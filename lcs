@@ -1,0 +1,110 @@
+#!/usr/bin/env python3
+
+import binascii
+import functools
+import re
+import glob
+import sys
+import os
+from itertools import islice
+import fnmatch
+
+if len(sys.argv) != 3: 
+    print ("Usage: lcs2.py [file extension without period] [number of bytes to read]")
+    sys.exit()
+    
+def findfiles(which, where='.'):
+    '''Returns list of filenames from `where` path matched by 'which'
+       shell pattern. Matching is case-insensitive.'''
+    rule = re.compile(fnmatch.translate(which), re.IGNORECASE)
+    return [name for name in os.listdir(where) if rule.match(name)]
+
+format=str(sys.argv[1])
+print (format)
+if sys.argv[1] == "all":
+    #print ("Arvg is all")
+    format_use="*"
+else:
+    format_use="*"+format
+bytes_to_read=int(sys.argv[2])
+bytes_to_print=str(sys.argv[2])
+file_list = findfiles(format_use)
+file_list.sort()
+
+match_count=0
+no_match_count=0
+
+with open(file_list[0], "rb") as f:
+    start_bytes = (f.read(bytes_to_read))
+    print ("\n\nFirst " + bytes_to_print + " binary bytes of " + file_list[0] + " are: " + str(start_bytes))
+    S1 = str((binascii.hexlify(start_bytes)))
+    S1 = S1.replace('b\'','')
+    print("First " + bytes_to_print + " hexadecimal bytes of " + file_list[0] + " are: " + str(S1) + "\n")
+
+    
+with open(file_list[1], "rb") as f:
+    start_bytes = (f.read(bytes_to_read))
+    print ("First " + bytes_to_print + " Binary bytes of " + file_list[1] + " are: " + str(start_bytes))
+    S2 = str((binascii.hexlify(start_bytes)))
+    S2 = S2.replace('b\'','')
+    print ("First " + bytes_to_print + " hexadecimal bytes of " + file_list[1] + " are: " + str(S2) + "\n")
+    
+def lcs(s1, s2):
+  m = [[0] * (1 + len(s2)) for i in range(1 + len(s1))]
+  longest, x_longest = 0, 0
+  for x in range(1, 1 + len(s1)):
+    for y in range(1, 1 + len(s2)):
+      if s1[x - 1] == s2[y - 1]:
+        m[x][y] = m[x - 1][y - 1] + 1
+        if m[x][y] > longest:
+          longest = m[x][y]
+          x_longest = x
+      else:
+        m[x][y] = 0
+  return s1[x_longest - longest: x_longest]
+
+common_sequence = lcs(S1, S2)
+a = re.search(common_sequence, S1)
+if len(str(a.group())) <= 3:
+    print ("ALERT - LONGEST COMMON SEQUENCE IS TOO SHORT!.")
+
+if a:
+    a2 = str(a.group()).replace('\'','')
+    print("Found the common sequence " + str(a2) + " at location " + str(a.span()) + "\n")
+    #print (a.group())
+    to_ascii=str(a2)
+    print ("to ascii is " + to_ascii)
+    #print (len(to_ascii))
+    #print(binascii.unhexlify(to_ascii))
+    if len(to_ascii)%2==0: 
+        #print (len(to_ascii))
+        ascii_version = binascii.unhexlify(to_ascii)
+        ascii_version = str(ascii_version).replace('b\'','')
+        ascii_version = str(ascii_version).replace('\'','')
+        print ("ASCII version of common sequence is " + str(ascii_version) + "\n")
+    else:
+        print ("FOUND ODD NUMBER OF CHARACTERS.")
+        to_ascii += '0' #ONLY FIXES RIGHT SIDE
+        #print("Length is now " + str(len(to_ascii)))
+        print (to_ascii)
+        ascii_version = binascii.unhexlify(to_ascii)
+        ascii_version = str(ascii_version).replace('b\'','')
+        ascii_version = str(ascii_version).replace('\'','')
+        print ("ASCII version of common sequence is " + str(ascii_version) + "\n")
+    print("Checking other files in directory.\n")
+
+for files in file_list:
+    with open(files, "rb") as f:
+        start_bytes = (f.read(bytes_to_read))
+        S1 = str((binascii.hexlify(start_bytes)))
+        S1 = S1.replace('b\'','')
+        result = re.search(common_sequence, S1)
+        if result:
+            match_count=match_count+1
+            print ("File " + files + " contains the string " + common_sequence + " at location " + str(result.span()))
+        else:
+            no_match_count=no_match_count+1
+            print("File " + files + " DOES NOT CONTAIN THE STRING.")
+            
+print (str(match_count) + " files with matches.")
+print (str(no_match_count) + " files without matches.")
