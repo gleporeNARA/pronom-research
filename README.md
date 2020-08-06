@@ -2,7 +2,7 @@
 
 Research into developing new file format signatures for files in archival collections.
 
-This repository will contain code samples, file format samples, and standard operating procedures for the identification, examination, and documentation of new file format signatures for the UK National Archives PRONOM database.
+This repository will contain code samples, file format samples, and <a href="https://github.com/gleporeNARA/pronom-research/wiki">standard operating procedures</a> for the identification, examination, and documentation of new file format signatures for the UK National Archives PRONOM database.
 
 "PRONOM is an on-line information system about data file formats and their supporting software products. Originally developed to support the accession and long-term preservation of electronic records held by the National Archives, PRONOM is now being made available as a resource for anyone requiring access to this type of information."
 
