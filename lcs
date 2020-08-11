@@ -20,12 +20,13 @@ def findfiles(which, where='.'):
     return [name for name in os.listdir(where) if rule.match(name)]
 
 format=str(sys.argv[1])
-print (format)
+#print (format)
 if sys.argv[1] == "all":
     #print ("Arvg is all")
     format_use="*"
 else:
     format_use="*"+format
+    
 bytes_to_read=int(sys.argv[2])
 bytes_to_print=str(sys.argv[2])
 file_list = findfiles(format_use)
@@ -39,6 +40,7 @@ with open(file_list[0], "rb") as f:
     print ("\n\nFirst " + bytes_to_print + " binary bytes of " + file_list[0] + " are: " + str(start_bytes))
     S1 = str((binascii.hexlify(start_bytes)))
     S1 = S1.replace('b\'','')
+    S1 = S1.replace('\'','')
     print("First " + bytes_to_print + " hexadecimal bytes of " + file_list[0] + " are: " + str(S1) + "\n")
 
     
@@ -47,6 +49,7 @@ with open(file_list[1], "rb") as f:
     print ("First " + bytes_to_print + " Binary bytes of " + file_list[1] + " are: " + str(start_bytes))
     S2 = str((binascii.hexlify(start_bytes)))
     S2 = S2.replace('b\'','')
+    S2 = S2.replace('\'','')
     print ("First " + bytes_to_print + " hexadecimal bytes of " + file_list[1] + " are: " + str(S2) + "\n")
     
 def lcs(s1, s2):
@@ -73,7 +76,7 @@ if a:
     print("Found the common sequence " + str(a2) + " at location " + str(a.span()) + "\n")
     #print (a.group())
     to_ascii=str(a2)
-    print ("to ascii is " + to_ascii)
+    #print ("to ascii is " + to_ascii)
     #print (len(to_ascii))
     #print(binascii.unhexlify(to_ascii))
     if len(to_ascii)%2==0: 
