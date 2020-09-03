@@ -1,0 +1,75 @@
+#!/usr/bin/env python3
+
+import binascii
+import functools
+import re
+import glob
+import sys
+import os
+from itertools import islice
+import fnmatch
+import subprocess
+
+walk_dir="./"    
+
+for root, subdirs, files in os.walk(walk_dir):
+    for filename in files:
+        #print (filename)
+        filename_only, file_extension = os.path.splitext(filename)
+        trid_matches = []
+        file_path = os.path.join(root, filename)
+        #print('file %s (full path: %s)' % (filename, file_path))
+        file_cmd = ["file", "-b", file_path]
+        file_result = subprocess.check_output(file_cmd)
+        sf_result = subprocess.check_output(['sf', file_path])
+        try:
+            currentDirectory = os.getcwd()
+            trid_file=currentDirectory + "/" + root + "/" + filename
+            trid_result = subprocess.check_output(['trid', trid_file],stderr=subprocess.STDOUT)
+        except subprocess.CalledProcessError as e:
+            raise RuntimeError("command '{}' return with error (code {}): {}".format(e.cmd, e.returncode, e.output))
+            continue
+
+        sf_result_text =  (sf_result.decode())
+        for line in sf_result_text.splitlines():
+            if "id      :" in line:
+                sf_unk = (line)
+                if "UNKNOWN" in sf_unk:
+                    sf_unk = "UNKNOWN"
+                else:
+                    sf_unk = "KNOWN"
+        for line in sf_result_text.splitlines():
+            if "extension only" in sf_result_text:
+                sf_basis = "EXTENSION ONLY"
+            elif "basis" in line:
+                if sf_unk == "UNKNOWN":
+                    sf_basis = "UNKNOWN"
+                else:
+                    sf_basis = (line)
+                    if "extension only" in sf_basis:
+                        sf_basis = "EXTENSION ONLY"
+                    else:
+                        sf_basis = sf_basis.replace('    basis   : ','')
+                        sf_basis = sf_basis.replace('\'','')
+        for line in sf_result_text.splitlines():
+            if "format" in line:
+                if sf_unk == "UNKNOWN":
+                    sf_fmt = "UNKNOWN"
+                else:
+                    sf_fmt = (line)    
+                    sf_fmt = sf_fmt.replace('    format  : \'','')
+                    sf_fmt = sf_fmt.replace('   format  : \'','')
+                    sf_fmt = sf_fmt.replace('\'','')
+                
+        trid_result_text = (trid_result.decode())
+        for line in trid_result_text.splitlines():
+
+            if "%" in line:
+                trid_matches.append(line)
+
+        trid_print = (' '.join(trid_matches))
+        output = (root + "|" + filename+ "|" + file_extension.lower() + "|" + str(file_result.decode()) + "|"  + (str(sf_fmt) + "|" + (str(sf_basis))  + "|" + trid_print))
+        output = output.replace('\n','')
+        #if "UNKNOWN" in output:
+        print (output)
+
