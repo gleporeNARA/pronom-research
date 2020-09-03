@@ -10,4 +10,6 @@ The PRONOM database currently holds some file format information for approximate
 
 The lcs.py code analyzes beginning sections of a group of files for common sequences. The sim.py code analyzes strings in two files for similarities and, if the files are similar enough, the code creates a regular expression that matches the first two files and then attempts to match that sequence in the remaining file in the collection.
 
+idcomp is a Python program which runs the Linux 'file' command, siegfried, and TrID against all files in a directory and below. It outputs the results of each program.
+
 
