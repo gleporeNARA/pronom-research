@@ -1,0 +1,133 @@
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Matteo Bottai
+Author-Workplace-Name: Karolinska Institutet
+Author-Name: Andrea Discacciati
+Author-Workplace-Name: Karolinska Institutet
+Author-Name: Giola Santoni
+Author-Workplace-Name: Karolinska Institutet
+Title: Modeling the probability of occurrence of events with the new stpreg command
+Abstract: We introduce the new stpreg command, which can fit flexible parametric models for the event-probability function, a measure of occurrence of an event of interest over time. The event-probability function is defined as the instantaneous probability of an event at a given time point conditional on having survived until that point. Unlike the hazard function, the event-probability function defines the instantaneous probability of the event. This talk describes its properties and interpretation along with convenient methods for modeling the possible effect of covariates on it, including flexible proportional-odds models and flexible power-probability models, which allow for censored and truncated observations. We compare these with other popular methods and discuss the theoretical and computational aspects of parameter estimation through a real data example.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_bottai.pdf
+Handle: RePEc:boc:ncon19:1
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Paul C. Lambert
+Author-Workplace-Name: University of Leicester
+Title: Marginal estimates through regression standardization in competing risks and relative survival models
+Abstract: In large disease registers, there is often interest in mortality due a specific cause. Individuals are at risk of death from a variety of other causes, making this a competing-risks situation. Disease registers are observational, and comparisons between exposure groups are prone to confounding. I will introduce a general command, standsurv, for obtaining marginal effects and contrasts from a variety of survival models. In this talk, I will focus on a marginal cause-specific cumulative incidence function after fitting some cause-specific models. These models need to be combined in order to obtain the marginal predictions. If the models appropriately adjust for relevant confounders, then contrasts between marginal estimates can be interpreted as causal effects. I will also describe a number of other useful measures including marginal estimates of the expected life years lost. Relative survival has some similarities to competing risks, and I will demonstrate how many of the ideas for competing risks also apply in a relative survival framework.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_lambert.pdf
+Handle: RePEc:boc:ncon19:2
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Michael J. Crowther
+Author-Workplace-Name: University of Leicester
+Title: Simple and complex survival analysis: New developments in merlin
+Abstract: At previous Stata conferences, I've presented survsim for simulating survival data, multistate for multistate parametric survival analysis, and merlin for fitting general mixed-effects regression models for linear, nonlinear, and user-defined distributions. In this talk, I'll present some ongoing work that brings together the codebase of all three commands into one coherent framework. This will provide new features such as
+simulating survival times from any survival model fit using merlin,
+allowing merlin to be used as a transition model in a multistate survival analysis—which enables, for example, the modeling of multiple timescales—and
+incorporating interval-censoring into standard and flexible parametric survival and cause-specific competing risks models, directly within merlin.
+To summarize, merlin can incorporate anything from the simplest parametric proportional hazards models to complex, nonlinear, hierarchical survival models. Possibilities are endless in terms of accounting for many challenges arising in clinical applications.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_crowther.pdf
+Handle: RePEc:boc:ncon19:3
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Hugo Sjöqvist
+Author-Workplace-Name: Karolinska Institutet
+Author-Name: Nicola Orsini
+Author-Workplace-Name: Karolinska Institutet
+Author-Person: por11
+Title: A procedure to facilitate the analysis of time-varying covariates with survival data
+Abstract: Continuously recorded exposure data are increasingly available in predicting time-to-event outcomes in epidemiological research. To take full advantage of this type of data, we introduce a new command, sttde, to facilitate statistical inference, visualization, and summary of exposure effects that may change along the time scale. The sttde command is designed to work with commonly used parametric and semiparametric survival models. I illustrate applications of the sttde command using yearly recorded exposure arising from the Swedish Register data.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_sjoqvist.pdf
+Handle: RePEc:boc:ncon19:4
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Yulia Marchenko
+Author-Workplace-Name: StataCorp
+Title: Meta-analysis in Stata
+Abstract: Meta-analysis combines results of multiple similar studies to provide an estimate of the overall effect. This overall estimate may not always be representative of a true effect. Often, studies report results that vary in magnitude and even direction of the effect, which leads to between-study heterogeneity. And sometimes the actual studies selected in a meta-analysis are not representative of the population of interest, which happens, for instance, in the presence of publication bias. Meta-analysis provides the tools to investigate and address these complications. Stata has a long history of meta-analysis methods contributed by Stata researchers. In my presentation, I will introduce Stata's new suite of commands, meta, and demonstrate it using real-world examples.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_marchenko.pdf
+Handle: RePEc:boc:ncon19:5
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Kristin MacDonald
+Author-Workplace-Name: StataCorp
+Title: Reproducible and automated reporting using Stata
+Abstract:  Whether you want to incorporate Stata results into a Word, Excel, HTML, or PDF document, you can use Stata's features for reproducible reports. And for reports that need to be dynamic--reports that need to change as the data changes--Stata provides the tools to recreate reports and automatically update all graphs, summary statistics, regressions, and other results from Stata. In this talk I will give an overview of Stata's tools for reporting and demonstrate how to create HTML and Word documents using Markdown and how to create customized Word, Excel, and PDF documents.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_macdonald.pdf
+Handle: RePEc:boc:ncon19:6
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Jan Ditzen
+Author-Workplace-Name: Heriot-Watt University
+Author-Person: pdi434
+Title: Estimating long-run coefficients and bootstrapping standard errors in large panels with cross-sectional dependence
+Abstract: This talk explains how to estimate long-run coefficients and bootstrap standard errors in a dynamic panel with heterogeneous coefficients, common factors, and many observations over cross-sectional units and time periods. The common factors cause cross-sectional dependence, which is approximated by cross-sectional averages. Heterogeneity of the coefficients is accounted for by taking the unweighted averages of the unit-specific estimates. Following Chudik, Mohaddes, Pesaran, and Raissi (2016, Advances in Econometrics 36:85–135), I consider three models to estimate long-run coefficients: a simple dynamic model (CS-DL), an error-correction model, and an ARDL model (CS-ARDL). I explain how to fit all three models using the community-contributed command xtdcce2. Then I compare the nonparametric standard errors and bootstrapped standard errors. The bootstrap follows on the lines of Goncalves and Perron (2016) and the community-contributed command boottest (Roodman, Nielsen, Webb and Mackinnon, 2018). The challenges are to maintain the error structure across time and cross-sectional units and to encompass the dynamic structure of the model.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_ditzen.pdf
+Handle: RePEc:boc:ncon19:7
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Erika Sabbath
+Author-Workplace-Name: Boston College
+Author-Name: Summer Sherburne Hawkins
+Author-Workplace-Name: Boston College
+Author-Name: Christopher F Baum
+Author-Workplace-Name: Boston College
+Author-Person: pba1
+Title: State-level gun policy changes and rate of workplace homicide in the United States
+Abstract: Nearly 40,000 people in the U.S. die from firearm-related causes annually. Of these, about 1% are intentionally shot and killed while at work; work-related homicides account for about 10% of all workplace fatalities. While firearm policies have remained essentially unchanged at the national level, there is greater variation in state-level gun control legislation. Moreover, the gun control landscape between and within states has changed considerably over the past 10 years. Little recent work has focused on determinants or epidemiology of workplace homicide. The purpose of this study is to test whether changes in state-level gun control policies are associated with changes in state-level workplace homicide rates. Our analysis shows that stronger gun-control policies, particularly around concealed carry permitting, background checks, and domestic violence, may be effective means of reducing work-related homicide.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_sabbath.pdf
+Handle: RePEc:boc:ncon19:8
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: David J. Miller
+Author-Workplace-Name: United States Environmental Protection Agency
+Author-Name: James Nguyen
+Author-Workplace-Name: United States Environmental Protection Agency
+Author-Name: Matteo Bottai
+Author-Workplace-Name: Karolinska Institutet
+Title: Emagnification: A tool for estimating effect-size magnification and performing design calculations in epidemiological studies
+Abstract: Artificial effect-size magnification (ESM) may occur in underpowered studies, where effects are reported only because they or their associated p-value have passed some threshold. Ioannidis (2008) and Gelman and Carlin (2014) have suggested that the plausibility of findings for a specific study can be evaluated by computing ESM, which requires statistical simulation. In this talk, we present a new Stata package, emagnification, that allows straightforward implementation of such simulations in Stata. The commands automate these simulations for epidemiological studies and enable the user to assess ESM routinely for published studies using user-selected, study-specific inputs that are commonly reported in published literature. The intention of the package is to allow a wider community to use ESMs as a tool for evaluating the reliability of reported effect sizes and to put an observed statistically significant effect size into a fuller context with respect to potential implications for study conclusions.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_miller.pdf
+Handle: RePEc:boc:ncon19:9
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Niels Henrik Bruun
+Author-Workplace-Name: Aarhus University
+Title: Visualizing effect modifications
+Abstract: margins and marginsplot are excellent Stata commands for visualizing effects. However, when the functions modeled for margins are not simple polynomials, but have to be modeled using cubic splines, there is a need for an alternative. I present an easy-to-use prefix command, emc, for visualizing the difference between two curves. One example could be the difference in weight or height development between boys and girls dependent of age. The emc command is about to be presented in the Stata Journal, but this presentation is quite different based on another example.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_bruun.pdf
+Handle: RePEc:boc:ncon19:10
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Nicola Orsini
+Author-Workplace-Name: Karolinska Institutet
+Author-Person: por11
+Title: Model selection in dose-response meta-analysis of summarized data
+Abstract:  A linear mixed-effects model for the synthesis of multiple tables of summarized dose-response data has been recently proposed and implemented in the drmeta command. One of the main advantages offered by this framework is the possibility to fit complex models avoiding exclusion of studies contrasting a limited number of doses. The aim of this presentation is to evaluate the ability of Akaike's information criterion (AIC) to suggest the true dose-response relationship. Statistical experiments are conducted under the assumption of either a linear (Shape 1) or nonlinear (Shape 2) relationship between a quantitative dose and mean outcome. Tables of summarized data are generated upon categorization of the dose into quantiles. Every simulated dose-response meta-analysis is analyzed with a linear-mixed effects model using two commonly used strategies: linear function and splines. Accuracy of the AIC is assessed by calculating the proportion of times in a large number of experiments the Shape 1 and Shape 2 are correctly identified by choosing the lowest AIC among the two modeling strategies. I also explore how this accuracy may vary according to the distribution of the dose and the way it has been categorized.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_orsini.pdf
+Handle: RePEc:boc:ncon19:11
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Matteo Marrazzo
+Author-Workplace-Name: Karolinska Institutet
+Author-Name: Nicola Orsini
+Author-Workplace-Name: Karolinska Institutet
+Author-Person: por11
+Title: Stata/SQL/Python integration to emulate prospective cohort studies from big register data
+Abstract: The possibilities of using Stata to interrogate and analyze big data are not widely known among health researchers. However, the ability to meld different programming tools is becoming gradually more important with the increasing mainstream availability of big data sources. The aim of this presentation is to illustrate, using existing commands such as odbc and python, how to emulate and analyze large prospective cohorts from a collection of big national registers, harvesting the power of the different engines available (for example, SQL to handle relational databases and the preprocess phase, Stata to easily perform advanced statistical analyses and Python to implement well-known modules and packages for data manipulation and plots). I use a case study in pharmaco-epidemiology to illustrate the potential of using Stata to both design and analyze such complex and large datasets.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/ncon1919/nordic19_marrazzo.pdf
+Handle: RePEc:boc:ncon19:12
+

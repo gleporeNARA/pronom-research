@@ -1,0 +1,65 @@
+/* REXX */
+
+SAY "This file is not executable as it is."
+SAY "It contains two functions that you could use in your own REXX"
+SAY "programs."
+SAY "One function initializes a Class-2 fax modem to receive data"
+SAY "and fax CALLs."
+SAY "The second function passes an incoming fax CALL to OS/2-FaxWorks"
+SAY "via FaxWork's hot handle feature."
+
+EXIT
+
+
+/* -------------------------------------------------------------- */
+/* init a FAX class 2 modem for adaptive CALLing                  */
+/* (works with FAX class 2 modems)                                */
+/* -------------------------------------------------------------- */
+faxmode:
+    CrLf = "^M^J"
+    CALL ZocSend "AT+fclass=2"||CrLf
+
+    CALL ZocSend "AT+FCR=1"||CrLf
+    CALL ZocWait "OK"
+
+    CALL ZocSend "AT+FDCC=1,5,0,2,0,0,0,0"||CrLf
+    CALL ZocWait "OK"
+
+    CALL ZocSend "AT+FCQ=0"||CrLf
+    CALL ZocWait "OK"
+
+    CALL ZocSend "AT+FAA=1"||CrLf
+    CALL ZocWait "OK"
+
+    CALL ZocWrite CrLf||"FAX-MODE SET ..."||Crlf
+    RETURN
+
+
+
+/* -------------------------------------------------------------- */
+/* receive a FAX CALL                                             */
+/* (will work with OS/2 FaxWorks only)                            */
+/* -------------------------------------------------------------- */
+faxCALL:
+    result= ZocWait("+FCON")
+    IF result = 0 THEN
+    DO
+        /* ********************************************* */
+        /* SLOW DOWN PORT SPEED TO MEET FAXWORKS DEFAULT */
+        /* ********************************************* */
+        CALL ZocBaud "14400"
+
+        /* ************************************** */
+        /* START FAXWORKS WITH HOT HANDLE FEATURE */
+        /* ************************************** */
+        CALL ZocXferShell "\faxworks\FAXWORKS.EXE -n7,%ZOCHFC%"
+
+        /* ***************************** */
+        /* RESET PORT SPEED TO OUR NEEDS */
+        /* ***************************** */
+        CALL ZocBaud "38400"
+    END
+    RETURN
+
+/* END OF REXX-MODULE */
+

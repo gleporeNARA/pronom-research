@@ -1,0 +1,35 @@
+/* REXX sample about decisions */
+
+'TIMEOUT 60'
+
+
+/* Wait for 'Name?' - check for success and report error */
+'WAIT "Name?"'
+
+IF RC=0 THEN 
+DO /* received 'Name?' */
+   'SEND "Joe User^M"'
+END
+ELSE
+DO /* Ouch, 'Name?' was not received */
+   'WRITELN "ERROR (Name)!!"'
+   'HANGUP'
+   SIGNAL GetOut   /* this command jumps to the end */
+END
+
+
+/* Wait for 'Password?' - check for success and report error */
+'WAIT "Password?"'
+
+IF RC=0 THEN 
+DO /* received 'Password?' */
+   'SEND "mypassword^M"'
+END
+ELSE
+DO /* Ouch, 'Password?' was not received */
+   'WRITELN "ERROR (Password)!!"'
+   'HANGUP'
+END
+
+
+GetOut:  /* this is the target for the SIGNAL command */ 

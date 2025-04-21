@@ -1,0 +1,19 @@
+/* REXX */
+
+/* send something to the modem and wait for an anwser */
+CALL ZocSend "ATZ^M"
+
+/* tell ZOC to wait 3 seconds max. */
+CALL ZocTimeout 3
+
+/* wait for answer */
+timeout= ZocGetline()
+IF timeout=0 THEN DO 
+    SAY "THE MODEM SEEMS TO RESET FINE!"
+END
+ELSE DO
+    SAY "THE MODEM SEEMS TO HAVE PROBLEMS!"
+END
+
+EXIT
+

@@ -1,0 +1,70 @@
+REGEDIT4
+
+;    ดับเบิ้ลคลิกไฟล์นี้บน window explorer จะเป็นการปรับปรุง registry ในส่วนของการตั้งค่าโปรแกรม 
+;    IE 4.0x Thai และ
+;    Outlook Express สำหรับการรับส่งเมลภาษาไทย และ
+;    Outlook Express สำหรับการอ่าน/เขียนกลุ่มข่าว(Newsgroup)เป็นภาษาไทย
+;    ไฟล์นี้เขียนโดย ลุงเปี๊ยก (ศาลานกน้อย) uncle-piak@usa.net 
+
+;     หมายเหตุ ใช้ได้กับระบบ windows 95/NT เวอร์ชั่นภาษาไทยเท่านั้น
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\International]
+"AcceptLanguage"="th"
+"Default_CodePage"=hex:6a,03,00,00
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\International\1252]
+"Default_InternetEncoding"=hex:e4,04,00,00
+"IEFixedFontName"="Courier New"
+"IEFontSize"=hex:02,00,00,00
+"IEPropFontName"="Times New Roman"
+"Script"="Western"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\International\874]
+"Default_InternetEncoding"=hex:6a,03,00,00
+"IEFixedFontName"="MS Sans Serif"
+"IEFontSize"=hex:04,00,00,00
+"IEPropFontName"="AngsanaUPC"
+"Script"="Thai"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Internet Explorer\Main]
+"Start Page"="http://www.geocities.com/Vienna/2739"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Outlook Express\Mail]
+"Default_CodePage"=dword:0000036a
+"Message HTML Allow 8bit in Header"=dword:00000001
+"Message HTML Character Line Wrap"=dword:0000004c
+"Message HTML Encoding Format"=dword:00000004
+"Message Plain Allow 8bit in Header"=dword:00000001
+"Message Plain Character Line Wrap"=dword:0000004c
+"Message Plain Encoding Format"=dword:00000004
+"Message Plain Format MIME"=dword:00000001
+"Message Send HTML"=dword:00000000
+
+
+[HKEY_CURRENT_USER\Software\Microsoft\Outlook Express\News]
+"Default_CodePage"=dword:0000036a
+"Message HTML Allow 8bit in Header"=dword:00000001
+"Message HTML Character Line Wrap"=dword:0000004c
+"Message HTML Encoding Format"=dword:00000004
+"Message Plain Allow 8bit in Header"=dword:00000001
+"Message Plain Character Line Wrap"=dword:0000004c
+"Message Plain Encoding Format"=dword:00000004
+"Message Plain Format MIME"=dword:00000000
+"Message Send HTML"=dword:00000000
+
+[HKEY_CURRENT_USER\Software\Microsoft\Outlook Express\Trident\International]
+"Default_CodePage"=hex:6a,03,00,00
+
+[HKEY_CURRENT_USER\Software\Microsoft\Outlook Express\Trident\International\1252]
+"Default_InternetEncoding"=hex:e4,04,00,00
+"IEFixedFontName"="Courier New"
+"IEFontSize"=hex:02,00,00,00
+"IEPropFontName"="Arial"
+"Script"="Western"
+
+[HKEY_CURRENT_USER\Software\Microsoft\Outlook Express\Trident\International\874]
+"Default_InternetEncoding"=hex:6a,03,00,00
+"IEFixedFontName"="MS Sans Serif"
+"IEFontSize"=hex:04,00,00,00
+"IEPropFontName"="AngsanaUPC"
+"Script"="Thai"

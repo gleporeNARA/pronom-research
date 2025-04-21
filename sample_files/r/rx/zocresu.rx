@@ -1,0 +1,18 @@
+/* REXX */
+
+'REQUEST "Are you sure?" "Yes" "No"'
+
+IF ZOCRESULT()=="Yes" THEN
+DO 
+   SAY "User really wants it!"
+END
+
+IF ZOCRESULT()=="No" THEN
+DO
+   SAY "User isn't sure"
+END
+
+IF ZOCRESULT()=="##CANCEL##" THEN
+DO
+   SAY "User pressed the ESC key"
+END

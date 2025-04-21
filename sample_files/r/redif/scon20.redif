@@ -1,0 +1,252 @@
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Paul Allison
+Author-Workplace-Name: Statistical Horizons LLC
+Title: Better predicted probabilities from linear probability models with applications to multiple imputation
+Abstract: Although logistic regression is the most popular method for regression analysis of binary outcomes, there are still many attractions to using least-squares regression to estimate a linear probability model. A major downside, however, is that predicted “probabilities” from a linear model are often greater than 1 or less than 0. That can be problematic for many real-world applications. As a solution, we propose to generate predicted probabilities based on a linear discriminant model, which Haggstrom (1983) showed could be obtained by rescaling coefficients from OLS regression.
+We offer a new Stata command, predict_ldm, that can be used after the regress command to generate predicted values that always fall within the (0,1) interval. We show that, for many applications, these values are very close to those produced by logistic regression. We also explore applications where there are substantial differences between logistic predictions and those produced by predict_ldm. Finally, we show that the linear discriminant method can be used to substantially improve multiple imputations of categorical data based on the multivariate normal model. We are currently developing a new mi impute command to implement this method.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Allison.pdf
+Handle: RePEc:boc:scon20:1
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Mariel Siravegna
+Author-Workplace-Name: Georgetown University
+Title: Implementing quantile selection models in Stata
+Abstract: This presentation describes qregsel, a community-contributed command to implement a copula-based sample-selection correction for quantile regression recently proposed by Arellano and Bonhomme (2017). We illustrate the use of qregsel with an empirical example using the data employed in the Stata base reference manual for the heckman command.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Siravegna.pdf
+Handle: RePEc:boc:scon20:2
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Daniel Litwok
+Author-Workplace-Name: Abt Associates
+Title: Expanding Stata's capabilities for sensitivity analysis
+Abstract: Nonexperimental approaches to estimating treatment effects often balance observable characteristics to minimize potential for bias. Rosenbaum (2002) recommends a sensitivity analysis to test the assumption that a study is free from hidden bias once such balance is achieved. There are currently two Stata commands that can implement this sensitivity test: mhbounds and rbounds.
+As of now, these commands are only suitable for a very limited set of approaches: mhbounds is suited for kth nearest neighbor matching without replacement and for stratification matching (Becker and Caliendo 2007) and rbounds is suitable only for one-to-one matching (Gangl 2004). The restriction to these approaches is a serious limitation to these commands. This presentation will describe adjustments to mhbounds that made it compatible with another approach to balancing observable characteristics: coarsened exact matching (Iacus, King, and Porro 2011). It will also discuss technical issues that future research should address if the command is to be expanded to allow other approaches, such as matching with replacement.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Litwok.pptx
+Handle: RePEc:boc:scon20:3
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Houssein Assaad
+Author-Workplace-Name: StataCorp
+Title: Meta-analysis using Stata
+Abstract: Meta-analysis combines results of multiple similar studies to provide an estimate of the overall effect. This overall estimate may not always be representative of a true effect. Often, studies report results that vary in magnitude and even direction of the effect, which leads to between-study heterogeneity. And sometimes the actual studies selected in a meta-analysis are not representative of the population of interest, which happens, for instance, in the presence of publication bias. Meta-analysis provides the tools to investigate and address these complications. Stata has a long history of meta-analysis methods contributed by Stata researchers. In my presentation, I will introduce Stata's new suite of commands, meta, and demonstrate it using real-world examples.
+Creation-Date: 20200820 
+File-URL: https://slides.com/hassaad/meta-webinar-6c3f0a
+Handle: RePEc:boc:scon20:4
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Calvin Price
+Author-Workplace-Name: MUFG Bank
+Title: Economic forecasting with multiequation simulation models
+Abstract: Capturing interdependencies among many variables is a crucial part of economic forecasting. We show how multiple estimated equations can be solved simultaneously with the Stata forecast command and how to simulate the system through time to produce forecasts. This can be combined with user-defined exogenous variables, so that different assumptions can be used to create forecasts under different scenarios. Techniques for assessing the quality of both ex post and ex ante forecasts are shown, along with a simple example model of the U.S. economy.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Price.pptx
+Handle: RePEc:boc:scon20:5
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Jose Canals-Cerda
+Author-Workplace-Name: Federal Reserve Bank of Philadelphia
+Title: Applications of generalized structural equation modeling for enhanced credit risk management
+Abstract: The integration of the generalized structural equation modeling (GSEM) framework to widely used statistical packages like Stata offers significant opportunities for credit risk management. GSEM techniques bring to bear a modular and all-inclusive approach to statistical model building. We illustrate the “game changing” potential of the GSEM framework with an application to credit risk stress testing and loss forecasting for a representative portfolio of mortgages originated over the past 20 years.
+Specifically, we analyze a representative dataset of USA mortgage loans originated over the past 20 years that includes detailed loan-level information on monthly loan performance and other relevant loan and borrower characteristics. Our analysis and discussion illustrates how GSEM techniques can significantly impact every aspect of a model-driven risk management framework, from model development, documentation, and validation to model production, as well as to other, perhaps less obvious, aspects of model building like model risk management, enhanced team collaboration, minimization of proliferation of disparate datasets within projects, and the promotion of a holistic and collaborative approach to model building.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Canals-Cerda.pdf
+Handle: RePEc:boc:scon20:6
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Thomas Kaspereit
+Author-Workplace-Name: Universite du Luxembourg 
+Title: Event studies with daily stock returns in Stata: Which command to use?
+Abstract: This presentation provides an overview on existing user-written commands for executing event studies. By conducting a review of articles that appeared in the past 10 years in 3 leading accounting, finance, and management journals and by assessing which commands could have been used to conduct these studies, I argue that currently only my command eventstudy2 provides sufficient flexibility to conduct a broad range of state-of-the-art event studies.
+The older command eventstudy (Zhang et al. 2013) provides a comfortable graphical user interface (GUI) and good functionality for event studies that do not require hypotheses testing. The command estudy described in Pacicco et al. (2018) provides a comprehensive set of test statistics, but its application is restricted to single-day event studies, which represent a very small fraction of event studies conducted in accounting, finance, and management journals.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Kaspereit.pdf
+Handle: RePEc:boc:scon20:7
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Zhao Xu
+Author-Workplace-Name: StataCorp
+Title: Call Stata from Python
+Abstract:  Stata 16 introduced tight integration with Python, allowing users to embed and execute Python code from within Stata. In this talk, I will demonstrate new functionality we have been working on—calling Stata from within Python. We are working on providing two ways to let users interact with Stata from within Python: the IPython magic commands and a suite of API functions. With those utilities, you will be able to run Stata conveniently from Python environments, such as Jupyter Notebook/console, Jupyter Lab/console, Spyder IDE, or Python launched from a Windows Command Prompt, Unix terminal, etc.
+Creation-Date: 20200820 
+File-URL: https://www.stata.com/meeting/us20/slides/us20_Zhao_Xu.html
+Handle: RePEc:boc:scon20:8
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Billy Buchanan
+Author-Workplace-Name: Fayette County Public Schools
+Author-Email:  william@williambuchanan.net 
+Title: Implementing programming patterns in Mata to optimize your code
+Abstract: Have you ever created a program that requires a nontrivial amount of data to be present or available (for example, look-up/value tables, data used for the program interface, etc…)? If you have, you’ll likely have experienced the performance penalty that multiple I/O operations can cause.
+In this talk, I’ll provide an example of how to implement a common programming pattern from the computer science field and how it can solve this performance issue more effectively. Based on a set of scripts developed by Adam Nelson (https://github.com/adamrossnelson/StataIPEDSAll), I developed a solution (https://github.com/wbuchanan/ipeds) that uses the singleton pattern to reduce object instantiation and I/O operations over multiple calls in order to improve performance.
+Creation-Date: 20200820 
+File-URL: https://wbuchanan.github.io/stataConference2020-patterns/#/
+Handle: RePEc:boc:scon20:9
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Matthias Schonlau
+Author-Workplace-Name: University of Waterloo 
+Title: Text mining with n-gram variables
+Abstract: Text data, such as answers to open-ended questions, are sometimes ignored because they are hard to analyze. Our Stata command ngram turns text into hundreds of variables using the "bag of words" approach. Broadly speaking, each variable records how often the corresponding word or word sequence occurs in a given text. This is more useful than it sounds. The program supports text in 12 European languages. (Schonlau, M, Guenther, and N Sucholutsky 2017)
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Schonlau.pdf
+Handle: RePEc:boc:scon20:10
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Fernando Rios-Avila
+Author-Workplace-Name: Levy Economics Institute
+Title: f_able estimation of marginal with transformed data
+Abstract: The command margins is a very powerful command that can be used for the estimation of marginal effects for linear and non-linear models (using official or community-contributed commands), as long as the variables of interest are introduced linearly or as polynomials (using factor notation). When other types of transformations are used, Stata is usually unable to estimate marginal effecs correctly because it may not understand that, for example, log_x is actually log(x), considering it as an unrelated independent variable in the model. In this presentation, I provide a simple command, f_able, that enables margins to correctly estimate marginal effects when transformations other than polynomials are used in the model specification.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Rios-Avila1.pdf
+Handle: RePEc:boc:scon20:11
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Joseph Terza
+Author-Workplace-Name: IUPUI
+Title: Two-dimensional Gauss–Legendre quadrature: Seemingly unrelated dispersion-flexible count regressions
+Abstract: Many contexts in empirical econometrics require nonclosed form two-dimensional (2D) integration for appropriate modeling and estimation design. Applied researchers often avoid such correct but computationally demanding specifications and opt for simpler biased or less efficient modeling designs. The presentation will detail a new Mata implementation of the 2D version of a relatively simple numerical integration technique—Gauss–Legendre quadrature.
+Although this Mata code is widely applicable, it is mainly designed for estimators that involve 2D integration at the observation level (for example, the likelihood function for a two-equation nonlinear regression system). The user inputs a vector-valued integrand function (for example, a vector of sample log-likelihood integrands) and a matrix of upper and lower limits for each of the two integration dimensions. The code outputs the corresponding vector of integrals (for example, the vector of observation-specific log likelihoods). To illustrate implementation, we estimate a bivariate seemingly unrelated 2D system of dispersion-flexible Conway–Maxwell Poisson regressions for the number of consultations in a two-week period with a 1) doctor and 2) non-doctor health professional, or both. The data were drawn from the 1977–1978 Australian health survey. Results from this model are juxtaposed with those from Conway–Maxwell and simple Poisson specifications in which possible cross-equation correlation is ignored.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Terza.pdf
+Handle: RePEc:boc:scon20:12
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Shatoya Covert Estime
+Author-Workplace-Name: Elizabeth City State University
+Title: Investigating factors that influence bicyclist injury severity in bicycle-motor vehicle crashes at unsignalized intersections in North Carolina
+Abstract: In 2014, North Carolina implemented a strategic highway safety plan to reduce fatalities and serious injuries. The plan defined nine areas of focus to address safety issues; two main areas were investigated, unsignalized intersections and bicyclist safety. The purpose of this study was to evaluate (1) potential factors associated with bicyclist injury severity in bicycle-motor vehicle crashes at unsignalized intersections and (2) the impact of these factors on bicyclist safety.
+Out of 8,418 bicycle-motor vehicle crash records from the UNC Highway Safety Research Center, 1,273 cases were evaluated. Injury severity is measured on an ordinal scale as minor, major, or severe. Stata's ordinal logistic regression was used to initially analyze potential factors associated with bicyclist injury severity, followed by generalized ordered logit (gologit) via the community-contributed ado-program gologit2 (Williams 2006). Generalized ordered logit relaxes the constraint that a variable has the same estimated coefficient throughout the range of injury severity. Statistical significance was linked to injury severity in the following variables: bicyclists 55 and older, the driver's speed, roadway features, day of week, light conditions, and season.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Covert.pdf
+Handle: RePEc:boc:scon20:13
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Sebastian Kripfganz
+Author-Workplace-Name: University of Exeter Business School
+Title: Generalized method of moments estimation of linear dynamic panel-data models
+Abstract: In dynamic models with unobserved group-specific effects, the lagged dependent variable is an endogenous regressor by construction. The conventional fixed-effects estimator is biased and inconsistent under fixed-T asymptotics. To deal with this problem, "difference GMM" and "system GMM" estimators in the spirit of Arellano and Bond (1991), Arellano and Bover (1995), and Blundell and Bond (1998) are predominantly applied in practice. The Stata community widely associates these methods with the xtabond2 command provided by Roodman (2009).
+I present the new xtdpdgmm command, which addresses some shortcomings of xtabond2 and adds further flexibility to the specification of the estimators. In particular, it allows one to incorporate the Ahn and Schmidt (1995) nonlinear moment conditions that can improve the efficiency and robustness of the estimation. Besides the familiar one-step and two-step estimators, xtdpdgmm also provides the Hansen, Heaton, and Yaron (1996) iterated GMM estimator.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Kripfganz.pdf
+Handle: RePEc:boc:scon20:14
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Ercio Munoz
+Author-Workplace-Name: CUNY Graduate Center
+Title: Pretesting for unobserved cluster effects and inference in panel-data sets
+Abstract: This presentation addresses the question of how to estimate the standard errors in panel data when there are potentially unobserved cluster effects. We analyze the performance of statistical inference regarding the parameters of a panel-data model when it is first subjected to a pretest for the presence of individual and time unobserved cluster effects.
+Using Monte Carlo simulations, we compare the performance of six proposed diagnostics that make use of statistical tests available in the literature such as Lagrange multipliers, Lagrange ratios, and F tests. We find that these six pretest estimators are a viable alternative to estimate panel-data models with unobserved cluster effects, in the sense that they achieve empirical sizes very close to the ones obtained using an estimator of the variance as if we knew the true data-generating process.
+Creation-Date: 20200820 
+Handle: RePEc:boc:scon20:15
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Alfonso Ugarte-Ruiz
+Author-Workplace-Name: BBVA Research
+Title: XTSEL: Selection of variables and specification in a panel-data framework
+Abstract: We have developed two new commands that allow selecting the best predictor between a number of alternative explanatory variables (xtselvar) and the best specification between all possible combinations of a defined set of explanatory variables (xtselmod) in a panel-data framework. xtselvar helps us to select the best predictor between a number of alternative explanatory variables (candidates).
+The procedure estimates the same specification n times, keeping constant the same dependent variable and an optional list of control variables. However, at each repetition, the procedure includes only one of the n-candidate variables in the specification, (in addition to the list of fixed control variables) until each one of the candidate variables listed by the user in the syntax has been included and evaluated. For each candidate variable, the procedure estimates seven parameters and statistical criteria. xtselmod helps us to select the best specification between all possible combinations of a defined set of explanatory variables. It is closely related to the command xtselvar and relies heavily on the Stata command tuples. Given n possible explanatory variables, the procedure estimates 2^n - 1 different specifications, one per each possible combination. Then, for each one of them, the procedure estimates a set of five statistical criteria. More specifically, xtselvar estimates seven statistics per variable (Coefficient, t-statistic, Adj. R2, AIC, BIC, U-Theil in time-series, U-Theil in cross-individual), while xtselmod estimates only the last five per specification. The procedures then rank each variable or specification according to those last five statistical criteria and generate one ranking for each one of them. It also computes a composite ranking summarizing all five criteria. It finally sorts all candidate variables or specifications according to the selected ranking, which by default is the composite ranking. The out-of-sample evaluation of each candidate variable and specification is performed based on the commands xtoos_t and xtoos_i, which need to be installed in Stata to be able to execute the procedures. xtselvar and xtselmod allow one to choose weights for each one of the five criteria used to compute the composite ranking. They also allow one to rank the variables and specifications according to a specific criterion of preference. For instance, if the primary objective of the estimation is to obtain the most accurate prediction of the dependent variable, one could choose to rank the candidate variables and specification according only to their forecasting ability, that is, according to the estimated U-Theil in its time-series dimension. The procedures allow one to choose different estimation methods, including some dynamic methodologies, and could also be used in a dataset with only time-series observations. When the specification includes lags of the dependent variable, the procedure is able to automatically generate dynamic forecasts for the out-of-sample evaluation performance. In the case of the out-of-sample evaluation in a time-series dimension, they allow one to choose a specific horizon h at which to evaluate the forecasting performance of the model, including the candidate variable and specification. It also allows one to estimate the forecasting performance from horizon t 1 until t h. xtselmod adjusts the Stata command tuples so that it allows time-series operators like lags, leads, and differences. Importantly, it also allows one to choose and use the conditionals option of the command tuples, using the same structure and syntax.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Ugarte-Ruiz.pdf
+Handle: RePEc:boc:scon20:16
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Fernando Rios-Avila
+Author-Workplace-Name: Levy Economics Institute
+Title: Smooth varying coefficient models in Stata
+Abstract:  Nonparametric regressions are a powerful statistical tool to model relationships between dependent and independent variables with minimal assumptions on the underlying functional forms. Despite its potential benefits, these types of models have two weaknesses: The added flexibility creates a curse of dimensionality, and procedures available for model selection, like cross-validation, have a high computationally cost in samples with even moderate sizes.
+An alternative to fully nonparametric models are semiparametric models that combine the flexibility of nonparametric regressions with the structure of standard models. This presentation describes the estimation of a particular type of semiparametric modes known as smooth varying-coefficient models (Hastie and Tibshirani 1993), based on kernel regression methods, using a new set of commands in vc_pack. These commands aim to facilitate bandwidth selection and model estimation and create visualizations of the results.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Rios-Avila2.pdf
+Handle: RePEc:boc:scon20:17
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Dorry Segev 
+Author-Workplace-Name: Johns Hopkins University
+Author-Name: Allan Massie
+Author-Workplace-Name: Johns Hopkins University
+Title: Using Stata to simulate the impact of COVID-19 on organ transplantation
+Abstract: We present a case study demonstrating how the Epidemiologic Research Group in Organ Transplantation (ERGOT) at Johns Hopkins uses Stata to further the group's research goals. Recent applications include simulation to estimate the benefit or harm of delaying organ transplantation in the context of the COVID-19 pandemic and modular code design to facilitate rapid analysis of changes in the landscape of organ transplantation under COVID-19 across different organ types. We will discuss techniques for simulation and integration of putdocx and frames to rapidly produce manuscript-ready output. Additionally we will provide an overview of the Stata class we teach at the Johns Hopkins School of Public Health and discuss the songs about Stata we have written to promote the class.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Segev.pptx
+Handle: RePEc:boc:scon20:19
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Billy Buchanan
+Author-Workplace-Name: Fayette County Public Schools
+Author-Email:  william@williambuchanan.net 
+Title: Reading an arbitrary number of files into Stata made easy
+Abstract: The Statalist is filled with threads from users who all want to do the same thing. You probably have run into the issue yourself. You have dozens, hundreds, or thousands of files that you need to combine into a single dataset for analysis and want to figure out the most efficient way to do it. In this talk, I’ll describe readit, a new command that solves this problem and can solve the same problem when used across multiple file types using the Python API introduced in Stata 16. The readit command can operate in a few different ways that provide significant flexibility built on the I/O capabilities of the pandas package in Python.
+Creation-Date: 20200820 
+File-URL: https://wbuchanan.github.io/stataConference2020-readit/#/
+Handle: RePEc:boc:scon20:20
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Ahmad Khanijahani
+Author-Workplace-Name: Duquesne University
+Title: Using Microsoft Excel to improve efficiency in working with large datasets in Stata
+Abstract: There is an ongoing growth in the availability of data and increased number of variables in large datasets such as medical claim files or national surveys. Stata supports various descriptive, exploratory, and analytical approaches to work with these data to identify and study various topics such as public and clinical health outcomes and issues. Given the high volume of various data generated daily, implementing cross-platform approaches to manage and manipulate data can improve efficiency of data-science professionals and academic researchers.
+The aim of this presentation is to use Microsoft Excel jointly with Stata to facilitate data governance and manipulation in large-scale datasets. Method: This presentation will focus on three different ways that Excel can be used as a supportive tool to facilitate and expedite the data manipulation, analysis, interpretation, and reporting in Stata, with a focus on large datasets with many variables. First, Excel will be used as an interactive data dictionary tool to select and keep track of variables included in various analysis stages. Second, Excel commands and features will be used to generate batch commands to perform repeated variable transformation and conditional data manipulation or analysis in Stata. Finally, Stata output tables will be imported to Excel to further customize preparation and reporting. Each of these three categories of tasks will be supported by at least one example from a dataset with many variables. Conclusion: Using Microsoft Excel features and commands jointly with Stata can benefit data scientists and researchers by improving efficiency and productivity through saving time and providing a comprehensive picture of a dataset.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Khanijahani.pdf
+Handle: RePEc:boc:scon20:21
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Kye Lippold
+Author-Workplace-Name: UC San Diego
+Title: Applying symbolic mathematics in Stata using Python
+Abstract: I present an applied example of blending theory and data using Stata 16's new Python integration. The SymPy library in Python makes a wide range of symbolic mathematical tools available to Stata programmers. For a recent project, I used theory and SymPy to derive a relationship between two labor supply elasticities in a structural model and separately used Stata to generate reduced-form estimates of these elasticities. I then used the Stata Function Interface to directly plug the empirical Stata estimates into my SymPy model, allowing easy and reproducible estimation of the theoretical relationship of interest. I discuss these methods and provide code for use by other researchers.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Lippold.pdf
+Handle: RePEc:boc:scon20:22
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Adam Ross Nelson
+Author-Workplace-Name: American University
+Title: Rosetta Stone: Stata To Python Pandas crosswalk
+Abstract: Given Stata’s recent updates that promote Python integration and the growing popularity of Python and Pandas as a data wrangling and analysis platform, this session will provide a Rosetta Stone-like crosswalk between Stata and Python. The content will demonstrate Python code that replicates common techniques often executed in Stata. This session will be best for Stata users who desire to leverage recently available Python integrations but who have yet to attain beginner-to-intermediate proficiency in Python.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Nelson.pptx
+Handle: RePEc:boc:scon20:23
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Danial Hoepfner
+Author-Workplace-Name: Gibson Consulting Group Inc.
+Title: Downloading and preparing survey data using the Qualtrics API in the Stata ecosystem
+Abstract: Downloading and preparing survey data for analysis from online platforms such as Qualtrics is a time-consuming and error-prone task. The qualtrics.ado command interacts with the Qualtrics API to download, and clean, data quickly with less error. The program requires users to enter their Qualtrics credentials.
+The command allows users to display a list of the surveys associated with that account, to download surveys with IDs retrieved from that list, and to apply variable and value labels. In this presentation, we will cover the functions of the .ado and demonstrate applied examples. The program uses cURL requests to fetch data from the Qualtrics API and import them into Stata, processes the files in Stata, then passes them back to the Qualtrics API or applies them to the downloaded data (such as variable and value labels and question stems). The ability to script the fetching and cleaning from a third-party survey platform opens up other possibilities, such as up-to-date results dashboards or response rates websites, which we will demonstrate in our presentation.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Hoepfner.pdf
+Handle: RePEc:boc:scon20:24
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: David Schenck
+Author-Workplace-Name: StataCorp
+Title: Nonlinear dynamic stochastic general equilibrium models in Stata
+Abstract: Dynamic stochastic general equilibrium (DSGE) models are used in macroeconomics for policy analysis and forecasting. A DSGE model consists of a system of equations—usually a nonlinear system of equations—that is derived from economic theory. I will show you how to easily solve, estimate, and analyze nonlinear DSGEs. We will explore how to obtain policy matrices, transition matrices, and impulse–response functions for nonlinear models.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Schenck.pdf
+Handle: RePEc:boc:scon20:25
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Bob Wen
+Author-Workplace-Name: Clemson University
+Title: The causal effects of parents' marital status on children's earnings
+Abstract: In this research, I examine how the marital relationship affects children's future economic status. I introduce the parental marital status hypothesis of children's earnings:
+1. Stronger family bonds and marriage relationship have positive effects on children's earnings skills and economic status. 2. The influence goes through the channels of the investments in children's education and the intergenerational endowment inheritability. 3. Successful marriage leads to intergenerational relative earnings improvement. I use PSID data to connect parents and their children. Two-stage-least-squares estimations help to alleviate the endogeneity problem of the explanatory variable of interest, parent's marital status. Preliminary results show the following: 1. The direct effects of parents' marital status on children's earnings reflect the factors that are related to the unobservable family endowment inheritance. 2. The education premium is affected by parents' marital status. Earnings returns to schooling are higher for workers who grew up in families with married parents than in families with parents who experienced divorce or were ever single. 3. Marriage has more positive effects on sons' earnings than on daughters'.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Wen.pdf
+Handle: RePEc:boc:scon20:26
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Angelo Cozzubo
+Author-Workplace-Name: University of Chicago
+Title: The social costs of crime over trust: An approach with machine learning
+Abstract: In Peru, 55% of the population considers insecurity as the country's main problem. The present study seeks to contribute to the understanding of the social costs of crime in Peru by measuring the impact of patrimonial crime on trust in public institutions,
+using victimization surveys and censuses of police stations and municipalities and using the newly implemented machine-learning techniques in Stata combined with propensity score matching. Results: reduction of 3 percentage points (pp.) in the probability of trusting in the police and Serenazgo in the short term and 2 pp. in judicial power in the long term. Female victims would lose more confidence in Serenazgo and the Public Ministry. Robustness in the presence of unobservables, different pairings, and falsification tests, which would suggest potential causal character.
+Creation-Date: 20200820 
+File-URL: http://fmwww.bc.edu/repec/scon2020/us20_Cozzubo.pdf
+Handle: RePEc:boc:scon20:27
+

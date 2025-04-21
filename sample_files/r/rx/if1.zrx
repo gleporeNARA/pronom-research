@@ -1,0 +1,32 @@
+/* REXX sample about decisions */
+
+/* Set max wait time to 60 seconds */
+CALL ZocTimeout 60
+
+/* Wait for text 'Name:' - check for timeout
+   and send user name or report error */
+timeout= ZocWait("Name:")
+IF timeout=0 THEN DO
+   /* received 'Name:' */
+   CALL ZocSend "Joe User^M"
+END
+ELSE DO
+   /* Ouch, 'Name:' was not received */
+   CALL ZocWriteln "ERROR (Name)!!"
+   CALL ZocHangup
+END
+
+/* Wait for text 'Password:' - check timeout
+   and send password or report error */
+timeout= ZocWait("Password:")
+IF timeout=0 THEN DO
+   /* received 'Password:' OK */
+   CALL ZocSend "secret^M"
+END
+ELSE DO
+   /* Ouch, 'Password:' was not received */
+   CALL ZocWriteln "ERROR (Password)!!"
+   CALL ZocHangup
+END
+
+EXIT

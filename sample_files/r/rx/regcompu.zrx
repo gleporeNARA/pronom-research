@@ -1,0 +1,133 @@
+/* REXX */
+
+CR=d2c(13)
+CRCR=CR||CR
+PARSE VALUE ARG(1) WITH file
+
+IF file="" THEN DO
+    msg= "This REXX program is only for use by the ZOC order form!"||CRCR
+    CALL ZocMsgBox msg
+    EXIT
+END
+
+msg= "You are about to transfer your order form to CompuLab via modem."||CR,
+    CR"This is a 3 step procedure which you may abort at any point."||CR,
+    CR"Do you want to continue?"
+result= ZocMsgBox(msg, 2)
+IF result=="##NO##" THEN SIGNAL aborted
+
+msg= "Please make sure that ZOC is correctly configured for modem",
+    "communication."||CR,
+    CR"Do you want to continue?"
+result= ZocMsgBox(msg, 2)
+IF result=="##NO##" THEN SIGNAL aborted
+
+msg= "In the next step, the order form will be shown.  Please check",
+    "if ordered products, credit card numbers, etc. are correct."CR,
+    CR"Do you want to continue?"
+result= ZocMsgBox(msg, 2)
+IF result=="##NO##" THEN SIGNAL aborted
+
+PARSE VALUE ZocOS() with osysstr osversion
+IF osysstr="OS2" then 
+    ADDRESS CMD "E "file
+else
+    ADDRESS CMD "NOTEPAD "file
+
+msg= "The next step will show the phone number of the support BBS in",
+    "Germany.  Outside Germany please replace 0911 with your international",
+	"dial prefix and German country/city code (49 911).  In the U.S.",
+	"this is probably 011 49 911. "CR,
+    CR"Do you want to continue?"
+result= ZocMsgBox(msg, 2)
+if result=="##NO##" THEN SIGNAL aborted
+
+phone= ZocAsk("Please complete the following phone number", "0911 3781200")
+IF phone="##CANCEL##" THEN SIGNAL aborted
+
+msg= "ZOC will now try to call the support BBS and send your order form."CR,
+    "(You can watch the transfer by moving the order form window aside.)"CR,
+    CR"Do you want to continue?"
+result= ZocMsgBox(msg, 2)
+IF result=="##NO##" THEN SIGNAL aborted
+
+CALL ZocTimeout 3
+CALL ZocSend "AT^M"
+CALL ZocWait "OK"
+CALL ZocDial phone
+CALL ZocTimeout 60
+
+result= ZocWaitmux("CONNECT", "(MSN)", "NO CARRIER", "NO DIALTONE", "BUSY", "ERROR")
+
+IF result=0 | result=1 THEN do
+    CALL ZocTimeout 40
+    
+    result= ZocWait("Name")
+    IF result=640 THEN SIGNAL fail
+    
+    CALL ZocDelay 1
+    CALL ZocSend "ZOC^M"
+    
+    result= ZocWait("Ihre Wahl")
+    IF result=640 THEN SIGNAL fail
+    
+    CALL ZocDelay 1
+    CALL ZocSend "Y^M"
+    
+    result= ZocWait("Bitte Text eingeben")
+    IF result=640 THEN SIGNAL fail
+    
+    CALL ZocDelay 1
+    CALL ZocSend "THIS REGISTRATION WAS DELIVERED BY REGCOMPU.ZRX^M^M"
+    
+    stuffseen= 0
+    linecnt= 0
+    DO FOREVER 
+        line= LINEIN(file)                /* read line from file */
+        line= STRIP(line,'l',D2C(9))    /* remove leading TAB characters */
+        line= STRIP(line,'l')            /* remove leading space characters */
+        linecnt= linecnt+1
+        if STREAM(file, 's')\="READY" THEN /* EOF */
+            LEAVE
+       
+        IF stuffseen=0 & line="" THEN 
+            ITERATE
+        ELSE
+            stuffseen= 1
+        
+        CALL ZocSend "    "||line
+        CALL ZocSend "^M"
+    END /* DO */
+    CALL ZocSend ".^M"
+    
+    CALL ZocTimeout 20
+    result= ZocWait("Eingabe beendet.")
+    IF result=0 & linecnt>10 THEN DO
+        CALL ZocWait "Ihre Wahl"
+        CALL ZocDelay 1
+        CALL ZocSend "Z^M"
+        CALL ZocDelay 5
+        CALL ZocHangup
+        CALL ZocMsgBox "Your order was delivered successfully. Thank you!"
+    END
+    ELSE DO
+        CALL ZocMsgBox "Error while sending. The order was *NOT* sent!"
+    END
+END /* IF */
+ELSE DO
+    CALL ZocHangup
+    CALL ZocMsgBox "Sorry, connection failed. The order was *NOT* sent!"
+END /* ELSE */
+
+EXIT
+
+
+fail:
+    CALL ZocHangup
+    CALL ZocMsgBox "Sorry, connection failed. The order was *NOT* sent!"
+    EXIT
+
+aborted:
+    CALL ZocMsgBox "User aborted. The order was *NOT* sent!"
+    EXIT
+

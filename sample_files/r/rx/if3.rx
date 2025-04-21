@@ -1,0 +1,30 @@
+/* REXX sample about decisions */
+
+'TIMEOUT 60'
+
+
+/* Wait for 'Name?' - check for success and report error */
+'WAIT "Name?"'
+
+IF RC=0 THEN /* outer IF */
+DO /* received 'Name?' */
+   'SEND "Joe User^M"'
+
+   /* Wait for 'Password?' - check success and report error */
+   'WAIT "Password?"'
+
+   IF RC=0 THEN  /* inner IF */
+   DO /* received 'Password?' */
+      'SEND "mypassword^M"'
+   END
+   ELSE /* inner IF */
+   DO /* Ouch, 'Password?' was not received */
+      'WRITELN "ERROR (Password)!!"'
+      'HANGUP'
+   END /* inner IF */
+END
+ELSE /* outer IF */
+DO /* Ouch, 'Name?' was not received */
+   'WRITELN "ERROR (Name)!!"'
+   'HANGUP'
+END /* outer IF */

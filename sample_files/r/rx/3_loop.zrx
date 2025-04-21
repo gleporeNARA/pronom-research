@@ -1,0 +1,34 @@
+/* REXX */
+
+/* THIS SCRIPT SHOWS HOW TO LOOP COMMANDS */
+
+CALL ZocCls
+
+/* a simple loop (running three times) */
+DO 3
+    SAY "ZOC!"
+END 
+
+
+/* a loop running until the user answers YES */
+DO UNTIL answer="YES"
+    answer= ZocRequest("Do you like ZOC?", "YES", "NO")
+END 
+
+SAY "Glad to hear that!"
+
+
+/* a counting loop */
+DO i=1 TO 11 
+    IF i//2 \= 0 THEN   /* if i not dividable by two */
+    DO 
+        SAY i": He loves me"
+    END
+    ELSE
+    DO 
+        SAY i": He loves me not"
+    END
+END
+
+EXIT
+

@@ -1,0 +1,85 @@
+PCF:dB,Column description of members.    MEMBER dB
+:COVER
+/1
+:HEADING
+/1
+=16
+"Members and When They Joined"
+/1
+<DATE*>
+" at "
+<TIME*>:@@@@@@@@@@:
+=54
+"Page "
+[PAGE*]:zz#:
+/2
+=1
+"Member"
+=8
+"Firstname"
+=21
+"Lastname"
+=37
+"Address1"
+=58
+"Since"
+/1
+=1
+"======"
+=8
+"============"
+=21
+"==============="
+=37
+"===================="
+=58
+"===="
+/1
+:DETAIL
+=1
+[Member_no,1,6]
+=8
+[Firstname,1,12]
+=21
+[Lastname,1,15]
+=37
+[Address1,1,20]
+=58
+[Member_sin,1,4]
+/1
+:SUBTOTAL
+.CP4
+"--------------------------------------"
+/1
+"Subtotal: "
+<SUBFLD*>
+" = "
+<SUBID*>
+", "
+<SUBCOUNT*>:zz,zz#:
+" records."
+/1
+"--------------------------------------"
+/2
+:FOOTING
+/4
+:TOTAL
+.CP11
+/1
+"______________________________________"
+/2
+"TOTALS:"
+/2
+"Printed "
+<COUNT*>:zz,zz#:
+" of the "
+<RECORDS*>:zz,zz#:
+" records."
+/2
+"PRIMARY SORT FIELD: "
+<SORT*>:@@@@@@@@@@@@:
+/2
+"SELECTION CRITERIA: "
+/1
+<SELECT*>
+/1

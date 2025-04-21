@@ -1,0 +1,22 @@
+REGEDIT4
+
+[HKEY_CLASSES_ROOT\.OCX]
+@="ActiveX_File"
+
+[HKEY_CLASSES_ROOT\ActiveX_File]
+@="Windows ActiveX Controls"
+
+[HKEY_CLASSES_ROOT\ActiveX_File\shellex\ContextMenuHandlers]
+@="ActiveX_FileMenu"
+
+; ***---modify the Clasid entry below---***
+; replace {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} with a valid Clasid entry...
+; ***-----------------------------------***
+[HKEY_CLASSES_ROOT\ActiveX_File\shellex\ContextMenuHandlers\ActiveX_FileMenu]
+@="{7006E274-7ADF-11D1-A438-0060B0A3B215}"
+
+; ***---modify the Clasid entry below---***
+; replace {xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx} with a valid Clasid entry...
+; ***-----------------------------------***
+[HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Approved]
+"{7006E274-7ADF-11D1-A438-0060B0A3B215}"="ActiveX File Extension"

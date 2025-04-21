@@ -1,0 +1,354 @@
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Roger Newson
+Author-Workplace-Name: Department of Primary Care and Public Health, Imperial College London
+Author-Email:  r.newson@imperial.ac.uk
+Author-Person: pne37
+Title: Bland–Altman plots, rank parameters, and calibration ridit splines
+Abstract:  Scientists frequently work with pairs of alternative variables intended to measure the same quantity. Examples include measured and predicted disease prevalences in primary-care practices and marks awarded to student exam scripts by two different teachers. Statistical methods developed for use with such pairs of variables (A and B) may aim to measure components of disagreement between the variables (like discordance, bias, and scale differential), or they may aim to estimate one variable from the other (calibration). The Bland–Altman plot is the standard way of presenting a pair of alternative measures and allows us to visualize discordance, bias, and scale differential at the same time. However, it lacks parameters with confidence limits. The SSC packages somersd, scsomersd, and rcentile can be used to estimate rank parameters. They can measure discordance using Kendall's τa between A and B, bias using the mean sign and percentiles of A-B, and scale differential using Kendall's τa between A-B and A+B. For calibration (predicting A from B), we can use the SSC packages wridit and polyspline to define a ridit spline of A with respect to B. We can then plot the observed B and the predicted A (with confidence limits) against the ridit of B to create a continuous alternative to the standard decile plot commonly used for calibration.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Newson_uk19.pdf
+File-Format: application/pdf
+File-Function: presentation materials
+File-URL: http://repec.org/usug2019/Newson_uk19.zip
+File-Format: application/zip
+File-Function: sample do-file
+Handle: RePEc:boc:usug19:01
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Nuzhat B. Ashra
+Author-Workplace-Name: Biostatistics Research Group, Department of Health Sciences, University of Leicester
+Author-Name:  Michael Crowther
+Author-Workplace-Name: Biostatistics Research Group, Department of Health Sciences, University of Leicester
+Author-Email: michael.crowther@le.ac.uk
+Title: Developing a postestimation command for joint models in merlin
+Abstract: Joint longitudinal-survival models are now increasingly utilized to quantify the association between a repeatedly measured biomarker and time-to-event outcome. Where singular methods ignore the dependency between the biomarker and time-to-event outcome, joint models describe the association while accounting for possible measurement error and the intermittent nature of observations. Furthermore, extensions to these models can allow estimation of survival probabilities that are conditional on measurements to date and individual characteristic information. These probabilities give an up-to-date risk estimate for event occurrence tailored to the individual.
+Currently, there are two commands available in Stata, that are designed to fit these models. The command stjm was first on the scene and was specifically written to fit joint models. However, as the new kid on the block, merlin has greater flexibility than its predecessor. As a fairly recently established command, however, the postestimation command options are still a work in progress. The aim is to establish a command using both ado and Mata programming that will be able to produce a graphical illustration of individualized conditional survival probabilities. In this presentation, I will be talking about my coding journey to this end.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Ashra_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:02
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: David Vincent
+Title: Estimating (S,s) rule-regression models
+Abstract: There are many economic variables such as prices or wages that exhibit infrequent or lumpy adjustments. These outcomes occur when there are costs associated with making such changes, which lead agents to adopt an (S,s) decision rule. These rules are characterized by a band of inaction, where agents tolerate some deviation from an optimal frictionless outcome, provided that the deviation is within the (S,s) interval thresholds.
+The purpose of this presentation is to describe a new command, xtss, that estimates the parameters of a simple (S,s) rule model, for panel-data applications. This extends the specification developed by Dhyne et al. (2011) for modelling sticky prices by allowing the thresholds to have truncated Normal distributions and depend on regressors that vary over time and across individuals. 
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Vincent_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:03
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Reinhard A. Weisser
+Author-Workplace-Name: Nottingham Business School, Nottingham Trent University
+Title: Area-of-effect placebo tests
+Abstract: The emergence of GIS data offers a plethora of analytical approaches to investigate societal phenomena or policies in a spatial context. However, not all policies are implemented on the level of clearly delineated administrative areas. Some interventions might be active in imprecisely specified or only partially known geographic sectors. As a direct consequence, the resulting uncertainty regarding the area-of-effect (AOE) impacts on estimates of the effectiveness of a related policy.
+In this research, I present a new Stata tool to investigate the robustness of area-specific effectiveness estimates when the observed area might suffer from unknown degrees of misspecification relative to the actual AOE of a policy. In this regard, there are several dimensions of uncertainty regarding the observed AOE that relate to a potential misspecification of the observed intervention area in three dimensions—its position, orientation, and scale. The impact of these forms of area misspecification can be assessed in the aoeplacebo program, either by generating a number of AOE placebo test diagnostics or conducting AOE permutation simulations.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Weisser_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:04
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: John Tazare
+Author-Workplace-Name: London School of Hygiene and Tropical Medicine
+Author-Name: Ian Douglas
+Author-Workplace-Name: London School of Hygiene and Tropical Medicine
+Author-Name: Elizabeth Williamson
+Author-Workplace-Name: London School of Hygiene and Tropical Medicine
+Title: hdps: Implementation of high-dimensional propensity score approaches in Stata
+Abstract: Large healthcare databases are increasingly used for research investigating the effects of medications. However, adequate adjustment for confounding remains a key issue because incorrect conclusions can be drawn amid concerns of residual or unmeasured confounding.
+The high-dimensional propensity score (hd-PS) has been proposed as a solution to improve confounder adjustment and was developed in the context of US claims data by Schneeweiss et al. (2009). This approach treats information, stored as codes, within healthcare databases as proxies for key underlying confounders. Some proxies are likely to be strongly correlated with the variables typically included in a traditional propensity score or multivariable analysis and others may represent information about patients that is otherwise unmeasured, such as frailty. By including many of these proxies in the analysis, the hd-PS aims to adjust for both measured and unmeasured confounding.
+I present hdps, a command implementing this approach in Stata. Having defined data dimensions and the level of code truncation, hdps allows the user to set several tuning parameters: the number of codes to retain per dimension (d), the prespecified time frame, and the number of variables to include in the final model (k). The command generates proxy variables and performs a variable selection step to identify important variables for confounder adjustment. I illustrate hdps using a study from the Clinical Practice Research Datalink (CPRD).
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Tazare_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:05
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Adrian Mander
+Author-Workplace-Name: Cardiff University
+Title: Creating tables easily in XML
+Abstract:  Stata has provided putdocx, which is an excellent suite of commands that can create XML documents. Often in clinical trials there is a fair amount of summary statistics and frequency tables when producing final study documents or data monitoring committee reports. Using putdocx commands works reasonably well at producing these tables but requires many lines of code to produce a reasonable table and often requires every cell of the table to be specified by the user. I will introduce a new command, report, that takes the pain out of producing summary statistics tables and frequency tables. This should ease the burden on statisticians who have to do this work and can also therefore avoid the cut and paste culture to produce table outputs.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Mander_uk19.pptx
+File-Format: application/x-ms-powerpoint
+File-Function: presentation slides
+Handle: RePEc:boc:usug19:06
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Tim Morris
+Author-Workplace-Name: MRC Clinical Trials Unit, University College London
+Author-Name:  Michael Crowther
+Author-Workplace-Name: Biostatistics Research Group, Department of Health Sciences, University of Leicester
+Author-Email: michael.crowther@le.ac.uk
+Title:  The right way to code simulation studies in Stata
+Abstract: There are two broad approaches to coding a simulation study in Stata. The first is to write an rclass program that simulates and analyzes data before using the simulate command to repeat the process and store summaries of results. The second is to loop through repetitions and use the postfile family to store results. One favors the simulate approach because the code is much cleaner, so it is easier to spot mistakes. The other favors the postfile approach because it delivers a superior dataset summarizing simulation results. Both are good reasons. During yet another argument, we spotted a third approach that is unambiguously right because it uses cleanly structured code and delivers a useful dataset. This presentation will describe the issues with the simulate and postfile approaches before showing the correct approach. Simulation studies are an important element of statistical research, but they can be derailed, sometimes badly, by coding errors. The approach that gives both clean code and a usable dataset is worthwhile for all but the simplest simulation studies.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Morris_uk19.pptx
+File-Format: application/x-ms-powerpoint
+Handle: RePEc:boc:usug19:07
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Christopher F Baum
+Author-Workplace-Name: Boston College 
+Author-Workplace-Name: DIW Berlin
+Author-Person: pba1
+Author-Email:  baum@bc.edu
+Author-Name:  Erika Sabbath
+Author-Workplace-Name: Boston College 
+Author-Name:  Summer Sherburne Hawkins
+Author-Workplace-Name: Boston College 
+Title: State-level gun policy changes and rate of workplace homicide in the United States
+Abstract: Nearly 40,000 people in the U.S. die from firearm-related causes annually. Of these, about 1% are intentionally shot and killed while at work; work-related homicides account for about 10% of all workplace fatalities. While firearm policies have remained essentially unchanged at the national level, there is greater variation in state-level gun control legislation. Moreover, the gun control landscape between and within states has changed considerably over the past 10 years. Little recent work has focused on determinants or epidemiology of workplace homicide. The purpose of this study is to test whether changes in state-level gun control policies are associated with changes in state-level workplace homicide rates. Our analysis shows that stronger gun-control policies, particularly around concealed carry permitting, background checks, and domestic violence, may be effective means of reducing work-related homicide.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Baum_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:08
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Simone Signore
+Author-Workplace-Name: European Investment Fund (European Investment Bank Group)
+Title: dbnomics: Stata client for DBnomics, the world's economic database
+Abstract: dbnomics provides a suite of tools to search, browse, and import time-series data from DBnomics, the world's economic database (https://db.nomics.world). DBnomics is a web-based platform that aggregates and maintains time-series data from various statistical agencies across the world. dbnomics works only with Stata 14 or higher, because it relies on the secure HTTP protocol (https).
+dbnomics provides an interface to DBnomics' RESTful API (https://api.db.nomics.world/apidocs), allowing for advanced filtering of data using Stata's native options syntax. To achieve this, the command relies on Erik Lindsley's libjson backend (ssc install libjson).
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Signore_uk19.pdf
+File-Format: application/pdf
+File-Function: presentation slides
+Handle: RePEc:boc:usug19:09
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Nicholas J. Cox
+Author-Workplace-Name: Durham University
+Author-Email:  n.j.cox@durham.ac.uk
+Author-Person: pco34
+Title:  Needing a different space? Transformed scales in Stata
+Abstract: Many procedures in statistical science benefit from working on a transformed scale, either with or without a later return to the original scale. Using a logarithmic axis scale for a graph and taking logarithms of a response or predictor are common if not elementary examples. Transformations provide a theme for reviewing small Stata tips and tricks and larger Stata commands for using a transformation known to be a good idea or choosing a transformation that might be a good idea.
+Terrain covered includes (1) using and labeling standard and not-so-standard graph scales&emdash;not just logarithm, but also root, cube root, reciprocal, neglog, asinh, logit, and other folded transformations; (2) log-ratio transformations for compositional data; (3) density estimation on transformed scales; (4) user-chosen link functions for generalized linear models; (5) choice of transformations given distributions and relationships. Some recent and new Stata commands will be among the illustrations.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Cox_uk19.pptx
+File-Format: application/x-ms-powerpoint
+Handle: RePEc:boc:usug19:10
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Jesse Wursten
+Author-Workplace-Name: KU Leuven FEB
+Title: Seven tools to make your Stata life more pleasant
+Abstract:  I present seven quality of life improvements for everyday Stata usage. The first three send messages to your smartphone, for example, to tell you the do-file encountered an error or the end of its journey. The fourth allows for low level task parallelization, which saves effort, frustration, and time. The fifth is a straightforward single-line timer. The sixth lets you write do-files in a highly organized way with minimal effort (and it writes code, which is both amazing and a little scary). Finally, the seventh one makes it easy to access the US Census API.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Wursten_uk19.pdf
+File-Format: application/pdf
+File-Function: presentation slides
+Handle: RePEc:boc:usug19:11
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Rachel Pearce
+Author-Workplace-Name:  Guy's Hospital
+Title: A suite of community-contributed programs to produce outcome tables and graphs for demographic and survival data
+Abstract:  I set out to describe the origins, development, and current status of a Stata program suite I have developed to handle requests for up-to-date tables and graphs showing the demographic distribution and outcomes of registry data.
+Stata's tabulation and graphical features continue to develop and become more flexible, and with the putdocx functions making it straightforward to generate reports, it is easier than ever to create publication-quality output. However, it is also important to make sure when creating graphs and tables that the headings, axis labels, legend, etc. match the content.
+As a statistician with the British Society of Blood and Marrow Transplantation (BSBMT), demands on my time include specific retrospective studies. In these cases, data are double checked, cleaned, and returned to me at a prespecified time point. Other analysis requests also increasingly include "up-to-date" reports on the whole registry or large subsections of it. These frequently involve repetitive graphs, tables, or both, for instance, cycling over diagnosis or over centers where the procedures were performed. This drove the creation of the suite of programs I will describe to generate tables of demographics, outcomes, and graphs (mostly survival curves).
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Pearce_uk19.pptx
+File-Format: application/x-ms-powerpoint
+File-Function: presentation slides
+Handle: RePEc:boc:usug19:12
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Jan Ditzen
+Author-Workplace-Name: Heriot-Watt University
+Author-Email: j.ditzen@hw.ac.uk
+Title: Estimating long-run coefficients and bootstrapping standard errors in large panels with cross-sectional dependence
+Abstract: This presentation explains how to estimate long-run coefficients and bootstrap standard errors in a dynamic panel with heterogeneous coefficients, common factors, and many observations over cross-sectional units and time periods. The common factors cause cross-sectional dependence, which is approximated by cross-sectional averages. Heterogeneity of the coefficients is accounted by taking the unweighted averages of the unit-specific estimates. Following Chudik, Mohaddes, Pesaran and Raissi (2016, Advances in Econometrics 36: 85-135) I consider three models to estimate long-run coefficients: a simple dynamic model (CS-DL), an error-correction model, and an ARDL model (CS-ARDL). I explain how to estimate all three models using the Stata community-contributed command xtdcce2. Secondly, I compare the nonparametric standard errors and bootstrapped standard errors. The bootstrap follows on the lines of Goncalves and Perron (2016) and the community-contributed command boottest by Roodman, Nielsen, Webb, and Mackinnon (2018). The challenges are to maintain the error structure across time and cross-sectional units and to encompass the dynamic structure of the model.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Ditzen_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:13
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Gabriel Aguilera-Venegas
+Author-Workplace-Name: Departamento de Matemática Aplicada, Universidad de Málaga
+Author-Name:  José Luis Galán-García
+Author-Workplace-Name: Departamento de Matemática Aplicada, Universidad de Málaga
+Author-Name:  María Ángeles Galán-García
+Author-Workplace-Name: Departamento de Matemática Aplicada, Universidad de Málaga
+Author-Name:  Yolanda Padilla-Domínguez
+Author-Workplace-Name: Departamento de Matemática Aplicada, Universidad de Málaga
+Author-Name:  Pedro Rodríguez-Cielos
+Author-Workplace-Name: Departamento de Matemática Aplicada, Universidad de Málaga
+Title: New functions for random-samples generation using Stata 15
+Abstract: In the 2017 Spanish Stata Users Group meeting, held in Madrid on 19 October, we introduced some functions for generating random samples from continuous and discrete distributions using Stata 13.
+In this presentation, I will show new extensions of such functions updated for Stata 15. I will describe their syntax and show different examples of use. I will also compare the new developed functions with the built-in Stata ones and with the function rsample.
+The goodness of the generated samples will be checked using the mean squared error (MSE) of the differences between the frequencies of the sample and the theoretical expected ones. I will also provide bar charts that will allow the user to graphically compare the sample with the exact distribution function of the random distribution being sampled.
+Graphics capabilities are included in the new developed functions so that the distribution of the generated sample can be displayed. This fact is useful in the teaching and learning process in subjects, which deals with statistics. Specifically, this educational approach has been considered when teaching statistics in the Health Engineering degree of the University of Málaga (Spain). 
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Galan-Garcia_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:14
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Adrian Sayers
+Author-Workplace-Name: Musculoskeletal Research Unit, University of Bristol
+Author-Name: Michael R. Whitehouse
+Author-Workplace-Name: Musculoskeletal Research Unit, University of Bristol
+Author-Name: Andrew Judge
+Author-Workplace-Name: Musculoskeletal Research Unit, University of Bristol
+Author-Name: Alexander MacGregor
+Author-Workplace-Name: Musculoskeletal Medicine Research Group, University of East Anglia
+Author-Name: Ashley W. Blom
+Author-Workplace-Name: Musculoskeletal Research Unit, University of Bristol
+Author-Name: Yoav Ben-Shlomo
+Author-Workplace-Name: Bristol Population Health Science Institute, University of Bristol
+Title: Analysis of pre- and post-intervention outcomes with floor and ceiling effects
+Abstract: Background: Analysis of pre- and post-intervention change in observational studies using Patient Reported Outcome Measures (PROMs) is often believed to be a trivial exercise, and guidance for analysis of data from randomized control trials is often applied. This is often inappropriate, and that analysis of change scores may be preferable. However, it is unclear if this is suitable in outcomes with floor and ceiling effects. I investigate the association between body mass index (BMI) and the efficacy of primary hip replacement.
+ Methods: Using a Monte Carlo simulation study and data from a national joint replacement register (162,513 patients with pre- and post-surgery PROMs) I investigate simple approaches for the analysis of outcomes with floor and ceiling effects that are measured at two occasions: linear and tobit regression (baseline adjusted ANCOVA, change-score analysis, postscore analysis) in addition to linear and multilevel Tobit models.
+ Results: Analysis of data with floor and ceiling effects with models that fail to account for these features induce substantial bias. Single-level tobit models correct only for floor or ceiling effects when the exposure of interest is not associated with the baseline score. In observational data scenarios, only multilevel tobit models are capable of providing unbiased inferences.
+ Conclusions: Inferences from pre- and post-studies that fail to account for floor and ceiling effects may induce spurious associations with substantial risk of bias. Multilevel tobit models indicate the efficacy of total hip replacement is independent of BMI. Restricting access to total hip replacement based on a patient's BMI cannot be supported by the data.
+Creation-Date: 20190915
+Handle: RePEc:boc:usug19:15
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Maarten Buis
+Author-Workplace-Name: Department of History and Sociology, University of Konstanz
+Title: Making interactive presentations in Stata
+Abstract:  In this presentation, I will go through the workflow of creating an interactive presentation in Stata (a .smcl presentation) with smclpres based on a small example presentation.
+Some talks are primarily on how to do things in Stata, like a lecture on graphs in Stata or a talk at a Stata Users' Group meeting. In those cases, a .smcl presentation can be useful. A .smcl presentation is a series of linked .smcl files that open in the viewer inside Stata (like help files). The strength of a .smcl presentation is that it can contain links that execute examples, open help files, open do-files, etc.
+A .smcl presentation is all about illustrating how to do something in Stata, so preparing for such a talk typically starts with preparing a set of examples in a do-file. By adding specific comments to that do-file, for example, to indicate when a slide starts and when it ends, what the title of the slide is, etc., the smclpres command can turn that do-file into a .smcl presentation. Moreover, the pres2html command can turn that .smcl presentation into an HTML handout so that participants can easily access the content after the presentation.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Buis_uk19.zip
+File-Format: application/zip
+File-Function: presentation slides
+Handle: RePEc:boc:usug19:16
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Sebastian Kripfganz
+Author-Workplace-Name: University of Exeter Business School
+Author-Email: S.Kripfganz@exeter.ac.uk
+Title: Generalized method of moments estimation of linear dynamic panel-data models
+Abstract:  In dynamic models with unobserved group-specific effects, the lagged dependent variable is an endogenous regressor by construction. The conventional fixed-effects estimator is biased and inconsistent under fixed-T asymptotics. To deal with this problem, "difference GMM" and "system GMM" estimators in the spirit of Arellano and Bond (1991, Review of Economic Studies), Arellano and Bover (1995, Journal of Econometrics), and Blundell and Bond (1998, Journal of Econometrics) are predominantly applied in practice. While Stata has the official commands xtabond and xtdpdsys—both are wrappers for xtdpd—the Stata community widely associates these methods with the xtabond2 command provided by Roodman (2009, Stata Journal).
+10 years after Roodman's award winning Stata Journal article, this presentation revisits the GMM estimation of dynamic panel-data models in Stata. I present the new command, xtdpdgmm, that addresses some shortcomings of xtabond2 and adds further flexibility to the specification of the estimators. In particular, it allows to incorporate the Ahn and Schmidt (1995, Journal of Econometrics) nonlinear moment conditions that can improve the efficiency and robustness of the estimation. Besides the familiar one-step and two-step estimators, xtdpdgmm also provides the Hansen, Heaton, and Yaron (1996, Journal of Business & Economic Statistics) iterated GMM estimator.
+While it can be pedagogically useful to think about "system GMM" as a system of a level equation and an equation in first differences or forward-orthogonal deviations, I explain that the resulting estimator can still be regarded as a "level GMM" estimator with a set of transformed instruments. These transformed instruments can be obtained as a postestimation feature and used for subsequent specification tests, for example with the ivreg2 command suite of Baum, Schaffer, and Stillman (2003 and 2007, Stata Journal). I further address common pitfalls and frequently asked questions about the estimation of linear dynamic panel-data models.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Kripfganz_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:17
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Yulia Marchenko
+Author-Workplace-Name: StataCorp LP
+Author-Email:  ymarchenko@stata.com
+Title: Meta-analysis in Stata
+Abstract: Meta-analysis combines results of multiple similar studies to provide an estimate of the overall effect. This overall estimate may not always be representative of a true effect. Often, studies report results that vary in magnitude and even direction of the effect, which leads to between-study heterogeneity. And sometimes the actual studies selected in a meta-analysis are not representative of the population of interest, which happens, for instance, in the presence of publication bias. Meta-analysis provides the tools to investigate and address these complications. Stata has a long history of meta-analysis methods contributed by Stata researchers. In my presentation, I will introduce Stata's new suite of commands, meta, and demonstrate it using real-world examples.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Marchenko_uk19.pdf
+File-Format: application/pdf 
+Handle: RePEc:boc:usug19:18
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Thorsten Doherr
+Author-Workplace-Name: Leibniz Centre for European Economic Research
+Title: ultimatch: Matching counterfactuals your way
+Abstract: ultimatch implements various score and distance based matching methods, for example, nearest neighbor, radius, coarsened exact, percentile rank and Mahalanobis distance matching. It implements an efficient method for distance-based matching like Mahalanobis matching, preventing the quadratic increment of the runtime. Matched observations are marked individually allowing interactions between treated and counterfactuals. Different methods can be combined to improve the results or to impose external requirements on the matched. Among other control variables, it creates mandatory weights to provide balanced matching results, preventing distortions caused by skewed counterfactual candidate distributions, for instance, overabundance of candidates with the same score or within the same coarsened group.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Doherr_uk19.pptx
+File-Format: application/x-ms-powerpoint
+File-Function: presentation slides
+Handle: RePEc:boc:usug19:19
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Sébastian Fontenay
+Author-Workplace-Name: ECON-IRES, Université Catholique de Louvain
+Title: discretize: Command to convert a continuous instrument into a dummy variable for instrumental-variable estimation
+Abstract: The Instrumental Variable (IV) method is a standard econometric approach to address endogeneity issues (for example, when an explanatory variable is correlated with the error term). It relies on finding an instrument, excluded from the outcome equation (second stage), but which is a determinant of the endogenous variable of interest (first stage). Many instruments rely on cross-sectional variation produced by a dummy variable, which is discretized from a continuous variable. There might be several reasons for converting a continuous variable into a binary instrument. First, continuous instruments recoded as dummies have been shown to provide a parsimonious nonparametric model for the underlying first-stage relation (Angrist and Pischke 2009). Second, it provides a simple tool to evaluate the IV strategy and the identification assumptions. Unfortunately, the construction of the binary instrument often appears to be arbitrary, which may raise concerns about the robustness of the second-stage results.
+I propose a data-driven procedure to build this discrete instrument, implemented in a command called discretize. The boundaries of the discrete variable are chosen to maximize the F-statistic in the first stage. This procedure has two main advantages. First, it minimizes the weak instrument problem, which can arise in case of incorrect functional specification in the first stage. Second, it offers a transparent, data-driven, procedure to select an instrument that does not depend on arbitrary decisions made by the researcher. Several options are available with the command to check graphically the robustness of the first- and second-stage parameters.
+The presentation includes an explanation of the functioning of the discretize command, and an illustration of its usefulness with an example that relates the raise of violent crime in city centers and the process of suburbanization. The endogenous relation is solved using lead poisoning as instrument. 
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Fontenay_uk19.pdf
+File-Format: application/pdf
+File-Function: presentation slides
+Handle: RePEc:boc:usug19:20
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Austin Nichols
+Author-Workplace-Name: Abt Associates
+Author-Email: austinnichols@gmail.com
+Title: Unbiased IV in Stata
+Abstract: A well-known result is that exactly identified IV has no moments, including in the ideal case of an experimental design (that is, a randomized control trial with imperfect compliance). However, this result no longer holds when the sign of the first stage is known. I describe a Stata implementation of an unbiased estimator for instrumental-variable models with a single endogenous regressor where the sign of one or more first-stage coefficients is known (Andrews and Armstrong 2017) and its finite sample properties under alternative error structures.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Nichols_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:21
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Robert Grant
+Author-Workplace-Name: BayesCamp
+Author-Email: austinnichols@gmail.com
+Title: Interactive graphics in the web browser using Stata2D3 and Stata's SVG graph exports
+Abstract:  A prototype command, d3, that makes interactive graphs with the JavaScript library D3 (Data-Driven Documents) was presented at the 2014 London Stata Users' Group meeting.
+Since then, the SVG graph export format in Stata versions 14 and up has made this task much simpler. I present a new version of d3 and its supporting commands in a package called Stata2D3, which takes advantage of the innate link between SVG and web browsers. Together, they export any Stata graph to SVG, wrap it in an HTML file, tag components of the graph such as markers and lines, append data from other variables of interest, and use the D3 library to add interactivity.
+The result is a familiar Stata graph in the web browser, the style of which can be controlled in the usual ways, but with the option of interactivity such as pop-up information when the mouse hovers over a marker or line, highlighting one line on click or hover, or tickboxes to show and hide groups of data. Any Stata graph is immediately available, and different forms of interactivity can be added.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Grant_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:22
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Ian R. White
+Author-Workplace-Name: MRC Clinical Trials Unit at University College London
+Title: Bayesian network meta-analysis
+Abstract: Network meta-analysis is a statistical approach to combining evidence from multiple studies comparing multiple treatments. It may be "two-stage", where treatment effects and their variances are estimated separately for each study and then combined using a normal approximation or "one stage", where summary statistics at treatment group level (for example, number of events and number of individuals) are directly analyzed. My network suite currently provides various tools for exploring network meta-analysis data and analyzing them in a two-stage frequentist approach (C. White 2015, The Stata Journal 15: 1–34). I will describe arguments for preferring a one-stage Bayesian approach and recent work implementing it. The one-stage approach amounts to fitting a generalized linear mixed model, but I was unable to achieve adequate mixing using bayes: meglm. I will describe my alternative approach of automating the writing and running of a WinBUGS program. This process is implemented in the new network bayes and allows substantial modelling flexibility, including normal or binomial data; various contrast-based and arm-based models; various heterogeneity structures; and the option to sample from the prior. Features not yet implemented are inconsistency models and meta-regression.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/White_uk19.pptx
+File-Format: application/x-ms-powerpoint
+Handle: RePEc:boc:usug19:23
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  Ben Jann
+Author-Workplace-Name: Institute of Sociology, University of Bern
+Author-Email: ben.jann@soz.unibe.ch
+Author-Person: pja61
+Title: Heat (and hexagon) plots in Stata
+Abstract: In this presentation, I will present two new Stata commands to produce heat plots. Generally speaking, a heat plot is a graph in which one of the dimensions of the data is visualized using a color gradient. One example of such a plot is a two-dimensional histogram in which the frequencies of combinations of binned X and Y are displayed as rectangular (or hexagonal) fields using a color gradient. Another example is a plot of a trivariate distribution where the color gradient is used to visualize the (average) value of Z within bins of X and Y. Yet another example is a plot that displays the contents of a matrix, say, a correlation matrix or a spacial weights matrix using a color gradient. The two commands I will present are called heatplot and hexplot.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Jann_uk19.pdf
+File-Format: application/pdf
+Handle: RePEc:boc:usug19:24
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  David Drukker
+Author-Workplace-Name: StataCorp LP
+Author-Email:  dmd@stata.com
+Title: Inference after lasso model selection
+Abstract: The increasing availability of high-dimensional data and increasing interest in more realistic functional forms have sparked a renewed interest in automated methods for selecting the covariates to include in a model. I discuss the promises and perils of model selection and pay special attention to estimators that provide reliable inference after model selection. I will demonstrate how to use Stata 16's new features for double selection, partialing out, and cross-fit partialing out to estimate the effects of variables of interest while using lasso methods to select control variables.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Drukker_uk19.pdf
+File-Format: application/pdf 
+Handle: RePEc:boc:usug19:25
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name: Koen Jochmans
+Author-Workplace-Name: Faculty of Economics, University of Cambridge
+Author-Name: Vincenzo Verardi
+Author-Workplace-Name: Université Libre de Bruxelles
+Author-Email: vverardi@ulb.ac.be
+Title: Exponential regression models with two-way fixed effects: twexp and twgravity
+Abstract: I present the commands twexp and twgravity, which implement the estimators developed in Jochmans (2017) for exponential regression models with two-way fixed effects. twexp is applicable to generic nxm panel data. twgravity is written for the special case where the data are a cross-section on dyadic interactions between n agents. A prime example of the latter is cross-sectional bilateral trade data, where the model of interest is a gravity equation with importer and exporter effects. Both twexp and twgravity can deal with data where n and m are large, that is, the case of many fixed effects.
+  Idea: The pseudo-Poisson approach suffers from two drawbacks. The first is a numerical one. Indeed, the large amount of fixed effects implies that a simple approach that combines, say, poisson with n+m dummy variables will be infeasible in many datasets. The routines poi2hdfe (Guimaraes 2016) or ppmlhdfe (Correia et al. 2019) are designed especially to deal with this problem and are useful alternatives here. The second drawback is that the plug-in estimator of the covariance matrix of the above moment conditions is severly biased. The origin of the problem is the estimation of the incidental parameters.
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/Jochmans_uk19.pdf
+File-Format: application/pdf 
+Handle: RePEc:boc:usug19:26
+
+Template-Type: ReDIF-Paper 1.0
+Author-Name:  João Santos Silva
+Author-Workplace-Name: School of Economics, University of Surrey
+Title: Quantile regression: Basics and recent advances
+Abstract: This presentation starts with a general introduction to quantile regression (see qreg and related commands) and then addresses two topics from recent research, specifically quantile regression with time-invariant individual ("fixed") effects, and structural quantile function estimation. After summarizing the main results in these areas, I present the approach to these problems proposed by Machado and Santos Silva (Quantiles via moments, Journal of Econometrics 2019, forthcoming), and illustrate the use of the corresponding Stata commands xtqreg and ivqreg2 (downloadable from SSC).
+Creation-Date: 20190915
+File-URL: http://repec.org/usug2019/SantosSilva_uk19.pdf
+File-Format: application/pdf 
+File-URL: http://repec.org/usug2019/SantosSilva_uk19.do
+File-Format: text/plain
+Handle: RePEc:boc:usug19:27
+
