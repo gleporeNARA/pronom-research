@@ -1,0 +1,536 @@
+version BMRT 2.6.0beta
+surface shinyplastic
+param	float	Ka		1
+param	float	Kd		0.5
+param	float	Ks		0.5
+param	float	roughness		0.1
+param	float	Kr		1
+param	float	blur		0
+param	float	ior		1.5
+param	string	envname		""
+param	string	envspace		"world"
+param	float	envrad		100
+param	float	rayjitter		0
+param	float	raysamples		1
+param	float	twosided		0
+local	string	$_str_0 	"__nondiffuse"
+local	string	$_str_1 	"__nonspecular"
+local	string	$_str_2 	"NDC"
+local	string	$_str_3 	"blur"
+local	string	$_str_4 	"fill"
+local	string	$_str_5 	""
+local	string	$_str_6 	"world"
+local	normal	Nf	0 0 0
+local	vector	_50$IN	0 0 0
+local	vector	_50$V	0 0 0
+local	float	_50$fkr	0
+local	float	_50$fkt	0
+local	vector	_50$R	0 0 0
+local	vector	_50$T	0 0 0
+local	float	_42$Kr	0
+code
+local	color	_42$C	0 0 0
+local	float	_42$alpha	0
+local	point	_28$Pndc	0 0 0
+local	float	_28$x	0
+local	float	_28$y	0
+local	point	_29$Psp	0 0 0
+local	vector	_29$Rsp	0 0 0
+local	float	_29$r2	0
+local	float	_29$t0	0
+local	float	_29$t1	0
+local	float	_19$eps	0
+code
+local	float	_19$b	0
+local	float	_19$c	0
+local	float	_19$discrim	0
+local	float	_19$solutions	0
+local	color	_42$Cray	0 0 0
+local	float	_32$blur	0
+code
+local	color	_32$C	0 0 0
+local	color	_32$Ct	0 0 0
+local	float	_32$hitdist	0
+local	point	_32$Phit	0 0 0
+local	point	_32$Pmiss	0 0 0
+local	vector	_32$Nhit	0 0 0
+local	vector	_32$Rmiss	0 0 0
+local	float	_32$bluramt	0
+local	float	_32$nrays	0
+local	vector	_32$Tu	0 0 0
+local	vector	_32$Tv	0 0 0
+local	vector	_36$uoffset	0 0 0
+local	vector	_36$voffset	0 0 0
+local	float	_36$i	0
+local	float	_36$j	0
+local	vector	_40$R	0 0 0
+local	point	_40$Pray	0 0 0
+local	float	__float_dummy	0
+code
+local	float	_36$totrays	0
+initcode 12
+	return
+code
+	pushv	I 
+	pushv	N 
+	normalize
+	faceforward
+	popv	Nf 
+	pushv	I 
+	normalize
+	popv	_50$IN 
+	pushv	_50$IN 
+	negv
+	popv	_50$V 
+	pushf	ior 
+	pushif	1 
+	divff
+	pushv	Nf 
+	pushv	_50$IN 
+	fresnel4
+	popf	_50$fkr 
+	popf	_50$fkt 
+	popv	_50$R 
+	popv	_50$T 
+	pushf	_50$fkr 
+	pushif	1 
+	subff
+	popf	_50$fkt 
+	pushif	0 
+	pushv	I 
+	pushv	N 
+	vdot
+	gt
+	pushif	0 
+	pushf	twosided 
+	feqf
+	and
+	ifz	1
+	pushif	0 
+	popf	_50$fkr 
+label 1
+label 2
+	mulFF	_50$fkr Kr 
+	popf	_42$Kr 
+	pushif	0 
+	cset	_42$C 
+	pushs	$_str_5 
+	pushs	envname 
+	sne
+	ifz	4
+	pushs	$_str_2 
+	pushs	envspace 
+	seq
+	ifz	6
+	pushv	P 
+	pushs	$_str_2 
+	transforms
+	popv	_28$Pndc 
+	pushv	_28$Pndc 
+	xcomp
+	popf	_28$x 
+	pushv	_28$Pndc 
+	ycomp
+	pushif	1 
+	subff
+	popf	_28$y 
+	pushif	1 
+	pushs	$_str_4 
+	pushf	blur 
+	pushs	$_str_3 
+	pushf	_28$y 
+	pushf	_28$x 
+	pushif	3 
+	pushs	envname 
+	pushif	2 
+	pushif	6 
+	ftexture
+	popf	_42$alpha 
+	pushf	blur 
+	pushs	$_str_3 
+	pushf	_28$y 
+	pushf	_28$x 
+	pushif	0 
+	pushs	envname 
+	pushif	2 
+	pushif	4 
+	ctexture
+label 8
+	popc	_42$C 
+	jump	7
+label 6
+	pushv	P 
+	pushs	envspace 
+	transforms
+	popv	_29$Psp 
+	pushv	_50$R 
+	pushs	envspace 
+	vtransforms
+	normalize
+	popv	_29$Rsp 
+	mulFF	envrad envrad 
+	popf	_29$r2 
+	pushf	_29$r2 
+	pushv	_29$Psp 
+	pushv	_29$Psp 
+	vdot
+	gt
+	ifz	10
+	pushv	_29$Psp 
+	normalize
+	mulFv	envrad 
+	popv	_29$Psp 
+label 10
+label 11
+	pushif	0 
+	pushif	1e-04 
+	popf	_19$eps 
+	pushv	_29$Rsp 
+	pushv	_29$Psp 
+	vdot
+	pushif	2 
+	mulff
+	popf	_19$b 
+	mulFF	envrad envrad 
+	pushv	_29$Psp 
+	pushv	_29$Psp 
+	vdot
+	subff
+	popf	_19$c 
+	pushf	_19$c 
+	pushif	4 
+	mulff
+	mulFF	_19$b _19$b 
+	subff
+	popf	_19$discrim 
+	pushif	0 
+	pushf	_19$discrim 
+	gt
+	ifz	15
+	pushf	_19$discrim 
+	sqrt
+	popf	_19$discrim 
+	pushif	2 
+	pushf	_19$b 
+	pushf	_19$discrim 
+	negf
+	subff
+	divff
+	popf	_29$t0 
+	pushf	_19$eps 
+	pushf	_29$t0 
+	gt
+	ifz	17
+	pushif	2 
+	subFF	_19$discrim _19$b 
+	divff
+	popf	_29$t1 
+	pushif	2 
+	popf	_19$solutions 
+	jump	18
+label 17
+	pushif	2 
+	subFF	_19$discrim _19$b 
+	divff
+	popf	_29$t0 
+	pushf	_19$eps 
+	pushf	_29$t0 
+	gt
+	ifz	19
+	pushif	1 
+	jump	20
+label 19
+	pushif	0 
+label 20
+	popf	_19$solutions 
+label 18
+	jump	16
+label 15
+	pushif	0 
+	pushf	_19$discrim 
+	feqf
+	ifz	21
+	pushif	2 
+	pushf	_19$b 
+	negf
+	divff
+	popf	_29$t0 
+	pushf	_19$eps 
+	pushf	_29$t0 
+	gt
+	ifz	23
+	pushif	1 
+	jump	24
+label 23
+	pushif	0 
+label 24
+	popf	_19$solutions 
+	jump	22
+label 21
+	pushif	0 
+	popf	_19$solutions 
+label 22
+label 16
+	pushf	_19$solutions 
+label 14
+	gt
+	ifz	12
+	mulFV	_29$t0 _29$Rsp 
+	addV	_29$Psp 
+	popv	_29$Rsp 
+label 12
+label 13
+	pushif	1 
+	pushs	$_str_4 
+	pushf	blur 
+	pushs	$_str_3 
+	pushv	_29$Rsp 
+	pushif	3 
+	pushs	envname 
+	pushif	1 
+	pushif	5 
+	fenvironment
+	popf	_42$alpha 
+	pushf	blur 
+	pushs	$_str_3 
+	pushv	_29$Rsp 
+	pushif	0 
+	pushs	envname 
+	pushif	1 
+	pushif	3 
+	cenvironment
+label 9
+	popc	_42$C 
+label 7
+label 4
+label 5
+	pushf	blur 
+	sqrt
+	popf	_32$blur 
+	pushif	1e-06 
+	pushv	_50$R 
+	area
+	sqrt
+	fmax
+	addF	_32$blur 
+	popf	_32$bluramt 
+	pushif	0 
+	raylevel
+	feqf
+	ifz	26
+	pushf	raysamples 
+	sqrt
+	ceil
+	pushif	1 
+	fmax
+	jump	27
+label 26
+	pushif	1 
+label 27
+	popf	_32$nrays 
+	pushf	du 
+	pushif	1.5 
+	mulff
+	pushv	P 
+	Duv
+	mulvf
+	popv	_32$Tu 
+	pushf	dv 
+	pushif	1.5 
+	mulff
+	pushv	P 
+	Dvv
+	mulvf
+	popv	_32$Tv 
+	pushif	1e-04 
+	pushf	_42$Kr 
+	lt
+	ifz	28
+	pushif	0 
+	cset	_32$C 
+	jump	29
+label 28
+	pushif	1 
+	pushf	_32$nrays 
+	gt
+	pushif	0 
+	pushf	_32$bluramt 
+	gt
+	or
+	ifz	30
+	pushv	_50$R 
+	xcomp
+	pushv	_50$R 
+	ycomp
+	subff
+	pushv	_50$R 
+	zcomp
+	pushv	_50$R 
+	xcomp
+	subff
+	pushv	_50$R 
+	ycomp
+	pushv	_50$R 
+	zcomp
+	subff
+	normalize
+	mulFv	_32$blur 
+	popv	_36$uoffset 
+	pushv	_36$uoffset 
+	pushv	_50$R 
+	cross
+	popv	_36$voffset 
+	pushif	0 
+	cset	_32$C 
+	pushif	0 
+	popf	_42$alpha 
+	pushif	0 
+	popf	_36$i 
+label 32
+	pushf	_32$nrays 
+	pushf	_36$i 
+	lt
+	ifz	34
+	pushif	0 
+	popf	_36$j 
+label 35
+	pushf	_32$nrays 
+	pushf	_36$j 
+	lt
+	ifz	37
+	pushv	_36$voffset 
+	pushif	0.5 
+	pushf	_32$nrays 
+	pushif	0.5 
+	addF	_36$j 
+	divff
+	subff
+	mulfv
+	pushv	_36$uoffset 
+	pushif	0.5 
+	pushf	_32$nrays 
+	pushif	0.5 
+	addF	_36$i 
+	divff
+	subff
+	mulfv
+	addV	_50$R 
+	addvv
+	popv	_40$R 
+	pushv	_40$R 
+	normalize
+	popv	_40$R 
+	pushv	_32$Tv 
+	pushif	0.5 
+	pushf	_32$nrays 
+	pushif	0.5 
+	addF	_36$i 
+	divff
+	subff
+	mulfv
+	pushv	_32$Tu 
+	pushif	0.5 
+	pushf	_32$nrays 
+	pushif	0.5 
+	addF	_36$j 
+	divff
+	subff
+	mulfv
+	addV	P 
+	addvv
+	popv	_40$Pray 
+	pushv	_40$R 
+	pushv	_40$Pray 
+	fulltrace
+	popc	_32$Ct 
+	popf	_32$hitdist 
+	popv	_32$Phit 
+	popv	_32$Nhit 
+	popv	_32$Pmiss 
+	popv	_32$Rmiss 
+	popf	__float_dummy 
+	pushc	_32$Ct 
+	addC	_32$C 
+	popc	_32$C 
+	pushf	_32$hitdist 
+	pushif	1e+10 
+	step
+	pushif	1 
+	subff
+	addF	_42$alpha 
+	popf	_42$alpha 
+label 36
+	pushif	1 
+	addF	_36$j 
+	popf	_36$j 
+	jump	35
+label 37
+label 33
+	pushif	1 
+	addF	_36$i 
+	popf	_36$i 
+	jump	32
+label 34
+	mulFF	_32$nrays _32$nrays 
+	popf	_36$totrays 
+	pushf	_36$totrays 
+	pushc	_32$C 
+	divcf
+	popc	_32$C 
+	pushf	_36$totrays 
+	divF	_42$alpha 
+	popf	_42$alpha 
+	jump	31
+label 30
+	pushv	_50$R 
+	pushv	P 
+	fulltrace
+	popc	_32$C 
+	popf	_32$hitdist 
+	popv	_32$Phit 
+	popv	_32$Nhit 
+	popv	_32$Pmiss 
+	popv	_32$Rmiss 
+	popf	__float_dummy 
+	pushf	_32$hitdist 
+	pushif	1e+10 
+	step
+	pushif	1 
+	subff
+	popf	_42$alpha 
+label 31
+label 29
+	pushc	_32$C 
+label 25
+	popc	_42$Cray 
+	pushc	_42$C 
+	pushf	_42$alpha 
+	pushif	1 
+	subff
+	mulfc
+	addC	_42$Cray 
+	popc	_42$C 
+	mulFC	_42$Kr _42$C 
+label 3
+	pushf	roughness 
+	pushv	_50$V 
+	pushv	Nf 
+	specular
+	mulFc	Ks 
+	pushv	Nf 
+	diffuse
+	mulFc	Kd 
+	ambient
+	mulFc	Ka 
+	addcc
+	mulFC	_50$fkt Cs 
+	mulcc
+	addcc
+	addcc
+label 0
+	popc	Ci 
+	cpCC	Os Oi 
+	pushc	Oi 
+	mulC	Ci 
+	popc	Ci 
+	return

@@ -1,0 +1,96 @@
+[Vertex shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : S_Position;
+	float3 ViewNormal : TEXCOORD0;
+};
+
+VertexOutput main(in uint id : S_VERTEX_ID,
+	in uint idInst : S_INSTANCE_ID,
+	SrtVsData srtData : S_SRT_DATA)
+{
+	VertexOutput Out;
+
+	//Create Instance World Matrix
+	float4x4 noBillboardWorldMatrix = float4x4(SRT_VS_INSTANCE_MATRIX1(idInst), SRT_VS_INSTANCE_MATRIX2(idInst), SRT_VS_INSTANCE_MATRIX3(idInst), float4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	float4 tempPosStatic = float4(SRT_VS_BUFFER_POSITION(id).xyz, 1.0f);
+	//World space position
+	float4 worldPosition = mul(noBillboardWorldMatrix, tempPosStatic);
+
+	//Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	//Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+	//Compute local tangent frame
+	float3x3 localTangentFrame = GetTangentFrame(SRT_VS_BUFFER_QTANGENT(id));
+
+	float3 localNormal = localTangentFrame[2];
+
+	//World space Normal
+	float3 worldNormal = mul(float3x3(noBillboardWorldMatrix), localNormal);
+
+	float3 viewSpaceNormal = mul(float3x3(g_ViewMat), worldNormal);
+
+	Out.ViewNormal = viewSpaceNormal;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+#include "Shaders/PS4/PBR.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : S_Position;
+	float3 ViewNormal : TEXCOORD0;
+};
+
+struct PixelOutput
+{
+	float4 Color0 : S_TARGET_OUTPUT0;
+	float4 Color1 : S_TARGET_OUTPUT1;
+	float4 Color2 : S_TARGET_OUTPUT2;
+	float4 Color3 : S_TARGET_OUTPUT3;
+};
+
+@uniform uint _ObjectReceiveDecal;
+PixelOutput main(in PixelInput In,
+	SrtPsData srtData : S_SRT_DATA)
+{
+	// Retrieve SRT data:
+	@uniform(_ObjectReceiveDecal);
+
+	PixelOutput Out;
+
+	float3 viewNormalNormalized = normalize(In.ViewNormal);
+
+	float matOcclusion = 1.0f;
+	GBufferData gBufferData;
+	gBufferData.ViewSpaceNormal = viewNormalNormalized;
+	gBufferData.BaseColor = float3(0.0f, 0.0f, 0.0f);
+	gBufferData.Occlusion = matOcclusion;
+	gBufferData.Roughness = 0.5f;
+	gBufferData.Reflectance = 0.5f;
+	gBufferData.MetalMask = 0.0f;
+	gBufferData.FXEmissive = true;
+	gBufferData.ShadingModel = 0;
+	gBufferData.CanReceiveDeferredDecals = _ObjectReceiveDecal;
+	gBufferData.Custom = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	EncodeGBufferData(gBufferData, Out.Color0, Out.Color1, Out.Color2, Out.Color3);
+
+	return Out;
+}

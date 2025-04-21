@@ -1,0 +1,207 @@
+version BMRT 2.6.0beta
+surface veinedmarble
+param	float	Ka		0.5
+param	float	Kd		0.8
+param	float	Ks		0.4
+param	float	roughness		0.075
+param	color	specularcolor		1 1 1
+param	float	veinfreq		1
+param	float	veinlevels		2
+param	float	warpfreq		1
+param	float	warping		0.5
+param	color	veincolor		0.6 0.5 0.1
+param	float	sharpness		8
+local	string	$_str_0 	"hsl"
+local	string	$_str_1 	"rgb"
+local	string	$_str_2 	"__nondiffuse"
+local	string	$_str_3 	"__nonspecular"
+local	string	$_str_4 	"NDC"
+local	string	$_str_5 	"blur"
+local	string	$_str_6 	"fill"
+local	string	$_str_7 	""
+local	string	$_str_8 	"shader"
+local	color	Ct	0 0 0
+local	point	offset	0 0 0
+local	float	i	0
+local	float	turb	0
+local	float	freq	0
+local	float	turbsum	0
+local	point	PP	0 0 0
+local	float	dPP	0
+local	float	_24$octaves	0
+code
+local	float	_24$lacunarity	0
+code
+local	float	_24$gain	0
+code
+local	float	_24$amp	0
+local	point	_24$pp	0 0 0
+local	vector	_24$sum	0 0 0
+local	float	_24$fw	0
+local	float	_24$i	0
+local	normal	Nf	0 0 0
+initcode 10
+	return
+code
+	pushv	P 
+	pushs	$_str_8 
+	transforms
+	popv	PP 
+	pushif	1e-06 
+	pushv	PP 
+	area
+	sqrt
+	fmax
+	popf	dPP 
+	pushif	6 
+	popf	_24$octaves 
+	pushif	2 
+	popf	_24$lacunarity 
+	pushif	0.5 
+	popf	_24$gain 
+	pushif	1 
+	popf	_24$amp 
+	pushv	PP 
+	popv	_24$pp 
+	pushif	0 
+	vset	_24$sum 
+	pushf	dPP 
+	popf	_24$fw 
+	pushif	0 
+	popf	_24$i 
+label 1
+	pushf	_24$octaves 
+	pushf	_24$i 
+	lt
+	ifz	3
+	pushf	_24$fw 
+	pushif	0.75 
+	pushif	0.2 
+	smoothstep
+	pushif	1 
+	subff
+	pushif	1 
+	pushv	_24$pp 
+	pointnoisev
+	pushif	2 
+	mulfv
+	subvf
+	mulvf
+	mulFv	_24$amp 
+	addV	_24$sum 
+	popv	_24$sum 
+	pushf	_24$gain 
+	mulF	_24$amp 
+	popf	_24$amp 
+	pushf	_24$lacunarity 
+	pushv	_24$pp 
+	mulvf
+	popv	_24$pp 
+	pushf	_24$lacunarity 
+	mulF	_24$fw 
+	popf	_24$fw 
+label 2
+	pushif	1 
+	addF	_24$i 
+	popf	_24$i 
+	jump	1
+label 3
+	pushv	_24$sum 
+label 0
+	pushif	0.5 
+	mulfv
+	addV	PP 
+	popv	PP 
+	pushif	0 
+	popf	turbsum 
+	pushif	1 
+	popf	freq 
+	pushf	veinfreq 
+	pushv	PP 
+	mulvf
+	popv	PP 
+	pushif	0 
+	popf	i 
+label 4
+	pushf	veinlevels 
+	pushf	i 
+	lt
+	ifz	6
+	mulFF	dPP freq 
+	pushif	0.75 
+	pushif	0.2 
+	smoothstep
+	pushif	1 
+	subff
+	pushif	1 
+	mulVF	PP freq 
+	noisev
+	pushif	2 
+	mulff
+	subff
+	mulff
+	abs
+	popf	turb 
+	pushf	freq 
+	pushf	sharpness 
+	pushf	turb 
+	pushif	1 
+	subff
+	pushif	1 
+	pushif	0.8 
+	smoothstep
+	pow
+	divff
+	popf	turb 
+	pushf	turb 
+	pushf	turbsum 
+	pushif	1 
+	subff
+	mulff
+	addF	turbsum 
+	popf	turbsum 
+	pushif	3 
+	mulF	freq 
+	popf	freq 
+	pushif	3 
+	pushv	PP 
+	mulvf
+	popv	PP 
+label 5
+	pushif	1 
+	addF	i 
+	popf	i 
+	jump	4
+label 6
+	pushf	turbsum 
+	pushc	veincolor 
+	pushc	Cs 
+	cmix
+	popc	Ct 
+	pushv	I 
+	pushv	N 
+	normalize
+	faceforward
+	popv	Nf 
+	pushf	roughness 
+	pushv	I 
+	normalize
+	negv
+	pushv	Nf 
+	specular
+	mulFc	Ks 
+	pushv	Nf 
+	diffuse
+	mulFc	Kd 
+	ambient
+	mulFc	Ka 
+	addcc
+	mulC	Ct 
+	addcc
+label 7
+	popc	Ci 
+	cpCC	Os Oi 
+	pushc	Oi 
+	mulC	Ci 
+	popc	Ci 
+	return

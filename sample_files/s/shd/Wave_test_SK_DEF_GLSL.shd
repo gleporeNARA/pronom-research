@@ -1,0 +1,107 @@
+[Vertex shader]
+
+#version 450 core
+#include "Shaders/GLSL/Preamble.shdh"
+#include "Shaders/GLSL/CommonHelpers.shdh"
+#include "Shaders/GLSL/GlobalConstants.shdh"
+
+in uvec4 inBlendIndices0;
+in vec4 inBlendWeight0;
+in vec3 inPosition0;
+in vec4 inNormal0;
+
+out vec4 Position0;
+out vec3 TexCoord0;
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	mat4x3 BoneMatrices[128];
+	mat4x4 WorldMatrix;
+	uint _ObjectReceiveDecal;
+	uint PADDING0__ObjectReceiveDecal;
+	uint PADDING1__ObjectReceiveDecal;
+	uint PADDING2__ObjectReceiveDecal;
+};
+void main()
+{
+	mat4x3 boneMatrix1 = BoneMatrices[inBlendIndices0.x];
+	mat4x3 boneMatrix2 = BoneMatrices[inBlendIndices0.y];
+	mat4x3 boneMatrix3 = BoneMatrices[inBlendIndices0.z];
+	mat4x3 boneMatrix4 = BoneMatrices[inBlendIndices0.w];
+	//World space position
+	vec4 worldPosition = vec4(0.0f, 0.0f, 0.0f, 1.0f);
+	worldPosition.xyz = (worldPosition.xyz + (inBlendWeight0.x * (boneMatrix1 * vec4(inPosition0, 1.0f))));
+	worldPosition.xyz = (worldPosition.xyz + (inBlendWeight0.y * (boneMatrix2 * vec4(inPosition0, 1.0f))));
+	worldPosition.xyz = (worldPosition.xyz + (inBlendWeight0.z * (boneMatrix3 * vec4(inPosition0, 1.0f))));
+	worldPosition.xyz = (worldPosition.xyz + (inBlendWeight0.w * (boneMatrix4 * vec4(inPosition0, 1.0f))));
+	worldPosition = (WorldMatrix * worldPosition);
+
+	//Projected position
+	vec4 projectedPosition = (g_ViewProjectionMat * worldPosition);
+
+	//Pass projected position to pixel shader
+	Position0 = projectedPosition;
+
+	//Compute local tangent frame
+	mat3x3 localTangentFrame = GetTangentFrame(inNormal0);
+
+	vec3 localNormal = localTangentFrame[2];
+
+	//World space Normal
+	vec3 worldNormal = vec3(0.0f, 0.0f, 0.0f);
+	worldNormal = (worldNormal + (inBlendWeight0.x * (boneMatrix1 * vec4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (inBlendWeight0.y * (boneMatrix2 * vec4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (inBlendWeight0.z * (boneMatrix3 * vec4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (inBlendWeight0.w * (boneMatrix4 * vec4(localNormal, 0.0f))));
+	worldNormal = (WorldMatrix * vec4(worldNormal, 0.0f)).xyz;
+
+	vec3 viewSpaceNormal = (mat3x3(g_ViewMat[0].xyz, g_ViewMat[1].xyz, g_ViewMat[2].xyz) * worldNormal);
+
+	TexCoord0 = viewSpaceNormal;
+
+	gl_Position = Position0;
+}
+
+
+[Fragment shader]
+
+#version 450 core
+#include "Shaders/GLSL/Preamble.shdh"
+#include "Shaders/GLSL/CommonHelpers.shdh"
+#include "Shaders/GLSL/PBR.shdh"
+
+in vec4 Position0;
+in vec3 TexCoord0;
+
+out vec4 outColor0;
+out vec4 outColor1;
+out vec4 outColor2;
+out vec4 outColor3;
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	mat4x3 BoneMatrices[128];
+	mat4x4 WorldMatrix;
+	uint _ObjectReceiveDecal;
+	uint PADDING0__ObjectReceiveDecal;
+	uint PADDING1__ObjectReceiveDecal;
+	uint PADDING2__ObjectReceiveDecal;
+};
+void main()
+{
+	vec3 viewNormalNormalized = normalize(TexCoord0);
+
+	float matOcclusion = 1.0f;
+	GBufferData gBufferData;
+	gBufferData.ViewSpaceNormal = viewNormalNormalized;
+	gBufferData.BaseColor = vec3(0.0f, 0.0f, 0.0f);
+	gBufferData.Occlusion = matOcclusion;
+	gBufferData.Roughness = 0.5f;
+	gBufferData.Reflectance = 0.5f;
+	gBufferData.MetalMask = 0.0f;
+	gBufferData.FXEmissive = true;
+	gBufferData.ShadingModel = 0;
+	gBufferData.CanReceiveDeferredDecals = _ObjectReceiveDecal;
+	gBufferData.Custom = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	EncodeGBufferData(gBufferData, outColor0, outColor1, outColor2, outColor3);
+}

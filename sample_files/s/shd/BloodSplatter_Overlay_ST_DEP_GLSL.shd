@@ -1,0 +1,244 @@
+[Vertex shader]
+
+#version 450 core
+#include "Shaders/GLSL/Preamble.shdh"
+#include "Shaders/GLSL/CommonHelpers.shdh"
+#include "Shaders/GLSL/GlobalConstants.shdh"
+
+in vec3 inPosition0;
+in vec2 inTexCoord0;
+in vec4 inNormal0;
+
+out vec4 Position0;
+out vec3 TexCoord0;
+out vec4 TexCoord1;
+out vec3 TexCoord2;
+out vec2 TexCoord3;
+out vec3 WorldNormal;
+out vec3 WorldBinormal;
+out vec3 WorldTangent;
+out vec3 WorldView;
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	mat4x4 WorldMatrix;
+	vec4 Vector4Parameter_Color;
+	vec2 Vector2Parameter_Texture_01_UV;
+	vec2 Vector2Parameter_Texture_01_Panning;
+	vec2 Vector2Parameter_Texture_02_UV;
+	vec2 Vector2Parameter_Texture_02_Panning;
+	float FloatParameter_SphereMask_MultSize;
+	float FloatParameter_SphereMask_FadeOutExp;
+	float FloatParameter_Opacity_FresnelPower;
+	float FloatParameter__Use_FresnelGeneral;
+	float FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING0_FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING1_FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING2_FloatParameter_BorderFresnel_FresnelPower;
+};
+void main()
+{
+	//World space position
+	vec4 worldPosition = (WorldMatrix * vec4(inPosition0, 1.0f));
+
+	//Projected position
+	vec4 projectedPosition = (g_ViewProjectionMat * worldPosition);
+
+	//Pass projected position to pixel shader
+	Position0 = projectedPosition;
+
+	//Object World Position
+	vec3 objectWorldPosition = WorldMatrix[3].xyz;
+
+	//Pass object world position to pixel shader
+	TexCoord0 = objectWorldPosition;
+
+	//Pass world position to pixel shader
+	TexCoord1 = worldPosition;
+
+	//Pass local position to pixel shader
+	TexCoord2 = inPosition0;
+
+	TexCoord3 = inTexCoord0;
+	//Compute local tangent frame
+	mat3x3 localTangentFrame = GetTangentFrame(inNormal0);
+
+	vec3 localNormal = localTangentFrame[2];
+
+	//World space Normal
+	vec3 worldNormal = (mat3x3(WorldMatrix[0].xyz, WorldMatrix[1].xyz, WorldMatrix[2].xyz) * localNormal);
+
+	//Normalize World Normal
+	vec3 worldNormalNormalized = normalize(worldNormal);
+
+	WorldNormal = worldNormalNormalized;
+
+	vec3 localBinormal = localTangentFrame[1];
+
+	//World space Binormal
+	vec3 worldBinormal = (mat3x3(WorldMatrix[0].xyz, WorldMatrix[1].xyz, WorldMatrix[2].xyz) * localBinormal);
+
+	//Normalize World Binormal
+	vec3 worldBinormalNormalized = normalize(worldBinormal);
+
+	WorldBinormal = worldBinormalNormalized;
+
+	vec3 localTangent = localTangentFrame[0];
+
+	//World space Tangent
+	vec3 worldTangent = (mat3x3(WorldMatrix[0].xyz, WorldMatrix[1].xyz, WorldMatrix[2].xyz) * localTangent);
+
+	//Normalize World Tangent
+	vec3 worldTangentNormalized = normalize(worldTangent);
+
+	WorldTangent = worldTangentNormalized;
+
+	//World space view vector
+	vec3 worldView = (g_CameraWorldPos.xyz - worldPosition.xyz);
+
+	WorldView = worldView;
+
+	gl_Position = Position0;
+}
+
+
+[Fragment shader]
+
+#version 450 core
+#include "Shaders/GLSL/Preamble.shdh"
+#include "Shaders/GLSL/CommonHelpers.shdh"
+#include "Shaders/GLSL/GlobalConstants.shdh"
+
+in vec4 Position0;
+in vec3 TexCoord0;
+in vec4 TexCoord1;
+in vec3 TexCoord2;
+in vec2 TexCoord3;
+in vec3 WorldNormal;
+in vec3 WorldBinormal;
+in vec3 WorldTangent;
+in vec3 WorldView;
+
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	mat4x4 WorldMatrix;
+	vec4 Vector4Parameter_Color;
+	vec2 Vector2Parameter_Texture_01_UV;
+	vec2 Vector2Parameter_Texture_01_Panning;
+	vec2 Vector2Parameter_Texture_02_UV;
+	vec2 Vector2Parameter_Texture_02_Panning;
+	float FloatParameter_SphereMask_MultSize;
+	float FloatParameter_SphereMask_FadeOutExp;
+	float FloatParameter_Opacity_FresnelPower;
+	float FloatParameter__Use_FresnelGeneral;
+	float FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING0_FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING1_FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING2_FloatParameter_BorderFresnel_FresnelPower;
+};
+VK_DESCRIPTOR(DS_Shader, 3) sampler _DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 4) texture2D Texture2DParameter_Texture_01_Map_DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 5) texture2D Texture2DParameter_Texture_02_Map_DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 6) texture2D Texture2DParameter_NM_DefaultWrapSampler;
+void CalculateMatOpacity(in vec3 in_0,
+	in vec3 in_1,
+	in vec3 in_2,
+	in vec2 in_3,
+	in vec3 in_4,
+	out float out_0)
+{
+	//ObjectWorldPositionNode {
+	//] ObjectWorldPositionNode
+	//WorldPositionNode {
+	//} WorldPositionNode
+	vec3 Local0 = (in_0 - in_1);
+	vec3 Local1 = Local0;
+	float Local2 = length(Local1);
+	//ConstantFloatNode {
+	//} ConstantFloatNode
+	float Local3 = (Local2 * FloatParameter_SphereMask_MultSize);
+	float Local4 = clamp(Local3, 0.0f, 1.0f);
+	//ConstantFloatNode {
+	//} ConstantFloatNode
+	float Local5 = pow(Local4, FloatParameter_SphereMask_FadeOutExp);
+	//LocalPosition {
+	//} LocalPosition
+	vec2 Local6 = in_2.xz;
+	//ConstantVector2Node {
+	//} ConstantVector2Node
+	vec2 Local7 = (Local6 * Vector2Parameter_Texture_01_UV);
+	//ConstantVector2Node {
+	//} ConstantVector2Node
+	vec2 Local8 = (g_CurrentTime * Vector2Parameter_Texture_01_Panning);
+	vec2 Local9 = (Local7 + Local8);
+	//Texture2DNode {
+	vec4 Local10 = texture(Texture2DParameter_Texture_01_Map_DefaultWrapSampler, Local9);
+	//[Local10] Get needed components
+	float Local11 = Local10.x;
+	//} Texture2DNode
+	//ConstantVector2Node {
+	//} ConstantVector2Node
+	vec2 Local12 = (Local6 * Vector2Parameter_Texture_02_UV);
+	//ConstantVector2Node {
+	//} ConstantVector2Node
+	vec2 Local13 = (g_CurrentTime * Vector2Parameter_Texture_02_Panning);
+	vec2 Local14 = (Local12 + Local13);
+	//Texture2DNode {
+	vec4 Local15 = texture(Texture2DParameter_Texture_02_Map_DefaultWrapSampler, Local14);
+	//[Local15] Get needed components
+	float Local16 = Local15.x;
+	//} Texture2DNode
+	float Local17 = min(Local11, Local16);
+	float Local18 = clamp(Local17, 0.0f, 1.0f);
+	float Local19 = (Local5 * Local18);
+	float Local20 = clamp(Local19, 0.0f, 1.0f);
+	//Texture2DNode {
+	vec4 Local21 = texture(Texture2DParameter_NM_DefaultWrapSampler, in_3);
+	//[Local21] Convert normalmaps to tangent space vectors
+	Local21.xyzw = Local21.wzyx;
+	Local21.xyz = ((Local21.xyz * 2.0f) - 1.0f);
+	Local21.z = -(Local21.z);
+	Local21.xyz = normalize(Local21.xyz);
+	//[Local21] Get needed components
+	vec3 Local22 = Local21.xyz;
+	//} Texture2DNode
+	//ConstantFloatNode {
+	//} ConstantFloatNode
+	//FresnelNode {
+	float Local23 = pow((1.0f - clamp(dot(Local22, in_4), 0, 1)), FloatParameter_Opacity_FresnelPower);
+	//} FresnelNode
+	float Local24 = (Local23 * Local20);
+	//ConstantFloatNode {
+	//} ConstantFloatNode
+	float Local25 = mix(Local20, Local24, FloatParameter__Use_FresnelGeneral);
+	//ConstantFloatNode {
+	//} ConstantFloatNode
+	//FresnelNode {
+	float Local26 = pow((1.0f - clamp(dot(Local22, in_4), 0, 1)), FloatParameter_BorderFresnel_FresnelPower);
+	//} FresnelNode
+	float Local27 = (Local26 * Local5);
+	float Local28 = mix(Local25, 1.0f, Local27);
+	//ConstantVector4Node {
+	//} ConstantVector4Node
+	float Local29 = Vector4Parameter_Color.w;
+	float Local30 = (Local28 * Local29);
+	float Local31 = clamp(Local30, 0.0f, 1.0f);
+	out_0 = Local31;
+}
+
+void main()
+{
+	float matOpacity;
+	mat3x3 NBT_WS = mat3x3(WorldTangent, WorldNormal, WorldBinormal);
+
+	//Normalized world space view vector
+	vec3 worldViewNormalized = normalize(WorldView);
+
+	//Calculate tangent space view vector
+	vec3 tangentView = normalize((NBT_WS * worldViewNormalized));
+
+	CalculateMatOpacity(TexCoord0, TexCoord1.xyz, TexCoord2.xyz, TexCoord3, tangentView, matOpacity);
+	if((matOpacity - 0.5f) < 0) discard;
+
+}

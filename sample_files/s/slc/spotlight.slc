@@ -1,0 +1,66 @@
+version BMRT 2.4.0d
+light spotlight
+param	float	intensity		1
+param	color	lightcolor		1 1 1
+param	point	from		0 0 0
+local	string	$_str_0 	"current"
+local	string	$_str_1 	"shader"
+param	point	to		0 0 0
+param	float	coneangle		0.523599
+param	float	conedeltaangle		0.0872665
+param	float	beamdistribution		2
+local	float	atten	0
+local	float	cosangle	0
+local	vector	A	0 0 0
+initcode 2
+	pushiv	0 0 0 
+	pushs	$_str_0 
+	pushs	$_str_1 
+	ptransformss
+	popv	from 
+initcode 3
+	pushiv	0 0 1 
+	pushs	$_str_0 
+	pushs	$_str_1 
+	ptransformss
+	popv	to 
+initcode 6
+	return
+code
+	return_area
+	subVV	to from 
+	normalize
+	popv	A 
+	pushf	coneangle 
+	pushv	A 
+	pushv	from 
+	illuminate3	0
+	pushv	L 
+	length
+	pushv	A 
+	pushv	L 
+	vdot
+	divff
+	popf	cosangle 
+	pushv	L 
+	pushv	L 
+	vdot
+	pushf	beamdistribution 
+	pushf	cosangle 
+	pow
+	divff
+	popf	atten 
+	pushf	cosangle 
+	subFF	coneangle conedeltaangle 
+	cos
+	pushf	coneangle 
+	cos
+	smoothstep
+	mulF	atten 
+	popf	atten 
+	pushc	lightcolor 
+	mulFF	atten intensity 
+	mulfc
+	popc	Cl 
+label 0
+	return

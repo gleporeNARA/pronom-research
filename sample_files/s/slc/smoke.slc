@@ -1,0 +1,462 @@
+version BMRT 2.6.0beta
+volume smoke
+param	float	opacdensity		1
+param	float	lightdensity		1
+param	float	integstart		0
+param	float	integend		100
+param	float	stepsize		0.1
+param	float	maxsteps		100
+param	color	scatter		1 1 1
+param	float	smokeoctaves		0
+param	float	smokefreq		1
+param	float	smokevary		1
+local	string	$_str_0 	"hsl"
+local	string	$_str_1 	"rgb"
+local	string	$_str_2 	"__foglight"
+local	string	$_str_3 	"shader"
+local	string	$_str_4 	"current"
+local	point	Worigin	0 0 0
+local	point	origin	0 0 0
+local	float	dtau	0
+local	float	last_dtau	0
+local	color	li	0 0 0
+local	color	last_li	0 0 0
+local	float	d	0
+local	vector	IN	0 0 0
+local	vector	WIN	0 0 0
+local	float	end	0
+local	float	ss	0
+local	point	_69$Pcur	0 0 0
+code
+local	point	_69$Pshad	0 0 0
+code
+local	float	_71$foglight	0
+local	float	__float_dummy	0
+code
+local	point	_74$Psmoke	0 0 0
+local	point	_21$p	0 0 0
+code
+local	float	_21$filtwidth	0
+code
+local	float	_21$octaves	0
+code
+local	float	_21$lacunarity	0
+code
+local	float	_21$gain	0
+code
+local	float	_21$amp	0
+local	point	_21$pp	0 0 0
+local	float	_21$sum	0
+local	float	_21$fw	0
+local	float	_21$i	0
+local	color	Cv	0 0 0
+local	color	Ov	0 0 0
+local	float	_80$tau	0
+local	color	_80$lighttau	0 0 0
+local	color	_77$C	0 0 0
+code
+initcode 9
+	return
+code
+	return_area
+	subVV	P I 
+	popv	Worigin 
+	pushv	Worigin 
+	pushs	$_str_3 
+	transforms
+	popv	origin 
+	pushf	stepsize 
+	random
+	mulff
+	addF	integstart 
+	popf	d 
+	pushv	I 
+	pushs	$_str_3 
+	vtransforms
+	normalize
+	popv	IN 
+	pushv	IN 
+	pushs	$_str_4 
+	pushs	$_str_3 
+	vtransformss
+	popv	WIN 
+	pushif	1e-04 
+	pushf	integend 
+	pushv	I 
+	length
+	fmin
+	subff
+	popf	end 
+	subFF	end d 
+	pushf	stepsize 
+	fmin
+	popf	ss 
+	mulFV	d WIN 
+	addV	Worigin 
+	popv	_69$Pcur 
+	mulFV	d IN 
+	addV	origin 
+	popv	_69$Pshad 
+	pushif	0 
+	cset	last_li 
+	pushv	_69$Pcur 
+	illuminance_start
+label 1
+	illuminance1	2
+	pushif	1 
+	popf	_71$foglight 
+	pushs	$_str_2 
+	pushif	1 
+	lightsourceM	_71$foglight 
+	popf	__float_dummy 
+	pushif	0 
+	pushf	_71$foglight 
+	gt
+	ifz	3
+	pushc	Cl 
+	addC	last_li 
+	popc	last_li 
+label 3
+label 4
+	jump	1
+label 2
+	pushif	0 
+	pushf	smokevary 
+	gt
+	pushif	0 
+	pushf	smokeoctaves 
+	gt
+	and
+	ifz	5
+	mulVF	_69$Pshad smokefreq 
+	popv	_74$Psmoke 
+	pushif	1 
+	pushv	_74$Psmoke 
+	noisev
+	pushif	2 
+	mulff
+	subff
+	popf	last_dtau 
+	pushif	0.01 
+	pushif	2 
+	pushc	last_li 
+	comp
+	pushif	1 
+	pushc	last_li 
+	comp
+	pushif	0 
+	pushc	last_li 
+	comp
+	addff
+	addff
+	gt
+	ifz	7
+	pushif	2 
+	pushv	_74$Psmoke 
+	mulvf
+	popv	_21$p 
+	pushif	2 
+	mulF	ss 
+	popf	_21$filtwidth 
+	pushif	1 
+	subF	smokeoctaves 
+	popf	_21$octaves 
+	pushif	2 
+	popf	_21$lacunarity 
+	pushif	0.5 
+	popf	_21$gain 
+	pushif	1 
+	popf	_21$amp 
+	pushv	_21$p 
+	popv	_21$pp 
+	pushif	0 
+	popf	_21$sum 
+	pushf	_21$filtwidth 
+	popf	_21$fw 
+	pushif	0 
+	popf	_21$i 
+label 10
+	pushf	_21$octaves 
+	pushf	_21$i 
+	lt
+	ifz	12
+	pushf	_21$fw 
+	pushif	0.75 
+	pushif	0.2 
+	smoothstep
+	pushif	1 
+	subff
+	pushif	1 
+	pushv	_21$pp 
+	noisev
+	pushif	2 
+	mulff
+	subff
+	mulff
+	mulF	_21$amp 
+	addF	_21$sum 
+	popf	_21$sum 
+	pushf	_21$gain 
+	mulF	_21$amp 
+	popf	_21$amp 
+	pushf	_21$lacunarity 
+	pushv	_21$pp 
+	mulvf
+	popv	_21$pp 
+	pushf	_21$lacunarity 
+	mulF	_21$fw 
+	popf	_21$fw 
+label 11
+	pushif	1 
+	addF	_21$i 
+	popf	_21$i 
+	jump	10
+label 12
+	pushf	_21$sum 
+label 9
+	pushif	0.5 
+	mulff
+	addF	last_dtau 
+	popf	last_dtau 
+label 7
+label 8
+	mulFF	smokevary last_dtau 
+	pushif	1 
+	pushif	-1 
+	smoothstep
+	popf	last_dtau 
+	jump	6
+label 5
+	pushif	0.5 
+	popf	last_dtau 
+label 6
+label 0
+	pushif	0 
+	cset	Cv 
+	pushif	0 
+	cset	Ov 
+label 13
+	pushf	end 
+	pushf	d 
+	le
+	ifz	15
+	subFF	end d 
+	pushif	0.005 
+	pushf	ss 
+	fclamp
+	popf	ss 
+	pushf	ss 
+	addF	d 
+	popf	d 
+	mulFV	d WIN 
+	addV	Worigin 
+	popv	_69$Pcur 
+	mulFV	d IN 
+	addV	origin 
+	popv	_69$Pshad 
+	pushif	0 
+	cset	li 
+	pushv	_69$Pcur 
+	illuminance_start
+label 17
+	illuminance1	18
+	pushif	1 
+	popf	_71$foglight 
+	pushs	$_str_2 
+	pushif	1 
+	lightsourceM	_71$foglight 
+	popf	__float_dummy 
+	pushif	0 
+	pushf	_71$foglight 
+	gt
+	ifz	19
+	pushc	Cl 
+	addC	li 
+	popc	li 
+label 19
+label 20
+	jump	17
+label 18
+	pushif	0 
+	pushf	smokevary 
+	gt
+	pushif	0 
+	pushf	smokeoctaves 
+	gt
+	and
+	ifz	21
+	mulVF	_69$Pshad smokefreq 
+	popv	_74$Psmoke 
+	pushif	1 
+	pushv	_74$Psmoke 
+	noisev
+	pushif	2 
+	mulff
+	subff
+	popf	dtau 
+	pushif	0.01 
+	pushif	2 
+	pushc	li 
+	comp
+	pushif	1 
+	pushc	li 
+	comp
+	pushif	0 
+	pushc	li 
+	comp
+	addff
+	addff
+	gt
+	ifz	23
+	pushif	2 
+	pushv	_74$Psmoke 
+	mulvf
+	popv	_21$p 
+	pushif	2 
+	mulF	ss 
+	popf	_21$filtwidth 
+	pushif	1 
+	subF	smokeoctaves 
+	popf	_21$octaves 
+	pushif	2 
+	popf	_21$lacunarity 
+	pushif	0.5 
+	popf	_21$gain 
+	pushif	1 
+	popf	_21$amp 
+	pushv	_21$p 
+	popv	_21$pp 
+	pushif	0 
+	popf	_21$sum 
+	pushf	_21$filtwidth 
+	popf	_21$fw 
+	pushif	0 
+	popf	_21$i 
+label 26
+	pushf	_21$octaves 
+	pushf	_21$i 
+	lt
+	ifz	28
+	pushf	_21$fw 
+	pushif	0.75 
+	pushif	0.2 
+	smoothstep
+	pushif	1 
+	subff
+	pushif	1 
+	pushv	_21$pp 
+	noisev
+	pushif	2 
+	mulff
+	subff
+	mulff
+	mulF	_21$amp 
+	addF	_21$sum 
+	popf	_21$sum 
+	pushf	_21$gain 
+	mulF	_21$amp 
+	popf	_21$amp 
+	pushf	_21$lacunarity 
+	pushv	_21$pp 
+	mulvf
+	popv	_21$pp 
+	pushf	_21$lacunarity 
+	mulF	_21$fw 
+	popf	_21$fw 
+label 27
+	pushif	1 
+	addF	_21$i 
+	popf	_21$i 
+	jump	26
+label 28
+	pushf	_21$sum 
+label 25
+	pushif	0.5 
+	mulff
+	addF	dtau 
+	popf	dtau 
+label 23
+label 24
+	mulFF	smokevary dtau 
+	pushif	1 
+	pushif	-1 
+	smoothstep
+	popf	dtau 
+	jump	22
+label 21
+	pushif	0.5 
+	popf	dtau 
+label 22
+label 16
+	addFF	dtau last_dtau 
+	pushif	2 
+	divF	ss 
+	mulF	opacdensity 
+	mulff
+	popf	_80$tau 
+	mulCF	last_li last_dtau 
+	mulCF	li dtau 
+	addcc
+	pushif	2 
+	divF	ss 
+	mulF	lightdensity 
+	mulfc
+	popc	_80$lighttau 
+	pushc	_80$lighttau 
+	pushc	Ov 
+	pushif	1 
+	ftoc
+	subcc
+	mulcc
+	addC	Cv 
+	popc	Cv 
+	pushc	scatter 
+	pushf	_80$tau 
+	negf
+	mulfc
+	popc	_77$C 
+	pushif	2 
+	pushc	_77$C 
+	comp
+	exp
+	pushif	1 
+	pushc	_77$C 
+	comp
+	exp
+	pushif	0 
+	pushc	_77$C 
+	comp
+	exp
+label 29
+	pushif	1 
+	ftoc
+	subcc
+	pushc	Ov 
+	pushif	1 
+	ftoc
+	subcc
+	mulcc
+	addC	Ov 
+	popc	Ov 
+	cpFF	dtau last_dtau 
+	cpCC	li last_li 
+label 14
+	jump	13
+label 15
+	pushc	Ci 
+	pushc	Ov 
+	pushif	1 
+	ftoc
+	subcc
+	mulcc
+	addC	Cv 
+	popc	Ci 
+	pushc	Oi 
+	pushc	Ov 
+	pushif	1 
+	ftoc
+	subcc
+	mulcc
+	addC	Ov 
+	popc	Oi 
+	return

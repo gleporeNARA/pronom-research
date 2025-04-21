@@ -1,0 +1,2534 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="SoundSet.xsl" version="1.0"?>
+<!DOCTYPE SoundSet SYSTEM "SoundSet.dtd" []>
+<SoundSet xmlns:ss="http://www.sibelius.com/xml/SoundSet.dtd" >
+    <Header>
+        <FileVersion>50002</FileVersion>
+        <Name>Garritan Personal Orchestra 4.0</Name>
+        <PatchLoadMechanism>ARIA</PatchLoadMechanism>
+        <NumLanes>16</NumLanes>
+        <DefaultSoundSet>false</DefaultSoundSet>
+        <ProgramsRelativeTo>0</ProgramsRelativeTo>
+        <SupportsPitchBendRange>false</SupportsPitchBendRange>
+    </Header>
+    <ControllerTypeList>
+        <ControllerTypeDefinition Name="Modulation" Number="1" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Volume" Number="7" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Controller 22" Number="22" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Sustain" Number="64" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Legato" Number="68" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Reverb" Number="91" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+    </ControllerTypeList>
+    <VolumeTypeList>
+        <VolumeTypeDefinition Name="NoteOnVelocity" Method="Default" />
+        <VolumeTypeDefinition Name="ModWheel" Method="Controller" >
+            <ControllerType>Modulation</ControllerType>
+        </VolumeTypeDefinition>
+    </VolumeTypeList>
+    <AttackTypeList>
+        <AttackTypeDefinition Name="NoteOnVelocity" Method="Default" />
+    </AttackTypeList>
+    <SwitchTypeList>
+        <SwitchTypeDefinition Name="GPOOpenOrMute" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+trill" >
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+mute" >
+                <KeySwitch Key="D-1" />
+            </Switch>
+            <Switch SoundIDChange="+legato +mute" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOOpenOrMuteTenorFix" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+trill" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+mute" >
+                <KeySwitch Key="D-1" />
+            </Switch>
+            <Switch SoundIDChange="+legato +mute" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOHarp" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+            </Switch>
+            <Switch SoundIDChange="+harmonic" >
+                <KeySwitch Key="E-1" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOPercussionDamp" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+            </Switch>
+            <Switch SoundIDChange="+damp" >
+                <KeySwitch Key="D-1" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOHarpsichord" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+            </Switch>
+            <Switch SoundIDChange="+8'" >
+                <KeySwitch Key="C-1" />
+            </Switch>
+            <Switch SoundIDChange="+8' +4'" >
+                <KeySwitch Key="D-1" />
+            </Switch>
+            <Switch SoundIDChange="+mute" >
+                <KeySwitch Key="E-1" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOSoloStrings" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+mute" >
+                <KeySwitch Key="C#-1" />
+            </Switch>
+            <Switch SoundIDChange="+legato +mute" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+pizzicato" >
+                <KeySwitch Key="F-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOSoloStrad" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="-stradivarius" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="-stradivarius +legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="-stradivarius +mute" >
+                <KeySwitch Key="C#-1" />
+            </Switch>
+            <Switch SoundIDChange="-stradivarius +legato +mute" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="-stradivarius +pizzicato" >
+                <KeySwitch Key="F-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOSoloGagliano" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="-gagliano" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="-gagliano +legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="-gagliano +mute" >
+                <KeySwitch Key="C#-1" />
+            </Switch>
+            <Switch SoundIDChange="-gagliano +legato +mute" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="-gagliano +pizzicato" >
+                <KeySwitch Key="F-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOSoloGuarneri" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="-guarneri" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="-guarneri +legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="-guarneri +mute" >
+                <KeySwitch Key="C#-1" />
+            </Switch>
+            <Switch SoundIDChange="-guarneri +legato +mute" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="-guarneri +pizzicato" >
+                <KeySwitch Key="F-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOEnsembleStrings" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+mute" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+legato +mute" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+pizzicato" >
+                <KeySwitch Key="F-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+            </Switch>
+            <Switch SoundIDChange="+tremolo.unmeasured +mute" IsMultipleNoteSample="true" >
+                <KeySwitch Key="F#-1" />
+            </Switch>
+            <Switch SoundIDChange="+tremolo.unmeasured" IsMultipleNoteSample="true" >
+                <KeySwitch Key="G-1" />
+            </Switch>
+            <Switch SoundIDChange="+trill.half +mute" IsMultipleNoteSample="true" >
+                <KeySwitch Key="G#-1" />
+            </Switch>
+            <Switch SoundIDChange="+trill.half" IsMultipleNoteSample="true" >
+                <KeySwitch Key="A-1" />
+            </Switch>
+            <Switch SoundIDChange="+trill.whole +mute" IsMultipleNoteSample="true" >
+                <KeySwitch Key="A#-1" />
+            </Switch>
+            <Switch SoundIDChange="+trill.whole" IsMultipleNoteSample="true" >
+                <KeySwitch Key="B-1" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOUpOrDownBow" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="D-1" />
+            </Switch>
+            <Switch SoundIDChange="+upbow" >
+                <KeySwitch Key="D#-1" />
+            </Switch>
+            <Switch SoundIDChange="+downbow" >
+                <KeySwitch Key="E-1" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOEnsembleBasses" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+mute" >
+                <KeySwitch Key="C#-1" />
+            </Switch>
+            <Switch SoundIDChange="+legato +mute" >
+                <KeySwitch Key="C#-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+pizzicato" >
+                <KeySwitch Key="F-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+            </Switch>
+            <Switch SoundIDChange="+tremolo.unmeasured +mute" IsMultipleNoteSample="true" >
+                <KeySwitch Key="F#-1" />
+            </Switch>
+            <Switch SoundIDChange="+tremolo.unmeasured" IsMultipleNoteSample="true" >
+                <KeySwitch Key="G-1" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOFlutePicc" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+vibrato" >
+                <KeySwitch Key="C-1" />
+            </Switch>
+            <Switch SoundIDChange="+legato +vibrato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+non vibrato" >
+                <KeySwitch Key="D-1" />
+            </Switch>
+            <Switch SoundIDChange="+legato +non vibrato" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue" IsMultipleNoteSample="true" >
+                <KeySwitch Key="E-1" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOLegato" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+trill" >
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOVibes" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Controller 22" Value="0" />
+            </Switch>
+            <Switch SoundIDChange="+motor on" >
+                <ControllerSwitch Name="Controller 22" Value="115" />
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GPOChoir" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+            <Switch SoundIDChange="+oo" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+oo +legato" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+        </SwitchTypeDefinition>
+    </SwitchTypeList>
+    <PatchList>
+        <Patch Name="Steinway Piano" >
+            <AriaPatch Instrument="Notation/5. Keyboards/n-Steinway Piano" BankID="2000" />
+            <SoundID>keyboard.piano.grand.steinway</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Steinway Piano Duo1" >
+            <AriaPatch Instrument="Notation/5. Keyboards/n-Steinway Piano Duo1" BankID="2000" />
+            <SoundID>keyboard.piano.grand.steinway.duo</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Steinway Piano Duo2" >
+            <AriaPatch Instrument="Notation/5. Keyboards/n-Steinway Piano Duo2" BankID="2000" />
+            <SoundID>keyboard.piano.grand.steinway.duo.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Steinway Piano Lite" >
+            <AriaPatch Instrument="Notation/5. Keyboards/n-Steinway Piano Lite" BankID="2000" />
+            <SoundID>keyboard.piano.grand.steinway.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Scharf IV" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Scharf IV" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.4'.scharf</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Haupt Mix" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Haupt Mix" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.diapason.chorus</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Cornet" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Cornet" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.cornets</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Flutes" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Flutes" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.organ flute</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Brustwerk All stops" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Brustwerk All Stops" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.full.brustwerk</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Baroque Plenum" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Baroque Plenum" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.full.baroque</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Full Organ" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Full Organ" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.full</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Hauptwerk All Stops" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Hauptwerk All Stops" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.full.hauptwerk</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Baroque Plenum Pedal" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Baroque Plenum Pedal" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.16'.full.baroque</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Prinzipal" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Prinzipal" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.principal</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Baroque Plenum Reeds" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Baroque Plenum Reeds" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.reeds</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Baroque Plen Reed Pedal" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Baroque Plen Reed Pedal" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.16'.reeds</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Symphonic Plenum" >
+            <AriaPatch Instrument="Notation/6. Pipe Organ/n-Symphonic Plenum" BankID="2000" />
+            <SoundID>keyboard.organ.pipe.8'.full.symphonic</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Harpsichord KS" >
+            <AriaPatch Instrument="Notation/5. Keyboards/n-Harpsichord KS" BankID="2000" />
+            <SoundID>keyboard.harpsichord.8'</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOHarpsichord</SwitchType>
+        </Patch>
+        <Patch Name="Celesta" >
+            <AriaPatch Instrument="Notation/5. Keyboards/n-Celesta" BankID="2000" />
+            <SoundID>keyboard.celesta</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Handbells" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Handbells" BankID="2000" />
+            <SoundID>pitched percussion.metal.bells.hand bells</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Tubular Bells" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Tubular Bells" BankID="2000" />
+            <SoundID>pitched percussion.metal.bells.tubular bells</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Crotales" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Crotales" BankID="2000" />
+            <SoundID>pitched percussion.metal.crotales</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Glockenspiel" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Glockenspiel" BankID="2000" />
+            <SoundID>pitched percussion.metal.glockenspiel</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Vibraphone" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Vibraphone" BankID="2000" />
+            <SoundID>pitched percussion.metal.vibraphone</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOVibes</SwitchType>
+        </Patch>
+        <Patch Name="Marimba" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Marimba" BankID="2000" />
+            <SoundID>pitched percussion.wood.marimba</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Marimba Grand Symph" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Marimba Grand Symph" BankID="2000" />
+            <SoundID>pitched percussion.wood.marimba.grand</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Xylophone" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Xylophone" BankID="2000" />
+            <SoundID>pitched percussion.wood.xylophone</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Harp 1 KS" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Harp 1 KS" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOHarp</SwitchType>
+        </Patch>
+        <Patch Name="Harp 2 KS" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Harp 2 KS" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOHarp</SwitchType>
+        </Patch>
+        <Patch Name="Chromatic Harp 1" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Chromatic Harp 1" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.chromatic</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Chromatic Harp 2" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Chromatic Harp 2" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.chromatic.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Chromatic Harp 2 Lite" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Chromatic Harp 1 Lite" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.chromatic.2.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Chromatic Harp 1 Lite" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Chromatic Harp 2 Lite" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.chromatic.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Glissando Harp 1" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Glissando Harp 1" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.glissando</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Glissando Harp 2" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Glissando Harp 2" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.glissando.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Harp Harmonics 1" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Harp Harmonics 1" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.harmonic</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Harp Harmonics 2" >
+            <AriaPatch Instrument="Notation/4. Harps/n-Harp Harmonics 2" BankID="2000" />
+            <SoundID>pitched percussion.stringed.harp.harmonic.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Timpani KS" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Timpani KS" BankID="2000" />
+            <SoundID>pitched percussion.drum.timpani</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOPercussionDamp</SwitchType>
+        </Patch>
+        <Patch Name="Glass Armonica" >
+            <AriaPatch Instrument="Notation/5. Keyboards/n-Glass Armonica" BankID="2000" />
+            <SoundID>pitched percussion.glass.glass harmonica</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Bass Clarinet Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Bass Clarinet Solo" BankID="2000" />
+            <SoundID>wind.clarinets.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Clarinet Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Bass Clarinet Plr1" BankID="2000" />
+            <SoundID>wind.clarinets.bass.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Clarinet Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Bass Clarinet Plr2" BankID="2000" />
+            <SoundID>wind.clarinets.bass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Clarinet Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Bass Clarinet Plr3" BankID="2000" />
+            <SoundID>wind.clarinets.bass.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Bb Clarinet Solo" BankID="2000" />
+            <SoundID>wind.clarinets.clarinet</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Bb Clarinet Plr1" BankID="2000" />
+            <SoundID>wind.clarinets.clarinet.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Bb Clarinet Plr2" BankID="2000" />
+            <SoundID>wind.clarinets.clarinet.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Bb Clarinet Plr3" BankID="2000" />
+            <SoundID>wind.clarinets.clarinet.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Contrabass Clar Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Contrabass Clarinet Solo" BankID="2000" />
+            <SoundID>wind.clarinets.contrabass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Clarinet Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/3. Clarinets/n-Eb Clarinet Solo" BankID="2000" />
+            <SoundID>wind.clarinets.eb</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Flute Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Alto Flute Solo" BankID="2000" />
+            <SoundID>wind.flutes.flute.alto</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Flute Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Alto Flute Plr1" BankID="2000" />
+            <SoundID>wind.flutes.flute.alto.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Flute Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Alto Flute Plr2" BankID="2000" />
+            <SoundID>wind.flutes.flute.alto.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Flute Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Alto Flute Plr3" BankID="2000" />
+            <SoundID>wind.flutes.flute.alto.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Flute Solo NV" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Bass Flute Solo NonVib" BankID="2000" />
+            <SoundID>wind.flutes.flute.bass.non vibrato</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Flute Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Bass Flute Plr1" BankID="2000" />
+            <SoundID>wind.flutes.flute.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Flute Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Bass Flute Plr2" BankID="2000" />
+            <SoundID>wind.flutes.flute.bass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Flute Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Bass Flute Plr3" BankID="2000" />
+            <SoundID>wind.flutes.flute.bass.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Flute Solo V" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Bass Flute Solo Vib" BankID="2000" />
+            <SoundID>wind.flutes.flute.bass.vibrato</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Solo Flutter" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Flute Solo Flutter" BankID="2000" />
+            <SoundID>wind.flutes.flute.flutter-tongue.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Solo NV" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Flute Solo NonVib" BankID="2000" />
+            <SoundID>wind.flutes.flute.non vibrato.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Solo KS" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Flute Solo KS" BankID="2000" />
+            <SoundID>wind.flutes.flute</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOFlutePicc</SwitchType>
+        </Patch>
+        <Patch Name="Flute Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Flute Plr1" BankID="2000" />
+            <SoundID>wind.flutes.flute.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Flute Plr2" BankID="2000" />
+            <SoundID>wind.flutes.flute.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Flute Plr3" BankID="2000" />
+            <SoundID>wind.flutes.flute.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Solo V" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Flute Solo Vib" BankID="2000" />
+            <SoundID>wind.flutes.flute.vibrato.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Solo KS" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Piccolo Solo KS" BankID="2000" />
+            <SoundID>wind.flutes.flute.piccolo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOFlutePicc</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Solo Flutter" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Piccolo Solo Flutter" BankID="2000" />
+            <SoundID>wind.flutes.flute.piccolo.flutter-tongue.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Solo NV" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Piccolo Solo NonVib" BankID="2000" />
+            <SoundID>wind.flutes.flute.piccolo.non vibrato.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Solo V" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/1. Flutes/n-Piccolo Solo Vib" BankID="2000" />
+            <SoundID>wind.flutes.flute.piccolo.vibrato.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe 1 Modern Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-Oboe 1 Modern Solo" BankID="2000" />
+            <SoundID>wind.oboes.oboe</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe D'Amore Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-Oboe D'Amore Solo" BankID="2000" />
+            <SoundID>wind.oboes.oboe d'amore</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe 2 Modern Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-Oboe 2 Modern Solo" BankID="2000" />
+            <SoundID>wind.oboes.oboe.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe 3 Modern Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-Oboe 3 Modern Solo" BankID="2000" />
+            <SoundID>wind.oboes.oboe.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe Classical Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-Oboe Classical Solo" BankID="2000" />
+            <SoundID>wind.oboes.oboe.classical</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe 1 Modern Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-Oboe 1 Modern Plr1" BankID="2000" />
+            <SoundID>wind.oboes.oboe.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe 1 Modern Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-Oboe 1 Modern Plr2" BankID="2000" />
+            <SoundID>wind.oboes.oboe.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe 1 Modern Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-Oboe 1 Modern Plr3" BankID="2000" />
+            <SoundID>wind.oboes.oboe.6</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="English Horn 1 Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-English Horn 1 Solo" BankID="2000" />
+            <SoundID>wind.oboes.english horn</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="English Horn 2 Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-English Horn 2 Solo" BankID="2000" />
+            <SoundID>wind.oboes.english horn.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="English Horn 1 Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-English Horn 1 Plr1" BankID="2000" />
+            <SoundID>wind.oboes.english horn.player 1</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="English Horn 1 Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-English Horn 1 Plr2" BankID="2000" />
+            <SoundID>wind.oboes.english horn.player 2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="English Horn 1 Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/2. Oboes and English Horns/n-English Horn 1 Plr3" BankID="2000" />
+            <SoundID>wind.oboes.english horn.player 3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon 1 Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Bassoon 1 Solo" BankID="2000" />
+            <SoundID>wind.bassoons.bassoon</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon 2 Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Bassoon 2 Solo" BankID="2000" />
+            <SoundID>wind.bassoons.bassoon.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon 1 Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Bassoon 1 Plr1" BankID="2000" />
+            <SoundID>wind.bassoons.bassoon.player 1</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon 2 Plr1" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Bassoon 2 Plr1" BankID="2000" />
+            <SoundID>wind.bassoons.bassoon.player 1.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon 1 Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Bassoon 1 Plr2" BankID="2000" />
+            <SoundID>wind.bassoons.bassoon.player 2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon 2 Plr2" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Bassoon 2 Plr2" BankID="2000" />
+            <SoundID>wind.bassoons.bassoon.player 2.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon 1 Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Bassoon 1 Plr3" BankID="2000" />
+            <SoundID>wind.bassoons.bassoon.player 3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon 2 Plr3" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Bassoon 2 Plr3" BankID="2000" />
+            <SoundID>wind.bassoons.bassoon.player 3.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Contrabassoon 1 Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Contrabassoon 1 Solo" BankID="2000" />
+            <SoundID>wind.bassoons.contrabassoon</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Contrabassoon 2 Solo" >
+            <AriaPatch Instrument="Notation/1. Woodwinds/4. Bassoons/n-Contrabassoon 2 Solo" BankID="2000" />
+            <SoundID>wind.bassoons.contrabassoon.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Piccolo Solo NV" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Picc Trumpet Solo NonVib" BankID="2000" />
+            <SoundID>brass.trumpets.piccolo.non vibrato</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Piccolo Solo V" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Picc Trumpet Solo Vib" BankID="2000" />
+            <SoundID>brass.trumpets.piccolo.vibrato</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Piccolo Solo KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-SAM Picc Trumpet Solo KS" />
+            <SoundID>brass.trumpets.piccolo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr1 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-SAM Trumpet Plr1 KS" />
+            <SoundID>brass.trumpets.trumpet.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr2 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-SAM Trumpet Plr2 KS" />
+            <SoundID>brass.trumpets.trumpet.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr3 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-SAM Trumpet Plr3 KS" />
+            <SoundID>brass.trumpets.trumpet.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Solo KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-SAM Trumpet Solo KS" />
+            <SoundID>brass.trumpets.trumpet</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Section KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-SAM Trumpet Section KS" />
+            <SoundID>brass.trumpets.trumpet.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Solo KS" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Solo KS" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr2 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Plr2 KS" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.2.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr3 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Plr3 KS" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.3.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr1 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Plr1 KS" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.4.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 2 Solo" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.2.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Solo ag" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Solo AG" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Solo" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Plr1" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Plr1" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.player 1.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr1" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 2 Plr1" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.player 1.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Plr2" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Plr2" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.player 2.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr2" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 2 Plr2" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.player 2.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Plr3" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 1 Plr3" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.player 3.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Plr3" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet 2 Plr3" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.player 3.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Solo Straight Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet Solo Straight Mute" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.mute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Plr1 Straight Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet Plr1 Straight Mute" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.mute.player 1</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Plr2 Straight Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet Plr2 Straight Mute" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.mute.player 2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Plr3 Straight Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet Plr3 Straight Mute" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.mute.player 3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Overlay" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet Overlay" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.overlay</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Overlay ag" >
+            <AriaPatch Instrument="Notation/2. Brass/2. Trumpets/n-Trumpet Overlay AG" BankID="2000" />
+            <SoundID>brass.trumpets.trumpet.overlay.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr1 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-SAM Trombone Plr1 KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr2 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-SAM Trombone Plr2 KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr3 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-SAM Trombone Plr3 KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Solo KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-SAM Trombone Solo KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Section KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-SAM Trombone Section KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor.emsemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Solo KS" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Solo KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Solo ag" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Solo AG" BankID="2000" />
+            <SoundID>brass.trombones.tenor.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Solo" BankID="2000" />
+            <SoundID>brass.trombones.tenor.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tnr Tbone Solo Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Solo Mute" BankID="2000" />
+            <SoundID>brass.trombones.tenor.mute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tnr Tbone Plr1 Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr1 Mute" BankID="2000" />
+            <SoundID>brass.trombones.tenor.mute.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tnr Tbone Plr2 Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr2 Mute" BankID="2000" />
+            <SoundID>brass.trombones.tenor.mute.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tnr Tbone Plr3 Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr3 Mute" BankID="2000" />
+            <SoundID>brass.trombones.tenor.mute.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tbone Overlay" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Overlay" BankID="2000" />
+            <SoundID>brass.trombones.tenor.overlay</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tbone Overlay ag" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Overlay AG" BankID="2000" />
+            <SoundID>brass.trombones.tenor.overlay aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr1 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr1 KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor.4.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr1" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr1" BankID="2000" />
+            <SoundID>brass.trombones.tenor.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr2 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr2 KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor.2.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMuteTenorFix</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr2" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr2" BankID="2000" />
+            <SoundID>brass.trombones.tenor.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr3 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr3 KS" BankID="2000" />
+            <SoundID>brass.trombones.tenor.3.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Tbone Plr3" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Trombone Plr3" BankID="2000" />
+            <SoundID>brass.trombones.tenor.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Trombone 1 Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Bass Trombone 1 Solo" BankID="2000" />
+            <SoundID>brass.trombones.bass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Trombone 2 Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Bass Trombone 2 Solo" BankID="2000" />
+            <SoundID>brass.trombones.bass.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Trombone 2 Solo ag" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-Bass Trombone 2 Solo AG" BankID="2000" />
+            <SoundID>brass.trombones.bass.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Trombone 1 Solo (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/3. Trombones/n-SAM Bass Tbone Solo KS" BankID="2000" />
+            <SoundID>brass.trombones.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Solo KS" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Solo KS" BankID="2000" />
+            <SoundID>brass.horns.french horn.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn 2 Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 2 Solo" BankID="2000" />
+            <SoundID>brass.horns.french horn.2.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Solo ag" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Solo AG" BankID="2000" />
+            <SoundID>brass.horns.french horn.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Solo" BankID="2000" />
+            <SoundID>brass.horns.french horn.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Solo Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn Solo Mute" BankID="2000" />
+            <SoundID>brass.horns.french horn.mute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Plr1 Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn Plr1 Mute" BankID="2000" />
+            <SoundID>brass.horns.french horn.mute.player 1</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Plr2 Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn Plr2 Mute" BankID="2000" />
+            <SoundID>brass.horns.french horn.mute.player 2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Plr3 Mute" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn Plr3 Mute" BankID="2000" />
+            <SoundID>brass.horns.french horn.mute.player 3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="FHorn Overlay f" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn Overlay f" BankID="2000" />
+            <SoundID>brass.horns.french horn.overlay f</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="FHorn Overlay f ag" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn Overlay f AG" BankID="2000" />
+            <SoundID>brass.horns.french horn.overlay f.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="FHorn Overlay ff" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn Overlay ff" BankID="2000" />
+            <SoundID>brass.horns.french horn.overlay ff</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Plr1 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Plr1 KS" BankID="2000" />
+            <SoundID>brass.horns.french horn.4.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn 2 Plr1" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 2 Plr1" BankID="2000" />
+            <SoundID>brass.horns.french horn.player 1.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Plr1" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Plr1" BankID="2000" />
+            <SoundID>brass.horns.french horn.player 1.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Plr2 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Plr2 KS" BankID="2000" />
+            <SoundID>brass.horns.french horn.2.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn 2 Plr2" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 2 Plr2" BankID="2000" />
+            <SoundID>brass.horns.french horn.player 2.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Plr2" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Plr2" BankID="2000" />
+            <SoundID>brass.horns.french horn.player 2.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Plr3 KS" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Plr3 KS" BankID="2000" />
+            <SoundID>brass.horns.french horn.3.gpo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn 2 Plr3" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 2 Plr3" BankID="2000" />
+            <SoundID>brass.horns.french horn.player 3.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn 1 Plr3" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-French Horn 1 Plr3" BankID="2000" />
+            <SoundID>brass.horns.french horn.player 3.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="French horn Plr1 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-SAM French Horn Plr1 KS" BankID="2000" />
+            <SoundID>brass.horns.french horn.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn Plr2 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-SAM French Horn Plr2 KS" BankID="2000" />
+            <SoundID>brass.horns.french horn.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn Plr3 KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-SAM French Horn Plr3 KS" BankID="2000" />
+            <SoundID>brass.horns.french horn.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn Solo KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-SAM French Horn Solo KS" BankID="2000" />
+            <SoundID>brass.horns.french horn</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="French horn Section KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/1. French Horns/n-SAM FHorn Section KS" BankID="2000" />
+            <SoundID>brass.horns.french horn.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Solo KS (Project SAM)" >
+            <AriaPatch Instrument="Notation/2. Brass/4. Tubas/n-SAM Tuba Solo KS" BankID="2000" />
+            <SoundID>brass.tubas.tuba</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOOpenOrMute</SwitchType>
+        </Patch>
+        <Patch Name="Tuba 1 Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/4. Tubas/n-Tuba 1 Solo" BankID="2000" />
+            <SoundID>brass.tubas.tuba.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba 2 Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/4. Tubas/n-Tuba 2 Solo" BankID="2000" />
+            <SoundID>brass.tubas.tuba.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba 2 Solo ag" >
+            <AriaPatch Instrument="Notation/2. Brass/4. Tubas/n-Tuba 2 Solo AG" BankID="2000" />
+            <SoundID>brass.tubas.tuba.aggressive.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Overlay" >
+            <AriaPatch Instrument="Notation/2. Brass/4. Tubas/n-Tuba Overlay" BankID="2000" />
+            <SoundID>brass.tubas.tuba.overlay</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Overlay ag" >
+            <AriaPatch Instrument="Notation/2. Brass/4. Tubas/n-Tuba Overlay AG" BankID="2000" />
+            <SoundID>brass.tubas.tuba.overlay.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Contratuba Solo" >
+            <AriaPatch Instrument="Notation/2. Brass/4. Tubas/n-Contratuba Solo" BankID="2000" />
+            <SoundID>brass.tubas.contratuba</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Choir" >
+            <AriaPatch Instrument="Notation/9. Choir/n-Full Choir Lite KS" BankID="2000" />
+            <SoundID>voice.ensemble.ah</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOChoir</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 KS" BankID="2000" />
+            <SoundID>strings.violin.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOEnsembleStrings</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 KS" BankID="2000" />
+            <SoundID>strings.violin.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOEnsembleStrings</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Sus+Short ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Sus+Short AG" BankID="2000" />
+            <SoundID>strings.violin.ensemble.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Sus+Short ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Sus+Short AG" BankID="2000" />
+            <SoundID>strings.violin.ensemble.aggressive.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Sus+Short" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Sus+Short" BankID="2000" />
+            <SoundID>strings.violin.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Sus+Short" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Sus+Short" BankID="2000" />
+            <SoundID>strings.violin.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Lush" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Lush" BankID="2000" />
+            <SoundID>strings.violin.ensemble.lush</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Lush" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Lush" BankID="2000" />
+            <SoundID>strings.violin.ensemble.lush.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Lush Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Lush Mutes" BankID="2000" />
+            <SoundID>strings.violin.ensemble.mute.lush</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Lush Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Lush Mutes" BankID="2000" />
+            <SoundID>strings.violin.ensemble.mute.lush.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Sus+Short Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Sus+Short Mutes" BankID="2000" />
+            <SoundID>strings.violin.ensemble.mute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Sus+Short Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Sus+Short Mutes" BankID="2000" />
+            <SoundID>strings.violin.ensemble.mute.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Pizzicato" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Pizzicato" BankID="2000" />
+            <SoundID>strings.violin.pizzicato.ensemble</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Vlns 2 Pizzicato" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Pizzicato" BankID="2000" />
+            <SoundID>strings.violin.pizzicato.ensemble.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Vlns 2 Short Bows KS ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Short Bows KS AG" BankID="2000" />
+            <SoundID>strings.violin.ensemble.aggressive.short bow.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Short Bows KS ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Short Bows KS AG" BankID="2000" />
+            <SoundID>strings.violin.ensemble.aggressive.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Short Bows KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Short Bows KS" BankID="2000" />
+            <SoundID>strings.violin.ensemble.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Short Bows KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Short Bows KS" BankID="2000" />
+            <SoundID>strings.violin.ensemble.short bow.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Tremolo" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Tremolo" BankID="2000" />
+            <SoundID>strings.violin.ensemble.tremolo.unmeasured.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Tremolo" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Tremolo" BankID="2000" />
+            <SoundID>strings.violin.ensemble.tremolo.unmeasured.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Trills H" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Trills Half" BankID="2000" />
+            <SoundID>strings.violin.ensemble.trill.half.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Trills H" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Trills Half" BankID="2000" />
+            <SoundID>strings.violin.ensemble.trill.half.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 1 Trills W" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/1. Violins 1/n-Violins 1 Trills Whole" BankID="2000" />
+            <SoundID>strings.violin.ensemble.trill.whole.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vlns 2 Trills W" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/2. Violins 2/n-Violins 2 Trills Whole" BankID="2000" />
+            <SoundID>strings.violin.ensemble.trill.whole.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 1 Gagli KS Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 1 Solo KS" BankID="2000" />
+            <SoundID>strings.violin.gagliano</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOSoloGagliano</SwitchType>
+        </Patch>
+        <Patch Name="Violin 1 Gagli Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 1 Solo" BankID="2000" />
+            <SoundID>strings.violin.gagliano.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 1 Gagli Pizz Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 1 Pizz Solo" BankID="2000" />
+            <SoundID>strings.violin.pizzicato.gagliano.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Violin 1 Gagli Plr1" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 1 Plr1" BankID="2000" />
+            <SoundID>strings.violin.gagliano.player 1</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 1 Gagli Plr2" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 1 Plr2" BankID="2000" />
+            <SoundID>strings.violin.gagliano.player 2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 1 Gagli Plr3" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 1 Plr3" BankID="2000" />
+            <SoundID>strings.violin.gagliano.player 3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 3 Guarn KS Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 3 Solo KS" BankID="2000" />
+            <SoundID>strings.violin.guarneri</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOSoloGuarneri</SwitchType>
+        </Patch>
+        <Patch Name="Violin 3 Guarn Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 3 Solo" BankID="2000" />
+            <SoundID>strings.violin.guarneri.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 3 Guarn Pizz Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 3 Pizz Solo" BankID="2000" />
+            <SoundID>strings.violin.pizzicato.guarneri.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Violin 3 Guarn Plr1" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 3 Plr1" BankID="2000" />
+            <SoundID>strings.violin.guarneri.player 1</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 3 Guarn Plr2" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 3 Plr2" BankID="2000" />
+            <SoundID>strings.violin.guarneri.player 2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 3 Guarn Plr3" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 3 Plr3" BankID="2000" />
+            <SoundID>strings.violin.guarneri.player 3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 2 Strad KS Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 2 Solo KS" BankID="2000" />
+            <SoundID>strings.violin.stradivarius</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOSoloStrad</SwitchType>
+        </Patch>
+        <Patch Name="Violin 2 Strad Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 2 Solo" BankID="2000" />
+            <SoundID>strings.violin.stradivarius.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 2 Strad Pizz Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 2 Pizz Solo" BankID="2000" />
+            <SoundID>strings.violin.pizzicato.stradivarius.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Violin 2 Strad Plr1" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 2 Plr1" BankID="2000" />
+            <SoundID>strings.violin.stradivarius.player 1</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 2 Strad Plr2" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 2 Plr2" BankID="2000" />
+            <SoundID>strings.violin.stradivarius.player 2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violin 2 Strad Plr3" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/1. Violin/n-Violin 2 Plr3" BankID="2000" />
+            <SoundID>strings.violin.stradivarius.player 3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violas KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas KS" BankID="2000" />
+            <SoundID>strings.viola.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOEnsembleStrings</SwitchType>
+        </Patch>
+        <Patch Name="Violas Sus+Short ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Sus+Short AG" BankID="2000" />
+            <SoundID>strings.viola.ensemble.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violas Sus+Short" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Sus+Short" BankID="2000" />
+            <SoundID>strings.viola.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violas Lush" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Lush" BankID="2000" />
+            <SoundID>strings.viola.ensemble.lush</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violas Lush Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Lush Mutes" BankID="2000" />
+            <SoundID>strings.viola.ensemble.mute.lush</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violas Sus+Short Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Sus+Short Mutes" BankID="2000" />
+            <SoundID>strings.viola.ensemble.mute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violas Pizzicato" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Pizzicato" BankID="2000" />
+            <SoundID>strings.viola.pizzicato.ensemble.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Violas Short Bows KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Short Bows KS" BankID="2000" />
+            <SoundID>strings.viola.ensemble.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Violas Short Bows KS ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Short Bows KS AG" BankID="2000" />
+            <SoundID>strings.viola.ensemble.aggressive.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Violas Tremolo" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Tremolo" BankID="2000" />
+            <SoundID>strings.viola.ensemble.tremolo.unmeasured.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violas Trills H" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Trills Half" BankID="2000" />
+            <SoundID>strings.viola.ensemble.trill.half.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Violas Trills W" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/3. Violas/n-Violas Trills Whole" BankID="2000" />
+            <SoundID>strings.viola.ensemble.trill.whole.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Viola KS Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/2. Viola/n-Viola 1 Solo KS" BankID="2000" />
+            <SoundID>strings.viola</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOSoloStrings</SwitchType>
+        </Patch>
+        <Patch Name="Viola Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/2. Viola/n-Viola 1 Solo" BankID="2000" />
+            <SoundID>strings.viola.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Viola Pizz Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/2. Viola/n-Viola 1 Pizz Solo" BankID="2000" />
+            <SoundID>strings.viola.pizzicato.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Viola Plr1" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/2. Viola/n-Viola 1 Plr1" BankID="2000" />
+            <SoundID>strings.viola.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Viola Plr2" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/2. Viola/n-Viola 1 Plr2" BankID="2000" />
+            <SoundID>strings.viola.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Viola Plr3" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/2. Viola/n-Viola 1 Plr3" BankID="2000" />
+            <SoundID>strings.viola.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 1 KS Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 1 Solo KS" BankID="2000" />
+            <SoundID>strings.violoncello</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOSoloStrings</SwitchType>
+        </Patch>
+        <Patch Name="Cello 2 KS Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 2 Solo KS" BankID="2000" />
+            <SoundID>strings.violoncello.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOSoloStrings</SwitchType>
+        </Patch>
+        <Patch Name="Cello 2 Plr1" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 2 Plr1" BankID="2000" />
+            <SoundID>strings.violoncello.player 1.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 2 Plr2" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 2 Plr2" BankID="2000" />
+            <SoundID>strings.violoncello.player 2.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 2 Plr3" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 2 Plr3" BankID="2000" />
+            <SoundID>strings.violoncello.player 3.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 3 KS Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 3 Solo KS" BankID="2000" />
+            <SoundID>strings.violoncello.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOSoloStrings</SwitchType>
+        </Patch>
+        <Patch Name="Cello 3 Plr1" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 3 Plr1" BankID="2000" />
+            <SoundID>strings.violoncello.player 1.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 3 Plr2" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 3 Plr2" BankID="2000" />
+            <SoundID>strings.violoncello.player 2.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 3 Plr3" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 3 Plr3" BankID="2000" />
+            <SoundID>strings.violoncello.player 3.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 1 Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 1 Solo" BankID="2000" />
+            <SoundID>strings.violoncello.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 2 Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 2 Solo" BankID="2000" />
+            <SoundID>strings.violoncello.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 3 Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 3 Solo" BankID="2000" />
+            <SoundID>strings.violoncello.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 1 Pizz Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 1 Pizz Solo" BankID="2000" />
+            <SoundID>strings.violoncello.pizzicato.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Cello 1 Plr1" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 1 Plr1" BankID="2000" />
+            <SoundID>strings.violoncello.player 1</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 1 Plr2" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 1 Plr2" BankID="2000" />
+            <SoundID>strings.violoncello.player 2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cello 1 Plr3" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/3. Cello/n-Cello 1 Plr3" BankID="2000" />
+            <SoundID>strings.violoncello.player 3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cellos KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos KS" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOEnsembleStrings</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Sus+Short ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Sus+Short AG" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Sus+Short" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Sus+Short" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Lush" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Lush" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.lush</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Lush Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Lush Mutes" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.mute.lush</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Sus+Short Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Sus+Short Mutes" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.mute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Pizzicato" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Pizzicato" BankID="2000" />
+            <SoundID>strings.violoncello.pizzicato.ensemble.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Cellos Short Bows KS ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Short Bows KS AG" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.aggressive.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Short Bows KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Short Bows KS" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Tremolo" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Tremolo" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.tremolo.unmeasured.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Trills H" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Trills Half" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.trill.half.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Cellos Trills W" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/4. Cellos/n-Cellos Trills Whole" BankID="2000" />
+            <SoundID>strings.violoncello.ensemble.trill.whole.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Basses KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses KS" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOEnsembleBasses</SwitchType>
+        </Patch>
+        <Patch Name="Basses Sus+Short ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Sus+Short AG" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Basses Sus+Short" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Sus+Short" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Basses Lush" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Lush" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble.lush</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Basses Lush Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Lush Mutes" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble.mute.lush</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Basses Sus+Short Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Sus+Short Mutes" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble.mute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Basses Pizzicato" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Pizzicato" BankID="2000" />
+            <SoundID>strings.contrabass.pizzicato.ensemble.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Basses Short Bows KS ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Short Bows KS AG" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble.aggressive.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Basses Short Bows KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Short Bows KS" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Basses Tremolo" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/5. Basses/n-Basses Tremolo" BankID="2000" />
+            <SoundID>strings.contrabass.ensemble.tremolo.unmeasured.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Dbl Bass KS Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/4. Double Bass/n-Double Bass 1 Solo KS" BankID="2000" />
+            <SoundID>strings.contrabass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOSoloStrings</SwitchType>
+        </Patch>
+        <Patch Name="Dbl Bass Pizz Solo" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/4. Double Bass/n-Double Bass 1 Pizz Solo" BankID="2000" />
+            <SoundID>strings.contrabass.pizzicato.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Dbl Bass Plr1" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/4. Double Bass/n-Double Bass 1 Plr1" BankID="2000" />
+            <SoundID>strings.contrabass.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Dbl Bass Plr2" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/4. Double Bass/n-Double Bass 1 Plr2" BankID="2000" />
+            <SoundID>strings.contrabass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Dbl Bass Plr3" >
+            <AriaPatch Instrument="Notation/7. Solo Strings/4. Double Bass/n-Double Bass 1 Plr3" BankID="2000" />
+            <SoundID>strings.contrabass.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Full Strgs KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings KS" BankID="2000" />
+            <SoundID>strings.string orchestra</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOEnsembleStrings</SwitchType>
+        </Patch>
+        <Patch Name="Full Strgs Sus+Short ag" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings Sus+Short AG" BankID="2000" />
+            <SoundID>strings.string orchestra.aggressive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Full Strgs Sus+Short" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings Sus+Short" BankID="2000" />
+            <SoundID>strings.string orchestra.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Full Strgs Sus+Short Mutes" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings Sus+Short Mutes" BankID="2000" />
+            <SoundID>strings.string orchestra.mute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Full Strgs Pizz" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings Pizz" BankID="2000" />
+            <SoundID>strings.string orchestra.pizzicato.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Full Strgs Short Bows KS" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings Short Bows KS" BankID="2000" />
+            <SoundID>strings.string orchestra.short bow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GPOUpOrDownBow</SwitchType>
+        </Patch>
+        <Patch Name="Full Strgs Tremolo" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings Tremolo" BankID="2000" />
+            <SoundID>strings.string orchestra.tremolo.unmeasured.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Full Strgs Trills H" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings Trills Half" BankID="2000" />
+            <SoundID>strings.string orchestra.trill.half.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Full Strgs Trills W" IsMultipleNoteSample="true" >
+            <AriaPatch Instrument="Notation/8. Section Strings/6. Full Strings/n-Full Strings Trills Whole" BankID="2000" />
+            <SoundID>strings.string orchestra.trill.whole.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GPOLegato</SwitchType>
+        </Patch>
+        <Patch Name="Basic Orchestral Percussion" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Basic Orchestral Percussion" BankID="2000" />
+            <DrumMap>Basic Orchestral Percussion</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Bass Drum KS" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Bass Drum KS" BankID="2000" />
+            <DrumMap>Bass Drum KS</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Cymbals" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Cymbals" BankID="2000" />
+            <DrumMap>Cymbals</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Percussion Toys" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Percussion Toys" BankID="2000" />
+            <DrumMap>Percussion Toys</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Snares" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Snares" BankID="2000" />
+            <DrumMap>Snares</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Wind Machine" >
+            <AriaPatch Instrument="Notation/3. Percussion/n-Wind Machine" BankID="2000" />
+            <DrumMap>Wind Machine</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+    </PatchList>
+    <DrumMapList>
+        <DrumMapDefinition Name="Basic Orchestral Percussion" >
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.bass drum.concert" Name="Bass drum hit" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.very low.bass drum.roll.concert" Name="Bass drum roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.drum.medium.snare drum.snares off.left" Name="Side drum hit snares off left" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.drum.medium.snare drum.snares off" Name="Side drum hit snares off" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.drum.medium.snare drum.snares off.right" Name="Side drum hit snares off right" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.drum.medium.snare drum.snares off.roll" Name="Side drum hit snares off roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.drum.medium.snare drum.snares on.left" Name="Side drum hit snares on left" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Side drum hit snares on" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.drum.medium.snare drum.snares on.right" Name="Side drum hit snares on right" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.drum.medium.snare drum.snares on.roll" Name="Side drum hit snares on roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.metal.cymbal.gong.large" Name="Large gong" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.metal.cymbal.gong.medium" Name="Medium gong 1" >
+            </DrumSound>
+            <DrumSound Pitch="82" SoundID="unpitched.metal.cymbal.tam tam" Name="Tam tam" >
+            </DrumSound>
+            <DrumSound Pitch="83" SoundID="unpitched.metal.cymbal.gong.medium.2" Name="Medium gong 2" >
+            </DrumSound>
+            <DrumSound Pitch="84" SoundID="unpitched.metal.cymbal.clash" Name="Piatti cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="85" SoundID="unpitched.metal.cymbal.clash.2" Name="Piatti cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="86" SoundID="unpitched.metal.cymbal.clash.3" Name="Piatti cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="87" SoundID="unpitched.metal.cymbal.crash" Name="Crash cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="88" SoundID="unpitched.metal.cymbal.choke" Name="Choke cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="89" SoundID="unpitched.metal.cymbal.ride.left" Name="Ride Cymbal left" >
+            </DrumSound>
+            <DrumSound Pitch="90" SoundID="unpitched.metal.cymbal.ride.right" Name="Ride Cymbal right" >
+            </DrumSound>
+            <DrumSound Pitch="91" SoundID="unpitched.metal.cymbal.ride.choke" Name="Ride Cymbal choke" >
+            </DrumSound>
+            <DrumSound Pitch="92" SoundID="unpitched.metal.cymbal.roll.damp" Name="Cymbal roll without release hit" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="93" SoundID="unpitched.metal.cymbal.roll" Name="Cymbal roll with release hit" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="94" SoundID="unpitched.metal.cymbal.roll.crescendo" Name="Cymbal roll crescendo" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="95" SoundID="unpitched.metal.bells.high.triangle.short.2" Name="Triangle short" >
+            </DrumSound>
+            <DrumSound Pitch="96" SoundID="unpitched.metal.bells.high.triangle.long.2" Name="Triangle long" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Bass Drum KS" >
+            <DrumSound Pitch="B1" SoundID="unpitched.drum.very low.bass drum.concert" Name="Bass drum hit" >
+            </DrumSound>
+            <DrumSound Pitch="C2" SoundID="unpitched.drum.very low.bass drum.concert.2" Name="Bass drum hit 2" >
+            </DrumSound>
+            <DrumSound Pitch="C#2" SoundID="unpitched.drum.very low.bass drum.roll.concert" Name="Bass drum roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B1" SoundID="unpitched.drum.very low.bass drum.muffled.concert" Name="Bass drum hit" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+                <EndSwitch>
+                    <KeySwitch Key="C-1" />
+                </EndSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C2" SoundID="unpitched.drum.very low.bass drum.muffled.concert.2" Name="Bass drum hit 2" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+                <EndSwitch>
+                    <KeySwitch Key="C-1" />
+                </EndSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C#2" SoundID="unpitched.drum.very low.bass drum.roll.muffled.concert" Name="Bass drum roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <KeySwitch Key="D-1" />
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+                <EndSwitch>
+                    <KeySwitch Key="C-1" />
+                </EndSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Cymbals" >
+            <DrumSound Pitch="G#5" SoundID="unpitched.metal.cymbal.gong.large" Name="Tam tam" >
+            </DrumSound>
+            <DrumSound Pitch="A5" SoundID="unpitched.metal.cymbal.gong.medium" Name="Large gong" >
+            </DrumSound>
+            <DrumSound Pitch="A#5" SoundID="unpitched.metal.cymbal.tam tam" Name="Medium gong 1" >
+            </DrumSound>
+            <DrumSound Pitch="B5" SoundID="unpitched.metal.cymbal.gong.medium.2" Name="Medium gong 2" >
+            </DrumSound>
+            <DrumSound Pitch="C6" SoundID="unpitched.metal.cymbal.clash" Name="Piatti cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="C#6" SoundID="unpitched.metal.cymbal.clash.2" Name="Piatti cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="D6" SoundID="unpitched.metal.cymbal.clash.3" Name="Piatti cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="D#6" SoundID="unpitched.metal.cymbal.crash" Name="Crash cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="E6" SoundID="unpitched.metal.cymbal.choke" Name="Choke cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="F6" SoundID="unpitched.metal.cymbal.ride.left" Name="Ride Cymbal left" >
+            </DrumSound>
+            <DrumSound Pitch="F#6" SoundID="unpitched.metal.cymbal.ride.right" Name="Ride Cymbal right" >
+            </DrumSound>
+            <DrumSound Pitch="G6" SoundID="unpitched.metal.cymbal.ride.choke" Name="Ride Cymbal choke" >
+            </DrumSound>
+            <DrumSound Pitch="G#6" SoundID="unpitched.metal.cymbal.roll.damp" Name="Cymbal roll without release hit" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A6" SoundID="unpitched.metal.cymbal.roll" Name="Cymbal roll with release hit" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A#6" SoundID="unpitched.metal.cymbal.roll.crescendo" Name="Cymbal roll crescendo" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Percussion Toys" >
+            <DrumSound Pitch="A#3" SoundID="unpitched.metal.bells.medium.cowbell" Name="Cowbell 1" >
+            </DrumSound>
+            <DrumSound Pitch="B3" SoundID="unpitched.metal.bells.medium.cowbell.2" Name="Cowbell 2" >
+            </DrumSound>
+            <DrumSound Pitch="C4" SoundID="unpitched.metal.bells.medium.cowbell.3" Name="Cowbell 3" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.wood.medium.gourd" Name="Gourd 1" >
+            </DrumSound>
+            <DrumSound Pitch="D4" SoundID="unpitched.wood.medium.gourd.2" Name="Gourd 2" >
+            </DrumSound>
+            <DrumSound Pitch="D#4" SoundID="unpitched.rattle.shaker.egg" Name="Shaker 1" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.rattle.shaker.egg.2" Name="Shaker 2" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium.tambourine.stroke.frame" Name="Tambourine pop" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium.tambourine.pop" Name="Tambourine pop" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.drum.medium.tambourine.roll" Name="Tambourine shake" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="D5" SoundID="unpitched.wood.high.castanets" Name="Castanet hit" >
+            </DrumSound>
+            <DrumSound Pitch="D#5" SoundID="unpitched.wood.high.castanets.roll" Name="Castanet roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.wood.high.claves" Name="Clave 1" >
+            </DrumSound>
+            <DrumSound Pitch="F5" SoundID="unpitched.wood.high.claves.2" Name="Clave 2" >
+            </DrumSound>
+            <DrumSound Pitch="F#5" SoundID="unpitched.wood.high.ratchet" Name="Ratchet" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G5" SoundID="unpitched.metal.bells.medium-high.sleigh bells" Name="Sleigh bells" >
+            </DrumSound>
+            <DrumSound Pitch="G#5" SoundID="unpitched.metal.bells.high.mark tree" Name="Mark tree" >
+            </DrumSound>
+            <DrumSound Pitch="A5" SoundID="unpitched.metal.bells.high.triangle.short" Name="Triangle short" >
+            </DrumSound>
+            <DrumSound Pitch="A#5" SoundID="unpitched.metal.bells.high.triangle.long" Name="Triangle long" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Snares" >
+            <DrumSound Pitch="G#3" SoundID="unpitched.drum.medium.snare drum.snares off.left" Name="side drum hit played with the left hand" >
+            </DrumSound>
+            <DrumSound Pitch="G#3" SoundID="unpitched.drum.medium.snare drum.snares off" Name="Snares off side drum hit" >
+            </DrumSound>
+            <DrumSound Pitch="A3" SoundID="unpitched.drum.medium.snare drum.snares off.right" Name="side drum hit played with the right hand" >
+            </DrumSound>
+            <DrumSound Pitch="A#3" SoundID="unpitched.drum.medium.snare drum.snares off.roll" Name="side drum roll (mod wheel)" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B3" SoundID="unpitched.drum.medium.snare drum.snares on.left" Name="snare drum hit played with the left hand" >
+            </DrumSound>
+            <DrumSound Pitch="B3" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Snares on snare drum hit" >
+            </DrumSound>
+            <DrumSound Pitch="C4" SoundID="unpitched.drum.medium.snare drum.snares on.right" Name="snare drum hit played with the right hand" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.drum.medium.snare drum.snares on.roll" Name="snare drum roll (mod wheel)" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Wind Machine" >
+            <DrumSound Pitch="B5" SoundID="unpitched.exotic.wind.slow" Name="Slow Wind" >
+                <StartSwitch >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C6" SoundID="unpitched.exotic.wind.fast" Name="Fast Wind" >
+                <StartSwitch >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C#6" SoundID="unpitched.exotic.wind" Name="Normal Wind" >
+                <StartSwitch >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+    </DrumMapList>
+</SoundSet>

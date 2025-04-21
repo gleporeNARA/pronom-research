@@ -1,0 +1,224 @@
+[Vertex shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : S_Position;
+	float Depth : TEXCOORD0;
+	float3 WorldNormal : TEXCOORD1;
+	float3 WorldView : TEXCOORD2;
+	float DepthNormalized : TEXCOORD3;
+	float FogLayer0 : TEXCOORD4;
+	float FogLayer1 : TEXCOORD5;
+};
+
+@uniform float4x4 WorldMatrix;
+VertexOutput main(in uint id : S_VERTEX_ID,
+	SrtVsData srtData : S_SRT_DATA)
+{
+	// Retrieve SRT data:
+	@uniform(WorldMatrix);
+
+	VertexOutput Out;
+
+	row_major float3x4 boneMatrix1 = SRT_VS_BONES_BONE(SRT_VS_BONES_INDICIES(id).x);
+	row_major float3x4 boneMatrix2 = SRT_VS_BONES_BONE(SRT_VS_BONES_INDICIES(id).y);
+	row_major float3x4 boneMatrix3 = SRT_VS_BONES_BONE(SRT_VS_BONES_INDICIES(id).z);
+	row_major float3x4 boneMatrix4 = SRT_VS_BONES_BONE(SRT_VS_BONES_INDICIES(id).w);
+	//World space position
+	float4 worldPosition = float4(0.0f, 0.0f, 0.0f, 1.0f);
+	float4 tempPosSkinned = float4(SRT_VS_BUFFER_POSITION(id).xyz, 1.0f);
+	worldPosition.xyz = (worldPosition.xyz + (SRT_VS_BONES_WEIGHTS(id).x * mul(boneMatrix1, tempPosSkinned)));
+	worldPosition.xyz = (worldPosition.xyz + (SRT_VS_BONES_WEIGHTS(id).y * mul(boneMatrix2, tempPosSkinned)));
+	worldPosition.xyz = (worldPosition.xyz + (SRT_VS_BONES_WEIGHTS(id).z * mul(boneMatrix3, tempPosSkinned)));
+	worldPosition.xyz = (worldPosition.xyz + (SRT_VS_BONES_WEIGHTS(id).w * mul(boneMatrix4, tempPosSkinned)));
+	worldPosition = mul(WorldMatrix, worldPosition);
+
+	//Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	//Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+	//View space position
+	float4 viewPosition = mul(g_ViewMat, worldPosition);
+
+	//Depth
+	float depth = viewPosition.z;
+
+	//Pass depth to pixel shader
+	Out.Depth = depth;
+
+	//Compute local tangent frame
+	float3x3 localTangentFrame = GetTangentFrame(SRT_VS_BUFFER_QTANGENT(id));
+
+	float3 localNormal = localTangentFrame[2];
+
+	//World space Normal
+	float3 worldNormal = float3(0.0f, 0.0f, 0.0f);
+	worldNormal = (worldNormal + (SRT_VS_BONES_WEIGHTS(id).x * mul(boneMatrix1, float4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (SRT_VS_BONES_WEIGHTS(id).y * mul(boneMatrix2, float4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (SRT_VS_BONES_WEIGHTS(id).z * mul(boneMatrix3, float4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (SRT_VS_BONES_WEIGHTS(id).w * mul(boneMatrix4, float4(localNormal, 0.0f))));
+	worldNormal = mul(WorldMatrix, float4(worldNormal, 0.0f)).xyz;
+
+	//Normalize World Normal
+	float3 worldNormalNormalized = normalize(worldNormal);
+
+	Out.WorldNormal = worldNormalNormalized;
+
+	//World space view vector
+	float3 worldView = (g_CameraWorldPos.xyz - worldPosition.xyz);
+
+	Out.WorldView = worldView;
+
+	//Normalized Depth
+	float depthNormalized = (depth / g_FarPlane);
+
+	//Pass normalized depth to pixel shader
+	Out.DepthNormalized = depthNormalized;
+
+	//Calculate Fog Layer 0 (EXP2)
+	float fogLayer0;
+	fogLayer0 = ComputeFogLayerExp2(depth, worldPosition.y, g_FogLayer0Density, g_FogLayer0NearStart, g_FogLayer0HeightStart, g_FogLayer0MaxHeight);
+	Out.FogLayer0 = fogLayer0;
+
+	//Calculate Fog Layer 1 (EXP2)
+	float fogLayer1;
+	fogLayer1 = ComputeFogLayerExp2(depth, worldPosition.y, g_FogLayer1Density, g_FogLayer1NearStart, g_FogLayer1HeightStart, g_FogLayer1MaxHeight);
+	Out.FogLayer1 = fogLayer1;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+#include "Shaders/PS4/Exposure.shdh"
+#include "Shaders/PS4/PBR.shdh"
+#include "Shaders/PS4/ImageBasedLightingHelpers.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : S_Position;
+	float Depth : TEXCOORD0;
+	float3 WorldNormal : TEXCOORD1;
+	float3 WorldView : TEXCOORD2;
+	float DepthNormalized : TEXCOORD3;
+	float FogLayer0 : TEXCOORD4;
+	float FogLayer1 : TEXCOORD5;
+};
+
+struct PixelOutput
+{
+	float4 Color0 : S_TARGET_OUTPUT0;
+};
+
+@uniform float FloatParameter_DepthDifferenceBlendDistance;
+@uniform SamplerState _PointMirrorSampler;
+@uniform Texture2D _sceneDepth;
+@uniform float _OpacityFade;
+@uniform float3 Vector3Parameter_WaveColor;
+void CalculateMatOpacity(SrtPsData srtData : S_SRT_DATA,
+	in float2 in_0,
+	in float in_1,
+	out float out_0)
+{
+	// Retrieve SRT data:
+	@uniform(FloatParameter_DepthDifferenceBlendDistance);
+	@uniform(_PointMirrorSampler);
+	@uniform(_sceneDepth);
+
+	//ConstantFloatNode {
+	//} ConstantFloatNode
+	//DepthDifferenceBlend
+	float Local0 = (_sceneDepth.Sample(_PointMirrorSampler, in_0).x * g_FarPlane);
+	float Local1 = (Local0 - in_1);
+	float Local2 = Local1;
+	float Local3 = saturate((Local2 / max(FloatParameter_DepthDifferenceBlendDistance, 0.0001f)));
+	//~DepthDifferenceBlend
+
+	float Local4 = clamp(Local3, 0.0f, 1.0f);
+	float Local5 = Local4.x;
+	float Local6 = (3.1415f * 5.0f);
+	float Local7 = (Local6 * Local5);
+	float Local8 = (g_CurrentTime * 5.0f);
+	float Local9 = (Local7 + Local8);
+	float Local10 = sin(Local9);
+	float Local11 = (Local10 * Local10);
+	float Local12 = (1.0f - Local11);
+	float Local13 = (Local5 - Local12);
+	out_0 = Local13;
+}
+
+void CalculateMatEmissiveColor(SrtPsData srtData : S_SRT_DATA,
+	out float3 out_0)
+{
+	// Retrieve SRT data:
+	@uniform(Vector3Parameter_WaveColor);
+
+	//ConstantVector3Node {
+	//} ConstantVector3Node
+	out_0 = Vector3Parameter_WaveColor;
+}
+
+PixelOutput main(in PixelInput In,
+	SrtPsData srtData : S_SRT_DATA)
+{
+	// Retrieve SRT data:
+	@uniform(_OpacityFade);
+
+	PixelOutput Out;
+
+	float matOpacity;
+	//UV position
+	float2 Local0 = (In.ProjectedPosition.xy / float2(g_RTWidth, g_RTHeight));
+
+	CalculateMatOpacity(srtData, Local0, In.Depth, matOpacity);
+	matOpacity = (matOpacity * _OpacityFade);
+
+	float3 matEmissiveColor;
+	CalculateMatEmissiveColor(srtData, matEmissiveColor);
+	//Normalize World Normal
+	float3 worldNormalNormalized = normalize(In.WorldNormal);
+
+	float matReflectance = 0.5f;
+	matReflectance = RemapReflectance(matReflectance);
+	float matRoughness = 0.5f;
+	matRoughness = max(0.09f, matRoughness);
+	float3 FinalColor = float3(0.0f, 0.0f, 0.0f);
+
+	float exposure = LoadExposure();
+	//Calculate Image Based Lighting
+	//Normalized world space view vector
+	float3 worldViewNormalized = normalize(In.WorldView);
+
+	float3 iblDiffuse;
+	float3 iblSpecular;
+	EvaluateDistantIBL(float3(0.0f, 0.0f, 0.0f), matRoughness, float3(matReflectance, matReflectance, matReflectance), 0.0f, worldNormalNormalized, worldViewNormalized, iblDiffuse, iblSpecular, srtData);
+	FinalColor = (FinalColor + ((iblDiffuse + iblSpecular) * exposure));
+
+	float3 LightDiffuseColorOut;
+	float3 LightSpecularColorOut;
+	DirectionLight(worldNormalNormalized, worldViewNormalized, g_SunLightDirection, g_SunLightColor, float3(0.0f, 0.0f, 0.0f), matReflectance, matRoughness, 0.0f, LightDiffuseColorOut, LightSpecularColorOut);
+	LightDiffuseColorOut = (LightDiffuseColorOut * exposure);
+	LightSpecularColorOut = (LightSpecularColorOut * exposure);
+	FinalColor = (FinalColor + (LightDiffuseColorOut + LightSpecularColorOut));
+
+	FinalColor = (FinalColor + (matEmissiveColor * !g_LightprobeCapture));
+
+	FinalColor = lerp((lerp(g_FogLayer0Color, GetSkyColor(-(worldViewNormalized), In.DepthNormalized), float3(g_FogLayer0BlendWithSky, g_FogLayer0BlendWithSky, g_FogLayer0BlendWithSky)) * exposure), FinalColor, float3(In.FogLayer0, In.FogLayer0, In.FogLayer0));
+	FinalColor = lerp((lerp(g_FogLayer1Color, GetSkyColor(-(worldViewNormalized), In.DepthNormalized), float3(g_FogLayer1BlendWithSky, g_FogLayer1BlendWithSky, g_FogLayer1BlendWithSky)) * exposure), FinalColor, float3(In.FogLayer1, In.FogLayer1, In.FogLayer1));
+
+	Out.Color0 = float4(FinalColor, matOpacity);
+	Out.Color0 = max(Out.Color0, 0.0f);
+
+	return Out;
+}

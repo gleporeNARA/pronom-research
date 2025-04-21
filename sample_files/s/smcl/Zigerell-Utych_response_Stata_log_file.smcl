@@ -1,0 +1,749 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\L.J\Desktop\Stata log file.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}15 Oct 2020, 22:27:18
+
+{com}. use "C:\Users\L.J\Desktop\anes_timeseries_2016_dta\anes_timeseries_2016_Stata12.dta"
+
+. *** This first set of commands are from the code for Utych 2020 PS:
+
+. do "C:\Users\L.J\AppData\Local\Temp\STD1878_000000.tmp"
+{txt}
+{com}. /*Replication Materials for "Powerless Conservatives or Powerless Findings?
+> PS
+> Stephen Utych*/
+. 
+. *Data source: 2016 ANES Time Series Study - available at electionstudies.org
+. 
+. /*Variable Recoding*/
+. 
+. *Dependent Variables
+. 
+. recode V161031 (2=1) (1=0) (3 4 5 6 7 8 -1 -8 -9 = .), gen(votetrump)
+{txt}(4270 differences between V161031 and votetrump)
+
+{com}. replace votetrump = 1 if V161027==2
+{txt}(67 real changes made)
+
+{com}. replace votetrump = 0 if V161027==1
+{txt}(74 real changes made)
+
+{com}. 
+. recode V161087 (-99 -88 = .), gen(ft_djt)
+{txt}(41 differences between V161087 and ft_djt)
+
+{com}. 
+. 
+. *Demographics
+. recode V161158x (-9 -8 = .), gen(repub)
+{txt}(23 differences between V161158x and repub)
+
+{com}. recode V161003 (5=0) (4=1) (3=2) (2=3) (1=4), gen(pol_int)
+{txt}(4270 differences between V161003 and pol_int)
+
+{com}. recode V161342 (2=1) (1=0) (-9 3 = .), gen(female)
+{txt}(4270 differences between V161342 and female)
+
+{com}. recode V161361x (-9 -5 = .), gen(income)
+{txt}(202 differences between V161361x and income)
+
+{com}. recode V161270 (-9 95 = .) (1 2 3 4 5 6 7 8 = 0) (9 90 = 1) (10 = 2) (11 12 = 3) (13 = 4) (14 15 16 = 5), gen(educ1)
+{txt}(4270 differences between V161270 and educ1)
+
+{com}. 
+. recode V161126 (-8 -9 99 = .), gen(conserv)
+{txt}(967 differences between V161126 and conserv)
+
+{com}. recode V161241 (2=0) (-9 -8 = .), gen(relig_imp)
+{txt}(1489 differences between V161241 and relig_imp)
+
+{com}. recode V161309 (2=0) (-9 -8 = .), gen(latinx)
+{txt}(3820 differences between V161309 and latinx)
+
+{com}. recode V161310x (-9 = .) (1 3 4 5 6 = 0) (2=1), gen(black)
+{txt}(4237 differences between V161310x and black)
+
+{com}. recode V161310x (-9 = .) (1 2 5 = 0) (3 4 6 = 1), gen(race_oth)
+{txt}(4237 differences between V161310x and race_oth)
+
+{com}. 
+. recode V161267c (-9 -8 = .), gen(byear)
+{txt}(121 differences between V161267c and byear)
+
+{com}. gen age = 2016-byear
+{txt}(121 missing values generated)
+
+{com}. 
+. recode V161268 (1 2 = 1) (3 4 5 6 = 0) (-9=.), gen(married)
+{txt}(2186 differences between V161268 and married)
+
+{com}. recode V161324 (0=0) (-9=.) (1 2 3 4 5 6 7 9 = 1), gen(under18)
+{txt}(818 differences between V161324 and under18)
+
+{com}. 
+. *Auth
+. 
+. recode V162239 (2=1) (1=0) (3 -6 -7 -8 -9 =.), gen(a1)
+{txt}(4270 differences between V162239 and a1)
+
+{com}. recode V162240 (2=1) (1=0) (3 -6 -7 -8 -9 =.), gen(a2)
+{txt}(4270 differences between V162240 and a2)
+
+{com}. recode V162241 (1=1) (2=0) (3 -6 -7 -8 -9 =.), gen(a3)
+{txt}(2586 differences between V162241 and a3)
+
+{com}. recode V162242 (2=1) (1=0) (3 -6 -7 -8 -9 =.), gen(a4)
+{txt}(4270 differences between V162242 and a4)
+
+{com}. 
+. alpha a1-a4
+
+{txt}Test scale = mean(unstandardized items)
+
+Average interitem covariance:{col 34}{res} .0696248
+{txt}Number of items in the scale:{col 34}{res}        4
+{txt}Scale reliability coefficient:{col 34}{res}   0.6457
+{txt}
+{com}. 
+. egen acount = rownonmiss(a1-a4)
+{txt}
+{com}. egen auth = rowtotal(a1-a4) if acount==4
+{txt}(803 missing values generated)
+
+{com}. 
+. *Egal
+. 
+. recode V162243 (5=0) (4=1) (3=2) (2=3) (1=4) (-6 -7 -8 -9 = .), gen(egal1)
+{txt}(4270 differences between V162243 and egal1)
+
+{com}. recode V162244 (5=4) (4=3) (3=2) (2=1) (1=0) (-6 -7 -8 -9 = .), gen(egal2)
+{txt}(4270 differences between V162244 and egal2)
+
+{com}. recode V162245 (5=4) (4=3) (3=2) (2=1) (1=0) (-6 -7 -8 -9 = .), gen(egal3)
+{txt}(4270 differences between V162245 and egal3)
+
+{com}. recode V162246 (5=0) (4=1) (3=2) (2=3) (1=4) (-6 -7 -8 -9 = .), gen(egal4)
+{txt}(4270 differences between V162246 and egal4)
+
+{com}. 
+. egen ecount = rownonmiss(egal1-egal4)
+{txt}
+{com}. egen egal = rowtotal(egal1-egal4) if ecount==4
+{txt}(654 missing values generated)
+
+{com}. 
+. 
+. /*Independent Variables*/
+. 
+. recode V162362 (5=0) (4=1) (3=2) (2=3) (1=4) (-9 -7 -6 -5 = .), gen(disc_women)
+{txt}(4270 differences between V162362 and disc_women)
+
+{com}. recode V162363 (5=0) (4=1) (3=2) (2=3) (1=4) (-9 -7 -6 -5 = .), gen(disc_men)
+{txt}(4270 differences between V162363 and disc_men)
+
+{com}. 
+. recode V162360 (5=0) (4=1) (3=2) (2=3) (1=4) (-9 -7 -6 -5 = .), gen(disc_w)
+{txt}(4270 differences between V162360 and disc_w)
+
+{com}. recode V162357 (5=0) (4=1) (3=2) (2=3) (1=4) (-9 -7 -6 -5 = .), gen(disc_b)
+{txt}(4270 differences between V162357 and disc_b)
+
+{com}. recode V162358 (5=0) (4=1) (3=2) (2=3) (1=4) (-9 -7 -6 -5 = .), gen(disc_h)
+{txt}(4270 differences between V162358 and disc_h)
+
+{com}. 
+. 
+. recode V162365 (5=0) (4=1) (3=2) (2=3) (1=4) (-9 -7 -6 -5 = .), gen(disc_xtian)
+{txt}(4270 differences between V162365 and disc_xtian)
+
+{com}. recode V162364 (5=0) (4=1) (3=2) (2=3) (1=4) (-9 -7 -6 -5 = .), gen(disc_mus)
+{txt}(4270 differences between V162364 and disc_mus)
+
+{com}. 
+. 
+. alpha disc_b disc_h disc_mus
+
+{txt}Test scale = mean(unstandardized items)
+
+Average interitem covariance:{col 34}{res}   .67413
+{txt}Number of items in the scale:{col 34}{res}        3
+{txt}Scale reliability coefficient:{col 34}{res}   0.8182
+{txt}
+{com}. egen disc_minc = rownonmiss(disc_b disc_h disc_mus)
+{txt}
+{com}. egen disc_min = rowtotal(disc_b disc_h disc_mus) if disc_minc==3
+{txt}(813 missing values generated)
+
+{com}. 
+. alpha disc_xtian disc_w
+
+{txt}Test scale = mean(unstandardized items)
+
+Average interitem covariance:{col 34}{res}   .51599
+{txt}Number of items in the scale:{col 34}{res}        2
+{txt}Scale reliability coefficient:{col 34}{res}   0.6543
+{txt}
+{com}. egen disc_majc = rownonmiss(disc_xtian disc_w)
+{txt}
+{com}. egen disc_maj = rowtotal(disc_xtian disc_w) if disc_majc==2
+{txt}(804 missing values generated)
+
+{com}. 
+. 
+. /*Regression replication*/
+. 
+. *Table 1
+. 
+. logit votetrump disc_women disc_men female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+
+{res}{txt}Iteration 0:{space 3}log pseudolikelihood = {res:-1255.9147}  
+Iteration 1:{space 3}log pseudolikelihood = {res:-391.04342}  
+Iteration 2:{space 3}log pseudolikelihood = {res:-357.85517}  
+Iteration 3:{space 3}log pseudolikelihood = {res:-355.66991}  
+Iteration 4:{space 3}log pseudolikelihood = {res:-355.66714}  
+Iteration 5:{space 3}log pseudolikelihood = {res:-355.66714}  
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}     1,898
+{txt}{col 49}Wald chi2({res}17{txt}){col 67}= {res}    391.71
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log pseudolikelihood = {res}-355.66714{txt}{col 49}Pseudo R2{col 67}= {res}    0.7168
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}   votetrump{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}disc_women {c |}{col 14}{res}{space 2}-.3161243{col 26}{space 2} .1430331{col 37}{space 1}   -2.21{col 46}{space 3}0.027{col 54}{space 4} -.596464{col 67}{space 3}-.0357846
+{txt}{space 4}disc_men {c |}{col 14}{res}{space 2} .5073136{col 26}{space 2} .1115918{col 37}{space 1}    4.55{col 46}{space 3}0.000{col 54}{space 4} .2885977{col 67}{space 3} .7260295
+{txt}{space 6}female {c |}{col 14}{res}{space 2}-.0658208{col 26}{space 2}  .259822{col 37}{space 1}   -0.25{col 46}{space 3}0.800{col 54}{space 4}-.5750625{col 67}{space 3} .4434209
+{txt}{space 9}age {c |}{col 14}{res}{space 2}-.0018946{col 26}{space 2}  .008881{col 37}{space 1}   -0.21{col 46}{space 3}0.831{col 54}{space 4} -.019301{col 67}{space 3} .0155118
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-4.610085{col 26}{space 2}  1.08736{col 37}{space 1}   -4.24{col 46}{space 3}0.000{col 54}{space 4}-6.741272{col 67}{space 3}-2.478899
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-2.331999{col 26}{space 2}  .477017{col 37}{space 1}   -4.89{col 46}{space 3}0.000{col 54}{space 4}-3.266935{col 67}{space 3}-1.397063
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-1.013685{col 26}{space 2} .3240799{col 37}{space 1}   -3.13{col 46}{space 3}0.002{col 54}{space 4} -1.64887{col 67}{space 3}-.3784999
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2} .4209211{col 26}{space 2} .2600388{col 37}{space 1}    1.62{col 46}{space 3}0.106{col 54}{space 4}-.0887455{col 67}{space 3} .9305878
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} .0333563{col 26}{space 2} .1216558{col 37}{space 1}    0.27{col 46}{space 3}0.784{col 54}{space 4}-.2050847{col 67}{space 3} .2717972
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} .9276321{col 26}{space 2} .0781742{col 37}{space 1}   11.87{col 46}{space 3}0.000{col 54}{space 4} .7744136{col 67}{space 3} 1.080851
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} .5138642{col 26}{space 2} .1329482{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} .2532905{col 67}{space 3} .7744378
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}-.1096422{col 26}{space 2} .0934824{col 37}{space 1}   -1.17{col 46}{space 3}0.241{col 54}{space 4}-.2928643{col 67}{space 3}   .07358
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.0534481{col 26}{space 2} .0203138{col 37}{space 1}   -2.63{col 46}{space 3}0.009{col 54}{space 4}-.0932624{col 67}{space 3}-.0136339
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .4288508{col 26}{space 2} .2697165{col 37}{space 1}    1.59{col 46}{space 3}0.112{col 54}{space 4}-.0997837{col 67}{space 3} .9574854
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2} .1613188{col 26}{space 2} .3392537{col 37}{space 1}    0.48{col 46}{space 3}0.634{col 54}{space 4}-.5036063{col 67}{space 3} .8262439
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} .2716898{col 26}{space 2} .1028585{col 37}{space 1}    2.64{col 46}{space 3}0.008{col 54}{space 4} .0700909{col 67}{space 3} .4732888
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.1568686{col 26}{space 2} .0399261{col 37}{space 1}   -3.93{col 46}{space 3}0.000{col 54}{space 4}-.2351223{col 67}{space 3}-.0786148
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} -3.70076{col 26}{space 2} 1.055842{col 37}{space 1}   -3.51{col 46}{space 3}0.000{col 54}{space 4}-5.770172{col 67}{space 3}-1.631348
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. reg ft_djt disc_women disc_men female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+{txt}(sum of wgt is 2,403.3614)
+
+Linear regression                               Number of obs     = {res}     2,473
+                                                {txt}F(17, 2455)       =  {res}   234.34
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5744
+                                                {txt}Root MSE          =    {res} 23.107
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      ft_djt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}disc_women {c |}{col 14}{res}{space 2}-3.138978{col 26}{space 2} .6972872{col 37}{space 1}   -4.50{col 46}{space 3}0.000{col 54}{space 4} -4.50631{col 67}{space 3}-1.771646
+{txt}{space 4}disc_men {c |}{col 14}{res}{space 2} 2.846829{col 26}{space 2} .6994013{col 37}{space 1}    4.07{col 46}{space 3}0.000{col 54}{space 4} 1.475352{col 67}{space 3} 4.218307
+{txt}{space 6}female {c |}{col 14}{res}{space 2}-1.528769{col 26}{space 2} 1.186641{col 37}{space 1}   -1.29{col 46}{space 3}0.198{col 54}{space 4} -3.85569{col 67}{space 3}  .798151
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0252627{col 26}{space 2} .0396065{col 37}{space 1}    0.64{col 46}{space 3}0.524{col 54}{space 4}-.0524028{col 67}{space 3} .1029282
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-7.389522{col 26}{space 2} 2.057466{col 37}{space 1}   -3.59{col 46}{space 3}0.000{col 54}{space 4}-11.42407{col 67}{space 3}-3.354974
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-10.60368{col 26}{space 2} 2.402603{col 37}{space 1}   -4.41{col 46}{space 3}0.000{col 54}{space 4}-15.31501{col 67}{space 3}-5.892339
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-3.655631{col 26}{space 2} 2.085852{col 37}{space 1}   -1.75{col 46}{space 3}0.080{col 54}{space 4}-7.745842{col 67}{space 3} .4345797
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2} 2.289398{col 26}{space 2}  1.31634{col 37}{space 1}    1.74{col 46}{space 3}0.082{col 54}{space 4}-.2918525{col 67}{space 3} 4.870649
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} 2.320402{col 26}{space 2} .6188448{col 37}{space 1}    3.75{col 46}{space 3}0.000{col 54}{space 4}  1.10689{col 67}{space 3} 3.533913
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} 7.532443{col 26}{space 2} .4653512{col 37}{space 1}   16.19{col 46}{space 3}0.000{col 54}{space 4} 6.619922{col 67}{space 3} 8.444965
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} 3.100197{col 26}{space 2} .6425314{col 37}{space 1}    4.82{col 46}{space 3}0.000{col 54}{space 4} 1.840237{col 67}{space 3} 4.360156
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}-1.740894{col 26}{space 2} .4342066{col 37}{space 1}   -4.01{col 46}{space 3}0.000{col 54}{space 4}-2.592343{col 67}{space 3}-.8894445
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.1200443{col 26}{space 2} .0953779{col 37}{space 1}   -1.26{col 46}{space 3}0.208{col 54}{space 4}-.3070738{col 67}{space 3} .0669852
+{txt}{space 5}married {c |}{col 14}{res}{space 2} 1.498483{col 26}{space 2} 1.393334{col 37}{space 1}    1.08{col 46}{space 3}0.282{col 54}{space 4}-1.233747{col 67}{space 3} 4.230714
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2} .0094565{col 26}{space 2} 1.412405{col 37}{space 1}    0.01{col 46}{space 3}0.995{col 54}{space 4}-2.760173{col 67}{space 3} 2.779086
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} 2.435647{col 26}{space 2}  .516451{col 37}{space 1}    4.72{col 46}{space 3}0.000{col 54}{space 4} 1.422922{col 67}{space 3} 3.448371
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.5629487{col 26}{space 2} .2195949{col 37}{space 1}   -2.56{col 46}{space 3}0.010{col 54}{space 4}-.9935591{col 67}{space 3}-.1323382
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-1.527935{col 26}{space 2} 5.229111{col 37}{space 1}   -0.29{col 46}{space 3}0.770{col 54}{space 4}-11.78186{col 67}{space 3} 8.725989
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. *Table 2
+. logit votetrump disc_women disc_men disc_maj disc_min female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+
+{res}{txt}Iteration 0:{space 3}log pseudolikelihood = {res:-1225.9025}  
+Iteration 1:{space 3}log pseudolikelihood = {res:-366.11188}  
+Iteration 2:{space 3}log pseudolikelihood = {res:-326.71453}  
+Iteration 3:{space 3}log pseudolikelihood = {res:-323.78181}  
+Iteration 4:{space 3}log pseudolikelihood = {res:-323.77466}  
+Iteration 5:{space 3}log pseudolikelihood = {res:-323.77466}  
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}     1,855
+{txt}{col 49}Wald chi2({res}19{txt}){col 67}= {res}    361.90
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log pseudolikelihood = {res}-323.77466{txt}{col 49}Pseudo R2{col 67}= {res}    0.7359
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}   votetrump{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}disc_women {c |}{col 14}{res}{space 2} -.354655{col 26}{space 2} .1639508{col 37}{space 1}   -2.16{col 46}{space 3}0.031{col 54}{space 4}-.6759927{col 67}{space 3}-.0333172
+{txt}{space 4}disc_men {c |}{col 14}{res}{space 2} .0688984{col 26}{space 2}  .140173{col 37}{space 1}    0.49{col 46}{space 3}0.623{col 54}{space 4}-.2058356{col 67}{space 3} .3436323
+{txt}{space 4}disc_maj {c |}{col 14}{res}{space 2} .5213093{col 26}{space 2} .1023815{col 37}{space 1}    5.09{col 46}{space 3}0.000{col 54}{space 4} .3206454{col 67}{space 3} .7219733
+{txt}{space 4}disc_min {c |}{col 14}{res}{space 2}-.1767613{col 26}{space 2} .0602375{col 37}{space 1}   -2.93{col 46}{space 3}0.003{col 54}{space 4}-.2948247{col 67}{space 3}-.0586979
+{txt}{space 6}female {c |}{col 14}{res}{space 2}-.2078262{col 26}{space 2}  .275245{col 37}{space 1}   -0.76{col 46}{space 3}0.450{col 54}{space 4}-.7472964{col 67}{space 3}  .331644
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0007745{col 26}{space 2} .0090471{col 37}{space 1}    0.09{col 46}{space 3}0.932{col 54}{space 4}-.0169574{col 67}{space 3} .0185064
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-4.021761{col 26}{space 2} .7565753{col 37}{space 1}   -5.32{col 46}{space 3}0.000{col 54}{space 4}-5.504621{col 67}{space 3}-2.538901
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-1.936184{col 26}{space 2} .4291489{col 37}{space 1}   -4.51{col 46}{space 3}0.000{col 54}{space 4}  -2.7773{col 67}{space 3}-1.095068
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-.9371198{col 26}{space 2} .3518125{col 37}{space 1}   -2.66{col 46}{space 3}0.008{col 54}{space 4} -1.62666{col 67}{space 3}-.2475799
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2}   .28633{col 26}{space 2} .2806482{col 37}{space 1}    1.02{col 46}{space 3}0.308{col 54}{space 4}-.2637305{col 67}{space 3} .8363904
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} .0332406{col 26}{space 2} .1297961{col 37}{space 1}    0.26{col 46}{space 3}0.798{col 54}{space 4}-.2211551{col 67}{space 3} .2876364
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} .9546656{col 26}{space 2} .0834354{col 37}{space 1}   11.44{col 46}{space 3}0.000{col 54}{space 4} .7911351{col 67}{space 3} 1.118196
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} .4395767{col 26}{space 2} .1234113{col 37}{space 1}    3.56{col 46}{space 3}0.000{col 54}{space 4}  .197695{col 67}{space 3} .6814584
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}-.0860747{col 26}{space 2} .0967286{col 37}{space 1}   -0.89{col 46}{space 3}0.374{col 54}{space 4}-.2756593{col 67}{space 3} .1035099
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.0545718{col 26}{space 2}  .020663{col 37}{space 1}   -2.64{col 46}{space 3}0.008{col 54}{space 4}-.0950705{col 67}{space 3}-.0140731
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .5030274{col 26}{space 2} .2763052{col 37}{space 1}    1.82{col 46}{space 3}0.069{col 54}{space 4}-.0385209{col 67}{space 3} 1.044576
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2}  .126587{col 26}{space 2} .3484474{col 37}{space 1}    0.36{col 46}{space 3}0.716{col 54}{space 4}-.5563574{col 67}{space 3} .8095313
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} .2109464{col 26}{space 2} .1031746{col 37}{space 1}    2.04{col 46}{space 3}0.041{col 54}{space 4} .0087279{col 67}{space 3} .4131649
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.1043028{col 26}{space 2} .0412484{col 37}{space 1}   -2.53{col 46}{space 3}0.011{col 54}{space 4}-.1851481{col 67}{space 3}-.0234575
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-3.549543{col 26}{space 2} 1.039851{col 37}{space 1}   -3.41{col 46}{space 3}0.001{col 54}{space 4}-5.587614{col 67}{space 3}-1.511472
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. reg ft_djt disc_women disc_men disc_maj disc_min female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+{txt}(sum of wgt is 2,350.7069)
+
+Linear regression                               Number of obs     = {res}     2,419
+                                                {txt}F(19, 2399)       =  {res}   215.18
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5837
+                                                {txt}Root MSE          =    {res} 22.848
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      ft_djt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}disc_women {c |}{col 14}{res}{space 2}-2.861644{col 26}{space 2} .8783996{col 37}{space 1}   -3.26{col 46}{space 3}0.001{col 54}{space 4}-4.584145{col 67}{space 3}-1.139144
+{txt}{space 4}disc_men {c |}{col 14}{res}{space 2}  .940386{col 26}{space 2} .8091329{col 37}{space 1}    1.16{col 46}{space 3}0.245{col 54}{space 4}-.6462858{col 67}{space 3} 2.527058
+{txt}{space 4}disc_maj {c |}{col 14}{res}{space 2} 2.032431{col 26}{space 2} .4684885{col 37}{space 1}    4.34{col 46}{space 3}0.000{col 54}{space 4} 1.113747{col 67}{space 3} 2.951115
+{txt}{space 4}disc_min {c |}{col 14}{res}{space 2}-.9092681{col 26}{space 2} .3716939{col 37}{space 1}   -2.45{col 46}{space 3}0.015{col 54}{space 4}-1.638143{col 67}{space 3}-.1803937
+{txt}{space 6}female {c |}{col 14}{res}{space 2}-1.559532{col 26}{space 2} 1.194985{col 37}{space 1}   -1.31{col 46}{space 3}0.192{col 54}{space 4}-3.902841{col 67}{space 3} .7837771
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0356091{col 26}{space 2} .0401809{col 37}{space 1}    0.89{col 46}{space 3}0.376{col 54}{space 4}-.0431838{col 67}{space 3} .1144019
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-5.437595{col 26}{space 2} 2.000033{col 37}{space 1}   -2.72{col 46}{space 3}0.007{col 54}{space 4}-9.359566{col 67}{space 3}-1.515624
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-9.333169{col 26}{space 2} 2.381697{col 37}{space 1}   -3.92{col 46}{space 3}0.000{col 54}{space 4}-14.00357{col 67}{space 3}-4.662771
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-3.584445{col 26}{space 2} 1.968832{col 37}{space 1}   -1.82{col 46}{space 3}0.069{col 54}{space 4}-7.445233{col 67}{space 3} .2763433
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2} .9718757{col 26}{space 2} 1.327466{col 37}{space 1}    0.73{col 46}{space 3}0.464{col 54}{space 4}-1.631223{col 67}{space 3} 3.574974
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} 2.216449{col 26}{space 2} .6202015{col 37}{space 1}    3.57{col 46}{space 3}0.000{col 54}{space 4} 1.000262{col 67}{space 3} 3.432635
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} 7.387597{col 26}{space 2} .4672532{col 37}{space 1}   15.81{col 46}{space 3}0.000{col 54}{space 4} 6.471335{col 67}{space 3} 8.303859
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} 2.604954{col 26}{space 2} .6426605{col 37}{space 1}    4.05{col 46}{space 3}0.000{col 54}{space 4} 1.344727{col 67}{space 3} 3.865182
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}-1.631631{col 26}{space 2}  .438184{col 37}{space 1}   -3.72{col 46}{space 3}0.000{col 54}{space 4}-2.490889{col 67}{space 3}-.7723726
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.0960265{col 26}{space 2} .0957495{col 37}{space 1}   -1.00{col 46}{space 3}0.316{col 54}{space 4}-.2837867{col 67}{space 3} .0917338
+{txt}{space 5}married {c |}{col 14}{res}{space 2} 1.528127{col 26}{space 2} 1.384971{col 37}{space 1}    1.10{col 46}{space 3}0.270{col 54}{space 4}-1.187737{col 67}{space 3} 4.243992
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2}-.4748575{col 26}{space 2} 1.398607{col 37}{space 1}   -0.34{col 46}{space 3}0.734{col 54}{space 4} -3.21746{col 67}{space 3} 2.267745
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} 2.252725{col 26}{space 2} .5213582{col 37}{space 1}    4.32{col 46}{space 3}0.000{col 54}{space 4} 1.230366{col 67}{space 3} 3.275084
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.3289972{col 26}{space 2} .2182335{col 37}{space 1}   -1.51{col 46}{space 3}0.132{col 54}{space 4}-.7569429{col 67}{space 3} .0989486
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.895553{col 26}{space 2}  5.63011{col 37}{space 1}    0.34{col 46}{space 3}0.736{col 54}{space 4}-9.144831{col 67}{space 3} 12.93594
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+{txt}end of do-file
+
+{com}. *** This next set of commands are from the Zigerell code:
+
+. do "C:\Users\L.J\AppData\Local\Temp\STD1878_000000.tmp"
+{txt}
+{com}. 
+. /// Create dichotomous predictors for denying discrimination against women and denying discrimination against men
+> /// The first two lines code missing (-9) as missing. The second two lines code missing (-9) as not denying discrimination
+> 
+. recode V162362 (5=1) (1/4=0) (-9 -7 -6 -5 = .), gen(d2_women)
+{txt}(4270 differences between V162362 and d2_women)
+
+{com}. recode V162363 (5=1) (1/4=0) (-9 -7 -6 -5 = .), gen(d2_men)
+{txt}(4270 differences between V162363 and d2_men)
+
+{com}. recode V162362 (5=1) (1/4 -9=0) (-7 -6 -5 = .), gen(d2_women_miss)
+{txt}(4270 differences between V162362 and d2_women_miss)
+
+{com}. recode V162363 (5=1) (1/4 -9=0) (-7 -6 -5 = .), gen(d2_men_miss)
+{txt}(4270 differences between V162363 and d2_men_miss)
+
+{com}. 
+. tab V162362 d2_women, mi
+
+                      {txt}{c |}   RECODE of V162362 (POST: FTF
+  POST: FTF CASI/WEB: {c |} CASI/WEB: Discrimination in the
+Discrimination in the {c |}       U.S. against Women)
+   U.S. against Women {c |}         0          1          . {c |}     Total
+{hline 22}{c +}{hline 33}{c +}{hline 10}
+          -9. Refused {c |}{res}         0          0         97 {txt}{c |}{res}        97 
+{txt}-7. No post data, del {c |}{res}         0          0         86 {txt}{c |}{res}        86 
+{txt}-6. No post-election  {c |}{res}         0          0        536 {txt}{c |}{res}       536 
+{txt}-5. Breakoff, suffici {c |}{res}         0          0         31 {txt}{c |}{res}        31 
+{txt}      1. A great deal {c |}{res}       264          0          0 {txt}{c |}{res}       264 
+{txt}             2. A lot {c |}{res}       638          0          0 {txt}{c |}{res}       638 
+{txt} 3. A moderate amount {c |}{res}     1,258          0          0 {txt}{c |}{res}     1,258 
+{txt}          4. A little {c |}{res}     1,113          0          0 {txt}{c |}{res}     1,113 
+{txt}       5. None at all {c |}{res}         0        247          0 {txt}{c |}{res}       247 
+{txt}{hline 22}{c +}{hline 33}{c +}{hline 10}
+                Total {c |}{res}     3,273        247        750 {txt}{c |}{res}     4,270 
+{txt}
+{com}. tab V162363 d2_men, mi
+
+                      {txt}{c |}   RECODE of V162363 (POST: FTF
+  POST: FTF CASI/WEB: {c |} CASI/WEB: Discrimination in the
+Discrimination in the {c |}        U.S. against Men)
+     U.S. against Men {c |}         0          1          . {c |}     Total
+{hline 22}{c +}{hline 33}{c +}{hline 10}
+          -9. Refused {c |}{res}         0          0        109 {txt}{c |}{res}       109 
+{txt}-7. No post data, del {c |}{res}         0          0         86 {txt}{c |}{res}        86 
+{txt}-6. No post-election  {c |}{res}         0          0        536 {txt}{c |}{res}       536 
+{txt}-5. Breakoff, suffici {c |}{res}         0          0         31 {txt}{c |}{res}        31 
+{txt}      1. A great deal {c |}{res}        85          0          0 {txt}{c |}{res}        85 
+{txt}             2. A lot {c |}{res}       125          0          0 {txt}{c |}{res}       125 
+{txt} 3. A moderate amount {c |}{res}       483          0          0 {txt}{c |}{res}       483 
+{txt}          4. A little {c |}{res}     1,288          0          0 {txt}{c |}{res}     1,288 
+{txt}       5. None at all {c |}{res}         0      1,527          0 {txt}{c |}{res}     1,527 
+{txt}{hline 22}{c +}{hline 33}{c +}{hline 10}
+                Total {c |}{res}     1,981      1,527        762 {txt}{c |}{res}     4,270 
+{txt}
+{com}. tab V162362 d2_women_miss, mi
+
+                      {txt}{c |}   RECODE of V162362 (POST: FTF
+  POST: FTF CASI/WEB: {c |} CASI/WEB: Discrimination in the
+Discrimination in the {c |}       U.S. against Women)
+   U.S. against Women {c |}         0          1          . {c |}     Total
+{hline 22}{c +}{hline 33}{c +}{hline 10}
+          -9. Refused {c |}{res}        97          0          0 {txt}{c |}{res}        97 
+{txt}-7. No post data, del {c |}{res}         0          0         86 {txt}{c |}{res}        86 
+{txt}-6. No post-election  {c |}{res}         0          0        536 {txt}{c |}{res}       536 
+{txt}-5. Breakoff, suffici {c |}{res}         0          0         31 {txt}{c |}{res}        31 
+{txt}      1. A great deal {c |}{res}       264          0          0 {txt}{c |}{res}       264 
+{txt}             2. A lot {c |}{res}       638          0          0 {txt}{c |}{res}       638 
+{txt} 3. A moderate amount {c |}{res}     1,258          0          0 {txt}{c |}{res}     1,258 
+{txt}          4. A little {c |}{res}     1,113          0          0 {txt}{c |}{res}     1,113 
+{txt}       5. None at all {c |}{res}         0        247          0 {txt}{c |}{res}       247 
+{txt}{hline 22}{c +}{hline 33}{c +}{hline 10}
+                Total {c |}{res}     3,370        247        653 {txt}{c |}{res}     4,270 
+{txt}
+{com}. tab V162363 d2_men_miss, mi
+
+                      {txt}{c |}   RECODE of V162363 (POST: FTF
+  POST: FTF CASI/WEB: {c |} CASI/WEB: Discrimination in the
+Discrimination in the {c |}        U.S. against Men)
+     U.S. against Men {c |}         0          1          . {c |}     Total
+{hline 22}{c +}{hline 33}{c +}{hline 10}
+          -9. Refused {c |}{res}       109          0          0 {txt}{c |}{res}       109 
+{txt}-7. No post data, del {c |}{res}         0          0         86 {txt}{c |}{res}        86 
+{txt}-6. No post-election  {c |}{res}         0          0        536 {txt}{c |}{res}       536 
+{txt}-5. Breakoff, suffici {c |}{res}         0          0         31 {txt}{c |}{res}        31 
+{txt}      1. A great deal {c |}{res}        85          0          0 {txt}{c |}{res}        85 
+{txt}             2. A lot {c |}{res}       125          0          0 {txt}{c |}{res}       125 
+{txt} 3. A moderate amount {c |}{res}       483          0          0 {txt}{c |}{res}       483 
+{txt}          4. A little {c |}{res}     1,288          0          0 {txt}{c |}{res}     1,288 
+{txt}       5. None at all {c |}{res}         0      1,527          0 {txt}{c |}{res}     1,527 
+{txt}{hline 22}{c +}{hline 33}{c +}{hline 10}
+                Total {c |}{res}     2,090      1,527        653 {txt}{c |}{res}     4,270 
+{txt}
+{com}. 
+. /// These are the Utych 2020 PS Table 1 analyses, but with these new dichotomous predictors
+> 
+. logit votetrump d2_women      d2_men      female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+
+{res}{txt}Iteration 0:{space 3}log pseudolikelihood = {res:-1255.9147}  
+Iteration 1:{space 3}log pseudolikelihood = {res: -394.6564}  
+Iteration 2:{space 3}log pseudolikelihood = {res:-364.01437}  
+Iteration 3:{space 3}log pseudolikelihood = {res:-362.07345}  
+Iteration 4:{space 3}log pseudolikelihood = {res:-362.06983}  
+Iteration 5:{space 3}log pseudolikelihood = {res:-362.06983}  
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}     1,898
+{txt}{col 49}Wald chi2({res}17{txt}){col 67}= {res}    380.34
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log pseudolikelihood = {res}-362.06983{txt}{col 49}Pseudo R2{col 67}= {res}    0.7117
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}   votetrump{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}d2_women {c |}{col 14}{res}{space 2} .4087834{col 26}{space 2} .5934527{col 37}{space 1}    0.69{col 46}{space 3}0.491{col 54}{space 4}-.7543625{col 67}{space 3} 1.571929
+{txt}{space 6}d2_men {c |}{col 14}{res}{space 2}-.7453027{col 26}{space 2} .2344883{col 37}{space 1}   -3.18{col 46}{space 3}0.001{col 54}{space 4}-1.204891{col 67}{space 3}-.2857141
+{txt}{space 6}female {c |}{col 14}{res}{space 2}-.1499213{col 26}{space 2} .2525748{col 37}{space 1}   -0.59{col 46}{space 3}0.553{col 54}{space 4}-.6449588{col 67}{space 3} .3451162
+{txt}{space 9}age {c |}{col 14}{res}{space 2}-.0022657{col 26}{space 2} .0084884{col 37}{space 1}   -0.27{col 46}{space 3}0.790{col 54}{space 4}-.0189026{col 67}{space 3} .0143712
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-4.376817{col 26}{space 2} 1.205122{col 37}{space 1}   -3.63{col 46}{space 3}0.000{col 54}{space 4}-6.738813{col 67}{space 3}-2.014822
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-2.268027{col 26}{space 2} .4605835{col 37}{space 1}   -4.92{col 46}{space 3}0.000{col 54}{space 4}-3.170754{col 67}{space 3}  -1.3653
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-.8647017{col 26}{space 2} .3128859{col 37}{space 1}   -2.76{col 46}{space 3}0.006{col 54}{space 4}-1.477947{col 67}{space 3}-.2514567
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2} .4109827{col 26}{space 2} .2557286{col 37}{space 1}    1.61{col 46}{space 3}0.108{col 54}{space 4}-.0902362{col 67}{space 3} .9122016
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} .0542866{col 26}{space 2} .1166721{col 37}{space 1}    0.47{col 46}{space 3}0.642{col 54}{space 4}-.1743865{col 67}{space 3} .2829597
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} .9303067{col 26}{space 2} .0766867{col 37}{space 1}   12.13{col 46}{space 3}0.000{col 54}{space 4} .7800034{col 67}{space 3}  1.08061
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} .5330276{col 26}{space 2} .1348473{col 37}{space 1}    3.95{col 46}{space 3}0.000{col 54}{space 4} .2687317{col 67}{space 3} .7973236
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}-.1069241{col 26}{space 2} .0896397{col 37}{space 1}   -1.19{col 46}{space 3}0.233{col 54}{space 4}-.2826146{col 67}{space 3} .0687664
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.0537958{col 26}{space 2} .0200746{col 37}{space 1}   -2.68{col 46}{space 3}0.007{col 54}{space 4}-.0931413{col 67}{space 3}-.0144503
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .3873402{col 26}{space 2}  .262749{col 37}{space 1}    1.47{col 46}{space 3}0.140{col 54}{space 4}-.1276385{col 67}{space 3} .9023188
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2} .1616412{col 26}{space 2} .3232494{col 37}{space 1}    0.50{col 46}{space 3}0.617{col 54}{space 4}-.4719159{col 67}{space 3} .7951983
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} .2642488{col 26}{space 2}  .101048{col 37}{space 1}    2.62{col 46}{space 3}0.009{col 54}{space 4} .0661983{col 67}{space 3} .4622992
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.1875248{col 26}{space 2} .0392486{col 37}{space 1}   -4.78{col 46}{space 3}0.000{col 54}{space 4}-.2644506{col 67}{space 3} -.110599
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-3.284803{col 26}{space 2} 1.025615{col 37}{space 1}   -3.20{col 46}{space 3}0.001{col 54}{space 4} -5.29497{col 67}{space 3}-1.274635
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. reg   ft_djt    d2_women      d2_men      female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+{txt}(sum of wgt is 2,403.3614)
+
+Linear regression                               Number of obs     = {res}     2,473
+                                                {txt}F(17, 2455)       =  {res}   231.92
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5715
+                                                {txt}Root MSE          =    {res} 23.185
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      ft_djt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 4}d2_women {c |}{col 14}{res}{space 2} 10.72602{col 26}{space 2} 3.083652{col 37}{space 1}    3.48{col 46}{space 3}0.001{col 54}{space 4} 4.679196{col 67}{space 3} 16.77285
+{txt}{space 6}d2_men {c |}{col 14}{res}{space 2}-3.633943{col 26}{space 2} 1.202877{col 37}{space 1}   -3.02{col 46}{space 3}0.003{col 54}{space 4}-5.992701{col 67}{space 3}-1.275184
+{txt}{space 6}female {c |}{col 14}{res}{space 2}-2.019464{col 26}{space 2} 1.197798{col 37}{space 1}   -1.69{col 46}{space 3}0.092{col 54}{space 4}-4.368263{col 67}{space 3} .3293353
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0375634{col 26}{space 2} .0397279{col 37}{space 1}    0.95{col 46}{space 3}0.344{col 54}{space 4}-.0403402{col 67}{space 3} .1154671
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-7.919815{col 26}{space 2} 2.111142{col 37}{space 1}   -3.75{col 46}{space 3}0.000{col 54}{space 4}-12.05962{col 67}{space 3}-3.780011
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-10.70463{col 26}{space 2} 2.425586{col 37}{space 1}   -4.41{col 46}{space 3}0.000{col 54}{space 4}-15.46104{col 67}{space 3}-5.948226
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-3.559846{col 26}{space 2} 2.132541{col 37}{space 1}   -1.67{col 46}{space 3}0.095{col 54}{space 4}-7.741611{col 67}{space 3} .6219185
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2} 2.017508{col 26}{space 2} 1.313058{col 37}{space 1}    1.54{col 46}{space 3}0.125{col 54}{space 4}-.5573071{col 67}{space 3} 4.592324
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2}  2.15547{col 26}{space 2} .6158582{col 37}{space 1}    3.50{col 46}{space 3}0.000{col 54}{space 4} .9478146{col 67}{space 3} 3.363125
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} 7.607666{col 26}{space 2} .4716011{col 37}{space 1}   16.13{col 46}{space 3}0.000{col 54}{space 4} 6.682889{col 67}{space 3} 8.532443
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} 3.443237{col 26}{space 2} .6544538{col 37}{space 1}    5.26{col 46}{space 3}0.000{col 54}{space 4} 2.159899{col 67}{space 3} 4.726576
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2} -1.54973{col 26}{space 2} .4328158{col 37}{space 1}   -3.58{col 46}{space 3}0.000{col 54}{space 4}-2.398452{col 67}{space 3}-.7010084
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.1165561{col 26}{space 2} .0965921{col 37}{space 1}   -1.21{col 46}{space 3}0.228{col 54}{space 4}-.3059665{col 67}{space 3} .0728542
+{txt}{space 5}married {c |}{col 14}{res}{space 2} 1.435411{col 26}{space 2} 1.425175{col 37}{space 1}    1.01{col 46}{space 3}0.314{col 54}{space 4}-1.359258{col 67}{space 3}  4.23008
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2} .0278292{col 26}{space 2} 1.437412{col 37}{space 1}    0.02{col 46}{space 3}0.985{col 54}{space 4}-2.790836{col 67}{space 3} 2.846494
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} 2.614127{col 26}{space 2} .5172291{col 37}{space 1}    5.05{col 46}{space 3}0.000{col 54}{space 4} 1.599876{col 67}{space 3} 3.628377
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.6952693{col 26}{space 2} .2197424{col 37}{space 1}   -3.16{col 46}{space 3}0.002{col 54}{space 4}-1.126169{col 67}{space 3}-.2643697
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-5.274999{col 26}{space 2} 5.267081{col 37}{space 1}   -1.00{col 46}{space 3}0.317{col 54}{space 4}-15.60338{col 67}{space 3} 5.053382
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. logit votetrump d2_women_miss d2_men_miss female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+
+{res}{txt}Iteration 0:{space 3}log pseudolikelihood = {res:-1280.5003}  
+Iteration 1:{space 3}log pseudolikelihood = {res:-404.79559}  
+Iteration 2:{space 3}log pseudolikelihood = {res:-372.56133}  
+Iteration 3:{space 3}log pseudolikelihood = {res:-370.40415}  
+Iteration 4:{space 3}log pseudolikelihood = {res:-370.40032}  
+Iteration 5:{space 3}log pseudolikelihood = {res:-370.40032}  
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}     1,942
+{txt}{col 49}Wald chi2({res}17{txt}){col 67}= {res}    393.89
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log pseudolikelihood = {res}-370.40032{txt}{col 49}Pseudo R2{col 67}= {res}    0.7107
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 15}{c |}{col 27}    Robust
+{col 1}    votetrump{col 15}{c |}      Coef.{col 27}   Std. Err.{col 39}      z{col 47}   P>|z|{col 55}     [95% Con{col 68}f. Interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+d2_women_miss {c |}{col 15}{res}{space 2}  .411712{col 27}{space 2} .5973352{col 38}{space 1}    0.69{col 47}{space 3}0.491{col 55}{space 4}-.7590434{col 68}{space 3} 1.582468
+{txt}{space 2}d2_men_miss {c |}{col 15}{res}{space 2}-.7640228{col 27}{space 2} .2313767{col 38}{space 1}   -3.30{col 47}{space 3}0.001{col 55}{space 4}-1.217513{col 68}{space 3}-.3105327
+{txt}{space 7}female {c |}{col 15}{res}{space 2}-.1299025{col 27}{space 2} .2482246{col 38}{space 1}   -0.52{col 47}{space 3}0.601{col 55}{space 4}-.6164138{col 68}{space 3} .3566088
+{txt}{space 10}age {c |}{col 15}{res}{space 2}-.0005402{col 27}{space 2} .0084781{col 38}{space 1}   -0.06{col 47}{space 3}0.949{col 55}{space 4}-.0171569{col 68}{space 3} .0160765
+{txt}{space 8}black {c |}{col 15}{res}{space 2}-4.614009{col 27}{space 2} 1.108397{col 38}{space 1}   -4.16{col 47}{space 3}0.000{col 55}{space 4}-6.786427{col 68}{space 3} -2.44159
+{txt}{space 7}latinx {c |}{col 15}{res}{space 2}-2.300552{col 27}{space 2} .4528249{col 38}{space 1}   -5.08{col 47}{space 3}0.000{col 55}{space 4}-3.188073{col 68}{space 3}-1.413032
+{txt}{space 5}race_oth {c |}{col 15}{res}{space 2}-.8053641{col 27}{space 2} .3057759{col 38}{space 1}   -2.63{col 47}{space 3}0.008{col 55}{space 4}-1.404674{col 68}{space 3}-.2060544
+{txt}{space 4}relig_imp {c |}{col 15}{res}{space 2} .4202217{col 27}{space 2} .2504827{col 38}{space 1}    1.68{col 47}{space 3}0.093{col 55}{space 4}-.0707153{col 68}{space 3} .9111587
+{txt}{space 6}pol_int {c |}{col 15}{res}{space 2} .0600436{col 27}{space 2} .1147293{col 38}{space 1}    0.52{col 47}{space 3}0.601{col 55}{space 4}-.1648217{col 68}{space 3} .2849088
+{txt}{space 8}repub {c |}{col 15}{res}{space 2} .9361053{col 27}{space 2} .0750944{col 38}{space 1}   12.47{col 47}{space 3}0.000{col 55}{space 4}  .788923{col 68}{space 3} 1.083288
+{txt}{space 6}conserv {c |}{col 15}{res}{space 2} .5223845{col 27}{space 2} .1327848{col 38}{space 1}    3.93{col 47}{space 3}0.000{col 55}{space 4}  .262131{col 68}{space 3}  .782638
+{txt}{space 8}educ1 {c |}{col 15}{res}{space 2}-.1096454{col 27}{space 2}     .088{col 38}{space 1}   -1.25{col 47}{space 3}0.213{col 55}{space 4}-.2821222{col 68}{space 3} .0628314
+{txt}{space 7}income {c |}{col 15}{res}{space 2}-.0545819{col 27}{space 2} .0198047{col 38}{space 1}   -2.76{col 47}{space 3}0.006{col 55}{space 4}-.0933984{col 68}{space 3}-.0157653
+{txt}{space 6}married {c |}{col 15}{res}{space 2} .3354694{col 27}{space 2} .2613266{col 38}{space 1}    1.28{col 47}{space 3}0.199{col 55}{space 4}-.1767213{col 68}{space 3}   .84766
+{txt}{space 6}under18 {c |}{col 15}{res}{space 2} .1731197{col 27}{space 2} .3188637{col 38}{space 1}    0.54{col 47}{space 3}0.587{col 55}{space 4}-.4518416{col 68}{space 3} .7980811
+{txt}{space 9}auth {c |}{col 15}{res}{space 2}  .286767{col 27}{space 2} .0990902{col 38}{space 1}    2.89{col 47}{space 3}0.004{col 55}{space 4} .0925537{col 68}{space 3} .4809803
+{txt}{space 9}egal {c |}{col 15}{res}{space 2}-.1779487{col 27}{space 2} .0387736{col 38}{space 1}   -4.59{col 47}{space 3}0.000{col 55}{space 4}-.2539435{col 68}{space 3}-.1019538
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2}-3.461816{col 27}{space 2} 1.013036{col 38}{space 1}   -3.42{col 47}{space 3}0.001{col 55}{space 4} -5.44733{col 68}{space 3}-1.476303
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. reg   ft_djt    d2_women_miss d2_men_miss female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+{txt}(sum of wgt is 2,455.9926)
+
+Linear regression                               Number of obs     = {res}     2,535
+                                                {txt}F(17, 2517)       =  {res}   235.99
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5683
+                                                {txt}Root MSE          =    {res} 23.279
+
+{txt}{hline 14}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 15}{c |}{col 27}    Robust
+{col 1}       ft_djt{col 15}{c |}      Coef.{col 27}   Std. Err.{col 39}      t{col 47}   P>|t|{col 55}     [95% Con{col 68}f. Interval]
+{hline 14}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+d2_women_miss {c |}{col 15}{res}{space 2} 10.82558{col 27}{space 2} 3.066563{col 38}{space 1}    3.53{col 47}{space 3}0.000{col 55}{space 4} 4.812335{col 68}{space 3} 16.83882
+{txt}{space 2}d2_men_miss {c |}{col 15}{res}{space 2}-3.693942{col 27}{space 2} 1.191647{col 38}{space 1}   -3.10{col 47}{space 3}0.002{col 55}{space 4}-6.030652{col 68}{space 3}-1.357233
+{txt}{space 7}female {c |}{col 15}{res}{space 2} -2.01379{col 27}{space 2}  1.18211{col 38}{space 1}   -1.70{col 47}{space 3}0.089{col 55}{space 4}-4.331797{col 68}{space 3} .3042168
+{txt}{space 10}age {c |}{col 15}{res}{space 2} .0464519{col 27}{space 2}   .03937{col 38}{space 1}    1.18{col 47}{space 3}0.238{col 55}{space 4}-.0307489{col 68}{space 3} .1236528
+{txt}{space 8}black {c |}{col 15}{res}{space 2}-8.502183{col 27}{space 2}   2.1471{col 38}{space 1}   -3.96{col 47}{space 3}0.000{col 55}{space 4}-12.71245{col 68}{space 3} -4.29192
+{txt}{space 7}latinx {c |}{col 15}{res}{space 2}-10.44843{col 27}{space 2} 2.393364{col 38}{space 1}   -4.37{col 47}{space 3}0.000{col 55}{space 4}-15.14159{col 68}{space 3}-5.755266
+{txt}{space 5}race_oth {c |}{col 15}{res}{space 2} -3.71349{col 27}{space 2} 2.113308{col 38}{space 1}   -1.76{col 47}{space 3}0.079{col 55}{space 4}-7.857491{col 68}{space 3} .4305114
+{txt}{space 4}relig_imp {c |}{col 15}{res}{space 2} 2.390366{col 27}{space 2} 1.304609{col 38}{space 1}    1.83{col 47}{space 3}0.067{col 55}{space 4}-.1678509{col 68}{space 3} 4.948584
+{txt}{space 6}pol_int {c |}{col 15}{res}{space 2} 2.123387{col 27}{space 2}  .605042{col 38}{space 1}    3.51{col 47}{space 3}0.000{col 55}{space 4} .9369558{col 68}{space 3} 3.309818
+{txt}{space 8}repub {c |}{col 15}{res}{space 2}  7.58339{col 27}{space 2} .4658437{col 38}{space 1}   16.28{col 47}{space 3}0.000{col 55}{space 4} 6.669914{col 68}{space 3} 8.496866
+{txt}{space 6}conserv {c |}{col 15}{res}{space 2} 3.375056{col 27}{space 2} .6462168{col 38}{space 1}    5.22{col 47}{space 3}0.000{col 55}{space 4} 2.107885{col 68}{space 3} 4.642227
+{txt}{space 8}educ1 {c |}{col 15}{res}{space 2}-1.594008{col 27}{space 2} .4268097{col 38}{space 1}   -3.73{col 47}{space 3}0.000{col 55}{space 4}-2.430942{col 68}{space 3}-.7570742
+{txt}{space 7}income {c |}{col 15}{res}{space 2}-.1191774{col 27}{space 2} .0949788{col 38}{space 1}   -1.25{col 47}{space 3}0.210{col 55}{space 4} -.305422{col 68}{space 3} .0670673
+{txt}{space 6}married {c |}{col 15}{res}{space 2} 1.459263{col 27}{space 2} 1.407637{col 38}{space 1}    1.04{col 47}{space 3}0.300{col 55}{space 4}-1.300983{col 68}{space 3} 4.219508
+{txt}{space 6}under18 {c |}{col 15}{res}{space 2}-.0813639{col 27}{space 2}  1.41688{col 38}{space 1}   -0.06{col 47}{space 3}0.954{col 55}{space 4}-2.859733{col 68}{space 3} 2.697005
+{txt}{space 9}auth {c |}{col 15}{res}{space 2} 2.721965{col 27}{space 2} .5117804{col 38}{space 1}    5.32{col 47}{space 3}0.000{col 55}{space 4} 1.718412{col 68}{space 3} 3.725519
+{txt}{space 9}egal {c |}{col 15}{res}{space 2}-.6569985{col 27}{space 2} .2145852{col 38}{space 1}   -3.06{col 47}{space 3}0.002{col 55}{space 4} -1.07778{col 68}{space 3}-.2362169
+{txt}{space 8}_cons {c |}{col 15}{res}{space 2}-5.828657{col 27}{space 2} 5.199292{col 38}{space 1}   -1.12{col 47}{space 3}0.262{col 55}{space 4}-16.02399{col 68}{space 3} 4.366671
+{txt}{hline 14}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. /// If keeping discrimination against women on the original 5-point scale
+> 
+. logit votetrump disc_women     d2_men      female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+
+{res}{txt}Iteration 0:{space 3}log pseudolikelihood = {res:-1255.9147}  
+Iteration 1:{space 3}log pseudolikelihood = {res:-393.24117}  
+Iteration 2:{space 3}log pseudolikelihood = {res:-361.31838}  
+Iteration 3:{space 3}log pseudolikelihood = {res:-359.26152}  
+Iteration 4:{space 3}log pseudolikelihood = {res:-359.25831}  
+Iteration 5:{space 3}log pseudolikelihood = {res:-359.25831}  
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}     1,898
+{txt}{col 49}Wald chi2({res}17{txt}){col 67}= {res}    364.31
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log pseudolikelihood = {res}-359.25831{txt}{col 49}Pseudo R2{col 67}= {res}    0.7139
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}   votetrump{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}disc_women {c |}{col 14}{res}{space 2} -.281946{col 26}{space 2}  .144202{col 37}{space 1}   -1.96{col 46}{space 3}0.051{col 54}{space 4}-.5645766{col 67}{space 3} .0006847
+{txt}{space 6}d2_men {c |}{col 14}{res}{space 2}-.7672476{col 26}{space 2} .2307617{col 37}{space 1}   -3.32{col 46}{space 3}0.001{col 54}{space 4}-1.219532{col 67}{space 3} -.314963
+{txt}{space 6}female {c |}{col 14}{res}{space 2} -.110106{col 26}{space 2} .2539645{col 37}{space 1}   -0.43{col 46}{space 3}0.665{col 54}{space 4}-.6078673{col 67}{space 3} .3876553
+{txt}{space 9}age {c |}{col 14}{res}{space 2}-.0032942{col 26}{space 2} .0087239{col 37}{space 1}   -0.38{col 46}{space 3}0.706{col 54}{space 4}-.0203927{col 67}{space 3} .0138043
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-4.295928{col 26}{space 2} 1.112719{col 37}{space 1}   -3.86{col 46}{space 3}0.000{col 54}{space 4}-6.476818{col 67}{space 3}-2.115038
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-2.289012{col 26}{space 2} .4796084{col 37}{space 1}   -4.77{col 46}{space 3}0.000{col 54}{space 4}-3.229028{col 67}{space 3}-1.348997
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-.9048309{col 26}{space 2} .3216916{col 37}{space 1}   -2.81{col 46}{space 3}0.005{col 54}{space 4}-1.535335{col 67}{space 3} -.274327
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2}  .406525{col 26}{space 2} .2576568{col 37}{space 1}    1.58{col 46}{space 3}0.115{col 54}{space 4}-.0984731{col 67}{space 3} .9115231
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} .0512397{col 26}{space 2} .1205267{col 37}{space 1}    0.43{col 46}{space 3}0.671{col 54}{space 4}-.1849883{col 67}{space 3} .2874678
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} .9255614{col 26}{space 2} .0785224{col 37}{space 1}   11.79{col 46}{space 3}0.000{col 54}{space 4} .7716603{col 67}{space 3} 1.079463
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} .5114643{col 26}{space 2} .1368976{col 37}{space 1}    3.74{col 46}{space 3}0.000{col 54}{space 4} .2431499{col 67}{space 3} .7797787
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}-.1150433{col 26}{space 2} .0905541{col 37}{space 1}   -1.27{col 46}{space 3}0.204{col 54}{space 4}-.2925262{col 67}{space 3} .0624396
+{txt}{space 6}income {c |}{col 14}{res}{space 2} -.055598{col 26}{space 2} .0198505{col 37}{space 1}   -2.80{col 46}{space 3}0.005{col 54}{space 4}-.0945042{col 67}{space 3}-.0166917
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .3927037{col 26}{space 2} .2652393{col 37}{space 1}    1.48{col 46}{space 3}0.139{col 54}{space 4}-.1271558{col 67}{space 3} .9125631
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2} .1840682{col 26}{space 2} .3305702{col 37}{space 1}    0.56{col 46}{space 3}0.578{col 54}{space 4}-.4638375{col 67}{space 3} .8319739
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} .2669145{col 26}{space 2} .1022877{col 37}{space 1}    2.61{col 46}{space 3}0.009{col 54}{space 4} .0664344{col 67}{space 3} .4673947
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.1746886{col 26}{space 2} .0397002{col 37}{space 1}   -4.40{col 46}{space 3}0.000{col 54}{space 4}-.2524996{col 67}{space 3}-.0968775
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2}-2.688701{col 26}{space 2}  1.03869{col 37}{space 1}   -2.59{col 46}{space 3}0.010{col 54}{space 4}-4.724496{col 67}{space 3}-.6529058
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. reg   ft_djt    disc_women     d2_men      female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+{txt}(sum of wgt is 2,403.3614)
+
+Linear regression                               Number of obs     = {res}     2,473
+                                                {txt}F(17, 2455)       =  {res}   233.13
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5712
+                                                {txt}Root MSE          =    {res} 23.192
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      ft_djt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}disc_women {c |}{col 14}{res}{space 2}-2.890876{col 26}{space 2}  .713472{col 37}{space 1}   -4.05{col 46}{space 3}0.000{col 54}{space 4}-4.289946{col 67}{space 3}-1.491807
+{txt}{space 6}d2_men {c |}{col 14}{res}{space 2}-3.168603{col 26}{space 2} 1.203626{col 37}{space 1}   -2.63{col 46}{space 3}0.009{col 54}{space 4}-5.528831{col 67}{space 3}-.8083758
+{txt}{space 6}female {c |}{col 14}{res}{space 2} -1.66864{col 26}{space 2} 1.197527{col 37}{space 1}   -1.39{col 46}{space 3}0.164{col 54}{space 4}-4.016908{col 67}{space 3}  .679628
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0210712{col 26}{space 2} .0397791{col 37}{space 1}    0.53{col 46}{space 3}0.596{col 54}{space 4}-.0569329{col 67}{space 3} .0990752
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-7.095818{col 26}{space 2} 2.069223{col 37}{space 1}   -3.43{col 46}{space 3}0.001{col 54}{space 4}-11.15342{col 67}{space 3}-3.038216
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-10.42187{col 26}{space 2} 2.399979{col 37}{space 1}   -4.34{col 46}{space 3}0.000{col 54}{space 4}-15.12806{col 67}{space 3}-5.715677
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-3.439241{col 26}{space 2} 2.098428{col 37}{space 1}   -1.64{col 46}{space 3}0.101{col 54}{space 4}-7.554114{col 67}{space 3} .6756319
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2}  2.34339{col 26}{space 2} 1.325088{col 37}{space 1}    1.77{col 46}{space 3}0.077{col 54}{space 4}-.2550153{col 67}{space 3} 4.941795
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} 2.339442{col 26}{space 2} .6220177{col 37}{space 1}    3.76{col 46}{space 3}0.000{col 54}{space 4} 1.119708{col 67}{space 3} 3.559175
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} 7.545572{col 26}{space 2} .4680181{col 37}{space 1}   16.12{col 46}{space 3}0.000{col 54}{space 4} 6.627821{col 67}{space 3} 8.463323
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} 3.137842{col 26}{space 2} .6501666{col 37}{space 1}    4.83{col 46}{space 3}0.000{col 54}{space 4}  1.86291{col 67}{space 3} 4.412774
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}  -1.7668{col 26}{space 2} .4376616{col 37}{space 1}   -4.04{col 46}{space 3}0.000{col 54}{space 4}-2.625024{col 67}{space 3}-.9085755
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.1388685{col 26}{space 2}  .095803{col 37}{space 1}   -1.45{col 46}{space 3}0.147{col 54}{space 4}-.3267316{col 67}{space 3} .0489946
+{txt}{space 5}married {c |}{col 14}{res}{space 2} 1.427252{col 26}{space 2} 1.398375{col 37}{space 1}    1.02{col 46}{space 3}0.308{col 54}{space 4}-1.314864{col 67}{space 3} 4.169368
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2} .0227311{col 26}{space 2} 1.421614{col 37}{space 1}    0.02{col 46}{space 3}0.987{col 54}{space 4}-2.764956{col 67}{space 3} 2.810418
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} 2.472984{col 26}{space 2} .5216502{col 37}{space 1}    4.74{col 46}{space 3}0.000{col 54}{space 4} 1.450064{col 67}{space 3} 3.495904
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.6522888{col 26}{space 2} .2215647{col 37}{space 1}   -2.94{col 46}{space 3}0.003{col 54}{space 4}-1.086762{col 67}{space 3}-.2178157
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2.907665{col 26}{space 2}  5.23977{col 37}{space 1}    0.55{col 46}{space 3}0.579{col 54}{space 4}-7.367161{col 67}{space 3} 13.18249
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. logit votetrump disc_women     d2_men_miss female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+
+{res}{txt}Iteration 0:{space 3}log pseudolikelihood = {res:-1262.4886}  
+Iteration 1:{space 3}log pseudolikelihood = {res:-394.30723}  
+Iteration 2:{space 3}log pseudolikelihood = {res:-362.09788}  
+Iteration 3:{space 3}log pseudolikelihood = {res:-359.99813}  
+Iteration 4:{space 3}log pseudolikelihood = {res:-359.99487}  
+Iteration 5:{space 3}log pseudolikelihood = {res:-359.99487}  
+{res}
+{txt}Logistic regression{col 49}Number of obs{col 67}= {res}     1,910
+{txt}{col 49}Wald chi2({res}17{txt}){col 67}= {res}    365.16
+{txt}{col 49}Prob > chi2{col 67}= {res}    0.0000
+{txt}Log pseudolikelihood = {res}-359.99487{txt}{col 49}Pseudo R2{col 67}= {res}    0.7149
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}   votetrump{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}disc_women {c |}{col 14}{res}{space 2}-.2826012{col 26}{space 2} .1437997{col 37}{space 1}   -1.97{col 46}{space 3}0.049{col 54}{space 4}-.5644434{col 67}{space 3}-.0007589
+{txt}{space 1}d2_men_miss {c |}{col 14}{res}{space 2}-.7709657{col 26}{space 2} .2312033{col 37}{space 1}   -3.33{col 46}{space 3}0.001{col 54}{space 4}-1.224116{col 67}{space 3}-.3178155
+{txt}{space 6}female {c |}{col 14}{res}{space 2}-.1202717{col 26}{space 2} .2538042{col 37}{space 1}   -0.47{col 46}{space 3}0.636{col 54}{space 4}-.6177187{col 67}{space 3} .3771753
+{txt}{space 9}age {c |}{col 14}{res}{space 2} -.003268{col 26}{space 2} .0086993{col 37}{space 1}   -0.38{col 46}{space 3}0.707{col 54}{space 4}-.0203183{col 67}{space 3} .0137824
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-4.303781{col 26}{space 2} 1.113067{col 37}{space 1}   -3.87{col 46}{space 3}0.000{col 54}{space 4}-6.485352{col 67}{space 3} -2.12221
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-2.275119{col 26}{space 2} .4770215{col 37}{space 1}   -4.77{col 46}{space 3}0.000{col 54}{space 4}-3.210064{col 67}{space 3}-1.340174
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}  -.92856{col 26}{space 2} .3113353{col 37}{space 1}   -2.98{col 46}{space 3}0.003{col 54}{space 4}-1.538766{col 67}{space 3} -.318354
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2}  .409338{col 26}{space 2} .2579688{col 37}{space 1}    1.59{col 46}{space 3}0.113{col 54}{space 4}-.0962717{col 67}{space 3} .9149476
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} .0525393{col 26}{space 2} .1200202{col 37}{space 1}    0.44{col 46}{space 3}0.662{col 54}{space 4} -.182696{col 67}{space 3} .2877747
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} .9307501{col 26}{space 2} .0783983{col 37}{space 1}   11.87{col 46}{space 3}0.000{col 54}{space 4} .7770924{col 67}{space 3} 1.084408
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2} .5069364{col 26}{space 2}  .136551{col 37}{space 1}    3.71{col 46}{space 3}0.000{col 54}{space 4} .2393014{col 67}{space 3} .7745713
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}-.1133999{col 26}{space 2} .0904184{col 37}{space 1}   -1.25{col 46}{space 3}0.210{col 54}{space 4}-.2906168{col 67}{space 3}  .063817
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.0557459{col 26}{space 2} .0198408{col 37}{space 1}   -2.81{col 46}{space 3}0.005{col 54}{space 4}-.0946331{col 67}{space 3}-.0168587
+{txt}{space 5}married {c |}{col 14}{res}{space 2} .3852858{col 26}{space 2} .2656797{col 37}{space 1}    1.45{col 46}{space 3}0.147{col 54}{space 4}-.1354369{col 67}{space 3} .9060086
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2} .1850638{col 26}{space 2} .3316893{col 37}{space 1}    0.56{col 46}{space 3}0.577{col 54}{space 4}-.4650352{col 67}{space 3} .8351628
+{txt}{space 8}auth {c |}{col 14}{res}{space 2}  .270946{col 26}{space 2} .1020056{col 37}{space 1}    2.66{col 46}{space 3}0.008{col 54}{space 4} .0710188{col 67}{space 3} .4708733
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.1738095{col 26}{space 2}  .039696{col 37}{space 1}   -4.38{col 46}{space 3}0.000{col 54}{space 4}-.2516122{col 67}{space 3}-.0960069
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} -2.70401{col 26}{space 2} 1.041423{col 37}{space 1}   -2.60{col 46}{space 3}0.009{col 54}{space 4}-4.745161{col 67}{space 3}-.6628595
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. reg   ft_djt    disc_women     d2_men_miss female age black latinx race_oth relig_imp pol_int repub conserv educ1 income married under18 auth egal [pweight=V160102]
+{txt}(sum of wgt is 2,420.0038)
+
+Linear regression                               Number of obs     = {res}     2,494
+                                                {txt}F(17, 2476)       =  {res}   235.85
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.5720
+                                                {txt}Root MSE          =    {res} 23.168
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}      ft_djt{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}disc_women {c |}{col 14}{res}{space 2}-2.892642{col 26}{space 2} .7090323{col 37}{space 1}   -4.08{col 46}{space 3}0.000{col 54}{space 4}   -4.283{col 67}{space 3}-1.502285
+{txt}{space 1}d2_men_miss {c |}{col 14}{res}{space 2}-3.134584{col 26}{space 2} 1.198087{col 37}{space 1}   -2.62{col 46}{space 3}0.009{col 54}{space 4}-5.483939{col 67}{space 3}-.7852294
+{txt}{space 6}female {c |}{col 14}{res}{space 2}-1.712764{col 26}{space 2} 1.188025{col 37}{space 1}   -1.44{col 46}{space 3}0.150{col 54}{space 4} -4.04239{col 67}{space 3} .6168618
+{txt}{space 9}age {c |}{col 14}{res}{space 2} .0206745{col 26}{space 2} .0395667{col 37}{space 1}    0.52{col 46}{space 3}0.601{col 54}{space 4}-.0569127{col 67}{space 3} .0982617
+{txt}{space 7}black {c |}{col 14}{res}{space 2}-7.270267{col 26}{space 2} 2.056704{col 37}{space 1}   -3.53{col 46}{space 3}0.000{col 54}{space 4} -11.3033{col 67}{space 3}-3.237229
+{txt}{space 6}latinx {c |}{col 14}{res}{space 2}-10.41167{col 26}{space 2} 2.387327{col 37}{space 1}   -4.36{col 46}{space 3}0.000{col 54}{space 4}-15.09304{col 67}{space 3} -5.73031
+{txt}{space 4}race_oth {c |}{col 14}{res}{space 2}-3.318897{col 26}{space 2}  2.07146{col 37}{space 1}   -1.60{col 46}{space 3}0.109{col 54}{space 4} -7.38087{col 67}{space 3}  .743076
+{txt}{space 3}relig_imp {c |}{col 14}{res}{space 2} 2.462175{col 26}{space 2} 1.320528{col 37}{space 1}    1.86{col 46}{space 3}0.062{col 54}{space 4}-.1272783{col 67}{space 3} 5.051628
+{txt}{space 5}pol_int {c |}{col 14}{res}{space 2} 2.329553{col 26}{space 2} .6179836{col 37}{space 1}    3.77{col 46}{space 3}0.000{col 54}{space 4} 1.117735{col 67}{space 3} 3.541371
+{txt}{space 7}repub {c |}{col 14}{res}{space 2} 7.535972{col 26}{space 2} .4658542{col 37}{space 1}   16.18{col 46}{space 3}0.000{col 54}{space 4} 6.622468{col 67}{space 3} 8.449476
+{txt}{space 5}conserv {c |}{col 14}{res}{space 2}  3.12557{col 26}{space 2} .6477198{col 37}{space 1}    4.83{col 46}{space 3}0.000{col 54}{space 4} 1.855441{col 67}{space 3} 4.395698
+{txt}{space 7}educ1 {c |}{col 14}{res}{space 2}-1.786719{col 26}{space 2} .4351931{col 37}{space 1}   -4.11{col 46}{space 3}0.000{col 54}{space 4}-2.640099{col 67}{space 3}-.9333392
+{txt}{space 6}income {c |}{col 14}{res}{space 2}-.1363674{col 26}{space 2} .0950024{col 37}{space 1}   -1.44{col 46}{space 3}0.151{col 54}{space 4}-.3226597{col 67}{space 3}  .049925
+{txt}{space 5}married {c |}{col 14}{res}{space 2} 1.449859{col 26}{space 2} 1.389907{col 37}{space 1}    1.04{col 46}{space 3}0.297{col 54}{space 4}-1.275641{col 67}{space 3}  4.17536
+{txt}{space 5}under18 {c |}{col 14}{res}{space 2}-.0771241{col 26}{space 2} 1.412318{col 37}{space 1}   -0.05{col 46}{space 3}0.956{col 54}{space 4} -2.84657{col 67}{space 3} 2.692321
+{txt}{space 8}auth {c |}{col 14}{res}{space 2} 2.482026{col 26}{space 2}  .518943{col 37}{space 1}    4.78{col 46}{space 3}0.000{col 54}{space 4} 1.464419{col 67}{space 3} 3.499634
+{txt}{space 8}egal {c |}{col 14}{res}{space 2}-.6526949{col 26}{space 2} .2199688{col 37}{space 1}   -2.97{col 46}{space 3}0.003{col 54}{space 4}-1.084037{col 67}{space 3}-.2213532
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2.983953{col 26}{space 2} 5.226556{col 37}{space 1}    0.57{col 46}{space 3}0.568{col 54}{space 4}-7.264918{col 67}{space 3} 13.23282
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+{txt}end of do-file
+
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\L.J\Desktop\Stata log file.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}15 Oct 2020, 22:29:27
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

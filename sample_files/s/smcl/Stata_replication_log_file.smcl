@@ -1,0 +1,199 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\benjamin.knoll\Desktop\Active Research\MPSA 2014 - physiological independents\Data files\Log of RAP models 6-18-2015 - for submission.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res}18 Jun 2015, 11:40:17
+
+{com}. * Log file for data replications.
+
+. * Oxley, et al. 2008 reproduction
+
+. sum SCLthreat SCLNONthreat
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 3}SCLthreat {c |}{res}        64    .0016286    .0218662  -.0247519   .1668252
+{txt}SCLNONthreat {c |}{res}        64   -.0001317    .0040809  -.0157623   .0129727
+
+{com}. ttest SCLthreat if citizen==1, by(policysocial2)
+
+{txt}Two-sample t test with equal variances
+{hline 9}{c TT}{hline 68}
+   Group{col 10}{c |}{col 16}Obs{col 27}Mean{col 35}Std. Err.{col 47}Std. Dev.{col 59}[95% Conf. Interval]
+{hline 9}{c +}{hline 68}
+     Low {c |}{res}{col 12}     23{col 22} .0055278{col 34} .0074002{col 46} .0354899{col 58}-.0098192{col 70} .0208748
+    {txt}High {c |}{res}{col 12}     37{col 22}-.0007408{col 34} .0011788{col 46} .0071704{col 58}-.0031316{col 70} .0016499
+{txt}{hline 9}{c +}{hline 68}
+combined {c |}{res}{col 12}     60{col 22} .0016622{col 34} .0029168{col 46} .0225937{col 58}-.0041744{col 70} .0074987
+{txt}{hline 9}{c +}{hline 68}
+    diff {c |}{res}{col 22} .0062687{col 34} .0059945{col 58}-.0057307{col 70}  .018268
+{txt}{hline 9}{c BT}{hline 68}
+    diff = mean({res}Low{txt}) - mean({res}High{txt})                                 t = {res}  1.0457
+{txt}Ho: diff = 0                                     degrees of freedom = {res}      58
+
+    {txt}Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = {res}0.8500         {txt}Pr(|T| > |t|) = {res}0.3000          {txt}Pr(T > t) = {res}0.1500
+
+{com}. ttest SCLNONthreat if citizen==1, by(policysocial2)
+
+{txt}Two-sample t test with equal variances
+{hline 9}{c TT}{hline 68}
+   Group{col 10}{c |}{col 16}Obs{col 27}Mean{col 35}Std. Err.{col 47}Std. Dev.{col 59}[95% Conf. Interval]
+{hline 9}{c +}{hline 68}
+     Low {c |}{res}{col 12}     23{col 22}-.0012459{col 34} .0008015{col 46} .0038438{col 58}-.0029081{col 70} .0004163
+    {txt}High {c |}{res}{col 12}     37{col 22} .0003993{col 34} .0007061{col 46} .0042949{col 58}-.0010327{col 70} .0018313
+{txt}{hline 9}{c +}{hline 68}
+combined {c |}{res}{col 12}     60{col 22}-.0002314{col 34} .0005388{col 46} .0041732{col 58}-.0013094{col 70} .0008467
+{txt}{hline 9}{c +}{hline 68}
+    diff {c |}{res}{col 22}-.0016452{col 34} .0010965{col 58}-.0038401{col 70} .0005497
+{txt}{hline 9}{c BT}{hline 68}
+    diff = mean({res}Low{txt}) - mean({res}High{txt})                                 t = {res} -1.5004
+{txt}Ho: diff = 0                                     degrees of freedom = {res}      58
+
+    {txt}Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = {res}0.0695         {txt}Pr(|T| > |t|) = {res}0.1389          {txt}Pr(T > t) = {res}0.9305
+
+{com}. regress policysocial SCLthreat gender income if citizen==1
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      59
+{txt}{hline 13}{char +}{hline 30}           F(  3,    55) ={res}    0.99
+    {txt}   Model {char |} {res} 2.34693316     3  .782311053           {txt}Prob > F      = {res} 0.4037
+    {txt}Residual {char |} {res} 43.3988296    55  .789069628           {txt}R-squared     = {res} 0.0513
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res}-0.0004
+    {txt}   Total {char |} {res} 45.7457627    58  .788720047           {txt}Root MSE      = {res}  .8883
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}policysocial{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}SCLthreat {c |}{col 14}{res}{space 2}-7.001359{col 26}{space 2} 5.153759{col 37}{space 1}   -1.36{col 46}{space 3}0.180{col 54}{space 4}-17.32972{col 67}{space 3} 3.327005
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .3002253{col 26}{space 2} .2535282{col 37}{space 1}    1.18{col 46}{space 3}0.241{col 54}{space 4}-.2078567{col 67}{space 3} .8083072
+{txt}{space 6}income {c |}{col 14}{res}{space 2} .0166312{col 26}{space 2} .0678614{col 37}{space 1}    0.25{col 46}{space 3}0.807{col 54}{space 4} -.119366{col 67}{space 3} .1526284
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2.219752{col 26}{space 2} .5740235{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} 1.069384{col 67}{space 3} 3.370121
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress policysocial SCLNONthreat gender income if citizen==1
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      59
+{txt}{hline 13}{char +}{hline 30}           F(  3,    55) ={res}    1.01
+    {txt}   Model {char |} {res} 2.38289999     3  .794299997           {txt}Prob > F      = {res} 0.3965
+    {txt}Residual {char |} {res} 43.3628627    55  .788415686           {txt}R-squared     = {res} 0.0521
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res} 0.0004
+    {txt}   Total {char |} {res} 45.7457627    58  .788720047           {txt}Root MSE      = {res} .88793
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}policysocial{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+SCLNONthreat {c |}{col 14}{res}{space 2} 38.21586{col 26}{space 2}  27.7784{col 37}{space 1}    1.38{col 46}{space 3}0.174{col 54}{space 4}-17.45331{col 67}{space 3} 93.88502
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .2463829{col 26}{space 2} .2523057{col 37}{space 1}    0.98{col 46}{space 3}0.333{col 54}{space 4}-.2592491{col 67}{space 3} .7520148
+{txt}{space 6}income {c |}{col 14}{res}{space 2} .0103984{col 26}{space 2} .0679551{col 37}{space 1}    0.15{col 46}{space 3}0.879{col 54}{space 4}-.1257867{col 67}{space 3} .1465835
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2.291654{col 26}{space 2} .5753713{col 37}{space 1}    3.98{col 46}{space 3}0.000{col 54}{space 4} 1.138584{col 67}{space 3} 3.444724
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. * Smith, et al. 2011 reproduction
+
+. sum SCLdisgust
+
+{txt}    Variable {c |}       Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 56}
+{space 2}SCLdisgust {c |}{res}        63    .0027283    .0325052    -.04466      .2501
+
+{com}. regress ideo SCLdisgust gender if citizen==1
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      60
+{txt}{hline 13}{char +}{hline 30}           F(  2,    57) ={res}    0.90
+    {txt}   Model {char |} {res}  7.7128017     2  3.85640085           {txt}Prob > F      = {res} 0.4126
+    {txt}Residual {char |} {res} 244.470532    57   4.2889567           {txt}R-squared     = {res} 0.0306
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res}-0.0034
+    {txt}   Total {char |} {res} 252.183333    59  4.27429379           {txt}Root MSE      = {res}  2.071
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        ideo{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}SCLdisgust {c |}{col 14}{res}{space 2} 1.076104{col 26}{space 2} 8.141842{col 37}{space 1}    0.13{col 46}{space 3}0.895{col 54}{space 4}-15.22765{col 67}{space 3} 17.37986
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .7095554{col 26}{space 2} .5404991{col 37}{space 1}    1.31{col 46}{space 3}0.195{col 54}{space 4}-.3727754{col 67}{space 3} 1.791886
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 2.890032{col 26}{space 2}  .398654{col 37}{space 1}    7.25{col 46}{space 3}0.000{col 54}{space 4} 2.091741{col 67}{space 3} 3.688323
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. regress marry SCLdisgust gender if citizen==1
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      60
+{txt}{hline 13}{char +}{hline 30}           F(  2,    57) ={res}    0.38
+    {txt}   Model {char |} {res}  .64974028     2   .32487014           {txt}Prob > F      = {res} 0.6835
+    {txt}Residual {char |} {res} 48.3335931    57  .847957773           {txt}R-squared     = {res} 0.0133
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res}-0.0214
+    {txt}   Total {char |} {res} 48.9833333    59  .830225989           {txt}Root MSE      = {res} .92085
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}       marry{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 2}SCLdisgust {c |}{col 14}{res}{space 2}-2.466711{col 26}{space 2} 3.620212{col 37}{space 1}   -0.68{col 46}{space 3}0.498{col 54}{space 4} -9.71606{col 67}{space 3} 4.782637
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .1487717{col 26}{space 2} .2403291{col 37}{space 1}    0.62{col 46}{space 3}0.538{col 54}{space 4}-.3324789{col 67}{space 3} .6300224
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.441824{col 26}{space 2} .1772587{col 37}{space 1}    8.13{col 46}{space 3}0.000{col 54}{space 4}  1.08687{col 67}{space 3} 1.796779
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. * Dodd, et al. 2012 reproduction
+
+. ttest SCLthreat if citizen==1, by(orientation2)
+
+{txt}Two-sample t test with equal variances
+{hline 9}{c TT}{hline 68}
+   Group{col 10}{c |}{col 16}Obs{col 27}Mean{col 35}Std. Err.{col 47}Std. Dev.{col 59}[95% Conf. Interval]
+{hline 9}{c +}{hline 68}
+Leftward {c |}{res}{col 12}     28{col 22}-.0021978{col 34}  .001119{col 46} .0059211{col 58}-.0044938{col 70} .0000981
+{txt}Rightwar {c |}{res}{col 12}     30{col 22} .0053524{col 34} .0057076{col 46}  .031262{col 58} -.006321{col 70} .0170258
+{txt}{hline 9}{c +}{hline 68}
+combined {c |}{res}{col 12}     58{col 22} .0017075{col 34} .0030181{col 46} .0229852{col 58}-.0043362{col 70} .0077511
+{txt}{hline 9}{c +}{hline 68}
+    diff {c |}{res}{col 22}-.0075502{col 34} .0060094{col 58}-.0195885{col 70}  .004488
+{txt}{hline 9}{c BT}{hline 68}
+    diff = mean({res}Leftward{txt}) - mean({res}Rightwar{txt})                        t = {res} -1.2564
+{txt}Ho: diff = 0                                     degrees of freedom = {res}      56
+
+    {txt}Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = {res}0.1071         {txt}Pr(|T| > |t|) = {res}0.2142          {txt}Pr(T > t) = {res}0.8929
+
+{com}. ttest SCLNONthreat if citizen==1, by(orientation2)
+
+{txt}Two-sample t test with equal variances
+{hline 9}{c TT}{hline 68}
+   Group{col 10}{c |}{col 16}Obs{col 27}Mean{col 35}Std. Err.{col 47}Std. Dev.{col 59}[95% Conf. Interval]
+{hline 9}{c +}{hline 68}
+Leftward {c |}{res}{col 12}     28{col 22} -.000276{col 34} .0004323{col 46} .0022876{col 58} -.001163{col 70}  .000611
+{txt}Rightwar {c |}{res}{col 12}     30{col 22}-.0002397{col 34} .0010084{col 46} .0055231{col 58}-.0023021{col 70} .0018226
+{txt}{hline 9}{c +}{hline 68}
+combined {c |}{res}{col 12}     58{col 22}-.0002573{col 34} .0005571{col 46} .0042425{col 58}-.0013728{col 70} .0008583
+{txt}{hline 9}{c +}{hline 68}
+    diff {c |}{res}{col 22}-.0000363{col 34} .0011247{col 58}-.0022893{col 70} .0022168
+{txt}{hline 9}{c BT}{hline 68}
+    diff = mean({res}Leftward{txt}) - mean({res}Rightwar{txt})                        t = {res} -0.0323
+{txt}Ho: diff = 0                                     degrees of freedom = {res}      56
+
+    {txt}Ha: diff < 0                 Ha: diff != 0                 Ha: diff > 0
+ Pr(T < t) = {res}0.4872         {txt}Pr(|T| > |t|) = {res}0.9744          {txt}Pr(T > t) = {res}0.5128
+
+{com}. regress orientation SCLthreat gender if citizen==1
+
+      {txt}Source {c |}       SS       df       MS              Number of obs ={res}      57
+{txt}{hline 13}{char +}{hline 30}           F(  2,    54) ={res}    0.50
+    {txt}   Model {char |} {res} .063663998     2  .031831999           {txt}Prob > F      = {res} 0.6075
+    {txt}Residual {char |} {res} 3.41708825    54  .063279412           {txt}R-squared     = {res} 0.0183
+{txt}{hline 13}{char +}{hline 30}           Adj R-squared = {res}-0.0181
+    {txt}   Total {char |} {res} 3.48075225    56   .06215629           {txt}Root MSE      = {res} .25155
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1} orientation{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}SCLthreat {c |}{col 14}{res}{space 2} .6945044{col 26}{space 2} 1.460185{col 37}{space 1}    0.48{col 46}{space 3}0.636{col 54}{space 4} -2.23299{col 67}{space 3} 3.621999
+{txt}{space 6}gender {c |}{col 14}{res}{space 2} .0552179{col 26}{space 2} .0671855{col 37}{space 1}    0.82{col 46}{space 3}0.415{col 54}{space 4} -.079481{col 67}{space 3} .1899167
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .3855224{col 26}{space 2} .0484341{col 37}{space 1}    7.96{col 46}{space 3}0.000{col 54}{space 4} .2884179{col 67}{space 3} .4826269
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}
+{com}. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\benjamin.knoll\Desktop\Active Research\MPSA 2014 - physiological independents\Data files\Log of RAP models 6-18-2015 - for submission.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res}18 Jun 2015, 11:41:54
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

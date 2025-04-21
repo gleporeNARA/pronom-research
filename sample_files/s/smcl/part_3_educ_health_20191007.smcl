@@ -1,0 +1,413 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}C:\Users\XUE XINDONG\Desktop\educ_health\World Development Submissions\part3 educ_health_20191007.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 7 Oct 2019, 15:11:19
+
+{com}. do "C:\Users\XUEXIN~1\AppData\Local\Temp\STD3f28_000000.tmp"
+{txt}
+{com}. use "C:\Users\XUE XINDONG\Desktop\educ_health\meta_educ_health(20190928).dta",
+{txt}
+{com}. 
+. ****************************************************************************
+. **************Robustness Checks: Z transformation  TABLE 10***************** 
+. ****************************************************************************
+. 
+. ******************************************************************************
+. *DEFINITION OF BASIC VARIABLES
+. ******************************************************************************
+. gen tstat=tstatistics
+{txt}
+{com}. gen negative = 1
+{txt}
+{com}. replace negative = -1 if BadHealth == 1 & BadEduc == 0
+{txt}(3,330 real changes made)
+
+{com}. replace negative = -1 if BadHealth == 0 & BadEduc == 1
+{txt}(80 real changes made)
+
+{com}. replace tstat = tstat*negative
+{txt}(3,397 real changes made)
+
+{com}. gen df = n-k1
+{txt}
+{com}. gen r = tstat/sqrt(tstat^2+df)
+{txt}
+{com}. gen varR = (1-r^2)/df
+{txt}
+{com}. gen seR = sqrt(varR)
+{txt}
+{com}. gen pcc = r
+{txt}
+{com}. gen abststat = abs(tstat)
+{txt}
+{com}. gen abspcc = abs(pcc)
+{txt}
+{com}. 
+. ******************************************************************************
+. * Distribution of t-stats and PCCs before kicking out outliers
+. ******************************************************************************
+. summ tstat, detail
+
+                            {txt}tstat
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}-3.366447            -20
+{txt} 5%    {res}-1.705179         -19.75
+{txt}10%    {res}-.6745101      -12.80742       {txt}Obs         {res}      4,718
+{txt}25%    {res} .5986928            -12       {txt}Sum of Wgt. {res}      4,718
+
+{txt}50%    {res} 1.959998                      {txt}Mean          {res} 3.053543
+                        {txt}Largest       Std. Dev.     {res} 6.912549
+{txt}75%    {res} 3.290574            104
+{txt}90%    {res}        7            109       {txt}Variance      {res} 47.78333
+{txt}95%    {res} 11.94444            125       {txt}Skewness      {res} 7.950496
+{txt}99%    {res}     27.7       137.5762       {txt}Kurtosis      {res} 105.9487
+{txt}
+{com}. summ pcc, detail
+
+                             {txt}pcc
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}-.0611414      -.1993045
+{txt} 5%    {res} -.018811      -.1753322
+{txt}10%    {res}-.0071823      -.1448239       {txt}Obs         {res}      4,718
+{txt}25%    {res}  .003816      -.1299282       {txt}Sum of Wgt. {res}      4,718
+
+{txt}50%    {res} .0150329                      {txt}Mean          {res} .0311541
+                        {txt}Largest       Std. Dev.     {res} .0625404
+{txt}75%    {res} .0438438        .854579
+{txt}90%    {res} .0878176       .9144696       {txt}Variance      {res} .0039113
+{txt}95%    {res} .1214882       .9151465       {txt}Skewness      {res} 5.387409
+{txt}99%    {res} .2419359       .9489114       {txt}Kurtosis      {res} 57.61067
+{txt}
+{com}. summ df, detail 
+
+                             {txt}df
+{hline 61}
+      Percentiles      Smallest
+ 1%    {res}      250             12
+{txt} 5%    {res}      612             47
+{txt}10%    {res}      985             47       {txt}Obs         {res}      4,718
+{txt}25%    {res}     3372             48       {txt}Sum of Wgt. {res}      4,718
+
+{txt}50%    {res}     9349                      {txt}Mean          {res} 67163.41
+                        {txt}Largest       Std. Dev.     {res} 290314.3
+{txt}75%    {res}    26442        3781410
+{txt}90%    {res}   106691        3781410       {txt}Variance      {res} 8.43e+10
+{txt}95%    {res}   205749        3781410       {txt}Skewness      {res} 8.915053
+{txt}99%    {res}  1823897        3781410       {txt}Kurtosis      {res} 92.25565
+{txt}
+{com}. 
+. 
+. ******************************************************************************
+. *Kicking out outliers
+. ******************************************************************************
+. reg pcc seR
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}     4,718
+{txt}{hline 13}{c +}{hline 34}   F(1, 4716)      = {res}   307.04
+{txt}       Model {c |} {res} 1.12776086         1  1.12776086   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 17.3218199     4,716   .00367299   {txt}R-squared       ={res}    0.0611
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.0609
+{txt}       Total {c |} {res} 18.4495808     4,717  .003911295   {txt}Root MSE        =   {res} .06061
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}         pcc{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}seR {c |}{col 14}{res}{space 2} 1.143686{col 26}{space 2} .0652692{col 37}{space 1}   17.52{col 46}{space 3}0.000{col 54}{space 4} 1.015728{col 67}{space 3} 1.271645
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0149453{col 26}{space 2} .0012783{col 37}{space 1}   11.69{col 46}{space 3}0.000{col 54}{space 4} .0124391{col 67}{space 3} .0174514
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. predict resid, residual
+{txt}
+{com}. egen stdr=std(resid)
+{txt}
+{com}. gen absr=abs(stdr)
+{txt}
+{com}. drop if absr>3.5
+{txt}(47 observations deleted)
+
+{com}. drop resid stdr absr
+{txt}
+{com}. 
+. ******************************************************************************
+. ****Z Transformation of PCC and its Standard Errors**************************
+. *****************************************************************************
+. ge zpcc=0.5*ln((1+pcc)/(1-pcc))
+{txt}
+{com}. gen zzpcc=atanh(pcc)
+{txt}
+{com}. gen zseR=atanh(seR)
+{txt}
+{com}. replace r=zzpcc
+{txt}(4,654 real changes made)
+
+{com}. replace seR=zseR
+{txt}(4,671 real changes made)
+
+{com}. 
+. 
+. ******************************************************************************
+. * FAT/PET
+. ******************************************************************************
+. ******************************************************************************
+. * Calculating study weights based on number of estimates per study
+. ******************************************************************************
+. bysort ID: egen numberests = count(ID)
+{txt}
+{com}. gen weight = 1/numberests
+{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * FIXED EFFECTS
+. ******************************************************************************
+. 
+. gen feprecisionR = 1/seR
+{txt}
+{com}. gen fetstatR = r/seR
+{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * Equal weight to each estimate (Column 1)
+. ******************************************************************************
+. regress fetstatR feprecisionR,  vce(cluster ID)
+
+{txt}Linear regression                               Number of obs     = {res}     4,671
+                                                {txt}F(1, 104)         =  {res}     3.29
+                                                {txt}Prob > F          = {res}    0.0726
+                                                {txt}R-squared         = {res}    0.0697
+                                                {txt}Root MSE          =    {res} 5.9044
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:105} clusters in ID)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}    fetstatR{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+feprecisionR {c |}{col 14}{res}{space 2} .0078302{col 26}{space 2}  .004317{col 37}{space 1}    1.81{col 46}{space 3}0.073{col 54}{space 4}-.0007306{col 67}{space 3} .0163909
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.606054{col 26}{space 2} .5824079{col 37}{space 1}    2.76{col 46}{space 3}0.007{col 54}{space 4} .4511169{col 67}{space 3} 2.760991
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * Equal weight to each study (Column (2)
+. ******************************************************************************
+. regress fetstatR feprecisionR  [pweight = weight],  vce(cluster ID)
+{txt}(sum of wgt is 105)
+
+Linear regression                               Number of obs     = {res}     4,671
+                                                {txt}F(1, 104)         =  {res}     2.57
+                                                {txt}Prob > F          = {res}    0.1118
+                                                {txt}R-squared         = {res}    0.0933
+                                                {txt}Root MSE          =    {res} 11.175
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:105} clusters in ID)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}    fetstatR{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+feprecisionR {c |}{col 14}{res}{space 2} .0108983{col 26}{space 2} .0067952{col 37}{space 1}    1.60{col 46}{space 3}0.112{col 54}{space 4}-.0025769{col 67}{space 3} .0243734
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 1.952569{col 26}{space 2} .8415106{col 37}{space 1}    2.32{col 46}{space 3}0.022{col 54}{space 4} .2838217{col 67}{space 3} 3.621316
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * RANDOM EFFECTS 
+. ******************************************************************************
+. //metan r seR, random
+. metareg r seR , wsse(seR)
+
+{txt}Meta-regression{col 55}Number of obs{col 70}= {res}   4671
+REML{txt} estimate of between-study variance{col 55}tau2{col 70}={res} .001213
+{txt}% residual variation due to heterogeneity{col 55}I-squared_res{col 70}= {res} 97.13%
+{txt}Proportion of between-study variance explained{col 55}Adj R-squared {col 70}= {res}  8.06%
+With{txt} Knapp-Hartung modification
+{res}{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           r{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}seR {c |}{col 14}{res}{space 2} 1.136554{col 26}{space 2} .0612887{col 37}{space 1}   18.54{col 46}{space 3}0.000{col 54}{space 4}   1.0164{col 67}{space 3} 1.256709
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} .0121667{col 26}{space 2} .0009002{col 37}{space 1}   13.52{col 46}{space 3}0.000{col 54}{space 4} .0104019{col 67}{space 3} .0139315
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. scalar tau2 =  e(tau2)
+{txt}
+{com}. gen revarR = varR + tau2
+{txt}
+{com}. gen reseR = sqrt(revarR)
+{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * Correcting for heteroskedasticity
+. ******************************************************************************
+. gen reprecisionR = 1/reseR
+{txt}
+{com}. gen retstatR = r/reseR
+{txt}
+{com}. gen repubbiasR = seR/reseR
+{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * Equal weight to each estimate (Column 3)
+. ******************************************************************************
+. regress retstatR  reprecisionR repubbiasR,  noc vce(cluster ID)
+
+{txt}Linear regression                               Number of obs     = {res}     4,671
+                                                {txt}F(2, 104)         =  {res}    56.08
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.3257
+                                                {txt}Root MSE          =    {res} 1.0358
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:105} clusters in ID)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}    retstatR{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+reprecisionR {c |}{col 14}{res}{space 2} .0121695{col 26}{space 2} .0030436{col 37}{space 1}    4.00{col 46}{space 3}0.000{col 54}{space 4}  .006134{col 67}{space 3}  .018205
+{txt}{space 2}repubbiasR {c |}{col 14}{res}{space 2} 1.136276{col 26}{space 2}  .266005{col 37}{space 1}    4.27{col 46}{space 3}0.000{col 54}{space 4} .6087779{col 67}{space 3} 1.663774
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * Equal weight to each study (Column 4)
+. ******************************************************************************
+. regress retstatR  reprecisionR   repubbiasR [pweight = weight] , noc vce(cluster ID)
+{txt}(sum of wgt is 105)
+
+Linear regression                               Number of obs     = {res}     4,671
+                                                {txt}F(2, 104)         =  {res}    73.34
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.3695
+                                                {txt}Root MSE          =    {res} 1.1662
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:105} clusters in ID)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}    retstatR{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+reprecisionR {c |}{col 14}{res}{space 2} .0146164{col 26}{space 2} .0036652{col 37}{space 1}    3.99{col 46}{space 3}0.000{col 54}{space 4} .0073482{col 67}{space 3} .0218846
+{txt}{space 2}repubbiasR {c |}{col 14}{res}{space 2}  1.41815{col 26}{space 2} .3181383{col 37}{space 1}    4.46{col 46}{space 3}0.000{col 54}{space 4} .7872699{col 67}{space 3}  2.04903
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. 
+. ******************************************************************************
+. * *PEESE
+. ******************************************************************************
+. 
+. ******************************************************************************
+. * FIXED EFFECTS
+. ******************************************************************************
+. 
+. ******************************************************************************
+. * Equal weight to each estimate (Column 1)
+. ******************************************************************************
+. regress fetstatR feprecisionR seR,  noc vce(cluster ID)
+
+{txt}Linear regression                               Number of obs     = {res}     4,671
+                                                {txt}F(2, 104)         =  {res}    33.55
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.2170
+                                                {txt}Root MSE          =    {res} 5.9755
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:105} clusters in ID)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}    fetstatR{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+feprecisionR {c |}{col 14}{res}{space 2}  .010879{col 26}{space 2} .0034388{col 37}{space 1}    3.16{col 46}{space 3}0.002{col 54}{space 4} .0040598{col 67}{space 3} .0176982
+{txt}{space 9}seR {c |}{col 14}{res}{space 2} 48.48096{col 26}{space 2} 13.80191{col 37}{space 1}    3.51{col 46}{space 3}0.001{col 54}{space 4} 21.11125{col 67}{space 3} 75.85066
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * Equal weight to each study (Column (2)
+. ******************************************************************************
+. regress fetstatR feprecisionR seR [pweight = weight], noc vce(cluster ID)
+{txt}(sum of wgt is 105)
+
+Linear regression                               Number of obs     = {res}     4,671
+                                                {txt}F(2, 104)         =  {res}    44.37
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.1906
+                                                {txt}Root MSE          =    {res} 11.243
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:105} clusters in ID)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}    fetstatR{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+feprecisionR {c |}{col 14}{res}{space 2} .0132687{col 26}{space 2} .0059079{col 37}{space 1}    2.25{col 46}{space 3}0.027{col 54}{space 4} .0015532{col 67}{space 3} .0249842
+{txt}{space 9}seR {c |}{col 14}{res}{space 2} 53.51309{col 26}{space 2} 15.53557{col 37}{space 1}    3.44{col 46}{space 3}0.001{col 54}{space 4} 22.70547{col 67}{space 3} 84.32071
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * RANDOM EFFECTS 
+. ******************************************************************************
+. ge  repubbiasRR = varR/reseR
+{txt}
+{com}. 
+. ******************************************************************************
+. * Equal weight to each estimate (Column 3)
+. ******************************************************************************
+. regress retstatR  reprecisionR   repubbiasRR,  noc vce(cluster ID)
+
+{txt}Linear regression                               Number of obs     = {res}     4,671
+                                                {txt}F(2, 104)         =  {res}    54.27
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.3073
+                                                {txt}Root MSE          =    {res} 1.0498
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:105} clusters in ID)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}    retstatR{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+reprecisionR {c |}{col 14}{res}{space 2} .0207985{col 26}{space 2} .0026056{col 37}{space 1}    7.98{col 46}{space 3}0.000{col 54}{space 4} .0156315{col 67}{space 3} .0259655
+{txt}{space 1}repubbiasRR {c |}{col 14}{res}{space 2} 19.69137{col 26}{space 2} 7.119965{col 37}{space 1}    2.77{col 46}{space 3}0.007{col 54}{space 4} 5.572209{col 67}{space 3} 33.81052
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. ******************************************************************************
+. * Equal weight to each study (Column 4)
+. ******************************************************************************
+. regress retstatR  reprecisionR repubbiasRR  [pweight = weight] , noc vce(cluster ID)
+{txt}(sum of wgt is 105)
+
+Linear regression                               Number of obs     = {res}     4,671
+                                                {txt}F(2, 104)         =  {res}    70.23
+                                                {txt}Prob > F          = {res}    0.0000
+                                                {txt}R-squared         = {res}    0.3586
+                                                {txt}Root MSE          =    {res} 1.1762
+
+{txt}{ralign 78:(Std. Err. adjusted for {res:105} clusters in ID)}
+{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}    Robust
+{col 1}    retstatR{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+reprecisionR {c |}{col 14}{res}{space 2}  .024436{col 26}{space 2} .0028135{col 37}{space 1}    8.69{col 46}{space 3}0.000{col 54}{space 4} .0188567{col 67}{space 3} .0300154
+{txt}{space 1}repubbiasRR {c |}{col 14}{res}{space 2} 26.48119{col 26}{space 2} 7.046379{col 37}{space 1}    3.76{col 46}{space 3}0.000{col 54}{space 4} 12.50795{col 67}{space 3} 40.45442
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. //log close
+.  
+. 
+{txt}end of do-file
+
+{com}. use "C:\Users\XUE XINDONG\Desktop\educ_health\meta_educ_health(20190928).dta", clear
+
+. exit, clear

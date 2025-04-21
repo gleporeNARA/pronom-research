@@ -1,0 +1,2714 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="SoundSet.xsl" version="1.0"?>
+<!DOCTYPE SoundSet SYSTEM "SoundSet.dtd" []>
+<SoundSet xmlns:ss="http://www.sibelius.com/xml/SoundSet.dtd" >
+    <Header>
+        <FileVersion>50002</FileVersion>
+        <Name>Garritan JABB 3.0</Name>
+        <PatchLoadMechanism>ARIA</PatchLoadMechanism>
+        <NumLanes>16</NumLanes>
+        <DefaultSoundSet>false</DefaultSoundSet>
+        <ProgramsRelativeTo>1</ProgramsRelativeTo>
+        <SupportsPitchBendRange>false</SupportsPitchBendRange>
+    </Header>
+    <ControllerTypeList>
+        <ControllerTypeDefinition Name="Modulation" Number="1" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Volume" Number="7" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="PitchBendDefeat" Number="19" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Portamento" Number="20" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="AirFlowNoise" Number="12" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="KeyClickValveNoise" Number="13" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="ReleaseEffects" Number="15" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="FluttertongueGrowl" Number="18" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Length" Number="21" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Intonation" Number="22" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Timbre" Number="23" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="ToneQuality" Number="26" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="EQCenterFreq" Number="27" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="ReleaseLevel" Number="29" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>127</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Sustain" Number="64" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Legato" Number="68" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Reverb" Number="91" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+    </ControllerTypeList>
+    <VolumeTypeList>
+        <VolumeTypeDefinition Name="NoteOnVelocity" Method="Default" />
+        <VolumeTypeDefinition Name="ModWheel" Method="Controller" >
+            <ControllerType>Modulation</ControllerType>
+        </VolumeTypeDefinition>
+        <VolumeTypeDefinition Name="Volume" Method="Controller" >
+            <ControllerType>Volume</ControllerType>
+        </VolumeTypeDefinition>
+    </VolumeTypeList>
+    <AttackTypeList>
+        <AttackTypeDefinition Name="NoteOnVelocity" Method="Default" />
+        <AttackTypeDefinition Name="Controller102" Method="Controller" >
+            <ControllerType>Controller102</ControllerType>
+        </AttackTypeDefinition>
+    </AttackTypeList>
+    <SwitchTypeList>
+        <SwitchTypeDefinition Name="JABBTrumpets" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight.legato" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup" >
+                <KeySwitch Key="E-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup.legato" >
+                <KeySwitch Key="E-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.harmon" >
+                <KeySwitch Key="F-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.harmon.legato" >
+                <KeySwitch Key="F-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.bucket" >
+                <KeySwitch Key="G-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.bucket.legato" >
+                <KeySwitch Key="G-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+fall" >
+                <ControllerSwitch Name="ReleaseEffects" Value="40" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+doit" >
+                <ControllerSwitch Name="ReleaseEffects" Value="80" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+kiss" >
+                <ControllerSwitch Name="ReleaseEffects" Value="120" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue.legato" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBTrombones" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight" >
+                <KeySwitch Key="D-1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight.legato" >
+                <KeySwitch Key="D-1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup" >
+                <KeySwitch Key="E-1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup.legato" >
+                <KeySwitch Key="E-1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.harmon" >
+                <KeySwitch Key="F-1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.harmon.legato" >
+                <KeySwitch Key="F-1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.bucket" >
+                <KeySwitch Key="G-1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.bucket.legato" >
+                <KeySwitch Key="G-1" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue.legato" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBTrumpLiteFlugelHorn" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <ControllerSwitch Name="ReleaseEffects" Value="1" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+fall" >
+                <ControllerSwitch Name="ReleaseEffects" Value="40" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+doit" >
+                <ControllerSwitch Name="ReleaseEffects" Value="80" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+kiss" >
+                <ControllerSwitch Name="ReleaseEffects" Value="120" />
+                <ControllerSwitch Name="ReleaseLevel" Value="On" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue.legato" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBTrumpetPlunger" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue.legato" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBTromboneLite" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue.legato" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBaTuba" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue.legato" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBUprightBasses" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <KeySwitch Key="C-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+harmonic" >
+                <KeySwitch Key="D-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBVibes" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Intonation" Value="0" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+tremolo" >
+                <ControllerSwitch Name="Intonation" Value="80" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBLegato" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBFlutesClars" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+                <ControllerSwitch Name="FluttertongueGrowl" Value="0" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+flutter-tongue.legato" >
+                <ControllerSwitch Name="FluttertongueGrowl" Value="127" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="JABBGuitar" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+harmonic" >
+                <KeySwitch Key="D-1" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+    </SwitchTypeList>
+    <PatchList>
+        <Patch Name="01 Brush Drum Kit" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Brushes/n-01 Brush Drum Kit" BankID="2002" />
+            <DrumMap>BrushKit 1</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="02 Brush Drum Kit" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Brushes/n-02 Brush Drum Kit" BankID="2002" />
+            <DrumMap>BrushKit 2</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="03 Classic Jz Drum Kit" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/sticks/Classic Jazz Drum Kit/n-03 Classic Jz DrumKit" BankID="2002" />
+            <DrumMap>Classic Jazz Kit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="04 Fusion Drum Kit" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/sticks/Fusion Drum Kit/n-04 Fusion Drum Kit" BankID="2002" />
+            <DrumMap>Fusion Kit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="GM Classic Jazz Drum Kit" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/GM Drum Kits/n-GM Classic Jazz Drum Kit" BankID="2002" />
+            <DrumMap>GM Classic Jazz Kit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="GM Fusion Drum Kit" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/GM Drum Kits/n-GM Fusion Drum Kit" BankID="2002" />
+            <DrumMap>GM Fusion Kit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="GM Brush Drum Kit" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/GM Drum Kits/n-GM Brush Drum Kit" BankID="2002" />
+            <DrumMap>GM Brush Kit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Bata" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Bata" BankID="2002" />
+            <DrumMap>BatasKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Bongos" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Bongos" BankID="2002" />
+            <DrumMap>BongosKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Cajones" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Cajones" BankID="2002" />
+            <DrumMap>CajonesKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Conga" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Conga" BankID="2002" />
+            <DrumMap>CongasKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Cuica" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Cuica" BankID="2002" />
+            <DrumMap>CuicasKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Djembe" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Djembe" BankID="2002" />
+            <DrumMap>DjembesKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Pandeiro" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Pandeiro" BankID="2002" />
+            <DrumMap>PanderosKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Quinto" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Quinto" BankID="2002" />
+            <DrumMap>QuintosKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Super Tumba" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Super Tumba" BankID="2002" />
+            <DrumMap>SuperTumbasKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Surdu" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Surdu" BankID="2002" />
+            <DrumMap>SurduKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="The Box" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-The Box" BankID="2002" />
+            <DrumMap>TheBoxKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Timbales" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Timbales" BankID="2002" />
+            <DrumMap>TimbalesKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Tumba" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Tumba" BankID="2002" />
+            <DrumMap>TumbasKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Udu" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/01 Drums/n-Udu" BankID="2002" />
+            <DrumMap>UdusKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Cabassa" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/02 Gourds/n-Cabassa" BankID="2002" />
+            <DrumMap>CabassaKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Guira" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/02 Gourds/n-Guira" BankID="2002" />
+            <DrumMap>GuiraKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Guiro" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/02 Gourds/n-Guiro" BankID="2002" />
+            <DrumMap>GuiroKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Maracas" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/02 Gourds/n-Maracas" BankID="2002" />
+            <DrumMap>MaracasKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Shakers" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/02 Gourds/n-Shakers" BankID="2002" />
+            <DrumMap>ShakersKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Shekere" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/02 Gourds/n-Shekere" BankID="2002" />
+            <DrumMap>ShekereKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Clave" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/03 Blocks/n-Clave" BankID="2002" />
+            <DrumMap>ClaveKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Jam Block" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/03 Blocks/n-Jam Block" BankID="2002" />
+            <DrumMap>JamBlockKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Woodblock" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/03 Blocks/n-Woodblock" BankID="2002" />
+            <DrumMap>WoodblockKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Agogo Bells" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/04 Bells/n-Agogo Bells" BankID="2002" />
+            <DrumMap>AgogoBellsKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Bongo Bells" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/04 Bells/n-Bongo Bells" BankID="2002" />
+            <DrumMap>BongoBellsKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Cha Cha Bells" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/04 Bells/n-Cha Cha Bells" BankID="2002" />
+            <DrumMap>ChaChaBellsKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Timbale Bell" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/04 Bells/n-Timbale Bell" BankID="2002" />
+            <DrumMap>TimbaleBellsKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Castanets" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/05 Misc. Percussion/n-Castanets" BankID="2002" />
+            <DrumMap>CastanetsKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Handclaps - Fingersnaps" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/05 Misc. Percussion/n-Handclaps - Fingersnaps" BankID="2002" />
+            <DrumMap>HandClapsKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Jawbone" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/05 Misc. Percussion/n-Jawbone" BankID="2002" />
+            <DrumMap>JawboneKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Rainstick" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/05 Misc. Percussion/n-Rainstick" BankID="2002" />
+            <DrumMap>RainsticksKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Tambourine" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/05 Misc. Percussion/n-Tambourine" BankID="2002" />
+            <DrumMap>TambourinesKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Triangles" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/05 Misc. Percussion/n-Triangles" BankID="2002" />
+            <DrumMap>TrianglesKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Whistles" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/05 Misc. Percussion/n-Whistles" BankID="2002" />
+            <DrumMap>WhistlesKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="All Drums" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/06 Combinations/n-All Drums" BankID="2002" />
+            <DrumMap>AllDrumsKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="All Gourds, Blocks, Bells, Misc" >
+            <AriaPatch Instrument="Notation/08 Drums and Percussion/Percussion/06 Combinations/n-All Gourds, Blocks, Bells, Misc." BankID="2002" />
+            <DrumMap>AllMiscKit</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Accordion" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Accordion" BankID="2002" />
+            <SoundID>keyboard.organ.reed.accordion</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Steinway Jazz Piano" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Steinway Jazz Piano" BankID="2002" />
+            <SoundID>keyboard.piano.grand.steinway.jazz</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Vintage Electric Piano" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Vintage Electric Piano" BankID="2002" />
+            <SoundID>keyboard.piano.electric.rhodes</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Vibraphone KS" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Vibraphone KS" BankID="2002" />
+            <SoundID>pitched percussion.metal.vibraphone</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBVibes</SwitchType>
+        </Patch>
+        <Patch Name="Vibraphone Hard Mallet" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Vibraphone Hard Mallet" BankID="2002" />
+            <SoundID>pitched percussion.metal.vibraphone.hard</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBVibes</SwitchType>
+        </Patch>
+        <Patch Name="Vibraphone Soft Mallet" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Vibraphone Soft Mallet" BankID="2002" />
+            <SoundID>pitched percussion.metal.vibraphone.soft</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBVibes</SwitchType>
+        </Patch>
+        <Patch Name="Vintage drawbar organ" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Organ 1" BankID="2002" />
+            <SoundID>keyboard.organ.drawbar.vintage</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Percussive organ" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Organ 2" BankID="2002" />
+            <SoundID>keyboard.organ.drawbar.percussive</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Rock organ" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Organ 3" BankID="2002" />
+            <SoundID>keyboard.organ.drawbar.with rotary speaker</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Rock organ 2" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Organ 4" BankID="2002" />
+            <SoundID>keyboard.organ.drawbar.with rotary speaker.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Drawbar organ" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Organ 5" BankID="2002" />
+            <SoundID>keyboard.organ.drawbar</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Percussive organ 2" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Organ 6" BankID="2002" />
+            <SoundID>keyboard.organ.drawbar.percussive.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="Stacked Combination Organ" >
+            <AriaPatch Instrument="Notation/06 Keyboards and Vibes/n-Organ 7" BankID="2002" />
+            <SoundID>keyboard.piano.electric</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+        </Patch>
+        <Patch Name="FretlessBass 1 KS" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Fretless Bass 1 KS" BankID="2002" />
+            <SoundID>guitar.bass.electric.fretless</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBElectricBasses</SwitchType>
+        </Patch>
+        <Patch Name="FretlessBass 2 KS" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Fretless Bass 2 KS" BankID="2002" />
+            <SoundID>guitar.bass.electric.fretless.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBElectricBasses</SwitchType>
+        </Patch>
+        <Patch Name="JazzFrettedBass 1 KS" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Jazz Fretted Bass 1 KS" BankID="2002" />
+            <SoundID>guitar.bass.electric.finger.jazz</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBElectricBasses</SwitchType>
+        </Patch>
+        <Patch Name="JazzFrettedBass 2 KS" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Jazz Fretted Bass 2 KS" BankID="2002" />
+            <SoundID>guitar.bass.electric.finger.jazz.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBElectricBasses</SwitchType>
+        </Patch>
+        <Patch Name="UprightBass 1 KS" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Upright Bass 1 KS" BankID="2002" />
+            <SoundID>guitar.bass.acoustic.upright</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBUprightBasses</SwitchType>
+        </Patch>
+        <Patch Name="UprightBass 2 KS" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Upright Bass 2 KS" BankID="2002" />
+            <SoundID>guitar.bass.acoustic.upright.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBUprightBasses</SwitchType>
+        </Patch>
+        <Patch Name="UprightBass 2 Arco KS" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Upright Bass Arco2 KS" BankID="2002" />
+            <SoundID>strings.contrabass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBUprightBasses</SwitchType>
+        </Patch>
+        <Patch Name="Slap Bass 1" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Slap Bass 1" BankID="2002" />
+            <SoundID>guitar.bass.electric.slap</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Slap Bass 2" >
+            <AriaPatch Instrument="Notation/07 Basses/n-Slap Bass 2" BankID="2002" />
+            <SoundID>guitar.bass.electric.slap.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Acoustic Guitar KS" >
+            <AriaPatch Instrument="Notation/05 Guitars/n-Acoustic Guitar KS" BankID="2002" />
+            <SoundID>guitar.steel string</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBGuitar</SwitchType>
+        </Patch>
+        <Patch Name="Electric Guitar KS" >
+            <AriaPatch Instrument="Notation/05 Guitars/n-Electric Guitar KS" BankID="2002" />
+            <SoundID>guitar.steel string.semi-acoustic.jazz</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBGuitar</SwitchType>
+        </Patch>
+        <Patch Name="Electric Guitar Mellow KS" >
+            <AriaPatch Instrument="Notation/05 Guitars/n-Electric Guitar Mellow KS" BankID="2002" />
+            <SoundID>guitar.steel string.semi-acoustic.jazz.mellow</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>JABBGuitar</SwitchType>
+        </Patch>
+        <Patch Name="Banjo" >
+            <AriaPatch Instrument="Notation/05 Guitars/n-Banjo" BankID="2002" />
+            <SoundID>guitar.steel string.banjo</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Bass Clarinet" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Clarinets/n-Bass Clarinet" BankID="2002" />
+            <SoundID>wind.clarinets.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet 1" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Clarinets/n-Bb Clarinet 1" BankID="2002" />
+            <SoundID>wind.clarinets.clarinet</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet 2" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Clarinets/n-Bb Clarinet 2" BankID="2002" />
+            <SoundID>wind.clarinets.clarinet.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet 3" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Clarinets/n-Bb Clarinet 3" BankID="2002" />
+            <SoundID>wind.clarinets.clarinet.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Alto Flute" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Flutes/n-Alto Flute" BankID="2002" />
+            <SoundID>wind.flutes.flute.alto</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Flute 1" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Flutes/n-Flute 1" BankID="2002" />
+            <SoundID>wind.flutes.flute</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Flute 2" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Flutes/n-Flute 2" BankID="2002" />
+            <SoundID>wind.flutes.flute.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Flute 3" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Flutes/n-Flute 3" BankID="2002" />
+            <SoundID>wind.flutes.flute.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Flutes/n-Piccolo" BankID="2002" />
+            <SoundID>wind.flutes.flute.piccolo</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBFlutesClars</SwitchType>
+        </Patch>
+        <Patch Name="Harmonica" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Harmonica/n-Harmonica" BankID="2002" />
+            <SoundID>wind.harmonica</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Alto Sax 1" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Alto Sax 1" BankID="2002" />
+            <SoundID>wind.saxophones.alto</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax 2" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Alto Sax 2" BankID="2002" />
+            <SoundID>wind.saxophones.alto.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax 3" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Alto Sax 3" BankID="2002" />
+            <SoundID>wind.saxophones.alto.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bari Sax 1" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Bari Sax 1" BankID="2002" />
+            <SoundID>wind.saxophones.baritone</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bari Sax 2" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Bari Sax 2" BankID="2002" />
+            <SoundID>wind.saxophones.baritone.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Sax 1" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Bass Sax 1" BankID="2002" />
+            <SoundID>wind.saxophones.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Sax 2" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Bass Sax 2" BankID="2002" />
+            <SoundID>wind.saxophones.bass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="C Melody Sax 1" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-C Melody Sax 1" BankID="2002" />
+            <SoundID>wind.saxophones.melody</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="C Melody Sax 2" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-C Melody Sax 2" BankID="2002" />
+            <SoundID>wind.saxophones.melody.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Contrabass Sax" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Contrabass Sax" BankID="2002" />
+            <SoundID>wind.saxophones.contrabass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mezzo Soprano Sax" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Mezzo Soprano Sax" BankID="2002" />
+            <SoundID>wind.saxophones.mezzo-soprano</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sopranino Sax" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Sopranino" BankID="2002" />
+            <SoundID>wind.saxophones.sopranino</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Soprano Sax 1" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Soprano Sax 1" BankID="2002" />
+            <SoundID>wind.saxophones.soprano</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Soprano Sax 2" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Soprano Sax 2" BankID="2002" />
+            <SoundID>wind.saxophones.soprano.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Subcontrabass Sax" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-SubContrabass Sax" BankID="2002" />
+            <SoundID>wind.saxophones.subcontrabass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax 1" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Tenor Sax 1" BankID="2002" />
+            <SoundID>wind.saxophones.tenor</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax 2" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Tenor Sax 2" BankID="2002" />
+            <SoundID>wind.saxophones.tenor.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax 3" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Tenor Sax 3" BankID="2002" />
+            <SoundID>wind.saxophones.tenor.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax 4" >
+            <AriaPatch Instrument="Notation/01 Saxes and Woodwinds/Saxophones/n-Tenor Sax 4" BankID="2002" />
+            <SoundID>wind.saxophones.tenor.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Tbone Open" >
+            <AriaPatch Instrument="Notation/03 Trombones/Bass Trombone/n-Bass Trombone Open" BankID="2002" />
+            <SoundID>brass.trombones.bass.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Bass Tbone Straight Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Bass Trombone/n-Bass Trombone Straight Mute" BankID="2002" />
+            <SoundID>brass.trombones.bass.mute.straight.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Bass Tbone Cup Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Bass Trombone/n-Bass Trombone Cup Mute" BankID="2002" />
+            <SoundID>brass.trombones.bass.mute.cup.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Bass Tbone Harmon Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Bass Trombone/n-Bass Trombone Harmon Mute" BankID="2002" />
+            <SoundID>brass.trombones.bass.mute.harmon.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Bass Tbone Bucket Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Bass Trombone/n-Bass Trombone Bucket Mute" BankID="2002" />
+            <SoundID>brass.trombones.bass.mute.bucket.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Bass Tbone KS" >
+            <AriaPatch Instrument="Notation/03 Trombones/Bass Trombone/n-Bass Trombone KS" BankID="2002" />
+            <SoundID>brass.trombones.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrombones</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 1 Open" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 1/n-Trombone 1 Open" BankID="2002" />
+            <SoundID>brass.trombones.tenor.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 1 Straight Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 1/n-Trombone 1 Straight Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.straight.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 1 Cup Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 1/n-Trombone 1 Cup Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.cup.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 1 Harmon Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 1/n-Trombone 1 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.harmon.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 1 Bucket Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 1/n-Trombone 1 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.bucket.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 1 KS" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 1/n-Trombone 1 KS" BankID="2002" />
+            <SoundID>brass.trombones.tenor</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrombones</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 2 Open" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 2/n-Trombone 2 Open" BankID="2002" />
+            <SoundID>brass.trombones.tenor.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 2 Straight Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 2/n-Trombone 2 Straight Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.straight.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 2 Cup Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 2/n-Trombone 2 Cup Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.cup.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 2 Harmon Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 2/n-Trombone 2 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.harmon.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 2 Bucket Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 2/n-Trombone 2 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.bucket.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 2 KS" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 2/n-Trombone 2 KS" BankID="2002" />
+            <SoundID>brass.trombones.tenor.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrombones</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 3 Open" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 3/n-Trombone 3 Open" BankID="2002" />
+            <SoundID>brass.trombones.tenor.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 3 Straight Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 3/n-Trombone 3 Straight Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.straight.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 3 Cup Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 3/n-Trombone 3 Cup Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.cup.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 3 Harmon Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 3/n-Trombone 3 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.harmon.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 3 Bucket Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 3/n-Trombone 3 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.bucket.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 3 KS" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 3/n-Trombone 3 KS" BankID="2002" />
+            <SoundID>brass.trombones.tenor.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrombones</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 4 Open" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 4/n-Trombone 4 Open" BankID="2002" />
+            <SoundID>brass.trombones.tenor.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 4 Straight Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 4/n-Trombone 4 Straight Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.straight.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 4 Cup Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 4/n-Trombone 4 Cup Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.cup.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 4 Harmon Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 4/n-Trombone 4 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.harmon.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 4 Bucket Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 4/n-Trombone 4 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.bucket.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 4 KS" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 4/n-Trombone 4 KS" BankID="2002" />
+            <SoundID>brass.trombones.tenor.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrombones</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 5 Open" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 5/n-Trombone 5 Open" BankID="2002" />
+            <SoundID>brass.trombones.tenor.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 5 Straight Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 5/n-Trombone 5 Straight Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.straight.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 5 Cup Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 5/n-Trombone 5 Cup Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.cup.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 5 Harmon Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 5/n-Trombone 5 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.harmon.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 5 Bucket Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 5/n-Trombone 5 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.bucket.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone 5 KS" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone 5/n-Trombone 5 KS" BankID="2002" />
+            <SoundID>brass.trombones.tenor.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrombones</SwitchType>
+        </Patch>
+        <Patch Name="Tbone Plunger Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone Plunger/n-Trombone Plunger Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.plunger</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Tbone Plunger+Str Mute" >
+            <AriaPatch Instrument="Notation/03 Trombones/Trombone Plunger/n-Trombone Plunger+Str Mute" BankID="2002" />
+            <SoundID>brass.trombones.tenor.mute.straight</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTromboneLite</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn 1" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Flugelhorns/n-Flugelhorn 1" BankID="2002" />
+            <SoundID>brass.trumpets.flugel horn</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn 2" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Flugelhorns/n-Flugelhorn 2" BankID="2002" />
+            <SoundID>brass.trumpets.flugel horn.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn 3" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Flugelhorns/n-Flugelhorn 3" BankID="2002" />
+            <SoundID>brass.trumpets.flugel horn.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn 4" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Flugelhorns/n-Flugelhorn 4" BankID="2002" />
+            <SoundID>brass.trumpets.flugel horn.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn 5" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Flugelhorns/n-Flugelhorn 5" BankID="2002" />
+            <SoundID>brass.trumpets.flugel horn.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Open" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 1/n-Trumpet 1 Open" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Straight Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 1/n-Trumpet 1 Straight Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.straight.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Cup Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 1/n-Trumpet 1 Cup Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.cup.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Harmon Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 1/n-Trumpet 1 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.harmon.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 Bucket Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 1/n-Trumpet 1 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.bucket.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 1 KS" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 1/n-Trumpet 1 KS" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpets</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Open" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 2/n-Trumpet 2 Open" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Straight Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 2/n-Trumpet 2 Straight Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.straight.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Cup Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 2/n-Trumpet 2 Cup Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.cup.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Harmon Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 2/n-Trumpet 2 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.harmon.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 Bucket Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 2/n-Trumpet 2 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.bucket.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 2 KS" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 2/n-Trumpet 2 KS" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpets</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 3 Open" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 3/n-Trumpet 3 Open" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 3 Straight Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 3/n-Trumpet 3 Straight Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.straight.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 3 Cup Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 3/n-Trumpet 3 Cup Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.cup.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 3 Harmon Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 3/n-Trumpet 3 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.harmon.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 3 Bucket Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 3/n-Trumpet 3 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.bucket.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 3 KS" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 3/n-Trumpet 3 KS" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpets</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 4 Open" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 4/n-Trumpet 4 Open" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 4 Straight Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 4/n-Trumpet 4 Straight Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.straight.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 4 Cup Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 4/n-Trumpet 4 Cup Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.cup.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 4 Harmon Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 4/n-Trumpet 4 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.harmon.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 4 Bucket Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 4/n-Trumpet 4 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.bucket.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 4 KS" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 4/n-Trumpet 4 KS" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpets</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 5 Open" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 5/n-Trumpet 5 Open" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 5 Straight Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 5/n-Trumpet 5 Straight Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.straight.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 5 Cup Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 5/n-Trumpet 5 Cup Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.cup.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 5 Harmon Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 5/n-Trumpet 5 Harmon Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.harmon.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 5 Bucket Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 5/n-Trumpet 5 Bucket Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.bucket.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpLiteFlugelHorn</SwitchType>
+        </Patch>
+        <Patch Name="Tpt 5 KS" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet 5/n-Trumpet 5 KS" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpets</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Plunger Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet Plunger/n-Trumpet Plunger Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.plunger</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpetPlunger</SwitchType>
+        </Patch>
+        <Patch Name="Tpt Plunger+Str Mute" >
+            <AriaPatch Instrument="Notation/02 Trumpets/Trumpet Plunger/n-Trumpet Plunger+Str Mute" BankID="2002" />
+            <SoundID>brass.trumpets.trumpet.mute.straight</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBTrumpetPlunger</SwitchType>
+        </Patch>
+        <Patch Name="Tuba" >
+            <AriaPatch Instrument="Notation/04 Tuba/n-Tuba" BankID="2002" />
+            <SoundID>brass.tubas.tuba</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>JABBaTuba</SwitchType>
+        </Patch>
+    </PatchList>
+    <DrumMapList>
+        <DrumMapDefinition Name="BrushKit 1" >
+            <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.brushes" Name="Bass Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.brushes.2" Name="Bass Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.swirl.brush.long" Name="Snare Stir" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare.drum.snares on" Name="Snare LH (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare.drum.snares on.left.brush" Name="Snare LH" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.drum.medium.snare.drum.snares on.right.brush" Name="Snare RH" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.metal.hi-hat.closed.pedal.brush" Name="Foot Closed Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.low.tom-tom.brush" Name="Low Tom" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.left.brush" Name="Closed Hi Hat LH" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.metal.hi-hat.closed.right.brush" Name="Closed Hi Hat RH" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.halfway.brush" Name="Half Open Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium.tom-tom.brush" Name="Mid Tom" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.brush" Name="Open Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.brush" Name="High Tom" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.brush" Name="Crash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.metal.cymbal.ride.brush" Name="Ride Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.brush.2" Name="Ride Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.sizzle.brush" Name="Sizzle Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.exotic.trash can.wire brush" Name="Garbage Can Lid (wire brush)" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.exotic.trash can.wire brush.handle" Name="Garbage Can Lid (brush handle)" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.exotic.trash can.blastik.brushes" Name="Garbage Can Lid (blastik)" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="BrushKit 2" >
+            <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.brushes" Name="Bass Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.brushes.2" Name="Bass Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.swirl.brush.long" Name="Snare Stir" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare.drum.snares on" Name="Snare LH (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare.drum.snares on.left.brush" Name="Snare LH" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.drum.medium.snare.drum.snares on.right.brush" Name="Snare RH" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.metal.hi-hat.closed.pedal.brush" Name="Foot Closed Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.low.tom-tom.brush" Name="Low Tom" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.left.brush" Name="Closed Hi Hat LH" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.metal.hi-hat.closed.right.brush" Name="Closed Hi Hat RH" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.halfway.brush" Name="Half Open Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium.tom-tom.brush" Name="Mid Tom" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.brush" Name="Open Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.brush" Name="High Tom" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.brush" Name="Crash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.metal.cymbal.ride.brush" Name="Ride Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.brush.2" Name="Ride Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.sizzle.brush" Name="Sizzle Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.exotic.trash can.wire brush" Name="Garbage Can Lid (wire brush)" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.exotic.trash can.wire brush.handle" Name="Garbage Can Lid (brush handle)" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.exotic.trash can.blastik.brushes" Name="Garbage Can Lid (blastik)" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Classic Jazz Kit" >
+            <DrumSound Pitch="34" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.jazz" Name="Side Stick" >
+            </DrumSound>
+            <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum" Name="Bass Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.jazz.2" Name="Bass Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.rim shot.jazz" Name="Rim Shot" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Snare LH (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.left" Name="Snare LH" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.drum.medium.snare drum.snares on.right" Name="Snare RH" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.metal.hi-hat.closed.pedal.jazz" Name="Foot Closed Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.low.tom-tom.jazz" Name="Low Floor Tom" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.left.jazz" Name="Closed Hi Hat LH" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.metal.hi-hat.closed.right.jazz" Name="Closed Hi Hat RH" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.halfway.jazz" Name="Half Open Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium.tom-tom.jazz" Name="Mid Tom" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.jazz" Name="Open Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.metal.hi-hat.crash.jazz" Name="Hi Hat Crash" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.jazz" Name="High Tom" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.jazz" Name="Crash Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.metal.cymbal.ride.jazz" Name="Ride Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.jazz.2" Name="Ride Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.crash.jazz.2" Name="Crash Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.jazz" Name="Ride Bell 1" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.metal.cymbal.ride.bell.jazz.2" Name="Ride Bell 2" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.ride.jazz.3" Name="Ride Cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.metal.cymbal.crash.jazz.3" Name="Crash Cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.sizzle.jazz" Name="Sizzle Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.metal.cymbal.crash.stagg" Name="Stagg Crash Cymbal 4" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.cracked.jazz" Name="Cracked Ride Cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.metal.cymbal.china.jazz" Name="China Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.metal.cymbal.splash.jazz" Name="Splash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="62" SoundID="unpitched.metal.cymbal.ride.jazz.4" Name="Ride Cymbal 4" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.metal.cymbal.crash.jazz.4" Name="Crash Cymbal 5" >
+            </DrumSound>
+            <DrumSound Pitch="64" SoundID="unpitched.metal.cymbal.sizzle.wood tip.jazz" Name="Sizzle Cymbal 2 (wood tip)" >
+            </DrumSound>
+            <DrumSound Pitch="65" SoundID="unpitched.metal.cymbal.sizzle.nylon tip.jazz" Name="Sizzle Cymbal 2 (nylon tip)" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.metal.cymbal.sizzle.mallet.jazz" Name="Sizzle Cymbal 2 (mallet)" >
+            </DrumSound>
+            <DrumSound Pitch="67" SoundID="unpitched.metal.cymbal.sizzle.finger.jazz" Name="Sizzle Cymbal 2 (finger)" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.metal.cymbal.sizzle.wood tip.bs.jazz" Name="Sizzle Cymbal 2 (wood tip BS)" >
+            </DrumSound>
+            <DrumSound Pitch="69" SoundID="unpitched.metal.cymbal.scrape.jazz" Name="Cymbal Scrape 1" >
+            </DrumSound>
+            <DrumSound Pitch="70" SoundID="unpitched.metal.cymbal.scrape.jazz.2" Name="Cymbal Scrape 2" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.metal.cymbal.scrape.jazz.3" Name="Cymbal Scrape 3" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.metal.cymbal.scrape.jazz.4" Name="Cymbal Scrape 4" >
+            </DrumSound>
+            <DrumSound Pitch="73" SoundID="unpitched.metal.cymbal.scrape.jazz.5" Name="Cymbal Scrape 5" >
+            </DrumSound>
+            <DrumSound Pitch="74" SoundID="unpitched.exotic.trash can.stick" Name="Garbage Can Lid (stick)" >
+            </DrumSound>
+            <DrumSound Pitch="75" SoundID="unpitched.exotic.trash can.mallet" Name="Garbage Can Lid (mallet)" >
+            </DrumSound>
+            <DrumSound Pitch="76" SoundID="unpitched.exotic.trash can.mallet.hard" Name="Garbage Can Lid (hard mallet)" >
+            </DrumSound>
+            <DrumSound Pitch="77" SoundID="unpitched.exotic.trash can.mallet.rubber" Name="Garbage Can Lid (rubber mallet)" >
+            </DrumSound>
+            <DrumSound Pitch="78" SoundID="unpitched.exotic.trash can.car keys" Name="Garbage Can Lid (car keys)" >
+            </DrumSound>
+            <DrumSound Pitch="79" SoundID="unpitched.exotic.trash can.hand" Name="Gargabe Can Lid (hand)" >
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.exotic.saw blade.radial" Name="Radial Saw Blade" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.exotic.saw blade.chrome" Name="Chrome Saw Blade" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Fusion Kit" >
+            <DrumSound Pitch="34" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.fusion" Name="Side Stick" >
+            </DrumSound>
+            <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum" Name="Bass Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.fusion.2" Name="Bass Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.rim shot.fusion" Name="Rim Shot" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Snare LH (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.left" Name="Snare LH" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.drum.medium.snare drum.snares on.right" Name="Snare RH" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.metal.hi-hat.closed.pedal.fusion" Name="Foot Closed Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.low.tom-tom.fusion" Name="Low Floor Tom" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.left.fusion" Name="Closed Hi Hat LH" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.metal.hi-hat.closed.right.fusion" Name="Closed Hi Hat RH" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.halfway.fusion" Name="Half Open Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium.tom-tom.fusion" Name="Mid Tom" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.fusion" Name="Open Hi Hat" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.metal.hi-hat.crash.fusion" Name="Hi Hat Crash" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.fusion" Name="High Tom" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.fusion" Name="Crash Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.metal.cymbal.ride.fusion" Name="Ride Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.fusion.2" Name="Ride Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.crash.fusion.2" Name="Crash Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.fusion" Name="Ride Bell 1" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.metal.cymbal.ride.bell.fusion.2" Name="Ride Bell 2" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.ride.fusion.3" Name="Ride Cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.metal.cymbal.crash.fusion.3" Name="Crash Cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.sizzle.fusion" Name="Sizzle Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.metal.cymbal.crash.stagg" Name="Stagg Crash Cymbal 4" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.cracked.fusion" Name="Cracked Ride Cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.metal.cymbal.china.fusion" Name="China Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.metal.cymbal.splash.fusion" Name="Splash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="62" SoundID="unpitched.metal.cymbal.ride.fusion.4" Name="Ride Cymbal 4" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.metal.cymbal.crash.fusion.5" Name="Crash Cymbal 5" >
+            </DrumSound>
+            <DrumSound Pitch="64" SoundID="unpitched.metal.cymbal.sizzle.wood tip" Name="Sizzle Cymbal 2 (wood tip)" >
+            </DrumSound>
+            <DrumSound Pitch="65" SoundID="unpitched.metal.cymbal.sizzle.nylon tip" Name="Sizzle Cymbal 2 (nylon tip)" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.metal.cymbal.sizzle.mallet." Name="Sizzle Cymbal 2 (mallet)" >
+            </DrumSound>
+            <DrumSound Pitch="67" SoundID="unpitched.metal.cymbal.sizzle.finger" Name="Sizzle Cymbal 2 (finger)" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.metal.cymbal.sizzle.wood tip.bs" Name="Sizzle Cymbal 2 (wood tip BS)" >
+            </DrumSound>
+            <DrumSound Pitch="69" SoundID="unpitched.metal.cymbal.scrape.fusion" Name="Cymbal Scrape 1" >
+            </DrumSound>
+            <DrumSound Pitch="70" SoundID="unpitched.metal.cymbal.scrape.fusion.2" Name="Cymbal Scrape 2" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.metal.cymbal.scrape.fusion.3" Name="Cymbal Scrape 3" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.metal.cymbal.scrape.fusion.4" Name="Cymbal Scrape 4" >
+            </DrumSound>
+            <DrumSound Pitch="73" SoundID="unpitched.metal.cymbal.scrape.fusion.5" Name="Cymbal Scrape 5" >
+            </DrumSound>
+            <DrumSound Pitch="74" SoundID="unpitched.exotic.trash can.stick" Name="Garbage Can Lid (stick)" >
+            </DrumSound>
+            <DrumSound Pitch="75" SoundID="unpitched.exotic.trash can.mallet" Name="Garbage Can Lid (mallet)" >
+            </DrumSound>
+            <DrumSound Pitch="76" SoundID="unpitched.exotic.trash can.mallet.hard" Name="Garbage Can Lid (hard mallet)" >
+            </DrumSound>
+            <DrumSound Pitch="77" SoundID="unpitched.exotic.trash can.mallet.rubber" Name="Garbage Can Lid (rubber mallet)" >
+            </DrumSound>
+            <DrumSound Pitch="78" SoundID="unpitched.exotic.trash can.car keys" Name="Garbage Can Lid (car keys)" >
+            </DrumSound>
+            <DrumSound Pitch="79" SoundID="unpitched.exotic.trash can.hand" Name="Gargabe Can Lid (hand)" >
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.exotic.saw blade.radial" Name="Radial Saw Blade" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.exotic.saw blade.chrome" Name="Chrome Saw Blade" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="GM Classic Jazz Kit" >
+            <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.2" Name="Bass Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum" Name="Bass Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick" Name="Side Stick" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Snare Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap" Name="Hand Clap" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.drum.snare drum.snares on.electric" Name="Snare Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom" Name="Low Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed" Name="Closed Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom" Name="Low Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal" Name="Pedal Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom" Name="Mid Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open" Name="Open Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom" Name="Mid Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom" Name="High Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.high" Name="Crash Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom" Name="High Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.high" Name="Ride Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese" Name="Chinese Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell" Name="Ride Bell" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame" Name="Tambourine" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash" Name="Splash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell" Name="Cowbell" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.medium" Name="Crash Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap" Name="Vibra Slap" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.medium" Name="Ride Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo" Name="High Bongo" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo" Name="Low Bongo" >
+            </DrumSound>
+            <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute" Name="Mute High Conga" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga" Name="Open High Conga" >
+            </DrumSound>
+            <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga" Name="Low Conga" >
+            </DrumSound>
+            <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.stick" Name="High Timbale" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.stick" Name="Low Timbale" >
+            </DrumSound>
+            <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo" Name="High Agogo" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo" Name="Low Agogo" >
+            </DrumSound>
+            <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa" Name="Cabasa" >
+            </DrumSound>
+            <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca" Name="Maracas" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.short" Name="Short Whistle" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.long" Name="Long Whistle" >
+            </DrumSound>
+            <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.short" Name="Short Guiro" >
+            </DrumSound>
+            <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.long" Name="Long Guiro" >
+            </DrumSound>
+            <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves" Name="Claves" >
+            </DrumSound>
+            <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock" Name="High Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock" Name="Low Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute" Name="Mute Cuica" >
+            </DrumSound>
+            <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.open" Name="Open Cuica" >
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed" Name="Mute Triangle" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.open" Name="Open Triangle" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="GM Fusion Kit" >
+            <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.2" Name="Bass Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum" Name="Bass Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick" Name="Side Stick" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Snare Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap" Name="Hand Clap" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.drum.snare drum.snares on.electric" Name="Snare Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom" Name="Low Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed" Name="Closed Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom" Name="Low Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal" Name="Pedal Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom" Name="Mid Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open" Name="Open Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom" Name="Mid Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom" Name="High Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.high" Name="Crash Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom" Name="High Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.high" Name="Ride Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese" Name="Chinese Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell" Name="Ride Bell" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame" Name="Tambourine" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash" Name="Splash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell" Name="Cowbell" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.medium" Name="Crash Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap" Name="Vibra Slap" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.medium" Name="Ride Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo" Name="High Bongo" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo" Name="Low Bongo" >
+            </DrumSound>
+            <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute" Name="Mute High Conga" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga" Name="Open High Conga" >
+            </DrumSound>
+            <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga" Name="Low Conga" >
+            </DrumSound>
+            <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.stick" Name="High Timbale" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.stick" Name="Low Timbale" >
+            </DrumSound>
+            <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo" Name="High Agogo" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo" Name="Low Agogo" >
+            </DrumSound>
+            <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa" Name="Cabasa" >
+            </DrumSound>
+            <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca" Name="Maracas" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.short" Name="Short Whistle" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.long" Name="Long Whistle" >
+            </DrumSound>
+            <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.short" Name="Short Guiro" >
+            </DrumSound>
+            <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.long" Name="Long Guiro" >
+            </DrumSound>
+            <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves" Name="Claves" >
+            </DrumSound>
+            <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock" Name="High Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock" Name="Low Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute" Name="Mute Cuica" >
+            </DrumSound>
+            <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.open" Name="Open Cuica" >
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed" Name="Mute Triangle" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.open" Name="Open Triangle" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="GM Brush Kit" >
+            <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.2" Name="Bass Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum" Name="Bass Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick" Name="Side Stick" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Snare Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap" Name="Hand Clap" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.drum.snare drum.snares on.electric" Name="Snare Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom" Name="Low Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed" Name="Closed Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom" Name="Low Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal" Name="Pedal Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom" Name="Mid Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open" Name="Open Hi-hat" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom" Name="Mid Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom" Name="High Tom 2" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.high" Name="Crash Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom" Name="High Tom 1" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.high" Name="Ride Cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese" Name="Chinese Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell" Name="Ride Bell" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame" Name="Tambourine" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash" Name="Splash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell" Name="Cowbell" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.medium" Name="Crash Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap" Name="Vibra Slap" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.medium" Name="Ride Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo" Name="High Bongo" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo" Name="Low Bongo" >
+            </DrumSound>
+            <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute" Name="Mute High Conga" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga" Name="Open High Conga" >
+            </DrumSound>
+            <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga" Name="Low Conga" >
+            </DrumSound>
+            <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.stick" Name="High Timbale" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.stick" Name="Low Timbale" >
+            </DrumSound>
+            <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo" Name="High Agogo" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo" Name="Low Agogo" >
+            </DrumSound>
+            <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa" Name="Cabasa" >
+            </DrumSound>
+            <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca" Name="Maracas" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.short" Name="Short Whistle" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.long" Name="Long Whistle" >
+            </DrumSound>
+            <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.short" Name="Short Guiro" >
+            </DrumSound>
+            <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.long" Name="Long Guiro" >
+            </DrumSound>
+            <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves" Name="Claves" >
+            </DrumSound>
+            <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock" Name="High Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock" Name="Low Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute" Name="Mute Cuica" >
+            </DrumSound>
+            <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.open" Name="Open Cuica" >
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed" Name="Mute Triangle" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.open" Name="Open Triangle" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="BatasKit" >
+            <DrumSound Pitch="36" SoundID="unpitched.drum.medium.bata" Name="Bata Low Open" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.bata.muffled" Name="Bata Low Muff" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.bata.slap" Name="Bata Low Slap" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.drum.medium-high.bata" Name="Bata Mid Open" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.drum.medium-high.bata.muffled" Name="Bata Mid Muff" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.medium-high.bata.slap" Name="Bata Mid Slap" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.drum.high.bata" Name="Bata High Open" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.drum.high.bata.muffled" Name="Bata High Muff" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.drum.high.bata.slap" Name="Bata High Slap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="BongosKit" >
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium.bongo" Name="Bongo Low Open" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.drum.medium.bongo.muffled" Name="Bongo Low Muff" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.drum.medium.bongo.slap" Name="Bongo Low Slap" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.high.bongo" Name="Bongo High Open" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.drum.high.bongo.muffled" Name="Bongo High Muff" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.drum.high.bongo.slap" Name="Bongo High Slap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="CajonesKit" >
+            <DrumSound Pitch="51" SoundID="unpitched.drum.medium-low.cajon" Name="Cajone Low" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.drum.medium-low.cajon.slap" Name="Cajone Slap" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.drum.medium-low.cajon.stick" Name="Cajone Stick Hit" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="CongasKit" >
+            <DrumSound Pitch="54" SoundID="unpitched.drum.medium-low.conga.bass tone" Name="Conga Low" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.drum.medium-low.conga" Name="Conga Open" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.drum.medium-low.conga.muffled" Name="Conga Muff" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.drum.medium-low.conga.slap" Name="Conga Slap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="CuicasKit" >
+            <DrumSound Pitch="58" SoundID="unpitched.drum.medium-low.cuica" Name="Cuica Low" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.drum.medium.cuica" Name="Cuica Mid" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.drum.medium-high.cuica" Name="Cuica High" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="DjembesKit" >
+            <DrumSound Pitch="61" SoundID="unpitched.drum.medium.djembe" Name="Djembe Open" >
+            </DrumSound>
+            <DrumSound Pitch="62" SoundID="unpitched.drum.medium.djembe.muffled" Name="Djembe Muff" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.drum.medium.djembe.slap" Name="Djembe Slap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="PanderosKit" >
+            <DrumSound Pitch="64" SoundID="unpitched.drum.medium-high.frame drum" Name="Pandero Open" >
+            </DrumSound>
+            <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.frame drum.muffled" Name="Pandero Muff" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.drum.medium-high.frame drum.slap" Name="Pandero Slap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="QuintosKit" >
+            <DrumSound Pitch="67" SoundID="unpitched.drum.medium.conga" Name="Quinto Open" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.drum.medium.conga.muffled" Name="Quinto Muff" >
+            </DrumSound>
+            <DrumSound Pitch="69" SoundID="unpitched.drum.medium.conga.slap" Name="Quinto Slap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="SuperTumbasKit" >
+            <DrumSound Pitch="70" SoundID="unpitched.drum.very-low.conga.bass tone" Name="Super Tumba Low" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.drum.very-low.conga" Name="Super Tumba Open" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.drum.very-low.conga.muffled" Name="Super Tumba Muff" >
+            </DrumSound>
+            <DrumSound Pitch="73" SoundID="unpitched.drum.very-low.conga.slap" Name="Super Tumba Slap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="SurduKit" >
+            <DrumSound Pitch="74" SoundID="unpitched.drum.low.surdo" Name="Surdu Open" >
+            </DrumSound>
+            <DrumSound Pitch="75" SoundID="unpitched.drum.low.surdo.muffled" Name="Surdu Muff" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="TheBoxKit" >
+            <DrumSound Pitch="76" SoundID="unpitched.wood.medium-low.the box" Name="The Box Low" >
+            </DrumSound>
+            <DrumSound Pitch="77" SoundID="unpitched.wood.medium.the box" Name="The Box Mid" >
+            </DrumSound>
+            <DrumSound Pitch="78" SoundID="unpitched.wood.medium-high.the box" Name="The Box High" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="TimbalesKit" >
+            <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.timbale" Name="Timbales Low" >
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.drum.medium-high.timbale" Name="Timbales High" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.drum.medium-high.timbale.rim" Name="Timbales Edge" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="TumbasKit" >
+            <DrumSound Pitch="82" SoundID="unpitched.drum.low.conga.bass tone" Name="Tumba Low" >
+            </DrumSound>
+            <DrumSound Pitch="83" SoundID="unpitched.drum.low.conga" Name="Tumba Open" >
+            </DrumSound>
+            <DrumSound Pitch="84" SoundID="unpitched.drum.low.conga.muffled" Name="Tumba Muff" >
+            </DrumSound>
+            <DrumSound Pitch="85" SoundID="unpitched.drum.low.conga.slap" Name="Tumba Slap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="UdusKit" >
+            <DrumSound Pitch="86" SoundID="unpitched.drum.low.udu.long" Name="Udu Long" >
+            </DrumSound>
+            <DrumSound Pitch="87" SoundID="unpitched.drum.low.udu.short" Name="Udu Short" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="CabassaKit" >
+            <DrumSound Pitch="36" SoundID="unpitched.rattle.cabasa" Name="Cabassa Short" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.rattle.cabasa.long" Name="Cabassa Long" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.rattle.cabasa.slap" Name="Cabassa Snap" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Guira Kit" >
+            <DrumSound Pitch="39" SoundID="unpitched.wood.medium.guira.short" Name="Guira Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.wood.medium.guira.short.2" Name="Guira Short 2" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.wood.medium.guira.long" Name="Guira Long" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="GuiroKit" >
+            <DrumSound Pitch="42" SoundID="unpitched.wood.medium.guiro.stroke" Name="Guiro 1 Shot 1" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.wood.medium.guiro.stroke.2" Name="Guiro 1 Shot 2" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.wood.medium.guiro.long" Name="Guiro 1 Long" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.wood.medium.guiro.short.3" Name="Guiro 2 Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.wood.medium.guiro.short.4" Name="Guiro 2 Short 2" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.wood.medium.guiro.long.2" Name="Guiro 2 Long" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="MaracasKit" >
+            <DrumSound Pitch="48" SoundID="unpitched.rattle.maraca.short" Name="Maraccas 1 Short" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.rattle.maraca.long" Name="Maraccas 1 Long" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.rattle.maraca.short.2" Name="Maraccas 2 Short" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.rattle.maraca.long.2" Name="Maraccas 2 Long" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="ShakersKit" >
+            <DrumSound Pitch="52" SoundID="unpitched.rattle.shaker" Name="Shaker Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.rattle.shaker.2" Name="Shaker Short 2" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.rattle.shaker.3" Name="Shaker Short 3" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.rattle.shaker.medium" Name="Shaker Medium" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.rattle.shaker.long" Name="Shaker Long" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="ShekereKit" >
+            <DrumSound Pitch="57" SoundID="unpitched.rattle.shaker.shekere.low" Name="Shekere Low" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.rattle.shaker.shekere.high" Name="Shekere High" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.rattle.shaker.shekere.short" Name="Shekere Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.rattle.shaker.shekere.short.2" Name="Shekere Short 2" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="ClaveKit" >
+            <DrumSound Pitch="61" SoundID="unpitched.wood.high.claves" Name="Clave" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="JamBlockKit" >
+            <DrumSound Pitch="62" SoundID="unpitched.wood.medium-high.jam block" Name="Jam Block Low" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.wood.medium.jam block" Name="Jam Block High" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="WoodblockKit" >
+            <DrumSound Pitch="64" SoundID="unpitched.wood.medium-high.woodblock" Name="Wood Block" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="AgogoBellsKit" >
+            <DrumSound Pitch="65" SoundID="unpitched.metal.bells.medium-high.agogo" Name="Agogo Bell Low Open" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.metal.bells.medium-high.agogo.mute" Name="Agogo Bell Low Mute" >
+            </DrumSound>
+            <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo" Name="Agogo Bell High Open" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.metal.bells.high.agogo.mute" Name="Agogo Bell High Mute" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="BongoBellsKit" >
+            <DrumSound Pitch="69" SoundID="unpitched.metal.bells.medium.cowbell.bongo" Name="Bongo Bell Low Open" >
+            </DrumSound>
+            <DrumSound Pitch="70" SoundID="unpitched.metal.bells.medium.cowbell.bongo.mute" Name="Bongo Bell Low Mute" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.metal.bells.medium-high.cowbell.bongo" Name="Bongo Bell High Open" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.metal.bells.medium-high.cowbell.bongo.mute" Name="Bongo Bell High Mute" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="ChaChaBellsKit" >
+            <DrumSound Pitch="73" SoundID="unpitched.metal.bells.medium.cowbell.cha cha" Name="Cha Cha Bell Open" >
+            </DrumSound>
+            <DrumSound Pitch="74" SoundID="unpitched.metal.bells.medium.cowbell.mute.cha cha" Name="Cha Cha Bell Mute" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="TimbaleBellsKit" >
+            <DrumSound Pitch="75" SoundID="unpitched.metal.bells.medium.cowbell.timbale" Name="Timbale Bell Open" >
+            </DrumSound>
+            <DrumSound Pitch="76" SoundID="unpitched.metal.bells.medium.cowbell.timbale.mute" Name="Timbale Bell Mute" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="CastanetsKit" >
+            <DrumSound Pitch="77" SoundID="unpitched.wood.high.castanets" Name="Castinets" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="HandClapsKit" >
+            <DrumSound Pitch="78" SoundID="unpitched.exotic.hand clap" Name="Hand Claps" >
+            </DrumSound>
+            <DrumSound Pitch="79" SoundID="unpitched.exotic.finger click" Name="Finger Snaps" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="JawboneKit" >
+            <DrumSound Pitch="80" SoundID="unpitched.rattle.jawbone" Name="Jawbone" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="RainsticksKit" >
+            <DrumSound Pitch="81" SoundID="unpitched.rattle.rainsticks" Name="Rainstick 1" >
+            </DrumSound>
+            <DrumSound Pitch="82" SoundID="unpitched.rattle.rainsticks.2" Name="Rainstick 2" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="TambourinesKit" >
+            <DrumSound Pitch="83" SoundID="unpitched.drum.medium.tambourine.short" Name="Tambourine Short" >
+            </DrumSound>
+            <DrumSound Pitch="84" SoundID="unpitched.drum.medium.tambourne.long" Name="Tambourine Long" >
+            </DrumSound>
+            <DrumSound Pitch="85" SoundID="unpitched.drum.medium.tambourine.stroke.frame" Name="Tambourine Hit" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="TrianglesKit" >
+            <DrumSound Pitch="86" SoundID="unpitched.metal.bells.high.triangle.open" Name="Triangle 1 Open" >
+            </DrumSound>
+            <DrumSound Pitch="87" SoundID="unpitched.metal.bells.high.triangle.mute" Name="Triangle 1 Mute" >
+            </DrumSound>
+            <DrumSound Pitch="88" SoundID="unpitched.metal.bells.high.triangle.open.2" Name="Triangle 2 Open" >
+            </DrumSound>
+            <DrumSound Pitch="89" SoundID="unpitched.metal.bells.high.triangle.mute.2" Name="Triangle 2 Mute" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="WhistlesKit" >
+            <DrumSound Pitch="90" SoundID="unpitched.wind.whistle.short" Name="Whistle 1 Short" >
+            </DrumSound>
+            <DrumSound Pitch="91" SoundID="unpitched.wind.whistle.long" Name="Whistle 1 Long" >
+            </DrumSound>
+            <DrumSound Pitch="92" SoundID="unpitched.wind.whistle.short.2" Name="Whistle 2 Short" >
+            </DrumSound>
+            <DrumSound Pitch="93" SoundID="unpitched.wind.whistle.long.2" Name="Whistle 2 Long" >
+            </DrumSound>
+            <DrumSound Pitch="94" SoundID="unpitched.wind.whistle.short.3" Name="Whistle 3 Short" >
+            </DrumSound>
+            <DrumSound Pitch="95" SoundID="unpitched.wind.whistle.medium.3" Name="Whistle 3 Medium" >
+            </DrumSound>
+            <DrumSound Pitch="96" SoundID="unpitched.wind.whistle.long.3" Name="Whistle 3 Long" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="AllDrumsKit" >
+            <DrumSound Pitch="36" SoundID="unpitched.drum.medium.bata" Name="Bata Low Open" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.bata.muffled" Name="Bata Low Muff" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.bata.slap" Name="Bata Low Slap" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.drum.medium-high.bata" Name="Bata Mid Open" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.drum.medium-high.bata.muffled" Name="Bata Mid Muff" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.drum.medium-high.bata.slap" Name="Bata Mid Slap" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.drum.high.bata" Name="Bata High Open" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.drum.high.bata.muffled" Name="Bata High Muff" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.drum.high.bata.slap" Name="Bata High Slap" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium.bongo" Name="Bongo Low Open" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.drum.medium.bongo.muffled" Name="Bongo Low Muff" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.drum.medium.bongo.slap" Name="Bongo Low Slap" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.drum.high.bongo" Name="Bongo High Open" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.drum.high.bongo.muffled" Name="Bongo High Muff" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.drum.high.bongo.slap" Name="Bongo High Slap" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.drum.medium-low.cajon" Name="Cajone Low" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.drum.medium-low.cajon.slap" Name="Cajone Slap" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.drum.medium-low.cajon.stick" Name="Cajone Stick Hit" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.drum.medium-low.conga.bass tone" Name="Conga Low" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.drum.medium-low.conga" Name="Conga Open" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.drum.medium-low.conga.muffled" Name="Conga Muff" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.drum.medium-low.conga.slap" Name="Conga Slap" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.drum.medium-low.cuica" Name="Cuica Low" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.drum.medium.cuica" Name="Cuica Mid" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.drum.medium-high.cuica" Name="Cuica High" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.drum.medium.djembe" Name="Djembe Open" >
+            </DrumSound>
+            <DrumSound Pitch="62" SoundID="unpitched.drum.medium.djembe.muffled" Name="Djembe Muff" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.drum.medium.djembe.slap" Name="Djembe Slap" >
+            </DrumSound>
+            <DrumSound Pitch="64" SoundID="unpitched.drum.medium-high.frame drum" Name="Pandero Open" >
+            </DrumSound>
+            <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.frame drum.muffled" Name="Pandero Muff" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.drum.medium-high.frame drum.slap" Name="Pandero Slap" >
+            </DrumSound>
+            <DrumSound Pitch="67" SoundID="unpitched.drum.medium.conga" Name="Quinto Open" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.drum.medium.conga.muffled" Name="Quinto Muff" >
+            </DrumSound>
+            <DrumSound Pitch="69" SoundID="unpitched.drum.medium.conga.slap" Name="Quinto Slap" >
+            </DrumSound>
+            <DrumSound Pitch="70" SoundID="unpitched.drum.very-low.conga.bass" Name="Super Tumba Low" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.drum.very-low.conga" Name="Super Tumba Open" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.drum.very-low.conga.muffled" Name="Super Tumba Muff" >
+            </DrumSound>
+            <DrumSound Pitch="73" SoundID="unpitched.drum.very-low.conga.slap" Name="Super Tumba Slap" >
+            </DrumSound>
+            <DrumSound Pitch="74" SoundID="unpitched.drum.low.surdo" Name="Surdu Open" >
+            </DrumSound>
+            <DrumSound Pitch="75" SoundID="unpitched.drum.low.surdo.muffled" Name="Surdu Muff" >
+            </DrumSound>
+            <DrumSound Pitch="76" SoundID="unpitched.wood.medium-low.the box" Name="The Box Low" >
+            </DrumSound>
+            <DrumSound Pitch="77" SoundID="unpitched.wood.medium.the box" Name="The Box Mid" >
+            </DrumSound>
+            <DrumSound Pitch="78" SoundID="unpitched.wood.medium-high.the box" Name="The Box High" >
+            </DrumSound>
+            <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.timbale" Name="Timbales Low" >
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.drum.medium-high.timbale" Name="Timbales High" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.drum.medium-high.timbale.rim" Name="Timbales Edge" >
+            </DrumSound>
+            <DrumSound Pitch="82" SoundID="unpitched.drum.low.conga.bass tone" Name="Tumba Low" >
+            </DrumSound>
+            <DrumSound Pitch="83" SoundID="unpitched.drum.low.conga" Name="Tumba Open" >
+            </DrumSound>
+            <DrumSound Pitch="84" SoundID="unpitched.drum.low.conga.muffled" Name="Tumba Muff" >
+            </DrumSound>
+            <DrumSound Pitch="85" SoundID="unpitched.drum.low.conga.slap" Name="Tumba Slap" >
+            </DrumSound>
+            <DrumSound Pitch="86" SoundID="unpitched.drum.low.udu.long" Name="Udu Long" >
+            </DrumSound>
+            <DrumSound Pitch="87" SoundID="unpitched.drum.low.udu.short" Name="Udu Short" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="AllMiscKit" >
+            <DrumSound Pitch="36" SoundID="unpitched.rattle.cabasa" Name="Cabassa Short" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.rattle.cabasa.long" Name="Cabassa Long" >
+            </DrumSound>
+            <DrumSound Pitch="38" SoundID="unpitched.rattle.cabasa.slap" Name="Cabassa Snap" >
+            </DrumSound>
+            <DrumSound Pitch="39" SoundID="unpitched.wood.medium.guira.short" Name="Guira Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="40" SoundID="unpitched.wood.medium.guira.short.2" Name="Guira Short 2" >
+            </DrumSound>
+            <DrumSound Pitch="41" SoundID="unpitched.wood.medium.guira.long" Name="Guira Long" >
+            </DrumSound>
+            <DrumSound Pitch="42" SoundID="unpitched.wood.medium.guiro.stroke" Name="Guiro 1 Shot 1" >
+            </DrumSound>
+            <DrumSound Pitch="43" SoundID="unpitched.wood.medium.guiro.stroke.2" Name="Guiro 1 Shot 2" >
+            </DrumSound>
+            <DrumSound Pitch="44" SoundID="unpitched.wood.medium.guiro.long" Name="Guiro 1 Long" >
+            </DrumSound>
+            <DrumSound Pitch="45" SoundID="unpitched.wood.medium.guiro.short.3" Name="Guiro 2 Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="46" SoundID="unpitched.wood.medium.guiro.short.4" Name="Guiro 2 Short 2" >
+            </DrumSound>
+            <DrumSound Pitch="47" SoundID="unpitched.wood.medium.guiro.long.2" Name="Guiro 2 Long" >
+            </DrumSound>
+            <DrumSound Pitch="48" SoundID="unpitched.rattle.maraca.short" Name="Maraccas 1 Short" >
+            </DrumSound>
+            <DrumSound Pitch="49" SoundID="unpitched.rattle.maraca.long" Name="Maraccas 1 Long" >
+            </DrumSound>
+            <DrumSound Pitch="50" SoundID="unpitched.rattle.maraca.short.2" Name="Maraccas 2 Short" >
+            </DrumSound>
+            <DrumSound Pitch="51" SoundID="unpitched.rattle.maraca.long.2" Name="Maraccas 2 Long" >
+            </DrumSound>
+            <DrumSound Pitch="52" SoundID="unpitched.rattle.shaker" Name="Shaker Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="53" SoundID="unpitched.rattle.shaker.2" Name="Shaker Short 2" >
+            </DrumSound>
+            <DrumSound Pitch="54" SoundID="unpitched.rattle.shaker.3" Name="Shaker Short 3" >
+            </DrumSound>
+            <DrumSound Pitch="55" SoundID="unpitched.rattle.shaker.medium" Name="Shaker Medium" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.rattle.shaker.long" Name="Shaker Long" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.rattle.shaker.shekere.low" Name="Shekere Low" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.rattle.shaker.shekere.high" Name="Shekere High" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.rattle.shaker.shekere.short" Name="Shekere Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.rattle.shaker.shekere.short.2" Name="Shekere Short 2" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.wood.high.claves" Name="Clave" >
+            </DrumSound>
+            <DrumSound Pitch="62" SoundID="unpitched.wood.medium-high.jam block" Name="Jam Block Low" >
+            </DrumSound>
+            <DrumSound Pitch="63" SoundID="unpitched.wood.medium.jam block" Name="Jam Block High" >
+            </DrumSound>
+            <DrumSound Pitch="64" SoundID="unpitched.wood.medium-high.woodblock" Name="Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="65" SoundID="unpitched.metal.bells.medium-high.agogo" Name="Agogo Bell Low Open" >
+            </DrumSound>
+            <DrumSound Pitch="66" SoundID="unpitched.metal.bells.medium-high.agogo.mute" Name="Agogo Bell Low Mute" >
+            </DrumSound>
+            <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo" Name="Agogo Bell High Open" >
+            </DrumSound>
+            <DrumSound Pitch="68" SoundID="unpitched.metal.bells.high.agogo.mute" Name="Agogo Bell High Mute" >
+            </DrumSound>
+            <DrumSound Pitch="69" SoundID="unpitched.metal.bells.medium.cowbell.bongo" Name="Bongo Bell Low Open" >
+            </DrumSound>
+            <DrumSound Pitch="70" SoundID="unpitched.metal.bells.medium.cowbell.bongo.mute" Name="Bongo Bell Low Mute" >
+            </DrumSound>
+            <DrumSound Pitch="71" SoundID="unpitched.metal.bells.medium-high.cowbell.bongo" Name="Bongo Bell High Open" >
+            </DrumSound>
+            <DrumSound Pitch="72" SoundID="unpitched.metal.bells.medium-high.cowbell.bongo.mute" Name="Bongo Bell High Mute" >
+            </DrumSound>
+            <DrumSound Pitch="73" SoundID="unpitched.metal.bells.medium.cowbell.cha cha" Name="Cha Cha Bell Open" >
+            </DrumSound>
+            <DrumSound Pitch="74" SoundID="unpitched.metal.bells.medium.cowbell.mute.cha cha" Name="Cha Cha Bell Mute" >
+            </DrumSound>
+            <DrumSound Pitch="75" SoundID="unpitched.metal.bells.medium.cowbell.timbale" Name="Timbale Bell Open" >
+            </DrumSound>
+            <DrumSound Pitch="76" SoundID="unpitched.metal.bells.medium.cowbell.timbale.mute" Name="Timbale Bell Mute" >
+            </DrumSound>
+            <DrumSound Pitch="77" SoundID="unpitched.wood.high.castanets" Name="Castinets" >
+            </DrumSound>
+            <DrumSound Pitch="78" SoundID="unpitched.exotic.hand clap" Name="Hand Claps" >
+            </DrumSound>
+            <DrumSound Pitch="79" SoundID="unpitched.exotic.finger click" Name="Finger Snaps" >
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.rattle.jawbone" Name="Jawbone" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.rattle.rainsticks" Name="Rainstick 1" >
+            </DrumSound>
+            <DrumSound Pitch="82" SoundID="unpitched.rattle.rainsticks.2" Name="Rainstick 2" >
+            </DrumSound>
+            <DrumSound Pitch="83" SoundID="unpitched.drum.medium.tambourine.short" Name="Tambourine Short" >
+            </DrumSound>
+            <DrumSound Pitch="84" SoundID="unpitched.drum.medium.tambourne.long" Name="Tambourine Long" >
+            </DrumSound>
+            <DrumSound Pitch="85" SoundID="unpitched.drum.medium.tambourine.stroke.frame" Name="Tambourine Hit" >
+            </DrumSound>
+            <DrumSound Pitch="86" SoundID="unpitched.metal.bells.high.triangle.open" Name="Triangle 1 Open" >
+            </DrumSound>
+            <DrumSound Pitch="87" SoundID="unpitched.metal.bells.high.triangle.mute" Name="Triangle 1 Mute" >
+            </DrumSound>
+            <DrumSound Pitch="88" SoundID="unpitched.metal.bells.high.triangle.open.2" Name="Triangle 2 Open" >
+            </DrumSound>
+            <DrumSound Pitch="89" SoundID="unpitched.metal.bells.high.triangle.mute.2" Name="Triangle 2 Mute" >
+            </DrumSound>
+            <DrumSound Pitch="90" SoundID="unpitched.wind.whistle.short" Name="Whistle 1 Short" >
+            </DrumSound>
+            <DrumSound Pitch="91" SoundID="unpitched.wind.whistle.long" Name="Whistle 1 Long" >
+            </DrumSound>
+            <DrumSound Pitch="92" SoundID="unpitched.wind.whistle.short.2" Name="Whistle 2 Short" >
+            </DrumSound>
+            <DrumSound Pitch="93" SoundID="unpitched.wind.whistle.long.2" Name="Whistle 2 Long" >
+            </DrumSound>
+            <DrumSound Pitch="94" SoundID="unpitched.wind.whistle.short.3" Name="Whistle 3 Short" >
+            </DrumSound>
+            <DrumSound Pitch="95" SoundID="unpitched.wind.whistle.medium.3" Name="Whistle 3 Medium" >
+            </DrumSound>
+            <DrumSound Pitch="96" SoundID="unpitched.wind.whistle.long.3" Name="Whistle 3 Long" >
+            </DrumSound>
+        </DrumMapDefinition>
+    </DrumMapList>
+</SoundSet>

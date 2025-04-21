@@ -1,0 +1,68 @@
+[Vertex shader]
+
+#version 450 core
+#include "Shaders/GLSL/Preamble.shdh"
+#include "Shaders/GLSL/CommonHelpers.shdh"
+#include "Shaders/GLSL/GlobalConstants.shdh"
+
+in vec3 inPosition0;
+in vec4 inColor1;
+in vec4 inColor2;
+in vec4 inColor3;
+
+out vec4 Position0;
+
+void main()
+{
+	//Create Instance World Matrix
+	mat4x4 noBillboardWorldMatrix = mat4x4(inColor1, inColor2, inColor3, vec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	//World space position
+	vec4 worldPosition = (noBillboardWorldMatrix * vec4(inPosition0, 1.0f));
+
+	//Projected position
+	vec4 projectedPosition = (g_ViewProjectionMat * worldPosition);
+
+	//Pass projected position to pixel shader
+	Position0 = projectedPosition;
+
+	gl_Position = Position0;
+}
+
+
+[Fragment shader]
+
+#version 450 core
+#include "Shaders/GLSL/Preamble.shdh"
+#include "Shaders/GLSL/CommonHelpers.shdh"
+#include "Shaders/GLSL/PBR.shdh"
+
+in vec4 Position0;
+
+out vec4 outColor0;
+out vec4 outColor1;
+out vec4 outColor2;
+out vec4 outColor3;
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	uint _ObjectReceiveDecal;
+	uint PADDING0__ObjectReceiveDecal;
+	uint PADDING1__ObjectReceiveDecal;
+	uint PADDING2__ObjectReceiveDecal;
+};
+void main()
+{
+	GBufferData gBufferData;
+	gBufferData.ViewSpaceNormal = vec3(0.0f, 1.0f, 0.0f);
+	gBufferData.BaseColor = vec3(0.0f, 0.0f, 0.0f);
+	gBufferData.Occlusion = 1.0f;
+	gBufferData.Roughness = 0.5f;
+	gBufferData.Reflectance = 0.5f;
+	gBufferData.MetalMask = 0.0f;
+	gBufferData.FXEmissive = true;
+	gBufferData.ShadingModel = 1;
+	gBufferData.CanReceiveDeferredDecals = _ObjectReceiveDecal;
+	gBufferData.Custom = vec4(0.0f, 0.0f, 0.0f, 0.0f);
+	EncodeGBufferData(gBufferData, outColor0, outColor1, outColor2, outColor3);
+}

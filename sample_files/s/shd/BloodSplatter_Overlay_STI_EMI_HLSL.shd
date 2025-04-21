@@ -1,0 +1,214 @@
+[Vertex shader]
+
+
+#include "Shaders/HLSL/Preamble.shdh"
+#include "Shaders/HLSL/CommonHelpers.shdh"
+#include "Shaders/HLSL/GlobalConstants.shdh"
+
+struct VertexInput
+{
+	float3 Position : POSITION0;
+	float4 InstanceMatrix1 : COLOR1;
+	float4 InstanceMatrix2 : COLOR2;
+	float4 InstanceMatrix3 : COLOR3;
+	float2 TexCoords0 : TEXCOORD0;
+	float4 LocalQTangent : NORMAL0;
+};
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : SV_Position0;
+	float3 LocalPosition : TEXCOORD0;
+	float2 TexCoords0 : TEXCOORD1;
+	float3 WorldNormal : TEXCOORD2;
+	float3 WorldBinormal : TEXCOORD3;
+	float3 WorldTangent : TEXCOORD4;
+	float3 WorldView : TEXCOORD5;
+};
+
+VertexOutput main(in VertexInput In)
+{
+	VertexOutput Out;
+
+	// Create Instance World Matrix
+	float4x4 noBillboardWorldMatrix = float4x4(In.InstanceMatrix1, In.InstanceMatrix2, In.InstanceMatrix3, float4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	// World space position
+	float4 worldPosition = mul(noBillboardWorldMatrix, float4(In.Position, 1.0f));
+
+	// Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	// Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+	// Pass local position to pixel shader
+	Out.LocalPosition = In.Position;
+
+	Out.TexCoords0 = In.TexCoords0;
+	// Compute local tangent frame
+	float3x3 localTangentFrame = GetTangentFrame(In.LocalQTangent);
+
+	float3 localNormal = localTangentFrame[2];
+
+	// World space Normal
+	float3 worldNormal = mul((float3x3)(noBillboardWorldMatrix), localNormal);
+
+	// Normalize World Normal
+	float3 worldNormalNormalized = normalize(worldNormal);
+
+	Out.WorldNormal = worldNormalNormalized;
+
+	float3 localBinormal = localTangentFrame[1];
+
+	// World space Binormal
+	float3 worldBinormal = mul((float3x3)(noBillboardWorldMatrix), localBinormal);
+
+	// Normalize World Binormal
+	float3 worldBinormalNormalized = normalize(worldBinormal);
+
+	Out.WorldBinormal = worldBinormalNormalized;
+
+	float3 localTangent = localTangentFrame[0];
+
+	// World space Tangent
+	float3 worldTangent = mul((float3x3)(noBillboardWorldMatrix), localTangent);
+
+	// Normalize World Tangent
+	float3 worldTangentNormalized = normalize(worldTangent);
+
+	Out.WorldTangent = worldTangentNormalized;
+
+	// World space view vector
+	float3 worldView = (g_CameraWorldPos.xyz - worldPosition.xyz);
+
+	Out.WorldView = worldView;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/HLSL/Preamble.shdh"
+#include "Shaders/HLSL/CommonHelpers.shdh"
+#include "Shaders/HLSL/GlobalConstants.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : SV_Position0;
+	float3 LocalPosition : TEXCOORD0;
+	float2 TexCoords0 : TEXCOORD1;
+	float3 WorldNormal : TEXCOORD2;
+	float3 WorldBinormal : TEXCOORD3;
+	float3 WorldTangent : TEXCOORD4;
+	float3 WorldView : TEXCOORD5;
+};
+
+struct PixelOutput
+{
+	float4 Color0 : SV_Target0;
+};
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	float2 Vector2Parameter_Texture_01_UV;
+	float2 Vector2Parameter_Texture_01_Panning;
+	float2 Vector2Parameter_Texture_02_UV;
+	float2 Vector2Parameter_Texture_02_Panning;
+	float FloatParameter_BorderFresnel_Intensity;
+	float FloatParameter_BorderFresnel_FresnelPower;
+	float FloatParameter_GradientMap_Contrast;
+	float FloatParameter_Intensity;
+};
+VK_DESCRIPTOR(DS_Shader, 3) SamplerState _DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 4) SamplerState _DefaultClampSampler;
+VK_DESCRIPTOR(DS_Shader, 5) Texture2D Texture2DParameter_Texture_01_Map_DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 6) Texture2D Texture2DParameter_Texture_02_Map_DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 7) Texture2D Texture2DParameter_NM_DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 8) Texture2D Texture2DParameter_GradientMap_Map_DefaultClampSampler;
+void CalculateMatEmissiveColor(in float3 in_0,
+	in float2 in_1,
+	in float3 in_2,
+	out float3 out_0)
+{
+	// LocalPosition {
+	// } LocalPosition
+	float2 Local0 = in_0.xz;
+	// ConstantVector2Node {
+	// } ConstantVector2Node
+	float2 Local1 = (Local0 * Vector2Parameter_Texture_01_UV);
+	// ConstantVector2Node {
+	// } ConstantVector2Node
+	float2 Local2 = (g_CurrentTime * Vector2Parameter_Texture_01_Panning);
+	float2 Local3 = (Local1 + Local2);
+	// Texture2DNode {
+	float4 Local4 = Texture2DParameter_Texture_01_Map_DefaultWrapSampler.Sample(_DefaultWrapSampler, Local3);
+	// [Local4] Get needed components
+	float Local5 = Local4.x;
+	// } Texture2DNode
+	// ConstantVector2Node {
+	// } ConstantVector2Node
+	float2 Local6 = (Local0 * Vector2Parameter_Texture_02_UV);
+	// ConstantVector2Node {
+	// } ConstantVector2Node
+	float2 Local7 = (g_CurrentTime * Vector2Parameter_Texture_02_Panning);
+	float2 Local8 = (Local6 + Local7);
+	// Texture2DNode {
+	float4 Local9 = Texture2DParameter_Texture_02_Map_DefaultWrapSampler.Sample(_DefaultWrapSampler, Local8);
+	// [Local9] Get needed components
+	float Local10 = Local9.x;
+	// } Texture2DNode
+	float Local11 = min(Local5, Local10);
+	float Local12 = clamp(Local11, 0.0f, 1.0f);
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	// Texture2DNode {
+	float4 Local13 = Texture2DParameter_NM_DefaultWrapSampler.Sample(_DefaultWrapSampler, in_1);
+	// [Local13] Convert normalmaps to tangent space vectors
+	Local13.xyzw = Local13.wzyx;
+	Local13.xyz = ((Local13.xyz * 2.0f) - 1.0f);
+	Local13.z = -(Local13.z);
+	Local13.xyz = normalize(Local13.xyz);
+	// [Local13] Get needed components
+	float3 Local14 = Local13.xyz;
+	// } Texture2DNode
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	// FresnelNode {
+	float Local15 = pow((1.0f - saturate(dot(Local14, in_2))), FloatParameter_BorderFresnel_FresnelPower);
+	// } FresnelNode
+	float Local16 = lerp(Local12, FloatParameter_BorderFresnel_Intensity, Local15);
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	float Local17 = pow(Local16, FloatParameter_GradientMap_Contrast);
+	// ColorRampTextureNode {
+	float4 Local18 = Texture2DParameter_GradientMap_Map_DefaultClampSampler.SampleLevel(_DefaultClampSampler, float2(Local17, 0.0f), 0.0f);
+	float3 Local19 = Local18.xyz;
+	// } ColorRampTextureNode
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	float3 Local20 = (Local19 * FloatParameter_Intensity);
+	out_0 = Local20;
+}
+
+PixelOutput main(in PixelInput In)
+{
+	PixelOutput Out;
+
+	float3 matEmissiveColor;
+	float3x3 NBT_WS = float3x3(In.WorldTangent, In.WorldNormal, In.WorldBinormal);
+
+	// Normalized world space view vector
+	float3 worldViewNormalized = normalize(In.WorldView);
+
+	// Calculate tangent space view vector
+	float3 tangentView = normalize(mul(NBT_WS, worldViewNormalized));
+
+	CalculateMatEmissiveColor(In.LocalPosition.xyz, In.TexCoords0, tangentView, matEmissiveColor);
+	Out.Color0 = float4(matEmissiveColor, 1.0f);
+
+	return Out;
+}

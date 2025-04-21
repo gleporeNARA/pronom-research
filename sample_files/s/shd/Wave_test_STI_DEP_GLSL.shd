@@ -1,0 +1,98 @@
+[Vertex shader]
+
+#version 450 core
+#include "Shaders/GLSL/Preamble.shdh"
+#include "Shaders/GLSL/CommonHelpers.shdh"
+#include "Shaders/GLSL/GlobalConstants.shdh"
+
+in vec3 inPosition0;
+in vec4 inColor1;
+in vec4 inColor2;
+in vec4 inColor3;
+
+out vec4 Position0;
+out float TexCoord0;
+
+void main()
+{
+	//Create Instance World Matrix
+	mat4x4 noBillboardWorldMatrix = mat4x4(inColor1, inColor2, inColor3, vec4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	//World space position
+	vec4 worldPosition = (noBillboardWorldMatrix * vec4(inPosition0, 1.0f));
+
+	//Projected position
+	vec4 projectedPosition = (g_ViewProjectionMat * worldPosition);
+
+	//Pass projected position to pixel shader
+	Position0 = projectedPosition;
+
+	//View space position
+	vec4 viewPosition = (g_ViewMat * worldPosition);
+
+	//Depth
+	float depth = viewPosition.z;
+
+	//Pass depth to pixel shader
+	TexCoord0 = depth;
+
+	gl_Position = Position0;
+}
+
+
+[Fragment shader]
+
+#version 450 core
+#include "Shaders/GLSL/Preamble.shdh"
+#include "Shaders/GLSL/CommonHelpers.shdh"
+#include "Shaders/GLSL/GlobalConstants.shdh"
+
+in vec4 Position0;
+in float TexCoord0;
+
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	float FloatParameter_DepthDifferenceBlendDistance;
+	float PADDING0_FloatParameter_DepthDifferenceBlendDistance;
+	float PADDING1_FloatParameter_DepthDifferenceBlendDistance;
+	float PADDING2_FloatParameter_DepthDifferenceBlendDistance;
+};
+VK_DESCRIPTOR(DS_Shader, 3) sampler _PointMirrorSampler;
+VK_DESCRIPTOR(DS_Shader, 4) texture2D _sceneDepth;
+void CalculateMatOpacity(in vec2 in_0,
+	in float in_1,
+	out float out_0)
+{
+	//ConstantFloatNode {
+	//} ConstantFloatNode
+	//DepthDifferenceBlend
+	float Local0 = (texture(_sceneDepth, in_0).x * g_FarPlane);
+	float Local1 = (Local0 - in_1);
+	float Local2 = Local1;
+	float Local3 = clamp((Local2 / max(FloatParameter_DepthDifferenceBlendDistance, 0.0001f)), 0, 1);
+	//~DepthDifferenceBlend
+
+	float Local4 = clamp(Local3, 0.0f, 1.0f);
+	float Local5 = Local4;
+	float Local6 = (3.1415f * 5.0f);
+	float Local7 = (Local6 * Local5);
+	float Local8 = (g_CurrentTime * 5.0f);
+	float Local9 = (Local7 + Local8);
+	float Local10 = sin(Local9);
+	float Local11 = (Local10 * Local10);
+	float Local12 = (1.0f - Local11);
+	float Local13 = (Local5 - Local12);
+	out_0 = Local13;
+}
+
+void main()
+{
+	float matOpacity;
+	//UV position
+	vec2 Local0 = (gl_FragCoord.xy / vec2(g_RTWidth, g_RTHeight));
+
+	CalculateMatOpacity(Local0, TexCoord0, matOpacity);
+	if((matOpacity - 0.5f) < 0) discard;
+
+}

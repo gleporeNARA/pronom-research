@@ -1,0 +1,1252 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SoundSet SYSTEM "SoundSet.dtd"[]>
+<SoundSet xmlns:ss="http://www.sibelius.com/xml/SoundSet.dtd">
+  <!-- 
+    Alteration or removal of these lines is a violation of the License Agreement: www.soundsetproject.com/legal/license/
+    
+    Vir2 Acoustic Legends HD (Fixed) Sibelius Sound Set (c) 2008-2012 The Sound Set Project, a division of Sound Notes LLC.
+    
+    www.soundsetproject.com
+    
+    Version History:
+    v1.0.0 - 07-16-2011
+    v1.0.1 - 01-21-2012
+    
+  -->
+  <Header>
+    <FileVersion>50001</FileVersion>
+    <Name>Vir2 Acoustic Legends HD (Fixed)</Name>
+    <PatchLoadMechanism>Fixed</PatchLoadMechanism>
+    <NumLanes>16</NumLanes>
+    <DefaultSoundSet>false</DefaultSoundSet>
+    <ProgramsRelativeTo>1</ProgramsRelativeTo>
+    <SupportsPitchBendRange>false</SupportsPitchBendRange>
+  </Header>
+  <ControllerTypeList>
+    <ControllerTypeDefinition Name="Modulation" Number="1" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Volume" Number="7" Binary="false">
+      <ControllerDefault>64</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Expression" Number="11" Binary="false">
+      <ControllerDefault>127</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller12" Number="12" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller14" Number="14" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Sustain" Number="64" Binary="true">
+      <ControllerOn>127</ControllerOn>
+      <ControllerOff>0</ControllerOff>
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+  </ControllerTypeList>
+  <VolumeTypeList>
+    <VolumeTypeDefinition Name="NoteOnVelocity" Method="Default"/>
+    <VolumeTypeDefinition Name="ModWheel" Method="Controller">
+      <ControllerType>Modulation</ControllerType>
+    </VolumeTypeDefinition>
+    <VolumeTypeDefinition Name="Volume" Method="Controller">
+      <ControllerType>Volume</ControllerType>
+    </VolumeTypeDefinition>
+    <VolumeTypeDefinition Name="Expression" Method="Controller">
+      <ControllerType>Expression</ControllerType>
+    </VolumeTypeDefinition>
+  </VolumeTypeList>
+  <AttackTypeList>
+    <AttackTypeDefinition Name="NoteOnVelocity" Method="Default"/>
+  </AttackTypeList>
+  <SwitchTypeList>
+    <SwitchTypeDefinition Name="CHORDS_KS">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +whole">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +whole +alternate">
+        <KeySwitch Key="25"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +half">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +half +alternate">
+        <KeySwitch Key="27"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +whole +short">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="+longest">
+        <KeySwitch Key="39"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +half +short">
+        <KeySwitch Key="30"/>
+      </Switch>
+      <Switch SoundIDChange="+shortest">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="+shorter">
+        <KeySwitch Key="32"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +heavy">
+        <KeySwitch Key="33"/>
+      </Switch>
+      <Switch SoundIDChange="+hard">
+        <KeySwitch Key="34"/>
+      </Switch>
+      <Switch SoundIDChange="+augmented">
+        <KeySwitch Key="35"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="72"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="72"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="DEFAULT_GUITAR">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +staccato">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.staccato">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +fall">
+        <ControllerSwitch Name="Controller14" Value="127"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="HOFNER_NYLON">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +thumb">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.thumb">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +finger">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.finger">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="+nail">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent +nail">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +fall">
+        <ControllerSwitch Name="Controller14" Value="127"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="HOFNER_NYLON_STAC">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +finger">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.finger">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="+nail">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent +nail">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +thumb">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.thumb">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +accent.staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +finger.staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +accent.finger.staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +staccatissimo +nail">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +accent.staccatissimo +nail">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +staccatissimo.thumb">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +accent.staccatissimo.thumb">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +fall">
+        <ControllerSwitch Name="Controller14" Value="127"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="J45_ART_HARM">
+      <Switch SoundIDChange="[reset]">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="63"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="63"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="NONVIB_VIB">
+      <Switch SoundIDChange="[reset]">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="MANDOLIN">
+      <Switch SoundIDChange="[reset]">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +tremolo.unmeasured" IsMultipleNoteSample="true">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+        <VolumeType>Expression</VolumeType>
+        <AttackType>NoteOnVelocity</AttackType>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="STAC_STACCA">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +staccato">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.staccato">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="STEEL_PICK_KS">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +staccato">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.staccato">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +staccatissimo">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.staccatissimo">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +slide">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +fall">
+        <ControllerSwitch Name="Controller14" Value="127"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="TAYLOR_STEEL_PICK_KS">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +slide">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +fall">
+        <ControllerSwitch Name="Controller14" Value="127"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="TAYLOR_STEEL_PICK_KS_STAC">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+        <ControllerSwitch Name="Controller14" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +slide">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +staccatissimo">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +accent.staccatissimo">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +staccatissimo.slide">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd -staccato +accent.staccatissimo.slide">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.non vibrato">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +accent.vibrato.heavy">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +fall">
+        <ControllerSwitch Name="Controller14" Value="127"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="XTRA_PINA">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="XTRA_SLIDE">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+      </Switch>
+      <Switch SoundIDChange="-alhd +slide">
+        <KeySwitch Key="26"/>
+      </Switch>
+    </SwitchTypeDefinition>
+  </SwitchTypeList>
+  <PatchList>
+    <Patch Name="Hofner Nylon Chopped">
+      <SoundID>guitar.nylon string.hofner.staccato.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>HOFNER_NYLON_STAC</SwitchType>
+    </Patch>
+    <Patch Name="Hofner Nylon Gentle">
+      <SoundID>guitar.nylon string.hofner.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Hofner Nylon Harmonics">
+      <SoundID>guitar.nylon string.hofner.harmonic.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Hofner Nylon Harmonics Flg">
+      <SoundID>guitar.nylon string.hofner.harmonic.flange.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Hofner Nylon Harmonics Trem" IsMultipleNoteSample="true">
+      <SoundID>guitar.nylon string.hofner.tremolo.harmonic.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Hofner Nylon KSW">
+      <SoundID>guitar.nylon string.hofner.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>HOFNER_NYLON</SwitchType>
+    </Patch>
+    <Patch Name="Langejan Nylon">
+      <SoundID>guitar.nylon string.langejan.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Langejan Nylon Compress">
+      <SoundID>guitar.nylon string.langejan.compress.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Langejan Nylon Finger">
+      <SoundID>guitar.nylon string.langejan.finger.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Langejan Nylon Gentle">
+      <SoundID>guitar.nylon string.langejan.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Langejan Nylon Nail">
+      <SoundID>guitar.nylon string.langejan.nail.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Langejan Nylon Thumb">
+      <SoundID>guitar.nylon string.langejan.thumb.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Langejan Nylon Tremolo" IsMultipleNoteSample="true">
+      <SoundID>guitar.nylon string.langejan.tremolo.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J200 Hrm Chords" IsMultipleNoteSample="true">
+      <SoundID>guitar.steel string.gibsonj200.harmonic.arpeggio.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J200 Hrm Chords Dly" IsMultipleNoteSample="true">
+      <SoundID>guitar.steel string.gibsonj200.harmonic.delay.arpeggio.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J200 Hrm Chords Flg" IsMultipleNoteSample="true">
+      <SoundID>guitar.steel string.gibsonj200.harmonic.flange.arpeggio.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J200 Picked">
+      <SoundID>guitar.steel string.gibsonj200.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J200 Picked Delay">
+      <SoundID>guitar.steel string.gibsonj200.delay.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J200 Picked Gentle">
+      <SoundID>guitar.steel string.gibsonj200.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Art Hrm">
+      <SoundID>guitar.steel string.gibsonj45rw.harmonic.artificial.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>J45_ART_HARM</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Art Hrm DTune">
+      <SoundID>guitar.steel string.gibsonj45rw.harmonic.artificial.detuned.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>J45_ART_HARM</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Art Hrm Delay">
+      <SoundID>guitar.steel string.gibsonj45rw.harmonic.artificial.delay.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>J45_ART_HARM</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Art Hrm Flange">
+      <SoundID>guitar.steel string.gibsonj45rw.harmonic.artificial.flange.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>J45_ART_HARM</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Art Hrm Phaser">
+      <SoundID>guitar.steel string.gibsonj45rw.harmonic.artificial.phase.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>J45_ART_HARM</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Muted">
+      <SoundID>guitar.steel string.gibsonj45rw.mute.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Gibson J45RW Muted Blunt">
+      <SoundID>guitar.steel string.gibsonj45rw.mute.staccato.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Gibson J45RW Muted Hvy Dly">
+      <SoundID>guitar.steel string.gibsonj45rw.mute.delay.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Gibson J45RW Muted Short">
+      <SoundID>guitar.steel string.gibsonj45rw.mute.staccatissimo.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Gibson J45RW Picked">
+      <SoundID>guitar.steel string.gibsonj45rw.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Picked Gentle">
+      <SoundID>guitar.steel string.gibsonj45rw.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Picked Phaser">
+      <SoundID>guitar.steel string.gibsonj45rw.phase.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Gibson J45RW Picked Radio">
+      <SoundID>guitar.steel string.gibsonj45rw.radio.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Gibson L130 Harmonics">
+      <SoundID>guitar.steel string.gibsonl130.harmonic.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Gibson L130 Harmonics Chrs">
+      <SoundID>guitar.steel string.gibsonl130.harmonic.chorus.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Gibson L130 Harmonics DTune">
+      <SoundID>guitar.steel string.gibsonl130.harmonic.detuned.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Lowden 025 Finger">
+      <SoundID>guitar.steel string.lowden.finger.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Lowden 025 Finger Chorus">
+      <SoundID>guitar.steel string.lowden.finger.chorus.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Lowden 025 Finger Flanger">
+      <SoundID>guitar.steel string.lowden.finger.flange.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Martin D35 Finger">
+      <SoundID>guitar.steel string.martind35.finger.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Martin D35 Finger Chorus">
+      <SoundID>guitar.steel string.martind35.finger.chorus.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Martin D35 Finger Compr">
+      <SoundID>guitar.steel string.martind35.finger.compress.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Martin D35 Finger Delay">
+      <SoundID>guitar.steel string.martind35.finger.delay.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Martin D35 Finger Fuzz">
+      <SoundID>guitar.steel string.martind35.finger.fuzz.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Martin D35 Finger Radio">
+      <SoundID>guitar.steel string.martind35.finger.radio.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Martin DC1E Picked">
+      <SoundID>guitar.steel string.martindc1e.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Martin DC1E Picked Compr">
+      <SoundID>guitar.steel string.martindc1e.compress.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Martin DC1E Picked Gentle">
+      <SoundID>guitar.steel string.martindc1e.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="McPherson MG45 Picked">
+      <SoundID>guitar.steel string.mcpherson.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="McPherson MG45 Picked Gentle">
+      <SoundID>guitar.steel string.mcpherson.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Six Str Chords KSW">
+      <SoundID>guitar.steel string.rhythm6.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>CHORDS_KS</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 914 Muted">
+      <SoundID>guitar.steel string.taylor914.mute.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 914 Muted Distort">
+      <SoundID>guitar.steel string.taylor914.distortion.mute.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 914 Muted Double">
+      <SoundID>guitar.steel string.taylor914.mute.double.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 914 Muted Dulled">
+      <SoundID>guitar.steel string.taylor914.mute.muffled.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 914 Picked">
+      <SoundID>guitar.steel string.taylor914.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>TAYLOR_STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 914 Picked Flanger">
+      <SoundID>guitar.steel string.taylor914.flange.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>TAYLOR_STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 914 Picked Gentle">
+      <SoundID>guitar.steel string.taylor914.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>TAYLOR_STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 914 Picked Short">
+      <SoundID>guitar.steel string.taylor914.staccato.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>TAYLOR_STEEL_PICK_KS_STAC</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 955 12Str">
+      <SoundID>guitar.steel string.taylor955.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 955 12Str Chorus">
+      <SoundID>guitar.steel string.taylor955.chorus.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 955 12Str Gentle">
+      <SoundID>guitar.steel string.taylor955.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STEEL_PICK_KS</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 955 12Str Muted">
+      <SoundID>guitar.steel string.taylor955.mute.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 955 12Str Muted ChoFlg">
+      <SoundID>guitar.steel string.taylor955.mute.chorus.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Taylor 955 12Str Muted Phsr">
+      <SoundID>guitar.steel string.taylor955.mute.phase.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Twelve Str Chords KSW">
+      <SoundID>guitar.steel string.rhythm12.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>CHORDS_KS</SwitchType>
+    </Patch>
+    <Patch Name="Vantage 12Str">
+      <SoundID>guitar.steel string.vantage.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Vantage 12Str DTune">
+      <SoundID>guitar.steel string.vantage.detuned.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Vantage 12Str Delay">
+      <SoundID>guitar.steel string.vantage.delay.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Vantage 12Str Gentle">
+      <SoundID>guitar.steel string.vantage.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>DEFAULT_GUITAR</SwitchType>
+    </Patch>
+    <Patch Name="Vantage 12Str Muted">
+      <SoundID>guitar.steel string.vantage.mute.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Vantage 12Str Muted Filt">
+      <SoundID>guitar.steel string.vantage.mute.filtered.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Vantage 12Str Muted Radio">
+      <SoundID>guitar.steel string.vantage.mute.radio.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Vantage 12Str Muted Trem" IsMultipleNoteSample="true">
+      <SoundID>guitar.steel string.vantage.tremolo.mute.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>STAC_STACCA</SwitchType>
+    </Patch>
+    <Patch Name="Acoustic Bass">
+      <SoundID>guitar.bass.acoustic.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Banjo">
+      <SoundID>guitar.steel string.banjo.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Banjo Gentle">
+      <SoundID>guitar.steel string.banjo.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Banjo Tuned">
+      <SoundID>guitar.steel string.banjo.detuned.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Mandolin">
+      <SoundID>guitar.steel string.mandolin.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>MANDOLIN</SwitchType>
+    </Patch>
+    <Patch Name="Mandolin Chords">
+      <SoundID>guitar.steel string.mandolin.rhythm.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Mandolin Gentle">
+      <SoundID>guitar.steel string.mandolin.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>MANDOLIN</SwitchType>
+    </Patch>
+    <Patch Name="Ukulele">
+      <SoundID>guitar.nylon string.ukulele.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Ukulele Chords">
+      <SoundID>guitar.nylon string.ukulele.rhythm.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Ukulele Gentle">
+      <SoundID>guitar.nylon string.ukulele.soft.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Ukulele Tuned">
+      <SoundID>guitar.nylon string.ukulele.detuned.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+      <SwitchType>NONVIB_VIB</SwitchType>
+    </Patch>
+    <Patch Name="Body Knocks 88">
+      <SoundID>unpitched.exotic.guitar body.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Fret Noise 88">
+      <SoundID>unpitched.exotic.guitar fret noise.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Badly Out">
+      <SoundID>synth.lead.hard.pluck.distortion.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Bull in Metal Shop">
+      <SoundID>synth.percussive.metal.echoing.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Clavitar Arp">
+      <SoundID>guitar.steel string.synth.flange.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Crazy Ed">
+      <SoundID>synth.sweep.pulsating.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Day At the Races">
+      <SoundID>unpitched.exotic.car.engine.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Deep Sea Dive">
+      <SoundID>unpitched.exotic.laser gun.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Electrik Nylon">
+      <SoundID>synth.lead.hard.pluck.echoing.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Empty Cathedral Pad">
+      <SoundID>synth.pad.warm.static.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="I in the Pie">
+      <SoundID>synth.lead.hard.pluck.delay.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="If It Quacks Blip">
+      <SoundID>guitar.steel string.synth.blip.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="K is Spacy">
+      <SoundID>synth.lead.hard.pluck.pulsating.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Lingua Aliena">
+      <SoundID>synth.percussive.wood.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Lost in Space">
+      <SoundID>synth.sequence.arpeggio.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Lounge Swell">
+      <SoundID>synth.pad.warm.static.metallic.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Magic Ambience">
+      <SoundID>synth.lead.soft.pulsating.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Metallic Impulse">
+      <SoundID>synth.percussive.metal.distortion.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Next Room Pad">
+      <SoundID>synth.pad.warm.static.delay.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Nothin But Pick">
+      <SoundID>unpitched.exotic.guitar pick.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Nylon Waves">
+      <SoundID>synth.pad.warm.static.bowed.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Octave Swim">
+      <SoundID>synth.lead.hard.pluck.phase.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Panned Stutter">
+      <SoundID>guitar.nylon string.synth.pan.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Pick a Nylon Any Nylon">
+      <SoundID>guitar.nylon string.synth.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Pointed Quake">
+      <SoundID>synth.lead.hard.distortion.delay.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Primus Pithicus">
+      <SoundID>synth.lead.soft.pulsating.delay.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Radio Friendly Trance">
+      <SoundID>synth.lead.hard.pluck.delay.phase.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Random Pina">
+      <SoundID>guitar.steel string.harmonic.artificial.filtered.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <SwitchType>XTRA_PINA</SwitchType>
+    </Patch>
+    <Patch Name="Shaker Sonority">
+      <SoundID>synth.lead.soft.delay.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Space Drift">
+      <SoundID>synth.pad.bright.metallic.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Springboard">
+      <SoundID>guitar.steel string.synth.mute.alhd</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Sproing">
+      <SoundID>synth.tone.fat.chorus.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Straight Lines to Nowhere">
+      <SoundID>synth.sweep.filtered.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Stranglehold">
+      <SoundID>synth.lead.hard.chorus.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Sweet Double Filter">
+      <SoundID>synth.pad.warm.double.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Synthin Arps">
+      <SoundID>synth.lead.hard.phase.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Tom Guitar Tom">
+      <SoundID>guitar.steel string.synth.mute.alhd.2</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="Twelve Pik">
+      <SoundID>unpitched.exotic.guitar pick.alhd.2</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Video Game Static">
+      <SoundID>synth.lead.hard.buzz.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+      <SwitchType>XTRA_SLIDE</SwitchType>
+    </Patch>
+    <Patch Name="Vinyl in Concrete">
+      <SoundID>synth.lead.hard.distortion.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Warblearblearblearble">
+      <SoundID>synth.tone.fat.flange.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+      <AttackType>NoteOnVelocity</AttackType>
+    </Patch>
+    <Patch Name="Wind Bucket">
+      <SoundID>synth.lead.hard.metallic.echoing.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Wipetar">
+      <SoundID>synth.lead.soft.pluck.bend.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <Patch Name="Wood Attack">
+      <SoundID>synth.percussive.wood.attack.alhd</SoundID>
+      <VolumeType>Expression</VolumeType>
+    </Patch>
+    <!-- ## CHORD BANKS UNASSIGNED ## -->
+    <!--
+      <Patch Name="Six Str Chords KSW QL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Chords KSW VL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Chords KSW QL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Chords KSW VL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## SIX STR DIATONICS ## -->
+    <!--
+      <Patch Name="Six Str Diatonic A#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic A"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic B"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic C#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic C"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic D#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic D"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic E"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic F#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic F"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic G#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Six Str Diatonic G"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## 12 STR DIATONICS ## -->
+    <!--
+      <Patch Name="Twelve Str Diatonic A#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic A"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic B"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic C#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic C"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic D#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic D"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic E"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic F#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic F"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic G#"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Twelve Str Diatonic G"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## NYLON STRING UNASSIGNED ## -->
+    <!-- ## HOFNER ## -->
+    <!--
+      <Patch Name="Hofner Nylon"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Hofner Nylon Finger"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Hofner Nylon Nail"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Hofner Nylon Thumb"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Hofner Nylon QL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Hofner Nylon Finger NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Hofner Nylon Nail NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Hofner Nylon NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Hofner Nylon Thumb NR"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## LANGEJAN ## -->
+    <!--
+      <Patch Name="Langejan Nylon Nail NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Langejan Nylon NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Langejan Nylon QL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Langejan Nylon Finger NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Langejan Nylon Thumb NR"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## STEEL STRING FINGER PICKED UNASSIGNED ## -->
+    <!-- ## LOWDEN ## -->
+    <!--
+      <Patch Name="Lowden 025 Finger NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Lowden 025 Finger QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## MARTIN ## -->
+    <!--
+      <Patch Name="Martin D35 Finger NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Martin D35 Finger QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## STEEL STRING PICKED UNASSIGNED ## -->
+    <!-- ## GIBSON ## -->
+    <!--
+      <Patch Name="Gibson J200 Picked NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Gibson J200 Picked QL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Gibson J45RW Picked NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Gibson J45RW Picked QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## MARTIN ## -->
+    <!--
+      <Patch Name="Martin DC1E Picked NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Martin DC1E Picked QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## MCPHERSON ## -->
+    <!--
+      <Patch Name="McPherson MG45 Picked NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="McPherson MG45 Picked QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## TAYLOR ## -->
+    <!--
+      <Patch Name="Taylor 914 Picked NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Taylor 914 Picked QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## TWELVE STRING PICKED UNASSIGNED ## -->
+    <!-- ## TAYLOR ## -->
+    <!--
+      <Patch Name="Taylor 955 12Str NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Taylor 955 12Str QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## VANTAGE ## -->
+    <!--
+      <Patch Name="Vantage 12Str NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Vantage 12Str QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+    <!-- ## XTRA BONUS CONTENT UNASSIGNED ## -->
+    <!--
+      <Patch Name="Acoustic Bass NR"><SoundID/><VolumeType/><AttackType/></Patch>   
+      <Patch Name="Acoustic Bass QL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Banjo NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Banjo QL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Mandolin NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Mandolin QL"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Mandolin Tremolo"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Ukulele NR"><SoundID/><VolumeType/><AttackType/></Patch>
+      <Patch Name="Ukulele QL"><SoundID/><VolumeType/><AttackType/></Patch>
+    -->
+  </PatchList>
+  <DrumMapList/>
+</SoundSet>

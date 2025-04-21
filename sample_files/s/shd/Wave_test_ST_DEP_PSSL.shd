@@ -1,0 +1,111 @@
+[Vertex shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : S_Position;
+	float Depth : TEXCOORD0;
+};
+
+@uniform float4x4 WorldMatrix;
+VertexOutput main(in uint id : S_VERTEX_ID,
+	SrtVsData srtData : S_SRT_DATA)
+{
+	// Retrieve SRT data:
+	@uniform(WorldMatrix);
+
+	VertexOutput Out;
+
+	float4 tempPosStatic = float4(SRT_VS_BUFFER_POSITION(id).xyz, 1.0f);
+	//World space position
+	float4 worldPosition = mul(WorldMatrix, tempPosStatic);
+
+	//Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	//Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+	//View space position
+	float4 viewPosition = mul(g_ViewMat, worldPosition);
+
+	//Depth
+	float depth = viewPosition.z;
+
+	//Pass depth to pixel shader
+	Out.Depth = depth;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : S_Position;
+	float Depth : TEXCOORD0;
+};
+
+struct PixelOutput
+{
+};
+
+@uniform float FloatParameter_DepthDifferenceBlendDistance;
+@uniform SamplerState _PointMirrorSampler;
+@uniform Texture2D _sceneDepth;
+void CalculateMatOpacity(SrtPsData srtData : S_SRT_DATA,
+	in float2 in_0,
+	in float in_1,
+	out float out_0)
+{
+	// Retrieve SRT data:
+	@uniform(FloatParameter_DepthDifferenceBlendDistance);
+	@uniform(_PointMirrorSampler);
+	@uniform(_sceneDepth);
+
+	//ConstantFloatNode {
+	//} ConstantFloatNode
+	//DepthDifferenceBlend
+	float Local0 = (_sceneDepth.Sample(_PointMirrorSampler, in_0).x * g_FarPlane);
+	float Local1 = (Local0 - in_1);
+	float Local2 = Local1;
+	float Local3 = saturate((Local2 / max(FloatParameter_DepthDifferenceBlendDistance, 0.0001f)));
+	//~DepthDifferenceBlend
+
+	float Local4 = clamp(Local3, 0.0f, 1.0f);
+	float Local5 = Local4.x;
+	float Local6 = (3.1415f * 5.0f);
+	float Local7 = (Local6 * Local5);
+	float Local8 = (g_CurrentTime * 5.0f);
+	float Local9 = (Local7 + Local8);
+	float Local10 = sin(Local9);
+	float Local11 = (Local10 * Local10);
+	float Local12 = (1.0f - Local11);
+	float Local13 = (Local5 - Local12);
+	out_0 = Local13;
+}
+
+PixelOutput main(in PixelInput In,
+	SrtPsData srtData : S_SRT_DATA)
+{
+	PixelOutput Out;
+
+	float matOpacity;
+	//UV position
+	float2 Local0 = (In.ProjectedPosition.xy / float2(g_RTWidth, g_RTHeight));
+
+	CalculateMatOpacity(srtData, Local0, In.Depth, matOpacity);
+	clip((matOpacity - 0.5f));
+
+
+	return Out;
+}

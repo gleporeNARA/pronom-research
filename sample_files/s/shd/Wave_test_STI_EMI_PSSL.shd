@@ -1,0 +1,74 @@
+[Vertex shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : S_Position;
+};
+
+VertexOutput main(in uint id : S_VERTEX_ID,
+	in uint idInst : S_INSTANCE_ID,
+	SrtVsData srtData : S_SRT_DATA)
+{
+	VertexOutput Out;
+
+	//Create Instance World Matrix
+	float4x4 noBillboardWorldMatrix = float4x4(SRT_VS_INSTANCE_MATRIX1(idInst), SRT_VS_INSTANCE_MATRIX2(idInst), SRT_VS_INSTANCE_MATRIX3(idInst), float4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	float4 tempPosStatic = float4(SRT_VS_BUFFER_POSITION(id).xyz, 1.0f);
+	//World space position
+	float4 worldPosition = mul(noBillboardWorldMatrix, tempPosStatic);
+
+	//Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	//Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : S_Position;
+};
+
+struct PixelOutput
+{
+	float4 Color0 : S_TARGET_OUTPUT0;
+};
+
+@uniform float3 Vector3Parameter_WaveColor;
+void CalculateMatEmissiveColor(SrtPsData srtData : S_SRT_DATA,
+	out float3 out_0)
+{
+	// Retrieve SRT data:
+	@uniform(Vector3Parameter_WaveColor);
+
+	//ConstantVector3Node {
+	//} ConstantVector3Node
+	out_0 = Vector3Parameter_WaveColor;
+}
+
+PixelOutput main(in PixelInput In,
+	SrtPsData srtData : S_SRT_DATA)
+{
+	PixelOutput Out;
+
+	float3 matEmissiveColor;
+	CalculateMatEmissiveColor(srtData, matEmissiveColor);
+	Out.Color0 = float4(matEmissiveColor, 1.0f);
+
+	return Out;
+}

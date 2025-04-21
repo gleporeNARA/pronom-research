@@ -1,0 +1,251 @@
+[Vertex shader]
+
+
+#include "Shaders/HLSL/Preamble.shdh"
+#include "Shaders/HLSL/CommonHelpers.shdh"
+#include "Shaders/HLSL/GlobalConstants.shdh"
+
+struct VertexInput
+{
+	float3 Position : POSITION0;
+	float4 InstanceMatrix1 : COLOR1;
+	float4 InstanceMatrix2 : COLOR2;
+	float4 InstanceMatrix3 : COLOR3;
+	float2 TexCoords0 : TEXCOORD0;
+	float4 LocalQTangent : NORMAL0;
+};
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : SV_Position0;
+	float3 ObjectWorldPosition : TEXCOORD0;
+	float4 WorldPosition : TEXCOORD1;
+	float3 LocalPosition : TEXCOORD2;
+	float2 TexCoords0 : TEXCOORD3;
+	float3 WorldNormal : TEXCOORD4;
+	float3 WorldBinormal : TEXCOORD5;
+	float3 WorldTangent : TEXCOORD6;
+	float3 WorldView : TEXCOORD7;
+};
+
+VertexOutput main(in VertexInput In)
+{
+	VertexOutput Out;
+
+	// Create Instance World Matrix
+	float4x4 noBillboardWorldMatrix = float4x4(In.InstanceMatrix1, In.InstanceMatrix2, In.InstanceMatrix3, float4(0.0f, 0.0f, 0.0f, 1.0f));
+
+	// World space position
+	float4 worldPosition = mul(noBillboardWorldMatrix, float4(In.Position, 1.0f));
+
+	// Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	// Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+	// Object World Position
+	float3 objectWorldPosition = float3(noBillboardWorldMatrix[0].w, noBillboardWorldMatrix[1].w, noBillboardWorldMatrix[2].w);
+
+	// Pass object world position to pixel shader
+	Out.ObjectWorldPosition = objectWorldPosition;
+
+	// Pass world position to pixel shader
+	Out.WorldPosition = worldPosition;
+
+	// Pass local position to pixel shader
+	Out.LocalPosition = In.Position;
+
+	Out.TexCoords0 = In.TexCoords0;
+	// Compute local tangent frame
+	float3x3 localTangentFrame = GetTangentFrame(In.LocalQTangent);
+
+	float3 localNormal = localTangentFrame[2];
+
+	// World space Normal
+	float3 worldNormal = mul((float3x3)(noBillboardWorldMatrix), localNormal);
+
+	// Normalize World Normal
+	float3 worldNormalNormalized = normalize(worldNormal);
+
+	Out.WorldNormal = worldNormalNormalized;
+
+	float3 localBinormal = localTangentFrame[1];
+
+	// World space Binormal
+	float3 worldBinormal = mul((float3x3)(noBillboardWorldMatrix), localBinormal);
+
+	// Normalize World Binormal
+	float3 worldBinormalNormalized = normalize(worldBinormal);
+
+	Out.WorldBinormal = worldBinormalNormalized;
+
+	float3 localTangent = localTangentFrame[0];
+
+	// World space Tangent
+	float3 worldTangent = mul((float3x3)(noBillboardWorldMatrix), localTangent);
+
+	// Normalize World Tangent
+	float3 worldTangentNormalized = normalize(worldTangent);
+
+	Out.WorldTangent = worldTangentNormalized;
+
+	// World space view vector
+	float3 worldView = (g_CameraWorldPos.xyz - worldPosition.xyz);
+
+	Out.WorldView = worldView;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/HLSL/Preamble.shdh"
+#include "Shaders/HLSL/CommonHelpers.shdh"
+#include "Shaders/HLSL/GlobalConstants.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : SV_Position0;
+	float3 ObjectWorldPosition : TEXCOORD0;
+	float4 WorldPosition : TEXCOORD1;
+	float3 LocalPosition : TEXCOORD2;
+	float2 TexCoords0 : TEXCOORD3;
+	float3 WorldNormal : TEXCOORD4;
+	float3 WorldBinormal : TEXCOORD5;
+	float3 WorldTangent : TEXCOORD6;
+	float3 WorldView : TEXCOORD7;
+};
+
+struct PixelOutput
+{
+};
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	float4 Vector4Parameter_Color;
+	float2 Vector2Parameter_Texture_01_UV;
+	float2 Vector2Parameter_Texture_01_Panning;
+	float2 Vector2Parameter_Texture_02_UV;
+	float2 Vector2Parameter_Texture_02_Panning;
+	float FloatParameter_SphereMask_MultSize;
+	float FloatParameter_SphereMask_FadeOutExp;
+	float FloatParameter_Opacity_FresnelPower;
+	float FloatParameter__Use_FresnelGeneral;
+	float FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING0_FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING1_FloatParameter_BorderFresnel_FresnelPower;
+	float PADDING2_FloatParameter_BorderFresnel_FresnelPower;
+};
+VK_DESCRIPTOR(DS_Shader, 3) SamplerState _DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 4) Texture2D Texture2DParameter_Texture_01_Map_DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 5) Texture2D Texture2DParameter_Texture_02_Map_DefaultWrapSampler;
+VK_DESCRIPTOR(DS_Shader, 6) Texture2D Texture2DParameter_NM_DefaultWrapSampler;
+void CalculateMatOpacity(in float3 in_0,
+	in float3 in_1,
+	in float3 in_2,
+	in float2 in_3,
+	in float3 in_4,
+	out float out_0)
+{
+	// ObjectWorldPositionNode {
+	// ] ObjectWorldPositionNode
+	// WorldPositionNode {
+	// } WorldPositionNode
+	float3 Local0 = (in_0 - in_1);
+	float3 Local1 = Local0;
+	float Local2 = length(Local1);
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	float Local3 = (Local2 * FloatParameter_SphereMask_MultSize);
+	float Local4 = clamp(Local3, 0.0f, 1.0f);
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	float Local5 = pow(Local4, FloatParameter_SphereMask_FadeOutExp);
+	// LocalPosition {
+	// } LocalPosition
+	float2 Local6 = in_2.xz;
+	// ConstantVector2Node {
+	// } ConstantVector2Node
+	float2 Local7 = (Local6 * Vector2Parameter_Texture_01_UV);
+	// ConstantVector2Node {
+	// } ConstantVector2Node
+	float2 Local8 = (g_CurrentTime * Vector2Parameter_Texture_01_Panning);
+	float2 Local9 = (Local7 + Local8);
+	// Texture2DNode {
+	float4 Local10 = Texture2DParameter_Texture_01_Map_DefaultWrapSampler.Sample(_DefaultWrapSampler, Local9);
+	// [Local10] Get needed components
+	float Local11 = Local10.x;
+	// } Texture2DNode
+	// ConstantVector2Node {
+	// } ConstantVector2Node
+	float2 Local12 = (Local6 * Vector2Parameter_Texture_02_UV);
+	// ConstantVector2Node {
+	// } ConstantVector2Node
+	float2 Local13 = (g_CurrentTime * Vector2Parameter_Texture_02_Panning);
+	float2 Local14 = (Local12 + Local13);
+	// Texture2DNode {
+	float4 Local15 = Texture2DParameter_Texture_02_Map_DefaultWrapSampler.Sample(_DefaultWrapSampler, Local14);
+	// [Local15] Get needed components
+	float Local16 = Local15.x;
+	// } Texture2DNode
+	float Local17 = min(Local11, Local16);
+	float Local18 = clamp(Local17, 0.0f, 1.0f);
+	float Local19 = (Local5 * Local18);
+	float Local20 = clamp(Local19, 0.0f, 1.0f);
+	// Texture2DNode {
+	float4 Local21 = Texture2DParameter_NM_DefaultWrapSampler.Sample(_DefaultWrapSampler, in_3);
+	// [Local21] Convert normalmaps to tangent space vectors
+	Local21.xyzw = Local21.wzyx;
+	Local21.xyz = ((Local21.xyz * 2.0f) - 1.0f);
+	Local21.z = -(Local21.z);
+	Local21.xyz = normalize(Local21.xyz);
+	// [Local21] Get needed components
+	float3 Local22 = Local21.xyz;
+	// } Texture2DNode
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	// FresnelNode {
+	float Local23 = pow((1.0f - saturate(dot(Local22, in_4))), FloatParameter_Opacity_FresnelPower);
+	// } FresnelNode
+	float Local24 = (Local23 * Local20);
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	float Local25 = lerp(Local20, Local24, FloatParameter__Use_FresnelGeneral);
+	// ConstantFloatNode {
+	// } ConstantFloatNode
+	// FresnelNode {
+	float Local26 = pow((1.0f - saturate(dot(Local22, in_4))), FloatParameter_BorderFresnel_FresnelPower);
+	// } FresnelNode
+	float Local27 = (Local26 * Local5);
+	float Local28 = lerp(Local25, 1.0f, Local27);
+	// ConstantVector4Node {
+	// } ConstantVector4Node
+	float Local29 = Vector4Parameter_Color.w;
+	float Local30 = (Local28 * Local29);
+	float Local31 = clamp(Local30, 0.0f, 1.0f);
+	out_0 = Local31;
+}
+
+PixelOutput main(in PixelInput In)
+{
+	PixelOutput Out;
+
+	float matOpacity;
+	float3x3 NBT_WS = float3x3(In.WorldTangent, In.WorldNormal, In.WorldBinormal);
+
+	// Normalized world space view vector
+	float3 worldViewNormalized = normalize(In.WorldView);
+
+	// Calculate tangent space view vector
+	float3 tangentView = normalize(mul(NBT_WS, worldViewNormalized));
+
+	CalculateMatOpacity(In.ObjectWorldPosition, In.WorldPosition.xyz, In.LocalPosition.xyz, In.TexCoords0, tangentView, matOpacity);
+	clip((matOpacity - 0.5f));
+
+
+	return Out;
+}

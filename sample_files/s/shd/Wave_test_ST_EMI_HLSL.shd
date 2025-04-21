@@ -1,0 +1,77 @@
+[Vertex shader]
+
+
+#include "Shaders/HLSL/Preamble.shdh"
+#include "Shaders/HLSL/CommonHelpers.shdh"
+#include "Shaders/HLSL/GlobalConstants.shdh"
+
+struct VertexInput
+{
+	float3 Position : POSITION0;
+};
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : SV_Position0;
+};
+
+VK_DESCRIPTOR(DS_Shader, 1) cbuffer CB_EngineParams : register(b1)
+{
+	float4x4 WorldMatrix;
+};
+VertexOutput main(in VertexInput In)
+{
+	VertexOutput Out;
+
+	// World space position
+	float4 worldPosition = mul(WorldMatrix, float4(In.Position, 1.0f));
+
+	// Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	// Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/HLSL/Preamble.shdh"
+#include "Shaders/HLSL/CommonHelpers.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : SV_Position0;
+};
+
+struct PixelOutput
+{
+	float4 Color0 : SV_Target0;
+};
+
+VK_DESCRIPTOR(DS_Shader, 0) cbuffer CB_MaterialConstants : register(b0)
+{
+	float3 Vector3Parameter_WaveColor;
+	float PADDING_Vector3Parameter_WaveColor;
+};
+void CalculateMatEmissiveColor(out float3 out_0)
+{
+	// ConstantVector3Node {
+	// } ConstantVector3Node
+	out_0 = Vector3Parameter_WaveColor;
+}
+
+PixelOutput main(in PixelInput In)
+{
+	PixelOutput Out;
+
+	float3 matEmissiveColor;
+	CalculateMatEmissiveColor(matEmissiveColor);
+	Out.Color0 = float4(matEmissiveColor, 1.0f);
+
+	return Out;
+}

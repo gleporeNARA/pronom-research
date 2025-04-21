@@ -1,0 +1,126 @@
+[Vertex shader]
+
+
+#include "Shaders/HLSL/Preamble.shdh"
+#include "Shaders/HLSL/CommonHelpers.shdh"
+#include "Shaders/HLSL/GlobalConstants.shdh"
+
+struct VertexInput
+{
+	uint4 BoneIndices : BLENDINDICES0;
+	float4 BoneWeights : BLENDWEIGHT0;
+	float3 Position : POSITION0;
+	float4 LocalQTangent : NORMAL0;
+};
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : SV_Position0;
+	float3 ViewNormal : TEXCOORD0;
+};
+
+VK_DESCRIPTOR(DS_Shader, 1) cbuffer CB_EngineParams : register(b1)
+{
+	row_major float3x4 BoneMatrices[128];
+	float4x4 WorldMatrix;
+	uint _ObjectReceiveDecal;
+	uint PADDING0__ObjectReceiveDecal;
+	uint PADDING1__ObjectReceiveDecal;
+	uint PADDING2__ObjectReceiveDecal;
+};
+VertexOutput main(in VertexInput In)
+{
+	VertexOutput Out;
+
+	row_major float3x4 boneMatrix1 = BoneMatrices[In.BoneIndices.x];
+	row_major float3x4 boneMatrix2 = BoneMatrices[In.BoneIndices.y];
+	row_major float3x4 boneMatrix3 = BoneMatrices[In.BoneIndices.z];
+	row_major float3x4 boneMatrix4 = BoneMatrices[In.BoneIndices.w];
+	// World space position
+	float4 worldPosition = float4(0.0f, 0.0f, 0.0f, 1.0f);
+	worldPosition.xyz = (worldPosition.xyz + (In.BoneWeights.x * mul(boneMatrix1, float4(In.Position, 1.0f))));
+	worldPosition.xyz = (worldPosition.xyz + (In.BoneWeights.y * mul(boneMatrix2, float4(In.Position, 1.0f))));
+	worldPosition.xyz = (worldPosition.xyz + (In.BoneWeights.z * mul(boneMatrix3, float4(In.Position, 1.0f))));
+	worldPosition.xyz = (worldPosition.xyz + (In.BoneWeights.w * mul(boneMatrix4, float4(In.Position, 1.0f))));
+	worldPosition = mul(WorldMatrix, worldPosition);
+
+	// Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	// Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+	// Compute local tangent frame
+	float3x3 localTangentFrame = GetTangentFrame(In.LocalQTangent);
+
+	float3 localNormal = localTangentFrame[2];
+
+	// World space Normal
+	float3 worldNormal = float3(0.0f, 0.0f, 0.0f);
+	worldNormal = (worldNormal + (In.BoneWeights.x * mul(boneMatrix1, float4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (In.BoneWeights.y * mul(boneMatrix2, float4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (In.BoneWeights.z * mul(boneMatrix3, float4(localNormal, 0.0f))));
+	worldNormal = (worldNormal + (In.BoneWeights.w * mul(boneMatrix4, float4(localNormal, 0.0f))));
+	worldNormal = mul(WorldMatrix, float4(worldNormal, 0.0f)).xyz;
+
+	float3 viewSpaceNormal = mul((float3x3)(g_ViewMat), worldNormal);
+
+	Out.ViewNormal = viewSpaceNormal;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/HLSL/Preamble.shdh"
+#include "Shaders/HLSL/CommonHelpers.shdh"
+#include "Shaders/HLSL/PBR.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : SV_Position0;
+	float3 ViewNormal : TEXCOORD0;
+};
+
+struct PixelOutput
+{
+	float4 Color0 : SV_Target0;
+	float4 Color1 : SV_Target1;
+	float4 Color2 : SV_Target2;
+	float4 Color3 : SV_Target3;
+};
+
+VK_DESCRIPTOR(DS_Shader, 1) cbuffer CB_EngineParams : register(b1)
+{
+	row_major float3x4 BoneMatrices[128];
+	float4x4 WorldMatrix;
+	uint _ObjectReceiveDecal;
+	uint PADDING0__ObjectReceiveDecal;
+	uint PADDING1__ObjectReceiveDecal;
+	uint PADDING2__ObjectReceiveDecal;
+};
+PixelOutput main(in PixelInput In)
+{
+	PixelOutput Out;
+
+	float3 viewNormalNormalized = normalize(In.ViewNormal);
+
+	float matOcclusion = 1.0f;
+	GBufferData gBufferData;
+	gBufferData.ViewSpaceNormal = viewNormalNormalized;
+	gBufferData.BaseColor = float3(0.0f, 0.0f, 0.0f);
+	gBufferData.Occlusion = matOcclusion;
+	gBufferData.Roughness = 0.5f;
+	gBufferData.Reflectance = 0.5f;
+	gBufferData.MetalMask = 0.0f;
+	gBufferData.FXEmissive = true;
+	gBufferData.ShadingModel = 0;
+	gBufferData.CanReceiveDeferredDecals = _ObjectReceiveDecal;
+	gBufferData.Custom = float4(0.0f, 0.0f, 0.0f, 0.0f);
+	EncodeGBufferData(gBufferData, Out.Color0, Out.Color1, Out.Color2, Out.Color3);
+
+	return Out;
+}

@@ -1,0 +1,31 @@
+version BMRT 2.4.0d
+displacement stucco
+param	float	Km		0.05
+param	float	power		5
+param	float	frequency		10
+local	string	$_str_0 	"shader"
+local	float	magnitude	0
+local	point	PP	0 0 0
+initcode 2
+	return
+code
+	pushv	P 
+	pushs	$_str_0 
+	transforms
+	popv	PP 
+	pushf	power 
+	mulVF	PP frequency 
+	noisev
+	pow
+	mulF	Km 
+	popf	magnitude 
+	pushv	N 
+	normalize
+	mulFv	magnitude 
+	addV	P 
+	popv	P 
+	pushv	P 
+	calculatenormal
+	popv	N 
+	return_area
+	return

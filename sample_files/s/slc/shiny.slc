@@ -1,0 +1,285 @@
+version BMRT 2.4.0d
+surface shiny
+param	float	Ka		1
+param	float	Kd		0.5
+param	float	Ks		1
+param	float	Kr		0.5
+param	float	roughness		0.05
+param	float	blur		0
+param	color	specularcolor		1 1 1
+param	float	samples		1
+local	normal	Nf	0 0 0
+local	vector	IN	0 0 0
+local	color	ev	0 0 0
+local	vector	_18$Rdir	0 0 0
+local	float	_8$jitter	0
+code
+local	color	_8$C	0 0 0
+local	float	_8$bluramt	0
+local	float	_8$nrays	0
+local	vector	_11$uoffset	0 0 0
+local	vector	_11$voffset	0 0 0
+local	vector	_11$Tu	0 0 0
+local	vector	_11$Tv	0 0 0
+local	float	_11$i	0
+local	float	_11$j	0
+local	vector	_15$R	0 0 0
+local	point	_15$Pray	0 0 0
+initcode 7
+	return
+code
+	pushv	I 
+	pushv	N 
+	normalize
+	faceforward
+	popv	Nf 
+	pushv	I 
+	normalize
+	popv	IN 
+	pushif	0.001 
+	pushf	Kr 
+	gt
+	ifz	0
+	pushv	Nf 
+	pushv	IN 
+	reflect
+	normalize
+	popv	_18$Rdir 
+	pushif	1 
+	popf	_8$jitter 
+	pushif	0 
+	cset	_8$C 
+	pushif	1e-06 
+	pushv	_18$Rdir 
+	area
+	sqrt
+	fmax
+	addF	blur 
+	popf	_8$bluramt 
+	pushif	0 
+	raylevel
+	feqf
+	ifz	3
+	pushf	samples 
+	sqrt
+	ceil
+	pushif	1 
+	fmax
+	jump	4
+label 3
+	pushif	1 
+label 4
+	popf	_8$nrays 
+	pushif	1 
+	pushf	_8$nrays 
+	gt
+	pushif	0 
+	pushf	_8$bluramt 
+	gt
+	or
+	ifz	5
+	pushv	_18$Rdir 
+	xcomp
+	pushv	_18$Rdir 
+	ycomp
+	subff
+	pushv	_18$Rdir 
+	zcomp
+	pushv	_18$Rdir 
+	xcomp
+	subff
+	pushv	_18$Rdir 
+	ycomp
+	pushv	_18$Rdir 
+	zcomp
+	subff
+	normalize
+	mulFv	blur 
+	popv	_11$uoffset 
+	pushv	_11$uoffset 
+	pushv	_18$Rdir 
+	cross
+	popv	_11$voffset 
+	pushf	du 
+	pushif	1.5 
+	mulff
+	pushv	P 
+	Duv
+	mulvf
+	popv	_11$Tu 
+	pushf	dv 
+	pushif	1.5 
+	mulff
+	pushv	P 
+	Dvv
+	mulvf
+	popv	_11$Tv 
+	pushif	0 
+	popf	_11$i 
+label 7
+	pushf	_8$nrays 
+	pushf	_11$i 
+	lt
+	ifz	9
+	pushif	0 
+	popf	_11$j 
+label 10
+	pushf	_8$nrays 
+	pushf	_11$j 
+	lt
+	ifz	12
+	pushv	_11$voffset 
+	pushif	0.5 
+	pushf	_8$nrays 
+	pushif	0 
+	raylevel
+	feqf
+	ifz	14
+	pushif	0.5 
+	random
+	subff
+	mulF	_8$jitter 
+	pushif	0.5 
+	addff
+	jump	15
+label 14
+	pushif	0.5 
+label 15
+label 13
+	addF	_11$j 
+	divff
+	subff
+	mulfv
+	pushv	_11$uoffset 
+	pushif	0.5 
+	pushf	_8$nrays 
+	pushif	0 
+	raylevel
+	feqf
+	ifz	17
+	pushif	0.5 
+	random
+	subff
+	mulF	_8$jitter 
+	pushif	0.5 
+	addff
+	jump	18
+label 17
+	pushif	0.5 
+label 18
+label 16
+	addF	_11$i 
+	divff
+	subff
+	mulfv
+	addV	_18$Rdir 
+	addvv
+	popv	_15$R 
+	pushv	_11$Tv 
+	pushif	0.5 
+	pushf	_8$nrays 
+	pushif	0 
+	raylevel
+	feqf
+	ifz	20
+	pushif	0.5 
+	random
+	subff
+	mulF	_8$jitter 
+	pushif	0.5 
+	addff
+	jump	21
+label 20
+	pushif	0.5 
+label 21
+label 19
+	addF	_11$i 
+	divff
+	subff
+	mulfv
+	pushv	_11$Tu 
+	pushif	0.5 
+	pushf	_8$nrays 
+	pushif	0 
+	raylevel
+	feqf
+	ifz	23
+	pushif	0.5 
+	random
+	subff
+	mulF	_8$jitter 
+	pushif	0.5 
+	addff
+	jump	24
+label 23
+	pushif	0.5 
+label 24
+label 22
+	addF	_11$j 
+	divff
+	subff
+	mulfv
+	addV	P 
+	addvv
+	popv	_15$Pray 
+	pushv	_15$R 
+	normalize
+	pushv	P 
+	trace
+	addC	_8$C 
+	popc	_8$C 
+label 11
+	pushif	1 
+	addF	_11$j 
+	popf	_11$j 
+	jump	10
+label 12
+label 8
+	pushif	1 
+	addF	_11$i 
+	popf	_11$i 
+	jump	7
+label 9
+	mulFF	_8$nrays _8$nrays 
+	pushc	_8$C 
+	divcf
+	popc	_8$C 
+	jump	6
+label 5
+	pushv	_18$Rdir 
+	pushv	P 
+	trace
+	popc	_8$C 
+label 6
+	pushc	_8$C 
+label 2
+	mulFc	Kr 
+	popc	ev 
+	jump	1
+label 0
+	pushif	0 
+	cset	ev 
+label 1
+	pushf	roughness 
+	pushv	IN 
+	negv
+	pushv	Nf 
+	specular
+	mulFc	Ks 
+	addC	ev 
+	mulC	specularcolor 
+	pushv	Nf 
+	diffuse
+	mulFc	Kd 
+	ambient
+	mulFc	Ka 
+	addcc
+	mulC	Cs 
+	addcc
+	popc	Ci 
+	return_area
+	cpCC	Os Oi 
+	pushc	Oi 
+	mulC	Ci 
+	popc	Ci 
+	return

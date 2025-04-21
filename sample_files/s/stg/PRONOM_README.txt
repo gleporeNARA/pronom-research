@@ -1,0 +1,8 @@
+STATISTICA is a statistical package, developed by StatSoft Inc. Its first release (STATISTICA/DOS) dates back to 1991. The current (2012) release is STATISTICA 11. It was preceded by the package CSS (Complete Statistical System), which was first released in 1987.
+
+The following file formats are used by STATISTICA:
+
+STG Graph file
+
+
+http://fileformats.archiveteam.org/wiki/Statistica

@@ -1,0 +1,2693 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE SoundSet SYSTEM "SoundSet.dtd"[]>
+<SoundSet xmlns:ss="http://www.sibelius.com/xml/SoundSet.dtd">
+  <!-- 
+    Alteration or removal of these lines is a violation of the License Agreement: www.soundsetproject.com/legal/license/
+    
+    Vir2 VI.ONE v2 GM (Fixed) Sibelius Sound Set (c) 2008-2012 The Sound Set Project, a division of Sound Notes LLC.
+    
+    www.soundsetproject.com
+    
+    Version History:
+    v1.0.0 - 03-24-2009
+    v1.1.0 - 05-19-2010
+    v2.0.0 - 03-01-2012
+    
+  -->
+  <Header>
+    <FileVersion>50001</FileVersion>
+    <Name>Vir2 VI.ONE v2 GM (Fixed)</Name>
+    <PatchLoadMechanism>Fixed</PatchLoadMechanism>
+    <NumLanes>16</NumLanes>
+    <DefaultSoundSet>false</DefaultSoundSet>
+    <ProgramsRelativeTo>1</ProgramsRelativeTo>
+    <SupportsPitchBendRange>false</SupportsPitchBendRange>
+  </Header>
+  <ControllerTypeList>
+    <ControllerTypeDefinition Name="Modulation" Number="1" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Volume" Number="7" Binary="false">
+      <ControllerDefault>64</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Expression" Number="11" Binary="false">
+      <ControllerDefault>64</ControllerDefault>
+    </ControllerTypeDefinition>
+    <!--
+    <ControllerTypeDefinition Name="Controller20" Number="20" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller21" Number="21" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller22" Number="22" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller23" Number="23" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller24" Number="24" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller25" Number="25" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller26" Number="26" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller27" Number="27" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller28" Number="28" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller29" Number="29" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller30" Number="30" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller31" Number="31" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller32" Number="32" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller33" Number="33" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller34" Number="34" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller35" Number="35" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller36" Number="36" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller37" Number="37" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller38" Number="38" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller39" Number="39" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    -->
+    <ControllerTypeDefinition Name="Controller40" Number="40" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <!--
+    <ControllerTypeDefinition Name="Controller41" Number="41" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    <ControllerTypeDefinition Name="Controller42" Number="42" Binary="false">
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+    -->
+    <ControllerTypeDefinition Name="Sustain" Number="64" Binary="true">
+      <ControllerOn>127</ControllerOn>
+      <ControllerOff>0</ControllerOff>
+      <ControllerDefault>0</ControllerDefault>
+    </ControllerTypeDefinition>
+  </ControllerTypeList>
+  <VolumeTypeList>
+    <VolumeTypeDefinition Name="NoteOnVelocity" Method="Default"/>
+    <VolumeTypeDefinition Name="ModWheel" Method="Controller">
+      <ControllerType>Modulation</ControllerType>
+    </VolumeTypeDefinition>
+    <VolumeTypeDefinition Name="Volume" Method="Controller">
+      <ControllerType>Volume</ControllerType>
+    </VolumeTypeDefinition>
+    <VolumeTypeDefinition Name="Expression" Method="Controller">
+      <ControllerType>Expression</ControllerType>
+    </VolumeTypeDefinition>
+  </VolumeTypeList>
+  <AttackTypeList>
+    <AttackTypeDefinition Name="NoteOnVelocity" Method="Default"/>
+    <AttackTypeDefinition Name="ModWheel" Method="Controller">
+      <ControllerType>Modulation</ControllerType>
+    </AttackTypeDefinition>
+  </AttackTypeList>
+  <SwitchTypeList>
+    <!-- SYNTH SWITCHES -->
+    <SwitchTypeDefinition Name="SYNTH_FILTER_PORTA">
+      <Switch SoundIDChange="[reset]">
+        <ControllerSwitch Name="Modulation" Value="126"/>
+        <ControllerSwitch Name="Controller40" Value="25"/>
+        <ControllerSwitch Name="Controller41" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+portamento">
+        <ControllerSwitch Name="Modulation" Value="126"/>
+        <ControllerSwitch Name="Controller40" Value="25"/>
+        <ControllerSwitch Name="Controller41" Value="26"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <!-- GUITAR SWITCHES -->
+    <SwitchTypeDefinition Name="MANDOLIN_TREMOLO">
+      <Switch SoundIDChange="[reset]">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +tremolo.unmeasured">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <!-- ORCHESTRAL - BRASS SWITCHES -->
+    <SwitchTypeDefinition Name="ORCH_BRASS_ENSEMBLE">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+staccato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+staccatissimo">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+crescendo">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="+fp">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="+effects">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="+chords">
+        <KeySwitch Key="33"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_BRASS_QUINTET">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+staccato">
+        <KeySwitch Key="25"/>
+      </Switch>
+      <Switch SoundIDChange="+staccatissimo">
+        <KeySwitch Key="25"/>
+      </Switch>
+      <Switch SoundIDChange="+fp">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="+chords">
+        <KeySwitch Key="27"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_CORNET">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +short">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +long">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp">
+        <KeySwitch Key="29"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_FLUGELHORN">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +short">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +long">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp">
+        <KeySwitch Key="29"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_FRENCH_HORN">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato.heavy">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.non vibrato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +closed">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +closed.vibrato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +closed.vibrato.heavy">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +closed.non vibrato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +short">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +long">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +mute">
+        <KeySwitch Key="33"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_TROMBONE">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="21"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="21"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="21"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="21"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +short">
+        <KeySwitch Key="22"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.plunger">
+        <KeySwitch Key="23"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.plunger.vibrato">
+        <KeySwitch Key="23"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.plunger.vibrato.heavy">
+        <KeySwitch Key="23"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.plunger.non vibrato">
+        <KeySwitch Key="23"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo.mute">
+        <KeySwitch Key="25"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp.mute">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +long">
+        <KeySwitch Key="27"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup +wah-wah">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup">
+        <KeySwitch Key="30"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.vibrato">
+        <KeySwitch Key="30"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.vibrato.heavy">
+        <KeySwitch Key="30"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.non vibrato">
+        <KeySwitch Key="30"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo.mute.cup">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp.mute.cup">
+        <KeySwitch Key="32"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +buzz">
+        <KeySwitch Key="33"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_TROMBONE_BASS">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +short">
+        <KeySwitch Key="25"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +long">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute">
+        <KeySwitch Key="27"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato">
+        <KeySwitch Key="27"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato.heavy">
+        <KeySwitch Key="27"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.non vibrato">
+        <KeySwitch Key="27"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo.mute +short">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp.mute">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp">
+        <KeySwitch Key="30"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.vibrato">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.vibrato.heavy">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.non vibrato">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo.mute.cup +short">
+        <KeySwitch Key="32"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp.mute.cup">
+        <KeySwitch Key="33"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +buzz">
+        <KeySwitch Key="34"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_TRUMPET">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.vibrato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.vibrato.heavy">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.cup.non vibrato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +crescendo +mute.cup">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fp +mute.cup">
+        <KeySwitch Key="31"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_TRUMPET_PICC">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.half" IsMultipleNoteSample="true">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.whole" IsMultipleNoteSample="true">
+        <KeySwitch Key="29"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_TUBA">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="72"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="72"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="72"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="72"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="74"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="74"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <!-- ORCHESTRAL - STRINGS SWITCHES -->
+    <SwitchTypeDefinition Name="ORCH_CELLO_SECTION">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato">
+        <KeySwitch Key="26"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato.snap">
+        <KeySwitch Key="28"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute">
+        <KeySwitch Key="29"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato">
+        <KeySwitch Key="29"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato.heavy">
+        <KeySwitch Key="29"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.non vibrato">
+        <KeySwitch Key="29"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +marcato">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +effects">
+        <KeySwitch Key="33"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +col legno">
+        <KeySwitch Key="35"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_CELLO_SOLO">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +harmonic">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +marcato">
+        <KeySwitch Key="27"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="27"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="27"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.non vibrato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato">
+        <KeySwitch Key="29"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato.snap">
+        <KeySwitch Key="30"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +tremolo.unmeasured.sul ponticello" IsMultipleNoteSample="true">
+        <KeySwitch Key="31"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_CONTRABASS_SECTION">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato">
+        <KeySwitch Key="26"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_CONTRABASS_SOLO">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato">
+        <KeySwitch Key="26"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_STRINGS_ENSEMBLE">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+tremolo.unmeasured" IsMultipleNoteSample="true">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="+marcato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+staccato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+staccatissimo">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+pizzicato">
+        <KeySwitch Key="29"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="+effects">
+        <KeySwitch Key="31"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_VIOLA_SECTION">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato.heavy">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.non vibrato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato">
+        <KeySwitch Key="28"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato.snap">
+        <KeySwitch Key="29"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_VIOLA_SOLO">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.non vibrato">
+        <KeySwitch Key="28"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato">
+        <KeySwitch Key="29"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +harmonic">
+        <KeySwitch Key="31"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_VIOLIN_SECTION">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.vibrato.heavy">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +mute.non vibrato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato">
+        <KeySwitch Key="28"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +tremolo.unmeasured.sul ponticello" IsMultipleNoteSample="true">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +marcato">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +col legno">
+        <KeySwitch Key="33"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="+chromatic">
+        <KeySwitch Key="35"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_VIOLIN_SOLO">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato">
+        <KeySwitch Key="28"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +pizzicato.snap">
+        <KeySwitch Key="29"/>
+        <VolumeType>NoteOnVelocity</VolumeType>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +harmonic">
+        <KeySwitch Key="31"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +tremolo.unmeasured.sul ponticello" IsMultipleNoteSample="true">
+        <KeySwitch Key="33"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <!-- ORCHESTRAL - WOODWINDS SWITCHES -->
+    <SwitchTypeDefinition Name="ORCH_BASSOON">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+fast">
+        <KeySwitch Key="25"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+short">
+        <KeySwitch Key="27"/>
+      </Switch>
+      <Switch SoundIDChange="+expressive">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +flutter-tongue" IsMultipleNoteSample="true">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +tremolo.unmeasured" IsMultipleNoteSample="true">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +glissando">
+        <KeySwitch Key="30"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.half" IsMultipleNoteSample="true">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.whole" IsMultipleNoteSample="true">
+        <KeySwitch Key="32"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_CLARINET">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+short">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +half.down +grace">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +whole.down +grace">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +half.up +grace">
+        <KeySwitch Key="33"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +whole.up +grace">
+        <KeySwitch Key="35"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_CLARINET_BASS">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+short">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="+expressive">
+        <KeySwitch Key="27"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.half" IsMultipleNoteSample="true">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.whole" IsMultipleNoteSample="true">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +half.down +grace">
+        <KeySwitch Key="30"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +whole.down +grace">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +half.up +grace">
+        <KeySwitch Key="32"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +whole.up +grace">
+        <KeySwitch Key="33"/>
+      </Switch>
+      <Switch SoundIDChange="+key clicks">
+        <KeySwitch Key="34"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_ENGLISH_HORN">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+short">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="+expressive">
+        <KeySwitch Key="27"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +whole.down +grace">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +half.down +grace">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +half.up +grace">
+        <KeySwitch Key="30"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +whole.up +grace">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.half" IsMultipleNoteSample="true">
+        <KeySwitch Key="32"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.whole" IsMultipleNoteSample="true">
+        <KeySwitch Key="33"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_FLUTE">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+short">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="+expressive">
+        <KeySwitch Key="27"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +glissando">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +flutter-tongue" IsMultipleNoteSample="true">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +tremolo.unmeasured" IsMultipleNoteSample="true">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.half" IsMultipleNoteSample="true">
+        <KeySwitch Key="30"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.whole" IsMultipleNoteSample="true">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +down +grace">
+        <KeySwitch Key="32"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +up +grace">
+        <KeySwitch Key="33"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +glissando +short">
+        <KeySwitch Key="34"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +effects">
+        <KeySwitch Key="35"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_FLUTE_ALTO">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+short">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="+expressive">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +flutter-tongue" IsMultipleNoteSample="true">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +tremolo.unmeasured" IsMultipleNoteSample="true">
+        <KeySwitch Key="31"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_FLUTE_PICCOLO">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="26"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+short">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +glissando">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +down +grace">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +up +grace">
+        <KeySwitch Key="33"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.half" IsMultipleNoteSample="true">
+        <KeySwitch Key="35"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.whole" IsMultipleNoteSample="true">
+        <KeySwitch Key="36"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_OBOE">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="24"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccato">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +staccatissimo">
+        <KeySwitch Key="25"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+short">
+        <KeySwitch Key="26"/>
+      </Switch>
+      <Switch SoundIDChange="+expressive">
+        <KeySwitch Key="27"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +harmonic">
+        <KeySwitch Key="28"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +half.down +grace">
+        <KeySwitch Key="29"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +whole.down +grace">
+        <KeySwitch Key="30"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +half.up +grace">
+        <KeySwitch Key="31"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +whole.up +grace">
+        <KeySwitch Key="32"/>
+      </Switch>
+      <Switch SoundIDChange="+multiphonics">
+        <KeySwitch Key="33"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.half" IsMultipleNoteSample="true">
+        <KeySwitch Key="34"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +trill.whole" IsMultipleNoteSample="true">
+        <KeySwitch Key="35"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <!-- ORCHESTRAL - GENERAL SWITCHES -->
+    <SwitchTypeDefinition Name="ORCH_GENERAL">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +vibrato.heavy">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +non vibrato">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_GENERAL_ALT">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+vibrato">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+vibrato.heavy">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+      <Switch SoundIDChange="+non vibrato">
+        <KeySwitch Key="0"/>
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_GENERAL_FLUTTER">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one -flutter-tongue +tremolo.unmeasured">
+        <KeySwitch Key="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_GENERAL_FLUTTER_ALT">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-flutter-tongue +tremolo.unmeasured">
+        <KeySwitch Key="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_GENERAL_MARC">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one -marcato +staccato">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one -marcato +staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_GENERAL_MARC_ALT">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-marcato +staccato">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-marcato +staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_GENERAL_STAC">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one -staccato +staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <SwitchTypeDefinition Name="ORCH_GENERAL_STAC_ALT">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="0"/>
+      </Switch>
+      <Switch SoundIDChange="-staccato +staccatissimo">
+        <KeySwitch Key="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <!-- ORGAN SWITCHES -->
+    <SwitchTypeDefinition Name="ORGAN_STANDARD">
+      <Switch SoundIDChange="[reset]">
+        <ControllerSwitch Name="Modulation" Value="64"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +fast">
+        <ControllerSwitch Name="Modulation" Value="127"/>
+      </Switch>
+      <Switch SoundIDChange="-vi-one +slow">
+        <ControllerSwitch Name="Modulation" Value="0"/>
+      </Switch>
+    </SwitchTypeDefinition>
+    <!-- DRUM LOOPS -->
+    <SwitchTypeDefinition Name="LOOP_START_ALTERNATE">
+      <Switch SoundIDChange="[reset]">
+        <KeySwitch Key="48"/>
+      </Switch>
+    </SwitchTypeDefinition>
+  </SwitchTypeList>
+  <PatchList>
+    <!-- ######################## -->
+    <!-- ##### BASS PATCHES ##### -->
+    <!-- ######################## -->
+    <!-- ACOUSTIC -->
+    <!-- ELECTRIC -->
+    <!-- SYNTH [MONO] -->
+    <!-- SYNTH [POLY] -->
+    <!-- ###################### -->
+    <!-- ##### DRUM LOOPS ##### -->
+    <!-- ###################### -->
+    <!-- BREAKBEATS -->
+    <!-- DANCE -->
+    <!-- FUNK -->
+    <!-- FX -->
+    <!-- HIP HOP -->
+    <!-- JAZZ -->
+    <!-- RNB -->
+    <!-- ROCK -->
+    <!-- ################# -->
+    <!-- ##### DRUMS ##### -->
+    <!-- ################# -->
+    <!-- ACOUSTIC PREMIUM -->
+    <!-- EIGHTIES -->
+    <!-- ELECTRONIC -->
+    <!-- HIP HOP -->
+    <!-- LO FI AND AMBIENT -->
+    <!-- PERCUSSION -->
+    <!-- POP AND ROCK -->
+    <!-- RNB -->
+    <!-- ############################ -->
+    <!-- ##### ETHNIC AND WORLD ##### -->
+    <!-- ############################ -->
+    <!-- AUSTRALIA -->
+    <!-- CELTIC -->
+    <!-- INDIA -->
+    <!-- MIDDLE EAST -->
+    <!-- PACIFIC -->
+    <!-- SOUTH AMERICA -->
+    <!-- ############## -->
+    <!-- ##### FX ##### -->
+    <!-- ############## -->
+    <!-- ######################## -->
+    <!-- ##### GENERAL MIDI ##### -->
+    <!-- ######################## -->
+    <Patch Name="[General MIDI] 001 Acoustic Grand">
+      <SoundID>keyboard.piano.grand.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 002 Bright Grand">
+      <SoundID>keyboard.piano.grand.bright.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 003 Electric Grand">
+      <SoundID>keyboard.piano.electric.grand.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 004 Honky-Tonk">
+      <SoundID>keyboard.piano.upright.honky-tonk.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 005 Electric Piano 1">
+      <SoundID>keyboard.piano.electric.overdriven.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 006 Electric Piano 2">
+      <SoundID>keyboard.piano.electric.stage.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 007 Harpsichord">
+      <SoundID>keyboard.harpsichord.8'.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 008 Clavinet">
+      <SoundID>keyboard.harpsichord.synth.clavinet.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 009 Celesta">
+      <SoundID>keyboard.celesta.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 010 Glockenspiel">
+      <SoundID>pitched percussion.metal.glockenspiel.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 011 Music Box">
+      <SoundID>pitched percussion.metal.music box.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 012 Vibraphone">
+      <SoundID>pitched percussion.metal.vibraphone.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 013 Marimba">
+      <SoundID>pitched percussion.wood.marimba.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 014 Xylophone">
+      <SoundID>pitched percussion.wood.xylophone.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 015 Tubular Bells">
+      <SoundID>pitched percussion.metal.bells.tubular bells.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 016 Dulcimer">
+      <SoundID>pitched percussion.stringed.hammer dulcimer.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 017 Drawbar Organ">
+      <SoundID>keyboard.organ.drawbar.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 018 Percussive Organ">
+      <SoundID>keyboard.organ.drawbar.percussive.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 019 Rock Organ">
+      <SoundID>keyboard.organ.drawbar.with rotary speaker.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 020 Church Organ">
+      <SoundID>keyboard.organ.pipe.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 021 Reed Organ">
+      <SoundID>keyboard.organ.reed.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 022 Accordion">
+      <SoundID>keyboard.organ.reed.accordion.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 023 Harmonica">
+      <SoundID>wind.harmonica.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 024 Tango Accord">
+      <SoundID>keyboard.organ.reed.accordion.tango.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 025 Nylon String Guitar">
+      <SoundID>guitar.nylon string.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 026 Steel String Guitar">
+      <SoundID>guitar.steel string.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 027 Electric Jazz Guitar">
+      <SoundID>guitar.electric.jazz.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 028 Electric Clean Guitar">
+      <SoundID>guitar.electric.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 029 Electric Muted Guitar">
+      <SoundID>guitar.electric.mute.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 030 Overdrive Guitar">
+      <SoundID>guitar.electric.overdrive.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 031 Distortion Guitar">
+      <SoundID>guitar.electric.distortion.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 032 Guitar Harmonics">
+      <SoundID>guitar.electric.harmonic.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 033 Acoustic Bass">
+      <SoundID>guitar.bass.acoustic.upright.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 034 Finger Bass">
+      <SoundID>guitar.bass.electric.finger.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 035 Bass Picked">
+      <SoundID>guitar.bass.electric.pick.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 036 Fretless Bass">
+      <SoundID>guitar.bass.electric.fretless.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 037 Slap Bass 1">
+      <SoundID>guitar.bass.electric.slap.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 038 Slap Bass 2">
+      <SoundID>guitar.bass.electric.pop.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 039 Synth Bass 1">
+      <SoundID>guitar.bass.synth.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 040 Synth Bass 2">
+      <SoundID>guitar.bass.synth.midi.vi-one.2</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 041 Violin">
+      <SoundID>strings.violin.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 042 Viola">
+      <SoundID>strings.viola.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 043 Cello">
+      <SoundID>strings.violoncello.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 044 Contrabass">
+      <SoundID>strings.contrabass.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 045 Tremolo Strings">
+      <SoundID>strings.string orchestra.tremolo.unmeasured.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 046 Pizzicato Strings">
+      <SoundID>strings.string orchestra.pizzicato.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 047 Orchestral Harp">
+      <SoundID>pitched percussion.stringed.harp.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 048 Timpani">
+      <SoundID>pitched percussion.drum.timpani.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 049 String Ensemble 1">
+      <SoundID>strings.string orchestra.midi.vi-one.2</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 050 String Ensemble 2">
+      <SoundID>strings.string orchestra.lush.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 051 Synth String 1">
+      <SoundID>strings.string orchestra.synth.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 052 Synth String 2">
+      <SoundID>strings.string orchestra.synth.midi.vi-one.2</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 053 Choir Ahs">
+      <SoundID>voice.ensemble.ah.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 054 Vocal Oohs">
+      <SoundID>voice.ensemble.oo.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 055 Synth Vox">
+      <SoundID>voice.synth.ensemble.doo.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 056 Orchestral Hits">
+      <SoundID>brass.brass group.synth.orchestra hit.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 057 Trumpet">
+      <SoundID>brass.trumpets.trumpet.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 058 Trombone">
+      <SoundID>brass.trombones.tenor.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 059 Tuba">
+      <SoundID>brass.tubas.tuba.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 060 Trumpet Muted">
+      <SoundID>brass.trumpets.trumpet.mute.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 061 French Horn">
+      <SoundID>brass.horns.french horn.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 062 Brass Section">
+      <SoundID>brass.brass group.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 063 Synth Brass 1">
+      <SoundID>brass.brass group.synth.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 064 Synth Brass 2">
+      <SoundID>brass.brass group.synth.midi.vi-one.2</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 065 Soprano Sax">
+      <SoundID>wind.saxophones.soprano.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 066 Alto Sax">
+      <SoundID>wind.saxophones.alto.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 067 Tenor Sax">
+      <SoundID>wind.saxophones.tenor.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 068 Baritone Sax">
+      <SoundID>wind.saxophones.baritone.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 069 Oboe">
+      <SoundID>wind.oboes.oboe.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 070 English Horn">
+      <SoundID>wind.oboes.english horn.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 071 Bassoon">
+      <SoundID>wind.bassoons.bassoon.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 072 Clarinet">
+      <SoundID>wind.clarinets.clarinet.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 073 Piccolo">
+      <SoundID>wind.flutes.flute.piccolo.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 074 Flute">
+      <SoundID>wind.flutes.flute.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 075 Recorder">
+      <SoundID>wind.flutes.recorder.descant.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 076 Pan Flute">
+      <SoundID>wind.flutes.breathy.pan pipe.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 077 Bottle Blow">
+      <SoundID>wind.flutes.breathy.blown bottle.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 078 Shakuhachi">
+      <SoundID>wind.flutes.breathy.shakuhachi.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 079 Whistle">
+      <SoundID>wind.flutes.breathy.whistling.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 080 Ocarina">
+      <SoundID>wind.flutes.breathy.ocarina.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 081 Lead 1 Square">
+      <SoundID>synth.tone.thin.square.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 082 Lead 2 Sawtooth">
+      <SoundID>synth.tone.fat.sawtooth.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 083 Lead 3 Calliope">
+      <SoundID>wind.flutes.flute.ensemble.synth.calliope.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 084 Lead 4 Chiff">
+      <SoundID>guitar.electric.synth.chiff.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 085 Lead 5 Charang">
+      <SoundID>guitar.electric.synth.charang.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 086 Lead 6 Voice">
+      <SoundID>voice.synth.ensemble.oo.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 087 Lead 7 Fifths">
+      <SoundID>brass.brass group.synth.fifths.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 088 Lead 8 Bs&amp;Ld">
+      <SoundID>guitar.bass.synth.bass+lead.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 089 Pad 1 New Age">
+      <SoundID>keyboard.piano.synth.new age.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 090 Pad 2 Warm">
+      <SoundID>synth.pad.warm.static.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 091 Pad 3 Poly Synth">
+      <SoundID>brass.brass group.synth.polysynth.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 092 Pad 4 Choir">
+      <SoundID>voice.synth.ensemble.ah.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 093 Pad 5 Bowed">
+      <SoundID>synth.pad.warm.static.bowed.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 094 Pad 6 Metallic">
+      <SoundID>synth.pad.bright.metallic.shimmering.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 095 Pad 7 Halo">
+      <SoundID>voice.synth.ensemble.ah.halo.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 096 Pad 8 Sweep">
+      <SoundID>synth.sweep.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 097 FX 1 Rain">
+      <SoundID>synth.sweep.rain.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 098 FX 2 Soundtrack">
+      <SoundID>synth.sweep.soundtrack.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 099 FX 3 Crystal">
+      <SoundID>pitched percussion.metal.bells.synth.crystal.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 100 FX 4 Atmosphere">
+      <SoundID>keyboard.piano.synth.atmosphere.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 101 FX 5 Brightness">
+      <SoundID>voice.synth.ensemble.ah.brightness.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 102 FX 6 Goblin">
+      <SoundID>synth.sweep.goblins.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 103 FX 6 Echos">
+      <SoundID>voice.synth.ensemble.ah.echoes.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 104 FX 8 Sci-Fi">
+      <SoundID>synth.pad.bright.static.sci-fi.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 105 Sitar">
+      <SoundID>guitar.sitar.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 106 Banjo">
+      <SoundID>guitar.steel string.banjo.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 107 Shamisen">
+      <SoundID>guitar.shamisen.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 108 Koto">
+      <SoundID>guitar.koto.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 109 Kalimba">
+      <SoundID>pitched percussion.wood.kalimba.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 110 Bagpipe">
+      <SoundID>wind.pipes.bagpipes.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 111 Fiddle">
+      <SoundID>strings.fiddle.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 112 Shenai">
+      <SoundID>wind.oboes.shanai.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 113 Tinkle Bell">
+      <SoundID>pitched percussion.metal.bells.tinkle bells.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 114 Agogo">
+      <SoundID>pitched percussion.metal.bells.agogo.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 115 Steel Drum">
+      <SoundID>pitched percussion.metal.steel drums.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 116 Wood Block">
+      <SoundID>pitched percussion.wood.woodblocks.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 117 Taiko Drum">
+      <SoundID>pitched percussion.drum.taiko.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 118 Melodic Tom">
+      <SoundID>pitched percussion.drum.tom-tom.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 119 Synth Drum">
+      <SoundID>pitched percussion.drum.tom-tom.midi.vi-one.2</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 120 Reverse Cymbal">
+      <SoundID>unpitched.metal.cymbal.reverse.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 121 Guitar Fret Noise">
+      <SoundID>unpitched.exotic.guitar fret noise.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 122 Breath">
+      <SoundID>unpitched.exotic.breath noise.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 123 Seashore">
+      <SoundID>unpitched.exotic.seashore.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 124 Bird Chirp">
+      <SoundID>unpitched.exotic.bird tweet.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 125 Telephone Ring">
+      <SoundID>unpitched.exotic.telephone ring.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 126 Helicopter">
+      <SoundID>unpitched.exotic.helicopter.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 127 Applause">
+      <SoundID>unpitched.exotic.applause.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] 128 Gun Shot">
+      <SoundID>unpitched.exotic.gunshot.midi.vi-one</SoundID>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] Kit-Brush">
+      <DrumMap>[General MIDI] Kit-Brush</DrumMap>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] Kit-Electronic">
+      <DrumMap>[General MIDI] Kit-Electronic</DrumMap>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] Kit-Jazz">
+      <DrumMap>[General MIDI] Kit-Jazz</DrumMap>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] Kit-Orchestra">
+      <DrumMap>[General MIDI] Kit-Orchestra</DrumMap>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] Kit-Power">
+      <DrumMap>[General MIDI] Kit-Power</DrumMap>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] Kit-Room">
+      <DrumMap>[General MIDI] Kit-Room</DrumMap>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] Kit-Standard">
+      <DrumMap>[General MIDI] Kit-Standard</DrumMap>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <Patch Name="[General MIDI] Kit-TR-808">
+      <DrumMap>[General MIDI] Kit-TR-808</DrumMap>
+      <VolumeType>NoteOnVelocity</VolumeType>
+    </Patch>
+    <!-- ############################## -->
+    <!-- ##### GUITARS - ACOUSTIC ##### -->
+    <!-- ############################## -->
+    <!-- ############################## -->
+    <!-- ##### GUITARS - ELECTRIC ##### -->
+    <!-- ############################## -->
+    <!-- ############################# -->
+    <!-- ##### KEYBOARDS AND EPS ##### -->
+    <!-- ############################# -->
+    <!-- ############################## -->
+    <!-- ##### ORCHESTRAL - BRASS ##### -->
+    <!-- ############################## -->
+    <!-- BASS TROMBONE -->
+    <!-- BRASS ENSEMBLE -->
+    <!-- BRASS QUINTET -->
+    <!-- CORNET -->
+    <!-- FLUGELHORN -->
+    <!-- FRENCH HORN -->
+    <!-- PICCOLO TRUMPET -->
+    <!-- TROMBONE -->
+    <!-- TRUMPET -->
+    <!-- TUBA -->
+    <!-- ################################### -->
+    <!-- ##### ORCHESTRAL - PERCUSSION ##### -->
+    <!-- ################################### -->
+    <!-- ################################ -->
+    <!-- ##### ORCHESTRAL - STRINGS ##### -->
+    <!-- ################################ -->
+    <!-- CELLO -->
+    <!-- CONTRABASS -->
+    <!-- STRING ORCHESTRA -->
+    <!-- VIOLA -->
+    <!-- VIOLIN -->
+    <!-- ################################## -->
+    <!-- ##### ORCHESTRAL - WOODWINDS ##### -->
+    <!-- ################################## -->
+    <!-- ALTO FLUTE -->
+    <!-- BASS CLARINET -->
+    <!-- BASSOON -->
+    <!-- CLARINET -->
+    <!-- ENGLISH HORN -->
+    <!-- FLUTE -->
+    <!-- OBOE -->
+    <!-- PICCOLO -->
+    <!-- ################## -->
+    <!-- ##### ORGANS ##### -->
+    <!-- ################## -->
+    <!-- ############################# -->
+    <!-- ##### PIANOS - ACOUSTIC ##### -->
+    <!-- ############################# -->
+    <!-- ############################# -->
+    <!-- ##### PIANOS - PREPARED ##### -->
+    <!-- ############################# -->
+    <!-- ############################### -->
+    <!-- ##### POP HORNS AND BRASS ##### -->
+    <!-- ############################### -->
+    <!-- ########################## -->
+    <!-- ##### SYNTH - MODERN ##### -->
+    <!-- ########################## -->
+    <!-- ATTACK -->
+    <!-- BASS [MONO] -->
+    <!-- BASS [POLY] -->
+    <!-- FX -->
+    <!-- LEAD [MONO] -->
+    <!-- LEAD [POLY] -->
+    <!-- PAD -->
+    <!-- RHYTHMIC -->
+    <!-- ########################### -->
+    <!-- ##### SYNTH - VINTAGE ##### -->
+    <!-- ########################### -->
+    <!-- *UNCATEGORIZED* -->
+    <!-- ARP 2600 -->
+    <!-- ARP ODYSSEY -->
+    <!-- ARP STRING ENSEMBLE -->
+    <!-- CRUMAR BIT 01 -->
+    <!-- FARFISA COMBO ORGAN -->
+    <!-- JUPITER 8 -->
+    <!-- KORG DW8000 -->
+    <!-- MELLOTRON -->
+    <!-- MEMORYMOOG -->
+    <!-- MINIMOOG -->
+    <!-- MOOG TAURUS -->
+    <!-- OBERHEIM MATRIX 12 -->
+    <!-- OBERHEIM OB8 -->
+    <!-- OBERHEIM OBX-A -->
+    <!-- OXFORD OSCAR -->
+    <!-- ROLAND JUNO-106 -->
+    <!-- ROLAND JX3P -->
+    <!-- ROLAND JX8P -->
+    <!-- ROLAND TB303 -->
+    <!-- SEQUENTIAL CIRCUITS -->
+    <!-- VOX CONTINENTAL -->
+    <!-- YAMAHA CS80 -->
+  </PatchList>
+  <DrumMapList>
+    <!-- ######################## -->
+    <!-- ##### DRUMS - MAPS ##### -->
+    <!-- ######################## -->
+    <!-- ACOUSTIC PREMIUM -->
+    <!-- EIGHTIES -->
+    <!-- ELECTRONIC -->
+    <!-- HIP HOP -->
+    <!-- LO FI AND AMBIENT -->
+    <!-- PERCUSSION -->
+    <!-- POP AND ROCK -->
+    <!-- RNB -->
+    <!-- ################################### -->
+    <!-- ##### ETHNIC AND WORLD - MAPS ##### -->
+    <!-- ################################### -->
+    <!-- AUSTRALIA -->
+    <!-- CELTIC -->
+    <!-- INDIA -->
+    <!-- MIDDLE EAST -->
+    <!-- PACIFIC -->
+    <!-- SOUTH AMERICA -->
+    <!-- ############################### -->
+    <!-- ##### GENERAL MIDI - MAPS ##### -->
+    <!-- ############################### -->
+    <DrumMapDefinition Name="[General MIDI] Kit-Brush">
+      <DrumSound Pitch="27" SoundID="unpitched.exotic.high q.kit-brush.midi.vi-one" Name="[Kit-Brush] High Q"/>
+      <DrumSound Pitch="28" SoundID="unpitched.exotic.slap.kit-brush.midi.vi-one" Name="[Kit-Brush] Slap"/>
+      <DrumSound Pitch="29" SoundID="unpitched.exotic.scratch push.kit-brush.midi.vi-one" Name="[Kit-Brush] Scratch - Push"/>
+      <DrumSound Pitch="30" SoundID="unpitched.exotic.scratch pull.kit-brush.midi.vi-one" Name="[Kit-Brush] Scratch - Pull"/>
+      <DrumSound Pitch="31" SoundID="unpitched.wood.medium.drum sticks.kit-brush.midi.vi-one" Name="[Kit-Brush] Drum Sticks"/>
+      <DrumSound Pitch="32" SoundID="unpitched.exotic.square click.kit-brush.midi.vi-one" Name="[Kit-Brush] Click"/>
+      <DrumSound Pitch="33" SoundID="unpitched.wood.medium.metronome click.kit-brush.midi.vi-one" Name="[Kit-Brush] Metronome Click"/>
+      <DrumSound Pitch="34" SoundID="unpitched.metal.bells.high.metronome bell.kit-brush.midi.vi-one" Name="[Kit-Brush] Metronome Bell"/>
+      <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.kit-brush.midi.vi-one.2" Name="[Kit-Brush] Kick Drum 2"/>
+      <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.kit-brush.midi.vi-one" Name="[Kit-Brush] Kick Drum 1"/>
+      <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.kit-brush.midi.vi-one"
+        Name="[Kit-Brush] Snare Drum - Side Stick"/>
+      <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.kit-brush.midi.vi-one" Name="[Kit-Brush] Snare Drum 1"/>
+      <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap.kit-brush.midi.vi-one" Name="[Kit-Brush] Hand Clap"/>
+      <DrumSound Pitch="40" SoundID="unpitched.drum.medium.snare drum.snares on.kit-brush.midi.vi-one.2" Name="[Kit-Brush] Snare Drum 2"/>
+      <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom.kit-brush.midi.vi-one" Name="[Kit-Brush] Low Tom 1"/>
+      <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.kit-brush.midi.vi-one" Name="[Kit-Brush] Closed Hi-hat"/>
+      <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom.kit-brush.midi.vi-one" Name="[Kit-Brush] Low Tom 2"/>
+      <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal.kit-brush.midi.vi-one" Name="[Kit-Brush] Pedal Hi-hat"/>
+      <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom.kit-brush.midi.vi-one" Name="[Kit-Brush] Mid Tom 1"/>
+      <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.kit-brush.midi.vi-one" Name="[Kit-Brush] Open Hi-hat"/>
+      <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom.kit-brush.midi.vi-one" Name="[Kit-Brush] Mid Tom 2"/>
+      <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.kit-brush.midi.vi-one" Name="[Kit-Brush] High Tom 1"/>
+      <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.kit-brush.midi.vi-one.high" Name="[Kit-Brush] Crash Cymbal 1"/>
+      <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom.kit-brush.midi.vi-one" Name="[Kit-Brush] High Tom 2"/>
+      <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.kit-brush.midi.vi-one.high" Name="[Kit-Brush] Ride Cymbal 1"/>
+      <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese.kit-brush.midi.vi-one" Name="[Kit-Brush] China Cymbal"/>
+      <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.kit-brush.midi.vi-one" Name="[Kit-Brush] Ride Bell"/>
+      <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame.kit-brush.midi.vi-one" Name="[Kit-Brush] Tambourine"/>
+      <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash.kit-brush.midi.vi-one" Name="[Kit-Brush] Splash Cymbal"/>
+      <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell.kit-brush.midi.vi-one" Name="[Kit-Brush] Cowbell"/>
+      <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.kit-brush.midi.vi-one.medium" Name="[Kit-Brush] Crash Cymbal 2"/>
+      <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap.kit-brush.midi.vi-one" Name="[Kit-Brush] Vibraslap"/>
+      <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.kit-brush.midi.vi-one.medium" Name="[Kit-Brush] Ride Cymbal 2"/>
+      <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo.kit-brush.midi.vi-one" Name="[Kit-Brush] High Bongo"/>
+      <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo.kit-brush.midi.vi-one" Name="[Kit-Brush] Low Bongo"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute.kit-brush.midi.vi-one" Name="[Kit-Brush] High Conga - Mute"/>
+      <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga.kit-brush.midi.vi-one" Name="[Kit-Brush] High Conga"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga.kit-brush.midi.vi-one" Name="[Kit-Brush] Low Conga"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.kit-brush.midi.vi-one" Name="[Kit-Brush] High Timbale"/>
+      <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.kit-brush.midi.vi-one" Name="[Kit-Brush] Low Timbale"/>
+      <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo.kit-brush.midi.vi-one" Name="[Kit-Brush] High Agogo"/>
+      <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo.kit-brush.midi.vi-one" Name="[Kit-Brush] Low Agogo"/>
+      <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa.kit-brush.midi.vi-one" Name="[Kit-Brush] Cabasa"/>
+      <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca.kit-brush.midi.vi-one" Name="[Kit-Brush] Maracas"/>
+      <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.kit-brush.midi.vi-one.short" Name="[Kit-Brush] Whistle - Short"/>
+      <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.kit-brush.midi.vi-one.long" Name="[Kit-Brush] Whistle - Long"/>
+      <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.kit-brush.midi.vi-one.short" Name="[Kit-Brush] Guiro - Short"/>
+      <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.kit-brush.midi.vi-one.long" Name="[Kit-Brush] Guiro - Long"/>
+      <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves.kit-brush.midi.vi-one" Name="[Kit-Brush] Claves"/>
+      <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock.kit-brush.midi.vi-one" Name="[Kit-Brush] High Woodblock"/>
+      <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock.kit-brush.midi.vi-one" Name="[Kit-Brush] Low Woodblock"/>
+      <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute.kit-brush.midi.vi-one" Name="[Kit-Brush] Cuica - Mute"/>
+      <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.kit-brush.midi.vi-one" Name="[Kit-Brush] Cuica"/>
+      <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed.kit-brush.midi.vi-one" Name="[Kit-Brush] Triangle - Mute"/>
+      <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.kit-brush.midi.vi-one" Name="[Kit-Brush] Triangle"/>
+      <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker.kit-brush.midi.vi-one" Name="[Kit-Brush] Shaker"/>
+      <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell.kit-brush.midi.vi-one" Name="[Kit-Brush] Jingle Bell"/>
+      <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree.kit-brush.midi.vi-one" Name="[Kit-Brush] Bell Tree"/>
+    </DrumMapDefinition>
+    <DrumMapDefinition Name="[General MIDI] Kit-Electronic">
+      <DrumSound Pitch="27" SoundID="unpitched.exotic.high q.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Q"/>
+      <DrumSound Pitch="28" SoundID="unpitched.exotic.slap.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Slap"/>
+      <DrumSound Pitch="29" SoundID="unpitched.exotic.scratch push.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Scratch - Push"/>
+      <DrumSound Pitch="30" SoundID="unpitched.exotic.scratch pull.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Scratch - Pull"/>
+      <DrumSound Pitch="31" SoundID="unpitched.wood.medium.drum sticks.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Drum Sticks"/>
+      <DrumSound Pitch="32" SoundID="unpitched.exotic.square click.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Click"/>
+      <DrumSound Pitch="33" SoundID="unpitched.wood.medium.metronome click.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Metronome Click"/>
+      <DrumSound Pitch="34" SoundID="unpitched.metal.bells.high.metronome bell.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Metronome Bell"/>
+      <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.kit-electronic.midi.vi-one.2" Name="[Kit-Electronic] Kick Drum 2"/>
+      <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Kick Drum 1"/>
+      <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.kit-electronic.midi.vi-one"
+        Name="[Kit-Electronic] Snare Drum - Side Stick"/>
+      <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Snare Drum 1"/>
+      <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Hand Clap"/>
+      <DrumSound Pitch="40" SoundID="unpitched.drum.medium.snare drum.snares on.kit-electronic.midi.vi-one.2" Name="[Kit-Electronic] Snare Drum 2"/>
+      <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Low Tom 1"/>
+      <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Closed Hi-hat"/>
+      <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Low Tom 2"/>
+      <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Pedal Hi-hat"/>
+      <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Mid Tom 1"/>
+      <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Open Hi-hat"/>
+      <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Mid Tom 2"/>
+      <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Tom 1"/>
+      <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.kit-electronic.midi.vi-one.high" Name="[Kit-Electronic] Crash Cymbal 1"/>
+      <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Tom 2"/>
+      <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.kit-electronic.midi.vi-one.high" Name="[Kit-Electronic] Ride Cymbal 1"/>
+      <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese.kit-electronic.midi.vi-one" Name="[Kit-Electronic] China Cymbal"/>
+      <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Ride Bell"/>
+      <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Tambourine"/>
+      <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Splash Cymbal"/>
+      <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Cowbell"/>
+      <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.kit-electronic.midi.vi-one.medium" Name="[Kit-Electronic] Crash Cymbal 2"/>
+      <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Vibraslap"/>
+      <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.kit-electronic.midi.vi-one.medium" Name="[Kit-Electronic] Ride Cymbal 2"/>
+      <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Bongo"/>
+      <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Low Bongo"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Conga - Mute"/>
+      <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Conga"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Low Conga"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Timbale"/>
+      <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Low Timbale"/>
+      <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Agogo"/>
+      <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Low Agogo"/>
+      <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Cabasa"/>
+      <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Maracas"/>
+      <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.kit-electronic.midi.vi-one.short" Name="[Kit-Electronic] Whistle - Short"/>
+      <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.kit-electronic.midi.vi-one.long" Name="[Kit-Electronic] Whistle - Long"/>
+      <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.kit-electronic.midi.vi-one.short" Name="[Kit-Electronic] Guiro - Short"/>
+      <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.kit-electronic.midi.vi-one.long" Name="[Kit-Electronic] Guiro - Long"/>
+      <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Claves"/>
+      <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock.kit-electronic.midi.vi-one" Name="[Kit-Electronic] High Woodblock"/>
+      <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Low Woodblock"/>
+      <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Cuica - Mute"/>
+      <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Cuica"/>
+      <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Triangle - Mute"/>
+      <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Triangle"/>
+      <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Shaker"/>
+      <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Jingle Bell"/>
+      <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree.kit-electronic.midi.vi-one" Name="[Kit-Electronic] Bell Tree"/>
+    </DrumMapDefinition>
+    <DrumMapDefinition Name="[General MIDI] Kit-Jazz">
+      <DrumSound Pitch="27" SoundID="unpitched.exotic.high q.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Q"/>
+      <DrumSound Pitch="28" SoundID="unpitched.exotic.slap.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Slap"/>
+      <DrumSound Pitch="29" SoundID="unpitched.exotic.scratch push.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Scratch - Push"/>
+      <DrumSound Pitch="30" SoundID="unpitched.exotic.scratch pull.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Scratch - Pull"/>
+      <DrumSound Pitch="31" SoundID="unpitched.wood.medium.drum sticks.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Drum Sticks"/>
+      <DrumSound Pitch="32" SoundID="unpitched.exotic.square click.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Click"/>
+      <DrumSound Pitch="33" SoundID="unpitched.wood.medium.metronome click.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Metronome Click"/>
+      <DrumSound Pitch="34" SoundID="unpitched.metal.bells.high.metronome bell.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Metronome Bell"/>
+      <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.kit-jazz.midi.vi-one.2" Name="[Kit-Jazz] Kick Drum 2"/>
+      <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Kick Drum 1"/>
+      <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.kit-jazz.midi.vi-one"
+        Name="[Kit-Jazz] Snare Drum - Side Stick"/>
+      <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Snare Drum 1"/>
+      <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Hand Clap"/>
+      <DrumSound Pitch="40" SoundID="unpitched.drum.medium.snare drum.snares on.kit-jazz.midi.vi-one.2" Name="[Kit-Jazz] Snare Drum 2"/>
+      <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Low Tom 1"/>
+      <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Closed Hi-hat"/>
+      <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Low Tom 2"/>
+      <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Pedal Hi-hat"/>
+      <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Mid Tom 1"/>
+      <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Open Hi-hat"/>
+      <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Mid Tom 2"/>
+      <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Tom 1"/>
+      <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.kit-jazz.midi.vi-one.high" Name="[Kit-Jazz] Crash Cymbal 1"/>
+      <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Tom 2"/>
+      <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.kit-jazz.midi.vi-one.high" Name="[Kit-Jazz] Ride Cymbal 1"/>
+      <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese.kit-jazz.midi.vi-one" Name="[Kit-Jazz] China Cymbal"/>
+      <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Ride Bell"/>
+      <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Tambourine"/>
+      <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Splash Cymbal"/>
+      <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Cowbell"/>
+      <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.kit-jazz.midi.vi-one.medium" Name="[Kit-Jazz] Crash Cymbal 2"/>
+      <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Vibraslap"/>
+      <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.kit-jazz.midi.vi-one.medium" Name="[Kit-Jazz] Ride Cymbal 2"/>
+      <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Bongo"/>
+      <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Low Bongo"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Conga - Mute"/>
+      <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Conga"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Low Conga"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Timbale"/>
+      <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Low Timbale"/>
+      <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Agogo"/>
+      <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Low Agogo"/>
+      <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Cabasa"/>
+      <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Maracas"/>
+      <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.kit-jazz.midi.vi-one.short" Name="[Kit-Jazz] Whistle - Short"/>
+      <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.kit-jazz.midi.vi-one.long" Name="[Kit-Jazz] Whistle - Long"/>
+      <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.kit-jazz.midi.vi-one.short" Name="[Kit-Jazz] Guiro - Short"/>
+      <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.kit-jazz.midi.vi-one.long" Name="[Kit-Jazz] Guiro - Long"/>
+      <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Claves"/>
+      <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock.kit-jazz.midi.vi-one" Name="[Kit-Jazz] High Woodblock"/>
+      <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Low Woodblock"/>
+      <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Cuica - Mute"/>
+      <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Cuica"/>
+      <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Triangle - Mute"/>
+      <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Triangle"/>
+      <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Shaker"/>
+      <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Jingle Bell"/>
+      <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree.kit-jazz.midi.vi-one" Name="[Kit-Jazz] Bell Tree"/>
+    </DrumMapDefinition>
+    <DrumMapDefinition Name="[General MIDI] Kit-Orchestra">
+      <DrumSound Pitch="27" SoundID="unpitched.exotic.high q.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] High Q"/>
+      <DrumSound Pitch="28" SoundID="unpitched.exotic.slap.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Slap"/>
+      <DrumSound Pitch="29" SoundID="unpitched.exotic.scratch push.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Scratch - Push"/>
+      <DrumSound Pitch="30" SoundID="unpitched.exotic.scratch pull.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Scratch - Pull"/>
+      <DrumSound Pitch="31" SoundID="unpitched.wood.medium.drum sticks.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Drum Sticks"/>
+      <DrumSound Pitch="32" SoundID="unpitched.exotic.square click.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Click"/>
+      <DrumSound Pitch="33" SoundID="unpitched.wood.medium.metronome click.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Metronome Click"/>
+      <DrumSound Pitch="34" SoundID="unpitched.metal.bells.high.metronome bell.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Metronome Bell"/>
+      <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.kit-orchestra.midi.vi-one.2" Name="[Kit-Orchestra] Kick Drum 2"/>
+      <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Kick Drum 1"/>
+      <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.kit-orchestra.midi.vi-one"
+        Name="[Kit-Orchestra] Snare Drum - Side Stick"/>
+      <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Snare Drum 1"/>
+      <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Hand Clap"/>
+      <DrumSound Pitch="40" SoundID="unpitched.drum.medium.snare drum.snares on.kit-orchestra.midi.vi-one.2" Name="[Kit-Orchestra] Snare Drum 2"/>
+      <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Tambourine"/>
+      <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.crash.kit-orchestra.midi.vi-one.high" Name="[Kit-Orchestra] Crash Cymbal 1"/>
+      <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Cowbell"/>
+      <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.kit-orchestra.midi.vi-one.medium" Name="[Kit-Orchestra] Crash Cymbal 2"/>
+      <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Vibraslap"/>
+      <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.kit-orchestra.midi.vi-one.medium" Name="[Kit-Orchestra] Ride Cymbal 2"/>
+      <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] High Bongo"/>
+      <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Low Bongo"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] High Conga - Mute"/>
+      <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] High Conga"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Low Conga"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] High Timbale"/>
+      <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Low Timbale"/>
+      <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] High Agogo"/>
+      <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Low Agogo"/>
+      <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Cabasa"/>
+      <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Maracas"/>
+      <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.kit-orchestra.midi.vi-one.short" Name="[Kit-Orchestra] Whistle - Short"/>
+      <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.kit-orchestra.midi.vi-one.long" Name="[Kit-Orchestra] Whistle - Long"/>
+      <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.kit-orchestra.midi.vi-one.short" Name="[Kit-Orchestra] Guiro - Short"/>
+      <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.kit-orchestra.midi.vi-one.long" Name="[Kit-Orchestra] Guiro - Long"/>
+      <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Claves"/>
+      <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] High Woodblock"/>
+      <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Low Woodblock"/>
+      <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Cuica - Mute"/>
+      <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Cuica"/>
+      <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Triangle - Mute"/>
+      <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Triangle"/>
+      <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Shaker"/>
+      <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Jingle Bell"/>
+      <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Bell Tree"/>
+      <DrumSound Pitch="88" SoundID="unpitched.exotic.applause.kit-orchestra.midi.vi-one" Name="[Kit-Orchestra] Applause"/>
+    </DrumMapDefinition>
+    <DrumMapDefinition Name="[General MIDI] Kit-Power">
+      <DrumSound Pitch="27" SoundID="unpitched.exotic.high q.kit-power.midi.vi-one" Name="[Kit-Power] High Q"/>
+      <DrumSound Pitch="28" SoundID="unpitched.exotic.slap.kit-power.midi.vi-one" Name="[Kit-Power] Slap"/>
+      <DrumSound Pitch="29" SoundID="unpitched.exotic.scratch push.kit-power.midi.vi-one" Name="[Kit-Power] Scratch - Push"/>
+      <DrumSound Pitch="30" SoundID="unpitched.exotic.scratch pull.kit-power.midi.vi-one" Name="[Kit-Power] Scratch - Pull"/>
+      <DrumSound Pitch="31" SoundID="unpitched.wood.medium.drum sticks.kit-power.midi.vi-one" Name="[Kit-Power] Drum Sticks"/>
+      <DrumSound Pitch="32" SoundID="unpitched.exotic.square click.kit-power.midi.vi-one" Name="[Kit-Power] Click"/>
+      <DrumSound Pitch="33" SoundID="unpitched.wood.medium.metronome click.kit-power.midi.vi-one" Name="[Kit-Power] Metronome Click"/>
+      <DrumSound Pitch="34" SoundID="unpitched.metal.bells.high.metronome bell.kit-power.midi.vi-one" Name="[Kit-Power] Metronome Bell"/>
+      <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.kit-power.midi.vi-one.2" Name="[Kit-Power] Kick Drum 2"/>
+      <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.kit-power.midi.vi-one" Name="[Kit-Power] Kick Drum 1"/>
+      <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.kit-power.midi.vi-one"
+        Name="[Kit-Power] Snare Drum - Side Stick"/>
+      <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.kit-power.midi.vi-one" Name="[Kit-Power] Snare Drum 1"/>
+      <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap.kit-power.midi.vi-one" Name="[Kit-Power] Hand Clap"/>
+      <DrumSound Pitch="40" SoundID="unpitched.drum.medium.snare drum.snares on.kit-power.midi.vi-one.2" Name="[Kit-Power] Snare Drum 2"/>
+      <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom.kit-power.midi.vi-one" Name="[Kit-Power] Low Tom 1"/>
+      <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.kit-power.midi.vi-one" Name="[Kit-Power] Closed Hi-hat"/>
+      <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom.kit-power.midi.vi-one" Name="[Kit-Power] Low Tom 2"/>
+      <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal.kit-power.midi.vi-one" Name="[Kit-Power] Pedal Hi-hat"/>
+      <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom.kit-power.midi.vi-one" Name="[Kit-Power] Mid Tom 1"/>
+      <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.kit-power.midi.vi-one" Name="[Kit-Power] Open Hi-hat"/>
+      <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom.kit-power.midi.vi-one" Name="[Kit-Power] Mid Tom 2"/>
+      <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.kit-power.midi.vi-one" Name="[Kit-Power] High Tom 1"/>
+      <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.kit-power.midi.vi-one.high" Name="[Kit-Power] Crash Cymbal 1"/>
+      <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom.kit-power.midi.vi-one" Name="[Kit-Power] High Tom 2"/>
+      <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.kit-power.midi.vi-one.high" Name="[Kit-Power] Ride Cymbal 1"/>
+      <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese.kit-power.midi.vi-one" Name="[Kit-Power] China Cymbal"/>
+      <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.kit-power.midi.vi-one" Name="[Kit-Power] Ride Bell"/>
+      <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame.kit-power.midi.vi-one" Name="[Kit-Power] Tambourine"/>
+      <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash.kit-power.midi.vi-one" Name="[Kit-Power] Splash Cymbal"/>
+      <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell.kit-power.midi.vi-one" Name="[Kit-Power] Cowbell"/>
+      <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.kit-power.midi.vi-one.medium" Name="[Kit-Power] Crash Cymbal 2"/>
+      <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap.kit-power.midi.vi-one" Name="[Kit-Power] Vibraslap"/>
+      <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.kit-power.midi.vi-one.medium" Name="[Kit-Power] Ride Cymbal 2"/>
+      <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo.kit-power.midi.vi-one" Name="[Kit-Power] High Bongo"/>
+      <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo.kit-power.midi.vi-one" Name="[Kit-Power] Low Bongo"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute.kit-power.midi.vi-one" Name="[Kit-Power] High Conga - Mute"/>
+      <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga.kit-power.midi.vi-one" Name="[Kit-Power] High Conga"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga.kit-power.midi.vi-one" Name="[Kit-Power] Low Conga"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.kit-power.midi.vi-one" Name="[Kit-Power] High Timbale"/>
+      <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.kit-power.midi.vi-one" Name="[Kit-Power] Low Timbale"/>
+      <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo.kit-power.midi.vi-one" Name="[Kit-Power] High Agogo"/>
+      <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo.kit-power.midi.vi-one" Name="[Kit-Power] Low Agogo"/>
+      <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa.kit-power.midi.vi-one" Name="[Kit-Power] Cabasa"/>
+      <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca.kit-power.midi.vi-one" Name="[Kit-Power] Maracas"/>
+      <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.kit-power.midi.vi-one.short" Name="[Kit-Power] Whistle - Short"/>
+      <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.kit-power.midi.vi-one.long" Name="[Kit-Power] Whistle - Long"/>
+      <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.kit-power.midi.vi-one.short" Name="[Kit-Power] Guiro - Short"/>
+      <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.kit-power.midi.vi-one.long" Name="[Kit-Power] Guiro - Long"/>
+      <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves.kit-power.midi.vi-one" Name="[Kit-Power] Claves"/>
+      <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock.kit-power.midi.vi-one" Name="[Kit-Power] High Woodblock"/>
+      <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock.kit-power.midi.vi-one" Name="[Kit-Power] Low Woodblock"/>
+      <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute.kit-power.midi.vi-one" Name="[Kit-Power] Cuica - Mute"/>
+      <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.kit-power.midi.vi-one" Name="[Kit-Power] Cuica"/>
+      <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed.kit-power.midi.vi-one" Name="[Kit-Power] Triangle - Mute"/>
+      <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.kit-power.midi.vi-one" Name="[Kit-Power] Triangle"/>
+      <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker.kit-power.midi.vi-one" Name="[Kit-Power] Shaker"/>
+      <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell.kit-power.midi.vi-one" Name="[Kit-Power] Jingle Bell"/>
+      <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree.kit-power.midi.vi-one" Name="[Kit-Power] Bell Tree"/>
+    </DrumMapDefinition>
+    <DrumMapDefinition Name="[General MIDI] Kit-Room">
+      <DrumSound Pitch="27" SoundID="unpitched.exotic.high q.kit-room.midi.vi-one" Name="[Kit-Room] High Q"/>
+      <DrumSound Pitch="28" SoundID="unpitched.exotic.slap.kit-room.midi.vi-one" Name="[Kit-Room] Slap"/>
+      <DrumSound Pitch="29" SoundID="unpitched.exotic.scratch push.kit-room.midi.vi-one" Name="[Kit-Room] Scratch - Push"/>
+      <DrumSound Pitch="30" SoundID="unpitched.exotic.scratch pull.kit-room.midi.vi-one" Name="[Kit-Room] Scratch - Pull"/>
+      <DrumSound Pitch="31" SoundID="unpitched.wood.medium.drum sticks.kit-room.midi.vi-one" Name="[Kit-Room] Drum Sticks"/>
+      <DrumSound Pitch="32" SoundID="unpitched.exotic.square click.kit-room.midi.vi-one" Name="[Kit-Room] Click"/>
+      <DrumSound Pitch="33" SoundID="unpitched.wood.medium.metronome click.kit-room.midi.vi-one" Name="[Kit-Room] Metronome Click"/>
+      <DrumSound Pitch="34" SoundID="unpitched.metal.bells.high.metronome bell.kit-room.midi.vi-one" Name="[Kit-Room] Metronome Bell"/>
+      <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.kit-room.midi.vi-one.2" Name="[Kit-Room] Kick Drum 2"/>
+      <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.kit-room.midi.vi-one" Name="[Kit-Room] Kick Drum 1"/>
+      <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.kit-room.midi.vi-one"
+        Name="[Kit-Room] Snare Drum - Side Stick"/>
+      <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.kit-room.midi.vi-one" Name="[Kit-Room] Snare Drum 1"/>
+      <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap.kit-room.midi.vi-one" Name="[Kit-Room] Hand Clap"/>
+      <DrumSound Pitch="40" SoundID="unpitched.drum.medium.snare drum.snares on.kit-room.midi.vi-one.2" Name="[Kit-Room] Snare Drum 2"/>
+      <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom.kit-room.midi.vi-one" Name="[Kit-Room] Low Tom 1"/>
+      <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.kit-room.midi.vi-one" Name="[Kit-Room] Closed Hi-hat"/>
+      <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom.kit-room.midi.vi-one" Name="[Kit-Room] Low Tom 2"/>
+      <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal.kit-room.midi.vi-one" Name="[Kit-Room] Pedal Hi-hat"/>
+      <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom.kit-room.midi.vi-one" Name="[Kit-Room] Mid Tom 1"/>
+      <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.kit-room.midi.vi-one" Name="[Kit-Room] Open Hi-hat"/>
+      <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom.kit-room.midi.vi-one" Name="[Kit-Room] Mid Tom 2"/>
+      <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.kit-room.midi.vi-one" Name="[Kit-Room] High Tom 1"/>
+      <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.kit-room.midi.vi-one.high" Name="[Kit-Room] Crash Cymbal 1"/>
+      <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom.kit-room.midi.vi-one" Name="[Kit-Room] High Tom 2"/>
+      <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.kit-room.midi.vi-one.high" Name="[Kit-Room] Ride Cymbal 1"/>
+      <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese.kit-room.midi.vi-one" Name="[Kit-Room] China Cymbal"/>
+      <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.kit-room.midi.vi-one" Name="[Kit-Room] Ride Bell"/>
+      <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame.kit-room.midi.vi-one" Name="[Kit-Room] Tambourine"/>
+      <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash.kit-room.midi.vi-one" Name="[Kit-Room] Splash Cymbal"/>
+      <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell.kit-room.midi.vi-one" Name="[Kit-Room] Cowbell"/>
+      <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.kit-room.midi.vi-one.medium" Name="[Kit-Room] Crash Cymbal 2"/>
+      <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap.kit-room.midi.vi-one" Name="[Kit-Room] Vibraslap"/>
+      <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.kit-room.midi.vi-one.medium" Name="[Kit-Room] Ride Cymbal 2"/>
+      <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo.kit-room.midi.vi-one" Name="[Kit-Room] High Bongo"/>
+      <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo.kit-room.midi.vi-one" Name="[Kit-Room] Low Bongo"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute.kit-room.midi.vi-one" Name="[Kit-Room] High Conga - Mute"/>
+      <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga.kit-room.midi.vi-one" Name="[Kit-Room] High Conga"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga.kit-room.midi.vi-one" Name="[Kit-Room] Low Conga"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.kit-room.midi.vi-one" Name="[Kit-Room] High Timbale"/>
+      <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.kit-room.midi.vi-one" Name="[Kit-Room] Low Timbale"/>
+      <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo.kit-room.midi.vi-one" Name="[Kit-Room] High Agogo"/>
+      <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo.kit-room.midi.vi-one" Name="[Kit-Room] Low Agogo"/>
+      <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa.kit-room.midi.vi-one" Name="[Kit-Room] Cabasa"/>
+      <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca.kit-room.midi.vi-one" Name="[Kit-Room] Maracas"/>
+      <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.kit-room.midi.vi-one.short" Name="[Kit-Room] Whistle - Short"/>
+      <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.kit-room.midi.vi-one.long" Name="[Kit-Room] Whistle - Long"/>
+      <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.kit-room.midi.vi-one.short" Name="[Kit-Room] Guiro - Short"/>
+      <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.kit-room.midi.vi-one.long" Name="[Kit-Room] Guiro - Long"/>
+      <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves.kit-room.midi.vi-one" Name="[Kit-Room] Claves"/>
+      <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock.kit-room.midi.vi-one" Name="[Kit-Room] High Woodblock"/>
+      <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock.kit-room.midi.vi-one" Name="[Kit-Room] Low Woodblock"/>
+      <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute.kit-room.midi.vi-one" Name="[Kit-Room] Cuica - Mute"/>
+      <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.kit-room.midi.vi-one" Name="[Kit-Room] Cuica"/>
+      <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed.kit-room.midi.vi-one" Name="[Kit-Room] Triangle - Mute"/>
+      <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.kit-room.midi.vi-one" Name="[Kit-Room] Triangle"/>
+      <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker.kit-room.midi.vi-one" Name="[Kit-Room] Shaker"/>
+      <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell.kit-room.midi.vi-one" Name="[Kit-Room] Jingle Bell"/>
+      <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree.kit-room.midi.vi-one" Name="[Kit-Room] Bell Tree"/>
+    </DrumMapDefinition>
+    <DrumMapDefinition Name="[General MIDI] Kit-Standard">
+      <DrumSound Pitch="27" SoundID="unpitched.exotic.high q.kit-standard.midi.vi-one" Name="[Kit-Standard] High Q"/>
+      <DrumSound Pitch="28" SoundID="unpitched.exotic.slap.kit-standard.midi.vi-one" Name="[Kit-Standard] Slap"/>
+      <DrumSound Pitch="29" SoundID="unpitched.exotic.scratch push.kit-standard.midi.vi-one" Name="[Kit-Standard] Scratch - Push"/>
+      <DrumSound Pitch="30" SoundID="unpitched.exotic.scratch pull.kit-standard.midi.vi-one" Name="[Kit-Standard] Scratch - Pull"/>
+      <DrumSound Pitch="31" SoundID="unpitched.wood.medium.drum sticks.kit-standard.midi.vi-one" Name="[Kit-Standard] Drum Sticks"/>
+      <DrumSound Pitch="32" SoundID="unpitched.exotic.square click.kit-standard.midi.vi-one" Name="[Kit-Standard] Click"/>
+      <DrumSound Pitch="33" SoundID="unpitched.wood.medium.metronome click.kit-standard.midi.vi-one" Name="[Kit-Standard] Metronome Click"/>
+      <DrumSound Pitch="34" SoundID="unpitched.metal.bells.high.metronome bell.kit-standard.midi.vi-one" Name="[Kit-Standard] Metronome Bell"/>
+      <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.kit-standard.midi.vi-one.2" Name="[Kit-Standard] Kick Drum 2"/>
+      <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.kit-standard.midi.vi-one" Name="[Kit-Standard] Kick Drum 1"/>
+      <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.kit-standard.midi.vi-one"
+        Name="[Kit-Standard] Snare Drum - Side Stick"/>
+      <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.kit-standard.midi.vi-one" Name="[Kit-Standard] Snare Drum 1"/>
+      <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap.kit-standard.midi.vi-one" Name="[Kit-Standard] Hand Clap"/>
+      <DrumSound Pitch="40" SoundID="unpitched.drum.medium.snare drum.snares on.kit-standard.midi.vi-one.2" Name="[Kit-Standard] Snare Drum 2"/>
+      <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom.kit-standard.midi.vi-one" Name="[Kit-Standard] Low Tom 1"/>
+      <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.kit-standard.midi.vi-one" Name="[Kit-Standard] Closed Hi-hat"/>
+      <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom.kit-standard.midi.vi-one" Name="[Kit-Standard] Low Tom 2"/>
+      <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal.kit-standard.midi.vi-one" Name="[Kit-Standard] Pedal Hi-hat"/>
+      <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom.kit-standard.midi.vi-one" Name="[Kit-Standard] Mid Tom 1"/>
+      <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.kit-standard.midi.vi-one" Name="[Kit-Standard] Open Hi-hat"/>
+      <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom.kit-standard.midi.vi-one" Name="[Kit-Standard] Mid Tom 2"/>
+      <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.kit-standard.midi.vi-one" Name="[Kit-Standard] High Tom 1"/>
+      <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.kit-standard.midi.vi-one.high" Name="[Kit-Standard] Crash Cymbal 1"/>
+      <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom.kit-standard.midi.vi-one" Name="[Kit-Standard] High Tom 2"/>
+      <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.kit-standard.midi.vi-one.high" Name="[Kit-Standard] Ride Cymbal 1"/>
+      <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese.kit-standard.midi.vi-one" Name="[Kit-Standard] China Cymbal"/>
+      <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.kit-standard.midi.vi-one" Name="[Kit-Standard] Ride Bell"/>
+      <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame.kit-standard.midi.vi-one" Name="[Kit-Standard] Tambourine"/>
+      <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash.kit-standard.midi.vi-one" Name="[Kit-Standard] Splash Cymbal"/>
+      <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell.kit-standard.midi.vi-one" Name="[Kit-Standard] Cowbell"/>
+      <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.kit-standard.midi.vi-one.medium" Name="[Kit-Standard] Crash Cymbal 2"/>
+      <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap.kit-standard.midi.vi-one" Name="[Kit-Standard] Vibraslap"/>
+      <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.kit-standard.midi.vi-one.medium" Name="[Kit-Standard] Ride Cymbal 2"/>
+      <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo.kit-standard.midi.vi-one" Name="[Kit-Standard] High Bongo"/>
+      <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo.kit-standard.midi.vi-one" Name="[Kit-Standard] Low Bongo"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute.kit-standard.midi.vi-one" Name="[Kit-Standard] High Conga - Mute"/>
+      <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga.kit-standard.midi.vi-one" Name="[Kit-Standard] High Conga"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga.kit-standard.midi.vi-one" Name="[Kit-Standard] Low Conga"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.kit-standard.midi.vi-one" Name="[Kit-Standard] High Timbale"/>
+      <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.kit-standard.midi.vi-one" Name="[Kit-Standard] Low Timbale"/>
+      <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo.kit-standard.midi.vi-one" Name="[Kit-Standard] High Agogo"/>
+      <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo.kit-standard.midi.vi-one" Name="[Kit-Standard] Low Agogo"/>
+      <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa.kit-standard.midi.vi-one" Name="[Kit-Standard] Cabasa"/>
+      <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca.kit-standard.midi.vi-one" Name="[Kit-Standard] Maracas"/>
+      <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.kit-standard.midi.vi-one.short" Name="[Kit-Standard] Whistle - Short"/>
+      <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.kit-standard.midi.vi-one.long" Name="[Kit-Standard] Whistle - Long"/>
+      <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.kit-standard.midi.vi-one.short" Name="[Kit-Standard] Guiro - Short"/>
+      <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.kit-standard.midi.vi-one.long" Name="[Kit-Standard] Guiro - Long"/>
+      <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves.kit-standard.midi.vi-one" Name="[Kit-Standard] Claves"/>
+      <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock.kit-standard.midi.vi-one" Name="[Kit-Standard] High Woodblock"/>
+      <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock.kit-standard.midi.vi-one" Name="[Kit-Standard] Low Woodblock"/>
+      <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute.kit-standard.midi.vi-one" Name="[Kit-Standard] Cuica - Mute"/>
+      <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.kit-standard.midi.vi-one" Name="[Kit-Standard] Cuica"/>
+      <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed.kit-standard.midi.vi-one" Name="[Kit-Standard] Triangle - Mute"/>
+      <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.kit-standard.midi.vi-one" Name="[Kit-Standard] Triangle"/>
+      <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker.kit-standard.midi.vi-one" Name="[Kit-Standard] Shaker"/>
+      <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell.kit-standard.midi.vi-one" Name="[Kit-Standard] Jingle Bell"/>
+      <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree.kit-standard.midi.vi-one" Name="[Kit-Standard] Bell Tree"/>
+    </DrumMapDefinition>
+    <DrumMapDefinition Name="[General MIDI] Kit-TR-808">
+      <DrumSound Pitch="27" SoundID="unpitched.exotic.high q.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Q"/>
+      <DrumSound Pitch="28" SoundID="unpitched.exotic.slap.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Slap"/>
+      <DrumSound Pitch="29" SoundID="unpitched.exotic.scratch push.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Scratch - Push"/>
+      <DrumSound Pitch="30" SoundID="unpitched.exotic.scratch pull.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Scratch - Pull"/>
+      <DrumSound Pitch="31" SoundID="unpitched.wood.medium.drum sticks.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Drum Sticks"/>
+      <DrumSound Pitch="32" SoundID="unpitched.exotic.square click.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Click"/>
+      <DrumSound Pitch="33" SoundID="unpitched.wood.medium.metronome click.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Metronome Click"/>
+      <DrumSound Pitch="34" SoundID="unpitched.metal.bells.high.metronome bell.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Metronome Bell"/>
+      <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.kit-tr-808.midi.vi-one.2" Name="[Kit-TR-808] Kick Drum 2"/>
+      <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Kick Drum 1"/>
+      <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick.kit-tr-808.midi.vi-one"
+        Name="[Kit-TR-808] Snare Drum - Side Stick"/>
+      <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Snare Drum 1"/>
+      <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Hand Clap"/>
+      <DrumSound Pitch="40" SoundID="unpitched.drum.medium.snare drum.snares on.kit-tr-808.midi.vi-one.2" Name="[Kit-TR-808] Snare Drum 2"/>
+      <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Low Tom 1"/>
+      <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Closed Hi-hat"/>
+      <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Low Tom 2"/>
+      <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Pedal Hi-hat"/>
+      <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Mid Tom 1"/>
+      <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Open Hi-hat"/>
+      <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Mid Tom 2"/>
+      <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Tom 1"/>
+      <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.kit-tr-808.midi.vi-one.high" Name="[Kit-TR-808] Crash Cymbal 1"/>
+      <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Tom 2"/>
+      <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.kit-tr-808.midi.vi-one.high" Name="[Kit-TR-808] Ride Cymbal 1"/>
+      <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] China Cymbal"/>
+      <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Ride Bell"/>
+      <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Tambourine"/>
+      <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Splash Cymbal"/>
+      <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Cowbell"/>
+      <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.kit-tr-808.midi.vi-one.medium" Name="[Kit-TR-808] Crash Cymbal 2"/>
+      <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Vibraslap"/>
+      <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.kit-tr-808.midi.vi-one.medium" Name="[Kit-TR-808] Ride Cymbal 2"/>
+      <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Bongo"/>
+      <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Low Bongo"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Conga - Mute"/>
+      <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Conga"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Low Conga"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Timbale"/>
+      <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Low Timbale"/>
+      <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Agogo"/>
+      <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Low Agogo"/>
+      <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Cabasa"/>
+      <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Maracas"/>
+      <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.kit-tr-808.midi.vi-one.short" Name="[Kit-TR-808] Whistle - Short"/>
+      <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.kit-tr-808.midi.vi-one.long" Name="[Kit-TR-808] Whistle - Long"/>
+      <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.kit-tr-808.midi.vi-one.short" Name="[Kit-TR-808] Guiro - Short"/>
+      <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.kit-tr-808.midi.vi-one.long" Name="[Kit-TR-808] Guiro - Long"/>
+      <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Claves"/>
+      <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] High Woodblock"/>
+      <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Low Woodblock"/>
+      <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Cuica - Mute"/>
+      <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Cuica"/>
+      <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Triangle - Mute"/>
+      <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Triangle"/>
+      <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Shaker"/>
+      <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Jingle Bell"/>
+      <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree.kit-tr-808.midi.vi-one" Name="[Kit-TR-808] Bell Tree"/>
+    </DrumMapDefinition>
+    <!-- ######################################## -->
+    <!-- ##### ORCHESTRAL PERCUSSION - MAPS ##### -->
+    <!-- ######################################## -->
+    <!-- ################################### -->
+    <!-- ##### PITCHED AS OF VERSION 2 ##### -->
+    <!-- ################################### -->
+    <!--
+      <DrumMapDefinition Name="[Orchestral - Percussion] Timpani FX">
+      <DrumSound Pitch="60" SoundID="unpitched.drum.low.timpani fx.orch-perc.vi-one" Name="[Timpani FX] Timpani FX 1"/>
+      <DrumSound Pitch="62" SoundID="unpitched.drum.low.timpani fx.orch-perc.vi-one.2" Name="[Timpani FX] Timpani FX 2"/>
+      <DrumSound Pitch="64" SoundID="unpitched.drum.low.timpani fx.orch-perc.vi-one.3" Name="[Timpani FX] Timpani FX 3"/>
+      <DrumSound Pitch="65" SoundID="unpitched.drum.low.timpani fx.glissando.down.orch-perc.vi-one" Name="[Timpani FX] Timpani Glissando Down">
+      <StartSwitch IsMultipleNoteSample="true"/>
+      </DrumSound>
+      <DrumSound Pitch="67" SoundID="unpitched.drum.low.timpani fx.glissando.up.orch-perc.vi-one" Name="[Timpani FX] Timpani Glissando Up">
+      <StartSwitch IsMultipleNoteSample="true"/>
+      </DrumSound>
+      </DrumMapDefinition>
+    -->
+  </DrumMapList>
+</SoundSet>

@@ -1,0 +1,66 @@
+version BMRT 2.4.0d
+surface shinymetal
+param	float	Ka		1
+param	float	Ks		1
+param	float	Kr		1
+param	float	roughness		0.1
+param	string	texturename		""
+local	string	$_str_0 	""
+local	string	$_str_1 	"world"
+local	normal	Nf	0 0 0
+local	vector	V	0 0 0
+local	vector	D	0 0 0
+local	color	env	0 0 0
+initcode 4
+	return
+code
+	pushv	I 
+	normalize
+	popv	V 
+	pushv	V 
+	pushv	N 
+	normalize
+	faceforward
+	popv	Nf 
+	pushv	Nf 
+	pushv	V 
+	reflect
+	popv	D 
+	pushv	D 
+	pushs	$_str_1 
+	vtransforms
+	popv	D 
+	pushs	$_str_0 
+	pushs	texturename 
+	sne
+	ifz	0
+	pushv	D 
+	pushif	0 
+	pushs	texturename 
+	pushif	1 
+	pushif	1 
+	cenvironment
+	mulFc	Kr 
+	popc	env 
+	jump	1
+label 0
+	pushif	0 
+	cset	env 
+label 1
+	return_area
+	cpCC	Os Oi 
+	pushc	env 
+	pushf	roughness 
+	pushv	V 
+	negv
+	pushv	Nf 
+	specular
+	mulFc	Ks 
+	ambient
+	mulFc	Ka 
+	addcc
+	addcc
+	mulCC	Os Cs 
+	mulcc
+	popc	Ci 
+	return

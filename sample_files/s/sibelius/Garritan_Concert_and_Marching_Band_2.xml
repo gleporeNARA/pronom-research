@@ -1,0 +1,3203 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="SoundSet.xsl" version="1.0"?>
+<!DOCTYPE SoundSet SYSTEM "SoundSet.dtd" []>
+<SoundSet xmlns:ss="http://www.sibelius.com/xml/SoundSet.dtd" >
+    <Header>
+        <FileVersion>50001</FileVersion>
+        <Name>Garritan Concert and Marching Band 2</Name>
+        <PatchLoadMechanism>ARIA</PatchLoadMechanism>
+        <NumLanes>16</NumLanes>
+        <DefaultSoundSet>false</DefaultSoundSet>
+        <ProgramsRelativeTo>0</ProgramsRelativeTo>
+        <SupportsPitchBendRange>false</SupportsPitchBendRange>
+    </Header>
+    <ControllerTypeList>
+        <ControllerTypeDefinition Name="Modulation" Number="1" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Volume" Number="7" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Sustain" Number="64" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Legato" Number="68" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Reverb" Number="91" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="VarIntonation" Number="22" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="VarTimbre" Number="23" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Portamento" Number="29" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Length" Number="21" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="VibratoSpeed" Number="17" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+    </ControllerTypeList>
+    <VolumeTypeList>
+        <VolumeTypeDefinition Name="NoteOnVelocity" Method="Default" />
+        <VolumeTypeDefinition Name="ModWheel" Method="Controller" >
+            <ControllerType>Modulation</ControllerType>
+        </VolumeTypeDefinition>
+    </VolumeTypeList>
+    <AttackTypeList>
+        <AttackTypeDefinition Name="NoteOnVelocity" Method="Default" />
+    </AttackTypeList>
+    <SwitchTypeList>
+        <SwitchTypeDefinition Name="GroupSolo" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="-ensemble" >
+                <KeySwitch Key="G-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato -ensemble" >
+                <KeySwitch Key="G-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="GroupMutes" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight +legato" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup" >
+                <KeySwitch Key="E-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup +legato" >
+                <KeySwitch Key="E-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="SoloMutes" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="G-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="G-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight" >
+                <KeySwitch Key="A-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight +legato" >
+                <KeySwitch Key="A-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup" >
+                <KeySwitch Key="B-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup +legato" >
+                <KeySwitch Key="B-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="ComboMutes" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.straight +legato" >
+                <KeySwitch Key="D-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup" >
+                <KeySwitch Key="E-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="+mute.cup +legato" >
+                <KeySwitch Key="E-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="-ensemble" >
+                <KeySwitch Key="G-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="-ensemble +legato" >
+                <KeySwitch Key="G-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="-ensemble +mute.straight" >
+                <KeySwitch Key="A-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="-ensemble +mute.straight +legato" >
+                <KeySwitch Key="A-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="-ensemble +mute.cup" >
+                <KeySwitch Key="B-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+            <Switch SoundIDChange="-ensemble +mute.cup +legato" >
+                <KeySwitch Key="B-1" />
+                <ControllerSwitch Name="Legato" Value="On" />
+                <VolumeType>ModWheel</VolumeType>
+                <AttackType>NoteOnVelocity</AttackType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="VDLXylo" >
+            <Switch SoundIDChange="[reset]" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+            </Switch>
+            <Switch SoundIDChange="+tremolo.unmeasured" IsMultipleNoteSample="true" >
+                <KeySwitch Key="C-1" />
+                <ControllerSwitch Name="Legato" Value="Off" />
+                <VolumeType>NoteOnVelocity</VolumeType>
+            </Switch>
+        </SwitchTypeDefinition>
+        <SwitchTypeDefinition Name="CMBLegato" >
+            <Switch SoundIDChange="[reset]" >
+                <ControllerSwitch Name="Legato" Value="Off" />
+            </Switch>
+            <Switch SoundIDChange="+legato" >
+                <ControllerSwitch Name="Legato" Value="On" />
+            </Switch>
+        </SwitchTypeDefinition>
+    </SwitchTypeList>
+    <PatchList>
+        <Patch Name="Glockenspiel (GPO)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-Glock (GPO map)" />
+            <SoundID>pitched percussion.metal.glockenspiel</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Glockenspiel (GPOmap) Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/03 Cymbals and Mallets/n-Glock (GPO map) Lite" />
+            <SoundID>pitched percussion.metal.glockenspiel.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Glockenspiel (VDL)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-Glock (VDL map)" />
+            <SoundID>pitched percussion.metal.glockenspiel.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Glockenspiel (VDLmap) Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/03 Cymbals and Mallets/n-Glock (VDL map) Lite" />
+            <SoundID>pitched percussion.metal.glockenspiel.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="VDLGlockenspiel Brass (GPO)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-VDL Glock Brass (GPO map)" />
+            <SoundID>pitched percussion.metal.glockenspiel.brass</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDLGlockenspiel Brass (VDL)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-VDL Glock Brass (VDL map)" />
+            <SoundID>pitched percussion.metal.glockenspiel.brass.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Chimes" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-Chimes" />
+            <SoundID>pitched percussion.metal.bells.tubular bells</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Chimes (VDL)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-VDL Chimes" />
+            <SoundID>pitched percussion.metal.bells.tubular bells.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Chimes (Lite)" >
+            <AriaPatch Instrument="Notation/04 Lite/03 Cymbals and Mallets/n-Chimes Lite" />
+            <SoundID>pitched percussion.metal.bells.tubular bells.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Vibraphone (GPO)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-Vibraphone (GPO)" />
+            <SoundID>pitched percussion.metal.vibraphone</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Xylophone" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-Xylophone" />
+            <SoundID>pitched percussion.wood.xylophone.bright</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Xylophone Bright (VDL)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-VDL Xylophone Bright KS" />
+            <SoundID>pitched percussion.wood.xylophone.bright.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Xylophone 2" >
+            <AriaPatch Instrument="Notation/04 Lite/03 Cymbals and Mallets/n-Xylophone Lite" />
+            <SoundID>pitched percussion.wood.xylophone.lite</SoundID>
+        </Patch>
+        <Patch Name="Marimba (GPO)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/05 Mallets/n-Marimba (GPO)" />
+            <SoundID>pitched percussion.wood.marimba</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Timpani" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/04 Percussion/n-Timpani" />
+            <SoundID>pitched percussion.drum.timpani</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Bass Clarinet Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bass Clarinet Solo 1" />
+            <SoundID>wind.clarinets.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Clarinet Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/04 Clarinets/n-Bass Clarinet Solo 1 Lite" />
+            <SoundID>wind.clarinets.bass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Clarinet Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bass Clarinet Solo 2" />
+            <SoundID>wind.clarinets.bass.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Clarinet Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bass Clarinet Solo 3" />
+            <SoundID>wind.clarinets.bass.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group 1" />
+            <SoundID>wind.clarinets.clarinet.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group 2" />
+            <SoundID>wind.clarinets.clarinet.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group 3" />
+            <SoundID>wind.clarinets.clarinet.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group 4" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group 4" />
+            <SoundID>wind.clarinets.clarinet.ensemble.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group-Solo 1 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group-Solo 1 KS" />
+            <SoundID>wind.clarinets.clarinet.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group-Solo 1 KS Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group-Solo 1 KS Lite" />
+            <SoundID>wind.clarinets.clarinet.ensemble.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group-Solo 2 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group-Solo 2 KS" />
+            <SoundID>wind.clarinets.clarinet.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group-Solo 3 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group-Solo 3 KS" />
+            <SoundID>wind.clarinets.clarinet.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Group-Solo 4 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Group-Solo 4 KS" />
+            <SoundID>wind.clarinets.clarinet.ensemble.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Solo 1" />
+            <SoundID>wind.clarinets.clarinet.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Solo 2" />
+            <SoundID>wind.clarinets.clarinet.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Solo 3" />
+            <SoundID>wind.clarinets.clarinet.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bb Clarinet Solo 4" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Bb Clarinet Solo 4" />
+            <SoundID>wind.clarinets.clarinet.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="ContraBass Clarinet Solo " >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Contrabass Clarinet Solo" />
+            <SoundID>wind.clarinets.contrabass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="ContraBass Clarinet Solo Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/04 Clarinets/n-Contrabass Clarinet Solo Lite" />
+            <SoundID>wind.clarinets.contrabass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Alto Clarinet Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Eb Alto Clarinet Solo 1" />
+            <SoundID>wind.clarinets.alto </SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Alto Clarinet Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/04 Clarinets/n-Eb Alto Clarinet Solo 1 Lite" />
+            <SoundID>wind.clarinets.alto.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Alto Clarinet Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Eb Alto Clarinet Solo 2" />
+            <SoundID>wind.clarinets.alto.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Alto Clarinet Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Eb Alto Clarinet Solo 3" />
+            <SoundID>wind.clarinets.alto.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Clarinet Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Eb Clarinet Solo 1" />
+            <SoundID>wind.clarinets.eb </SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Clarinet Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/04 Clarinets/n-Eb Clarinet Solo 1 Lite" />
+            <SoundID>wind.clarinets.eb.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Clarinet Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Eb Clarinet Solo 2" />
+            <SoundID>wind.clarinets.eb.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Clarinet Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Eb Clarinet Solo 3" />
+            <SoundID>wind.clarinets.eb.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Eb Clarinet Solo 4" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/04 Clarinets/n-Eb Clarinet Solo 4" />
+            <SoundID>wind.clarinets.eb.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Group 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/01 Piccolos/n-Piccolo Group 1" />
+            <SoundID>wind.flutes.flute.piccolo.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Group 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/01 Piccolos/n-Piccolo Group 2" />
+            <SoundID>wind.flutes.flute.piccolo.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Group-Solo 1 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/01 Piccolos/n-Piccolo Group-Solo 1 KS" />
+            <SoundID>wind.flutes.flute.piccolo.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Group-Solo 1 KS Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/01 Piccolos/n-Piccolo Group-Solo 1 KS Lite" />
+            <SoundID>wind.flutes.flute.piccolo.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Group-Solo 2 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/01 Piccolos/n-Piccolo Group-Solo 2 KS" />
+            <SoundID>wind.flutes.flute.piccolo.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/01 Piccolos/n-Piccolo Solo 1" />
+            <SoundID>wind.flutes.flute.piccolo.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Piccolo Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/01 Piccolos/n-Piccolo Solo 2" />
+            <SoundID>wind.flutes.flute.piccolo.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Group 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Group 1" />
+            <SoundID>wind.flutes.flute.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Group 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Group 2" />
+            <SoundID>wind.flutes.flute.ensemble.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Group 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Group 3" />
+            <SoundID>wind.flutes.flute.ensemble.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Group-Solo 1 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Group-Solo 1 KS" />
+            <SoundID>wind.flutes.flute.ensemble</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Flute Group-Solo 2 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Group-Solo 2 KS" />
+            <SoundID>wind.flutes.flute.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Flute Group-Solo 3 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Group-Solo 3 KS" />
+            <SoundID>wind.flutes.flute.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Flute Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Solo 1" />
+            <SoundID>wind.flutes.flute.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Solo 2" />
+            <SoundID>wind.flutes.flute.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/02 Flutes/n-Flute Solo 3" />
+            <SoundID>wind.flutes.flute.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flute Group-Solo 1 KS Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/02 Flutes/n-Flute Group-Solo 1 KS Lite" />
+            <SoundID>wind.flutes.flute.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Oboe Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/03 Oboes/n-Oboe Solo 1" />
+            <SoundID>wind.oboes.oboe </SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/03 Oboes/n-Oboe Solo 1 Lite" />
+            <SoundID>wind.oboes.oboe.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/03 Oboes/n-Oboe Solo 2" />
+            <SoundID>wind.oboes.oboe.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Oboe Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/03 Oboes/n-Oboe Solo 3" />
+            <SoundID>wind.oboes.oboe.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sarrusophone Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/06 Sarrusophones/n-Sarrusophone Solo 1" />
+            <SoundID>wind.oboes.sarrusaphone</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sarrusophone Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/06 Saxophones/06 Sarrusophones/n-Sarrusophone Solo 1 Lite" />
+            <SoundID>wind.oboes.sarrusaphone.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sarrusophone Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/06 Sarrusophones/n-Sarrusophone Solo 2" />
+            <SoundID>wind.oboes.sarrusaphone.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/05 Bassoons/n-Bassoon Solo 1" />
+            <SoundID>wind.bassoons.bassoon</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/05 Bassoons/n-Bassoon Solo 1 Lite" />
+            <SoundID>wind.bassoons.bassoon.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/05 Bassoons/n-Bassoon Solo 2" />
+            <SoundID>wind.bassoons.bassoon.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bassoon Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/05 Bassoons/n-Bassoon Solo 3" />
+            <SoundID>wind.bassoons.bassoon.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Soprano Sax Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/01 Soprano Saxes/n-Soprano Sax Solo 1" />
+            <SoundID>wind.saxophones.soprano</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Soprano Sax Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/06 Saxophones/01 Soprano Saxes/n-Soprano Sax Solo 1 Lite" />
+            <SoundID>wind.saxophones.soprano.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Soprano Sax Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/01 Soprano Saxes/n-Soprano Sax Solo 2" />
+            <SoundID>wind.saxophones.soprano.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Soprano Sax Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/01 Soprano Saxes/n-Soprano Sax Solo 3" />
+            <SoundID>wind.saxophones.soprano.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Group 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Group 1" />
+            <SoundID>wind.saxophones.alto.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Group 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Group 2" />
+            <SoundID>wind.saxophones.alto.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Group 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Group 3" />
+            <SoundID>wind.saxophones.alto.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Group-Solo 1 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Group-Solo 1 KS" />
+            <SoundID>wind.saxophones.alto.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Group-Solo 1 KS Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Group-Solo 1 KS Lite" />
+            <SoundID>wind.saxophones.alto.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Group-Solo 2 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Group-Solo 2 KS" />
+            <SoundID>wind.saxophones.alto.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Group-Solo 3 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Group-Solo 3 KS" />
+            <SoundID>wind.saxophones.alto.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Solo 1" />
+            <SoundID>wind.saxophones.alto.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Solo 2" />
+            <SoundID>wind.saxophones.alto.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Alto Sax Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/02 Alto Saxes/n-Alto Sax Solo 3" />
+            <SoundID>wind.saxophones.alto.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Group 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Group 1" />
+            <SoundID>wind.saxophones.tenor.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Group 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Group 2" />
+            <SoundID>wind.saxophones.tenor.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Group 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Group 3" />
+            <SoundID>wind.saxophones.tenor.ensemble.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Group-Solo 1 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Group-Solo 1 KS" />
+            <SoundID>wind.saxophones.tenor.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Group-Solo 1 KS Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Group-Solo 1 KS Lite" />
+            <SoundID>wind.saxophones.tenor.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Group-Solo 2 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Group-Solo 2 KS" />
+            <SoundID>wind.saxophones.tenor.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Group-Solo 3 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Group-Solo 3 KS" />
+            <SoundID>wind.saxophones.tenor.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Solo 1" />
+            <SoundID>wind.saxophones.tenor.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Solo 2" />
+            <SoundID>wind.saxophones.tenor.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenor Sax Solo 3" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/03 Tenor Saxes/n-Tenor Sax Solo 3" />
+            <SoundID>wind.saxophones.tenor.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritone Sax Group 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/04 Bari Saxes/n-Baritone Sax Group 1" />
+            <SoundID>wind.saxophones.baritone.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritone Sax Group 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/04 Bari Saxes/n-Baritone Sax Group 2" />
+            <SoundID>wind.saxophones.baritone.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritone Sax Group-Solo 1 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/04 Bari Saxes/n-Baritone Sax Group-Solo 1 KS" />
+            <SoundID>wind.saxophones.baritone.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Baritone Sax Group-Solo 1 KS Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/06 Saxophones/04 Bari Saxes/n-Baritone Sax Group-Solo 1 KS Lite" />
+            <SoundID>wind.saxophones.baritone.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Baritone Sax Group-Solo 2 KS" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/04 Bari Saxes/n-Baritone Sax Group-Solo 2 KS" />
+            <SoundID>wind.saxophones.baritone.ensemble.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Baritone Sax Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/04 Bari Saxes/n-Baritone Sax Solo 1" />
+            <SoundID>wind.saxophones.baritone.solo.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="BaritoneSax Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/04 Bari Saxes/n-Baritone Sax Solo 2" />
+            <SoundID>wind.saxophones.baritone.solo.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Sax Solo 1" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/05 Bass Saxes/n-Bass Sax Solo 1" />
+            <SoundID>wind.saxophones.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Sax Solo 2" >
+            <AriaPatch Instrument="Notation/01 Woodwinds and Saxes/06 Saxophones/05 Bass Saxes/n-Bass Sax Solo 2" />
+            <SoundID>wind.saxophones.bass.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Sax Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/01 Woodwinds and Saxes/06 Saxophones/05 Bass Saxes/n-Bass Sax Solo 1 Lite" />
+            <SoundID>wind.saxophones.bass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Group 1 KSm" />
+            <SoundID>brass.trumpets.trumpet.ensemble.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Group 2 KSm" />
+            <SoundID>brass.trumpets.trumpet.ensemble.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Group 3 KSm" />
+            <SoundID>brass.trumpets.trumpet.ensemble.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Group 4 KSm" />
+            <SoundID>brass.trumpets.trumpet.ensemble.lite.4</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Group-Solo 1 KSm" />
+            <SoundID>brass.trumpets.trumpet.ensemble</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/01 Trumpets/n-Trumpet Group-Solo 1 KSm Lite" />
+            <SoundID>brass.trumpets.trumpet.ensemble.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Group-Solo 2 KSm" />
+            <SoundID>brass.trumpets.trumpet.ensemble.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Group-Solo 3 KSm" />
+            <SoundID>brass.trumpets.trumpet.ensemble.4</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Group-Solo 4 KSm" />
+            <SoundID>brass.trumpets.trumpet.ensemble.5</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Solo 1 KSm" />
+            <SoundID>brass.trumpets.trumpet.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Solo 2 KSm" />
+            <SoundID>brass.trumpets.trumpet.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Solo 3 KSm" />
+            <SoundID>brass.trumpets.trumpet.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Trumpet Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/01 Trumpets/n-Trumpet Solo 4 KSm" />
+            <SoundID>brass.trumpets.trumpet.lite.4</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Group 1 KSm" />
+            <SoundID>brass.trumpets.cornet.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Group 2 KSm" />
+            <SoundID>brass.trumpets.cornet.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Group 3 KSm" />
+            <SoundID>brass.trumpets.cornet.ensemble.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Group 4 KSm" />
+            <SoundID>brass.trumpets.cornet.ensemble.lite.4</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Group-Solo 1 KSm" />
+            <SoundID>brass.trumpets.cornet.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/02 Cornets/n-Cornet Group-Solo 1 KSm Lite" />
+            <SoundID>brass.trumpets.cornet.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Group-Solo 2 KSm" />
+            <SoundID>brass.trumpets.cornet.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Group-Solo 3 KSm" />
+            <SoundID>brass.trumpets.cornet.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Group-Solo 4 KSm" />
+            <SoundID>brass.trumpets.cornet.ensemble.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Solo 1 KSm" />
+            <SoundID>brass.trumpets.cornet.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Solo 2 KSm" />
+            <SoundID>brass.trumpets.cornet.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Solo 3 KSm" />
+            <SoundID>brass.trumpets.cornet.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Cornet Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Cornet Solo 4 KSm" />
+            <SoundID>brass.trumpets.cornet.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Eb Cornet Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Eb Cornet Solo 1 KSm" />
+            <SoundID>brass.trumpets.cornet.eb </SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Eb Cornet Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/02 Cornets/n-Eb Cornet Solo 1 KSm Lite" />
+            <SoundID>brass.trumpets.cornet.eb.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Eb Cornet Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Eb Cornet Solo 2 KSm" />
+            <SoundID>brass.trumpets.cornet.eb.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Eb Cornet Solo 3 KSm" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Eb Cornet Solo 3 KSm" />
+            <SoundID>brass.trumpets.cornet.eb.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Eb Cornet Solo 4 KSm" >
+            <AriaPatch Instrument="Notation/02 Brass/02 Cornets/n-Eb Cornet Solo 4 KSm" />
+            <SoundID>brass.trumpets.cornet.eb.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Group 1" />
+            <SoundID>brass.trumpets.flugel horn.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Group 2" />
+            <SoundID>brass.trumpets.flugel horn.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Group 3" />
+            <SoundID>brass.trumpets.flugel horn.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Group 4" />
+            <SoundID>brass.trumpets.flugel horn.ensemble.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Group-Solo 1 KS" />
+            <SoundID>brass.trumpets.flugel horn.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/03 Flugelhorns/n-Flugelhorn Group-Solo 1 KS Lite" />
+            <SoundID>brass.trumpets.flugel horn.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Group-Solo 2 KS" />
+            <SoundID>brass.trumpets.flugel horn.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Group-Solo 3 KS" />
+            <SoundID>brass.trumpets.flugel horn.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Group-Solo 4 KS" />
+            <SoundID>brass.trumpets.flugel horn.ensemble.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Solo 1" />
+            <SoundID>brass.trumpets.flugel horn.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Solo 2" />
+            <SoundID>brass.trumpets.flugel horn.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Solo 3" />
+            <SoundID>brass.trumpets.flugel horn.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Flugelhorn Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/03 Flugelhorns/n-Flugelhorn Solo 4" />
+            <SoundID>brass.trumpets.flugel horn.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Group 1" />
+            <SoundID>brass.tubas.tenor horn.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Group 2" />
+            <SoundID>brass.tubas.tenor horn.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Group 3" />
+            <SoundID>brass.tubas.tenor horn.ensemble.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Group 4" />
+            <SoundID>brass.tubas.tenor horn.ensemble.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Group-Solo 1 KS" />
+            <SoundID>brass.tubas.tenor horn.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/06 Tenor horns/n-Tenor horn Group-Solo 1 KS Lite" />
+            <SoundID>brass.tubas.tenor horn.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Group-Solo 2 KS" />
+            <SoundID>brass.tubas.tenor horn.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Group-Solo 3 KS" />
+            <SoundID>brass.tubas.tenor horn.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Group-Solo 4 KS" />
+            <SoundID>brass.tubas.tenor horn.ensemble.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Solo 1" />
+            <SoundID>brass.tubas.tenor horn.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Solo 2" />
+            <SoundID>brass.tubas.tenor horn.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Solo 3" />
+            <SoundID>brass.tubas.tenor horn.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Tenorhorn Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/06 Tenor horns/n-Tenor horn Solo 4" />
+            <SoundID>brass.tubas.tenor horn.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Group 1 KSm" />
+            <SoundID>brass.horns.french horn.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Group 2 KSm" />
+            <SoundID>brass.horns.french horn.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Group 3 KSm" />
+            <SoundID>brass.horns.french horn.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Group 4 KSm" />
+            <SoundID>brass.horns.french horn.ensemble.lite.4</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Group-Solo 1 KSm" />
+            <SoundID>brass.horns.french horn.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/04 French horns/n-French Horn Group-Solo 1 KSm Lite" />
+            <SoundID>brass.horns.french horn.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Group-Solo 2 KSm" />
+            <SoundID>brass.horns.french horn.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Group-Solo 3 KSm" />
+            <SoundID>brass.horns.french horn.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Group-Solo 4 KSm" />
+            <SoundID>brass.horns.french horn.ensemble.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>ComboMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Solo 1 KSm" />
+            <SoundID>brass.horns.french horn.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Solo 2 KSm" />
+            <SoundID>brass.horns.french horn.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Solo 3 KSm" />
+            <SoundID>brass.horns.french horn.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="French Horn Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/04 French horns/n-French Horn Solo 4 KSm" />
+            <SoundID>brass.horns.french horn.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>SoloMutes</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Group 1" />
+            <SoundID>brass.tubas.mellophone.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Group 2" />
+            <SoundID>brass.tubas.mellophone.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Group 3" />
+            <SoundID>brass.tubas.mellophone.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Group 4" />
+            <SoundID>brass.tubas.mellophone.ensemble.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Group-Solo 1 KS" />
+            <SoundID>brass.tubas.mellophone.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Group-Solo 2 KS" />
+            <SoundID>brass.tubas.mellophone.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Group-Solo 3 KS" />
+            <SoundID>brass.tubas.mellophone.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Group-Solo 4 KS" />
+            <SoundID>brass.tubas.mellophone.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Solo 1" />
+            <SoundID>brass.tubas.mellophone.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/05 Mellophones/n-Mellophone Solo 1 KS Lite" />
+            <SoundID>brass.tubas.mellophone.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Solo 2" />
+            <SoundID>brass.tubas.mellophone.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Solo 3" />
+            <SoundID>brass.tubas.mellophone.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Mellophone Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/05 Mellophones/n-Mellophone Solo 4" />
+            <SoundID>brass.tubas.mellophone.lite.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Group 1 KSm" />
+            <SoundID>brass.trombones.tenor.ensemble.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Group 2 KSm" />
+            <SoundID>brass.trombones.tenor.ensemble.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Group 3 KSm" />
+            <SoundID>brass.trombones.tenor.ensemble.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Group 4 KSm" />
+            <SoundID>brass.trombones.tenor.ensemble.lite.4</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Group-Solo 1 KSm" />
+            <SoundID>brass.trombones.tenor.ensemble</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/07 Trombones/n-Trombone Group-Solo 1 KSm Lite" />
+            <SoundID>brass.trombones.tenor.ensemble.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Group-Solo 2 KSm" />
+            <SoundID>brass.trombones.tenor.ensemble.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Group-Solo 3 KSm" />
+            <SoundID>brass.trombones.tenor.ensemble.4</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Group-Solo 4 KSm" />
+            <SoundID>brass.trombones.tenor.ensemble.5</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Solo 1 KSm" />
+            <SoundID>brass.trombones.tenor.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Solo 2 KSm" />
+            <SoundID>brass.trombones.tenor.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Solo 3 KSm" />
+            <SoundID>brass.trombones.tenor.lite.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Trombone Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Trombone Solo 4 KSm" />
+            <SoundID>brass.trombones.tenor.lite.4</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Trombone Solo K" >
+            <AriaPatch Instrument="Notation/02 Brass/07 Trombones/n-Bass Trombone Solo KSm" />
+            <SoundID>brass.trombones.bass</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Bass Trombone Solo KSm Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/07 Trombones/n-Bass Trombone Solo KSm Lite" />
+            <SoundID>brass.trombones.bass.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Group 1" />
+            <SoundID>brass.tubas.euphonium.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Group 2" />
+            <SoundID>brass.tubas.euphonium.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Group 3" />
+            <SoundID>brass.tubas.euphonium.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Group 4" />
+            <SoundID>brass.tubas.euphonium.ensemble.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Group-Solo 1 KS" />
+            <SoundID>brass.tubas.euphonium.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/08 Euphoniums/n-Euphonium Group-Solo 1 KS Lite" />
+            <SoundID>brass.tubas.euphonium.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Group-Solo 2 KS" />
+            <SoundID>brass.tubas.euphonium.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Group-Solo 3 KS" />
+            <SoundID>brass.tubas.euphonium.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Group-Solo 4 KS" />
+            <SoundID>brass.tubas.euphonium.ensemble.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Solo 1" />
+            <SoundID>brass.tubas.euphonium.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Solo 2" />
+            <SoundID>brass.tubas.euphonium.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Solo 3" />
+            <SoundID>brass.tubas.euphonium.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Euphonium Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/08 Euphoniums/n-Euphonium Solo 4" />
+            <SoundID>brass.tubas.euphonium.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Group 1" />
+            <SoundID>brass.tubas.baritone horn.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Group 2" />
+            <SoundID>brass.tubas.baritone horn.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Group 3" />
+            <SoundID>brass.tubas.baritone horn.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group 4" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Group 4" />
+            <SoundID>brass.tubas.baritone horn.ensemble.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Group-Solo 1 KS" />
+            <SoundID>brass.tubas.baritone horn.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/09 Baritones/n-Baritone horn Group-Solo 1 KS Lite" />
+            <SoundID>brass.tubas.baritone horn.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Group-Solo 2 KS" />
+            <SoundID>brass.tubas.baritone horn.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Group-Solo 3 KS" />
+            <SoundID>brass.tubas.baritone horn.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Group-Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Group-Solo 4 KS" />
+            <SoundID>brass.tubas.baritone horn.ensemble.5</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Solo 1" />
+            <SoundID>brass.tubas.baritone horn.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Solo 2" />
+            <SoundID>brass.tubas.baritone horn.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Solo 3" />
+            <SoundID>brass.tubas.baritone horn.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Baritonehorn Solo 4" >
+            <AriaPatch Instrument="Notation/02 Brass/09 Baritones/n-Baritone horn Solo 4" />
+            <SoundID>brass.tubas.baritone horn.lite.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/10 Tubas/n-Tuba Group 1" />
+            <SoundID>brass.tubas.tuba.ensemble.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/10 Tubas/n-Tuba Group 2" />
+            <SoundID>brass.tubas.tuba.ensemble.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/10 Tubas/n-Tuba Group-Solo 1 KS" />
+            <SoundID>brass.tubas.tuba.ensemble</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/10 Tubas/n-Tuba Group-Solo 1 KS Lite" />
+            <SoundID>brass.tubas.tuba.ensemble.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/10 Tubas/n-Tuba Group-Solo 2 KS" />
+            <SoundID>brass.tubas.tuba.ensemble.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/10 Tubas/n-Tuba Solo 1" />
+            <SoundID>brass.tubas.tuba.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Tuba Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/10 Tubas/n-Tuba Solo 2" />
+            <SoundID>brass.tubas.tuba.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Group 1" />
+            <SoundID>brass.tubas.sousaphone.ensemble.lite</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Group 2" />
+            <SoundID>brass.tubas.sousaphone.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Group 3" />
+            <SoundID>brass.tubas.sousaphone.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Group-Solo 1 KS" />
+            <SoundID>brass.tubas.sousaphone.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/11 Sousaphones/n-Sousaphone Group-Solo 1 KS Lite" />
+            <SoundID>brass.tubas.sousaphone.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Group-Solo 2 KS" />
+            <SoundID>brass.tubas.sousaphone.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Group-Solo 3 KS" />
+            <SoundID>brass.tubas.sousaphone.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Solo 1" />
+            <SoundID>brass.tubas.sousaphone.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Solo 2" />
+            <SoundID>brass.tubas.sousaphone.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Sousaphone Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/11 Sousaphones/n-Sousaphone Solo 3" />
+            <SoundID>brass.tubas.sousaphone.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Group 1" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Group 1" />
+            <SoundID>brass.tubas.sousaphone.helicon.ensemble.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Group 2" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Group 2" />
+            <SoundID>brass.tubas.sousaphone.helicon.ensemble.lite.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Group 3" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Group 3" />
+            <SoundID>brass.tubas.sousaphone.helicon.ensemble.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Group-Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Group-Solo 1 KS" />
+            <SoundID>brass.tubas.sousaphone.helicon.ensemble</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Group-Solo 1 Lite" >
+            <AriaPatch Instrument="Notation/04 Lite/02 Brass/12 Helicons/n-Helicon Group-Solo 1 KS Lite" />
+            <SoundID>brass.tubas.sousaphone.helicon.ensemble.2</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Group-Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Group-Solo 2 KS" />
+            <SoundID>brass.tubas.sousaphone.helicon.ensemble.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Group-Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Group-Solo 3 KS" />
+            <SoundID>brass.tubas.sousaphone.helicon.ensemble.4</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>GroupSolo</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Solo 1" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Solo 1" />
+            <SoundID>brass.tubas.sousaphone.helicon.lite</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Solo 2" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Solo 2" />
+            <SoundID>brass.tubas.sousaphone.helicon.lite.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Helicon Solo 3" >
+            <AriaPatch Instrument="Notation/02 Brass/12 Helicons/n-Helicon Solo 3" />
+            <SoundID>brass.tubas.sousaphone.helicon.lite.3</SoundID>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+            <SwitchType>CMBLegato</SwitchType>
+        </Patch>
+        <Patch Name="Basic Orchestral Percussion (GPO)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/06 GM, GPO and Finale/n-Basic Orch Perc (GPO)" />
+            <DrumMap>Basic Orch Perc (GPO)</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Bass Drum (GPO)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-Bass Drum (GPO)" />
+            <DrumMap>Bass Drum</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Bass Drum (Large)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-Bass Drum Large" />
+            <DrumMap>Bass Drum Large</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Bass Drum (Small)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-Bass Drum Small" />
+            <DrumMap>Bass Drum Small</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Cymbals" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/03 Cymbals/n-Cymbals (GPO)" />
+            <DrumMap>Cymbals (Band)</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Cymbals (GPO)" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/03 Cymbals/n-Cymbals" />
+            <DrumMap>Cymbals (Orch)</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Gong" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/03 Cymbals/n-Gong" />
+            <DrumMap>Gong</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Snare Drum" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-Snare Drum" />
+            <DrumMap>Snare Drum</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Tenor Drums" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-Tenor Drums" />
+            <DrumMap>Tenor Drums</DrumMap>
+            <VolumeType>ModWheel</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Toms" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-Toms" />
+            <DrumMap>Toms</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Triangle" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/04 Percussion/n-Triangle" />
+            <DrumMap>Triangle</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Bass Line" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/02 Drum Lines/n-VDL BassLine" />
+            <DrumMap>VDL BassLine</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Castanets" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/04 Percussion/n-VDL Castanets" />
+            <DrumMap>VDL Castanets</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Concert Toms" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-VDL Concert Toms" />
+            <DrumMap>VDL Concert Toms</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Cymbals-HiHats" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/03 Cymbals/n-VDL Cymbals-HiHats" />
+            <DrumMap>VDL Cymbals-HiHats</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Finale Map" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/06 GM, GPO and Finale/n-VDL Finale Map" />
+            <DrumMap>VDL Finale Map</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Finger Cymbals" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/03 Cymbals/n-VDL Finger Cymbals" />
+            <DrumMap>VDL Finger Cymbals</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Flexatones" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/04 Percussion/n-VDL Flexatones" />
+            <DrumMap>VDL Flexatones</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL General MIDI Set" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/06 GM, GPO and Finale/n-VDL General MIDI set" />
+            <DrumMap>VDL General MIDI Set</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Impact Drums" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-VDL Impact Drums" />
+            <DrumMap>VDL Impact Drums</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Police Whistle" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/04 Percussion/n-VDL Police Whistle" />
+            <DrumMap>VDL Police Whistle</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Roto Toms" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/01 Single Drums/n-VDL Roto Toms" />
+            <DrumMap>VDL Roto Toms</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Snare Line" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/02 Drum Lines/n-VDL SnareLine" />
+            <DrumMap>VDL SnareLine</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="VDL Tenor Line" >
+            <AriaPatch Instrument="Notation/03 Drums and Percussion/02 Drum Lines/n-VDL TenorLine KS" />
+            <DrumMap>VDL TenorLine KS</DrumMap>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+    </PatchList>
+    <DrumMapList>
+        <DrumMapDefinition Name="Basic Orch Perc (GPO)" >
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.bass drum.concert" Name="Bass drum hit" >
+            </DrumSound>
+            <DrumSound Pitch="37" SoundID="unpitched.drum.very low.bass drum.roll.concert" Name="Bass drum roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.drum.medium.snare drum.snares off.left" Name="Side drum hit snares off left" >
+            </DrumSound>
+            <DrumSound Pitch="56" SoundID="unpitched.drum.medium.snare drum.snares off" Name="Side drum hit snares off left (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="57" SoundID="unpitched.drum.medium.snare drum.snares off.right" Name="Side drum hit snares off right" >
+            </DrumSound>
+            <DrumSound Pitch="58" SoundID="unpitched.drum.medium.snare drum.snares off.roll" Name="Side drum hit snares off roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.drum.medium.snare drum.snares on.left" Name="Side drum hit snares on left" >
+            </DrumSound>
+            <DrumSound Pitch="59" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Side drum hit snares on left (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="60" SoundID="unpitched.drum.medium.snare drum.snares on.right" Name="Side drum hit snares on right" >
+            </DrumSound>
+            <DrumSound Pitch="61" SoundID="unpitched.drum.medium.snare drum.snares on.roll" Name="Side drum hit snares on roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="80" SoundID="unpitched.metal.cymbal.gong.large" Name="Large gong" >
+            </DrumSound>
+            <DrumSound Pitch="81" SoundID="unpitched.metal.cymbal.gong.medium" Name="Medium gong 1" >
+            </DrumSound>
+            <DrumSound Pitch="82" SoundID="unpitched.metal.cymbal.tam tam" Name="Tam tam" >
+            </DrumSound>
+            <DrumSound Pitch="83" SoundID="unpitched.metal.cymbal.gong.medium.2" Name="Medium gong 2" >
+            </DrumSound>
+            <DrumSound Pitch="84" SoundID="unpitched.metal.cymbal.clash" Name="Piatti cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="85" SoundID="unpitched.metal.cymbal.clash.2" Name="Piatti cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="86" SoundID="unpitched.metal.cymbal.clash.3" Name="Piatti cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="87" SoundID="unpitched.metal.cymbal.crash" Name="Crash cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="88" SoundID="unpitched.metal.cymbal.choke" Name="Choke cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="89" SoundID="unpitched.metal.cymbal.ride.left" Name="Ride Cymbal left" >
+            </DrumSound>
+            <DrumSound Pitch="90" SoundID="unpitched.metal.cymbal.ride.right" Name="Ride Cymbal right" >
+            </DrumSound>
+            <DrumSound Pitch="91" SoundID="unpitched.metal.cymbal.ride.choke" Name="Ride Cymbal choke" >
+            </DrumSound>
+            <DrumSound Pitch="92" SoundID="unpitched.metal.cymbal.roll.damp" Name="Cymbal roll without release hit" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="93" SoundID="unpitched.metal.cymbal.roll" Name="Cymbal roll with release hit" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="94" SoundID="unpitched.metal.cymbal.roll.crescendo" Name="Cymbal roll crescendo" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="95" SoundID="unpitched.metal.bells.high.triangle.short.2" Name="Triangle short" >
+            </DrumSound>
+            <DrumSound Pitch="96" SoundID="unpitched.metal.bells.high.triangle.long.2" Name="Triangle long" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Bass Drum" >
+            <DrumSound Pitch="B1" SoundID="unpitched.drum.very low.bass drum.concert.lite" Name="Bass drum hit" >
+            </DrumSound>
+            <DrumSound Pitch="C2" SoundID="unpitched.drum.very low.bass drum.concert.lite.2" Name="Bass drum hit 2" >
+            </DrumSound>
+            <DrumSound Pitch="C#2" SoundID="unpitched.drum.very low.bass drum.roll.concert.lite" Name="Bass drum roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Bass Drum Large" >
+            <DrumSound Pitch="B1" SoundID="unpitched.drum.very low.bass drum.concert.large.damped" Name="Damped hit" >
+            </DrumSound>
+            <DrumSound Pitch="C2" SoundID="unpitched.drum.very low.bass drum.concert.large" Name="Undamped hit" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Bass Drum Small" >
+            <DrumSound Pitch="C2" SoundID="unpitched.drum.very low.bass drum.concert.small" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="C#2" SoundID="unpitched.drum.very low.bass drum.roll.concert.small" Name="Roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Cymbals (Band)" >
+            <DrumSound Pitch="C4" SoundID="unpitched.metal.cymbal.clash" Name="Cymbal 1 piatti" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.metal.cymbal.clash.choke" Name="Cymbal 1 piatti choke" >
+            </DrumSound>
+            <DrumSound Pitch="D4" SoundID="unpitched.metal.cymbal" Name="Cymbal 1 hit" >
+            </DrumSound>
+            <DrumSound Pitch="D#4" SoundID="unpitched.metal.cymbal.scrape" Name="Cymbal 1 scrape 1" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.metal.cymbal.scrape.2" Name="Cymbal 1 scrape 2" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.metal.cymbal.clash.2" Name="Cymbal 2 piatti" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.metal.cymbal.clash.choke.2" Name="Cymbal 2 piatti choke" >
+            </DrumSound>
+            <DrumSound Pitch="D5" SoundID="unpitched.metal.cymbal.2" Name="Cymbal 2 hit 1" >
+            </DrumSound>
+            <DrumSound Pitch="D#5" SoundID="unpitched.metal.cymbal.3" Name="Cymbal 2 hit 2" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.metal.cymbal.choke" Name="Cymbal 2 hit choke 1" >
+            </DrumSound>
+            <DrumSound Pitch="F5" SoundID="unpitched.metal.cymbal.choke.2" Name="Cymbal 2 hit choke 2" >
+            </DrumSound>
+            <DrumSound Pitch="C6" SoundID="unpitched.metal.cymbal.clash.3" Name="Cymbal 3 piatti" >
+            </DrumSound>
+            <DrumSound Pitch="C#6" SoundID="unpitched.metal.cymbal.clash.choke.3" Name="Cymbal 3 piatti choke 1" >
+            </DrumSound>
+            <DrumSound Pitch="D6" SoundID="unpitched.metal.cymbal.clash.choke.4" Name="Cymbal 3 piatti choke 2" >
+            </DrumSound>
+            <DrumSound Pitch="D#6" SoundID="unpitched.metal.cymbal.scrape.3" Name="Cymbal 3 scrape 1" >
+            </DrumSound>
+            <DrumSound Pitch="E6" SoundID="unpitched.metal.cymbal.scrape.4" Name="Cymbal 3 scrape 2" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Cymbals (Orch)" >
+            <DrumSound Pitch="G#5" SoundID="unpitched.metal.cymbal.gong.large.orch" Name="Large gong" >
+            </DrumSound>
+            <DrumSound Pitch="A5" SoundID="unpitched.metal.cymbal.gong.medium.orch" Name="Medium gong 1" >
+            </DrumSound>
+            <DrumSound Pitch="A#5" SoundID="unpitched.metal.cymbal.gong.tam tam.orch" Name="Tam tam" >
+            </DrumSound>
+            <DrumSound Pitch="B5" SoundID="unpitched.metal.cymbal.gong.medium.orch.2" Name="Medium gong 2" >
+            </DrumSound>
+            <DrumSound Pitch="C6" SoundID="unpitched.metal.cymbal.clash.orch.4" Name="Piatti cymbal 1" >
+            </DrumSound>
+            <DrumSound Pitch="C#6" SoundID="unpitched.metal.cymbal.clash.orch.5" Name="Piatti cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="D6" SoundID="unpitched.metal.cymbal.clash.orch.6" Name="Piatti cymbal 3" >
+            </DrumSound>
+            <DrumSound Pitch="D#6" SoundID="unpitched.metal.cymbal.crash.orch" Name="Crash cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="E6" SoundID="unpitched.metal.cymbal.choke.orch" Name="Choke cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="F6" SoundID="unpitched.metal.cymbal.ride.left.orch" Name="Cymbal hit (ping) LH" >
+            </DrumSound>
+            <DrumSound Pitch="F#6" SoundID="unpitched.metal.cymbal.ride.right.orch" Name="Cymbal hit (ping) RH" >
+            </DrumSound>
+            <DrumSound Pitch="G6" SoundID="unpitched.metal.cymbal.ride.choke.orch" Name="Cymbal hit (ping) choke" >
+            </DrumSound>
+            <DrumSound Pitch="G#6" SoundID="unpitched.metal.cymbal.roll.damp.orch" Name="Cymbal roll (mod wheel)" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A6" SoundID="unpitched.metal.cymbal.roll.orch" Name="Cymbal roll (mod wheel) with release hit" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A#6" SoundID="unpitched.metal.cymbal.roll.crescendo.orch" Name="Cymbal roll crescendo" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Gong" >
+            <DrumSound Pitch="C4" SoundID="unpitched.metal.cymbal.gong" Name="Gong hit 1" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.metal.cymbal.gong.2" Name="Gong hit 2" >
+            </DrumSound>
+            <DrumSound Pitch="D4" SoundID="unpitched.metal.cymbal.gong.choke" Name="Gong hit choke" >
+            </DrumSound>
+            <DrumSound Pitch="D#4" SoundID="unpitched.metal.cymbal.gong.scrape" Name="Gong scrape 1" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.metal.cymbal.gong.scrape.2" Name="Gong scrape 2" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.metal.cymbal.gong.roll" Name="Gong crescendo roll 1" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F#4" SoundID="unpitched.metal.cymbal.gong.roll.2" Name="Gong crescendo roll 2" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Snare Drum" >
+            <DrumSound Pitch="C3" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Hit 1" >
+            </DrumSound>
+            <DrumSound Pitch="D3" SoundID="unpitched.drum.medium.snare drum.snares on.2" Name="Hit 2" >
+            </DrumSound>
+            <DrumSound Pitch="E3" SoundID="unpitched.drum.medium.snare drum.snares on.3" Name="Hit 3" >
+            </DrumSound>
+            <DrumSound Pitch="F3" SoundID="unpitched.drum.medium.snare drum.snares on.4" Name="Hit 4" >
+            </DrumSound>
+            <DrumSound Pitch="G3" SoundID="unpitched.drum.medium.snare drum.snares on.flam.tight" Name="Tight flam" >
+            </DrumSound>
+            <DrumSound Pitch="A3" SoundID="unpitched.drum.medium.snare drum.snares on.open.flam" Name="Open flam" >
+            </DrumSound>
+            <DrumSound Pitch="B3" SoundID="unpitched.drum.medium.snare drum.snares on.drag" Name="Drag" >
+            </DrumSound>
+            <DrumSound Pitch="C4" SoundID="unpitched.drum.medium.snare drum.snares on.flam.scottish" Name="Scottish flam" >
+            </DrumSound>
+            <DrumSound Pitch="D4" SoundID="unpitched.drum.medium.snare drum.snares on.ruff" Name="4-stroke ruff" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.drum.medium.snare drum.snares on.crush" Name="Fat crush" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.medium.snare drum.snares on.diddle" Name="Diddle/rim knock/pingshot" >
+            </DrumSound>
+            <DrumSound Pitch="G4" SoundID="unpitched.drum.medium.snare drum.snares on.roll" Name="Sustained roll 1" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.medium.snare drum.snares on.roll.2" Name="Sustained roll 2" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B4" SoundID="unpitched.drum.medium.snare drum.snares on.roll.3" Name="Sustained roll 3" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium.snare drum.snares on.stick" Name="Stick" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Tenor Drums" >
+            <DrumSound Pitch="F3" SoundID="unpitched.drum.medium-low.tenor drum.2" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="A3" SoundID="unpitched.drum.medium-low.tenor drum" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="C4" SoundID="unpitched.drum.medium.tenor drum.2" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.drum.medium.tenor drum" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.medium-low.tenor drum.flam.2" Name="Flam" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.medium-low.tenor drum.flam" Name="Flam" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium.tenor drum.flam.2" Name="Flam" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.drum.medium.tenor drum.flam" Name="Flam" >
+            </DrumSound>
+            <DrumSound Pitch="F5" SoundID="unpitched.drum.medium-low.tenor drum.roll.short.2" Name="Short roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A5" SoundID="unpitched.drum.medium-low.tenor drum.roll.short" Name="Short roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C6" SoundID="unpitched.drum.medium.tenor drum.roll.short.2" Name="Short roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="E6" SoundID="unpitched.drum.medium.tenor drum.roll.short" Name="Short roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F6" SoundID="unpitched.drum.medium-low.tenor drum.roll.2" Name="Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A6" SoundID="unpitched.drum.medium-low.tenor drum.roll" Name="Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C7" SoundID="unpitched.drum.medium.tenor drum.roll.2" Name="Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="E7" SoundID="unpitched.drum.medium.tenor drum.roll" Name="Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Toms" >
+            <DrumSound Pitch="D4" SoundID="unpitched.drum.very low.tom-tom" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.low.tom-tom" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.medium-low.tom-tom" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium.tom-tom" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.drum.medium-high.tom-tom" Name="Hit" >
+            </DrumSound>
+            <DrumSound Pitch="G5" SoundID="unpitched.drum.high.tom-tom" Name="Hit" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="Triangle" >
+            <DrumSound Pitch="B6" SoundID="unpitched.metal.bells.high.triangle.open" Name="Ringing hit" >
+            </DrumSound>
+            <DrumSound Pitch="C7" SoundID="unpitched.metal.bells.high.triangle.closed" Name="Damped hit" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL BassLine" >
+            <DrumSound Pitch="F2" SoundID="unpitched.drum.very low.bass drum.rim.left" Name="Drum 6 LH rim" >
+            </DrumSound>
+            <DrumSound Pitch="F2" SoundID="unpitched.drum.very low.bass drum.rim" Name="Drum 6 LH rim (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="F#2" SoundID="unpitched.drum.very low.bass drum.rim.right" Name="Drum 6 RH rim" >
+            </DrumSound>
+            <DrumSound Pitch="G2" SoundID="unpitched.drum.very low.bass drum.rim.left.2" Name="Drum 5 LH rim" >
+            </DrumSound>
+            <DrumSound Pitch="G2" SoundID="unpitched.drum.very low.bass drum.rim.2" Name="Drum 5 LH rim (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="G#2" SoundID="unpitched.drum.very low.bass drum.rim.right.2" Name="Drum 5 RH rim" >
+            </DrumSound>
+            <DrumSound Pitch="A2" SoundID="unpitched.drum.low.bass drum.rim.left" Name="Drum 4 LH rim" >
+            </DrumSound>
+            <DrumSound Pitch="A2" SoundID="unpitched.drum.low.bass drum.rim" Name="Drum 4 LH rim (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="A#2" SoundID="unpitched.drum.low.bass drum.rim.right" Name="Drum 4 RH rim" >
+            </DrumSound>
+            <DrumSound Pitch="B2" SoundID="unpitched.drum.low.bass drum.rim.left.2" Name="Drum 3 LH rim" >
+            </DrumSound>
+            <DrumSound Pitch="B2" SoundID="unpitched.drum.low.bass drum.rim.2" Name="Drum 3 LH rim (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="C3" SoundID="unpitched.drum.low.bass drum.rim.right.2" Name="Drum 3 RH rim" >
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.drum.medium-low.bass drum.rim.left" Name="Drum 2 LH rim" >
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.drum.medium-low.bass drum.rim" Name="Drum 2 LH rim (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="D3" SoundID="unpitched.drum.medium-low.bass drum.rim.right" Name="Drum 2 RH rim" >
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.drum.medium-low.bass drum.rim.left.2" Name="Drum 1 LH rim" >
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.drum.medium-low.bass drum.rim.2" Name="Drum 1 LH rim (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="E3" SoundID="unpitched.drum.medium-low.bass drum.rim.right.2" Name="Drum 1 RH rim" >
+            </DrumSound>
+            <DrumSound Pitch="G#3" SoundID="unpitched.drum.low.bass drum.ensemble.roll" Name="Unison Sustained Roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B3" SoundID="unpitched.drum.low.bass drum.ensemble.crush" Name="Unison Crush" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.drum.low.bass drum.ensemble.rim.left" Name="Unison LH Rims" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.drum.low.bass drum.ensemble.rim" Name="Unison LH Rims (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="D4" SoundID="unpitched.drum.low.bass drum.ensemble.rim.right" Name="Unison RH rims" >
+            </DrumSound>
+            <DrumSound Pitch="D#4" SoundID="unpitched.drum.low.bass drum.ensemble.left" Name="Unison LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="D#4" SoundID="unpitched.drum.low.bass drum.ensemble" Name="Unison LH Hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.drum.low.bass drum.ensemble.right" Name="Unison RH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.very low.bass drum.left" Name="Drum 6 LH hits" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.very low.bass drum" Name="Drum 6 LH hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="F#4" SoundID="unpitched.drum.very low.bass drum.right" Name="Drum 6 RH hits" >
+            </DrumSound>
+            <DrumSound Pitch="G4" SoundID="unpitched.drum.very low.bass drum.left.2" Name="Drum 5 LH hits" >
+            </DrumSound>
+            <DrumSound Pitch="G4" SoundID="unpitched.drum.very low.bass drum.2" Name="Drum 5 LH hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="G#4" SoundID="unpitched.drum.very low.bass drum.right.2" Name="Drum 5 RH hits" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.low.bass drum.left" Name="Drum 4 LH hits" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.low.bass drum" Name="Drum 4 LH hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="A#4" SoundID="unpitched.drum.low.bass drum.right" Name="Drum 4 RH hits" >
+            </DrumSound>
+            <DrumSound Pitch="B4" SoundID="unpitched.drum.low.bass drum.left.2" Name="Drum 3 LH hits" >
+            </DrumSound>
+            <DrumSound Pitch="B4" SoundID="unpitched.drum.low.bass drum.2" Name="Drum 3 LH hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.low.bass drum.right.2" Name="Drum 3 RH hits" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.drum.medium-low.bass drum.left" Name="Drum 2 LH hits" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.drum.medium-low.bass drum" Name="Drum 2 LH hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="D5" SoundID="unpitched.drum.medium-low.bass drum.right" Name="Drum 2 RH hits" >
+            </DrumSound>
+            <DrumSound Pitch="D#5" SoundID="unpitched.drum.medium-low.bass drum.left.2" Name="Drum 1 LH hits" >
+            </DrumSound>
+            <DrumSound Pitch="D#5" SoundID="unpitched.drum.medium-low.bass drum.2" Name="Drum 1 LH hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.drum.medium-low.bass drum.right.2" Name="Drum 1 RH hits" >
+            </DrumSound>
+            <DrumSound Pitch="F6" SoundID="unpitched.drum.very low.bass drum.crush" Name="Drum 6 Crush" >
+            </DrumSound>
+            <DrumSound Pitch="F#6" SoundID="unpitched.drum.very low.bass drum.roll" Name="Drum 6 Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G6" SoundID="unpitched.drum.very low.bass drum.crush.2" Name="Drum 5 crush" >
+            </DrumSound>
+            <DrumSound Pitch="G#6" SoundID="unpitched.drum.very low.bass drum.roll.2" Name="Drum 5 RH Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A6" SoundID="unpitched.drum.low.bass drum.crush" Name="Drum 4 LH crush" >
+            </DrumSound>
+            <DrumSound Pitch="A#6" SoundID="unpitched.drum.low.bass drum.roll" Name="Drum 4 Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B6" SoundID="unpitched.drum.low.bass drum.crush.2" Name="Drum 3 LH Crush" >
+            </DrumSound>
+            <DrumSound Pitch="C7" SoundID="unpitched.drum.low.bass drum.roll.2" Name="Drum 3 Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C#7" SoundID="unpitched.drum.medium-low.bass drum.crush" Name="Drum 2 Crush" >
+            </DrumSound>
+            <DrumSound Pitch="D7" SoundID="unpitched.drum.medium-low.bass drum.roll" Name="Drum 2 Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="D#7" SoundID="unpitched.drum.medium-low.bass drum.crush.2" Name="Drum 1 Crush" >
+            </DrumSound>
+            <DrumSound Pitch="E7" SoundID="unpitched.drum.medium-low.bass drum.roll.2" Name="Drum 1 Sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Castanets" >
+            <DrumSound Pitch="D5" SoundID="unpitched.wood.high.castanets.flam.left" Name="LH flam" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.wood.high.castanets.left" Name="LH hit" >
+            </DrumSound>
+            <DrumSound Pitch="F5" SoundID="unpitched.wood.high.castanets.right" Name="RH hit" >
+            </DrumSound>
+            <DrumSound Pitch="G5" SoundID="unpitched.wood.high.castanets.flam.right" Name="RH flam" >
+            </DrumSound>
+            <DrumSound Pitch="A5" SoundID="unpitched.wood.high.castanets.roll" Name="Roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Concert Toms" >
+            <DrumSound Pitch="D4" SoundID="unpitched.drum.very low.tom-tom.concert" Name="Concert Tom 6 Hit" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.low.tom-tom.concert" Name="Concert Tom 5 Hit" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.medium-low.tom-tom.concert" Name="Concert Tom 4 Hit" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium.tom-tom.concert" Name="Concert Tom 3 Hit" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.drum.medium-high.tom-tom.concert" Name="Concert Tom 2 Hit" >
+            </DrumSound>
+            <DrumSound Pitch="G5" SoundID="unpitched.drum.high.tom-tom.concert" Name="Concert Tom 1 Hit" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Cymbals-HiHats" >
+            <DrumSound Pitch="F#2" SoundID="unpitched.metal.hi-hat.closed" Name="Closed high hat" >
+            </DrumSound>
+            <DrumSound Pitch="G#2" SoundID="unpitched.metal.hi-hat.closed.pedal" Name="Pedal high hat" >
+            </DrumSound>
+            <DrumSound Pitch="A#2" SoundID="unpitched.metal.hi-hat" Name="Open high hat" >
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.metal.cymbal.crash" Name="Crash cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.metal.cymbal.ride" Name="Ride cymbal tip 1" >
+            </DrumSound>
+            <DrumSound Pitch="E3" SoundID="unpitched.metal.cymbal.chinese" Name="Chinese cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="F3" SoundID="unpitched.metal.cymbal.ride.bell" Name="Ride cymbal bell" >
+            </DrumSound>
+            <DrumSound Pitch="G3" SoundID="unpitched.metal.cymbal.splash" Name="Splash cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="A3" SoundID="unpitched.metal.cymbal.crash.2" Name="Crash cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="B3" SoundID="unpitched.metal.cymbal.ride.2" Name="Ride cymbal tip 2" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Finale Map" >
+            <DrumSound Pitch="C2" SoundID="unpitched.drum.very low.bass drum" Name="Bass Drum 5" >
+            </DrumSound>
+            <DrumSound Pitch="C#2" SoundID="unpitched.drum.low.bass drum.ensemble.rim" Name="Unison BD Rim click" >
+            </DrumSound>
+            <DrumSound Pitch="D2" SoundID="unpitched.drum.low.bass drum.2" Name="Bass Drum 4" >
+            </DrumSound>
+            <DrumSound Pitch="D#2" SoundID="unpitched.drum.low.bass drum.ensemble" Name="Unison BD hit" >
+            </DrumSound>
+            <DrumSound Pitch="E2" SoundID="unpitched.drum.low.bass drum" Name="Bass Drum 3" >
+            </DrumSound>
+            <DrumSound Pitch="F2" SoundID="unpitched.drum.medium-low.bass drum.2" Name="Bass Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="F#2" SoundID="unpitched.drum.low.bass drum.ensemble.roll" Name="Unison BD roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G2" SoundID="unpitched.drum.medium-low.bass drum" Name="Bass Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="G#2" SoundID="unpitched.metal.cymbal.ensemble.sizzle" Name="Cymbal Line Sizzle" >
+            </DrumSound>
+            <DrumSound Pitch="A2" SoundID="unpitched.metal.cymbal.ensemble.crash" Name="Cymbal Line Crash" >
+            </DrumSound>
+            <DrumSound Pitch="A#2" SoundID="unpitched.metal.hi-hat.ensemble" Name="Cymbal Line High Hat" >
+            </DrumSound>
+            <DrumSound Pitch="B2" SoundID="unpitched.metal.cymbal.ensemble.crash.choke" Name="Cymbal Line Crash Choke" >
+            </DrumSound>
+            <DrumSound Pitch="C3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.left" Name="Snareline LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="C3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble" Name="Snareline LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim shot.left" Name="Snareline LH Rimshots" >
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim shot" Name="Snareline LH Rimshots" >
+            </DrumSound>
+            <DrumSound Pitch="D3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.right" Name="Snareline RH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim shot.right" Name="Snareline RH Rimshots" >
+            </DrumSound>
+            <DrumSound Pitch="E3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.ping" Name="Snareline ping shot" >
+            </DrumSound>
+            <DrumSound Pitch="F3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.crush.dry" Name="Snareline Crush (secco)" >
+            </DrumSound>
+            <DrumSound Pitch="F#3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.crush.fat" Name="Snareline Crush (wet)" >
+            </DrumSound>
+            <DrumSound Pitch="G3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim.left" Name="Snareline Rim clicks LH" >
+            </DrumSound>
+            <DrumSound Pitch="G3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim" Name="Snareline Rim clicks LH" >
+            </DrumSound>
+            <DrumSound Pitch="G#3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim.right" Name="Snareline Rim clicks RH" >
+            </DrumSound>
+            <DrumSound Pitch="A3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim.kock" Name="Snareline Rim knock" >
+            </DrumSound>
+            <DrumSound Pitch="A#3" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.stick shot" Name="Snareline Stick shot" >
+            </DrumSound>
+            <DrumSound Pitch="B3" SoundID="unpitched.drum.medium.snare drum.ensemble.stick click" Name="Stick click" >
+            </DrumSound>
+            <DrumSound Pitch="C4" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.roll" Name="Snareline buzz roll (sustained)" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.metal.cymbal.ride.bell" Name="Snareline on cymbal bell" >
+            </DrumSound>
+            <DrumSound Pitch="D4" SoundID="unpitched.metal.cymbal.ride" Name="Snareline on Ride cymbals" >
+            </DrumSound>
+            <DrumSound Pitch="D#4" SoundID="unpitched.metal.hi-hat" Name="Snareline on High Hat (open)" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.metal.hi-hat.closed" Name="Snareline on High Hat (closed)" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.2" Name="Tenors Drum 4" >
+            </DrumSound>
+            <DrumSound Pitch="F#4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim shot.2" Name="Tenors Drum 4 Shot drum" >
+            </DrumSound>
+            <DrumSound Pitch="G4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.roll.buzz.2" Name="Tenors Drum 4 sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble" Name="Tenors Drum 3" >
+            </DrumSound>
+            <DrumSound Pitch="A#4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim shot" Name="Tenors Drum 3 Shot drum" >
+            </DrumSound>
+            <DrumSound Pitch="B4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.roll.buzz" Name="Tenors Drum 3 sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium.tenor drum.ensemble.2" Name="Tenors Drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.2" Name="Tenors Drum 2 Shot drum" >
+            </DrumSound>
+            <DrumSound Pitch="D5" SoundID="unpitched.drum.medium.tenor drum.ensemble.roll.buzz.2" Name="Tenors Drum 2 sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.drum.medium.tenor drum.ensemble" Name="Tenors Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="F5" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot" Name="Tenors Drum 1 Shot drum" >
+            </DrumSound>
+            <DrumSound Pitch="F#5" SoundID="unpitched.drum.medium.tenor drum.ensemble.roll.buzz" Name="Tenors Drum 1 sustained roll" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G5" SoundID="unpitched.drum.medium.tenor drum.ensemble.spock" Name="Tenors Spock Drum" >
+            </DrumSound>
+            <DrumSound Pitch="G#5" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.spock" Name="Tenors Shot on Spock Drum" >
+            </DrumSound>
+            <DrumSound Pitch="A5" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim" Name="Tenor Rims Low" >
+            </DrumSound>
+            <DrumSound Pitch="A#5" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim" Name="Tenor Rims High" >
+            </DrumSound>
+            <DrumSound Pitch="B5" SoundID="unpitched.drum.medium.tenor drum.ensemble.shell" Name="Tenor Shell Hits" >
+            </DrumSound>
+            <DrumSound Pitch="C6" SoundID="unpitched.metal.cymbal.crash" Name="Crash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="C#6" SoundID="unpitched.metal.cymbal.chinese" Name="China cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="D6" SoundID="unpitched.metal.bells.medium.cowbell" Name="Cowbell" >
+            </DrumSound>
+            <DrumSound Pitch="D#6" SoundID="unpitched.metal.bells.high.agogo" Name="Agogo Low" >
+            </DrumSound>
+            <DrumSound Pitch="E6" SoundID="unpitched.metal.bells.medium.agogo" Name="Agogo High" >
+            </DrumSound>
+            <DrumSound Pitch="F6" SoundID="unpitched.wood.high.claves" Name="Claves" >
+            </DrumSound>
+            <DrumSound Pitch="F#6" SoundID="unpitched.rattle.vibraslap" Name="Vibraslap" >
+            </DrumSound>
+            <DrumSound Pitch="G6" SoundID="unpitched.drum.medium.tambourine" Name="Tambourine" >
+            </DrumSound>
+            <DrumSound Pitch="G#6" SoundID="unpitched.rattle.cabasa" Name="Cabasa" >
+            </DrumSound>
+            <DrumSound Pitch="A6" SoundID="unpitched.drum.medium.conga.mute" Name="Conga Hi Mute Slap" >
+            </DrumSound>
+            <DrumSound Pitch="A#6" SoundID="unpitched.drum.medium.conga" Name="Conga Hi Open Tone" >
+            </DrumSound>
+            <DrumSound Pitch="B6" SoundID="unpitched.drum.medium.conga.slap" Name="Conga High Mute Slap" >
+            </DrumSound>
+            <DrumSound Pitch="C7" SoundID="unpitched.drum.very low.bass drum.concert" Name="Concert Bass Drum" >
+            </DrumSound>
+            <DrumSound Pitch="C#7" SoundID="unpitched.metal.bells.high.triangle.closed" Name="Triangle Muted" >
+            </DrumSound>
+            <DrumSound Pitch="D7" SoundID="unpitched.metal.bells.high.triangle" Name="Triangle Open" >
+            </DrumSound>
+            <DrumSound Pitch="D#7" SoundID="unpitched.wind.whistle.police.short" Name="Whistle Short" >
+            </DrumSound>
+            <DrumSound Pitch="E7" SoundID="unpitched.wind.whistle.police.long" Name="Whistle Long" >
+                <StartSwitch >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F7" SoundID="unpitched.metal.cymbal.tam tam" Name="Tam Tam (gong)" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Finger Cymbals" >
+            <DrumSound Pitch="D4" SoundID="unpitched.metal.bells.medium-high.finger cymbals.bell" Name="Edge against Bell" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.metal.bells.medium-high.finger cymbals.edge" Name="Edge against Edge" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Flexatones" >
+            <DrumSound Pitch="E4" SoundID="unpitched.metal.flexatone" Name="Ascending/descending 1" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.metal.flexatone.2" Name="Ascending/descending 2" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL General MIDI Set" >
+            <DrumSound Pitch="B1" SoundID="unpitched.drum.very low.kick drum" Name="Bass drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="C2" SoundID="unpitched.drum.very low.kick drum.2" Name="Bass drum 2" >
+            </DrumSound>
+            <DrumSound Pitch="C#2" SoundID="unpitched.drum.medium.snare drum.snares on.side stick" Name="Cross stick" >
+            </DrumSound>
+            <DrumSound Pitch="D2" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Snare drum" >
+            </DrumSound>
+            <DrumSound Pitch="D#2" SoundID="unpitched.exotic.hand clap" Name="Hand clap" >
+            </DrumSound>
+            <DrumSound Pitch="E2" SoundID="unpitched.drum.medium.snare drum.snares on.electric" Name="Snare drum rimshot" >
+            </DrumSound>
+            <DrumSound Pitch="F2" SoundID="unpitched.drum.very low.tom-tom" Name="Low Floor Tom" >
+            </DrumSound>
+            <DrumSound Pitch="F#2" SoundID="unpitched.metal.hi-hat.closed" Name="Closed high hat" >
+            </DrumSound>
+            <DrumSound Pitch="G2" SoundID="unpitched.drum.low.tom-tom" Name="High floor tom" >
+            </DrumSound>
+            <DrumSound Pitch="G#2" SoundID="unpitched.metal.hi-hat.closed.pedal" Name="Pedal high hat" >
+            </DrumSound>
+            <DrumSound Pitch="A2" SoundID="unpitched.drum.medium-low.tom-tom" Name="Low Tom" >
+            </DrumSound>
+            <DrumSound Pitch="A#2" SoundID="unpitched.metal.hi-hat.open" Name="Open High Hat" >
+            </DrumSound>
+            <DrumSound Pitch="B2" SoundID="unpitched.drum.medium.tom-tom" Name="Low-Mid Tom" >
+            </DrumSound>
+            <DrumSound Pitch="C3" SoundID="unpitched.drum.medium-high.tom-tom" Name="High-Mid Tom" >
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.metal.cymbal.crash.high" Name="Crash cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="D3" SoundID="unpitched.drum.high.tom-tom" Name="High Tom" >
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.metal.cymbal.ride.high" Name="Ride Cymbal Tip 1" >
+            </DrumSound>
+            <DrumSound Pitch="E3" SoundID="unpitched.metal.cymbal.chinese" Name="Chinese Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="F3" SoundID="unpitched.metal.cymbal.ride.bell" Name="Ride Cymbal Bell" >
+            </DrumSound>
+            <DrumSound Pitch="F#3" SoundID="unpitched.drum.medium.tambourine.stroke.frame" Name="Tambourine" >
+            </DrumSound>
+            <DrumSound Pitch="G3" SoundID="unpitched.metal.cymbal.splash" Name="Splash Cymbal" >
+            </DrumSound>
+            <DrumSound Pitch="G#3" SoundID="unpitched.metal.bells.medium.cowbell" Name="Cowbell" >
+            </DrumSound>
+            <DrumSound Pitch="A3" SoundID="unpitched.metal.cymbal.crash.medium" Name="Crash Cymbal 2" >
+            </DrumSound>
+            <DrumSound Pitch="A#3" SoundID="unpitched.rattle.vibraslap" Name="Vibraslap" >
+            </DrumSound>
+            <DrumSound Pitch="B3" SoundID="unpitched.metal.cymbal.ride.medium" Name="Ride Cymbal Tip 2" >
+            </DrumSound>
+            <DrumSound Pitch="C4" SoundID="unpitched.drum.high.bongo" Name="High Bongo" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.drum.medium.bongo" Name="Low Bongo" >
+            </DrumSound>
+            <DrumSound Pitch="D4" SoundID="unpitched.drum.medium.conga.mute" Name="Mute High Conga" >
+            </DrumSound>
+            <DrumSound Pitch="D#4" SoundID="unpitched.drum.medium.conga" Name="Open High Conga" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.drum.medium-low.conga" Name="Low Conga" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.medium-high.timbale.rim.stick" Name="High Timbale" >
+            </DrumSound>
+            <DrumSound Pitch="F#4" SoundID="unpitched.drum.medium-low.timbale.rim.stick" Name="Low Timbale" >
+            </DrumSound>
+            <DrumSound Pitch="G4" SoundID="unpitched.metal.bells.high.agogo" Name="High Agogo" >
+            </DrumSound>
+            <DrumSound Pitch="G#4" SoundID="unpitched.metal.bells.medium.agogo" Name="Low Agogo" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.rattle.cabasa" Name="Cabasa" >
+            </DrumSound>
+            <DrumSound Pitch="A#4" SoundID="unpitched.rattle.maraca" Name="Maracas" >
+            </DrumSound>
+            <DrumSound Pitch="B4" SoundID="unpitched.wind.whistle.police.short" Name="Short Whistle" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.wind.whistle.police.long" Name="Long Whistle" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.wood.medium.guiro.short" Name="Short Guiro Scrape" >
+            </DrumSound>
+            <DrumSound Pitch="D5" SoundID="unpitched.wood.medium.guiro.long" Name="Long Guiro Scrape" >
+            </DrumSound>
+            <DrumSound Pitch="D#5" SoundID="unpitched.wood.high.claves" Name="Claves" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.wood.high.woodblock" Name="High Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="F5" SoundID="unpitched.wood.low.woodblock" Name="Low Wood Block" >
+            </DrumSound>
+            <DrumSound Pitch="G#5" SoundID="unpitched.metal.bells.high.triangle.closed" Name="Muted Triangle" >
+            </DrumSound>
+            <DrumSound Pitch="A5" SoundID="unpitched.metal.bells.high.triangle" Name="Open Trigngle" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Impact Drums" >
+            <DrumSound Pitch="C4" SoundID="unpitched.drum.low.impact" Name="Drum 1" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.drum.low.impact.2" Name="Drum 2" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Police Whistle" >
+            <DrumSound Pitch="C4" SoundID="unpitched.wind.whistle.police" Name="Sustain" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.wind.whistle.police.short" Name="Short 1" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.wind.whistle.police.short.2" Name="Short 2" >
+            </DrumSound>
+            <DrumSound Pitch="G4" SoundID="unpitched.wind.whistle.police.2" Name="Descending/Ascending" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL Roto Toms" >
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.low.tom-tom.rototom" Name="Low Roto Tom" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.medium-low.tom-tom.rototom" Name="Mid-Low Roto Tom" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium-high.tom-tom.rototom" Name="Mid-High Roto Tom" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.drum.high.tom-tom.rototom" Name="High Roto Tom" >
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL SnareLine" >
+            <DrumSound Pitch="C2" SoundID="unpitched.wood.medium.drum sticks.in" Name="Sticks in" >
+            </DrumSound>
+            <DrumSound Pitch="E2" SoundID="unpitched.wood.medium.drum sticks" Name="Stick click" >
+            </DrumSound>
+            <DrumSound Pitch="F2" SoundID="unpitched.exotic.harness hit" Name="Harness Hit" >
+            </DrumSound>
+            <DrumSound Pitch="C4" SoundID="unpitched.drum.medium.snare drum.snares on.rim shot.left" Name="Solo LH Shot" >
+            </DrumSound>
+            <DrumSound Pitch="C4" SoundID="unpitched.drum.medium.snare drum.snares on.rim shot" Name="Solo LH Shot (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.drum.medium.snare drum.snares on.left" Name="Solo LH hit" >
+            </DrumSound>
+            <DrumSound Pitch="C#4" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Solo LH hit (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="D4" SoundID="unpitched.drum.medium.snare drum.snares on.rim shot.right" Name="Solo RH Shot" >
+            </DrumSound>
+            <DrumSound Pitch="D#4" SoundID="unpitched.drum.medium.snare drum.snares on.right" Name="Solo RH Hit" >
+            </DrumSound>
+            <DrumSound Pitch="E4" SoundID="unpitched.drum.medium.snare drum.snares on.crush.fat" Name="Solo fat crash" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim.left" Name="LH rims" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim" Name="LH rims (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="D#5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim.right" Name="RH rims" >
+            </DrumSound>
+            <DrumSound Pitch="F5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim shot.left" Name="LH shots" >
+            </DrumSound>
+            <DrumSound Pitch="F5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim shot" Name="LH shots (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="F#5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.left" Name="LH hits" >
+            </DrumSound>
+            <DrumSound Pitch="F#5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble" Name="LH hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="G5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.rim shot.right" Name="RH shots" >
+            </DrumSound>
+            <DrumSound Pitch="G#5" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.right" Name="RH hits" >
+            </DrumSound>
+            <DrumSound Pitch="C#6" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.crush.dry" Name="Dry crushes" >
+            </DrumSound>
+            <DrumSound Pitch="E6" SoundID="unpitched.drum.medium.snare drum.snares on.ensemble.roll" Name="Sustained rolls" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+        </DrumMapDefinition>
+        <DrumMapDefinition Name="VDL TenorLine KS" >
+            <DrumSound Pitch="A1" SoundID="unpitched.drum.medium-low.tenor drum.stick click" Name="Aluminium mallet stick" >
+            </DrumSound>
+            <DrumSound Pitch="B1" SoundID="unpitched.drum.medium-low.tenor drum.shell" Name="Double-stop on shells" >
+            </DrumSound>
+            <DrumSound Pitch="F2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim shot.left.2" Name="Drum 4 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim shot.2" Name="Drum 4 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F#2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim shot.right.2" Name="Drum 4 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim shot.left" Name="Drum 3 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim shot" Name="Drum 3 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G#2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim shot.right" Name="Drum 3 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.left.2" Name="Drum 2 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.2" Name="Drum 2 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A#2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.right.2" Name="Drum 2 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.left" Name="Drum 1 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot" Name="Drum 1 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.right" Name="Drum 1 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.left.spock.2" Name="Spock 2 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.spock.2" Name="Spock 2 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="D3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.right.spock.2" Name="Spock 2 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.left.spock" Name="Spock 1 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.spock" Name="Spock 1 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="E3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim shot.right.spock" Name="Spock 1 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="C-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim.left.2" Name="Drum 4 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim.2" Name="Drum 4 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F#2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim.right.2" Name="Drum 4 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim.left" Name="Drum 3 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim" Name="Drum 3 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G#2" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.rim.right" Name="Drum 3 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.left.2" Name="Drum 2 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.2" Name="Drum 2 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A#2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.right.2" Name="Drum 2 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.left" Name="Drum 1 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="B2" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim" Name="Drum 1 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.right" Name="Drum 1 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.left.spock.2" Name="Spock 2 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="C#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.spock.2" Name="Spock 2 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="D3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.right.spock.2" Name="Spock 2 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.left.spock" Name="Spock 1 LH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="D#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.spock" Name="Spock 1 LH rim/shot (duplicate)" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="E3" SoundID="unpitched.drum.medium.tenor drum.ensemble.rim.right.spock" Name="Spock 1 RH rim/shot" >
+                <StartSwitch >
+                    <KeySwitch Key="D-1" />
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F3" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.roll.buzz.2" Name="Sustained buzz roll drum 4" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F#3" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.roll.buzz" Name="Sustained buzz roll drum 3" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G3" SoundID="unpitched.drum.medium.tenor drum.ensemble.roll.buzz.2" Name="Sustained buzz roll drum 2" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="G#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.roll.buzz" Name="Sustained buzz roll drum 1" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A3" SoundID="unpitched.drum.medium.tenor drum.ensemble.roll.buzz.spock.2" Name="Sustained buzz roll spock 2" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="A#3" SoundID="unpitched.drum.medium.tenor drum.ensemble.roll.buzz.spock" Name="Sustained buzz roll spock 1" >
+                <StartSwitch IsMultipleNoteSample="true" >
+                    <VolumeType>ModWheel</VolumeType>
+                </StartSwitch>
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.left.2" Name="Drum 4 LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="F4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.2" Name="Drum 4 LH Hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="F#4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.right.2" Name="Drum 4 RH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="G4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.left" Name="Drum 3 LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="G4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble" Name="Drum 3 LH Hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="G#4" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.right" Name="Drum 3 RH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.medium.tenor drum.ensemble.left.2" Name="Drum 2 LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="A4" SoundID="unpitched.drum.medium.tenor drum.ensemble.2" Name="Drum 2 LH Hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="A#4" SoundID="unpitched.drum.medium.tenor drum.ensemble.right.2" Name="Drum 2 RH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="B4" SoundID="unpitched.drum.medium.tenor drum.ensemble.left" Name="Drum 1 LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="B4" SoundID="unpitched.drum.medium.tenor drum.ensemble" Name="Drum 1 LH Hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="C5" SoundID="unpitched.drum.medium.tenor drum.ensemble.right" Name="Drum 1 RH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.drum.medium.tenor drum.ensemble.left.spock.2" Name="Spock 2 LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="C#5" SoundID="unpitched.drum.medium.tenor drum.ensemble.spock.2" Name="Spock 2 LH Hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="D5" SoundID="unpitched.drum.medium.tenor drum.ensemble.right.spock.2" Name="Spock 2 RH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="D#5" SoundID="unpitched.drum.medium.tenor drum.ensemble.left.spock" Name="Spock 1 LH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="D#5" SoundID="unpitched.drum.medium.tenor drum.ensemble.spock" Name="Spock 1 LH Hits (duplicate)" >
+            </DrumSound>
+            <DrumSound Pitch="E5" SoundID="unpitched.drum.medium.tenor drum.ensemble.right.spock" Name="Spock 1 RH Hits" >
+            </DrumSound>
+            <DrumSound Pitch="F6" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.crush.dry.2" Name="Drum 4 dry crush" >
+            </DrumSound>
+            <DrumSound Pitch="G6" SoundID="unpitched.drum.medium-low.tenor drum.ensemble.dry" Name="Drum 3 dry crush" >
+            </DrumSound>
+            <DrumSound Pitch="A6" SoundID="unpitched.drum.medium.tenor drum.ensemble.crush.dry.2" Name="Drum 2 dry crush" >
+            </DrumSound>
+            <DrumSound Pitch="B6" SoundID="unpitched.drum.medium.tenor drum.ensemble.crush.dry" Name="Drum 1 dry crush" >
+            </DrumSound>
+            <DrumSound Pitch="C7" SoundID="unpitched.drum.medium.tenor drum.ensemble.crush.fat" Name="Drum 1 fat crash" >
+            </DrumSound>
+            <DrumSound Pitch="C#7" SoundID="unpitched.drum.medium.tenor drum.ensemble.crush.dry.spock" Name="Spock 2 dry crush" >
+            </DrumSound>
+            <DrumSound Pitch="D#7" SoundID="unpitched.drum.medium.tenor drum.ensemble.crush.dry.spock.2" Name="Spock 1 dry crush" >
+            </DrumSound>
+        </DrumMapDefinition>
+    </DrumMapList>
+</SoundSet>

@@ -1,0 +1,1768 @@
+version BMRT 2.6.0beta
+surface supertexmap
+param	float	Ka		1
+param	float	Kd		0.5
+param	float	Ks		0.5
+param	float	roughness		0.1
+param	string	Csmapname		""
+param	string	Csproj		"st"
+param	string	Csspace		"shader"
+param	float	Csmx[16]		0
+param	float	Csblur		0
+param	string	Osmapname		""
+param	string	Osproj		"st"
+param	string	Osspace		"shader"
+param	float	Osmx[16]		0
+param	float	Osblur		0
+param	string	Ksmapname		""
+param	string	Ksproj		"st"
+param	string	Ksspace		"shader"
+param	float	Ksmx[16]		0
+param	float	Ksblur		0
+param	string	dispmapname		""
+param	string	dispproj		"st"
+param	string	dispspace		"shader"
+param	float	dispmx[16]		0
+param	float	dispblur		0
+param	float	truedisp		1
+local	string	$_str_0 	"st"
+local	string	$_str_1 	"planar"
+local	string	$_str_2 	"perspective"
+local	string	$_str_3 	"spherical"
+local	string	$_str_4 	"cylindrical"
+local	string	$_str_5 	"blur"
+local	string	$_str_6 	"fill"
+local	string	$_str_7 	"__nondiffuse"
+local	string	$_str_8 	"__nonspecular"
+local	string	$_str_9 	"NDC"
+local	string	$_str_10 	""
+local	string	$_str_11 	"shader"
+local	color	Ct	0 0 0
+local	color	Ot	0 0 0
+local	float	ks	0
+local	float	disp	0
+local	matrix	_18$xform	0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+code
+local	float	_18$alpha	0
+local	color	_18$Ct	0 0 0
+local	float	_16$alphachannel	0
+code
+local	float	_16$ss	0
+local	float	_16$tt	0
+local	float	_16$ds	0
+local	float	_16$dt	0
+local	point	_6$Pproj	0 0 0
+local	float	_13$z	0
+local	vector	_1$V	0 0 0
+local	vector	_4$V	0 0 0
+local	color	_16$Ct	0 0 0
+local	matrix	_19$xform	0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+code
+local	float	_19$alpha	0
+local	float	_19$x	0
+local	float	_17$alphachannel	0
+code
+local	float	_17$ss	0
+local	float	_17$tt	0
+local	float	_17$ds	0
+local	float	_17$dt	0
+local	float	_17$val	0
+local	vector	_21$dir	0 0 0
+code
+local	float	_21$spacescale	0
+local	vector	_21$Ndisp	0 0 0
+local	normal	Nf	0 0 0
+initcode 7
+	pushif	1 
+	pushif	0
+	apopf	Csmx 
+	pushif	0 
+	pushif	1
+	apopf	Csmx 
+	pushif	0 
+	pushif	2
+	apopf	Csmx 
+	pushif	0 
+	pushif	3
+	apopf	Csmx 
+	pushif	0 
+	pushif	4
+	apopf	Csmx 
+	pushif	1 
+	pushif	5
+	apopf	Csmx 
+	pushif	0 
+	pushif	6
+	apopf	Csmx 
+	pushif	0 
+	pushif	7
+	apopf	Csmx 
+	pushif	0 
+	pushif	8
+	apopf	Csmx 
+	pushif	0 
+	pushif	9
+	apopf	Csmx 
+	pushif	1 
+	pushif	10
+	apopf	Csmx 
+	pushif	0 
+	pushif	11
+	apopf	Csmx 
+	pushif	0 
+	pushif	12
+	apopf	Csmx 
+	pushif	0 
+	pushif	13
+	apopf	Csmx 
+	pushif	0 
+	pushif	14
+	apopf	Csmx 
+	pushif	1 
+	pushif	15
+	apopf	Csmx 
+initcode 12
+	pushif	1 
+	pushif	0
+	apopf	Osmx 
+	pushif	0 
+	pushif	1
+	apopf	Osmx 
+	pushif	0 
+	pushif	2
+	apopf	Osmx 
+	pushif	0 
+	pushif	3
+	apopf	Osmx 
+	pushif	0 
+	pushif	4
+	apopf	Osmx 
+	pushif	1 
+	pushif	5
+	apopf	Osmx 
+	pushif	0 
+	pushif	6
+	apopf	Osmx 
+	pushif	0 
+	pushif	7
+	apopf	Osmx 
+	pushif	0 
+	pushif	8
+	apopf	Osmx 
+	pushif	0 
+	pushif	9
+	apopf	Osmx 
+	pushif	1 
+	pushif	10
+	apopf	Osmx 
+	pushif	0 
+	pushif	11
+	apopf	Osmx 
+	pushif	0 
+	pushif	12
+	apopf	Osmx 
+	pushif	0 
+	pushif	13
+	apopf	Osmx 
+	pushif	0 
+	pushif	14
+	apopf	Osmx 
+	pushif	1 
+	pushif	15
+	apopf	Osmx 
+initcode 17
+	pushif	1 
+	pushif	0
+	apopf	Ksmx 
+	pushif	0 
+	pushif	1
+	apopf	Ksmx 
+	pushif	0 
+	pushif	2
+	apopf	Ksmx 
+	pushif	0 
+	pushif	3
+	apopf	Ksmx 
+	pushif	0 
+	pushif	4
+	apopf	Ksmx 
+	pushif	1 
+	pushif	5
+	apopf	Ksmx 
+	pushif	0 
+	pushif	6
+	apopf	Ksmx 
+	pushif	0 
+	pushif	7
+	apopf	Ksmx 
+	pushif	0 
+	pushif	8
+	apopf	Ksmx 
+	pushif	0 
+	pushif	9
+	apopf	Ksmx 
+	pushif	1 
+	pushif	10
+	apopf	Ksmx 
+	pushif	0 
+	pushif	11
+	apopf	Ksmx 
+	pushif	0 
+	pushif	12
+	apopf	Ksmx 
+	pushif	0 
+	pushif	13
+	apopf	Ksmx 
+	pushif	0 
+	pushif	14
+	apopf	Ksmx 
+	pushif	1 
+	pushif	15
+	apopf	Ksmx 
+initcode 22
+	pushif	1 
+	pushif	0
+	apopf	dispmx 
+	pushif	0 
+	pushif	1
+	apopf	dispmx 
+	pushif	0 
+	pushif	2
+	apopf	dispmx 
+	pushif	0 
+	pushif	3
+	apopf	dispmx 
+	pushif	0 
+	pushif	4
+	apopf	dispmx 
+	pushif	1 
+	pushif	5
+	apopf	dispmx 
+	pushif	0 
+	pushif	6
+	apopf	dispmx 
+	pushif	0 
+	pushif	7
+	apopf	dispmx 
+	pushif	0 
+	pushif	8
+	apopf	dispmx 
+	pushif	0 
+	pushif	9
+	apopf	dispmx 
+	pushif	1 
+	pushif	10
+	apopf	dispmx 
+	pushif	0 
+	pushif	11
+	apopf	dispmx 
+	pushif	0 
+	pushif	12
+	apopf	dispmx 
+	pushif	0 
+	pushif	13
+	apopf	dispmx 
+	pushif	0 
+	pushif	14
+	apopf	dispmx 
+	pushif	1 
+	pushif	15
+	apopf	dispmx 
+initcode 24
+	return
+code
+	pushc	Cs 
+	popc	Ct 
+	pushc	Os 
+	popc	Ot 
+	pushf	Ks 
+	popf	ks 
+	pushif	0 
+	popf	disp 
+	pushs	$_str_10 
+	pushs	Csmapname 
+	sne
+	ifz	0
+	pushif	15 
+	apushf	Csmx 
+	pushif	14 
+	apushf	Csmx 
+	pushif	13 
+	apushf	Csmx 
+	pushif	12 
+	apushf	Csmx 
+	pushif	11 
+	apushf	Csmx 
+	pushif	10 
+	apushf	Csmx 
+	pushif	9 
+	apushf	Csmx 
+	pushif	8 
+	apushf	Csmx 
+	pushif	7 
+	apushf	Csmx 
+	pushif	6 
+	apushf	Csmx 
+	pushif	5 
+	apushf	Csmx 
+	pushif	4 
+	apushf	Csmx 
+	pushif	3 
+	apushf	Csmx 
+	pushif	2 
+	apushf	Csmx 
+	pushif	1 
+	apushf	Csmx 
+	pushif	0 
+	apushf	Csmx 
+label 2
+	popm	_18$xform 
+	pushif	3 
+	popf	_16$alphachannel 
+	pushs	$_str_0 
+	pushs	Csproj 
+	seq
+	ifz	6
+	pushif	0 
+	pushf	t 
+	pushf	s 
+	popv	_6$Pproj 
+	jump	7
+label 6
+	pushv	P 
+	pushs	Csspace 
+	transforms
+	popv	_6$Pproj 
+label 7
+	pushv	_6$Pproj 
+	pushm	_18$xform 
+	transformm
+	popv	_6$Pproj 
+	pushs	$_str_0 
+	pushs	Csproj 
+	seq
+	pushs	$_str_1 
+	pushs	Csproj 
+	seq
+	or
+	ifz	8
+	pushv	_6$Pproj 
+	xcomp
+	popf	_16$ss 
+	pushv	_6$Pproj 
+	ycomp
+	popf	_16$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$ds 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$dt 
+	jump	9
+label 8
+	pushs	$_str_2 
+	pushs	Csproj 
+	seq
+	ifz	10
+	pushif	1e-06 
+	pushv	_6$Pproj 
+	zcomp
+	fmax
+	popf	_13$z 
+	pushf	_13$z 
+	pushv	_6$Pproj 
+	xcomp
+	divff
+	popf	_16$ss 
+	pushf	_13$z 
+	pushv	_6$Pproj 
+	ycomp
+	divff
+	popf	_16$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$ds 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$dt 
+	jump	11
+label 10
+	pushs	$_str_3 
+	pushs	Csproj 
+	seq
+	ifz	12
+	pushv	_6$Pproj 
+	normalize
+	popv	_1$V 
+	pushif	3.14159 
+	pushif	2 
+	mulff
+	pushif	3.14159 
+	pushv	_1$V 
+	xcomp
+	pushv	_1$V 
+	ycomp
+	atan2
+	negf
+	addff
+	divff
+	popf	_16$ss 
+	pushif	3.14159 
+	pushv	_1$V 
+	zcomp
+	acos
+	divff
+	pushif	0.5 
+	subff
+	popf	_16$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$ds 
+	pushif	0.5 
+	pushf	_16$ds 
+	gt
+	ifz	15
+	pushif	1e-06 
+	pushf	_16$ds 
+	pushif	1 
+	subff
+	fmax
+	popf	_16$ds 
+label 15
+label 16
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$dt 
+	pushif	0.5 
+	pushf	_16$dt 
+	gt
+	ifz	17
+	pushif	1e-06 
+	pushf	_16$dt 
+	pushif	1 
+	subff
+	fmax
+	popf	_16$dt 
+label 17
+label 18
+label 14
+	jump	13
+label 12
+	pushs	$_str_4 
+	pushs	Csproj 
+	seq
+	ifz	19
+	pushv	_6$Pproj 
+	normalize
+	popv	_4$V 
+	pushif	3.14159 
+	pushif	2 
+	mulff
+	pushif	3.14159 
+	pushv	_4$V 
+	xcomp
+	pushv	_4$V 
+	ycomp
+	atan2
+	negf
+	addff
+	divff
+	popf	_16$ss 
+	pushv	_6$Pproj 
+	zcomp
+	popf	_16$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$ds 
+	pushif	0.5 
+	pushf	_16$ds 
+	gt
+	ifz	22
+	pushif	1e-06 
+	pushf	_16$ds 
+	pushif	1 
+	subff
+	fmax
+	popf	_16$ds 
+label 22
+label 23
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$dt 
+label 21
+label 19
+label 20
+label 13
+label 11
+label 9
+label 5
+	pushif	0.5 
+	mulF	_16$ds 
+	popf	_16$ds 
+	pushif	0.5 
+	mulF	_16$dt 
+	popf	_16$dt 
+	pushf	Csblur 
+	pushs	$_str_5 
+	addFF	_16$tt _16$dt 
+	addFF	_16$ss _16$ds 
+	addFF	_16$tt _16$dt 
+	subFF	_16$ss _16$ds 
+	subFF	_16$tt _16$dt 
+	addFF	_16$ss _16$ds 
+	subFF	_16$tt _16$dt 
+	subFF	_16$ss _16$ds 
+	pushif	0 
+	pushs	Csmapname 
+	pushif	8 
+	pushif	10 
+	ctexture
+	popc	_16$Ct 
+	pushif	1 
+	pushs	$_str_6 
+	pushf	Csblur 
+	pushs	$_str_5 
+	addFF	_16$tt _16$dt 
+	addFF	_16$ss _16$ds 
+	addFF	_16$tt _16$dt 
+	subFF	_16$ss _16$ds 
+	subFF	_16$tt _16$dt 
+	addFF	_16$ss _16$ds 
+	subFF	_16$tt _16$dt 
+	subFF	_16$ss _16$ds 
+	pushf	_16$alphachannel 
+	pushs	Csmapname 
+	pushif	8 
+	pushif	12 
+	ftexture
+	popf	_18$alpha 
+	pushc	_16$Ct 
+label 4
+	popc	_18$Ct 
+	pushc	Ct 
+	pushf	_18$alpha 
+	pushif	1 
+	subff
+	mulfc
+	addC	_18$Ct 
+label 3
+	popc	Ct 
+label 0
+label 1
+	pushs	$_str_10 
+	pushs	Osmapname 
+	sne
+	ifz	24
+	pushif	15 
+	apushf	Osmx 
+	pushif	14 
+	apushf	Osmx 
+	pushif	13 
+	apushf	Osmx 
+	pushif	12 
+	apushf	Osmx 
+	pushif	11 
+	apushf	Osmx 
+	pushif	10 
+	apushf	Osmx 
+	pushif	9 
+	apushf	Osmx 
+	pushif	8 
+	apushf	Osmx 
+	pushif	7 
+	apushf	Osmx 
+	pushif	6 
+	apushf	Osmx 
+	pushif	5 
+	apushf	Osmx 
+	pushif	4 
+	apushf	Osmx 
+	pushif	3 
+	apushf	Osmx 
+	pushif	2 
+	apushf	Osmx 
+	pushif	1 
+	apushf	Osmx 
+	pushif	0 
+	apushf	Osmx 
+label 26
+	popm	_18$xform 
+	pushif	3 
+	popf	_16$alphachannel 
+	pushs	$_str_0 
+	pushs	Osproj 
+	seq
+	ifz	30
+	pushif	0 
+	pushf	t 
+	pushf	s 
+	popv	_6$Pproj 
+	jump	31
+label 30
+	pushv	P 
+	pushs	Osspace 
+	transforms
+	popv	_6$Pproj 
+label 31
+	pushv	_6$Pproj 
+	pushm	_18$xform 
+	transformm
+	popv	_6$Pproj 
+	pushs	$_str_0 
+	pushs	Osproj 
+	seq
+	pushs	$_str_1 
+	pushs	Osproj 
+	seq
+	or
+	ifz	32
+	pushv	_6$Pproj 
+	xcomp
+	popf	_16$ss 
+	pushv	_6$Pproj 
+	ycomp
+	popf	_16$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$ds 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$dt 
+	jump	33
+label 32
+	pushs	$_str_2 
+	pushs	Osproj 
+	seq
+	ifz	34
+	pushif	1e-06 
+	pushv	_6$Pproj 
+	zcomp
+	fmax
+	popf	_13$z 
+	pushf	_13$z 
+	pushv	_6$Pproj 
+	xcomp
+	divff
+	popf	_16$ss 
+	pushf	_13$z 
+	pushv	_6$Pproj 
+	ycomp
+	divff
+	popf	_16$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$ds 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$dt 
+	jump	35
+label 34
+	pushs	$_str_3 
+	pushs	Osproj 
+	seq
+	ifz	36
+	pushv	_6$Pproj 
+	normalize
+	popv	_1$V 
+	pushif	3.14159 
+	pushif	2 
+	mulff
+	pushif	3.14159 
+	pushv	_1$V 
+	xcomp
+	pushv	_1$V 
+	ycomp
+	atan2
+	negf
+	addff
+	divff
+	popf	_16$ss 
+	pushif	3.14159 
+	pushv	_1$V 
+	zcomp
+	acos
+	divff
+	pushif	0.5 
+	subff
+	popf	_16$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$ds 
+	pushif	0.5 
+	pushf	_16$ds 
+	gt
+	ifz	39
+	pushif	1e-06 
+	pushf	_16$ds 
+	pushif	1 
+	subff
+	fmax
+	popf	_16$ds 
+label 39
+label 40
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$dt 
+	pushif	0.5 
+	pushf	_16$dt 
+	gt
+	ifz	41
+	pushif	1e-06 
+	pushf	_16$dt 
+	pushif	1 
+	subff
+	fmax
+	popf	_16$dt 
+label 41
+label 42
+label 38
+	jump	37
+label 36
+	pushs	$_str_4 
+	pushs	Osproj 
+	seq
+	ifz	43
+	pushv	_6$Pproj 
+	normalize
+	popv	_4$V 
+	pushif	3.14159 
+	pushif	2 
+	mulff
+	pushif	3.14159 
+	pushv	_4$V 
+	xcomp
+	pushv	_4$V 
+	ycomp
+	atan2
+	negf
+	addff
+	divff
+	popf	_16$ss 
+	pushv	_6$Pproj 
+	zcomp
+	popf	_16$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$ds 
+	pushif	0.5 
+	pushf	_16$ds 
+	gt
+	ifz	46
+	pushif	1e-06 
+	pushf	_16$ds 
+	pushif	1 
+	subff
+	fmax
+	popf	_16$ds 
+label 46
+label 47
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_16$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_16$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_16$dt 
+label 45
+label 43
+label 44
+label 37
+label 35
+label 33
+label 29
+	pushif	0.5 
+	mulF	_16$ds 
+	popf	_16$ds 
+	pushif	0.5 
+	mulF	_16$dt 
+	popf	_16$dt 
+	pushf	Osblur 
+	pushs	$_str_5 
+	addFF	_16$tt _16$dt 
+	addFF	_16$ss _16$ds 
+	addFF	_16$tt _16$dt 
+	subFF	_16$ss _16$ds 
+	subFF	_16$tt _16$dt 
+	addFF	_16$ss _16$ds 
+	subFF	_16$tt _16$dt 
+	subFF	_16$ss _16$ds 
+	pushif	0 
+	pushs	Osmapname 
+	pushif	8 
+	pushif	10 
+	ctexture
+	popc	_16$Ct 
+	pushif	1 
+	pushs	$_str_6 
+	pushf	Osblur 
+	pushs	$_str_5 
+	addFF	_16$tt _16$dt 
+	addFF	_16$ss _16$ds 
+	addFF	_16$tt _16$dt 
+	subFF	_16$ss _16$ds 
+	subFF	_16$tt _16$dt 
+	addFF	_16$ss _16$ds 
+	subFF	_16$tt _16$dt 
+	subFF	_16$ss _16$ds 
+	pushf	_16$alphachannel 
+	pushs	Osmapname 
+	pushif	8 
+	pushif	12 
+	ftexture
+	popf	_18$alpha 
+	pushc	_16$Ct 
+label 28
+	popc	_18$Ct 
+	pushc	Ct 
+	pushf	_18$alpha 
+	pushif	1 
+	subff
+	mulfc
+	addC	_18$Ct 
+label 27
+	popc	Ot 
+label 24
+label 25
+	pushs	$_str_10 
+	pushs	Ksmapname 
+	sne
+	ifz	48
+	pushif	15 
+	apushf	Ksmx 
+	pushif	14 
+	apushf	Ksmx 
+	pushif	13 
+	apushf	Ksmx 
+	pushif	12 
+	apushf	Ksmx 
+	pushif	11 
+	apushf	Ksmx 
+	pushif	10 
+	apushf	Ksmx 
+	pushif	9 
+	apushf	Ksmx 
+	pushif	8 
+	apushf	Ksmx 
+	pushif	7 
+	apushf	Ksmx 
+	pushif	6 
+	apushf	Ksmx 
+	pushif	5 
+	apushf	Ksmx 
+	pushif	4 
+	apushf	Ksmx 
+	pushif	3 
+	apushf	Ksmx 
+	pushif	2 
+	apushf	Ksmx 
+	pushif	1 
+	apushf	Ksmx 
+	pushif	0 
+	apushf	Ksmx 
+label 50
+	popm	_19$xform 
+	pushif	3 
+	popf	_17$alphachannel 
+	pushs	$_str_0 
+	pushs	Ksproj 
+	seq
+	ifz	54
+	pushif	0 
+	pushf	t 
+	pushf	s 
+	popv	_6$Pproj 
+	jump	55
+label 54
+	pushv	P 
+	pushs	Ksspace 
+	transforms
+	popv	_6$Pproj 
+label 55
+	pushv	_6$Pproj 
+	pushm	_19$xform 
+	transformm
+	popv	_6$Pproj 
+	pushs	$_str_0 
+	pushs	Ksproj 
+	seq
+	pushs	$_str_1 
+	pushs	Ksproj 
+	seq
+	or
+	ifz	56
+	pushv	_6$Pproj 
+	xcomp
+	popf	_17$ss 
+	pushv	_6$Pproj 
+	ycomp
+	popf	_17$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$ds 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$dt 
+	jump	57
+label 56
+	pushs	$_str_2 
+	pushs	Ksproj 
+	seq
+	ifz	58
+	pushif	1e-06 
+	pushv	_6$Pproj 
+	zcomp
+	fmax
+	popf	_13$z 
+	pushf	_13$z 
+	pushv	_6$Pproj 
+	xcomp
+	divff
+	popf	_17$ss 
+	pushf	_13$z 
+	pushv	_6$Pproj 
+	ycomp
+	divff
+	popf	_17$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$ds 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$dt 
+	jump	59
+label 58
+	pushs	$_str_3 
+	pushs	Ksproj 
+	seq
+	ifz	60
+	pushv	_6$Pproj 
+	normalize
+	popv	_1$V 
+	pushif	3.14159 
+	pushif	2 
+	mulff
+	pushif	3.14159 
+	pushv	_1$V 
+	xcomp
+	pushv	_1$V 
+	ycomp
+	atan2
+	negf
+	addff
+	divff
+	popf	_17$ss 
+	pushif	3.14159 
+	pushv	_1$V 
+	zcomp
+	acos
+	divff
+	pushif	0.5 
+	subff
+	popf	_17$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$ds 
+	pushif	0.5 
+	pushf	_17$ds 
+	gt
+	ifz	63
+	pushif	1e-06 
+	pushf	_17$ds 
+	pushif	1 
+	subff
+	fmax
+	popf	_17$ds 
+label 63
+label 64
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$dt 
+	pushif	0.5 
+	pushf	_17$dt 
+	gt
+	ifz	65
+	pushif	1e-06 
+	pushf	_17$dt 
+	pushif	1 
+	subff
+	fmax
+	popf	_17$dt 
+label 65
+label 66
+label 62
+	jump	61
+label 60
+	pushs	$_str_4 
+	pushs	Ksproj 
+	seq
+	ifz	67
+	pushv	_6$Pproj 
+	normalize
+	popv	_4$V 
+	pushif	3.14159 
+	pushif	2 
+	mulff
+	pushif	3.14159 
+	pushv	_4$V 
+	xcomp
+	pushv	_4$V 
+	ycomp
+	atan2
+	negf
+	addff
+	divff
+	popf	_17$ss 
+	pushv	_6$Pproj 
+	zcomp
+	popf	_17$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$ds 
+	pushif	0.5 
+	pushf	_17$ds 
+	gt
+	ifz	70
+	pushif	1e-06 
+	pushf	_17$ds 
+	pushif	1 
+	subff
+	fmax
+	popf	_17$ds 
+label 70
+label 71
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$dt 
+label 69
+label 67
+label 68
+label 61
+label 59
+label 57
+label 53
+	pushif	0.5 
+	mulF	_17$ds 
+	popf	_17$ds 
+	pushif	0.5 
+	mulF	_17$dt 
+	popf	_17$dt 
+	pushf	Ksblur 
+	pushs	$_str_5 
+	addFF	_17$tt _17$dt 
+	addFF	_17$ss _17$ds 
+	addFF	_17$tt _17$dt 
+	subFF	_17$ss _17$ds 
+	subFF	_17$tt _17$dt 
+	addFF	_17$ss _17$ds 
+	subFF	_17$tt _17$dt 
+	subFF	_17$ss _17$ds 
+	pushif	0 
+	pushs	Ksmapname 
+	pushif	8 
+	pushif	10 
+	ftexture
+	popf	_17$val 
+	pushif	1 
+	pushs	$_str_6 
+	pushf	Ksblur 
+	pushs	$_str_5 
+	addFF	_17$tt _17$dt 
+	addFF	_17$ss _17$ds 
+	addFF	_17$tt _17$dt 
+	subFF	_17$ss _17$ds 
+	subFF	_17$tt _17$dt 
+	addFF	_17$ss _17$ds 
+	subFF	_17$tt _17$dt 
+	subFF	_17$ss _17$ds 
+	pushf	_17$alphachannel 
+	pushs	Ksmapname 
+	pushif	8 
+	pushif	12 
+	ftexture
+	popf	_19$alpha 
+	pushf	_17$val 
+label 52
+	popf	_19$x 
+	pushf	Ks 
+	pushf	_19$alpha 
+	pushif	1 
+	subff
+	mulff
+	addF	_19$x 
+label 51
+	popf	ks 
+label 48
+label 49
+	pushs	$_str_10 
+	pushs	dispmapname 
+	sne
+	ifz	72
+	pushif	15 
+	apushf	dispmx 
+	pushif	14 
+	apushf	dispmx 
+	pushif	13 
+	apushf	dispmx 
+	pushif	12 
+	apushf	dispmx 
+	pushif	11 
+	apushf	dispmx 
+	pushif	10 
+	apushf	dispmx 
+	pushif	9 
+	apushf	dispmx 
+	pushif	8 
+	apushf	dispmx 
+	pushif	7 
+	apushf	dispmx 
+	pushif	6 
+	apushf	dispmx 
+	pushif	5 
+	apushf	dispmx 
+	pushif	4 
+	apushf	dispmx 
+	pushif	3 
+	apushf	dispmx 
+	pushif	2 
+	apushf	dispmx 
+	pushif	1 
+	apushf	dispmx 
+	pushif	0 
+	apushf	dispmx 
+label 74
+	popm	_19$xform 
+	pushif	3 
+	popf	_17$alphachannel 
+	pushs	$_str_0 
+	pushs	dispproj 
+	seq
+	ifz	78
+	pushif	0 
+	pushf	t 
+	pushf	s 
+	popv	_6$Pproj 
+	jump	79
+label 78
+	pushv	P 
+	pushs	dispspace 
+	transforms
+	popv	_6$Pproj 
+label 79
+	pushv	_6$Pproj 
+	pushm	_19$xform 
+	transformm
+	popv	_6$Pproj 
+	pushs	$_str_0 
+	pushs	dispproj 
+	seq
+	pushs	$_str_1 
+	pushs	dispproj 
+	seq
+	or
+	ifz	80
+	pushv	_6$Pproj 
+	xcomp
+	popf	_17$ss 
+	pushv	_6$Pproj 
+	ycomp
+	popf	_17$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$ds 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$dt 
+	jump	81
+label 80
+	pushs	$_str_2 
+	pushs	dispproj 
+	seq
+	ifz	82
+	pushif	1e-06 
+	pushv	_6$Pproj 
+	zcomp
+	fmax
+	popf	_13$z 
+	pushf	_13$z 
+	pushv	_6$Pproj 
+	xcomp
+	divff
+	popf	_17$ss 
+	pushf	_13$z 
+	pushv	_6$Pproj 
+	ycomp
+	divff
+	popf	_17$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$ds 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$dt 
+	jump	83
+label 82
+	pushs	$_str_3 
+	pushs	dispproj 
+	seq
+	ifz	84
+	pushv	_6$Pproj 
+	normalize
+	popv	_1$V 
+	pushif	3.14159 
+	pushif	2 
+	mulff
+	pushif	3.14159 
+	pushv	_1$V 
+	xcomp
+	pushv	_1$V 
+	ycomp
+	atan2
+	negf
+	addff
+	divff
+	popf	_17$ss 
+	pushif	3.14159 
+	pushv	_1$V 
+	zcomp
+	acos
+	divff
+	pushif	0.5 
+	subff
+	popf	_17$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$ds 
+	pushif	0.5 
+	pushf	_17$ds 
+	gt
+	ifz	87
+	pushif	1e-06 
+	pushf	_17$ds 
+	pushif	1 
+	subff
+	fmax
+	popf	_17$ds 
+label 87
+label 88
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$dt 
+	pushif	0.5 
+	pushf	_17$dt 
+	gt
+	ifz	89
+	pushif	1e-06 
+	pushf	_17$dt 
+	pushif	1 
+	subff
+	fmax
+	popf	_17$dt 
+label 89
+label 90
+label 86
+	jump	85
+label 84
+	pushs	$_str_4 
+	pushs	dispproj 
+	seq
+	ifz	91
+	pushv	_6$Pproj 
+	normalize
+	popv	_4$V 
+	pushif	3.14159 
+	pushif	2 
+	mulff
+	pushif	3.14159 
+	pushv	_4$V 
+	xcomp
+	pushv	_4$V 
+	ycomp
+	atan2
+	negf
+	addff
+	divff
+	popf	_17$ss 
+	pushv	_6$Pproj 
+	zcomp
+	popf	_17$tt 
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$ss 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$ss 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$ds 
+	pushif	0.5 
+	pushf	_17$ds 
+	gt
+	ifz	94
+	pushif	1e-06 
+	pushf	_17$ds 
+	pushif	1 
+	subff
+	fmax
+	popf	_17$ds 
+label 94
+label 95
+	pushif	1e-06 
+	pushf	dv 
+	pushf	_17$tt 
+	Dvf
+	mulff
+	abs
+	pushf	du 
+	pushf	_17$tt 
+	Duf
+	mulff
+	abs
+	addff
+	fmax
+	popf	_17$dt 
+label 93
+label 91
+label 92
+label 85
+label 83
+label 81
+label 77
+	pushif	0.5 
+	mulF	_17$ds 
+	popf	_17$ds 
+	pushif	0.5 
+	mulF	_17$dt 
+	popf	_17$dt 
+	pushf	dispblur 
+	pushs	$_str_5 
+	addFF	_17$tt _17$dt 
+	addFF	_17$ss _17$ds 
+	addFF	_17$tt _17$dt 
+	subFF	_17$ss _17$ds 
+	subFF	_17$tt _17$dt 
+	addFF	_17$ss _17$ds 
+	subFF	_17$tt _17$dt 
+	subFF	_17$ss _17$ds 
+	pushif	0 
+	pushs	dispmapname 
+	pushif	8 
+	pushif	10 
+	ftexture
+	popf	_17$val 
+	pushif	1 
+	pushs	$_str_6 
+	pushf	dispblur 
+	pushs	$_str_5 
+	addFF	_17$tt _17$dt 
+	addFF	_17$ss _17$ds 
+	addFF	_17$tt _17$dt 
+	subFF	_17$ss _17$ds 
+	subFF	_17$tt _17$dt 
+	addFF	_17$ss _17$ds 
+	subFF	_17$tt _17$dt 
+	subFF	_17$ss _17$ds 
+	pushf	_17$alphachannel 
+	pushs	dispmapname 
+	pushif	8 
+	pushif	12 
+	ftexture
+	popf	_19$alpha 
+	pushf	_17$val 
+label 76
+	popf	_19$x 
+	pushf	disp 
+	pushf	_19$alpha 
+	pushif	1 
+	subff
+	mulff
+	addF	_19$x 
+label 75
+	popf	disp 
+	pushv	N 
+	normalize
+	popv	_21$dir 
+	pushv	_21$dir 
+	pushs	dispspace 
+	vtransforms
+	length
+	popf	_21$spacescale 
+	pushif	1e-06 
+	pushf	_21$spacescale 
+	fmax
+	divF	disp 
+	pushv	_21$dir 
+	mulvf
+	popv	_21$Ndisp 
+	mulFV	truedisp _21$Ndisp 
+	addV	P 
+	popv	P 
+	pushv	_21$Ndisp 
+	pushf	truedisp 
+	pushif	1 
+	subff
+	mulfv
+	addV	P 
+	calculatenormal
+	normalize
+label 96
+	popv	N 
+label 72
+label 73
+	pushv	I 
+	pushv	N 
+	normalize
+	faceforward
+	popv	Nf 
+	pushf	roughness 
+	pushv	I 
+	normalize
+	negv
+	pushv	Nf 
+	specular
+	mulFc	ks 
+	pushv	Nf 
+	diffuse
+	mulFc	Kd 
+	ambient
+	mulFc	Ka 
+	addcc
+	mulC	Ct 
+	addcc
+label 97
+	popc	Ci 
+	cpCC	Ot Oi 
+	pushc	Oi 
+	mulC	Ci 
+	popc	Ci 
+	return

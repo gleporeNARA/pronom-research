@@ -1,0 +1,2030 @@
+{smcl}
+{com}{sf}{ul off}{txt}{.-}
+      name:  {res}<unnamed>
+       {txt}log:  {res}/Users/woon/Dropbox/Party Reputations/PRQ/Final Submission/dtw_mdpa_replication_public_final/dtw_mdpa_final_70518.smcl
+  {txt}log type:  {res}smcl
+ {txt}opened on:  {res} 5 Jul 2018, 10:22:36
+{txt}
+{com}. 
+. // Replication file for final version of Dancey, Tarpey, and Woon, 
+. // "The Macro Dynamics of Partisan Advantage"
+. // Forthcoming, Political Research Quarterly
+. // Final version of replication file, 7/6/18
+. // Page numbers refer to final MS Word version
+. // This code was run using Stata 15
+. 
+. use dtw_mdpa_70518.dta, clear
+{txt}
+{com}. 
+. 
+. ***Main Analysis***
+. 
+. // Figure 1 - Democratic Advantage time series plot
+. tsset qdate
+{res}{txt}{col 9}time variable:  {res}{col 25}qdate, 1980q1 to 2016q2
+{txt}{col 17}delta:  {res}1 quarter
+{txt}
+{com}. tsline demadv, xtitle(Quarter, margin(small)) ytitle(Democratic Advantage) ///
+>         yline(53.16, lpattern(dash)) xlabel(80(16)225, labsize(small)) scheme(s1mono)
+{res}{txt}
+{com}.         
+. // Declare data to be time series
+. tsset time
+{res}{txt}{col 9}time variable:  {res}{col 25}time, 1 to 146
+{txt}{col 17}delta:  {res}1 unit
+{txt}
+{com}. 
+. // Granger causality tests (p.13) 
+. varsoc macrop demadv
+
+{txt}{col 4}Selection-order criteria
+{col 4}Sample:  {res}5 - 144 {txt}{col 49}Number of obs {col 68}= {res}      140
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{res}{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-671.474{col 18}{col 27}{col 32}{col 39} 51.6921{col 48}{space 1} 9.62106{col 58}{space 1} 9.63813{col 68}{space 1} 9.66308{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-418.564{col 18}{space 1} 505.82{col 27}   4{col 32} 0.000{col 39} 1.47617{col 48}{space 1} 6.06519{col 58}{space 1} 6.11642{col 68}{space 1} 6.19126{col 77}*{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1} -412.27{col 18}{space 1} 12.587{col 27}   4{col 32} 0.013{col 39} 1.42865{col 48}{space 1} 6.03243{col 58}{space 1} 6.11781{col 68}{space 1} 6.24254{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-404.717{col 18}{space 1} 15.107{col 26}*{col 27}   4{col 32} 0.004{col 39} 1.35809{col 47}*{col 48}{space 1} 5.98166{col 57}*{col 58}{space 1}  6.1012{col 67}*{col 68}{space 1} 6.27583{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-401.048{col 18}{space 1} 7.3362{col 27}   4{col 32} 0.119{col 39}  1.3648{col 48}{space 1} 5.98641{col 58}{space 1}  6.1401{col 68}{space 1} 6.36462{col 79}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{res}{txt}{space 3}Endogenous:  macropartisanship demadv
+{space 3} Exogenous:  _cons
+
+{com}. var macrop demadv, lags(1/3)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}4 - 144 {txt}{col 49}Number of obs{col 67}= {res}       141
+{txt}Log likelihood =  {res}-407.5003{txt}{col 38}{col 49}AIC{col 67}=  {res} 5.978728
+{txt}FPE{col 16}=  {res}   1.3541{txt}{col 49}HQIC{col 67}=  {res} 6.097706
+{txt}Det(Sigma_ml){col 16}=  {res} 1.110036{txt}{col 49}SBIC{col 67}=  {res} 6.271513
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}macropartisans~p{col 18}{result}     7{col 26}{space 2} .788734{col 37}{space 1} 0.8911{col 47} 1153.751{col 58} 0.0000
+{col 1}{text}demadv          {col 18}{result}     7{col 26}{space 2} 1.52542{col 37}{space 1} 0.8023{col 47} 572.2349{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      z{col 51}   P>|z|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}macropartisanship {txt}{c |}
+macropartisanship {c |}
+{space 14}L1. {c |}{col 19}{res}{space 2} .8685586{col 31}{space 2}  .089028{col 42}{space 1}    9.76{col 51}{space 3}0.000{col 59}{space 4} .6940669{col 72}{space 3}  1.04305
+{txt}{space 14}L2. {c |}{col 19}{res}{space 2} .0353993{col 31}{space 2}  .115202{col 42}{space 1}    0.31{col 51}{space 3}0.759{col 59}{space 4}-.1903926{col 72}{space 3} .2611911
+{txt}{space 14}L3. {c |}{col 19}{res}{space 2} .0017406{col 31}{space 2} .0876833{col 42}{space 1}    0.02{col 51}{space 3}0.984{col 59}{space 4}-.1701156{col 72}{space 3} .1735968
+{txt}{space 17} {c |}
+{space 11}demadv {c |}
+{space 14}L1. {c |}{col 19}{res}{space 2} .1032116{col 31}{space 2} .0462311{col 42}{space 1}    2.23{col 51}{space 3}0.026{col 59}{space 4} .0126003{col 72}{space 3}  .193823
+{txt}{space 14}L2. {c |}{col 19}{res}{space 2} .0471559{col 31}{space 2} .0585719{col 42}{space 1}    0.81{col 51}{space 3}0.421{col 59}{space 4} -.067643{col 72}{space 3} .1619547
+{txt}{space 14}L3. {c |}{col 19}{res}{space 2}-.1273354{col 31}{space 2} .0445628{col 42}{space 1}   -2.86{col 51}{space 3}0.004{col 59}{space 4} -.214677{col 72}{space 3}-.0399938
+{txt}{space 17} {c |}
+{space 12}_cons {c |}{col 19}{res}{space 2}  3.92809{col 31}{space 2} 1.642486{col 42}{space 1}    2.39{col 51}{space 3}0.017{col 59}{space 4}  .708876{col 72}{space 3} 7.147303
+{txt}{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv            {txt}{c |}
+macropartisanship {c |}
+{space 14}L1. {c |}{col 19}{res}{space 2} .4207034{col 31}{space 2} .1721813{col 42}{space 1}    2.44{col 51}{space 3}0.015{col 59}{space 4} .0832342{col 72}{space 3} .7581726
+{txt}{space 14}L2. {c |}{col 19}{res}{space 2}-.1089671{col 31}{space 2} .2228022{col 42}{space 1}   -0.49{col 51}{space 3}0.625{col 59}{space 4}-.5456514{col 72}{space 3} .3277172
+{txt}{space 14}L3. {c |}{col 19}{res}{space 2}-.3797706{col 31}{space 2} .1695807{col 42}{space 1}   -2.24{col 51}{space 3}0.025{col 59}{space 4}-.7121426{col 72}{space 3}-.0473985
+{txt}{space 17} {c |}
+{space 11}demadv {c |}
+{space 14}L1. {c |}{col 19}{res}{space 2} .8234931{col 31}{space 2} .0894116{col 42}{space 1}    9.21{col 51}{space 3}0.000{col 59}{space 4} .6482496{col 72}{space 3} .9987366
+{txt}{space 14}L2. {c |}{col 19}{res}{space 2} .0564642{col 31}{space 2} .1132788{col 42}{space 1}    0.50{col 51}{space 3}0.618{col 59}{space 4}-.1655582{col 72}{space 3} .2784867
+{txt}{space 14}L3. {c |}{col 19}{res}{space 2}-.0559649{col 31}{space 2} .0861851{col 42}{space 1}   -0.65{col 51}{space 3}0.516{col 59}{space 4}-.2248846{col 72}{space 3} .1129549
+{txt}{space 17} {c |}
+{space 12}_cons {c |}{col 19}{res}{space 2}  13.1404{col 31}{space 2} 3.176589{col 42}{space 1}    4.14{col 51}{space 3}0.000{col 59}{space 4} 6.914403{col 72}{space 3}  19.3664
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. vargranger
+
+{txt}{col 4}Granger causality Wald tests
+{res}{col 3}{text}{c TLC}{hline 19}{hline 19}{c TT}{hline 9}{hline 6}{hline 12}{c TRC}
+{col 3}{text}{c |}          Equation{col 23}          Excluded{col 42}{c |}   chi2 {col 52}   df{col 58}Prob > chi2{col 70}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |} macropartisanship{col 23}            demadv{col 42}{c |}{result}{space 1} 13.307{col 52}    3{col 58}{space 2} 0.004{col 70}{text}{c |}
+{res}{col 3}{text}{c |} macropartisanship{col 23}               ALL{col 42}{c |}{result}{space 1} 13.307{col 52}    3{col 58}{space 2} 0.004{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}            demadv{col 23} macropartisanship{col 42}{c |}{result}{space 1} 12.982{col 52}    3{col 58}{space 2} 0.005{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}               ALL{col 42}{c |}{result}{space 1} 12.982{col 52}    3{col 58}{space 2} 0.005{col 70}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 19}{hline 19}{c BT}{hline 9}{hline 6}{hline 12}{c BRC}
+{res}{txt}
+{com}. 
+. // Create variables for fractional difference model
+. arfima d.demadv
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-289.25732}  
+Iteration 1:{space 3}log likelihood = {res:-280.53764}  
+Iteration 2:{space 3}log likelihood = {res:-277.34898}  
+Iteration 3:{space 3}log likelihood = {res:-276.33227}  
+Iteration 4:{space 3}log likelihood = {res:-276.19661}  
+Iteration 5:{space 3}log likelihood = {res:-276.19661}  
+Refining estimates:
+Iteration 0:{space 3}log likelihood = {res:-276.19661}  
+Iteration 1:{space 3}log likelihood = {res:-276.19661}  
+{res}
+{txt}ARFIMA regression
+
+{col 1}Sample: 2 - 146{col 49}Number of obs{col 67}= {res}       145
+{txt}{col 49}Wald chi2({res}1{txt}){col 67}= {res}      0.02
+{txt}Log likelihood = {res}-276.19661{txt}{col 49}Prob > chi2{col 67}= {res}    0.8745
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OIM
+{col 1}    D.demadv{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D.demadv     {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0209428{col 26}{space 2} .1274904{col 37}{space 1}   -0.16{col 46}{space 3}0.870{col 54}{space 4}-.2708193{col 67}{space 3} .2289338
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARFIMA       {txt}{c |}
+{space 11}d {c |}{col 14}{res}{space 2}-.0128834{col 26}{space 2} .0816013{col 37}{space 1}   -0.16{col 46}{space 3}0.875{col 54}{space 4} -.172819{col 67}{space 3} .1470522
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     /sigma2 {c |}{col 14}{res}{space 2} 2.642496{col 26}{space 2} .3103455{col 37}{space 1}    8.51{col 46}{space 3}0.000{col 54}{space 4}  2.03423{col 67}{space 3} 3.250762
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. predict fddemadv, fdifference
+{res}{txt}
+{com}. arfima d.prezapp
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-474.81413}  
+Iteration 1:{space 3}log likelihood = {res:-470.45784}  
+Iteration 2:{space 3}log likelihood = {res:-469.77416}  
+Iteration 3:{space 3}log likelihood = {res:-469.77273}  
+Iteration 4:{space 3}log likelihood = {res:-469.77273}  
+Refining estimates:
+Iteration 0:{space 3}log likelihood = {res:-469.77273}  
+Iteration 1:{space 3}log likelihood = {res:-469.77273}  
+{res}
+{txt}ARFIMA regression
+
+{col 1}Sample: 2 - 146{col 49}Number of obs{col 67}= {res}       145
+{txt}{col 49}Wald chi2({res}1{txt}){col 67}= {res}      3.33
+{txt}Log likelihood = {res}-469.77273{txt}{col 49}Prob > chi2{col 67}= {res}    0.0681
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OIM
+{col 1}   D.prezapp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D.prezapp    {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0028834{col 26}{space 2} .2625959{col 37}{space 1}    0.01{col 46}{space 3}0.991{col 54}{space 4} -.511795{col 67}{space 3} .5175619
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARFIMA       {txt}{c |}
+{space 11}d {c |}{col 14}{res}{space 2}-.1534434{col 26}{space 2} .0841144{col 37}{space 1}   -1.82{col 46}{space 3}0.068{col 54}{space 4}-.3183046{col 67}{space 3} .0114179
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     /sigma2 {c |}{col 14}{res}{space 2} 38.12047{col 26}{space 2} 4.477204{col 37}{space 1}    8.51{col 46}{space 3}0.000{col 54}{space 4} 29.34531{col 67}{space 3} 46.89562
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. predict fdprez, fdifference
+{res}{txt}
+{com}. arfima d.congapp
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-370.61525}  
+Iteration 1:{space 3}log likelihood = {res: -365.8482}  
+Iteration 2:{space 3}log likelihood = {res:-357.47365}  
+Iteration 3:{space 3}log likelihood = {res:-353.60349}  
+Iteration 4:{space 3}log likelihood = {res:-353.41709}  
+Iteration 5:{space 3}log likelihood = {res:-353.41683}  
+Iteration 6:{space 3}log likelihood = {res:-353.41683}  
+Refining estimates:
+Iteration 0:{space 3}log likelihood = {res:-353.41683}  
+Iteration 1:{space 3}log likelihood = {res:-353.41683}  
+{res}
+{txt}ARFIMA regression
+
+{col 1}Sample: 2 - 146{col 49}Number of obs{col 67}= {res}       145
+{txt}{col 49}Wald chi2({res}1{txt}){col 67}= {res}      0.34
+{txt}Log likelihood = {res}-353.41683{txt}{col 49}Prob > chi2{col 67}= {res}    0.5608
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OIM
+{col 1}   D.congapp{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D.congapp    {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-.0121496{col 26}{space 2} .2849416{col 37}{space 1}   -0.04{col 46}{space 3}0.966{col 54}{space 4}-.5706248{col 67}{space 3} .5463256
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARFIMA       {txt}{c |}
+{space 11}d {c |}{col 14}{res}{space 2} .0459196{col 26}{space 2} .0789448{col 37}{space 1}    0.58{col 46}{space 3}0.561{col 54}{space 4}-.1088093{col 67}{space 3} .2006484
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     /sigma2 {c |}{col 14}{res}{space 2}  7.66558{col 26}{space 2} .9002805{col 37}{space 1}    8.51{col 46}{space 3}0.000{col 54}{space 4} 5.901063{col 67}{space 3} 9.430097
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. predict fdcongapp, fdifference
+{res}{txt}
+{com}. arfima d.policymood
+{res}{txt}Iteration 0:{space 3}log likelihood = {res:-301.18217}  
+Iteration 1:{space 3}log likelihood = {res:-301.13927}  
+Iteration 2:{space 3}log likelihood = {res:-290.93049}  
+Iteration 3:{space 3}log likelihood = {res:-290.92012}  
+Iteration 4:{space 3}log likelihood = {res:-290.75716}  
+Iteration 5:{space 3}log likelihood = {res:-290.75716}  
+Refining estimates:
+Iteration 0:{space 3}log likelihood = {res:-290.75716}  
+Iteration 1:{space 3}log likelihood = {res:-290.75716}  
+{res}
+{txt}ARFIMA regression
+
+{col 1}Sample: 2 - 146{col 49}Number of obs{col 67}= {res}       145
+{txt}{col 49}Wald chi2({res}1{txt}){col 67}= {res}      1.92
+{txt}Log likelihood = {res}-290.75716{txt}{col 49}Prob > chi2{col 67}= {res}    0.1661
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}{col 26}      OIM
+{col 1}D.policymood{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}D.policymood {txt}{c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0483109{col 26}{space 2} .0953249{col 37}{space 1}    0.51{col 46}{space 3}0.612{col 54}{space 4}-.1385224{col 67}{space 3} .2351443
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}ARFIMA       {txt}{c |}
+{space 11}d {c |}{col 14}{res}{space 2}-.1015492{col 26}{space 2} .0733292{col 37}{space 1}   -1.38{col 46}{space 3}0.166{col 54}{space 4}-.2452718{col 67}{space 3} .0421733
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+     /sigma2 {c |}{col 14}{res}{space 2} 3.228835{col 26}{space 2} .3792129{col 37}{space 1}    8.51{col 46}{space 3}0.000{col 54}{space 4} 2.485592{col 67}{space 3} 3.972079
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{p 0 6 0 79}Note: The test of the variance against zero is one sided, and the two-sided confidence interval is truncated at zero.{p_end}
+
+{com}. predict fdpolicymood, fdifference
+{res}{txt}
+{com}. 
+. // Table 1 - OLS w/FD series 
+. regress fddemadv dividegov fdpolicymood c.fdprez##i.gopprez c.fdcongapp##i.gopcong c.fdcongapp##i.dividecong c.fdprez##presbreak c.fdcong##congbreak c.fdcong##dividebreak
+{p 0 6 2}{txt}note: fdcongapp omitted because of collinearity{p_end}
+{p 0 6 2}note: fdprez omitted because of collinearity{p_end}
+{p 0 6 2}note: fdcongapp omitted because of collinearity{p_end}
+{p 0 6 2}note: fdcongapp omitted because of collinearity{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(16, 128)      = {res}     5.93
+{txt}       Model {c |} {res} 163.045888        16   10.190368   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 220.116661       128  1.71966141   {txt}R-squared       ={res}    0.4255
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.3537
+{txt}       Total {c |} {res} 383.162549       144  2.66085103   {txt}Root MSE        =   {res} 1.3114
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}               fddemadv{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 14}dividegov {c |}{col 25}{res}{space 2} .6449586{col 37}{space 2} .3080907{col 48}{space 1}    2.09{col 57}{space 3}0.038{col 65}{space 4} .0353484{col 78}{space 3} 1.254569
+{txt}{space 11}fdpolicymood {c |}{col 25}{res}{space 2}-.0304361{col 37}{space 2}  .067524{col 48}{space 1}   -0.45{col 57}{space 3}0.653{col 65}{space 4}-.1640438{col 78}{space 3} .1031716
+{txt}{space 17}fdprez {c |}{col 25}{res}{space 2}  .144376{col 37}{space 2}  .046916{col 48}{space 1}    3.08{col 57}{space 3}0.003{col 65}{space 4} .0515448{col 78}{space 3} .2372073
+{txt}{space 14}1.gopprez {c |}{col 25}{res}{space 2}  .279577{col 37}{space 2} .2392931{col 48}{space 1}    1.17{col 57}{space 3}0.245{col 65}{space 4}-.1939053{col 78}{space 3} .7530593
+{txt}{space 23} {c |}
+{space 7}gopprez#c.fdprez {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.2785579{col 37}{space 2} .0501321{col 48}{space 1}   -5.56{col 57}{space 3}0.000{col 65}{space 4}-.3777528{col 78}{space 3}-.1793631
+{txt}{space 23} {c |}
+{space 14}fdcongapp {c |}{col 25}{res}{space 2}-.0005588{col 37}{space 2} .0637067{col 48}{space 1}   -0.01{col 57}{space 3}0.993{col 65}{space 4}-.1266135{col 78}{space 3} .1254958
+{txt}{space 14}1.gopcong {c |}{col 25}{res}{space 2} .2851357{col 37}{space 2} .2917515{col 48}{space 1}    0.98{col 57}{space 3}0.330{col 65}{space 4}-.2921444{col 78}{space 3} .8624159
+{txt}{space 23} {c |}
+{space 4}gopcong#c.fdcongapp {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.1834936{col 37}{space 2} .1466501{col 48}{space 1}   -1.25{col 57}{space 3}0.213{col 65}{space 4}-.4736659{col 78}{space 3} .1066787
+{txt}{space 23} {c |}
+{space 14}fdcongapp {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 11}1.dividecong {c |}{col 25}{res}{space 2} .0947964{col 37}{space 2} .2939577{col 48}{space 1}    0.32{col 57}{space 3}0.748{col 65}{space 4} -.486849{col 78}{space 3} .6764419
+{txt}{space 23} {c |}
+{space 1}dividecong#c.fdcongapp {c |}
+{space 21}1  {c |}{col 25}{res}{space 2} -.008424{col 37}{space 2} .0872737{col 48}{space 1}   -0.10{col 57}{space 3}0.923{col 65}{space 4}-.1811098{col 78}{space 3} .1642619
+{txt}{space 23} {c |}
+{space 17}fdprez {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 12}1.presbreak {c |}{col 25}{res}{space 2}-1.682833{col 37}{space 2} 1.144658{col 48}{space 1}   -1.47{col 57}{space 3}0.144{col 65}{space 4}-3.947734{col 78}{space 3} .5820687
+{txt}{space 23} {c |}
+{space 5}presbreak#c.fdprez {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.0316021{col 37}{space 2} .0669093{col 48}{space 1}   -0.47{col 57}{space 3}0.638{col 65}{space 4}-.1639936{col 78}{space 3} .1007894
+{txt}{space 23} {c |}
+{space 14}fdcongapp {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 12}1.congbreak {c |}{col 25}{res}{space 2} .4005264{col 37}{space 2}  1.13074{col 48}{space 1}    0.35{col 57}{space 3}0.724{col 65}{space 4}-1.836835{col 78}{space 3} 2.637888
+{txt}{space 23} {c |}
+{space 2}congbreak#c.fdcongapp {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.6111049{col 37}{space 2} .4101085{col 48}{space 1}   -1.49{col 57}{space 3}0.139{col 65}{space 4}-1.422575{col 78}{space 3} .2003648
+{txt}{space 23} {c |}
+{space 14}fdcongapp {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 10}1.dividebreak {c |}{col 25}{res}{space 2} .3466176{col 37}{space 2} .8461171{col 48}{space 1}    0.41{col 57}{space 3}0.683{col 65}{space 4} -1.32757{col 78}{space 3} 2.020805
+{txt}{space 23} {c |}
+dividebreak#c.fdcongapp {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.4995126{col 37}{space 2} .3342469{col 48}{space 1}   -1.49{col 57}{space 3}0.138{col 65}{space 4}-1.160877{col 78}{space 3}  .161852
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2}-.7653237{col 37}{space 2} .3190315{col 48}{space 1}   -2.40{col 57}{space 3}0.018{col 65}{space 4}-1.396582{col 78}{space 3}-.1340655
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat bgodfrey
+
+{txt}Breusch-Godfrey LM test for autocorrelation
+{hline 13}{c TT}{hline 61}
+{col 5}lags({it:p}){col 14}{c |}{col 25}chi2{col 44}df{col 63}Prob > chi2
+{hline 13}{c +}{hline 61}
+{col 6}  1{col 14}{c |}{res}{col 20}     0.124{col 43}  1{col 63}  0.7249
+{txt}{hline 13}{c BT}{hline 61}
+{col 25}H0: no serial correlation
+
+{com}. 
+. // Linear combination discussed (p. 16)
+. lincom fdprez+1.gopprez#c.fdprez
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}fdprez + 1.gopprez#c.fdprez = 0{p_end}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    fddemadv{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}(1) {c |}{col 14}{res}{space 2}-.1341819{col 26}{space 2} .0271746{col 37}{space 1}   -4.94{col 46}{space 3}0.000{col 54}{space 4}-.1879515{col 67}{space 3}-.0804123
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. // Analyses post-1994 election (1995 onward) as referenced in endnote 4
+. tab yearquarter if time==60
+
+{txt}yearquarter {c |}      Freq.     Percent        Cum.
+{hline 12}{c +}{hline 35}
+     1994.4 {c |}{res}          1      100.00      100.00
+{txt}{hline 12}{c +}{hline 35}
+      Total {c |}{res}          1      100.00
+{txt}
+{com}. regress fddemadv dividegov fdpolicymood c.fdprez##i.gopprez c.fdcongapp##i.gopcong c.fdcongapp##i.dividecong c.fdprez##presbreak c.fdcong##congbreak c.fdcong##dividebreak if time>60
+{p 0 6 2}{txt}note: fdcongapp omitted because of collinearity{p_end}
+{p 0 6 2}note: fdprez omitted because of collinearity{p_end}
+{p 0 6 2}note: fdcongapp omitted because of collinearity{p_end}
+{p 0 6 2}note: fdcongapp omitted because of collinearity{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}        86
+{txt}{hline 13}{c +}{hline 34}   F(16, 69)       = {res}     2.58
+{txt}       Model {c |} {res} 66.5166572        16  4.15729108   {txt}Prob > F        ={res}    0.0035
+{txt}    Residual {c |} {res} 111.344095        69  1.61368254   {txt}R-squared       ={res}    0.3740
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.2288
+{txt}       Total {c |} {res} 177.860752        85  2.09247944   {txt}Root MSE        =   {res} 1.2703
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}               fddemadv{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 14}dividegov {c |}{col 25}{res}{space 2} .9674304{col 37}{space 2} .4120246{col 48}{space 1}    2.35{col 57}{space 3}0.022{col 65}{space 4} .1454638{col 78}{space 3} 1.789397
+{txt}{space 11}fdpolicymood {c |}{col 25}{res}{space 2}-.0350599{col 37}{space 2} .0831138{col 48}{space 1}   -0.42{col 57}{space 3}0.674{col 65}{space 4}-.2008674{col 78}{space 3} .1307476
+{txt}{space 17}fdprez {c |}{col 25}{res}{space 2} .1701688{col 37}{space 2} .0839474{col 48}{space 1}    2.03{col 57}{space 3}0.047{col 65}{space 4} .0026983{col 78}{space 3} .3376393
+{txt}{space 14}1.gopprez {c |}{col 25}{res}{space 2} .6322632{col 37}{space 2} .3428141{col 48}{space 1}    1.84{col 57}{space 3}0.069{col 65}{space 4}-.0516321{col 78}{space 3} 1.316159
+{txt}{space 23} {c |}
+{space 7}gopprez#c.fdprez {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.3169924{col 37}{space 2} .0901236{col 48}{space 1}   -3.52{col 57}{space 3}0.001{col 65}{space 4}-.4967841{col 78}{space 3}-.1372007
+{txt}{space 23} {c |}
+{space 14}fdcongapp {c |}{col 25}{res}{space 2}-.0028705{col 37}{space 2} .2510063{col 48}{space 1}   -0.01{col 57}{space 3}0.991{col 65}{space 4}-.5036143{col 78}{space 3} .4978734
+{txt}{space 14}1.gopcong {c |}{col 25}{res}{space 2} .5006379{col 37}{space 2} .4326325{col 48}{space 1}    1.16{col 57}{space 3}0.251{col 65}{space 4}-.3624403{col 78}{space 3} 1.363716
+{txt}{space 23} {c |}
+{space 4}gopcong#c.fdcongapp {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.1893654{col 37}{space 2} .2698603{col 48}{space 1}   -0.70{col 57}{space 3}0.485{col 65}{space 4}-.7277221{col 78}{space 3} .3489912
+{txt}{space 23} {c |}
+{space 14}fdcongapp {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 11}1.dividecong {c |}{col 25}{res}{space 2} .2836633{col 37}{space 2} .5230707{col 48}{space 1}    0.54{col 57}{space 3}0.589{col 65}{space 4}-.7598343{col 78}{space 3} 1.327161
+{txt}{space 23} {c |}
+{space 1}dividecong#c.fdcongapp {c |}
+{space 21}1  {c |}{col 25}{res}{space 2} .2831358{col 37}{space 2} .3201662{col 48}{space 1}    0.88{col 57}{space 3}0.380{col 65}{space 4}-.3555783{col 78}{space 3} .9218499
+{txt}{space 23} {c |}
+{space 17}fdprez {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 12}1.presbreak {c |}{col 25}{res}{space 2}-3.252924{col 37}{space 2} 1.281599{col 48}{space 1}   -2.54{col 57}{space 3}0.013{col 65}{space 4}-5.809645{col 78}{space 3}-.6962032
+{txt}{space 23} {c |}
+{space 5}presbreak#c.fdprez {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.0273412{col 37}{space 2}  .097665{col 48}{space 1}   -0.28{col 57}{space 3}0.780{col 65}{space 4}-.2221775{col 78}{space 3}  .167495
+{txt}{space 23} {c |}
+{space 14}fdcongapp {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 12}1.congbreak {c |}{col 25}{res}{space 2} .2835844{col 37}{space 2} 3.295157{col 48}{space 1}    0.09{col 57}{space 3}0.932{col 65}{space 4}-6.290074{col 78}{space 3} 6.857243
+{txt}{space 23} {c |}
+{space 2}congbreak#c.fdcongapp {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.5991669{col 37}{space 2} .9488152{col 48}{space 1}   -0.63{col 57}{space 3}0.530{col 65}{space 4}-2.492001{col 78}{space 3} 1.293668
+{txt}{space 23} {c |}
+{space 14}fdcongapp {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 10}1.dividebreak {c |}{col 25}{res}{space 2} .2616333{col 37}{space 2} 3.310339{col 48}{space 1}    0.08{col 57}{space 3}0.937{col 65}{space 4}-6.342313{col 78}{space 3}  6.86558
+{txt}{space 23} {c |}
+dividebreak#c.fdcongapp {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.5524927{col 37}{space 2} 1.769577{col 48}{space 1}   -0.31{col 57}{space 3}0.756{col 65}{space 4}-4.082702{col 78}{space 3} 2.977717
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2}-1.299455{col 37}{space 2} .4957532{col 48}{space 1}   -2.62{col 57}{space 3}0.011{col 65}{space 4}-2.288455{col 78}{space 3}-.3104541
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. lincom fdcong+1.gopcong#c.fdcong
+
+{p 0 7}{space 1}{text:( 1)}{space 1} {res}fdcongapp + 1.gopcong#c.fdcongapp = 0{p_end}
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}    fddemadv{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}(1) {c |}{col 14}{res}{space 2}-.1922359{col 26}{space 2} .1466382{col 37}{space 1}   -1.31{col 46}{space 3}0.194{col 54}{space 4} -.484771{col 67}{space 3} .1002992
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. //Table 2 - party rolls
+. regress fddemadv dividegov fdpolicymood c.fdprez##i.gopprez c.majroll##i.gophouse c.majroll##i.dividecong c.fdprez##presbreak c.majroll##congbreak c.majroll##dividebreak
+{p 0 6 2}{txt}note: majroll omitted because of collinearity{p_end}
+{p 0 6 2}note: fdprez omitted because of collinearity{p_end}
+{p 0 6 2}note: majroll omitted because of collinearity{p_end}
+{p 0 6 2}note: majroll omitted because of collinearity{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(16, 128)      = {res}     5.74
+{txt}       Model {c |} {res} 159.999469        16  9.99996682   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  223.16308       128  1.74346156   {txt}R-squared       ={res}    0.4176
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.3448
+{txt}       Total {c |} {res} 383.162549       144  2.66085103   {txt}Root MSE        =   {res} 1.3204
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}             fddemadv{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}dividegov {c |}{col 23}{res}{space 2} .4221733{col 35}{space 2} .2994552{col 46}{space 1}    1.41{col 55}{space 3}0.161{col 63}{space 4}-.1703499{col 76}{space 3} 1.014697
+{txt}{space 9}fdpolicymood {c |}{col 23}{res}{space 2}-.0034997{col 35}{space 2} .0676948{col 46}{space 1}   -0.05{col 55}{space 3}0.959{col 63}{space 4}-.1374454{col 76}{space 3}  .130446
+{txt}{space 15}fdprez {c |}{col 23}{res}{space 2} .1786944{col 35}{space 2} .0489817{col 46}{space 1}    3.65{col 55}{space 3}0.000{col 63}{space 4} .0817758{col 76}{space 3}  .275613
+{txt}{space 12}1.gopprez {c |}{col 23}{res}{space 2} .3723922{col 35}{space 2} .2646192{col 46}{space 1}    1.41{col 55}{space 3}0.162{col 63}{space 4}-.1512021{col 76}{space 3} .8959866
+{txt}{space 21} {c |}
+{space 5}gopprez#c.fdprez {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-.3228973{col 35}{space 2} .0513399{col 46}{space 1}   -6.29{col 55}{space 3}0.000{col 63}{space 4}-.4244821{col 76}{space 3}-.2213124
+{txt}{space 21} {c |}
+{space 14}majroll {c |}{col 23}{res}{space 2} .3514559{col 35}{space 2} .1928519{col 46}{space 1}    1.82{col 55}{space 3}0.071{col 63}{space 4}-.0301345{col 76}{space 3} .7330462
+{txt}{space 11}1.gophouse {c |}{col 23}{res}{space 2} .5753823{col 35}{space 2}  .351618{col 46}{space 1}    1.64{col 55}{space 3}0.104{col 63}{space 4}-.1203539{col 76}{space 3} 1.271118
+{txt}{space 21} {c |}
+{space 3}gophouse#c.majroll {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-.4374661{col 35}{space 2} .2620133{col 46}{space 1}   -1.67{col 55}{space 3}0.097{col 63}{space 4}-.9559042{col 76}{space 3}  .080972
+{txt}{space 21} {c |}
+{space 14}majroll {c |}{col 23}{res}{space 2}        0{col 35}{txt}  (omitted)
+{space 9}1.dividecong {c |}{col 23}{res}{space 2} .1242124{col 35}{space 2} .3727507{col 46}{space 1}    0.33{col 55}{space 3}0.740{col 63}{space 4}-.6133385{col 76}{space 3} .8617632
+{txt}{space 21} {c |}
+{space 1}dividecong#c.majroll {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-.2803764{col 35}{space 2} .2639315{col 46}{space 1}   -1.06{col 55}{space 3}0.290{col 63}{space 4}-.8026099{col 76}{space 3} .2418572
+{txt}{space 21} {c |}
+{space 15}fdprez {c |}{col 23}{res}{space 2}        0{col 35}{txt}  (omitted)
+{space 10}1.presbreak {c |}{col 23}{res}{space 2}-1.868933{col 35}{space 2} 1.158835{col 46}{space 1}   -1.61{col 55}{space 3}0.109{col 63}{space 4}-4.161886{col 76}{space 3} .4240201
+{txt}{space 21} {c |}
+{space 3}presbreak#c.fdprez {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-.0644397{col 35}{space 2} .0701019{col 46}{space 1}   -0.92{col 55}{space 3}0.360{col 63}{space 4}-.2031483{col 76}{space 3} .0742688
+{txt}{space 21} {c |}
+{space 14}majroll {c |}{col 23}{res}{space 2}        0{col 35}{txt}  (omitted)
+{space 10}1.congbreak {c |}{col 23}{res}{space 2} .0209181{col 35}{space 2} 1.188633{col 46}{space 1}    0.02{col 55}{space 3}0.986{col 63}{space 4}-2.330996{col 76}{space 3} 2.372832
+{txt}{space 21} {c |}
+{space 2}congbreak#c.majroll {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-2.288031{col 35}{space 2} 1.564874{col 46}{space 1}   -1.46{col 55}{space 3}0.146{col 63}{space 4}-5.384402{col 76}{space 3} .8083392
+{txt}{space 21} {c |}
+{space 14}majroll {c |}{col 23}{res}{space 2}        0{col 35}{txt}  (omitted)
+{space 8}1.dividebreak {c |}{col 23}{res}{space 2} .4165024{col 35}{space 2} 1.345441{col 46}{space 1}    0.31{col 55}{space 3}0.757{col 63}{space 4}-2.245683{col 76}{space 3} 3.078688
+{txt}{space 21} {c |}
+dividebreak#c.majroll {c |}
+{space 19}1  {c |}{col 23}{res}{space 2} .4947176{col 35}{space 2} 1.606976{col 46}{space 1}    0.31{col 55}{space 3}0.759{col 63}{space 4}-2.684959{col 76}{space 3} 3.674394
+{txt}{space 21} {c |}
+{space 16}_cons {c |}{col 23}{res}{space 2}-.9154803{col 35}{space 2} .3598468{col 46}{space 1}   -2.54{col 55}{space 3}0.012{col 63}{space 4}-1.627499{col 76}{space 3} -.203462
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat bgodfrey
+
+{txt}Breusch-Godfrey LM test for autocorrelation
+{hline 13}{c TT}{hline 61}
+{col 5}lags({it:p}){col 14}{c |}{col 25}chi2{col 44}df{col 63}Prob > chi2
+{hline 13}{c +}{hline 61}
+{col 6}  1{col 14}{c |}{res}{col 20}     0.062{col 43}  1{col 63}  0.8037
+{txt}{hline 13}{c BT}{hline 61}
+{col 25}H0: no serial correlation
+
+{com}. 
+. // Table 3 - legislative accomplishments 
+. // Mayhew Laws (column 1)
+. regress fddemadv dividegov fdpolicymood c.fdprez##i.gopprez c.mayhewlaws##i.gopcong c.mayhewlaws##i.dividecong  c.fdprez##presbreak c.mayhewlaws##congbreak c.mayhewlaws##dividebreak
+{p 0 6 2}{txt}note: mayhewlaws omitted because of collinearity{p_end}
+{p 0 6 2}note: fdprez omitted because of collinearity{p_end}
+{p 0 6 2}note: mayhewlaws omitted because of collinearity{p_end}
+{p 0 6 2}note: mayhewlaws omitted because of collinearity{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(16, 128)      = {res}     5.81
+{txt}       Model {c |} {res} 161.226983        16  10.0766865   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 221.935565       128   1.7338716   {txt}R-squared       ={res}    0.4208
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.3484
+{txt}       Total {c |} {res} 383.162549       144  2.66085103   {txt}Root MSE        =   {res} 1.3168
+
+{txt}{hline 25}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}                fddemadv{col 26}{c |}      Coef.{col 38}   Std. Err.{col 50}      t{col 58}   P>|t|{col 66}     [95% Con{col 79}f. Interval]
+{hline 25}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 15}dividegov {c |}{col 26}{res}{space 2} .4450501{col 38}{space 2} .2965099{col 49}{space 1}    1.50{col 58}{space 3}0.136{col 66}{space 4}-.1416453{col 79}{space 3} 1.031746
+{txt}{space 12}fdpolicymood {c |}{col 26}{res}{space 2} .0159069{col 38}{space 2}  .067825{col 49}{space 1}    0.23{col 58}{space 3}0.815{col 66}{space 4}-.1182964{col 79}{space 3} .1501102
+{txt}{space 18}fdprez {c |}{col 26}{res}{space 2} .1469924{col 38}{space 2} .0435433{col 49}{space 1}    3.38{col 58}{space 3}0.001{col 66}{space 4} .0608346{col 79}{space 3} .2331502
+{txt}{space 15}1.gopprez {c |}{col 26}{res}{space 2} .3248428{col 38}{space 2} .2363183{col 49}{space 1}    1.37{col 58}{space 3}0.172{col 66}{space 4}-.1427533{col 79}{space 3}  .792439
+{txt}{space 24} {c |}
+{space 8}gopprez#c.fdprez {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}-.2942272{col 38}{space 2} .0461269{col 49}{space 1}   -6.38{col 58}{space 3}0.000{col 66}{space 4}-.3854972{col 79}{space 3}-.2029572
+{txt}{space 24} {c |}
+{space 14}mayhewlaws {c |}{col 26}{res}{space 2} .1069195{col 38}{space 2} .1382506{col 49}{space 1}    0.77{col 58}{space 3}0.441{col 66}{space 4}-.1666329{col 79}{space 3} .3804719
+{txt}{space 15}1.gopcong {c |}{col 26}{res}{space 2} .3062351{col 38}{space 2} .3930785{col 49}{space 1}    0.78{col 58}{space 3}0.437{col 66}{space 4}-.4715379{col 79}{space 3} 1.084008
+{txt}{space 24} {c |}
+{space 4}gopcong#c.mayhewlaws {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} .0169083{col 38}{space 2}  .183584{col 49}{space 1}    0.09{col 58}{space 3}0.927{col 66}{space 4}-.3463439{col 79}{space 3} .3801606
+{txt}{space 24} {c |}
+{space 14}mayhewlaws {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
+{space 12}1.dividecong {c |}{col 26}{res}{space 2} .5832627{col 38}{space 2} .4013219{col 49}{space 1}    1.45{col 58}{space 3}0.149{col 66}{space 4}-.2108213{col 79}{space 3} 1.377347
+{txt}{space 24} {c |}
+{space 1}dividecong#c.mayhewlaws {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}-.3315272{col 38}{space 2} .2113635{col 49}{space 1}   -1.57{col 58}{space 3}0.119{col 66}{space 4} -.749746{col 79}{space 3} .0866916
+{txt}{space 24} {c |}
+{space 18}fdprez {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
+{space 13}1.presbreak {c |}{col 26}{res}{space 2}-1.619589{col 38}{space 2} 1.161335{col 49}{space 1}   -1.39{col 58}{space 3}0.166{col 66}{space 4}-3.917488{col 79}{space 3} .6783105
+{txt}{space 24} {c |}
+{space 6}presbreak#c.fdprez {c |}
+{space 22}1  {c |}{col 26}{res}{space 2}-.0584336{col 38}{space 2} .0639012{col 49}{space 1}   -0.91{col 58}{space 3}0.362{col 66}{space 4} -.184873{col 79}{space 3} .0680058
+{txt}{space 24} {c |}
+{space 14}mayhewlaws {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
+{space 13}1.congbreak {c |}{col 26}{res}{space 2}  .234161{col 38}{space 2} .9776719{col 49}{space 1}    0.24{col 58}{space 3}0.811{col 66}{space 4} -1.70033{col 79}{space 3} 2.168652
+{txt}{space 24} {c |}
+{space 2}congbreak#c.mayhewlaws {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} -1.48686{col 38}{space 2} .8354245{col 49}{space 1}   -1.78{col 58}{space 3}0.077{col 66}{space 4} -3.13989{col 79}{space 3} .1661703
+{txt}{space 24} {c |}
+{space 14}mayhewlaws {c |}{col 26}{res}{space 2}        0{col 38}{txt}  (omitted)
+{space 11}1.dividebreak {c |}{col 26}{res}{space 2} -.412469{col 38}{space 2} .9398355{col 49}{space 1}   -0.44{col 58}{space 3}0.661{col 66}{space 4}-2.272094{col 79}{space 3} 1.447156
+{txt}{space 24} {c |}
+dividebreak#c.mayhewlaws {c |}
+{space 22}1  {c |}{col 26}{res}{space 2} 2.270828{col 38}{space 2} 1.303998{col 49}{space 1}    1.74{col 58}{space 3}0.084{col 66}{space 4}-.3093554{col 79}{space 3} 4.851012
+{txt}{space 24} {c |}
+{space 19}_cons {c |}{col 26}{res}{space 2}-.8298342{col 38}{space 2} .3855387{col 49}{space 1}   -2.15{col 58}{space 3}0.033{col 66}{space 4}-1.592688{col 79}{space 3}  -.06698
+{txt}{hline 25}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat bgodfrey
+
+{txt}Breusch-Godfrey LM test for autocorrelation
+{hline 13}{c TT}{hline 61}
+{col 5}lags({it:p}){col 14}{c |}{col 25}chi2{col 44}df{col 63}Prob > chi2
+{hline 13}{c +}{hline 61}
+{col 6}  1{col 14}{c |}{res}{col 20}     0.111{col 43}  1{col 63}  0.7388
+{txt}{hline 13}{c BT}{hline 61}
+{col 25}H0: no serial correlation
+
+{com}. // House Wins (column 2)
+. regress fddemadv dividegov fdpolicymood c.fdprez##i.gopprez c.housepwin##i.gophouse c.housepwin##i.dividecong c.fdprez##presbreak c.housepwin##congbreak c.housepwin##dividebreak
+{p 0 6 2}{txt}note: housepwin omitted because of collinearity{p_end}
+{p 0 6 2}note: fdprez omitted because of collinearity{p_end}
+{p 0 6 2}note: housepwin omitted because of collinearity{p_end}
+{p 0 6 2}note: housepwin omitted because of collinearity{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(16, 128)      = {res}     5.99
+{txt}       Model {c |} {res} 164.098583        16  10.2561614   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 219.063966       128  1.71143724   {txt}R-squared       ={res}    0.4283
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.3568
+{txt}       Total {c |} {res} 383.162549       144  2.66085103   {txt}Root MSE        =   {res} 1.3082
+
+{txt}{hline 24}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}               fddemadv{col 25}{c |}      Coef.{col 37}   Std. Err.{col 49}      t{col 57}   P>|t|{col 65}     [95% Con{col 78}f. Interval]
+{hline 24}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 14}dividegov {c |}{col 25}{res}{space 2} .5192781{col 37}{space 2} .2974411{col 48}{space 1}    1.75{col 57}{space 3}0.083{col 65}{space 4}-.0692599{col 78}{space 3} 1.107816
+{txt}{space 11}fdpolicymood {c |}{col 25}{res}{space 2} .0173164{col 37}{space 2} .0665794{col 48}{space 1}    0.26{col 57}{space 3}0.795{col 65}{space 4}-.1144222{col 78}{space 3} .1490551
+{txt}{space 17}fdprez {c |}{col 25}{res}{space 2}  .144525{col 37}{space 2} .0481484{col 48}{space 1}    3.00{col 57}{space 3}0.003{col 65}{space 4} .0492551{col 78}{space 3}  .239795
+{txt}{space 14}1.gopprez {c |}{col 25}{res}{space 2} .3431858{col 37}{space 2} .2605942{col 48}{space 1}    1.32{col 57}{space 3}0.190{col 65}{space 4}-.1724445{col 78}{space 3}  .858816
+{txt}{space 23} {c |}
+{space 7}gopprez#c.fdprez {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.2960479{col 37}{space 2} .0522446{col 48}{space 1}   -5.67{col 57}{space 3}0.000{col 65}{space 4}-.3994228{col 78}{space 3}-.1926729
+{txt}{space 23} {c |}
+{space 14}housepwin {c |}{col 25}{res}{space 2}-1.613979{col 37}{space 2} 2.147858{col 48}{space 1}   -0.75{col 57}{space 3}0.454{col 65}{space 4}-5.863883{col 78}{space 3} 2.635924
+{txt}{space 13}1.gophouse {c |}{col 25}{res}{space 2}-3.636029{col 37}{space 2} 2.083618{col 48}{space 1}   -1.75{col 57}{space 3}0.083{col 65}{space 4}-7.758824{col 78}{space 3} .4867651
+{txt}{space 23} {c |}
+{space 3}gophouse#c.housepwin {c |}
+{space 21}1  {c |}{col 25}{res}{space 2} 4.724957{col 37}{space 2}  2.45903{col 48}{space 1}    1.92{col 57}{space 3}0.057{col 65}{space 4}-.1406532{col 78}{space 3} 9.590568
+{txt}{space 23} {c |}
+{space 14}housepwin {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 11}1.dividecong {c |}{col 25}{res}{space 2} 1.805268{col 37}{space 2} 2.056356{col 48}{space 1}    0.88{col 57}{space 3}0.382{col 65}{space 4}-2.263584{col 78}{space 3} 5.874121
+{txt}{space 23} {c |}
+{space 1}dividecong#c.housepwin {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-2.574813{col 37}{space 2} 2.439388{col 48}{space 1}   -1.06{col 57}{space 3}0.293{col 65}{space 4}-7.401558{col 78}{space 3} 2.251933
+{txt}{space 23} {c |}
+{space 17}fdprez {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 12}1.presbreak {c |}{col 25}{res}{space 2}-2.089739{col 37}{space 2} 1.156015{col 48}{space 1}   -1.81{col 57}{space 3}0.073{col 65}{space 4}-4.377113{col 78}{space 3} .1976346
+{txt}{space 23} {c |}
+{space 5}presbreak#c.fdprez {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-.0232256{col 37}{space 2} .0702562{col 48}{space 1}   -0.33{col 57}{space 3}0.741{col 65}{space 4}-.1622395{col 78}{space 3} .1157883
+{txt}{space 23} {c |}
+{space 14}housepwin {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 12}1.congbreak {c |}{col 25}{res}{space 2}  7.61889{col 37}{space 2} 14.84272{col 48}{space 1}    0.51{col 57}{space 3}0.609{col 65}{space 4}-21.74997{col 78}{space 3} 36.98775
+{txt}{space 23} {c |}
+{space 2}congbreak#c.housepwin {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-9.822372{col 37}{space 2} 16.08722{col 48}{space 1}   -0.61{col 57}{space 3}0.543{col 65}{space 4}-41.65368{col 78}{space 3} 22.00893
+{txt}{space 23} {c |}
+{space 14}housepwin {c |}{col 25}{res}{space 2}        0{col 37}{txt}  (omitted)
+{space 10}1.dividebreak {c |}{col 25}{res}{space 2} 1.805934{col 37}{space 2} 14.18677{col 48}{space 1}    0.13{col 57}{space 3}0.899{col 65}{space 4}-26.26501{col 78}{space 3} 29.87688
+{txt}{space 23} {c |}
+dividebreak#c.housepwin {c |}
+{space 21}1  {c |}{col 25}{res}{space 2}-1.223557{col 37}{space 2} 15.55068{col 48}{space 1}   -0.08{col 57}{space 3}0.937{col 65}{space 4}-31.99324{col 78}{space 3} 29.54612
+{txt}{space 23} {c |}
+{space 18}_cons {c |}{col 25}{res}{space 2} .6819817{col 37}{space 2} 1.842061{col 48}{space 1}    0.37{col 57}{space 3}0.712{col 65}{space 4} -2.96285{col 78}{space 3} 4.326813
+{txt}{hline 24}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat bgodfrey
+
+{txt}Breusch-Godfrey LM test for autocorrelation
+{hline 13}{c TT}{hline 61}
+{col 5}lags({it:p}){col 14}{c |}{col 25}chi2{col 44}df{col 63}Prob > chi2
+{hline 13}{c +}{hline 61}
+{col 6}  1{col 14}{c |}{res}{col 20}     0.013{col 43}  1{col 63}  0.9097
+{txt}{hline 13}{c BT}{hline 61}
+{col 25}H0: no serial correlation
+
+{com}. // Senate Wins (column 3)
+. regress fddemadv dividegov fdpolicymood c.fdprez##i.gopprez c.senpwin##i.gopsen c.senpwin##i.dividecong c.fdprez##presbreak c.senpwin##congbreak c.senpwin##dividebreak
+{p 0 6 2}{txt}note: senpwin omitted because of collinearity{p_end}
+{p 0 6 2}note: fdprez omitted because of collinearity{p_end}
+{p 0 6 2}note: senpwin omitted because of collinearity{p_end}
+{p 0 6 2}note: senpwin omitted because of collinearity{p_end}
+
+      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(16, 128)      = {res}     5.25
+{txt}       Model {c |} {res} 151.835036        16  9.48968973   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 231.327513       128   1.8072462   {txt}R-squared       ={res}    0.3963
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.3208
+{txt}       Total {c |} {res} 383.162549       144  2.66085103   {txt}Root MSE        =   {res} 1.3443
+
+{txt}{hline 22}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}             fddemadv{col 23}{c |}      Coef.{col 35}   Std. Err.{col 47}      t{col 55}   P>|t|{col 63}     [95% Con{col 76}f. Interval]
+{hline 22}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 12}dividegov {c |}{col 23}{res}{space 2} .3043782{col 35}{space 2} .3213775{col 46}{space 1}    0.95{col 55}{space 3}0.345{col 63}{space 4}-.3315221{col 76}{space 3} .9402784
+{txt}{space 9}fdpolicymood {c |}{col 23}{res}{space 2}-.0037742{col 35}{space 2} .0686213{col 46}{space 1}   -0.06{col 55}{space 3}0.956{col 63}{space 4}-.1395533{col 76}{space 3} .1320048
+{txt}{space 15}fdprez {c |}{col 23}{res}{space 2} .1674045{col 35}{space 2} .0479615{col 46}{space 1}    3.49{col 55}{space 3}0.001{col 63}{space 4} .0725045{col 76}{space 3} .2623045
+{txt}{space 12}1.gopprez {c |}{col 23}{res}{space 2} .2335202{col 35}{space 2} .2490382{col 46}{space 1}    0.94{col 55}{space 3}0.350{col 63}{space 4}-.2592444{col 76}{space 3} .7262848
+{txt}{space 21} {c |}
+{space 5}gopprez#c.fdprez {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-.3125171{col 35}{space 2} .0517487{col 46}{space 1}   -6.04{col 55}{space 3}0.000{col 63}{space 4}-.4149107{col 76}{space 3}-.2101234
+{txt}{space 21} {c |}
+{space 14}senpwin {c |}{col 23}{res}{space 2}-1.107568{col 35}{space 2} 1.190389{col 46}{space 1}   -0.93{col 55}{space 3}0.354{col 63}{space 4}-3.462956{col 76}{space 3} 1.247821
+{txt}{space 10}1.gopsenate {c |}{col 23}{res}{space 2}-.5034522{col 35}{space 2} 1.033377{col 46}{space 1}   -0.49{col 55}{space 3}0.627{col 63}{space 4}-2.548166{col 76}{space 3} 1.541262
+{txt}{space 21} {c |}
+{space 2}gopsenate#c.senpwin {c |}
+{space 19}1  {c |}{col 23}{res}{space 2} .9613871{col 35}{space 2} 1.455586{col 46}{space 1}    0.66{col 55}{space 3}0.510{col 63}{space 4}-1.918739{col 76}{space 3} 3.841513
+{txt}{space 21} {c |}
+{space 14}senpwin {c |}{col 23}{res}{space 2}        0{col 35}{txt}  (omitted)
+{space 9}1.dividecong {c |}{col 23}{res}{space 2}-.3181343{col 35}{space 2} 1.010096{col 46}{space 1}   -0.31{col 55}{space 3}0.753{col 63}{space 4}-2.316781{col 76}{space 3} 1.680513
+{txt}{space 21} {c |}
+{space 1}dividecong#c.senpwin {c |}
+{space 19}1  {c |}{col 23}{res}{space 2} .4578306{col 35}{space 2} 1.449093{col 46}{space 1}    0.32{col 55}{space 3}0.753{col 63}{space 4}-2.409447{col 76}{space 3} 3.325108
+{txt}{space 21} {c |}
+{space 15}fdprez {c |}{col 23}{res}{space 2}        0{col 35}{txt}  (omitted)
+{space 10}1.presbreak {c |}{col 23}{res}{space 2} -1.92263{col 35}{space 2} 1.177656{col 46}{space 1}   -1.63{col 55}{space 3}0.105{col 63}{space 4}-4.252824{col 76}{space 3}  .407563
+{txt}{space 21} {c |}
+{space 3}presbreak#c.fdprez {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-.0630948{col 35}{space 2} .0693009{col 46}{space 1}   -0.91{col 55}{space 3}0.364{col 63}{space 4}-.2002185{col 76}{space 3} .0740289
+{txt}{space 21} {c |}
+{space 14}senpwin {c |}{col 23}{res}{space 2}        0{col 35}{txt}  (omitted)
+{space 10}1.congbreak {c |}{col 23}{res}{space 2} 1.473376{col 35}{space 2} 4.920363{col 46}{space 1}    0.30{col 55}{space 3}0.765{col 63}{space 4}-8.262402{col 76}{space 3} 11.20915
+{txt}{space 21} {c |}
+{space 2}congbreak#c.senpwin {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-3.178987{col 35}{space 2} 6.081087{col 46}{space 1}   -0.52{col 55}{space 3}0.602{col 63}{space 4}-15.21146{col 76}{space 3} 8.853482
+{txt}{space 21} {c |}
+{space 14}senpwin {c |}{col 23}{res}{space 2}        0{col 35}{txt}  (omitted)
+{space 8}1.dividebreak {c |}{col 23}{res}{space 2} 1.105422{col 35}{space 2} 5.092688{col 46}{space 1}    0.22{col 55}{space 3}0.829{col 63}{space 4} -8.97133{col 76}{space 3} 11.18217
+{txt}{space 21} {c |}
+dividebreak#c.senpwin {c |}
+{space 19}1  {c |}{col 23}{res}{space 2}-.6911246{col 35}{space 2} 6.760775{col 46}{space 1}   -0.10{col 55}{space 3}0.919{col 63}{space 4}-14.06847{col 76}{space 3} 12.68622
+{txt}{space 21} {c |}
+{space 16}_cons {c |}{col 23}{res}{space 2} .3141342{col 35}{space 2} .9500072{col 46}{space 1}    0.33{col 55}{space 3}0.741{col 63}{space 4}-1.565617{col 76}{space 3} 2.193886
+{txt}{hline 22}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. estat bgodfrey
+
+{txt}Breusch-Godfrey LM test for autocorrelation
+{hline 13}{c TT}{hline 61}
+{col 5}lags({it:p}){col 14}{c |}{col 25}chi2{col 44}df{col 63}Prob > chi2
+{hline 13}{c +}{hline 61}
+{col 6}  1{col 14}{c |}{res}{col 20}     0.001{col 43}  1{col 63}  0.9731
+{txt}{hline 13}{c BT}{hline 61}
+{col 25}H0: no serial correlation
+
+{com}. 
+. 
+. ***Appendix***
+. 
+. // Figure A1 - Majority Party Rolls 
+. tsline majroll, xtitle(Quarters) ytitle(Majority Party Rolls)
+{res}{txt}
+{com}. 
+. // Table A1 - ADL
+. regress demadv lagdemadv dividecong dividegov policymood lagpolicymood congapp lagcongapp prezapp lagprezapp gopcong gopprez gopcong_approv laggopcong_approv gopprez_approv laggopprez_approv congbreak presbreak dividebreak presbreak_approv congbreak_approv dividecong_approv dividecong_lagapprov dividebreak_app 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(23, 121)      = {res}    46.70
+{txt}       Model {c |} {res} 1425.12691        23  61.9620397   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 160.555304       121  1.32690334   {txt}R-squared       ={res}    0.8987
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8795
+{txt}       Total {c |} {res} 1585.68222       144  11.0116821   {txt}Root MSE        =   {res} 1.1519
+
+{txt}{hline 21}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}              demadv{col 22}{c |}      Coef.{col 34}   Std. Err.{col 46}      t{col 54}   P>|t|{col 62}     [95% Con{col 75}f. Interval]
+{hline 21}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 11}lagdemadv {c |}{col 22}{res}{space 2} .6994942{col 34}{space 2} .0546146{col 45}{space 1}   12.81{col 54}{space 3}0.000{col 62}{space 4} .5913703{col 75}{space 3} .8076182
+{txt}{space 10}dividecong {c |}{col 22}{res}{space 2}-.4342922{col 34}{space 2} 1.054326{col 45}{space 1}   -0.41{col 54}{space 3}0.681{col 62}{space 4}-2.521608{col 75}{space 3} 1.653024
+{txt}{space 11}dividegov {c |}{col 22}{res}{space 2}-.3038125{col 34}{space 2} .3676039{col 45}{space 1}   -0.83{col 54}{space 3}0.410{col 62}{space 4}-1.031582{col 75}{space 3} .4239564
+{txt}{space 10}policymood {c |}{col 22}{res}{space 2}-.0001689{col 34}{space 2} .0636186{col 45}{space 1}   -0.00{col 54}{space 3}0.998{col 62}{space 4}-.1261187{col 75}{space 3} .1257808
+{txt}{space 7}lagpolicymood {c |}{col 22}{res}{space 2} -.101333{col 34}{space 2} .0602337{col 45}{space 1}   -1.68{col 54}{space 3}0.095{col 62}{space 4}-.2205815{col 75}{space 3} .0179154
+{txt}{space 13}congapp {c |}{col 22}{res}{space 2}-.0687921{col 34}{space 2} .0540961{col 45}{space 1}   -1.27{col 54}{space 3}0.206{col 62}{space 4}-.1758896{col 75}{space 3} .0383054
+{txt}{space 10}lagcongapp {c |}{col 22}{res}{space 2}-.0193301{col 34}{space 2} .0564783{col 45}{space 1}   -0.34{col 54}{space 3}0.733{col 62}{space 4}-.1311438{col 75}{space 3} .0924837
+{txt}{space 13}prezapp {c |}{col 22}{res}{space 2} .1668801{col 34}{space 2} .0420899{col 45}{space 1}    3.96{col 54}{space 3}0.000{col 62}{space 4} .0835521{col 75}{space 3} .2502081
+{txt}{space 10}lagprezapp {c |}{col 22}{res}{space 2}-.0460891{col 34}{space 2} .0257017{col 45}{space 1}   -1.79{col 54}{space 3}0.075{col 62}{space 4}-.0969724{col 75}{space 3} .0047943
+{txt}{space 13}gopcong {c |}{col 22}{res}{space 2} .0179973{col 34}{space 2} 1.467763{col 45}{space 1}    0.01{col 54}{space 3}0.990{col 62}{space 4}-2.887827{col 75}{space 3} 2.923822
+{txt}{space 13}gopprez {c |}{col 22}{res}{space 2}  9.87193{col 34}{space 2} 2.189043{col 45}{space 1}    4.51{col 54}{space 3}0.000{col 62}{space 4} 5.538142{col 75}{space 3} 14.20572
+{txt}{space 6}gopcong_approv {c |}{col 22}{res}{space 2}-.0030035{col 34}{space 2} .0459308{col 45}{space 1}   -0.07{col 54}{space 3}0.948{col 62}{space 4}-.0939357{col 75}{space 3} .0879287
+{txt}{space 3}laggopcong_approv {c |}{col 22}{res}{space 2} .0106381{col 34}{space 2} .0170698{col 45}{space 1}    0.62{col 54}{space 3}0.534{col 62}{space 4} -.023156{col 75}{space 3} .0444322
+{txt}{space 6}gopprez_approv {c |}{col 22}{res}{space 2}-.2721666{col 34}{space 2} .0396921{col 45}{space 1}   -6.86{col 54}{space 3}0.000{col 62}{space 4}-.3507475{col 75}{space 3}-.1935857
+{txt}{space 3}laggopprez_approv {c |}{col 22}{res}{space 2} .1108211{col 34}{space 2} .0172372{col 45}{space 1}    6.43{col 54}{space 3}0.000{col 62}{space 4} .0766954{col 75}{space 3} .1449467
+{txt}{space 11}congbreak {c |}{col 22}{res}{space 2}-2.932784{col 34}{space 2} 3.136112{col 45}{space 1}   -0.94{col 54}{space 3}0.352{col 62}{space 4}-9.141545{col 75}{space 3} 3.275977
+{txt}{space 11}presbreak {c |}{col 22}{res}{space 2}-9.043675{col 34}{space 2} 3.046661{col 45}{space 1}   -2.97{col 54}{space 3}0.004{col 62}{space 4}-15.07534{col 75}{space 3}-3.012007
+{txt}{space 9}dividebreak {c |}{col 22}{res}{space 2} -1.33017{col 34}{space 2}  2.61775{col 45}{space 1}   -0.51{col 54}{space 3}0.612{col 62}{space 4}-6.512696{col 75}{space 3} 3.852357
+{txt}{space 4}presbreak_approv {c |}{col 22}{res}{space 2} .1934938{col 34}{space 2} .0679035{col 45}{space 1}    2.85{col 54}{space 3}0.005{col 62}{space 4} .0590609{col 75}{space 3} .3279268
+{txt}{space 4}congbreak_approv {c |}{col 22}{res}{space 2} .0600177{col 34}{space 2} .1023098{col 45}{space 1}    0.59{col 54}{space 3}0.559{col 62}{space 4}-.1425316{col 75}{space 3} .2625669
+{txt}{space 3}dividecong_approv {c |}{col 22}{res}{space 2}-.1000021{col 34}{space 2} .0766844{col 45}{space 1}   -1.30{col 54}{space 3}0.195{col 62}{space 4}-.2518191{col 75}{space 3}  .051815
+{txt}dividecong_lagapprov {c |}{col 22}{res}{space 2} .1080073{col 34}{space 2} .0770043{col 45}{space 1}    1.40{col 54}{space 3}0.163{col 62}{space 4} -.044443{col 75}{space 3} .2604577
+{txt}{space 5}dividebreak_app {c |}{col 22}{res}{space 2}  .060368{col 34}{space 2} .0818761{col 45}{space 1}    0.74{col 54}{space 3}0.462{col 62}{space 4}-.1017274{col 75}{space 3} .2224634
+{txt}{space 15}_cons {c |}{col 22}{res}{space 2} 18.36042{col 34}{space 2} 3.158246{col 45}{space 1}    5.81{col 54}{space 3}0.000{col 62}{space 4} 12.10784{col 75}{space 3}   24.613
+{txt}{hline 21}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. est sto f_adl
+{txt}
+{com}. 
+. // Variables for the VAR analysis in Table A2//
+. sum prezapp 
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}prezapp {c |}{res}        146    51.67466    10.90303         28       86.4
+{txt}
+{com}. gen newpres= prezapp - r(mean)
+{txt}
+{com}. replace newpres=newpres*-1 if gopprez==1
+{txt}(80 real changes made)
+
+{com}. sum congapp
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}congapp {c |}{res}        146    33.50776    8.981204     18.709      55.49
+{txt}
+{com}. gen newcong= congapp - r(mean)
+{txt}
+{com}. replace newcong=newcong*-1 if gopcong==1 
+{txt}(47 real changes made)
+
+{com}. replace newcong=. if dividecong==1
+{txt}(47 real changes made, 47 to missing)
+
+{com}. sum congapp
+
+{txt}    Variable {c |}        Obs        Mean    Std. Dev.       Min        Max
+{hline 13}{c +}{hline 57}
+{space 5}congapp {c |}{res}        146    33.50776    8.981204     18.709      55.49
+{txt}
+{com}. gen newhouse= congapp - r(mean)
+{txt}
+{com}. replace newhouse=newhouse*-1 if gophouse==1
+{txt}(70 real changes made)
+
+{com}. 
+. // Table A2 - VAR models
+. varsoc demadv newpres newhouse policymood
+
+{txt}{col 4}Selection-order criteria
+{col 4}Sample:  {res}5 - 146 {txt}{col 49}Number of obs {col 68}= {res}      142
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{res}{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1}-1728.64{col 18}{col 27}{col 32}{col 39}  465939{col 48}{space 1} 24.4033{col 58}{space 1} 24.4372{col 68}{space 1} 24.4866{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-1325.68{col 18}{space 1} 805.92{col 26}*{col 27}  16{col 32} 0.000{col 39}  2001.8{col 47}*{col 48}{space 1} 18.9532{col 57}*{col 58}{space 1} 19.1224{col 67}*{col 68}{space 1} 19.3695{col 77}*{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-1318.53{col 18}{space 1} 14.291{col 27}  16{col 32} 0.577{col 39} 2268.96{col 48}{space 1} 19.0779{col 58}{space 1} 19.3824{col 68}{space 1} 19.8273{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-1305.76{col 18}{space 1} 25.549{col 27}  16{col 32} 0.061{col 39} 2377.68{col 48}{space 1} 19.1233{col 58}{space 1} 19.5632{col 68}{space 1} 20.2057{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1}-1299.91{col 18}{space 1} 11.697{col 27}  16{col 32} 0.765{col 39} 2750.18{col 48}{space 1} 19.2663{col 58}{space 1} 19.8415{col 68}{space 1} 20.6818{col 79}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{res}{txt}{space 3}Endogenous:  demadv newpres newhouse policymood
+{space 3} Exogenous:  _cons
+
+{com}. var demadv newpres newhouse policymood, lags(1)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}2 - 146 {txt}{col 49}Number of obs{col 67}= {res}       145
+{txt}Log likelihood =  {res}-1356.646{txt}{col 38}{col 49}AIC{col 67}=  {res} 18.98822
+{txt}FPE{col 16}=  {res} 2073.151{txt}{col 49}HQIC{col 67}=  {res} 19.15506
+{txt}Det(Sigma_ml){col 16}=  {res} 1573.179{txt}{col 49}SBIC{col 67}=  {res} 19.39881
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}demadv          {col 18}{result}     5{col 26}{space 2} 1.51968{col 37}{space 1} 0.7961{col 47}  566.136{col 58} 0.0000
+{col 1}{text}newpres         {col 18}{result}     5{col 26}{space 2} 5.35128{col 37}{space 1} 0.7647{col 47} 471.3223{col 58} 0.0000
+{col 1}{text}newhouse        {col 18}{result}     5{col 26}{space 2} 3.29016{col 37}{space 1} 0.8637{col 47} 918.6115{col 58} 0.0000
+{col 1}{text}policymood      {col 18}{result}     5{col 26}{space 2} 1.77307{col 37}{space 1} 0.8051{col 47} 598.8705{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv       {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .6943792{col 26}{space 2} .0618493{col 37}{space 1}   11.23{col 46}{space 3}0.000{col 54}{space 4} .5731568{col 67}{space 3} .8156015
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0660027{col 26}{space 2} .0170625{col 37}{space 1}    3.87{col 46}{space 3}0.000{col 54}{space 4} .0325608{col 67}{space 3} .0994447
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0142869{col 26}{space 2} .0162399{col 37}{space 1}   -0.88{col 46}{space 3}0.379{col 54}{space 4}-.0461165{col 67}{space 3} .0175426
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0411775{col 26}{space 2} .0317618{col 37}{space 1}    1.30{col 46}{space 3}0.195{col 54}{space 4}-.0210744{col 67}{space 3} .1034295
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 13.81892{col 26}{space 2} 3.564703{col 37}{space 1}    3.88{col 46}{space 3}0.000{col 54}{space 4} 6.832232{col 67}{space 3} 20.80561
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newpres      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0413436{col 26}{space 2} .2177913{col 37}{space 1}   -0.19{col 46}{space 3}0.849{col 54}{space 4}-.4682068{col 67}{space 3} .3855195
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8790495{col 26}{space 2} .0600827{col 37}{space 1}   14.63{col 46}{space 3}0.000{col 54}{space 4} .7612896{col 67}{space 3} .9968094
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0039056{col 26}{space 2} .0571858{col 37}{space 1}   -0.07{col 46}{space 3}0.946{col 54}{space 4}-.1159878{col 67}{space 3} .1081765
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0748562{col 26}{space 2} .1118436{col 37}{space 1}    0.67{col 46}{space 3}0.503{col 54}{space 4}-.1443531{col 67}{space 3} .2940656
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-2.495987{col 26}{space 2} 12.55247{col 37}{space 1}   -0.20{col 46}{space 3}0.842{col 54}{space 4}-27.09838{col 67}{space 3}  22.1064
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newhouse     {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2123937{col 26}{space 2} .1339059{col 37}{space 1}   -1.59{col 46}{space 3}0.113{col 54}{space 4}-.4748445{col 67}{space 3}  .050057
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0107776{col 26}{space 2}  .036941{col 37}{space 1}    0.29{col 46}{space 3}0.770{col 54}{space 4}-.0616254{col 67}{space 3} .0831806
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8932414{col 26}{space 2} .0351599{col 37}{space 1}   25.41{col 46}{space 3}0.000{col 54}{space 4} .8243293{col 67}{space 3} .9621536
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0746561{col 26}{space 2} .0687654{col 37}{space 1}   -1.09{col 46}{space 3}0.278{col 54}{space 4}-.2094339{col 67}{space 3} .0601217
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 16.19992{col 26}{space 2}  7.71771{col 37}{space 1}    2.10{col 46}{space 3}0.036{col 54}{space 4} 1.073487{col 67}{space 3} 31.32636
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}policymood   {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .044487{col 26}{space 2}  .072162{col 37}{space 1}    0.62{col 46}{space 3}0.538{col 54}{space 4}-.0969478{col 67}{space 3} .1859219
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0160202{col 26}{space 2} .0199075{col 37}{space 1}   -0.80{col 46}{space 3}0.421{col 54}{space 4}-.0550382{col 67}{space 3} .0229978
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0156151{col 26}{space 2} .0189477{col 37}{space 1}    0.82{col 46}{space 3}0.410{col 54}{space 4}-.0215217{col 67}{space 3} .0527519
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8839142{col 26}{space 2} .0370577{col 37}{space 1}   23.85{col 46}{space 3}0.000{col 54}{space 4} .8112824{col 67}{space 3} .9565461
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4.726457{col 26}{space 2} 4.159079{col 37}{space 1}    1.14{col 46}{space 3}0.256{col 54}{space 4}-3.425188{col 67}{space 3}  12.8781
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. // Different lag lengths as noted in appendix
+. var demadv newpres newhouse policymood, lags(1/2)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}3 - 146 {txt}{col 49}Number of obs{col 67}= {res}       144
+{txt}Log likelihood =  {res}-1336.139{txt}{col 38}{col 49}AIC{col 67}=  {res} 19.05748
+{txt}FPE{col 16}=  {res} 2223.027{txt}{col 49}HQIC{col 67}=  {res} 19.35917
+{txt}Det(Sigma_ml){col 16}=  {res} 1347.454{txt}{col 49}SBIC{col 67}=  {res} 19.79993
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}demadv          {col 18}{result}     9{col 26}{space 2} 1.52956{col 37}{space 1} 0.8004{col 47} 577.5644{col 58} 0.0000
+{col 1}{text}newpres         {col 18}{result}     9{col 26}{space 2} 5.26974{col 37}{space 1} 0.7773{col 47} 502.7162{col 58} 0.0000
+{col 1}{text}newhouse        {col 18}{result}     9{col 26}{space 2} 3.30826{col 37}{space 1} 0.8647{col 47} 919.9212{col 58} 0.0000
+{col 1}{text}policymood      {col 18}{result}     9{col 26}{space 2} 1.76187{col 37}{space 1} 0.8075{col 47} 604.1922{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv       {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7971309{col 26}{space 2}  .090917{col 37}{space 1}    8.77{col 46}{space 3}0.000{col 54}{space 4}  .618937{col 67}{space 3} .9753249
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1107167{col 26}{space 2} .0877199{col 37}{space 1}   -1.26{col 46}{space 3}0.207{col 54}{space 4}-.2826445{col 67}{space 3} .0612111
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0786455{col 26}{space 2} .0256001{col 37}{space 1}    3.07{col 46}{space 3}0.002{col 54}{space 4} .0284703{col 67}{space 3} .1288208
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0168184{col 26}{space 2} .0270679{col 37}{space 1}   -0.62{col 46}{space 3}0.534{col 54}{space 4}-.0698705{col 67}{space 3} .0362338
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0031796{col 26}{space 2} .0385926{col 37}{space 1}   -0.08{col 46}{space 3}0.934{col 54}{space 4}-.0788197{col 67}{space 3} .0724605
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0153975{col 26}{space 2} .0378655{col 37}{space 1}   -0.41{col 46}{space 3}0.684{col 54}{space 4}-.0896126{col 67}{space 3} .0588176
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0239509{col 26}{space 2} .0714408{col 37}{space 1}    0.34{col 46}{space 3}0.737{col 54}{space 4}-.1160706{col 67}{space 3} .1639723
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0204756{col 26}{space 2} .0704681{col 37}{space 1}    0.29{col 46}{space 3}0.771{col 54}{space 4}-.1176393{col 67}{space 3} .1585905
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 14.04303{col 26}{space 2} 3.850523{col 37}{space 1}    3.65{col 46}{space 3}0.000{col 54}{space 4} 6.496139{col 67}{space 3} 21.58991
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newpres      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.1506839{col 26}{space 2} .3132324{col 37}{space 1}   -0.48{col 46}{space 3}0.630{col 54}{space 4}-.7646081{col 67}{space 3} .4632402
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .2716818{col 26}{space 2} .3022176{col 37}{space 1}    0.90{col 46}{space 3}0.369{col 54}{space 4}-.3206538{col 67}{space 3} .8640175
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9649013{col 26}{space 2} .0881989{col 37}{space 1}   10.94{col 46}{space 3}0.000{col 54}{space 4} .7920346{col 67}{space 3} 1.137768
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1297842{col 26}{space 2}  .093256{col 37}{space 1}   -1.39{col 46}{space 3}0.164{col 54}{space 4}-.3125626{col 67}{space 3} .0529943
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0289218{col 26}{space 2} .1329615{col 37}{space 1}   -0.22{col 46}{space 3}0.828{col 54}{space 4}-.2895215{col 67}{space 3} .2316779
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0316107{col 26}{space 2} .1304566{col 37}{space 1}    0.24{col 46}{space 3}0.809{col 54}{space 4}-.2240795{col 67}{space 3} .2873008
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2159262{col 26}{space 2}  .246132{col 37}{space 1}   -0.88{col 46}{space 3}0.380{col 54}{space 4} -.698336{col 67}{space 3} .2664837
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .2528081{col 26}{space 2} .2427807{col 37}{space 1}    1.04{col 46}{space 3}0.298{col 54}{space 4}-.2230332{col 67}{space 3} .7286495
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-8.764348{col 26}{space 2} 13.26605{col 37}{space 1}   -0.66{col 46}{space 3}0.509{col 54}{space 4}-34.76532{col 67}{space 3} 17.23662
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newhouse     {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2770496{col 26}{space 2} .1966424{col 37}{space 1}   -1.41{col 46}{space 3}0.159{col 54}{space 4}-.6624617{col 67}{space 3} .1083625
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0698953{col 26}{space 2} .1897276{col 37}{space 1}    0.37{col 46}{space 3}0.713{col 54}{space 4}-.3019639{col 67}{space 3} .4417545
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0031236{col 26}{space 2} .0553699{col 37}{space 1}   -0.06{col 46}{space 3}0.955{col 54}{space 4}-.1116467{col 67}{space 3} .1053994
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0170942{col 26}{space 2} .0585447{col 37}{space 1}    0.29{col 46}{space 3}0.770{col 54}{space 4}-.0976513{col 67}{space 3} .1318397
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9716606{col 26}{space 2} .0834712{col 37}{space 1}   11.64{col 46}{space 3}0.000{col 54}{space 4} .8080601{col 67}{space 3} 1.135261
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0840089{col 26}{space 2} .0818986{col 37}{space 1}   -1.03{col 46}{space 3}0.305{col 54}{space 4}-.2445272{col 67}{space 3} .0765095
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} -.179523{col 26}{space 2} .1545179{col 37}{space 1}   -1.16{col 46}{space 3}0.245{col 54}{space 4}-.4823725{col 67}{space 3} .1233265
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .1124149{col 26}{space 2}  .152414{col 37}{space 1}    0.74{col 46}{space 3}0.461{col 54}{space 4} -.186311{col 67}{space 3} .4111407
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 15.49234{col 26}{space 2} 8.328219{col 37}{space 1}    1.86{col 46}{space 3}0.063{col 54}{space 4}-.8306668{col 67}{space 3} 31.81535
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}policymood   {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .2054852{col 26}{space 2} .1047255{col 37}{space 1}    1.96{col 46}{space 3}0.050{col 54}{space 4} .0002271{col 67}{space 3} .4107433
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1793812{col 26}{space 2} .1010428{col 37}{space 1}   -1.78{col 46}{space 3}0.076{col 54}{space 4}-.3774215{col 67}{space 3} .0186591
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0097832{col 26}{space 2} .0294882{col 37}{space 1}   -0.33{col 46}{space 3}0.740{col 54}{space 4}-.0675791{col 67}{space 3} .0480127
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0094403{col 26}{space 2}  .031179{col 37}{space 1}   -0.30{col 46}{space 3}0.762{col 54}{space 4}-.0705501{col 67}{space 3} .0516695
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0571732{col 26}{space 2} .0444541{col 37}{space 1}    1.29{col 46}{space 3}0.198{col 54}{space 4}-.0299552{col 67}{space 3} .1443016
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0541493{col 26}{space 2} .0436166{col 37}{space 1}   -1.24{col 46}{space 3}0.214{col 54}{space 4}-.1396362{col 67}{space 3} .0313376
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8691978{col 26}{space 2} .0822913{col 37}{space 1}   10.56{col 46}{space 3}0.000{col 54}{space 4} .7079099{col 67}{space 3} 1.030486
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0105887{col 26}{space 2} .0811708{col 37}{space 1}    0.13{col 46}{space 3}0.896{col 54}{space 4}-.1485032{col 67}{space 3} .1696805
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 5.986395{col 26}{space 2} 4.435342{col 37}{space 1}    1.35{col 46}{space 3}0.177{col 54}{space 4}-2.706716{col 67}{space 3} 14.67951
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. vargranger
+
+{txt}{col 4}Granger causality Wald tests
+{res}{col 3}{text}{c TLC}{hline 19}{hline 19}{c TT}{hline 9}{hline 6}{hline 12}{c TRC}
+{col 3}{text}{c |}          Equation{col 23}          Excluded{col 42}{c |}   chi2 {col 52}   df{col 58}Prob > chi2{col 70}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}            demadv{col 23}           newpres{col 42}{c |}{result}{space 1} 15.903{col 52}    2{col 58}{space 2} 0.000{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}          newhouse{col 42}{c |}{result}{space 1} 1.2594{col 52}    2{col 58}{space 2} 0.533{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}        policymood{col 42}{c |}{result}{space 1} 1.8224{col 52}    2{col 58}{space 2} 0.402{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}               ALL{col 42}{c |}{result}{space 1} 17.797{col 52}    6{col 58}{space 2} 0.007{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newpres{col 23}            demadv{col 42}{c |}{result}{space 1} .85623{col 52}    2{col 58}{space 2} 0.652{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}          newhouse{col 42}{c |}{result}{space 1} .05872{col 52}    2{col 58}{space 2} 0.971{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}        policymood{col 42}{c |}{result}{space 1} 1.0977{col 52}    2{col 58}{space 2} 0.578{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}               ALL{col 42}{c |}{result}{space 1}  2.209{col 52}    6{col 58}{space 2} 0.900{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}          newhouse{col 23}            demadv{col 42}{c |}{result}{space 1} 2.7758{col 52}    2{col 58}{space 2} 0.250{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}           newpres{col 42}{c |}{result}{space 1} .14561{col 52}    2{col 58}{space 2} 0.930{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}        policymood{col 42}{c |}{result}{space 1} 1.7905{col 52}    2{col 58}{space 2} 0.409{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}               ALL{col 42}{c |}{result}{space 1} 7.3755{col 52}    6{col 58}{space 2} 0.288{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}        policymood{col 23}            demadv{col 42}{c |}{result}{space 1} 4.1499{col 52}    2{col 58}{space 2} 0.126{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newpres{col 42}{c |}{result}{space 1} .80507{col 52}    2{col 58}{space 2} 0.669{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}          newhouse{col 42}{c |}{result}{space 1} 1.6889{col 52}    2{col 58}{space 2} 0.430{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}               ALL{col 42}{c |}{result}{space 1} 6.4889{col 52}    6{col 58}{space 2} 0.371{col 70}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 19}{hline 19}{c BT}{hline 9}{hline 6}{hline 12}{c BRC}
+{res}{txt}
+{com}. var demadv newpres newhouse policymood, lags(1/3)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}4 - 146 {txt}{col 49}Number of obs{col 67}= {res}       143
+{txt}Log likelihood =  {res}-1314.761{txt}{col 38}{col 49}AIC{col 67}=  {res} 19.11554
+{txt}FPE{col 16}=  {res}  2359.12{txt}{col 49}HQIC{col 67}=  {res} 19.55334
+{txt}Det(Sigma_ml){col 16}=  {res} 1137.693{txt}{col 49}SBIC{col 67}=  {res} 20.19294
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}demadv          {col 18}{result}    13{col 26}{space 2} 1.50541{col 37}{space 1} 0.8138{col 47}  625.171{col 58} 0.0000
+{col 1}{text}newpres         {col 18}{result}    13{col 26}{space 2} 5.19063{col 37}{space 1} 0.7883{col 47} 532.6434{col 58} 0.0000
+{col 1}{text}newhouse        {col 18}{result}    13{col 26}{space 2} 3.28473{col 37}{space 1} 0.8706{col 47} 961.8124{col 58} 0.0000
+{col 1}{text}policymood      {col 18}{result}    13{col 26}{space 2}  1.7551{col 37}{space 1} 0.8117{col 47} 616.2712{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv       {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7684476{col 26}{space 2} .0899461{col 37}{space 1}    8.54{col 46}{space 3}0.000{col 54}{space 4} .5921566{col 67}{space 3} .9447387
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .066508{col 26}{space 2} .1150232{col 37}{space 1}    0.58{col 46}{space 3}0.563{col 54}{space 4}-.1589332{col 67}{space 3} .2919493
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1611692{col 26}{space 2} .0875555{col 37}{space 1}   -1.84{col 46}{space 3}0.066{col 54}{space 4}-.3327748{col 67}{space 3} .0104363
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0834419{col 26}{space 2} .0259517{col 37}{space 1}    3.22{col 46}{space 3}0.001{col 54}{space 4} .0325776{col 67}{space 3} .1343063
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0007119{col 26}{space 2} .0339434{col 37}{space 1}   -0.02{col 46}{space 3}0.983{col 54}{space 4}-.0672398{col 67}{space 3}  .065816
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0261804{col 26}{space 2} .0264769{col 37}{space 1}   -0.99{col 46}{space 3}0.323{col 54}{space 4}-.0780741{col 67}{space 3} .0257134
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0076539{col 26}{space 2} .0378313{col 37}{space 1}    0.20{col 46}{space 3}0.840{col 54}{space 4} -.066494{col 67}{space 3} .0818019
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0728369{col 26}{space 2} .0524773{col 37}{space 1}   -1.39{col 46}{space 3}0.165{col 54}{space 4}-.1756905{col 67}{space 3} .0300167
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0441067{col 26}{space 2} .0371142{col 37}{space 1}    1.19{col 46}{space 3}0.235{col 54}{space 4}-.0286358{col 67}{space 3} .1168492
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0017252{col 26}{space 2} .0707108{col 37}{space 1}    0.02{col 46}{space 3}0.981{col 54}{space 4}-.1368654{col 67}{space 3} .1403157
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0838159{col 26}{space 2}  .093448{col 37}{space 1}    0.90{col 46}{space 3}0.370{col 54}{space 4}-.0993389{col 67}{space 3} .2669706
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0556303{col 26}{space 2} .0688177{col 37}{space 1}   -0.81{col 46}{space 3}0.419{col 54}{space 4}-.1905104{col 67}{space 3} .0792499
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 15.60482{col 26}{space 2} 4.062912{col 37}{space 1}    3.84{col 46}{space 3}0.000{col 54}{space 4} 7.641655{col 67}{space 3} 23.56798
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newpres      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.1628103{col 26}{space 2} .3101325{col 37}{space 1}   -0.52{col 46}{space 3}0.600{col 54}{space 4} -.770659{col 67}{space 3} .4450383
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .4909024{col 26}{space 2} .3965979{col 37}{space 1}    1.24{col 46}{space 3}0.216{col 54}{space 4}-.2864153{col 67}{space 3}  1.26822
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0448436{col 26}{space 2} .3018898{col 37}{space 1}   -0.15{col 46}{space 3}0.882{col 54}{space 4}-.6365366{col 67}{space 3} .5468495
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9416387{col 26}{space 2} .0894809{col 37}{space 1}   10.52{col 46}{space 3}0.000{col 54}{space 4} .7662592{col 67}{space 3} 1.117018
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0379395{col 26}{space 2} .1170364{col 37}{space 1}    0.32{col 46}{space 3}0.746{col 54}{space 4}-.1914476{col 67}{space 3} .2673265
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.2098904{col 26}{space 2} .0912919{col 37}{space 1}   -2.30{col 46}{space 3}0.021{col 54}{space 4}-.3888192{col 67}{space 3}-.0309616
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0042011{col 26}{space 2} .1304416{col 37}{space 1}   -0.03{col 46}{space 3}0.974{col 54}{space 4}-.2598619{col 67}{space 3} .2514597
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1470527{col 26}{space 2} .1809408{col 37}{space 1}   -0.81{col 46}{space 3}0.416{col 54}{space 4}-.5016902{col 67}{space 3} .2075849
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .1661997{col 26}{space 2} .1279692{col 37}{space 1}    1.30{col 46}{space 3}0.194{col 54}{space 4}-.0846153{col 67}{space 3} .4170147
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2629734{col 26}{space 2} .2438095{col 37}{space 1}   -1.08{col 46}{space 3}0.281{col 54}{space 4}-.7408313{col 67}{space 3} .2148845
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .3704504{col 26}{space 2} .3222072{col 37}{space 1}    1.15{col 46}{space 3}0.250{col 54}{space 4}-.2610641{col 67}{space 3} 1.001965
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1396753{col 26}{space 2} .2372821{col 37}{space 1}   -0.59{col 46}{space 3}0.556{col 54}{space 4}-.6047397{col 67}{space 3} .3253891
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-13.22081{col 26}{space 2} 14.00885{col 37}{space 1}   -0.94{col 46}{space 3}0.345{col 54}{space 4}-40.67765{col 67}{space 3} 14.23604
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newhouse     {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2522413{col 26}{space 2} .1962576{col 37}{space 1}   -1.29{col 46}{space 3}0.199{col 54}{space 4}-.6368992{col 67}{space 3} .1324165
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2525926{col 26}{space 2} .2509745{col 37}{space 1}   -1.01{col 46}{space 3}0.314{col 54}{space 4}-.7444936{col 67}{space 3} .2393085
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .4037342{col 26}{space 2} .1910414{col 37}{space 1}    2.11{col 46}{space 3}0.035{col 54}{space 4} .0292999{col 67}{space 3} .7781685
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0025564{col 26}{space 2} .0566252{col 37}{space 1}    0.05{col 46}{space 3}0.964{col 54}{space 4} -.108427{col 67}{space 3} .1135397
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .038986{col 26}{space 2} .0740628{col 37}{space 1}    0.53{col 46}{space 3}0.599{col 54}{space 4}-.1061744{col 67}{space 3} .1841464
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0381515{col 26}{space 2} .0577712{col 37}{space 1}   -0.66{col 46}{space 3}0.509{col 54}{space 4} -.151381{col 67}{space 3} .0750779
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .982283{col 26}{space 2} .0825458{col 37}{space 1}   11.90{col 46}{space 3}0.000{col 54}{space 4} .8204961{col 67}{space 3}  1.14407
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0842326{col 26}{space 2} .1145027{col 37}{space 1}   -0.74{col 46}{space 3}0.462{col 54}{space 4}-.3086538{col 67}{space 3} .1401886
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0088545{col 26}{space 2} .0809813{col 37}{space 1}    0.11{col 46}{space 3}0.913{col 54}{space 4}-.1498659{col 67}{space 3} .1675749
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} -.119626{col 26}{space 2} .1542872{col 37}{space 1}   -0.78{col 46}{space 3}0.438{col 54}{space 4}-.4220233{col 67}{space 3} .1827714
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .2532182{col 26}{space 2} .2038987{col 37}{space 1}    1.24{col 46}{space 3}0.214{col 54}{space 4}-.1464159{col 67}{space 3} .6528523
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.2054861{col 26}{space 2} .1501565{col 37}{space 1}   -1.37{col 46}{space 3}0.171{col 54}{space 4}-.4997874{col 67}{space 3} .0888153
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 10.05372{col 26}{space 2} 8.865061{col 37}{space 1}    1.13{col 46}{space 3}0.257{col 54}{space 4}-7.321479{col 67}{space 3} 27.42892
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}policymood   {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1876795{col 26}{space 2} .1048644{col 37}{space 1}    1.79{col 46}{space 3}0.073{col 54}{space 4} -.017851{col 67}{space 3}   .39321
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0824421{col 26}{space 2} .1341008{col 37}{space 1}   -0.61{col 46}{space 3}0.539{col 54}{space 4}-.3452748{col 67}{space 3} .1803906
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0823786{col 26}{space 2} .1020773{col 37}{space 1}   -0.81{col 46}{space 3}0.420{col 54}{space 4}-.2824464{col 67}{space 3} .1176893
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0073891{col 26}{space 2}  .030256{col 37}{space 1}   -0.24{col 46}{space 3}0.807{col 54}{space 4}-.0666897{col 67}{space 3} .0519116
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .007279{col 26}{space 2} .0395732{col 37}{space 1}    0.18{col 46}{space 3}0.854{col 54}{space 4}-.0702831{col 67}{space 3} .0848412
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0243372{col 26}{space 2} .0308683{col 37}{space 1}   -0.79{col 46}{space 3}0.430{col 54}{space 4} -.084838{col 67}{space 3} .0361636
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0686526{col 26}{space 2} .0441059{col 37}{space 1}    1.56{col 46}{space 3}0.120{col 54}{space 4}-.0177934{col 67}{space 3} .1550986
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1415196{col 26}{space 2} .0611811{col 37}{space 1}   -2.31{col 46}{space 3}0.021{col 54}{space 4}-.2614324{col 67}{space 3}-.0216068
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0807381{col 26}{space 2} .0432699{col 37}{space 1}    1.87{col 46}{space 3}0.062{col 54}{space 4}-.0040694{col 67}{space 3} .1655457
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8683646{col 26}{space 2} .0824388{col 37}{space 1}   10.53{col 46}{space 3}0.000{col 54}{space 4} .7067875{col 67}{space 3} 1.029942
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0204089{col 26}{space 2} .1089472{col 37}{space 1}   -0.19{col 46}{space 3}0.851{col 54}{space 4}-.2339415{col 67}{space 3} .1931237
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}  .027986{col 26}{space 2} .0802317{col 37}{space 1}    0.35{col 46}{space 3}0.727{col 54}{space 4}-.1292652{col 67}{space 3} .1852372
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.389245{col 26}{space 2} 4.736782{col 37}{space 1}    1.35{col 46}{space 3}0.177{col 54}{space 4}-2.894676{col 67}{space 3} 15.67317
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. vargranger
+
+{txt}{col 4}Granger causality Wald tests
+{res}{col 3}{text}{c TLC}{hline 19}{hline 19}{c TT}{hline 9}{hline 6}{hline 12}{c TRC}
+{col 3}{text}{c |}          Equation{col 23}          Excluded{col 42}{c |}   chi2 {col 52}   df{col 58}Prob > chi2{col 70}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}            demadv{col 23}           newpres{col 42}{c |}{result}{space 1} 18.972{col 52}    3{col 58}{space 2} 0.000{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}          newhouse{col 42}{c |}{result}{space 1} 3.8874{col 52}    3{col 58}{space 2} 0.274{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}        policymood{col 42}{c |}{result}{space 1} 1.8763{col 52}    3{col 58}{space 2} 0.598{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}               ALL{col 42}{c |}{result}{space 1} 23.504{col 52}    9{col 58}{space 2} 0.005{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newpres{col 23}            demadv{col 42}{c |}{result}{space 1} 2.7944{col 52}    3{col 58}{space 2} 0.424{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}          newhouse{col 42}{c |}{result}{space 1} 1.7093{col 52}    3{col 58}{space 2} 0.635{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}        policymood{col 42}{c |}{result}{space 1} 1.5257{col 52}    3{col 58}{space 2} 0.676{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}               ALL{col 42}{c |}{result}{space 1}  6.901{col 52}    9{col 58}{space 2} 0.647{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}          newhouse{col 23}            demadv{col 42}{c |}{result}{space 1} 7.8365{col 52}    3{col 58}{space 2} 0.050{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}           newpres{col 42}{c |}{result}{space 1} .57683{col 52}    3{col 58}{space 2} 0.902{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}        policymood{col 42}{c |}{result}{space 1} 2.7839{col 52}    3{col 58}{space 2} 0.426{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}               ALL{col 42}{c |}{result}{space 1} 13.459{col 52}    9{col 58}{space 2} 0.143{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}        policymood{col 23}            demadv{col 42}{c |}{result}{space 1} 4.3644{col 52}    3{col 58}{space 2} 0.225{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newpres{col 42}{c |}{result}{space 1} 1.2692{col 52}    3{col 58}{space 2} 0.736{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}          newhouse{col 42}{c |}{result}{space 1} 5.5526{col 52}    3{col 58}{space 2} 0.136{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}               ALL{col 42}{c |}{result}{space 1} 13.106{col 52}    9{col 58}{space 2} 0.158{col 70}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 19}{hline 19}{c BT}{hline 9}{hline 6}{hline 12}{c BRC}
+{res}{txt}
+{com}. var demadv newpres newhouse policymood, lags(1/4)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}5 - 146 {txt}{col 49}Number of obs{col 67}= {res}       142
+{txt}Log likelihood =  {res}-1299.908{txt}{col 38}{col 49}AIC{col 67}=  {res} 19.26631
+{txt}FPE{col 16}=  {res} 2750.177{txt}{col 49}HQIC{col 67}=  {res}  19.8415
+{txt}Det(Sigma_ml){col 16}=  {res} 1050.539{txt}{col 49}SBIC{col 67}=  {res} 20.68178
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}demadv          {col 18}{result}    17{col 26}{space 2} 1.52342{col 37}{space 1} 0.8167{col 47} 632.6664{col 58} 0.0000
+{col 1}{text}newpres         {col 18}{result}    17{col 26}{space 2} 5.23246{col 37}{space 1} 0.7889{col 47}  530.748{col 58} 0.0000
+{col 1}{text}newhouse        {col 18}{result}    17{col 26}{space 2}  3.3272{col 37}{space 1} 0.8711{col 47} 959.2135{col 58} 0.0000
+{col 1}{text}policymood      {col 18}{result}    17{col 26}{space 2} 1.74396{col 37}{space 1} 0.8164{col 47} 631.2861{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv       {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7573519{col 26}{space 2} .0912553{col 37}{space 1}    8.30{col 46}{space 3}0.000{col 54}{space 4} .5784948{col 67}{space 3}  .936209
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0538693{col 26}{space 2} .1154474{col 37}{space 1}    0.47{col 46}{space 3}0.641{col 54}{space 4}-.1724034{col 67}{space 3}  .280142
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1163026{col 26}{space 2} .1159581{col 37}{space 1}   -1.00{col 46}{space 3}0.316{col 54}{space 4}-.3435763{col 67}{space 3}  .110971
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0207901{col 26}{space 2} .0896162{col 37}{space 1}   -0.23{col 46}{space 3}0.817{col 54}{space 4}-.1964347{col 67}{space 3} .1548545
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0822643{col 26}{space 2} .0263464{col 37}{space 1}    3.12{col 46}{space 3}0.002{col 54}{space 4} .0306262{col 67}{space 3} .1339023
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0080934{col 26}{space 2}  .034635{col 37}{space 1}    0.23{col 46}{space 3}0.815{col 54}{space 4}  -.05979{col 67}{space 3} .0759767
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0157001{col 26}{space 2} .0338753{col 37}{space 1}   -0.46{col 46}{space 3}0.643{col 54}{space 4}-.0820944{col 67}{space 3} .0506942
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0206938{col 26}{space 2} .0269579{col 37}{space 1}   -0.77{col 46}{space 3}0.443{col 54}{space 4}-.0735304{col 67}{space 3} .0321427
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0047252{col 26}{space 2} .0386061{col 37}{space 1}    0.12{col 46}{space 3}0.903{col 54}{space 4}-.0709413{col 67}{space 3} .0803916
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0650859{col 26}{space 2} .0535935{col 37}{space 1}   -1.21{col 46}{space 3}0.225{col 54}{space 4}-.1701272{col 67}{space 3} .0399555
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0490333{col 26}{space 2} .0536797{col 37}{space 1}    0.91{col 46}{space 3}0.361{col 54}{space 4}-.0561769{col 67}{space 3} .1542436
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0095341{col 26}{space 2} .0376462{col 37}{space 1}   -0.25{col 46}{space 3}0.800{col 54}{space 4}-.0833192{col 67}{space 3}  .064251
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0053975{col 26}{space 2} .0717781{col 37}{space 1}   -0.08{col 46}{space 3}0.940{col 54}{space 4}  -.14608{col 67}{space 3}  .135285
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0877323{col 26}{space 2} .0948447{col 37}{space 1}    0.93{col 46}{space 3}0.355{col 54}{space 4}-.0981599{col 67}{space 3} .2736245
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0533349{col 26}{space 2} .0942689{col 37}{space 1}   -0.57{col 46}{space 3}0.572{col 54}{space 4}-.2380986{col 67}{space 3} .1314288
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0052054{col 26}{space 2} .0693117{col 37}{space 1}    0.08{col 46}{space 3}0.940{col 54}{space 4} -.130643{col 67}{space 3} .1410538
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 15.30982{col 26}{space 2} 4.405986{col 37}{space 1}    3.47{col 46}{space 3}0.001{col 54}{space 4} 6.674241{col 67}{space 3} 23.94539
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newpres      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2249312{col 26}{space 2} .3134338{col 37}{space 1}   -0.72{col 46}{space 3}0.473{col 54}{space 4}-.8392502{col 67}{space 3} .3893877
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .5410316{col 26}{space 2} .3965261{col 37}{space 1}    1.36{col 46}{space 3}0.172{col 54}{space 4}-.2361453{col 67}{space 3} 1.318208
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0684889{col 26}{space 2} .3982801{col 37}{space 1}    0.17{col 46}{space 3}0.863{col 54}{space 4}-.7121258{col 67}{space 3} .8491036
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0168213{col 26}{space 2} .3078041{col 37}{space 1}   -0.05{col 46}{space 3}0.956{col 54}{space 4}-.6201063{col 67}{space 3} .5864637
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9117106{col 26}{space 2} .0904918{col 37}{space 1}   10.08{col 46}{space 3}0.000{col 54}{space 4} .7343498{col 67}{space 3} 1.089071
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}   .05646{col 26}{space 2} .1189605{col 37}{space 1}    0.47{col 46}{space 3}0.635{col 54}{space 4}-.1766983{col 67}{space 3} .2896183
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1164867{col 26}{space 2}  .116351{col 37}{space 1}   -1.00{col 46}{space 3}0.317{col 54}{space 4}-.3445306{col 67}{space 3} .1115571
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.1229849{col 26}{space 2} .0925921{col 37}{space 1}   -1.33{col 46}{space 3}0.184{col 54}{space 4}-.3044622{col 67}{space 3} .0584923
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0085862{col 26}{space 2} .1325999{col 37}{space 1}   -0.06{col 46}{space 3}0.948{col 54}{space 4}-.2684772{col 67}{space 3} .2513048
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1272805{col 26}{space 2} .1840771{col 37}{space 1}   -0.69{col 46}{space 3}0.489{col 54}{space 4} -.488065{col 67}{space 3} .2335039
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0631763{col 26}{space 2} .1843732{col 37}{space 1}    0.34{col 46}{space 3}0.732{col 54}{space 4}-.2981885{col 67}{space 3} .4245411
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0928116{col 26}{space 2} .1293029{col 37}{space 1}    0.72{col 46}{space 3}0.473{col 54}{space 4}-.1606175{col 67}{space 3} .3462407
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.3092988{col 26}{space 2} .2465356{col 37}{space 1}   -1.25{col 46}{space 3}0.210{col 54}{space 4}-.7924997{col 67}{space 3}  .173902
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .3752787{col 26}{space 2} .3257622{col 37}{space 1}    1.15{col 46}{space 3}0.249{col 54}{space 4}-.2632036{col 67}{space 3} 1.013761
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0311436{col 26}{space 2} .3237847{col 37}{space 1}   -0.10{col 46}{space 3}0.923{col 54}{space 4}-.6657498{col 67}{space 3} .6034627
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.1140905{col 26}{space 2} .2380642{col 37}{space 1}   -0.48{col 46}{space 3}0.632{col 54}{space 4}-.5806877{col 67}{space 3} .3525068
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-14.86232{col 26}{space 2}  15.1332{col 37}{space 1}   -0.98{col 46}{space 3}0.326{col 54}{space 4}-44.52285{col 67}{space 3} 14.79821
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newhouse     {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2362645{col 26}{space 2} .1993052{col 37}{space 1}   -1.19{col 46}{space 3}0.236{col 54}{space 4}-.6268956{col 67}{space 3} .1543665
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.2421671{col 26}{space 2} .2521417{col 37}{space 1}   -0.96{col 46}{space 3}0.337{col 54}{space 4}-.7363556{col 67}{space 3} .2520215
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .3271453{col 26}{space 2}  .253257{col 37}{space 1}    1.29{col 46}{space 3}0.196{col 54}{space 4}-.1692293{col 67}{space 3}   .82352
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}  .136196{col 26}{space 2} .1957255{col 37}{space 1}    0.70{col 46}{space 3}0.487{col 54}{space 4}-.2474189{col 67}{space 3} .5198108
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0093589{col 26}{space 2} .0575416{col 37}{space 1}   -0.16{col 46}{space 3}0.871{col 54}{space 4}-.1221385{col 67}{space 3} .1034206
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0314944{col 26}{space 2} .0756442{col 37}{space 1}    0.42{col 46}{space 3}0.677{col 54}{space 4}-.1167655{col 67}{space 3} .1797543
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0141037{col 26}{space 2} .0739849{col 37}{space 1}    0.19{col 46}{space 3}0.849{col 54}{space 4}-.1309041{col 67}{space 3} .1591115
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0578368{col 26}{space 2} .0588772{col 37}{space 1}   -0.98{col 46}{space 3}0.326{col 54}{space 4} -.173234{col 67}{space 3} .0575603
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9770494{col 26}{space 2} .0843172{col 37}{space 1}   11.59{col 46}{space 3}0.000{col 54}{space 4} .8117908{col 67}{space 3} 1.142308
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0875111{col 26}{space 2} .1170503{col 37}{space 1}   -0.75{col 46}{space 3}0.455{col 54}{space 4}-.3169255{col 67}{space 3} .1419033
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0402808{col 26}{space 2} .1172386{col 37}{space 1}    0.34{col 46}{space 3}0.731{col 54}{space 4}-.1895026{col 67}{space 3} .2700642
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0207774{col 26}{space 2} .0822207{col 37}{space 1}   -0.25{col 46}{space 3}0.800{col 54}{space 4} -.181927{col 67}{space 3} .1403723
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  -.10745{col 26}{space 2} .1567662{col 37}{space 1}   -0.69{col 46}{space 3}0.493{col 54}{space 4}-.4147062{col 67}{space 3} .1998061
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .2291863{col 26}{space 2} .2071446{col 37}{space 1}    1.11{col 46}{space 3}0.269{col 54}{space 4}-.1768097{col 67}{space 3} .6351822
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1986462{col 26}{space 2} .2058871{col 37}{space 1}   -0.96{col 46}{space 3}0.335{col 54}{space 4}-.6021775{col 67}{space 3} .2048851
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0107238{col 26}{space 2} .1513795{col 37}{space 1}   -0.07{col 46}{space 3}0.944{col 54}{space 4}-.3074221{col 67}{space 3} .2859745
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}  6.42737{col 26}{space 2}  9.62285{col 37}{space 1}    0.67{col 46}{space 3}0.504{col 54}{space 4}-12.43307{col 67}{space 3} 25.28781
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}policymood   {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1705765{col 26}{space 2} .1044664{col 37}{space 1}    1.63{col 46}{space 3}0.103{col 54}{space 4}-.0341739{col 67}{space 3} .3753269
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0412504{col 26}{space 2} .1321608{col 37}{space 1}   -0.31{col 46}{space 3}0.755{col 54}{space 4}-.3002808{col 67}{space 3}   .21778
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0988924{col 26}{space 2} .1327454{col 37}{space 1}   -0.74{col 46}{space 3}0.456{col 54}{space 4}-.3590686{col 67}{space 3} .1612839
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} -.015292{col 26}{space 2} .1025901{col 37}{space 1}   -0.15{col 46}{space 3}0.882{col 54}{space 4}-.2163648{col 67}{space 3} .1857809
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0118658{col 26}{space 2} .0301606{col 37}{space 1}   -0.39{col 46}{space 3}0.694{col 54}{space 4}-.0709795{col 67}{space 3} .0472479
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0050973{col 26}{space 2} .0396491{col 37}{space 1}    0.13{col 46}{space 3}0.898{col 54}{space 4}-.0726136{col 67}{space 3} .0828082
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0293418{col 26}{space 2} .0387794{col 37}{space 1}   -0.76{col 46}{space 3}0.449{col 54}{space 4}-.1053481{col 67}{space 3} .0466644
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0117303{col 26}{space 2} .0308606{col 37}{space 1}    0.38{col 46}{space 3}0.704{col 54}{space 4}-.0487554{col 67}{space 3} .0722161
+{txt}{space 12} {c |}
+{space 4}newhouse {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0734418{col 26}{space 2} .0441951{col 37}{space 1}    1.66{col 46}{space 3}0.097{col 54}{space 4} -.013179{col 67}{space 3} .1600626
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1383426{col 26}{space 2} .0613523{col 37}{space 1}   -2.25{col 46}{space 3}0.024{col 54}{space 4}-.2585909{col 67}{space 3}-.0180944
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0298732{col 26}{space 2}  .061451{col 37}{space 1}   -0.49{col 46}{space 3}0.627{col 54}{space 4}-.1503149{col 67}{space 3} .0905684
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .1090262{col 26}{space 2} .0430962{col 37}{space 1}    2.53{col 46}{space 3}0.011{col 54}{space 4} .0245591{col 67}{space 3} .1934932
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8406028{col 26}{space 2} .0821695{col 37}{space 1}   10.23{col 46}{space 3}0.000{col 54}{space 4} .6795536{col 67}{space 3} 1.001652
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0138455{col 26}{space 2} .1085754{col 37}{space 1}    0.13{col 46}{space 3}0.899{col 54}{space 4}-.1989585{col 67}{space 3} .2266495
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0198844{col 26}{space 2} .1079163{col 37}{space 1}    0.18{col 46}{space 3}0.854{col 54}{space 4}-.1916277{col 67}{space 3} .2313965
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0139567{col 26}{space 2}  .079346{col 37}{space 1}   -0.18{col 46}{space 3}0.860{col 54}{space 4} -.169472{col 67}{space 3} .1415586
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 7.766266{col 26}{space 2} 5.043845{col 37}{space 1}    1.54{col 46}{space 3}0.124{col 54}{space 4}-2.119488{col 67}{space 3} 17.65202
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. vargranger
+
+{txt}{col 4}Granger causality Wald tests
+{res}{col 3}{text}{c TLC}{hline 19}{hline 19}{c TT}{hline 9}{hline 6}{hline 12}{c TRC}
+{col 3}{text}{c |}          Equation{col 23}          Excluded{col 42}{c |}   chi2 {col 52}   df{col 58}Prob > chi2{col 70}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}            demadv{col 23}           newpres{col 42}{c |}{result}{space 1} 21.285{col 52}    4{col 58}{space 2} 0.000{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}          newhouse{col 42}{c |}{result}{space 1} 3.2592{col 52}    4{col 58}{space 2} 0.515{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}        policymood{col 42}{c |}{result}{space 1}  1.959{col 52}    4{col 58}{space 2} 0.743{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}               ALL{col 42}{c |}{result}{space 1} 25.839{col 52}   12{col 58}{space 2} 0.011{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newpres{col 23}            demadv{col 42}{c |}{result}{space 1}  4.234{col 52}    4{col 58}{space 2} 0.375{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}          newhouse{col 42}{c |}{result}{space 1} 2.0363{col 52}    4{col 58}{space 2} 0.729{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}        policymood{col 42}{c |}{result}{space 1} 2.1965{col 52}    4{col 58}{space 2} 0.700{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}               ALL{col 42}{c |}{result}{space 1} 9.1448{col 52}   12{col 58}{space 2} 0.691{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}          newhouse{col 23}            demadv{col 42}{c |}{result}{space 1} 8.3821{col 52}    4{col 58}{space 2} 0.079{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}           newpres{col 42}{c |}{result}{space 1} 1.2541{col 52}    4{col 58}{space 2} 0.869{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}        policymood{col 42}{c |}{result}{space 1} 2.9376{col 52}    4{col 58}{space 2} 0.568{col 70}{text}{c |}
+{res}{col 3}{text}{c |}          newhouse{col 23}               ALL{col 42}{c |}{result}{space 1} 14.142{col 52}   12{col 58}{space 2} 0.292{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}        policymood{col 23}            demadv{col 42}{c |}{result}{space 1} 4.4152{col 52}    4{col 58}{space 2} 0.353{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newpres{col 42}{c |}{result}{space 1} 1.7005{col 52}    4{col 58}{space 2} 0.791{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}          newhouse{col 42}{c |}{result}{space 1} 12.683{col 52}    4{col 58}{space 2} 0.013{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}               ALL{col 42}{c |}{result}{space 1} 20.392{col 52}   12{col 58}{space 2} 0.060{col 70}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 19}{hline 19}{c BT}{hline 9}{hline 6}{hline 12}{c BRC}
+{res}{txt}
+{com}. 
+. // Robustness check for periods without divided Congress
+. varsoc demadv newpres newcong policymood
+
+{txt}{col 4}Selection-order criteria
+{col 4}Sample:  {res}33 - 146, but with gaps{txt}{col 49}Number of obs {col 68}= {res}       83
+{col 3}{text}{c TLC}{hline 4}{c TT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c TRC}
+{col 3}{text}{c |}lag{col 8}{c |}    LL  {col 18}   LR  {col 27}  df{col 32}   p  {col 39}   FPE {col 48}    AIC {col 58}   HQIC {col 68}   SBIC {col 79}{c |}
+{res}{col 3}{text}{c LT}{hline 4}{c +}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c RT}
+{col 3}{text}{c |}  0{col 8}{c |}{result}{space 1} -975.33{col 18}{col 27}{col 32}{col 39}  208316{col 48}{space 1} 23.5983{col 58}{space 1} 23.6451{col 68}{space 1} 23.7149{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  1{col 8}{c |}{result}{space 1}-740.848{col 18}{space 1} 468.96{col 26}*{col 27}  16{col 32} 0.000{col 39} 1077.89{col 47}*{col 48}{space 1} 18.3337{col 57}*{col 58}{space 1} 18.5678{col 67}*{col 68}{space 1} 18.9165{col 77}*{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  2{col 8}{c |}{result}{space 1}-734.573{col 18}{space 1}  12.55{col 27}  16{col 32} 0.705{col 39} 1366.39{col 48}{space 1}  18.568{col 58}{space 1} 18.9895{col 68}{space 1} 19.6171{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  3{col 8}{c |}{result}{space 1}-724.435{col 18}{space 1} 20.275{col 27}  16{col 32} 0.208{col 39} 1584.73{col 48}{space 1} 18.7093{col 58}{space 1} 19.3181{col 68}{space 1} 20.2247{col 79}{text}{c |}
+{res}{col 3}{text}{c |}  4{col 8}{c |}{result}{space 1} -717.26{col 18}{space 1}  14.35{col 27}  16{col 32} 0.573{col 39}  1986.1{col 48}{space 1} 18.9219{col 58}{space 1} 19.7181{col 68}{space 1} 20.9036{col 79}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 4}{c BT}{hline 9}{hline 8}{hline 1}{hline 5}{hline 7}{hline 8}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 9}{hline 1}{hline 1}{c BRC}
+{res}{txt}{space 3}Endogenous:  demadv newpres newcong policymood
+{space 3} Exogenous:  _cons
+
+{com}. var demadv newpres newcong policymood, lags(1)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}2 - 146, but with gaps{txt}{col 49}Number of obs{col 67}= {res}        95
+{txt}Log likelihood =  {res}-858.7427{txt}{col 38}{col 49}AIC{col 67}=  {res} 18.49985
+{txt}FPE{col 16}=  {res} 1272.485{txt}{col 49}HQIC{col 67}=  {res}  18.7171
+{txt}Det(Sigma_ml){col 16}=  {res} 834.8774{txt}{col 49}SBIC{col 67}=  {res}  19.0375
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}demadv          {col 18}{result}     5{col 26}{space 2} 1.46622{col 37}{space 1} 0.8152{col 47} 419.1577{col 58} 0.0000
+{col 1}{text}newpres         {col 18}{result}     5{col 26}{space 2} 5.33124{col 37}{space 1} 0.7749{col 47} 327.0268{col 58} 0.0000
+{col 1}{text}newcong         {col 18}{result}     5{col 26}{space 2} 2.87965{col 37}{space 1} 0.8423{col 47} 507.2989{col 58} 0.0000
+{col 1}{text}policymood      {col 18}{result}     5{col 26}{space 2} 1.77531{col 37}{space 1} 0.8184{col 47} 428.2583{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv       {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7254597{col 26}{space 2}  .075197{col 37}{space 1}    9.65{col 46}{space 3}0.000{col 54}{space 4} .5780762{col 67}{space 3} .8728431
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0582169{col 26}{space 2} .0212679{col 37}{space 1}    2.74{col 46}{space 3}0.006{col 54}{space 4} .0165326{col 67}{space 3} .0999012
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} -.017491{col 26}{space 2} .0259392{col 37}{space 1}   -0.67{col 46}{space 3}0.500{col 54}{space 4} -.068331{col 67}{space 3}  .033349
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0503789{col 26}{space 2} .0396566{col 37}{space 1}    1.27{col 46}{space 3}0.204{col 54}{space 4}-.0273466{col 67}{space 3} .1281044
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 11.54035{col 26}{space 2} 4.307937{col 37}{space 1}    2.68{col 46}{space 3}0.007{col 54}{space 4} 3.096954{col 67}{space 3} 19.98375
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newpres      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} -.168952{col 26}{space 2} .2734189{col 37}{space 1}   -0.62{col 46}{space 3}0.537{col 54}{space 4}-.7048432{col 67}{space 3} .3669393
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .928065{col 26}{space 2} .0773308{col 37}{space 1}   12.00{col 46}{space 3}0.000{col 54}{space 4} .7764994{col 67}{space 3} 1.079631
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0022919{col 26}{space 2}  .094316{col 37}{space 1}    0.02{col 46}{space 3}0.981{col 54}{space 4}-.1825641{col 67}{space 3} .1871478
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1433612{col 26}{space 2} .1441928{col 37}{space 1}    0.99{col 46}{space 3}0.320{col 54}{space 4}-.1392516{col 67}{space 3} .4259739
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} .0904958{col 26}{space 2} 15.66381{col 37}{space 1}    0.01{col 46}{space 3}0.995{col 54}{space 4}   -30.61{col 67}{space 3} 30.79099
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newcong      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0781342{col 26}{space 2}  .147686{col 37}{space 1}   -0.53{col 46}{space 3}0.597{col 54}{space 4}-.3675935{col 67}{space 3} .2113251
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0005564{col 26}{space 2} .0417699{col 37}{space 1}    0.01{col 46}{space 3}0.989{col 54}{space 4}-.0813111{col 67}{space 3} .0824239
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9075048{col 26}{space 2} .0509444{col 37}{space 1}   17.81{col 46}{space 3}0.000{col 54}{space 4} .8076557{col 67}{space 3} 1.007354
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0066004{col 26}{space 2} .0778851{col 37}{space 1}   -0.08{col 46}{space 3}0.932{col 54}{space 4}-.1592524{col 67}{space 3} .1460516
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 4.391931{col 26}{space 2} 8.460736{col 37}{space 1}    0.52{col 46}{space 3}0.604{col 54}{space 4}-12.19081{col 67}{space 3} 20.97467
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}policymood   {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0107461{col 26}{space 2} .0910486{col 37}{space 1}    0.12{col 46}{space 3}0.906{col 54}{space 4}-.1677059{col 67}{space 3}  .189198
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0116173{col 26}{space 2} .0257512{col 37}{space 1}    0.45{col 46}{space 3}0.652{col 54}{space 4}-.0388542{col 67}{space 3} .0620887
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0655068{col 26}{space 2} .0314073{col 37}{space 1}    2.09{col 46}{space 3}0.037{col 54}{space 4} .0039497{col 67}{space 3} .1270639
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8707269{col 26}{space 2} .0480163{col 37}{space 1}   18.13{col 46}{space 3}0.000{col 54}{space 4} .7766168{col 67}{space 3} .9648371
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 7.315012{col 26}{space 2} 5.216053{col 37}{space 1}    1.40{col 46}{space 3}0.161{col 54}{space 4}-2.908264{col 67}{space 3} 17.53829
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. 
+. // Different lag lengths as noted in appendix
+. var demadv newpres newcong policymood, lags(1/2)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}3 - 146, but with gaps{txt}{col 49}Number of obs{col 67}= {res}        91
+{txt}Log likelihood =  {res}-801.6144{txt}{col 38}{col 49}AIC{col 67}=  {res} 18.40911
+{txt}FPE{col 16}=  {res} 1164.671{txt}{col 49}HQIC{col 67}=  {res} 18.80985
+{txt}Det(Sigma_ml){col 16}=  {res} 526.5732{txt}{col 49}SBIC{col 67}=  {res} 19.40241
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}demadv          {col 18}{result}     9{col 26}{space 2} 1.50608{col 37}{space 1} 0.8208{col 47} 416.8076{col 58} 0.0000
+{col 1}{text}newpres         {col 18}{result}     9{col 26}{space 2} 5.25574{col 37}{space 1} 0.7903{col 47} 343.0378{col 58} 0.0000
+{col 1}{text}newcong         {col 18}{result}     9{col 26}{space 2} 2.68641{col 37}{space 1} 0.8563{col 47} 542.2624{col 58} 0.0000
+{col 1}{text}policymood      {col 18}{result}     9{col 26}{space 2} 1.72823{col 37}{space 1} 0.8273{col 47} 435.8707{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv       {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7598214{col 26}{space 2} .1228795{col 37}{space 1}    6.18{col 46}{space 3}0.000{col 54}{space 4} .5189819{col 67}{space 3} 1.000661
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0545503{col 26}{space 2} .1181539{col 37}{space 1}   -0.46{col 46}{space 3}0.644{col 54}{space 4}-.2861277{col 67}{space 3}  .177027
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0654803{col 26}{space 2} .0353877{col 37}{space 1}    1.85{col 46}{space 3}0.064{col 54}{space 4}-.0038784{col 67}{space 3}  .134839
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0081826{col 26}{space 2} .0378782{col 37}{space 1}   -0.22{col 46}{space 3}0.829{col 54}{space 4}-.0824226{col 67}{space 3} .0660574
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0369429{col 26}{space 2} .0546833{col 37}{space 1}    0.68{col 46}{space 3}0.499{col 54}{space 4}-.0702344{col 67}{space 3} .1441202
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0718736{col 26}{space 2}  .055195{col 37}{space 1}   -1.30{col 46}{space 3}0.193{col 54}{space 4}-.1800538{col 67}{space 3} .0363067
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0125972{col 26}{space 2} .0892607{col 37}{space 1}    0.14{col 46}{space 3}0.888{col 54}{space 4}-.1623506{col 67}{space 3}  .187545
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0626412{col 26}{space 2} .0863126{col 37}{space 1}    0.73{col 46}{space 3}0.468{col 54}{space 4}-.1065283{col 67}{space 3} .2318106
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 11.06063{col 26}{space 2}  4.71548{col 37}{space 1}    2.35{col 46}{space 3}0.019{col 54}{space 4} 1.818459{col 67}{space 3}  20.3028
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newpres      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.6505452{col 26}{space 2} .4288117{col 37}{space 1}   -1.52{col 46}{space 3}0.129{col 54}{space 4}-1.491001{col 67}{space 3} .1899103
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .6844889{col 26}{space 2} .4123206{col 37}{space 1}    1.66{col 46}{space 3}0.097{col 54}{space 4}-.1236446{col 67}{space 3} 1.492622
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} 1.051327{col 26}{space 2} .1234923{col 37}{space 1}    8.51{col 46}{space 3}0.000{col 54}{space 4} .8092864{col 67}{space 3} 1.293367
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1805671{col 26}{space 2} .1321834{col 37}{space 1}   -1.37{col 46}{space 3}0.172{col 54}{space 4}-.4396418{col 67}{space 3} .0785076
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1345013{col 26}{space 2} .1908278{col 37}{space 1}    0.70{col 46}{space 3}0.481{col 54}{space 4}-.2395144{col 67}{space 3}  .508517
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1515922{col 26}{space 2} .1926136{col 37}{space 1}   -0.79{col 46}{space 3}0.431{col 54}{space 4}-.5291079{col 67}{space 3} .2259235
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0003691{col 26}{space 2} .3114925{col 37}{space 1}   -0.00{col 46}{space 3}0.999{col 54}{space 4}-.6108831{col 67}{space 3} .6101449
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .118033{col 26}{space 2} .3012042{col 37}{space 1}    0.39{col 46}{space 3}0.695{col 54}{space 4}-.4723164{col 67}{space 3} .7083824
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-8.972629{col 26}{space 2} 16.45557{col 37}{space 1}   -0.55{col 46}{space 3}0.586{col 54}{space 4}-41.22496{col 67}{space 3}  23.2797
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newcong      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}   .05355{col 26}{space 2} .2191818{col 37}{space 1}    0.24{col 46}{space 3}0.807{col 54}{space 4}-.3760385{col 67}{space 3} .4831386
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} -.201409{col 26}{space 2} .2107526{col 37}{space 1}   -0.96{col 46}{space 3}0.339{col 54}{space 4}-.6144766{col 67}{space 3} .2116585
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.1166631{col 26}{space 2} .0631216{col 37}{space 1}   -1.85{col 46}{space 3}0.065{col 54}{space 4}-.2403791{col 67}{space 3} .0070529
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .1330703{col 26}{space 2} .0675639{col 37}{space 1}    1.97{col 46}{space 3}0.049{col 54}{space 4} .0006475{col 67}{space 3} .2654932
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8024966{col 26}{space 2} .0975393{col 37}{space 1}    8.23{col 46}{space 3}0.000{col 54}{space 4} .6113231{col 67}{space 3} .9936702
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0776441{col 26}{space 2} .0984521{col 37}{space 1}    0.79{col 46}{space 3}0.430{col 54}{space 4}-.1153184{col 67}{space 3} .2706067
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0364406{col 26}{space 2} .1592156{col 37}{space 1}    0.23{col 46}{space 3}0.819{col 54}{space 4}-.2756162{col 67}{space 3} .3484973
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0523728{col 26}{space 2} .1539568{col 37}{space 1}   -0.34{col 46}{space 3}0.734{col 54}{space 4}-.3541226{col 67}{space 3} .2493771
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 8.571725{col 26}{space 2} 8.411065{col 37}{space 1}    1.02{col 46}{space 3}0.308{col 54}{space 4}-7.913659{col 67}{space 3} 25.05711
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}policymood   {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1255561{col 26}{space 2} .1410046{col 37}{space 1}    0.89{col 46}{space 3}0.373{col 54}{space 4}-.1508078{col 67}{space 3} .4019201
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1017889{col 26}{space 2} .1355819{col 37}{space 1}   -0.75{col 46}{space 3}0.453{col 54}{space 4}-.3675245{col 67}{space 3} .1639467
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0153397{col 26}{space 2} .0406075{col 37}{space 1}    0.38{col 46}{space 3}0.706{col 54}{space 4}-.0642496{col 67}{space 3}  .094929
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0086597{col 26}{space 2} .0434654{col 37}{space 1}   -0.20{col 46}{space 3}0.842{col 54}{space 4}-.0938503{col 67}{space 3} .0765309
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0327606{col 26}{space 2} .0627492{col 37}{space 1}    0.52{col 46}{space 3}0.602{col 54}{space 4}-.0902256{col 67}{space 3} .1557468
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0236583{col 26}{space 2} .0633364{col 37}{space 1}    0.37{col 46}{space 3}0.709{col 54}{space 4}-.1004788{col 67}{space 3} .1477954
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7755137{col 26}{space 2} .1024269{col 37}{space 1}    7.57{col 46}{space 3}0.000{col 54}{space 4} .5747606{col 67}{space 3} .9762668
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0927671{col 26}{space 2} .0990439{col 37}{space 1}    0.94{col 46}{space 3}0.349{col 54}{space 4}-.1013554{col 67}{space 3} .2868895
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 6.686955{col 26}{space 2} 5.411026{col 37}{space 1}    1.24{col 46}{space 3}0.217{col 54}{space 4}-3.918462{col 67}{space 3} 17.29237
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. vargranger
+
+{txt}{col 4}Granger causality Wald tests
+{res}{col 3}{text}{c TLC}{hline 19}{hline 19}{c TT}{hline 9}{hline 6}{hline 12}{c TRC}
+{col 3}{text}{c |}          Equation{col 23}          Excluded{col 42}{c |}   chi2 {col 52}   df{col 58}Prob > chi2{col 70}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}            demadv{col 23}           newpres{col 42}{c |}{result}{space 1} 7.3355{col 52}    2{col 58}{space 2} 0.026{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}           newcong{col 42}{c |}{result}{space 1} 2.4849{col 52}    2{col 58}{space 2} 0.289{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}        policymood{col 42}{c |}{result}{space 1} 3.2493{col 52}    2{col 58}{space 2} 0.197{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}               ALL{col 42}{c |}{result}{space 1} 11.215{col 52}    6{col 58}{space 2} 0.082{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newpres{col 23}            demadv{col 42}{c |}{result}{space 1} 2.9249{col 52}    2{col 58}{space 2} 0.232{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}           newcong{col 42}{c |}{result}{space 1} .62195{col 52}    2{col 58}{space 2} 0.733{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}        policymood{col 42}{c |}{result}{space 1} .68259{col 52}    2{col 58}{space 2} 0.711{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}               ALL{col 42}{c |}{result}{space 1} 4.1182{col 52}    6{col 58}{space 2} 0.661{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newcong{col 23}            demadv{col 42}{c |}{result}{space 1} 1.4238{col 52}    2{col 58}{space 2} 0.491{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}           newpres{col 42}{c |}{result}{space 1} 4.1225{col 52}    2{col 58}{space 2} 0.127{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}        policymood{col 42}{c |}{result}{space 1} .13814{col 52}    2{col 58}{space 2} 0.933{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}               ALL{col 42}{c |}{result}{space 1} 5.1775{col 52}    6{col 58}{space 2} 0.521{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}        policymood{col 23}            demadv{col 42}{c |}{result}{space 1} .80857{col 52}    2{col 58}{space 2} 0.667{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newpres{col 42}{c |}{result}{space 1} .16662{col 52}    2{col 58}{space 2} 0.920{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newcong{col 42}{c |}{result}{space 1} 2.9381{col 52}    2{col 58}{space 2} 0.230{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}               ALL{col 42}{c |}{result}{space 1} 4.7514{col 52}    6{col 58}{space 2} 0.576{col 70}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 19}{hline 19}{c BT}{hline 9}{hline 6}{hline 12}{c BRC}
+{res}{txt}
+{com}. var demadv newpres newcong policymood, lags(1/3)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}4 - 146, but with gaps{txt}{col 49}Number of obs{col 67}= {res}        87
+{txt}Log likelihood =  {res}-756.5698{txt}{col 38}{col 49}AIC{col 67}=  {res} 18.58781
+{txt}FPE{col 16}=  {res} 1401.531{txt}{col 49}HQIC{col 67}=  {res} 19.18129
+{txt}Det(Sigma_ml){col 16}=  {res} 420.2711{txt}{col 49}SBIC{col 67}=  {res} 20.06169
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}demadv          {col 18}{result}    13{col 26}{space 2} 1.48887{col 37}{space 1} 0.8415{col 47} 461.8397{col 58} 0.0000
+{col 1}{text}newpres         {col 18}{result}    13{col 26}{space 2} 5.11663{col 37}{space 1} 0.8121{col 47} 376.0006{col 58} 0.0000
+{col 1}{text}newcong         {col 18}{result}    13{col 26}{space 2} 2.69346{col 37}{space 1} 0.8582{col 47}  526.374{col 58} 0.0000
+{col 1}{text}policymood      {col 18}{result}    13{col 26}{space 2} 1.73935{col 37}{space 1} 0.8313{col 47} 428.6887{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv       {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7570673{col 26}{space 2} .1257693{col 37}{space 1}    6.02{col 46}{space 3}0.000{col 54}{space 4} .5105641{col 67}{space 3} 1.003571
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0503437{col 26}{space 2} .1627881{col 37}{space 1}    0.31{col 46}{space 3}0.757{col 54}{space 4}-.2687151{col 67}{space 3} .3694025
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0256703{col 26}{space 2} .1219736{col 37}{space 1}   -0.21{col 46}{space 3}0.833{col 54}{space 4}-.2647342{col 67}{space 3} .2133936
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}  .081362{col 26}{space 2} .0385782{col 37}{space 1}    2.11{col 46}{space 3}0.035{col 54}{space 4} .0057502{col 67}{space 3} .1569738
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0274332{col 26}{space 2} .0491621{col 37}{space 1}    0.56{col 46}{space 3}0.577{col 54}{space 4}-.0689227{col 67}{space 3}  .123789
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0710185{col 26}{space 2} .0384222{col 37}{space 1}   -1.85{col 46}{space 3}0.065{col 54}{space 4}-.1463247{col 67}{space 3} .0042878
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0730038{col 26}{space 2} .0599918{col 37}{space 1}    1.22{col 46}{space 3}0.224{col 54}{space 4}-.0445779{col 67}{space 3} .1905856
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1069569{col 26}{space 2} .0721108{col 37}{space 1}   -1.48{col 46}{space 3}0.138{col 54}{space 4}-.2482915{col 67}{space 3} .0343777
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0133606{col 26}{space 2} .0546621{col 37}{space 1}    0.24{col 46}{space 3}0.807{col 54}{space 4}-.0937752{col 67}{space 3} .1204964
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0600004{col 26}{space 2} .0924312{col 37}{space 1}   -0.65{col 46}{space 3}0.516{col 54}{space 4}-.2411622{col 67}{space 3} .1211614
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .1728739{col 26}{space 2} .1117066{col 37}{space 1}    1.55{col 46}{space 3}0.122{col 54}{space 4} -.046067{col 67}{space 3} .3918148
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0760662{col 26}{space 2} .0858648{col 37}{space 1}   -0.89{col 46}{space 3}0.376{col 54}{space 4} -.244358{col 67}{space 3} .0922257
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 9.335656{col 26}{space 2} 5.031267{col 37}{space 1}    1.86{col 46}{space 3}0.064{col 54}{space 4}-.5254469{col 67}{space 3} 19.19676
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newpres      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.5911421{col 26}{space 2} .4322179{col 37}{space 1}   -1.37{col 46}{space 3}0.171{col 54}{space 4}-1.438274{col 67}{space 3} .2559895
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} 1.121673{col 26}{space 2} .5594365{col 37}{space 1}    2.01{col 46}{space 3}0.045{col 54}{space 4} .0251975{col 67}{space 3} 2.218148
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1471449{col 26}{space 2} .4191738{col 37}{space 1}   -0.35{col 46}{space 3}0.726{col 54}{space 4}-.9687105{col 67}{space 3} .6744206
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} 1.090328{col 26}{space 2} .1325775{col 37}{space 1}    8.22{col 46}{space 3}0.000{col 54}{space 4} .8304804{col 67}{space 3} 1.350175
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0027147{col 26}{space 2}   .16895{col 37}{space 1}   -0.02{col 46}{space 3}0.987{col 54}{space 4}-.3338507{col 67}{space 3} .3284212
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} -.308775{col 26}{space 2} .1320416{col 37}{space 1}   -2.34{col 46}{space 3}0.019{col 54}{space 4}-.5675719{col 67}{space 3}-.0499782
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .2816427{col 26}{space 2} .2061674{col 37}{space 1}    1.37{col 46}{space 3}0.172{col 54}{space 4} -.122438{col 67}{space 3} .6857233
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.4256369{col 26}{space 2} .2478157{col 37}{space 1}   -1.72{col 46}{space 3}0.086{col 54}{space 4}-.9113467{col 67}{space 3} .0600729
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .2275381{col 26}{space 2} .1878515{col 37}{space 1}    1.21{col 46}{space 3}0.226{col 54}{space 4}-.1406442{col 67}{space 3} .5957203
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2086699{col 26}{space 2} .3176484{col 37}{space 1}   -0.66{col 46}{space 3}0.511{col 54}{space 4}-.8312494{col 67}{space 3} .4139095
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .2365539{col 26}{space 2} .3838902{col 37}{space 1}    0.62{col 46}{space 3}0.538{col 54}{space 4}-.5158572{col 67}{space 3} .9889649
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0689683{col 26}{space 2} .2950823{col 37}{space 1}   -0.23{col 46}{space 3}0.815{col 54}{space 4} -.647319{col 67}{space 3} .5093825
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-17.79266{col 26}{space 2} 17.29042{col 37}{space 1}   -1.03{col 46}{space 3}0.303{col 54}{space 4}-51.68127{col 67}{space 3} 16.09595
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newcong      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0244911{col 26}{space 2} .2275248{col 37}{space 1}   -0.11{col 46}{space 3}0.914{col 54}{space 4}-.4704316{col 67}{space 3} .4214493
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0692979{col 26}{space 2} .2944942{col 37}{space 1}   -0.24{col 46}{space 3}0.814{col 54}{space 4} -.646496{col 67}{space 3} .5079002
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1306015{col 26}{space 2} .2206582{col 37}{space 1}   -0.59{col 46}{space 3}0.554{col 54}{space 4}-.5630837{col 67}{space 3} .3018807
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0528267{col 26}{space 2} .0697904{col 37}{space 1}   -0.76{col 46}{space 3}0.449{col 54}{space 4}-.1896135{col 67}{space 3}   .08396
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0383631{col 26}{space 2} .0889374{col 37}{space 1}    0.43{col 46}{space 3}0.666{col 54}{space 4}-.1359509{col 67}{space 3} .2126772
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0755055{col 26}{space 2} .0695083{col 37}{space 1}    1.09{col 46}{space 3}0.277{col 54}{space 4}-.0607283{col 67}{space 3} .2117394
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .8991998{col 26}{space 2}  .108529{col 37}{space 1}    8.29{col 46}{space 3}0.000{col 54}{space 4} .6864868{col 67}{space 3} 1.111913
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1039071{col 26}{space 2} .1304532{col 37}{space 1}   -0.80{col 46}{space 3}0.426{col 54}{space 4}-.3595906{col 67}{space 3} .1517765
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .1253967{col 26}{space 2} .0988874{col 37}{space 1}    1.27{col 46}{space 3}0.205{col 54}{space 4} -.068419{col 67}{space 3} .3192123
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0141329{col 26}{space 2}  .167214{col 37}{space 1}   -0.08{col 46}{space 3}0.933{col 54}{space 4}-.3418663{col 67}{space 3} .3136006
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0239518{col 26}{space 2} .2020845{col 37}{space 1}    0.12{col 46}{space 3}0.906{col 54}{space 4}-.3721265{col 67}{space 3} .4200302
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0163948{col 26}{space 2} .1553349{col 37}{space 1}   -0.11{col 46}{space 3}0.916{col 54}{space 4}-.3208457{col 67}{space 3} .2880561
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 12.03879{col 26}{space 2} 9.101891{col 37}{space 1}    1.32{col 46}{space 3}0.186{col 54}{space 4}-5.800585{col 67}{space 3} 29.87817
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}policymood   {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1225974{col 26}{space 2} .1469284{col 37}{space 1}    0.83{col 46}{space 3}0.404{col 54}{space 4}-.1653771{col 67}{space 3} .4105718
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0580608{col 26}{space 2} .1901752{col 37}{space 1}   -0.31{col 46}{space 3}0.760{col 54}{space 4}-.4307974{col 67}{space 3} .3146758
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0231488{col 26}{space 2} .1424942{col 37}{space 1}    0.16{col 46}{space 3}0.871{col 54}{space 4}-.2561347{col 67}{space 3} .3024324
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0283088{col 26}{space 2} .0450685{col 37}{space 1}    0.63{col 46}{space 3}0.530{col 54}{space 4}-.0600239{col 67}{space 3} .1166414
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .009291{col 26}{space 2}  .057433{col 37}{space 1}    0.16{col 46}{space 3}0.871{col 54}{space 4}-.1032755{col 67}{space 3} .1218576
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0446956{col 26}{space 2} .0448863{col 37}{space 1}   -1.00{col 46}{space 3}0.319{col 54}{space 4}-.1326712{col 67}{space 3} .0432799
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0457466{col 26}{space 2} .0700847{col 37}{space 1}    0.65{col 46}{space 3}0.514{col 54}{space 4}-.0916168{col 67}{space 3} .1831101
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0852675{col 26}{space 2} .0842426{col 37}{space 1}   -1.01{col 46}{space 3}0.311{col 54}{space 4}-.2503799{col 67}{space 3}  .079845
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .1259594{col 26}{space 2} .0638584{col 37}{space 1}    1.97{col 46}{space 3}0.049{col 54}{space 4} .0007993{col 67}{space 3} .2511195
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7806843{col 26}{space 2} .1079816{col 37}{space 1}    7.23{col 46}{space 3}0.000{col 54}{space 4} .5690442{col 67}{space 3} .9923243
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0432371{col 26}{space 2} .1304999{col 37}{space 1}    0.33{col 46}{space 3}0.740{col 54}{space 4} -.212538{col 67}{space 3} .2990122
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0329465{col 26}{space 2} .1003105{col 37}{space 1}    0.33{col 46}{space 3}0.743{col 54}{space 4}-.1636584{col 67}{space 3} .2295514
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 3.961645{col 26}{space 2} 5.877718{col 37}{space 1}    0.67{col 46}{space 3}0.500{col 54}{space 4} -7.55847{col 67}{space 3} 15.48176
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. vargranger
+
+{txt}{col 4}Granger causality Wald tests
+{res}{col 3}{text}{c TLC}{hline 19}{hline 19}{c TT}{hline 9}{hline 6}{hline 12}{c TRC}
+{col 3}{text}{c |}          Equation{col 23}          Excluded{col 42}{c |}   chi2 {col 52}   df{col 58}Prob > chi2{col 70}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}            demadv{col 23}           newpres{col 42}{c |}{result}{space 1} 12.142{col 52}    3{col 58}{space 2} 0.007{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}           newcong{col 42}{c |}{result}{space 1} 3.0914{col 52}    3{col 58}{space 2} 0.378{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}        policymood{col 42}{c |}{result}{space 1} 3.0194{col 52}    3{col 58}{space 2} 0.389{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}               ALL{col 42}{c |}{result}{space 1} 18.103{col 52}    9{col 58}{space 2} 0.034{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newpres{col 23}            demadv{col 42}{c |}{result}{space 1} 6.3699{col 52}    3{col 58}{space 2} 0.095{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}           newcong{col 42}{c |}{result}{space 1} 3.4529{col 52}    3{col 58}{space 2} 0.327{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}        policymood{col 42}{c |}{result}{space 1} .52301{col 52}    3{col 58}{space 2} 0.914{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}               ALL{col 42}{c |}{result}{space 1} 9.4561{col 52}    9{col 58}{space 2} 0.396{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newcong{col 23}            demadv{col 42}{c |}{result}{space 1} 1.9514{col 52}    3{col 58}{space 2} 0.583{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}           newpres{col 42}{c |}{result}{space 1} 3.3261{col 52}    3{col 58}{space 2} 0.344{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}        policymood{col 42}{c |}{result}{space 1} .02145{col 52}    3{col 58}{space 2} 0.999{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}               ALL{col 42}{c |}{result}{space 1} 3.7125{col 52}    9{col 58}{space 2} 0.929{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}        policymood{col 23}            demadv{col 42}{c |}{result}{space 1} .93498{col 52}    3{col 58}{space 2} 0.817{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newpres{col 42}{c |}{result}{space 1} 1.5567{col 52}    3{col 58}{space 2} 0.669{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newcong{col 42}{c |}{result}{space 1} 7.3581{col 52}    3{col 58}{space 2} 0.061{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}               ALL{col 42}{c |}{result}{space 1} 10.824{col 52}    9{col 58}{space 2} 0.288{col 70}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 19}{hline 19}{c BT}{hline 9}{hline 6}{hline 12}{c BRC}
+{res}{txt}
+{com}. var demadv newpres newcong policymood, lags(1/4)
+{res}
+{txt}Vector autoregression
+
+{col 1}Sample:  {res}33 - 146, but with gaps{txt}{col 49}Number of obs{col 67}= {res}        83
+{txt}Log likelihood =  {res}  -717.26{txt}{col 38}{col 49}AIC{col 67}=  {res} 18.92193
+{txt}FPE{col 16}=  {res} 1986.097{txt}{col 49}HQIC{col 67}=  {res} 19.71806
+{txt}Det(Sigma_ml){col 16}=  {res} 376.8567{txt}{col 49}SBIC{col 67}=  {res} 20.90363
+
+{col 1}{text}Equation        {col 18}  Parms{col 26}     RMSE {col 37}   R-sq  {col 47}   chi2   {col 58} P>chi2
+{res}{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{col 1}{text}demadv          {col 18}{result}    17{col 26}{space 2} 1.53028{col 37}{space 1} 0.8496{col 47} 468.8982{col 58} 0.0000
+{col 1}{text}newpres         {col 18}{result}    17{col 26}{space 2}  5.3666{col 37}{space 1} 0.8053{col 47} 343.2168{col 58} 0.0000
+{col 1}{text}newcong         {col 18}{result}    17{col 26}{space 2} 2.79277{col 37}{space 1} 0.8507{col 47}  472.935{col 58} 0.0000
+{col 1}{text}policymood      {col 18}{result}    17{col 26}{space 2} 1.72774{col 37}{space 1} 0.8400{col 47} 435.6162{col 58} 0.0000
+{col 1}{text}{hline 17}{hline 8}{hline 11}{hline 10}{hline 11}{hline 7}
+{res}
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      z{col 46}   P>|z|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}demadv       {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .7493188{col 26}{space 2} .1294879{col 37}{space 1}    5.79{col 46}{space 3}0.000{col 54}{space 4} .4955272{col 67}{space 3}  1.00311
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0421807{col 26}{space 2} .1678516{col 37}{space 1}    0.25{col 46}{space 3}0.802{col 54}{space 4}-.2868023{col 67}{space 3} .3711637
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0907057{col 26}{space 2} .1711912{col 37}{space 1}   -0.53{col 46}{space 3}0.596{col 54}{space 4}-.4262343{col 67}{space 3} .2448229
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0980223{col 26}{space 2} .1232369{col 37}{space 1}    0.80{col 46}{space 3}0.426{col 54}{space 4}-.1435175{col 67}{space 3} .3395621
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0767083{col 26}{space 2} .0403217{col 37}{space 1}    1.90{col 46}{space 3}0.057{col 54}{space 4}-.0023208{col 67}{space 3} .1557374
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  .052782{col 26}{space 2}  .054642{col 37}{space 1}    0.97{col 46}{space 3}0.334{col 54}{space 4}-.0543143{col 67}{space 3} .1598783
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0740348{col 26}{space 2} .0509596{col 37}{space 1}   -1.45{col 46}{space 3}0.146{col 54}{space 4}-.1739138{col 67}{space 3} .0258442
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0098373{col 26}{space 2} .0407997{col 37}{space 1}   -0.24{col 46}{space 3}0.809{col 54}{space 4}-.0898034{col 67}{space 3} .0701287
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0597786{col 26}{space 2} .0633023{col 37}{space 1}    0.94{col 46}{space 3}0.345{col 54}{space 4}-.0642915{col 67}{space 3} .1838488
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0839168{col 26}{space 2} .0842586{col 37}{space 1}   -1.00{col 46}{space 3}0.319{col 54}{space 4}-.2490606{col 67}{space 3} .0812271
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0329129{col 26}{space 2} .0755235{col 37}{space 1}   -0.44{col 46}{space 3}0.663{col 54}{space 4}-.1809362{col 67}{space 3} .1151104
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0638955{col 26}{space 2} .0574888{col 37}{space 1}    1.11{col 46}{space 3}0.266{col 54}{space 4}-.0487805{col 67}{space 3} .1765716
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0927292{col 26}{space 2} .0957124{col 37}{space 1}   -0.97{col 46}{space 3}0.333{col 54}{space 4}-.2803222{col 67}{space 3} .0948637
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .1882647{col 26}{space 2} .1200007{col 37}{space 1}    1.57{col 46}{space 3}0.117{col 54}{space 4}-.0469325{col 67}{space 3} .4234618
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0672725{col 26}{space 2} .1136926{col 37}{space 1}   -0.59{col 46}{space 3}0.554{col 54}{space 4}-.2901058{col 67}{space 3} .1555609
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0004949{col 26}{space 2}  .086448{col 37}{space 1}   -0.01{col 46}{space 3}0.995{col 54}{space 4}-.1699299{col 67}{space 3} .1689401
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 8.920127{col 26}{space 2} 5.424863{col 37}{space 1}    1.64{col 46}{space 3}0.100{col 54}{space 4}-1.712408{col 67}{space 3} 19.55266
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newpres      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.5701426{col 26}{space 2} .4541047{col 37}{space 1}   -1.26{col 46}{space 3}0.209{col 54}{space 4}-1.460171{col 67}{space 3} .3198863
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}  1.27019{col 26}{space 2} .5886434{col 37}{space 1}    2.16{col 46}{space 3}0.031{col 54}{space 4} .1164705{col 67}{space 3}  2.42391
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.4332008{col 26}{space 2} .6003553{col 37}{space 1}   -0.72{col 46}{space 3}0.471{col 54}{space 4}-1.609876{col 67}{space 3}  .743474
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .2567788{col 26}{space 2} .4321828{col 37}{space 1}    0.59{col 46}{space 3}0.552{col 54}{space 4} -.590284{col 67}{space 3} 1.103842
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} 1.090139{col 26}{space 2} .1414054{col 37}{space 1}    7.71{col 46}{space 3}0.000{col 54}{space 4} .8129894{col 67}{space 3} 1.367288
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0647396{col 26}{space 2} .1916255{col 37}{space 1}   -0.34{col 46}{space 3}0.735{col 54}{space 4}-.4403186{col 67}{space 3} .3108395
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.2653255{col 26}{space 2} .1787117{col 37}{space 1}   -1.48{col 46}{space 3}0.138{col 54}{space 4}-.6155939{col 67}{space 3} .0849429
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0216977{col 26}{space 2} .1430818{col 37}{space 1}   -0.15{col 46}{space 3}0.879{col 54}{space 4}-.3021328{col 67}{space 3} .2587375
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .3202586{col 26}{space 2} .2219965{col 37}{space 1}    1.44{col 46}{space 3}0.149{col 54}{space 4}-.1148467{col 67}{space 3} .7553638
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} -.535738{col 26}{space 2} .2954889{col 37}{space 1}   -1.81{col 46}{space 3}0.070{col 54}{space 4}-1.114886{col 67}{space 3} .0434096
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .2312649{col 26}{space 2} .2648554{col 37}{space 1}    0.87{col 46}{space 3}0.383{col 54}{space 4}-.2878422{col 67}{space 3} .7503719
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0728524{col 26}{space 2} .2016092{col 37}{space 1}    0.36{col 46}{space 3}0.718{col 54}{space 4}-.3222944{col 67}{space 3} .4679992
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.2273138{col 26}{space 2} .3356567{col 37}{space 1}   -0.68{col 46}{space 3}0.498{col 54}{space 4}-.8851887{col 67}{space 3} .4305612
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .2934753{col 26}{space 2}  .420834{col 37}{space 1}    0.70{col 46}{space 3}0.486{col 54}{space 4}-.5313442{col 67}{space 3} 1.118295
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} -.000396{col 26}{space 2} .3987117{col 37}{space 1}   -0.00{col 46}{space 3}0.999{col 54}{space 4}-.7818566{col 67}{space 3} .7810646
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.1666707{col 26}{space 2}  .303167{col 37}{space 1}   -0.55{col 46}{space 3}0.582{col 54}{space 4} -.760867{col 67}{space 3} .4275257
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2}-21.51609{col 26}{space 2}  19.0246{col 37}{space 1}   -1.13{col 46}{space 3}0.258{col 54}{space 4}-58.80363{col 67}{space 3} 15.77144
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}newcong      {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0866872{col 26}{space 2} .2363157{col 37}{space 1}   -0.37{col 46}{space 3}0.714{col 54}{space 4}-.5498576{col 67}{space 3} .3764831
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0212476{col 26}{space 2} .3063296{col 37}{space 1}   -0.07{col 46}{space 3}0.945{col 54}{space 4}-.6216425{col 67}{space 3} .5791474
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.1891447{col 26}{space 2} .3124244{col 37}{space 1}   -0.61{col 46}{space 3}0.545{col 54}{space 4}-.8014853{col 67}{space 3}  .423196
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0212981{col 26}{space 2} .2249076{col 37}{space 1}    0.09{col 46}{space 3}0.925{col 54}{space 4}-.4195127{col 67}{space 3} .4621089
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2}-.0390154{col 26}{space 2} .0735873{col 37}{space 1}   -0.53{col 46}{space 3}0.596{col 54}{space 4}-.1832438{col 67}{space 3}  .105213
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0186034{col 26}{space 2} .0997218{col 37}{space 1}    0.19{col 46}{space 3}0.852{col 54}{space 4}-.1768477{col 67}{space 3} .2140544
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0926124{col 26}{space 2} .0930014{col 37}{space 1}    1.00{col 46}{space 3}0.319{col 54}{space 4} -.089667{col 67}{space 3} .2748919
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0026792{col 26}{space 2} .0744597{col 37}{space 1}    0.04{col 46}{space 3}0.971{col 54}{space 4} -.143259{col 67}{space 3} .1486175
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .9075979{col 26}{space 2} .1155268{col 37}{space 1}    7.86{col 46}{space 3}0.000{col 54}{space 4} .6811695{col 67}{space 3} 1.134026
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.1196974{col 26}{space 2} .1537722{col 37}{space 1}   -0.78{col 46}{space 3}0.436{col 54}{space 4}-.4210854{col 67}{space 3} .1816905
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .2327186{col 26}{space 2} .1378305{col 37}{space 1}    1.69{col 46}{space 3}0.091{col 54}{space 4}-.0374243{col 67}{space 3} .5028615
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.1237893{col 26}{space 2} .1049173{col 37}{space 1}   -1.18{col 46}{space 3}0.238{col 54}{space 4}-.3294233{col 67}{space 3} .0818448
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0636652{col 26}{space 2} .1746755{col 37}{space 1}    0.36{col 46}{space 3}0.716{col 54}{space 4}-.2786924{col 67}{space 3} .4060229
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} -.095282{col 26}{space 2} .2190017{col 37}{space 1}   -0.44{col 46}{space 3}0.664{col 54}{space 4}-.5245174{col 67}{space 3} .3339534
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} -.003794{col 26}{space 2} .2074893{col 37}{space 1}   -0.02{col 46}{space 3}0.985{col 54}{space 4}-.4104655{col 67}{space 3} .4028775
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0449473{col 26}{space 2} .1577679{col 37}{space 1}    0.28{col 46}{space 3}0.776{col 54}{space 4} -.264272{col 67}{space 3} .3541666
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 13.76487{col 26}{space 2} 9.900389{col 37}{space 1}    1.39{col 46}{space 3}0.164{col 54}{space 4}-5.639535{col 67}{space 3} 33.16928
+{txt}{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}policymood   {txt}{c |}
+{space 6}demadv {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .1511318{col 26}{space 2} .1461961{col 37}{space 1}    1.03{col 46}{space 3}0.301{col 54}{space 4}-.1354073{col 67}{space 3} .4376709
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} -.049408{col 26}{space 2}   .18951{col 37}{space 1}   -0.26{col 46}{space 3}0.794{col 54}{space 4}-.4208407{col 67}{space 3} .3220247
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2} .0022964{col 26}{space 2} .1932805{col 37}{space 1}    0.01{col 46}{space 3}0.991{col 54}{space 4}-.3765265{col 67}{space 3} .3811193
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0729282{col 26}{space 2} .1391385{col 37}{space 1}    0.52{col 46}{space 3}0.600{col 54}{space 4}-.1997782{col 67}{space 3} .3456346
+{txt}{space 12} {c |}
+{space 5}newpres {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0025625{col 26}{space 2} .0455246{col 37}{space 1}    0.06{col 46}{space 3}0.955{col 54}{space 4} -.086664{col 67}{space 3} .0917889
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0342799{col 26}{space 2} .0616926{col 37}{space 1}    0.56{col 46}{space 3}0.578{col 54}{space 4}-.0866354{col 67}{space 3} .1551951
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0358846{col 26}{space 2} .0575351{col 37}{space 1}   -0.62{col 46}{space 3}0.533{col 54}{space 4}-.1486512{col 67}{space 3} .0768821
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2}-.0266107{col 26}{space 2} .0460643{col 37}{space 1}   -0.58{col 46}{space 3}0.563{col 54}{space 4} -.116895{col 67}{space 3} .0636736
+{txt}{space 12} {c |}
+{space 5}newcong {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .0365525{col 26}{space 2} .0714704{col 37}{space 1}    0.51{col 46}{space 3}0.609{col 54}{space 4}-.1035268{col 67}{space 3} .1766318
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2}-.0967973{col 26}{space 2} .0951307{col 37}{space 1}   -1.02{col 46}{space 3}0.309{col 54}{space 4}-.2832502{col 67}{space 3} .0896555
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}-.0048423{col 26}{space 2} .0852685{col 37}{space 1}   -0.06{col 46}{space 3}0.955{col 54}{space 4}-.1719655{col 67}{space 3} .1622809
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .1901058{col 26}{space 2} .0649068{col 37}{space 1}    2.93{col 46}{space 3}0.003{col 54}{space 4} .0628908{col 67}{space 3} .3173208
+{txt}{space 12} {c |}
+{space 2}policymood {c |}
+{space 9}L1. {c |}{col 14}{res}{space 2} .6975423{col 26}{space 2} .1080625{col 37}{space 1}    6.45{col 46}{space 3}0.000{col 54}{space 4} .4857437{col 67}{space 3} .9093409
+{txt}{space 9}L2. {c |}{col 14}{res}{space 2} .0856246{col 26}{space 2} .1354848{col 37}{space 1}    0.63{col 46}{space 3}0.527{col 54}{space 4}-.1799207{col 67}{space 3} .3511699
+{txt}{space 9}L3. {c |}{col 14}{res}{space 2}  .008589{col 26}{space 2} .1283627{col 37}{space 1}    0.07{col 46}{space 3}0.947{col 54}{space 4}-.2429972{col 67}{space 3} .2601752
+{txt}{space 9}L4. {c |}{col 14}{res}{space 2} .0197868{col 26}{space 2} .0976027{col 37}{space 1}    0.20{col 46}{space 3}0.839{col 54}{space 4}-.1715109{col 67}{space 3} .2110845
+{txt}{space 12} {c |}
+{space 7}_cons {c |}{col 14}{res}{space 2} 1.955484{col 26}{space 2} 6.124849{col 37}{space 1}    0.32{col 46}{space 3}0.750{col 54}{space 4}  -10.049{col 67}{space 3} 13.95997
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+
+{com}. vargranger
+
+{txt}{col 4}Granger causality Wald tests
+{res}{col 3}{text}{c TLC}{hline 19}{hline 19}{c TT}{hline 9}{hline 6}{hline 12}{c TRC}
+{col 3}{text}{c |}          Equation{col 23}          Excluded{col 42}{c |}   chi2 {col 52}   df{col 58}Prob > chi2{col 70}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}            demadv{col 23}           newpres{col 42}{c |}{result}{space 1} 13.267{col 52}    4{col 58}{space 2} 0.010{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}           newcong{col 42}{c |}{result}{space 1} 2.8441{col 52}    4{col 58}{space 2} 0.584{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}        policymood{col 42}{c |}{result}{space 1} 2.8061{col 52}    4{col 58}{space 2} 0.591{col 70}{text}{c |}
+{res}{col 3}{text}{c |}            demadv{col 23}               ALL{col 42}{c |}{result}{space 1} 21.236{col 52}   12{col 58}{space 2} 0.047{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newpres{col 23}            demadv{col 42}{c |}{result}{space 1} 6.7398{col 52}    4{col 58}{space 2} 0.150{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}           newcong{col 42}{c |}{result}{space 1} 4.2043{col 52}    4{col 58}{space 2} 0.379{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}        policymood{col 42}{c |}{result}{space 1} 1.0634{col 52}    4{col 58}{space 2} 0.900{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newpres{col 23}               ALL{col 42}{c |}{result}{space 1} 10.372{col 52}   12{col 58}{space 2} 0.583{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}           newcong{col 23}            demadv{col 42}{c |}{result}{space 1} 2.4202{col 52}    4{col 58}{space 2} 0.659{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}           newpres{col 42}{c |}{result}{space 1} 3.7131{col 52}    4{col 58}{space 2} 0.446{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}        policymood{col 42}{c |}{result}{space 1} .28143{col 52}    4{col 58}{space 2} 0.991{col 70}{text}{c |}
+{res}{col 3}{text}{c |}           newcong{col 23}               ALL{col 42}{c |}{result}{space 1} 4.2685{col 52}   12{col 58}{space 2} 0.978{col 70}{text}{c |}
+{res}{col 3}{text}{c LT}{hline 19}{hline 19}{c +}{hline 9}{hline 6}{hline 12}{c RT}
+{col 3}{text}{c |}        policymood{col 23}            demadv{col 42}{c |}{result}{space 1} 2.4322{col 52}    4{col 58}{space 2} 0.657{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newpres{col 42}{c |}{result}{space 1} 2.0191{col 52}    4{col 58}{space 2} 0.732{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}           newcong{col 42}{c |}{result}{space 1} 17.992{col 52}    4{col 58}{space 2} 0.001{col 70}{text}{c |}
+{res}{col 3}{text}{c |}        policymood{col 23}               ALL{col 42}{c |}{result}{space 1} 22.258{col 52}   12{col 58}{space 2} 0.035{col 70}{text}{c |}
+{res}{col 3}{text}{c BLC}{hline 19}{hline 19}{c BT}{hline 9}{hline 6}{hline 12}{c BRC}
+{res}{txt}
+{com}. 
+. // Analysis mentioned in endnote 6//
+. // Majority Rolls//
+. regress demadv lagdemadv dividecong dividegov policymood lagpolicymood majroll lagmajroll prezapp lagprezapp gophouse gopprez rollrategop laggoproll gopprez_approv laggopprez_approv dividecong_roll dividecong_lroll
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(17, 127)      = {res}    60.12
+{txt}       Model {c |} {res} 1410.42836        17  82.9663743   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 175.253853       127  1.37995159   {txt}R-squared       ={res}    0.8895
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8747
+{txt}       Total {c |} {res} 1585.68222       144  11.0116821   {txt}Root MSE        =   {res} 1.1747
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           demadv{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}lagdemadv {c |}{col 19}{res}{space 2} .7120103{col 31}{space 2} .0513692{col 42}{space 1}   13.86{col 51}{space 3}0.000{col 59}{space 4} .6103599{col 72}{space 3} .8136608
+{txt}{space 7}dividecong {c |}{col 19}{res}{space 2} .3094706{col 31}{space 2} .4483705{col 42}{space 1}    0.69{col 51}{space 3}0.491{col 59}{space 4}-.5777738{col 72}{space 3} 1.196715
+{txt}{space 8}dividegov {c |}{col 19}{res}{space 2}-.2869375{col 31}{space 2} .3236851{col 42}{space 1}   -0.89{col 51}{space 3}0.377{col 59}{space 4}-.9274518{col 72}{space 3} .3535769
+{txt}{space 7}policymood {c |}{col 19}{res}{space 2}-.0206177{col 31}{space 2} .0638549{col 42}{space 1}   -0.32{col 51}{space 3}0.747{col 59}{space 4}-.1469751{col 72}{space 3} .1057396
+{txt}{space 4}lagpolicymood {c |}{col 19}{res}{space 2}-.0634214{col 31}{space 2} .0589521{col 42}{space 1}   -1.08{col 51}{space 3}0.284{col 59}{space 4}-.1800769{col 72}{space 3} .0532341
+{txt}{space 10}majroll {c |}{col 19}{res}{space 2} .2365697{col 31}{space 2} .1697361{col 42}{space 1}    1.39{col 51}{space 3}0.166{col 59}{space 4}-.0993074{col 72}{space 3} .5724469
+{txt}{space 7}lagmajroll {c |}{col 19}{res}{space 2}-.0670583{col 31}{space 2} .1710352{col 42}{space 1}   -0.39{col 51}{space 3}0.696{col 59}{space 4}-.4055061{col 72}{space 3} .2713894
+{txt}{space 10}prezapp {c |}{col 19}{res}{space 2} .0787468{col 31}{space 2} .0299396{col 42}{space 1}    2.63{col 51}{space 3}0.010{col 59}{space 4} .0195017{col 72}{space 3} .1379919
+{txt}{space 7}lagprezapp {c |}{col 19}{res}{space 2} -.002491{col 31}{space 2} .0185633{col 42}{space 1}   -0.13{col 51}{space 3}0.893{col 59}{space 4}-.0392245{col 72}{space 3} .0342424
+{txt}{space 9}gophouse {c |}{col 19}{res}{space 2} .9485485{col 31}{space 2} .3823362{col 42}{space 1}    2.48{col 51}{space 3}0.014{col 59}{space 4} .1919742{col 72}{space 3} 1.705123
+{txt}{space 10}gopprez {c |}{col 19}{res}{space 2} 8.635578{col 31}{space 2} 1.691601{col 42}{space 1}    5.10{col 51}{space 3}0.000{col 59}{space 4} 5.288205{col 72}{space 3} 11.98295
+{txt}{space 6}rollrategop {c |}{col 19}{res}{space 2}-.5134332{col 31}{space 2}  .240493{col 42}{space 1}   -2.13{col 51}{space 3}0.035{col 59}{space 4}-.9893254{col 72}{space 3} -.037541
+{txt}{space 7}laggoproll {c |}{col 19}{res}{space 2}-.0572418{col 31}{space 2}  .249538{col 42}{space 1}   -0.23{col 51}{space 3}0.819{col 59}{space 4}-.5510325{col 72}{space 3} .4365489
+{txt}{space 3}gopprez_approv {c |}{col 19}{res}{space 2}-.2419233{col 31}{space 2} .0332083{col 42}{space 1}   -7.29{col 51}{space 3}0.000{col 59}{space 4}-.3076365{col 72}{space 3}-.1762101
+{txt}laggopprez_approv {c |}{col 19}{res}{space 2} .0960452{col 31}{space 2} .0129284{col 42}{space 1}    7.43{col 51}{space 3}0.000{col 59}{space 4} .0704622{col 72}{space 3} .1216281
+{txt}{space 2}dividecong_roll {c |}{col 19}{res}{space 2}-.4702291{col 31}{space 2} .2364407{col 42}{space 1}   -1.99{col 51}{space 3}0.049{col 59}{space 4}-.9381025{col 72}{space 3}-.0023556
+{txt}{space 1}dividecong_lroll {c |}{col 19}{res}{space 2} -.242833{col 31}{space 2} .2330878{col 42}{space 1}   -1.04{col 51}{space 3}0.299{col 59}{space 4}-.7040717{col 72}{space 3} .2184057
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2}  15.9048{col 31}{space 2} 2.942141{col 42}{space 1}    5.41{col 51}{space 3}0.000{col 59}{space 4} 10.08284{col 72}{space 3} 21.72677
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. regress demadv lagdemadv majroll lagmajroll gophouse rollrategop 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(5, 139)       = {res}    96.19
+{txt}       Model {c |} {res} 1230.15145         5  246.030289   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  355.53077       139  2.55777532   {txt}R-squared       ={res}    0.7758
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.7677
+{txt}       Total {c |} {res} 1585.68222       144  11.0116821   {txt}Root MSE        =   {res} 1.5993
+
+{txt}{hline 13}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}      demadv{col 14}{c |}      Coef.{col 26}   Std. Err.{col 38}      t{col 46}   P>|t|{col 54}     [95% Con{col 67}f. Interval]
+{hline 13}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 3}lagdemadv {c |}{col 14}{res}{space 2}  .884861{col 26}{space 2} .0416814{col 37}{space 1}   21.23{col 46}{space 3}0.000{col 54}{space 4} .8024495{col 67}{space 3} .9672726
+{txt}{space 5}majroll {c |}{col 14}{res}{space 2} .1201625{col 26}{space 2}  .178385{col 37}{space 1}    0.67{col 46}{space 3}0.502{col 54}{space 4}-.2325362{col 67}{space 3} .4728613
+{txt}{space 2}lagmajroll {c |}{col 14}{res}{space 2} -.045092{col 26}{space 2} .1441152{col 37}{space 1}   -0.31{col 46}{space 3}0.755{col 54}{space 4}-.3300335{col 67}{space 3} .2398494
+{txt}{space 4}gophouse {c |}{col 14}{res}{space 2}  .467138{col 26}{space 2} .3734104{col 37}{space 1}    1.25{col 46}{space 3}0.213{col 54}{space 4}-.2711606{col 67}{space 3} 1.205437
+{txt}{space 1}rollrategop {c |}{col 14}{res}{space 2}-.2489466{col 26}{space 2} .3004353{col 37}{space 1}   -0.83{col 46}{space 3}0.409{col 54}{space 4}-.8429606{col 67}{space 3} .3450673
+{txt}{space 7}_cons {c |}{col 14}{res}{space 2} 5.898473{col 26}{space 2} 2.301344{col 37}{space 1}    2.56{col 46}{space 3}0.011{col 54}{space 4} 1.348306{col 67}{space 3} 10.44864
+{txt}{hline 13}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. // Mayhew Laws//
+. regress demadv lagdemadv dividecong dividegov policymood lagpolicymood mayhewlaws lagmayhewlaws prezapp lagprezapp gopcong gopprez mayhew_gopcong lagmayhew_gopcong gopprez_approv laggopprez_approv mayhew_divcon lagmayhew_divcon
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(17, 127)      = {res}    53.71
+{txt}       Model {c |} {res} 1392.04834        17  81.8851962   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  193.63388       127  1.52467622   {txt}R-squared       ={res}    0.8779
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8615
+{txt}       Total {c |} {res} 1585.68222       144  11.0116821   {txt}Root MSE        =   {res} 1.2348
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           demadv{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}lagdemadv {c |}{col 19}{res}{space 2} .7346106{col 31}{space 2} .0562775{col 42}{space 1}   13.05{col 51}{space 3}0.000{col 59}{space 4} .6232476{col 72}{space 3} .8459736
+{txt}{space 7}dividecong {c |}{col 19}{res}{space 2} .1521765{col 31}{space 2} .4233155{col 42}{space 1}    0.36{col 51}{space 3}0.720{col 59}{space 4}-.6854884{col 72}{space 3} .9898415
+{txt}{space 8}dividegov {c |}{col 19}{res}{space 2}-.2295632{col 31}{space 2} .3443726{col 42}{space 1}   -0.67{col 51}{space 3}0.506{col 59}{space 4}-.9110143{col 72}{space 3}  .451888
+{txt}{space 7}policymood {c |}{col 19}{res}{space 2} .0411767{col 31}{space 2} .0653324{col 42}{space 1}    0.63{col 51}{space 3}0.530{col 59}{space 4}-.0881042{col 72}{space 3} .1704577
+{txt}{space 4}lagpolicymood {c |}{col 19}{res}{space 2}-.0758272{col 31}{space 2} .0621225{col 42}{space 1}   -1.22{col 51}{space 3}0.224{col 59}{space 4}-.1987564{col 72}{space 3}  .047102
+{txt}{space 7}mayhewlaws {c |}{col 19}{res}{space 2} .1693761{col 31}{space 2} .1281645{col 42}{space 1}    1.32{col 51}{space 3}0.189{col 59}{space 4}-.0842383{col 72}{space 3} .4229906
+{txt}{space 4}lagmayhewlaws {c |}{col 19}{res}{space 2}-.1146006{col 31}{space 2} .1238274{col 42}{space 1}   -0.93{col 51}{space 3}0.356{col 59}{space 4}-.3596326{col 72}{space 3} .1304315
+{txt}{space 10}prezapp {c |}{col 19}{res}{space 2} .0533256{col 31}{space 2} .0321653{col 42}{space 1}    1.66{col 51}{space 3}0.100{col 59}{space 4}-.0103237{col 72}{space 3}  .116975
+{txt}{space 7}lagprezapp {c |}{col 19}{res}{space 2}  .005866{col 31}{space 2} .0204748{col 42}{space 1}    0.29{col 51}{space 3}0.775{col 59}{space 4}-.0346499{col 72}{space 3} .0463819
+{txt}{space 10}gopcong {c |}{col 19}{res}{space 2} .1673401{col 31}{space 2} .4514666{col 42}{space 1}    0.37{col 51}{space 3}0.712{col 59}{space 4}-.7260307{col 72}{space 3} 1.060711
+{txt}{space 10}gopprez {c |}{col 19}{res}{space 2} 6.878383{col 31}{space 2} 1.876306{col 42}{space 1}    3.67{col 51}{space 3}0.000{col 59}{space 4} 3.165512{col 72}{space 3} 10.59125
+{txt}{space 3}mayhew_gopcong {c |}{col 19}{res}{space 2}-.0639149{col 31}{space 2} .1704127{col 42}{space 1}   -0.38{col 51}{space 3}0.708{col 59}{space 4}-.4011309{col 72}{space 3} .2733011
+{txt}lagmayhew_gopcong {c |}{col 19}{res}{space 2} .1709835{col 31}{space 2} .1611586{col 42}{space 1}    1.06{col 51}{space 3}0.291{col 59}{space 4}-.1479204{col 72}{space 3} .4898873
+{txt}{space 3}gopprez_approv {c |}{col 19}{res}{space 2}-.2060773{col 31}{space 2} .0356575{col 42}{space 1}   -5.78{col 51}{space 3}0.000{col 59}{space 4}-.2766371{col 72}{space 3}-.1355175
+{txt}laggopprez_approv {c |}{col 19}{res}{space 2}  .083424{col 31}{space 2}  .013929{col 42}{space 1}    5.99{col 51}{space 3}0.000{col 59}{space 4}  .055861{col 72}{space 3}  .110987
+{txt}{space 4}mayhew_divcon {c |}{col 19}{res}{space 2}-.2559645{col 31}{space 2} .2007979{col 42}{space 1}   -1.27{col 51}{space 3}0.205{col 59}{space 4}-.6533074{col 72}{space 3} .1413783
+{txt}{space 1}lagmayhew_divcon {c |}{col 19}{res}{space 2} .1878557{col 31}{space 2} .1694022{col 42}{space 1}    1.11{col 51}{space 3}0.270{col 59}{space 4}-.1473608{col 72}{space 3} .5230721
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} 12.89597{col 31}{space 2} 2.968539{col 42}{space 1}    4.34{col 51}{space 3}0.000{col 59}{space 4} 7.021764{col 72}{space 3} 18.77017
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. regress demadv lagdemadv mayhewlaws lagmayhewlaws gopcong mayhew_gopcong lagmayhew_gopcong 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(6, 138)       = {res}    81.65
+{txt}       Model {c |} {res} 1237.16545         6  206.194242   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 348.516766       138  2.52548382   {txt}R-squared       ={res}    0.7802
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.7707
+{txt}       Total {c |} {res} 1585.68222       144  11.0116821   {txt}Root MSE        =   {res} 1.5892
+
+{txt}{hline 18}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}           demadv{col 19}{c |}      Coef.{col 31}   Std. Err.{col 43}      t{col 51}   P>|t|{col 59}     [95% Con{col 72}f. Interval]
+{hline 18}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 8}lagdemadv {c |}{col 19}{res}{space 2} .8685866{col 31}{space 2} .0415017{col 42}{space 1}   20.93{col 51}{space 3}0.000{col 59}{space 4} .7865252{col 72}{space 3}  .950648
+{txt}{space 7}mayhewlaws {c |}{col 19}{res}{space 2} .1311597{col 31}{space 2} .1202785{col 42}{space 1}    1.09{col 51}{space 3}0.277{col 59}{space 4}-.1066675{col 72}{space 3} .3689869
+{txt}{space 4}lagmayhewlaws {c |}{col 19}{res}{space 2}-.1009305{col 31}{space 2} .1144195{col 42}{space 1}   -0.88{col 51}{space 3}0.379{col 59}{space 4}-.3271726{col 72}{space 3} .1253115
+{txt}{space 10}gopcong {c |}{col 19}{res}{space 2} .2339716{col 31}{space 2} .4315438{col 42}{space 1}    0.54{col 51}{space 3}0.589{col 59}{space 4}-.6193214{col 72}{space 3} 1.087265
+{txt}{space 3}mayhew_gopcong {c |}{col 19}{res}{space 2} -.017311{col 31}{space 2} .1903197{col 42}{space 1}   -0.09{col 51}{space 3}0.928{col 59}{space 4}-.3936309{col 72}{space 3} .3590089
+{txt}lagmayhew_gopcong {c |}{col 19}{res}{space 2} .1596485{col 31}{space 2} .1727157{col 42}{space 1}    0.92{col 51}{space 3}0.357{col 59}{space 4}-.1818628{col 72}{space 3} .5011598
+{txt}{space 12}_cons {c |}{col 19}{res}{space 2} 6.790641{col 31}{space 2} 2.162952{col 42}{space 1}    3.14{col 51}{space 3}0.002{col 59}{space 4} 2.513829{col 72}{space 3} 11.06745
+{txt}{hline 18}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. // House Wins//
+. regress demadv lagdemadv dividecong dividegov policymood lagpolicymood housepwin laghousepwin prezapp lagprezapp gophouse gopprez housepwin_gop laghousepwin_gop gopprez_approv laggopprez_approv housepwin_divgov laghousepwin_divgov
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       143
+{txt}{hline 13}{c +}{hline 34}   F(17, 125)      = {res}    61.10
+{txt}       Model {c |} {res} 1399.20793        17  82.3063491   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  168.38176       125  1.34705408   {txt}R-squared       ={res}    0.8926
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8780
+{txt}       Total {c |} {res} 1567.58969       142   11.039364   {txt}Root MSE        =   {res} 1.1606
+
+{txt}{hline 20}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}             demadv{col 21}{c |}      Coef.{col 33}   Std. Err.{col 45}      t{col 53}   P>|t|{col 61}     [95% Con{col 74}f. Interval]
+{hline 20}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 10}lagdemadv {c |}{col 21}{res}{space 2} .7409754{col 33}{space 2} .0495961{col 44}{space 1}   14.94{col 53}{space 3}0.000{col 61}{space 4} .6428186{col 74}{space 3} .8391322
+{txt}{space 9}dividecong {c |}{col 21}{res}{space 2}-.2243304{col 33}{space 2} .2946456{col 44}{space 1}   -0.76{col 53}{space 3}0.448{col 61}{space 4}-.8074707{col 74}{space 3} .3588098
+{txt}{space 10}dividegov {c |}{col 21}{res}{space 2}-2.062608{col 33}{space 2} 2.852929{col 44}{space 1}   -0.72{col 53}{space 3}0.471{col 61}{space 4}-7.708909{col 74}{space 3} 3.583693
+{txt}{space 9}policymood {c |}{col 21}{res}{space 2}-.0156451{col 33}{space 2} .0638196{col 44}{space 1}   -0.25{col 53}{space 3}0.807{col 61}{space 4}-.1419519{col 74}{space 3} .1106618
+{txt}{space 6}lagpolicymood {c |}{col 21}{res}{space 2}-.0633288{col 33}{space 2} .0578861{col 44}{space 1}   -1.09{col 53}{space 3}0.276{col 61}{space 4}-.1778925{col 74}{space 3} .0512349
+{txt}{space 10}housepwin {c |}{col 21}{res}{space 2}-1.571405{col 33}{space 2} 3.232946{col 44}{space 1}   -0.49{col 53}{space 3}0.628{col 61}{space 4}-7.969805{col 74}{space 3} 4.826996
+{txt}{space 7}laghousepwin {c |}{col 21}{res}{space 2}  .261216{col 33}{space 2} 1.179587{col 44}{space 1}    0.22{col 53}{space 3}0.825{col 61}{space 4}-2.073332{col 74}{space 3} 2.595764
+{txt}{space 12}prezapp {c |}{col 21}{res}{space 2}   .05411{col 33}{space 2} .0323225{col 44}{space 1}    1.67{col 53}{space 3}0.097{col 61}{space 4}-.0098603{col 74}{space 3} .1180803
+{txt}{space 9}lagprezapp {c |}{col 21}{res}{space 2} .0134216{col 33}{space 2} .0187081{col 44}{space 1}    0.72{col 53}{space 3}0.474{col 61}{space 4}-.0236041{col 74}{space 3} .0504473
+{txt}{space 11}gophouse {c |}{col 21}{res}{space 2}-1.744327{col 33}{space 2} 2.331425{col 44}{space 1}   -0.75{col 53}{space 3}0.456{col 61}{space 4}-6.358506{col 74}{space 3} 2.869852
+{txt}{space 12}gopprez {c |}{col 21}{res}{space 2} 8.064685{col 33}{space 2} 1.840697{col 44}{space 1}    4.38{col 53}{space 3}0.000{col 61}{space 4} 4.421718{col 74}{space 3} 11.70765
+{txt}{space 6}housepwin_gop {c |}{col 21}{res}{space 2}  2.53222{col 33}{space 2} 2.506435{col 44}{space 1}    1.01{col 53}{space 3}0.314{col 61}{space 4}-2.428325{col 74}{space 3} 7.492766
+{txt}{space 3}laghousepwin_gop {c |}{col 21}{res}{space 2} .2883013{col 33}{space 2} .8386132{col 44}{space 1}    0.34{col 53}{space 3}0.732{col 61}{space 4}-1.371418{col 74}{space 3} 1.948021
+{txt}{space 5}gopprez_approv {c |}{col 21}{res}{space 2}-.2203477{col 33}{space 2} .0361586{col 44}{space 1}   -6.09{col 53}{space 3}0.000{col 61}{space 4}-.2919101{col 74}{space 3}-.1487853
+{txt}{space 2}laggopprez_approv {c |}{col 21}{res}{space 2} .0840879{col 33}{space 2} .0130098{col 44}{space 1}    6.46{col 53}{space 3}0.000{col 61}{space 4} .0583399{col 74}{space 3} .1098359
+{txt}{space 3}housepwin_divgov {c |}{col 21}{res}{space 2} 1.151818{col 33}{space 2}  3.23134{col 44}{space 1}    0.36{col 53}{space 3}0.722{col 61}{space 4}-5.243403{col 74}{space 3}  7.54704
+{txt}laghousepwin_divgov {c |}{col 21}{res}{space 2}  1.24363{col 33}{space 2} .5379193{col 44}{space 1}    2.31{col 53}{space 3}0.022{col 61}{space 4} .1790212{col 74}{space 3} 2.308239
+{txt}{space 14}_cons {c |}{col 21}{res}{space 2} 15.51172{col 33}{space 2} 3.333887{col 44}{space 1}    4.65{col 53}{space 3}0.000{col 61}{space 4}  8.91354{col 74}{space 3} 22.10989
+{txt}{hline 20}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. regress demadv lagdemadv housepwin laghousepwin gophouse housepwin_gop laghousepwin_gop
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       143
+{txt}{hline 13}{c +}{hline 34}   F(6, 136)       = {res}    81.43
+{txt}       Model {c |} {res} 1226.26635         6  204.377725   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 341.323344       136  2.50973047   {txt}R-squared       ={res}    0.7823
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.7727
+{txt}       Total {c |} {res} 1567.58969       142   11.039364   {txt}Root MSE        =   {res} 1.5842
+
+{txt}{hline 17}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}          demadv{col 18}{c |}      Coef.{col 30}   Std. Err.{col 42}      t{col 50}   P>|t|{col 58}     [95% Con{col 71}f. Interval]
+{hline 17}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 7}lagdemadv {c |}{col 18}{res}{space 2} .8825466{col 30}{space 2} .0417255{col 41}{space 1}   21.15{col 50}{space 3}0.000{col 58}{space 4} .8000319{col 71}{space 3} .9650612
+{txt}{space 7}housepwin {c |}{col 18}{res}{space 2}-1.898453{col 30}{space 2} 1.686484{col 41}{space 1}   -1.13{col 50}{space 3}0.262{col 58}{space 4}-5.233578{col 71}{space 3} 1.436672
+{txt}{space 4}laghousepwin {c |}{col 18}{res}{space 2} .7141815{col 30}{space 2} 1.341276{col 41}{space 1}    0.53{col 50}{space 3}0.595{col 58}{space 4}-1.938272{col 71}{space 3} 3.366635
+{txt}{space 8}gophouse {c |}{col 18}{res}{space 2}-1.065856{col 30}{space 2} 2.430044{col 41}{space 1}   -0.44{col 50}{space 3}0.662{col 58}{space 4}-5.871416{col 71}{space 3} 3.739704
+{txt}{space 3}housepwin_gop {c |}{col 18}{res}{space 2} .5769111{col 30}{space 2} 2.685894{col 41}{space 1}    0.21{col 50}{space 3}0.830{col 58}{space 4}-4.734607{col 71}{space 3} 5.888429
+{txt}laghousepwin_gop {c |}{col 18}{res}{space 2}  .987357{col 30}{space 2}   1.0859{col 41}{space 1}    0.91{col 50}{space 3}0.365{col 58}{space 4}-1.160075{col 71}{space 3} 3.134789
+{txt}{space 11}_cons {c |}{col 18}{res}{space 2} 7.072809{col 30}{space 2}  2.38112{col 41}{space 1}    2.97{col 50}{space 3}0.004{col 58}{space 4}    2.364{col 71}{space 3} 11.78162
+{txt}{hline 17}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. //Senate Wins//
+. regress demadv lagdemadv dividecong dividegov policymood lagpolicymood senpwin lagsenpwin prezapp lagprezapp gopsenate gopprez senpwin_gop lagsenpwin_gop gopprez_approv laggopprez_approv senpwin_divcong lagsenpwin_divcong
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(17, 127)      = {res}    62.17
+{txt}       Model {c |} {res} 1415.58879        17  83.2699289   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res} 170.093425       127  1.33931831   {txt}R-squared       ={res}    0.8927
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8784
+{txt}       Total {c |} {res} 1585.68222       144  11.0116821   {txt}Root MSE        =   {res} 1.1573
+
+{txt}{hline 19}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}            demadv{col 20}{c |}      Coef.{col 32}   Std. Err.{col 44}      t{col 52}   P>|t|{col 60}     [95% Con{col 73}f. Interval]
+{hline 19}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 9}lagdemadv {c |}{col 20}{res}{space 2} .6687185{col 32}{space 2}  .053193{col 43}{space 1}   12.57{col 52}{space 3}0.000{col 60}{space 4} .5634593{col 73}{space 3} .7739778
+{txt}{space 8}dividecong {c |}{col 20}{res}{space 2}-.5368491{col 32}{space 2} .9972536{col 43}{space 1}   -0.54{col 52}{space 3}0.591{col 60}{space 4}-2.510234{col 73}{space 3} 1.436536
+{txt}{space 9}dividegov {c |}{col 20}{res}{space 2}-.8123206{col 32}{space 2} .3475476{col 43}{space 1}   -2.34{col 52}{space 3}0.021{col 60}{space 4}-1.500055{col 73}{space 3}-.1245868
+{txt}{space 8}policymood {c |}{col 20}{res}{space 2} .0471301{col 32}{space 2}  .059653{col 43}{space 1}    0.79{col 52}{space 3}0.431{col 60}{space 4}-.0709124{col 73}{space 3} .1651725
+{txt}{space 5}lagpolicymood {c |}{col 20}{res}{space 2}-.0970042{col 32}{space 2}  .057995{col 43}{space 1}   -1.67{col 52}{space 3}0.097{col 60}{space 4}-.2117658{col 73}{space 3} .0177573
+{txt}{space 11}senpwin {c |}{col 20}{res}{space 2}-2.077848{col 32}{space 2} 1.086139{col 43}{space 1}   -1.91{col 52}{space 3}0.058{col 60}{space 4}-4.227121{col 73}{space 3} .0714251
+{txt}{space 8}lagsenpwin {c |}{col 20}{res}{space 2}-1.992276{col 32}{space 2} .8493863{col 43}{space 1}   -2.35{col 52}{space 3}0.021{col 60}{space 4}-3.673058{col 73}{space 3}-.3114939
+{txt}{space 11}prezapp {c |}{col 20}{res}{space 2} .0852977{col 32}{space 2} .0333752{col 43}{space 1}    2.56{col 52}{space 3}0.012{col 60}{space 4} .0192542{col 73}{space 3} .1513412
+{txt}{space 8}lagprezapp {c |}{col 20}{res}{space 2} .0037448{col 32}{space 2} .0191716{col 43}{space 1}    0.20{col 52}{space 3}0.845{col 60}{space 4}-.0341925{col 73}{space 3}  .041682
+{txt}{space 9}gopsenate {c |}{col 20}{res}{space 2} -2.13975{col 32}{space 2} 1.030941{col 43}{space 1}   -2.08{col 52}{space 3}0.040{col 60}{space 4}-4.179796{col 73}{space 3}-.0997045
+{txt}{space 11}gopprez {c |}{col 20}{res}{space 2}  8.93901{col 32}{space 2} 1.997133{col 43}{space 1}    4.48{col 52}{space 3}0.000{col 60}{space 4} 4.987045{col 73}{space 3} 12.89097
+{txt}{space 7}senpwin_gop {c |}{col 20}{res}{space 2} .9878944{col 32}{space 2} 1.292591{col 43}{space 1}    0.76{col 52}{space 3}0.446{col 60}{space 4}-1.569909{col 73}{space 3} 3.545698
+{txt}{space 4}lagsenpwin_gop {c |}{col 20}{res}{space 2} 1.840778{col 32}{space 2} .6611414{col 43}{space 1}    2.78{col 52}{space 3}0.006{col 60}{space 4} .5324983{col 73}{space 3} 3.149057
+{txt}{space 4}gopprez_approv {c |}{col 20}{res}{space 2} -.232713{col 32}{space 2} .0379993{col 43}{space 1}   -6.12{col 52}{space 3}0.000{col 60}{space 4}-.3079067{col 73}{space 3}-.1575193
+{txt}{space 1}laggopprez_approv {c |}{col 20}{res}{space 2} .0626713{col 32}{space 2} .0144404{col 43}{space 1}    4.34{col 52}{space 3}0.000{col 60}{space 4} .0340963{col 73}{space 3} .0912463
+{txt}{space 3}senpwin_divcong {c |}{col 20}{res}{space 2}-.0768005{col 32}{space 2}  1.33646{col 43}{space 1}   -0.06{col 52}{space 3}0.954{col 60}{space 4}-2.721413{col 73}{space 3} 2.567812
+{txt}lagsenpwin_divcong {c |}{col 20}{res}{space 2} 1.015772{col 32}{space 2} .7028573{col 43}{space 1}    1.45{col 52}{space 3}0.151{col 60}{space 4} -.375056{col 73}{space 3}   2.4066
+{txt}{space 13}_cons {c |}{col 20}{res}{space 2} 19.51048{col 32}{space 2} 3.120129{col 43}{space 1}    6.25{col 52}{space 3}0.000{col 60}{space 4} 13.33631{col 73}{space 3} 25.68465
+{txt}{hline 19}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. regress demadv lagdemad senpwin lagsenpwin gopsenate  senpwin_gop lagsenpwin_gop 
+
+{txt}      Source {c |}       SS           df       MS      Number of obs   ={res}       145
+{txt}{hline 13}{c +}{hline 34}   F(6, 138)       = {res}   100.53
+{txt}       Model {c |} {res} 1290.43916         6  215.073193   {txt}Prob > F        ={res}    0.0000
+{txt}    Residual {c |} {res}  295.24306       138  2.13944246   {txt}R-squared       ={res}    0.8138
+{txt}{hline 13}{c +}{hline 34}   Adj R-squared   ={res}    0.8057
+{txt}       Total {c |} {res} 1585.68222       144  11.0116821   {txt}Root MSE        =   {res} 1.4627
+
+{txt}{hline 15}{c TT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{col 1}        demadv{col 16}{c |}      Coef.{col 28}   Std. Err.{col 40}      t{col 48}   P>|t|{col 56}     [95% Con{col 69}f. Interval]
+{hline 15}{c +}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{space 5}lagdemadv {c |}{col 16}{res}{space 2} .8695232{col 28}{space 2} .0371322{col 39}{space 1}   23.42{col 48}{space 3}0.000{col 56}{space 4} .7961015{col 69}{space 3} .9429449
+{txt}{space 7}senpwin {c |}{col 16}{res}{space 2}-1.387006{col 28}{space 2} .9560239{col 39}{space 1}   -1.45{col 48}{space 3}0.149{col 56}{space 4}-3.277356{col 69}{space 3} .5033434
+{txt}{space 4}lagsenpwin {c |}{col 16}{res}{space 2}-2.752119{col 28}{space 2} .8490863{col 39}{space 1}   -3.24{col 48}{space 3}0.001{col 56}{space 4} -4.43102{col 69}{space 3}-1.073218
+{txt}{space 5}gopsenate {c |}{col 16}{res}{space 2}-2.581051{col 28}{space 2} 1.100413{col 39}{space 1}   -2.35{col 48}{space 3}0.020{col 56}{space 4}-4.756902{col 69}{space 3}-.4052007
+{txt}{space 3}senpwin_gop {c |}{col 16}{res}{space 2} .9936942{col 28}{space 2} 1.433437{col 39}{space 1}    0.69{col 48}{space 3}0.489{col 56}{space 4}-1.840646{col 69}{space 3} 3.828035
+{txt}lagsenpwin_gop {c |}{col 16}{res}{space 2} 3.313246{col 28}{space 2} .7327749{col 39}{space 1}    4.52{col 48}{space 3}0.000{col 56}{space 4} 1.864328{col 69}{space 3} 4.762165
+{txt}{space 9}_cons {c |}{col 16}{res}{space 2}  9.55807{col 28}{space 2}  2.12118{col 39}{space 1}    4.51{col 48}{space 3}0.000{col 56}{space 4} 5.363854{col 69}{space 3} 13.75229
+{txt}{hline 15}{c BT}{hline 11}{hline 11}{hline 9}{hline 8}{hline 13}{hline 12}
+{res}{txt}
+{com}. 
+. 
+. log close
+      {txt}name:  {res}<unnamed>
+       {txt}log:  {res}/Users/woon/Dropbox/Party Reputations/PRQ/Final Submission/dtw_mdpa_replication_public_final/dtw_mdpa_final_70518.smcl
+  {txt}log type:  {res}smcl
+ {txt}closed on:  {res} 5 Jul 2018, 10:22:46
+{txt}{.-}
+{smcl}
+{txt}{sf}{ul off}

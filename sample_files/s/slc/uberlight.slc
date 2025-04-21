@@ -1,0 +1,633 @@
+version BMRT 2.4.0d
+light uberlight
+param	string	lighttype		"spot"
+param	float	intensity		1
+param	color	lightcolor		1 1 1
+param	float	cuton		0.01
+param	float	cutoff		1e+06
+param	float	nearedge		0
+param	float	faredge		0
+param	float	falloff		0
+param	float	falloffdist		1
+param	float	maxintensity		1
+param	float	parallelrays		0
+param	float	shearx		0
+param	float	sheary		0
+param	float	width		1
+param	float	height		1
+param	float	wedge		0.1
+param	float	hedge		0.1
+param	float	roundness		1
+param	float	beamdistribution		0
+param	string	slidename		""
+param	float	noiseamp		0
+param	float	noisefreq		4
+param	vector	noiseoffset		0 0 0
+param	string	shadowmap		""
+param	float	shadowblur		0.01
+param	float	shadowbias		0.01
+param	float	shadownsamps		16
+param	color	shadowcolor		0 0 0
+param	float	raytraceshadow		0
+param	float	nshadowrays		1
+param	vector	shadowcheat		0 0 0
+local	string	$_str_5 	"current"
+param	string	blockercoords		""
+param	float	blockerwidth		1
+param	float	blockerheight		1
+param	float	blockerwedge		0.1
+param	float	blockerhedge		0.1
+param	float	blockerround		1
+param	float	__nonspecular		0
+param	float	__nondiffuse		0
+param	float	__foglight		1
+local	string	$_str_0 	"spot"
+local	string	$_str_1 	"omni"
+local	string	$_str_2 	""
+local	string	$_str_3 	"shader"
+local	string	$_str_4 	"arealight"
+local	point	PL	0 0 0
+local	point	from	0 0 0
+local	vector	axis	0 0 0
+local	float	angle	0
+local	float	_21$maxradius	0
+local	float	_26$atten	0
+local	color	_26$lcol	0 0 0
+local	float	_5$maxintensity	0
+code
+local	float	_5$atten	0
+local	float	_5$PLlen	0
+local	float	_5$Pz	0
+local	float	_13$s	0
+local	float	_13$beta	0
+local	point	_1$Q	0 0 0
+code
+local	float	_1$A	0
+code
+local	float	_1$B	0
+code
+local	float	_1$result	0
+local	float	_1$x	0
+local	float	_1$y	0
+local	float	_4$re	0
+local	float	_4$q	0
+local	float	_4$r	0
+local	point	_30$Pslide	0 0 0
+local	float	_30$zslide	0
+local	float	_32$n	0
+local	float	_28$unoccluded	0
+local	point	_28$shadoworigin	0 0 0
+local	color	_39$vis	0 0 0
+local	float	_39$i	0
+local	float	_17$unoccluded	0
+local	point	_17$Pb1	0 0 0
+local	point	_17$Pb2	0 0 0
+local	vector	_19$Vlight	0 0 0
+local	point	_19$Pplane	0 0 0
+initcode 30
+	pushiv	0 0 0 
+	pushs	$_str_5 
+	pushs	$_str_3 
+	vtransformss
+	popv	shadowcheat 
+initcode 39
+	return
+code
+	pushv	Ps 
+	pushs	$_str_3 
+	transforms
+	popv	PL 
+	pushs	$_str_0 
+	pushs	lighttype 
+	seq
+	ifz	0
+	pushiv	0 0 0 
+	pushs	$_str_5 
+	pushs	$_str_3 
+	ptransformss
+	popv	from 
+	pushiv	0 0 1 
+	pushs	$_str_5 
+	pushs	$_str_3 
+	vtransformss
+	normalize
+	popv	axis 
+	pushf	shearx 
+	abs
+	addFF	width wedge 
+	addff
+	pushf	sheary 
+	abs
+	addFF	height hedge 
+	addff
+	fmax
+	pushif	1.41421 
+	mulff
+	popf	_21$maxradius 
+	pushf	_21$maxradius 
+	atan
+	popf	angle 
+	jump	1
+label 0
+	pushs	$_str_4 
+	pushs	lighttype 
+	seq
+	ifz	2
+	cpVV	P from 
+	cpVV	N axis 
+	pushif	1.5708 
+	popf	angle 
+	jump	3
+label 2
+	pushiv	0 0 0 
+	pushs	$_str_5 
+	pushs	$_str_3 
+	ptransformss
+	popv	from 
+	pushiv	0 0 1 
+	pushs	$_str_5 
+	pushs	$_str_3 
+	vtransformss
+	normalize
+	popv	axis 
+	pushif	3.14159 
+	popf	angle 
+label 3
+label 1
+	pushf	angle 
+	pushv	axis 
+	pushv	from 
+	illuminate3	4
+	pushif	1 
+	popf	_26$atten 
+	pushc	lightcolor 
+	popc	_26$lcol 
+	divFF	maxintensity intensity 
+	popf	_5$maxintensity 
+	pushif	1 
+	popf	_5$atten 
+	pushv	PL 
+	length
+	popf	_5$PLlen 
+	pushs	$_str_0 
+	pushs	lighttype 
+	seq
+	ifz	6
+	pushv	PL 
+	zcomp
+	popf	_5$Pz 
+	jump	7
+label 6
+	cpFF	_5$PLlen _5$Pz 
+label 7
+	pushf	_5$Pz 
+	pushf	cuton 
+	subFF	cuton nearedge 
+	smoothstep
+	mulF	_5$atten 
+	popf	_5$atten 
+	pushf	_5$Pz 
+	addFF	cutoff faredge 
+	pushf	cutoff 
+	smoothstep
+	pushif	1 
+	subff
+	mulF	_5$atten 
+	popf	_5$atten 
+	pushif	0 
+	pushf	falloff 
+	fnef
+	ifz	8
+	pushf	falloffdist 
+	pushf	_5$PLlen 
+	gt
+	ifz	10
+	pushf	falloff 
+	divFF	falloffdist _5$PLlen 
+	pow
+	mulF	_5$atten 
+	popf	_5$atten 
+	jump	11
+label 10
+	pushf	_5$maxintensity 
+	pushif	1 
+	divff
+	log
+	popf	_13$s 
+	pushf	_13$s 
+	pushf	falloff 
+	negf
+	divff
+	popf	_13$beta 
+	pushf	_13$beta 
+	divFF	_5$PLlen falloffdist 
+	pow
+	mulF	_13$s 
+	exp
+	mulF	_5$maxintensity 
+	mulF	_5$atten 
+	popf	_5$atten 
+label 11
+label 8
+label 9
+	pushif	0 
+	pushf	beamdistribution 
+	gt
+	pushs	$_str_1 
+	pushs	lighttype 
+	sne
+	and
+	ifz	12
+	pushf	beamdistribution 
+	pushv	axis 
+	pushv	PL 
+	normalize
+	vdot
+	pow
+	mulF	_5$atten 
+	popf	_5$atten 
+label 12
+label 13
+	pushs	$_str_0 
+	pushs	lighttype 
+	seq
+	ifz	14
+	pushif	0 
+	pushf	sheary 
+	pushf	shearx 
+	pushf	_5$Pz 
+	pushv	PL 
+	divvf
+	subvv
+	popv	_1$Q 
+	addFF	width wedge 
+	popf	_1$A 
+	addFF	height hedge 
+	popf	_1$B 
+	pushv	_1$Q 
+	xcomp
+	abs
+	popf	_1$x 
+	pushv	_1$Q 
+	ycomp
+	abs
+	popf	_1$y 
+	pushif	1e-06 
+	pushf	roundness 
+	lt
+	ifz	17
+	pushf	_1$y 
+	pushf	_1$B 
+	pushf	height 
+	smoothstep
+	pushif	1 
+	subff
+	pushf	_1$x 
+	pushf	_1$A 
+	pushf	width 
+	smoothstep
+	pushif	1 
+	subff
+	mulff
+	pushif	1 
+	subff
+	popf	_1$result 
+	jump	18
+label 17
+	pushf	roundness 
+	pushif	2 
+	divff
+	popf	_4$re 
+	pushf	_4$re 
+	pushif	-1 
+	divff
+	pushf	_4$re 
+	mulFF	width _1$y 
+	pow
+	pushf	_4$re 
+	mulFF	height _1$x 
+	pow
+	addff
+	pow
+	mulFF	width height 
+	mulff
+	popf	_4$q 
+	pushf	_4$re 
+	pushif	-1 
+	divff
+	pushf	_4$re 
+	mulFF	_1$A _1$y 
+	pow
+	pushf	_4$re 
+	mulFF	_1$B _1$x 
+	pow
+	addff
+	pow
+	mulFF	_1$A _1$B 
+	mulff
+	popf	_4$r 
+	pushif	1 
+	pushf	_4$r 
+	pushf	_4$q 
+	smoothstep
+	popf	_1$result 
+label 18
+	pushf	_1$result 
+label 16
+	pushif	1 
+	subff
+	mulF	_5$atten 
+	popf	_5$atten 
+label 14
+label 15
+	pushf	_5$atten 
+label 5
+	mulF	_26$atten 
+	popf	_26$atten 
+	pushif	0 
+	pushf	_26$atten 
+	gt
+	ifz	19
+	pushs	$_str_2 
+	pushs	slidename 
+	sne
+	ifz	21
+	pushif	1 
+	addFF	height hedge 
+	addFF	width wedge 
+	divV	PL 
+	popv	_30$Pslide 
+	pushv	_30$Pslide 
+	zcomp
+	popf	_30$zslide 
+	pushf	_30$zslide 
+	pushv	_30$Pslide 
+	ycomp
+	divff
+	pushif	0.5 
+	mulff
+	pushif	0.5 
+	subff
+	pushif	0.5 
+	pushf	_30$zslide 
+	pushv	_30$Pslide 
+	xcomp
+	divff
+	pushif	0.5 
+	mulff
+	addff
+	pushif	0 
+	pushs	slidename 
+	pushif	2 
+	pushif	2 
+	ctexture
+	mulC	_26$lcol 
+	popc	_26$lcol 
+label 21
+label 22
+	pushif	0 
+	pushf	noiseamp 
+	gt
+	ifz	23
+	pushiv	1 1 0 
+	addVV	PL noiseoffset 
+	mulFv	noisefreq 
+	mulvv
+	noisev
+	popf	_32$n 
+	pushif	0.5 
+	subF	_32$n 
+	mulF	noiseamp 
+	pushif	0.5 
+	addff
+	pushif	1 
+	pushif	0 
+	smoothstep
+	popf	_32$n 
+	pushf	_32$n 
+	mulF	_26$atten 
+	popf	_26$atten 
+label 23
+label 24
+	pushif	1 
+	popf	_28$unoccluded 
+	pushs	$_str_2 
+	pushs	shadowmap 
+	sne
+	ifz	25
+label 25
+label 26
+	pushif	0 
+	pushf	parallelrays 
+	feqf
+	ifz	27
+	cpVV	from _28$shadoworigin 
+	jump	28
+label 27
+	pushf	cuton 
+	pushv	PL 
+	ycomp
+	pushv	PL 
+	xcomp
+	pushs	$_str_5 
+	pushs	$_str_3 
+	ptransformss
+	popv	_28$shadoworigin 
+label 28
+	pushs	$_str_2 
+	pushs	shadowmap 
+	sne
+	pushif	0 
+	pushf	raytraceshadow 
+	fnef
+	or
+	ifz	29
+	pushif	0 
+	cset	_39$vis 
+	pushif	0 
+	popf	_39$i 
+label 31
+	pushf	nshadowrays 
+	pushf	_39$i 
+	lt
+	ifz	33
+	addVV	_28$shadoworigin shadowcheat 
+	pushv	Ps 
+	visibility
+	addC	_39$vis 
+	popc	_39$vis 
+label 32
+	pushif	1 
+	addF	_39$i 
+	popf	_39$i 
+	jump	31
+label 33
+	pushf	nshadowrays 
+	pushc	_39$vis 
+	divcf
+	popc	_39$vis 
+	pushif	3 
+	pushif	2 
+	pushc	_39$vis 
+	comp
+	pushif	1 
+	pushc	_39$vis 
+	comp
+	pushif	0 
+	pushc	_39$vis 
+	comp
+	addff
+	addff
+	divff
+	mulF	_28$unoccluded 
+	popf	_28$unoccluded 
+label 29
+label 30
+	pushs	$_str_2 
+	pushs	blockercoords 
+	sne
+	ifz	34
+	pushif	1 
+	popf	_17$unoccluded 
+	pushv	Ps 
+	pushs	blockercoords 
+	transforms
+	popv	_17$Pb1 
+	pushv	_28$shadoworigin 
+	pushs	blockercoords 
+	transforms
+	popv	_17$Pb2 
+	pushif	0 
+	pushv	_17$Pb1 
+	zcomp
+	pushv	_17$Pb2 
+	zcomp
+	mulff
+	lt
+	ifz	37
+	subVV	_17$Pb1 _17$Pb2 
+	popv	_19$Vlight 
+	pushv	_19$Vlight 
+	zcomp
+	pushv	_17$Pb1 
+	zcomp
+	divff
+	pushv	_19$Vlight 
+	mulvf
+	subV	_17$Pb1 
+	popv	_19$Pplane 
+	addFF	blockerwidth blockerwedge 
+	popf	_1$A 
+	addFF	blockerheight blockerhedge 
+	popf	_1$B 
+	pushv	_19$Pplane 
+	xcomp
+	abs
+	popf	_1$x 
+	pushv	_19$Pplane 
+	ycomp
+	abs
+	popf	_1$y 
+	pushif	1e-06 
+	pushf	blockerround 
+	lt
+	ifz	40
+	pushf	_1$y 
+	pushf	_1$B 
+	pushf	blockerheight 
+	smoothstep
+	pushif	1 
+	subff
+	pushf	_1$x 
+	pushf	_1$A 
+	pushf	blockerwidth 
+	smoothstep
+	pushif	1 
+	subff
+	mulff
+	pushif	1 
+	subff
+	popf	_1$result 
+	jump	41
+label 40
+	pushf	blockerround 
+	pushif	2 
+	divff
+	popf	_4$re 
+	pushf	_4$re 
+	pushif	-1 
+	divff
+	pushf	_4$re 
+	mulFF	blockerwidth _1$y 
+	pow
+	pushf	_4$re 
+	mulFF	blockerheight _1$x 
+	pow
+	addff
+	pow
+	mulFF	blockerwidth blockerheight 
+	mulff
+	popf	_4$q 
+	pushf	_4$re 
+	pushif	-1 
+	divff
+	pushf	_4$re 
+	mulFF	_1$A _1$y 
+	pow
+	pushf	_4$re 
+	mulFF	_1$B _1$x 
+	pow
+	addff
+	pow
+	mulFF	_1$A _1$B 
+	mulff
+	popf	_4$r 
+	pushif	1 
+	pushf	_4$r 
+	pushf	_4$q 
+	smoothstep
+	popf	_1$result 
+label 41
+	pushf	_1$result 
+label 39
+	mulF	_17$unoccluded 
+	popf	_17$unoccluded 
+label 37
+label 38
+	pushf	_17$unoccluded 
+label 36
+	mulF	_28$unoccluded 
+	popf	_28$unoccluded 
+label 34
+label 35
+	pushf	_28$unoccluded 
+	pushc	_26$lcol 
+	pushc	shadowcolor 
+	cmix
+	popc	_26$lcol 
+	pushf	__nonspecular 
+	pushif	1 
+	subff
+	mulF	_28$unoccluded 
+	pushif	1 
+	subff
+	popf	__nonspecular 
+label 19
+label 20
+	pushc	_26$lcol 
+	mulFF	_26$atten intensity 
+	mulfc
+	popc	Cl 
+	pushif	0 
+	pushf	parallelrays 
+	fnef
+	ifz	42
+	subVV	Ps from 
+	length
+	pushv	axis 
+	mulvf
+	popv	L 
+label 42
+label 43
+label 4
+	return

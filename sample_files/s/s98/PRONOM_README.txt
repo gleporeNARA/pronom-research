@@ -1,0 +1,3 @@
+The Sound 98 format (the name is a guess, though it was probably named after the PC-9801) is a log of the instructions sent to several Yamaha sound chips used in various Japanese home computers like the NEC PC-6001, PC-6601, PC-8801, and PC-9801, the Sharp X1, and the Fujitsu FM-7 and FM Towns. Playback occurs by emulating the audio chips used by these computers (the YM3526, YM2151, YM2203, and YM2608) and outputting the generated signal to a speaker. While this technique could potentially be used for any device using one of these chips, the community seems to have limited their efforts to the Japanese PCs.
+
+http://www.vgmpf.com/Wiki/index.php?title=S98

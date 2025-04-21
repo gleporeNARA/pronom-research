@@ -1,0 +1,83 @@
+[Vertex shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+
+struct VertexOutput
+{
+	float4 ProjectedPosition : S_Position;
+};
+
+@uniform float4x4 WorldMatrix;
+VertexOutput main(in uint id : S_VERTEX_ID,
+	SrtVsData srtData : S_SRT_DATA)
+{
+	// Retrieve SRT data:
+	@uniform(WorldMatrix);
+
+	VertexOutput Out;
+
+	row_major float3x4 boneMatrix1 = SRT_VS_BONES_BONE(SRT_VS_BONES_INDICIES(id).x);
+	row_major float3x4 boneMatrix2 = SRT_VS_BONES_BONE(SRT_VS_BONES_INDICIES(id).y);
+	row_major float3x4 boneMatrix3 = SRT_VS_BONES_BONE(SRT_VS_BONES_INDICIES(id).z);
+	row_major float3x4 boneMatrix4 = SRT_VS_BONES_BONE(SRT_VS_BONES_INDICIES(id).w);
+	//World space position
+	float4 worldPosition = float4(0.0f, 0.0f, 0.0f, 1.0f);
+	float4 tempPosSkinned = float4(SRT_VS_BUFFER_POSITION(id).xyz, 1.0f);
+	worldPosition.xyz = (worldPosition.xyz + (SRT_VS_BONES_WEIGHTS(id).x * mul(boneMatrix1, tempPosSkinned)));
+	worldPosition.xyz = (worldPosition.xyz + (SRT_VS_BONES_WEIGHTS(id).y * mul(boneMatrix2, tempPosSkinned)));
+	worldPosition.xyz = (worldPosition.xyz + (SRT_VS_BONES_WEIGHTS(id).z * mul(boneMatrix3, tempPosSkinned)));
+	worldPosition.xyz = (worldPosition.xyz + (SRT_VS_BONES_WEIGHTS(id).w * mul(boneMatrix4, tempPosSkinned)));
+	worldPosition = mul(WorldMatrix, worldPosition);
+
+	//Projected position
+	float4 projectedPosition = mul(g_ViewProjectionMat, worldPosition);
+
+	//Pass projected position to pixel shader
+	Out.ProjectedPosition = projectedPosition;
+
+
+	return Out;
+}
+
+
+[Fragment shader]
+
+
+#include "Shaders/PS4/srt_struct.h"
+#include "Shaders/PS4/CommonHelpers.shdh"
+
+struct PixelInput
+{
+	float4 ProjectedPosition : S_Position;
+};
+
+struct PixelOutput
+{
+	float4 Color0 : S_TARGET_OUTPUT0;
+};
+
+@uniform float3 Vector3Parameter_WaveColor;
+void CalculateMatEmissiveColor(SrtPsData srtData : S_SRT_DATA,
+	out float3 out_0)
+{
+	// Retrieve SRT data:
+	@uniform(Vector3Parameter_WaveColor);
+
+	//ConstantVector3Node {
+	//} ConstantVector3Node
+	out_0 = Vector3Parameter_WaveColor;
+}
+
+PixelOutput main(in PixelInput In,
+	SrtPsData srtData : S_SRT_DATA)
+{
+	PixelOutput Out;
+
+	float3 matEmissiveColor;
+	CalculateMatEmissiveColor(srtData, matEmissiveColor);
+	Out.Color0 = float4(matEmissiveColor, 1.0f);
+
+	return Out;
+}

@@ -1,0 +1,836 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<?xml-stylesheet type="text/xsl" href="SoundSet.xsl" version="1.0"?>
+<!DOCTYPE SoundSet SYSTEM "SoundSet.dtd" []>
+<SoundSet xmlns:ss="http://www.sibelius.com/xml/SoundSet.dtd" >
+    <Header>
+        <FileVersion>50001</FileVersion>
+        <Name>Sibelius Essentials GM</Name>
+        <PatchLoadMechanism>Kontakt</PatchLoadMechanism>
+        <NumLanes>16</NumLanes>
+        <DefaultSoundSet>false</DefaultSoundSet>
+        <ProgramsRelativeTo>1</ProgramsRelativeTo>
+        <SupportsPitchBendRange>false</SupportsPitchBendRange>
+    </Header>
+    <KontaktInfo>
+    	<LibraryID>118</LibraryID>
+    </KontaktInfo>
+    <ControllerTypeList>
+        <ControllerTypeDefinition Name="Modulation" Number="1" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Volume" Number="7" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Expression" Number="11" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Control 20" Number="20" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Control 21" Number="21" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Control 22" Number="22" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Control 23" Number="23" Binary="false" >
+            <ControllerDefault>10</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Sustain" Number="64" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Legato" Number="68" Binary="true" >
+            <ControllerOn>127</ControllerOn>
+            <ControllerOff>0</ControllerOff>
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Reverb" Number="91" Binary="false" >
+            <ControllerDefault>64</ControllerDefault>
+        </ControllerTypeDefinition>
+        <ControllerTypeDefinition Name="Chorus" Number="93" Binary="false" >
+            <ControllerDefault>0</ControllerDefault>
+        </ControllerTypeDefinition>
+    </ControllerTypeList>
+    <VolumeTypeList>
+        <VolumeTypeDefinition Name="NoteOnVelocity" Method="Default" />
+        <VolumeTypeDefinition Name="ModWheel" Method="Controller" >
+            <ControllerType>Modulation</ControllerType>
+        </VolumeTypeDefinition>
+        <VolumeTypeDefinition Name="Volume" Method="Controller" >
+            <ControllerType>Volume</ControllerType>
+        </VolumeTypeDefinition>
+        <VolumeTypeDefinition Name="Expression" Method="Controller" >
+            <ControllerType>Expression</ControllerType>
+        </VolumeTypeDefinition>
+    </VolumeTypeList>
+    <AttackTypeList>
+        <AttackTypeDefinition Name="NoteOnVelocity" Method="Default" />
+    </AttackTypeList>
+    <PatchList>
+        <Patch Name="Brass Section (GM)" >
+            <KontaktPatch Instrument="062 Brass 1" LibraryID="118" Path="GM" />
+            <SoundID>brass.brass group</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Synth Brass 1 (GM)" >
+            <KontaktPatch Instrument="063 Synth Brass 1" LibraryID="118" Path="GM" />
+            <SoundID>brass.brass group.synth</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Synth Brass 2 (GM)" >
+            <KontaktPatch Instrument="064 Synth Brass 2" LibraryID="118" Path="GM" />
+            <SoundID>brass.brass group.synth.2</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Celesta (GM)" >
+            <KontaktPatch Instrument="009 Celesta" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.celesta</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Harpsichord (GM)" >
+            <KontaktPatch Instrument="007 Harpsichord" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.harpsichord.8'</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Clavinet (GM)" >
+            <KontaktPatch Instrument="008 Clavinet" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.harpsichord.synth.clavinet</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Drawbar Organ (GM)" >
+            <KontaktPatch Instrument="017 Drawbar Organ New" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.organ.drawbar.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Percussive Organ (GM)" >
+            <KontaktPatch Instrument="018 Perc Organ" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.organ.drawbar.percussive</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Rock Organ (GM)" >
+            <KontaktPatch Instrument="019 Rock Organ" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.organ.drawbar.with rotary speaker</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Church organ (GM)" >
+            <KontaktPatch Instrument="020 Church Organ" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.organ.pipe</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Reed organ (GM)" >
+            <KontaktPatch Instrument="021 Reed Organ" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.organ.reed</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Accordion (GM)" >
+            <KontaktPatch Instrument="022 Accordion" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.organ.reed.accordion</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Tango Accordion (GM)" >
+            <KontaktPatch Instrument="024 Tango Accordion" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.organ.reed.accordion.tango</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Electric Piano 2 (GM)" >
+            <KontaktPatch Instrument="006 Electric Piano 2" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.piano.electric.fm</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Electric Grand Piano (GM)" >
+            <KontaktPatch Instrument="003 El Grand" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.piano.electric.grand</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Electric Piano 1 (GM)" >
+            <KontaktPatch Instrument="005 El Piano 1" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.piano.electric.rhodes.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Acoustic Piano (GM)" >
+            <KontaktPatch Instrument="001 Grand Piano" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.piano.grand.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Bright Piano (GM)" >
+            <KontaktPatch Instrument="002 Grand Piano" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.piano.grand.bright</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="FX 4 atmosphere (GM)" >
+            <KontaktPatch Instrument="100 FX 4 Atmosphere" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.piano.synth.atmosphere</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Pad 1 new age (GM)" >
+            <KontaktPatch Instrument="089 Pad 1 New Age" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.piano.synth.new age</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Honky-tonk Piano (GM)" >
+            <KontaktPatch Instrument="004 Honky-tonk Piano" LibraryID="118" Path="GM" />
+            <SoundID>keyboard.piano.upright.honky-tonk</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Taiko Drum (GM)" >
+            <KontaktPatch Instrument="117 Taiko" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.drum.taiko</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Timpani (GM)" >
+            <KontaktPatch Instrument="048 Timpani" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.drum.timpani.3</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Melodic Tom (GM)" >
+            <KontaktPatch Instrument="118 Melodic Tom" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.drum.tom-tom</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Synth Drum (GM)" >
+            <KontaktPatch Instrument="119 Synth Drum" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.drum.tom-tom.synth</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Agogo Bells (GM)" >
+            <KontaktPatch Instrument="114 Agogo" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.metal.bells.agogo</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="FX 3 Crystal (GM)" >
+            <KontaktPatch Instrument="099 FX 3 Crystal" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.metal.bells.synth.crystal</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Tinkle Bell (GM)" >
+            <KontaktPatch Instrument="113 Tinkle Bell" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.metal.bells.tinkle bells</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Tubular Bell (GM)" >
+            <KontaktPatch Instrument="015 Tubular Bells" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.metal.bells.tubular bells</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Glockenspiel (GM)" >
+            <KontaktPatch Instrument="010 Glockenspiel" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.metal.glockenspiel</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Music Box (GM)" >
+            <KontaktPatch Instrument="011 Music Box" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.metal.music box</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Steel Drums (GM)" >
+            <KontaktPatch Instrument="115 Steeldrums L" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.metal.steel drums</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Vibraphone (GM)" >
+            <KontaktPatch Instrument="012 Vibraphone" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.metal.vibraphone</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Dulcimer (GM)" >
+            <KontaktPatch Instrument="016 Dulcimer" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.stringed.hammer dulcimer</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Orchestral Harp (GM)" >
+            <KontaktPatch Instrument="047 Harp" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.stringed.harp</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Kalimba (GM)" >
+            <KontaktPatch Instrument="109 Kalimba" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.wood.kalimba</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Marimba (GM)" >
+            <KontaktPatch Instrument="013 Marimba" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.wood.marimba</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Xylophone (GM)" >
+            <KontaktPatch Instrument="014 Xylophone" LibraryID="118" Path="GM" />
+            <SoundID>pitched percussion.wood.xylophone</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Acoustic Bass (GM)" >
+            <KontaktPatch Instrument="033 Acoustic Bass" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.acoustic</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Electric Bass (finger) (GM)" >
+            <KontaktPatch Instrument="034 Finger Bass" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.electric.finger.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Fretless Bass (GM)" >
+            <KontaktPatch Instrument="036 Fretless Bass" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.electric.fretless</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Electric Bass pick (GM)" >
+            <KontaktPatch Instrument="035 Pick Bass" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.electric.pick</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Slap Bass 1 (GM)" >
+            <KontaktPatch Instrument="037 Slap Bass 1" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.electric.slap</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Slap Bass 2 (GM)" >
+            <KontaktPatch Instrument="038 Slap Bass 2" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.electric.pop</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Synth Bass 1 (GM)" >
+            <KontaktPatch Instrument="039 Synth Bass 1" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.synth</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Synth Bass 2 (GM)" >
+            <KontaktPatch Instrument="040 Synth Bass 2" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.synth.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Lead 8 bass + lead (GM)" >
+            <KontaktPatch Instrument="088 Bass + Lead" LibraryID="118" Path="GM" />
+            <SoundID>guitar.bass.synth.bass+lead</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Electric Guitar (clean) (GM)" >
+            <KontaktPatch Instrument="028 Clean Electric Guitar" LibraryID="118" Path="GM" />
+            <SoundID>guitar.electric.2</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Distortion Guitar (GM)" >
+            <KontaktPatch Instrument="031 Distorted Guitar" LibraryID="118" Path="GM" />
+            <SoundID>guitar.electric.distortion</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Guitar harmonics (GM)" >
+            <KontaktPatch Instrument="032 Guitar Harmonics" LibraryID="118" Path="GM" />
+            <SoundID>guitar.electric.distortion.harmonic</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Overdriven Guitar (GM)" >
+            <KontaktPatch Instrument="030 Overdriven Guitar" LibraryID="118" Path="GM" />
+            <SoundID>guitar.electric.overdrive</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Lead 5 charang (GM)" >
+            <KontaktPatch Instrument="085 Charang" LibraryID="118" Path="GM" />
+            <SoundID>guitar.electric.synth.charang</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Lead 4 chiff (GM)" >
+            <KontaktPatch Instrument="084 Chiff Lead" LibraryID="118" Path="GM" />
+            <SoundID>guitar.electric.synth.chiff</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Koto (GM)" >
+            <KontaktPatch Instrument="108 Koto" LibraryID="118" Path="GM" />
+            <SoundID>guitar.koto</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Acoustic Guitar Hard Nylon string (GM)" >
+            <KontaktPatch Instrument="025 Nylon Hard" LibraryID="118" Path="GM" />
+            <SoundID>guitar.nylon string.hard</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Acoustic Guitar Soft Nylon string (GM)" >
+            <KontaktPatch Instrument="025 Nylon Soft" LibraryID="118" Path="GM" />
+            <SoundID>guitar.nylon string.soft</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Shamisen (GM)" >
+            <KontaktPatch Instrument="107 Shamisen" LibraryID="118" Path="GM" />
+            <SoundID>guitar.shamisen</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Sitar (GM)" >
+            <KontaktPatch Instrument="105 Sitar" LibraryID="118" Path="GM" />
+            <SoundID>guitar.sitar</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Acoustic Guitar steel string (GM)" >
+            <KontaktPatch Instrument="026 Steel String Guitar" LibraryID="118" Path="GM" />
+            <SoundID>guitar.steel string</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Banjo (GM)" >
+            <KontaktPatch Instrument="106 Banjo" LibraryID="118" Path="GM" />
+            <SoundID>guitar.steel string.banjo</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Electric Guitar jazz (GM)" >
+            <KontaktPatch Instrument="027 Electric Jazz Guitar" LibraryID="118" Path="GM" />
+            <SoundID>guitar.steel string.semi-acoustic.jazz</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Electric Guitar jazz muted (GM)" >
+            <KontaktPatch Instrument="029 Muted Electric Guitar" LibraryID="118" Path="GM" />
+            <SoundID>guitar.steel string.semi-acoustic.jazz.mute</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Bassoon (GM)" >
+            <KontaktPatch Instrument="071 Bassoon" LibraryID="118" Path="GM" />
+            <SoundID>wind.bassoons.bassoon</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Clarinet (GM)" >
+            <KontaktPatch Instrument="072 Clarinet" LibraryID="118" Path="GM" />
+            <SoundID>wind.clarinets.clarinet</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Blown Bottle (GM)" >
+            <KontaktPatch Instrument="077 Bottle Blow" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.breathy.blown bottle</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Ocarina (GM)" >
+            <KontaktPatch Instrument="080 Ocarina" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.breathy.ocarina</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Pan Flute (GM)" >
+            <KontaktPatch Instrument="076 Pan Flute" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.breathy.pan pipe</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Shakuhachi (GM)" >
+            <KontaktPatch Instrument="078 Shakuhachi" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.breathy.shakuhachi</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Whistle (GM)" >
+            <KontaktPatch Instrument="079 Whistle" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.breathy.whistling</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Lead 3 calliope (GM)" >
+            <KontaktPatch Instrument="083 Calliope Lead" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.flute.ensemble.synth.calliope</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Flute (GM)" >
+            <KontaktPatch Instrument="074 Flute" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.flute</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Piccolo (GM)" >
+            <KontaktPatch Instrument="073 Piccolo" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.flute.piccolo</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Descant Recorder (GM)" >
+            <KontaktPatch Instrument="075 Recorder" LibraryID="118" Path="GM" />
+            <SoundID>wind.flutes.recorder.descant</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Harmonica (GM)" >
+            <KontaktPatch Instrument="023 Harmonica" LibraryID="118" Path="GM" />
+            <SoundID>wind.harmonica</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="English Horn (GM)" >
+            <KontaktPatch Instrument="070 English Horn" LibraryID="118" Path="GM" />
+            <SoundID>wind.oboes.english horn</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Oboe (GM)" >
+            <KontaktPatch Instrument="069 Oboe" LibraryID="118" Path="GM" />
+            <SoundID>wind.oboes.oboe</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Shanai (GM)" >
+            <KontaktPatch Instrument="112 Shanai" LibraryID="118" Path="GM" />
+            <SoundID>wind.oboes.shanai</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Bagpipe (GM)" >
+            <KontaktPatch Instrument="110 Bagpipes" LibraryID="118" Path="GM" />
+            <SoundID>wind.pipes.bagpipes</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Alto Sax (GM)" >
+            <KontaktPatch Instrument="066 Alto Sax" LibraryID="118" Path="GM" />
+            <SoundID>wind.saxophones.alto</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Baritone Sax (GM)" >
+            <KontaktPatch Instrument="068 Baritone Sax" LibraryID="118" Path="GM" />
+            <SoundID>wind.saxophones.baritone</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Soprano Sax (GM)" >
+            <KontaktPatch Instrument="065 Soprano Sax" LibraryID="118" Path="GM" />
+            <SoundID>wind.saxophones.soprano</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Tenor Sax (GM)" >
+            <KontaktPatch Instrument="067 Tenor Sax p" LibraryID="118" Path="GM" />
+            <SoundID>wind.saxophones.tenor</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Lead 7 fifths (GM)" >
+            <KontaktPatch Instrument="087 Fifth Lead" LibraryID="118" Path="GM" />
+            <SoundID>brass.brass group.synth.fifths</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Orchestra Hit (GM)" >
+            <KontaktPatch Instrument="056 OrchHit 17" LibraryID="118" Path="GM" />
+            <SoundID>brass.brass group.synth.orchestra hit</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Pad 3 polysynth (GM)" >
+            <KontaktPatch Instrument="091 Pad 3 Polysynth" LibraryID="118" Path="GM" />
+            <SoundID>brass.brass group.synth.polysynth</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="French horn (GM)" >
+            <KontaktPatch Instrument="061 French Horn 1" LibraryID="118" Path="GM" />
+            <SoundID>brass.horns.french horn</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Trombone (GM)" >
+            <KontaktPatch Instrument="058 Trombone" LibraryID="118" Path="GM" />
+            <SoundID>brass.trombones.tenor</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Trumpet (GM)" >
+            <KontaktPatch Instrument="057 Trumpet f" LibraryID="118" Path="GM" />
+            <SoundID>brass.trumpets.trumpet</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Trumpet Mute (GM)" >
+            <KontaktPatch Instrument="060 Muted Trumpet" LibraryID="118" Path="GM" />
+            <SoundID>brass.trumpets.trumpet.mute.harmon</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Tuba (GM)" >
+            <KontaktPatch Instrument="059 Tuba" LibraryID="118" Path="GM" />
+            <SoundID>brass.tubas.tuba</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Voice Aahs (GM)" >
+            <KontaktPatch Instrument="053 Choir Aah" LibraryID="118" Path="GM" />
+            <SoundID>voice.mixed.ensemble.ah</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Pad 4 choir (GM)" >
+            <KontaktPatch Instrument="092 Pad Choir" LibraryID="118" Path="GM" />
+            <SoundID>voice.synth.ensemble.ah</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="FX 5 brightness (GM)" >
+            <KontaktPatch Instrument="101 FX 5 Brightness" LibraryID="118" Path="GM" />
+            <SoundID>voice.synth.ensemble.ah.brightness</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Voice Oohs (GM)" >
+            <KontaktPatch Instrument="054 Choir Ooh" LibraryID="118" Path="GM" />
+            <SoundID>voice.synth.ensemble.doo</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="FX 7 echoes (GM)" >
+            <KontaktPatch Instrument="103 FX 7 Echoes" LibraryID="118" Path="GM" />
+            <SoundID>voice.synth.ensemble.ah.echoes</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Pad 7 halo (GM)" >
+            <KontaktPatch Instrument="095 Pad 7 Halo" LibraryID="118" Path="GM" />
+            <SoundID>voice.synth.ensemble.ah.halo</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Synth Voice (GM)" >
+            <KontaktPatch Instrument="055 Synth Vox" LibraryID="118" Path="GM" />
+            <SoundID>voice.synth.ensemble.oo</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Lead 6 voice (GM)" >
+            <KontaktPatch Instrument="086 Solo Voice" LibraryID="118" Path="GM" />
+            <SoundID>voice.synth.ensemble.oo.2</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Double bass (GM)" >
+            <KontaktPatch Instrument="044 Contrabass" LibraryID="118" Path="GM" />
+            <SoundID>strings.contrabass</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Contrabass solo pizzicato (GM)" >
+            <KontaktPatch Instrument="046 Pizz Strings" LibraryID="118" Path="GM" />
+            <SoundID>strings.contrabass.pizzicato</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Fiddle (GM)" >
+            <KontaktPatch Instrument="111 Fiddle" LibraryID="118" Path="GM" />
+            <SoundID>strings.fiddle</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="String Ensemble 1 (GM)" >
+            <KontaktPatch Instrument="049 Strings Ensemble 1" LibraryID="118" Path="GM" />
+            <SoundID>strings.string orchestra</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="String Ensemble 2 (GM)" >
+            <KontaktPatch Instrument="050 Slow Strings" LibraryID="118" Path="GM" />
+            <SoundID>strings.string orchestra.2</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Pizzicato Strings (GM)" >
+            <KontaktPatch Instrument="046 Pizz Strings" LibraryID="118" Path="GM" />
+            <SoundID>strings.string orchestra.pizzicato</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Synth Strings 1 (GM)" >
+            <KontaktPatch Instrument="051 Synth Strings 1" LibraryID="118" Path="GM" />
+            <SoundID>strings.string orchestra.synth</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Synth Strings 2 (GM)" >
+            <KontaktPatch Instrument="052 Synth Strings 2" LibraryID="118" Path="GM" />
+            <SoundID>strings.string orchestra.synth.2</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Tremolo Strings (GM)" IsMultipleNoteSample="true" >
+            <KontaktPatch Instrument="045 Tremolo Strings" LibraryID="118" Path="GM" />
+            <SoundID>strings.string orchestra.tremolo</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Viola (GM)" >
+            <KontaktPatch Instrument="042 Viola" LibraryID="118" Path="GM" />
+            <SoundID>strings.viola</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Violia solo pizzicato (GM)" >
+            <KontaktPatch Instrument="046 Pizz Strings" LibraryID="118" Path="GM" />
+            <SoundID>strings.viola.pizzicato</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Violin (GM)" >
+            <KontaktPatch Instrument="041 Violin" LibraryID="118" Path="GM" />
+            <SoundID>strings.violin</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Cello (GM)" >
+            <KontaktPatch Instrument="043 Cello" LibraryID="118" Path="GM" />
+            <SoundID>strings.violoncello</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Violoncello solo pizzicato (GM)" >
+            <KontaktPatch Instrument="046 Pizz Strings" LibraryID="118" Path="GM" />
+            <SoundID>strings.violoncello.pizzicato</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Pad 6 metallic (GM)" >
+            <KontaktPatch Instrument="094 Pad 6 Metallic" LibraryID="118" Path="GM" />
+            <SoundID>synth.pad.bright.metallic.shimmering</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="FX 8 sci-fi (GM)" >
+            <KontaktPatch Instrument="104 FX 8 Sci Fi" LibraryID="118" Path="GM" />
+            <SoundID>synth.pad.bright.static.sci-fi</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Pad 2 warm (GM)" >
+            <KontaktPatch Instrument="090 Warm Pad" LibraryID="118" Path="GM" />
+            <SoundID>synth.pad.warm.static</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Pad 5 bowed (GM)" >
+            <KontaktPatch Instrument="093 Pad 5 Bowed Glass" LibraryID="118" Path="GM" />
+            <SoundID>synth.pad.warm.static.bowed</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Pad 8 sweep (GM)" >
+            <KontaktPatch Instrument="096 Pad 8 Sweep" LibraryID="118" Path="GM" />
+            <SoundID>synth.sweep</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="FX 6 goblins(GM)" >
+            <KontaktPatch Instrument="102 FX 6 Goblins" LibraryID="118" Path="GM" />
+            <SoundID>synth.sweep.goblins</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="FX 1 rain (GM)" >
+            <KontaktPatch Instrument="097 FX 1 Rain" LibraryID="118" Path="GM" />
+            <SoundID>synth.sweep.rain</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="FX 2 soundtrack (GM)" >
+            <KontaktPatch Instrument="098 FX 2 Soundtrack" LibraryID="118" Path="GM" />
+            <SoundID>synth.sweep.soundtrack</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Lead 2 sawtooth (GM)" >
+            <KontaktPatch Instrument="082 Sawtooth Lead" LibraryID="118" Path="GM" />
+            <SoundID>synth.tone.fat.sawtooth</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Lead 1 square (GM)" >
+            <KontaktPatch Instrument="081 Square Lead" LibraryID="118" Path="GM" />
+            <SoundID>synth.tone.thin.square</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Applause (GM)" >
+            <KontaktPatch Instrument="127 Applause" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.exotic.applause</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Bird Tweet (GM)" >
+            <KontaktPatch Instrument="124 Bird Tweet" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.exotic.bird tweet</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Breath Noise (GM)" >
+            <KontaktPatch Instrument="122 Breath Noise" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.exotic.breath noise</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Guitar Fret Noise (GM)" >
+            <KontaktPatch Instrument="121 Fretnoise" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.exotic.guitar fret noise</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Gunshot (GM)" >
+            <KontaktPatch Instrument="128 Gunshot" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.exotic.gunshot</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Helicopter (GM)" >
+            <KontaktPatch Instrument="126 Helicopter" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.exotic.helicopter</SoundID>
+            <VolumeType>Expression</VolumeType>
+            <AttackType>NoteOnVelocity</AttackType>
+        </Patch>
+        <Patch Name="Seashore (GM)" >
+            <KontaktPatch Instrument="123 Seashore" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.exotic.seashore</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Telephone Ring (GM)" >
+            <KontaktPatch Instrument="125 Telephone" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.exotic.telephone ring</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+        <Patch Name="Reverse Cymbal (GM)" >
+            <KontaktPatch Instrument="120 Reverse Crash" LibraryID="118" Path="GM" />
+            <SoundID>unpitched.metal.cymbal.reverse</SoundID>
+            <VolumeType>NoteOnVelocity</VolumeType>
+        </Patch>
+    </PatchList>
+    <DrumMapList>
+        <DrumMapDefinition Name="General MIDI Drum set" >
+            <DrumSound Pitch="33" SoundID="unpitched.drum.very low.kick drum.3" Name="Bass Drum 3" />
+            <DrumSound Pitch="34" SoundID="unpitched.drum.medium.snare drum.snares on.rim shot" Name="Rim shot" />
+            <DrumSound Pitch="35" SoundID="unpitched.drum.very low.kick drum.2" Name="Bass Drum 2" />
+            <DrumSound Pitch="36" SoundID="unpitched.drum.very low.kick drum" Name="Bass Drum 1" />
+            <DrumSound Pitch="37" SoundID="unpitched.drum.medium.snare drum.snares on.side stick" Name="Side Stick" />
+            <DrumSound Pitch="38" SoundID="unpitched.drum.medium.snare drum.snares on" Name="Snare Drum 1" />
+            <DrumSound Pitch="39" SoundID="unpitched.exotic.hand clap" Name="Hand Clap" />
+            <DrumSound Pitch="40" SoundID="unpitched.drum.medium.tom-tom.electric" Name="Electric Tom" />
+            <DrumSound Pitch="41" SoundID="unpitched.drum.very low.tom-tom" Name="Low Tom 2" />
+            <DrumSound Pitch="42" SoundID="unpitched.metal.hi-hat.closed" Name="Closed Hi-hat" />
+            <DrumSound Pitch="43" SoundID="unpitched.drum.low.tom-tom" Name="Low Tom 1" />
+            <DrumSound Pitch="44" SoundID="unpitched.metal.hi-hat.closed.pedal" Name="Pedal Hi-hat" />
+            <DrumSound Pitch="45" SoundID="unpitched.drum.medium-low.tom-tom" Name="Mid Tom 2" />
+            <DrumSound Pitch="46" SoundID="unpitched.metal.hi-hat.open" Name="Open Hi-hat" />
+            <DrumSound Pitch="47" SoundID="unpitched.drum.medium.tom-tom" Name="Mid Tom 1" />
+            <DrumSound Pitch="48" SoundID="unpitched.drum.medium-high.tom-tom" Name="High Tom 2" />
+            <DrumSound Pitch="49" SoundID="unpitched.metal.cymbal.crash.high" Name="Crash Cymbal 1" />
+            <DrumSound Pitch="50" SoundID="unpitched.drum.high.tom-tom" Name="High Tom 1" />
+            <DrumSound Pitch="51" SoundID="unpitched.metal.cymbal.ride.high" Name="Ride Cymbal 1" />
+            <DrumSound Pitch="52" SoundID="unpitched.metal.cymbal.chinese" Name="Chinese Cymbal" />
+            <DrumSound Pitch="53" SoundID="unpitched.metal.cymbal.ride.bell" Name="Ride Bell" />
+            <DrumSound Pitch="54" SoundID="unpitched.drum.medium.tambourine.stroke.frame" Name="Tambourine" />
+            <DrumSound Pitch="55" SoundID="unpitched.metal.cymbal.splash" Name="Splash Cymbal" />
+            <DrumSound Pitch="56" SoundID="unpitched.metal.bells.medium.cowbell" Name="Cowbell" />
+            <DrumSound Pitch="57" SoundID="unpitched.metal.cymbal.crash.medium" Name="Crash Cymbal 2" />
+            <DrumSound Pitch="58" SoundID="unpitched.rattle.vibraslap" Name="Vibra Slap" />
+            <DrumSound Pitch="59" SoundID="unpitched.metal.cymbal.ride.medium" Name="Ride Cymbal 2" />
+            <DrumSound Pitch="60" SoundID="unpitched.drum.high.bongo" Name="High Bongo" />
+            <DrumSound Pitch="61" SoundID="unpitched.drum.medium.bongo" Name="Low Bongo" />
+            <DrumSound Pitch="62" SoundID="unpitched.drum.medium.conga.mute" Name="Mute High Conga" />
+            <DrumSound Pitch="63" SoundID="unpitched.drum.medium.conga" Name="Open High Conga" />
+            <DrumSound Pitch="64" SoundID="unpitched.drum.medium-low.conga" Name="Low Conga" />
+            <DrumSound Pitch="65" SoundID="unpitched.drum.medium-high.timbale.rim.stick" Name="High Timbale" />
+            <DrumSound Pitch="66" SoundID="unpitched.drum.medium-low.timbale.rim.stick" Name="Low Timbale" />
+            <DrumSound Pitch="67" SoundID="unpitched.metal.bells.high.agogo" Name="High Agogo" />
+            <DrumSound Pitch="68" SoundID="unpitched.metal.bells.medium.agogo" Name="Low Agogo" />
+            <DrumSound Pitch="69" SoundID="unpitched.rattle.cabasa" Name="Cabasa" />
+            <DrumSound Pitch="70" SoundID="unpitched.rattle.maraca" Name="Maracas" />
+            <DrumSound Pitch="71" SoundID="unpitched.wind.whistle.police.short" Name="Short Whistle" />
+            <DrumSound Pitch="72" SoundID="unpitched.wind.whistle.police.long" Name="Long Whistle" />
+            <DrumSound Pitch="73" SoundID="unpitched.wood.medium.guiro.short" Name="Short Guiro" />
+            <DrumSound Pitch="74" SoundID="unpitched.wood.medium.guiro.long" Name="Long Guiro" />
+            <DrumSound Pitch="75" SoundID="unpitched.wood.high.claves" Name="Claves" />
+            <DrumSound Pitch="76" SoundID="unpitched.wood.high.woodblock" Name="High Wood Block GM" />
+            <DrumSound Pitch="77" SoundID="unpitched.wood.low.woodblock" Name="Low Wood Block" />
+            <DrumSound Pitch="78" SoundID="unpitched.drum.medium-high.cuica.mute" Name="Mute Cuica" />
+            <DrumSound Pitch="79" SoundID="unpitched.drum.medium-low.cuica" Name="Open Cuica" />
+            <DrumSound Pitch="80" SoundID="unpitched.metal.bells.high.triangle.closed" Name="Mute Triangle" />
+            <DrumSound Pitch="81" SoundID="unpitched.metal.bells.high.triangle" Name="Open Triangle" />
+            <DrumSound Pitch="82" SoundID="unpitched.rattle.shaker" Name="Shaker" />
+            <DrumSound Pitch="83" SoundID="unpitched.metal.bells.medium-high.jingle bell" Name="Jingle Bell" />
+            <DrumSound Pitch="84" SoundID="unpitched.metal.bells.medium-high.bell tree" Name="Bell Tree" />
+        </DrumMapDefinition>
+    </DrumMapList>
+</SoundSet>

@@ -1,0 +1,6 @@
+Storm3D Object Definition (SOD) File Format===========================================Author: Steve WilliamsStorm3D Graphics Engine Lead.Copyright (c) Activision 2000.Modifications: Fixed node specification error.Audience========This document is intended for use by experienced 3D tools programmersfor the purposes of writing exporters, importers and conversion toolsto/from the .SOD format. A good understanding of real time 3D graphicsprinciples is assumed. The reader is expected to be familiar withreal time 3D geometry concepts such as lighting, animation & scenegraph hierarchies.Introduction============The SOD file format is a binary file format describing the 3D directedscene graph hierarchies used by the Storm3D rendering engine.Each .SOD file describes one such hierarchy
+
+
+Section 1 : File Header=======================HEADER Storm3D_SW File identification header (8 bit ascii values) - no strlen or terminating '\0'.FLOAT version Current version is 1.8, older formats are not described at this time.
+
+http://webcache.googleusercontent.com/search?q=cache:muDHScEQbXUJ:armadafiles.com/files/armada-2/official-releases/other/storm3d-object-definition-sod-file-format-18/summary/download&cd=1&hl=en&ct=clnk&gl=us&client=ubuntu
