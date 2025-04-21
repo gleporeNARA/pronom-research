@@ -1,0 +1,44 @@
+{VERSION 3 0 "IBM INTEL NT" "3.0" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 0 
+0 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 }0 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "Maple Output" 0 11 1 
+{CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 }3 3 0 -1 -1 -1 0 0 
+0 0 0 0 -1 0 }}
+{SECT 0 {EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "restart;" }}{PARA 0 "
+> " 0 "" {MPLTEXT 1 0 33 "a:=eval(int(c-c*x-c*y,y=0..1-x)):" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 12 "simplify(a);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 23 "b:=eval(int(a,x=0..1)):" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 14 "simplify(b=1);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "
+c:=fsolve(b=1,c);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#,(%\"cG#\"\"\"\"
+\"#*&F$F&%\"xGF&!\"\"*&F$\"\"\")F)F'F,F%" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#/,$%\"cG#\"\"\"\"\"'F'" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"cG
+$\"\"'\"\"!" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "fxy:=6*(1-x-
+y);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 43 "fy:=simplify(int(6*(1-x-y),x
+=0..1));fxy/fy;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 28 "xgiveny:=(simpli
+fy(fxy/fy));" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$fxyG,(\"\"'\"\"\"%
+\"xG!\"'%\"yGF)" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#fyG,&\"\"$\"\"\"
+%\"yG!\"'" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#*&,(\"\"'\"\"\"%\"xG!\"'%
+\"yGF(\"\"\",&\"\"$F&F)F(!\"\"" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%(x
+givenyG,$*&,(!\"\"\"\"\"%\"xGF)%\"yGF)\"\"\",&F(F)F+\"\"#!\"\"F." }}}
+{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 38 "fx:=simplify(int(6*(1-x-y),y
+=0..1-x));" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%#fxG,(\"\"$\"\"\"%\"xG
+!\"'*$)F(\"\"#\"\"\"F&" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 25 "c
+ombine(simplify(fx*fy));" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#*&,(!\"*\"
+\"\"%\"xG\"#=*$)F'\"\"#\"\"\"F%F&,&!\"\"F&%\"yGF+F&" }}}{EXCHG {PARA 
+0 "> " 0 "" {MPLTEXT 1 0 23 "d:=simplify(fxy-fx*fy);" }}{PARA 11 "" 1 
+"" {XPPMATH 20 "6#>%\"dG,.!\"$\"\"\"%\"xG\"#7%\"yGF)*&F(F'F*F'!#O*$)F(
+\"\"#\"\"\"!\"**&F.F0F*F0\"#=" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 
+0 16 "simplify(d-fxy);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#,.!\"*\"\"\"
+%\"xG\"#=%\"yGF'*&F&F%F(F%!#O*$)F&\"\"#\"\"\"F$*&F,F.F(F.F'" }}}
+{EXCHG {PARA 0 "" 0 "" {TEXT -1 16 "Not independant." }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 87 "ex=int(int(x*6*(1-x-y),y=0..1-x),x=0..1);ex2=int
+(int((x^2)*6*(1-x-y),y=0..1-x),x=0..1);" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#/%#exG#\"\"\"\"\"%" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/%$ex2G#\"
+\"\"\"#5" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "(1/4)-(1/10)^2;
+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6##\"\"'\"#D" }}}{EXCHG {PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 32 "simplify(int(x*xgiveny,x=0..1));" }}{PARA 11 "
+" 1 "" {XPPMATH 20 "6#,$*&,&!\"\"\"\"\"%\"yG\"\"$\"\"\",&F&F'F(\"\"#!
+\"\"#F'F)" }}}{EXCHG {PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{MARK "0 \+
+0 0" 8 }{VIEWOPTS 1 1 0 1 1 1803 }

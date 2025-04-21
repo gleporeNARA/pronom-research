@@ -1,0 +1,214 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 51 
+a1,50,48,49
+ELASTIC BENDING IN A BEAM SUPPORTED AT BOTH ENDS
+.TXT 2 0 2 61 
+a2,61,59,114
+Equations taken from Baumeister, Availone, and Baumeister,  
+"Mark's Standard Handbook for Mechanical Engineers."
+.TXT 3 5 2 67 
+a2,67,65,102
+A beam is supported at both ends. This document finds the maximum 
+stress and deflection in the beam.
+.TXT 3 0 1 18 
+a1,18,16,17
+Beam dimensions:
+.TXT 2 6 1 9 
+a1,9,7,8
+Length:
+.EQN 0 19 1 11 
+L:3*ft
+.TXT 2 -19 1 16 
+a1,16,14,15
+Cross-section:
+.EQN 0 19 1 12 
+H:.3*in
+.EQN 0 14 1 12 
+W:.3*in
+.TXT 2 -39 1 13 
+a1,13,11,12
+Point load:
+.TXT 2 6 1 9 
+a1,9,7,8
+Weight:
+.EQN 0 19 1 13 
+F:50*lbf
+.TXT 2 -19 2 15 
+a2,15,13,24
+Distance from 
+far end:
+.EQN 1 19 1 11 
+a:2*ft
+.TXT 2 -25 1 23 
+a1,23,21,22
+Beam characteristics:
+.EQN 1 25 4 18 
+E:2.9*10^7*lbf/in^2
+.TXT 1 -19 2 13 
+a2,13,11,25
+Modulus of  
+elasticity:
+.TXT 4 -6 1 65 
+a1,65,63,64
+Now compute the deflection and stress at points along the beam:
+.EQN 2 25 4 11 
+I:W*H^3/12
+.TXT 1 -19 2 11 
+a2,11,9,20
+Moment of 
+inertia:
+.TXT 4 0 2 16 
+a2,16,14,27
+Distance to 
+neutral axis:
+.EQN 0 19 3 8 
+c:H/2
+.TXT 4 -19 2 17 
+a2,17,15,24
+Area of 
+cross-section:
+.EQN 0 19 1 10 
+A:W*H
+.TXT 3 -19 2 14 
+a2,14,12,24
+Points along 
+the beam:
+.EQN 0 19 1 13 
+i:0;50
+.EQN 0 20 3 12 
+x[i:i*L/50
+.TXT 5 -39 1 13 
+a1,13,11,12
+Deflection:
+.EQN 2 0 5 68 
+y[i:F*((L-a)*(x[i^3-a*(2*L-a)*x[i)-if(x[i>a,L*(x[i-a)^3,0L^4))/(6*L*E*I)
+.EQN 7 39 4 22 
+xmax:\((a*(2*L-a))/3)
+.TXT 2 -39 1 30 
+a1,30,28,29
+Point of maximum deflection:
+.EQN 2 4 1 17 
+xmax=?ft
+.EQN 2 0 4 46 
+ymax:F*((L-a)*(xmax^3-a*(2*L-a)*xmax))/(6*L*E*I)
+.EQN 4 0 1 18 
+ymax=?in
+.TXT 2 -4 1 60 
+a1,60,58,59
+Side view of beam (vertical dimension greatly exaggerated)
+.EQN 2 -11 8 77 
+0*in&ymax&y[i{1,1,6,70,l}@L&0*ft&x[i
+.TXT 9 4 1 28 
+a1,28,26,27
+Stress and bending moment:
+.EQN 2 9 4 51 
+M[i:F*(L-a)*x[i/L-if(x[i>a,F*(x[i-a),0*F*1L)
+.EQN 5 0 3 21 
+Mmax:F*(L-a)*a/L
+.EQN 1 28 1 19 
+Mmax=?in*lbf
+.EQN 3 -28 3 12 
+S[i:M[i*c/I
+.EQN 4 0 3 16 
+Smax:Mmax*c/I
+.EQN 0 28 4 22 
+Smax=?lbf/in^2
+.TXT 5 -12 1 26 
+a1,25,23,24
+Stress diagram for beam
+.EQN 2 -23 8 68 
+Smax&0*psi&S[i{1,1,6,60,l}@L&0*ft&x[i
+.TXT 8 0 1 4 
+a1,4,2,3
+--
+.TXT 2 -1 1 25 
+a1,24,22,23
+UNIT DEFINITIONS (MKS)
+.TXT 3 0 1 13 
+a1,12,13,11
+Base units
+.EQN 2 5 1 8 
+m~1L
+.EQN 0 18 1 9 
+kg~1M
+.EQN 0 18 1 10 
+sec~1T
+.TXT 2 -41 1 24 
+a1,23,26,22
+Derived units: Length
+.EQN 2 5 1 12 
+cm~.01*m
+.EQN 0 18 1 13 
+km~1000*m
+.EQN 0 18 1 13 
+mm~.001*m
+.EQN 2 -36 1 14 
+ft~.3048*m
+.EQN 0 18 1 14 
+in~2.54*cm
+.EQN 0 18 1 11 
+yd~3*ft
+.TXT 2 -41 1 22 
+a1,21,23,20
+Derived units: Mass
+.EQN 2 5 2 14 
+gm~10^-3*kg
+.EQN 1 18 1 17 
+tonne~1000*kg
+.TXT 0 17 1 14 
+a1,14,12,13
+(metric ton)
+.EQN 2 -35 1 19 
+lb~453.59247*gm
+.TXT 0 24 2 43 
+a2,42,40,63
+(use convention that lb represents
+ pounds MASS; avoirdupois)
+.EQN 2 -24 3 9 
+oz~lb/16
+.EQN 1 18 1 15 
+ton~2000*lb
+.TXT 0 17 1 15 
+a1,15,13,14
+("short" ton)
+.EQN 3 -35 1 18 
+slug~32.174*lb
+.EQN 1 0 4 18 
+g~9.80665*m/sec^2
+.TXT 2 22 1 27 
+a1,27,25,26
+(acceleration of gravity)
+.TXT 3 -27 1 38 
+a1,37,41,36
+Derived units: Force, Energy, Power
+.EQN 2 5 4 18 
+newton~kg*m/sec^2
+.EQN 5 0 1 12 
+lbf~g*lb
+.TXT 0 17 1 16 
+a1,15,13,14
+(pound force)
+.EQN 2 -17 1 12 
+kgf~g*kg
+.TXT 0 17 1 19 
+a1,18,16,17
+(kilogram force)
+.EQN 2 -17 1 18 
+joule~newton*m
+.TXT 2 -5 1 26 
+a1,25,38,24
+Derived units: Pressure
+.EQN 2 5 4 13 
+Pa~newton/m^2
+.EQN 0 18 4 11 
+psi~lbf/in^2

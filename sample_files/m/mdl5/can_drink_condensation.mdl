@@ -1,0 +1,56 @@
+mdl 1.3;
+
+using state import *;
+
+import adobe::mtl::*;
+import adobe::util::*;
+import ::tex::gamma_mode;
+import ::state::normal;
+
+export material MODEL_CAN_DRINK_CONDENSATION_MATERIAL_1(*)
+  = adobe::mtl::standard(
+    translucence : float(0),
+    interiorColor : color(1.0, 1.0, 1.0),
+    indexOfRefraction : float(1.6000),
+    metallic : float(0),
+    baseColor : color(0.83, 0.83, 0.83),
+    roughness : float(0.2),
+    density : float(0),
+    glow : float(0.0),
+    opacity : float(1.0),
+    normal : adobe::util::normal_texture( texture_2d("can_drink_condensation/can_drink_body_normal.png", ::tex::gamma_linear) ),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );
+
+export material MODEL_CAN_DRINK_CONDENSATION_MATERIAL_2(*)
+  = adobe::mtl::standard(
+    translucence : float(0),
+    interiorColor : color(1.0, 1.0, 1.0),
+    indexOfRefraction : float(20.0000),
+    metallic : float(1),
+    baseColor : color(0.4, 0.4, 0.4),
+    roughness : float(0.3),
+    density : float(0),
+    glow : float(0.0),
+    opacity : float(1.0),
+    normal : ::state::normal(),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );
+	
+export material MODEL_CAN_DRINK_CONDENSATION_MATERIAL_3(*)
+  = adobe::mtl::standard(
+    baseColor: color(1.0, 1.0, 1.0),
+    opacity: float(1.0),
+    glow: float(0),
+    roughness: float(0),
+    metallic: float(0),
+    translucence: float(1.0),
+    indexOfRefraction: float(1.33),
+    density: float(0),
+    interiorColor: color(1.f, 1.f, 1.f),
+    normal: ::state::normal(),
+    height: float(0.5),
+    heightScale: float(1.0)
+    );

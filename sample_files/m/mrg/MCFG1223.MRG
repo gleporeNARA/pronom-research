@@ -1,0 +1,482 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against E:\RBBS\STOCK\CONFIG.BAS to produce E:\RBBS\CHAT\CONFIG.BAS
+* E:\RBBS\STOCK\CONFIG.BAS:  Date 6-20-1992  Size 157813 bytes
+* ------------[ Created 12-23-1992 04:56:24 ]------------
+* REPLACING old line(s) by new
+10000 ' CONFIG.BAS (RBBS-PC VERSION 17.4)
+      'by D. Thomas Mack, 39 Cranbury Drive, Trumbull, CT 06611 (up to 16)
+      '  Jon Martin, 4396 N Prairie Willow Ct, Concord, CA 94521 (up to 17.2B)
+      '  Ken Goosens, 5020 Portsmouth Road, Fairfax, VA 22032
+      '  Doug Azzarito, 5480 Eagle Lake Drive, Palm Beach Gardens, FL 33418
+      '
+      ' *******************************NOTICE**********************************
+      ' *  A limited license is granted to all users of this program and it's *
+      ' *  companion program, RBBS-PC (ver. 17.4), to make copies of this     *
+      ' *  program and distribute the copies to other users, on the following *
+      ' *  conditions                                                         *
+      ' *   1.   The copyright notices contained within this program are not  *
+      ' *        altered, bypassed, or removed.                               *
+      ' *   2.   The program is not to be disrtibuted to others in modified   *
+      ' *        form (i.e. the line numbers must remain the same).           *
+      ' *   3.   No fee is charged (or any other consideration received)      *
+      ' *        for coping or distributing these programs without an express *
+      ' *        written agreement with the authors.                          *
+      ' *                                                                     *
+      ' *      Copyright (c) 1983-1992 D. Thomas Mack, The Second Ring        *
+      ' ***********************************************************************
+'     $INCLUDE: 'CNFG-VAR.BAS'
+      CLEAR
+'
+' ****************************************************************************
+' *  DISPLAY THE CONFIG TITLE PAGE
+' ****************************************************************************
+'
+      WIDTH 80
+      CLS
+      NOT.YET.IN$ = "[Not Implemented]"  ' Msg used in config for parm not yet implemented
+      NONE.PICKED$ = "<none>"    ' Standardized message
+      NUM.FILES = 8
+      NUM.GLOBAL = 4
+      NUM.MAIN = 18
+      NUM.SYSOP = 7
+      NUM.UTILITY = 12
+      NUM.LIBRARY = 7
+      VERSION.NUMBER$ = "17.4"
+      I! = FRE(C$)
+      KEY OFF
+      CALL CNFGINIT
+      PRINT TAB(60)"tm"
+      PRINT TAB(16) STRING$(15,205)" U S E R W A R E "STRING$(15,205)
+      PRINT
+      PRINT TAB(17)"Capital PC User Group User-Supported Software"
+      PRINT
+      X$ = "    "
+* ------[ first line different ]------
+      PRINT "Copyright (c) 1983-1991 D. Thomas Mack, 39 Cranbury Dr., Trumbull, CT. 06611"
+      PRINT
+      PRINT X$;"    If you use Maple RBBS-PC " + CONFIG.VERSION$ + " and find"
+      PRINT X$;"    it valuable, consider contributing to"
+      PRINT ""
+      PRINT X$;"                 Capital PC Software Exchange"
+      PRINT X$;"                     Post Office Box 1785"
+      PRINT X$;"                West Bethesda, Maryland  20827"
+      PRINT
+      PRINT X$;"    You are free to copy and share RBBS-PC provided"
+      PRINT X$;"      1.  This program is not distributed in modified form."
+      PRINT X$;"      2.  No fee or consideration is charged for RBBS-PC itself."
+* REPLACING old line(s) by new
+10230 PRINT X$;"      3.  This notice is not bypassed or removed."
+      PRINT
+'
+' *  DEFINE THE FUNCTIONS USED BY CONFIG
+'
+      DEF FNTI! = CSNG(FIX((VAL(MID$(TIME$,1,2)) * 60 * 60) _
+                         + (VAL(MID$(TIME$,4,2)) * 60) _
+                         + (VAL(MID$(TIME$,7,2)) * 1)))
+      DEF FNHSH(X$) = ((ASC(X$) * 100  _
+                         + ASC(MID$(X$,(LEN(X$)/2) + .1,1)) * 10  _
+                         + ASC(RIGHT$(X$,1))) MOD MAX.USR.FILE.SIZE.FRM.DEF) + 1
+      DEF FNHSH2(X$) = (ASC(MID$(X$,2,1)) * 10 + 7) MOD MAX.USR.FILE.SIZE.FRM.DEF
+* ------[ first line different ]------
+      DELAY! = FNTI! + 1
+* REPLACING old line(s) by new
+11600 INPUT #1,CONFIG.FILE.VER$, _
+               DOWNLOAD.DRIVES$, _
+               SYSOP.PASSWORD.1$, _
+               SYSOP.PASSWORD.2$, _
+               SYSOP.FIRST.NAME$, _
+               SYSOP.LAST.NAME$, _
+               REQUIRED.RINGS, _
+               START.OFFICE.HOURS, _
+               END.OFFICE.HOURS, _
+               MINUTES.PER.SESSION!, _
+               MAX.ALLOWED.MSGS.FRM.DEF, _
+               ACT.MNTHS.B4.DELETING, _
+               UPLOAD.DIRECTORY$, _
+* ------[ first line different ]------
+               ZSkipMailCheck, _                    'Pe 11/02/92
+               ACTIVE.BULLETINS, _
+               PROMPT.BELL, _
+               PCJR, _
+               MENUS.CAN.PAUSE, _
+               MENU$(1), _
+               MENU$(2), _
+               MENU$(3), _
+               MENU$(4), _
+               MENU$(5), _
+               MENU$(6), _
+               CONFERENCE.MENU$, _
+               TEST.ANSI.TIME, _
+               WELCOME.INTERRUPTABLE, _
+               REMIND.FILE.TRANSFERS, _
+               PAGE.LENGTH, _
+               MAX.MESSAGE.LINES, _
+               DOORS.AVAILABLE, _
+               MO$
+      IF CONFIG.FILE.VER$ > LEFT$(VERSION.NUMBER$,5) OR _
+         CONFIG.FILE.VER$ < "17.1A" THEN _
+         PRINT "Config DEF file, " + CONFIG.FILENAME$ + " not " + CONFIG.VERSION$ : _
+         END
+      GOSUB 22340
+* REPLACING old line(s) by new
+12626 ON ILOOKUP GOSUB 18000, _  '  41 Field used to locate a users record
+                       18100, _  '  42 Field to distinguish users with same id
+                       17800, _  '  43 Where personal id begins in user rec
+                       17810, _  '  44 Length of personal id in user rec
+                       17830, _  '  45 First Name prompt
+                       17840, _  '  46 Last Name prompt
+                       17850, _  '  47 Enforce upload/download ratios
+                       17630, _  '  48 Restrict users by date
+                       18510, _  '  49 Security level when subscription expires
+                       18530, _  '  50 Days before expiration to warn user
+                       18520, _  '  51 Days a newuser gets when registers
+                       17610, _  '  52 Turn printer off on recycle
+* ------[ first line different ]------
+                       17620, _  '  53 Do Not write Uploadlg.def file? 'Pe 03/31/92
+                       21760, _  '  54 Buffer size for text files
+                       16032, _  '  55 Size of stack space to use
+                       22550, _  '  56 Notify users when SYSOP wants system?
+                       17845, _  '  57 Ask users their (city/state)
+                       12325, _  '  58
+                       21770, _  '  59 Internal Protocols stripped in Maple 'Pe 06/26/92
+                       21900     '  60 Voice synthesizer support
+      GOTO 12325
+* REPLACING old line(s) by new
+12646 ON ILOOKUP GOSUB 17560, _  ' 281 Prompt new users for their preferences
+* ------[ first line different ]------
+                       17565, _  ' 282 Skip Mail check on log on
+                       22550, _  ' 283 New users default file-transfer mode
+                       22550, _  ' 284 Line feeds for new users default to
+                       22550, _  ' 285 Nulls for new users default to
+                       22550, _  ' 286 Prompt bell for new users defaults to
+                       22550, _  ' 287 New users 'graphics' ability is
+                       22550, _  ' 288 New users upper/lower case
+                       22550, _  ' 289 New users margins defaults are
+                       17570, _  ' 290 Remember new users
+                       17580, _  ' 291 Survive no user room
+                       17295, _  ' 292 Max # of mins can bank
+                       12325, _  ' 293
+                       12325, _  ' 294
+                       12325, _  ' 295
+                       12325, _  ' 296
+                       12325, _  ' 297
+                       12325, _  ' 298
+                       12325, _  ' 299
+                       12325     ' 300
+      GOTO 12325
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+12647 ON ILOOKUP GOSUB 20000, _  ' 301 Drive for Chat
+                       20010, _  ' 302 Drive/path for directory
+                       20020, _  ' 303 Extension for directory lists
+                       20030, _  ' 304 Drive/path for work disk
+                       20040, _  ' 305 # of disks in Library
+                       20050, _  ' 306 # of Master directories
+                       20060, _  ' 307 # of subdirectories in each master
+                       20070, _  ' 308 Prefix of subdirectory on Library
+                       20080, _  ' 309 Name of subsystem command menu
+                       20090, _  ' 310 Symbols to use for menu commands
+                       20090, _  ' 311 Security levels for menu functions
+                       20100, _  ' 312 Drive/path of ARCHIVE utility
+                       20110, _  ' 313 Name of ARCHIVE utility
+                       12325, _  ' 314
+                       12325, _  ' 315
+                       12325, _  ' 316
+                       12325, _  ' 317
+                       12325, _  ' 318
+                       12325, _  ' 319
+                       12325     ' 320
+      GOTO 12325
+* INSERTING new line(s)
+17565 CALL GETNUMYN ("Skip Mail check on log on ",ZSkipMailCheck)   'Pe 11/02/92
+      RETURN                                                        'Pe 11/02/92
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+17620 CALL GETNUMYN ("OMIT Users/File Name from UPLOADLG.DEF File ",MUSIC)  'Pe 03/31/92
+      RETURN
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+17650 CALL GETNUMYN ("AUTODOWNLOAD removed in Maple version (answer NO)",ASK.IDENTITY) 'Pe 06/27/92
+      RETURN
+* REPLACING old line(s) by new
+18800 CALL GETNUMYN ("Set the Parameters new in " + CONFIG.VERSION$,AB)
+      IF NOT AB THEN _
+         RETURN
+      HJ$ = CHR$(13)
+'
+' * SET THE PARAMETERS NEW TO THIS RELEASE OF RBBS-PC
+' *  20 = Seconds to wait for ansi detect
+* ------[ first line different ]------
+' *  96 = Seconds to display copyright notice
+' *  97 = Prevent callers from quoting a reply
+' * 159 = Min security to do personal uploads
+' * 160 = Let msgs have multiple recipients
+' * 171 = name of distribution list menu
+' * 172 = drive/path where distribution lists stored
+' * 173 = types of msg protection allowed
+' * 292 = max # of minutes can bank
+'
+      KSTACKED$ = "20" + HJ$ + "96" + HJ$ + _
+                  "97" + HJ$ + "159" + HJ$
+      KSTACKED$ = KSTACKED$ + _
+                  "160" + HJ$ + "171" + HJ$ + _
+                  "172" + HJ$ + "173" + HJ$
+      KSTACKED$ = KSTACKED$ + _
+                  "292" + HJ$
+      IPAGE = 1
+      RETURN
+'
+' * LET THE SYSOP SPECIFY THE NUMBER OF RECORDS IN THE USER FILE
+'
+* REPLACING old line(s) by new
+20000 LOCATE 18,1
+* ------[ first line different ]------
+      A$ = "Specify Drive for CHAT work files in the range A->" + M$ + "(or NONE) " 'Pe 03/31/92
+      MAX = 4
+      GOSUB 13599
+      LIBRARY.DRIVE$ = HJ$
+      IF LEN(HJ$) > 1 AND HJ$ <> "NONE" THEN _
+         GOTO 20000
+      IF LIBRARY.DRIVE$ = "NONE" THEN _
+         LIBRARY.DRIVE$ = "" _
+      ELSE LIBRARY.DRIVE$ = LIBRARY.DRIVE$ + ":"
+      RETURN
+'
+' * LIBRARY DIRECTORY/PATH
+'
+* REPLACING old line(s) by new
+23630 SK = 0
+      GOSUB 30040              ' <----Print message headers
+      FILNUM = 1
+      GOSUB 30050
+      FIELD 1,128 AS MESSAGE.RECORD$
+* ------[ first line different ]------
+      IS.HEADER$ = CHR$(225) + CHR$(226)
+      FOR I = FIRST.MESSAGE.RECORD TO NEXT.MESSAGE.RECORD - 1
+         GET 1,I
+         IF INSTR(IS.HEADER$,MID$(MESSAGE.RECORD$,116,1)) = 0 THEN _
+            GOTO 23725
+         IF VAL(MID$(MESSAGE.RECORD$,117,4)) > 0 AND _
+            SK < VAL(MID$(MESSAGE.RECORD$,2,4)) THEN _
+            SK = VAL(MID$(MESSAGE.RECORD$,2,4)) : _
+            I = LOC(1) + VAL(MID$(MESSAGE.RECORD$,117,4)) - 1 _
+         ELSE GOTO 23725
+         I$ = "K"
+         IF MID$(MESSAGE.RECORD$,116,1) = CHR$(225) THEN _
+            I$ = "A"
+         IF LOC(1) > NEXT.MESSAGE.RECORD - 1 THEN _
+            GOTO 23730
+         PRINT LEFT$(MESSAGE.RECORD$,5) + " " + _
+               MID$(MESSAGE.RECORD$,76,25) + " " + _
+               MID$(MESSAGE.RECORD$,101,15) + " " + _
+               I$ + " " + _
+               MID$(MESSAGE.RECORD$,117,4) + " " + _
+               STR$(LOC(1)) + " "  + _
+               STR$(I)
+         SK = VAL(MID$(MESSAGE.RECORD$,2,4))
+         IF RB AND VAL(MID$(MESSAGE.RECORD$,2,4)) = CALLS.TODATE! THEN _
+            GOTO 23730
+         IF RB THEN _
+            GOSUB 50580
+* REPLACING old line(s) by new
+24800 CLS
+      I! = FRE(C$)
+      COLOR 0,7,0
+* ------[ first line different ]------
+      LOCATE 1,3
+      PRINT " Maple RBBS-PC Default Configuration " + CONFIG.VERSION$";
+      IF CONFERENCE.MODE THEN _
+         GOSUB 24970
+      COLOR FG,BG,BORDER
+      PRINT " Page" + STR$(DISPLAYED.PAGE.NUMBER) + " of" + STR$(MAXIMUM.DISPLAYABLE.PAGES)
+      RETURN
+'
+' * ROUTINE TO DISPLAY CONFERENCE MAINTENANCE MODE IN CONFIG'S DISPLAYS
+'
+* REPLACING old line(s) by new
+50580 OLD = LOC(1)
+      GET 1,I + 1
+      IF (MID$(MESSAGE.RECORD$,116,1) = CHR$(225) _
+         OR  MID$(MESSAGE.RECORD$,116,1) = CHR$(226)) _
+         AND (MID$(MESSAGE.RECORD$,61,1) = ":" _
+* ------[ first line different ]------
+         AND MID$(MESSAGE.RECORD$,70,1) = "-" _
+         AND MID$(MESSAGE.RECORD$,73,1) = "-") THEN _
+         RETURN
+      PRINT "Message chain broken at record number " + STR$(OLD)
+      PRINT "Message chain repair in progress!
+      FOR IQ = OLD + 1 TO NEXT.MESSAGE.RECORD - 1
+         GET 1,IQ
+         IF (MID$(MESSAGE.RECORD$,116,1) = CHR$(225) _
+            OR MID$(MESSAGE.RECORD$,116,1) = CHR$(226)) _
+            AND (MID$(MESSAGE.RECORD$,61,1)  = ":" _
+            AND  MID$(MESSAGE.RECORD$,64,1)  = ":" _
+            AND  MID$(MESSAGE.RECORD$,70,1) = "-" _
+            AND  MID$(MESSAGE.RECORD$,73,1) = "-") THEN _
+            GET 1,OLD : _
+            MID$(MESSAGE.RECORD$,117,4) = STR$(IQ - OLD) : _
+            PUT 1,OLD : _
+            PRINT "Message chain repaired." : _
+            I = IQ : _
+            RETURN
+      NEXT
+      RETURN 23730
+'
+' * COMMON SUBROUTINE TO HASH A USER'S NAME TO FIND THE CORRECT USER RECORD #
+'
+* REPLACING old line(s) by new
+59030 WRITE #1,VERSION.NUMBER$, _
+               DOWNLOAD.DRIVES$, _
+               SYSOP.PASSWORD.1$, _
+               SYSOP.PASSWORD.2$, _
+               SYSOP.FIRST.NAME$, _
+               SYSOP.LAST.NAME$, _
+               REQUIRED.RINGS, _
+               START.OFFICE.HOURS, _
+               END.OFFICE.HOURS, _
+               MINUTES.PER.SESSION!, _
+               MAX.ALLOWED.MSGS.FRM.DEF, _
+               ACT.MNTHS.B4.DELETING, _
+               UPLOAD.DIRECTORY$,_
+* ------[ first line different ]------
+               ZSkipMailCheck, _                 'Pe 11/02/92
+               ACTIVE.BULLETINS, _
+               PROMPT.BELL, _
+               PCJR, _
+               MENUS.CAN.PAUSE, _
+               MENU$(1), _
+               MENU$(2), _
+               MENU$(3), _
+               MENU$(4), _
+               MENU$(5), _
+               MENU$(6), _
+               CONFERENCE.MENU$, _
+               TEST.ANSI.TIME, _
+               WELCOME.INTERRUPTABLE, _
+               REMIND.FILE.TRANSFERS, _
+               PAGE.LENGTH, _
+               MAX.MESSAGE.LINES, _
+               DOORS.AVAILABLE, _
+               MO$
+      IF INSTR(BULLETIN.MENU$,":") < 1 THEN _
+         BULLETIN.MENU$ = DRIVE.FOR.BULLETINS$ + _
+                          BULLETIN.MENU$
+      IF INSTR(BULLETIN.PREFIX$,":") < 1 THEN _
+         BULLETIN.PREFIX$ = DRIVE.FOR.BULLETINS$ + _
+                            BULLETIN.PREFIX$
+      IF GLOBAL.FUNCTION(3) > MINIMUM.LOGON.SECURITY THEN _
+         GLOBAL.FUNCTION(3) = MINIMUM.LOGON.SECURITY
+      IF FILES.FUNCTION(2) > MINIMUM.LOGON.SECURITY THEN _
+         FILES.FUNCTION(2) = MINIMUM.LOGON.SECURITY
+      IF LIBRARY.FUNCTION(4) > MINIMUM.LOGON.SECURITY THEN _
+         LIBRARY.FUNCTION(4) = MINIMUM.LOGON.SECURITY
+      IF LIBRARY.DRIVE$ = "" THEN _
+         MAIN.FUNCTION(18) = 32767
+      WRITE #1,MAIN.MESSAGE.FILE$, _
+               MAIN.MESSAGE.BACKUP$, _
+               CALLERS.FILE$, _
+               COMMENTS.FILE$, _
+               MAIN.USER.FILE$, _
+               WELCOME.FILE$, _
+               NEWUSER.FILE$, _
+               DIRECTORY.EXTENTION$, _
+               COM.PORT$, _
+               BULLETINS.OPTIONAL, _
+               USER.INIT.COMMAND$, _
+               RTS$, _
+               ZCallersLst$, _
+               FG, _
+               BG, _
+               BORDER, _
+               RBBS.BAT$, _
+               RCTTY.BAT$
+      WRITE #1,OMIT.MAIN.DIRECTORY$, _
+               FIRST.NAME.PROMPT$, _
+               HELP$(3), _
+               HELP$(4), _
+               HELP$(7), _
+               HELP$(9), _
+               BULLETIN.MENU$, _
+               BULLETIN.PREFIX$, _
+               DRIVE.FOR.BULLETINS$, _
+               MESSAGE.REMINDER, _
+               REQUIRE.NON.ASCII, _
+               ASK.EXTENDED.DESC, _
+               MAXIMUM.NUMBER.OF.NODES, _
+               NETWORK.TYPE, _
+               RECYCLE.TO.DOS, _
+               MAX.USR.FILE.SIZE.FRM.DEF, _
+               MAX.MSG.FILE.SIZE.FRM.DEF!, _
+               TRASHCAN.FILE$
+      WRITE #1,MINIMUM.LOGON.SECURITY, _
+               DEFAULT.SECURITY.LEVEL, _
+               SYSOP.SECURITY.LEVEL, _
+               FILESEC.FILE$, _
+               SYSOP.MENU.SECURITY.LEVEL, _
+               CONFMAIL.LIST$, _
+               MAXIMUM.VIOLATIONS, _
+               SYSOP.FUNCTION(1), _
+               SYSOP.FUNCTION(2), _
+               SYSOP.FUNCTION(3), _
+               SYSOP.FUNCTION(4), _
+               SYSOP.FUNCTION(5), _
+               SYSOP.FUNCTION(6), _
+               SYSOP.FUNCTION(7), _
+               PASSWORD.FILE$, _
+               MAXIMUM.PASSWORD.CHANGES, _
+               MINIMUM.SECURITY.FOR.TEMP.PASSWORD, _
+               OVERWRITE.SECURITY.LEVEL, _
+               DOORS.TERMINAL.TYPE, _
+               MAX.PER.DAY
+      WRITE #1,MAIN.FUNCTION(1), _
+               MAIN.FUNCTION(2), _
+               MAIN.FUNCTION(3), _
+               MAIN.FUNCTION(4), _
+               MAIN.FUNCTION(5), _
+               MAIN.FUNCTION(6), _
+               MAIN.FUNCTION(7), _
+               MAIN.FUNCTION(8), _
+               MAIN.FUNCTION(9), _
+               MAIN.FUNCTION(10), _
+               MAIN.FUNCTION(11), _
+               MAIN.FUNCTION(12), _
+               MAIN.FUNCTION(13), _
+               MAIN.FUNCTION(14), _
+               MAIN.FUNCTION(15), _
+               MAIN.FUNCTION(16), _
+               MAIN.FUNCTION(17), _
+               MAIN.FUNCTION(18), _
+               MIN.NEWCALLER.BAUD, _
+               WAIT.BEFORE.DISCONNECT
+      WRITE #1,FILES.FUNCTION(1), _
+               FILES.FUNCTION(2), _
+               FILES.FUNCTION(3), _
+               FILES.FUNCTION(4), _
+               FILES.FUNCTION(5), _
+               FILES.FUNCTION(6), _
+               FILES.FUNCTION(7), _
+               FILES.FUNCTION(8), _
+               UTILITY.FUNCTION(1), _
+               UTILITY.FUNCTION(2), _
+               UTILITY.FUNCTION(3), _
+               UTILITY.FUNCTION(4), _
+               UTILITY.FUNCTION(5), _
+               UTILITY.FUNCTION(6), _
+               UTILITY.FUNCTION(7), _
+               UTILITY.FUNCTION(8), _
+               UTILITY.FUNCTION(9), _
+               UTILITY.FUNCTION(10), _
+               UTILITY.FUNCTION(11), _
+               UTILITY.FUNCTION(12), _
+               GLOBAL.FUNCTION(1), _
+               GLOBAL.FUNCTION(2), _
+               GLOBAL.FUNCTION(3), _
+               GLOBAL.FUNCTION(4), _
+               UPLOAD.TIME.FACTOR!, _
+               COMPUTER.TYPE, _
+               REMIND.PROFILE, _
+               RBBS.NAME$, _
+               COMMANDS.BETWEEN.RINGS, _
+               ZCopyrightSecs, _
+               PAGING.PRINTER.SUPPORT$, _
+               MODEM.INIT.BAUD$

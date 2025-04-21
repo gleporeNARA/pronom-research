@@ -1,0 +1,223 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 45 
+a1,44,78,43
+MATHCAD VERSION 2.50 ON-LINE RELEASE NOTES
+.TXT 2 8 4 60 
+a4,59,57,197
+This file contains the most up-to-date product 
+information on this release of MathCAD, including 
+additions and corrections to the material in the MathCAD 
+User's Guide and printed release notes.
+.TXT 5 -8 1 31 
+a1,30,28,29
+HOW TO CONTACT MATHSOFT INC.
+.TXT 2 8 13 68 
+a13,67,65,608
+If you require any assistance, please call MathSoft Technical 
+Support at (617) 577-1017. We would be pleased to help you from 
+9:00 AM to 5:30 PM (Eastern Time), Monday through Friday.
+Please have your serial number ready when you call. (The serial
+number is on the inside cover of the manual.)
+
+We strongly encourage you to mail in your registration card. 
+Registered users receive the quarterly MathSoft User's Journal. 
+Registered users will also receive information on future upgrades 
+to MathCAD. 
+
+If you think you have found a bug, please call technical support 
+and bring it to our attention. 
+.TXT 14 -8 1 27 
+a1,26,24,25
+SEND US YOUR SUGGESTIONS
+.TXT 2 8 3 66 
+a3,65,63,149
+Help us plan for new features in future versions of MathCAD. We 
+appreciate your suggestions for new features, or for changes in 
+existing features.
+.TXT 4 -8 1 20 
+a1,19,35,18
+MATHCAD DOCUMENTS
+.TXT 2 8 5 72 
+a5,71,70,208
+The MathCAD Auxiliary Disk contains many sample documents. You can 
+load these documents into MathCAD to see some ways to use MathCAD's 
+features.
+
+See the file DIRECTRY.MCD for a list of these documents.
+.TXT 6 -8 1 18 
+a1,17,15,16
+UNITS DOCUMENTS
+.TXT 2 8 12 69 
+a12,68,66,496
+The MathCAD Auxiliary Disk includes three files that contain unit  
+conversions.
+
+CGS.MCD contains unit conversions in the cgs system, based on 
+centimeters, grams, and seconds. All units, including electrical 
+units, are defined in terms of these base units.
+
+MKS.MCD contains unit conversions in the MKS system, based on 
+meters, kilograms, seconds, and coulombs.
+
+USCUSTOM.MCD contains unit conversions based on the U.S. Customary 
+units of feet, pounds (mass), seconds, and coulombs.  
+.TXT 13 0 3 65 
+a3,64,62,129
+You can add these conversions into files you create, or append 
+them to the end of your files using the MathCAD append 
+command.
+.TXT 4 -8 2 16 
+a2,15,13,29
+PROGRAM NOTES 
+=============
+.TXT 3 0 1 20 
+a1,19,17,18
+REDISPLAY COMMAND
+.TXT 2 8 21 67 
+a21,66,64,841
+If you suspect that the MathCAD display screen is not accurately 
+reflecting the state of a document, or if equations on screen 
+have gaps or overlap one another, use the redisplay command by 
+pressing [Ctrl]R. This redisplays the whole screen.
+
+Here are some actions that can cause the display to have gaps or 
+unreadable parts:
+
+    1. Regions that overlap one another on the screen.
+
+    2. Error messages from an equation or plot that coincide     
+       on screen with other regions.
+
+    3. Cutting and pasting equations that overlap one another.
+
+    4. Interrupting the display of a surface plot or sketch with
+       [Ctrl]A or [Ctrl][Break]
+
+None of these problems can cause computational errors; they 
+affect the display only. When the information on the screen is 
+unclear, press [Ctrl]R to redisplay everything.  
+.TXT 22 -8 1 21 
+a1,20,18,19
+PRINTING DOCUMENTS
+.TXT 2 7 2 65 
+a2,64,72,115
+We recommend that you save your documents before printing, in
+case of an unrecoverable printer-interface problem.
+.TXT 3 0 3 64 
+a3,63,72,180
+If you try to print with no printer selected, MathCAD shows
+you the menu of printer types. Select one and press [Enter].
+Then use the print command again to print your document.
+.TXT 4 0 3 68 
+a3,67,65,153
+If your printer works with other programs but not with MathCAD, 
+MathCAD may be having difficulty communicating with your printer. 
+Check the following:
+.TXT 4 0 2 65 
+a2,64,72,124
+PARALLEL PRINTERS: Specify PRN or LPT1 as the printer device.
+(Specify LPT2 if the printer is on the second parallel port.
+.TXT 3 0 7 66 
+a7,65,65,275
+SERIAL PRINTERS: First execute the following DOS commands:
+
+    MODE COM1: 9600,N,8,1,P           (or other parameters as 
+                                      appropriate for printer)
+    MODE LPT1:= COM1
+
+Then, when MathCAD prompts for a printer device, specify PRN.
+.TXT 8 0 8 69 
+a8,68,72,324
+PLOTTERS: First execute the following DOS command:
+
+    MODE COM1: 9600,N,8,1,P           (see your plotter manual to
+                                      make sure this is correct)
+
+Then, when MathCAD prompts for a printer device, specify COM1. DO
+NOT use LPT1 or PRN, even if you have redirected them to COM1.
+   
+.TXT 8 -7 1 37 
+a1,36,78,35
+WHAT TO DO IF MATHCAD CANNOT PRINT
+.TXT 2 7 4 68 
+a4,67,71,246
+First, check that your printer is compatible with a model that
+MathCAD supports. See the description of printing in the User's
+Guide and the descriptions of each printer driver in the printed
+Release Notes in the disk pocket of your package. 
+.TXT 5 0 18 71 
+a18,70,68,636
+If MathCAD cannot print directly, try printing to a file as follows:
+
+   1. Print the document to a file. Type [Esc] print [Enter].
+   When MathCAD prompts you for a print area, press [Enter].
+   Then, in place of the printer device, specify a filename like
+   OUTPUT.PRN.
+
+   2. Save your document and exit MathCAD by pressing [Ctrl]Q.
+
+   3. At the DOS prompt, type:
+
+               COPY /B OUTPUT.PRN PRN
+
+   This sends the print file to the printer. Substitute the
+   filename you used in step 1 for OUTPUT.PRN and the name of
+   the port to which your printer is attached (for example,
+   LPT1 or COM1) for PRN.  
+
+.TXT 18 -7 1 18 
+a1,17,78,16
+REPLACE COMMAND
+.TXT 2 7 4 67 
+a4,66,64,222
+MathCAD will not always recalculate equations as necessary     
+after using the replace command ([Ctrl][F6]). After a replace 
+command, do a process command to ensure that the calculations in 
+the document are up to date.
+.TXT 5 -7 1 31 
+a1,30,78,29
+AT & T 6300 SERIES COMPUTERS
+.TXT 2 7 7 70 
+a7,69,67,200
+To run in high-resolution mode (640x400 color or monochrome) on an
+AT&T 6300 series computer, type:
+
+    MCAD /A
+
+If you do not type /A, MathCAD runs in CGA-emulation mode (640x200 
+monochrome).
+.TXT 8 -7 1 42 
+a1,41,78,40
+SKETCH FILES WITH MORE THAN 8000 POINTS
+.TXT 2 7 5 68 
+a5,67,71,288
+The program MCSTRANS.EXE, included with this disk, translates
+HPGL files into MathCAD's sketch format. If the resulting sketch
+has more than 8000 points, MathCAD cannot show the whole sketch
+in a MathCAD document. Instead, you see a partial sketch showing
+only the first 8000 points.
+.TXT 6 -7 1 22 
+a1,21,78,20
+BLOCK CUT AND PASTE
+.TXT 2 7 4 68 
+a4,67,65,222
+If you paste a block of regions and change your mind, just press 
+[F3] to cut them again. The manual states that MathCAD will 
+prompt you if the pasted regions overlap existing regions; 
+actually, there is no such prompt.
+.TXT 5 -7 1 20 
+a1,19,78,18
+COMPLEX TOLERANCE
+.TXT 2 7 1 72 
+a1,71,71,70
+The maximum complex tolerance is 63, not 308 as stated in the manual.

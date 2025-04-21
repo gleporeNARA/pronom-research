@@ -1,0 +1,732 @@
+*SANSMODEL*
+
+
+
+*NOTES*
+
+*VERSION*
+  VERSION NO.  = 5.00
+  VERSION TYPE = Full Version
+  VERSION DATE = 01-01-2015
+  COPYRIGHT    = Nathan Madutujuh
+  LICENSEE     = Ir. Nathan Madutujuh, M.Sc, Bandung
+*MODELHISTORY*
+  Creation Date = 01-01-2015
+  Created  By   = 
+  Creation Note = 
+  Revision Date = 01-01-2015
+  Revised  By   = 
+  Revision Note = 
+*STRUCTURE*
+  Structure Model      = 2 : PTruss
+  Structure Material   = 2 : Concrete
+  Structure Type       = 0 : DuctileFrame
+  Design Method        = 2 : Capacity
+  Design Code          = 11 : PBI-2003
+  Steel Design Option  = 1 : Linear
+  Earthquake Load Design Code    = 5
+  Special Building Model Option  = 0
+  Use Material Schedule Flag     = 0
+*UNITS*
+  Unit Type     = 0
+  Unit Name     = kgcm
+  Modulus       = kg/cm2
+  Unit Weight   = kg/cm3
+  Length        = cm
+  Displacement  = cm
+  Force         = kg
+  Moment        = kg.cm
+  Torsion       = kg.cm
+  Stress        = kg/cm2
+  Gravity Accel = cm/s2
+*ANALYSIS*
+  Analysis Method      = 1 : Static
+  Linearity Model      = 1 : Linear Static
+  Rigid Floor          = 1
+  Number of Eigen      = 0
+  Damping Ratio        = 0.000
+  Earthquake Dir Comb  = 3
+  Total Earthquake Dir = 0
+  Gravity Acceleration =    981.00000
+  Condensation Level   = 2
+  P-Delta Effects      = 0
+  Ductility Factor     = 1.000
+  #1 Lateral Load Case with Pdelta = 0
+  #2 Lateral Load Case with Pdelta = 0
+  Include Slab Thickness for Beam Weight = 0
+  Use Effective Steel and Concrete Inertia = 0
+  Use Base Shear Correction = 0
+  Use Rigid End Zone for Beam = 3
+  Rigid End Zone Correction Factor for Beam,   Alpha1 =    0.500
+  Rigid End Zone Correction Factor for Column, Alpha2 =    0.500
+  Starting Vector for Eigen Analysis = 0
+  Stiffness Option for Plane Stress/Strain = 0
+  Shell FEM Formulation Method = 3
+  Multiple Tower or Diaphragms = 0
+  Mass Type = 0
+  Damping Type = 0
+  Blast Analysis Flag = 0
+  Shear Deformation Flag      = 0
+  Tappered Section Option     = 0
+  End Moment Spring Option    = 0
+  Moment Spring Parameter Opt = 0
+  Construction Stage Analysis Option = 0 0 0 0.000000
+  Slab Weight Load Case Option = 0
+  Steel Bracing Activation Option = 0
+  Diaphragm Force Option s= 0
+*SOLVER*
+  Equation Solver Method          = 0
+  Equation Solver Parallelism     = 0
+  Equation Solver Storage System  = 0
+  Equation Solver Assembly Method = 0
+*FEOPTION*
+  FE Option, Node Numbering Order = 0
+  FE Option, Materially Nonlinear = 0
+  FE Option, Geometrically Nonlinear = 0
+  FE Option, Coordinate System = 0
+  FE Option, Explicit Formulation = 0
+  FE Option, Rotational DOF = 1
+  FE Option, Membrane Stiffness = 1
+  FE Option, Bending Stiffness = 4
+  FE Option, Gauss Point, Membrane = 2
+  FE Option, Gauss Point,Bending = 2
+  FE Option, Co-Rotational = 1
+  Frame Option, Spring Stiffness = 1
+*AUTOMESH*
+  Automesh, Max Element Size =    150.00000
+  Automesh, Max Aspect Ratio =     10.00000
+  Automesh, Min Node Dist    =      0.10000
+  Automesh, Merge Close Node = 0
+*DIRECTINTEGRATION*
+  Parameter Gamma =   0.00000000
+  Parameter Beta  =   0.00000000
+  Parameter Alpha =   0.00000000
+  Damping Ratio Mode #1 = 0.000
+  Frequency     Mode #1 =      0.00000
+  Damping Ratio Mode #2 = 0.000
+  Frequency     Mode #2 =      0.00000
+  Frequency Cutt-Off    =      0.00000
+  Maximum Time Step     =      0.00000
+  Maximum Analysis Time =      0.00000
+  Integration Method    = 0
+  Wilson-Theta =   0.00000000
+*NONLINEAR*
+  Materially Nonlinear Type = 0
+  Strain Type = 0
+  Deform Type = 1
+  Solver Type = 0
+  Iteration Method = 1
+  Post Buckling = 1
+  Load Increment Type = 0
+  Load Step Ratio = 0.10000
+  Max Load Step   = 0
+  N Update K      = 0
+  Residual Correction = 1
+  Update Coordinate = 0
+  Load Comb No  = 1
+  Load Case Opt = 0
+  Max Iteration = 20
+  Tolerance, Displacement = 1E-005
+  Tolerance, Rotation = 1E-005
+  Tolerance, Force = 1E-005
+  Tolerance, Moment = 1E-005
+  Initial Lambda = 0
+  Divergen Max Fac = 0
+  Convergence Checking = 0
+  Convergence Check for Disp = 0
+  Convergence Check for Force = 0
+  Convergence Check for Work = 0
+  Joint Load Node N1,N2 = 0 0
+  Joint Load Dir  = 1
+  Joint Disp Node N1,N2 = 0 0
+  Joint Disp Dir  = 1
+  Use Bending Stress for Emod = 0
+*PARAMETER*
+  Number of 2D Node             = 8
+  Number of 3D Node             = 0
+  Number of Supported Node      = 2
+  Number of Material Properties = 1
+  Number of Section Properties  = 4
+  Number of Design Data         = 4
+  Number of Texture Properties  = 0
+  Number of Element Set/ELSET   = 4
+  Number of Linear Spring Element = 0
+  Number of Truss Element       = 13
+  Number of Frame Element       = 0
+  Number of QPS8  Element       = 0
+  Number of QPB8  Element       = 0
+  Number of QUAD4 Element       = 0
+  Number of Nodal Mass          = 0
+  Number of Joint Load          = 8
+  Number of Truss Load Type     = 0
+  Number of Truss Load          = 0
+  Number of Frame Load Type     = 0
+  Number of Frame Load          = 0
+  Number of Material Schedule   = 0
+*SOILTAB*
+  0  0  0
+*MATERIAL*
+   1  1 ISOTROPIC STEEL 0 0 0 0     0.00 0  0.000  0.000
+      0 1.17E-005 0.00785 2100000 840000 0.25
+*SECTION*
+   1  11 USER         0 0 L80x80x8
+     L80x80x8 1
+   2  11 USER         0 0 L60x60x6
+     L60x60x6 1
+   3  11 USER         0 0 L50x50x5
+     L50x50x5 1
+   4  11 USER         0 0 L40x40x4
+     L40x40x4 1
+*DESIGN*
+   1   2 STEEL_TRUSS  L80x80x8 1 1 11 1 1 1 0
+      0.9 0.75 0.85 0.85 0.75 0.75 0.9 0.8   1 1 1 1 1   1 1 1 1 1
+      STEELDSG   = 0 0 1 L80x80x8 NOSECTION 1 1 0  2100000 3700 2400  0 0 0 0 0.85  ST-37 0 0 0 0 0 0 0
+      CONNECTION = 1  3700 2400 1600 0.8  0 0 0 0  4079 2532 1688 1.6  0.85  2 2 0 1 0 0 0  0 0 0 0 0    
+   2   2 STEEL_TRUSS  L60x60x6 1 1 11 1 1 1 0
+      0.9 0.75 0.85 0.85 0.75 0.75 0.9 0.8   1 1 1 1 1   1 1 1 1 1
+      STEELDSG   = 0 0 1 L60x60x6 NOSECTION 1 1 0  2100000 3700 2400  0 0 0 0 0.85  ST-37 0 0 0 0 0 0 0
+      CONNECTION = 1  3700 2400 1600 0.6  0 0 0 0  4079 2532 1688 1.2  0.85  1 2 0 1 0 0 0  0 0 0 0 0    
+   3   2 STEEL_TRUSS  L50x50x5 1 1 11 1 1 1 0
+      0.9 0.75 0.85 0.85 0.75 0.75 0.9 0.8   1 1 1 1 1   1 1 1 1 1
+      STEELDSG   = 0 0 1 L50x50x5 NOSECTION 1 1 0  2100000 3700 2400  0 0 0 0 0.85  ST-37 0 0 0 0 0 0 0
+      CONNECTION = 1  3700 2400 1600 0.6  0 0 0 0  4079 2532 1688 1.2  0.85  1 2 0 1 0 0 0  0 0 0 0 0    
+   4   2 STEEL_TRUSS  L40x40x4 1 1 11 1 1 1 0
+      0.9 0.75 0.85 0.85 0.75 0.75 0.9 0.8   1 1 1 1 1   1 1 1 1 1
+      STEELDSG   = 0 0 1 L40x40x4 NOSECTION 1 1 0  2100000 3700 2400  0 0 0 0 0.85  ST-37 0 0 0 0 0 0 0
+      CONNECTION = 1  3700 2400 1600 0.6  0 0 0 0  4079 2532 1688 1.2  0.85  1 2 0 1 0 0 0  0 0 0 0 0    
+*TEXTURE*
+*ELSET*
+   1   1  1  1  0  
+   2   1  2  2  0  
+   3   1  3  3  0  
+   4   1  4  4  0  
+*MATERIALSCHEDULE*
+*LOADING*
+  Lateral Load Type = -1
+  Dead Load #1 = 1
+  Live Load #1 = 2
+  Dead Load #2 = 1
+  Live Load #2 = 2
+  Wind Load #1 = 0
+  Wind Load #2 = 0
+  Earthquake  Load #1 = 0
+  Earthquake  Load #2 = 0
+  Prestressed Load # =  0 : (Service)
+  Prestressed Pe/Po Ratio =  0.700 : (Ratio of Pe/Po)
+  Earth Press Load #  = 0
+  LL Reduction for Earthquake  =  1.000
+  LL Reduction for Wind Load   =  1.000
+  LL Reduction for Weight/Mass =  1.000
+  LL Reduction for Main Girder =  1.000
+  Load Combination Type   = 3
+  Load Combination Option = 1
+  Number of Load System   = 2
+  Number of Load Case     = 2, 2
+  Combination # 1 =    1.400   1.400   0.000
+  Combination # 2 =    1.200   1.200   1.600
+  Reduced Load Factor By 30pct for Temporary Load = 0
+  Use Unity Load Factors = 0
+  Service Wind Load #1 = 0
+  Service Wind Load #2 = 0
+  Rain/Storm Load   #  = 0
+  Temp Worker Load  #  = 0
+  Combination for Uplift    = 1
+  Combination for Wind Load = 0
+  Use Vertical Earthquake   = 1
+  Uplift Water Pressure = 0
+  Notional Load #1      = 0
+  Notional Load #1      = 0
+  Notional Load #2      = 0
+  Notional Load #2      = 0
+  Use Notional Load for Gravity LoadComb = 0
+  Use Notional Load for Lateral LoadComb = 0
+  Notional Load Coeffcient               = 0.000000
+  Spare Load case #1 = 0
+  Spare Load case #2 = 0
+  Spare Load case #3 = 0
+  Spare Load case #4 = 0
+*NODE3D*
+*NODEXY*
+   1  0 0
+   2  150 0
+   3  300 0
+   4  450 0
+   5  600 0
+   6  150 150
+   7  450 150
+   8  300 300
+*SUPPORT*
+     1  1 0 0  0  0  
+     5  1 0 0  0  0  
+*SPRING*
+*TRUSS*
+     1     1    2   2  0 0 0
+     2     2    3   2  0 0 0
+     3     3    4   2  0 0 0
+     4     4    5   2  0 0 0
+     5     1    6   2  0 0 0
+     6     6    8   2  0 0 0
+     7     8    7   2  0 0 0
+     8     7    5   2  0 0 0
+     9     2    6   1  0 0 0
+    10     4    7   1  0 0 0
+    11     3    6   1  0 0 0
+    12     3    7   1  0 0 0
+    13     3    8   1  0 0 0
+*FRAME*
+*QUAD4*
+*QPS8*
+*QPB8*
+*JLOAD*
+   1     1  0,-100,0,0,0,0  0
+   1     6  0,-200,0,0,0,0  0
+   1     8  0,-200,0,0,0,0  0
+   1     7  0,-200,0,0,0,0  0
+   1     5  0,-100,0,0,0,0  0
+   2     5  -150,0,0,0,0,0  0
+   2     7  -300,0,0,0,0,0  0
+   2     8  -150,0,0,0,0,0  0
+*TLOADTAB*
+*TLOAD*
+*FLOADTAB*
+*FLOAD*
+*QLOADTAB*
+*QLOAD*
+*WINDLOAD*
+  Wind Code        = 1
+  Wind Exposure    = 2
+  Wind Drag Option = 0
+  Importancy Factor      =    1.00
+  Datum for Wind Height  =    0.00
+  Basic Wind Speed (Mph) =   70.00
+  Solidity Ratio         =    1.00
+  Constant Wind Pressure =    0.00
+  User Drag Coef., Windward =    0.90
+  User Drag Coef., Leeward  =    0.40
+*EQ-GENERIC*
+1 1.000 1.000  0.0000  0.0000  0.7500  0.7500  8.5000  8.5000  4.0000  4.0000  0.1000  0.1000  0.0000
+ 0.0000  0.0000          0.0          0.0          0.0          0.0
+
+*PPTGIUG-1983*
+Ductile Portal, Reinforced Concrete
+Ductile Portal, Reinforced Concrete
+3 3 2 1 1.000 1 0 0 1 1 0
+ 0.0000
+ 1.0000  4.0000 0.07300  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+ 1.0000  4.0000 0.07300  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+
+*SNI-1726-2002*
+Moment-Resisting Frame System, Special Moment Resisting Frame, Concrete
+Moment-Resisting Frame System, Special Moment Resisting Frame, Concrete
+4 3 2 1 1.000 1 0 0 1 1 0
+ 0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000  0.5000  0.0000
+ 8.5000  2.8000 0.07300  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+ 8.5000  2.8000 0.07300  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+
+*UBC-1994*
+Moment-Resisting Frame System, Special Moment Resisting Frame, Concrete
+Moment-Resisting Frame System, Special Moment Resisting Frame, Concrete
+4 3 2 1 1.250 1 0 0 1 1 0
+ 0.0000
+11.9000  2.8000 0.07300  0.0000  0.0000  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+11.9000  2.8000 0.07300  0.0000  0.0000  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+
+*UBC-1997*
+Moment-Resisting Frame System, Special Moment Resisting Frame, Concrete
+Moment-Resisting Frame System, Special Moment Resisting Frame, Concrete
+4 4 2 1 1.250 1 0 0 1 1 0
+1 1  1.0000  1.0000  1.0000  1.0000  0.5000  0.5000  0.5000
+ 8.5000  2.8000 0.07300  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+ 8.5000  2.8000 0.07300  0.0000  0.0000  0.0000  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+
+*IBC-2000*
+Moment-Resisting Frame System, Special Moment Resisting Frame, Concrete
+Moment-Resisting Frame System, Special Moment Resisting Frame, Concrete
+0 5 2 2 1.000 1 0 0 1 1 0  0.0000
+ 1.5000  0.5370  0.9000  2.4000  1.3500  1.2890  0.9000  0.8590  0.1910  0.9550  0.1800  1.2000  1.0000
+ 7.0000  2.5000 0.04700  2.2750  0.0540  0.1290  0.0000  0.0400  0.0540    3059701.8  0.1590     487258.1
+ 7.0000  2.5000 0.04700  2.2750  0.0540  0.1290  0.0000  0.0400  0.0540    3059701.8  0.1590     487258.1
+
+*MEXICO-1993*
+Ductile Portal, Reinforced Concrete
+Ductile Portal, Reinforced Concrete
+4 3 2 1 1.000 0 0 0 1 1 0
+ 0.0000
+ 0.0000  0.0000 0.00000  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+ 0.0000  0.0000 0.00000  0.0000  0.0000  0.0000          0.0  0.0000          0.0
+
+*MASSES*
+  0 0 0
+*SPECTRUM*
+  Spectrum Name   = International, IBC-2000
+  Number of Point = 0
+*GROUNDACCEL*
+  Ground Accel. Scale X =      1.00000
+  Ground Accel. Scale Y =      1.00000
+  Ground Accel. Scale Z =      1.00000
+  Ground Accel. Data File = 
+*SCREEN*
+  Snap to Grid        = 1
+  Snap Ratio          = 100
+  Auto Working Range  = 0
+  Building Floor Xmin = -200
+  Building Floor Xmax = 800
+  Building Floor Ymin = 0
+  Building Floor Ymax = 300
+  Grid Spacing,  DX   = 50
+  Grid Spacing,  DY   = 50
+  AutoScale Flag  = 1
+  Drawing  Scale  = 1
+  Zoom Factor     = 1
+  Displacement Scale  = 1
+  Rotation Scale  = 1
+  Drawing Scale, Column = 1
+  Drawing Scale, Wall   = 1
+  Drawing Scale, Beam   = 1
+  Drawing Scale, Surface Load        = 1
+  Drawing Scale, Distributed Force   = 1
+  Drawing Scale, Distributed Torsion = 1
+  Drawing Scale, Point   Force       = 1
+  Drawing Scale, Point   Moment      = 1
+  Drawing Scale, Point   Torsion     = 1
+  Building Floor, X Margin = 200
+  Building Floor, Y Margin = 200
+  Building Floor, X Axis   = 500
+  Building Floor, Y Axis   = 500
+  Snap to Axis    = 0
+  Dark Background = 0
+  Draw Axis Lines = 0
+  Show Node       = 0
+  Show CLine      = 0
+  Show Slab       = 0
+  Ortho Flag      = 0
+  Perspective Flag = 1
+  Perspective Factor = 1.5
+  Render Type        = 0
+  Show Ray Lines     = 0
+  Show EquivLoad, X  = 0
+  Show EquivLoad, Z  = 0
+*DRAWING*
+  Paper Size    = 1
+  Border        = 1
+  Project       = 
+  Location      = 
+  Owner Name    = 
+  Architect     = 
+  Consultant    = 
+  Contractor    = 
+  Job Name      = Structural Design
+  Drawing       = 
+  Engineer      = 
+  Drafter       = 
+  Approved By   = 
+  Drawing Code  = P-01
+  Drawing No    = 1
+  Total Page    = 1
+  Drawing Scale = 1
+  Axis X, Name = 
+  Axis X, Loc  = 
+  Axis Y, Name = 
+  Axis Y, Loc  = 
+  Drawing Limit X-Left   = 0
+  Drawing Limit X-Right  = 0
+  Drawing Limit Y-Bottom = 0
+  Drawing Limit X-Left   = 0
+*FOUNDATION*
+  Foundation Capacity Design         = 1
+  LL Reduction Factor for Gravity    = 0.40
+  LL Reduction Factor for Earthquake = 0.50
+  Lateral Load Multiplier            = 1.2  1.56
+  Lateral Pile Group Efficiency      = 0.75  0.5
+  Group Efficiency Method   = 2
+  Flag Reduced Pile capacity by pile weight = 0
+  Flag Increase Pile capacity for Temporary load = 1
+  Flag Neglect Bending Moment = 0
+  Flag Save Detail Calculation = 1
+  Safety Factor for Tension = 1.5
+  Safety Factor for Shear   = 1.5
+  Pile-Pile Distance Ratio of D = 2.5
+  Pile-Edge Distance Ratio of D = 1.25
+  Pilecap Thickness Minimum = 50
+  Bending Strength Reduction phim = 0.8
+  Shear Strength phiv = 0.6
+  Concrete Compression Strength fc1 = 332
+  Concrete Cover, Top = 5.0
+  Concrete Cover, Bot = 10
+  Pile Emmbeded Length = 7.5
+  Rebar Yield Strength Fy = 3900
+  Stirrups Yield Strength Fy = 3900
+  Sidebar Yield Strength Fy = 2400
+  Rebar Diameter Db = 2.5
+  Stirrups Diameter Dbv = 1.3
+  Sidebar Diameter Dbs = 1.2
+  Minimum Rebar Pct = 0.20
+  Sloof Width    = 50
+  Sloof Height   = 100
+  Sloof Length   = 7.5
+  Sloof Length1  = 5
+  Uplift Head    = 3
+  Frustrum Angle = 15
+  Soil Weight    = 1600
+  Number of Foundation Type = 0
+*VOLCOST*
+  Concrete unit cost per m3        = 1260000
+  Rebar unit cost per kg           = 10460
+  Slab   formwork unit cost per m2 = 120000
+  Beam   formwork unit cost per m2 = 96000
+  Column formwork unit cost per m2 = 96000
+  Wall   formwork unit cost per m2 = 96000
+  Steel IWF   unit cost per kg     = 15000
+  Steel Angle unit cost per kg     = 15000
+  Rebar Calculation Method         = 2
+  Slab Rebar Percentage            = 1.2
+  Beam Rebar Percentage            = 2.0
+  Column Rebar Percentage          = 3.0
+  Shearwall Rebar Percentage       = 1.9
+  Excluded HCS Volume and Weight                 = 1
+  Report Cost Calculation per Floor              = 1
+  Include Shear Reinforcement                    = 1
+  Include Beam Top Enlargement for HCS Support   = 1
+  Lower Column rebar larger than Upper Column    = 1
+  Increase Column Rebar for splicing by          = 1
+  Include Prestressed Girder Ordinary Rebar Wgt  = 1
+  Report Cost Calculation per member             = 0
+  Exclude large density rebar                    = 0
+  Additional Percentage for Column Splice        = 10
+  Report option for Column Position              = 0
+  Use Cost correction by floor height            = 0
+Correction Factors = 
+Additional Volume, Pilecap   = ,,,
+Additional Volume, Tie Beam  = ,,,
+Additional Volume, Staircase = ,,,
+Additional Volume, Others    = ,,,
+*PDFREPORT*
+  Report Language    = 0
+  Report Level       = 2
+  Support Option     = 1
+  Bitmap Logo  File  = 
+  Bitmap Cover File  = 
+  Save Cover page    = 1
+  Save TOC           = 1
+  Save Foreword      = 1
+  Save Struct Data   = 1
+  Save Material Data = 1
+  Save Design Codes  = 1
+  Save Floor Layout  = 1
+  Save Moment Diagr  = 1
+  Save Mode Shape    = 1
+  Save Support React = 1
+  Save Design Result = 1
+  Save Foundation Dsg       = 1
+  Save Node Disp            = 1
+  Save Dynamic Analysis     = 1
+  Save Building Text Report = 1
+  Save Support Table        = 1
+  Save Slab Design          = 1
+  Save Capacity Design      = 1
+  Save Shearwall Design     = 1
+  Save Foundation Tabl      = 1
+  Save Volume and Cost est. = 1
+
+
+
+
+
+<DESCRIPTION>
+Gedung Vimala Hills Hotel dan Resort iini merupakan gedung multi-fungsi yang 
+terdiri dari dari 2 Basement parkir, Hotel, Function Hall, dan Restaurant.
+
+Pengujian Sifat Tanah telah dilakukan oleh PT DAYA CREASI MITRAYASA dan
+telah digunakan untuk perencanaan pondasi dan DPT pada projek ini.
+<SOILPROP>
+Rencana proyek akan dibangun sebuah hotel 4 lantai dengan bangunan lain
+seperti conventional hall, jembatan, perumahan, dan villa dengan luas tanah
+± 100 Ha yang terletak di Ciawi - Bogor. Pada saat penyelidikan berlangsung,
+lokasi merupakan lahan kosong yang berada di daerah perbukitan yang
+ditumbuhi oleh semak belukar.
+
+Untuk mengetahui sifat tanah telah dilakukan 25 Titik Test Sondir dan
+12 Titik Boring Log dengan lokasi titik pengujian terlampir.
+Hasil kedalaman tanah keras untuk Sondir bervariasi
+antara 5.6m s/d 25m, sedangkan dari Boring Log berkisar di 26m.
+
+Daya dukung Aksial tiang pancang yang direkomendasikan adalah sebagai 
+berikut:
+
+Area        Pile 35x35    Pile 40x40
+                    (ton)            (ton)
+----------------------------------------
+Area 1          41                47
+Area 2          29                33
+
+Daya dukung Aksial tiang pancang yang direkomendasikan adalah sebagai 
+berikut:
+
+Area        Pile 35x35    Pile 40x40
+                    (ton)            (ton)
+----------------------------------------
+Area 1          2.8              3.45
+Area 2          2.83             3.47
+
+Karena ada lapisan > 3m yang berupa tanah lunak di lapisan < 30m maka 
+digunakan
+Kategori TANAH LUNAK (SOFT SOIL).
+
+Untuk Daerah Ciawi digunakan Peta Gempa 2011 dengan Nilai Ss = 0.9 dan S1 
+= 0.5
+
+JENIS PONDASI
+
+Untuk area lereng akan digunakan jenis pondasi Mini Bored Pile
+Untuk area datar akan digunakan jenis pondasi Precast Pile.
+
+
+
+<MATPROP>
+a. Concrete Material:
+
+   Kolom/Wall		: K-300
+   Balok		: K-300
+   Pelat		: K-300
+   Pelat Basement	: K-300
+   Retaining Wall	: K-300
+   Pilecap		: K-300
+   Sloof		: K-300
+   Bored Pile		: K-300 (>= D80), K-250 (< D80)
+   Precast Pile         : K-450
+   HCS                  : K-450
+   Tangga		: K-300
+   Listplank dan lain2	: K-225
+   Non-struktural	: K-175
+   Lantai kerja		: K-125
+
+b. Steel Material:
+
+   Semua Tulangan	: U-40, Ulir, D >= 10mm, 
+Fy=3900 kg/cm2
+   Tulangan polos	: U-24, polos, D < 10mm, Fy = 
+2400 kg/cm2
+   Baja Profil dan Pelat: BJ-37, Fu=3700 kg/cm2, 
+Fy=2400 kg/cm2
+   Wiremesh		: U-50 (hanya untuk pelat biasa 
+/ non flat-slab)
+
+c. Welding:
+
+   Electrode            : AWS E-70XX
+
+<LOADCALC>
+a. Unit Weight of Materials
+
+   ----------------------------------------------
+   Material                Weight          Unit
+   ----------------------------------------------
+   Beton bertulang         2400            Kg/m3
+   Beton polos             2100            Kg/m3
+   Baja                    7850            Kg/m3
+   Pasir                   1800            Kg/m3
+   Tanah urug              2000            Kg/m3
+   Dinding bata 15cm       250             Kg/m2
+   Dinding Hebel           600             Kg/m3
+   Adukan                  2000            Kg/m3
+   Plafond,ducting,lampu   20              Kg/m2
+   Lantai granit           2600            Kg/m3
+   Batu pecah              1450            Kg/m3
+   Sirtu                   1850            Kg/m3
+   Pasangan batu kali      1800            Kg/m3
+   Air                     1000            Kg/m3
+   Dinding partisi         50              Kg/m2
+   Lantai teraso, t=1cm    22              Kg/m2
+   Aspal campur            2200            Kg/m3
+   Atap genteng+reng/kaso  50              Kg/m2
+   Atap metal sheet        10              Kg/m2
+   Beban Single Hebel      120             kg/m2
+   ----------------------------------------------
+
+b. Design Load (UBC-97)
+
+   DEAD LOAD:
+
+   ----------------------------------------------
+   Function                QDL             Unit
+   ----------------------------------------------
+   Gudang                  2500            Kg/m2
+   Arsip                   800             Kg/m2
+   Roof + Peralatan M&E    500             Kg/m2
+   Partisi ringan          50              Kg/m2
+   ----------------------------------------------
+
+   LIVE LOAD:
+
+   ----------------------------------------------
+   Function                QLL             Unit
+   ----------------------------------------------
+   Sekolah                 200             Kg/m2
+   Perpustakaan, R. Baca   300             Kg/m2
+   Perpustakaan, Rak Buku  600             Kg/m2
+   Rumah Sakit, Kamar      200             Kg/m2
+   Rumah Sakit, Lab        500             Kg/m2
+   Apartemen               200             Kg/m2
+   Balkon, Koridor         300             Kg/m2
+   Anjungan                500             Kg/m2
+   Kamar Mandi             250             Kg/m2
+   Kantor                  250             Kg/m2
+   Lab Komputer            300             Kg/m2
+   Ruang Server            500             Kg/m2
+   Retail, Supermarket     500             Kg/m2
+   Bioskop, Teater         250             Kg/m2
+   Teater, Moveable seats  500             Kg/m2
+   Teater, Stage,Warehouse 600             Kg/m2
+   Roof, Tanpa akses       100             Kg/m2
+   Roof, Akses             250             Kg/m2
+   Heavy Parking,Unloading 800             Kg/m2
+   Light Parking           400             Kg/m2
+   Garasi, bengkel         400             Kg/m2
+   Garasi, rumah           250             Kg/m2
+   Pabrik ringan           400             Kg/m2
+   Pabrik berat            600             Kg/m2
+   Gudang rumah tinggal    200             Kg/m2
+   Gudang ringan           600             Kg/m2
+   Gudang berat            1200            Kg/m2
+   Jembatan penyebrangan   500             Kg/m2
+   Jalan mobil             1200            Kg/m2
+   Plantation              1600            kg/m3
+   Water pool              1000            kg/m3
+   Beban Lift Kecil        2500            kg/titik
+   Beban Lift Sedang       3500            kg/titik
+   ----------------------------------------------
+
+c. Live Load Reduction Factor
+   (Faktor Reduksi Beban Hidup)
+
+   -------------------------------------------------
+   Ruangan      Pelat,B.Anak  Portal,B. Induk  Massa
+   -------------------------------------------------
+   Perkantoran      1.0             0.9         0.3
+   Apartment        1.0             0.9         0.3
+   Parkir           1.0             0.9         0.5
+   Gudang           1.0             1.0         0.8
+   Perpustakaan     1.0             1.0         0.8
+   -------------------------------------------------
+
+d. Faktor Reduksi Beban Hidup terhadap Jumlah Lantai
+   yang dipikul
+
+   -----------------------------------------------
+   Jumlah lantai dipikul    Reduksi QLL kumulatif
+   -----------------------------------------------
+          1                          1.0
+          2                          1.0
+          3                          0.90
+          4                          0.80
+          5                          0.70
+          6                          0.60
+          7                          0.50
+          >= 8                    0.40
+   -----------------------------------------------
+
+<END>
+*BORCPT*
+*CONSTRUCTIONLINE*
+*PCAD*
+*END*

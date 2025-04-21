@@ -1,0 +1,238 @@
+*SANSMODEL*
+Perhitungan Rangka Atap
+
+
+*NOTES*
+
+*VERSION*
+  VERSION No.  = 4.2
+  VERSION TYPE = Full Version
+  VERSION DATE = 02 Dec 1998
+  COPYRIGHT    = Nathan Madutujuh
+  LICENSEE     = Ir. Nathan Madutujuh, M.Sc., PT Anugrah Multi Cipta Karya, INDONESIA
+*MODELHISTORY*
+  Creation Date = 02/12/1997
+  Created  By   = Nathan
+  Creation Note = Creation Note =
+  Revision Date = 02/12/1997
+  Revised  By   = Nathan
+  Revision Note = Revision Note =
+*STRUCTURE*
+  Structure Model     = 2 : PTruss
+  Structure Material  = 2 : Steel
+  Structure Type      = 1 : NonductileFrame
+  Design Method       = 1 : Non-Capacity
+  Design Code         = 4 : BAJA-98
+  Steel Design Option = 1 : Linear
+  Importance Factor I = 1.5
+  Ductility  Factor K = 1
+*UNITS*
+  Unit Type     = 0
+  Unit Name     = kgcm
+  Modulus       = kg/cm2
+  Unit Weight   = kg/cm3
+  Length        = cm
+  Displacement  = cm
+  Force         = kg
+  Moment        = kg.cm
+  Torsion       = kg.cm
+  Stress        = kg/cm2
+  Gravity Accel = cm/s2
+*ANALYSIS*
+  Analysis Method      = 1 : Static
+  Linearity Model      = 1 : Linear
+  Rigid Floor          = 1
+  Number of Eigen      = 0
+  Damping Ratio        = 0
+  Earthquake Dir Comb  = 3
+  Total Earthquake Dir = 0
+  Gravity Acceleration = 981
+  Condensation Level   = 0
+  P-Delta Effects      = 0
+  Ductility Factor     = 1
+  #1 Lateral Load Case with Pdelta = 0
+  #2 Lateral Load Case with Pdelta = 0
+  Include Slab Thickness for Beam Weight = 0
+*PARAMETER*
+  Number of 2D Node             = 12
+  Number of 3D Node             = 0
+  Number of Supported Node      = 2
+  Number of Material Properties = 1
+  Number of Section Properties  = 3
+  Number of Design Data         = 3
+  Number of Texture Properties  = 0
+  Number of Element Set/ELSET   = 3
+  Number of Spring Element      = 0
+  Number of Truss Element       = 21
+  Number of Frame Element       = 0
+  Number of Plane Strs Element  = 0
+  Number of Plate Element       = 0
+  Number of Shell Element       = 0
+  Number of Nodal Mass          = 0
+  Number of Joint Load          = 10
+  Number of Truss Load Type     = 0
+  Number of Truss Load          = 0
+  Number of Frame Load Type     = 0
+  Number of Frame Load          = 0
+*MATERIAL*
+   1   1  ISOTROPIC   NONAME 0
+      0 0 0.00875 2100000 810000 0
+*SECTION*
+   1  11 USER         0 0 L80.80.8
+     L80.80.8 1
+   2  11 USER         0 0 L60.60.6
+     L60.60.6 1
+   3   6 RECT         0 0 NONAME
+      30 50 30 0
+*DESIGN*
+   1   2 STEEL_TRUSS  L80.80.8 1 1 1 1 0 0 1
+      1 1 1 1 1 1 1 1   1 1 1 1 1   0.85 0.85 1 1 1
+      STEELDSG = 0 0 1 L80.80.8 NOSECTION 1 1 0  2100000 3700 2400  0 0 0 0 0.85
+      CONNECTION = 1  3700 2400 1.5  0 0 0  3700 2400 1600 2  0.85  0
+   2   2 STEEL_TRUSS  L60.60.6 1 1 1 1 0 0 1
+      1 1 1 1 1 1 1 1   1 1 1 1 1   0.85 0.85 1 1 1
+      STEELDSG = 0 0 1 L60.60.6 NOSECTION 1 1 0  2100000 3700 2400  0 0 0 0 0.85
+      CONNECTION = 0  3700 2400 1.5  0 0 0  3700 2400 1600 2  0.85  0
+   3   4 CONCRETE_GIRDER NONAME 2 1 7 1 0 0 1
+      1 1 1 1 1 1 1 1   1 1 1 1 1   0.85 0.85 1 1 1
+      CONCRETE = 30 50 30 0 0  0 0 0 0  0 0 0 0  0 0 0 0  1 0 0 0
+*TEXTURE*
+*ELSET*
+   1   1  1  1  0
+   2   1  2  2  0
+   3   1  3  3  0
+*LOADING*
+  Lateral Load Type = 1
+  Dead Load #1 = 1
+  Live Load #1 = 2
+  Dead Load #2 = 1
+  Live Load #2 = 2
+  Wind Load #1 = 0
+  Wind Load #2 = 0
+  Earthquake  Load #1 = 3
+  Earthquake  Load #2 = 4
+  Prestressed Load #1 =  0 : (Transfer)
+  Prestressed Load #2 =  0 : (Service)
+  Earth Press Load #1 = 0
+  LL Reduction for Earthquake  =  1.000
+  LL Reduction for Wind Load   =  1.000
+  LL Reduction for Weight/Mass =  1.000
+  LL Reduction for Main Girder =  1.000
+  Load Combination Type   = 0
+  Load Combination Option = 1
+  Number of Load System   = 1
+  Number of Load Case     = 2
+  Combination # 1 =    1.000   1.000   0.000   0.000   0.000
+*NODE3D*
+*NODEXY*
+   1  0 0
+   2  200 0
+   3  400 0
+   4  600 0
+   5  800 0
+   6  1000 0
+   7  1200 0
+   8  200 150
+   9  400 300
+  10  600 450
+  11  800 300
+  12  1000 150
+*SUPPORT*
+     1  1 0 0 0 0 0 0 0 0
+     7  3 0 0 0 0 0 0 0 0
+*SPRING*
+*TRUSS*
+     1     1    2   1  2
+     2     2    3   1  2
+     3     3    4   1  2
+     4     4    5   1  2
+     5     5    6   1  2
+     6     6    7   1  2
+     7    10   11   1  2
+     8    11   12   1  2
+     9    12    7   1  2
+    10     2    8   2  2
+    11     3    9   2  2
+    12     4   10   2  2
+    13     5   11   2  2
+    14     6   12   2  2
+    15     8    3   2  2
+    16     9    4   2  2
+    17    11    4   2  2
+    18    12    5   2  2
+    19     1    8   1  0
+    20     8    9   1  1
+    21     9   10   1  1
+*FRAME*
+*QPS8*
+*QPB8*
+*QUAD4*
+*JLOAD*
+   1     1  0,-500,0,0,0,0
+   1     7  0,-500,0,0,0,0
+   1     8  0,-1000,0,0,0,0
+   1     9  0,-1000,0,0,0,0
+   1    10  0,-1000,0,0,0,0
+   1    11  0,-1000,0,0,0,0
+   1    12  0,-1000,0,0,0,0
+   2     8  500,0,0,0,0,0
+   2     9  500,0,0,0,0,0
+   2    10  500,0,0,0,0,0
+*TLOADTAB*
+*TLOAD*
+*FLOADTAB*
+*FLOAD*
+*QLOADTAB*
+*QLOAD*
+*WINDLOAD*
+*MASSES*
+  0 0 0
+*SPECTRUM*
+  Earthquake Zone = 0
+  Spectrum Type   = 1
+  Soil Type       = 1
+  Normalized      = 1
+  Number of Point = 0
+*SCREEN*
+  Snap to Grid        = 1
+  Snap Ratio          = 100
+  Auto Working Range  = 0
+  Building Floor Xmin = -200
+  Building Floor Xmax = 1400
+  Building Floor Ymin = -200
+  Building Floor Ymax = 1000
+  Grid Spacing,  DX   = 100
+  Grid Spacing,  DY   = 100
+  AutoScale Flag  = 1
+  Drawing  Scale  = 1
+  Zoom Factor     = 1
+  Deform   Scale  = 1
+  Rotation Scale  = 1
+  Drawing Scale, Column = 1
+  Drawing Scale, Wall   = 1
+  Drawing Scale, Beam   = 1
+  Drawing Scale, Surface Load        = 1
+  Drawing Scale, Distributed Force   = 1
+  Drawing Scale, Distributed Torsion = 1
+  Drawing Scale, Point   Force       = 1
+  Drawing Scale, Point   Moment      = 1
+  Drawing Scale, Point   Torsion     = 1
+*DRAWING*
+  Paper Size    = 1
+  Border        = 1
+  Project       = Noname
+  Location      = Indonesia
+  Owner Name    = Nathan
+  Architect     = Yahya
+  Consultant    = 1
+  Contractor    = 1
+  Job Name      = 1
+  Drawing       = 1
+  Engineer      = 1
+  Drafter       = 1
+  Approved By   = 1
+  Drawing Code  = 1
+  Drawing No    = 1
+  Total Page    = 1
+  Drawing Scale = 1
+*END*

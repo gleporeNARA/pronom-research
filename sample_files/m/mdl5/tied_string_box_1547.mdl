@@ -1,0 +1,40 @@
+mdl 1.3;
+
+using state import *;
+
+import adobe::mtl::*;
+import adobe::util::*;
+import ::tex::gamma_mode;
+import ::state::normal;
+
+export material MODEL_TIED_STRING_BOX_1547_MATERIAL_1(*)
+  = adobe::mtl::standard(
+    opacity : float(1.0),
+    baseColor : adobe::util::color_texture( texture_2d("tied_string_box_1547/tied_string_box_1547_rope_Mat_baseColor.png", ::tex::gamma_srgb) ),
+    translucence : float(0.0),
+    glow : float(0.0),
+    indexOfRefraction : float(1.6),
+    density : float(1.0),
+    roughness : adobe::util::float_texture( texture_2d("tied_string_box_1547/tied_string_box_1547_rope_Mat_roughness.png", ::tex::gamma_linear) ),
+    normal : adobe::util::normal_texture( texture_2d("tied_string_box_1547/tied_string_box_1547_rope_Mat_normal.png", ::tex::gamma_linear) ),
+    interiorColor : color(1.0, 1.0, 1.0),
+    metallic : float(0.0),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );
+
+export material MODEL_TIED_STRING_BOX_1547_MATERIAL_2(*)
+  = adobe::mtl::standard(
+    opacity : float(1.0),
+    baseColor : adobe::util::color_texture( texture_2d("tied_string_box_1547/tied_string_box_1547_carton_Mat_baseColor.png", ::tex::gamma_srgb) ),
+    translucence : float(0.0),
+    glow : float(0.0),
+    indexOfRefraction : float(1.6),
+    density : float(1.0),
+    roughness : float(0.4),
+    normal : adobe::util::normal_texture( texture_2d("tied_string_box_1547/tied_string_box_1547_carton_Mat_normal.png", ::tex::gamma_linear) ),
+    interiorColor : color(1.0, 1.0, 1.0),
+    metallic : float(0.0),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );

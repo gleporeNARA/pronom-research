@@ -1,0 +1,349 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against C:\174\RBBS-PC.BAS to produce D:\SOURCE\RBBS-PC.BAS
+* C:\174\RBBS-PC.BAS:  Date 6-20-1992  Size 147219 bytes
+* ------------[ Created 03-12-1993 21:22:52 ]------------
+* REPLACING old line(s) by new
+800 IF ZAdjustedSecurity THEN _
+       GOSUB 5135
+    IF ZOrigCnfg$ = ZCurDef$ THEN _
+       ZMainUserFileIndex = ZUserFileIndex : _
+       ZOrigSec = ZUserSecLevel : _
+       ZUserSecSave = ZUserSecLevel : _
+       ZOrigUserName$ = ZActiveUserName$
+    ZTimesLoggedOn = CVI(MID$(ZUserOption$,1,2)) - _
+       ((ZOrigCnfg$ <> ZCurDef$ OR NOT ZSubBoard) AND _
+        (NOT ZPrivateDoor) AND (NOT ZExitToDoors))
+    GOSUB 9500
+    IF (NOT ZExitToDoors) AND (NOT ZSubBoard) THEN _
+       CALL UpdtCalr (ZActiveUserName$ + " from " + ZWasCI$ + _
+* ------[ first line different ]------
+                 " Lvl" + STR$(ZUserSecLevel) + " " + TIME$,2) : _   ' KG092201
+       CALL UpdtCalr ("Line Speed " + ZCBaud$,2)                     ' KG092201
+    PrevLastOn$ = ZLastDateTimeOn$
+    IF ZLocalUser THEN _
+       ZTalkToModemAt$ = "9600" : _
+       ZBaudParity$ = "9600 BPS,N,8,1" : _
+       ZModemInitBaud$ = "9600" : _
+       ZSnoop = ZTrue : _
+       ZLineFeeds = ZTrue
+    CALL SetCrLf
+    CALL SetPrompt
+    CALL XferType (2,ZTrue)
+    IF NOT ZSubBoard THEN _
+       BoardCheckDate$ = PrevLastOn$
+    CALL SetSysOp
+    IF ZWasA THEN _
+       ZActiveUserName$ = "SYSOP" : _
+       ZFirstName$ = "SysOp"
+    IF ZExitToDoors OR ZSubBoard THEN _
+       GOTO 815
+    GOSUB 465
+    IF (ZEightBit AND _
+       ZAutoDownDesired) OR _
+       ZAskID THEN _
+       CALL TestUser
+    CALL QuickTPut1 ("Logging " + ZActiveUserName$)
+    CALL Talk (1,ZOutTxt$)
+    Temp$ = STR$(ZBaudTest!) + MID$(ZBaudParity$,INSTR(ZBaudParity$," B"))
+    CALL QuickTPut1 ("RBBS-PC " + ZVersionID$ + " Node " + ZNodeID$) ' KG092201
+    CALL QuickTPut1 ("Line speed " + ZCBaud$  + "  Host operating at" + Temp$) ' KG092201
+    CALL SkipLine (1)
+    Attempts = 0
+    ZWasZ$ = ZActiveUserName$ + _
+            " on at " + _
+            ZCurDate$ + _
+            ", " + _
+            ZTime$ + _
+            " from " + _
+            ZWasCI$ + _
+            "," + Temp$
+     ZWasNG$ = ZWasZ$ + SPACE$(128 - LEN(ZWasZ$))
+'
+' *  ALWAYS RECORD THE HASH/INDIVIDUATING FIELD TO EACH RECORD LOGGED OUT
+'
+     WasX$ = "{" + _
+          HashValue$ + _
+          "/" + _
+          ZIndivValue$ + _
+          "}"
+     IF LEN(ZWasZ$) < 65 THEN _
+        WasX = 65 _
+     ELSE WasX = LEN(ZWasZ$) + 2
+     MID$(ZWasNG$,WasX) = WasX$
+     CALL Printit ("  " + ZWasZ$)
+     IF ZNewUser THEN _
+        CALL UpdtCalr ("NEWUSER",1) : _
+        CALL Muzak (2)
+'
+' *****  NOTIFY CALLER IF ABLE TO "AUTODOWN"  ****
+'
+    IF ZEightBit AND ZAutoDownYes THEN _
+       ZOutTxt$ = CHR$(9) + _
+            ZReturnLineFeed$ + _
+            "You may use AUTODOWNLOADing!" : _
+       CALL RingCaller : _
+       CALL DelayTime(4)
+* REPLACING old line(s) by new
+819 CALL Trim (ZWasCI$)
+    IF (ZNodeRecIndex < 2) THEN _
+       GOTO 821
+    GOSUB 4910
+    GOSUB 24000
+    GET 1,ZNodeRecIndex
+    MID$(ZMsgRec$,1,31) = ZActiveUserName$ + _
+                                 SPACE$(31 - LEN(ZActiveUserName$))
+    MID$(ZMsgRec$,40,2) = " 0"
+    MID$(ZMsgRec$,44,2) = RIGHT$(STR$(-ZBPS),2)
+    MID$(ZMsgRec$,55,2) = " 0"
+    MID$(ZMsgRec$,57,1) = "A"
+    MID$(ZMsgRec$,60,5) = ZTalkToModemAt$ + _
+                                 SPACE$(5 - LEN(ZTalkToModemAt$))
+    MID$(ZMsgRec$,72,2) = " 0"
+* ------[ first line different ]------
+    MID$(ZMsgRec$,79,5) = ZCBaud$ + SPACE$(5 - LEN(ZCBaud$))         ' KG012001
+    MID$(ZMsgRec$,93,24) = ZWasCI$ + _
+                                  SPACE$(24)
+    PUT 1,ZNodeRecIndex
+    GOSUB 12985
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+1895 IF TurboLogon OR ZNonStop THEN _                                ' KG012301
+        RETURN
+     ZOutTxt$ = "Check mail in " + ZConfName$ + " ([Y],N)"
+     GOSUB 12930                                                     ' KG012301
+     IF ZNo THEN _
+        SkipMain = ZTrue : _
+        RETURN
+     ZUserIn$(0) = LEFT$("NEW ",-4*LogonMailNew)
+* REPLACING old line(s) by new
+2010 IF NOT QuotedReply THEN _
+* ------[ first line different ]------
+        ZLinesInMsg = 0 : _                                          ' KG011201
+        WasL = 0 : _
+        WasX = 0 : _
+        REDIM ZOutTxt$(ZMsgDim)
+     IF ZGetExtDesc THEN _
+        GOTO 2100
+     GOSUB 1893
+     RcvrRecNum = 0
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+2020 CALL SetWhoTo (-ZEnableCC*(ZUserSecLevel>=ZOptSec(5)),MsgTo$,MsgFrom$,RcvrRecNum,Found,INSTR(ZMsgSecCats$,"U")>0) ' KG012502
+     IF MsgTo$ = "" THEN _
+        RETURN
+     IF ZSysopComment OR ZSysopMsg THEN _
+        GOTO 2100
+     IF ZReply OR MsgFwd THEN _
+        Found = ZTrue : _
+        CALL Trim (MsgTo$):  _
+        GOTO 2035 _
+     ELSE Subject$ = ""
+     GOSUB 2065
+* REPLACING old line(s) by new
+2500 ZOutTxt$ = "Delete from"
+     GOSUB 3300
+     Mark1 = ZTestedIntValue
+* ------[ first line different ]------
+     IF ZAnsIndex < ZLastIndex AND ZUserIn$(ZAnsIndex+1) = "-" THEN _ ' KG031101
+           ZAnsIndex = ZAnsIndex + 1 _                               ' KG031101
+     ELSE Temp = INSTR(ZUserIn$(ZAnsIndex),"-") : _                  ' KG031101
+             IF Temp > 0 AND Temp < LEN(ZUserIn$(ZAnsIndex)) THEN _  ' KG031101
+                ZUserIn$(ZAnsIndex) = MID$(ZUserIn$(ZAnsIndex),Temp+1) : _ ' KG031101
+                ZAnsIndex = ZAnsIndex - 1                            ' KG031101
+* REPLACING old line(s) by new
+4352 SearchString$ = ""
+     DontPrint = ZFalse
+     JustReplied = ZFalse
+     QuotedReply = ZFalse
+     CanKill = (ZSysop OR ZUserSecLevel >= ZSecKillAny)
+     GOSUB 1893
+     GOSUB 5344
+     ZWasZ$ = ""
+* ------[ first line different ]------
+     FOR WasI = 2 TO ZLastIndex                                      ' KG012802
+        IF INSTR("Ss*",ZUserIn$(WasI)) > 0 THEN _
+           ZUserIn$(WasI) = MID$(STR$(ZLastMsgRead+1),2) + "+"
+        IF INSTR("Ll",ZUserIn$(WasI)) > 0 THEN _
+           ZUserIn$(WasI) = MID$(STR$(HighMsgNumber),2) + "-"
+        IF INSTR("Gg",ZUserIn$(WasI)) > 0 THEN _
+           GOSUB 4640                                                ' KG013001
+     NEXT
+* REPLACING old line(s) by new
+4380 WasA1$ = "Msg #" + _
+           STR$(LowMsgNumber) + _
+           "-" + _
+           MID$(STR$(ZMsgPtr(ActiveMessages,2)),2) + _
+           " (H)lp,S)ince,L)ast" + _
+           LEFT$(",G)lobal",8*(ZLinkedConf$ ="" OR ZGlobalRead)+8)
+* ------[ first line different ]------
+     CALL SkipLine (-QuickScanMsgs)                                  ' KG062301
+     IF ZGlobalRead THEN _
+        CALL QuickTPut1 ("Reading globally")
+     IF AddressedToUser OR ToRequested OR FromRequested THEN _
+        ZWasY$ = LEFT$("TO",-2*(ToRequested OR AddressedToUser)) + _
+             LEFT$("/",-AddressedToUser) + _
+             LEFT$("FROM",-4*(FromRequested OR AddressedToUser)) : _
+        CALL QuickTPut1 ("Include only msgs "+ZWasY$+" you.  Read what msgs (? for help)") _
+     ELSE WasA1$ = WasA1$ + ",T)o,F)rom,M)" : _
+          IF ReadMsgs AND ZMarkedMsgs$ <> "" THEN _
+             WasA1$ = WasA1$ + "arked" _
+          ELSE WasA1$ = WasA1$ + "ine"
+     IF SearchString$ = "" THEN _
+        WasA1$ = WasA1$ + _
+             ", text" _
+     ELSE CALL QuickTPut1 ("Include only msgs with text " + SearchString$ + ".  Read what msgs (? for help)")
+* REPLACING old line(s) by new
+4415 Forward = ZFalse
+     Reverse = ZFalse
+     FOR WasI = ZAnsIndex to ZLastIndex
+* ------[ first line different ]------
+        IF INSTR("Gg",ZUserIn$(WasI)) > 0 THEN _
+           GOSUB 4640                                                ' KG020201
+     NEXT
+     IF ZAnsIndex <= ZLastIndex OR LEN(ZUserIn$(ZAnsIndex)) = 1 THEN _ ' DR020301
+        IF INSTR("Ss*",ZUserIn$(ZAnsIndex)) > 0 THEN _
+           CurMsg = ZLastMsgRead + 1 : _
+           Forward = ZTrue : _
+           GOTO 4430 _
+        ELSE IF INSTR("Ll",ZUserIn$(ZAnsIndex)) > 0 THEN _
+                CurMsg = HighMsgNumber : _
+                Reverse = ZTrue : _
+                GOTO 4490 _
+        ELSE IF INSTR("Gg",ZUserIn$(ZAnsIndex)) > 0 THEN _
+                ZGlobalRead = ZTrue : _
+                GOTO 4370
+* REPLACING old line(s) by new
+4418 ZWasA = INSTR("FfTt",ZUserIn$(ZAnsIndex))
+     IF ZWasA > 0 THEN _
+        ToRequested = (ZWasA > 2) : _
+        FromRequested = (ZWasA < 3) : _
+        GOTO 4370
+     IF CurMsg = 0 THEN _
+        IF SearchHeader$ <> "" THEN _
+           GOTO 4370 _
+        ELSE SearchString$ = ZUserIn$(ZAnsIndex) : _
+             SearchCt = 0 : _
+             CALL AllCaps (SearchString$) : _
+             CALL Remove (SearchString$,CHR$(34) + CHR$(39)) : _
+             SearchHeader$ = SearchString$ : _
+             SubInHeader$ = SearchHeader$ : _
+             GOTO 4370
+* ------[ first line different ]------
+     CALL SkipLine (-ReadMsgs)                                       ' KG062301
+* REPLACING old line(s) by new
+4630   CALL AskMore (",M)ark, #(s) to read",ZTrue,ZTrue,WasXX,ZFalse)
+       IF ZWasQ = 0 OR ZYes THEN _
+          GOTO 4631
+       IF ZNo THEN _
+          RETURN
+       IF ZSubParm = -1 THEN _
+          RETURN 10595
+       IF ZRet THEN _
+          RETURN
+       ZWasZ$ = ZUserIn$(1)
+       CALL AllCaps (ZWasZ$)
+       IF ZWasZ$ = "M" THEN _
+          ZLastIndex = ZWasQ : _
+          ZAnsIndex = 1 : _
+          CALL AskItems ("M",ZWasZ$,ZTrue,"msg",ZMarkedMsgs$)
+       IF VAL(ZWasZ$) > 0 THEN _
+          FOR WasI = ZWasQ TO 1 STEP -1 : _
+             ZUserIn$(WasI + 1) = ZUserIn$(WasI) : _
+          NEXT : _
+          ZUserIn$(1) = MID$(ZAllOpts$,INSTR(ZOrigCommands$,"R"),1) : _
+          ZLastIndex = ZWasQ + 1 : _
+          ZAnsIndex = 1 : _
+* ------[ first line different ]------
+          RETURN 1235                                                ' KG062301
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4631   IF NOT Forward AND NOT Reverse THEN _                         ' KG062301
+          GOTO 4370                                                  ' KG062301
+        CALL CheckCarrier                                            ' KG062301
+       IF ZSubParm THEN _
+          RETURN 10595
+       IF ZRet THEN _
+          RETURN
+* INSERTING new line(s)
+4640 FOR WasJ = WasI to ZLastIndex-1                                 ' KG013001
+        ZUserIn$(WasJ) = ZUserIn$(WasJ+1)                            ' KG013001
+     NEXT                                                            ' KG013001
+     ZGlobalRead = ZTrue                                             ' KG013001
+     ZLastIndex = ZLastIndex - 1                                     ' KG013001
+     RETURN                                                          ' KG013001
+* REPLACING old line(s) by new
+4666 CALL Trim (MsgTo$)
+     ZOutTxt$ = "Change receiver's name from " + _
+        MsgTo$ + _
+        " to"
+     GOSUB 12995
+     IF ZWasQ = 0 THEN _
+        GOTO 4667
+     IF LEN(ZUserIn$) > 30 THEN _
+        CALL QuickTPut1 ("30 chars max") : _
+        GOTO 4666
+     CALL AllCaps (ZUserIn$)
+     MsgTo$ = ZUserIn$
+     TempMsgTo$ = ZUserIn$
+* ------[ first line different ]------
+     CALL SetWhoTo (ZFalse,MsgTo$,MsgFrom$,RcvrRecNum,Found,ZTrue)   ' KG012502
+     IF MsgTo$ = "" THEN MsgTo$ = TempMsgTo$
+* REPLACING old line(s) by new
+5323 IF ZWasZ$ = "MAIN" THEN _
+        ZWasZ$ = "M"
+     WasX = (ZWasZ$ = "M")
+     IF ZWasZ$ = ConfNameSave$ OR (WasX AND ZConfName$ = "MAIN") THEN _
+        CALL QuickTPut1 ("You are already in " + ZWasZ$) : _
+        RETURN
+* ------[ first line different ]------
+     IF ZUserIn$(ZAnsIndex+1) = "!" AND ZAnsIndex < ZLastIndex THEN _ ' KG012801
+        TurboLogon = ZTrue : _                                       ' KG012801
+        ZAnsIndex = ZAnsIndex + 1                                    ' KG012801
+     ON INSTR("MNSPQ",ZWasZ$) GOTO 5350,5290,5292,5294,10550
+     IF NOT ZOK THEN _
+        GOTO 5300
+     CLOSE 2
+'
+' ****  UPDATE PREVIOUS MESSAGE BASE CHECKPOINT RECORD  ***
+'
+* REPLACING old line(s) by new
+9760 ' ****  [entry when want review plus chance to read] *********
+     GOSUB 9750
+     IF NumNewBullets > 0 THEN _
+        ZLastIndex = NumNewBullets + 1 : _
+* ------[ first line different ]------
+        ZOutTxt$ = "Read what new bulletins (A)ll,[Q]uit)" : _       ' KG012401
+        GOSUB 12999 : _
+        CALL AllCaps (ZUserIn$) : _                                  ' KG013002
+        IF ZWasQ > 0 AND ZUserIn$ <> "Q" THEN _                      ' KG012401
+           GOSUB 9761 : _                                            ' KG012401
+           ZAnsIndex = 0 : _
+           ZLastIndex = NumNewBullets : _
+           GOTO 9700
+     ZLastIndex = 0
+     IF ZAnsIndex < 1 THEN _
+        RETURN
+     GOTO 9701
+* INSERTING new line(s)
+9761 IF ZUserIn$ <> "A" THEN _                                       ' KG012401
+        NumNewBullets = ZWasQ _                                      ' KG012401
+     ELSE _                                                          ' KG012401
+        FOR Temp = 1 TO NumNewBullets : _                            ' KG012401
+           ZUserIn$(Temp) = ZOutTxt$(Temp+1) : _                     ' KG012401
+        NEXT                                                         ' KG012401
+     RETURN                                                          ' KG012401
+'
+' *  W - COMMAND FROM MAIN MENU (WHO'S ON THE OTHER NODES)
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+9800 CALL WhosOn                                                     ' KG012601
+     GOSUB 5344
+     RETURN
+'
+' *  1 - COMMAND FROM SYSOP MENU (DISPLAY COMMENTS)
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20205 ZFileSysParm = 0                                               ' RM030201
+      RETURN

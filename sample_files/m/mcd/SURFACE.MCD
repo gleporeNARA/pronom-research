@@ -1,0 +1,30 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 15 
+a1,14,78,13
+SURFACE PLOT
+.EQN 0 16 2 24 
+f(x,y):sin(x^2+y^2)
+.EQN 0 30 1 9 
+N:20
+.EQN 0 10 1 12 
+i:0;N
+.EQN 1 0 1 12 
+j:0;N
+.EQN 2 -56 2 20 
+x[i:-1.5+.15*i
+.EQN 0 24 2 20 
+y[j:-1.5+.15*j
+.EQN 0 22 2 18 
+M[(i,j):f(x[i,y[j)
+.EQN 3 -37 16 33 
+M{10 35 0 60 20 15 30 0 1 1 2}{57}

@@ -1,0 +1,59 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 ¬ áá  ¤«¨­  ¢p¥¬ï § àï¤
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.EQN 0 0 5 10 
+x:({5,1}ö4ö3ö2ö1ö0)
+.EQN 0 26 5 12 
+ff:({5,1}ö-2ö2ö-1ö3ö5)
+.EQN 1 18 1 12 
+i:0;4
+.EQN 3 -34 8 21 
+&&ff[i{5,5,6,15,l}@&&x[i
+.EQN 10 -8 6 35 
+({5,1}öeödöcöböa):({5,5}ö256ö81ö16ö1ö0ö64ö27ö8ö1ö0ö16ö9ö4ö1ö0ö4ö3ö2ö1ö0ö1ö1ö1ö1ö1)^-1*({5,1}ö-2ö2ö-1ö3ö5)
+.EQN 7 1 2 38 
+y(p):a+b*p+c*p^2+d*p^3+e*p^4
+.EQN 1 39 1 17 
+p:0,0.05;4
+.EQN 2 -36 10 31 
+&&ff[i,y(p){10,10,8,20,l}@&&x[i,p
+.EQN 9 1 4 35 
+w(y,v):i#if(i{56}v,y-x[i,1)
+.EQN 6 0 4 26 
+m(y):i$w(y,i)/w(x[i,i)*ff[i
+.EQN 4 25 10 31 
+&&ff[i,m(p){10,10,8,20,l}@&&x[i,p
+.EQN 2 -24 1 17 
+p:0,0.04;4
+.EQN 15 -6 2 13 
+f[(i,1):ff[i
+.EQN 0 16 5 41 
+f[(i,k+2):if(i<4,(f[(i+1,k+1)-f[(i,k+1))/(x[(i+k+1)-x[i),0)
+.EQN 3 -15 1 8 
+k:0
+.EQN 4 15 5 41 
+f[(i,k+2):if(i<3,(f[(i+1,k+1)-f[(i,k+1))/(x[(i+k+1)-x[i),0)
+.EQN 2 -14 1 8 
+k:1
+.EQN 5 16 5 41 
+f[(i,k+2):if(i<2,(f[(i+1,k+1)-f[(i,k+1))/(x[(i+k+1)-x[i),0)
+.EQN 2 -13 1 8 
+k:2
+.EQN 5 14 5 41 
+f[(i,k+2):if(i<1,(f[(i+1,k+1)-f[(i,k+1))/(x[(i+k+1)-x[i),0)
+.EQN 1 -11 1 8 
+k:3
+.EQN 7 2 4 35 
+d(v,k):i#if(i<k,v-x[i,1)
+.EQN 6 2 4 30 
+a(v):i$(d(v,i)*f[(0,i+1))
+.EQN 8 18 12 31 
+&&a(p),ff[i{10,10,10,20,l}@&&p,x[i

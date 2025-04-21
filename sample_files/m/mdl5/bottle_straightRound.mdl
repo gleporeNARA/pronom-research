@@ -1,0 +1,56 @@
+mdl 1.3;
+
+using state import *;
+
+import adobe::mtl::*;
+import adobe::util::*;
+import ::tex::gamma_mode;
+import ::state::normal;
+
+export material MODEL_BOTTLE_STRAIGHT_ROUND_MATERIAL_1(*)
+  = adobe::mtl::standard(
+    translucence : float(0),
+    baseColor : color(0.716, 0.716, 0.716),
+    interiorColor : color(1.0, 1.0, 1.0),
+    indexOfRefraction : float(1.2000),
+    metallic : float(0),
+    roughness : (0.08, 0.08, 0.08),
+    density : float(0),
+    glow : float(0.0),
+    opacity : float(1.0),
+    normal : ::state::normal(),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );
+
+export material MODEL_BOTTLE_STRAIGHT_ROUND_MATERIAL_2(*)
+  = adobe::mtl::standard(
+    translucence : float(0),
+    baseColor : color(0.8, 0.8, 0.8),
+    interiorColor : color(1.0, 1.0, 1.0),
+    indexOfRefraction : float(1.4500),
+    metallic : float(0),
+    roughness : float(0),
+    density : float(0),
+    glow : float(0.0),
+    opacity : float(1.0),
+    normal : ::state::normal(),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );
+
+export material MODEL_BOTTLE_STRAIGHT_ROUND_MATERIAL_3(*)
+  = adobe::mtl::standard(
+    translucence : float(0),
+    interiorColor : color(1.0, 1.0, 1.0),
+    indexOfRefraction : float(10.0000),
+    metallic : float(1),
+    baseColor : color(0.440, 0.440, 0.440),
+    roughness : adobe::util::float_texture( texture_2d("bottle_straightRound/bottle_straightRound_metal_roughness.jpg", ::tex::gamma_linear) ),
+    density : float(0),
+    glow : float(0.0),
+    opacity : float(1.0),
+    normal : adobe::util::normal_texture( texture_2d("bottle_straightRound/bottle_straightRound_metal_normal.jpg", ::tex::gamma_linear) ),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );

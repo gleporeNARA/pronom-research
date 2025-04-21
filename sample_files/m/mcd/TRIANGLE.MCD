@@ -1,0 +1,71 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 0 2 1 18 
+a1,17,15,16
+Triangle solver
+.TXT 2 -2 1 55 
+a1,54,52,53
+Given two sides and included angle, find third side:
+.EQN 2 10 3 41 
+abC_c(a,b,C):\(a^2+b^2-2*a*b*cos(C))
+.TXT 5 -10 1 56 
+a1,55,53,54
+Given two sides and adjacent angle, find other angle:
+.EQN 2 10 3 32 
+abA_B(a,b,A):asin(b*sin(A)/a)
+.TXT 4 -10 1 38 
+a1,37,35,36
+Given two angles, find third angle:
+.EQN 2 10 1 32 
+AB_C(A,B):180*deg-(A+B)
+.TXT 2 -10 1 33 
+a1,32,30,31
+Given three sides, find angle:
+.EQN 2 10 4 36 
+abc_C(a,b,c):acos((a^2+b^2-c^2)/(2*a*b))
+.TXT 5 -10 1 50 
+a1,50,48,49
+Given two angles and a side, find adjacent side:
+.EQN 2 10 3 26 
+aAB_b(a,A,B):a*sin(B)/sin(A)
+.TXT 4 -10 1 77 
+a1,77,75,76
+===========================================================================
+.TXT 2 0 1 66 
+a1,65,63,64
+Solving for triangle parts, given b and c and included angle A:
+.EQN 2 40 1 8 
+b:1
+.EQN 2 0 1 8 
+c:2
+.EQN 2 0 1 13 
+A:60*deg
+.EQN 2 -40 1 19 
+a:abC_c(b,c,A)
+.EQN 0 40 1 13 
+a=?
+.EQN 2 -40 1 19 
+B:abA_B(a,b,A)
+.EQN 0 40 1 12 
+B=?deg
+.EQN 2 -40 1 19 
+C:abA_B(a,c,A)
+.EQN 0 40 1 12 
+C=?deg
+.TXT 4 -40 2 68 
+a2,67,65,95
+Using these same functions, similar solutions are possible given 
+other parts of the triangle.
+.EQN 26 10 1 9 
+rad~1
+.EQN 2 0 3 15 
+deg~ã/180*rad

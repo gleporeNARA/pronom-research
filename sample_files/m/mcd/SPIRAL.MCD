@@ -1,0 +1,26 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 0 5 1 8 
+a1,8,6,7
+SPIRAL
+.EQN 0 25 1 10 
+N:6*ã
+.EQN 0 20 1 15 
+s:0,.1;N
+.EQN 2 -49 22 56 
+N&-N&s*sin(s){1,1,21,45,l}@N&-N&s*cos(s)
+.TXT 6 59 4 16 
+a4,16,14,54
+To see more or 
+fewer curls, 
+change the 
+value of N.

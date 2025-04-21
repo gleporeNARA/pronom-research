@@ -1,0 +1,1069 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<MINiML
+   xmlns="http://www.ncbi.nlm.nih.gov/geo/info/MINiML"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ncbi.nlm.nih.gov/geo/info/MINiML http://www.ncbi.nlm.nih.gov/geo/info/MINiML.xsd"
+   version="0.5.0" >
+
+  <Contributor iid="contrib1">
+    <Person><First>Tomoyuki</First><Last>Furuya</Last></Person>
+    <Email>furuya@opal.kobe-u.ac.jp</Email>
+    <Organization>Kobe University</Organization>
+    <Address>
+      <Line>1-1, Rokkodai-cho, Nada-ku</Line>
+      <City>Kobe</City>
+      <Postal-Code>657-8501</Postal-Code>
+      <Country>Japan</Country>
+    </Address>
+  </Contributor>
+
+  <Contributor iid="contrib2">
+    <Organization></Organization>
+    <Email>geo@ncbi.nlm.nih.gov, support@affymetrix.com</Email>
+    <Phone>888-362-2447</Phone>
+    <Organization>Affymetrix, Inc.</Organization>
+    <Address>
+      <City>Santa Clara</City>
+      <State>CA</State>
+      <Zip-Code>95051</Zip-Code>
+      <Country>USA</Country>
+    </Address>
+    <Web-Link>http://www.affymetrix.com/index.affx</Web-Link>
+  </Contributor>
+
+  <Contributor iid="contrib3">
+    <Person><First>Yukiko</First><Last>Sugisawa</Last></Person>
+  </Contributor>
+
+  <Database iid="GEO">
+    <Name>Gene Expression Omnibus (GEO)</Name>
+    <Public-ID>GEO</Public-ID>
+    <Organization>NCBI NLM NIH</Organization>
+    <Web-Link>http://www.ncbi.nlm.nih.gov/geo</Web-Link>
+    <Email>geo@ncbi.nlm.nih.gov</Email>
+  </Database>
+
+  <Platform iid="GPL17416">
+    <Status database="GEO">
+      <Submission-Date>2013-07-08</Submission-Date>
+      <Release-Date>2013-07-08</Release-Date>
+      <Last-Update-Date>2017-02-21</Last-Update-Date>
+    </Status>
+    <Title>[AraGene-1_0-st] Arabidopsis Gene 1.0 ST Array [transcript (gene) version]</Title>
+    <Accession database="GEO">GPL17416</Accession>
+    <Technology>in situ oligonucleotide</Technology>
+    <Distribution>commercial</Distribution>
+    <Organism taxid="3702">Arabidopsis thaliana</Organism>
+    <Manufacturer>Affymetrix</Manufacturer>
+    <Manufacture-Protocol>
+See manufacturer's web site
+    </Manufacture-Protocol>
+    <Description>
+#%create_date=Wed May  1 12:43:31 2013 PDT
+#%chip_type=AraGene-1_0-st-v1
+#%lib_set_name=AraGene-1_0-st
+#%lib_set_version=v1
+#%genome-version=tair10
+#%genome-version-ucsc=tair10
+#%genome-lifted-method=NONE
+#%genome-lifted_from-version-ucsc=tair10
+#%netaffx-annotation-date=2012-09-15
+#%netaffx-annotation-netaffx-build=33
+#%netaffx-annotation-tabular-data-version=1.1
+#%netaffx-annotation-tabular-format-version=1.1
+#%netaffx-annotation-data-type=transcript_cluster
+#%netaffx-annotation-docgen-method=module:affy/annotation_update/builder; exec:create-download-file.pl
+#%netaffx-annotation-docgen-version=8487
+#%netaffx-annotation-url-transcript=www.affymetrix.com/analysis/netaffx/gene/transcript.affx?pk=
+#%netaffx-annotation-url-mrna=www.affymetrix.com/analysis/netaffx/gene/rna.affx?pk=
+    </Description>
+    <Relation type="Alternative to" target="GPL17417" comment="alternative CDF" />
+    <Relation type="Alternative to" target="GPL21430 (alternative CDF" comment="aragene10st_At_TAIRG version 18)" />
+    <Relation type="Alternative to" target="GPL22603" comment="alternative CDF [aragene10st_At_TAIRG version 19]" />
+    <Relation type="Alternative to" target="GPL23011" comment="alternative CDF [aragene10st_At_TAIRG version 20]" />
+    <Data-Table>
+      <Column position="1">
+        <Name>ID</Name>
+      </Column>
+      <Column position="2">
+        <Name>seqname</Name>
+      </Column>
+      <Column position="3">
+        <Name>strand</Name>
+      </Column>
+      <Column position="4">
+        <Name>start</Name>
+      </Column>
+      <Column position="5">
+        <Name>stop</Name>
+      </Column>
+      <Column position="6">
+        <Name>total_probes</Name>
+      </Column>
+      <Column position="7">
+        <Name>gene_assignment</Name>
+      </Column>
+      <Column position="8">
+        <Name>mrna_assignment</Name>
+      </Column>
+      <Column position="9">
+        <Name>GB_ACC</Name>
+        <Description>GenBank accession number </Description>
+        <Link-Prefix>http://www.ncbi.nlm.nih.gov/nuccore/?term=</Link-Prefix>
+      </Column>
+      <Column position="10">
+        <Name>ORF</Name>
+      </Column>
+      <Column position="11">
+        <Name>SPOT_ID</Name>
+      </Column>
+      <Column position="12">
+        <Name>swissprot</Name>
+      </Column>
+      <Column position="13">
+        <Name>GO_biological_process</Name>
+      </Column>
+      <Column position="14">
+        <Name>GO_cellular_component</Name>
+      </Column>
+      <Column position="15">
+        <Name>GO_molecular_function</Name>
+      </Column>
+      <Column position="16">
+        <Name>protein_domains</Name>
+      </Column>
+      <Column position="17">
+        <Name>crosshyb_type</Name>
+      </Column>
+      <Column position="18">
+        <Name>category</Name>
+      </Column>
+    <External-Data rows="38506">
+GPL17416-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Platform>
+
+  <Sample iid="GSM5226914">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_0h</Title>
+    <Accession database="GEO">GSM5226914</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 0h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0642
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226914/suppl/GSM5226914_Aragene-0642_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226914/suppl/GSM5226914_Aragene-0642_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226914-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226915">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_6h</Title>
+    <Accession database="GEO">GSM5226915</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 6h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0644
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226915/suppl/GSM5226915_Aragene-0644_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226915/suppl/GSM5226915_Aragene-0644_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226915-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226916">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_12h</Title>
+    <Accession database="GEO">GSM5226916</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 12h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0646
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226916/suppl/GSM5226916_Aragene-0646_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226916/suppl/GSM5226916_Aragene-0646_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226916-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226917">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_18h</Title>
+    <Accession database="GEO">GSM5226917</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 18h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0648
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226917/suppl/GSM5226917_Aragene-0648_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226917/suppl/GSM5226917_Aragene-0648_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226917-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226918">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_24h</Title>
+    <Accession database="GEO">GSM5226918</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 24h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0650
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226918/suppl/GSM5226918_Aragene-0650_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226918/suppl/GSM5226918_Aragene-0650_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226918-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226919">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_30h</Title>
+    <Accession database="GEO">GSM5226919</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 30h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0651
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226919/suppl/GSM5226919_Aragene-0651_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226919/suppl/GSM5226919_Aragene-0651_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226919-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226920">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_36h</Title>
+    <Accession database="GEO">GSM5226920</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 36h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0652
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226920/suppl/GSM5226920_Aragene-0652_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226920/suppl/GSM5226920_Aragene-0652_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226920-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226921">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_42h</Title>
+    <Accession database="GEO">GSM5226921</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 42h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0653
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226921/suppl/GSM5226921_Aragene-0653_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226921/suppl/GSM5226921_Aragene-0653_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226921-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226922">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_48h</Title>
+    <Accession database="GEO">GSM5226922</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 48h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0654
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226922/suppl/GSM5226922_Aragene-0654_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226922/suppl/GSM5226922_Aragene-0654_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226922-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226923">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_54h</Title>
+    <Accession database="GEO">GSM5226923</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 54h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0655
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226923/suppl/GSM5226923_Aragene-0655_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226923/suppl/GSM5226923_Aragene-0655_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226923-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226924">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_60h</Title>
+    <Accession database="GEO">GSM5226924</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 60h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0656
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226924/suppl/GSM5226924_Aragene-0656_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226924/suppl/GSM5226924_Aragene-0656_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226924-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226925">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_66h</Title>
+    <Accession database="GEO">GSM5226925</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 66h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0657
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226925/suppl/GSM5226925_Aragene-0657_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226925/suppl/GSM5226925_Aragene-0657_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226925-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM5226926">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>VISUAL_72h</Title>
+    <Accession database="GEO">GSM5226926</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Col-0, 6-day-old seedlings, cotyledons</Source>
+      <Organism taxid="3702">Arabidopsis thaliana</Organism>
+      <Characteristics tag="organ">
+Col-0, 6-day-old cotyledons
+      </Characteristics>
+      <Characteristics tag="time">
+induction after 72h
+      </Characteristics>
+      <Treatment-Protocol>
+Cotyledons were cultured with the induction medium containing 2,4-D (1.25 mg/L), kinetin (0.25 mg/L), and bikinin (10 μM). Samples were collected from 0 to 72 hours at every 6 hours after inuduction.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+Arabidopsis seeds were sterilized with sodium hypochlorite for 5 min, and then washed with sterile water. These seeds were grown with MS liquid medium at 22ºC under the continuous light conditions for 6 days.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Total RNA was extracted and purified with Rneasy Plant Mini Kit (QIAGEN).
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA was prepared from total RNA with GeneChip One-Cycle Target Labeling and Control Reagents (Affymetrix).
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Hybridization, washing, staining procedures were conducted with Fluidics Station 450 as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Scanning procedure ws conducted with GeneChip Scanner 3000 7G as described in the GeneChip Expression Analysis Techinical Manual (Affymetrix).
+    </Scan-Protocol>
+    <Description>
+Aragene-0658
+    </Description>
+    <Data-Processing>
+GCOS
+    </Data-Processing>
+    <Platform-Ref ref="GPL17416" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="CEL">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226926/suppl/GSM5226926_Aragene-0658_AraGene-1_0-st.CEL.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="CHP">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5226nnn/GSM5226926/suppl/GSM5226926_Aragene-0658_AraGene-1_0-st_.rma-gene-full.chp.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>log2 RMA</Description>
+      </Column>
+    <External-Data rows="38408">
+GSM5226926-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Series iid="GSE171548">
+    <Status database="GEO">
+      <Submission-Date>2021-04-06</Submission-Date>
+      <Release-Date>2021-05-19</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>Six-hour interval time-course expression data during VISUAL</Title>
+    <Accession database="GEO">GSE171548</Accession>
+    <Summary>
+We used in vitro tissue culture system (named VISUAL), in which xylem and phloem differentiation can be induced with Arabidopsis thaliana cotyledons
+To investigate temporal gene expression profiles during ectopic vascular cell defferentiaction processes, we performed GeneChip analysis using VISUAL.
+    </Summary>
+    <Overall-Design>
+Arabidopsis cotyledons cultured with the induction medium were sampled collected from 0 to 72 hours at every 6 hours after inuduction.
+    </Overall-Design>
+    <Type>Expression profiling by array</Type>
+    <Contributor-Ref ref="contrib3" position="1" />
+    <Contact-Ref ref="contrib1" />
+    <Sample-Ref ref="GSM5226914" />
+    <Sample-Ref ref="GSM5226915" />
+    <Sample-Ref ref="GSM5226916" />
+    <Sample-Ref ref="GSM5226917" />
+    <Sample-Ref ref="GSM5226918" />
+    <Sample-Ref ref="GSM5226919" />
+    <Sample-Ref ref="GSM5226920" />
+    <Sample-Ref ref="GSM5226921" />
+    <Sample-Ref ref="GSM5226922" />
+    <Sample-Ref ref="GSM5226923" />
+    <Sample-Ref ref="GSM5226924" />
+    <Sample-Ref ref="GSM5226925" />
+    <Sample-Ref ref="GSM5226926" />
+    <Supplementary-Data type="TAR">
+ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE171nnn/GSE171548/suppl/GSE171548_RAW.tar
+    </Supplementary-Data>
+    <Relation type="BioProject" target="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA720046" />
+  </Series>
+
+</MINiML>

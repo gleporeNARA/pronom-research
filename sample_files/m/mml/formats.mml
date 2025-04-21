@@ -1,0 +1,84 @@
+<MML 1.00 - Sample standard font, paragraph, and document formats>
+
+<Comment *** Define fonts for Title, Section, Body, Headers
+   and Footers.  Most of the defaults are good, so we just
+   specify family, size, and style. "ft" stands for "font
+   for Titles", "fs" is "font for sections," etc.>
+<!DefineFont ft
+  <Family Times>
+  <pts 18>
+  <Bold>
+>
+<!DefineFont fs
+  <Family Times>
+  <pts 14>
+  <Bold>
+>
+<!DefineFont fb
+  <Family Times>
+  <pts 12>
+  <Plain>
+>
+<!DefineFont fhf
+  <Family Times>
+  <pts 10>
+  <Plain >
+> 
+<Comment *** Set appropriate font for a Title paragraph and 
+   define its format.>
+<!DefinePar Title 
+ <ft>
+ <Alignment Center> 
+ <SpaceAfter 12pt> 
+>
+<Comment *** Set font and define other paragraph formats.>
+<!DefinePar Section
+  <fs>
+  <Alignment Left >
+  <LeftIndent 0.50">
+  <FirstIndent 0.00">
+  <RightIndent 0.00">
+  <Leading 0pt>
+  <SpaceBefore 9pt>
+  <SpaceAfter 9pt>
+  <AutoNumber Yes >
+  <NumberFormat "+.0\t">
+  <TabStops <TabStop 0.50"> >
+>
+<!DefinePar Body
+  <fb>
+  <Alignment LeftRight >
+  <LeftIndent 0.50">
+  <FirstIndent 0.50">
+  <RightIndent 0.00">
+  <Leading 2pt>
+  <SpaceBefore 0pt>
+  <SpaceAfter 10pt>
+  <AutoNumber No >
+  <TabStops>
+> 
+<!DefinePar BulletItem
+  <Alignment Left >
+  <LeftIndent 0.75">
+  <FirstIndent 0.50">
+  <RightIndent 0.00">
+  <Leading 2pt>
+  <SpaceBefore 0pt>
+  <SpaceAfter 3pt>
+  <AutoNumber Yes>
+  <NumberFormat	"\xA5 \t">
+  <Comment *** \xA5 is the bullet character. \t is a tab character.>
+  <TabStops <TabStop 0.75">>
+> 
+<Comment *** Document Layout descriptions. Most of the
+   default settings are good. >
+<Pagewidth 7.00">
+<PageHeight 10.00">
+<TopMargin 0.75">
+<BottomMargin 0.75">
+<LeftMargin 0.50">
+<RightMargin 0.50">
+<HeaderTopMargin 0.40">
+<HeaderBottomMargin 0.46">
+<HeaderLeftMargin 1.00">
+<HeaderRightMargin 1.00">

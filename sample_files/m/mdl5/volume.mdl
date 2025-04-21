@@ -1,0 +1,97 @@
+mdl 1.5;
+
+import state::*;
+import math::*;
+import anno::*;
+import base::*;
+import limits::*;
+
+export struct volume_return
+[[ anno::hidden() ]]
+{
+    color absorption_coefficient = color();
+    color scattering_coefficient = color();
+};
+
+export volume_return volume_conversion(
+    varying color absorption_color = color(1.f) [[
+        anno::description("Color of light after absorption in volume. (Value-normalized, white = no absorption)"),
+        anno::display_name("Absorption Color"),
+        anno::soft_range(color(0.f),color(1.f)),
+        anno::hard_range(color(0.f),color(1.f))
+    ]],
+    uniform float absorption_distance = 1.f [[
+        anno::description("Approximate distance to full absorption in volume, in scene units."),
+        anno::display_name("Absorption Distance"),
+        anno::soft_range(0.f,1.f),
+        anno::hard_range(0.f,1000000.f)
+    ]],
+    uniform bool scattering = true [[
+        anno::description("Enables scattering of light within a volume."),
+        anno::display_name("Scattering")
+    ]],
+    varying color scatter_color = color(1.f) [[
+        anno::description("Color of scattered media in volume."),
+        anno::display_name("Scatter Color"),
+        anno::soft_range(color(0.f),color(1.f)),
+        anno::hard_range(color(0.f),color(1.f))
+    ]],
+    varying color scatter_distance = color(1.f) [[
+        anno::description("Approximate distance to full scattering in volume per wavelength, in scene units."),
+        anno::display_name("Scatter Distance"),
+        anno::soft_range(color(0.f),color(1.f)),
+        anno::hard_range(color(0.f),color(1000000.f))
+    ]],
+    uniform float scatter_red_shift = 0.f [[
+        anno::description("Degree to which red light travels farther through a volume than other colors. Useful for skin."),
+        anno::display_name("Red Shift"),
+        anno::soft_range(0.f, 1.f),
+        anno::hard_range(0.f, 2.f)
+    ]],
+    uniform float scatter_rayleigh = 0.f [[
+        anno::description("Degree to which the blue end of the light spectrum scatters more than orange and red light."),
+        anno::display_name("Rayleigh Scattering"),
+        anno::soft_range(0.f, 1.f),
+        anno::hard_range(-1.f, 2.f),
+        anno::unused()
+    ]]
+)
+[[
+    anno::description("Calculate volume properties from parameters"),
+    anno::noinline()
+]]
+{
+    bool do_attenuate = math::min_value(absorption_color)<1.f;
+    bool do_scatter = scattering;
+
+    if (!do_attenuate && !do_scatter) {
+        return volume_return();
+    }
+
+    // At this point, either absorption or scattering or both is happening...
+    const float clamp_min = 1e-5;
+    const float clamp_max = 1.f-clamp_min;
+
+    absorption_color = math::clamp(absorption_color, clamp_min, clamp_max);
+    if (!do_scatter) {
+        return volume_return(
+            absorption_coefficient: -math::log(absorption_color) / absorption_distance
+        );
+    }
+
+    color scatter_coefficient( color(1.f) / math::max(scatter_distance, clamp_min) );
+    
+    scatter_color = math::clamp(scatter_color, clamp_min, clamp_max);
+    color subsurface_color = do_scatter ? (color(1.f) - math::pow(color(4.09712f) + 4.20863f * scatter_color + -math::sqrt( color(9.59217f) + scatter_color * (color(41.6808f) + 17.7126f * scatter_color)), 2.f)) : color();
+
+    color absorption_coefficient = do_attenuate ? -math::log(absorption_color) / absorption_distance : color(0);
+
+    color red_shift_modifier(math::pow(0.25f, scatter_red_shift), 1, 1);
+
+    // TO DO: Implement Rayleigh scattering
+
+    return volume_return(
+        absorption_coefficient: red_shift_modifier * (absorption_coefficient + scatter_coefficient) * (color(1.f) - subsurface_color),
+        scattering_coefficient: red_shift_modifier * (absorption_coefficient + scatter_coefficient) * subsurface_color
+    );
+}

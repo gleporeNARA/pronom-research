@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MorpheusModel version="4">
+    <Description>
+        <Details>Full Title: Spatio-temporal BMP signaling model
+This simulation reproduces Fig. 3B of the referenced paper. Parameter values are as published in Suppl. Section "Mathematical modeling" except for the size of the mBMP expressing clone, see Note 1 below. The results illustrate that different signal transduction kinetics can determine specific activity ranges of pSmad5 and pSmad2 in response to the same gradient of mBMP4, the latter being established by a localized source and diffusion, decay in a 2D domain.
+A radial coordinate "x" is used to optionally plot the concentration profiles. Also optionally, time courses of mean concentrations over the domain can be plotted. Both plotting options are included but temporarily inactivated in the model file.
+
+Reference: The model is described in the peer-reviewed publication "Integration of Nodal and BMP Signaling by Mutual Signaling Effector Antagonism" by Gary Huiming Soh, Autumn Penecilla Pomreinke, Patrick Müller. Cell Reports 31, 107487,  2020, https://doi.org/10.1016/j.celrep.2020.03.051
+
+Creator of Morpheus model: peter.brusch.dd@gmail.com
+Date of Morpheus model: November 21, 2020
+Software: Morpheus (open-source), download from https://morpheus.gitlab.io
+Units are: [space]=micrometer, [time]=second
+Note: 1. This Morpheus model uses r=50 (micrometers) for the radius of the (blue) source region in the center of the (black) simulation domain with radius 300 micrometers. This corresponds to the geometry used in Fig. 3B of the referenced paper.
+2. The resulting state at 7200sec is a transient state as the mBMP4 field is initialized as zero, a steady state with higher concentration values is approached at ten times longer duration.
+3. The color scales for the two displayed fields are chosen such that red corresponds to maximum pSmad5 of 5000 and green to maximum pSmad2 of 5. 
+
+model-level annotations:
+http://identifiers.org/taxonomy/7955
+http://identifiers.org/BTO:0000839
+http://identifiers.org/mamo/MAMO_0000048
+http://identifiers.org/pubmed/32268105
+</Details>
+        <Title>BMP signaling</Title>
+    </Description>
+    <Space>
+        <Lattice class="square">
+            <Neighborhood>
+                <Order>1</Order>
+            </Neighborhood>
+            <Size value="650, 650, 0" symbol="size"/>
+            <NodeLength value="1" symbol="dx"/>
+            <BoundaryConditions>
+                <Condition boundary="x" type="noflux"/>
+                <Condition boundary="-x" type="noflux"/>
+                <Condition boundary="y" type="noflux"/>
+                <Condition boundary="-y" type="noflux"/>
+            </BoundaryConditions>
+            <Domain boundary-type="noflux">
+                <Circle diameter="600"/>
+            </Domain>
+        </Lattice>
+        <SpaceSymbol symbol="s" name="Position"/>
+    </Space>
+    <Time>
+        <StartTime value="0"/>
+        <StopTime value="7200" symbol="StopTime_in_seconds"/>
+        <TimeSymbol symbol="Time" name="Time in seconds"/>
+    </Time>
+    <Global>
+        <Constant value="50" symbol="r" name="Radius of mBMP4 expressing clone in micrometer"/>
+        <Field value="1" symbol="domain"/>
+        <Field value="if((s.x-0.5*size.x)^2+(s.y-0.5*size.y)^2&lt;=r^2, 1, 0)" symbol="clone" name="Area of mBMP4 clone"/>
+        <Field value="0" symbol="mBMP4" name="mouse BMP4 protein concentration">
+            <Diffusion rate="3"/>
+            <Annotation>http://identifiers.org/uniprot/P21275</Annotation>
+        </Field>
+        <Field value="0" symbol="pSmad5">
+            <Annotation>http://identifiers.org/uniprot/Q9W7E7
+http://identifiers.org/PATO:0002220</Annotation>
+        </Field>
+        <Field value="0" symbol="pSmad2">
+            <Annotation>http://identifiers.org/uniprot/Q9I9P9
+http://identifiers.org/PATO:0002220</Annotation>
+        </Field>
+        <System solver="Runge-Kutta [fixed, O(4)]" time-step="1">
+            <DiffEqn name="Marker reaction-diffusion model" symbol-ref="mBMP4">
+                <Expression>k1*clone-k2*mBMP4</Expression>
+            </DiffEqn>
+            <DiffEqn symbol-ref="pSmad5">
+                <Expression>k5*mBMP4/(kd+mBMP4) - k3*pSmad5</Expression>
+            </DiffEqn>
+            <DiffEqn symbol-ref="pSmad2">
+                <Expression>k6*mBMP4/(ke+mBMP4) - k4*pSmad2</Expression>
+            </DiffEqn>
+            <Constant value="1" symbol="k1"/>
+            <Constant value="1E-4" symbol="k2"/>
+            <Constant value="1E-4" symbol="k3"/>
+            <Constant value="1E-4" symbol="k4"/>
+            <Constant value="1" symbol="k5"/>
+            <Constant value="1" symbol="k6"/>
+            <Constant value="100" symbol="kd"/>
+            <Constant value="1E6" symbol="ke"/>
+        </System>
+        <Function symbol="mBMP4_observable">
+            <Expression>(1+mBMP4)*(1-clone)*domain - clone</Expression>
+        </Function>
+        <Function symbol="pSmad5_observable">
+            <Expression>(1+pSmad5)*(1-clone)*domain - clone</Expression>
+        </Function>
+        <Function symbol="pSmad2_observable">
+            <Expression>(1+pSmad2)*(1-clone)*domain - clone</Expression>
+        </Function>
+        <Function symbol="x">
+            <Expression>s.x-size.x/2</Expression>
+        </Function>
+        <Variable value="0.0" symbol="mean_mBMP4"/>
+        <Variable value="0.0" symbol="mean_pSmad5"/>
+        <Variable value="0.0" symbol="mean_pSmad2"/>
+        <Mapper time-step="100">
+            <Input value="mBMP4"/>
+            <Output mapping="average" symbol-ref="mean_mBMP4"/>
+        </Mapper>
+        <Mapper time-step="100">
+            <Input value="pSmad5"/>
+            <Output mapping="average" symbol-ref="mean_pSmad5"/>
+        </Mapper>
+        <Mapper time-step="100">
+            <Input value="pSmad2"/>
+            <Output mapping="average" symbol-ref="mean_pSmad2"/>
+        </Mapper>
+    </Global>
+    <Analysis>
+        <DependencyGraph format="svg" reduced="false" include-tags="#untagged"/>
+        <Gnuplotter time-step="600" decorate="false" log-commands="false">
+            <Terminal name="png"/>
+            <!--    <Disabled>
+        <Plot title="mouse BMP4">
+            <Field min="-1" max="500" symbol-ref="mBMP4_observable">
+                <ColorMap>
+                    <Color value="500" color="yellow"/>
+                    <Color value="1" color="black"/>
+                    <Color value="0" color="white"/>
+                    <Color value="-1" color="blue"/>
+                </ColorMap>
+            </Field>
+        </Plot>
+    </Disabled>
+-->
+            <Plot title="pSmad5">
+                <Field min="-1" max="5000" symbol-ref="pSmad5_observable">
+                    <ColorMap>
+                        <Color value="5000" color="red"/>
+                        <Color value="1" color="black"/>
+                        <Color value="0" color="white"/>
+                        <Color value="-1" color="blue"/>
+                    </ColorMap>
+                </Field>
+            </Plot>
+            <Plot title="pSmad2">
+                <Field min="-1" max="5" symbol-ref="pSmad2_observable">
+                    <ColorMap>
+                        <Color value="5" color="green"/>
+                        <Color value="1" color="black"/>
+                        <Color value="0" color="white"/>
+                        <Color value="-1" color="blue"/>
+                    </ColorMap>
+                </Field>
+            </Plot>
+        </Gnuplotter>
+        <!--    <Disabled>
+        <Logger time-step="100">
+            <Input/>
+            <Output>
+                <TextOutput/>
+            </Output>
+            <Plots>
+                <Plot time-step="600">
+                    <Style style="points"/>
+                    <Terminal terminal="png"/>
+                    <X-axis>
+                        <Symbol symbol-ref="Time"/>
+                    </X-axis>
+                    <Y-axis>
+                        <Symbol symbol-ref="mean_mBMP4"/>
+                    </Y-axis>
+                </Plot>
+                <Plot time-step="600">
+                    <Style style="points"/>
+                    <Terminal terminal="png"/>
+                    <X-axis>
+                        <Symbol symbol-ref="Time"/>
+                    </X-axis>
+                    <Y-axis>
+                        <Symbol symbol-ref="mean_pSmad5"/>
+                    </Y-axis>
+                </Plot>
+                <Plot time-step="600">
+                    <Style style="points"/>
+                    <Terminal terminal="png"/>
+                    <X-axis>
+                        <Symbol symbol-ref="Time"/>
+                    </X-axis>
+                    <Y-axis>
+                        <Symbol symbol-ref="mean_pSmad2"/>
+                    </Y-axis>
+                </Plot>
+            </Plots>
+        </Logger>
+    </Disabled>
+-->
+        <!--    <Disabled>
+        <Logger time-step="600">
+            <Restriction domain-only="true" condition="(s.x>=0.5*size.x)*(s.y==0.5*size.y)"/>
+            <Input>
+                <Symbol symbol-ref="mBMP4"/>
+                <Symbol symbol-ref="x"/>
+                <Symbol symbol-ref="pSmad5"/>
+                <Symbol symbol-ref="pSmad2"/>
+            </Input>
+            <Output>
+                <TextOutput/>
+            </Output>
+            <Plots>
+                <Plot time-step="600" title="Spatial profile mBMP4">
+                    <Style point-size="1.0" line-width="1.0" decorate="true" style="lines"/>
+                    <Terminal terminal="png"/>
+                    <X-axis>
+                        <Symbol symbol-ref="x"/>
+                    </X-axis>
+                    <Y-axis>
+                        <Symbol symbol-ref="mBMP4"/>
+                    </Y-axis>
+                    <Range>
+                        <Time mode="current"/>
+                    </Range>
+                </Plot>
+                <Plot time-step="600" title="Spatial profile pSmad5">
+                    <Style point-size="1.0" line-width="1.0" decorate="true" style="lines"/>
+                    <Terminal terminal="png"/>
+                    <X-axis>
+                        <Symbol symbol-ref="x"/>
+                    </X-axis>
+                    <Y-axis>
+                        <Symbol symbol-ref="pSmad5"/>
+                    </Y-axis>
+                    <Range>
+                        <Time mode="current"/>
+                    </Range>
+                </Plot>
+                <Plot time-step="600" title="Spatial profile pSmad2">
+                    <Style point-size="1.0" line-width="1.0" decorate="true" style="lines"/>
+                    <Terminal terminal="png"/>
+                    <X-axis>
+                        <Symbol symbol-ref="x"/>
+                    </X-axis>
+                    <Y-axis>
+                        <Symbol symbol-ref="pSmad2"/>
+                    </Y-axis>
+                    <Range>
+                        <Time mode="current"/>
+                    </Range>
+                </Plot>
+            </Plots>
+        </Logger>
+    </Disabled>
+-->
+    </Analysis>
+</MorpheusModel>

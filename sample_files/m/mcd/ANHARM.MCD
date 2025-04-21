@@ -1,0 +1,40 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 0 0 1 27 
+a1,26,24,25
+Anharmonic Oscillations:
+.TXT 2 1 1 28 
+a1,28,26,27
+Over a mesh of N points...
+.EQN 0 33 1 10 
+N:100
+.EQN 0 14 1 12 
+i:1;N
+.TXT 2 -40 1 43 
+a1,43,41,42
+...spanning the range from -à to à, where
+.EQN 0 43 1 10 
+à:3.1
+.EQN 2 -15 3 23 
+x[i:à*(2*i/(N+1)-1)
+.EQN 1 -32 2 9 
+t[0:0
+.EQN 0 16 2 9 
+x[0:à
+.TXT 3 -19 2 77 
+a2,77,75,134
+We compute the times at which these points are reached by an oscillator 
+having a cosine potential energy, and plot their trajectory.
+.EQN 3 1 5 34 
+t[i:t[(i-1)+à/\|(cos(x[i)-cos(à))
+.EQN 0 40 11 35 
+à&-à&x[i{1,1,9,30,d}@t[N&0&t[i

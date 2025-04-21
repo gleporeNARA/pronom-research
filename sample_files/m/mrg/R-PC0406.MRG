@@ -1,0 +1,2174 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against RBBS-PC.BAS to produce RBBS-PC.NEW
+* RBBS-PC.BAS:  Date 6-20-1992  Size 147219 bytes
+* BusiMod (tm) mods for RBBS v17.4 - (c) 1993,94 by respective authors
+* RBBS v17.4 (c) 1986,1992 by D Thomas Mack
+* ------------[ Created 04-06-1994 22:00:00 ]------------
+* REPLACING old line(s) by new
+29 ' **************************************************************************
+   '
+   ' $INCLUDE: 'RBBS-VAR.BAS'
+   '
+   ' $SUBTITLE: 'Main-line RBBS-PC Program'
+* ------[ first line different ]------
+   '
+    ZCrLf$ = CHR$(13) + CHR$(10)
+    WasJ = 60
+    DIM ZOptSec(WasJ)
+    ZConfigFileName$ = "RBBS-PC.DEF"
+    CALL GetCommand (ZDebug,ZNetTime$,ZNetBaud$,ZNetReliable$)
+    ZSubParm = -62
+    ZBulletinMenu$ = ""
+    CALL ReadDef (ZConfigFileName$)
+    IF ZErrCode > 0 THEN _
+       GOTO 31
+    CALL MLInit (1)
+    GOTO 100
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+100 CLEAR,,                                                          ' RM11109301
+    ZMsgDim = 99                                                     ' RM020901/021801/RM08139301/RM10159302/RM11279301/RM03119401
+    WasMM = 9999                                                     ' RM020901/RM08139301/RM03119401
+    WasBX = 75                                                       ' RM08139301
+    WasJ = 60                                                        ' RM08139301
+    REDIM ZOptSec(WasJ)                                              ' RM08139301
+    DIM ZWorkAra$(WasJ)                                              ' RM08139301
+    DIM ZGSRAra$(WasJ)                                               ' RM08139301
+    DIM ZCategoryName$(WasBX),ZCategoryCode$(WasBX),ZCategoryDesc$(WasBX) ' RM08139301
+    DIM ZOutTxt$(ZMsgDim)                      ' Message line table  ' RM08139301/RM03119401
+    DIM ZUserIn$(ZMsgDim)                      ' Message line table  ' RM08139301
+    DIM ZMsgPtr(9999,2)                        ' Message pointers    ' RM08139301/RM03249401
+    CALL VarInit
+    ZMsgDim = ZMaxMsgLinesDef                                        ' RM03119401
+    REDIM ZWorkAra$(ZMaxWorkVar)                                     ' RM08139301
+    REDIM ZGSRAra$(ZMaxWorkVar)                                      ' RM08139301
+    STACK (ZSizeOfStack)                                             ' RM11109301
+    CALL SysInfo                                                     ' SIN174
+    IF ZErrCode > 0 THEN _
+       GOTO 31
+    ZOrigUpgradeSec = ZAutoUpgradeSec                                ' RM08199303
+    ZOrigMainSec = ZMinLogonSec                                      ' RM08199303
+    CALL BreakFileName (ZOrigMsgFile$,Drive$,ZOrigMsgName$,ZWasY$,ZFalse) ' RM08119301
+    IF ZOrigMsgName$ = "MESSAGES" THEN _                             ' RM08119301
+       ZOrigMsgName$ = "MAIN" _                                      ' RM08119301
+    ELSE IF RIGHT$(ZOrigMsgName$,1) = "M" THEN _                     ' RM08119301
+            ZOrigMsgName$ = LEFT$(ZOrigMsgName$,LEN(ZOrigMsgName$)-1) ' RM08119301/SG08169301
+    ZConfFileName$ = ZOrigMsgName$                                   ' RM08119301
+    ZOrigNewsFileName$ = ZWelcomeFileDrvPath$ + _                    ' RM08119301
+              ZOrigMsgName$ + ".NWS"                                 ' RM08119301
+    ZNewsFileName$ = ZOrigNewsFileName$                              ' RM08119301
+    IF ZNetMail$ <> "NONE" AND VAL(ZNetTime$) > 0 THEN _
+       ZLimitMinsPerSession = VAL(ZNetTime$)
+    IF ZNetMail$ <> "NONE" AND VAL(ZNetBaud$) > 0 THEN _
+       ZExpectActiveModem = ZTrue : _
+       IF NOT ZKeepInitBaud THEN _
+          ZModemInitBaud$ = ZNetBaud$
+    IF ZFossil THEN _
+       ZComPort = VAL(RIGHT$(ZComPort$,1)) - 1 : _
+       IF ZComPort < 0 THEN _
+          GOTO 108 _
+       ELSE CALL FOSinit(ZComPort,Result) : _
+            IF Result = -1 THEN _
+               ZSnoop = ZTrue : _
+               CALL PScrn("ERROR INITIALIZING FOSSIL") : _
+               GOTO 204
+* REPLACING old line(s) by new
+108 CALL BreakFileName (ZCallersFile$,Drive$,WasX$,ZWasY$,ZTrue)
+    ZCallersFilePrefix$ = WasX$
+    ZNodeWorkDrvPath$ = Drive$
+    ZArcWork$ = ZNodeWorkDrvPath$ + _
+                "ARCWORK" + _
+                ZNodeFileID$ + _
+                ".DEF"
+    IF ZUseBASICWrites THEN _
+       ZLocalBksp$ = ZBackArrow$ _
+* ------[ first line different ]------
+    ELSE ZLocalBksp$ = ZBackSpace$ : CALL ANSISET                    ' NB101890
+    ZSysopFullName$ = LEFT$(ZSysopFirstName$ + " " + ZSysopLastName$ + "  ",22)
+    CALL FindFile ("FILEZ.DEF",ZGetDescAfterTransfer)                ' RM02269401
+    CALL FindFile (LEFT$(ZFastFileList$, _
+                   INSTR(ZFastFileList$, ".") -1) + ".CFG",ZWildDownOK) ' WILD\RM03139401
+    CALL FindFile ("NOWUW.DEF",ZNoWUW)                               ' CM03129401
+    ZFastFileSearch = ZFalse
+    CALL GetFastFile                                                 ' RM03269404
+'
+' *****  INITIALIZE NetBIOS INTERFACE   ****
+'
+   IF (ZNetworkType = 6 OR ZNetworkType = 7) AND NOT ZSubBoard THEN _ ' RM01109402
+      CALL InitIBM
+'
+' *****  ESTABLISH NEXT CALLERS FILE RECORD AVAILABLE   ***
+'
+    CALL SetCall
+* REPLACING old line(s) by new
+135 IF ZCurDef$ = ZOrigCnfg$ THEN _
+       ZActiveMessageFile$ = ZMainMsgFile$ : _
+       ZActiveUserFile$ = ZMainUserFile$
+    GOSUB 4910
+    IF ZConfMode THEN _
+       GOTO 150
+    ZLocalUserMode = (RIGHT$(ZComPort$,1) < "1")
+    GET 1,ZNodeRecIndex
+    ZWasY$ = MID$(ZMsgRec$,77,2)
+    CALL UnPackDate (ZWasY$,WasX,WasL,WasI,ZOldDate$)
+    ZOldDate$ = LEFT$(ZOldDate$,6) + MID$(STR$(WasX),2)
+    ZHourMinToDropToDos = - (ZHourMinToDropToDos > 0) * ZHourMinToDropToDos
+* ------[ first line different ]------
+    THour = INT(ZHourMinToDropToDos / 100)                           ' MSVB/RM041101
+    WasMN = ZHourMinToDropToDos - THour * 100                        ' MSVB/RM041101
+    ZTimeToDropToDos! = THour * 3600! + WasMN * 60!                  ' MSVB/RM041101
+'
+' ******  TEST FOR TIMED EXIT ACTIVE   *****
+'
+* REPLACING old line(s) by new
+150 IF ZSubBoard THEN _
+       GOSUB 12987 : _
+       GOSUB 5135 : _
+       GOTO 170
+    ZSysopAvail = VAL(MID$(ZMsgRec$,32,2))
+    ZSysopAnnoy = VAL(MID$(ZMsgRec$,34,2))
+    ZSysopNext = VAL(MID$(ZMsgRec$,36,2))
+    MID$(ZMsgRec$,36,2) = STR$(ZFalse)
+    ZPrinter = VAL(MID$(ZMsgRec$,38,2))
+    IF ZTurnPrinterOff THEN _
+       ZPrinter = ZFalse
+    ZExitToDoors = (MID$(ZMsgRec$,40,2) = "-1" AND ZNetBaud$ = "" _
+                    AND INSTR(COMMAND$," LOCAL") = 0)
+    ZEightBit = VAL(MID$(ZMsgRec$,42,2))
+    ZBPS = -VAL(MID$(ZMsgRec$,44,2))
+    ZSnoop = VAL(MID$(ZMsgRec$,58,2))
+    MID$(ZMsgRec$,57,1) = "I"
+    ZPrivateDoor = (MID$(ZMsgRec$,72,2) = "-1")
+    IF ZPrivateDoor THEN _
+       ZHasPrivDoor = ZTrue
+    MID$(ZMsgRec$,72,2) = STR$(ZFalse)
+    ZLocalUser = (MID$(ZMsgRec$,101,2) = ZCarriageReturn$+ZCarriageReturn$) OR _
+                 ZLocalUserMode
+    IF ZExitToDoors OR ZPrivateDoor THEN _
+       ZHasDoored = ZTrue : _
+* ------[ first line different ]------
+       ZTurboLogon = ZTrue                                           ' RM08139301
+    PUT 1,ZNodeRecIndex
+    GOSUB 12985
+    GET 1,1
+    ZCallsToDate! = VAL(MID$(ZMsgRec$,11,10))                        ' RM08119301
+    IF ZCallsToDate! < 11 THEN _                                     ' RM08119301
+       CALL CopyRight
+'
+' *****  INITIALIZE VOICE SYNTHESIZER   ****
+'
+    CALL Talk (Init,ZOutTxt$)
+'
+' *****  TEST FOR MULTI LINK PRESENT IF NOT COMPAQ COMPUTER   ****
+'
+* REPLACING old line(s) by new
+170 FOR FunctionKeyIndex = 1 TO 10
+       KEY FunctionKeyIndex,""
+    NEXT
+* ------[ first line different ]------
+'
+' ******  INITIALIZE FILE MANAGEMENT SYSTEM, CHECK FOR LOCAL BBS MODE
+'
+* REPLACING old line(s) by new
+175 GOSUB 5344
+* ------[ first line different ]------
+    GOSUB 1298                                                       ' RM03279401
+    ZMaxMsgLines = ZMaxMsgLinesDef
+    IF (NOT ZLocalUser) AND (NOT ZSubBoard) THEN _
+       CALL OpenCom (ZModemInitBaud$,",N,8,1")
+    IF NOT ZSubBoard THEN _
+       CALL SetEcho (ZDefaultEchoer$)
+    ZNodeWorkFile$ = ZNodeWorkDrvPath$ + _
+                      "NODE" + _
+                      ZNodeFileID$ + _
+                      "WRK"
+    ZUploadWorkFile$ = ZNodeWorkDrvPath$ + "NODE" + ZNodeFileID$ + _ ' BTCH174
+                      "FUP"                                          ' BTCH174
+    ZDownloadWorkFile$ = ZNodeWorkDrvPath$ + "NODE" + ZNodeFileID$ + _ ' BTCH174
+                      "FDN"                                          ' BTCH174
+    ZSecsPerSession! = ZMinsPerSession * 60!
+    LogIndex = 1
+    IF NOT ZLocalUserMode THEN _
+       IF NOT ZExitToDoors THEN _
+          GOTO 180 _
+       ELSE IF NOT ZLocalUser THEN _
+               GOTO 180
+    ZLocalUser = ZTrue
+    ZBPS = -17                                                       ' BB08219301/BB09039301/RM11279301
+    ZBaudTest! = 57600                                               ' BB08219301
+    ZCBaud$ = "57600"                                                ' BB08219301
+    ZCBPS = -17                                                      ' BB08219301/BB09039301/RM11279301
+    ZEightBit = ZTrue
+    ZSnoop = ZTrue
+    IF ZExitToDoors THEN _
+       CALL AMorPM : _
+       CALL ReadProf : _
+       GOTO 410
+    GOSUB 178
+    GOTO 345
+* REPLACING old line(s) by new
+178 IF NOT ZSubBoard THEN _
+       RETURN
+    IF ZNewUser THEN _
+       GOSUB 758
+* ------[ first line different ]------
+    IF OrigFirstName$ = ZSysopFirstName$ AND _                       ' DGSALIAS
+       ZLastName$ = ZSysopLastName$ THEN _
+          RETURN 832 _
+    ELSE RETURN 790
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+204 IF ZFossil THEN _
+       CALL FOSExit(ZComPort)
+    SYSTEM
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+400 'CALL SkipLine(1)                                                ' DGS092301-DS
+    CALL Line25                                                      ' DGS092301-DS
+    ZEscapeInsecure = ZFalse
+    ZUpperCase = ZFalse
+    CALL SetExpert
+    WasA1$ = "What is your "
+    CALL FlushCom (ZWasDF$)
+    GOSUB 12500
+    CALL CommInfo
+    IF ZFF THEN _
+       ZLogonErrorIndex = 1 : _
+       GOTO 10620
+    IF ZMinOldCallerBaud > ZBaudTest! THEN _
+       CALL QuickTPut1 ("Sorry," + STR$(ZBaudTest!) + " BPS not allowed") : _
+       ZWasLG$(7) = "OLD CALLER BAUD RESTRICTION" : _
+       ZLogonErrorIndex = 7 : _
+       GOTO 10620
+    LogIndex = 4 - (ZLenIndiv > 0 AND ZStartIndiv > 0)
+    ZTurboLogon = (LEFT$(ZUserIn$(LogIndex),1) = "!")                ' RM08139301
+    SkipWelcomeScreen = (LEFT$(ZUserIn$(LogIndex),1) = "$")
+    ZHomeConf$ = RIGHT$(ZUserIn$(LogIndex),LEN(ZUserIn$(LogIndex)) _
+                     + (ZTurboLogon OR SkipWelcomeScreen))           ' RM08139301
+    CALL AllCaps(ZHomeConf$)
+'
+' *****  CHECK IF SAME USER ON ANOTHER NODE   ***
+'
+* REPLACING old line(s) by new
+420 IF MID$(ZMsgRec$,57,1) = "A" THEN _
+       ZLogonErrorIndex = 6 : _
+       ZWasLG$(6) = ZWasLG$(6) + _
+                LEFT$(ZMsgRec$,25) : _
+       ZOutTxt$ = "The name '" + ZActiveUserName$ + _
+                  "' is in use on another node" : _
+       CALL RingCaller : _
+       GOTO 10620
+    ZFirstName$ = LEFT$(ZMsgRec$,INSTR(ZMsgRec$, " ") - 1)
+    IF NOT ZPrivateDoor THEN _
+       CALL SkipLine (1) : _
+* ------[ first line different ]------
+       CALL QuickTPut1 (ZFG7$ + ZFirstName$ + ZFG6$ + ", welcome back to " + _
+                        ZFG7$ + ZRBBSName$ + ZFG6$ + "!" + ZColorReset$) : _ ' RM09269301
+       CALL Talk (11,ZOutTxt$)
+    IF ZExitToDoors THEN _
+       GOTO 457
+'
+' *****  TEST FOR REMOTE SYSOP LOGGING ON   ***
+'
+* REPLACING old line(s) by new
+457 CALL SkipLine (1)
+    GOSUB 12840
+    GOSUB 12850
+* ------[ first line different ]------
+    ZJParm = 8                                                       ' RM09259302
+    CALL JoinConference (Found)                                      ' RM09259302
+    CALL RegToCurrent
+    CALL CompDate (ZTodayRegYY,ZTodayRegMM,ZTodayRegDD,ZTodayComputeDate!) ' RM08209301
+    IF NOT Found THEN _
+       GOTO 700
+    GOSUB 12984
+'
+' *****  ACTIVE USER FOUND  ****
+'
+* REPLACING old line(s) by new
+459 GOSUB 9500
+    ZLastDateTimeOnSave$ = ZLastDateTimeOn$
+    ZMinsInDoors = 0
+    IF ZExitToDoors THEN _
+       TempHoldTime! = VAL(LEFT$(ZTime$,2))*3600! + _
+                         VAL(MID$(ZTime$,4,2))*60! : _
+       CALL CheckTime(TempHoldTime!, TempTime!, 2) : _
+       ZMinsInDoors = TempTime! / 60 : _
+       CALL TimeRemain (MinsRemaining)
+    ZUserFileIndex = LOC(5)
+    GOSUB 5135
+'
+' ***  COMPUTE THE NUMBER OF DAYS REMAINING UNTIL REGISTRATION EXPIRES **
+'
+* ------[ first line different ]------
+    ZJParm = 7                                                       ' RM09029301
+    CALL JoinConference (Found)                                      ' RM09029301/RM09259302
+* REPLACING old line(s) by new
+460 UserSecLevel$ = STR$(ZUserSecLevel)
+    IF ZUserSecLevel > -1 THEN _
+       UserSecLevel$ = MID$(UserSecLevel$,2)
+    IF ZUserSecLevel >= ZMinLogonSec THEN _
+       GOTO 470
+    IF NOT ZPrivateDoor THEN _
+       GOSUB 465 : _
+       CALL DelayTime (8 + ZBPS)
+    IF ZLogonErrorIndex < 9 AND _
+       ZErrCode = 0 THEN _
+       ZLogonErrorIndex = 8
+    GOTO 10620
+* ------[ first line different ]------
+'
+' ***  DISPLAY LOG-ON MESSAGE FOR SPECIFIC SECURITY LEVEL  **
+'
+* DELETING old line(s)
+462
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+465 ZTurboLogon = ZTurboLogon AND (ZExitToDoors OR _                 ' RM08139301
+                  (ZUserSecLevel >= ZAllowCallerTurbo))
+    IF ZTurboLogon THEN _                                            ' RM08139301
+       RETURN
+    ZFileName$ = ZWelcomeFileDrvPath$ + _
+                 "LG" + _
+                 UserSecLevel$ + _
+                 ".DEF"
+* REPLACING old line(s) by new
+470 GOSUB 12989
+    ZWasCI$ = ZCityState$
+    CALL Trim (ZWasCI$)
+    ZAttemptsAllowed = 4
+    ZPswdSave$ = ZPswd$
+    TempSysop = (ZUserSecLevel >= ZSysopSecLevel)
+    ZMsgPswd = ZFalse
+    IF NOT ZSubBoard THEN _
+       ZElapsedTime = CVI(ZElapsedTime$)
+    IF (NOT ZExitToDoors) AND _
+       (ZCurDate$ <> LEFT$(ZLastDateTimeOn$,8)) AND _
+       (ZElapsedTime > 0 OR NOT ZKeepTimeCredits) THEN _
+       ZElapsedTime = 0
+    IF ZPrivateDoor AND _
+       ZTransferFunction = 3 THEN _
+       GOSUB 755 : _
+       GOTO 800
+    IF ZPswdSave$ = SPACE$(LEN(ZPswdSave$)) THEN _
+* ------[ first line different ]------
+       ZSubParm = 1 : _                                              ' DGS121801-DS
+       GOSUB 755 : _
+       GOTO 800
+* REPLACING old line(s) by new
+643 IF NOT LogonPswdFailed THEN _
+       GOSUB 41070 : _
+       GOTO 644 _
+    ELSE IF ZExitToDoors THEN _
+            GOTO 644
+    GOSUB 12991
+* ------[ first line different ]------
+    CALL BufFile(ZHelpPath$ + "BADPASSW" + ZHelpExtension$,WasX)     ' DA081201
+    ZOutTxt$ = "Forget password?  Leave comment to SysOp (Y,[N])"
+    GOSUB 12999
+    IF ZYes THEN _
+       MParm = 10 : _                                                ' MS174/RM08139301
+       GOSUB 2001                                                    ' MS174/RM08139301
+    ZFirstName$ = ""
+    GOTO 902
+* REPLACING old line(s) by new
+700 ZExpertUser = ZFalse
+    CALL SetExpert
+    IF ZMinNewCallerBaud > ZBaudTest! THEN _
+       CALL QuickTPut ("Sorry," + STR$(ZBaudTest!) + _
+                       " BPS only for registered users",1) : _
+       ZWasLG$(7) = "NEW CALLER BAUD RESTRICTION" : _
+       ZLogonErrorIndex = 7 : _
+       GOTO 10620
+    CALL QuickTPut1 ("User not found")
+    ZLastIndex = 0
+    GOSUB 12558
+    IF ZNo THEN _
+       GOSUB 13700 : _
+       GOTO 400
+    CALL Line25
+    ZWasZ$ = ZFirstName$
+    GOSUB 670
+    ZWasZ$ = ZLastName$
+    GOSUB 670
+    ZWasZ$ = ZActiveUserName$
+    GOSUB 670
+* ------[ first line different ]------
+    ZTurboLogon = ZFalse                                             ' RM08139301
+* REPLACING old line(s) by new
+725 IF ZUserSecLevel < ZMinLogonSec THEN _
+       ZLogonErrorIndex = 1 : _
+       GOTO 460
+    IF ZFirstName$ = ZLastName$ THEN _
+       CALL QuickTPut1 (ZFirstNamePrompt$+"/"+ZLastNamePrompt$+" cannot be same") : _
+       ZLogonErrorIndex = 3 : _
+       GOTO 10620
+    IF NOT ZRememberNewUsers THEN _
+       GOSUB 13700 : _
+       ZUserFileIndex = 0 : _
+       GOSUB 12960: _
+* ------[ first line different ]------
+       PrevLastOn$ = "00-00-00" : _
+       ZNewUser = ZTrue : _                                          ' RM04019402
+       GOTO 735
+    ZNewUser = ZTrue
+    CALL OpenUser (ZHighestUserRecord)
+    GOSUB 9450
+    GOSUB 12630
+    MID$(ZUserRecord$,ZStartHash,ZLenHash) = LEFT$("NEWUSER",ZLenHash)
+    IF ZStartIndiv > 0 THEN _
+       MID$(ZUserRecord$,ZStartIndiv,ZLenIndiv) = ZIndivValue$
+    GOSUB 9440
+* REPLACING old line(s) by new
+754 CALL QuickTPut1 ("GUEST privileges granted.  Re-register on future calls")
+    ZUserSecSave = ZUserSecLevel
+* ------[ first line different ]------
+    CALL SetPrivileges                                               ' DD
+    CALL SetPrompt                                                   ' DD
+    GOTO 832
+* REPLACING old line(s) by new
+755 IF ZPrivateDoor THEN _
+       ZUserIn$ = ZPswd$ : _
+       ZWasZ$ = ZUserIn$ : _
+       RETURN
+    GOSUB 12800
+    ZOutTxt$ = "Re-Enter password for Verification"
+    GOSUB 45010
+    SWAP ZWasZ$,ZUserIn$
+    CALL AllCaps (ZWasZ$)
+    IF ZUserIn$ <> ZWasZ$ THEN _
+* ------[ first line different ]------
+       CALL QuickTPut1 (ZFG5$ + "Passwords Don't Match!" + ZEmphasizeOff$) : _ ' RM051801
+       GOTO 755
+    RETURN
+* REPLACING old line(s) by new
+758 CALL AskMore ("",ZTrue,ZTrue,WasX,ZTrue)
+    CALL Line25
+    ZFileName$ = ZNewUserFile$
+    ZStopInterrupts = ZTrue
+* ------[ first line different ]------
+    CALL InitWelc (2)                                                ' IW174/RM08059306
+    CALL SkipLine(1)
+    RETURN
+'
+' ***  R - COMMAND FROM NEWUSER ROUTINE - REGISTER   **
+'
+* REPLACING old line(s) by new
+760 ZLastIndex = 0
+    GOSUB 755
+    CALL AllCaps (ZWasZ$)
+    LSET ZPswd$ = ZWasZ$
+    CALL QuickTPut1 ("Please REMEMBER your password")
+* ------[ first line different ]------
+    ZMenuNewUsers = ZMenuNewUsers + 1                                ' MENU174
+    ZUserTextColor = 37
+    ZTempSecLevel = ZUserSecLevel
+    CALL Protocol
+    ZUserXferDefault$ = "N"
+    ZProtoPrompt$ = "None"
+    IF ZNewUserSetsDefaults THEN _
+       ZBypassTimeCheck = ZTrue : _
+       GOSUB 43001 : _                                               ' GR174/RM08039303
+       ZBypassTimeCheck = ZFalse : _
+       CALL Graphic (ZFileName$) : _
+       GOSUB 42805 : _
+       GOSUB 42700 _
+    ELSE ZUpperCase = ZFalse : _
+         ZNulls = ZFalse
+    ZPageLength = ZPageLengthDef
+    CALL SetNewUserDef
+    GOSUB 5135
+    CALL DefaultU
+* REPLACING old line(s) by new
+790 IF NOT ZNewUser THEN _
+       GOTO 800
+    ZFileName$ = ZNewUserQuestionnaire$
+* ------[ first line different ]------
+    CALL QuestAns (2, WasX)                                          ' QA174/RM08059308
+    IF ZSubParm = -1 THEN _                                          ' RM12149301
+       GOTO 10595                                                    ' RM12149301
+    LSET ZSecLevel$ = MKI$(ZUserSecLevel)
+    UserSecLevel$ = STR$(ZUserSecLevel)
+    CALL Remove (UserSecLevel$," ")
+'
+' ****  LOGIN ALL USERS  ***
+'
+* REPLACING old line(s) by new
+800 IF ZAdjustedSecurity THEN _
+       GOSUB 5135
+    IF ZOrigCnfg$ = ZCurDef$ THEN _
+       ZMainUserFileIndex = ZUserFileIndex : _
+       ZOrigSec = ZUserSecLevel : _
+       ZUserSecSave = ZUserSecLevel : _
+* ------[ first line different ]------
+       OrigFirstName$ = ZFirstName$ : _                              ' DGSALIAS
+       ZOrigUserNameDGS$ = ZActiveUserName$ : _                      ' DGSALIAS
+       ZOrigUserName$ = ZActiveUserName$
+    ZTimesLoggedOn = CVI(MID$(ZUserOption$,1,2)) - _
+       ((ZOrigCnfg$ <> ZCurDef$ OR NOT ZSubBoard) AND _
+        (NOT ZPrivateDoor) AND (NOT ZExitToDoors))
+    GOSUB 9500
+    IF (NOT ZExitToDoors) AND (NOT ZSubBoard) THEN _
+       CALL UpdtCalr (ZActiveUserName$ + " from " + ZWasCI$ + _
+                 " Lvl" + STR$(ZUserSecLevel) + " " + TIME$,2) : _   ' PSWD174
+       CALL UpdtCalr ("Line Speed " + ZCBaud$,2) : _                 ' KG092201
+       CALL ExpiredPswd : _                                          ' PSWD174/MENU174
+       ZMenuNewCalls = ZMenuNewCalls + 1                             ' MENU174
+    PrevLastOn$ = ZLastDateTimeOn$
+    IF ZOnlyOneTimeLockPerDay THEN _                                 ' RM02089401
+       IF NOT ZPrivateDoor AND NOT ZExitToDoors AND ZTimeLock <> 0 AND _
+         ZTempTimeLock > 0 AND LEFT$(ZLastDateTimeOn$,8) = ZCurDate$ THEN _ ' RM02089401
+            IF (CVI(ZElapsedTime$) * 60 >= ZTempTimeLock) THEN _     ' RM02039401/RM02069401
+               ZTimeLock = 0 : _                                     ' RM02039401/RM02069401
+               CALL SkipLine (1) : _                                 ' RM02059401
+               CALL QuickTPut1 (ZFG6$ + "Time Lock " + ZFG7$ + "EXEMPT" + ZFG6$ + " this call!" + ZEmphasizeOff$) : _ ' RM02039401/RM02069401
+               CALL SkipLine (1) _                                   ' RM02069401/RM02089401
+            ELSE _                                                   ' RM02089401
+               ZTimeLockSet = ZTimeLockSet - (CVI(ZElapsedTime$) * 60) ' RM02089401
+    IF ZLocalUser THEN _
+       ZTalkToModemAt$ = "57600" : _                                 ' BB08219301
+       ZBaudParity$ = "57600 BPS,N,8,1" : _                          ' BB08219301
+       ZModemInitBaud$ = "57600" : _                                 ' BB08219301
+       ZSnoop = ZTrue : _
+       ZLineFeeds = ZTrue
+    CALL SetCrLf
+    CALL SetPrompt
+    CALL XferType (2,ZTrue)
+    IF NOT ZSubBoard THEN _
+       ZBoardCheckDate$ = PrevLastOn$                                ' RM08119301
+    CALL SetSysOp
+    IF ZWasA THEN _
+       ZActiveUserName$ = "SYSOP" : _
+       ZFirstName$ = "SysOp"
+    IF ZExitToDoors OR ZSubBoard THEN _
+       GOTO 815
+    GOSUB 465
+    IF (ZEightBit AND _
+       ZAutoDownDesired) OR _
+       ZAskID THEN _
+       CALL TestUser
+    CALL QuickTPut1 (ZFG1$ + "Logging " + ZFG7$ + ZActiveUserName$ + ZEmphasizeOff$) ' RM051801
+    CALL Talk (1,ZOutTxt$)
+    Temp$ = STR$(ZBaudTest!) + MID$(ZBaudParity$,INSTR(ZBaudParity$," B"))
+    IF ZKeepInitBaud THEN _                                          ' RM030201
+       CALL QuickTPut1 (ZFG1$ + "RBBS-PC " + ZFG7$ + ZVersionID$ + ZFG1$ + " Node " + _
+                     ZFG7$ + ZNodeID$ + ZEmphasizeOff$) : _          ' RM051801
+       CALL QuickTPut1 (ZFG1$ + "Host operating at " + ZFG7$ + ZModemInitBaud$ + ZFG1$ + _
+                 " BPS, Line Speed" + ZFG7$ + Temp$ + ZEmphasizeOff$) _ ' KG081902/RM030201
+    ELSE _
+       CALL QuickTPut1 (ZFG1$ + "RBBS-PC " + ZFG7$ + ZVersionID$ + ZFG1$ + " Node " + _
+           ZFG7$ + ZNodeID$ + ZFG1$ + ", operating at" + ZFG7$ + Temp$ + ZEmphasizeOff$) ' RM051801' KG081902
+    CALL QuickTPut1 (ZFG1$ + ZRBBSName$ + ZFG7$ + " - BusiMods by Many" + _ ' RM10059301/RM11229303
+                     ZEmphasizeOff$)                                 ' RM051801/RM10059301
+    CALL SkipLine (1)
+    IF ZMaxNodes > 1 AND ZAllowInternodeChat THEN _                  ' RCHAT401/RM11199301
+       GOSUB 42750 : _                                               ' RCHAT401/RM091701
+       CALL LogNewForChat (ZMaxNodes)                                ' RCHAT401
+    Attempts = 0
+    ZWasZ$ = ZActiveUserName$ + _
+            " on at " + _
+            ZCurDate$ + _
+            ", " + _
+            ZTime$ + _
+            " from " + _
+            ZWasCI$ + _
+            "," + Temp$
+     ZWasNG$ = ZWasZ$ + SPACE$(128 - LEN(ZWasZ$))
+'
+' *  ALWAYS RECORD THE HASH/INDIVIDUATING FIELD TO EACH RECORD LOGGED OUT
+'
+     WasX$ = "{" + _
+          ZHashValue$ + _                                            ' RM08139301
+          "/" + _
+          ZIndivValue$ + _
+          "}"
+     IF LEN(ZWasZ$) < 65 THEN _
+        WasX = 65 _
+     ELSE WasX = LEN(ZWasZ$) + 2
+     MID$(ZWasNG$,WasX) = WasX$
+     CALL Printit ("  " + ZWasZ$)
+     IF ZNewUser THEN _
+        CALL UpdtCalr ("NEWUSER",1) : _
+        CALL FindFile ("WELCOME.DEF",ZWelcomeAboard) : _             ' NEWU174
+        CALL Muzak (2)
+'
+' *****  NOTIFY CALLER IF ABLE TO "AUTODOWN"  ****
+'
+    IF ZEightBit AND ZAutoDownYes THEN _
+       ZOutTxt$ = CHR$(9) + _
+            ZReturnLineFeed$ + _
+            "You may use AUTODOWNLOADing!" : _
+       CALL RingCaller : _
+       CALL DelayTime(4)
+* REPLACING old line(s) by new
+815 CALL SetUserUpDn
+    IF ZCurDate$ <> LEFT$(ZLastDateTimeOnSave$,8) THEN  _
+       ZDLToday! = 0 : _
+       ZBytesToday! = 0
+    CALL SetGlobalUpDn
+    GOSUB 827
+    LSET ZUserOption$ = MKI$(ZTimesLoggedOn) + _
+                        MID$(ZUserOption$,3)
+    LSET ZLastDateTimeOn$ = ZCurDate$ + _
+                              " " + _
+                              ZTimeLoggedOn$
+* ------[ first line different ]------
+    MID$(ZUserRecord$,ZStartHash,ZLenHash) = ZHashValue$             ' RM08139301
+    IF ZStartIndiv > 0 THEN _
+       MID$(ZUserRecord$,ZStartIndiv,ZLenIndiv) = ZIndivValue$
+    LSET ZUserName$ = ZOrigUserName$
+    IF (NOT ZExitToDoors) AND NOT (ZOrigMsgFile$ = ZActiveMessageFile$ AND ZSubBoard) THEN _
+       CALL AutoPage
+    IF NOT ZSubBoard THEN _
+       ZOrigUserFileIndex = ZUserFileIndex
+    IF NOT ZConfMode THEN _
+       IF ZOrigDateTimeOn$ = "" THEN _
+          ZOrigDateTimeOn$ = ZLastDateTimeOn$ : _
+          ZOrigTimeLoggedOn$ = ZTimeLoggedOn$ _
+       ELSE ZLastDateTimeOn$ = ZOrigDateTimeOn$ : _
+            ZTimeLoggedOn$ = ZOrigTimeLoggedOn$
+    GOSUB 9440
+    GOSUB 12991
+    GOSUB 41000
+    CALL AskMore ("",ZTrue,ZTrue,WasX,ZTrue)
+    IF ZTurboLogon THEN _                                            ' RM08139301
+       GOTO 819
+    IF SkipWelcomeScreen AND _
+       (ZUserSecLevel >= ZAllowCallerTurbo) THEN _
+       GOTO 816
+    IF NOT SameUser THEN _
+       ZStopInterrupts = NOT ZWelcomeInterruptable : _
+       ZBypassTimeCheck = ZTrue : _
+       ZFileName$ = ZWelcomeFile$ : _
+       ZDisplayAsUnit = ZTrue : _
+       CALL InitWelc (2) : _                                         ' IW174/RM08059306
+       IF ZRIPTest THEN _
+          CALL QuickTPut1 (ZRIPReset$)                               ' RM11069301
+       ZDisplayAsUnit = ZFalse
+    ZBypassTimeCheck = ZFalse
+    ZStopInterrupts = ZTrue
+* REPLACING old line(s) by new
+816 IF NOT ZNewUser THEN _
+* ------[ first line different ]------
+       CALL SkipLine (1)                                             ' RM10069301
+       CALL QuickTPut1 (ZFG5$ + "Times on:" + ZFG7$ + STR$(ZTimesLoggedOn) + _
+            ZFG5$ + "  Last on: " + ZFG7$ + PrevLastOn$ + ZEmphasizeOff$) ' RM051801
+* REPLACING old line(s) by new
+817 IF NOT ZRemindFileXfers OR ZNewUser THEN _
+       GOTO 818
+* ------[ first line different ]------
+    ZOutTxt$ = ZFG3$ + "Files Downloaded:" + ZFG7$ + _
+         STR$(ZDnlds) + ZFG3$ + _
+         "  Uploaded:" + ZFG7$ + _
+         STR$(ZUplds) + ZEmphasizeOff$                               ' RM051901
+    GOSUB 12977
+    CALL CheckRatio (ZFalse)
+* REPLACING old line(s) by new
+819 CALL Trim (ZWasCI$)
+    IF (ZNodeRecIndex < 2) THEN _
+       GOTO 821
+    GOSUB 4910
+* ------[ first line different ]------
+    CALL UpdtMessageHdr                                              ' UM174/RM08059305           ' UM174/RM08059305
+    GET 1,ZNodeRecIndex
+    MID$(ZMsgRec$,1,31) = ZActiveUserName$ + _
+                                 SPACE$(31 - LEN(ZActiveUserName$))
+    MID$(ZMsgRec$,40,2) = " 0"
+    MID$(ZMsgRec$,44,2) = RIGHT$(STR$(-ZBPS),2)
+    MID$(ZMsgRec$,55,2) = " 0"
+    MID$(ZMsgRec$,57,1) = "A"
+    MID$(ZMsgRec$,60,5) = ZTalkToModemAt$ + _
+                                 SPACE$(5 - LEN(ZTalkToModemAt$))
+    MID$(ZMsgRec$,72,2) = " 0"
+    MID$(ZMsgRec$,79,5) = ZCBaud$ + SPACE$(5 - LEN(ZCBaud$))         ' KG012001
+    MID$(ZMsgRec$,93,24) = ZWasCI$ + _
+                                  SPACE$(24)
+    PUT 1,ZNodeRecIndex
+    GOSUB 12985
+* REPLACING old line(s) by new
+821 IF ZExitToDoors THEN _
+       IF ZTransferFunction = 3 THEN _
+          ZNewUser = ZTrue : _
+* ------[ first line different ]------
+          ZTurboLogon = ZFalse : _                                   ' RM08139301
+          SameUser = ZFalse : _
+          ZTransferFunction = 0 : _
+          GOTO 832 _
+       ELSE GOTO 832
+    ZJParm = 5                                                       ' JC174/RM08119301
+    GOSUB 5300                                                       ' JC174/RM08119301
+    IF (ZSubBoard AND (ZOrigMsgFile$ = ZActiveMessageFile$)) _
+       OR ((ZUserSecLevel > ZMaxRegSec) AND (NOT ZNewUser)) THEN _
+       GOTO 832
+    ZWasZ$ = ZRegProgram$
+    ZTransferFunction = 3
+    CALL DoorExit (ZFalse)
+    ZTransferFunction = 0
+    GOTO 832
+'
+' ****  ESC PRESSED ON LOCAL CONSOLE ENTERS HERE   ***
+'
+* REPLACING old line(s) by new
+822 LOCATE 24,1
+    CALL TakeOffHook
+    ZLocalUser = ZTrue
+    ZSnoop = ZTrue
+* ------[ first line different ]------
+    ZBPS = -17                                                       ' BB08219301/BB09039301/RM11279301
+    CALL CommInfo
+    CALL Muzak (2)
+    IF NOT ZEscapeInsecure THEN _
+       GOTO 345
+    ZActiveUserName$ = ZSecretName$
+    ZFirstName$ = ZSysopPswd1$
+    ZLastName$ = ZSysopPswd2$
+    ZUserLogonTime! = TIMER
+    ZTimeLoggedOn$ = TIME$
+    ZLinesPrinted = 0
+    ZSysop = ZTrue
+    GOTO 457
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+827 IF ZLastMsgRead > ZHighMsgNumber THEN _                          ' RM08119301
+       ZLastMsgRead = 0 : _
+       MID$(ZUserOption$,3,2) = MKI$(0)
+    RETURN
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+832 IF ZNewUser AND NOT ZRememberNewUsers THEN                       ' DD/RM04019402
+       ZNewUser = ZFalse                                             ' RM04019402
+       ZFileName$ = ZWelcomeFile$                                    ' DD
+       ZDisplayAsUnit = ZTrue                                        ' DD
+       CALL InitWelc (2)                                             ' RM03309401
+       IF ZRIPTest THEN _                                            ' RM03309401
+          CALL QuickTPut1 (ZRIPReset$)                               ' RM03309401
+       ZDisplayAsUnit = ZFalse                                       ' RM03309401
+    END IF                                                           ' RM03309401
+    IF ZRestrictByDate AND ZDaysInRegPeriod > 0 THEN _               ' RM03309401
+       IF ZRegDaysRemaining <= ZDaysToWarn AND _
+          ZRegDaysRemaining > 0 AND ZUserSecLevel > ZTempExpiredSec THEN _
+             CALL QuickTPut1 ("Registration EXPIRES in" + _
+                       STR$(ZRegDaysRemaining) + " days!") : _
+             ZFileName$ = ZHelpPath$ + "RGXPIRE" + ZHelpExtension$ : _ ' RM08059307
+             GOSUB 43025 : _                                         ' RM08059307
+             CALL DelayTime (5)                                      ' RM08059307
+    IF (NOT ZReqQuesAnswered) AND _
+       ZReqQues$ <> "" THEN _
+         ZFileName$ = ZReqQues$ : _
+         CALL QuestAns (2, WasX) : _                                 ' QA174/RM08059308
+         IF ZSubParm = -1 THEN _                                     ' RM12149301
+            GOTO 10595                                               ' RM12149301
+         IF ZOK THEN _
+            ZReqQuesAnswered = ZTrue
+* REPLACING old line(s) by new
+842 CALL SetSessionTime
+    ZSysop = (ZUserSecLevel >= ZSysopSecLevel)
+    GOSUB 12987
+    IF ZSubBoard THEN _
+       GOTO 850
+    GOSUB 12986
+* ------[ first line different ]------
+    CALL GetMessageHdr                                               ' GM174/RM08059303
+    ZCallsToDate! = ZCallsToDate! + 1 + (ZSysop OR ZHasDoored)       ' RM08119301
+    CALL UpdtMessageHdr                                              ' UM174/RM08059305           ' UM174/RM08059305
+    GOSUB 12985
+* REPLACING old line(s) by new
+850 ZSubParm = 2
+    CALL Line25
+    CALL SkipLine (1)
+* ------[ first line different ]------
+    IF ZTurboLogon THEN _                                            ' RM08139301
+       ZBulletinSave$ = ZBulletinMenu$ : _
+       GOSUB 9750 : _
+       GOTO 900
+    IF ZNewUser OR NOT ZNewFilesCheck THEN _                         ' RM10159301
+       GOTO 852                                                      ' RM10159301
+    CALL LoadNew (ZMsgPtr())                                         ' DGS050501-DS/LOADNEW
+    CALL CountNewFiles (ZBoardCheckDate$,ZMsgPtr(),LastNew,ZOutTxt$) ' RM08119301
+    IF ZFMSDirectory$ <> "" THEN
+       CALL SkipLine(1)                                              ' DGS050501-DS/LOADNEW
+       IF LastNew > 0 THEN                                           ' RM030701
+          CALL QuickTPut1 (ZFG5$ + "There are" + ZOutTxt$ + _
+               ZFG7$ + STR$(LastNew) + ZFG5$ + " NEW file(s) since last on" + ZEmphasizeOff$) ' RM051801/RM030701
+       ELSE
+          CALL QuickTPut1 (ZFG5$ + "There are " + ZFG7$ + "NO" + ZFG5$ + " New Files since last on" _
+                          + ZEmphasizeOff$)                          ' DGS092401-DS/LOADNEW/RM10059301
+          CALL SkipLine(1)                                           ' RM10159301
+          GOTO 852                                                   ' RM10159301
+       ENDIF
+       CALL SkipLine(1)                                              ' DGS050501-DS/LOADNEW
+    ELSE GOTO 852
+    ENDIF                                                            ' RM030701
+    WasL = LEN(ZDnldDrives$)
+    SecNum = 19
+    IF (NOT ZSkipFilesLogon) AND _
+       ZUserSecLevel >= ZOptSec(SecNum) THEN _
+          ZOutTxt$ = ZFG1$ + "Review new files for possible download ([Y]" + _
+                     ZFG1$ + ",N)" + ZEmphasizeOff$ : _              ' RM051801/JL030701
+          GOSUB 12999 : _
+          IF NOT ZNo THEN _
+             ZLastIndex = 3 : _
+             ZAnsIndex = 1 : _
+             ZWasQ = 3 : _
+             ZUserIn$(2) = MID$(ZBoardCheckDate$,1,2) + _            ' RM08119301
+                     MID$(ZBoardCheckDate$,4,2) + _                  ' RM08119301
+                     MID$(ZBoardCheckDate$,7,2) : _                  ' RM08119301
+             ZWasY$ = ZUserIn$(3) : _
+             CALL BreakFileName (ZFMSDirectory$,DR$,ZWasY$,WasX$,ZFalse) : _
+             ZUserIn$(3) = ZWasY$ : _
+             TimeLockExempt = ZTrue : _
+             GOSUB 20185 : _
+             ZLastIndex = 0 : _
+             TimeLockExempt = ZFalse
+* REPLACING old line(s) by new
+856 IF NOT ZCheckBulletLogon THEN _
+       ZAnsIndex = 0 : _
+       GOSUB 9760 : _
+       GOTO 900
+    CALL SkipLine (1)
+* ------[ first line different ]------
+    ZOutTxt$ = ZFG5$ + "Skip the bulletins (Y,[N]" + ZFG5$ + ")" + ZEmphasizeOff$ ' RM051801
+    GOSUB 12999
+    IF ZYes THEN _
+       GOTO 900
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+900 IF ZWelcomeAboard THEN _                                         ' NEWU174
+       GOSUB 1799 : _                                                ' NEWU174
+       CALL UpdtCalr ("New User Welcome message sent!",1) : _        ' NEWU174
+       WelcomeAboard = ZWelcomeAboard : _                            ' NEWU174
+       ZWelcomeAboard = ZFalse                                       ' NEWU174
+    ZNewUser = ZFalse                                                ' NEWU174
+    ActionFlag = (ZLogonMailLevel$ = "S")
+    LogonMailNew = (ZLogonMailLevel$ = "N")
+    ZActiveMessages = 0                                              ' RM08159301
+    MParm = 11                                                       ' MS174/RM08139301
+    GOSUB 2001                                                       ' MS174/RM08139301
+    IF ZActiveUserName$ = "SYSOP" AND NOT ZSysop THEN _
+       ZActiveUserName$ = ZOrigUserName$
+    LogonMailNew = ZFalse
+    ZSubParm = 2
+    CALL Line25
+    ZSection$ = "    "
+    ZOutTxt$ = ""
+    IF (NOT ZConfMode) AND (NOT ZSubBoard) AND NOT ZTurboLogon AND NOT WelcomeAboard THEN _ ' RM08049307/RM08139301
+       ZMailCheckConfirm = (ZDoMailCheck = 0) : _                    ' SG082103
+       ZLinkNew = ZTrue : _                                          ' RM02079401/RM02079401
+       GOSUB 5800
+    ZMailCheckConfirm = ZFalse                                       ' RM02079401
+    ZWasQ! = ZMinsInDoors * 60
+    ZMinsInDoors = 0
+* REPLACING old line(s) by new
+902 IF LogonPswdFailed THEN _
+       ZExitToDoors = ZFalse : _
+       CALL UpdateU (ZTrue) : _
+       ZLogonErrorIndex = 4 : _
+       GOTO 10620
+* ------[ first line different ]------
+    IF ZExitToDoors and ZDooredTo$ <> "" AND NOT ZPrivateDoor THEN _ ' RM01299401
+       ZFileName$ = ZOutTxt$(7) : _                                  ' RM09019301
+       IF ZFileName$ <> "" THEN _                                    ' RM01309401
+          GOSUB 43025                                                ' RM09019301
+    ZExitToDoors = ZFalse
+    IF ZHomeConf$ = "" THEN _
+       MParm = 9 : _                                                 ' MS174/RM08139301
+       GOSUB 2001                                                    ' MS174/RM08129301
+    IF NOT ZPrivateDoor THEN _
+       GOTO 955
+    GOSUB 20165
+    CALL SetSection
+    ZPrivateDoor = ZFalse
+    GOTO 1205
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+955 IF NOT ZTurboLogon THEN                                          ' RM08139301/RM08229301
+       IF NOT ZSubBoard AND NOT ZConfMode THEN _                     ' RM08229301/RM02089401
+          GOSUB 4850                                                 ' MESS174
+       IF STR$(ZLastMsgRead) < STR$(ZHighMsgNumber) AND ZUserSecLevel => MsgSec THEN _ ' MESS174/RM08119301
+          GOSUB 4275                                                 ' MESS174
+    END IF                                                           ' RM08229301
+    SkipMain = ZFalse
+    ZTurboLogon = ZFalse                                             ' RM08139301
+'
+' *                           COMMAND PROCESSING
+'
+* REPLACING old line(s) by new
+1205 IF ZSubParm < 0 THEN _
+        GOTO 202
+     ZSubParm = 1
+     ZStopInterrupts = ZFalse
+     ZWasQ = 0
+* ------[ first line different ]------
+     IF (NOT ZConfMailJoin) AND (ZHomeConf$ = "" OR ZHomeConf$ = "MAIN") THEN _ ' RM02079401
+        GOTO 1209
+     ZTurboLogon = ZLinkNext OR (NOT ZConfMailJoin)                   ' RM08139301/RM08219302/RM02079401
+     ZConfMailJoin = ZFalse                                           ' RM02079401
+     ZFF = 8
+     IF ZHomeConf$ = "MAIN" THEN _
+        ZHomeConf$ = "M"
+     ZUserIn$(ZAnsIndex) = ZHomeConf$
+     IF ZLinkNext THEN _                                             ' RM08219302
+        ZUserIn$(ZAnsIndex + 1) = "R" : _
+        ZLastIndex = ZAnsIndex + 1
+     ZLastIndex = -ZLastIndex*(ZLastIndex > ZAnsIndex)-ZAnsIndex*(ZLastIndex <= ZAnsIndex)
+     ZAnsIndex = ZAnsIndex - 1
+     ZHomeConf$ = ""
+     ZWasQ = ZLastIndex
+     ZStoreParseAt = 1
+     ZLastCommand$ = "MJ"
+     GOTO 1240
+* REPLACING old line(s) by new
+1212 ZLinesPrinted = -ZMenusCanPause * ZLinesPrinted
+     IF ZCustomPUI THEN _
+        GOTO 1230
+     IF ZSubSection < ZBegFile THEN _
+        IF ZUserSecLevel >= ZSysopMenuSecLevel THEN _
+           ZFileName$ = ZMenu$(1) : _
+           GOSUB 43025
+     ZFileName$ = ZMenu$(ZMenuIndex)
+     ZDeleteInvalid = ZTrue
+* ------[ first line different ]------
+     CALL InitWelc (2)                                               ' IW174/RM08059306
+     ZDeleteInvalid = ZFalse
+* REPLACING old line(s) by new
+1230 CALL Line25
+     ZOutTxt$ = ZConfName$ + ":"
+     GOSUB 12978
+     CALL Talk (65,ZConfName$)
+     CALL DispTimeRemain (MinsRemaining)
+* ------[ first line different ]------
+     IF ZMenuIndex = 6 AND NOT ZCDRom THEN _                         ' RM03259401
+        ZSubParm = 1 : _
+        CALL Library
+     CALL CBCheck(WillChat)                                          ' RCHAT401
+     IF WillChat THEN GOTO 1600                                      ' RCHAT401
+     CALL SaveUserActivity("I", ZNodeRecIndex, ZFalse)               ' RCHAT401
+     CALL Talk (ZMenuIndex, ZOutTxt$)
+* REPLACING old line(s) by new
+1235 ZWasZ$ = ZUserIn$(ZAnsIndex)
+     IF ZWasZ$ = SPACE$(LEN(ZWasZ$)) THEN _
+        GOTO 1230
+     CALL SearchCmd (ZSubSection,ZFF)
+     IF ZFF > 0 THEN _
+        GOTO 1239
+     IF ZWasQ > 0 THEN _
+* ------[ first line different ]------
+        CALL QuickTPut1 (ZFG5$ + "Sorry, Unknown command <" + ZFG7$ + _
+              ZWasZ$ + ZFG5$ + ">" + ZEmphasizeOff$)                 ' RM052901
+     CALL FlushKeys
+     GOTO 1230
+* REPLACING old line(s) by new
+1240 IF ZUserSecLevel < ZOptSec(ZFF) THEN _
+       ZViolation$ = ZSection$ + _
+                     " " + _
+                     ZWasZ$ : _
+        GOSUB 1380 : _
+        GOTO 1205
+     IF ZFF > 39 THEN _
+        ZDirExtension$ = ZLibDirExtension$ _
+     ELSE ZDirExtension$ = ZMainDirExtension$
+* ------[ first line different ]------
+     IF ZRIPTest THEN _
+        Call QuickTPut1 (ZRIPReset$)                                 ' RM09089301
+        ON ZFF GOSUB _
+                 1400, _      ' 1  A)nswer questionnaire 1
+                 9700, _      ' 2  B)ulletins
+                 1800, _      ' 3  C)omments
+                 10970, _     ' 4  D)oor (exit to)
+                 2000, _      ' 5  E)nter a message
+                 1275, _      ' 6  F)ile system (exit to)
+                 1760, _      ' 7  I)nitial welcome redisplayed
+                 5299, _      ' 8  J)oin a conference                ' JC174/RM08119301
+                 3900, _      ' 9  K)ill a message
+                 4700, _      '10  O)perator page
+                 1900, _      '11  P)ersonal mail (look for)
+                 4330, _      '12  R)ead messages
+                 4340, _      '13  S)can message headers
+                 4320, _      '14  T)opic msg scan
+                 1285, _      '15  U)tilities (exit to)
+                 5800, _      '16  V)iew a conference
+                 9800, _      '17  W)ho's on other nodes displayed
+                 1283, _      '18  @)Library (exit to) 18
+                20160, _      '19  D)ownload
+                10570, _      '20  G)oodbye
+                20155, _      '21  L)ist
+                20185, _      '22  N)ew
+                20180, _      '23  P)ersonal files
+                20175, _      '24  S)can
+                20170, _      '25  U)pload
+                20140, _      '26  V)iew ARC Contents
+                 5500, _      '27  B)ank Time
+                 9100, _      '28  C)lock (time & time on)
+                 42850, _     '29  E)cho selection
+                 42800, _     '30  F)ile transfer protocol
+                 43001, _     '31  G)raphics                         ' GR174/RM08039303
+                 5200, _      '32  L)ines per page
+                 10925, _     '33  M)essage margin
+                 5110, _      '34  P)ersonal Info. Change
+                 5400, _      '35  R)eview preferences
+                 4850, _      '36  S)tatistics displayed
+                 1500, _      '37  T)oggle
+                 10090, _     '38  U)serlog displayed 12
+                 30000, _     '39  A)rchive a Library disk 1
+                 30100, _     '40  C)hange a Library disk
+                 30200, _     '41  D)ownload Library files
+                 10570, _     '42  G)oodbye
+                 20155, _     '43  L)ist a Library directory
+                 20175, _     '44  S)can a Library disk directory
+                 20140, _     '45  V)iew arc contents 7
+                 1325, _      '46  H)elp 1
+                 1330, _      '47  ?)help
+                 1250, _      '48  Q)uit
+                 4240, _      '49  X)expert toggle on/off 4
+                 10070, _     '50  1) List comments file 1
+                 10090, _     '51  2) List callers file
+                 10390, _     '52  3) Recover a message
+                 10530, _     '53  4) Erase comments
+                 11000, _     '54  5) User file maintenance
+                  4130, _     '55  6) Toggle page bell on/off
+                 10930        '56  7) Exit to DOS 2.x or above 7
+     GOTO 1205
+'
+' ****           QUIT COMMAND (GLOBAL)              ***
+'
+* DELETING old line(s)
+1241
+1242
+1243
+* REPLACING old line(s) by new
+1250 IF ZExpertUser THEN _
+        ZOutTxt$ = ZQuitPromptExpert$ _
+     ELSE ZOutTxt$ = ZQuitPromptNovice$
+     ZStackC = ZTrue
+     GOSUB 12930
+     IF ZWasQ = 0 THEN _
+        ZUserIn$(ZAnsIndex) = "M"
+     ZWasZ$ = ZUserIn$(ZAnsIndex)
+     CALL AllCaps (ZWasZ$)
+* ------[ first line different ]------
+     IF ZWasZ$ = "C" THEN
+        IF ZMarkedFiles$ <> "" AND ZSubBoard THEN                    ' RM01169401
+           GOSUB 4000                                                ' RM01179401
+        END IF                                                       ' RM01169401
+        IF ZSubBoard THEN _                                          ' RM01169401
+           ZMarkedFiles$ = ""                                        ' RM01169401
+        ZWasZ$ = "M"
+        ZJParm = 2                                                   ' JC174/RM08119301
+        GOSUB 5300                                                   ' JC174/RM08119301
+     END IF                                                          ' RM01169401
+     ZCDRom = ZFalse                                                 ' RM03259401
+     IF ZWasZ$ <> SPACE$(LEN(ZWasZ$)) THEN _
+        ON INSTR(ZQuitList$,ZWasZ$) GOTO 1275,1280,1285,10570,1283
+     GOTO 1250
+* REPLACING old line(s) by new
+1283 ZMenuIndex = 6
+     ZActiveFMSDir$ = ""
+* ------[ first line different ]------
+     CALL FindFile (ZNodeWorkDrvPath$ + "CDR" + ZNodeID$ + ".CFG",ZCDRom) ' RM03259401/RM03269401/RM03279401
+     IF ZCDRom THEN                                                  ' RM03269401
+        CALL SelectCD (1)                                            ' RM03269401
+        GOSUB 1298                                                   ' RM03279401
+     END IF                                                          ' RM03279401
+     GOTO 1295
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+1295 IF ZMenuIndex <> 6 THEN                                         ' RM03269401
+        CALL SelectCD (3)                                            ' RM03269401
+        GOSUB 1298                                                   ' RM03279401
+     END IF                                                          ' RM03279401
+     CALL SetSection
+     RETURN
+* INSERTING new line(s)
+1298 CALL CountLines (MaxEntries)                                    ' RM03279401
+     REDIM ZCategoryName$(MaxEntries),ZCategoryCode$(MaxEntries), _
+           ZCategoryDesc$(MaxEntries)                                ' RM03279401
+     CALL InitFMS (ZNumCategories)                                   ' RM03279401
+     RETURN                                                          ' RM03279401
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+1300 CALL QuickTPut1 (ZFG7$ + ZConfName$ + ZFG5$ + " Message base" + ZEmphasizeOff$) ' RM052901
+     RETURN
+'
+' **** COMMON LOCAL DISPLAY PRINT  ***
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+1400 CALL QuestAns (1, WasX)                                         ' QA174/RM08059308
+     IF ZSubParm < 0 THEN _                                          ' QA174/RM08059308
+        RETURN 10595                                                 ' QA174/RM08059308
+     RETURN                                                          ' QA174/RM08059308
+'
+' *****    Toggle COMMAND (UTILITIES)     ****
+'
+* DELETING old line(s)
+1401
+* REPLACING old line(s) by new
+1500 CALL CmndToggle
+     RETURN
+* ------[ first line different ]------
+* INSERTING new line(s)
+1600 CALL CBTrueChat (ZMaxNodes)                                     ' RCHAT401
+     GOSUB 5344                                                      ' RCHAT401
+     GOTO 1205                                                       ' RCHAT401
+'
+' ****  I - COMMAND FROM MAIN MENU (DISPLAY INITIAL WELCOME)  ***
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+1760 CALL InitWelc (1)                                               ' IW174/RM08059306
+     IF ZSubParm < 0 THEN RETURN 10595                               ' IW174/RM08059306
+     RETURN                                                          ' IW174/RM08059306
+'
+' ***  C - COMMAND FROM MAIN MENU (LEAVE COMMENT FOR SYSOP)   **
+'
+* DELETING old line(s)
+1790
+* INSERTING new line(s)
+1799 MParm = 1                                                       ' MS174/RM08139301
+     GOTO 2001                                                       ' MS174/RM08139301
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+1800 MParm = 2                                                       ' MS174/RM08139301
+     GOTO 2001                                                       ' MS174/RM08139301
+* DELETING old line(s)
+1801
+1850
+1893
+1895
+1897
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+1900 MParm = 5                                                       ' MS174/RM08139301
+     GOTO 2001
+* DELETING old line(s)
+1905
+1906
+1910
+1915
+1920
+1925
+1930
+1935
+1940
+1945
+1946
+1950
+1960
+1961
+* REPLACING old line(s) by new
+2000 MParm = 3
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+2001 CALL MsgSys (MParm,ActionFlag,GetOut,LogonMailNew,UtilMarginChange) ' MS174/RM08129301/RM08179301/RM08309301/RM03319401
+     Temp = MParm                                                    ' RM12129302
+     MParm = 0                                                       ' RM12129302
+     IF Temp = 10 THEN GOTO 10595                                    ' RM12129302
+     IF Temp = 9 THEN GOTO 10590                                     ' RM12129302
+     IF Temp = 2 THEN RETURN 10595                                   ' RM12129302
+     IF ZJParm = 3 THEN _                                            ' MS174/RM08139301
+        ZJParm = 0 : _                                               ' MS174/RM08139301
+        RETURN 108                                                   ' MS174/RM08139301
+     IF Temp = 1 THEN GOTO 10570                                     ' RM12129302/RM03319401
+     IF Temp = 3 THEN GOTO 5160                                      ' MS174/RM08159301/RM12129302
+     IF Temp = 4 THEN RETURN 13600                                   ' MS174/RM08189301/RM12129302
+     IF Temp = 5 THEN RETURN 1235                                    ' RM12129302
+     IF Temp = 6 THEN RETURN 1205                                    ' RM12129302
+     IF Temp = 7 THEN GOTO 202                                       ' RM12129302
+     IF Temp = 8 THEN GOTO 1300                                      ' RM12129302
+     IF Temp = 11 THEN GOTO 10620                                    ' RM12129302
+     IF Temp = 12 THEN RETURN 10553                                  ' RM12129302
+     RETURN                                                          ' MS174/RM08139301
+* DELETING old line(s)
+2006
+2007
+2008
+2009
+2010
+2020
+2035
+2065
+2100
+2125
+2127
+2140
+2200
+2210
+2300
+2302
+2315
+2330
+2332
+2335
+2345
+2350
+2400
+2430
+2435
+2440
+2500
+2520
+2522
+2530
+2550
+2555
+2600
+2800
+2820
+2830
+2840
+2870
+2920
+3000
+3010
+3020
+3100
+3150
+3200
+3300
+3400
+3405
+3410
+3460
+3530
+3630
+3640
+3650
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+3900 MParm = 4                                                       ' MS174/RM08139301
+     GOTO 2001                                                       ' MS174/RM08139301
+
+'
+' *** Download Marked files when exiting sub board or joining conf/subboard
+'
+* DELETING old line(s)
+3930
+3935
+3950
+* INSERTING new line(s)
+4000  CALL SkipLine (1)                                              ' RM01169401
+      ZOutTxt$ = "You have Files MARKED for Download."               ' RM01279401/RM03069401
+      Call RingCaller                                                ' DGS022202-DS
+      ZOutTxt$ = ZFG6$ + "Download before exiting [Y]" + ZFG6$ + ",N " + ZEmphasizeOff$ ' RM01169401/RM01279401
+      GOSUB 12995                                                    ' RM01169401
+      IF ZWasQ = 0 OR NOT ZNo THEN _                                 ' RM01169401
+         CALL CmdStackPushPop (1)  : _                               ' RM01169401
+         ZLastIndex = ZAnsIndex : _                                  ' RM01169401
+         ZUserIn$(ZAnsIndex) = "M" : _                               ' RM01169401
+         ZFileSysParm = 10 : _                                       ' RM01179401
+         GOSUB 20200 : _                                             ' RM01169401
+         CALL CmdStackPushPop (2)                                    ' RM01169401
+      RETURN                                                         ' RM01169401
+'
+' ****  Sysop Available toggle
+'
+* DELETING old line(s)
+4040
+* INSERTING new line(s)
+4275 CALL SkipLine(1)                                                ' MESS174
+     IF WelcomeAboard THEN _                                         ' MESS174
+        ZOutTxt$ = ZFG5$ + "You have " + ZFG7$ + "New Mail" + ZFG5$ + _ ' RM051901
+                  " waiting, Read now? ([Y]" + ZFG5$ + ",N)" + ZEmphasizeOff$ _ ' MESS174
+     ELSE _                                                          ' MESS174
+        ZOutTxt$ = ZFG5$ + "There are " + ZFG7$ + "New Messages" + _
+            ZFG5$ + " since your last call, Read them now? ([Y]" + _
+            ZFG5$ + ",N)" + ZEmphasizeOff$                           ' MESS174
+     GOSUB 12999                                                     ' MESS174
+     CALL SkipLine(1)                                                ' MESS174
+4279 IF ZNO THEN _                                                   ' MESS174
+        WelcomeAboard = ZFalse : _                                   ' MESS174
+        RETURN _                                                     ' MESS174
+     ELSE _                                                          ' MESS174
+        ZLastIndex = 2 : _                                           ' MESS174
+        ZAnsIndex = 1 : _                                            ' MESS174
+        ZWasQ = 2                                                    ' MESS174
+        IF WelcomeAboard THEN _                                      ' MESS174
+           WelcomeAboard = ZFalse : _                                ' MESS174
+           ZUserIn$(2) = "L" _                                       ' MESS174
+        ELSE _                                                       ' MESS174
+           ZUserIn$(2) = "*"                                         ' MESS174
+        GOTO 4330                                                    ' MESS174
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4320 MParm = 8                                                       ' MS174/RM08139301
+     GOTO 2001                                                       ' MS174/RM08139301
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4330 MParm = 6                                                       ' MS174/RM08139301
+     GOTO 2001                                                       ' MS174/RM08139301
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4340 MParm = 7                                                       ' MS174/RM08139301
+     GOTO 2001
+'
+' ****  O - COMMAND FROM MAIN MENU (OPERATOR PAGE)   ***
+'
+* DELETING old line(s)
+4345
+4350
+4352
+4360
+4370
+4371
+4380
+4390
+4400
+4402
+4415
+4416
+4418
+4430
+4450
+4452
+4470
+4480
+4490
+4492
+4510
+4515
+4520
+4530
+4540
+4550
+4552
+4560
+4561
+4562
+4563
+4580
+4581
+4582
+4584
+4585
+4590
+4600
+4601
+4602
+4603
+4604
+4605
+4606
+4607
+4608
+4609
+4610
+4611
+4612
+4614
+4615
+4617
+4620
+4621
+4622
+4623
+4624
+4625
+4626
+4627
+4628
+4629
+4630
+4631
+4635
+4637
+4650
+4652
+4655
+4656
+4660
+4661
+4662
+4665
+4666
+4667
+4668
+4669
+4670
+* REPLACING old line(s) by new
+4700 IF NOT ZSysopAvail THEN _
+* ------[ first line different ]------
+        ZOutTxt$ = ZFG5$ + "Sorry, " + ZFG7$ + _
+             ZSysopFirstName$ + ZFG5$ + _
+             " is not available now" + ZEmphasizeOff$ : _            ' RM051801
+        GOSUB 12979 : _
+        GOTO 4755
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4705 CALL QuickTPut1 (ZFG6$ + "Chat with SysOp" + ZEmphasizeOff$)    ' RM051801
+     WasJJ = VAL(MID$(TIME$,1,2))*100 + VAL(MID$(TIME$,4,2))
+     IF (WasJJ > ZStartOfficeHours AND WasJJ < ZEndOfficeHours) OR ZSysopAnnoy THEN _
+        GOTO 4710
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4708 ZOutTxt$ = ZFG6$ + "SysOp is in from" + ZFG7$ + _
+          STR$(ZStartOfficeHours) + _
+          + ZFG6$ + " to" + ZFG7$ + _
+          STR$(ZEndOfficeHours) + ZEmphasizeOff$                     ' RM051801
+     GOSUB 12979
+     GOTO 4755
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4710 ZOutTxt$ = ZFG5$ + "Purpose of Chat" + ZEmphasizeOff$           ' PAGE174/RM071101
+     CALL SkipLine (1)                                               ' PAGE174/RM071101
+     GOSUB 12995                                                     ' PAGE174/RM071101
+     ZOutTxt$ = ZFG5$ + "Really Page " + ZFG7$ + _                   ' PAGE174/RM071101
+          ZSysopFirstName$ + ZFG5$ + _
+          " (Y,[N]" + ZFG5$ + ")" + ZEmphasizeOff$                   ' RM051801
+     GOSUB 12999
+     IF NOT ZYes THEN _
+        RETURN
+     CALL SkipLine (1)                                               ' PAGE174/RM071101
+     PageCount = 0
+     ZOutTxt$ = "Paging SysOp"
+     GOSUB 12978
+     PageTimeStart! = TIMER
+     TempSnoop = ZSnoop
+     ZSnoop = ZTrue
+     CALL Line25
+* REPLACING old line(s) by new
+4750 CALL QuickTPut1 (ZFG7$ + ZSysopFirstName$ + ZFG1$ + " not responding" + ZEmphasizeOff$) ' RM051801
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4755 ZPageStatus$ = "PG!"
+     CALL UpdtCalr ("Operator paged " + LEFT$(TIME$,5),2)
+     ZOutTxt$ = ZFG6$ + "Would you like to leave a comment to " + _  ' PAGE174
+        ZFG7$ + ZSysopFirstName$ + ZFG6$ + " (Y,[N]" + ZFG6$ + ")" + ZEmphasizeOff$ ' PAGE174
+     CALL SkipLine (1)                                               ' PAGE174
+     GOSUB 12999                                                     ' PAGE174
+     IF NOT ZYes THEN _                                              ' PAGE174
+        RETURN                                                       ' PAGE174
+     GOSUB 1800                                                      ' PAGE174
+     RETURN
+* REPLACING old line(s) by new
+4765 CALL UpdtCalr ("Paged & chatted with Sysop",1)
+* ------[ first line different ]------
+     ZPageStatus$ = ""
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4770 IF ZRIPTest THEN _                                              ' RM11039301
+        CALL QuickTPut1 (ZRIPReset$)                                 ' RM11079301
+     IF (ZANSITest = ZTrue OR ZWasGR > 1) AND ZDosANSI THEN _        ' CHAT174/RM101701
+        CALL SysopChat (2) _                                         ' CHAT174/RM101701
+     ELSE _                                                          ' CHAT174
+        CALL QuickTPut1 ("SysOp in!  " + _                           ' CHAT174
+             ZFirstName$ + ", this is " + _                          ' CHAT174
+             ZSysopFullName$ + ", go ahead!") : _                    ' CHAT174
+             CALL SysopChat (1)                                      ' CHAT174/RM101701
+     IF ZSubParm < 0 THEN _
+        GOTO 202
+     RETURN
+'
+' ****  S - COMMAND FROM UTILITY MENU (STATISTICS)  ***
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4850 CALL Statistics                                                 ' STAT174/RM08119301
+     RETURN                                                          ' STAT174
+* DELETING old line(s)
+4855
+4857
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4905 IF NOT ZTurboLogon THEN _                                       ' RM08139301
+        CALL InitWelc (2)                                            ' IW174/RM08059306
+* REPLACING old line(s) by new
+4910 GOSUB 12986
+     GOSUB 5344
+     IF LOF(1) = 0 THEN _
+        ZWasDF$ = ZActiveMessageFile$ : _
+        CLOSE 1 : _
+        KILL ZActiveMessageFile$ : _
+        GOSUB 12987 : _
+        RETURN 13600
+* ------[ first line different ]------
+     CALL GetMessageHdr                                              ' GM174/RM08059303
+     RETURN
+'
+' P - COMMAND FROM UTILITY MENU (CITY/STATE / PASSWORD CHANGE)  ***
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+5110 CALL PersInfo                                                   ' PI174/RM08059301
+     IF ZSubParm < 0 THEN GOTO 10595                                 ' PI174/RM08059301
+     RETURN                                                          ' PI174/RM08059301
+'
+' ****  SEARCH "PASSWORDS" FILE FOR TEMPORARY PASSWORDS  ***
+'
+* DELETING old line(s)
+5120
+5125
+5126
+5129
+5130
+5131
+* REPLACING old line(s) by new
+5280 CALL BreakFileName (ZActiveMsgFile$,UserDrvPath$,ZWasDF$,ZWasY$,ZTrue)
+     WasX$ = UserDrvPath$ + _
+             ZConfName$ + _
+             "U.DEF"
+     CALL FindIt (WasX$)
+     IF NOT ZOK THEN _
+* ------[ first line different ]------
+        CALL BreakFileName (ZActiveUserFile$,UserDrvPath$,ZWasDF$,ZWasY$,ZTrue) : _ ' KG040602
+        WasX$ = UserDrvPath$ + _
+                ZConfName$ + _
+                "U.DEF"
+     RETURN
+'
+' ****  J - COMMAND FROM MAIN MENU (JOIN CONFERENCE)  ***
+'
+* DELETING old line(s)
+5290
+5292
+5293
+5294
+5296
+* INSERTING new line(s)
+5299 IF ZMarkedFiles$ <> "" THEN _                                   ' RM01179401
+        GOSUB 4000                                                   ' RM01179401
+     ZJParm = 1                                                      ' JC174/RM08119301
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+5300 CALL JoinConference (Found)                                     ' JC174/RM08109301/RM09259302
+     IF ZSubBoard AND ZMarkedFiles$ <> "" THEN _                     ' RM01179401
+        ZMarkedFiles$ = ""                                           ' RM01179401
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+5301 IF ZJParm = 6 THEN _                                            ' JC174/RM08119301
+        ZJParm = 0 : _                                               ' JC174/RM08119301
+        RETURN 10595                                                 ' JC174/RM08119301
+* INSERTING new line(s)
+5302 IF ZJParm = 1 THEN _                                            ' JC174/RM08119301
+        ZJParm = 0 : _                                               ' JC174/RM08119301
+        GOTO 202                                                     ' JC174/RM08119301
+5303 IF ZJParm = 2 THEN _                                            ' JC174/RM08119301
+        ZJParm = 0 : _                                               ' JC174/RM08119301
+        RETURN 13600                                                 ' JC174/RM08119301
+5304 IF ZJParm = 3 THEN _                                            ' JC174/RM08119301
+        ZJParm = 0 : _                                               ' JC174/RM08119301
+        RETURN 108                                                   ' JC174/RM08119301
+5305 IF ZJParm = 4 THEN _                                            ' JC174/RM08119301
+        ZJParm = 0 : _                                               ' JC174/RM08119301
+        RETURN 852                                                   ' JC174/RM08119301
+5306 IF ZJParm = 5 THEN _                                            ' JC174/RM08119301
+        ZJParm = 0 : _                                               ' JC174/RM08119301
+        RETURN 1205                                                  ' JC174/RM08119301
+     ZJParm = 0                                                      ' JC174/RM09019301
+     RETURN                                                          ' JC174/RM08119301
+'
+' *****  OPEN AND SETUP MESSAGE BASE  *****
+'
+* DELETING old line(s)
+5323
+5324
+5325
+5327
+5328
+5330
+5335
+5340
+5341
+5343
+* REPLACING old line(s) by new
+5344 CALL OpenMsg
+     IF ZErrCode = 64 THEN _
+        ZErrCode = 0 : _
+* ------[ first line different ]------
+        ZJParm = 4 : _                                               ' RM08119301
+        GOSUB 5300                                                   ' JC174/RM08119301
+     FIELD 1, 128 AS ZMsgRec$
+     RETURN
+'
+' *****  UPDATE CURRENT USERS RECORD  ****
+'
+* DELETING old line(s)
+5345
+5347
+5348
+5350
+5360
+5375
+* REPLACING old line(s) by new
+5380 IF ZUserFileIndex < 1 THEN _
+        RETURN
+     IF ZAdjustedSecurity AND NOT ZSysop THEN _
+        LSET ZSecLevel$ = MKI$(ZUserSecLevel) : _
+        ZUserSecSave = ZUserSecLevel
+* ------[ first line different ]------
+     IF SubBoard THEN _                                              ' DGSALIAS
+        ZActiveUserName$ = ZOrigUserNameDGS$ : _                     ' DGSALIAS
+        ZFirstName$ = OrigFirstName$                                 ' DGSALIAS
+     CALL UpdateU (ZFalse)
+     RETURN
+'
+' *****  R - COMMAND FROM UTILITY MENU (REVIEW PROFILE)  ****
+'
+* DELETING old line(s)
+5382
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+5400 CALL ShowUsrProfile                                             ' STAT174
+     RETURN                                                          ' STAT174
+'
+' *****  B - COMMAND FROM UTILITY MENU (Bank Time)  ****
+'
+* DELETING old line(s)
+5410
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+5800 CALL ConfMail (ZMailCheckConfirm,ZLinkNew,ZLinkPers)            ' RM02079401
+     ZConfMailJoin = (ZHomeConf$ <> "")                              ' RM02079401
+     RETURN
+'
+' *  C - COMMAND FROM UTILITY MENU (CLOCK - TIME ON SYSTEM)
+'
+* DELETING old line(s)
+8000
+8020
+8030
+8040
+8050
+8076
+8077
+8080
+9000
+9050
+9060
+9070
+9085
+9090
+* REPLACING old line(s) by new
+9450 IF LOF(5) < 1 THEN _
+        ZWasDF$ = ZActiveUserFile$ : _
+        RETURN 13600
+     FIELD 5,31 AS ZUserName$, _
+             15 AS ZPswd$, _
+              2 AS ZSecLevel$, _
+             14 AS ZUserOption$,  _
+             24 AS ZCityState$, _
+* ------[ first line different ]------
+              1 AS MachineType$, _                                   ' DROP174
+              1 AS ZDropTimes$, _                                    ' DROP174
+              1 AS ZBankTime$,_
+              4 AS ZTodayDl$, _
+              4 AS ZTodayBytes$, _
+              4 AS ZDlBytes$, _
+              4 AS ZULBytes$, _
+             14 AS ZLastDateTimeOn$, _
+              3 AS ZListNewDate$, _
+              2 AS ZUserDnlds$, _
+              2 AS ZUserUplds$, _
+              2 AS ZElapsedTime$
+     FIELD 5,128 AS ZUserRecord$
+     RETURN
+'
+' * GET USER DEFAULTS
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+9701 CALL SubMenu ("Read what bulletin(s), L)ist, S)ince, N)ews ([ENTER] = Quit)", _ ' FM/RM03179401
+                   WasA1$, ZBulletinPrefix$,"",ReturnOn$,_
+                   ZFalse,ZFalse,ZFalse,"",WasX,ZTrue)
+     IF ZWasQ = 0 THEN _
+        RETURN
+     CALL CheckCarrier
+     IF ZSubParm = -1 THEN _
+        RETURN 10595
+     IF (ZWasZ$ = "*" OR ZWasZ$ = "S") THEN _
+        ZPrevPrefix$ = "" : _
+        GOTO 9760
+     ZStopInterrupts = ZFalse
+     IF ZWasZ$ = "N" THEN _
+        ZJParm = 6 : _                                               ' JC174/RM08119301
+        GOSUB 5300 : _                                               ' JC174/RM08119301
+        IF WasZ <> 0 THEN _
+           CALL QuickTPut1 ("No NEWS available") : _
+           GOTO 9701 _
+        ELSE GOTO 9703
+     CALL BufFile (ZFileName$,ZAnsIndex)
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+9750 CALL CheckNewBul (ZBoardCheckDate$,NumNewBullets,NewBullets$)   ' RM08119301
+     RETURN
+* REPLACING old line(s) by new
+9760 ' ****  [entry when want review plus chance to read] *********
+     GOSUB 9750
+     IF NumNewBullets > 0 THEN _
+        ZLastIndex = NumNewBullets + 1 : _
+* ------[ first line different ]------
+        ZOutTxt$ = ZFG6$ + "Read what new bulletins (" + ZFG7$ + "A" + _
+             ZFG6$ + ")ll,[Q]" + ZFG6$ + "uit)" + ZEmphasizeOff$ : _ ' RM051901/KG012401
+        GOSUB 12999 : _
+        CALL AllCaps (ZUserIn$) : _                                  ' KG013002
+        IF ZWasQ > 0 AND ZUserIn$ <> "Q" THEN _                      ' KG012401
+           GOSUB 9761 : _                                            ' KG012401
+           ZAnsIndex = 0 : _
+           ZLastIndex = NumNewBullets : _
+           GOTO 9700
+     ZLastIndex = 0
+     IF ZAnsIndex < 1 THEN _
+        RETURN
+     GOTO 9701
+* INSERTING new line(s)
+9761 IF ZUserIn$ <> "A" THEN _                                       ' KG012401
+        NumNewBullets = ZWasQ _                                      ' KG012401
+     ELSE _                                                          ' KG012401
+        FOR Temp = 1 TO NumNewBullets : _                            ' KG012401
+           ZUserIn$(Temp) = ZOutTxt$(Temp+1) : _                     ' KG012401
+        NEXT                                                         ' KG012401
+     RETURN                                                          ' KG012401
+'
+' *  W - COMMAND FROM MAIN MENU (WHO'S ON THE OTHER NODES)
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+9800 IF ZMaxNodes > 1 AND ZAllowInternodeChat THEN _                 ' RCHAT401/RM09119302/RM11199301
+        CALL PageEm (ZNodeRecIndex - 1, ZMaxNodes) : _               ' RCHAT401
+        CLOSE 10 _                                                   ' RCHAT401
+     ELSE _                                                          ' RCHAT401/RM09119302
+        CALL WhosOn (ZMaxNodes)                                      ' RCHAT401/RM09119302
+     GOSUB 5344
+     RETURN
+'
+' *  1 - COMMAND FROM SYSOP MENU (DISPLAY COMMENTS)
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+10090 CALL DisplayUser                                               ' DU174/RM08049301
+      IF ZSubParm < 0 THEN _                                         ' DU174/RM08049301
+         RETURN 10595                                                ' DU174/RM08049301
+      RETURN                                                         ' DU174/RM08049301
+'
+' *  3 - COMMAND FROM SYSOP MENU (RECOVER MESSAGES)
+'
+* DELETING old line(s)
+10093
+10096
+10097
+10098
+10099
+* REPLACING old line(s) by new
+10391 CALL ChangeInt (ZFalse,"Recover Msg #",0,1,9999)
+      IF ZWasQ = 0 THEN _
+         RETURN
+      MsgToRecover = ZTestedIntValue
+      GOSUB 5344
+      ActionFlag = ZFalse
+* ------[ first line different ]------
+      CALL RecoverMsg (MsgToRecover,ActionFlag)                      ' RM08119301
+      MsgRecovered = MsgRecovered OR ActionFlag
+      GOTO 10391
+* REPLACING old line(s) by new
+10553 CALL UpdtCalr ("Time limit exceeded",1)
+      CALL QuickTPut1 ("You have no time left")
+* ------[ first line different ]------
+      GOTO 10562                                                     ' LOFF174
+'
+' *  Q - COMMAND FROM GLOBAL FUNCTIONS
+'
+* REPLACING old line(s) by new
+10560 GOSUB 41000                                                    ' LOFF174
+* INSERTING new line(s)
+10562 GOSUB 9100                                                     ' LOFF174
+10563 IF NOT ZSysOp THEN _                                           ' XMSG
+         ZFileName$ = ZHelpPath$ + "XMSG" + _                        ' XMSG
+             UserSecLevel$ + ".HLP" : _                              ' XMSG
+         GOSUB 43025 : _                                             ' XMSG/RM08059307
+         IF ZOK THEN _                                               ' XMSG/RM041101
+            CALL Delaytime (4)                                       ' XMSG/RM08059307
+      IF ZUserSecLevel < ZSecExemptFromEpilog THEN _                 ' LOFF174/XMSG
+           ZFileName$ = ZEpilog$ : _
+           CALL QuestAns (2, WasX)                                   ' QA174/RM08059308
+      IF ZLocalUserMode OR NOT ZLocalUser THEN _
+         CALL UpdtCalr ("Logged off",1)
+      CALL Muzak (4)
+      GOTO 10595
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+10570 GOSUB 41000                                                    ' LOFF174
+      IF ZMarkedFiles$ <> "" THEN _                                  ' RM01279401
+         GOSUB 4000                                                  ' RM01279401
+      GetOut = ZFalse                                                ' RM03309401
+      CALL GetLogoff (Wherego)                                       ' LOFF174/RM07249301
+      ON Wherego GOTO 10571,10574,10572,10573                        ' LOFF174/RM07249301
+* INSERTING new line(s)
+10571 RETURN                                                         ' LOFF174
+10572 GetOut = ZTrue                                                 ' LOFF174
+      GOTO 1800                                                      ' LOFF174/RM03319401
+10573 GetOut = ZTrue                                                 ' LOFF174
+      GOTO 10560                                                     ' LOFF174
+10574 GOSUB 5500                                                     ' LOFF174
+      GOTO 10570                                                     ' LOFF174/RM111501
+* REPLACING old line(s) by new
+10595 CALL GetTime
+      GOSUB 13700
+* ------[ first line different ]------
+      IF NOT GetOut AND NOT ZFileSysParm = 6 AND NOT Temp = 12 THEN  ' RM03309401
+         ZSubParm = 0
+         CALL Carrier
+         IF ZSubParm = -1 THEN _
+            GOTO 10597
+      END IF                                                         ' RM03309401
+      IF ZConfName$ = ZOrigMsgName$ THEN _                           ' RM08119301
+         GetOut = ZTrue
+      IF (ZSubBoard AND (NOT GetOut) AND (NOT ZSleepDisconnect) AND (NOT ZAutoLogoffReq)) THEN _ ' RM09209301
+         GOSUB 5380 : _
+         ZHomeConf$ = "M" : _
+         CALL QuickTPut1 ("Time limit exceeded in " + ZConfName$) : _
+         ZSubBoard = ZFalse : _
+         GOTO 1205
+* REPLACING old line(s) by new
+10698 CALL Muzak (5)
+* ------[ first line different ]------
+      IF ZFunctionKey > 21 THEN _                                    ' RM12159301
+         GOTO 13545
+      ZOutTxt$ = "Access denied!"
+      GOSUB 12976
+      CALL DelayTime (8 + ZBPS)
+      GOTO 13545
+'
+' *  M - COMMAND FROM UTILITY MENU (CHANGE MARGINS)
+'
+* REPLACING old line(s) by new
+10925 UtilMarginChange = ZTrue
+* ------[ first line different ]------
+      MParm = 13                                                     ' MS174/RM08139301
+      GOSUB 2001                                                     ' MS174/RM08139301
+      UtilMarginChange = ZFalse
+      RETURN
+'
+' *  7 - COMMAND FROM SYSOP MENU (EXIT TO DOS)
+'
+* REPLACING old line(s) by new
+10974 WasA1$ = ZMenu$(5)
+      CALL Talk (5,ZOutTxt$)
+      ZStackC = ZTrue
+      CALL SubMenu ("Open which door, L)ist" + ZPressEnterExpert$, _
+* ------[ first line different ]------
+                    WasA1$,"",".BAT","", _
+                    ZTrue,ZFalse,ZFalse,"",InMenu,ZFalse)
+      IF ZWasQ = 0 THEN _
+         RETURN
+      IF ZSubParm = -1 THEN _
+         RETURN 10595
+* REPLACING old line(s) by new
+10986 ZWasZ$ = ZFileName$
+      CALL DoorExit (NOT InMenu)
+      GOTO 10974
+* ------[ first line different ]------
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+11000 CALL UserMaint (EditFromRead, TempHashValue$, ReturnRead)      ' SU174/RM08079303/RM08199302
+      IF ZSubParm < 0 THEN _                                         ' SU174/RM08079303
+         RETURN 10595                                                ' SU174/RM08079303
+      IF ReturnRead THEN _                                           ' SU174/RM08079303
+         ReturnRead = ZFalse : _                                     ' SU174/RM08079303
+         MParm = 14 : _                                              ' MS174/RM08139301
+         GOTO 2001                                                   ' MS174/4M08139301
+      RETURN                                                         ' SU174/RM08079303
+'
+' *  GET USER First AND Last NAMES
+'
+* DELETING old line(s)
+11001
+11003
+11005
+11010
+11015
+11107
+11110
+11115
+11125
+11127
+11130
+11160
+11185
+11190
+11220
+11290
+11310
+11311
+11320
+11325
+11330
+11340
+11341
+11342
+11345
+11380
+11390
+11395
+11400
+11420
+11423
+11450
+11455
+11490
+11520
+12300
+12310
+12311
+12320
+12330
+* REPLACING old line(s) by new
+12595 CALL QuickTPut1 ("Name not valid here. Call recorded")
+      CALL UpdtCalr ("Name violation: "+ZActiveUserName$,1)
+      GOTO 10621
+'
+* ------[ first line different ]------
+' *  AUGMENT USER COUNT, LOCK 4 REC BLOCK IN USER, UNLOCK FILES
+'
+* DELETING old line(s)
+12598
+12600
+12605
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+12630 CALL GetMessageHdr                                             ' GM174/RM08059303
+      ZCurUserCount = ZCurUserCount + (ZWasSL = 0) * ZRememberNewUsers ' RM08119301
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+12632 CALL UpdtMessageHdr                                            ' UM174/RM08059305           ' UM174/RM08059305
+      GOSUB 12985
+      IF ZRememberNewUsers THEN _
+         GOSUB 12989
+      GOSUB 12990
+      RETURN
+'
+' *  INFORM USER OF WHAT CONFERENCE USER FILE HE IS VIEWING
+'
+* REPLACING old line(s) by new
+12840 IF ZStartHash = 1 THEN _
+* ------[ first line different ]------
+         ZHashValue$ = ZActiveUserName$ : _                          ' RM08139301
+         RETURN
+      WasX$ = WasA1$ + _
+           ZPromptHash$
+      CALL UntilRight (WasX$,ZHashValue$,2,ZLenHash)                 ' RM08139301
+      RETURN
+'
+' *  GET FIELD TO INDIVIDUATE ONE USER FROM ANOTHER (NAME FIELD IS DEFAULT)
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+12930 IF ZRIPTest THEN _                                             ' RM09089301
+         ZTurboKey = ZFalse _                                        ' RM09089301
+      ELSE _                                                         ' RM09089301
+         ZTurboKey = -ZTurboKeyUser                                  ' RM09089301
+* REPLACING old line(s) by new
+12960 ZOutTxt$ = WasA1$ + _
+                 ZUserLocation$
+      IF NOT ZNewUser THEN _
+         ZOutTxt$ = ZOutTxt$ + ZPressEnter$
+      ZParseOff = ZTrue
+      GOSUB 12932
+      IF ZWasQ = 0 OR ZUserIn$ = SPACE$(LEN(ZUserIn$)) THEN _
+         IF ZNewUser THEN _
+            GOTO 12960 _
+         ELSE RETURN
+      CALL AllCaps (ZUserIn$)
+      CALL QuickTPut1 ("Set to "+ZUserIn$)
+      LSET ZCityState$ = ZUserIn$
+      ZWasCI$ = ZUserIn$
+      RETURN
+'
+* ------[ first line different ]------
+' * CALLS INTO SEPARATELY COMPILED SUBROUTINES (RBBS-SUB)
+'
+'
+' * STANDARD ENTRY FOR RBBS-PC'S COMMON TERMINAL OUTPUT ROUTINE
+'
+* DELETING old line(s)
+12962
+12963
+12965
+12966
+12967
+12968
+12969
+12970
+12971
+12972
+* DELETING old line(s)
+12992
+12993
+* REPLACING old line(s) by new
+13000 IF ZDebug THEN _
+         ZOutTxt$ = "DEBUG Trap ERL=" + _
+              STR$(ZWasEL) + _
+              " ERR=" + _
+              STR$(ZErrCode) : _
+              CALL Printit(ZOutTxt$) : _
+              WasD$ = ZOutTxt$ : _
+              GOSUB 1315
+      IF ZWasEL = 1905 AND ZErrCode = 63 THEN _
+         CLOSE 1 : _
+         KILL ZActiveMessageFile$ : _
+* ------[ first line different ]------
+         ZJParm = 4 : _                                              ' JC174/RM08119301
+         GOSUB 5300                                                  ' JC174/RM08119301
+      IF ZWasEL = 4371 AND ZErrCode = 6 THEN _
+         GOTO 1200
+      IF ZWasEL =  4740 THEN _
+         GOTO 4745
+* REPLACING old line(s) by new
+13549 GOSUB 13700
+* ------[ first line different ]------
+      CALL LPrnt (ZColorReset$,1)                                    ' RM03119401/RM03179401/RM03269401
+      IF ZLocalUser OR _
+         ZModemOffHook THEN _
+         GOTO 13555
+      IF NOT ZFossil THEN _
+         OUT ZModemCntlReg,INP(ZModemCntlReg) AND 254 : _
+         CALL DelayTime (ZDTRDropDelay) : _
+         OUT ZModemCntlReg,INP(ZModemCntlReg) OR 1 : _
+         GOTO 13553
+* REPLACING old line(s) by new
+13555 ZActiveMessageFile$ = ZOrigMsgFile$
+      GOSUB 12986
+      GOSUB 5344
+      GET 1,ZNodeRecIndex
+      MID$(ZMsgRec$,57,1) = "I"
+      MID$(ZMsgRec$,40,2) = " 0"
+      MID$(ZMsgRec$,72,2) = " 0"
+      IF MID$(ZMsgRec$,101,2) = ZCarriageReturn$+ZCarriageReturn$ THEN _
+         MID$(ZMsgRec$,101,2) = " 0"
+      PUT 1,ZNodeRecIndex
+      GOSUB 12985
+* ------[ first line different ]------
+      CLOSE
+'     CLOSE 1,2,4,5                                                  ' RM03179401
+      IF NOT ZFossil THEN _
+         CLOSE 3
+      IF ZRecycleToDos THEN _
+         GOTO 203
+      GOSUB 45020                                                    ' RM112201
+      RUN 100                                                        ' RM092301/GS02129401
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20205 ZFileSysParm = 0                                               ' RM030201
+      RETURN
+* REPLACING old line(s) by new
+20225 ZSysopComment = ZTrue
+      ZMaxMsgLines = ZMaxExtendedLines
+* ------[ first line different ]------
+      MParm = 12                                                     ' MS174/RM08139301
+      GOSUB 2001                                                     ' MS174/RM08139301
+      GOTO 20190
+* REPLACING old line(s) by new
+20235 RETURN 10595
+'
+* ------[ first line different ]------
+' * A - COMMAND FROM Library MENU (ARCHIVE A SELECTED Library DISK)
+'
+* DELETING old line(s)
+23000
+23100
+24000
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+30000 IF NOT ZCDRom THEN _                                           ' RM03259401
+         ZSubParm = 4 : _                                            ' RM03259401
+         CALL Library
+      IF ZSubParm = -1 THEN _
+         RETURN 10595
+      RETURN
+'
+' * C - COMMAND FROM Library MENU (CHANGE TO A Library DISK)
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+30100 IF ZCDRom THEN                                                 ' RM03259401
+         CALL SelectCD (2)                                           ' RM03269401
+         IF ZAbort THEN _                                            ' RM03269401
+            ZAbort = ZFalse : _                                      ' RM03269401
+            RETURN                                                   ' RM03269401
+         GOSUB 1298                                                  ' RM03279401
+      ELSE                                                           ' RM03259401
+         ZSubParm = 2                                                ' RM03259401
+         CALL Library
+      END IF                                                         ' RM03259401
+      IF ZSubParm = -1 THEN _                                        ' RM03269401
+         RETURN 10595                                                ' RM03269401
+      RETURN
+'
+' * D - COMMAND FROM Library MENU (DOWNLOAD A DISK/FILE FROM Library)
+'
+* REPLACING old line(s) by new
+30200 IF ZTimeLock AND 2 AND NOT ZHasPrivDoor THEN _
+         CALL TimeLock : _
+         IF NOT ZOK THEN _
+            RETURN
+* ------[ first line different ]------
+      IF ZLibDiskChar$ = "0000" AND NOT ZCDRom THEN _                ' RM03259401
+         CALL QuickTPut1 ("You must select a Library disk first!") : _
+         RETURN
+      IF NOT ZCDRom THEN _                                           ' RM03259401
+         ZSubParm = 3 : _                                            ' RM03259401
+         CALL Library
+      GOTO 20160
+'
+' * CALCULATE TIME REMAINING FOR USER
+'
+* REPLACING old line(s) by new
+42700 CALL SkipLine (1)
+      CALL QuickTPut1 ("TurboKey: act on 1 char command without waiting for [ENTER]")
+      ZOutTxt$ = "Use TurboKey (Y,[N])"
+      GOSUB 12999
+      ZTurboKeyUser = NOT ZYes
+      CALL Toggle (8)
+      RETURN
+* ------[ first line different ]------
+'                                                                    ' RCHAT401/RM091701
+' * CHAT SET AT LOGON                                                ' RCHAT401/RM091701
+'                                                                    ' RCHAT401/RM091701
+* INSERTING new line(s)
+42750 IF ZTurboLogon THEN _                                          ' DLB101393
+         RETURN                                                      ' DLB101393
+      ZOutTxt$ = "Are you available for Internode Chatting (Y/[N])"  ' RCHAT401/RM091701
+      GOSUB 12930                                                    ' RCHAT401/RM110301
+      ZAvailableForChat = NOT ZYes                                   ' RCHAT401/RM091701
+      CALL Toggle (11)                                               ' RCHAT401/RM091701
+      RETURN                                                         ' RCHAT401/RM091701
+'
+' *  F - COMMAND FROM UTILITY MENU (FILE Transfer DEFALUT MODE)
+' *  FILE Transfer DEFAULT SET FOR NEW USERS
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+42850 CALL EchoSet                                                   ' ES174/RM08069301
+      IF ZSubParm < 0 THEN RETURN 10595                              ' ES174/RM08069301
+      RETURN                                                         ' ES174/RM08069301
+'
+' *  G - COMMAND FROM UTILITY MENU (GRAPHICS WANTED)
+' *  Graphic MENUS SELECTION SET FOR NEW USERS
+'
+* DELETING old line(s)
+42851
+42852
+43000
+* INSERTING new line(s)
+43001 CALL GraphicsSet                                               ' GR174/RM08039303
+      IF ZSubParm < 0 THEN _                                         ' GR174/RM08039303
+         RETURN 10595                                                ' GR174/RM08039303
+      RETURN                                                         ' GR174/RM08039303
+* DELETING old line(s)
+43005
+43020
+43022
+* REPLACING old line(s) by new
+45010 ZHidden = ZTrue
+      GOSUB 12995
+      ZHidden = ZFalse
+      RETURN
+* ------[ first line different ]------
+'                                                                    ' RM122201
+' * REDIM ARRAYS FOR INTERNAL RECYCLE DUE TO ANSI EDITOR             ' RM122201
+'                                                                    ' RM122201
+* INSERTING new line(s)
+45020 WasJ = 60                                                      ' RM112201
+      ZMsgDim = ZMaxMsgLinesDef                                      ' RM112201/RM020901/RM10159302/RM11279301/RM03119401
+      REDIM ZWorkAra$(WasJ)                                          ' RM112201
+      REDIM ZOutTxt$(WasJ)                                           ' RM112201/RM03119401
+      REDIM ZUserIn$(ZMsgDim)                                        ' RM112201
+      RETURN                                                         ' RM112201

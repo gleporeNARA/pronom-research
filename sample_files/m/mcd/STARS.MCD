@@ -1,0 +1,46 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 23 1 30 
+a1,29,27,28
+STARS INSCRIBED IN A CIRCLE
+.TXT 2 -23 1 17 
+a1,17,15,16
+Parameters --->
+.TXT 0 17 1 19 
+a1,19,17,18
+Number of points:
+.EQN 0 19 1 9 
+N:15
+.EQN 0 20 1 12 
+j:0;N
+.EQN 2 -20 3 19 
+C:floor(N/2)+1
+.EQN 0 20 3 25 
+z[j:exp(1i*(C/N)*2*ã*j)
+.TXT 1 -39 1 19 
+a1,19,17,18
+Crossover factor:
+.EQN 3 -17 15 39 
+1&-1&Im(z[j){1,1,13,30,l}@1&-1&Re(z[j)
+.TXT 1 44 11 31 
+a11,31,29,201
+To see other stars, change N 
+or C.
+
+For pointy stars, use C close 
+to N/2.  For polygons, use
+C = 1.
+
+To avoid retracing the same 
+star over and over, make sure 
+C and N have no common 
+factors.

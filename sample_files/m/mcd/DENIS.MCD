@@ -1,0 +1,71 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 масса длина вpемя заряд
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.EQN 0 0 2 26 
+f(t,x):x+t^2+t-1
+.EQN 3 0 1 10 
+h:.25
+.EQN 0 14 2 9 
+x[0:0
+.EQN 2 -14 1 13 
+i:1;10
+.EQN 0 16 2 9 
+t[0:0
+.EQN 2 -16 2 16 
+t[(i+1):t[(i)+h
+.EQN 3 0 2 25 
+x[(i+1):x[i+h*f(t[i,x[i)
+.EQN 4 1 2 9 
+z[0:0
+.EQN 2 0 2 40 
+z[(i+1):z[i+h*f(t[(i+1),z[i+h*f(t[i,z[i))
+.EQN 4 0 4 31 
+y(t):2*e^t[i-t[i^2-3*t[i-2
+.EQN 4 0 17 53 
+&&x[i,z[i,y(t){5,5,15,40,l}@&&t[i
+.EQN 15 60 12 11 
+y(t)-x[i=
+.EQN 5 -60 22 57 
+&&y(t)-x[i,y(t)-z[i{6,3,20,35,l}@&&t[i
+.EQN 8 60 12 11 
+y(t)-z[i=
+.EQN 14 -58 2 9 
+d[0:0
+.EQN 3 0 3 55 
+d[(i+1):d[i+(h/2)*(f(t[i,d[i)+f(t[(i+1),d[i+h*f(t[i,d[i)))
+.EQN 4 0 22 60 
+&&d[i,y(t){7,3,20,50,l}@&&t[i
+.EQN 23 -2 12 32 
+&&y(t)-d[i{3,3,10,20,l}@&&t[i
+.EQN 0 42 12 30 
+&&x[i-d[i{1,1,10,20,l}@&&t[i
+.EQN 15 -42 2 9 
+k[0:0
+.EQN 0 10 2 10 
+k1[0:0
+.EQN 0 11 2 10 
+k2[0:0
+.EQN 0 12 2 10 
+k3[0:0
+.EQN 0 13 2 10 
+k4[0:0
+.EQN 4 -46 2 20 
+k1[(i+1):f(t[(i),k1[(i))
+.EQN 3 0 3 38 
+k2[(i+1):f(t[(i)+h/2,k2[i+h/2*f(t[i,k1[i))
+.EQN 4 0 3 56 
+k3[(i+1):f(t[i+h/2,k3[i+h/2*f(t[i+h/2,k2[i+h/2*f(t[i,k1[i)))
+.EQN 4 0 3 74 
+k4[(i+1):f(t[i+h,k4[i+h*f(t[i+h/2,k3[i+h/2*f(t[i+h/2,k2[i+h/2*f(t[i,k1[i))))
+.EQN 4 0 3 47 
+k[(i+1):h/6*(k1[(i+1)+2*k2[(i+1)+2*k3[(i+1)+k4[(i+1))
+.EQN 4 0 17 60 
+&&k[i,y(t){1,1,15,50,l}@&&t[i

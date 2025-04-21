@@ -1,0 +1,600 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against E:\RBBS\STOCK\CNFG-SUB.BAS to produce E:\RBBS\CHAT\CNFG-SUB.BAS
+* E:\RBBS\STOCK\CNFG-SUB.BAS:  Date 6-20-1992  Size 103455 bytes
+* ------------[ Created 12-23-1992 04:56:48 ]------------
+* REPLACING old line(s) by new
+' $linesize:132
+' $title: 'CNFG-SUB.BAS 17.4, Copyright 1987-92 by D. Thomas Mack'
+* ------[ first line different ]------
+'  Copyright 1991 by D. Thomas Mack, all rights reserved.
+'  Name ...............: CNFG-SUB.BAS
+'  First Released .....: March 22, 1992
+'  Subsequent Releases.: 
+'  Copyright ..........: 1987-92
+'  Purpose.............: The Remote Bulletin Board System for the IBM PC,
+'                        RBBS-PC, configuration program -- CONFIG.BAS
+'                        utilizes a lot of menus and string space.
+'                        These are incorporated within CNFG-SUB.BAS as a
+'                        seperately callable subroutines in order to free
+'                        up as much code as possible within the 64K code
+'                        segment used by CONFIG.BAS.
+'  Parameters..........: Most parameters are passed via a COMMON statement.
+'
+' Subroutine  Line      Function of Subroutine
+'    Name    Number
+' ALLCAPS    61212+     Captialize a string
+' ANSIDECODE 62040+     Convert ANSI strings into english text expressions
+' ANYINTEGER 61450      Prompt for any integer
+' ANYNUMBER  61400      Prompt for any number
+' ASKRO      61100      Ask a question on a specific row
+' ASKUPOS    61300      Ask for identifying field in USERS record
+' BRKFNAME   61830      Break file name in drive/path, prefix, extension
+' CHKFMSDIR  61700      Check FMS directory for valid structure
+' CHKPERSDIR 61755      Check Personal directory format
+' CHKRANDOM  61751      Checks FMS/Pers read Randomly
+' CNFGINIT   60385      Initialize CONFIG's constants
+' COLORCODE  62040+     Convert response into ANSI-meaningful strings
+' DISPLAY    12190      Display the CONFIG menu pages
+' FINDFILE   61600      Determine whether a file exists
+' FINDLAST   61850      Find last occurence of a character in a string
+' GETANSI    62000      Prompt for ANSI colors to be used
+' GETASCII   61810      Get any character by character or ascii value
+' GETCOLOR   61950      Process request for setting color
+' GETINIT    61110      Get answers that are integers
+' GETNUMYN   61150      Get TRUE/FALSE answer to a YES/NO question
+' GETYESNO   61200      Ask a question with a "yes" or "no" response
+' HANDERR    61775+     Handle error checking for FMS directories
+' MMINTEGER  61500      Prompt for integer with min and a max
+' NETTYPE    60382      Prompt for supported network types
+' REMOVE     61800      Remove characters from a string
+' SECURE     61860      Allow commands and their security level to be changed
+' SELMODEM   62100      Select modem to set modem strings
+' SETSCRSCHK 61754      Sets up screen for check of FMS directory
+' TRIMTRAIL  61840      Remove trailing characters from a string
+'
+'  $INCLUDE: 'CNFG-VAR.BAS'
+'
+'  $SUBTITLE: 'DISPLAY - subroutine to display CONFIG's menus'
+'  $PAGE
+'
+'  SUBROUTINE NAME    --  DISPLAY
+'
+'  INPUT PARAMETERS   --  PARAMETER        DESCRIPTION
+'                         IX = 0           DISPLAY THE CHOICE OF MENUS
+'                         IX = -1          RE-READ THE INPUT (INVALID REQUEST)
+'                         IX > 0           DISPLAY THE APPROPRIATE PAGE
+'
+'  OUTPUT PARAMETERS  --  HJ$              OPTION SELECTED
+'                         IPAGE            MENU PAGE CONTAINING OPTION
+'                         ILOOKUP          INDEX (1 TO 20) OF OPTION SELECTED
+'
+'  SUBROUTINE PURPOSE --  TO DISPLAY CONFIG'S MENUS AND REQUEST OPTION
+'
+      SUB DISPLAY STATIC
+'
+' *  DISPLAY CONFIG'S MAIN FUNCTION KEY MENU
+'
+      IF IX > 0 THEN _
+         GOTO 12320
+      IF IX = -1 THEN _
+         GOTO 12590
+* REPLACING old line(s) by new
+12190 COLOR FG,BG,BORDER
+      CLS
+      DISPLAYED.PAGE.NUMBER = 0
+      I! = FRE(C$)
+      COLOR 0,7,0
+* ------[ first line different ]------
+      LOCATE 4,3
+      PRINT " Maple RBBS-PC "+ CONFIG.VERSION$ + " CONFIGURATION PROGRAM "
+      COLOR FG,BG,BORDER
+      LOCATE 1,1,0
+      PRINT "Copyright (c) 1983-1991 Tom Mack"
+      LOCATE 2,1,0
+      PRINT "39 Cranbury Dr, Trumbull, CT. 06611";
+      IF CONFERENCE.MODE THEN _
+         GOSUB 24970
+      LOCATE  5,1
+      PRINT "   F1            Global RBBS-PC Parameters (part 1)
+      PRINT "   F2            Global RBBS-PC Parameters (part 2)
+      PRINT "   F3            Global RBBS-PC Parameters (part 3)
+      PRINT "   F4            RBBS-PC System Files (part 1)
+      PRINT "   F5            RBBS-PC System Files (part 2)
+      PRINT "   F6            Parameters for RBBS-PC's 'Doors'
+      PRINT "   F7            Parameters for RBBS-PC's Security (part 1)
+      PRINT "   F8            Parameters for RBBS-PC's Security (part 2)
+      PRINT "   F9            Parameters for multiple RBBS-PC's
+      PRINT "  F10            RBBS-PC utilities
+      PRINT "  Shift-F1       RBBS-PC File Management Faciliites"
+      PRINT "  Shift-F2       RBBS-PC Communications Parameters (part 1)
+      PRINT "  Shift-F3       RBBS-PC Communications Parameters (part 2)
+      PRINT "  Shift-F4       Parameters for RBBS-PC NET-MAIL
+      PRINT "  Shift-F5       New users parameters"
+      PRINT "  Shift-F6       Library Sub-System"
+      PRINT "  Shift-F7       RBBS-PC Color parameters"
+      PRINT "  Shift-F8       Reserved for future use"
+      XX$ = "Press END to terminate or Function Key to select page "
+      GOSUB 50345
+      LOCATE ,,1
+* REPLACING old line(s) by new
+12370 DISPLAYED.PAGE.NUMBER = 2
+      GOSUB 24800
+      LOCATE  3,1
+      PRINT "21. Remind users of messages that they left ------ " + FNYESNO$(MESSAGE.REMINDER)
+      PRINT "22. Remind users of # uploads and downloads? ----- " + FNYESNO$(REMIND.FILE.TRANSFERS)
+      PRINT "23. Remind users of their user preferences? ------ " + FNYESNO$(REMIND.PROFILE)
+      PRINT "24. Enable download of new files at logon -------- " + FNYESNO$(NEW.FILES.CHECK)
+      PRINT "25. Default user page length is ------------------" + STR$(PAGE.LENGTH)
+      PRINT "26. Maximum number of lines allowed per message --" + STR$(MAX.MESSAGE.LINES)
+      PRINT "27. Is system 'welcome' interruptable? ----------- " + FNYESNO$(WELCOME.INTERRUPTABLE)
+      PRINT "28. Are system bulletins to be 'optional'? ------- " + FNYESNO$(BULLETINS.OPTIONAL)
+      PRINT "29. Type of PC RBBS-PC will be running on? ------- " + COMPUTER.TYPE$
+* ------[ first line different ]------
+      PRINT "30.  Symbols to use for SYSOP commands ----------- " + SYSOP.COMMANDS$
+      PRINT "31.  Symbols to use for MAIN menu commands ------- " + MAIN.COMMANDS$
+      PRINT "32. Symbols to use for FILE menu commands -------- " + FILE.COMMANDS$
+      PRINT "33.  Symbols to use for UTILITIES menu commands -- " + UTIL.COMMANDS$
+      PRINT "34. Symbols to use for global commands ----------- " + GLOBAL.COMMANDS$
+      PRINT "35. Show section in command prompt --------------- " + FNYESNO$(SHOW.SECTION)
+      PRINT "36. Show commands in command prompt -------------- " + FNYESNO$(COMMANDS.IN.PROMPT)
+      PRINT "37. Restrict valid commands to current section --- " + FNYESNO$(RESTRICT.VALID.CMDS)
+      PRINT "38. Use machine language routines for speed ------ " + FNYESNO$(TURBO.RBBS)
+      PRINT "39. Use BASIC PRINT for screen writes ------------ " + FNYESNO$(USE.BASIC.WRITES)
+      PRINT "40. # of lines for extended file descriptions ----" + STR$(MAX.EXTENDED.LINES)
+      GOTO 12580
+* REPLACING old line(s) by new
+12380 DISPLAYED.PAGE.NUMBER = 3
+      GOSUB 24800
+      LOCATE  3,1
+      PRINT "41. Field used to identify users ----------------- " + HASH.ID$
+      PRINT "42. Field used to distinguish users with same ID-- " + INDIV.ID$
+      PRINT "43. Start position identifying personal downloads-"  + STR$(PERSONAL.BEGIN)
+      PRINT "44. Field length to identify personal downloads --"  + STR$(PERSONAL.LEN)
+      PRINT "45. Prompt for first part of personal identifier - " + FIRST.NAME.PROMPT$
+      PRINT "46. Prompt for last part of personal identifier -- " + LAST.NAME.PROMPT$
+      PRINT "47. Enforce upload/download ratios --------------- " + FNYESNO$(ENFORCE.UPLOAD.DOWNLOAD.RATIOS)
+      PRINT "48. RESTRICT users by SUBSCRIPTION date ---------- " + FNYESNO$(RESTRICT.BY.DATE)
+      PRINT "49. Security level when SUBSCRIPTION expires -----"  + STR$(EXPIRED.SECURITY)
+      PRINT "50. Days before expiration to warn callers -------"  + STR$(DAYS.TO.WARN)
+      PRINT "51. Default # days in SUBSCRIPTION PERIOD --------"  + STR$(DAYS.IN.SUBSCRIPTION.PERIOD)
+      PRINT "52. Turn printer off after each recycle ---------- " + FNYESNO$(TURN.PRINTER.OFF)
+* ------[ first line different ]------
+      PRINT "53.  OMIT Users Name from UpLoadLg.def file  ----- " + FNYESNO$(MUSIC)
+      PRINT "54. BUFFER SIZE used when displaying text files --" + STR$(BUFFER.SIZE)
+      PRINT "55. Stack space to be made available -------------" + STR$(SIZE.OF.STACK)
+      PRINT "56. File shown users when SYSOP wants system next  " + NOT.YET.IN$ ' F7.MESSAGE$
+      PRINT "57. Ask users their (What is your ...) ----------- " + USER.LOCATION$
+      PRINT "58. ---------------------------------------------- "
+      PRINT "59.  No internal protocols with Maple (use 128)---" + STR$(WRITE.BUF.DEF)
+      PRINT "60. Add Users Name to Dir listing --------------- " + VOICE.TYPE$
+      GOTO 12580
+* REPLACING old line(s) by new
+12500 DISPLAYED.PAGE.NUMBER = 12
+      GOSUB 24800
+      LOCATE 3,1
+      PRINT "221. Communications port to be used by RBBS-PC ---- " + COM.PORT$
+      PRINT "222. # of seconds to wait for modem to initialize -" + STR$(MODEM.INIT.WAIT.TIME)
+      PRINT "223. Seconds to wait before issuing modem commands-" + STR$(MODEM.COMMAND.DELAY.TIME)
+      PRINT "224. Number of rings to wait before answering -----" + STR$(REQUIRED.RINGS);
+      IF INSTR(USER.INIT.COMMAND$, "S0=255") > 0 THEN _
+         PRINT " RING BACK";
+      PRINT
+      PRINT "225. Set the modem commands"
+      PRINT "226. ---------------------------------------------- "
+      PRINT "227. Issue modem commands between rings ----------- " ; FNYESNO$(COMMANDS.BETWEEN.RINGS)
+      PRINT "228. BPS rate to initially open modem at ---------- " + MODEM.INIT.BAUD$
+      X$ = STR$(WAIT.BEFORE.DISCONNECT) + " seconds"
+      IF WAIT.BEFORE.DISCONNECT = 0 THEN _
+         X$ = "NO"
+      PRINT "229. Log off user who are idle for ----------------" + X$
+      PRINT "230. Are you using a 'DUMB' auto-answer modem? ---- " ; FNYESNO$(DUMB.MODEM)
+      PRINT "231. Initialize modem firmware for RBBS-PC."
+      PRINT "232. # seconds to wait after dropping DTR ---------"  + STR$(DTR.DROP.DELAY)
+      IF PROTO.DEF$ = "" THEN _
+         X$ = NONE.PICKED$ _
+      ELSE X$ = PROTO.DEF$
+      PRINT "233. File with PROTOCOL definitions --------------- " ; X$
+* ------[ first line different ]------
+      PRINT "234.  AUTODOWNLOAD stripped out with Maple Merges - " ; FNYESNO$(ASK.IDENTITY)
+      PRINT "235. Require non-ascii protocol for BASIC files --- " ; FNYESNO$(REQUIRE.NON.ASCII)
+      X$ = STR$(RECYCLE.WAIT) + " minutes"
+      IF RECYCLE.WAIT = 0 THEN _
+         X$ = "<Don't recycle>"
+      PRINT "236. Recycle if no calls are received within ------" + X$
+      PRINT "237. Leave modem at initial baud ------------------ " + FNYESNO$(KEEP.INIT.BAUD)
+      GOTO 12580
+* REPLACING old line(s) by new
+12520 DISPLAYED.PAGE.NUMBER = 15
+      GOSUB 24800
+      LOCATE  3,1
+      PRINT "281. Let new users set their preferences --------- " ; FNYESNO$(NEWUSER.SETS.DEFAULTS)
+* ------[ first line different ]------
+      PRINT "282.  Skip Mail check on log on ------------------ " ; FNYESNO$(ZSkipMailCheck) 'Pe 11/02/92
+      PRINT "283. New users default file-transfer protocol ---- " + NOT.YET.IN$ ' NEW.USER.DEFAULT.PROTOCOL$
+      PRINT "284. Line feeds for new users default to --------- " + NOT.YET.IN$ ' NEW.USER.LINE.FEEDS$
+      PRINT "285. Nulls for new users default to -------------- " + NOT.YET.IN$ ' NEW.USER.NULLS$
+      PRINT "286. Prompt bell for new users defaults to ------- " + NOT.YET.IN$ ' NEW.USER.BELL$
+      PRINT "287. New users 'graphics' capability is assumed -- " + NOT.YET.IN$ ' NEW.USER.GRAPHICS$
+      PRINT "288. New users are assumed UPPERCASE only -------- " + NOT.YET.IN$ ' NEW.USER.CASE$
+      PRINT "289. New users message margins defaults to ------- " + NOT.YET.IN$ ' STR$(NEW.USER.MARGINS)
+      PRINT "290. Add new users to USERS file ----------------- " ; FNYESNO$(REMEMBER.NEW.USERS)
+      PRINT "291. Let new users on even when USERS file full -- " ; FNYESNO$(SURVIVE.NOUSER.ROOM)
+      PRINT "292. Default max number of minutes can Bank ------" ; STR$(ZMaxBank)
+      GOTO 12580
+* REPLACING old line(s) by new
+12530 DISPLAYED.PAGE.NUMBER = 16
+      GOSUB 24800
+      LOCATE  3,1
+      X$ = LIBRARY.DRIVE$
+      IF LIBRARY.DRIVE$ = "" THEN _
+         X$ = NONE.PICKED$
+* ------[ first line different ]------
+      PRINT "301.  Work Drv for CHAT (Ram disk recommended)---- " + X$
+      PRINT "302. Drive/Path for Library directory ------------ " + LIBRARY.DIRECTORY.PATH$
+      PRINT "303. Extension for Library directory ------------- " + LIBRARY.DIRECTORY.EXTENTION$
+      PRINT "304. Drive/Path for V)iew feature ---------------- " + LIBRARY.WORK.DISK.PATH$
+      PRINT "305. # of disks in Library -----------------------" + STR$(LIBRARY.MAX.DISK)
+      PRINT "306. # of master Library subdirectories ----------" + STR$(LIBRARY.MAX.DIRECTORY)
+      PRINT "307. # of subdirectories in each master ----------" + STR$(LIBRARY.MAX.SUBDIR)
+      PRINT "308. Prefix of Library subdirectories ------------ " + LIBRARY.SUBDIR.PREFIX$
+      PRINT "309. Name of Library subsystem command menu ------ " + MENU$(6)
+      PRINT "310. Symbols to use for Library menu commands ---- " + LIBRARY.COMMANDS$
+      M27$ = STR$(PS)
+      IX = LIBRARY.FUNCTION(1)
+      FOR I = 1 TO NUM.LIBRARY
+         IF IX<>LIBRARY.FUNCTION(I) THEN _
+            M27$ = "(Variable)" : _
+            GOTO 12531
+      NEXT
+* REPLACING old line(s) by new
+24800 CLS
+      I! = FRE(C$)
+      COLOR 0,7,0
+* ------[ first line different ]------
+      LOCATE 1,5
+      PRINT " Maple RBBS-PC " + CONFIG.VERSION$ + " Configuration ";
+      IF CONFERENCE.MODE THEN _
+         GOSUB 24970
+      COLOR FG,BG,BORDER
+      PRINT " Page" + STR$(DISPLAYED.PAGE.NUMBER) + " of" + STR$(MAXIMUM.DISPLAYABLE.PAGES)
+      RETURN
+* REPLACING old line(s) by new
+60382 CLS
+      LOCATE 3,1
+      PRINT "     RBBS-PC is supported in the following:"
+      PRINT "                   Environment"
+      PRINT "          0. Single RBBS-PC in an IBM DOS environment"
+* ------[ first line different ]------
+      PRINT "          1. Not in Maple Code (previously Multilink option)"
+      PRINT "          2. Omninet (CORVUS)"
+      PRINT "          3. PC-NET (Orchid)"
+      PRINT "          4. DESQview (Quarterdeck)"
+      PRINT "          5. 10 NET (Fox Research)"
+      PRINT "          6. NETBIOS (DOS SHARE)"
+      PRINT "          7. DoubleDOS, but file sharing not supported."
+* REPLACING old line(s) by new
+60390 MACRO.DRVPATH$             = D$
+      MACRO.EXTENSION$           = ""
+      MAIN.COMMANDS.DEFAULTS$    = "ABCDEFIJKOPRSTUVW@"
+      MAIN.COMMANDS$             = MAIN.COMMANDS.DEFAULTS$
+      MAIN.FUNCTION$(1,1)        = "A)nswer questionnaire  "
+      MAIN.FUNCTION$(2,1)        = "B)ulletins             "
+      MAIN.FUNCTION$(3,1)        = "C)omments              "
+      MAIN.FUNCTION$(4,1)        = "D)oor subsystem        "
+      MAIN.FUNCTION$(5,1)        = "E)nter message         "
+      MAIN.FUNCTION$(6,1)        = "F)iles subsystem       "
+      MAIN.FUNCTION$(7,1)        = "I)nitial welcome       "
+      MAIN.FUNCTION$(8,1)        = "J)oin a conference     "
+      MAIN.FUNCTION$(9,1)        = "K)ill messages         "
+      MAIN.FUNCTION$(10,1)       = "O)perator page         "
+      MAIN.FUNCTION$(11,1)       = "P)ersonal mail         "
+      MAIN.FUNCTION$(12,1)       = "R)ead messages         "
+      MAIN.FUNCTION$(13,1)       = "S)can messages header  "
+* ------[ first line different ]------
+      MAIN.FUNCTION$(14,1)       = " T)ype ASCII file      "
+      MAIN.FUNCTION$(15,1)       = "U)tilities subsystem   "
+      MAIN.FUNCTION$(16,1)       = "V)iew conference mail  "
+      MAIN.FUNCTION$(17,1)       = "W)ho's on other nodes  "
+      MAIN.FUNCTION$(18,1)       = "@)InterNode Chat       "
+      MAIN.FUNCTION$(1,2)        = "A"
+      MAIN.FUNCTION$(2,2)        = "B"
+      MAIN.FUNCTION$(3,2)        = "C"
+      MAIN.FUNCTION$(4,2)        = "D"
+      MAIN.FUNCTION$(5,2)        = "E"
+      MAIN.FUNCTION$(6,2)        = "F"
+      MAIN.FUNCTION$(7,2)        = "I"
+      MAIN.FUNCTION$(8,2)        = "J"
+      MAIN.FUNCTION$(9,2)        = "K"
+      MAIN.FUNCTION$(10,2)       = "O"
+      MAIN.FUNCTION$(11,2)       = "P"
+      MAIN.FUNCTION$(12,2)       = "R"
+      MAIN.FUNCTION$(13,2)       = "S"
+      MAIN.FUNCTION$(14,2)       = "T"
+      MAIN.FUNCTION$(15,2)       = "U"
+      MAIN.FUNCTION$(16,2)       = "V"
+      MAIN.FUNCTION$(17,2)       = "W"
+      MAIN.MESSAGE.BACKUP$       = D$ + "MESSAGES.BAK"
+      MAIN.MESSAGE.FILE$         = D$ + "MESSAGES"
+      MAIN.PUI$                  = D$ + "MAIN.PUI"
+      MAIN.USER.FILE$            = D$ + "USERS"
+      MASTER.DIRECTORY.NAME$     = ""
+      MAX.ALLOWED.MSGS.FRM.DEF   = 5
+      MAX.CARRIER.WAIT           = 30
+      MAX.DESC.LEN               = 40
+      MAX.EXTENDED.LINES         = 2
+      MAX.MESSAGE.LINES          = 19
+      MAX.PER.DAY                = 0
+      MAX.REG.SEC                = 0
+      MAX.USR.FILE.SIZE.FRM.DEF  = 16
+      MAX.WORK.VAR               = 30
+      MAXD                       = 15
+      MAXIMUM.DISPLAYABLE.PAGES  = 17
+      MAXIMUM.PASSWORD.CHANGES   = 3
+      MAXIMUM.VIOLATIONS         = 5
+      MAXIMUM.NUMBER.OF.NODES    = 1
+      MENU$(1)                   = D$ + "MENU1"
+      MENU$(2)                   = D$ + "MENU2"
+      MENU$(3)                   = D$ + "MENU3"
+      MENU$(4)                   = D$ + "MENU4"
+      MENU$(5)                   = D$ + "MENU5"
+      MENU$(6)                   = D$ + "MENU6"
+      MENUS.CAN.PAUSE            = TRUE
+      MESSAGE.REMINDER           = TRUE
+      MESSAGES.CAN.GROW          = FALSE
+      MIN.NEWCALLER.BAUD         = 0
+      MIN.OLDCALLER.BAUD         = 0
+      MIN.SEC.TO.VIEW            = DEFAULT.SECURITY.LEVEL
+      MINIMUM.LOGON.SECURITY     = 0
+      MINIMUM.SECURITY.FOR.TEMP.PASSWORD = 5
+      MINUTES.PER.SESSION!       = 72
+      MLCOM                      = FALSE
+      MM                         = 5
+      MO$                        = DD$
+      MUSIC                      = FALSE
+      NET.MAIL$                  = "<none>"
+      NETWORK.TYPE               = 0
+      NETWORK.TYPE$              = "IBM's DOS"
+      NEW.FILES.CHECK            = FALSE
+      NEW.USER.QUESTIONNAIRE$    = D$ + "RBBS-REG.DEF"
+      NEWUSER.FILE$              = D$ + "NEWUSER"
+      NEWUSER.SETS.DEFAULTS      = TRUE
+      OMIT.MAIN.DIRECTORY$       = "NO"
+      OMIT.UPLOAD.DIRECTORY$     = "NO"
+      OVERWRITE.SECURITY.LEVEL   = SYSOP.SECURITY.LEVEL
+      PAGE.LENGTH                = 23
+      PAGING.PRINTER.SUPPORT$    = ". "
+      PASSWORD.FILE$             = D$ + "PASSWRDS"
+      PCJR                       = FALSE
+      PERSONAL.BEGIN             = 1
+      PERSONAL.DIR$              = D$+"PRIV.DEF"
+      PERSONAL.DRVPATH$          = D$
+      PERSONAL.LEN               = 31
+      PERSONAL.CONCAT            = FALSE
+      PRELOG$                    = D$ + "PRELOG"
+      PRIVATE.READ.SEC           = DEFAULT.SECURITY.LEVEL
+      PROTO.DEF$                 = D$ + "PROTO.DEF"
+      PROMPT.BELL                = 0
+      PROMPT.HASH$               = "Name"
+      PROMPT.INDIV$              = ""
+      PS                         = 5
+      PUBLIC.READ.SEC            = DEFAULT.SECURITY.LEVEL
+      QUES.PATH$                 = D$
+      RBBS.BAT$                  = D$ + "RBBS" + NODE.ID$ + ".BAT"
+      RBBS.NAME$                 = "RBBS-PC"
+      RCTTY.BAT$                 = D$ + "RCTTY" + NODE.ID$ + ".BAT"
+      RECYCLE.TO.DOS             = 0
+      RECYCLE.TO.DOS$            = "INTERNAL"
+      RECYCLE.WAIT               = 0
+      REDIRECT.IO.METHOD         = TRUE
+      REGISTRATION.PROGRAM$      = "<none>"
+      REMEMBER.NEW.USERS         = TRUE
+      REMIND.FILE.TRANSFERS      = FALSE
+      REMIND.PROFILE             = FALSE
+      REQUIRE.NON.ASCII          = TRUE
+      REQUIRED.QUESTIONNAIRE$    = "<none>"
+      REQUIRED.RINGS             = 1
+      RESTRICT.BAUD              = FALSE
+      RESTRICT.BY.DATE           = FALSE
+      RESTRICT.VALID.CMDS        = FALSE
+      RTS$                       = "NO"
+      SCREEN.OUT.MSG$            = "SEEN-BY: "
+      SEC.CHANGE.MSG             = SYSOP.SECURITY.LEVEL
+      SEC.LVL.EXEMPT.FRM.PURGING = SYSOP.SECURITY.LEVEL
+      SECVIO.HLP$                = D$ + "SECVIO." + HELP.EXTENSION$
+      SECURITY.EXEMPT.FROM.EPILOG= DEFAULT.SECURITY.LEVEL + 1
+      SF                         = SYSOP.SECURITY.LEVEL
+      SHOOT.YOURSELF             = FALSE
+      SHOW.SECTION               = TRUE
+      SIZE.OF.STACK              = 1024
+      SL.CATEGORIZE.UPLOADS      = SYSOP.SECURITY.LEVEL
+      SMART.TEXT                 = 123
+      START.HASH                 = 1
+      START.INDIV                = 0
+      START.OFFICE.HOURS         = 800
+      SURVIVE.NOUSER.ROOM        = FALSE
+      SWITCH.BACK                = FALSE
+      SYSOP.COMMANDS.DEFAULTS$   = "1234567"
+      SYSOP.COMMANDS$            = SYSOP.COMMANDS.DEFAULTS$
+      SYSOP.FUNCTION$(1,1)       = " 1 List comments      "
+      SYSOP.FUNCTION$(2,1)       = " 2 List CALLERS log   "
+      SYSOP.FUNCTION$(3,1)       = " 3 Recover a message  "
+      SYSOP.FUNCTION$(4,1)       = " 4 Erase comments     "
+      SYSOP.FUNCTION$(5,1)       = " 5 User maintenance   "
+      SYSOP.FUNCTION$(6,1)       = " 6 Toggle Page bell   "
+      SYSOP.FUNCTION$(7,1)       = " 7 Exit to DOS        "
+      SYSOP.FUNCTION$(1,2)       = " 1"
+      SYSOP.FUNCTION$(2,2)       = " 2"
+      SYSOP.FUNCTION$(3,2)       = " 3"
+      SYSOP.FUNCTION$(4,2)       = " 4"
+      SYSOP.FUNCTION$(5,2)       = " 5"
+      SYSOP.FUNCTION$(6,2)       = " 6"
+      SYSOP.FUNCTION$(7,2)       = " 7"
+      SYSOP.FIRST.NAME$          = "TOM"
+      SYSOP.LAST.NAME$           = "MACK"
+      SYSOP.MENU.SECURITY.LEVEL  = SYSOP.SECURITY.LEVEL
+      SYSOP.PASSWORD.1$          = "SECRET"
+      SYSOP.PASSWORD.2$          = "NAME"
+      TEST.ANSI.TIME             = 0
+      TIME.TO.DROP.TO.DOS        = 0
+      TRASHCAN.FILE$             = D$ + "TRASHCAN"
+      TURN.PRINTER.OFF           = FALSE
+      TURBO.RBBS                 = TRUE
+      UE                         = 5
+      FMS.DIRECTORY$             = ""
+      UPCAT.HELP$                = "UPCAT"
+      UPLOAD.DIRECTORY$          = "99"
+      UPLOAD.PATH$               = D$
+      UPLOAD.SUBDIR$             = ""
+      UPLOAD.TIME.FACTOR!        = 0
+      UPLOAD.TO.SUBDIR           = FALSE
+      USE.BASIC.WRITES           = FALSE
+      USE.DEVICE.DRIVER$         = ""
+      USER.LOCATION$             = "CITY and STATE"
+      UTIL.COMMANDS.DEFAULTS$    = "BCEFGLMPRSTU"
+      UTIL.COMMANDS$             = UTIL.COMMANDS.DEFAULTS$
+      UTILITY.FUNCTION$(1,1)     = "B)ank time            "
+      UTILITY.FUNCTION$(2,1)     = "C)lock (time)         "
+      UTILITY.FUNCTION$(3,1)     = "E)cho                 "
+      UTILITY.FUNCTION$(4,1)     = "F)ile x-fer protocol  "
+      UTILITY.FUNCTION$(5,1)     = "G)raphics             "
+      UTILITY.FUNCTION$(6,1)     = "L)ines per page       "
+      UTILITY.FUNCTION$(7,1)     = "M)sg margin setting   "
+      UTILITY.FUNCTION$(8,1)     = "P)assword change      "
+      UTILITY.FUNCTION$(9,1)     = "R)eview defaults      "
+      UTILITY.FUNCTION$(10,1)    = "S)tatistics           "
+      UTILITY.FUNCTION$(11,1)    = "T)oggle               "
+      UTILITY.FUNCTION$(12,1)    = "U)ser log scan        "
+      VOICE.TYPE                 = 0
+      VOICE.TYPE$                = NONE.PICKED$
+      XON.XOFF                   = FALSE
+      ZCallersLst$               = D$ + "CALLLST.DEF"
+      ZCopyrightSecs             = 8
+      ZDistriHelp$               = "DISTRI"
+      ZDistriPath$               = D$
+      ZEnableCC                  = FALSE
+      ZMaxBank                   = 60
+      ZMinSecPersUpld            = SYSOP.SECURITY.LEVEL
+      ZMsgSecCats$               = "URP"
+      ZSkipMailCheck             = 0                       'Pe 11/02/92
+      FOR I = 1 TO LEN(UTIL.COMMANDS.DEFAULTS$)
+         UTILITY.FUNCTION$(I,2) = MID$(UTIL.COMMANDS.DEFAULTS$,I,1)
+      NEXT
+      WAIT.BEFORE.DISCONNECT     = 180
+      WELCOME.FILE$              = D$ + "WELCOME"
+      WELCOME.INTERRUPTABLE      = TRUE
+      WILL.SUBDIRS.B.USED        = FALSE
+      WRITE.BUF.DEF              = 1024
+      FOR I = 1 TO NUM.SYSOP
+         SYSOP.FUNCTION(I) = SF
+      NEXT
+      FOR I = 1 TO NUM.MAIN
+         MAIN.FUNCTION(I) = MM
+      NEXT
+      FOR I = 1 TO NUM.FILES
+         FILES.FUNCTION(I) = FC
+      NEXT
+      FOR I = 1 TO NUM.LIBRARY
+         LIBRARY.FUNCTION(I) = PS
+      NEXT
+      FOR I = 1 TO NUM.UTILITY
+         UTILITY.FUNCTION(I) = UE
+      NEXT
+      FOR I = 1 TO NUM.GLOBAL
+         GLOBAL.FUNCTION(I) = GB
+      NEXT
+      CALL MODEMINITCMD
+      END SUB
+'  $SUBTITLE: 'VOICETYPE - subroutine to select voice'
+'  $PAGE
+'
+'  SUBROUTINE NAME    --  VOICETYPE
+'
+'  INPUT PARAMETERS   --  VOICE.TYPE
+'                         VOICE.TYPE$
+'                         SUBROUTINE.PARAMETER
+'
+'  OUTPUT PARAMETERS  --  VOICE.TYPE
+'                         VOICE.TYPE$
+'
+'  SUBROUTINE PURPOSE --  TO SELECT THE RBBS-PC SUPPORTED VOICE
+'                         SYNTHESIZERS
+'
+      SUB VOICETYPE STATIC
+      ON SUBROUTINE.PARAMETER GOTO 60482,60484
+* REPLACING old line(s) by new
+60482 CLS
+      LOCATE 3,1
+* ------[ first line different ]------
+      PRINT "     Add Users Name to Dir listing:"  'Pe 06/01/92
+      PRINT 
+      PRINT "          0. No"                      
+      PRINT "          1. Yes"
+      PRINT
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+60483 CALL ASKRO("Select Please (0 or 1, [ENTER] quits)",24,X$)
+      IF X$ = "" THEN _
+         EXIT SUB
+      VOICE.TYPE = VAL(X$)
+      IF VOICE.TYPE < 0 OR VOICE.TYPE > 2 THEN _
+         GOTO 60483
+* REPLACING old line(s) by new
+60484 IF VOICE.TYPE = 0 THEN _
+* ------[ first line different ]------
+         VOICE.TYPE$ = "Don't add"
+      IF VOICE.TYPE = 1 THEN _
+         VOICE.TYPE$ = "Add Users Name"
+      IF VOICE.TYPE = 2 THEN _
+         VOICE.TYPE$ = "Add Users Name"
+      END SUB
+'  $SUBTITLE: 'ASKRO - ask a question at a specific row'
+'  $PAGE
+'
+'  SUBROUTINE NAME    --  ASKRO
+'
+'  INPUT PARAMETERS   --  PARAMETER         MENANING
+'                         ANS$           STRING TO PUT THE ANSWER IN
+'                         STRNG$         STRING CONTAINING THE QUESTION
+'                         RO             ROW TO ASK THE QUESTION ON
+'
+'  OUTPUT PARAMETERS  --  ANS$           RESPONSE FROM THE KEYBOARD
+'
+'  SUBROUTINE PURPOSE --  TO ASK A QUESTION ON THE PC'S DISPLAY AT A
+'                         SPECIFIC ROW
+'
+      SUB ASKRO (STRNG$,RO,ANS$) STATIC
+* REPLACING old line(s) by new
+61900 CLS
+      I! = FRE(C$)
+      COLOR 0,7,0
+* ------[ first line different ]------
+      LOCATE 1,18
+      PRINT " Maple RBBS-PC "+ CONFIG.VERSION$ + " Default Configuration";
+      COLOR FG,BG,BORDER
+      LOCATE  2,5
+      PRINT "The RBBS-PC " + _
+             SECTION$ + _
+            " Commands are as follows:"
+      LOCATE   3,10
+      XX$ = "Command             Security"
+      IF IPAGE = 2 OR _
+         VAL(OPTION$) = 310 THEN _
+         XX$ = "Description         Command"
+      PRINT XX$
+      RETURN
+      END SUB
+'  $SUBTITLE: 'GETCOLOR - get colors using natural language'
+'  $PAGE
+'
+'  SUBROUTINE NAME    -- GETCOLOR
+'
+'  INPUT PARAMETERS   -- PARAMETER             MEANING
+'                        STRNG$             TITLE OF WHAT COLOR IS FOR
+'                        NUM.COLOR          CURRENT COLOR SETTING
+'
+'  OUTPUT PARAMETERS  -- NUM.COLOR          NEW COLOR SETTING
+'
+'  SUBROUTINE PURPOSE -- SET THE COLOR USING NATURAL LANGUAGE PHRASES
+'
+      SUB GETCOLOR (STRNG$,NUM.COLOR) STATIC
+      CLS

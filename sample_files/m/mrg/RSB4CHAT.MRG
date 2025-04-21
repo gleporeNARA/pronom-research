@@ -1,0 +1,103 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against OLD\RBBSSUB4.BAS to produce RBBSSUB4.BAS
+* OLD\RBBSSUB4.BAS:  Date 8-26-1990  Size 126891 bytes
+* ------------[ Created 08-28-1990 14:14:36 ]------------
+* REPLACING old line(s) by new
+57000 ' $SUBTITLE: 'Toggle - Toggle User Preferences'
+' $PAGE
+'
+'  NAME    -- Toggle
+'
+'  INPUTS  -- ToggleOption      Option to toggle or view
+'                               according to the following:
+'    ToggleOption         PREFERENCE
+'   Toggle   VIEW
+'     1       -1           Autodownload
+'     2       -2           Bulletin review on logon
+'     3       -3           Case change
+'     4       -4           File review on logon
+'     5       -5           Highlight
+'     6       -6           Line feeds
+'     7       -7           Nulls
+'     8       -8           TurboKey
+'     9       -9           Expert
+'    10      -10           Bell
+'
+'  OUTPUTS -- ZSubParm   passed from TPut
+'
+'  PURPOSE -- Sets or views any single user preference value
+'
+      SUB Toggle (ToggleOption) STATIC
+      ZSubParm = 0
+      IF ToggleOption < 0 THEN _
+         GOTO 57005
+      ON ToggleOption GOSUB _
+         57010, _         'Autodownload
+         57120, _         'Bulletin review on logon
+         57260, _         'Case change
+         57150, _         'File review on logon
+         57040, _         'Highlight
+         57100, _         'Line feeds
+         57210, _         'Nulls
+         57230, _         'TurboKey
+         57190, _         'Expert
+* ------[ first line different ]------
+         57170, _         'Bell                                      ' RCHAT
+         57300            'Internode chat availability               ' RCHAT
+      EXIT SUB
+* REPLACING old line(s) by new
+57005 CALL AskMore ("",ZTrue,ZTrue,WasX,ZTrue)
+      ON -ToggleOption GOSUB _
+         57030, _         'Autodownload
+         57130, _         'Bulletin review on logon
+         57270, _         'Case change
+         57160, _         'File review on logon
+         57050, _         'Highlight
+         57110, _         'Line feeds
+         57220, _         'Nulls
+         57240, _         'TurboKey
+         57200, _         'Expert
+* ------[ first line different ]------
+         57180, _         'Bell                                      ' RCHAT
+         57310            'Internode chat availability               ' RCHAT
+      EXIT SUB
+* REPLACING old line(s) by new
+57280 ZUseTPut = (ZUpperCase OR ZXOnXOff)
+      RETURN
+* ------[ first line different ]------
+* INSERTING new line(s)
+57300 ZAvailableForChat = NOT ZAvailableForChat                      ' RCHAT
+57310 ZOutTxt$ = "Available for node chat: " + MID$("NO YES", 1 -3 * ZAvailableForChat, 3)
+      CALL QuickTPut1 (ZOutTxt$)                                     ' RCHAT
+      END SUB
+'
+* REPLACING old line(s) by new
+64636 IF ZAnsIndex < ZLastIndex THEN _
+         GOTO 64638
+      ZOutTxt$ = "A)utodwnld   B)ullet  C)ase     F)ile   H)ilite"
+      CALL TopPrompt
+      ZOutTxt$ = "L)ine feeds  N)ulls   T)urboKey X)pert  !)bell"
+      CALL ColorPrompt (ZOutTxt$)                                    ' KG021503
+      CALL QuickTPut1 (ZOutTxt$)
+* ------[ first line different ]------
+      ZOutTxt$ = "I)nternode chat page availability"                 ' RCHAT
+      CALL ColorPrompt (ZOutTxt$)                                    ' RCHAT
+      CALL QuickTPut1 (ZOutTxt$)                                     ' RCHAT
+      ZOutTxt$ = "Toggle which options on/off?" + ZPressEnter$
+64638 ZStackC = ZTrue
+      ZTurboKey = -ZTurboKeyUser
+      CALL PopCmdStack
+      IF ZWasQ=0 OR ZSubParm < 0 THEN _
+         EXIT SUB
+      ZWasZ$ = ZUserIn$(ZAnsIndex)
+      CALL AllCaps (ZWasZ$)
+      ZFF = INSTR("ABCFHLNTX!I",ZWasZ$)                              ' RCHAT
+      IF ZFF < 1 THEN _
+         GOTO 64636
+      CALL Toggle (ZFF)
+      GOTO 64636
+      END SUB
+      SUB TopPrompt STATIC
+      CALL ColorPrompt (ZOutTxt$)                                    ' KG021401
+      CALL QuickTPut1 (ZOutTxt$)                                     ' KG021401
+      END SUB

@@ -1,0 +1,20 @@
+mdl 1.6;
+
+import ::adobe::materials::*;
+import ::base::*;
+import ::state::*;
+import ::tex::*;
+
+export material coated_metallic_paint(*)
+  = ::adobe::materials::standard(
+    base_color: color(0.745404f,0.304987f,0.f),
+    roughness: 0.41f,
+    metallic: 0.46f,
+    specular_edge_color: color(0.62396f,0.571125f,0.215861f),
+    sheen: 1.f,
+    sheen_color: color(0.296138f,0.0251869f,0.0251869f),
+    sheen_roughness: 0.93f,
+    coat: 0.9f,
+    coat_color: color(1.f,0.417885f,0.417885f),
+    coat_ior: 1.7f
+  );

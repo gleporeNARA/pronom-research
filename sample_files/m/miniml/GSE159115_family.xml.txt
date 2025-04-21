@@ -1,0 +1,944 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<MINiML
+   xmlns="http://www.ncbi.nlm.nih.gov/geo/info/MINiML"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ncbi.nlm.nih.gov/geo/info/MINiML http://www.ncbi.nlm.nih.gov/geo/info/MINiML.xsd"
+   version="0.5.0" >
+
+  <Contributor iid="contrib1">
+    <Person><First>Arul</First><Middle>M.</Middle><Last>Chinnaiyan</Last></Person>
+    <Organization>University of Michigan</Organization>
+    <Address>
+      <Line>1500 E. Medical Center Dr</Line>
+      <City>Ann Arbor</City>
+      <State>MICHIGAN</State>
+      <Zip-Code>48109</Zip-Code>
+      <Country>USA</Country>
+    </Address>
+  </Contributor>
+
+  <Contributor iid="contrib2">
+    <Organization>GEO</Organization>
+    <Address>
+      <City></City>
+      <Country>USA</Country>
+    </Address>
+  </Contributor>
+
+  <Contributor iid="contrib3">
+    <Person><First>Yuping</First><Last>Zhang</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib4">
+    <Person><First>Sathiya</First><Middle>P</Middle><Last>Narayanan</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib5">
+    <Person><First>Saravana</First><Middle>M</Middle><Last>Dhanasekaran</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib6">
+    <Person><First>Gregory</First><Last>Raskind</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib7">
+    <Person><First>Xiaoming</First><Last>Wang</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib8">
+    <Person><First>Pankaj</First><Last>Vats</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib9">
+    <Person><First>Rahul</First><Last>Mannan</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib10">
+    <Person><First>Fengyun</First><Last>Su</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib11">
+    <Person><First>Lisha</First><Last>Wang</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib12">
+    <Person><First>Xuhong</First><Last>Cao</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib13">
+    <Person><First>Chandan</First><Last>Kumar-Sinha</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib14">
+    <Person><First>Thomas</First><Middle>J</Middle><Last>Giordono</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib15">
+    <Person><First>Todd</First><Middle>M</Middle><Last>Morgan</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib16">
+    <Person><First>Sethu</First><Last>Pitchaya</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib17">
+    <Person><First>Ajjai</First><Last>Alva</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib18">
+    <Person><First>Rohit</First><Last>Mehra</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib19">
+    <Person><First>Marcin</First><Last>Cieslik</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib20">
+    <Person><First>Arul</First><Middle>M</Middle><Last>Chinnaiyan</Last></Person>
+  </Contributor>
+
+  <Database iid="GEO">
+    <Name>Gene Expression Omnibus (GEO)</Name>
+    <Public-ID>GEO</Public-ID>
+    <Organization>NCBI NLM NIH</Organization>
+    <Web-Link>http://www.ncbi.nlm.nih.gov/geo</Web-Link>
+    <Email>geo@ncbi.nlm.nih.gov</Email>
+  </Database>
+
+  <Platform iid="GPL16791">
+    <Status database="GEO">
+      <Submission-Date>2013-03-14</Submission-Date>
+      <Release-Date>2013-03-14</Release-Date>
+      <Last-Update-Date>2019-03-27</Last-Update-Date>
+    </Status>
+    <Title>Illumina HiSeq 2500 (Homo sapiens)</Title>
+    <Accession database="GEO">GPL16791</Accession>
+    <Technology>high-throughput sequencing</Technology>
+    <Distribution>virtual</Distribution>
+    <Organism taxid="9606">Homo sapiens</Organism>
+    <Manufacturer></Manufacturer>
+    <Manufacture-Protocol>
+    </Manufacture-Protocol>
+    <Contact-Ref ref="contrib2" />
+  </Platform>
+
+  <Sample iid="GSM4819725">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_18854</Title>
+    <Accession database="GEO">GSM4819725</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2005
+      </Characteristics>
+      <Characteristics tag="tissue">
+Tumor
+      </Characteristics>
+      <Characteristics tag="tumor subtype">
+Clear Cell RCC
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819725/suppl/GSM4819725_SI_18854_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380685" />
+  </Sample>
+
+  <Sample iid="GSM4819726">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_18856</Title>
+    <Accession database="GEO">GSM4819726</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2006
+      </Characteristics>
+      <Characteristics tag="tissue">
+Tumor
+      </Characteristics>
+      <Characteristics tag="tumor subtype">
+Clear Cell RCC
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819726/suppl/GSM4819726_SI_18856_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380684" />
+  </Sample>
+
+  <Sample iid="GSM4819727">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_18855</Title>
+    <Accession database="GEO">GSM4819727</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2006
+      </Characteristics>
+      <Characteristics tag="tissue">
+Benign Adjacent
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819727/suppl/GSM4819727_SI_18855_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380683" />
+  </Sample>
+
+  <Sample iid="GSM4819728">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_19704</Title>
+    <Accession database="GEO">GSM4819728</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2007
+      </Characteristics>
+      <Characteristics tag="tissue">
+Tumor
+      </Characteristics>
+      <Characteristics tag="tumor subtype">
+Clear Cell RCC
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819728/suppl/GSM4819728_SI_19704_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380682" />
+  </Sample>
+
+  <Sample iid="GSM4819729">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_19703</Title>
+    <Accession database="GEO">GSM4819729</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2007
+      </Characteristics>
+      <Characteristics tag="tissue">
+Benign Adjacent
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819729/suppl/GSM4819729_SI_19703_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380681" />
+  </Sample>
+
+  <Sample iid="GSM4819730">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_21255</Title>
+    <Accession database="GEO">GSM4819730</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2014
+      </Characteristics>
+      <Characteristics tag="tissue">
+Benign Adjacent Cortex
+      </Characteristics>
+      <Characteristics tag="Sex">
+Female
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819730/suppl/GSM4819730_SI_21255_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380680" />
+  </Sample>
+
+  <Sample iid="GSM4819731">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_21256</Title>
+    <Accession database="GEO">GSM4819731</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2014
+      </Characteristics>
+      <Characteristics tag="tissue">
+Benign Adjacent Medulla
+      </Characteristics>
+      <Characteristics tag="Sex">
+Female
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819731/suppl/GSM4819731_SI_21256_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380679" />
+  </Sample>
+
+  <Sample iid="GSM4819732">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_21561</Title>
+    <Accession database="GEO">GSM4819732</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2016
+      </Characteristics>
+      <Characteristics tag="tissue">
+Tumor
+      </Characteristics>
+      <Characteristics tag="tumor subtype">
+Chromophobe RCC
+      </Characteristics>
+      <Characteristics tag="Sex">
+Female
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819732/suppl/GSM4819732_SI_21561_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380678" />
+  </Sample>
+
+  <Sample iid="GSM4819733">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_22369</Title>
+    <Accession database="GEO">GSM4819733</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2017
+      </Characteristics>
+      <Characteristics tag="tissue">
+Tumor
+      </Characteristics>
+      <Characteristics tag="tumor subtype">
+Clear Cell RCC
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819733/suppl/GSM4819733_SI_22369_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380677" />
+  </Sample>
+
+  <Sample iid="GSM4819734">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_22368</Title>
+    <Accession database="GEO">GSM4819734</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2017
+      </Characteristics>
+      <Characteristics tag="tissue">
+Benign Adjacent
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819734/suppl/GSM4819734_SI_22368_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380676" />
+  </Sample>
+
+  <Sample iid="GSM4819735">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_22605</Title>
+    <Accession database="GEO">GSM4819735</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2022
+      </Characteristics>
+      <Characteristics tag="tissue">
+Tumor
+      </Characteristics>
+      <Characteristics tag="tumor subtype">
+Clear Cell RCC
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819735/suppl/GSM4819735_SI_22605_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380675" />
+  </Sample>
+
+  <Sample iid="GSM4819736">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_22604</Title>
+    <Accession database="GEO">GSM4819736</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2022
+      </Characteristics>
+      <Characteristics tag="tissue">
+Benign Adjacent
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819736/suppl/GSM4819736_SI_22604_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380674" />
+  </Sample>
+
+  <Sample iid="GSM4819737">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_23459</Title>
+    <Accession database="GEO">GSM4819737</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2023
+      </Characteristics>
+      <Characteristics tag="tissue">
+Tumor
+      </Characteristics>
+      <Characteristics tag="tumor subtype">
+Clear Cell RCC
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819737/suppl/GSM4819737_SI_23459_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380673" />
+  </Sample>
+
+  <Sample iid="GSM4819738">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>SI_23843</Title>
+    <Accession database="GEO">GSM4819738</Accession>
+    <Type>SRA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>Kidney</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="individual">
+Patient SS_2026
+      </Characteristics>
+      <Characteristics tag="tissue">
+Tumor
+      </Characteristics>
+      <Characteristics tag="tumor subtype">
+Clear Cell RCC
+      </Characteristics>
+      <Characteristics tag="Sex">
+Male
+      </Characteristics>
+      <Treatment-Protocol>
+n/a
+      </Treatment-Protocol>
+      <Growth-Protocol>
+n/a
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+Partial nephroctomy samples were dissociated using collagense based enzyme cocktail to obtain single cell suspension.
+Single cell RNA libraries were prepared for sequencing using standard 10X genomics and Illumina protocols
+      </Extract-Protocol>
+    </Channel>
+    <Data-Processing>
+Base calling, read alignment and quantification were conducted with Cell Ranger (2.1.1) and pre-built reference genome (GRCh38-1.2.0).
+Genome_build: GRCh38
+Supplementary_files_format_and_content: h5
+    </Data-Processing>
+    <Platform-Ref ref="GPL16791" />
+    <Library-Strategy>RNA-Seq</Library-Strategy>
+    <Library-Source>transcriptomic</Library-Source>
+    <Library-Selection>cDNA</Library-Selection>
+    <Instrument-Model>
+      <Predefined>Illumina HiSeq 2500</Predefined>
+    </Instrument-Model>
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="H5">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM4819nnn/GSM4819738/suppl/GSM4819738_SI_23843_filtered_gene_bc_matrices_h5.h5
+    </Supplementary-Data>
+    <Relation type="BioSample" target="https://www.ncbi.nlm.nih.gov/biosample/SAMN16380672" />
+  </Sample>
+
+  <Series iid="GSE159115">
+    <Status database="GEO">
+      <Submission-Date>2020-10-06</Submission-Date>
+      <Release-Date>2021-05-22</Release-Date>
+      <Last-Update-Date>2021-05-22</Last-Update-Date>
+    </Status>
+    <Title>Single Cell Analyses of Renal Cell Cancers Reveal Insights into Tumor Microenvironment, Cell of Origin, and Therapy Response</Title>
+    <Accession database="GEO">GSE159115</Accession>
+    <Summary>
+Diverse subtypes of renal cell carcinomas (RCC) display a wide spectrum of histomorphologies, proteogenomic alterations, immune cell infiltration patterns, and clinical behavior. Delineating the ontogeny of these malignancies with the identification of cells of origin for different RCC subtypes will provide mechanistic insights into their diverse pathobiology. With this aim, we performed single cell RNA sequencing (scRNA-seq) analysis of ~30,000 cells dissociated from benign human kidney and renal tumor specimens. The benign renal tissue cell atlas comprised 26 distinct cell clusters representing all known major and minor cell types, as well as two rare proximal tubule cell types (PT-B and PT-C) and one novel entity containing both intercalated and principal cell (IC-PC) phenotypes. In comparison, the tumor cell atlas was comprised of 13 different cell clusters encompassing neoplastic cells and components of the tumor microenvironment. Using a random forest model trained on the scRNA-seq data from benign tubular epithelial cell types, we predicted the putative cell of origin for more than 10 different RCC subtypes.
+    </Summary>
+    <Overall-Design>
+Single-cell suspensions from 8 renal tumor specimens and  6  benign human kidney specimens from clear cell cell carcinoma (ccRCC) and chromophobe renal cell carcinoma (chRCC) patients were obtained by enzymatic dissociation.  The cell suspension was used to prepare single cell RNA-seq libraries using the 3' V2 chemistry kit on Chromium Single cell controller (10x Genomics).
+*** This GEO submission contains only processed data (raw counts tables in HDF5 format), raw data (FASTQ files) will be submitted  to dbGaP/SRA due to to patient privacy concerns.
+    </Overall-Design>
+    <Type>Expression profiling by high throughput sequencing</Type>
+    <Contributor-Ref ref="contrib3" position="1" />
+    <Contributor-Ref ref="contrib4" position="2" />
+    <Contributor-Ref ref="contrib5" position="3" />
+    <Contributor-Ref ref="contrib6" position="4" />
+    <Contributor-Ref ref="contrib7" position="5" />
+    <Contributor-Ref ref="contrib8" position="6" />
+    <Contributor-Ref ref="contrib9" position="7" />
+    <Contributor-Ref ref="contrib10" position="8" />
+    <Contributor-Ref ref="contrib11" position="9" />
+    <Contributor-Ref ref="contrib12" position="10" />
+    <Contributor-Ref ref="contrib13" position="11" />
+    <Contributor-Ref ref="contrib14" position="12" />
+    <Contributor-Ref ref="contrib15" position="13" />
+    <Contributor-Ref ref="contrib16" position="14" />
+    <Contributor-Ref ref="contrib17" position="15" />
+    <Contributor-Ref ref="contrib18" position="16" />
+    <Contributor-Ref ref="contrib19" position="17" />
+    <Contributor-Ref ref="contrib20" position="18" />
+    <Contact-Ref ref="contrib1" />
+    <Sample-Ref ref="GSM4819725" />
+    <Sample-Ref ref="GSM4819726" />
+    <Sample-Ref ref="GSM4819727" />
+    <Sample-Ref ref="GSM4819728" />
+    <Sample-Ref ref="GSM4819729" />
+    <Sample-Ref ref="GSM4819730" />
+    <Sample-Ref ref="GSM4819731" />
+    <Sample-Ref ref="GSM4819732" />
+    <Sample-Ref ref="GSM4819733" />
+    <Sample-Ref ref="GSM4819734" />
+    <Sample-Ref ref="GSM4819735" />
+    <Sample-Ref ref="GSM4819736" />
+    <Sample-Ref ref="GSM4819737" />
+    <Sample-Ref ref="GSM4819738" />
+    <Relation type="BioProject" target="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA667716" />
+  </Series>
+
+</MINiML>

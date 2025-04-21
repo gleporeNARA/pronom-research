@@ -1,0 +1,79 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=8 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 36 
+a1,35,33,34
+Calculate Net Present Value (NPV)
+.TXT 2 0 2 66 
+a2,65,65,123
+Examine net present value of initial investment I resulting in 
+cash flows C over time. Use discount rate denoted by int. 
+.EQN 3 10 1 11 
+I:5000
+.TXT 0 16 1 24 
+a1,24,22,23
+... initial investment
+.EQN 1 -16 1 13 
+int:12*%
+.TXT 0 16 1 31 
+a1,30,28,29
+... interest rate per period
+.EQN 3 -17 10 13 
+C:({10,1}ö500ö1000ö2000ö2000ö3000ö4000ö3000ö2000ö1200ö500)
+.TXT 5 16 1 39 
+a1,38,53,37
+... paybacks over term of investment
+.EQN 6 -25 1 16 
+N:length(C)
+.EQN 0 19 1 10 
+N=?
+.EQN 0 10 1 12 
+j:1;N
+.TXT 3 -29 1 15 
+a1,14,12,13
+NPV formula:
+.EQN 2 10 4 62 
+npv(init,pmts,i_rate):-init+j$pmts[(j-1)*(1+i_rate)^-j
+.EQN 5 0 1 21 
+NPV:npv(I,C,int)
+.EQN 1 0 1 18 
+NPV=?
+.TXT 0 30 1 23 
+a1,23,21,22
+... net present value
+.TXT 2 -40 1 47 
+a1,46,44,45
+Plot present value of discounted cash flows.
+.EQN 2 12 2 11 
+PV[0:-I
+.EQN 2 0 3 33 
+PV[j:PV[(j-1)+C[(j-1)*(1+int)^-j
+.EQN 1 37 1 13 
+j1:0;N
+.EQN 3 -42 16 54 
+NPV&-I&PV[j1,0{1,10,15,45,l}@last(C)&0&j1
+.EQN 0 54 1 18 
+NPV=?
+.EQN 7 0 1 3 
+0
+.EQN 7 0 1 14 
+-I=?
+.TXT 3 -61 1 36 
+a1,35,33,34
+Now find internal rate of return.
+.EQN 2 12 1 20 
+Rate_guess:10*%
+.EQN 2 0 1 40 
+IRR(init,C,p):root(npv(init,C,p),p)
+.EQN 2 0 1 19 
+int:Rate_guess
+.EQN 2 0 1 23 
+IRR(I,C,int)={19073}?%

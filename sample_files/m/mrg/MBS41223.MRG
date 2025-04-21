@@ -1,0 +1,1553 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against E:\RBBS\STOCK\RBBSSUB4.BAS to produce E:\RBBS\CHAT\RBBSSUB4.BAS
+* E:\RBBS\STOCK\RBBSSUB4.BAS:  Date 6-20-1992  Size 120885 bytes
+* ------------[ Created 12-23-1992 04:55:30 ]------------
+* REPLACING old line(s) by new
+' $linesize:132
+' $title: 'RBBSSUB4.BAS 17.4, Copyright 1986 - 92 by D. Thomas Mack'
+'  Copyright 1992 by D. Thomas Mack, all rights reserved.
+'  Name ...............: RBBSSUB4.BAS
+'  First Released .....: June 21, 1992
+'  Subsequent Releases.: 
+'  Copyright ..........: 1986 - 1992
+'  Purpose.............: The Remote Bulletin Board System for the IBM PC,
+'     RBBS-PC.BAS utilizes a lot of common subroutines.  Those that do not
+'     require error trapping are incorporated within RBBSSUB 2-5 as
+'     separately callable subroutines in order to free up as much
+'     code as possible within the 64K code segment used by RBBS-PC.BAS.
+'  Parameters..........: Most parameters are passed via a COMMON statement.
+'
+' Subroutine  Line               Function of Subroutine
+'   Name     Number
+'  AnyBut         59760  Determine where a "word" begins
+'  AskUsers       64003  Ask users questions based on a script and save answers
+'  AskMore        59858  Check whether screen full
+'  AutoPage       60300  Check whether to notify sysop caller is on
+' BadFileChar     59800  Check file name for bad character
+'  Bracket        59960  Puts strings around a substring
+'  BufFile        58400  Write a file to the user quickly
+'  BufString      58300  Write a string with imbedded CR/LF to the user quickly
+'  CheckColor     59930  Highlighting based on search string
+'  CmndToggle     64635  Processes user command to T)oggle preferences
+* ------[ first line different ]------
+'  CmndSysopXfer  64640  Sysop function to change Xfer count
+'  ColorDir       59920  Adds colorization to FMS directory entry
+'  ColorPrompt    59940  Colorizes prompts
+'  CompDate       59880+ Produces a computational data from YY, MM, DD
+'  ConfMail       59850  Check conference mail waiting
+'  ConvertDir     58950  Checks for U & A (shorthand) and converts appropriately
+'  PackDate       59201  Compress date in string format to 2 characters
+'  EofComm        60000  Determine whether any chars in comm port buffer
+'  ExpireDate     59890  Calculate registration expiration date
+'  FakeXRpt       62650  Write out file transfer report for protocols that don't
+'  FindEnd        58770  Find where a "word" ends
+'  FindFile       58790  Determine whether a file exists without opening it
+'  FindLast       58600  Find last occurence of a string
+'  FMS            58200  Search the upload management system for entries
+'  GetAll         59780  Get list of all directories to display
+'  GetDirs        58895  Prompts for directories for file list/new/search cmds
+'  GetMsgAttr     62530  Restore attributes of original message
+'  GetYMD         59204  Pulls YY, MM, or DD from a 2 byte stored date
+'  GlobalSrchRepl 60100  Global search and replace
+'  LogPDown       59400  Records download in private directory
+'  MarkTime       60200  Give visual feedback during lengthy process
+'  MetaGSR        60130  Meta statement global search and replace
+'  MsgImport      59698  Allow local user to import a text file to a message
+'  Muzak          59100  Play musical themes for different RBBS functions
+'  NewPassword    60668  Get a new password
+'  Protocol       62600  Determine if external protocols are available
+'  PutMsgAttr     62520  Save attributes of original message
+'  Remove         58210  Remove characters from within strings
+'  RotorsDir      58700  Searches for a file using list of subdirs
+'  RptTime        62540  Report date/time and time on
+'  SearchArray    58190  Check for the occurance of a string in an array
+'  SetEcho        59600  Set RBBS properly for who is to echo
+'  SetHiLite      59934  Set user preference on highlighting
+'  SetGraphic     59980  Sets graphic preference for text file display
+'  SetNewUserDef  64645  Sets new user defaults
+'  SmartText      58250  Process SMART TEXT control strings
+'  SubMenu        59500  Processes options that have sub-menus
+'  TimedOut       63000  Write timed exit semaphore file
+'  TimeLock       60180  Check for TIME LOCK on certain features
+'  Transfer       62624  RBBS-PC support for external protocols for file transfer
+'  Toggle         57000  Toggles or views user options
+' TwoByteDate     59200  Reduces a data to 2 byte string for space compression
+'  UnPackDate     59902  Uncompresses a 2 byte date
+'  UserColor      59965  Lets user set color for text and whether bold
+'  UserFace       59450  Processes programmable user interface
+'  ViewArc        64600  Display .ARC file contents to user
+'  PrivDoorRtn    62629  Private door exit routine
+'  WipeLine       58800  Wipes away a line so next prints in its place
+'  WordWrap       59710  Adjust a msg -- wrap lines and perserve paragraphs
+'
+'  $INCLUDE: 'RBBS-VAR.BAS'
+'
+* REPLACING old line(s) by new
+57000 ' $SUBTITLE: 'Toggle - Toggle User Preferences'
+' $PAGE
+'
+'  NAME    -- Toggle
+'
+'  INPUTS  -- ToggleOption      Option to toggle or view
+'                               according to the following:
+'    ToggleOption         PREFERENCE
+'   Toggle   VIEW
+* ------[ first line different ]------
+'     1       -1           AnsiEd Toggle
+'     2       -2           Bulletin review on logon
+'     3       -3           Case change
+'     4       -4           File review on logon
+'     5       -5           Highlight
+'     6       -6           Line feeds
+'     7       -7           Nulls
+'     8       -8           TurboKey
+'     9       -9           Expert
+'    10      -10           Bell
+'
+'  OUTPUTS -- ZSubParm   passed from TPut
+'
+'  PURPOSE -- Sets or views any single user preference value
+'
+      SUB Toggle (ToggleOption) STATIC
+      ZSubParm = 0
+      IF ToggleOption < 0 THEN _
+         GOTO 57005
+      ON ToggleOption GOSUB _
+         57010, _         'AnsiEd toggle
+         57120, _         'Bulletin review on logon
+         57260, _         'Case change
+         57150, _         'File review on logon
+         57040, _         'Highlight
+         57100, _         'Line feeds
+         57210, _         'Nulls
+         57230, _         'TurboKey
+         57190, _         'Expert
+         57170            'Bell
+      EXIT SUB
+* REPLACING old line(s) by new
+57005 CALL AskMore ("",ZTrue,ZTrue,WasX,ZTrue)
+      ON -ToggleOption GOSUB _
+* ------[ first line different ]------
+         57030, _         'AnsiEd Toggle
+         57130, _         'Bulletin review on logon
+         57270, _         'Case change
+         57160, _         'File review on logon
+         57050, _         'Highlight
+         57110, _         'Line feeds
+         57220, _         'Nulls
+         57240, _         'TurboKey
+         57200, _         'Expert
+         57180            'Bell
+      EXIT SUB
+* REPLACING old line(s) by new
+57010 ZFullScreenEditor = NOT ZFullScreenEditor      
+* DELETING old line(s)
+57020
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+57030 CALL QuickTPut1 ("Full Screen Editor " + FNOffOn$(ZFullScreenEditor))
+      RETURN
+* REPLACING old line(s) by new
+58200 ' $SUBTITLE: 'FMS - subroutine to search the upload management system'
+' $PAGE
+'
+'  NAME    -- FMS
+'
+'  INPUTS  -- PARAMETER                      MEANING
+'             DirToSearch$          RBBS-PC "DIR" CATEGORY TO LOOK
+'                                     FOR
+'             SearchString$          STRING TO SEARCH FOR
+'             SearchDate$            DATE TO SEARCH FOR
+'             ZCategoryName$()
+'             ZCategoryCode$()
+'             ZCategoryDesc$()
+'             CatFound
+'             ZNumCategories
+'
+'  OUTPUTS -- ProcessedInFMS
+'             DnldFlag
+'
+'  PURPOSE -- To search the file management system and display the
+'             files being searched for as well as the catetory descriptions
+'
+      SUB FMS (DirToSearch$,SearchString$,SearchDate$, _
+               ProcessedInFMS,ZCategoryName$(1),ZCategoryCode$(1), _
+               ZCategoryDesc$(1),DnldFlag,CatFound,AbortIndex) STATIC
+      DnldFlag = 0
+      CALL SearchArray (DirToSearch$,ZCategoryName$(),ZNumCategories,CatFound)
+      ProcessedInFMS = ProcessedInFMS OR (CatFound > 0)
+* ------[ first line different ]------
+IF ZFG4$ <> "" THEN _
+	FG5$ = ZEscape$ + "[1;34;40m" : _
+	FG6$ = ZEscape$ + "[1;37;41m" : _
+	FG7$ = ZEscape$ + "[1;37;44m"         'Pe 02/05/90
+      IF ProcessedInFMS THEN _
+         ZSubParm = 5 : _
+         GOSUB 58202 : _
+	 CALL QuickTPut("",1) : _
+	 CALL QuickTPut(FG5$+"ษอ"+FG6$+" "+DirToSearch$+" "+FG5$+"อออ",0) : _
+	 CALL QuickTPut(FG6$ +" "+ ZCategoryDesc$(CatFound) +" " + FG5$ + "ออออ" + _
+		    ZFG3$+" " +  SrchDir$,1) : _
+	 CALL QuickTPut(FG5$+ "บ",1)  : _
+	 CALL QuickTPut("ศอ"+FG7$+"File Name"+FG5$+"อออออ" + FG7$ + "Size" + _
+		    FG5$+"อออออ",0) : _
+	 CALL QuickTPut(FG7$+"Date"+FG5$+"ออออ"+FG7$ + "Description"+ _
+	      FG5$+"ออออออออออออออออออออออออออออ"+ZFG3$+" "+ZEmphasizeOff$,1) : _
+	 Cat$ = ZCategoryCode$(CatFound) : _
+	 CALL DispUpDir (CAT$,SearchString$,SearchDate$,DnldFlag,AbortIndex)
+      EXIT SUB
+* REPLACING old line(s) by new
+58202 ZOutTxt$ = SearchDate$
+      IF LEN(ZOutTxt$) > 0 THEN _
+         ZOutTxt$ = MID$(ZOutTxt$,3) + LEFT$(ZOutTxt$,2)
+* ------[ first line different ]------
+      SrchDir$ = SearchString$ + _
+             ZOutTxt$
+      IF SrchDir$ <> "" THEN _
+          SrchDir$ = ZFG4$ + "Scanning for "  + ZFG2$ + SrchDir$
+      RETURN
+      END SUB
+* REPLACING old line(s) by new
+58250 ' $SUBTITLE: 'SmartText - smart text substitution'
+' $PAGE
+'
+'  NAME    -- SmartText   (WRITTEN BY DOUG AZZARITO)
+'
+'  INPUTS  -- StringWork$        string to scan for Smart Text
+'             CRFound            Does this line contain a CR?
+'             ZSmartTextCode     Smart Text control code
+'
+'  OUTPUTS -- StringWork$        Input string with Smart replaced
+'
+'  PURPOSE -- Smart Text allows control strings in text files
+'             to be replaced at runtime with user info or other
+'             data.  The Smart Text control code is a 1-byte
+'             code (configurable) with a 2-byte action code.
+'
+      SUB SmartText (StringWork$, CRFound, OverStrike) STATIC
+      IF SmartCarry$<>"" THEN _
+         StringWork$ = SmartCarry$+StringWork$
+      Index = INSTR(StringWork$, ZSmartTextCode$)
+      WHILE Index > 0 AND Index < LEN(StringWork$)-1
+         IF INSTR(MID$(StringWork$, Index+1,2)," ") THEN _
+            SmartAct = 0 _
+         ELSE _
+            SmartAct = INSTR(ZSmartTable$, MID$(StringWork$, Index+1, 2))
+         IF SmartAct = 0 THEN _
+            WasI = 1 : _
+            GOTO 58254
+         SmartAct = (SmartAct+2)/3
+         ON SmartAct GOSUB 58260, 58261, 58262, 58263, 58264, 58265, _
+                           58266, 58267, 58268, 58269, 58270, _
+                           58271, 58272, 58273, 58274, 58275, _
+                           58276, 58277, 58278, 58279, 58280, _
+                           58281, 58282, 58283, 58284, 58285, _
+                           58286, 58287, 58289, 58290, 58291, _
+* ------[ first line different ]------
+                           58292, 58293, 58294, 58295, 58296, _
+                           58297, 58298, 58299, 58300, 58301, _
+                           58302, 58303, 58304, 58305, 58306
+         GOSUB 58256
+         WasI = LEN(SmartHold$)
+         ReplaceLen = 3
+         IF OverStrike OR Overlay THEN _
+            IF WasI > 2 THEN _
+               ReplaceLen = WasI _
+            ELSE _
+               SmartHold$ = SmartHold$ + SPACE$(3 - WasI)
+         StringWork$ = LEFT$(StringWork$, Index-1) + SmartHold$ + _
+                       MID$(StringWork$,Index+ReplaceLen)
+* REPLACING old line(s) by new
+58273 SmartHold$ = ZCityState$              ' CT Users CITY & STATE
+* ------[ first line different ]------
+      CALL Trim (SmartHold$)                                         ' DD032301
+      RETURN
+* REPLACING old line(s) by new
+58295 SmartHold$ = ZConfName$               ' CN Conference Name
+      RETURN
+* ------[ first line different ]------
+* INSERTING new line(s)
+58296 SmartHold$ = ZFG5$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+58297 SmartHold$ = ZFG6$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+58298 SmartHold$ = ZFG7$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+58299 SmartHold$ = ZFG8$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+58300 SmartHold$ = ZFG9$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+58301 SmartHold$ = ZFGA$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+58302 SmartHold$ = ZFGB$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+58303 SmartHold$ = ZFGC$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+58304 SmartHold$ = ZFGD$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+58305 SmartHold$ = ZFGE$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+* INSERTING new line(s)
+58306 SmartHold$ = ZFGF$                                          ' DD061303
+      GOTO 58258                                                  ' DD061303
+      END SUB
+'
+'Line numbers changed from 58300-58307 to 58350-58357 'Pe 06/21/92
+'  to allow additional SmartText Colors
+'
+* DELETING old line(s)
+58307
+* INSERTING new line(s)
+58350 ' $SUBTITLE: 'BufString - write a string with imbedded ZCR/LF'
+' $PAGE
+'
+'  NAME    -- BufString
+'
+'  INPUTS  -- PARAMETER                      MEANING
+'             Strng$                  STRING TO BE WRITTEN OUT
+'             DataSize               LENGTH OF STRING - # LEFT
+'                                        CHARS TO OUTPUT
+'
+'  OUTPUTS -- Strng$                  IS WRITTEN TO THE USER
+'
+'  PURPOSE -- To search the string, Strng$, for embedded carriage
+'             returns and line feeds and write out each line with
+'             the appropriate substitution (cr/lf if to the local
+'             screen or cr/nulls/lf if to the communications port).
+'
+      SUB BufString (Strng$,PassedDataSize,AbortIndex) STATIC
+      WasL = LEN(Strng$)
+      IF PassedDataSize < WasL THEN _
+         WasL = PassedDataSize
+      IF WasL < 1 THEN _
+         EXIT SUB
+      ZFF = ZPageLength - 1
+      StartByte = 1
+      ZRet = ZFalse
+      IF CarryOver THEN _
+         IF ASC(Strng$) = 10 THEN _
+            StartByte = 2 : _
+            CALL SkipLine (1+ZJumpSearching)
+      CarryOver = (MID$(Strng$,WasL,1) = ZCarriageReturn$)
+      WasL = WasL + CarryOver
+58351 CRat = INSTR(StartByte,Strng$,ZCarriageReturn$)
+      IF CRat > 0 AND CRat < WasL THEN _
+         CRFound = (MID$(Strng$,CRat + 1,1) = ZLineFeed$) _
+      ELSE CRFound = ZFalse
+      EOLlen = -2 * CRFound
+      IF CRFound THEN _
+         EOD = CRat _
+      ELSE EOD = WasL + 1
+      NumBytes = EOD - StartByte
+      StringWork$ = MID$(Strng$,StartByte,NumBytes)
+      IF NOT ZDeleteInvalid THEN _
+         GOTO 58352
+      Index = INSTR(StringWork$,"[")
+      WasJ = LEN(StringWork$) - 1
+      WHILE Index > 0 AND Index < WasJ
+         IF MID$(StringWork$,Index + 2,1) = "]" THEN _
+            IF INSTR (ZInvalidOpts$,MID$(StringWork$,Index + 1,1)) THEN _
+               MID$(StringWork$,Index + 1,1) = "*"
+         Index = INSTR(Index + 1,StringWork$,"[")
+      WEND
+58352 IF ZJumpSearching THEN _
+         Temp$ = StringWork$ : _
+         CALL AllCaps (Temp$) : _
+         HiLitePos = INSTR (Temp$,ZJumpTo$) : _
+         IF HiLitePos = 0 THEN _
+            GOTO 58357 _
+         ELSE CALL Bracket (StringWork$,HiLitePos,HiLitePos+LEN(ZJumpTo$)-1,ZEmphasizeOn$,ZEmphasizeOff$) : _
+              ZJumpSearching = ZFalse
+      IF ZSmartTextCode THEN _
+         CALL SmartText (StringWork$, CRFound, ZFalse)
+      IF NOT ZLocalUser THEN _
+         CALL EofComm (Char) : _
+         IF Char <> -1 THEN _
+            GOTO 58353            ' comm port input
+      ZKeyboardStack$ = INKEY$ : _
+      IF ZKeyboardStack$ <> "" THEN _  ' keyboard input
+         GOTO 58353
+      CALL QuickTPut (StringWork$, - (CRFound))
+      GOTO 58354
+58353 ZOutTxt$ = StringWork$
+      ZSubParm = 4
+      IF CRFound THEN ZSubParm = 5
+      CALL TPut
+58354 IF ZRet THEN _
+         EXIT SUB
+      IF ZLinesPrinted < ZFF THEN _
+         GOTO 58357
+58355 CALL CheckTimeRemain (MinsRemaining)
+      CALL CheckCarrier
+      IF ZSubParm = -1 THEN _
+         EXIT SUB
+      IF ZNonStop THEN _
+         GOTO 58357
+      IF NOT CRFound THEN _
+         GOTO 58357
+      ZForceKeyboard = ZTrue
+      CALL AskMore ("",ZTrue,ZFalse,AbortIndex,ZStopInterrupts)
+      IF ZNo THEN _
+         ZRet = ZTrue : _
+         EXIT SUB
+58357 StartByte = EOD + EOLlen
+      IF StartByte <= WasL THEN _
+         GOTO 58351
+      END SUB
+* REPLACING old line(s) by new
+58400 ' $SUBTITLE: 'BufFile - subroutine to write a sequential file to the user'
+' $PAGE
+'
+'  NAME    -- BufFile
+'
+'  INPUTS  -- PARAMETER                      MEANING
+'             FileSpec$               NAME OF THE FILE TO WRITE TO
+'                                                OUT TO THE USER
+'
+'  OUTPUTS -- NONE                    FILE IS WRITTEN TO THE USER
+'
+'  PURPOSE -- To display a sequential file to the user
+'
+      SUB BufFile (FilName$,AbortIndex) STATIC
+      CALL FindIt (FilName$)
+      IF NOT ZOK THEN _
+         GOTO 58419
+      ZNo = ZFalse
+      CALL OpenRSeq (FilName$,NumRecs,LenLastRec,ZBufferSize)
+      IF ZErrCode > 0 THEN _
+         GOTO 58419
+      DataSize = ZBufferSize
+      FIELD 2, DataSize AS SeqRec$
+      ZNonStop = ZNonStop OR (ZPageLength < 1)
+      ZJumpLast$ = ""
+      ZJumpSearching = ZFalse
+      ZJumpSupported = ZTrue
+      IF NOT ZStopInterrupts THEN _
+         IF NOT ZConcatFIles THEN _
+            IF NOT ZNonStop THEN _
+               ZOutTxt$ = "* Ctrl-K(^K) / ^X aborts. ^S suspends ^Q resumes *" : _
+               ZSubParm = 2 : _
+               CALL TPut
+* ------[ first line different ]------
+IF ZSubParm = -1 THEN _
+     EXIT SUB               'Pe 02/09/90
+      WasTU = 0
+* REPLACING old line(s) by new
+58419 CLOSE 2
+* ------[ first line different ]------
+      ZBypassTimeCheck = ZFalse
+      ZStopInterrupts = ZFalse
+      CALL QuickTPut (ZEmphasizeOff$,0)
+      ZJumpSupported = ZFalse
+      END SUB
+* REPLACING old line(s) by new
+58700 ' $SUBTITLE: 'RotorsDir - search thru a list of subdirs for a file'
+' $PAGE
+'
+'  NAME    -- RotorsDir
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'             FilName$                  FILE NAME TO LOOK FOR
+'             SDIR.ARA                  ARRAY OF SUBDIRECTORIES
+'             MaxSearch                 MAX # OF SUBDIRECTORIES
+'             MarkingTime               WHETHER TO MARK TIME
+'
+'  OUTPUTS -- FNAME$                    ADD SUBDIRECTORY TO THE
+'                                       FILE NAME IF FOUND.  OTHER-
+'                                       WISE DON'T.
+'             ZOK                       TRUE IF FILE WAS Found
+'
+'  PURPOSE -- Hunt through a list of subdirectories to determine
+'             if a file is in any of them.  If file is found, open
+'             the file as file #2, add the drive/path to the file
+'             name, and sets ZOK to true.  If file isn't found, set
+'             file name to the last subdirectory searched -- which
+'             should be the upload subdirectory.
+'
+'             If the library menu is selected (ZMenuIndex = 6), then
+'             only 2 subdirectories are searched. The first being
+'             the work disk and the second being the selected
+'             library disk.
+'
+* ------[ first line different ]------
+'      SUB RotorsDir (FilName$,SDirAra$(1),MaxSearch,MarkingTime,PassToMacro$) STATIC
+'      CALL Carrier                                                 'Mpl090202
+'      IF ZSubParm = -1 THEN _                                      'Pe 01/04/89
+'      EXIT SUB                                                     'Pe 01/04/89
+'      ZOK = ZFalse
+'      ZDotFlag = ZFalse
+'      IF MarkingTime THEN _
+'         CALL QuickTPut ("Searching for "+FilName$,0)
+'      NumSearch = 1
+'      WasX = 0
+'  WasX$ = ZArkViewPath$ + FilName$                                 'Pe 08/15/91
+'         CALL FindFile (WasX$,ZOK)                                 'Pe 08/15/91
+'          IF ZOK THEN _                                            'Pe 08/15/91
+'          GOTO 58710                                               'Pe 08/15/91
+'      WHILE (NOT ZOK) AND NumSearch <= MaxSearch AND _
+'         SDirAra$(NumSearch) <> ""
+'         IF MarkingTime THEN _
+'            CALL MarkTime (WasX)
+'         WasX$ = SDirAra$(NumSearch) + _
+'              FilName$
+'         CALL FindFile (WasX$,ZOK)
+'         NumSearch = NumSearch + 1
+'      WEND
+'      IF ZOK OR NOT ZFastFileSearch THEN _
+'         GOTO 58710
+'      CALL OpenWork (2,ZFastFileList$)                               ' DD091502/RFMCHK
+'      CALL ReadDir (2,1)                                             ' DD091502/RFMCHK
+'      testlength = LEN(ZOutTxt$ + ZCRLf$)                            ' DD091502/RFMCHK
+'      IF testlength = 21 THEN _                                      ' DD091502/RFMCHK
+'         RFM = ZTrue                                                 ' DD091502/RFMCHK
+'      CLOSE 2                                                        ' DD091502/RFMCHK
+'      IF RFM = ZTrue THEN _                                          ' DD091502/RFMCHK
+'         CALL OpenRSeq (ZFastFileList$,HighRec,WasX,21) : _          ' WM050501/DD091502/RFMCHK
+'         FIELD #2, 12 AS SearchFile$, _                              ' WM050501/DD091502/RFMCHK
+'                    4 AS SearchPath$, _                              ' WM050501/DD091502/RFMCHK
+'                    3 AS SearchDate$, _                              ' WM050501/DD091502/RFMCHK
+'                    2 AS SearchCrLf$                                 ' WM050501/DD091502/RFMCHK
+'      IF ZErrCode <> 0 THEN _
+'         GOTO 58710
+'      CALL TrimTrail (FilName$,".")
+'      CALL BinSearch (FilName$,1,12,testlength,HighRec,RecFoundAt,RecFound$)' WM050501/DD091502/RFMCHK
+'      ZOK = (RecFoundAt > 0)
+'      IF NOT ZOK THEN _
+'         GOTO 58710
+'      ZOK = ZFalse
+'      CALL CheckInt (MID$(RecFound$,13,4))
+'      IF ZTestedIntValue < 1 THEN _
+'         GOTO 58710
+'      IF RFM = ZTrue THEN _                                          ' DD091502/RFMCHK
+'         WasDX$ = DATE$ : _                                          ' Pe081091/DD091502/RFMCHK
+'         LSET SearchDate$ = CHR$ (VAL (MID$ (WasDX$, 9, 2)) - 48) + _' Pe081091/DD091502/RFMCHK
+'                            CHR$ (VAL (MID$ (WasDX$, 1, 2)) + 31) + _' Pe081091/DD091502/RFMCHK
+'                            CHR$ (VAL (MID$ (WasDX$, 4, 2)) + 31) : _' Pe081091/DD091502/RFMCHK
+'         PUT 2, RecFoundAt                                           ' WM050501/DD091502/RFMCHK
+'      CALL OpenRSeq (ZFastFileLocator$,HighRec,WasX,66)
+'      IF ZErrCode <> 0 OR ZTestedIntValue > HighRec THEN _
+'         GOTO 58710
+'      FIELD 2, 66 AS LocatorRec$
+'      GET 2, ZTestedIntValue
+'      Temp$ = WasX$
+'      WasX$ = LEFT$(LocatorRec$,63)
+'      CALL Trim (WasX$)
+'      IF LEFT$(WasX$,2) = "M!" THEN _
+'         ZOK = ZFalse : _
+'         ZGSRAra$(1) = PassToMacro$ : _
+'         WasX$ = RIGHT$(WasX$,LEN(WasX$)-2) : _
+'         CALL Trim (WasX$) : _
+'         ZFileLocation$ = "" : _
+'         CALL MacroExe (WasX$) : _
+'         IF ZFileLocation$ = "" THEN _
+'            ZOK = ZFalse : _
+'            WasX$ = Temp$ : _
+'            GOTO 58710 _
+'         ELSE WasX$ = ZFileLocation$
+'      WasX$ = WasX$ + FilName$
+'      CALL FindFile (WasX$,ZOK)
+'      IF NOT ZOK THEN _
+'         WasX$ = SDirAra$(MaxSearch) + FilName$
+'      GOTO 58710
+'58710 FilName$ = WasX$
+'58711 CALL SkipLine (-MarkingTime)
+'      END SUB
+'
+'
+'The following code replaces the ROTORSDIR sub in RBBSSUB4.BAS (Maple 0726).
+'This code is fully compatible with the original ROTORSDIR code and makes RFM
+'backwards compatible as well.  If extra FFS files are desired, create a file in
+'the same directory called IDX.LST.  In this file, list the extra FIDX and LIDX
+'files that you want to use.  They can have any name that you want.  If you want
+'a Tab file, the name of the FIDX file must have only 7 characters to make room
+'for the T added on to the name, just as is required with the primary FIDX file.
+'Example:
+'
+'c:\rbbs\dir\walnutf.def,c:\rbbs\dir\walnutl.def
+'c:\rbbs\dir\pdsi7f.def,c:\rbbs\dir\pdsi7l.def
+'c:\rbbs\dir\fidx1,c:\rbbs\dir\lidx1
+'
+'These entries would cause RBBS to search the following in order:
+'FIDX.DEF     FIDXT.DEF    LIDX.DEF
+'WALNUTF.DEF  WALNUTFT.DEF WALNUTL.DEF
+'PDSI7F.DEF   PDSI7FT.DEF  PDSI7L.DEF
+'FIDX1        FIDX1T       LIDX1
+      SUB RotorsDir (FilName$,SDirAra$(1),MaxSearch,MarkingTime,PassToMacro$) STATIC
+      CALL Carrier
+      IF ZSubParm = -1 THEN _   'Pe 01/04/89
+      EXIT SUB                              'Pe 01/04/89
+      ZOK = ZFalse
+      ZDotFlag = ZFalse
+      IF MarkingTime THEN _
+         CALL QuickTPut ("Searching for "+FilName$,0)
+      NumSearch = 1
+      WasX = 0
+  WasX$ = ZArkViewPath$ + FilName$  'Pe 08/15/91
+         CALL FindFile (WasX$,ZOK)  'Pe 08/15/91
+          IF ZOK THEN _             'Pe 08/15/91
+          GOTO 58710                'Pe 08/15/91
+      WHILE (NOT ZOK) AND NumSearch <= MaxSearch AND _
+         SDirAra$(NumSearch) <> ""
+         IF MarkingTime THEN _
+            CALL MarkTime (WasX)
+         WasX$ = SDirAra$(NumSearch) + _
+              FilName$
+         CALL FindFile (WasX$,ZOK)
+         NumSearch = NumSearch + 1
+      WEND
+      IF ZOK OR NOT ZFastFileSearch THEN _
+         GOTO 58710
+'* ------[ first line different ]------
+   TFastFileList$ = ZFastFileList$                            'SM102201
+   TFastFileLocator$ = ZFastFileLocator$                      'SM102201
+   TFastTabs$ = ZFastTab$                                     'SM102201
+   Tptr = 1                                                   'SM102201
+   CALL BreakFileName (ZFastFileList$, Drive$,TWasX$,ZWasY$,ZTrue)    'SM102201
+   TIdxLst$ = Drive$ + "IDX.LST"                              'SM102201
+   CALL FindIt (TIdxLst$)                                     'SM102201
+      IF NOT ZOK THEN _                                       'SM102201
+         TIdxLst$ = ""                                        'SM102201
+* DELETING old line(s)
+58705
+* INSERTING new line(s)
+58708 FSize = 21                                              'SM102201
+      CALL OpenRSeq (TFastFileList$,HighRec,WasX,21)         ' WM050501
+      FIELD #2, 12 AS SearchFile$, _                         ' WM050501
+                 4 AS SearchPath$, _                         ' WM050501
+                 3 AS SearchDate$, _                         ' WM050501
+                 2 AS SearchCrLf$                            ' WM050501
+      Get 2,1                                                 'SM102201
+      if SearchCrLf$ <> ZCrLf$ then _                         'SM102201
+         FSize = 18 : _                                       'SM102201
+         CALL OpenRSeq (TFastFileList$,HighRec,WasX,18) : _   'SM102201
+         FIELD #2, 12 AS SearchFile$, _                       'SM102201
+                    4 AS SearchPath$, _                       'SM102201
+                    2 AS SearchCrLf$                          'SM102201
+      IF ZErrCode <> 0 THEN _
+         ZOK = ZFalse : _                                     'SM102201
+         GOTO 58710
+      CALL TrimTrail (FilName$,".")
+      CALL BinSearch (FilName$,1,12,FSize,HighRec,RecFoundAt,RecFound$) 'SM102201
+      ZOK = (RecFoundAt > 0)
+      ZFastTab$ = TFastTab$                                   'SM102201
+      IF ZOK THEN _                                           'SM102201
+         GOTO 58709                                           'SM102201
+      IF TIdxLst$ = "" THEN _                                 'SM102201
+         GOTO 58710                                           'SM102201
+      CALL OpenWork(2,TIdxLst$)                               'SM102201
+      IF ZErrCode <> 0 THEN _                                 'SM102201
+         ZOK = ZFalse : _                                     'SM102201
+         GOTO 58710                                           'SM102201
+      CALL ReadParmsX(2,ZOutTxt$(),2,TPtr)                    'SM102201
+      IF ZErrCode <> 0 or ZOutTxt$(1)="" or ZOutTxt$(2)="" THEN _    'SM102201
+         ZOK = ZFalse : _                                     'SM102201
+         GOTO 58710                                           'SM102201
+      TPtr = TPtr + 1                                         'SM102201
+      TFastFileList$ = ZOutTxt$(1)                            'SM102201
+      TFastFileLocator$ = ZOutTxt$(2)                         'SM102201
+      CALL BreakFileName (TFastFileList$,Drive$,TWasX$,ZWasY$,ZTrue) 'SM102201
+      TFN$ = Drive$ + TWasX$ + "T" + ZWasY$                   'SM102201
+      CALL FindIt (TFN$)                                      'SM102201
+      IF ZOK THEN _                                           'SM102201
+         CALL OpenRSeq (TFN$, TWasX, WasY, 72) : _            'SM102201
+         FIELD 2, 72 AS IndexRec$ : _                         'SM102201
+         GET 2, 1 : _                                         'SM102201
+         ZFastTabs$ = IndexRec$ : _                           'SM102201
+         CLOSE 2 _                                            'SM102201
+      ELSE _                                                  'SM102201
+         ZFastTabs$ = ""                                      'SM102201
+      GOTO 58708                                              'SM102201
+58709 ZOK = ZFalse                                            'SM102201
+      CALL CheckInt (MID$(RecFound$,13,4))
+      IF ZTestedIntValue < 1 THEN _
+         GOTO 58710
+      WasDX$ = DATE$                                         ' Pe081091
+      LSET SearchDate$ = CHR$ (VAL (MID$ (WasDX$, 9, 2)) - 48) + _   ' Pe081091
+                         CHR$ (VAL (MID$ (WasDX$, 1, 2)) + 31) + _   ' Pe081091
+                         CHR$ (VAL (MID$ (WasDX$, 4, 2)) + 31)       ' Pe081091
+      PUT 2, RecFoundAt                                      ' WM050501
+      CALL OpenRSeq (TFastFileLocator$,HighRec,WasX,66)       'SM102201
+      IF ZErrCode <> 0 OR ZTestedIntValue > HighRec THEN _
+         GOTO 58710
+      FIELD 2, 66 AS LocatorRec$
+      GET 2, ZTestedIntValue
+      Temp$ = WasX$
+      WasX$ = LEFT$(LocatorRec$,63)
+      CALL Trim (WasX$)
+      IF LEFT$(WasX$,2) = "M!" THEN _
+         ZOK = ZFalse : _
+         ZGSRAra$(1) = PassToMacro$ : _
+         WasX$ = RIGHT$(WasX$,LEN(WasX$)-2) : _
+         CALL Trim (WasX$) : _
+         ZFileLocation$ = "" : _
+         CALL MacroExe (WasX$) : _
+         IF ZFileLocation$ = "" THEN _
+            ZOK = ZFalse : _
+            WasX$ = Temp$ : _
+            GOTO 58710 _
+         ELSE WasX$ = ZFileLocation$
+      WasX$ = WasX$ + FilName$
+      CALL FindFile (WasX$,ZOK)
+      IF NOT ZOK THEN _
+         WasX$ = SDirAra$(MaxSearch) + FilName$
+      GOTO 58710
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+58900 If ZEndList = ZTrue Then _     'Lk11/29/91
+      Exit Sub                       'Lk 11/29/91
+      ZOutTxt$ = ZDirPrompt$
+      ZMacroMin = 2
+      CALL PopCmdStack
+      IF ZWasQ = 0 OR ZSubParm = -1 THEN _
+         EXIT SUB
+      CALL AraAllCaps (ZUserIn$(),ZAnsIndex)
+      IF ZUserIn$(ZAnsIndex) = "Q" THEN _
+         ZWasQ = 0 : _
+         EXIT SUB
+      ZWasA = INSTR("E+.E-.E.L.H.?.",ZUserIn$(ZAnsIndex)+".")
+      IF ZWasA = 0 THEN _
+         EXIT SUB
+      IF ZWasA > 8 THEN _
+         IF ZAnsIndex < ZLastIndex THEN _
+            GOTO 58900 _
+         ELSE GOTO 58902
+      IF ZWasA = 7 THEN _
+         ZExtendedOff = NOT ZExtendedOff _
+      ELSE ZExtendedOff = (ZWasA > 3)
+      CALL QuickTPut1 ("Extended directory display "+FNOffOn$(NOT ZExtendedOff))
+      GOTO 58900
+* DELETING old line(s)
+59100
+59102
+59104
+59106
+59108
+59110
+59112
+59114
+* REPLACING old line(s) by new
+59456 ZFileName$ = ZCurPUI$
+      CALL Graphic (ZFileName$)
+      IF NOT ZOK THEN _
+         CALL UpdtCalr ("Missing menu " + ZCurPUI$,2) : _
+         ZCurPUI$ = ZPrevPUI$ : _
+         GOTO 59456
+      CALL BreakFileName(ZFileName$,ZWasZ$,ZActiveMenu$,ZWasZ$,ZTrue)
+      ZActiveMenu$ = LEFT$(ZActiveMenu$,1)
+      LSET ZLastCommand$ = ZActiveMenu$ + " "
+      ZPrevPUI$ = ZCurPUI$
+      LINE INPUT #2,ZFileName$
+* ------[ first line different ]------
+'     LINE INPUT #2,Prompt$				'SM091926
+      INPUT #2,Prompt$					'SM091926
+      INPUT #2,ValidChoice$,ActualCommands$
+      LINE INPUT #2,MenuChoice$
+      LINE INPUT #2,MenuName$
+      LINE INPUT #2,QuitCmd$
+'     LINE INPUT #2,QuitPrompt$				'SM091926
+      INPUT #2,QuitPrompt$				'SM091926
+      LINE INPUT #2,QuitSubCmds$
+      LINE INPUT #2,QuitMenuOpt$
+      LINE INPUT #2,QuitMenus$
+      CALL Graphic (ZFileName$)
+      CALL BreakFileName (ZFileName$,MenuDrvPath$,WasX$,ZWasY$,ZTrue)
+      MenuToDisplay$ = ZFileName$
+      WasJ = INSTR(ZOrigCommands$,"?")
+      IF WasJ < 1 THEN _
+         WasX$ = "" _
+      ELSE WasX$ = MID$(ZAllOpts$,WasJ,1)
+* REPLACING old line(s) by new
+59458 IF ZExpertUser THEN _
+* ------[ first line different ]------
+      Call QuickTPut (ZConfName$ + ": ",0) : _
+      CALL DispTimeRemain (TimeRemaining!) : _
+              GOTO 59461
+* REPLACING old line(s) by new
+59460 ZNonStop = (ZPageLength < 1)
+* ------[ first line different ]------
+     ZDeleteInvalid = ZTrue   'Pe 01/08/90
+     CALL BufFile (MenuToDisplay$,WasX)
+     ZDeleteInvalid = ZFalse  'Pe 01/08/90
+     CALL Line25               'Pe 01/13/90
+     Call QuickTput (ZConfName$ + ": ",0)
+     CALL DispTimeRemain (TimeRemaining!) 'Pe time mod  Moved line number down 04/02/90
+* REPLACING old line(s) by new
+59461 MID$(ZLastCommand$,2,1) = " "
+      ZOutTxt$ = Prompt$
+      ZTurboKey = -ZTurboKeyUser
+      CALL PopCmdStack
+      IF ZSubParm = -1 OR ZFunctionKey <> 0 THEN _
+         EXIT SUB
+      IF ZWasQ = 0 THEN _
+* ------[ first line different ]------
+         GOTO 59461
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+59492 CALL Putcom (CHR$(7))   'Pe 04/25/92
+      CALL QuickTPut1 ("No such option <" + ZWasZ$ + ">")
+      Call FlushKeys
+      GOTO 59460
+      END SUB
+* REPLACING old line(s) by new
+59530 ZWasZ$ = ZUserIn$(ZAnsIndex)
+      CALL AllCaps (ZWasZ$)
+* ------[ first line different ]------
+           IF INSTR(ReturnOn$,","+ZWasZ$+",") THEN _  'check if calling pgm wants
+         EXIT SUB
+      IF INSTR("LH?",ZWasZ$) THEN _       'check whether caller wants help
+         GOTO 59515
+      IF INSTR(ZWasZ$,".") > 0 THEN _
+         GOTO 59532
+      CALL BadFile (ZWasZ$,WasBF)
+      IF WasBF > 1 THEN _
+         GOTO 59532
+      FPre$ = MenuFront$   ' check for sub-option
+      PreSuf$ = "-"
+      CALL BadFile (FPRE$ + ZWasZ$ + "-",WasBF)
+      ZOK = ZFalse
+      IF WasBF < 2 THEN _
+         VerifyInMenu = ZFalse : _
+         GOSUB 59538
+      PreSuf$ = ""
+      VerifyInMenu = PassedVerifyInMenu
+      IF NOT ZOK THEN _
+         FPre$ = FrontOpt$ : _    ' check standard option
+         GOSUB 59538 : _
+         IF NOT ZOK THEN _    ' check option where menu is
+            FPre$ = MenuDrv$ + FrontPre$ : _
+            IF FrontOpt$ <> FPre$ THEN _
+               GOSUB 59538
+      IF NewMenu THEN _
+         NewMenu = ZFalse : _
+         GOTO 59515
+      IF ZOK THEN _
+         EXIT SUB
+* REPLACING old line(s) by new
+59703 ' $SUBTITLE: 'WordWrap -- subroutine to wrap lines in a message'
+' $PAGE
+'
+'  NAME    -- WordWrap
+'
+'  INPUTS  --   PARAMETER     MEANING
+'               MaxLen       MAXIMUM LENGTH OF A SINGLE LINE
+'               NumLines     NUMBER OF LINES IN A MESSAGE
+'               LineAra$     ALL THE LINES IN THE MESSAGE
+'
+'  OUTPUTS --   NumLines
+'               LineAra$
+'
+'  PURPOSE -- Batch adjusts a message, wrapping lines if
+'             needed.  Preserves paragraph structure.
+'
+      SUB WordWrap (MaxLen,NumLines,LineAra$(1)) STATIC
+      WasJ = 1
+* ------[ first line different ]------
+      SplitOn = 1  + .4 * MaxLen
+      WHILE WasJ <= NumLines and NumLines < ZMaxMsgLines  'Pe 08/04/91
+         ReFormatted = ZFalse
+* REPLACING old line(s) by new
+59780 ' $SUBTITLE: 'GetAll -- subroutine to create directory list'
+' $PAGE
+'
+'  NAME    -- GetAll
+'
+'  INPUTS  --   PARAMETER     MEANING
+'               LookIn$       NAME OF FILE TO SEARCH
+'               DIR.EXT$      MAIN DIRECTORY EXTENSION TO USE
+'               StartPos      Last POSITION USED IN ARRAY
+'
+'  OUTPUTS      StartPos     Last ELEMENT USED IN ARRAY
+'               LoadInto$    ARRAY TO LOAD ELEMENTS Found
+'
+'  PURPOSE -- Creates a list (LoadInto$) of all directories
+* ------[ first line different ]------
+'             to be listed when A)ll is selected for a directory.
+'             All uses config parm, which can be either a single
+'             directory or list of directories (begin with "@").
+'
+      SUB GetAll (LoadInto$(1), StartPos) STATIC
+      IF ZMasterDirName$ <> "" AND LEFT$(ZMasterDirName$,1) <> "@" THEN _
+         StartPos = StartPos + 1 : _
+         LoadInto$(StartPos) = ZMasterDirName$ : _
+         EXIT SUB
+      ZOK = ZFalse
+      IF LEN (ZMasterDirName$) > 1 AND LEFT$(ZMasterDirName$,1) = "@" THEN _
+         CALL FindIt(MID$(ZMasterDirName$,2))
+      IF NOT ZOK THEN _
+         CALL QuickTPut1 ("No dirs defined for A)ll") : _
+         EXIT SUB
+      MaxLoad = UBOUND(LoadInto$, 1)
+      StartSort = StartPos + 1
+      WHILE NOT EOF(2) AND StartPos < MaxLoad
+         LINE INPUT #2, ZOutTxt$
+         StartPos = StartPos + 1
+         LoadInto$(StartPos) = ZOutTxt$
+      WEND
+      CLOSE 2
+      END SUB
+* REPLACING old line(s) by new
+59851 IF NOT ZOK THEN _
+         GOTO 59856 _
+      ELSE IF EOF(2) THEN _
+              IF LogicalEOF$ = "" OR SkipParms = 0 THEN _
+                 GOTO 59856 _
+              ELSE CALL FindIt (ZConfMailList$) : _
+                   SkipParms = 0 : _
+                   GOTO 59851
+         CALL ReadAny
+         ZActiveUserFile$ = ZOutTxt$
+         CALL ReadAny
+         IF ZErrCode > 0 THEN _
+            GOTO 59856
+         SkipParms = SkipParms + 2
+         ZActiveMessageFile$ = ZOutTxt$
+         CALL FindFile (ZActiveUserFile$,ZOK)
+         IF NOT ZOK THEN _
+            GOTO 59856
+* ------[ first line different ]------
+         CALL OpenUser (ZHighestUserRecord)
+         FIELD 5, 128 AS ZUserRecord$
+         CALL FindFile (ZActiveMessageFile$,ZOK)
+         IF NOT ZOK THEN _
+            GOTO 59856
+         CALL FindUser (ZOrigUserName$,"",ZStartHash,ZLenHash,_
+                        0,0,ZHighestUserRecord,_
+                        Found,HoldUserFileIndex,ZWasSL)
+         IF NOT Found THEN _
+            GOTO 59853
+         CALL OpenMsg
+         FIELD 1, 128 AS ZMsgRec$
+         GET 1,1
+         AnyMail = ZTrue
+         WasX = CVI(MID$(ZUserRecord$,57,2))
+         FileWait = (WasX AND 4096) > 0
+         WasX = (WasX AND 512) > 0
+         CALL BreakFileName (ZActiveUserFile$,WasX$,CurPre$,CurExt$,ZFalse)
+         InCur = (CurPre$ = NowInPre$ AND CurExt$ = NowInExt$)
+* REPLACING old line(s) by new
+59860 CALL QuickTPut (ZEmphasizeOff$,0)
+      IF CantInterrupt THEN _
+         ZTurboKey = 2 : _
+         ZForceKeyboard = ZTrue : _
+         ZOutTxt$ = "Press any key to continue" _
+      ELSE GOSUB 59870 : _
+           ZOutTxt$ = ZMorePrompt$ + Temp$ + ExtraPrompt$ + LEFT$(">",-ZExpertUser)
+      WasX = LEN(ZOutTxt$) + 2
+      ZNoAdvance = OverWrite
+      ZSubParm = 1
+      IF ExtraPrompt$ = "" AND ZTurboKey = 0 THEN _
+         ZTurboKey = -ZTurboKeyUser
+      ZMacroMin = 2
+      CALL TGet
+      IF ZSubParm = -1 THEN _
+        EXIT SUB
+      ZTurboKey = ZFalse
+      ZWasDF$ = ZUserIn$ (1)
+      CALL AllCaps (ZWasDF$)
+      WasI = INSTR(";C;A;",";"+ZWasDF$+";")
+      IF WasI = 1 THEN _
+         ZNonStop = ZTrue : _
+         ZWasQ = 0
+      CALL WipeLine (WasX + LEN(ZUserIn$))
+      IF NOT ZHiLiteOff THEN _
+* ------[ first line different ]------
+         CALL QuickTPut (ZLastSmartColor$,0) : _  'Pe 08/26/92
+         CALL QuickTput (ZEmphaSizeOFF$,0)      'Lk 07/16/90
+      IF CantInterrupt THEN _
+         ZNo = ZFalse : _
+         EXIT SUB
+      IF WasI = 3 THEN _
+         ZLastIndex = 0 : _
+         AbortIndex = 32000
+      IF ZNo THEN _
+         ZKeyboardStack$ = "" : _
+         ZCommPortStack$ = "" : _
+         ZLastSmartColor$ = ""
+      IF NOT ZJumpSupported THEN _
+         EXIT SUB
+      IF ZWasDF$ = "J" THEN _
+         IF ZWasQ > 1 THEN _
+            ZUserIn$ = ZUserIn$(2) : _
+            GOTO 59866 _
+         ELSE ZOutTxt$ = "Jump to what text" + ZPressEnterExpert$ : _
+              CALL PopCmdStack : _
+              IF ZWasQ = 0 THEN _
+                 EXIT SUB _
+              ELSE GOTO 59866
+      IF ZWasDF$ <> "R" THEN _
+         EXIT SUB
+      ZUserIn$ = ZJumpLast$
+* REPLACING old line(s) by new
+59921 Strng$ = ZDR1$ + LEFT$(Strng$,13) + ZDR2$ + MID$(Strng$,14,10) + _
+* ------[ first line different ]------
+               ZDR3$ + MID$(Strng$,24,10) + ZDR4$ + MID$(Strng$,34,ZMaxDescLen) + _
+               ZEmphasizeoff$         'Pe 03/15/92
+      EXIT SUB
+* REPLACING old line(s) by new
+59934 ' $SUBTITLE: 'SetHiLite - subroutine to reset highlight preference'
+' $PAGE
+'
+'  NAME    --  SetHiLite
+'
+'  INPUTS  --  PARAMETER                   MEANING
+'              SetTo              New value (True or False)
+'              ZEmphasizeOnDef$   String turns emphasize on
+'              ZEmphasizeOffDef$  String turns emphasize off
+'
+'  OUTPUTS --  ZHiLiteOff       Callers preference on Hilite
+'              ZEmphasizeOn$       String to use for emphasis
+'              ZEmphasizeOff$      String to use after emphasis
+'
+      SUB SetHiLite (SetTo) STATIC
+      ZHiLiteOff = (ZEmphasizeOnDef$ <> "" AND SetTo)
+      IF ZHiLiteOff THEN _
+         ZEmphasizeOn$ = "" : _
+         ZEmphasizeOff$ = "" : _
+         ZFG1$ = "" : _
+         ZFG2$ = "" : _
+         ZFG3$ = "" : _
+* ------[ first line different ]------
+         ZFG4$ = "" : _                                              ' DD061303/COLR
+         ZFG5$ = "" : _                                              ' DD061303/COLR
+         ZFG6$ = "" : _                                              ' DD061303/COLR
+         ZFG7$ = "" : _                                              ' DD061303/COLR
+         ZFG8$ = "" : _                                              ' DD061303/COLR
+         ZFG9$ = "" : _                                              ' DD061303/COLR
+         ZFGA$ = "" : _                                              ' DD061303/COLR
+         ZFGB$ = "" : _                                              ' DD061303/COLR
+         ZFGC$ = "" : _                                              ' DD061303/COLR
+         ZFGD$ = "" : _                                              ' DD061303/COLR
+         ZFGE$ = "" : _                                              ' DD072201/COLR
+         ZFGF$ = "" _                                                ' DD072201/COLR
+      ELSE ZEmphasizeOn$ = ZEmphasizeOnDef$ : _
+           ZFG1$ = ZFG1Def$ : _
+           ZFG2$ = ZFG2Def$ : _
+           ZFG3$ = ZFG3Def$ : _
+           ZFG4$ = ZFG4Def$ : _                                      ' DD061303/COLR
+           ZFG5$ = ZEscape$ + "[1;34;40m" : _     'Brt Blue          ' DD061303/COLR
+           ZFG6$ = ZEscape$ + "[1;35;40m" : _     'Brt Magenta       ' DD061303/COLR
+           ZFG7$ = ZEscape$ + "[1;33;44m" : _     'Yellow/Blue       ' DD061303/COLR
+           ZFG8$ = ZEscape$ + "[1;33;42m" : _     'Yellow/Green      ' DD061303/COLR
+           ZFG9$ = ZEscape$ + "[1;33;41m" : _     'Yellow/Red        ' DD061303/COLR
+           ZFGA$ = ZEscape$ + "[1;33;45m" : _     'Yellow/Magenta    ' DD061303/COLR
+           ZFGB$ = ZEscape$ + "[1;37;44m" : _     'White/Blue        ' DD061303/COLR
+           ZFGC$ = ZEscape$ + "[1;37;42m" : _     'White/Green       ' DD061303/COLR
+           ZFGD$ = ZEscape$ + "[1;37;41m" : _     'White/Red         ' DD061303/COLR
+           ZFGE$ = ZEscape$ + "[1;37;45m" : _     'White/Magenta     ' DD061303/COLR
+           ZFGF$ = ZEscape$ + "[1;36;44m"         'Brt Cyan/Blue     ' DD061303/COLR
+      END SUB
+* REPLACING old line(s) by new
+59940 ' $SUBTITLE: 'ColorPrompt - subroutine to colorize prompts'
+' $PAGE
+'
+'  NAME    --  ColorPrompt
+'
+'  INPUTS  --  PARAMETER                   MEANING
+'              Strng$              String to colorize
+'              ZHiLiteOff          Whether highlighting is off
+'              ZEmphasizeOn$       String to use for emphasis
+'              ZEmphasizeOff$      String to use after emphasis
+'
+'  OUTPUTS --  Strng$              Colorized string
+'
+'  PURPOSE -- colorizes a string based on sysop settings
+'             and the string.
+'                        [...] is the default - put in emphasis
+'                        <...> options to type - put in ZFG4$
+'                        and first two preceeding words use ZFG1$ and ZFG2$
+'                        options identified on right by ) and on
+'                        left by space or comma - put in ZFG4$
+'
+      SUB ColorPrompt (Strng$) STATIC
+* ------[ first line different ]------
+      CALL SmartText(Strng$,ZTrue,ZFalse)		'SM091927
+      IF ZHiLiteOff THEN _
+         EXIT SUB
+      AlreadyColorized = (INSTR(Strng$,ZEscape$) > 0)
+      WasX = INSTR(Strng$,"<")
+      IF WasX > 0 THEN _
+         GOTO 59943
+      WasX = INSTR(Strng$,"[")   ' highlight default
+      IF WasX > 0 THEN _
+         WasY = INSTR(WasX,Strng$,"]") : _
+         IF WasY > 0 THEN _
+            CALL FindLast (LEFT$(Strng$,WasY),"[",WasX,Temp) : _
+            CALL Bracket (Strng$,WasX,WasY,ZEmphasizeOn$,ZEmphasizeOff$)
+      IF AlreadyColorized THEN _
+         EXIT SUB
+      WasX = INSTR(Strng$,"<")
+      IF WasX < 1 THEN _
+         GOTO 59945
+* REPLACING old line(s) by new
+59965 ' $SUBTITLE: 'UserColor - lets user set color for normal text'
+' $PAGE
+'
+'  NAME    --  UserColor
+'
+'  INPUTS  --  PARAMETER                   MEANING
+'              ZEmphasizeOff$            Normal text color
+'
+'  OUTPUTS --  ZEmphasizeOff$            New text color
+'              ZBoldText$                Whether bold (0 not, 1 bold)
+'              ZUserTextColor            ANSI Color selected
+'
+'  PURPOSE --  Lets caller select desired color and whether bold.
+'
+      SUB UserColor STATIC
+      IF ZHiLiteOff THEN _
+* ------[ first line different ]------
+         EXIT SUB _                                                  ' DD061303/COLR
+      ELSE _                                                         ' DD061303/COLR
+         ZFG5$ = ZEscape$ + "[1;34;40m" : _     'Brt Blue          ' DD061303/COLR
+         ZFG6$ = ZEscape$ + "[1;35;40m" : _     'Brt Magenta       ' DD061303/COLR
+         ZFG7$ = ZEscape$ + "[1;33;44m" : _     'Yellow/Blue       ' DD061303/COLR
+         ZFG8$ = ZEscape$ + "[1;33;42m" : _     'Yellow/Green      ' DD061303/COLR
+         ZFG9$ = ZEscape$ + "[1;33;41m" : _     'Yellow/Red        ' DD061303/COLR
+         ZFGA$ = ZEscape$ + "[1;33;45m" : _     'Yellow/Magenta    ' DD061303/COLR
+         ZFGB$ = ZEscape$ + "[1;37;44m" : _     'White/Blue        ' DD061303/COLR
+         ZFGC$ = ZEscape$ + "[1;37;42m" : _     'White/Green       ' DD061303/COLR
+         ZFGD$ = ZEscape$ + "[1;37;41m" : _     'White/Red         ' DD061303/COLR
+         ZFGE$ = ZEscape$ + "[1;37;45m" : _     'White/Magenta     ' DD061303/COLR
+         ZFGF$ = ZEscape$ + "[1;36;44m"         'Brt Cyan/Blue     ' DD061303/COLR
+* REPLACING old line(s) by new
+59970 CALL QuickTPut (ZEmphasizeOff$,0)
+      ZOutTxt$ = "Make text R)ed,G)reen,Y)ellow,B)lue,P)urple,C)yan,W)hite" + ZPressEnterExpert$
+      GOSUB 59973
+      IF ZWasQ = 0 THEN _
+         ZEmphasizeOff$ = ZEscape$ + "[" + ZBoldText$ + _
+             ";40;" + MID$(STR$(ZUserTextColor),2) + "m" : _
+         EXIT SUB
+      CALL AllCaps (ZUserIn$)
+      WasX = INSTR("RGYBPCW",ZUserIn$)
+      IF WasX = 0 THEN _
+         GOTO 59970
+      ZUserTextColor = 30 + WasX
+* ------[ first line different ]------
+      ZOutTxt$ = "Make text Bright (Y,[N])"
+      GOSUB 59973
+      ZBoldText$ = CHR$(48 - ZYes)
+      ZEmphasizeOff$ = ZEscape$ + "[" + ZBoldText$ + ";40;" + MID$(STR$(ZUserTextColor),2) + "m"
+      GOTO 59970
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+59973 ZSubParm = 1
+      ZTurboKey = -ZTurboKeyUser
+      CALL TGet
+      IF ZSubParm = -1 THEN _
+         EXIT SUB
+      RETURN
+      END SUB
+* REPLACING old line(s) by new
+59980 ' $SUBTITLE: 'SetGraphic - Sets user graphic preference'
+' $PAGE
+'
+'  NAME    --  SetGraphic
+'
+'  INPUTS  --  PARAMETER                   MEANING
+'              GraphicsNumber        0=None, 1=Ascii, 2=color
+'
+'  OUTPUTS --  ZWasGR                Shared var - set to
+'                                    graphics.number
+'              ZUserGraphicDefault$ What add to file name to
+'                                    see if got graphics file ver
+'
+'  PURPOSE --  Sets file graphics preference
+'
+      SUB SetGraphic (GraphicsNumber) STATIC
+      ZWasGR = GraphicsNumber
+      IF ZWasGR = 2 THEN _
+         ZDR1$ = ZFG1Def$ : _
+         ZDR2$ = ZFG2Def$ : _
+         ZDR3$ = ZFG3Def$ : _
+* ------[ first line different ]------
+         ZDR4$ = ZFG4Def$ : _                                        ' DD061303/COLR
+         ZDR5$ = ZFG5$ : _                                           ' DD061303/COLR
+         ZDR6$ = ZFG6$ : _                                           ' DD061303/COLR
+         ZDR7$ = ZFG7$ : _                                           ' DD061303/COLR
+         ZDR8$ = ZFG8$ : _                                           ' DD061303/COLR
+         ZDR9$ = ZFG9$ : _                                           ' DD061303/COLR
+         ZDRA$ = ZFGA$ : _                                           ' DD061303/COLR
+         ZDRB$ = ZFGB$ : _                                           ' DD061303/COLR
+         ZDRC$ = ZFGC$ : _                                           ' DD061303/COLR
+         ZDRD$ = ZFGD$ : _                                           ' DD061303/COLR
+         ZDRE$ = ZFGE$ : _                                           ' DD061303/COLR
+         ZDRF$ = ZFGF$ _                                             ' DD061303/COLR
+      ELSE ZDR1$ = "" : _
+           ZDR2$ = "" : _
+           ZDR3$ = "" : _
+           ZDR4$ = "" : _                                            ' DD061303/COLR
+           ZDR5$ = "" : _                                            ' DD061303/COLR
+           ZDR6$ = "" : _                                            ' DD061303/COLR
+           ZDR7$ = "" : _                                            ' DD061303/COLR
+           ZDR8$ = "" : _                                            ' DD061303/COLR
+           ZDR9$ = "" : _                                            ' DD061303/COLR
+           ZDRA$ = "" : _                                            ' DD061303/COLR
+           ZDRB$ = "" : _                                            ' DD061303/COLR
+           ZDRC$ = "" : _                                            ' DD061303/COLR
+           ZDRD$ = "" : _                                            ' DD061303/COLR
+           ZDRE$ = "" : _                                            ' DD061303/COLR
+           ZDRF$ = ""                                                ' DD061303/COLR
+      ZUserGraphicDefault$ = MID$(" GC",ZWasGR+1, - (ZWasGR > 0))
+      END SUB
+* REPLACING old line(s) by new
+60130 ' $SUBTITLE: 'MetaGSR -- Meta Global search and replace'
+' $PAGE
+'
+'  NAME    --  MetaGSR
+'
+'  INPUTS  --  PARAMETER               MEANING
+'              Strng$              String to edit
+'
+'  OUTPUTS --  Strng$              Edited string
+'
+'  PURPOSE --  Global search and replace for meta variables
+'
+* ------[ first line different ]------
+' DSZ port [PORT#] speed [BAUD] estimate 0 [CBAUD] ha on sz -r [FILE]
+'
+' RBBS will substitute the variable [CBAUD] with the actual modem speed.
+'
+      SUB MetaGSR (Strng$,OverStrike) STATIC
+      WasY = 1
+* REPLACING old line(s) by new
+60135 MetaVal$ = MID$(Strng$,WasX+1,WasY-WasX-1)
+* ------[ first line different ]------
+      WasI = INSTR("      BAUD  CBAUD PORT  PORT# PARITYPROTO NODE  FILE  ",MetaVal$) ' KG122301
+      IF WasI = 0 OR LEN(MetaVal$) < 4 THEN _
+         WasY = WasX + 1 : _
+         GOTO 60131
+      WasJ = (WasI-1)\6 + 1
+      WasK = (WasI+4)\6 + 1
+      IF WasK > WasJ THEN _
+         EXIT SUB
+      ON WasJ GOTO 60155, _
+                60137, _
+                60138, _
+                60139, _
+                60141, _
+                60143, _
+                60145, _
+                60147, _
+                60149, _
+                60151
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+60149 IF ZWasBatchTransfer THEN _              'Pe BatchUp Mod
+ CALL BreakFileName (ZFileName$,Drive$,Prefix$,Ext$,ZFalse) : _
+       WorkHold$ = Drive$ _
+     ELSE _
+       IF ZBatchTransfer THEN _ 
+         WorkHold$ = "@" + ZNodeWorkFile$ _
+      ELSE WorkHold$ = ZFileName$
+      GOTO 60151
+* REPLACING old line(s) by new
+60180 ' $SUBTITLE: 'TimeLock - Test TIME LOCK for premium features'
+' $PAGE
+'
+'  NAME    --  TimeLock  (written by Doug Azzarito)
+'
+'  INPUTS  --  PARAMETER                   MEANING
+'              ZTimeLockSet               SECONDS/SESSION TO LOCK
+'
+'  OUTPUTS --  ZSubParm     -1 if feature is LOCKED
+'
+'  PURPOSE -- Check elapsed time for lock duration
+'
+      SUB TimeLock STATIC
+      CALL TimeRemain(MinsRemaining)
+      IF ZSecsUsedSession! >= ZTimeLockSet THEN _
+         ZOK = ZTrue : _
+         EXIT SUB
+      ZOutTxt$ = ZFirstName$
+      CALL NameCaps(ZOutTxt$)
+      CALL QuickTPut1 ("Sorry, " + ZOutTxt$ + ", function locked" + _
+* ------[ first line different ]------
+                   STR$(INT((ZTimeLockSet-ZSecsUsedSession!)/60)) + _
+                   " more minutes" + _
+                   STR$(INT(ZTimeLockSet-ZSecsUsedSession!) MOD 60) + " seconds")
+      CALL BufFile(ZHelpPath$+"TIMELOCK"+ZHelpExtension$,WasX)
+      ZOK = ZFalse
+      ZLastIndex = 0
+      END SUB
+* REPLACING old line(s) by new
+60300 ' $SUBTITLE: 'AutoPage - NOTIFIES ZSysop WHEN SPECIFIC USER CALLS'
+' $PAGE
+'
+'  NAME    --  AutoPage   'Contributed  by Gregg and Bob Snyder
+'                        'and RoseMarie Siddiqui
+'
+'  INPUTS  --  ZAutoPageDef$  List of conditions that trigger
+'                                       notification and how
+'
+'  OUTPUTS -- NONE
+'
+'  PURPOSE -- Search ZAutoPageDef$ for match on whether
+'             on name, security level, whether new user.
+'             Also controls whether caller notified and
+'             number of times sysop has bell rung.
+'             And what tune to play (if any).
+'
+      SUB AutoPage STATIC
+      CALL FindIt (ZAutoPageDef$)
+      IF NOT ZOK THEN _
+         EXIT SUB
+      ZErrCode = 0
+      ZOK = ZFalse
+      WHILE NOT EOF(2) AND ZOK = ZFalse AND ZErrCode = 0
+         CALL ReadParms (ZWorkAra$(),4,1)
+         IF ZErrCode = 0 THEN _
+            ZOK = (ZWorkAra$(1) = ZActiveUserName$) : _
+            IF NOT ZOK THEN _
+               IF ZNewUser AND ZWorkAra$(1) = "NEWUSER" THEN _
+                  ZOK = ZTrue _
+               ELSE IF LEFT$(ZWorkAra$(1),1) = "/" AND LEN(ZWorkAra$(1)) > 2 THEN _
+                       ZWasB = INSTR (2,ZWorkAra$(1),"/") : _
+                       IF ZWasB > 0 AND LEN(ZWorkAra$(1)) > ZWasB THEN _
+                          IF ZUserSecLevel <= VAL(MID$(ZWorkAra$(1),ZWasB+1)) AND _
+                             ZUserSecLevel >= VAL(MID$(ZWorkAra$(1),2)) THEN _
+                                ZOK = ZTrue
+      WEND
+      CLOSE 2
+      IF ZErrCode > 0 OR NOT ZOK THEN _
+         ZErrCode = 0 : _
+         EXIT SUB
+      ZPageStatus$ = "AP!"
+      IF LEFT$(ZWorkAra$(2),1) = "N" THEN _
+         ZOutTxt$ = "Telling sysop you're on..." : _
+         CALL RingCaller
+      ZWasB = (ZWorkAra$(4) = "")
+      ZWorkAra$(5) = ""
+     TempSnoop = ZSnoop
+     ZSnoop = ZTrue
+     CALL Line25
+      FOR WasI = 1 TO VAL(ZWorkAra$(3))
+         IF ZWasB THEN _
+            CALL LPrnt (ZBellRinger$,0) : _
+         ELSE ZWorkAra$(5) = ZWorkAra$(5) + "O4 X" + VARPTR$(ZWorkAra$(4))
+      NEXT
+* ------[ first line different ]------
+      ZSnoop = TempSnoop
+      END SUB
+* REPLACING old line(s) by new
+62540 ' $SUBTITLE: 'RptTime -- Reports time on system'
+' $PAGE
+'
+'  NAME    --  RptTime
+'
+'  INPUTS  --  PARAMETER                   MEANING
+'
+'  OUTPUTS --
+'
+'  PURPOSE --  Tells user time used on system
+'
+      SUB RptTime STATIC
+      CALL SkipLine (1)
+      CALL GetTime
+      CALL AMorPM
+      Mins = (ZSessionHour * 60) + ZSessionMin
+      CALL Carrier
+      IF ZSubParm = -1 THEN _
+         EXIT SUB
+      CALL QuickTPut1 ("Now: " + DATE$ + " at " + TIME$)
+      CALL QuickTPut1 ("On for" + STR$(Mins) + " mins," + _
+                        STR$(ZSessionSec) + " secs")
+* ------[ first line different ]------
+'      CALL Talk (7,ZOutTxt$)
+      END SUB
+* REPLACING old line(s) by new
+62620 ' $SUBTITLE: 'Transfer - Subroutine for external protocols'
+' $PAGE
+'
+'  NAME    -- Transfer
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'              ZTransferFunction         = 1 DOWNLOAD FILE TO USER
+'                                        = 2 UPLOAD FILE TO RBBS-PC
+'              ZFileName$                NAME OF FILE FOR Transfer
+'              ZComPort$                 NAME OF COMMUNICATIONS PORT
+'                                        TO BE USED BY KERMIT (COM1
+'                                        OR COM2)
+'              ZBPS                      = -1 FOR   300 BAUD
+'                                        = -2 FOR   450 BAUD
+'                                        = -3 FOR  1200 BAUD
+'                                        = -4 FOR  2400 BAUD
+'                                        = -5 FOR  4800 BAUD
+'                                        = -6 FOR  9600 BAUD
+* ------[ first line different ]------
+'                                        = -7 FOR 14400 BAUD
+'                                        = -8 FOR 19200 BAUD
+'
+'  OUTPUTS  -- NONE
+'
+'  PURPOSE -- To transfer files using external protocols
+'
+      SUB Transfer STATIC
+IF ZUpBatchTransfer Then _
+   Exit Sub
+      IF ZPrivateDoor THEN _
+         CALL PrivDoorRtn : _
+         EXIT SUB
+      IF ZTransferFunction = 1 THEN _
+         ZUserIn$ = ZDownTemplate$ : _
+         ZWasZ$ = "send " _
+      ELSE IF ZTransferFunction = 2 THEN _
+              ZUserIn$ = ZUpTemplate$ : _
+              ZWasZ$ = "receive "
+      CALL MetaGSR (ZUserIn$,ZFalse)
+      CALL QuickTPut1 ("Protocol     : "+ZProtoPrompt$)
+      CALL QuickTPut ("Ready to " + ZWasZ$ + " ",0)
+'
+      IF ZBatchTransfer or ZWasBatchTransfer THEN _        'Pe BatchUp mod
+         CALL QuickTPut1 ("(BATCH)")  _
+      ELSE CALL QuickTPut1 (ZFileNameHold$)
+'
+   IF ZWasBatchTransfer THEN _                             'Pe BatchUp mod
+        Temp$ = ZBatchWorkFile$ _
+          ELSE IF ZBatchTransfer Then _
+        Temp$ = ZNodeWorkFile$  
+   IF ZBatchTransfer or ZWasBatchTransfer THEN _        'Pe BatchUp mod
+       CALL OpenWork (2,Temp$) : _
+          WHILE NOT EOF(2) : _
+            CALL ReadAny : _
+           CALL BreakFileName (ZOutTxt$,ZWasZ$,ZWasY$,WasX$,ZTrue) : _
+         CALL QuickTPut1 ("   "+ZWasY$+WasX$) : _
+     WEND
+'
+      IF ZAutoEnd = 1 THEN _                  'Pe 03/30/92
+         CALL QuickTPut1 ("Automatic logoff, if transfer OK")   'Pe 08/17/91
+      CALL PrivDoorRtn
+      END SUB
+* REPLACING old line(s) by new
+62628 WasX$ = LEFT$(ZUserIn$,INSTR(ZUserIn$+" "," ")-1)
+      IF WasX$ = "" THEN _
+         EXIT SUB
+      CALL FindIt (WasX$)
+      IF NOT ZOK THEN _
+         ZOutTxt$ = "Missing door program" : _
+         CALL UpdtCalr (ZOutTxt$ + " " + WasX$,1) : _
+         ZSnoop = ZTrue : _
+         CALL LPrnt (ZOutTxt$,1) : _
+         EXIT SUB
+      ZOutTxt$(1) = "CLS"
+      GOSUB 62633
+* ------[ first line different ]------
+      ZOutTxt$(2) = "ECHO " + ZOutTxt$
+      ZOutTxt$(3) = ZDiskForDos$ + _
+              "COMMAND /C " + _
+              ZUserIn$
+      ZOutTxt$(4) = ZRBBSBat$
+      ZPrivateDoor = ZTrue
+      CALL QuickTPut1 ("Exiting to External Pgm for Transfer")
+      LOCATE 25,1
+      CALL LPrnt(ZLineFeed$,0)
+      CALL DoorInfo
+      CALL RBBSExit (ZOutTxt$(),4)
+* REPLACING old line(s) by new
+62629 GOSUB 62633
+* ------[ first line different ]------
+      'CLS
+      CALL LPrnt (ZOutTxt$,1)
+      CALL ShellExit (ZUserIn$)
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+62633 IF ZTransferFunction = 1 THEN _                 'Pe 06/19/92
+      ZOutTxt$ = STR$(ZUserSecLevel) + _
+		 " " + _
+		 ZActiveUserName$ + _
+		 " " +  _ 
+                 ZWasCI$ + ZCrlF$ : _
+      ZOutTxt$ = ZOutTxt$ +  "ECHO Downloading " +STR$(ZBytesInFile#) + _     'Pe 10/11/91
+	   " bytes" + _                                'Pe 10/11/91
+	  " At "+  STR$(ZBaudTest!) + " Baud" + _
+	   " Time:" + _
+	 STR$(INT(ZBlocksInFile# / 60)) + _
+	 " min," + _
+	 STR$(INT(ZBlocksInFile# - (INT(ZBlocksInFile# / 60) * 60))) + _
+	 " sec (approx)"_                              'Pe 10/11/91
+     Else ZOutTxt$ = "Uploading file"+ _               'Pe 06/19/92
+          " At "+  STR$(ZBaudTest!) + " Baud"          'Pe 06/19/92
+         RETURN
+      END SUB
+* REPLACING old line(s) by new
+62660 ' $SUBTITLE: 'SetExpert - subroutine to adjust for expert change'
+' $PAGE
+'
+'  NAME    --  SetExpert
+'
+'  INPUTS  --  PARAMETER                   MEANING
+'              ZExpertUser          WHETHER IS AN EXPERT
+'
+'  OUTPUTS --  ZMorePrompt$         Pause prompt
+'              ZPressEnter$         Prompt to press enter
+'
+'  PURPOSE --  Make more helpful prompt for novices and shorter
+'              one for experts
+'
+      SUB SetExpert STATIC
+      IF ZExpertUser THEN _
+* ------[ first line different ]------
+         ZMorePrompt$ = "More <[Y],N,A" : _
+         ZPressEnter$ = ZPressEnterExpert$ : _
+         EXIT SUB
+      ZMorePrompt$ = "More [Y]es,N)o,A)bort"
+      ZPressEnter$ = ZPressEnterNovice$
+      END SUB
+* REPLACING old line(s) by new
+62670 ZOutTxt$ = Prompt$
+* ------[ first line different ]------
+      ZHidden = ZTrue
+      CALL PopCmdStack
+      ZHidden = ZFalse
+      IF ZSubParm < 0 OR ZWasQ = 0 THEN _
+         EXIT SUB
+      IF LEN(ZUserIn$) > 15 THEN _
+         CALL QuickTPut1 ("15 chars max") : _
+         GOTO 62670
+      IF INSTR(ZUserIn$,";") > 0 THEN _
+         CALL QuickTPut1 ("Cannot use ';'") : _
+         GOTO 62670
+   IF NOT ZSYSOP Then                                     ' Pe 04/16/92
+      IF INSTR(ZUserIn$," ") > 0 THEN _                'lk 022792
+         CALL QuickTPut1 ("Cannot use Spaces ' '") : _ 'lk 022792
+         GOTO 62670                                    'lk 022792
+    End If                                                 'Pe 04/16/92
+      IF DisallowSpaces THEN _
+         IF ZUserIn$ = SPACE$(LEN(ZUserIn$)) THEN _
+            CALL QuickTPut1 ("Not all blanks") : _
+            GOTO 62670
+      CALL AllCaps (ZUserIn$)
+      ZWasZ$ = ZUserIn$
+      END SUB
+* REPLACING old line(s) by new
+64510 ZChatAvail = (INSTR("MUF",ZActiveMenu$) > 0)
+      ZOK = ZTrue
+      ZLastIndex = 0
+      END SUB
+* ------[ first line different ]------
+' ViewArc Subroutine.... deleted
+* DELETING old line(s)
+64600
+64605
+64610
+64620
+64630
+* REPLACING old line(s) by new
+64636 IF ZAnsIndex < ZLastIndex THEN _
+         GOTO 64638
+* ------[ first line different ]------
+    ZOutTxt$ = "A)nsi Editor  B)ullet  C)ase     F)ile   H)ilite"  'Pe 09/02/91
+    CALL TopPrompt
+    ZOutTxt$ = "L)ine feeds   N)ulls   T)urboKey X)pert  !)bell"
+    CALL ColorPrompt (ZOutTxt$)

@@ -1,0 +1,25 @@
+mdl 1.6;
+
+import ::df::*;
+import ::anno::*;
+
+//- Core functions and materials for Substance Designer specifics
+import ::alg::base::core::*;
+
+export material diffuse_light(
+	color tint = (1.),
+	float intensity = 1
+) [[
+    anno::display_name("Diffuse Light"),
+    anno::description(""),
+    anno::author(alg::base::core::ALLEGORITHMIC_AUTHOR),
+    anno::copyright_notice(alg::base::core::ALLEGORITHMIC_COPYRIGHT),
+    anno::version(6,0,0)
+]] = material(
+	surface: material_surface(
+		emission: material_emission(
+			emission: df::diffuse_edf(),
+			intensity: tint * intensity * 20000
+		)
+	)
+);

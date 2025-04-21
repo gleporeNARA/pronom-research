@@ -1,0 +1,51 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 2 2 48 
+a2,47,45,88
+Conformal Mapping by a Linear Transformation: 
+   First, define a "box" in the z-plane:
+.EQN 3 3 2 9 
+z[0:0
+.EQN 0 11 2 10 
+z[1:.4
+.EQN 0 13 2 16 
+z[2:.4+.4i
+.EQN 0 16 2 11 
+z[3:.4i
+.EQN 0 12 2 9 
+z[4:0
+.EQN 3 -53 1 12 
+j:0;4
+.EQN 0 26 8 24 
+1&-1&Im(z[j){1,1,6,15,l}@1&-1&Re(z[j)
+.TXT 1 26 3 12 
+a3,12,10,31
+Plot the 
+box in the 
+z-plane.
+.TXT 1 -56 1 28 
+a1,28,26,27
+Define the transformation:
+.EQN 2 4 4 11 
+à:e^.7i/.8
+.EQN 2 13 1 9 
+á:.5
+.EQN 3 -13 2 16 
+w[j:à*z[j+á
+.EQN 0 26 8 24 
+1&-1&Im(w[j){1,1,6,15,l}@1&-1&Re(w[j)
+.TXT 1 26 4 15 
+a4,15,13,45
+Plot the 
+image of the 
+box in the 
+w-plane.

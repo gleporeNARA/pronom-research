@@ -1,0 +1,118 @@
+.MCD 25000 60
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 27 
+a1,26,78,25
+POLYNOMIAL CURVE FITTING
+.TXT 2 5 5 54 
+a5,54,52,214
+This document shows how to fit a quadratic function 
+to a set of data. The same technique also works for 
+other types of curve fitting and for multiple 
+regression (regression with several independent 
+variables).
+.TXT 6 0 3 73 
+a3,73,73,162
+(This document follows the presentation in "Applied Linear Statistical 
+Models", by John Neter and William Wasserman, Richard D. Irwin, 1974. 
+Chapters 7 and 8.)
+.TXT 4 -5 1 43 
+a1,43,78,42
+First, read the data from external files:
+.EQN 2 6 1 21 
+x:READPRN(data1)
+.EQN 0 26 1 16 
+N:length(x)
+.EQN 2 -26 1 21 
+y:READPRN(data2)
+.EQN 0 26 1 11 
+N=?
+.TXT 2 -32 1 28 
+a1,28,78,27
+Compute sample statistics:
+.EQN 1 40 2 23 
+mean(y)=?
+.EQN 1 -34 1 17 
+mean(x)=?
+.EQN 1 0 2 22 
+var(x)=?
+.EQN 0 34 2 23 
+var(y)=?
+.EQN 2 0 2 24 
+stdev(y)=?
+.EQN 1 -34 1 22 
+stdev(x)=?
+.TXT 2 -6 1 26 
+a1,26,78,25
+Simple linear curve fit:
+.EQN 2 6 1 21 
+corr(x,y)=?
+.EQN 2 0 1 17 
+m:slope(x,y)
+.EQN 0 21 1 21 
+b:intercept(x,y)
+.EQN 2 -21 1 22 
+linear(x):m*x+b
+.TXT 2 0 1 29 
+a1,29,72,28
+Compute mean squared error:
+.EQN 2 0 4 30 
+SSE.L:{55}((y-linear(x))^2){49}
+.EQN 5 0 4 16 
+MSE.L:SSE.L/(N-2)
+.EQN 2 24 3 21 
+MSE.L=?
+.TXT 4 -30 1 1 
+x1,1,0,0
+.TXT 1 0 1 39 
+a1,39,78,38
+Quadratic fit using matrix operations
+.TXT 2 6 1 35 
+a1,35,72,34
+Create second variable: x squared
+.EQN 2 1 3 12 
+x2:(x^2){49}
+.EQN 1 23 1 16 
+i:0;N-1
+.TXT 4 -24 1 17 
+a1,17,72,16
+Create X matrix
+.EQN 1 19 2 11 
+X{52}1:x
+.EQN 0 15 2 12 
+X{52}2:x2
+.EQN 1 -33 2 11 
+X[(i,0):1
+.EQN 3 0 2 22 
+b:(X{51}*X)^-1*(X{51}*y)
+.EQN 3 0 4 19 
+b=?
+.TXT 6 -1 1 15 
+a1,15,71,14
+Fitted curve:
+.EQN 1 14 3 30 
+quad(x):b[0+b[1*x+b[2*x^2
+.TXT 4 -14 1 29 
+a1,29,72,28
+Compute mean squared error:
+.EQN 2 2 4 28 
+SSE.Q:{55}((y-quad(x))^2){49}
+.EQN 5 0 4 16 
+MSE.Q:SSE.Q/(N-2)
+.EQN 1 22 3 21 
+MSE.Q=?
+.TXT 4 -30 1 44 
+a1,44,78,43
+Now graph the two curves against the data:
+.EQN 3 0 10 31 
+7*10^5&0&y[i,linear(x[i){1,1,8,15,dll}@&&x[i
+.EQN 0 38 10 29 
+7*10^5&0&y[i,quad(x[i){1,1,8,15,dll}@&&x[i

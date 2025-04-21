@@ -1,0 +1,31 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.EQN 0 0 2 29 
+f(x):x^3-4*x^2+5*x-2
+.EQN 1 29 1 17 
+x:0,0.01;3
+.EQN 2 -23 1 8 
+a:0
+.EQN 0 8 1 8 
+b:3
+.EQN 0 8 1 12 
+d:a-b
+.EQN 0 12 1 9 
+n:12
+.EQN 0 9 1 15 
+i:1,2;12
+.EQN 0 15 2 9 
+q[0:a
+.EQN 3 -52 4 47 
+q[(i+1):if((f(q[i)){56}(f(q[i+d/2^i)),q[i,q[i+d/2^i)
+.EQN 5 4 17 15 
+d/2^i=

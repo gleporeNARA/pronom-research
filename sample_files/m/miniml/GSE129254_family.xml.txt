@@ -1,0 +1,1488 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+
+<MINiML
+   xmlns="http://www.ncbi.nlm.nih.gov/geo/info/MINiML"
+   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+   xsi:schemaLocation="http://www.ncbi.nlm.nih.gov/geo/info/MINiML http://www.ncbi.nlm.nih.gov/geo/info/MINiML.xsd"
+   version="0.5.0" >
+
+  <Contributor iid="contrib1">
+    <Person><First>Viswanathan</First><Last>Palanisamy</Last></Person>
+    <Email>visu@musc.edu</Email>
+    <Phone>843-792-5701</Phone>
+    <Laboratory>BSB 512D</Laboratory>
+    <Department>Biochemistry and Molecular Biology</Department>
+    <Organization>Medical University of South Carolina</Organization>
+    <Address>
+      <Line>173 Ashley Ave</Line>
+      <City>Charleston</City>
+      <State>South Carolina</State>
+      <Zip-Code>29425</Zip-Code>
+      <Country>USA</Country>
+    </Address>
+  </Contributor>
+
+  <Contributor iid="contrib2">
+    <Organization>Illumina Inc.</Organization>
+    <Email>expression@illumina.com, techsupport@illumina.com</Email>
+    <Phone>1 800 809 4566 </Phone>
+    <Organization>Illumina Inc.</Organization>
+    <Address>
+      <Line>9885 Towne Centre Drive</Line>
+      <City>San Diego</City>
+      <State>CA</State>
+      <Zip-Code>92121</Zip-Code>
+      <Country>USA</Country>
+    </Address>
+    <Web-Link>www.illumina.com</Web-Link>
+  </Contributor>
+
+  <Contributor iid="contrib3">
+    <Person><First>Qi</First><Last>Wang</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib4">
+    <Person><First>E</First><Middle>S</Middle><Last>Hazard</Last></Person>
+  </Contributor>
+
+  <Contributor iid="contrib5">
+    <Person><First>Robert</First><Middle>C</Middle><Last>Wilson</Last></Person>
+  </Contributor>
+
+  <Database iid="GEO">
+    <Name>Gene Expression Omnibus (GEO)</Name>
+    <Public-ID>GEO</Public-ID>
+    <Organization>NCBI NLM NIH</Organization>
+    <Web-Link>http://www.ncbi.nlm.nih.gov/geo</Web-Link>
+    <Email>geo@ncbi.nlm.nih.gov</Email>
+  </Database>
+
+  <Platform iid="GPL10558">
+    <Status database="GEO">
+      <Submission-Date>2010-06-17</Submission-Date>
+      <Release-Date>2010-06-17</Release-Date>
+      <Last-Update-Date>2020-03-04</Last-Update-Date>
+    </Status>
+    <Title>Illumina HumanHT-12 V4.0 expression beadchip</Title>
+    <Accession database="GEO">GPL10558</Accession>
+    <Technology>oligonucleotide beads</Technology>
+    <Distribution>commercial</Distribution>
+    <Organism taxid="9606">Homo sapiens</Organism>
+    <Manufacturer>Illumina Inc.</Manufacturer>
+    <Manufacture-Protocol>
+see manufacturer's website
+    </Manufacture-Protocol>
+    <Description>
+The HumanHT-12 v4 Expression BeadChip provides high throughput processing of 12 samples per BeadChip without the need for expensive, specialized automation. The BeadChip is designed to support flexible usage across a wide-spectrum of experiments.
+
+The updated content on the HumanHT-12 v4 Expression BeadChips provides more biologically meaningful results through genome-wide transcriptional coverage of well-characterized genes, gene candidates, and splice variants.
+
+Each array on the HumanHT-12 v4 Expression BeadChip targets more than 31,000 annotated genes with more than 47,000 probes derived from the National Center for Biotechnology Information Reference Sequence (NCBI) RefSeq Release 38 (November 7, 2009) and other sources.
+
+Please use the GEO Data Submission Report Plug-in v1.0 for Gene Expression which may be downloaded from https://icom.illumina.com/icom/software.ilmn?id=234 to format the normalized and raw data.  These should be submitted as part of a GEOarchive.  Instructions for assembling a GEOarchive may be found at http://www.ncbi.nlm.nih.gov/projects/geo/info/spreadsheet.html
+
+October 11, 2012: annotation table updated with HumanHT-12_V4_0_R2_15002873_B.txt
+    </Description>
+    <Contact-Ref ref="contrib2" />
+    <Supplementary-Data type="TXT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/platforms/GPL10nnn/GPL10558/suppl/GPL10558_HumanHT-12_V4_0_R1_15002873_B.txt.gz
+    </Supplementary-Data>
+    <Supplementary-Data type="TXT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/platforms/GPL10nnn/GPL10558/suppl/GPL10558_HumanHT-12_V4_0_R2_15002873_B.txt.gz
+    </Supplementary-Data>
+    <Relation type="Alternative to" target="GPL10904" />
+    <Relation type="Alternative to" target="GPL22366" comment="alternative" />
+    <Relation type="Alternative to" target="GPL28098" comment="HumanHT-12_V4_0_R0_15002873_4.bgx" />
+    <Relation type="Alternative to" target="GPL28226" comment="custom probe mapping" />
+    <Data-Table>
+      <Column position="1">
+        <Name>ID</Name>
+        <Description>Unique identifier for the probe (across all products and species)</Description>
+      </Column>
+      <Column position="2">
+        <Name>Species</Name>
+      </Column>
+      <Column position="3">
+        <Name>Source</Name>
+        <Description>Transcript sequence source name</Description>
+      </Column>
+      <Column position="4">
+        <Name>Search_Key</Name>
+        <Description>Internal id useful for custom design array</Description>
+      </Column>
+      <Column position="5">
+        <Name>Transcript</Name>
+        <Description>Internal transcript id</Description>
+      </Column>
+      <Column position="6">
+        <Name>ILMN_Gene</Name>
+        <Description>Internal gene symbol</Description>
+      </Column>
+      <Column position="7">
+        <Name>Source_Reference_ID</Name>
+        <Description>Id in the source database</Description>
+      </Column>
+      <Column position="8">
+        <Name>RefSeq_ID</Name>
+        <Description>Refseq id</Description>
+      </Column>
+      <Column position="9">
+        <Name>Unigene_ID</Name>
+        <Description>Unigene id</Description>
+      </Column>
+      <Column position="10">
+        <Name>Entrez_Gene_ID</Name>
+        <Description>Entrez gene id</Description>
+      </Column>
+      <Column position="11">
+        <Name>GI</Name>
+        <Description>Genbank id</Description>
+      </Column>
+      <Column position="12">
+        <Name>Accession</Name>
+        <Description>Genbank accession number</Description>
+      </Column>
+      <Column position="13">
+        <Name>Symbol</Name>
+        <Description>Gene symbol from the source database</Description>
+      </Column>
+      <Column position="14">
+        <Name>Protein_Product</Name>
+        <Description>Genbank protein accession number</Description>
+      </Column>
+      <Column position="15">
+        <Name>Probe_Id</Name>
+      </Column>
+      <Column position="16">
+        <Name>Array_Address_Id</Name>
+        <Description>Decoder id</Description>
+      </Column>
+      <Column position="17">
+        <Name>Probe_Type</Name>
+        <Description>Information about what this probe is targeting</Description>
+      </Column>
+      <Column position="18">
+        <Name>Probe_Start</Name>
+        <Description>Position of the probe relative to the 5' of the source transcript sequence</Description>
+      </Column>
+      <Column position="19">
+        <Name>SEQUENCE</Name>
+        <Description>Probe sequence</Description>
+      </Column>
+      <Column position="20">
+        <Name>Chromosome</Name>
+        <Description>Chromosome</Description>
+      </Column>
+      <Column position="21">
+        <Name>Probe_Chr_Orientation</Name>
+        <Description>Orientation on the NCBI genome built</Description>
+      </Column>
+      <Column position="22">
+        <Name>Probe_Coordinates</Name>
+        <Description>genomic position of the probe on the NCBI genome build 36 version 3</Description>
+      </Column>
+      <Column position="23">
+        <Name>Cytoband</Name>
+      </Column>
+      <Column position="24">
+        <Name>Definition</Name>
+        <Description>Gene description from the source</Description>
+      </Column>
+      <Column position="25">
+        <Name>Ontology_Component</Name>
+        <Description>Cellular component annotations from Gene Ontology project</Description>
+      </Column>
+      <Column position="26">
+        <Name>Ontology_Process</Name>
+        <Description>Biological process annotations from Gene Ontology project</Description>
+      </Column>
+      <Column position="27">
+        <Name>Ontology_Function</Name>
+        <Description>Molecular function annotations from Gene Ontology project</Description>
+      </Column>
+      <Column position="28">
+        <Name>Synonyms</Name>
+        <Description>Gene symbol synonyms from Refseq</Description>
+      </Column>
+      <Column position="29">
+        <Name>Obsolete_Probe_Id</Name>
+        <Description>Identifier of probe id before bgx time</Description>
+      </Column>
+      <Column position="30">
+        <Name>GB_ACC</Name>
+      </Column>
+    <External-Data rows="48107">
+GPL10558-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Platform>
+
+  <Sample iid="GSM3703626">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 DMSO 1</Title>
+    <Accession database="GEO">GSM3703626</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+DMSO
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 1
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703626/suppl/GSM3703626_200796210096_A_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_A.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703626-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703627">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 DMSO 2</Title>
+    <Accession database="GEO">GSM3703627</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+DMSO
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 2
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703627/suppl/GSM3703627_200796210096_B_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_B.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703627-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703628">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 DMSO 3</Title>
+    <Accession database="GEO">GSM3703628</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+DMSO
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 3
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703628/suppl/GSM3703628_200796210096_C_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_C.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703628-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703629">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 LAPA 1 uM 1</Title>
+    <Accession database="GEO">GSM3703629</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+LAPA 1 uM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 1
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703629/suppl/GSM3703629_200796210096_D_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_D.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703629-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703630">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 LAPA 1 uM 2</Title>
+    <Accession database="GEO">GSM3703630</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+LAPA 1 uM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 2
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703630/suppl/GSM3703630_200796210096_E_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_E.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703630-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703631">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 LAPA 1 uM 3</Title>
+    <Accession database="GEO">GSM3703631</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+LAPA 1 uM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 3
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703631/suppl/GSM3703631_200796210096_F_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_F.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703631-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703632">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 THZ 1250 nM 1</Title>
+    <Accession database="GEO">GSM3703632</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+THZ 1250 nM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 1
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703632/suppl/GSM3703632_200796210096_J_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_J.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703632-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703633">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 THZ 1250 nM 2</Title>
+    <Accession database="GEO">GSM3703633</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+THZ 1250 nM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 2
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703633/suppl/GSM3703633_200796210096_K_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_K.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703633-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703634">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>SKBR3 THZ 1250 nM 3</Title>
+    <Accession database="GEO">GSM3703634</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>SKBR3</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+SKBR3
+      </Characteristics>
+      <Characteristics tag="treatment">
+THZ 1250 nM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 3
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703634/suppl/GSM3703634_200796210096_L_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796210096_L.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703634-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703635">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 DMSO 1</Title>
+    <Accession database="GEO">GSM3703635</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+DMSO
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 1
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703635/suppl/GSM3703635_200796250119_A_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_A.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703635-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703636">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 DMSO 2</Title>
+    <Accession database="GEO">GSM3703636</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+DMSO
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 2
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703636/suppl/GSM3703636_200796250119_B_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_B.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703636-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703637">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 DMSO 3</Title>
+    <Accession database="GEO">GSM3703637</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+DMSO
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 3
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703637/suppl/GSM3703637_200796250119_C_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_C.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703637-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703638">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 LAPA 1 uM 1</Title>
+    <Accession database="GEO">GSM3703638</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+LAPA 1 uM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 1
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703638/suppl/GSM3703638_200796250119_D_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_D.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703638-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703639">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 LAPA 1 uM 2</Title>
+    <Accession database="GEO">GSM3703639</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+LAPA 1 uM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 2
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703639/suppl/GSM3703639_200796250119_E_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_E.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703639-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703640">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 LAPA 1 uM 3</Title>
+    <Accession database="GEO">GSM3703640</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+LAPA 1 uM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 3
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703640/suppl/GSM3703640_200796250119_F_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_F.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703640-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703641">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 THZ 1250 nM 1</Title>
+    <Accession database="GEO">GSM3703641</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+THZ 1250 nM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 1
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703641/suppl/GSM3703641_200796250119_J_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_J.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703641-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703642">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 THZ 1250 nM 2</Title>
+    <Accession database="GEO">GSM3703642</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+THZ 1250 nM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 2
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703642/suppl/GSM3703642_200796250119_K_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_K.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703642-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Sample iid="GSM3703643">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>BT474 THZ 1250 nM 3</Title>
+    <Accession database="GEO">GSM3703643</Accession>
+    <Type>RNA</Type>
+    <Channel-Count>1</Channel-Count>
+    <Channel position="1">
+      <Source>BT474</Source>
+      <Organism taxid="9606">Homo sapiens</Organism>
+      <Characteristics tag="cell line">
+BT474
+      </Characteristics>
+      <Characteristics tag="treatment">
+THZ 1250 nM
+      </Characteristics>
+      <Treatment-Protocol>
+Cells were treated with vehicle control (DMSO), lapatinib (1 μM) or THZ1 (250 nM) for 6 hrs.
+      </Treatment-Protocol>
+      <Growth-Protocol>
+SKBR3 and BT474 were cultured in RPMI-1640 (GIBCO) supplemented with 10% FBS and 1% penicillin/streptomycin.
+      </Growth-Protocol>
+      <Molecule>total RNA</Molecule>
+      <Extract-Protocol>
+RNA was extracted with Trizol reagent, followed by clean-up and DNase I treatment with QIAGEN RNeasy mini kit in accordance with the prescribed protocol provided with the kit. Quality control was performed with Agilent Bioanalyser.
+      </Extract-Protocol>
+      <Label>biotin</Label>
+      <Label-Protocol>
+Biotinylated cRNA were prepared with the Ambion MessageAmp kit for Illumina arrays
+      </Label-Protocol>
+    </Channel>
+    <Hybridization-Protocol>
+Standard Illumina hybridization protocol
+    </Hybridization-Protocol>
+    <Scan-Protocol>
+Standard Illumina scanning protocol
+    </Scan-Protocol>
+    <Description>
+replicate 3
+    </Description>
+    <Data-Processing>
+The data were normalised using quantile normalisation with Partek array software
+    </Data-Processing>
+    <Platform-Ref ref="GPL10558" />
+    <Contact-Ref ref="contrib1" />
+    <Supplementary-Data type="IDAT">
+ftp://ftp.ncbi.nlm.nih.gov/geo/samples/GSM3703nnn/GSM3703643/suppl/GSM3703643_200796250119_L_Grn.idat.gz
+    </Supplementary-Data>
+    <Data-Table>
+      <Column position="1">
+        <Name>ID_REF</Name>
+      </Column>
+      <Column position="2">
+        <Name>VALUE</Name>
+        <Description>quantile normalized</Description>
+      </Column>
+      <Column position="3">
+        <Name>200796250119_L.Detection Pval</Name>
+      </Column>
+    <External-Data rows="47323">
+GSM3703643-tbl-1.txt
+    </External-Data>
+    </Data-Table>
+  </Sample>
+
+  <Series iid="GSE129254">
+    <Status database="GEO">
+      <Submission-Date>2019-04-02</Submission-Date>
+      <Release-Date>2021-05-21</Release-Date>
+      <Last-Update-Date>2021-05-21</Last-Update-Date>
+    </Status>
+    <Title>Pertubations of gene expresion  by lapatinib or THZ1 in HER2 positive breast cancer cell lines.</Title>
+    <Accession database="GEO">GSE129254</Accession>
+    <Pubmed-ID>31462705</Pubmed-ID>
+    <Summary>
+Gene expression profiling were examined by Human HT-12 v4.0 Expression BeadChip arrays  in SKBR3 and BT474 cells treated with HER2 inhibitor lapatinib or CDK7 inhibitor THZ1.
+    </Summary>
+    <Overall-Design>
+SKBR3 and BT474 cells were treated with  lapatinib(1 μM) or THZ1 (250 nM) for 6 hours. RNA was extracted with TRIzol reagent (Invitrogen)  and RNeasy mini kit (Qiagen). HumanHT-12 v4.0 Expression BeadChip arrays were used for analyses of transcriptomic changes caused by HER2 or CDK7 inhibition.
+    </Overall-Design>
+    <Type>Expression profiling by array</Type>
+    <Contributor-Ref ref="contrib3" position="1" />
+    <Contributor-Ref ref="contrib4" position="2" />
+    <Contributor-Ref ref="contrib5" position="3" />
+    <Contact-Ref ref="contrib1" />
+    <Sample-Ref ref="GSM3703626" />
+    <Sample-Ref ref="GSM3703627" />
+    <Sample-Ref ref="GSM3703628" />
+    <Sample-Ref ref="GSM3703629" />
+    <Sample-Ref ref="GSM3703630" />
+    <Sample-Ref ref="GSM3703631" />
+    <Sample-Ref ref="GSM3703632" />
+    <Sample-Ref ref="GSM3703633" />
+    <Sample-Ref ref="GSM3703634" />
+    <Sample-Ref ref="GSM3703635" />
+    <Sample-Ref ref="GSM3703636" />
+    <Sample-Ref ref="GSM3703637" />
+    <Sample-Ref ref="GSM3703638" />
+    <Sample-Ref ref="GSM3703639" />
+    <Sample-Ref ref="GSM3703640" />
+    <Sample-Ref ref="GSM3703641" />
+    <Sample-Ref ref="GSM3703642" />
+    <Sample-Ref ref="GSM3703643" />
+    <Supplementary-Data type="TAR">
+ftp://ftp.ncbi.nlm.nih.gov/geo/series/GSE129nnn/GSE129254/suppl/GSE129254_RAW.tar
+    </Supplementary-Data>
+    <Relation type="BioProject" target="https://www.ncbi.nlm.nih.gov/bioproject/PRJNA530616" />
+  </Series>
+
+</MINiML>

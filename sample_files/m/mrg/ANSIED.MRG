@@ -1,0 +1,1185 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against E:\RBBS\STOCK\ANSIED.BAS to produce E:\RBBS\CHAT\ANSIED.BAS
+* E:\RBBS\STOCK\ANSIED.BAS:  Date 2-16-1991  Size 43992 bytes
+* ------------[ Created 12-23-1992 04:56:10 ]------------
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+' $linesize:132
+' $title: 'ANSIED.BAS'
+'*
+'*  ANSIED v2.44a  by Tom Collins 
+'*---------------------------------------------------------------------------
+'*  Full Screen Text Editor for RBBS-PC
+'*  QuickBASIC v4.5 Version
+'*  02-16-91
+'*
+'*  v2.1xx ... made it work with RBBS v17
+'*  v2.2 ..... fixed some inconsistincies in the code as to # of lines in msg.
+'*             Some of the code thought 99 was length, some thought 100.
+'*  v2.3 ..... let it work with quoted reply.  No more REDIM of ZOutTxt$
+'*  v2.4 ..... removed tabs, margins code to be smaller
+'*  v2.41..... fixed bug with loss of bold attribute occasionally
+'*  v2.42..... made it work as a v17.3 subroutine.  Added block delete.
+'*  v2.43..... Added to: and from:.  Made cursor keys work locally.
+'*  v2.43a.... Stupid little bugs fixed
+'*  v2.44..... Fixed bugs, added ^T, Import, Subject, ASM functions
+'*  v2.44a.... Wordwrap/reflow bug fixed.  Arrows work in del.  Lines renum.
+'*
+'*  Returns:
+'*  ZSubParm  =  1 - Save Message
+'*            =  2 - Abort Message
+'*            = -1 - Dropped Carrier
+'*            = -2 - Sleep Disconnect
+'*
+'* Compile with:
+'*   BC C:\RBBSARCS\ANSIED.BAS /O/T/C:512;
+'*   
+'* Modifications to 2.44a by: Steve Stevens
+'* If you Like 'em let me know!
+'*       FIDONET 1:376/102                      RBBSNet 8:927/2
+
+
+* REPLACING old line(s) by new
+110   CONST ESCKey = 27
+      CONST BackspKey = 8
+      CONST OtherBackspKey = 127
+      CONST CarrRet = 13
+      CONST WordLeftKey = 1          ' Ctrl-A
+      CONST ReformTextKey = 2        ' Ctrl-B
+      CONST PageDownKey = 3          ' Ctrl-C
+      CONST ColRightKey = 4          ' Ctrl-D
+      CONST LineUpKey = 5            ' Ctrl-E
+      CONST WordRightKey = 6         ' Ctrl-F
+      CONST CharDeleteKey = 7        ' Ctrl-G
+* ------[ first line different ]------
+      CONST HelpExpertKey = 8        ' Ctrl-H
+      CONST TabKey = 9               ' Ctrl-I <- Tab Key Support
+      CONST EndSessionKey = 11       ' Ctrl-K
+      CONST HelpKey = 14             ' Ctrl-N
+      CONST ReflowTextKey = 15       ' Ctrl-O
+      CONST RepaintKey = 16          ' Ctrl-P
+      CONST PageUpKey = 18           ' Ctrl-R
+      CONST ColLeftKey = 19          ' Ctrl-S
+      CONST DeleteWordRightKey = 20  ' Ctrl-T
+      CONST ToggleINSKey = 22        ' Ctrl-V
+      CONST HomeKey = 23             ' Ctrl-W
+      CONST LineDownKey = 24         ' Ctrl-X
+      CONST LineDeleteKey = 25       ' Ctrl-Y
+      CONST EndKey = 26              ' Ctrl-Z
+
+      CONST BlankLine$ = ""
+* REPLACING old line(s) by new
+120   COMMON SHARED /Ansied/ CurrentRow, CurrentCol, TopLine
+      COMMON SHARED /Ansied/ OldColour, IsBold, InsertMode
+      COMMON SHARED /Ansied/ SoftSpace$
+      COMMON SHARED /Ansied/ BlockDelActive, MsgLockLines
+      COMMON SHARED /Ansied/ BlockLine1, BlockLine2
+      COMMON SHARED /Ansied/ MsgTo$, MsgSubj$
+
+* ------[ first line different ]------
+' $INCLUDE: 'RBBS-VAR.MOD'
+
+'      REDIM ZOutTxt$(99)     '<-- Needed to add this,
+'      REDIM ZUserIn$(10)      '<-- And this for some strange reason.
+
+'*  AnsiEd
+'*----------------------------------------------------------------------------
+'*  Main full-screen editor routine
+'*
+'*
+      SUB Ansied (T$, S$, L%) STATIC
+      '*
+      '* ZworkAra$() holds what's currently on the user's screen.
+      '* 24 Lines: ZWorkAra$(1) = Menu, Bottom Line = "Line 25"
+      '*
+
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+500  REDIM ZWorkAra$(24)
+      '*
+      '* TopLine is the index into the ZOutTxt$() array that
+      '* corresponds to the top of the displayed image, i.e.
+      '* what's on line 3 of the user's screen.
+      '*
+      '*   1,12,23,34,45,56,78
+      '*
+      TopLine = 1
+      SoftSpace$ = CHR$(250)
+      InsertMode = ZTrue
+      ZLineFeed$ = CHR$(10)
+      BlockDelActive = ZFalse
+      HiLiteSave = ZHiLiteOff
+      ZHiLiteOff = ZFalse
+      UseTputSave = ZUseTput
+      ZUseTput = ZFalse
+      MsgLockLines = L%
+      MsgTo$ = T$
+      CALL NameCaps(MsgTo$)
+
+      MsgSubj$ = S$
+      YY$ = ""
+      IF LEFT$(MsgSubj$, 3) = "(R)" THEN
+         YY$ = "(R)"
+         MsgSubj$ = MID$(MsgSubj$, 4)
+      END IF
+      CALL NameCaps(MsgSubj$)
+      MsgSubj$ = YY$ + MsgSubj$
+
+      '*
+      '* Initialize the screen
+      '*
+* REPLACING old line(s) by new
+510   CALL ClearScreen
+      CALL UpdateStatusLine(1)
+* ------[ first line different ]------
+      CALL DisplayKeys
+      CALL MoveCursor(3, 1)
+      '*
+      '* Remove ANSI sequences from the quoted lines
+      '*
+      IF ZLinesInMsg > 88 THEN
+         ZLinesInMsg = 88
+      END IF
+      IF ZMaxMsgLines > 98 THEN
+         ZMaxMsgLines = 98
+      END IF
+      IF ZLinesInMsg > ZMaxMsgLines THEN
+         ZLinesInMsg = ZMaxMsgLines
+      END IF
+      FOR I = ZLinesInMsg + 1 TO 99
+         ZOutTxt$(I) = BlankLine$
+      NEXT
+      IF ZLinesInMsg <> 0 THEN
+         FOR I = 1 TO ZLinesInMsg
+            CALL UnString(ZOutTxt$(I), "[")
+         NEXT
+         J = ZLinesInMsg \ 11
+         IF ZLinesInMsg MOD 11 = 0 THEN
+           J = J - 1
+         END IF
+         TopLine = J * 11 + 1
+         J = ZLinesInMsg - TopLine
+         CALL MoveCursor(J + 5, 1)
+      END IF
+      CALL UpdateScreen
+      '*
+      '* Run the Editor
+      '*
+* REPLACING old line(s) by new
+540            CASE ESCKey
+                  IF BlockDelActive THEN
+                     BlockDelActive = ZFalse
+* ------[ first line different ]------
+                     CALL ClearScreen        ' <-- Added when user cancells
+                     CALL UpdateScreen       ' Block Delete the "highlighted"
+                     CALL UpdateStatusLine(1)
+                     CALL UpdateStatusLine(2)
+                     CALL MoveCursor(BlockRow, BlockCol)
+                     KeyPressed = 255
+                  END IF
+
+               CASE LineUpKey, LineDownKey, PageDownKey, PageUpKey, TabKey
+                  '*
+                  '* Up and Down get passed on
+                  '*
+               CASE ELSE
+                  '*
+                  '* Ignore the key
+                  '*
+                  KeyPressed = 255
+
+            END SELECT
+         END IF
+
+* REPLACING old line(s) by new
+560      SELECT CASE KeyPressed
+* ------[ first line different ]------
+            CASE ESCKey,EndSessionKey    'Pe 03/17/92
+               '*
+               '* User wants to see main menu
+               '*
+               CALL DisplayMainMenu
+               CALL MoveCursor(RowSave, ColSave)
+               CALL GetChar(B$): GOSUB 740
+               CALL AllCaps(B$)                                        'RT062992
+               IF B$ = "D" THEN
+                  BlockDelActive = ZTrue
+                  BlockLine1 = RowSave + TopLine - 3
+                  BlockCol = ColSave
+                  BlockRow = RowSave
+                  CALL EraseToEOL(1, 1)
+                  ' v2.44a
+                  CALL PutScreen("Delete Block: Press ENTER on Last Line to Delete, or ESC Twice to Quit", DefaultColor, DefaultBold)
+                  BlockLine2 = 0
+  CALL MoveCursor(RowSave, 1)                                'SM070501
+   Index = (RowSave) + (Topline - 3)
+    CALL Putscreen(ZOutTxt$(Index),RedFore,ZFalse)
+               ELSE
+                  CALL MenuCommand(B$): GOSUB 740
+               END IF
+     CALL MoveCursor(RowSave, ColSave)
+
+* REPLACING old line(s) by new
+570         CASE LineUpKey
+               '*
+               '* Move the current cursor position up one line
+               '*
+               IF CurrentRow > 3 THEN
+                  CALL MoveCursor(CurrentRow - 1, CurrentCol)
+               ELSE
+                  IF TopLine <> 1 THEN
+                     TopLine = TopLine - 11
+                     CALL MoveCursor(CurrentRow + 10, CurrentCol)
+                     CALL UpdateScreen
+                  END IF
+               END IF
+* ------[ first line different ]------
+'*
+'* Un-Highlights lines to be deleted
+'* Steve
+IF BlockDelActive THEN
+' CALL SaveCursor(SaveRow, SaveCol)
+  Index = (CurrentRow + 1) + (Topline - 3)
+    CALL MoveCursor(CurrentRow,1)                            'SM070501
+    CALL Putscreen(ZOutTxt$(Index), YellowFore,ZTrue)
+     CALL MoveCursor(SaveRow, SaveCol)
+END IF
+
+* REPLACING old line(s) by new
+580         CASE LineDownKey
+               '*
+               '* Move the current cursor position down one line
+               '*
+* ------[ first line different ]------
+               IF CurrentRow < 19 THEN
+                  CALL MoveCursor(CurrentRow + 1, CurrentCol)
+               ELSEIF BlockDelActive THEN
+                CALL PutScreen(CHR$(7),RedFore,ZFalse)
+               ELSE
+                  IF NOT TopLine = 78 THEN
+                     TopLine = TopLine + 11
+                     CALL MoveCursor(CurrentRow - 10, CurrentCol)
+                     CALL UpdateScreen
+                  END IF
+               END IF
+'*
+'* Highlight lines to be delete
+'*        Steve
+IF BlockDelActive THEN
+   Index = (CurrentRow) + (Topline - 3)
+      CALL Putscreen(ZOutTxt$(Index),RedFore,ZFalse)
+       CALL MoveCursor(CurrentRow, 1)
+END IF
+* INSERTING new line(s)
+595         CASE TabKey    ' <- Tab Key Support here..
+               '*
+               '* Tab 8 Spaces
+               '*
+               IF CurrentCol < 72 THEN
+                CALL MoveCursor(CurrentRow, CurrentCol + 8)
+               END IF
+
+* REPLACING old line(s) by new
+710         CASE HelpKey, ReformTextKey, ReflowTextKey, ToggleINSKey, RepaintKey
+               '*
+               '* Execute a main menu command
+               '*
+               '*          1234567890123456789012
+               YY$ = MID$(" J           HRP     I", KeyPressed, 1)
+               CALL MenuCommand(YY$): GOSUB 740
+               CALL MoveCursor(RowSave, ColSave)
+* ------[ first line different ]------
+            CASE IS > 127, IS < 32
+               '*
+               '* Ignore characters above 127 or below 32
+               '*
+* REPLACING old line(s) by new
+730   REDIM ZWorkAra$(13)
+      ZHiLiteOff = HiLiteSave
+      ZUseTput = UseTputSave
+* ------[ first line different ]------
+      S$ = MsgSubj$                                                   'RT062992
+      CALL AllCaps(S$)                                                'RT062992
+      EXIT SUB
+
+      '*
+      '* Test ZSubParm and Exit ANSIED if the carrier dropped
+      '*
+* REPLACING old line(s) by new
+740   IF ZSubParm <> 0 THEN
+         GOTO 730
+      END IF
+      RETURN
+
+      END SUB         ' Sub AnsiEd
+
+'*  BackspChar()
+'*----------------------------------------------------------------------------
+'*  This routine handles the user entering the backspace key
+'*
+'*
+* ------[ first line different ]------
+      SUB BackspChar STATIC
+* REPLACING old line(s) by new
+1230     ELSE
+            CALL FindWrap(LEFT$(ZOutTxt$(Index - 1), ZRightMargin + 1), I)
+            IF I <= 1 THEN
+               I = ZRightMargin
+            END IF
+            ZOutTxt$(Index) = MID$(ZOutTxt$(Index - 1), I + 1)
+            ZOutTxt$(Index - 1) = LEFT$(ZOutTxt$(Index - 1), I)
+         END IF
+         IF RowSave > 3 THEN
+            CALL MoveCursor(RowSave - 1, NewCol)
+            CALL UpdateScreen
+         ELSE
+            CALL MoveCursor(RowSave, NewCol)
+            CALL UnGetChar(LineUpKey)
+         END IF
+      END IF
+      END SUB
+
+'*  CarrRetKey()
+'*----------------------------------------------------------------------------
+'*  This routine handles carriage returns entered in the file
+'*
+'*
+* ------[ first line different ]------
+      SUB CarrRetKey STATIC
+* REPLACING old line(s) by new
+1300  Index = CurrentRow + TopLine - 3
+      IF Index >= 99 THEN
+         EXIT SUB
+      END IF
+      IF InsertMode THEN         ' Insert a new line
+         FOR I = 98 TO Index + 1 STEP -1
+            ZOutTxt$(I + 1) = ZOutTxt$(I)
+         NEXT I
+         IF LEN(ZOutTxt$(Index)) >= CurrentCol THEN
+            ZOutTxt$(Index + 1) = MID$(ZOutTxt$(Index), CurrentCol)
+            ZOutTxt$(Index) = LEFT$(ZOutTxt$(Index), CurrentCol - 1)
+         ELSE
+            ZOutTxt$(Index + 1) = BlankLine$
+         END IF
+         CALL UpdateScreen
+* ------[ first line different ]------
+END IF
+
+     IF CurrentRow < 19 THEN
+        CALL MoveCursor(CurrentRow + 1, 1)
+     ELSE
+         CALL MoveCursor(CurrentRow,1)
+         CALL UnGetChar(LineDownKey)
+     END IF
+      END SUB
+
+'*  ChangeSubject()
+'*----------------------------------------------------------------------------
+'*  Routine to allow user to change the message subject
+'*
+'*
+      SUB ChangeSubject STATIC
+      CALL GetString("Change Subject From '" + MsgSubj$ + "' To? ", NewSubj$)
+      IF NewSubj$ <> "" THEN
+         MsgSubj$ = LEFT$(NewSubj$, 25)
+         CALL NameCaps(MsgSubj$)
+      END IF
+      END SUB
+
+'*  ClearScreen()
+'*----------------------------------------------------------------------------
+'*  This routine clears the screen and moves the cursor to row 2, col 1
+'*
+'*
+      SUB ClearScreen STATIC
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+1500  FOR I = 1 TO 19
+         ZWorkAra$(I) = BlankLine$
+      NEXT I
+      CALL QuickTput("[2J[0m", 0)
+      ZSubParm = 2
+      CALL Line25
+      ZSubParm = 0
+      CALL QuickTput("[0m[3;1H" + ZEmphasizeOff$, 0)
+      CurrentCol = 1
+      CurrentRow = 4
+      IsBold = DefaultBold
+      OldColour = DefaultColor
+      END SUB
+
+'*  DeleteCurrentLine()
+'*----------------------------------------------------------------------------
+'*  This routine deletes the current line on the screen and in the array
+'*  ZOutTxt$, and moves the next lower line up one  It then repaints the
+'*  affected portion of the screen (from the deleted line down)
+'*
+'*
+      SUB DeleteCurrentLine (Index%) STATIC
+* REPLACING old line(s) by new
+1600  FOR I = Index% TO 98
+         ZOutTxt$(I) = ZOutTxt$(I + 1)
+      NEXT I
+      ZOutTxt$(99) = BlankLine$
+      CALL UpdateScreen
+      END SUB
+
+'*  DisplayMainMenu()
+'*----------------------------------------------------------------------------
+'*  This routine displays the main menu on the top line
+'*
+'*
+* ------[ first line different ]------
+      SUB DisplayMainMenu STATIC
+* REPLACING old line(s) by new
+1700  CALL MoveCursor(1, 1)
+      YY$ = "A)bort H)elp D)elete I)ns/ovw J)ustify "
+      IF ZLocalUser OR ZSysop THEN
+         YY$ = YY$ + "O)import R)eflow P)aint S)ave U)subject "
+      ELSE
+         YY$ = YY$ + "R)eflow P)aint S)ave U)subject          "
+      END IF
+      CALL ColorPrompt(YY$)
+      CALL PutScreen(YY$, DefaultColor, DefaultBold)
+      END SUB
+
+'*  DoneWithMsg()
+'*----------------------------------------------------------------------------
+'*  This routine is called to save or abort the message
+'*
+'*
+* ------[ first line different ]------
+      SUB DoneWithMsg (YY$) STATIC
+* REPLACING old line(s) by new
+1810  SELECT CASE YY$
+         CASE "S"        ' Save Message
+            '*
+            '* Remove trailing blank lines from the message
+            '*
+            CALL FindEndOfMsg(EndOfMsg)
+            FOR I = 1 TO EndOfMsg
+               J = INSTR(ZOutTxt$(I), SoftSpace$)
+               WHILE J <> 0
+                  MID$(ZOutTxt$(I), J, 1) = " "
+                  J = INSTR(ZOutTxt$(I), SoftSpace$)
+               WEND
+               CALL TrimTrail(ZOutTxt$(I), " ")
+            NEXT I
+            CALL FindEndOfMsg(ZLinesInMsg)
+* ------[ first line different ]------
+             CALL EraseToEOL(1, 1)
+              CALL MoveCursor(1, 1)
+      CALL PutScreen(" ", DefaultColor, DefaultBold)
+      CALL ClearScreen                 'Pe 03/15/92
+               ZSubParm = 1
+
+* REPLACING old line(s) by new
+1820     CASE "A"
+            CALL EraseToEOL(1, 1)
+            YY$ = "Abort: Are You Sure (Y)es,[N]o)? "
+            CALL ColorPrompt(YY$)
+            CALL PutScreen(YY$, DefaultColor, DefaultBold)
+            CALL GetChar(B$)
+            IF ZSubParm <> 0 THEN
+               B$ = "Y"
+            END IF
+* ------[ first line different ]------
+            CALL AllCaps(B$)                                           'RT062992
+            IF B$ = "Y" THEN                                           'RT062992
+               CALL ClearScreen
+               ZSubParm = 2
+            END IF
+
+      CASE ELSE
+
+      END SELECT
+      END SUB
+
+'*  EraseToEOL()
+'*----------------------------------------------------------------------------
+'*  This routine clears from a position to to the end of that line
+'*
+'*
+      SUB EraseToEOL (LineNumber, ColNumber) STATIC
+* REPLACING old line(s) by new
+1900  CALL MoveCursor(LineNumber, ColNumber)
+      CALL QuickTput("[K", 0)
+      END SUB
+
+'*  FindEndOfMsg()
+'*----------------------------------------------------------------------------
+'*  Finds the last active line in the message
+'*
+'*
+* ------[ first line different ]------
+      SUB FindEndOfMsg (EndOfMsg) STATIC
+      EndOfMsg = 1
+      FOR I = ZMaxMsgLines TO 1 STEP -1
+         IF ZOutTxt$(I) <> BlankLine$ OR I <= MsgLockLines THEN
+            EndOfMsg = I
+            EXIT FOR
+         END IF
+      NEXT I
+      END SUB
+
+'*  FindWrap()
+'*----------------------------------------------------------------------------
+'*  This routine finds a place in the string yy$ that could be used as a
+'*  place to wrap the line WhereToWrap should be the last position that
+'*  remains in the line, ie
+'*    set   currentline$ = left$(yy$,wheretowrap)
+'*          nextline$    = mid$ (yy$,wheretowrap+1)
+'*
+'*
+      SUB FindWrap (YY$, WhereToWrap) STATIC
+* REPLACING old line(s) by new
+2100  WhereToWrap = LEN(YY$) + 1
+      CALL FindWord(YY$, 0, WhereToWrap)
+      WhereToWrap = WhereToWrap - 1
+      END SUB
+
+'*  GetChar()
+'*----------------------------------------------------------------------------
+'*  This routine reads a character from the user into YY$
+'*
+'*
+* ------[ first line different ]------
+      SUB GetChar (YY$) STATIC
+* REPLACING old line(s) by new
+2200  ZAutoLogoff! = TIMER + ZWaitBeforeDisconnect
+      CALL Carrier
+      YY$ = ""
+      WHILE ZSubParm <> -1 AND ZSubParm <> -2 AND YY$ = ""
+         ZSubParm = 0
+         IF LEN(ZCommportStack$) > 0 THEN
+            YY$ = LEFT$(ZCommportStack$, 1)
+            ZCommportStack$ = MID$(ZCommportStack$, 2)
+         ELSE
+            IF ZLocalUser THEN
+               YY$ = INKEY$
+               IF LEN(YY$) = 2 THEN
+                  KeyPressed = ASC(RIGHT$(YY$, 1))
+                  YY$ = ""
+                  SELECT CASE KeyPressed
+                     CASE 82                  ' Insert
+                        KeyPressed = ToggleINSKey
+                     CASE 83                  ' Delete
+                        KeyPressed = CharDeleteKey
+                     CASE 71                  ' Home
+                        KeyPressed = HomeKey
+                     CASE 73                  ' PgUp
+                        KeyPressed = PageUpKey
+                     CASE 72                  ' Up Arrow
+                        KeyPressed = LineUpKey
+                     CASE 80                  ' Down Arrow
+                        KeyPressed = LineDownKey
+                     CASE 81                  ' PgDn
+                        KeyPressed = PageDownKey
+                     CASE 75                  ' Left Arrow
+                        KeyPressed = ColLeftKey
+                     CASE 77                  ' Right Arrow
+                        KeyPressed = ColRightKey
+                     CASE 115                 ' Ctrl-Left Arrow
+                        KeyPressed = WordLeftKey
+                     CASE 116                 ' Ctrl-Right Arrow
+                        KeyPressed = WordRightKey
+                     CASE 79                  ' End
+                        KeyPressed = EndKey
+* ------[ first line different ]------
+                     CASE 9
+                        KeyPressed = TabKey
+                     CASE ELSE
+                        KeyPressed = 0
+                  END SELECT
+                  IF KeyPressed <> 0 THEN
+                     YY$ = CHR$(KeyPressed)
+                  END IF
+               END IF
+            ELSE
+               CALL FindFKey
+               IF ZSubParm >= 0 THEN
+                  YY$ = ZKeyPressed$
+                  IF YY$ = "" THEN
+                     CALL EofComm(Char%)
+                     IF Char% = -1 THEN
+                        CALL CheckTime(ZAutoLogoff!, Remain!, 1)
+                        IF Remain! < 0 THEN
+                           CALL UpdtCalr("Sleep disconnect", 1)
+                           ZSubParm = -2
+                           ZNo = ZTrue
+                           ZSleepDisconnect = ZTrue
+                        END IF
+                     ELSE
+                        CALL Carrier
+                        IF ZSubParm <> -1 THEN
+                           ZSubParm = 0
+                           CALL GetCom(YY$)
+                        END IF
+                     END IF
+                  END IF
+               END IF
+            END IF
+         END IF
+      WEND
+      END SUB
+
+'*  GetString()
+'*----------------------------------------------------------------------------
+'*  Gets a string from the user
+'*
+'*
+      SUB GetString (Prompt$, YY$) STATIC
+      YY$ = ""
+      CALL EraseToEOL(1, 1)
+      CALL PutScreen(Prompt$, DefaultColor, DefaultBold)
+      NewCol = CurrentCol
+      InitCol = NewCol
+      DO
+         CALL MoveCursor(CurrentRow, NewCol)
+         CALL GetChar(B$)
+         IF ZSubParm <> 0 THEN
+            B$ = CHR$(ESCKey)
+         END IF
+         KeyPressed = ASC(B$)
+         SELECT CASE KeyPressed
+            CASE BackspKey, OtherBackspKey
+               IF NewCol <> InitCol THEN
+                  CALL MoveCursor(CurrentRow, NewCol - 1)
+                  CALL PutScreen(" ", DefaultColor, DefaultBold)
+                  NewCol = NewCol - 1
+                  YY$ = LEFT$(YY$, LEN(YY$) - 1)
+               END IF
+            CASE CarrRet
+               EXIT DO
+            CASE ESCKey
+               YY$ = ""
+               EXIT DO
+            CASE ELSE
+               YY$ = YY$ + B$
+               CALL PutScreen(B$, DefaultColor, DefaultBold)
+               NewCol = NewCol + 1
+         END SELECT
+      LOOP WHILE 1
+      END SUB
+
+'*  HelpMe()
+'*----------------------------------------------------------------------------
+'*  This routine provides on-line help for the user
+'*
+'*
+      SUB HelpMe STATIC
+* REPLACING old line(s) by new
+2300  CALL SaveCursor(RowSave, ColSave)
+      CALL ClearScreen
+      CALL BufFile(ZHelpPath$ + "ANSIED" + ZHelpExtension$, X)
+      CALL ClearScreen
+      CALL UpdateScreen
+      CALL MoveCursor(RowSave, ColSave)
+      END SUB
+
+'*  ImportFile()
+'*----------------------------------------------------------------------------
+'*  Imports an ASCII text file in the message
+'*
+'*
+* ------[ first line different ]------
+      SUB ImportFile STATIC
+      IF ZLocalUser OR ZSysop THEN
+         CALL GetString("Import What File? ", FileName$)
+         IF FileName$ <> "" THEN
+            CALL FindIt(FileName$)
+            IF ZOK THEN
+               ZUserIn$(1) = FileName$
+               ZAnsIndex = 0
+               ZLastIndex = 1
+               CALL FindEndOfMsg(EndOfMsg)
+               CALL MsgImport(ZMaxMsgLines, ZRightMargin, EndOfMsg, ZOutTxt$())
+         J = EndOfMsg \ 11
+         IF EndOfMsg MOD 11 = 0 THEN
+           J = J - 1
+         END IF
+          TopLine = J * 11 + 1
+           J = EndOfMsg - TopLine
+          CALL MoveCursor(J + 5, 1)
+         CALL UpdateScreen
+            END IF
+         END IF
+      END IF
+      END SUB
+
+'*  LastParaLine()
+'*----------------------------------------------------------------------------
+'*  This routine returns ZTrue if ZOutTxt$(I) is the last line
+'*  in a paragraph
+'*
+'*
+      SUB LastParaLine (I, LastLine, Result) STATIC
+* REPLACING old line(s) by new
+2400  Result = ZFalse
+      IF I = LastLine OR I >= ZMaxMsgLines THEN
+         Result = ZTrue
+      ELSE
+         YY$ = ZOutTxt$(I)
+         J = INSTR(YY$, ">")
+         IF J = 0 THEN
+            J = 6
+         END IF
+         IF J < 5 THEN
+            Result = ZTrue
+         ELSEIF YY$ = BlankLine$ THEN
+            Result = ZTrue
+         ELSE
+            IF ZOutTxt$(I + 1) = BlankLine$ THEN
+               Result = ZTrue
+            ELSEIF LEFT$(ZOutTxt$(I + 1), 1) = " " THEN
+               Result = ZTrue
+            ELSE
+               K = INSTR(ZOutTxt$(I + 1), ">")
+               IF K <> 0 AND K < 5 THEN
+                  Result = ZTrue
+               END IF
+            END IF
+         END IF
+      END IF
+      END SUB
+
+'*  MenuCommand()
+'*----------------------------------------------------------------------------
+'* This routine executes the passed main menu command
+'*
+'*
+* ------[ first line different ]------
+      SUB MenuCommand (YY$) STATIC
+* REPLACING old line(s) by new
+2450  ZSubParm = 0              ' v2.44a
+      SELECT CASE YY$
+* ------[ first line different ]------
+'         CASE "+"
+'         CASE "-"
+         CASE "H"
+            CALL HelpMe
+            CALL DisPlayKeys       'Pe 03/17/92
+         CASE "S", "A"
+            CALL DoneWithMsg(YY$)
+         CASE "P"
+            CALL ClearScreen
+            CALL DisplayKeys
+            CALL UpdateScreen
+         CASE "I"
+            InsertMode = NOT InsertMode
+         CASE "R"
+            CALL ReformText(ZFalse)
+         CASE "J"
+            CALL ReformText(ZTrue)
+         CASE "O"
+            CALL ImportFile
+         CASE "U"
+            CALL ChangeSubject
+      Case Else                       'HP072501
+      END SELECT
+      IF ZSubParm = 0 THEN
+         CALL EraseToEOL(1, 1)
+         CALL UpdateStatusLine(1)
+      END IF
+      END SUB
+
+'*  MoveCursor()
+'*----------------------------------------------------------------------------
+'*  This routine moves the cursor to the position spec'd by newcol and
+'*  newrow and tries to do it with the minimum number of Ansi characters
+'*
+'*
+      SUB MoveCursor (NewRow, NewCol) STATIC
+* REPLACING old line(s) by new
+2500  YY$ = "        "
+      CALL MoveCurStr(CurrentRow, CurrentCol, NewRow, NewCol, YY$, YLen)
+      IF YLen <> 0 THEN
+         YY$ = LEFT$(YY$, YLen)
+         CALL QuickTput(YY$, 0)
+      END IF
+      ZSubParm = 0
+      END SUB
+
+'*  NormalChar()
+'*----------------------------------------------------------------------------
+'*  This routine handles 'normal' characters entered into the message
+'*
+'*
+* ------[ first line different ]------
+      SUB NormalChar (YY$) STATIC
+
+* REPLACING old line(s) by new
+2630  ELSE
+         '*
+         '* Wrap the end of the line
+         '*
+         IF NOT AtEndOfLine THEN
+            ZOutTxt$(Index) = LEFT$(ZOutTxt$(Index), CurrentCol - 1) + YY$ + MID$(ZOutTxt$(Index), CurrentCol)
+            LML = LML + 1
+         ELSE
+            MID$(ZOutTxt$(Index), CurrentCol, 1) = YY$
+         END IF
+
+         CALL FindWrap(ZOutTxt$(Index), I)
+         IF I <= 1 THEN
+            I = ZRightMargin
+         END IF
+
+         ZZ$ = MID$(ZOutTxt$(Index), (I + 1))
+         CALL TrimTrail(ZZ$, SoftSpace$)
+         ZOutTxt$(Index) = LEFT$(ZOutTxt$(Index), I)
+         '*
+         '* Add to the beginning of a new line
+         '*
+         IF Index <= 98 THEN
+            Index = Index + 1
+         END IF
+
+         Z = INSTR(ZOutTxt$(Index), ">")                                                  ' v2.44a
+         IF ZOutTxt$(Index) <> BlankLine$ AND (Z <= 0 OR Z > 6) AND LEN(ZOutTxt$(Index)) + LEN(ZZ$) < ZRightMargin THEN
+            ZOutTxt$(Index) = ZZ$ + ZOutTxt$(Index)
+         ELSE
+            FOR J = 98 TO Index STEP -1
+               ZOutTxt$(J + 1) = ZOutTxt$(J)
+            NEXT J
+            ZOutTxt$(Index) = ZZ$
+         END IF
+
+         CALL EraseToEOL(CurrentRow, I + 1)        ' do the "easy" line
+         ZWorkAra$(CurrentRow) = ZOutTxt$(Index)
+
+         CALL UpdateScreen
+         IF (ColSave > I) THEN
+            NewCol = ColSave - I + 1
+* ------[ first line different ]------
+            IF RowSave <> 19 THEN
+               CALL MoveCursor(RowSave + 1, NewCol)
+            ELSE
+               CALL MoveCursor(RowSave, NewCol)
+               CALL UnGetChar(LineDownKey)
+            END IF
+         ELSE
+            CALL MoveCursor(RowSave, ColSave + 1)
+         END IF
+      END IF
+      END SUB
+
+'*  PutScreen()
+'*----------------------------------------------------------------------------
+'* This routine writes YY$ to the user in the color and
+'* intensity specified
+'*
+'*
+      SUB PutScreen (YY$, Colour, Bold) STATIC
+* REPLACING old line(s) by new
+2800  ZZ$ = ""
+      IF Colour <> 99 THEN
+         IF (Colour <> OldColour) OR (Bold <> IsBold) THEN
+            ZZ$ = "["
+            IF Bold <> IsBold THEN
+               IF Bold THEN
+                  ZZ$ = ZZ$ + "1;"
+               ELSE
+                  ZZ$ = ZZ$ + "0;"
+               END IF
+            END IF
+            ZZ$ = ZZ$ + MID$(STR$(Colour), 2) + "m"
+         END IF
+      ELSE
+         ZZ$ = ZEmphasizeOff$
+      END IF
+      ZOutTxt$ = ZZ$ + YY$
+      IF ZLocalUser THEN
+         CALL QuickTput(ZOutTxt$, 0)
+      ELSE
+         ZSubParm = 4
+         CALL Tput
+      END IF
+      ZSubParm = 0
+      IF INSTR(YY$, "[") = 0 THEN
+         CurrentCol = CurrentCol + LEN(YY$)
+         IF CurrentCol > 80 THEN
+            CurrentCol = 0
+            CurrentRow = 0
+         END IF
+      ELSE
+         CurrentRow = 0
+         CurrentCol = 0
+      END IF
+      OldColour = Colour
+      IsBold = Bold
+      END SUB
+
+'*  ReformText()
+'*----------------------------------------------------------------------------
+'*  This routine reflows the text to the current margins.  Optionally,
+'*  it right justifies all lines by adding "soft spaces"
+'*
+'*
+* ------[ first line different ]------
+      SUB ReformText (Justify%) STATIC
+
+* REPLACING old line(s) by new
+2900  DIM Places(80)
+
+      CALL EraseToEOL(1, 1)
+      CALL PutScreen("Reformatting... Please Wait.", WhiteFore, ZTrue)
+
+      CALL FindEndOfMsg(EndOfMsg)
+
+      I = MsgLockLines + 1   ' Read index
+      J = MsgLockLines + 1   ' Write index
+
+      '*
+      '* Reflow the text to the maximum on a line
+      '*
+      DO WHILE I <= EndOfMsg
+         '*
+         '* Loop until we get a long line or an end of paragraph
+         '*
+         ZOutTxt$ = ""
+         DO WHILE 1
+            YY$ = ZOutTxt$(I)
+            CALL UnString(YY$, SoftSpace$)
+            IF ZOutTxt$ <> "" AND RIGHT$(ZOutTxt$, 1) <> " " THEN
+               ZOutTxt$ = ZOutTxt$ + " "
+            END IF
+            ZOutTxt$ = ZOutTxt$ + YY$
+            CALL LastParaLine(I, EndOfMsg, EndOfPara)
+            I = I + 1
+            IF LEN(ZOutTxt$) > ZRightMargin THEN
+               '*
+               '* Wrap the long line
+               '*
+               CALL FindWrap(LEFT$(ZOutTxt$, ZRightMargin + 1), K)
+               IF K <= 1 THEN
+                  K = ZRightMargin
+               END IF
+               ZOutTxt$(J) = LEFT$(ZOutTxt$, K)
+               IF EndOfPara THEN
+                  '*
+                  '* Go to the next paragraph
+                  '*
+                  J = J + 1
+                  ZOutTxt$(J) = MID$(ZOutTxt$, K + 1)
+               ELSE
+                  '*
+                  '* Keep the remaining part of the line and process
+                  '* it on the next pass
+                  '*
+                  I = I - 1
+                  ZOutTxt$(I) = MID$(ZOutTxt$, K + 1)
+               END IF
+               J = J + 1
+               EXIT DO
+            ELSEIF EndOfPara THEN
+               ZOutTxt$(J) = ZOutTxt$
+               J = J + 1
+               EXIT DO
+            END IF
+         LOOP
+      LOOP
+
+      FOR I = J TO 99
+         ZOutTxt$(I) = BlankLine$
+      NEXT
+
+      EndOfMsg = J - 1
+
+      '*
+      '* Space out the text on each line
+      '*
+      IF Justify% THEN
+         FOR I = MsgLockLines + 1 TO EndOfMsg
+            CALL LastParaLine(I, EndOfMsg, EndOfPara)
+            IF NOT EndOfPara THEN
+               '*
+               '* Space out the line
+               '*
+               ZOutTxt$ = ZOutTxt$(I)
+               CALL TrimTrail(ZOutTxt$, " ")
+               TxtLen = LEN(ZOutTxt$)
+               SpacesToAdd = ZRightMargin - TxtLen
+               IF SpacesToAdd > 0 THEN
+                  '*
+                  '* Skip leading spaces on the line
+                  '*
+                  Place = 1
+                  IF LEFT$(ZOutTxt$, 1) = " " THEN
+                     CALL FindWord(ZOutTxt$, 1, Place)
+                  END IF
+                  '*
+                  '* Find all of the possible places to space out the line
+                  '*
+                  NumPlaces = 0
+                  DO WHILE 1
+                     CALL FindWord(ZOutTxt$, 1, Place)
+                     IF Place < TxtLen THEN
+                        NumPlaces = NumPlaces + 1
+                        Places(NumPlaces) = Place
+                     ELSE
+                        EXIT DO
+                     END IF
+                  LOOP
+                  '*
+                  '* Fill in available places with soft spaces
+                  '*
+                  IF NumPlaces <> 0 THEN
+                     ExtraPlaces = (SpacesToAdd MOD NumPlaces)
+                     LeftExtra = ExtraPlaces \ 2
+                     RightExtra = ExtraPlaces - LeftExtra
+                     FOR J = NumPlaces TO 1 STEP -1
+                        SpacesThisPlace = SpacesToAdd \ NumPlaces
+                        IF J <= LeftExtra OR J > NumPlaces - RightExtra THEN
+                           SpacesThisPlace = SpacesThisPlace + 1
+                        END IF
+                        IF SpacesThisPlace <> 0 THEN
+                           ZOutTxt$ = LEFT$(ZOutTxt$, Places(J) - 1) + STRING$(SpacesThisPlace, SoftSpace$) + MID$(ZOutTxt$, Places(J))
+                        END IF
+                     NEXT J
+                  END IF
+               END IF
+               ZOutTxt$(I) = ZOutTxt$
+            END IF
+         NEXT I
+      END IF
+
+      CALL UpdateScreen
+
+      END SUB
+
+'*  SaveCursor()
+'*----------------------------------------------------------------------------
+'*  This routine saves the current cursor position
+'*
+'*
+* ------[ first line different ]------
+      SUB SaveCursor (Row%, Col%) STATIC
+      Row% = CurrentRow
+      Col% = CurrentCol
+      END SUB
+
+'*  UnGetChar()
+'*----------------------------------------------------------------------------
+'*   Puts a key in the beginning of the keyboard buffer
+'*
+'*
+      SUB UnGetChar (X) STATIC
+      ZCommportStack$ = CHR$(X) + ZCommportStack$
+      END SUB
+
+'*  UnString()
+'*----------------------------------------------------------------------------
+'*  Removes one string from another
+'*
+'*
+      SUB UnString (YY$, BadString$) STATIC
+      I = INSTR(YY$, BadString$)
+      WHILE I <> 0
+         YY$ = LEFT$(YY$, I - 1) + MID$(YY$, I + LEN(BadString$))
+         I = INSTR(YY$, BadString$)
+      WEND
+      END SUB
+
+'*  UpdateScreen()
+'*----------------------------------------------------------------------------
+'*  This is one of the most important routines  It compares the arrays
+'*  ZOutTxt$ and ZWorkAra$ and only sends the user the DIFFERENCE between the
+'*  two within the viewing area  In this way all processing can be done on
+'*  ZOutTxt$ and then the screen is updated to reflect the changes. After the
+'*  users screen is updated, ZWorkAra$ is changed to reflect what should be
+'*  on the users' screen The cursor is restored to its original position
+'*
+'*
+      SUB UpdateScreen STATIC
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+3100  CALL SaveCursor(Row, Col)
+IF ZExpertUser THEN PE = 24 _
+   Else PE = 19
+      For I = 3 To PE                'Pe 07/25/92
+         Index = I + TopLine - 3
+         ScreenLine$ = ZWorkAra$(I)
+         MessageLine$ = ZOutTxt$(Index)
+         LML = LEN(MessageLine$)
+
+         IF Index = ZMaxMsgLines + 1 THEN
+            CALL EraseToEOL(I, 1)
+            CALL PutScreen("[* End of Message *]", CyanFore, ZFalse)
+            ZWorkAra$(I) = CHR$(EndKey)
+         ELSEIF Index > ZMaxMsgLines + 1 THEN
+            IF ScreenLine$ <> BlankLine$ THEN
+               CALL EraseToEOL(I, 1)
+               ZWorkAra$(I) = BlankLine$
+            END IF
+         ELSEIF MessageLine$ = ScreenLine$ THEN
+            '*
+            '* Screen = What's in message buffer
+            '*
+         ELSEIF MessageLine$ = BlankLine$ OR MessageLine$ = SPACE$(LML) THEN
+            CALL EraseToEOL(I, 1)
+            ZWorkAra$(I) = MessageLine$
+         ELSE
+          CALL MoveCursor(I, 1)
+          YY$ = MessageLine$
+          CALL EraseToEOL(CurrentRow, CurrentCol) ' <-- Switched these 2 to
+          CALL PutScreen(YY$, YellowFore, ZTrue)  ' <-- get P)aint Working
+          ZWorkAra$(I) = ZOutTxt$(Index)          '     Properly.
+         END IF
+      NEXT I
+    CALL MoveCursor(Row,Col)
+      END SUB
+
+'*  UpdateStatusLine()
+'*-----------------------------------------------------------------------------
+'*  Rewrites the status line on screen line(s) 1 and 2
+'*
+'*    Input:  How% = 1   - Rewrite both lines
+'*            How% = 2   - Just rewrite top line
+' Changed this a little bit.
+' Changed the DOUBLE ESC command to CTRL-K (Double ESC still works)
+' CTRL-K was easier to explain to brain dead users :)
+' Also attempted to make CTRL-K stand out a bit more
+'
+
+      SUB UpdateStatusLine (How%) STATIC
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+3200  CALL MoveCursor(1, 1)
+      CALL PutScreen("ANSIED " + Version$ +" by Tom Collins       ", BlueFore, ZTrue)
+      CALL PutScreen("Hit Esc Twice or Cntrl-K ",RedFore, ZTrue)
+      CALL PutScreen("for Menu" + SPACE$(24),BlueFore, ZTrue)
+
+* REPLACING old line(s) by new
+3210  IF How% = 1 THEN
+         YY$ = CHR$(205) + " To: " + MsgTo$ + " " + CHR$(205) + " Re: " + MsgSubj$ + " " + CHR$(205)
+* ------[ first line different ]------
+         YY$ = YY$ + STRING$(74 - LEN(YY$), CHR$(205))
+         IF InsertMode THEN
+            MID$(YY$, 70) = " Ins "
+         ELSE
+            MID$(YY$, 70) = " Ovw "
+         END IF
+         I = 1
+         CALL MoveCursor(2, I)
+         CALL PutScreen(YY$, WhiteFore, ZFalse)
+      END IF
+      END SUB
+
+* INSERTING new line(s)
+3220 SUB DisplayKeys STATIC
+IF ZExpertUser THEN EXIT SUB   'Pe 07/25/92
+  CALL MoveCursor(20,1)
+YY$ = STRING$(79,CHR$(205))
+MID$ (YY$,30) = "ANSIED QuickKeys Menu"
+  CALL Putscreen(YY$,RedFore,DefaultBold)
+  CALL MoveCursor(21,1)
+  CALL PutScreen ("^A Word Left  ^B Reformat  ^C PageDown  ^D ColRight ^E LineUp   ^F Word Right",DefaultColor, DefaultBold)
+  CALL MoveCursor(22,1)
+  CALL PutScreen ("^G Del        ^O Reflow    ^P Repaint   ^R PageUp   ^S ColLeft  ^T DelWordRight",DefaultColor, DefaultBold)
+  CALL MoveCursor(23,1)
+  CALL PutScreen ("^V Toggle Ins ^W home      ^X Line Down ^Y Del Line ^Z End",DefaultColor, DefaultBold)
+  CALL MoveCursor(24,1)
+  CALL PutScreen ("^K Lists Menu",GreenFore, DefaultBold)
+
+     END SUB

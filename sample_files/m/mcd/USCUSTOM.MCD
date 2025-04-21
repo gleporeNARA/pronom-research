@@ -1,0 +1,218 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 20 5 1 19 
+a1,18,16,17
+UNIT DEFINITIONS
+.TXT 0 30 1 23 
+a1,22,25,21
+U.S. Customary units
+.TXT 3 -1 3 38 
+a3,37,35,87
+Base units are U.S. Customary units 
+(sometimes called "English" or 
+"Imperial" units)
+.TXT 4 -29 1 15 
+a1,15,13,14
+I. Base units
+.EQN 1 5 1 9 
+ft~1L
+.EQN 0 18 1 9 
+lb~1M
+.EQN 0 18 1 10 
+sec~1T
+.EQN 0 18 1 11 
+coul~1Q
+.TXT 2 -55 2 65 
+a2,64,62,74
+(In this document "lb" represents "pounds-mass", the base unit 
+of mass.)
+.TXT 3 -4 1 21 
+a1,21,19,20
+II. Angular measure
+.EQN 1 5 1 9 
+rad~1
+.EQN 0 18 3 15 
+deg~ã/180*rad
+.TXT 4 -23 1 28 
+a1,28,26,27
+III. Derived units: Length
+.EQN 1 5 3 9 
+in~ft/12
+.EQN 0 17 3 11 
+m~ft/.3048
+.EQN 0 19 1 11 
+yd~3*ft
+.EQN 0 18 1 12 
+cm~.01*m
+.EQN 1 -18 1 14 
+mi~5280*ft
+.EQN 0 18 1 13 
+km~1000*m
+.EQN 1 0 1 13 
+mm~.001*m
+.TXT 2 -59 1 25 
+a1,25,23,24
+IV. Derived units: Mass
+.EQN 1 5 1 18 
+slug~32.174*lb
+.EQN 0 18 3 9 
+oz~lb/16
+.EQN 0 18 1 15 
+ton~2000*lb
+.EQN 0 18 3 16 
+kg~lb/.45358247
+.TXT 1 -19 1 15 
+a1,15,13,14
+("short" ton)
+.EQN 2 1 1 17 
+tonne~1000*kg
+.EQN 0 18 2 14 
+gm~10^-3*kg
+.TXT 1 -19 1 14 
+a1,14,12,13
+(metric ton)
+.TXT 2 -40 1 24 
+a1,24,22,23
+V. Derived units: Time
+.EQN 1 5 1 14 
+min~60*sec
+.EQN 0 18 1 15 
+hr~3600*sec
+.EQN 0 18 1 13 
+day~24*hr
+.EQN 2 -36 1 19 
+yr~365.2422*day
+.TXT 0 19 1 17 
+a1,17,15,16
+(tropical year)
+.TXT 2 -24 1 33 
+a1,33,31,32
+VI. Derived units: Area, Volume
+.EQN 1 5 2 17 
+acre~4840*yd^2
+.EQN 0 36 2 18 
+hectare~10^4*m^2
+.TXT 3 -37 1 5 
+a1,5,3,4
+---
+.EQN 1 1 2 22 
+fl_oz~29.57353*cm^3
+.EQN 0 29 2 17 
+liter~(.1*m)^3
+.EQN 0 23 2 17 
+mL~10^-3*liter
+.EQN 2 -52 1 17 
+gal~128*fl_oz
+.TXT 0 28 2 22 
+a2,22,20,38
+(Sometimes defined 
+with "L" symbol.)
+.TXT 3 -33 1 44 
+a1,44,42,43
+VII. Derived units: Velocity, Acceleration
+.EQN 1 5 3 10 
+mph~mi/hr
+.EQN 0 18 3 10 
+kph~km/hr
+.TXT 4 -19 1 6 
+a1,6,4,5
+----
+.EQN 1 1 4 17 
+g~32.174*ft/sec^2
+.TXT 1 22 1 27 
+a1,27,25,26
+(acceleration of gravity)
+.TXT 4 -27 1 44 
+a1,43,41,42
+VIII. Derived units: Force, Energy, Power
+.EQN 1 5 1 12 
+lbf~g*lb
+.EQN 0 20 4 18 
+newton~kg*m/sec^2
+.EQN 0 23 2 20 
+dyne~10^-5*newton
+.TXT 1 -44 1 15 
+a1,15,13,14
+(pound force)
+.EQN 2 1 1 12 
+kgf~g*kg
+.TXT 1 -1 1 18 
+a1,18,16,17
+(kilogram force)
+.TXT 2 0 1 6 
+a1,6,4,5
+----
+.EQN 1 1 1 18 
+joule~newton*m
+.EQN 0 20 2 18 
+erg~10^-7*joule
+.EQN 0 23 1 20 
+cal~4.1868*joule
+.EQN 1 0 1 17 
+kcal~1000*cal
+.EQN 1 -43 2 31 
+BTU~1.05505585262*10^3*joule
+.TXT 3 -1 1 6 
+a1,6,4,5
+----
+.EQN 1 1 3 14 
+watt~joule/sec
+.EQN 0 43 3 17 
+hp~550*(ft*lbf)/sec
+.EQN 1 -25 1 16 
+kW~1000*watt
+.TXT 2 24 1 23 
+a1,23,21,22
+(standard horsepower)
+.TXT 2 -47 1 40 
+a1,40,38,39
+IX. Derived units: Pressure, Viscosity
+.EQN 1 5 4 11 
+psi~lbf/in^2
+.EQN 0 18 4 13 
+Pa~newton/m^2
+.EQN 0 18 2 22 
+atm~1.01325*10^5*Pa
+.EQN 2 0 2 23 
+torr~1.33322*10^2*Pa
+.EQN 2 0 2 24 
+in_Hg~3.38638*10^3*Pa
+.TXT 3 -37 1 6 
+a1,6,4,5
+----
+.EQN 1 37 4 14 
+stokes~cm^2/sec
+.EQN 1 -36 1 19 
+poise~.1*Pa*sec
+.TXT 4 -5 1 30 
+a1,30,28,29
+X. Derived units: Electrical
+.EQN 1 5 3 12 
+amp~coul/sec
+.EQN 0 18 3 13 
+volt~watt/amp
+.EQN 0 18 3 12 
+ohm~volt/amp
+.EQN 1 14 1 18 
+weber~volt*sec
+.EQN 2 -50 3 16 
+siemens:1/ohm
+.EQN 0 18 3 14 
+farad~coul/volt
+.EQN 0 18 3 20 
+oersted~1000/(4*ã)*amp/m
+.EQN 3 -36 3 15 
+henry~weber/amp
+.EQN 0 18 4 15 
+tesla~weber/m^2
+.EQN 0 18 2 20 
+gauss~10^-4*tesla

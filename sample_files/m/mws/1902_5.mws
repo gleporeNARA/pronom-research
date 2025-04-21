@@ -1,0 +1,227 @@
+{VERSION 2 3 "IBM INTEL NT" "2.3" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 98 0 0 0 2 0 0 0 0 
+0 0 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "" 0 1 44 91 50 0 0 0 0 0 0 
+0 0 0 0 }0 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "Text Output" -1 2 
+1 {CSTYLE "" -1 -1 "Courier" 1 10 0 0 255 1 0 0 0 0 0 1 3 0 0 }1 0 0 
+-1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "" 2 6 1 {CSTYLE "" -1 -1 "" 0 1 
+114 136 136 0 0 0 0 0 0 0 2 0 0 }0 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }
+{PSTYLE "Maple Output" 0 11 1 {CSTYLE "" -1 -1 "" 0 1 111 119 115 0 0 
+0 0 0 0 0 0 0 0 }3 3 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "Maple Plot
+" 0 13 1 {CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 0 0 }3 0 0 -1 
+-1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "" 0 256 1 {CSTYLE "" -1 -1 "" 0 1 0 
+0 16 0 0 1 0 0 0 0 0 0 0 }3 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "" 
+0 257 1 {CSTYLE "" -1 -1 "" 0 1 114 136 0 0 0 1 0 0 0 0 0 0 0 }3 0 0 
+-1 -1 -1 0 0 0 0 0 0 -1 0 }}
+{SECT 0 {EXCHG {PARA 256 "" 0 "" {TEXT -1 20 " Further Programming" }
+{MPLTEXT 1 0 0 "" }}{PARA 257 "" 0 "" {TEXT -1 20 "David Brook, mat8dr
+b" }{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 8 "Problem1" 
+}{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 12 "d:=proc(p,q)" 
+}}{PARA 0 "> " 0 "" {MPLTEXT 1 0 44 "   evalf(sqrt((p[1]-q[1])^2+(p[2]
+-q[2])^2));" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 4 "end:" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 18 "best2:=proc(p,S,h)" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 38 "   local i,q,bestyet,this,a,bestorder;" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 20 "   if nops(S)=0 then" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 21 "      bestorder:=[h];" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 22 "      bestyet:=d(p,h);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 7 "  \+
+ else" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 24 "      bestyet:=infinity;" 
+}}{PARA 0 "> " 0 "" {MPLTEXT 1 0 25 "      for i to nops(S) do" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "         q:=S[i];" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 34 "         a:=best2(q,S minus\{q\},h);" }}{PARA 0 
+"> " 0 "" {MPLTEXT 1 0 27 "         this:=d(p,q)+a[1];" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 29 "         if this<bestyet then" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 26 "            bestyet:=this;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 34 "            bestorder:=[q,a[2][]];" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 12 "         fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 9 "
+      od;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "   fi;" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 23 "   [bestyet,bestorder];" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 4 "end:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 51 "best2([0,0]
+,\{[1,0],[0,1],[1,1],[2,1],[0,2]\},[0,0]);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 0 "" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#7$$\"+CrUGo!\"*7(7
+$\"\"\"\"\"!7$\"\"#F)7$F)F)7$F*F,7$F*F)7$F*F*" }}}{EXCHG {PARA 0 "" 0 
+"" {TEXT -1 9 "Problem 2" }{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 36 "drawtable:=proc(k::posint,m::posint)" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 21 "local t,i,alpha,beta;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 14 "if k>=16 then " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 38 "
+   ERROR(`k should be less than 16`,k)" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 3 "fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "if m>=16 then " }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 38 "   ERROR(`m should be less than 16`
+,m)" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "fi;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 16 "printf(`    n`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+20 "for t from 2 to m do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "   if t
+<10 then " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "   printf(`   %dn`,t);
+" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 7 "   else" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 21 "   printf(`  %dn`,t);" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 6 "   fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od;" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 13 "printf(`\\n`);" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 13 "for i to m do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 19 "   printf(
+`-----`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od;" }}{PARA 0 "> " 0 "
+" {MPLTEXT 1 0 13 "printf(`\\n`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+24 "for alpha from 1 to k do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 26 "   \+
+for beta from 1 to m do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 31 "      if
+ beta*alpha>=100 then  " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 35 "        \+
+ printf(`  %d`,beta*alpha);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "    \+
+  else " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 31 "         if beta*alpha>=
+10 then" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 39 "            printf(`   %
+d`,beta*alpha);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "         else" }
+}{PARA 0 "> " 0 "" {MPLTEXT 1 0 40 "            printf(`    %d`,beta*a
+lpha);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 12 "         fi:" }}{PARA 0 "
+> " 0 "" {MPLTEXT 1 0 6 "   fi:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 " \+
+  od;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "   printf(`\\n`);" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 4 "end:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "drawtable(5,12);" }}
+{PARA 6 "" 1 "" {TEXT -1 426 "    n   2n   3n   4n   5n   6n   7n   8n
+   9n  10n  11n  12n\n------------------------------------------------
+------------\n    1    2    3    4    5    6    7    8    9   10   11 \+
+  12\n    2    4    6    8   10   12   14   16   18   20   22   24\n  \+
+  3    6    9   12   15   18   21   24   27   30   33   36\n    4    8
+   12   16   20   24   28   32   36   40   44   48\n    5   10   15   \+
+20   25   30   35   40   45   50   55   60" }}}{EXCHG {PARA 0 "" 0 "" 
+{TEXT -1 9 "Problem 3" }{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 24 "ordinal:=proc(x::posint)" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 26 "local first,second,answer;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 18 "first:=irem(x,10);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+28 "second:=irem(iquo(x,10),10);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 15 
+"if first>3 then" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 19 "   printf(`%dth
+`,x)" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "fi;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 19 "if first=3 then    " }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 20 "   if second=1 then " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 23 "     \+
+ printf(`%dth`,x);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "   else " }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 23 "      printf(`%drd`,x);" }}{PARA 0 
+"> " 0 "" {MPLTEXT 1 0 6 "   fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "
+fi:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "if first=2 then" }}{PARA 0 "
+> " 0 "" {MPLTEXT 1 0 20 "   if second=1 then " }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 23 "      printf(`%dth`,x);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 8 "   else " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 23 "      p
+rintf(`%dnd`,x);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "   fi;" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 3 "fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "
+if first=1 then" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "   if second=1 t
+hen " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 23 "      printf(`%dth`,x);" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "   else " }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 23 "      printf(`%dst`,x);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 6 "   fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "fi;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "if first=0 then " }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 20 "   printf(`%dth`,x);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 3 "fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 4 "end:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 24 "for n from 212 to 224 do" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 14 "   ordinal(n);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 16 "   printf(`\\n`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+3 "od;" }}{PARA 6 "" 1 "" {TEXT -1 77 "212th\n213th\n214th\n215th\n216
+th\n217th\n218th\n219th\n220th\n221st\n222nd\n223rd\n224th" }}}{EXCHG 
+{PARA 0 "" 0 "" {TEXT -1 9 "Problem 4" }{MPLTEXT 1 0 0 "" }}{PARA 0 ">
+ " 0 "" {MPLTEXT 1 0 30 "eqn:=diff(y(x),x)=5*x*y*(1-y);" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 14 "ini:=y(0)=0.1;" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 23 "dsolve(\{eqn,ini\},y(x));" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+41 "yexpr:=subs(dsolve(\{eqn,ini\},y(x)),y(x)):" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 19 "plot(yexpr,x=0..3);" }}{PARA 11 "" 1 "" {XPPMATH 20 "
+6#>%$eqnG/-%%diffG6$-%\"yG6#%\"xGF,,$*(F,\"\"\"F*F/,&F/F/F*!\"\"F/\"\"
+&" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%$iniG/-%\"yG6#\"\"!$\"\"\"!\"\"
+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/-%\"yG6#%\"xG*$,&\"\"\"F*-%$expG6
+#,$*$F'\"\"##!\"&F0$\"\"*\"\"!!\"\"" }}{PARA 13 "" 1 "" {INLPLOT "6%-%
+'CURVESG6$7S7$\"\"!$\"1+++++++5!#;7$$\"1+++]i9Rl!#<$\"1\"*)p?Ki'45F+7$
+$\"1++vVA)GA\"F+$\"1'zR**>aT.\"F+7$$\"1++]Peui=F+$\"1`du'zC33\"F+7$$\"
+1++]i3&o]#F+$\"1rD&>9[0:\"F+7$$\"1++voX*y9$F+$\"1L87&*e3Y7F+7$$\"1++vV
+TAUPF+$\"1w)Gmo:@O\"F+7$$\"1++v$*zhdVF+$\"1Fy[1&*[::F+7$$\"1++v$>fS*\\
+F+$\"1<H<=I)or\"F+7$$\"1++v=$f%GcF+$\"1U')*4'f')p>F+7$$\"1+++Dy,\"G'F+
+$\"1prp[*Q`H#F+7$$\"1++]7<zboF+$\"1Z+\")>X.YEF+7$$\"1,++v4&G](F+$\"16F
+9E,*=7$F+7$$\"1+++Drc_\")F+$\"1e*e([/3#p$F+7$$\"1+++D!*oy()F+$\"1=ZqPC
+iFVF+7$$\"1++v$pnsM*F+$\"15njTBln\\F+7$$\"1++]siL-5!#:$\"1B:\"zlg(zdF+
+7$$\"1+++!R5'f5Fep$\"1`*\\gW[(ykF+7$$\"1+]P/QBE6Fep$\"1\\JiTmsesF+7$$
+\"1+++:o?&=\"Fep$\"1l.Htxv#)yF+7$$\"1+]Pa&4*\\7Fep$\"17EmHXOm%)F+7$$\"
+1+]7j=_68Fep$\"1\"e\"eXO%>\"*)F+7$$\"1++vVy!eP\"Fep$\"1U#z#p1_l#*F+7$$
+\"1+](=WU[V\"Fep$\"1'\\!*\\i'\\-&*F+7$$\"1++DJ#>&)\\\"Fep$\"1.]9(H;Ao*
+F+7$$\"1+]P>:mk:Fep$\"1FV**)ocg!)*F+7$$\"1+]iv&QAi\"Fep$\"1o7Nd-`w)*F+
+7$$\"1++vtLU%o\"Fep$\"1&*y+3\"*yD**F+7$$\"1+++bjm[<Fep$\"1Yqrk\"3r&**F
++7$$\"1++vyb^6=Fep$\"1^\\<I'Ra(**F+7$$\"1+]PMaKs=Fep$\"10/Q*ecf)**F+7$
+$\"1++D6W%)R>Fep$\"1zh%H&eh#***F+7$$\"1+++:K^+?Fep$\"1FR-xl$f***F+7$$
+\"1++]7,Hl?Fep$\"1DCK#4'*y***F+7$$\"1+]P4w)R7#Fep$\"1TRYZ@'))***F+7$$
+\"1++]x%f\")=#Fep$\"1<>Js-V****F+7$$\"1+]P/-a[AFep$\"197+y$3(****F+7$$
+\"1+](=Yb;J#Fep$\"1m:e&)z&)****F+7$$\"1++]i@OtBFep$\"16@(H1J*****F+7$$
+\"1+]PfL'zV#Fep$\"1Cf;0$o*****F+7$$\"1+++!*>=+DFep$\"0,9rH&)*****Fep7$
+$\"1++DE&4Qc#Fep$\"0e]*HM******Fep7$$\"1+]P%>5pi#Fep$\"0C'*H5(******Fe
+p7$$\"1+++bJ*[o#Fep$\"0OH'e')******Fep7$$\"1++Dr\"[8v#Fep$\"0-ijX*****
+**Fep7$$\"1+++Ijy5GFep$\"0q<@w*******Fep7$$\"1+]P/)fT(GFep$\"0p]L!****
+****Fep7$$\"1+]i0j\"[$HFep$\"0!o%*f********Fep7$$\"\"$F($\"0#Hx%)*****
+***Fep-%'COLOURG6&%$RGBG$\"#5!\"\"F(F(-%+AXESLABELSG6$%\"xG%!G-%%VIEWG
+6$;F(Fdz%(DEFAULTG" 2 383 383 383 2 0 1 0 2 9 0 4 2 1.000000 
+45.000000 45.000000 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 1 1 0 0 0 0 
+24356 0 0 0 0 0 1 }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 10 "Problem 5." }
+{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "F:=(x,y)->5*x*y
+*(1-y):" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "x0:=0.0:" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 8 "y0:=0.1:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 9 "h1:
+=0.01:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "nmax:=100:" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 24 "yeular1:=array(1..nmax):" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 6 "X:=x0:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "Y:=y0:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "for n to nmax do" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 18 "   Y:=Y+h1*F(X,Y);" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 11 "   X:=X+h1;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "   yeular1[n
+]:=Y;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 13 "yeular1[100];" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$\"+
+6XBec!#5" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "Problem 6" }{MPLTEXT 
+1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "F:=(x,y)->5*x*y*(1-y):" 
+}}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "x0:=0.0:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 8 "y0:=0.1:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "h2:=0.0
+01:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "nmax:=1000:" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 24 "yeular2:=array(1..nmax):" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 6 "X:=x0:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "Y:=y0:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "for n to nmax do" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 18 "   Y:=Y+h2*F(X,Y);" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 11 "   X:=X+h2;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "   yeular2[n
+]:=Y;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 14 "yeular2[1000];" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$\"
++(\\*)>u&!#5" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 10 "Pro blem 7" }
+{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "F:=(x,y)->5*x*y
+*(1-y):" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "x0:=0.0:" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 8 "y0:=0.1:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 9 "h3:
+=0.01:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "nmax:=100:" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 21 "ymod:=array(1..nmax):" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 6 "X:=x0:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "Y:=y0:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "for n to nmax do" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 44 "   Y:=Y+(h3/2)*(F(X,Y)+F(X+h3,Y+h3*F(X,Y)));" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "   X:=X+h3;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 14 "   ymod[n]:=Y;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "o
+d:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "ymod[100];" }}{PARA 11 "" 1 "
+" {XPPMATH 20 "6#$\"+>5y]d!#5" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "P
+roblem 8" }{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 82 "prin
+tf(`          Problem 4     Problem 5     Problem 6     Problem 7     \+
+   \\n`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "printf(`     x`);" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "for n from 1 to 4 do" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 28 "   printf(`   Step   Soln`);" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "printf(
+`\\n`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 74 "printf(`----------------
+-----------------------------------------------`);" }}{PARA 0 "> " 0 "
+" {MPLTEXT 1 0 13 "printf(`\\n`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+21 "for t from 1 to 10 do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "   if \+
+0.1*t=1.0 then" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 31 "      printf(`   \+
+%3.1f`,0.1*t);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 7 "   else" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 32 "      printf(`   0%2.1f`,0.1*t);" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "   fi;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 20 "   printf(`   n/a`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 47 "   printf(`  %.5f`,evalf(subs(x=0.1*t,yexpr)));" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 24 "   printf(`  0%.2f`,h1);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 34 "   printf(`  %.5f`,yeular1[10*t]);" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 24 "   printf(`  0%.3f`,h2);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 34 "   printf(` %.5f`,yeular2[100*t]);" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 24 "   printf(`  0%.2f`,h3);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 31 "   printf(`  %.5f`,ymod[10*t]);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 16 "   printf(`\\n`);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+3 "od:" }}{PARA 6 "" 1 "" {TEXT -1 826 "          Problem 4     Proble
+m 5     Problem 6     Problem 7        \n     x   Step   Soln   Step  \+
+ Soln   Step   Soln   Step   Soln\n-----------------------------------
+----------------------------\n   0.1   n/a  .10227  0.01  .10204  0.00
+1 .10224  0.01  .10227\n   0.2   n/a  .10936  0.01  .10885  0.001 .109
+31  0.01  .10936\n   0.3   n/a  .12215  0.01  .12126  0.001 .12206  0.
+01  .12214\n   0.4   n/a  .14218  0.01  .14074  0.001 .14204  0.01  .1
+4218\n   0.5   n/a  .17189  0.01  .16961  0.001 .17166  0.01  .17189\n
+   0.6   n/a  .21463  0.01  .21112  0.001 .21427  0.01  .21462\n   0.7
+   n/a  .27443  0.01  .26927  0.001 .27391  0.01  .27442\n   0.8   n/a
+  .35497  0.01  .34785  0.001 .35426  0.01  .35495\n   0.9   n/a  .457
+04  0.01  .44823  0.001 .45616  0.01  .45701\n   1.0   n/a  .57512  0.
+01  .56582  0.001 .57419  0.01  .57507" }}}{EXCHG {PARA 0 "" 0 "" 
+{TEXT -1 277 "It would appear that the modified Yeular Solution is the
+ nearest to the 'actual' solutions, ie Problem 4. Problem 6 is the nex
+t best approximation, and you can tell that increasing the step size a
+s is done over problems 5 and 6 improves the accuracy of the calculate
+d solution." }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 18 "Goodbye Maple.....
+" }{MPLTEXT 1 0 0 "" }}}}{MARK "10 0 1" 0 }{VIEWOPTS 1 1 0 1 1 1803 }

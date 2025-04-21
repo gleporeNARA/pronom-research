@@ -1,0 +1,3 @@
+WarioWare D.I.Y.,[a] known as WarioWare: Do It Yourself in the PAL regions, is a minigame compilation and game creation system by Nintendo SPD and Intelligent Systems and published by Nintendo for the Nintendo DS. It is the seventh title in the WarioWare series and the last to be developed for the Nintendo DS family of systems. Formally revealed at Nintendo's conference in October 2008,[5] the game was released in Japan on April 29, 2009. It was released in 2010 in North America, Europe, and Australia respectively and was accompanied by a separate WiiWare title, WarioWare: D.I.Y. Showcase.
+
+https://en.wikipedia.org/wiki/WarioWare_D.I.Y.

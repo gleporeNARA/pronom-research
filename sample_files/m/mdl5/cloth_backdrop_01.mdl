@@ -1,0 +1,24 @@
+mdl 1.3;
+
+using state import *;
+
+import adobe::mtl::*;
+import adobe::util::*;
+import ::tex::gamma_mode;
+import ::state::normal;
+
+export material MATERIAL_CLOTH_BACKDROP_01_MAT(*)
+  = adobe::mtl::standard(
+    translucence : float(0.0),
+    interiorColor : color(1.0, 1.0, 1.0),
+    indexOfRefraction : float(1.6000),
+    metallic : float(0.0),
+    baseColor : color(0.6, 0.6, 0.6),
+    roughness : float(0.4935),
+    density : float(0),
+    glow : float(0.0),
+    opacity : float(1.0),
+    normal : ::state::normal(),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );

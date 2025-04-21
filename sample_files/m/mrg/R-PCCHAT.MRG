@@ -1,0 +1,169 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against OLD\RBBS-PC.BAS to produce RBBS-PC.BAS
+* OLD\RBBS-PC.BAS:  Date 8-26-1990  Size 165474 bytes
+* ------------[ Created 08-28-1990 14:07:47 ]------------
+* REPLACING old line(s) by new
+800 IF ZAdjustedSecurity THEN _                                      ' KG032501
+       GOSUB 5135
+    IF ZOrigCnfg$ = ZCurDef$ THEN _
+       ZMainUserFileIndex = ZUserFileIndex : _
+       ZOrigSec = ZUserSecLevel : _
+       ZUserSecSave = ZUserSecLevel : _
+       ZOrigUserName$ = ZActiveUserName$
+    ZTimesLoggedOn = CVI(MID$(ZUserOption$,1,2)) - _
+       ((ZOrigCnfg$ <> ZCurDef$ OR NOT ZSubBoard) AND _              ' KG022601
+        (NOT ZPrivateDoor) AND (NOT ZExitToDoors))
+    GOSUB 9500
+    IF (NOT ZExitToDoors) AND (NOT ZSubBoard) THEN _                 ' KG022601
+       CALL UpdtCalr (ZActiveUserName$ + " from " + ZWasCI$ + _
+                 " Lvl" + STR$(ZUserSecLevel) + " " + TIME$,2)
+    PrevLastOn$ = ZLastDateTimeOn$
+    IF ZLocalUser THEN _
+       ZTalkToModemAt$ = "9600" : _
+       ZBaudParity$ = "9600 BPS,N,8,1" : _                           ' DA062001
+       ZModemInitBaud$ = "9600" : _
+       ZSnoop = ZTrue : _
+       ZLineFeeds = ZTrue
+    CALL SetCrLf
+    CALL SetPrompt
+    CALL XferType (2,ZTrue)
+    IF NOT ZSubBoard THEN _                                          ' KG022601
+       BoardCheckDate$ = PrevLastOn$
+    CALL SetSysOp                                                    ' KG022601
+    IF ZWasA THEN _
+       ZActiveUserName$ = "SYSOP" : _
+       ZFirstName$ = "SysOp"                                         ' KG011401
+    IF ZExitToDoors OR ZSubBoard THEN _                              ' KG022601
+       GOTO 815
+    GOSUB 465
+    IF (ZEightBit AND _
+       ZAutoDownDesired) OR _
+       ZAskID THEN _
+       CALL TestUser
+    CALL QuickTPut1 ("Logging " + ZActiveUserName$)
+    CALL Talk (1,ZOutTxt$)
+    Temp$ = STR$(ZBaudTest!) + MID$(ZBaudParity$,INSTR(ZBaudParity$," B")) ' KG081902
+    CALL QuickTPut1 ("RBBS-PC " + ZVersionID$ + " Node " + ZNodeID$ + _
+                ", operating at" + Temp$)                            ' KG081902
+    CALL SkipLine (1)
+* ------[ first line different ]------
+    IF ZMaxNodes > 1 THEN                                            ' RCHAT
+       CALL LogNewForChat (ZMaxNodes)                                ' RCHAT
+    END IF                                                           ' RCHAT
+    Attempts = 0
+    ZWasZ$ = ZActiveUserName$ + _
+            " on at " + _
+            ZCurDate$ + _
+            ", " + _
+            ZTime$ + _
+            " from " + _
+            ZWasCI$ + _
+            "," + Temp$                                              ' KG081902
+     ZWasNG$ = ZWasZ$ + SPACE$(128 - LEN(ZWasZ$))
+'
+' *  ALWAYS RECORD THE HASH/INDIVIDUATING FIELD TO EACH RECORD LOGGED OUT
+'
+     WasX$ = "{" + _
+          HashValue$ + _
+          "/" + _
+          ZIndivValue$ + _
+          "}"
+     IF LEN(ZWasZ$) < 65 THEN _
+        WasX = 65 _
+     ELSE WasX = LEN(ZWasZ$) + 2
+     MID$(ZWasNG$,WasX) = WasX$
+     CALL Printit ("  " + ZWasZ$)
+     IF ZNewUser THEN _
+        CALL UpdtCalr ("NEWUSER",1) : _
+        CALL Muzak (2)
+'
+' *****  NOTIFY CALLER IF ABLE TO "AUTODOWN"  ****
+'
+    IF ZEightBit AND ZAutoDownYes THEN _
+       ZOutTxt$ = CHR$(9) + _
+            ZReturnLineFeed$ + _
+            "You may use AUTODOWNLOADing!" : _
+       CALL RingCaller : _
+       CALL DelayTime(4)
+* REPLACING old line(s) by new
+1230 CALL Line25
+     ZOutTxt$ = ZConfName$ + ":"                                     ' TC070708
+     GOSUB 12978                                                     ' TC070708
+     CALL Talk (65,ZConfName$)                                       ' TC070708
+     CALL DispTimeRemain (MinsRemaining)
+     IF ZMenuIndex = 6 THEN _
+        ZSubParm = 1 : _
+        CALL Library
+* ------[ first line different ]------
+     CALL CBCheck(WillChat)                                          ' RCHAT
+     IF WillChat THEN GOTO 1600
+     CALL SaveUserActivity("I", ZNodeRecIndex, ZFalse)               ' RCHAT
+     CALL Talk (ZMenuIndex, ZOutTxt$)
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+* INSERTING new line(s)
+1600 CALL CBTrueChat (ZMaxNodes)                                     ' RCHAT
+     GOSUB 5344                                                      ' RCHAT
+     GOTO 1205                                                       ' RCHAT
+'
+' ****  I - COMMAND FROM MAIN MENU (DISPLAY INITIAL WELCOME)  ***
+'
+* REPLACING old line(s) by new
+*2100 ZOutTxt$ = "Type " + _
+*          ZMsgHeader$ + _
+*          STR$(ZMaxMsgLines) + _
+*          " lines max" + _
+*          ZPressEnter$
+*     GOSUB 12975
+*     GOSUB 3200
+* ------[ first line different ]------
+*     CALL SaveUserActivity("M", ZNodeRecIndex, ZFalse)               ' RCHAT
+* REPLACING old line(s) by new
+4360 ZWasLG$(11) = ZWasZ$
+     NumMsgsSelected = ZLastIndex
+     MsgIndex = ZAnsIndex
+     ZLastIndex = 0
+     AddressedToUser = ZFalse                                        ' KG020801
+     ToRequested = ZFalse                                            ' KG020801
+     FromRequested = ZFalse                                          ' KG010102
+     LinkNext = ZFalse                                               ' KG020801
+* ------[ first line different ]------
+     CALL SaveUserActivity("M", ZNodeRecIndex, ZFalse)               ' RCHAT
+* REPLACING old line(s) by new
+5410 CALL Toggle(-9)
+     GOSUB 43020
+     ZFF = INSTR(ZDefaultXfer$,ZUserXferDefault$)
+     CALL Toggle(-5)
+     GOSUB 42810
+     CALL Toggle(-3)
+     CALL Toggle(-6)
+     CALL Toggle(-7)
+     CALL Toggle(-10)
+     CALL Toggle(-2)
+     CALL Toggle(-4)
+     CALL Toggle(-8)
+     CALL Toggle(-1)
+* ------[ first line different ]------
+     CALL Toggle(-11)                                                ' RCHAT
+     IF ZRestrictByDate AND ZDaysInRegPeriod > 0 THEN _
+        IF ZUserSecLevel > ZTempExpiredSec THEN _                    ' DA021501
+           CALL QuickTPut1 ("Registration expires " + ZExpirationDate$)
+     RETURN
+'
+' *****  B - TIME BANK  (I figured someone should change this..)  ****
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+9800 CALL PageEm (ZNodeRecIndex - 1, ZMaxNodes)
+     REM ** 'ZNodeRecIndex - 1' is the users actual node number.. is there
+     REM ** already a variable for this?? I dunno..
+     REM **
+     REM ** PageEm will call WhosOn, then ask if they want to page someone
+     REM ** if so, it'll call CBTrueChat
+     REM ** etc..
+     CLOSE 10                                                        ' RCHAT
+     GOSUB 5344
+     RETURN
+'
+' *  1 - COMMAND FROM SYSOP MENU (DISPLAY COMMENTS)
+'

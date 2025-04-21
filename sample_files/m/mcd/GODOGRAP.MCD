@@ -1,0 +1,72 @@
+.MCD 20000 0
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=10 zt=8 pr=6 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.EQN 7 8 1 12 
+r1:1010
+.EQN 0 12 1 12 
+r3:1500
+.EQN 0 13 1 12 
+r2:1500
+.EQN 2 -25 2 16 
+c:0.51*10^-9
+.EQN 0 18 2 15 
+l:3.4*10^-3
+.EQN 0 17 2 10 
+j:\-1
+.TXT 3 -36 1 24 
+a1,23,71,22
+From laplace method :
+.TXT 2 9 1 23 
+a1,22,62,21
+  I2(p)(r1+pl)     E
+.TXT 1 -7 1 64 
+a1,63,69,62
+I1(p)= - ------------ + ----------   =  I2(p)t12 + E(p)t13   
+.TXT 1 7 1 33 
+a1,32,62,31
+  r1+pl+r2       p(r1+pl+r2)  
+.TXT 2 0 1 32 
+a1,31,62,30
+  I1(p)(r1+pl)              E
+.TXT 1 -7 1 71 
+a1,70,69,69
+I2(p)= - ---------------- + ------------------- = I1(p)t21 + E(p)t23
+.TXT 1 7 1 52 
+a1,51,62,50
+  r1+r3+pl+1/(pc)     p(r1+pl+r3+1/(cp))         
+.TXT 3 -3 1 16 
+a1,15,65,14
+t13 + t23*t12
+.TXT 1 -8 1 64 
+a1,63,73,62
+T(p)= ---------------- r2         After some transformation :
+.TXT 1 6 1 16 
+a1,15,67,14
+  1 - t21*t12
+.EQN 2 -6 7 66 
+T(p):(p*(r2*r3)+r2/c)/(p^2*l*(r2+r3)+p*(r1*r2+r3*r1+r2*r3+l/c)+(r2+r1)/c)
+.EQN 7 1 1 13 
+p(ß):j*ß
+.TXT 2 -4 1 24 
+a1,23,76,22
+Practical godograph :
+.EQN 2 7 9 12 
+í:({9,1}ö180ö100ö70ö52ö40ö20ö12ö0ö0)
+.EQN 0 15 9 13 
+ur:({9,1}ö0ö1.2ö2.7ö3.3ö3.7ö4ö4ö4ö4)
+.EQN 10 -16 1 14 
+i:0,1;8
+.EQN 2 2 4 22 
+x[i:ur[i/6.6*cos(í[i/180*ã)
+.EQN 0 26 4 22 
+y[i:ur[i/6.6*sin(í[i/180*ã)
+.EQN 5 -27 2 20 
+ß:0,5*10^4;10^7
+.EQN 9 -2 17 63 
+.5&-.5&-Im(T(p(ß))),y[i{10,14,15,45,lp}@.7&-.7&Re(T(p(ß))),x[i

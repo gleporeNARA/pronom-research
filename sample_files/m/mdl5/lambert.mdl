@@ -1,0 +1,46 @@
+mdl 1.6;
+
+using ::df import *;
+using ::state import *;
+using ::base import *;
+using ::tex import *;
+using ::anno import *;
+using ::math import *;
+using ::limits import *;
+
+//- Custom annotation for Substance Designer specifics
+import ::alg::base::annotations::*;
+
+//- Core functions and materials for Substance Designer specifics
+import ::alg::base::core::*;
+
+
+export material lambert(
+
+	//- Material Inputs
+	varying color baseColor = color(0.214041) [[
+		anno::display_name("Diffuse"),
+		anno::in_group("Diffuse"),
+		anno::description("Diffuse channel"),
+		anno::usage("diffuse"),
+		alg::base::annotations::gamma_type(gamma_srgb),
+		alg::base::annotations::visible_by_default(true)
+	]]
+
+) [[
+    anno::display_name("Lambert"),
+    anno::description(""),
+    anno::author(alg::base::core::ALLEGORITHMIC_AUTHOR),
+    anno::copyright_notice(alg::base::core::ALLEGORITHMIC_COPYRIGHT),
+    anno::version( 2018, 3, 0 ),
+    anno::modified( 2018, 9, 14, "switch standard ::anno::usage( string hint )" )
+]] = let{
+
+	//- Diffuse BRDF (connect roughness parameter to diffuse as well ?)
+	bsdf diffuse_brdf = df::diffuse_reflection_bsdf(tint: baseColor, roughness: 0.0);
+
+} in material(
+	surface: material_surface(
+		scattering: diffuse_brdf
+	)
+);

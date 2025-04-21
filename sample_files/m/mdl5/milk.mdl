@@ -1,0 +1,19 @@
+mdl 1.6;
+
+import ::adobe::materials::*;
+import ::base::*;
+import ::state::*;
+import ::tex::*;
+
+export material milk(*)
+  = ::adobe::materials::standard(
+    base_color: color(1.f),
+    roughness: 0.f,
+    translucency: 1.f,
+    absorption_distance: 1.f,
+    specular_ior: 1.33f,
+    scatter: true,
+    scatter_color: color(0.930184907f,0.920056008f,0.842226678f),
+    scatter_distance: 0.055f,
+    scatter_rayleigh: 0.5f
+  );

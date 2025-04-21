@@ -1,0 +1,609 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against E:\RBBS\STOCK\RCHAT300.BAS to produce E:\RBBS\CHAT\RCHAT300.BAS
+* E:\RBBS\STOCK\RCHAT300.BAS:  Date 8-28-1990  Size 30163 bytes
+* ------------[ Created 12-23-1992 04:56:19 ]------------
+* REPLACING old line(s) by new
+'
+' RChat300  --  Or, RBBS-Chat, release 3.00.  A character by character
+'               internode chat program..
+'
+'  Not the worlds prettiest, or cleanest code.. but I'm under no illusions..
+'
+'  Copyright 1989-1990 By John Morris  All Rights Reserved
+* ------[ first line different ]------
+'  modifications for rbbs17.4 by Pete Eibl
+'
+'  I'm not a big fan of global variables, but here goes..
+'
+'  $INCLUDE: 'RBBS-VAR.MOD'   'RBBS-VAR.BAS minus the DEF FN...
+'  $DYNAMIC
+   DEFINT A - Z
+   COMMON Shared /Chat/ DoTrueChat, HasPaged, UpperNode, LowerNode, SaveToDisk
+   COMMON Shared /Chat/ NodesToSquelch$
+   COMMON SHARED /ChatField/ ChatActivity$, PagingNode$, PrivateFor$
+   COMMON SHARED /ChatField/ ChatInput$, ChatName$, InTrueChat$
+   COMMON SHARED /ChatField/ TrueChatIndex$, SavingToDisk$, BBSActivity$
+'
+* REPLACING old line(s) by new
+59800 ' $SUBTITLE: 'LogNewForChat - Save user info for chat'
+' $PAGE
+'
+'  NAME    -- LogNewForChat
+'
+* ------[ first line different ]------
+'  INPUTS  -- Zmaxnodes -- needed for creation of RBBSCHAT.DEF
+'
+'  OUTPUTS -- Updates the node record in RBBSCHAT.DEF with this users
+'             name and chat activity (always "I") when the user logs on.
+'
+'  PURPOSE -- See OUTPUTS. Also, if no RBBSCHAT.DEF is not found, one will be
+'             created.
+'
+      SUB LogNewForChat(ZMaxNodes) STATIC
+      CALL FindItX (ZChatFileName$, 9)
+      REM ** If "RBBSCHAT.DEF" does not exist, then create it **
+
+      IF NOT ZOK THEN
+         CALL OpenWrk9 (ZChatFileName$)
+         FIELD 9, 128 AS TempNode$
+         LSET TempNode$ = SPACE$(128)
+         FOR Index = 1 TO ZMaxNodes
+            CALL LockIt9 (Index, ZFalse)
+         NEXT
+      END IF
+
+      ChatIndex = ZNodeRecIndex - 1
+      CLOSE 9
+      CALL OpenWrk9 (ZChatFileName$)
+      CALL Field9
+      CALL LockIt9 (ChatIndex, ZTrue)
+      LSET ChatActivity$ = "I"    ' I means inactive
+      LSET PagingNode$ = MKI$(0)
+      LSET ChatName$ = SPACE$(31)
+
+      IF ZActiveUserName$ = ZSysopPswd1$ + " " + ZSysopPswd2$ THEN
+         LSET ChatName$ = "SYSOP"
+       ELSE
+         LSET ChatName$ = ZActiveUserName$
+      END IF
+
+      LSET ChatInput$ = SPACE$(72)
+      LSET InTrueChat$ = "I"
+      CALL LockIt9 (ChatIndex, ZFalse)
+      CLOSE 9
+      END SUB
+
+* REPLACING old line(s) by new
+59810 ' $SUBTITLE: 'CBCHECK - Check for a page attempt'
+' $PAGE
+'
+'  NAME    -- CBCHECK
+'
+'  INPUTS  -- NONE
+'
+'  OUTPUTS -- ChatActivity$   Changed to reflect whether or not they
+'                             are going to chat
+'             WillChat        If WillChat is TRUE, then the user will
+'                             automatically be thrust unawares into
+'                             chat mode.. They said yes... didn't they?
+'
+'  PURPOSE -- Check to see if we have been paged from another node
+'
+      SUB CBCheck(WillChat) STATIC
+* ------[ first line different ]------
+      WillChat = ZFalse
+      ZOutTxt$ = ""
+      IsTrueChat = ZFalse
+      CALL FindItX (ZChatFileName$, 9)
+
+      IF NOT ZOK THEN
+         EXIT SUB
+      END IF
+
+      ChatIndex = ZNodeRecIndex - 1
+      CLOSE 9
+      CALL OpenWrk9 (ZChatFileName$)
+      CALL Field9
+      CALL LockIt9 (ChatIndex, ZTrue)
+
+      IF ChatActivity$ = "R" THEN   'R means request for chat
+         PagerIndex = CVI(PagingNode$)
+         CALL RingCaller
+         CALL LockIt9 (PagerIndex, ZTrue)
+         IsTrueChat = (InTrueChat$ = "A")
+         ZOutTxt$ = ChatName$
+         CALL TrimTrail (ZOutTxt$, " ")
+         CALL NameCaps(ZOutTxt$)
+         CALL UpdtCalr("Paged for Chat by " + ZOutTxt$ + " on node" + STR$(PagerIndex), 1)
+         CALL QuickTPut( ZOutTxt$ + " is requesting that you join in a chat!", 1)
+         ZOutTxt$ = "Do you plan to join the chat (Y/[N])"
+         ZSubParm = 1
+         CALL TGet
+                   IF ZSubParm = -1 THEN
+                     CLOSE 9
+                      EXIT SUB
+                   END IF
+         CALL LockIt9 (ChatIndex, ZTrue)
+
+                IF ZNo OR (ZWasQ = 0) THEN
+                     LSET ChatActivity$ = "N"   'No, I don't think I'll chat
+                  ELSE
+                    LSET ChatActivity$ = "Y"   'Yeah, I might just join a chat
+                   WillChat = ZTrue
+                 END IF
+
+
+         CALL LockIt9 (ChatIndex, ZFalse)
+      END IF
+      CLOSE 9
+  END SUB
+
+* REPLACING old line(s) by new
+59820 ' $SUBTITLE: 'PageEm - attempt to page another user to chat'
+' $PAGE
+'
+'  NAME    -- PageEm
+'
+'  INPUTS  -- ShowOnly         Show whos is on the other nodes only
+* ------[ first line different ]------
+'             Zmaxnodes    Number of nodes in this system
+'
+'  OUTPUTS -- HasPaged        -1 exit chat mode
+'                              0 don't check for reply to page
+'                              1 - Zmaxnodes check for page reply
+'
+'  PURPOSE -- Page another user on the system and set up for a reply
+'             from the other user
+'
+      SUB PageEm(CurrentNodeIndex, ZMaxNodes, ShowOnly) STATIC
+
+      REM ** Page 'Em only needs access to the COMMON variable HasPaged **
+      SHARED HasPaged
+
+      CALL WhosOn (ZMaxNodes)
+      CALL SkipLine(1)
+
+        IF ShowOnly THEN
+          EXIT SUB
+         END IF
+
+      ZOutTxt$ = "Which node do you wish to page (1 -" + STR$(ZMaxNodes) + ")" + PRESS.ENTER$
+      ZSubParm = 1
+      CALL TGet
+
+          IF ZWasQ = 0 OR ZSubParm = -1 THEN
+            HasPaged = -1
+             EXIT SUB
+            END IF
+
+      CALL CheckInt(ZUserIn$(1))
+      CALL Field9
+
+      IF ZTestedIntValue > 0 AND ZTestedIntValue <= ZMaxnodes AND _
+         ZTestedIntValue <> CurrentNodeIndex THEN
+         CALL LockIt9 (ZTestedIntValue, ZTrue)
+
+             IF ChatActivity$ = "A" THEN        'if other node already
+              HasPaged = 0
+               END IF
+
+         CALL QuickTPut1("Hang on,  I'll let them know you want to chat")
+         CALL QuickTPut1("If you don't get an answer within a couple minutes,")
+         CALL QuickTPut1("then you probably won't get an answer")
+         LSET ChatActivity$ = "R"                        'R means Request
+         LSET PagingNode$ = MKI$(CurrentNodeIndex)
+         HasPaged = ZTestedIntValue
+         CALL LockIt9 (ZTestedIntValue, ZFalse)
+        ELSE
+         HasPaged = -1
+      END IF
+
+   END SUB
+
+* REPLACING old line(s) by new
+59830 ' $SUBTITLE: 'CBTrueChat - The letter by letter chat'
+' $PAGE
+'
+'  NAME    -- CBTrueChat
+'
+* ------[ first line different ]------
+'  INPUTS  -- Zmaxnodes
+'
+'  INTERNAL - NodesToSquelch$      STRING OF NODES NOT TO RECEIVE TEXT FROM
+'             HasPaged             NODE (IF ANY) THAT THIS USER PAGED
+'             CurrentNodeIndex     NODE RECORD IN "RBBSCHAT.DEF"
+'             ChatActivity$        CURRENT STATUS OF EACH NODE
+'             PagingNode$          NODE WHICH HAS PAGED THIS ONE
+'             ChatInput$           CURRENT TEXT INPUT BY USER FOR CHATTING
+'             ChatName$            NAME OF USER ON EACH NODE (NOT CURRENTLY USED)
+'             SquelchIt            BOOLEAN - MEANS NODE IS IGNORED
+'             ZUserIn$()           USED TO SAVE CURRENT STATUS OF EACH NODE
+'                                  THIS INFO IS LATER COMPARED, AND IF THAT
+'                                  STATUS IS CHANGED, THEN THE USER IS NOTIFIED
+'                                  OF THE CHANGE
+'             DoTrueChat           Means we are in a true chat mode, we'll
+'                                  only check one node for input
+'
+'
+'  OUTPUTS -- NONE
+'
+'  PURPOSE -- To allow users to chat between nodes in several different
+'             ways.
+'
+      SUB CBTrueChat(Zmaxnodes) STATIC
+
+      SHARED DoTrueChat, HasPaged, UpperNode, LowerNode, SaveToDisk
+      SHARED NodesToSquelch$
+
+      CALL SaveUserActivity("C", ZNodeRecIndex, ZFalse)
+
+      ZCol = 1
+      SendRemote = ZRemoteEcho
+      SaveToDisk = ZFalse
+      DoTrueChat = ZFalse
+      NodesToSquelch$ = ""
+      HasPaged = 0
+      ChatSubParm = 0
+      CALL FindItX (ZChatFileName$, 9)
+      IF ZOK THEN
+         CurrentNodeIndex = ZNodeRecIndex - 1
+         CLOSE 9
+         CALL OpenWrk9 (ZChatFileName$)
+         CALL Field9
+         CALL UpdtCalr("Entered CBTrueCh@ sim at " + TIME$, 1)
+         CALL QuickTPut1("Type Ctrl-Q or ESCape for a list of commands")
+
+         REDIM TrueChatIndexHold(Zmaxnodes)
+
+         CALL LockIt9 (CurrentNodeIndex, ZTrue)
+            LowerNode = 1
+            UpperNode = Zmaxnodes
+         LSET ChatActivity$ = "A"
+         LSET TrueChatIndex$ = MKI$(1)
+         CALL LockIt9 (CurrentNodeIndex, ZFalse)
+
+         REM ** Load in current node status for later comparison **
+         FOR LineIndex = 1 TO Zmaxnodes
+            CALL LockIt9 (LineIndex, ZTrue)
+            ZUserIn$(LineIndex) = ChatActivity$
+            REM ** save current index so we don't get a bunch of trash if **
+            REM ** a chat is already in progress.                         **
+            IF ChatActivity$ = "A" THEN
+               TrueChatIndexHold(LineIndex) = CVI(TrueChatIndex$)
+             ELSE
+               TrueChatIndexHold(LineIndex) = 1
+            END IF
+         NEXT
+
+         REM ** Set Autologoff time before we start looping **
+'         ZAutoLogoff! = TIMER + ZWaitBeforeDisconnect
+
+         REM ** We are currently getting name from MESSAGES file.. set that up..
+         WasA1$ = ZActiveMessageFile$
+         ZActiveMessageFile$ = ZOrigMsgFile$
+         CALL OpenMsg
+         FIELD 1, 128 AS ZMsgRec$
+
+         DO 'the wild chat thingie..
+
+REM **************************************************************************
+REM ******Check for answer to page, or text from other users in chat  ********
+REM ******If the other guy has 'page availability' turned off, then   ********
+REM ******we simply won't tell this guy.. he won't know the difference********
+REM **************************************************************************
+            FOR LineIndex = LowerNode TO UpperNode
+
+               SquelchIt = ZFalse
+               IF LineIndex <> CurrentNodeIndex THEN
+
+                  CALL LockIt9 (LineIndex, ZTrue)
+                  Index$ = MID$(STR$(LineIndex), 2, 1)
+
+                  REM ** Check for answer to page (if a page was done) **
+                  IF HasPaged = LineIndex THEN
+                     IF ChatActivity$ <> "R" THEN
+                        IF ChatActivity$ = "N" THEN
+                           CALL QuickTPut("Paged user may not enter chat mode!", 1)
+                           HasPaged = 0
+                        ELSEIF ChatActivity$ = "Y" THEN
+                           HasPaged = 0
+                        END IF
+                     END IF
+                  END IF
+
+                  ChatTemp$ = ""
+                  NameTemp$ = ""
+
+                  REM ** Check for change in node activity              **
+                  REM ** In this case, see if someone has left the chat **
+                  REM ** node must not be squelched                     **
+                  IF NOT SquelchIt THEN
+                     IF (ZUserIn$(LineIndex) = "A") AND (ChatActivity$ = "I") THEN
+                        GOSUB 59840
+                        CALL QuickTPut(NameTemp$ + " on Node " + Index$ + " has exited chat mode!", 1)
+                        IF DoTrueChat THEN
+                           DoTrueChat = ZFalse
+                           CALL LockIt9 (CurrentNodeIndex, ZTrue)
+                           LSET InTrueChat$ = "I"
+                           LSET ChatInput$ = SPACE$(72)
+                           LSET TrueChatIndex$ = MKI$(1)
+                           CALL LockIt9 (CurrentNodeIndex, ZFalse)
+                           REM ** TrueChat over.. start looping thru all nodes
+                           LowerNode = 1
+                           UpperNode = Zmaxnodes
+                        END IF
+                     END IF
+                     REM ** OR, If someone has joined the chat **
+                     IF (ZUserIn$(LineIndex) <> "A") AND (ChatActivity$ = "A") THEN
+                        GOSUB 59840
+                        CALL QuickTPut(NameTemp$ + " on Node " + Index$ + " has entered the chat!", 1)
+                        REM ** Save the ring buffer index as they currently see it **
+                        TrueChatIndexHold(LineIndex) = CVI(TrueChatIndex$)
+                     END IF
+                  END IF
+
+                  REM ** Save new node status (if any) **
+                  ZUserIn$(LineIndex) = ChatActivity$
+
+                  REM ** If other node is active (& not squelched) check it **
+                  IF (ChatActivity$ = "A") AND (NOT SquelchIt) THEN
+
+                     OtherNodeInput$ = MID$(ChatInput$, TrueChatIndexHold(LineIndex), 1)
+
+                     IF (CVI(TrueChatIndex$) <> TrueChatIndexHold(LineIndex)) THEN
+
+                        IF OtherNodeInput$ = CHR$(8) THEN
+                           CALL LPrnt(ZLocalBkSp$, 0)
+                           CALL PutCom (ZBackSpace$)
+                         IF ZCol > 0 THEN
+                            ZCol = ZCol - 1
+                          END IF
+                         ELSEIF OtherNodeInput$ = ZCarriageReturn$ THEN
+                           CALL SkipLine(1)
+                           ZCol = 1
+                         ELSE
+                           CALL ColorText(OtherNodeInput$, LineIndex)
+                           CALL LPrnt (OtherNodeInput$, 0)
+                           CALL PutCom(OtherNodeInput$)
+                           ZCol = ZCol + 1
+                           IF (ZCol > 65 AND OtherNodeInput$ = CHR$(32)) THEN
+                              CALL SkipLine(1)
+                             ZCol = 1
+                           END IF
+                        END IF
+                        TrueChatIndexHold(LineIndex) = TrueChatIndexHold(LineIndex) + 1
+                        IF TrueChatIndexHold(LineIndex) > 72 THEN TrueChatIndexHold(LineIndex) = 1
+
+                     END IF
+                  END IF
+               END IF
+            NEXT
+
+REM *************************************************************************
+REM *******Get text from local user (local, as in, this node of RBBS)********
+REM *******Also local, as in.. SysOp                                 ********
+REM *************************************************************************
+
+' ZAutoLogoff! = TIMER + ZWaitBeforeDisconnect 'Pe 01/21/92
+            CALL FindFKey                ' will also get local key pressed
+            IF ZSubParm < 0 THEN
+               EXIT DO
+            END IF
+
+            Key$ = ""
+            IF NOT ZLocalUser THEN
+               CALL EOFComm (Char%)
+              ELSE
+               Char% = -1
+            END IF
+            IF Char% <> -1 THEN          'if remote key in then get it
+               CALL GetCom(Key$)
+              ELSE
+               Key$ = ZKeyPressed$       'INKEY$ is performed in FindFKey
+            END IF
+            IF Key$ <> "" THEN
+               IF LEN(Key$) = 1 THEN
+                  IF Key$ = ZEscape$ OR Key$ = CHR$(17) THEN
+                     CALL ChatCommand(ChatSubParm, CurrentNodeIndex, Zmaxnodes)
+                     IF ChatSubParm THEN
+                        EXIT DO
+                     END IF
+                   ELSE
+                     CALL LockIt9(CurrentNodeIndex, ZTrue)
+                     TempChatInput$ = ChatInput$
+                     TempTrueChatIndex = CVI(TrueChatIndex$)
+                     MID$(TempChatInput$, TempTrueChatIndex, 1) = Key$
+                     LSET ChatInput$ = TempChatInput$
+                     TempTrueChatIndex = TempTrueChatIndex + 1
+                     IF TempTrueChatIndex > 72 THEN
+                        TempTrueChatIndex = 1
+                     END IF
+                     LSET TrueChatIndex$ = MKI$(TempTrueChatIndex)
+                     CALL LockIt9(CurrentNodeIndex, ZFalse)
+                     IF Key$ <> CHR$(8) THEN
+                        IF ZWasGR = 2 AND Key$ <> ZCarriageReturn$ THEN
+                           Key$ = ZEmphasizeOff$ + Key$
+                        END IF
+                        CALL QuickTPut(Key$, 0)
+                      ELSE
+                        CALL LPrnt(ZLocalBkSp$, 0)
+                        IF (NOT ZLocalUser) AND SendRemote THEN
+                           CALL PutCom (ZBackSpace$)
+                        END IF
+                        ZCol = ZCol - 2
+                     END IF
+                     IF Key$ = ZCarriageReturn$ THEN
+                        IF SendRemote AND ZLineFeeds THEN
+                           CALL PutCom(ZLineFeed$)
+                        END IF
+                        ZCol = 0
+                     END IF
+                     ZCol = ZCol + 1
+                  END IF
+                  REM ** Reset auto log-off timeski..
+'                  ZAutoLogoff! = TIMER + ZWaitBeforeDisconnect
+               END IF
+            END IF
+
+            REM ** I'll call the below.. pseudo-wordwrap.. or a way to
+            REM ** get around having to do word wrap.. it ain't easy in
+            REM ** char by char mode... Much easier in C than in BASIC
+
+            IF (ZCol > 72) OR (ZCol > 65 AND Key$ = CHR$(32)) THEN
+               CALL SkipLine(1)
+               ZCol = 1
+            END IF
+
+            CALL CheckCarrier
+            IF ZSubParm = -1 THEN
+               EXIT DO
+            END IF
+
+'            CALL CheckTimeRemain(MinsRemaining)
+'            IF ZSubParm = -1 THEN
+'               EXIT DO
+'            END IF
+'              CALL CheckTime(ZAutoLogoff!, Remain!, 1)  'Pe 01/21/92
+'                IF Remian! < 0 THEN
+'                 ZWaitExpired = ZTrue
+'               EXIT DO
+'             END IF
+
+         LOOP
+         CALL LockIt9 (CurrentNodeIndex, ZTrue)
+         LSET ChatInput$ = SPACE$(72)
+         LSET ChatActivity$ = "I"
+         LSET InTrueChat$ = "I"
+         CALL LockIt9 (CurrentNodeIndex, ZFalse)
+         IF HasPaged > 0 THEN
+            CALL LockIt9 (HasPaged, ZTrue)
+            IF ChatActivity$ = "R" THEN
+               LSET ChatActivity$ = "I"
+               CALL LockIt9 (HasPaged, ZFalse)
+            END IF
+         END IF
+         CLOSE 9
+
+         CLOSE 2
+         ZActiveMessageFile$ = WasA1$
+
+         ERASE TrueChatIndexHold    'free memory taken by integer array
+
+      END IF
+
+      EXIT SUB
+
+* REPLACING old line(s) by new
+59840 GET 1, (LineIndex + 1)
+      IF MID$(ZMsgRec$, 55, 2) = "-1" AND NOT ZSysop THEN
+         NameTemp$ = "SYSOP"
+       ELSE
+         NameTemp$ = MID$(ZMsgRec$, 1, 26)
+      END IF
+      CALL TrimTrail (NameTemp$," ")
+      CALL NameCaps(NameTemp$)
+      RETURN
+
+      END SUB
+* ------[ first line different ]------
+* REPLACING old line(s) by new
+59910 SUB SaveUserActivity(Activity$, NodeRecordIndex, ReadIt) STATIC
+
+      ChatNodeIndex = NodeRecordIndex - 1
+
+      CLOSE 9
+* ------[ first line different ]------
+      CALL OpenWrk9 (ZChatFileName$)
+      CALL Field9
+
+      IF ReadIt THEN
+         CALL LockIt9(ChatNodeIndex, ZTrue)
+         Activity$ = BBSActivity$
+       ELSE
+         CALL LockIt9(ChatNodeIndex, ZTrue)
+         LSET BBSActivity$ = Activity$
+         CALL LockIt9(ChatNodeIndex, ZFalse)
+      END IF
+
+      IF NOT ReadIt THEN
+         CLOSE 9
+      END IF
+
+      END SUB
+
+REM **
+REM ** Chat command line mode.. this is where they can do certain functions
+REM ** pertaining to the chat
+REM **
+REM ** ChatSubParm is returned TRUE when a user wishes to exit the chat mode
+
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+59920 SUB ChatCommand(ChatSubParm, CurrentNodeIndex, Zmaxnodes) STATIC
+
+      SHARED DoTrueChat, HasPaged, UpperNode, LowerNode, SaveToDisk
+      SHARED NodesToSquelch$
+
+      CALL SkipLine(1)
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+59922 ZFileName$ = "CHAT.MNU"    'Pe 01/27/92
+       CALL Graphic (ZFileName$) ' Pe 01/27/92  
+       CALL BufFile(ZFileName$, X) 'Pe 01/27/92
+      END IF
+      ZOutTxt$ = "CHAT command "
+
+ IF ZExpertUser THEN
+         ZOutTxt$ = ZOutTxt$ + "[C],H,W,Q,X,P"
+       ELSE
+         ZOutTxt$ = ZOutTxt$ + "[C]hat,H)elp,W)ho,Q)uit,X)pert,P)age"
+         END IF
+      ZSubParm = 1
+      CALL TGet
+      IF ZSubParm = -1 THEN
+         GOTO 59940
+      END IF
+      ChatSubParm = ZFalse
+      IF ZWasQ > 0 THEN
+         CALL AllCaps(ZUserIn$(1))
+         SELECT CASE LEFT$(ZUserIn$(1), 1)
+
+            CASE "C"    REM ** Return to chat mode
+               EXIT SUB
+
+            CASE "H", "?" REM ** Help.. means show the Chat menu
+               GOTO 59922
+
+            CASE "W"    REM ** Show whos on the system
+               CALL PageEm(CurrentNodeIndex, Zmaxnodes, ZTrue)
+               GOTO 59921
+
+            CASE "Q"    REM ** Quit/Exit out of chat mode
+               ChatSubParm = ZTrue
+               EXIT SUB
+
+            CASE "X"    REM ** Toggle expert mode
+               CALL Toggle(9)
+               GOTO 59921
+
+            CASE "P"    REM ** Page another node to chat
+               IF NOT DoTrueChat THEN
+                  CALL PageEm(CurrentNodeIndex, Zmaxnodes, ZFalse)
+                  IF HasPaged = -1 THEN
+                     ChatSubParm = ZTrue
+                     EXIT SUB
+                  END IF
+               END IF
+               GOTO 59921
+
+            CASE ELSE   REM ** Illegal command entered.. show menu..
+               CALL QuickTPut1("Unknown command <" + LEFT$(ZUserIn$(1), 1) + ">")
+               GOTO 59922
+
+         END SELECT
+      END IF
+      EXIT SUB
+
+      REM ** user dropped carrier.. return in a way to abort chat mode
+* DELETING old line(s)
+59930

@@ -1,0 +1,624 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against CNFG-SUB.BAS to produce CNFG-SUB.NEW
+* CNFG-SUB.BAS:  Date 6-20-1992  Size 103455 bytes
+* BusiMod (tm) mods for RBBS v17.4 - (c) 1993,94 by respective authors
+* RBBS v17.4 (c) 1986,1992 by D Thomas Mack
+* ------------[ Created 04-06-1994 22:00:00 ]------------
+* REPLACING old line(s) by new
+12470 DISPLAYED.PAGE.NUMBER = 9
+      GOSUB 30040
+      ' MAX.USR.FILE.SIZE.FRM.DEF = HIGHEST.USER.RECORD
+* ------[ first line different ]------
+      MAX.MSG.FILE.SIZE.FRM.DEF! = HIGHEST.MESSAGE.RECORD!           ' RM12279301
+      MAX.ALLOWED.MSGS.FRM.DEF  = MAXIMUM.NUMBER.OF.MSGS
+      GOSUB 24800
+      LOCATE  3,1
+      PRINT "161. Maximum number of concurrent RBBS-PC's  -------" + STR$(MAXIMUM.NUMBER.OF.NODES)
+      MT$ = "single RBBS-PC copy "
+      IF MAXIMUM.NUMBER.OF.NODES <> 1 THEN _
+         MT$ = "concurrent RBBS-PC's" : _
+         SUBROUTINE.PARAMETER = 2 : _
+         IF NETWORK.TYPE < 0 OR NETWORK.TYPE > 8 THEN _              ' RM10019301
+            SUBROUTINE.PARAMETER = 1 : _
+            CALL NETTYPE : _
+         ELSE CALL NETTYPE
+      IF NETWORK.TYPE = 6 THEN _
+         MT$ = "NETBIOS             "
+      IF NETWORK.TYPE = 8 THEN _                                     ' RM10019301
+         MT$ = "DoubleDOS           "
+      PRINT "162. Environment running " + MT$ + " ------ " + NETWORK.TYPE$
+      PRINT "163. RBBS-PC 'recycle' method when users log off --- " + RECYCLE.TO.DOS$
+      FILE$ = MAIN.MESSAGE.FILE$
+      GOSUB 30180
+      MAX.MSG.FILE.SIZE.FRM.DEF! = UG!                               ' RM12279303
+      IF CONFERENCE.MODE <> 1 THEN _
+         X$ = "MAIN" _
+      ELSE X$ = ZConfName$
+      PRINT "164. Number of records in " ;X$;" User File ";STRING$(15-LEN(X$),"-");STR$(MAX.USR.FILE.SIZE.FRM.DEF)
+      IF MAIN.MESSAGE.FILE$ = MAINMSG$ THEN _
+         X$ = "MAIN" _
+      ELSE X$ = ZConfName$
+      PRINT "165. Number of records in " ;X$;" Message File ";STRING$(12-LEN(X$),"-");STR$(MAX.MSG.FILE.SIZE.FRM.DEF!)
+      PRINT "166. Maximum number of messages allowed ------------" ; STR$(MAX.ALLOWED.MSGS.FRM.DEF)
+      PRINT "167. Conference File Maintenance."
+      IF DEFAULT.EXTENSION$ = "" THEN _
+         X$ = NONE.PICKED$ _
+      ELSE X$ = DEFAULT.EXTENSION$
+      PRINT "168. Default extension for compressed files -------- " ; X$
+      PRINT "169. Additional extensions for compressed files ---- " ; COMPRESSED.EXT$
+      PRINT "170. Message file GROWS in size as messages added -- " ; FNYESNO$(MESSAGES.CAN.GROW)
+      PRINT "171. Name (prefix only) of distribution lists menu - " ; ZDistriHelp$
+      PRINT "172. Drive/path where distribution lists stored ---- " ; ZDistriPath$
+      PRINT "173. Msg sec can be (U=public,R=private,P=password)- " ; ZMsgSecCats$
+      GOTO 12580
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+30040 IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN MAIN.MESSAGE.FILE$ FOR RANDOM SHARED AS #2 LEN=128 _
+      ELSE OPEN "R",2,MAIN.MESSAGE.FILE$,128
+      FIELD 2,128 AS RR$
+      GET 2,1
+      CALLS.TODATE! = VAL(MID$(RR$,1,8))             '  1-  8  =  number of last message on system
+      FIRST.USER.RECORD = VAL(MID$(RR$,52,5))        ' 52- 56  =  first rec. of user file
+      CURRENT.USER.COUNT = VAL(MID$(RR$,57,5))       ' 57- 61  =  next avail. user record
+      HIGHEST.USER.RECORD = VAL(MID$(RR$,62,5))      ' 62- 66  =  last rec. of user file
+      FIRST.MESSAGE.RECORD = VAL(MID$(RR$,68,7))     ' 68- 74 = first rec. of msgs file
+      NEXT.MESSAGE.RECORD = VAL(MID$(RR$,75,7))      ' 75- 81 = next avail. msgs record
+      HIGHEST.MESSAGE.RECORD! = VAL(MID$(RR$,82,7))   ' 82- 88 = last rec. of msgs file ' RM12279301
+      MAXIMUM.NUMBER.OF.MSGS = VAL(MID$(RR$,89,7))   ' 89- 95 = maximum number of messages
+      MAXIMUM.NUMBER.OF.NODES = VAL(MID$(RR$,127,2)) '127-128 = maximum number of "nodes"
+      CLOSE 2
+      RETURN
+'
+' * COMMON ROUTINE TO GET THE LENGTH OF A FILE
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+30180 IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN FILE$ FOR RANDOM SHARED AS #2 LEN=128 _
+      ELSE OPEN "R",2,FILE$,128
+      FIELD 2,128 AS RR$
+      UG! = LOF(2) / 128                                             ' RM12279303
+      CLOSE 2
+      RETURN
+'
+' * COMMON SUBROUTINE TO KEEP STRING SPACE CLEAN AND CLEAR LINE 24
+'
+* REPLACING old line(s) by new
+60382 CLS
+      LOCATE 3,1
+      PRINT "     RBBS-PC is supported in the following:"
+      PRINT "                   Environment"
+      PRINT "          0. Single RBBS-PC in an IBM DOS environment"
+      PRINT "          1. MultiLink (multi-tasking under single DOS)"
+      PRINT "          2. Omninet (CORVUS)"
+      PRINT "          3. PC-NET (Orchid)"
+      PRINT "          4. DESQview (Quarterdeck)"
+      PRINT "          5. 10 NET (Fox Research)"
+      PRINT "          6. NETBIOS (DOS SHARE)"
+* ------[ first line different ]------
+      PRINT "          7. OS/2 v2.x DOS Box"                         ' RM10019301
+      PRINT "          8. DoubleDOS, but file sharing not supported." ' RM10019301
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+60383 XX$ = "Select environment (0 to 8, [ENTER] quits) : "          ' RM10019301/RM12279302
+      I! = FRE(C$)
+      LOCATE 24,1
+      PRINT STRING$(79,32);
+      LOCATE 24,5
+      PRINT XX$;
+      LINE INPUT;X$
+      IF X$ = "" THEN _
+         EXIT SUB
+      NETWORK.TYPE = VAL(X$)
+      IF NETWORK.TYPE < 0 OR NETWORK.TYPE > 8 THEN _                 ' RM10019301
+         GOTO 60383
+* REPLACING old line(s) by new
+60384 IF NETWORK.TYPE = 0 THEN _
+         NETWORK.TYPE$ = "IBM's DOS"
+      IF NETWORK.TYPE = 1 THEN _
+         MLCOM = TRUE : _
+         NETWORK.TYPE$ = "MultiLink"
+      IF NETWORK.TYPE = 2 THEN _
+         NETWORK.TYPE$ = "Omninet"
+      IF NETWORK.TYPE = 3 THEN _
+         NETWORK.TYPE$ = "PC-NET"
+      IF NETWORK.TYPE = 4 THEN _
+         NETWORK.TYPE$ = "DESQview"
+      IF NETWORK.TYPE = 5 THEN _
+         NETWORK.TYPE$ = "10 NET"
+      IF NETWORK.TYPE = 6 THEN _
+         NETWORK.TYPE$ = "NETBIOS"
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 7 THEN _                                     ' RM10019301
+         NETWORK.TYPE$ = "OS/2 v2.x DOS Box"                         ' RM10019301
+      IF NETWORK.TYPE = 8 THEN _                                     ' RM10019301
+         NETWORK.TYPE$ = "No file sharing!"
+      IF SUBROUTINE.PARAMETER = 2 THEN _
+         EXIT SUB
+      IF NETWORK.TYPE = 2 OR NETWORK.TYPE = 3 OR NETWORK.TYPE = 5 OR NETWORK.TYPE = 6 THEN _
+         CALL GETNUMYN ("Are you running Multi-Link with " + NETWORK.TYPE$,MLCOM)
+      END SUB
+'  $SUBTITLE: 'CNFGINIT - subroutine to initialize CONFIG's constants'
+'  $PAGE
+'
+'  SUBROUTINE NAME    --  CNFGINIT
+'
+'  INPUT PARAMETERS   --  NONE
+'
+'  OUTPUT PARAMETERS  --  CONFIG'S CONSTANTS INITIALIZED
+'
+'  SUBROUTINE PURPOSE --  TO INITIALIZE THE CONSTANTS USED BY CONFIG
+'
+* REPLACING old line(s) by new
+60390 MACRO.DRVPATH$             = D$
+      MACRO.EXTENSION$           = ""
+      MAIN.COMMANDS.DEFAULTS$    = "ABCDEFIJKOPRSTUVW@"
+      MAIN.COMMANDS$             = MAIN.COMMANDS.DEFAULTS$
+      MAIN.FUNCTION$(1,1)        = "A)nswer questionnaire  "
+      MAIN.FUNCTION$(2,1)        = "B)ulletins             "
+      MAIN.FUNCTION$(3,1)        = "C)omments              "
+      MAIN.FUNCTION$(4,1)        = "D)oor subsystem        "
+      MAIN.FUNCTION$(5,1)        = "E)nter message         "
+      MAIN.FUNCTION$(6,1)        = "F)iles subsystem       "
+      MAIN.FUNCTION$(7,1)        = "I)nitial welcome       "
+      MAIN.FUNCTION$(8,1)        = "J)oin a conference     "
+      MAIN.FUNCTION$(9,1)        = "K)ill messages         "
+      MAIN.FUNCTION$(10,1)       = "O)perator page         "
+      MAIN.FUNCTION$(11,1)       = "P)ersonal mail         "
+      MAIN.FUNCTION$(12,1)       = "R)ead messages         "
+      MAIN.FUNCTION$(13,1)       = "S)can messages header  "
+      MAIN.FUNCTION$(14,1)       = "T)opic msg scan        "
+      MAIN.FUNCTION$(15,1)       = "U)tilities subsystem   "
+      MAIN.FUNCTION$(16,1)       = "V)iew conference mail  "
+      MAIN.FUNCTION$(17,1)       = "W)ho's on other nodes  "
+      MAIN.FUNCTION$(18,1)       = "@)Library subsystem    "
+      MAIN.FUNCTION$(1,2)        = "A"
+      MAIN.FUNCTION$(2,2)        = "B"
+      MAIN.FUNCTION$(3,2)        = "C"
+      MAIN.FUNCTION$(4,2)        = "D"
+      MAIN.FUNCTION$(5,2)        = "E"
+      MAIN.FUNCTION$(6,2)        = "F"
+      MAIN.FUNCTION$(7,2)        = "I"
+      MAIN.FUNCTION$(8,2)        = "J"
+      MAIN.FUNCTION$(9,2)        = "K"
+      MAIN.FUNCTION$(10,2)       = "O"
+      MAIN.FUNCTION$(11,2)       = "P"
+      MAIN.FUNCTION$(12,2)       = "R"
+      MAIN.FUNCTION$(13,2)       = "S"
+      MAIN.FUNCTION$(14,2)       = "T"
+      MAIN.FUNCTION$(15,2)       = "U"
+      MAIN.FUNCTION$(16,2)       = "V"
+      MAIN.FUNCTION$(17,2)       = "W"
+* ------[ first line different ]------
+      MAIN.MESSAGE.BACKUP$       = D$ + "MAINM.BAK"                  'STUNY174/020901
+      MAIN.MESSAGE.FILE$         = D$ + "MAINM.DEF"                  'STUNY174/020901
+      MAIN.PUI$                  = D$ + "MAIN.PUI"                   'STUNY174/020901
+      MAIN.USER.FILE$            = D$ + "MAINU.DEF"                  'STUNY174/020901
+      MASTER.DIRECTORY.NAME$     = ""
+      MAX.ALLOWED.MSGS.FRM.DEF   = 5
+      MAX.CARRIER.WAIT           = 30
+      MAX.DESC.LEN               = 40
+      MAX.EXTENDED.LINES         = 2
+      MAX.MESSAGE.LINES          = 19
+      MAX.PER.DAY                = 0
+      MAX.REG.SEC                = 0
+      MAX.USR.FILE.SIZE.FRM.DEF  = 16
+      MAX.WORK.VAR               = 30
+      MAXD                       = 15
+      MAXIMUM.DISPLAYABLE.PAGES  = 17
+      MAXIMUM.PASSWORD.CHANGES   = 3
+      MAXIMUM.VIOLATIONS         = 5
+      MAXIMUM.NUMBER.OF.NODES    = 1
+      MENU$(1)                   = D$ + "MENU1"
+      MENU$(2)                   = D$ + "MENU2"
+      MENU$(3)                   = D$ + "MENU3"
+      MENU$(4)                   = D$ + "MENU4"
+      MENU$(5)                   = D$ + "MENU5"
+      MENU$(6)                   = D$ + "MENU6"
+      MENUS.CAN.PAUSE            = TRUE
+      MESSAGE.REMINDER           = TRUE
+      MESSAGES.CAN.GROW          = FALSE
+      MIN.NEWCALLER.BAUD         = 0
+      MIN.OLDCALLER.BAUD         = 0
+      MIN.SEC.TO.VIEW            = DEFAULT.SECURITY.LEVEL
+      MINIMUM.LOGON.SECURITY     = 0
+      MINIMUM.SECURITY.FOR.TEMP.PASSWORD = 5
+      MINUTES.PER.SESSION!       = 72
+      MLCOM                      = FALSE
+      MM                         = 5
+      MO$                        = DD$
+      MUSIC                      = FALSE
+      NET.MAIL$                  = "<none>"
+      NETWORK.TYPE               = 0
+      NETWORK.TYPE$              = "IBM's DOS"
+      NEW.FILES.CHECK            = FALSE
+      NEW.USER.QUESTIONNAIRE$    = D$ + "RBBS-REG.DEF"
+      NEWUSER.FILE$              = D$ + "NEWUSER"
+      NEWUSER.SETS.DEFAULTS      = TRUE
+      OMIT.MAIN.DIRECTORY$       = "NO"
+      OMIT.UPLOAD.DIRECTORY$     = "NO"
+      OVERWRITE.SECURITY.LEVEL   = SYSOP.SECURITY.LEVEL
+      PAGE.LENGTH                = 23
+      PAGING.PRINTER.SUPPORT$    = ". "
+      PASSWORD.FILE$             = D$ + "PASSWRDS"
+      PCJR                       = FALSE
+      PERSONAL.BEGIN             = 1
+      PERSONAL.DIR$              = D$+"PRIV.DEF"
+      PERSONAL.DRVPATH$          = D$
+      PERSONAL.LEN               = 31
+      PERSONAL.CONCAT            = FALSE
+      PRELOG$                    = D$ + "PRELOG"
+      PRIVATE.READ.SEC           = DEFAULT.SECURITY.LEVEL
+      PROTO.DEF$                 = D$ + "PROTO.DEF"
+      PROMPT.BELL                = 0
+      PROMPT.HASH$               = "Name"
+      PROMPT.INDIV$              = ""
+      PS                         = 5
+      PUBLIC.READ.SEC            = DEFAULT.SECURITY.LEVEL
+      QUES.PATH$                 = D$
+      RBBS.BAT$                  = D$ + "RBBS" + NODE.ID$ + ".BAT"
+      RBBS.NAME$                 = "RBBS-PC"
+      RCTTY.BAT$                 = D$ + "RCTTY" + NODE.ID$ + ".BAT"
+      RECYCLE.TO.DOS             = 0
+      RECYCLE.TO.DOS$            = "INTERNAL"
+      RECYCLE.WAIT               = 0
+      REDIRECT.IO.METHOD         = TRUE
+      REGISTRATION.PROGRAM$      = "<none>"
+      REMEMBER.NEW.USERS         = TRUE
+      REMIND.FILE.TRANSFERS      = FALSE
+      REMIND.PROFILE             = FALSE
+      REQUIRE.NON.ASCII          = TRUE
+      REQUIRED.QUESTIONNAIRE$    = "<none>"
+      REQUIRED.RINGS             = 1
+      RESTRICT.BAUD              = FALSE
+      RESTRICT.BY.DATE           = FALSE
+      RESTRICT.VALID.CMDS        = FALSE
+      RTS$                       = "NO"
+      SCREEN.OUT.MSG$            = "SEEN-BY: "
+      SEC.CHANGE.MSG             = SYSOP.SECURITY.LEVEL
+      SEC.LVL.EXEMPT.FRM.PURGING = SYSOP.SECURITY.LEVEL
+      SECVIO.HLP$                = D$ + "SECVIO." + HELP.EXTENSION$
+      SECURITY.EXEMPT.FROM.EPILOG= DEFAULT.SECURITY.LEVEL + 1
+      SF                         = SYSOP.SECURITY.LEVEL
+      SHOOT.YOURSELF             = FALSE
+      SHOW.SECTION               = TRUE
+      SIZE.OF.STACK              = 1024
+      SL.CATEGORIZE.UPLOADS      = SYSOP.SECURITY.LEVEL
+      SMART.TEXT                 = 123
+      START.HASH                 = 1
+      START.INDIV                = 0
+      START.OFFICE.HOURS         = 800
+      SURVIVE.NOUSER.ROOM        = FALSE
+      SWITCH.BACK                = FALSE
+      SYSOP.COMMANDS.DEFAULTS$   = "1234567"
+      SYSOP.COMMANDS$            = SYSOP.COMMANDS.DEFAULTS$
+      SYSOP.FUNCTION$(1,1)       = " 1 List comments      "
+      SYSOP.FUNCTION$(2,1)       = " 2 List CALLERS log   "
+      SYSOP.FUNCTION$(3,1)       = " 3 Recover a message  "
+      SYSOP.FUNCTION$(4,1)       = " 4 Erase comments     "
+      SYSOP.FUNCTION$(5,1)       = " 5 User maintenance   "
+      SYSOP.FUNCTION$(6,1)       = " 6 Toggle Page bell   "
+      SYSOP.FUNCTION$(7,1)       = " 7 Exit to DOS        "
+      SYSOP.FUNCTION$(1,2)       = " 1"
+      SYSOP.FUNCTION$(2,2)       = " 2"
+      SYSOP.FUNCTION$(3,2)       = " 3"
+      SYSOP.FUNCTION$(4,2)       = " 4"
+      SYSOP.FUNCTION$(5,2)       = " 5"
+      SYSOP.FUNCTION$(6,2)       = " 6"
+      SYSOP.FUNCTION$(7,2)       = " 7"
+      SYSOP.FIRST.NAME$          = "TOM"
+      SYSOP.LAST.NAME$           = "MACK"
+      SYSOP.MENU.SECURITY.LEVEL  = SYSOP.SECURITY.LEVEL
+      SYSOP.PASSWORD.1$          = "SECRET"
+      SYSOP.PASSWORD.2$          = "NAME"
+      TEST.ANSI.TIME             = 0
+      TIME.TO.DROP.TO.DOS        = 0
+      TRASHCAN.FILE$             = D$ + "TRASHCAN"
+      TURN.PRINTER.OFF           = FALSE
+      TURBO.RBBS                 = TRUE
+      UE                         = 5
+      FMS.DIRECTORY$             = ""
+      UPCAT.HELP$                = "UPCAT"
+      UPLOAD.DIRECTORY$          = "99"
+      UPLOAD.PATH$               = D$
+      UPLOAD.SUBDIR$             = ""
+      UPLOAD.TIME.FACTOR!        = 0
+      UPLOAD.TO.SUBDIR           = FALSE
+      USE.BASIC.WRITES           = FALSE
+      USE.DEVICE.DRIVER$         = ""
+      USER.LOCATION$             = "CITY and STATE"
+      UTIL.COMMANDS.DEFAULTS$    = "BCEFGLMPRSTU"
+      UTIL.COMMANDS$             = UTIL.COMMANDS.DEFAULTS$
+      UTILITY.FUNCTION$(1,1)     = "B)ank time            "
+      UTILITY.FUNCTION$(2,1)     = "C)lock (time)         "
+      UTILITY.FUNCTION$(3,1)     = "E)cho                 "
+      UTILITY.FUNCTION$(4,1)     = "F)ile x-fer protocol  "
+      UTILITY.FUNCTION$(5,1)     = "G)raphics             "
+      UTILITY.FUNCTION$(6,1)     = "L)ines per page       "
+      UTILITY.FUNCTION$(7,1)     = "M)sg margin setting   "
+      UTILITY.FUNCTION$(8,1)     = "P)assword change      "
+      UTILITY.FUNCTION$(9,1)     = "R)eview defaults      "
+      UTILITY.FUNCTION$(10,1)    = "S)tatistics           "
+      UTILITY.FUNCTION$(11,1)    = "T)oggle               "
+      UTILITY.FUNCTION$(12,1)    = "U)ser log scan        "
+      VOICE.TYPE                 = 0
+      VOICE.TYPE$                = NONE.PICKED$
+      XON.XOFF                   = FALSE
+      ZCallersLst$               = D$ + "CALLLST.DEF"
+      ZCopyrightSecs             = 8
+      ZDistriHelp$               = "DISTRI"
+      ZDistriPath$               = D$
+      ZEnableCC                  = FALSE
+      ZMaxBank                   = 60
+      ZMinSecPersUpld            = SYSOP.SECURITY.LEVEL
+      ZMsgSecCats$               = "URP"
+      FOR I = 1 TO LEN(UTIL.COMMANDS.DEFAULTS$)
+         UTILITY.FUNCTION$(I,2) = MID$(UTIL.COMMANDS.DEFAULTS$,I,1)
+      NEXT
+      WAIT.BEFORE.DISCONNECT     = 180
+      WELCOME.FILE$              = D$ + "WELCOME"
+      WELCOME.INTERRUPTABLE      = TRUE
+      WILL.SUBDIRS.B.USED        = FALSE
+      WRITE.BUF.DEF              = 1024
+      FOR I = 1 TO NUM.SYSOP
+         SYSOP.FUNCTION(I) = SF
+      NEXT
+      FOR I = 1 TO NUM.MAIN
+         MAIN.FUNCTION(I) = MM
+      NEXT
+      FOR I = 1 TO NUM.FILES
+         FILES.FUNCTION(I) = FC
+      NEXT
+      FOR I = 1 TO NUM.LIBRARY
+         LIBRARY.FUNCTION(I) = PS
+      NEXT
+      FOR I = 1 TO NUM.UTILITY
+         UTILITY.FUNCTION(I) = UE
+      NEXT
+      FOR I = 1 TO NUM.GLOBAL
+         GLOBAL.FUNCTION(I) = GB
+      NEXT
+      CALL MODEMINITCMD
+      END SUB
+'  $SUBTITLE: 'VOICETYPE - subroutine to select voice'
+'  $PAGE
+'
+'  SUBROUTINE NAME    --  VOICETYPE
+'
+'  INPUT PARAMETERS   --  VOICE.TYPE
+'                         VOICE.TYPE$
+'                         SUBROUTINE.PARAMETER
+'
+'  OUTPUT PARAMETERS  --  VOICE.TYPE
+'                         VOICE.TYPE$
+'
+'  SUBROUTINE PURPOSE --  TO SELECT THE RBBS-PC SUPPORTED VOICE
+'                         SYNTHESIZERS
+'
+      SUB VOICETYPE STATIC
+      ON SUBROUTINE.PARAMETER GOTO 60482,60484
+* REPLACING old line(s) by new
+61700 SUB CHKFMSDIR (FMSDIR$,LINELEN,FMS.DIRCAT$) STATIC
+      CALL GETNUMYN ("Really check FMS directory",AB)
+      IF NOT AB THEN _
+         EXIT SUB
+      DIM CAT.CODE$(99)
+      CALL SETSCRCHK ("FMS",FMSDIR$)
+      NCATS = 0
+      CALL FINDFILE (FMS.DIRCAT$,FEXISTS)
+      IF NOT FEXISTS THEN _
+         GOTO 61702
+      NCATS = 1
+      CAT.CODE$(1) = "***"
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN FMS.DIRCAT$ FOR INPUT SHARED AS #2 _
+      ELSE  OPEN FMS.DIRCAT$ FOR INPUT AS #2
+      WHILE NOT EOF(2) AND NCATS < UBOUND(CAT.CODE$)
+         NCATS = NCATS + 1
+         INPUT #2,X$,Y$,X$
+         CAT.CODE$(NCATS) = Y$
+      WEND
+      CLOSE 2
+* REPLACING old line(s) by new
+61702 GO.ON = -1
+      CALL FINDFILE (FMSDIR$,FEXISTS)
+      IF NOT FEXISTS THEN _
+         LOCATE 6,25 : _
+         PRINT "File not found"; : _
+         GOTO 61750
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN FMSDIR$ FOR INPUT SHARED AS #2 _
+      ELSE OPEN FMSDIR$ FOR INPUT AS #2
+      WHILE NOT EOF(2) AND GO.ON
+         NLINES = NLINES + 1
+         LINE INPUT #2, A$
+         L = LEN(A$)
+         LOCATE 7,36
+         PRINT NLINES;
+         IF L > LINELEN THEN _
+            CALL HANDERR (A$,NLINES,"Too LONG: has" + STR$(L) + " chars but should have" + STR$(LINELEN),GO.ON):_
+            IF NOT GO.ON THEN _
+               GOTO 61740
+         IF L < LINELEN THEN _
+            X$ = "Too SHORT: has" + STR$(L) + " chars but should have" + STR$(LINELEN) : _
+            CALL HANDERR (A$,NLINES,X$,GO.ON):_
+            IF NOT GO.ON THEN _
+               GOTO 61740
+         IF L = LINELEN THEN _
+            I = INSTR(A$," ") : _
+            IF I = 0 OR I > 13 THEN _
+               CALL HANDERR (A$,NLINES, "Space must begin line or be after file name",GO.ON) : _
+               IF NOT GO.ON THEN _
+                  GOTO 61740
+         IF L > 0 THEN _
+            IF INSTR ("\* ",LEFT$(A$,1)) THEN _
+               GOTO 61740
+         IF L > 30 THEN _
+            X$ = MID$(A$,24,2) + _
+                 MID$(A$,27,2) + _
+                 MID$(A$,30,2) : _
+            I = 1 : _
+            WHILE I < 7 AND INSTR("0123456789",MID$(X$,I,1)) > 0 : _
+               I = I + 1: _
+            WEND: _
+            IF I < 7 THEN _
+               CALL HANDERR (A$,NLINES,"INVALID CHARACTER <" + MID$(X$,I,1) + "> in date field",GO.ON) : _
+               IF NOT GO.ON THEN _
+                  GOTO 61740
+         I = 1
+         Y$ = MID$(A$,L - 2)
+         CALL REMOVE (Y$," ")
+         WHILE I <= NCATS AND Y$ <> CAT.CODE$(I)
+            I = I + 1
+         WEND
+         IF I > NCATS THEN _
+            CALL HANDERR (A$,NLINES,"Category code <" + Y$ + "> NOT IN " + FMS.DIRCAT$,GO.ON)
+* REPLACING old line(s) by new
+61751 SUB CHKRANDOM (CHKTHIS$, LINELEN, KindChk$) STATIC
+      LOCATE 15,15
+      BEEP
+      CALL ASKRO ("          1st check done.  Press [ENTER] to continue",20,ANS$)
+      CALL SETSCRCHK (KindChk$,CHKTHIS$)
+      RECLEN = LINELEN + 2
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN CHKTHIS$ FOR RANDOM SHARED AS #2 LEN=RECLEN _
+      ELSE OPEN "R",2,CHKTHIS$,RECLEN
+      FIELD 2, RECLEN AS FMSREC$
+      LASTREC = LOF(2)/RECLEN
+      CRLF$ = CHR$(13) + CHR$(10)
+      FOR NLINES = 1 TO LASTREC
+         GET 2,NLINES
+         LOCATE 7,36
+         PRINT NLINES;
+         IF INSTR ("\*=",MID$(FMSREC$,1,1)) THEN _
+            GOTO 61753
+         I = INSTR(FMSREC$," ") : _
+         IF I = 0 OR I > 13 THEN _
+            J = INSTR(FMSREC$,CHR$(0)) : _
+            IF J > 0 AND J < I THEN _
+               CALL HANDERR (FMSREC$,NLINES, "Space must begin line or be after file name",GO.ON) : _
+               IF NOT GO.ON THEN _
+                  GOTO 61752
+         IF RIGHT$(FMSREC$,2) <> CRLF$ THEN _
+            CALL HANDERR (FMSREC$,NLINES,"Does not end with carriage-return-line-feed",GO.ON) :_
+            IF NOT GO.ON THEN _
+               GOTO 61752
+        GOTO 61753
+* REPLACING old line(s) by new
+61755 SUB CHKPERSDIR (PDIR$, DESC.LEN, NAMELEN) STATIC
+      CALL GETNUMYN ("Really check Personal directory",AB)
+      IF NOT AB THEN _
+         EXIT SUB
+      CLS
+      LOCATE 5, 14
+      PRINT "Checking Personal Directory "; PDIR$;
+      NLINES = 0
+      LOCATE 7, 27
+      PRINT "Line #";
+      LOCATE 9, 20
+      COLOR 0, 7
+      PRINT " Last Line with an ERROR ";
+      LOCATE 12, 28
+      PRINT " Last ERROR ";
+      COLOR 7, 0
+      GO.ON = -1
+      CALL FINDFILE(PDIR$, FEXISTS)
+      IF NOT FEXISTS THEN _
+         LOCATE 6, 25: _
+         PRINT "File not found"; : _
+         GOTO 61775
+      LINELEN = 34 + DESC.LEN + NAMELEN
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN PDIR$ FOR INPUT SHARED AS #2 _
+      ELSE OPEN PDIR$ FOR INPUT SHARED AS #2
+      WHILE NOT EOF(2) AND GO.ON
+         NLINES = NLINES + 1
+         LINE INPUT #2, A$
+         L = LEN(A$)
+         LOCATE 7, 36
+         PRINT NLINES;
+         IF L > LINELEN THEN _
+            CALL HANDERR(A$, NLINES, "Too LONG: has" + STR$(L) + " chars but should have" + STR$(LINELEN), GO.ON) : _
+            IF NOT GO.ON THEN _
+               GOTO 61770
+         IF L < LINELEN THEN _
+            CALL HANDERR(A$, NLINES, "Too SHORT: has" + STR$(L) + " chars but should have" + STR$(LINELEN), GO.ON) : _
+               IF NOT GO.ON THEN _
+                  GOTO 61770
+         IF L > 30 AND (LEFT$(A$,1) <> " ") THEN _
+            X$ = MID$(A$, 24, 2) + MID$(A$, 27, 2) + MID$(A$, 30, 2) : _
+            I = 1 : _
+            WHILE I < 7 AND INSTR("0123456789", MID$(X$, I, 1)) > 0 : _
+               I = I + 1 : _
+            WEND : _
+            IF I < 7 THEN _
+               CALL HANDERR(A$, NLINES, "INVALID CHARACTER <" + MID$(X$, I, 1) + "> in date field", GO.ON) : _
+               IF NOT GO.ON THEN _
+                  GOTO 61770
+           IF L = LINELEN THEN _
+              X$ = RIGHT$(A$, 1) : _
+              IF INSTR("*!", X$) = 0 THEN _
+                 CALL HANDERR(A$, NLINES, "Last char on line should be * or ! but found <" + X$ + ">", GO.ON) : _
+                 IF NOT GO.ON THEN  _
+                    GOTO 61770
+           IF L = LINELEN THEN _
+              X$ = MID$(A$, L - NAMELEN, LINELEN) : _
+              IF LEFT$(X$, 1) = " " THEN _
+                 IF INSTR("0123456789-", MID$(X$, 2, 1)) = 0 THEN _
+                    CALL HANDERR(A$, NLINES, "Name field at col" + STR$(L - NAMELEN) + " has <" + LEFT$(X$, 1) + ">, needs non-blank or blank+number", GO.ON) : _
+                    IF NOT GO.ON THEN _
+                       GOTO 61770
+           IF L = LINELEN THEN _
+              I = INSTR(A$," ") : _
+              IF I = 0 OR I > 13 THEN _
+                 CALL HANDERR(A$,NLINES, "Space must begin line or be after file name",GO.ON) : _
+                 IF NOT GO.ON THEN _
+                    GOTO 61770
+* REPLACING old line(s) by new
+62103 CLOSE 2
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN "MODEMS.SET" FOR INPUT SHARED AS #2 _
+      ELSE OPEN "I",2,"MODEMS.SET"
+      MODEM.MODEL = 0
+      MODEM.PAGE = 0
+* REPLACING old line(s) by new
+62110 LOCATE 24,10
+      PRINT "Use Parameter 231 to initialize modem's firmware";
+      CALL GETINIT("Select modem number, or [ENTER] to exit", _
+                    22,MODEM.PAGE,MODEM.MODEL,MODEM.SELECTED, CR)
+      IF CR THEN _
+         EXIT SUB
+      IF MODEM.SELECTED = 0 THEN _
+         GOTO 62105
+      CLOSE 2
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN "MODEMS.SET" FOR INPUT SHARED AS #2 _
+      ELSE OPEN "I",2,"MODEMS.SET"
+      FOR I = 1 TO (MODEM.SELECTED - 1) * 16      ' # of parms * modem
+         INPUT #2,GARBAGE$
+      NEXT
+      INPUT #2, MODEM.MODEL$, _
+                SWITCHES$, _
+                USER.ANSWER.COMMAND$, _
+                USER.COUNT.RINGS.COMMAND$, _
+                USER.GO.OFFHOOK.COMMAND$, _
+                USER.INIT.COMMAND$, _
+                USER.RESET.COMMAND$, _
+                USER.INITIALIZE.COMMAND$, _
+                USER.FIRMWARE.CLEAR.CMND$, _
+                USER.FIRMWARE.WRITE.CMND$, _
+                RTS$, _
+                MODEM.INIT.WAIT.TIME, _
+                MODEM.COMMAND.DELAY.TIME, _
+                COMMANDS.BETWEEN.RINGS, _
+                MODEM.INIT.BAUD$, _
+                KEEP.INIT.BAUD
+      CLOSE 2
+      END SUB

@@ -1,0 +1,1454 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against RCHAT401.BAS to produce RCHAT401.NEW
+* RCHAT401.BAS:  Date 9-14-92  Size 31858 bytes
+* ------------[ Created 08-18-1996 13:45:03 ]------------
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+' $segment
+'
+' RChat401  --  Or, RBBS-Chat, release 4.01.  A character by character
+'               internode chat program..
+'
+'  Not the worlds prettiest, or cleanest code.. but I'm under no illusions..
+'
+'  Copyright 1989-1992 By John Morris  All Rights Reserved
+'
+'  I'm not a big fan of global variables, but here goes..
+'
+
+REM **********************************************************************
+REM ***  Change 'CONST LogChatToDisk = -1' if you wish to record       ***
+REM ***  all of the chats. This is for your protection!   If you turn  ***
+REM ***  this option on (-1) then the users will be notified that      ***
+REM ***  the chat is being recorded (they have a right to know!)       ***
+REM ***  Chat filenames have this format: MM-DD-HH.CHAT or             ***
+REM ***  month-day-hour.CHT                                            ***
+REM **********************************************************************
+
+'  CONST LogChatToDisk = 0
+   DEFINT A - Z
+
+REM *************************************************************
+REM ** The following are needed by only 2 or 3 subprograms, so,**
+REM ** they are declared COMMON, and then SHARED only in some  **
+REM ** of the subprgms.. the fewer that have access the better **
+REM *************************************************************
+
+   COMMON /Chat/ DoTrueChat, HasPaged, UpperNode, LowerNode, SaveToDisk
+   COMMON /Chat/ NodesToSquelch$, RePage, DOSVersion
+
+REM *************************************************************
+REM ** The below are the shared fields used by the subprograms **
+REM ** Each and every one is declared as COMMON SHARED so every**
+REM ** subprogram has access to the following variables        **
+REM *************************************************************
+
+   COMMON SHARED /ChatField/ ChatActivity$, PagingNode$, PrivateFor$
+   COMMON SHARED /ChatField/ ChatInput$, ChatName$, InTrueChat$
+   COMMON SHARED /ChatField/ TrueChatIndex$, SavingToDisk$, BBSActivity$
+'
+'  $INCLUDE: 'RBBS-VAR.BAS'   'RBBS-VAR.BAS minus the DEF FN...
+'
+* REPLACING old line(s) by new
+59800 ' $SUBTITLE: 'LogNewForChat - Save user info for chat'
+' $PAGE
+'
+'  NAME    -- LogNewForChat
+'
+'  INPUTS  -- NodesInSystem -- needed for creation of RBBSCHAT.DEF
+'
+'  OUTPUTS -- Updates the node record in RBBSCHAT.DEF with this users
+'             name and chat activity (always "I") when the user logs on.
+'
+'  PURPOSE -- See OUTPUTS. Also, if no RBBSCHAT.DEF is not found, one will be
+'             created.
+'
+      SUB LogNewForChat(NodesInSystem) STATIC
+
+* ------[ first line different ]------
+'     SHARED DosVersion
+
+      CALL FindItX (ZChatFileName$, 10)
+      REM ** If "RBBSCHAT.DEF" does not exist, then create it **
+      IF NOT ZOK THEN
+         CALL OpenRWork (10,ZChatFileName$)
+         FIELD 10, 128 AS TempNode$
+         LSET TempNode$ = SPACE$(128)
+         FOR Index = 1 TO ZMaxNodes
+            CALL UpdateR (10,Index, ZFalse)
+         NEXT
+      END IF
+      ChatIndex = ZNodeRecIndex - 1
+      CLOSE 10
+      CALL OpenRWork (10,ZChatFileName$)
+      CALL Field10
+      CALL LockUnlock10 (ZTrue)
+      CALL UpdateR (10,ChatIndex, ZTrue)
+      LSET ChatActivity$ = "I"                 ' I means inactive
+      LSET PagingNode$ = MKI$(0)
+      LSET ChatName$ = SPACE$(31)
+      LSET ChatName$ = ZActiveUserName$
+      LSET ChatInput$ = SPACE$(72)
+      LSET InTrueChat$ = "I"
+      CALL UpdateR (10,ChatIndex, ZFalse)
+      CALL LockUnlock10 (ZFalse)
+      CLOSE 10
+      HasPaged = 0
+      END SUB
+
+* REPLACING old line(s) by new
+59810 ' $SUBTITLE: 'CBCHECK - Check for a page attempt'
+' $PAGE
+'
+'  NAME    -- CBCHECK
+'
+'  INPUTS  -- NONE
+'
+'  OUTPUTS -- ChatActivity$   Changed to reflect whether or not they
+'                             are going to chat
+'             WillChat        If WillChat is TRUE, then the user will
+'                             automatically be thrust unawares into
+'                             chat mode.. They said yes... didn't they?
+'
+'  PURPOSE -- Check to see if we have been paged from another node
+'
+      SUB CBCheck(WillChat) STATIC
+
+      ' You might just wanna REM this out..
+      IF NOT ZAvailableForChat THEN
+         EXIT SUB
+      END IF
+
+      WillChat = ZFalse
+      ZOutTxt$ = ""
+      IsTrueChat = ZFalse
+* ------[ first line different ]------
+      CALL FindItX (ZChatFileName$, 10)
+      IF NOT ZOK THEN
+         EXIT SUB
+      END IF
+      ChatIndex = ZNodeRecIndex - 1
+      CLOSE 10
+      CALL OpenRWork (10,ZChatFileName$)
+      CALL Field10
+      CALL UpdateR (10,ChatIndex, ZTrue)
+      IF ChatActivity$ = "R" THEN   'R means request for chat
+         PagerIndex = CVI(PagingNode$)
+         CALL RingCaller
+         CALL UpdateR (10,PagerIndex, ZTrue)
+         IsTrueChat = (InTrueChat$ = "A")
+         ZOutTxt$ = ChatName$
+         CALL TrimTrail (ZOutTxt$, SPACE$(1))
+         CALL NameCaps(ZOutTxt$)
+         '* "Paged for Chat by{SP"
+         LineNum = 867
+         GOSUB 59815
+         Strng1$ = Strng$
+         '* "{SPon node"
+         LineNum = 868
+         GOSUB 59815
+         Strng2$ = Strng$
+         CALL UpdtCalr(Strng1$ + ZOutTxt$ + Strng2$ + STR$(PagerIndex), 1)
+         IF ZMaxNodes > 1 AND ZMaxNodes < 5 AND ZWasGR > 1 AND ZCanANSIChat THEN
+            IF ZWasGR = 4 THEN
+               CALL BufFile (ZWelcomeFileDrvPath$ + "RIPWINCI.RIP",0)
+            END IF
+            ZDoANSIMChat = ZTrue
+            '* "{CF{G7"
+            LineNum = 1107
+            GOSUB 59815
+            Strng1$ = Strng$
+            '* "ANSIMChat"
+            LineNum = 1108
+            GOSUB 59815
+            Strng2$ = Strng$
+            CALL ANSIBox(2,2,23,78,Strng1$,"",Strng2$)
+            '* "{CA{G0"
+            LineNum = 1109
+            GOSUB 59815
+            Strng1$ = Strng$
+            '* "Chat Request!"
+            LineNum = 1110
+            GOSUB 59815
+            Strng2$ = Strng$
+            CALL ANSIBox(9,10,10,70,Strng1$,"",Strng2$)
+            CALL ANSILocate(9,10)
+         ELSE
+            ZDoANSIMChat = ZFalse
+         END IF
+         '* "{SP is requesting that you join in a chat!"
+         LineNum = 869
+         GOSUB 59815
+         CALL QuickTPut(ZEmphasizeOff$ + ZOutTxt$ + Strng$, 1)
+         '* "Would you like to join the chat ([Y],N)"
+         LineNum = 870
+         GOSUB 59815
+         ZOutTxt$ = Strng$
+         IF ZDoANSIMChat THEN
+            CALL ANSILocate(10,10)
+         END IF
+         ZSubParm = 1
+         CALL TGet
+         IF ZSubParm = -1 THEN
+            CLOSE 10
+            EXIT SUB
+         END IF
+         CALL LockUnlock10 (ZTrue)
+         CALL UpdateR (10,ChatIndex, ZTrue)
+         IF ZNo THEN
+            LSET ChatActivity$ = "N"   'No, I don't think I'll chat
+            IF ZDoANSIMChat THEN
+               CALL ANSILocate(24,1)
+            END IF
+         ELSE
+            LSET ChatActivity$ = "Y"   'Yeah, I might just join a chat
+            WillChat = ZTrue
+         END IF
+         IF IsTrueChat THEN
+            LSET InTrueChat$ = "Y"
+         ELSE
+            LSET InTrueChat$ = "I"
+         END IF
+         CALL UpdateR (10,ChatIndex, ZFalse)
+         CALL LockUnlock10 (ZFalse)
+      END IF
+      CLOSE 10
+      EXIT SUB
+* INSERTING new line(s)
+59815 CALL FormatString (LineNum,ZFalse,ZFalse,0,ZFalse,0,Strng$)
+      RETURN
+      END SUB
+
+* REPLACING old line(s) by new
+59820 ' $SUBTITLE: 'PageEm - attempt to page another user to chat'
+' $PAGE
+'
+'  NAME    -- PageEm
+'
+'  INPUTS  -- ShowOnly         Show whos is on the other nodes only
+'             NodesInSystem    Number of nodes in this system
+'
+'  OUTPUTS -- HasPaged        -1 exit chat mode
+'                              0 don't check for reply to page
+'                              1 - NodesInSystem check for page reply
+'
+'  PURPOSE -- Page another user on the system and set up for a reply
+'             from the other user
+'
+      SUB PageEm(CurrentNodeIndex, NodesInSystem) STATIC
+
+      REM ** Page 'Em needs access to the COMMON variable HasPaged & RePage **
+      SHARED DoTrueChat, HasPaged, UpperNode, LowerNode, RePage
+
+* ------[ first line different ]------
+      SaveCursorRow = CSRLIN
+
+      IF NodesInSystem > 1 AND NodesInSystem < 5 AND ZWasGR > 1 AND ZCanANSIChat THEN
+         CALL ResetGraphics
+         ZDoANSIMChat = ZTrue
+      ELSE
+         ZDoANSIMChat = ZFalse
+      END IF
+
+      IF NOT ZExpertUser THEN
+         CALL ChatCommand(ChatSubParm, CurrentNodeIndex, NodesInSystem)
+         IF ChatSubParm THEN
+            CALL ANSILocate (SaveCursorRow,1)
+            EXIT SUB
+         END IF
+      END IF
+
+RePageEm:
+
+      IF ZDoANSIMChat THEN
+         '* "{CF{G7"
+         LineNum = 1107
+         GOSUB 59825
+         Strng1$ = Strng$
+         '* "ANSIMChat"
+         LineNum = 1108
+         GOSUB 59825
+         Strng2$ = Strng$
+         CALL ANSIBox(2,2,23,78,Strng1$,"",Strng2$)
+      END IF
+      HasPaged = 0
+      CALL WhosOn
+      IF NodesInSystem < 2 THEN
+         CALL SmartPause (ZFalse)
+         EXIT SUB
+      END IF
+      IF ZDoANSIMChat THEN
+         CALL ANSILocate (12,2)
+      ELSE
+         CALL SkipLine(1)
+      END IF
+      '* "{RCChat with which node (1 -"
+      LineNum = 1111
+      GOSUB 59825
+      CALL QuickTPut (Strng$ + STR$(NodesInSystem) + ")",0)
+      ZOutTxt$ = ZPressEnterExpert$
+      ZSubParm = 1
+      CALL TGet
+      IF ZWasQ = 0 OR ZSubParm = -1 THEN
+         IF ZDoANSIMChat THEN
+            CALL ANSILocate (SaveCursorRow,1)
+         END IF
+         EXIT SUB
+      END IF
+      CALL CheckInt(ZUserInAra$(1))
+      CALL Field10
+      IF ZTestedIntValue > 0 AND ZTestedIntValue <= NodesInSystem THEN
+         IF ZTestedIntValue = CurrentNodeIndex THEN
+            IF ZDoANSIMChat THEN
+               '* "{CC{G0"
+               LineNum = 1112
+               GOSUB 59825
+               Strng1$ = Strng$
+               '* "Hello!"
+               LineNum = 1113
+               GOSUB 59825
+               Strng2$ = Strng$
+               CALL ANSIBox(18,4,18,75,Strng1$,"",Strng2$)
+               CALL ANSILocate(18,4)
+            END IF
+            '* "{RCSorry, {FN you cannot talk to yourself!"
+            LineNum = 1114
+            GOSUB 59825
+            CALL QuickTPut1 (Strng$)
+            CALL DelayTime(1)
+            GOTO RePageEm
+         END IF
+         CALL UpdateR (10,ZTestedIntValue, ZTrue)
+         IF ChatActivity$ = "A" THEN        'A if other node already
+            IF InTrueChat$ = "A" THEN       'A can't page 'em if in true chat
+               IF ZDoANSIMChat THEN
+                  '* "{CA{G0"
+                  LineNum = 1115
+                  GOSUB 59825
+                  Strng1$ = Strng$
+                  '* "Private Chat!"
+                  LineNum = 1116
+                  GOSUB 59825
+                  Strng2$ = Strng$
+                  CALL ANSIBox(9,4,11,75,Strng1$,"",Strng2$)
+                  CALL ANSILocate(10,8)
+               END IF
+               '* "Sorry, the node you requested is in a private chat!"
+               LineNum = 871
+               GOSUB 59825
+               CALL QuickTPut1 (Strng$)
+               IF ZDoANSIMChat THEN
+                  CALL ANSILocate(11,8)
+               END IF
+               CALL SmartPause(ZTrue)
+               EXIT SUB
+            END IF
+            '
+            'If the other node is active in chat , but not in a private chat
+            'then we'll just drop down to 'CALL CBTrueChat'
+            '
+          ELSE
+            HasPaged = ZTestedIntValue
+            IF ZDoANSIMChat THEN
+               '* "{CB{G0"
+               LineNum = 1117
+               GOSUB 59825
+               Strng1$ = Strng$
+               '* "Select Chat Mode"
+               LineNum = 1118
+               GOSUB 59825
+               Strng2$ = Strng$
+               CALL ANSIBox(18,17,18,58,Strng1$,"",Strng2$)
+               CALL ANSILocate(18,19)
+            END IF
+            '* "Should this be a private chat ([Y],N)"
+            LineNum = 872
+            GOSUB 59825
+            ZOutTxt$ = Strng$
+            ZSubParm = 1
+            CALL TGet
+            IF ZYes OR (ZWasQ = 0) THEN
+               DoTrueChat = ZTrue
+               LowerNode = HasPaged
+               UpperNode = HasPaged
+            ELSE
+               DoTrueChat = ZFalse
+            END IF
+            IF ZDoANSIMChat THEN
+               '* "{C9{G0"
+               LineNum = 1119
+               GOSUB 59825
+               Strng1$ = Strng$
+               '* "Paging Node {IV"
+               LineNum = 1120
+               GOSUB 59825
+               Strng2$ = Strng$
+               CALL ANSIBox(18,24,18,53,Strng1$,"",Strng2$)
+               CALL ANSILocate(18,24)
+            END IF
+            '* "Attempting to page other node
+            LineNum = 873
+            GOSUB 59825
+            CALL QuickTPut1 (Strng$)
+            IF ZDoANSIMChat THEN
+               CALL DelayTime(1)
+            END IF
+            LSET ChatActivity$ = "R"        'R means Request
+            LSET PagingNode$ = MKI$(CurrentNodeIndex)
+            CALL LockUnlock10 (ZTrue)
+            CALL UpdateR (10,ZTestedIntValue, ZFalse)
+            CALL LockUnlock10 (ZFalse)
+
+            IF DoTrueChat THEN
+               CALL LockUnlock10 (ZTrue)
+               CALL UpdateR (10,CurrentNodeIndex, ZTrue)
+               LSET InTrueChat$ = "A"
+               CALL UpdateR (10,CurrentNodeIndex, ZFalse)
+               CALL LockUnlock10 (ZFalse)
+            END IF
+         END IF
+
+         CALL CBTrueChat(NodesInSystem)
+
+         ' user might want to repage some other node.. we'll just loop back
+         ' and start over..
+         IF RePage THEN
+            GOTO RePageEm
+         END IF
+
+      END IF
+      EXIT SUB
+* INSERTING new line(s)
+59825 CALL FormatString (LineNum,ZFalse,ZFalse,0,ZFalse,0,Strng$)
+      RETURN
+      END SUB
+
+* REPLACING old line(s) by new
+59830 ' $SUBTITLE: 'CBTrueChat - The letter by letter chat'
+' $PAGE
+'
+'  NAME    -- CBTrueChat
+'
+'  INPUTS  -- NodesInSystem
+'
+'  INTERNAL - NodesToSquelch$      STRING OF NODES NOT TO RECEIVE TEXT FROM
+'             HasPaged             NODE (IF ANY) THAT THIS USER PAGED
+'             CurrentNodeIndex     NODE RECORD IN "RBBSCHAT.DEF"
+'             ChatActivity$        CURRENT STATUS OF EACH NODE
+'             PagingNode$          NODE WHICH HAS PAGED THIS ONE
+'             ChatInput$           CURRENT TEXT INPUT BY USER FOR CHATTING
+'             ChatName$            NAME OF USER ON EACH NODE (NOT CURRENTLY USED)
+'             SquelchIt            BOOLEAN - MEANS NODE IS IGNORED
+* ------[ first line different ]------
+'             ZUserInAra$()           USED TO SAVE CURRENT STATUS OF EACH NODE
+'                                  THIS INFO IS LATER COMPARED, AND IF THAT
+'                                  STATUS IS CHANGED, THEN THE USER IS NOTIFIED
+'                                  OF THE CHANGE
+'             DoTrueChat           Means we are in a true chat mode, we'll
+'                                  only check one node for input
+'
+'
+'  OUTPUTS -- NONE
+'
+'  PURPOSE -- To allow users to chat between nodes in several different
+'             ways.
+'
+      SUB CBTrueChat(NodesInSystem) STATIC
+
+      SHARED DoTrueChat, HasPaged, UpperNode, LowerNode, SaveToDisk
+      SHARED NodesToSquelch$, RePage
+
+      CALL SaveUserActivity("C", ZNodeRecIndex, ZFalse,WasAV)
+
+      ZCol = 1
+      SendRemote = ZRemoteEcho
+      SaveToDisk = ZFalse
+      DoTrueChat = ZFalse
+      NodesToSquelch$ = ""
+
+      IF HasPaged AND (ZBBSOptions AND 32) > 0 THEN
+         CALL SetUpLogFile
+      END IF
+
+      ChatSubParm = 0
+      CALL FindItX (ZChatFileName$, 10)
+      IF ZOK THEN
+         CurrentNodeIndex = ZNodeRecIndex - 1
+         CLOSE 10
+         CALL OpenRWork (10,ZChatFileName$)
+         CALL Field10
+
+         IF NOT RePage THEN
+            '* "Entered CBTrueCH@ sim at {LT"
+            LineNum = 874
+            GOSUB 59845
+            CALL UpdtCalr (Strng$,1)
+         END IF
+
+         IF NOT ZDoANSIMChat THEN
+            '* "Press ESC or CTRL-C for Menu"
+            LineNum = 875
+            GOSUB 59845
+            CALL QuickTPut1 (Strng$)
+         END IF
+
+         REDIM TrueChatIndexHold(NodesInSystem)
+
+         REDIM RemoteStartRow(NodesInSystem)
+         REDIM RemoteEndRow(NodesInSystem)
+         REDIM RemoteCurRow(NodesInSystem)
+         REDIM RemoteCurCol(NodesInSystem)
+         REDIM AlreadyPrinted(NodesInSystem)
+
+         RePage = ZFalse
+
+         CALL LockUnlock10 (ZTrue)
+         CALL UpdateR (10,CurrentNodeIndex, ZTrue)
+         REM ** Set up for truechat mode.. two nodes in a private chat **
+         IF InTrueChat$ = "Y" OR InTrueChat$ = "A" THEN
+            IF InTrueChat$ = "Y" THEN
+                LSET InTrueChat$ = "A"
+                LowerNode = CVI(PagingNode$)
+                UpperNode = CVI(PagingNode$)
+            END IF
+            DoTrueChat = ZTrue
+          ELSE
+            LowerNode = 1
+            UpperNode = NodesInSystem
+         END IF
+         LSET ChatActivity$ = "A"
+         LSET TrueChatIndex$ = MKI$(1)
+         CALL UpdateR (10,CurrentNodeIndex, ZFalse)
+         CALL LockUnlock10 (ZFalse)
+
+         TotalActive = 1
+         REM ** Load in current node status for later comparison **
+         FOR LineIndex = 1 TO NodesInSystem
+            CALL UpdateR (10,LineIndex, ZTrue)
+            ZUserInAra$(LineIndex) = ChatActivity$
+            REM ** save current index so we don't get a bunch of trash if **
+            REM ** a chat is already in progress.                         **
+            IF ChatActivity$ = "A" THEN
+               TotalActive = TotalActive + 1
+               TrueChatIndexHold(LineIndex) = CVI(TrueChatIndex$)
+            ELSE
+               TrueChatIndexHold(LineIndex) = 1
+            END IF
+            AlreadyPrinted(LineIndex) = ZFalse
+         NEXT
+
+         LocalStartCol = 3
+         LocalCurCol   = 4
+         LocalCurRow   = 3
+         LocalStartRow = 3
+         LocalEndRow = 20/NodesInSystem
+         RemoteStartCol = 3
+         IF ZDoANSIMChat THEN
+            GOSUB 59832
+         END IF
+
+         REM ** Set Autologoff time before we start looping **
+         ZAutoLogoff! = TIMER + ZWaitBeforeDisconnect
+
+         REM ** We are currently getting name from MESSAGES file.. set that up..
+         WasA1$ = ZActiveMessageFile$
+         ZActiveMessageFile$ = ZOrigMsgFile$
+         CALL OpenMsg
+         FIELD 1, 128 AS ZMsgRec$
+
+         DO 'the wild chat thingie..
+
+REM **************************************************************************
+REM ******Check for answer to page, or text from other users in chat  ********
+REM ******If the other guy has 'page availability' turned off, then   ********
+REM ******we simply won't tell this guy.. he won't know the difference********
+REM **************************************************************************
+            FOR LineIndex = LowerNode TO UpperNode
+
+               SquelchIt = ZFalse
+               IF LineIndex <> CurrentNodeIndex THEN
+
+                  CALL UpdateR (10,LineIndex, ZTrue)
+                  Index$ = MID$(STR$(LineIndex), 2, 1)
+
+                  REM ** Check to see if node (LineIndex) has been squelched **
+                  IF NodesToSquelch$ <> "" THEN
+                     SquelchIt = (INSTR(NodesToSquelch$, Index$) > 0)
+                  END IF
+
+                  REM ** Check to see if other node in truechat **
+                  IF NOT SquelchIt AND NOT DoTrueChat THEN
+                     SquelchIt = (InTrueChat$ = "A")
+                  END IF
+
+                  REM ** Check for answer to page (if a page was done) **
+                  IF HasPaged = LineIndex THEN
+                     IF ChatActivity$ <> "R" THEN
+                        IF ChatActivity$ = "N" THEN
+                           '* "{RCPaged user said NO to chat mode!"
+                           LineNum = 876
+                           GOSUB 59845
+                           CALL QuickTPut1 (Strng$)
+                           HasPaged = 0
+                         ELSEIF ChatActivity$ = "Y" THEN
+                           REM ** if the other dude answered Yes, they will automatically
+                           REM ** be sent into the chat mode.. so don't bother telling the
+                           REM ** guy that they answered yes.. just turn off HasPaged
+                           HasPaged = 0
+                        END IF
+                     END IF
+                  END IF
+
+                  ChatTemp$ = ""
+                  NameTemp$ = ""
+
+                  REM ** Check for change in node activity              **
+                  REM ** In this case, see if someone has left the chat **
+                  REM ** node must not be squelched                     **
+                  IF NOT SquelchIt THEN
+                     IF (ZUserInAra$(LineIndex) = "A") AND (ChatActivity$ = "I") THEN
+                        GOSUB 59840
+                        '* "{SPon Node{SP
+                        LineNum = 877
+                        GOSUB 59845
+                        Strng1$ = Strng$
+                        '* "{SPhas exited chat mode!"
+                        LineNum = 878
+                        GOSUB 59845
+                        Strng2$ = Strng$
+                        IF ZDoANSIMChat THEN
+                           IF LocalCurRow = LocalEndRow THEN
+                              LocalCurRow = LocalStartRow
+                           ELSE
+                              LocalCurRow = LocalCurRow + 1
+                           END IF
+                           CALL ANSILocate (LocalStartRow,LocalStartCol+1)
+                           TotalActive = TotalActive - 1
+                        END IF
+                        CALL QuickTPut(ZEmphasizeOff$ + NameTemp$ + Strng1$ + Index$ + Strng2$, 1)
+                        IF ZDoANSIMChat THEN
+                           '* "{CF{G7"
+                           LineNum = 1107
+                           GOSUB 59845
+                           CALL QuickTPut(Strng$,0)
+                           FOR PrtRow = RemoteStartRow(LineIndex)-1 TO RemoteEndRow(LineIndex)+1
+                              CALL ANSILocate (PrtRow,2)
+                              CALL QuickTPut(SPACE$(77),0)
+                           NEXT PrtRow
+                           CALL ANSILocate(LocalStartRow+1,LocalStartCol+1)
+                        END IF
+                        IF DoTrueChat THEN
+                           DoTrueChat = ZFalse
+                           CALL LockUnlock10 (ZTrue)
+                           CALL UpdateR (10,CurrentNodeIndex, ZTrue)
+                           LSET InTrueChat$ = "I"
+                           LSET ChatInput$ = SPACE$(72)
+                           LSET TrueChatIndex$ = MKI$(1)
+                           CALL UpdateR (10,CurrentNodeIndex, ZFalse)
+                           CALL LockUnlock10 (ZFalse)
+                           REM ** TrueChat over.. start looping thru all nodes
+                           LowerNode = 1
+                           UpperNode = NodesInSystem
+                        END IF
+                     END IF
+                     REM ** OR, If someone has joined the chat **
+                     IF (ZUserInAra$(LineIndex) <> "A") AND (ChatActivity$ = "A") THEN
+                        GOSUB 59840
+                        '* "{SPon Node{SP
+                        LineNum = 877
+                        GOSUB 59845
+                        Strng1$ = Strng$
+                        '* "{SPhas entered chat mode!"
+                        LineNum = 879
+                        GOSUB 59845
+                        Strng2$ = Strng$
+                        '* ANSI MChat
+                        IF ZDoANSIMChat THEN
+                           IF LocalCurRow = LocalEndRow THEN
+                              LocalCurRow = LocalStartRow
+                           ELSE
+                              LocalCurRow = LocalCurRow + 1
+                           END IF
+                           TotalActive = TotalActive + 1
+                           '*{CB{G0"
+                           LineNum = 1121
+                           GOSUB 59845
+                           Strng3$ = Strng$
+                           Strng4$ = RTRIM$(ChatName$) + " Node" + STR$(LineIndex)
+                           CALL NameCaps(Strng4$)
+                           CALL ANSIBox(RemoteStartRow(LineIndex),3,RemoteEndRow(LineIndex),76,Strng3$,"",Strng4$)
+                           CALL ANSILocate(LocalStartRow,LocalStartCol+1)
+                        END IF
+                        CALL QuickTPut(ZEmphasizeOff$ + NameTemp$ + Strng1$ + Index$ + Strng2$, 1)
+                        REM ** Save the ring buffer index as they currently see it **
+                        TrueChatIndexHold(LineIndex) = CVI(TrueChatIndex$)
+                     END IF
+                  END IF
+
+                  REM ** Save new node status (if any) **
+                  ZUserInAra$(LineIndex) = ChatActivity$
+
+                  REM ** If other node is active (& not squelched) check it **
+                  IF (ChatActivity$ = "A") AND (NOT SquelchIt) THEN
+
+                     IF (CVI(TrueChatIndex$) <> TrueChatIndexHold(LineIndex)) THEN
+                        'Reset ZAutoLoggoff for Slow Typers on other nodes
+                        ZAutoLogoff! = TIMER + ZWaitBeforeDisconnect
+                        '* ANSI MChat
+                        IF ZDoANSIMChat THEN
+                           IF AlreadyPrinted(LineIndex) = ZFalse THEN
+                              '* "{CB{G0"
+                              LineNum = 1121
+                              GOSUB 59845
+                              Strng1$ = Strng$
+                              Strng2$ = RTRIM$(ChatName$) + " Node" + STR$(LineIndex)
+                              CALL NameCaps(Strng2$)
+                              CALL ANSIBox(RemoteStartRow(LineIndex),3,RemoteEndRow(LineIndex),76,Strng1$,"",Strng2$)
+                              AlreadyPrinted(LineIndex) = ZTrue
+                           END IF
+                        END IF
+
+                        OtherNodeInput$ = MID$(ChatInput$, TrueChatIndexHold(LineIndex), 1)
+
+                        IF OtherNodeInput$ = CHR$(8) THEN
+                           '* ANSI MChat
+                           IF ZDoANSIMChat THEN
+                              IF RemoteCurCol(LineIndex) > RemoteStartCol THEN
+                                 CALL ANSILocate(RemoteCurRow(LineIndex),RemoteCurCol(LineIndex))
+                                 CALL QuickTPut(" ",0)
+                                 IF RemoteCurCol(LineIndex) > RemoteStartCol THEN
+                                    RemoteCurCol(LineIndex) = RemoteCurCol(LineIndex) - 1
+                                 END IF
+                              ELSE
+                                 IF RemoteCurRow(LineIndex) = RemoteStartRow(LineIndex) THEN
+                                    RemoteCurRow(LineIndex) = RemoteEndRow(LineIndex)
+                                 ELSE
+                                    RemoteCurRow(LineIndex) = RemoteCurRow(LineIndex) - 1
+                                 END IF
+                                 RemoteCurCol(LineIndex) = 75
+                                 ZCol = 73
+                                 CALL ANSILocate (RemoteCurRow(LineIndex),RemoteCurCol(LineIndex))
+                                 CALL QuickTPut(" ",0)
+                                 RemoteCurCol(LineIndex) = RemoteCurCol(LineIndex) - 1
+                              END IF
+                           ELSE
+                              CALL LPrnt(ZLocalBkSp$, 0)
+                              CALL PutCom (ZBackSpace$)
+                           END IF
+                           IF SaveToDisk THEN
+                              CALL PrintWork(ZBackSpace$)
+                           END IF
+                           IF ZCol > 0 THEN
+                              ZCol = ZCol - 1
+                           END IF
+                        ELSEIF OtherNodeInput$ = CHR$(13) THEN
+                           '* ANSI MChat
+                           IF ZDoANSIMChat THEN
+                              RemoteCurRow(LineIndex) = RemoteCurRow(LineIndex) + 1
+                              RemoteCurCol(LineIndex) = RemoteStartCol
+                              IF RemoteCurRow(LineIndex) > RemoteEndRow(LineIndex) THEN
+                                 RemoteCurRow(LineIndex) = RemoteStartRow(LineIndex)
+                              END IF
+                              GOSUB 59834
+                           ELSE
+                              CALL SkipLine(1)
+                           END IF
+                           IF SaveToDisk THEN
+                              CALL PrintWorkA(2,"")
+                           END IF
+                           ZCol = 1
+                        ELSEIF OtherNodeInput$ > CHR$(31) AND OtherNodeInput$ < CHR$(255) THEN
+                           IF SaveToDisk THEN 'save to disk before colorization
+                              CALL PrintWork(OtherNodeInput$)
+                           END IF
+                           CALL ColorText(OtherNodeInput$, LineIndex)
+                           '* ANSI MChat
+                           IF ZDoANSIMChat THEN
+                              CALL ANSILocate (RemoteCurRow(LineIndex),RemoteCurCol(LineIndex) + 1)
+                              CALL QuickTPut (OtherNodeInput$,0)
+                              RemoteCurCol(LineIndex) = RemoteCurCol(LineIndex) + 1
+                              IF (RemoteCurCol(LineIndex) > 65 AND OtherNodeInput$ = " ") THEN
+                                 RemoteCurRow(LineIndex) = RemoteCurRow(LineIndex) + 1
+                                 RemoteCurCol(LineIndex) = RemoteStartCol
+                                 IF RemoteCurRow(LineIndex) = RemoteEndRow(LineIndex) + 1 THEN
+                                    RemoteCurRow(LineIndex) = RemoteStartRow(LineIndex)
+                                 END IF
+                                 GOSUB 59834
+                              ELSEIF RemoteCurCol(LineIndex) > 74 THEN
+                                 RemoteCurRow(LineIndex) = RemoteCurRow(LineIndex) + 1
+                                 RemoteCurCol(LineIndex) = RemoteStartCol
+                                 IF RemoteCurRow(LineIndex) = RemoteEndRow(LineIndex) + 1 THEN
+                                    RemoteCurRow(LineIndex) = RemoteStartRow(LineIndex)
+                                 END IF
+                                 GOSUB 59834
+                              END IF
+                           ELSE
+                              CALL LPrnt (OtherNodeInput$, 0)
+                              CALL PutCom(OtherNodeInput$)
+                           END IF
+                           ZCol = ZCol + 1
+* INSERTING new line(s)
+59831                      IF (ZCol>72) OR (ZCol > 65 AND OtherNodeInput$ = " ") THEN
+                              '* ANSI MChat
+                              IF NOT ZDoANSIMChat THEN
+                                 CALL SkipLine(1)
+                              END IF
+                              IF SaveToDisk THEN
+                                 CALL PrintWorkA(2,"")
+                              END IF
+                              ZCol = 1
+                           END IF
+                        END IF
+                        TrueChatIndexHold(LineIndex) = TrueChatIndexHold(LineIndex) + 1
+                        IF TrueChatIndexHold(LineIndex) > 72 THEN TrueChatIndexHold(LineIndex) = 1
+                     END IF
+                  END IF
+               END IF
+            NEXT
+
+REM *************************************************************************
+REM *******Get text from local user (local, as in, this node of RBBS)********
+REM *******Also local, as in.. SysOp                                 ********
+REM *************************************************************************
+
+            CALL FindFKey                ' will also get local key pressed
+            IF ZSubParm < 0 THEN
+               EXIT DO
+            END IF
+
+            LocalKey$ = ""
+            IF NOT ZLocalUser THEN
+               CALL EOFComm (Char%)
+              ELSE
+               Char% = -1
+            END IF
+            IF Char% <> -1 THEN          'if remote key in then get it
+               CALL GetCom(LocalKey$)
+              ELSE
+               LocalKey$ = ZKeyPressed$  'INKEY$ is performed in FindFKey
+            END IF
+            IF LocalKey$ <> "" THEN
+               IF LEN(LocalKey$) = 1 THEN
+                  IF LocalKey$ = ZEscape$ OR LocalKey$ = CHR$(17) THEN
+                     CALL ChatCommand(ChatSubParm, CurrentNodeIndex, NodesInSystem)
+                     IF ChatSubParm OR RePage THEN
+                        EXIT DO
+                     END IF
+                     '* ANSI MChat
+                     IF ZDoANSIMChat THEN
+                        GOSUB 59832
+                     END IF
+                  ELSEIF LocalKey$ = CHR$(13) OR LocalKey$ = CHR$(8) OR _
+                     (LocalKey$ > CHR$(31) AND LocalKey$ < CHR$(255)) THEN
+                     CALL LockUnlock10 (ZTrue)
+                     CALL UpdateR (10,CurrentNodeIndex, ZTrue)
+                     TempChatInput$ = ChatInput$
+                     TempTrueChatIndex = CVI(TrueChatIndex$)
+                     MID$(TempChatInput$, TempTrueChatIndex, 1) = LocalKey$
+                     LSET ChatInput$ = TempChatInput$
+                     TempTrueChatIndex = TempTrueChatIndex + 1
+                     IF TempTrueChatIndex > 72 THEN
+                        TempTrueChatIndex = 1
+                     END IF
+                     LSET TrueChatIndex$ = MKI$(TempTrueChatIndex)
+                     CALL UpdateR (10,CurrentNodeIndex, ZFalse)
+                     CALL LockUnlock10 (ZFalse)
+                     IF LocalKey$ <> CHR$(8) THEN
+                        IF SaveToDisk THEN
+                           CALL PrintWork(LocalKey$)
+                        END IF
+                        '* ANSI MChat
+                        IF ZDoANSIMChat THEN
+                           CALL ANSILocate (LocalCurRow,LocalCurCol)
+                        ELSE
+                           IF ZWasGR > 1 AND LocalKey$ <> ZCarriageReturn$ THEN
+                              LocalKey$ = ZEmphasizeOff$ + LocalKey$
+                           END IF
+                        END IF
+                        CALL QuickTPut (ZEmphasizeOff$ + LocalKey$,0)
+                     ELSE
+                        IF ZDoANSIMChat THEN
+                           IF LocalCurCol > LocalStartCol+1 THEN
+                              CALL ANSILocate (LocalCurRow,LocalCurCol - 1)
+                              LocalCurCol = LocalCurCol - 1
+                           ELSE
+                              IF LocalCurRow = LocalStartRow THEN
+                                 LocalCurRow = LocalEndRow
+                              ELSE
+                                 LocalCurRow = LocalCurRow - 1
+                              END IF
+                              LocalCurCol = 76
+                              ZCol = 73
+                              CALL ANSILocate (LocalCurRow,LocalCurCol - 1)
+                              LocalCurCol = LocalCurCol - 1
+                           END IF
+                           CALL QuickTPut (SPACE$(1)+CHR$(8),0)
+                        ELSE
+                           CALL LPrnt(ZLocalBkSp$, 0)
+                           IF (NOT ZLocalUser) AND SendRemote THEN
+                              CALL PutCom (ZBackSpace$)
+                           END IF
+                        END IF
+                        IF SaveToDisk THEN
+                           CALL PrintWork(ZBackSpace$)
+                        END IF
+                        ZCol = ZCol - 2
+                     END IF
+                     IF LocalKey$ = ZCarriageReturn$ THEN
+                        '* ANSI MChat
+                        IF ZDoANSIMChat THEN
+                           LocalCurRow = LocalCurRow + 1
+                           LocalCurCol = LocalStartCol
+                           GOSUB 59836
+                           CALL ANSILocate (LocalCurRow,LocalStartCol)
+                        ELSE
+                           CALL SkipLine (1)
+                           IF SendRemote AND ZLineFeeds THEN
+                              CALL PutCom(ZLineFeed$)
+                           END IF
+                        END IF
+                        ZCol = 0
+                     END IF
+                     '* ANSI MChat
+                     IF ZDoANSIMChat THEN
+                        IF LocalKey$ <> CHR$(8) THEN
+                           LocalCurCol = LocalCurCol + 1
+                        END IF
+                        CALL ANSILocate (LocalCurRow,LocalCurCol)
+                     END IF
+                     ZCol = ZCol + 1
+                  END IF
+                  REM ** Reset auto log-off timeski..
+                  ZAutoLogoff! = TIMER + ZWaitBeforeDisconnect
+               END IF
+            END IF
+
+            REM ** I'll call the below.. pseudo-wordwrap.. or a way to
+            REM ** get around having to do word wrap.. it ain't easy in
+            REM ** char by char mode... Much easier in C than in BASIC
+
+            IF (ZCol > 72) OR (ZCol > 65 AND LocalKey$ = " ") THEN
+               '* ANSI MChat
+               IF ZDoANSIMChat THEN
+                  LocalCurRow = LocalCurRow + 1
+                  LocalCurCol = LocalStartCol + 1
+                  GOSUB 59836
+                  CALL ANSILocate (LocalCurRow,LocalCurCol)
+               ELSE
+                  CALL SkipLine(1)
+               END IF
+               IF SaveToDisk THEN
+                  CALL PrintWorkA(2,"")
+               END IF
+               ZCol = 1
+            END IF
+
+            CALL CheckCarrier
+            IF ZSubParm = -1 THEN
+               EXIT DO
+            END IF
+            CALL CheckTimeRemain(MinsRemaining)
+            IF MinsRemaining <=3 OR ZSubParm = -1 THEN
+               IF ZDoANSIMChat OR ZSubParm > 0 THEN
+                  CALL ANSILocate(24,1)
+               END IF
+               EXIT DO
+            END IF
+            CALL CheckTime(ZAutoLogoff!, ZIdleTime!, 1)
+            IF ZIdleTime! <= 0 THEN
+               ZWaitExpired = ZTrue
+               EXIT DO
+            END IF
+
+            CALL GiveBack
+
+         LOOP
+
+         CALL LockUnlock10 (ZTrue)
+         CALL UpdateR (10,CurrentNodeIndex, ZTrue)
+         LSET ChatInput$ = SPACE$(72)
+         LSET ChatActivity$ = "I"
+         LSET InTrueChat$ = "I"
+         CALL UpdateR (10,CurrentNodeIndex, ZFalse)
+         CALL LockUnlock10 (ZFalse)
+         IF HasPaged > 0 THEN
+            CALL LockUnlock10 (ZTrue)
+            CALL UpdateR (10,HasPaged, ZTrue)
+            IF ChatActivity$ = "R" THEN
+               LSET ChatActivity$ = "I"
+               CALL UpdateR (10,HasPaged, ZFalse)
+            END IF
+            CALL LockUnlock10 (ZFalse)
+         END IF
+         CLOSE 10
+
+         CLOSE 2
+         ZActiveMessageFile$ = WasA1$
+
+         ERASE TrueChatIndexHold    'free memory taken by integer array
+         ERASE RemoteStartRow
+         ERASE RemoteEndRow
+         ERASE RemoteCurRow
+         ERASE RemoteCurCol
+         ERASE AlreadyPrinted
+
+      END IF
+
+      HasPaged = 0
+
+      EXIT SUB
+
+'
+' *   Full Screen Handling
+'
+59832 StartRemote = LocalEndRow + 4
+      FOR icount = 1 TO NodesInSystem
+         IF icount <> CurrentNodeIndex THEN
+            RemoteStartRow(icount) = StartRemote
+            RemoteEndRow(icount) = RemoteStartRow(icount) + (LocalEndRow-LocalStartRow)
+            RemoteCurRow(icount) = RemoteStartRow(icount)
+            RemoteCurCol(icount) = 3
+            AlreadyPrinted(icount) = ZFalse
+            StartRemote = StartRemote + (20/NodesInSystem) + 1
+         END IF
+      NEXT icount
+      '* "{CF{G7"
+      LineNum = 1107
+      GOSUB 59845
+      Strng1$ = Strng$
+      '* "ANSIMChat"
+      LineNum = 1108
+      GOSUB 59845
+      Strng2$ = Strng$
+      CALL ANSIBox(2,2,23,78,Strng1$,"",Strng2$)
+      '* "{CB{G0"
+      LineNum = 1122
+      GOSUB 59845
+      Strng1$ = Strng$
+      Strng2$ = ZActiveUserName$ + " Node" + STR$(ZNodeRecIndex-1)
+      CALL NameCaps(Strng2$)
+      CALL ANSIBox(LocalStartRow,LocalStartCol,LocalEndRow,76,Strng1$,"",Strng2$)
+      CALL ANSILocate(LocalEndRow+1,55)
+      CALL QuickTPut ("[ Press ESC for Menu ]",0)
+      LocalCurCol = LocalStartCol+1
+      LocalCurRow = LocalStartRow
+      CALL ANSILocate(LocalCurRow,LocalCurCol)
+      RETURN
+
+'
+' *   Remote Window CR/LF Handling
+'
+59834 IF RemoteCurRow(LineIndex) = RemoteStartRow(LineIndex) THEN
+         CALL ANSILocate (RemoteCurRow(LineIndex) + 1,RemoteStartCol)
+      ELSEIF RemoteCurRow(LineIndex) < RemoteEndRow(LineIndex) THEN
+         CALL ANSILocate (RemoteCurRow(LineIndex) + 1,RemoteStartCol)
+      ELSEIF RemoteCurRow(LineIndex) = RemoteEndRow(LineIndex) THEN
+         CALL ANSILocate (RemoteStartRow(LineIndex),RemoteStartCol)
+      END IF
+      CALL QuickTPut (SPACE$(74),0)
+      CALL ANSILocate (RemoteCurRow(LineIndex),RemoteCurCol(LineIndex))
+      RETURN
+'
+' *   Local Window CR/LF Handling
+'
+59836 IF LocalCurRow > LocalEndRow THEN
+         LocalCurRow = LocalStartRow
+      END IF
+      IF LocalCurRow = LocalStartRow THEN
+         CALL ANSILocate (LocalCurRow + 1,LocalStartCol)
+      ELSEIF LocalCurRow < LocalEndRow THEN
+         CALL ANSILocate (LocalCurRow + 1,LocalStartCol)
+      ELSEIF LocalCurRow = LocalEndRow THEN
+         CALL ANSILocate (LocalStartRow,LocalStartCol)
+      END IF
+      CALL QuickTPut (SPACE$(74),0)
+      RETURN
+
+* REPLACING old line(s) by new
+59840 GET 1, (LineIndex + 1)
+      IF MID$(ZMsgRec$, 55, 2) = "-1" AND NOT ZSysop THEN
+* ------[ first line different ]------
+         '* "SYSOP"
+         LineNum = 880
+         GOSUB 59845
+         NameTemp$ = Strng$
+       ELSE
+         NameTemp$ = MID$(ZMsgRec$, 1, 26)
+      END IF
+      CALL TrimTrail (NameTemp$, SPACE$(1))
+      CALL NameCaps(NameTemp$)
+      RETURN
+
+* INSERTING new line(s)
+59845 CALL FormatString (LineNum,ZFalse,ZFalse,0,ZFalse,0,Strng$)
+      RETURN
+
+      END SUB
+
+* REPLACING old line(s) by new
+59900 SUB ColorText(Text$, NodeIndex) STATIC
+
+* ------[ first line different ]------
+      IF ZWasGR > 1 THEN
+         TextColor = (NodeIndex MOD 6) + 1
+         IF TextColor = 4 THEN
+            TextColor = 5
+         END IF
+         Text$ = CHR$(27) + "[1;3" + RIGHT$(STR$(TextColor), 1) + ";40m" + Text$
+      END IF
+
+      END SUB
+
+REM **
+REM ** Save what a user is doing in the BBS.. for W)hos on mods..... **
+REM **
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+59910 SUB SaveUserActivity(Activity$,NodeRecordIndex,ReadIt,Avail) STATIC
+
+      ChatNodeIndex = NodeRecordIndex - 1
+
+      CLOSE 10
+      CALL OpenRWork (10,ZChatFileName$)
+      CALL Field10
+
+      IF ReadIt THEN
+         CALL UpdateR (10,ChatNodeIndex, ZTrue)
+         Activity$ = BBSActivity$
+         IF MID$(PrivateFor$,1,1) = "Y" THEN
+            Avail = ZTrue
+         ELSE
+            Avail = ZFalse
+         END IF
+      ELSE
+         CALL LockUnlock10 (ZTrue)
+         CALL UpdateR (10,ChatNodeIndex, ZTrue)
+         LSET BBSActivity$ = Activity$
+         IF ZAvailableForChat THEN
+            LSET PrivateFor$ = "Y "
+         ELSE
+            LSET PrivateFor$ = "N "
+         END IF
+         CALL UpdateR (10,ChatNodeIndex, ZFalse)
+         CALL LockUnlock10 (ZFalse)
+      END IF
+
+      IF NOT ReadIt THEN
+         CLOSE 10
+      END IF
+
+      END SUB
+
+REM **
+REM ** Chat command line mode.. this is where they can do certain functions
+REM ** pertaining to the chat
+REM **
+REM ** ChatSubParm is returned TRUE when a user wishes to exit the chat mode
+
+* REPLACING old line(s) by new
+59920 SUB ChatCommand(ChatSubParm, CurrentNodeIndex, NodesInSystem) STATIC
+
+      SHARED DoTrueChat, HasPaged, UpperNode, LowerNode, SaveToDisk
+      SHARED NodesToSquelch$, RePage
+
+* ------[ first line different ]------
+      ZExpertUserHold = ZExpertUser
+
+      IF NOT ZDoANSIMChat THEN
+         CALL SkipLine(1)
+      END IF
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+59922    ZFileName$ = ZWelcomeFileDrvPath$ + "CHAT.MNU"
+         CALL QuickTPut(ZEmphasizeOff$,0)
+         CALL GraphicDisplayFile (ZFileName$)
+      ELSEIF ZDoANSIMChat THEN
+         '* "{CA{G0"
+         LineNum = 1123
+         GOSUB 59955
+         Strng1$ = Strng$
+         '* "Chat Commands"
+         LineNum = 1124
+         GOSUB 59955
+         Strng2$ = Strng$
+         CALL ANSIBox(18,17,19,58,Strng1$,"",Strng2$)
+         CALL ANSILocate(18,17)
+      END IF
+      CALL DispSectionAndTime
+      IF ZDoANSIMChat AND ZExpertUser THEN
+         CALL ANSILocate(19,17)
+      END IF
+      '* "{CFCHAT {C2command {RC"
+      LineNum = 881
+      GOSUB 59955
+      ZOutTxt$ = Strng$
+      IF ZExpertUser THEN
+         '* "([C],H,W,Q,X"
+         LineNum = 882
+         GOSUB 59955
+         ZOutTxt$ = ZOutTxt$ + Strng$
+         IF NOT DoTrueChat THEN
+            '* ",P,S,U"
+            LineNum = 883
+            GOSUB 59955
+            ZOutTxt$ = ZOutTxt$ + Strng$
+         END IF
+       ELSE
+         '* "([C]hat,H)elp,W)ho,Q)uit,X)pert"
+         LineNum = 884
+         GOSUB 59955
+         ZOutTxt$ = ZOutTxt$ + Strng$
+         IF NOT DoTrueChat THEN
+            '* ",P)age,S)qlch,U)nsqlch"
+            LineNum = 885
+            GOSUB 59955
+            ZOutTxt$ = ZOutTxt$ + Strng$
+         END IF
+      END IF
+      ZOutTxt$ = ZOutTxt$ + ">"
+      ZSubParm = 1
+      CALL TGet
+      IF ZSubParm = -1 THEN
+         GOTO 59950
+      END IF
+      ChatSubParm = ZFalse
+      ZExpertUser = ZExpertUserHold
+      IF ZWasQ > 0 THEN
+         CALL AllCaps(ZUserInAra$(1))
+         SELECT CASE LEFT$(ZUserInAra$(1), 1)
+
+            CASE "C"    REM ** Return to chat mode
+               EXIT SUB
+
+            CASE "H", "?" REM ** Help.. means show the Chat menu
+               GOTO 59922
+
+            CASE "W"    REM ** Show whos on the system
+               ZExpertUser = ZTrue
+               CALL WhosOn
+               GOTO 59921
+
+            CASE "Q"    REM ** Quit/Exit out of chat mode
+               IF ZDoANSIMChat THEN
+                  CALL ANSILocate(24,1)
+               END IF
+               ChatSubParm = ZTrue
+               EXIT SUB
+
+            CASE "X"    REM ** Toggle expert mode
+               CALL Toggle(9)
+               GOTO 59921
+
+            REM Got to eliminate this for now..
+            CASE "P"    REM ** Page another node to chat
+               RePage = ZTrue
+               EXIT SUB
+
+            CASE "S"    REM ** Squelch -- turn off reception of any node
+               IF NOT DoTrueChat THEN
+                  IF ZDoANSIMChat THEN
+                     '* "{CA{G0"
+                     LineNum = 1125
+                     GOSUB 59955
+                     Strng1$ = Strng$
+                     '* "Squelch a Node"
+                     LineNum = 1126
+                     GOSUB 59955
+                     Strng2$ = Strng$
+                     CALL ANSIBox(16,6,16,71,Strng1$,"",Strng2$)
+                     CALL ANSILocate(16,7)
+                  END IF
+                  '* "Squelch which node (1 -"
+                  LineNum = 886
+                  GOSUB 59955
+                  ZOutTxt$ = Strng$ + STR$(NodesInSystem) + ")" + ZPressEnterExpert$
+                  ZSubParm = 1
+                  CALL TGet
+                  IF ZSubParm = -1 THEN
+                     GOTO 59950
+                  END IF
+                  IF ZDoANSIMChat THEN
+                     '* "{CF{G7"
+                     LineNum = 1107
+                     GOSUB 59955
+                     FOR PrtRow = 15 TO 17
+                        CALL ANSILocate (PrtRow,5)
+                        CALL QuickTPut(Strng$ + SPACE$(68),0)
+                     NEXT PrtRow
+                  END IF
+                  IF ZWasQ > 0 THEN
+                     CALL CheckInt(ZUserInAra$(1))
+                     IF ZTestedIntValue AND ZDoANSIMChat THEN
+                        '* "{CA{G0"
+                        LineNum = 1125
+                        GOSUB 59955
+                        Strng1$ = Strng$
+                        '* "Squelch a Node"
+                        LineNum = 1126
+                        GOSUB 59955
+                        Strng2$ = Strng$
+                        CALL ANSIBox(18,27,18,48,Strng1$,"",Strng2$)
+                        CALL ANSILocate(18,27)
+                     END IF
+                     IF ZTestedIntValue <> CurrentNodeIndex THEN
+                        NodesToSquelch$ = NodesToSquelch$ + MID$(STR$(ZTestedIntValue), 2, 1)
+                        '* "Node {IV squelched"
+                        CALL FormatString (887,ZFalse,ZFalse,0,ZTrue,1,"")
+                      ELSE
+                        '* "Why Squelch Yourself?"
+                        CALL FormatString (888,ZFalse,ZFalse,0,ZTrue,1,"")
+                     END IF
+                  END IF
+               END IF
+               IF ZDoANSIMChat THEN
+                  CALL DelayTime(1)
+               END IF
+               GOTO 59921
+
+            CASE "U"    REM ** Turn reception of a node back to ON
+               IF NOT DoTrueChat THEN
+                  IF NodesToSquelch$ <> "" THEN
+                     IF ZDoANSIMChat THEN
+                        '* "{CA{G0"
+                        LineNum = 1127
+                        GOSUB 59955
+                        Strng1$ = Strng$
+                        '* "UnSquelch a Node"
+                        LineNum = 1128
+                        GOSUB 59955
+                        Strng2$ = Strng$
+                        CALL ANSIBox(16,6,16,71,Strng1$,"",Strng2$)
+                        CALL ANSILocate(16,7)
+                     END IF
+                     '* "UnSquelch which node (1 -{SP"
+                     LineNum = 889
+                     GOSUB 59955
+                     ZOutTxt$ = Strng$ + STR$(NodesInSystem) + ")" + ZPressEnterExpert$
+                     ZSubParm = 1
+                     CALL TGet
+                     IF ZSubParm = -1 THEN
+                        GOTO 59950
+                     END IF
+                     IF ZDoANSIMChat THEN
+                        '* "{CF{G7"
+                        LineNum = 1107
+                        GOSUB 59955
+                        FOR PrtRow = 15 TO 17
+                           CALL ANSILocate (PrtRow,5)
+                           CALL QuickTPut(Strng$ + SPACE$(68),0)
+                        NEXT PrtRow
+                     END IF
+                     IF ZWasQ > 0 THEN
+                        CALL CheckInt(ZUserInAra$(1))
+                        Squelched = INSTR(NodesToSquelch$, MID$(STR$(ZTestedIntValue), 2, 1))
+                        IF Squelched = 1 THEN
+                           IF LEN(NodesToSquelch$) = 1 THEN
+                              NodesToSquelch$ = ""
+                            ELSE
+                              NodesToSquelch$ = MID$(NodesToSquelch$, Squelched + 1)
+                           END IF
+                         ELSEIF Squelched > 1 THEN
+                           NodesToSquelch$ = LEFT$(NodesToSquelch$, Squelched - 1) + _
+                                             MID$ (NodesToSquelch$, Squelched + 1)
+                        END IF
+                        IF Squelched > 0 THEN
+                           IF ZDoANSIMChat THEN
+                              '* "{CA{G0"
+                              LineNum = 1127
+                              GOSUB 59955
+                              Strng1$ = Strng$
+                              '* "UnSquelch a Node"
+                              LineNum = 1128
+                              GOSUB 59955
+                              Strng2$ = Strng$
+                              CALL ANSIBox(18,27,18,48,Strng1$,"",Strng2$)
+                              CALL ANSILocate(18,27)
+                           END IF
+                           '* "Node {IV UnSquelched"
+                           CALL FormatString (890,ZFalse,ZFalse,0,ZTrue,1,"")
+                        END IF
+                     END IF
+                  END IF
+               END IF
+               IF ZDoANSIMChat THEN
+                  CALL DelayTime(1)
+               END IF
+               GOTO 59921
+
+            CASE ELSE   REM ** Illegal command entered.. show menu..
+               '* "Unknown command <{Z1>"
+               CALL FormatString (891,ZFalse,ZFalse,0,ZTrue,1,"")
+               GOTO 59922
+
+         END SELECT
+      END IF
+      EXIT SUB
+
+      REM ** user dropped carrier.. return in a way to abort chat mode
+
+* DELETING old line(s)
+59940
+59930
+* INSERTING new line(s)
+59950 ChatSubParm = ZTrue
+      EXIT SUB
+
+
+59955 CALL FormatString (LineNum,ZFalse,ZFalse,0,ZFalse,0,Strng$)
+      RETURN
+      END SUB
+
+      REM ** here is where we set up chat log file.. hopefully with a unique
+      REM ** filename. The logging code is still quite fallible..
+59960 SUB SetUpLogFile STATIC
+
+      SHARED SaveToDisk
+
+      TempTime$ = TIME$
+      TempDate$ = DATE$
+      FileName$ = LEFT$(TempDate$, 2) + _     'filename format is now:
+                  MID$ (TempDate$, 4, 2) + _  '   mmddhhmm.Css
+                  LEFT$(TempTime$, 2) + _
+                  MID$ (TempTime$, 4, 2) + _
+                  ".C" + _
+                  RIGHT$(Temptime$, 2)
+      CLOSE 2
+      CALL OpenOutW(ZChatLogPath$ + FileName$)
+      IF NOT ZOK THEN
+         EXIT SUB
+      END IF
+      IF ZDoANSIMChat THEN
+         '* "{CC{G0"
+         LineNum = 1129
+         GOSUB 59965
+         Strng1$ = Strng$
+         '* "Notice!"
+         LineNum = 1130
+         GOSUB 59965
+         Strng2$ = Strng$
+         CALL ANSIBox(18,19,18,55,Strng1$,"",Strng2$)
+         CALL ANSILocate(18,20)
+      END IF
+      '* "Notice: all chats recorded to disk."
+      CALL FormatString (892,ZFalse,ZFalse,0,ZTrue,1,"")
+      IF ZDoANSIMChat THEN
+         CALL DelayTime (2)
+      END IF
+      LSET SavingToDisk$ = "Y"
+      SaveToDisk = ZTrue
+      EXIT SUB
+59965 CALL FormatString (LineNum,ZFalse,ZFalse,0,ZFalse,0,Strng$)
+      RETURN
+      END SUB
+
+* REPLACING old line(s) by new
+59999 SUB LockUnlock10(LockMode) STATIC
+* ------[ first line different ]------
+      ZWasEN$ = ZChatFileName$
+      IF LockMode THEN
+         ZSubParm = 9
+       ELSE
+         ZSubParm = 10
+      END IF
+      CALL FileLock
+      END SUB

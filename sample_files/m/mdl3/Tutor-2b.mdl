@@ -1,0 +1,409 @@
+*SANSMODEL*
+Perencanaan Struktur Bangunan
+(Beton Bertulang)
+
+*NOTES*
+Kolom 40/40; Balok 30/50- 24/45
+*VERSION*
+  VERSION No.  = 4.2
+  VERSION TYPE = Full Version
+  VERSION DATE = 02 Dec 1998
+  COPYRIGHT    = Nathan Madutujuh
+  LICENSEE     = Ir. Nathan Madutujuh, M.Sc., PT Anugrah Multi Cipta Karya, INDONESIA
+*MODELHISTORY*
+  Creation Date = 02/12/1997
+  Created  By   = Nathan
+  Creation Note = Creation Note =
+  Revision Date = 02/12/1997
+  Revised  By   = Nathan
+  Revision Note = Revision Note =
+*STRUCTURE*
+  Structure Model     = 9 : Building1
+  Structure Material  = 1 : Concrete
+  Structure Type      = 1 : NonductileFrame
+  Design Method       = 1 : Non-Capacity
+  Design Code         = 4 : BAJA-98
+  Steel Design Option = 1 : Linear
+  Importance Factor I = 1.5
+  Ductility  Factor K = 1
+*UNITS*
+  Unit Type     = 0
+  Unit Name     = kgcm
+  Modulus       = kg/cm2
+  Unit Weight   = kg/cm3
+  Length        = cm
+  Displacement  = cm
+  Force         = kg
+  Moment        = kg.cm
+  Torsion       = kg.cm
+  Stress        = kg/cm2
+  Gravity Accel = cm/s2
+*ANALYSIS*
+  Analysis Method      = 1 : Static
+  Linearity Model      = 1 : Linear
+  Rigid Floor          = 1
+  Number of Eigen      = 6
+  Damping Ratio        = 0.05
+  Earthquake Dir Comb  = 3
+  Total Earthquake Dir = 2
+  Gravity Acceleration = 981
+  Condensation Level   = 2
+  P-Delta Effects      = 0
+  Ductility Factor     = 1
+  #1 Lateral Load Case with Pdelta = 0
+  #2 Lateral Load Case with Pdelta = 0
+  Include Slab Thickness for Beam Weight = 0
+  Earthquake Direction #1 = 90
+  Earthquake Direction #2 = 0
+*PARAMETER*
+  Number of 2D Node             = 24
+  Number of 3D Node             = 0
+  Number of Supported Node      = 16
+  Number of Material Properties = 1
+  Number of Section Properties  = 5
+  Number of Design Data         = 6
+  Number of Texture Properties  = 0
+  Number of Element Set/ELSET   = 5
+  Number of Spring Element      = 0
+  Number of Truss Element       = 0
+  Number of Frame Element       = 0
+  Number of Plane Strs Element  = 0
+  Number of Plate Element       = 0
+  Number of Shell Element       = 0
+  Number of Nodal Mass          = 0
+  Number of Joint Load          = 0
+  Number of Truss Load Type     = 0
+  Number of Truss Load          = 0
+  Number of Frame Load Type     = 1
+  Number of Frame Load          = 0
+*MATERIAL*
+   1   1  ISOTROPIC   K-225 0
+      0 0 0.0024 210000 87500 0
+*SECTION*
+   1   6 RECT         0 0 K-40
+      40 40 0 0
+   2   6 RECT         0 0 B-30
+      30 50 30 0
+   3   6 RECT         0 0 B-25
+      25 40 25 0
+   4   3 THICKNESS    0 0 t
+      12
+   5   3 THICKNESS    0 0 t
+      10
+*DESIGN*
+   1   7 CONCRETE_BCOL K-40 3 3 5 0 1 0 0
+      0.8 0.8 0.65 0.6 0.65 0.8 0.6 0.6   1 1 1 1 1   0.85 0.85 1 1 1
+      CONCRETE = 40 40 60 25 5  210000 187 0 0  3200 1.9 1 0  1 0 4 0  1 2400 1 0
+   2   4 CONCRETE_GIRDER B-30 2 2 5 0 1 0 0
+      0.8 0.8 0.65 0.6 0.65 0.8 0.6 0.6   1 1 1 1 1   0.85 0.85 1 1 1
+      CONCRETE = 30 50 30 0 4  210000 187 0 0  3200 1.9 0.6 4  1 0.6 4 0  1 2400 1 0
+   3   4 CONCRETE_GIRDER B-25 2 2 5 0 1 0 0
+      0.8 0.8 0.65 0.6 0.65 0.8 0.6 0.6   1 1 1 1 1   0.85 0.85 1 1 1
+      CONCRETE = 25 40 25 0 4  210000 187 0 0  3200 1.9 0.6 0  1 0.6 4 0  1 2400 1 0
+   4   8 CONCRETE_SLAB t 5 0 5 0 0 0 0
+      0.8 0.8 0.6 0.65 0.6 0.6 0.6 1   1 1 1 1 1   0.85 0.85 1 1 1
+      CONCRETE = 12 187 0 0 2.5  210000 187 0 0  2400 1 1 4  1 1 4 0  1 2400 1 0
+   5   8 CONCRETE_SLAB t 5 0 5 0 0 0 0
+      0.8 0.8 0.6 0.65 0.6 0.6 0.6 1   1 1 1 1 1   0.85 0.85 1 1 1
+      CONCRETE = 10 187 0 0 2.5  210000 187 0 0  2400 1 1 4  1 1 4 0  1 2400 1 0
+   6   4 CONCRETE_GIRDER B-25 2 2 5 0 1 0 0
+      0.8 0.8 0.65 0.6 0.65 0.8 0.6 0.6   1 1 1 1 1   0.85 0.85 1 1 1
+      CONCRETE = 25 40 25 0 4  210000 187 0 0  3200 1.9 0.6 0  3200 1.2 4 0  1 2400 1 0
+*TEXTURE*
+*ELSET*
+   1   1  1  1  0
+   2   1  2  2  0
+   3   1  3  3  0
+   4   1  4  4  0
+   5   1  5  5  0
+*LOADING*
+  Lateral Load Type = 1
+  Dead Load #1 = 1
+  Live Load #1 = 2
+  Dead Load #2 = 1
+  Live Load #2 = 2
+  Wind Load #1 = 0
+  Wind Load #2 = 0
+  Earthquake  Load #1 = 3
+  Earthquake  Load #2 = 4
+  Prestressed Load #1 =  0 : (Transfer)
+  Prestressed Load #2 =  0 : (Service)
+  Earth Press Load #1 = 1
+  LL Reduction for Earthquake  =  1.000
+  LL Reduction for Wind Load   =  1.000
+  LL Reduction for Weight/Mass =  1.000
+  LL Reduction for Main Girder =  5.000
+  Load Combination Type   = 5
+  Load Combination Option = 1
+  Number of Load System   = 3
+  Number of Load Case     = 4
+  Combination # 1 =    1.200   1.200   1.600   0.000   0.000   0.000   0.000
+  Combination # 2 =    1.050   1.050   1.050   1.050   0.315   0.000   0.000
+  Combination # 3 =    1.050   1.050   1.050   0.315   1.050   0.000   0.000
+*BUILDING*
+  Number of Layout Node   = 24
+  Number of Height Offset = 0
+  Number of Storey/Floor  = 4
+  Number of Column Layout = 2
+  Number of Beam   Layout = 2
+  Number of Wall   Layout = 0
+  Number of Slab Data     = 2
+  Number of Slab Region   = 9
+  Number of Beam Load     = 12
+*STOREY*
+   0  Lt-0        0  0  0 0 0 0 0 0 9216 800 800 9.39449541284404 5921037.3088685 0 0
+   1  Lt-1        1  1  0 1 300 0 0 0 206016 800 800 210.006116207951 107178302.956167 0 0
+   2  Lt-2        1  1  0 1 600 0 0 0 206016 800 800 210.006116207951 107178302.956167 0 0
+   3  Lt-3        1  1  0 1 900 0 0 0 206016 800 800 210.006116207951 107178302.956167 0 0
+   4  Lt-4        1  2  0 1 1200 0 0 0 51936 800 800 52.9418960244648 28598305.4026504 0 0
+*NODE3D*
+*NODEXY*
+   1  500 0  0  
+   2  1100 0  0  
+   3  0 100  0  
+   4  500 100  0  
+   5  1100 100  0  
+   6  1600 100  0  
+   7  0 600  0  
+   8  100 600  0  
+   9  500 600  0  
+  10  1100 600  0  
+  11  1500 600  0  
+  12  1600 600  0  
+  13  0 1000  0  
+  14  100 1000  0  
+  15  500 1000  0  
+  16  1100 1000  0  
+  17  1500 1000  0  
+  18  1600 1000  0  
+  19  0 1500  0  
+  20  500 1500  0  
+  21  1100 1500  0  
+  22  1600 1500  0  
+  23  500 1600  0  
+  24  1100 1600  0  
+*OFFSET*
+*SUPPORT*
+  1  0    3  2 0 0 0 0 0 0 0 0
+  1  0    4  2 0 0 0 0 0 0 0 0
+  1  0    5  2 0 0 0 0 0 0 0 0
+  1  0    6  2 0 0 0 0 0 0 0 0
+  1  0    7  2 0 0 0 0 0 0 0 0
+  1  0    9  2 0 0 0 0 0 0 0 0
+  1  0   10  2 0 0 0 0 0 0 0 0
+  1  0   12  2 0 0 0 0 0 0 0 0
+  1  0   13  2 0 0 0 0 0 0 0 0
+  1  0   15  2 0 0 0 0 0 0 0 0
+  1  0   16  2 0 0 0 0 0 0 0 0
+  1  0   18  2 0 0 0 0 0 0 0 0
+  1  0   19  2 0 0 0 0 0 0 0 0
+  1  0   20  2 0 0 0 0 0 0 0 0
+  1  0   21  2 0 0 0 0 0 0 0 0
+  1  0   22  2 0 0 0 0 0 0 0 0
+*LAYCOL*
+  COLUMN LAYOUT #1, Total Column = 16
+     3   1  0 0
+     4   1  0 0
+     5   1  0 0
+     6   1  0 0
+     7   1  0 0
+     9   1  0 0
+    10   1  0 0
+    12   1  0 0
+    13   1  0 0
+    15   1  0 0
+    16   1  0 0
+    18   1  0 0
+    19   1  0 0
+    20   1  0 0
+    21   1  0 0
+    22   1  0 0
+  COLUMN LAYOUT #2, Total Column = 0
+*LAYBEAM*
+  FLOOR BEAM LAYOUT #1, Total Beam = 32
+    3   4  2  0
+    1   2  2  0
+    5   6  2  0
+    7   8  2  0
+    8   9  2  0
+    9  10  2  0
+   10  11  2  0
+   11  12  2  0
+   13  14  2  0
+   14  15  2  0
+   15  16  2  0
+   16  17  2  0
+   17  18  2  0
+   19  20  2  0
+   21  22  2  0
+   23  24  2  0
+    3   7  2  0
+   13  19  2  0
+    1   4  2  0
+    4   9  2  0
+   15  20  2  0
+   20  23  2  0
+    2   5  2  0
+    5  10  2  0
+   16  21  2  0
+   21  24  2  0
+    6  12  2  0
+   18  22  2  0
+    8  14  3  0
+    9  15  3  0
+   10  16  3  0
+   11  17  3  0
+  FLOOR BEAM LAYOUT #2, Total Beam = 32
+    3   4  2  0
+    1   2  2  0
+    5   6  2  0
+    7   8  2  0
+    8   9  2  0
+    9  10  2  0
+   10  11  2  0
+   11  12  2  0
+   13  14  2  0
+   14  15  2  0
+   15  16  2  0
+   16  17  2  0
+   17  18  2  0
+   19  20  2  0
+   21  22  2  0
+   23  24  2  0
+    3   7  2  0
+   13  19  2  0
+    1   4  2  0
+    4   9  2  0
+   15  20  2  0
+   20  23  2  0
+    2   5  2  0
+    5  10  2  0
+   16  21  2  0
+   21  24  2  0
+    6  12  2  0
+   18  22  2  0
+    8  14  3  0
+    9  15  3  0
+   10  16  3  0
+   11  17  3  0
+*LAYWALL*
+*SPRING*
+*TRUSS*
+*FRAME*
+*QPS8*
+*QPB8*
+*QUAD4*
+*FLOORSLAB*
+   1  t          1  4 12 -0.015 -0.025
+   2  t          1  1 5 10 -0.01
+*REGION*
+   1  1 2 0   3,  4,  9,  7
+   1  1 2 0   1,  2, 10,  9
+   1  1 2 0   5,  6, 12, 10
+   1  1 2 0   8,  9, 15, 14
+   1  1 2 0   9, 10, 16, 15
+   1  1 2 0  13, 15, 20, 19
+   1  1 2 0  15, 16, 24, 23
+   1  1 2 0  10, 11, 17, 16
+   1  1 2 0  16, 18, 22, 21
+*JLOAD*
+*TLOADTAB*
+*TLOAD*
+*FLOADTAB*
+    1   5  -7.5,0,1,0,0
+*FLOAD*
+*QLOADTAB*
+*QLOAD*
+*BLOAD*
+   1   1   1   1
+   1   1   2   1
+   1   1   3   1
+   1   1  27   1
+   1   1  17   1
+   1   1  29   1
+   1   1  32   1
+   1   1  28   1
+   1   1  15   1
+   1   1  16   1
+   1   1  14   1
+   1   1  18   1
+*WINDLOAD*
+*EQLOAD*
+  Number of Floor Included     NF = 4
+  Earthquake Z-Factor,          Z = 1
+  Earthquake Structure Type       = 2
+  Time Period Calculation Method  = 1
+  Basic Time Period,          Tox = 0.386845175456475
+  Basic Time Period,          Toz = 0.386845175456475
+  Basic Cofficient,           Cbx = 0.05
+  Basic Cofficient,           Cbz = 0.05
+  Total Structure Weight,     Wgt = 669984
+  Earthquake Max Height        Ht = 1200
+  Earthquake Base Level    H-base = 0
+  Structural Width, X-Dir      Wx = 18
+  Structural Width, Z-Dir      Wz = 16
+  Design Cofficient,          Cdx = 0.8
+  Design Cofficient,          Cdz = 0.8
+  Design Base Shear,          Vdx = 535987.2
+  Design Cofficient,          Vdz = 535987.2
+  Updated Time Period (Drift),Tdx = 0
+  Updated Time Period (Drift),Tdz = 0
+   1  76478 76478 0 0
+   2  152960 152960 0 0
+   3  229430 229430 0 0
+   4  77119 77119 0 0
+*MASSES*
+  1 1 0.3 0 0
+*SPECTRUM*
+  Earthquake Zone = 3
+  Spectrum Type   = 1
+  Soil Type       = 1
+  Normalized      = 1
+  Number of Point = 4
+  0  0.07  0
+  1  0.07  0
+  2  0.035  0
+  100  0.035  0
+*SCREEN*
+  Snap to Grid        = 1
+  Snap Ratio          = 100
+  Auto Working Range  = 0
+  Building Floor Xmin = -400
+  Building Floor Xmax = 2400
+  Building Floor Ymin = -400
+  Building Floor Ymax = 2200
+  Grid Spacing,  DX   = 100
+  Grid Spacing,  DY   = 100
+  AutoScale Flag  = 1
+  Drawing  Scale  = 1
+  Zoom Factor     = 1
+  Deform   Scale  = 1
+  Rotation Scale  = 1
+  Drawing Scale, Column = 1
+  Drawing Scale, Wall   = 1
+  Drawing Scale, Beam   = 1
+  Drawing Scale, Surface Load        = 1
+  Drawing Scale, Distributed Force   = 1
+  Drawing Scale, Distributed Torsion = 1
+  Drawing Scale, Point   Force       = 1
+  Drawing Scale, Point   Moment      = 1
+  Drawing Scale, Point   Torsion     = 1
+*DRAWING*
+  Paper Size    = 1
+  Border        = 1
+  Project       = Noname
+  Location      = Indonesia
+  Owner Name    = Nathan
+  Architect     = Yahya
+  Consultant    = 1
+  Contractor    = 1
+  Job Name      = 1
+  Drawing       = 1
+  Engineer      = 1
+  Drafter       = 1
+  Approved By   = 1
+  Drawing Code  = 1
+  Drawing No    = 1
+  Total Page    = 1
+  Drawing Scale = 1
+*END*

@@ -1,0 +1,87 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against RBBSSUB5.BAS to produce RBBSSUB5.NEW
+* RBBSSUB5.BAS:  Date 9-1-1991  Size 100075 bytes
+* ------------[ Created 11-28-1991 15:44:45 ]------------
+* REPLACING old line(s) by new
+20400 CALL TimeBack (1)
+* ------[ first line different ]------
+      DupeCount = 0                                                    ' ds112801
+      GOSUB 20420
+      ZAutoLogOffReq = 0
+      FirstUpld = ZAnsIndex
+      GOTO 20430
+* REPLACING old line(s) by new
+20432 FOR ZAnsIndex = FirstUpld TO LastUpld
+* ------[ first line different ]------
+         IF (ZBatchProto = 0 AND ZuserXferDefault$ <> "N") AND ZAnsIndex > 1 THEN _  ' ds112801
+            ZAnsIndex = LastUpld + 1 : _                             ' ds112801
+            EXIT FOR                                                 ' ds112801
+         GOSUB 20470
+         GOSUB 20435
+         FirstUpld = FirstUpld + 1
+         IF ZFileSysParm > 1 THEN _
+            ZAnsIndex = LastUpld + 1
+      NEXT
+      IF (DupeCount > 0 AND ZAnsIndex <> 1) _                          ' ds112801
+            AND (ZBatchProto <> 0 OR ZUserXferDefault$ = "N") THEN _   ' ds112801
+        CALL QuickTPut1 (" ") : _                                      ' ds112801
+        CALL QuickTPut1 ("List of Duplicate Files:") : _               ' ds112801
+        CALL QuickTPut ("-------------------------",1) : _             ' ds112801
+        FOR DCount = 1 to DupeCount : _                                ' ds112801
+            CALL QuickTPut1 ("     " + ZUserIn$(DCount)) : _           ' ds112801
+        NEXT : _                                                       ' ds112801
+        CALL QuickTPut1 (" ") : _                                      ' ds112801
+        CALL QuickTPut1 ("Please remove noted files from your Batch Upload List") ' ds112801
+      ZCmdTransfer$ = ""
+      RETURN
+* REPLACING old line(s) by new
+20435 ZFileNameHold$ = ZUserIn$(ZAnsIndex)
+      ExtSrch = ZFalse
+      IF INSTR(ZFileNameHold$,".") = 0 THEN _
+         ZFileNameHold$ = ZFileNameHold$ + "." + ZDefaultExtension$
+      CALL AllCaps(ZFileNameHold$)
+      ZFileName$ = ZFileNameHold$
+* ------[ first line different ]------
+      ZUserIn$(ZAnsIndex) = ZFileName$                               ' ds112801
+      ZViolation$ = "Upload "
+      CALL NoPath (ZFileName$,BadFileNameIndex)
+      IF BadFileNameIndex THEN _
+         GOTO 20451
+      CALL BadFile (ZFileName$,BadFileNameIndex)
+      ON BadFileNameIndex GOTO 20440,20451,20515
+* REPLACING old line(s) by new
+20454 CALL QuickTPut1 ("Thanks, but we already have " + ZFileNameHold$)
+* ------[ first line different ]------
+      IF ZBatchProto <> 0 OR ZUserXferDefault$ = "N" THEN _            ' ds112801
+         DupeCount = DupeCount + 1 : _                                 ' ds112801
+         ZUserIn$(DupeCount) = ZUserIn$(ZAnsIndex)                     ' ds112801
+      CALL UpdtCalr ("Upload duplicate " + ZFileNameHold$,1)
+      RETURN
+* REPLACING old line(s) by new
+20475 ZWasZ$ = ZUpldDriveFile$
+      CALL FindFree
+      IF VAL(ZFreeSpace$) < 4096 THEN _
+         CALL QuickTPut1 ("No room for uploads.  Try tomorrow.") : _
+         ZAnsIndex = ZLastIndex + 1 : _
+         RETURN
+* ------[ first line different ]------
+      IF ZBatchProto <> 0 OR ZUserXferDefault$ = "N" THEN _          ' ds112801
+         IF (ZAnsIndex < LastUpld) OR DupeCount > 0 THEN _           ' ds112801
+            RETURN                                                   ' ds112801
+      IF (ZUserIn$(1) = "U" OR ZUserIn$(1) = "u") THEN _             ' ds121401
+         ZUserIn$(1) = ZUserIn$(2)                                   ' ds121401
+      ZFileNameHold$ = ZUserIn$(1)                                   ' ds123001
+      CALL AllCaps(ZFileNameHold$)                                   ' ds123001
+      IF ZBatchProto = 0 AND ZuserXferDefault$ <> "N" THEN _         ' ds112801
+         ZLastIndex = 1                                              ' ds112801
+      ZOutTxt$ = "Upload disk has" + _
+           ZFreeSpace$
+      GOSUB 21640
+      IF ZFileSysParm > 1 THEN _
+         RETURN
+      ZLine25$ = "(U) " + _
+                 ZFileNameHold$
+      ZSubParm = 2
+      CALL Line25
+      ZOutTxt$ = ""
+      ZOK = ZTrue

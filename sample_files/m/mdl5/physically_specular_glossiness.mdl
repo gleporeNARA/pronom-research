@@ -1,0 +1,285 @@
+mdl 1.6;
+
+using ::df import *;
+using ::state import *;
+using ::base import *;
+using ::tex import *;
+using ::anno import *;
+using ::math import *;
+using ::limits import *;
+
+//- Custom annotation for Substance Designer specifics
+import ::alg::base::annotations::*;
+
+//- Core functions and materials for Substance Designer specifics
+import ::alg::base::core::*;
+
+export material physically_specular_glossiness(
+
+	varying color baseColor = color(0.214041) [[
+		anno::display_name("Diffuse"),
+		anno::in_group("Diffuse"),
+		anno::description("Diffuse channel"),
+		anno::usage("diffuse"),
+		alg::base::annotations::gamma_type(gamma_srgb),
+		alg::base::annotations::visible_by_default(true)
+	]],
+
+	varying float3 normal = state::normal() [[
+		anno::display_name("Normal"),
+		anno::in_group("Normal"),
+		anno::description("Normal channel"),
+		anno::usage("normal"),
+		alg::base::annotations::gamma_type(gamma_linear),
+		alg::base::annotations::visible_by_default(true)
+	]],
+
+	varying color specular = color(0.214041) [[
+		anno::display_name("Specular"),
+		anno::in_group("Specular"),
+		anno::description("Specular channel"),
+		anno::usage("specular"),
+		alg::base::annotations::gamma_type(gamma_srgb),
+		alg::base::annotations::visible_by_default(true)
+	]],
+
+	varying float glossiness = float(0.5) [[
+		anno::display_name("Glossiness"),
+		anno::in_group("Glossiness"),
+		anno::description("Glossiness channel"),
+		anno::usage("glossiness"),
+		alg::base::annotations::gamma_type(gamma_linear),
+		alg::base::annotations::visible_by_default(true)
+	]],
+
+	varying float height = float(0.5) [[
+		anno::display_name("Height"),
+		anno::in_group("Height"),
+		anno::description("Height channel"),
+		anno::usage("height"),
+		alg::base::annotations::gamma_type(gamma_linear),
+		alg::base::annotations::visible_by_default(true)
+	]],
+
+	uniform float heightScale = float(0) [[
+		anno::display_name("Scale"),
+		anno::in_group("Height"),
+		anno::description("provides significant physical detail to the surface by manipulating the vertices of the mesh"),
+		anno::usage("heightScale"),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	varying float ambientOcclusion = float(1) [[
+		anno::display_name("Ambient Occlusion"),
+		anno::in_group("Ambient Occlusion"),
+		anno::description("Ambient Occlusion channel"),
+		anno::usage("ambientOcclusion"),
+		alg::base::annotations::gamma_type(gamma_linear),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	varying float anisotropyLevel = float(0) [[
+		anno::display_name("Anisotropy Level"),
+		anno::in_group("Anisotropy"),
+		anno::description("Anisotropy Level channel"),
+		anno::usage("anisotropyLevel"),
+		alg::base::annotations::gamma_type(gamma_linear),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	varying float anisotropyAngle = float(0) [[
+		anno::display_name("Anisotropy Angle"),
+		anno::in_group("Anisotropy"),
+		anno::description("Anisotropy Angle channel"),
+		anno::usage("anisotropyAngle"),
+		alg::base::annotations::gamma_type(gamma_linear),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	varying color emissiveColor = color(0) [[
+		anno::display_name("Emissive"),
+		anno::in_group("Emissive"),
+		anno::description("Emissive channel"),
+		anno::usage("emissive"),
+		alg::base::annotations::gamma_type(gamma_srgb),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	uniform float emissiveIntensity = float(1) [[
+		anno::display_name("Emissive Intensity"),
+		anno::in_group("Emissive"),
+		anno::description("Controls how much light is emitted from the surface"),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	varying float opacity = float(1) [[
+		anno::display_name("Opacity"),
+		anno::in_group("Opacity"),
+		anno::description("Opacity channel"),
+		anno::usage("opacity"),
+		alg::base::annotations::gamma_type(gamma_linear),
+		alg::base::annotations::visible_by_default(true)
+	]],
+
+	varying float refraction = float(0) [[
+		anno::display_name("Refraction"),
+		anno::in_group("Refraction"),
+		anno::description("Refraction"),
+		anno::usage("refraction"),
+		alg::base::annotations::gamma_type(gamma_linear),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	varying color refractionColor = color(1) [[
+		anno::display_name("Refraction Color"),
+		anno::in_group("Refraction"),
+		anno::description("Refraction channel"),
+		anno::usage("refractioncolor"),
+		alg::base::annotations::gamma_type(gamma_srgb),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	uniform float refractionIOR = float(1.5) [[
+		anno::display_name("IOR"),
+		anno::in_group("Refraction"),
+		anno::description("Index of Refraction"),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	uniform float scattering = float(0) [[
+		anno::display_name("Scattering"),
+		anno::in_group("Refraction"),
+		anno::description("controls how much light is scattered through the surface"),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	uniform float absorption = float(0) [[
+		anno::display_name("Absorption"),
+		anno::in_group("Refraction"),
+		anno::description("controls how much light is absorbed through the surface"),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+	uniform color absorptionColor = color(1) [[
+		anno::display_name("Absorption Color"),
+		anno::in_group("Refraction"),
+		anno::description("simulates shifts in color when light passes through the surface"),
+		alg::base::annotations::visible_by_default(false)
+	]],
+
+    uniform float scalarZeroValue = float(0.5) [[
+        anno::display_name("Scalar Zero Value")
+        , anno::in_group("Height")
+		, anno::usage("heightScalarZeroValue")
+        , anno::soft_range(0.0, 1.0)
+        , anno::description("Determine the neutral height value")
+    ]],
+
+    uniform float tiling = float(1.0) [[
+        anno::display_name("Tiling")
+        , anno::in_group("Height")
+		, anno::usage("materialTiling")
+        , anno::soft_range(0.0, 10.0)
+        , anno::description("Tiling value to keep displacement tiling independent")
+    ]]
+
+) [[
+    anno::display_name("Physically Specular Glossiness")
+    , anno::version( 2020, 8, 21 )
+    , anno::modified(2018, 9, 14, "switch standard ::anno::usage( string hint )" )
+    , anno::modified(2020, 8, 21, "Added scalarZeroValue to be able to interpret different height texture correctly")
+    , anno::modified(2020, 8, 21, "Added tiling to be able to express displacement in a tiling independent manner")
+    , anno::author(alg::base::core::ALLEGORITHMIC_AUTHOR)
+    , anno::copyright_notice(alg::base::core::ALLEGORITHMIC_COPYRIGHT)
+    , anno::hidden()
+]] = let{
+
+	//- Ambient occlusion mix
+	texture_return diffuse_color_mix = base::blend_color_layers(
+		base: color(1.0),
+		layers: base::color_layer[](
+			base::color_layer(
+				layer_color: specular,
+				mode: base::color_layer_negation
+			)
+		)
+	);
+
+	color diffuse_color = baseColor*ambientOcclusion;
+	color specular_color = specular*ambientOcclusion;
+	float specular_weight = math::luminance(specular_color);
+	color transparency_color = refractionColor*ambientOcclusion;
+
+	texture_return specular_tint = base::blend_color_layers(
+		base: color(1.0),
+		layers: base::color_layer[](
+			base::color_layer(
+				layer_color: specular_color,
+				mode: base::color_layer_color
+			)
+		)
+	);
+
+	//- roughness
+	float roughness = math::max(1.0 - glossiness,0.0);
+
+	//- Specular BTDF
+	bsdf specular_btdf = df::microfacet_ggx_smith_bsdf(tint: transparency_color,
+		roughness_u: 0.0, mode: df::scatter_transmit);
+
+	//- Diffuse BRDF
+	bsdf diffuse_brdf = df::diffuse_reflection_bsdf(tint: diffuse_color*diffuse_color_mix.tint, roughness: 0.0);
+
+	//- Transparency mix
+	bsdf transparent_opaque_mix = df::weighted_layer(weight: refraction, layer: specular_btdf, base: diffuse_brdf);
+
+	//- Specular Anisotropy
+	base::anisotropy_return specular_anisotropy = base::anisotropy_conversion(roughness: roughness*roughness,
+		anisotropy: anisotropyLevel, anisotropy_rotation: anisotropyAngle, tangent_u: state::texture_tangent_u(0));
+
+	//- Specular BRDF
+	bsdf specular_brdf = df::microfacet_ggx_smith_bsdf(tint: color(1),
+	roughness_u: specular_anisotropy.roughness_u, roughness_v: specular_anisotropy.roughness_v, tangent_u: specular_anisotropy.tangent_u);
+
+	//- Metallic Model
+	bsdf metallic_model = df::directional_factor(normal_tint: specular_tint.tint, grazing_tint: color(1.0), exponent: 3.0, base: specular_brdf);
+
+	//- Custom curve for specular/diffuse angular mix
+	bsdf diffuse_specular_mix = df::custom_curve_layer(normal_reflectivity: specular_weight, grazing_reflectivity: 1.0, exponent: 5.0,
+		weight: 1.0, layer: metallic_model, base: transparent_opaque_mix);
+
+	//- Subsurface color
+	color volume_color = clamp(absorptionColor, color(0.01), color(0.99));
+
+} in material(
+
+	ior: color(refractionIOR),
+
+	surface: material_surface(
+		scattering: diffuse_specular_mix,
+		emission: material_emission(
+			emission: df::diffuse_edf(),
+			intensity: alg::base::core::default_emission_intensity(
+	            emission: emissiveIntensity,
+	            emission_color: emissiveColor
+	        ),
+			mode: intensity_radiant_exitance
+		)
+	),
+
+	volume: material_volume(
+		absorption_coefficient: (absorption>0)? -math::log(volume_color)*absorption : color(0),
+		scattering_coefficient: (scattering>0)? -math::log(color(0.5))*scattering : color(0)
+	),
+
+	geometry: material_geometry(
+		normal: normal,
+		displacement: alg::base::core::displacement(
+			height         : height,
+			heightScale    : heightScale,
+			scalarZeroValue: scalarZeroValue,
+			tiling         : tiling
+		),
+		cutout_opacity: opacity
+	)
+);

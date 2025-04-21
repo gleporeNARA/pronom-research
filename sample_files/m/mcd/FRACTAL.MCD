@@ -1,0 +1,93 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 30 
+a1,29,27,28
+SELF-SQUARED FRACTAL CURVES
+.TXT 2 0 3 76 
+a3,75,73,170
+For further information on these curves, see Mandelbrot, "The Fractal     
+Geometry of Nature" (chapter 19), and Peitgen & Richter, "The Beauty of 
+Fractals" (chapter 2)
+.TXT 4 0 3 77 
+a3,76,74,202
+Self squared curves are curves in the complex plane which remain invariant 
+under quadratic transformation. We examine the problem of iterates of
+the functions f(x) = x^2 + æ, or f(x) = Þ * x * (1-x).
+.TXT 4 0 1 67 
+a1,66,64,65
+The following examples are computed by direct inverse iteration.
+.TXT 2 0 2 75 
+a2,74,72,117
+First define a function that allows a random choice between two possible 
+inverses for a quadratic function. To wit:
+.EQN 3 1 1 31 
+pick(x)~2*floor(rnd(2))-1
+.TXT 0 35 1 20 
+a1,19,17,18
+returns +1 or -1.
+.TXT 3 -36 1 35 
+a1,35,33,34
+Calculate based on this function:
+.EQN 0 43 2 17 
+f(x):x^2+æ
+.TXT 2 -43 1 71 
+a1,70,68,69
+Now pick a value for æ. (Change the value of æ to see other curves.)
+.EQN 2 1 1 20 
+æ:0.31+0.4*1i
+.EQN 3 0 1 17 
+transient:10
+.TXT 0 24 2 43 
+a2,42,40,69
+(detail of curve is directly  
+proportional to number of iterations)
+.EQN 1 -24 1 19 
+iterations:250
+.EQN 2 0 1 33 
+i:1;transient+iterations
+.EQN 2 0 2 9 
+x[1:0
+.EQN 3 0 3 25 
+x[(i+1):pick(1)*\(x[i-æ)
+.EQN 5 -1 1 29 
+i:transient;iterations
+.EQN 0 34 1 15 
+xscale:1.2
+.EQN 1 0 1 16 
+yscale:0.75
+.EQN 2 -34 17 50 
+yscale/|æ&-yscale/|æ&Im(x[i){1,1,15,40,d}@xscale&-xscale&Re(x[i)
+.TXT 19 0 1 34 
+a1,33,36,32
+Now an example with the Þ form:
+.EQN 0 41 1 22 
+f(x):Þ*x*(1-x)
+.EQN 2 -40 1 8 
+Þ:3
+.EQN 2 0 1 35 
+i:1;(transient+iterations)
+.EQN 2 0 2 9 
+x[i:0
+.EQN 3 0 7 31 
+x[(i+1):(1+pick(1)*\(1-(4*x[i)/Þ))/2
+.EQN 9 0 1 29 
+i:transient;iterations
+.EQN 0 39 1 15 
+xscale:1.1
+.EQN 1 0 1 15 
+yscale:1.0
+.EQN 2 -39 17 49 
+&&Im(x[i){1,1,15,40,d}@&&Re(x[i)
+.TXT 30 28 2 26 
+a2,25,49,41
+Based on a document by
+Seth Finkelstein

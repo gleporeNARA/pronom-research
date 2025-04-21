@@ -1,0 +1,56 @@
+mdl 1.3;
+
+using state import *;
+
+import adobe::mtl::*;
+import adobe::util::*;
+import ::tex::gamma_mode;
+import ::state::normal;
+
+export material MODEL_DRAWSTRING_BAG_1485_MATERIAL_1(*)
+  = adobe::mtl::standard(
+    opacity : float(1.0),
+    baseColor : color(0.1, 0.1, 0.1),
+    translucence : float(0.0),
+    glow : float(0.0),
+    indexOfRefraction : float(1.6),
+    density : float(1.0),
+    roughness : adobe::util::float_texture( texture_2d("drawstring_bag_1485/drawstring_bag_1485_drawstring_Mat_roughness.png", ::tex::gamma_linear) ),
+    normal : ::state::normal(),
+    interiorColor : color(1.0, 1.0, 1.0),
+    metallic : adobe::util::float_texture( texture_2d("drawstring_bag_1485/drawstring_bag_1485_drawstring_Mat_metallic.png", ::tex::gamma_linear) ),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );
+
+export material MODEL_DRAWSTRING_BAG_1485_MATERIAL_2(*)
+  = adobe::mtl::standard(
+    opacity : float(1.0),
+    baseColor : adobe::util::color_texture( texture_2d("drawstring_bag_1485/drawstring_bag_1485_metal_Mat_baseColor.png", ::tex::gamma_srgb) ),
+    translucence : float(0.0),
+    glow : float(0.0),
+    indexOfRefraction : float(1.6),
+    density : float(1.0),
+    roughness : adobe::util::float_texture( texture_2d("drawstring_bag_1485/drawstring_bag_1485_metal_Mat_roughness.png", ::tex::gamma_linear) ),
+    normal : ::state::normal(),
+    interiorColor : color(1.0, 1.0, 1.0),
+    metallic : adobe::util::float_texture( texture_2d("drawstring_bag_1485/drawstring_bag_1485_metal_Mat_metallic.png", ::tex::gamma_linear) ),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );
+
+export material MODEL_DRAWSTRING_BAG_1485_MATERIAL_3(*)
+  = adobe::mtl::standard(
+    opacity : float(1.0),
+    baseColor : adobe::util::color_texture( texture_2d("drawstring_bag_1485/drawstring_bag_1485_bag_Mat_baseColor.png", ::tex::gamma_srgb) ),
+    translucence : float(0.0),
+    glow : float(0.0),
+    indexOfRefraction : float(1.6),
+    density : float(1.0),
+    roughness : adobe::util::float_texture( texture_2d("drawstring_bag_1485/drawstring_bag_1485_bag_Mat_roughness.png", ::tex::gamma_linear) ),
+    normal : ::state::normal(),
+    interiorColor : color(1.0, 1.0, 1.0),
+    metallic : adobe::util::float_texture( texture_2d("drawstring_bag_1485/drawstring_bag_1485_bag_Mat_metallic.png", ::tex::gamma_linear) ),
+    height : float(0.5),
+    heightScale : float(1.0)
+    );

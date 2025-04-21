@@ -1,0 +1,19 @@
+mdl 1.3;
+
+import ::adobe::mtl::standard;
+import ::state::normal;
+
+export material MATERIAL_WAX(*)
+ = ::adobe::mtl::standard(
+    baseColor: color(1.f, 1.f, 1.f),
+    opacity: 1.f,
+    glow: 0.f,
+    roughness: 0.61,
+    metallic: 0.f,
+    translucence: 0.91,
+    indexOfRefraction: 1.5f,
+    density: 0.19,
+    interiorColor: color(1.000, 0.973, 0.888),
+    normal: ::state::normal(),
+    height: 0.5f,
+    heightScale: 1.f);

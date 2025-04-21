@@ -1,0 +1,8 @@
+MapSource is compatible with all GARMIN GPS systems except the GPS 100 family of products (GPS 100AVD, GPS 100MRN, GPS 100MIL, SRVY II) and panel mount aviation units. Trip and waypoint planning is possible for all other units; however, the map transfer feature is only compatible with the following GARMIN GPS units: GPS III Plus, GPS 12MAP, NavTalk, GPSMAP 162/168, StreetPilot, StreetPilot ColorMap, GPSMAP 295, and eMap.
+
+MapSource software allows you to view color maps on a personal computer, with zoom and pan functions for easy map browsing. Use the trip and waypoint manager functions to create waypoints, routes, and tracks, and transfer them between your PC and nearly all GARMIN GPS units. This is excellent for planning your next outdoor adventure, business trip, vacation, or recreational outing without ever leaving your house. For those units that accept the map transfer feature, users can also select individual maps in areas of interest and download the selected maps to a compatible GARMIN GPS (currently the GPS III Plus, NavTalk, StreetPilot, StreetPilot ColorMap, GPS 12MAP, GPSMAP 162/168, GPSMAP 295, and eMap). Simply connect your GARMIN GPS to your PC using a PC interface cable. Select the map areas on screen, and with the click of the mouse, the information downloads to your GPS. Some units require a blank 8 or 16 MB data card to download.
+
+All MapSource products include the trip and waypoint manager functions for transferring waypoints, routes and tracks. Your preference for map detail and your specific activities will determine which MapSource CD is right for you. MapSource gives you the flexibility to select the mapping coverage you need.
+
+
+https://web.archive.org/web/20000819043609/http://www.garmin.com/cartography/mapSource/

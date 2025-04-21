@@ -1,0 +1,60 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 36 
+a1,35,33,34
+FILTERING A NOISY SIGNAL WITH FFT
+.TXT 2 0 1 20 
+a1,20,18,19
+Define the signal:
+.EQN 0 23 1 14 
+i:0;127
+.EQN 2 0 3 37 
+q[i:sin(i/128*14*ã)+cos(i/128*19*ã)
+.EQN 5 -12 7 50 
+6&-6&q[i{1,1,6,45,l}@127&0&i
+.TXT 8 -11 1 17 
+a1,17,15,16
+Add some noise:
+.EQN 2 10 2 23 
+s[i:q[i+rnd(2)-1
+.EQN 3 1 7 50 
+6&-6&s[i{1,1,6,45,l}@127&0&i
+.TXT 8 -11 1 38 
+a1,38,36,37
+Take its discrete fourier transform:
+.EQN 2 11 1 13 
+f:fft(s)
+.EQN 0 18 1 13 
+j:0;64
+.EQN 2 -18 1 10 
+à:2.5
+.TXT 0 13 2 51 
+a2,51,49,52
+...define threshold for spectral noise rejection. 
+
+.EQN 2 -13 7 24 
+8&0&|f[j,à{1,1,6,15,dl}@64&0&j
+.TXT 1 29 1 12 
+a1,12,10,11
+<-- Signal
+.TXT 3 0 1 11 
+a1,11,9,10
+<-- Noise
+.TXT 4 -40 1 42 
+a1,41,39,40
+Filter, and take the inverse transform:
+.EQN 3 10 2 22 
+g[j:f[j*è(|f[j-à)
+.EQN 0 28 1 14 
+h:ifft(g)
+.EQN 3 -27 7 50 
+6&-6&h[i{1,1,6,45,l}@127&0&i

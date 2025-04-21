@@ -1,0 +1,33 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 масса длина вpемя заряд
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.EQN 0 0 1 24 
+f1(t,x1,x2):-100*x1
+.EQN 0 29 2 10 
+x1[0:1
+.EQN 0 15 2 10 
+x2[0:1
+.EQN 0 13 2 9 
+t[0:0
+.EQN 2 -57 1 24 
+f2(t,x1,x2):-.01*x2
+.EQN 2 0 1 12 
+h:.0001
+.EQN 0 15 1 11 
+N:1000
+.EQN 2 -4 1 12 
+i:0;N
+.EQN 0 13 2 16 
+t[(i+1):t[i+h
+.EQN 2 -24 4 37 
+({2,1}Ўx2[(i+1)Ўx1[(i+1)):({2,1}Ўx2[i+h*f2(t[i,x1[i,x2[i)Ўx1[i+h*f1(t[i,x1[i,x2[i))
+.EQN 6 0 11 25 
+&&x1[i,x2[i{1,1,6,15,l}@&&t[i

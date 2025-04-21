@@ -1,0 +1,90 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=56 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 13 
+a1,12,10,11
+BODE PLOTS
+.TXT 2 10 4 64 
+a4,63,61,214
+This document examines the dynamic response of a second-order 
+system, and presents it in the form of a Bode plot. The 
+results demonstrate how to use the Laplace domain and 
+semi-log and log-log plots in MathCAD.
+.TXT 5 -10 1 10 
+a1,10,8,9
+Example:
+.TXT 2 10 2 52 
+a2,51,54,66
+First, define resonant frequency, ß, and damping 
+coefficient, à:
+.EQN 3 0 4 9 
+à:\2/2
+.EQN 1 20 1 15 
+ß:10*hertz
+.TXT 4 -20 1 41 
+a1,40,38,39
+The second order system is defined as:
+.EQN 2 0 5 27 
+f(s):ß^2/(s^2+2*à*ß*s+ß^2)
+.EQN 7 0 1 9 
+n:50
+.EQN 0 20 1 12 
+i:0;n
+.TXT 2 -20 3 61 
+a3,60,58,158
+We will be working with a system with resonant frequency   
+10 rad/sec, so the minimum and maxumum frequency of 
+interest for plotting are 1 and 100 rad/sec.
+.EQN 4 0 1 10 
+min:1
+.EQN 0 20 1 12 
+max:100
+.TXT 2 -20 3 58 
+a3,58,56,124
+r is a log ratio of maximum and minimum frequencies. The 
+values of s computed below will be equally spaced on a 
+log plot.
+.EQN 4 0 3 14 
+r:ln(max/min)
+.EQN 4 0 5 22 
+s[i:min*e^(i*r/(n))*hertz
+.TXT 6 -10 1 20 
+a1,20,18,19
+Global definitions
+.EQN 2 10 1 10 
+sec~1t
+.EQN 0 20 3 13 
+hertz~(2*ã)/sec
+.EQN 0 20 3 11 
+deg~ã/180
+.EQN 4 -40 1 37 
+è(é)~angle(Re(é),Im(é))-360*deg
+.TXT 3 -10 1 1 
+x1,1,0,0
+.TXT 2 30 1 35 
+a1,34,32,33
+Bode Plot of Second Order System
+.EQN 2 -25 17 73 
+10&10^-2&|f(s[i*1j){67,66,15,60,O}@10^2*hertz&1*hertz&s[i
+.TXT 18 20 1 36 
+a1,36,34,35
+Phase angle of second order system
+.EQN 2 -20 15 74 
+0*deg&-180*deg&è(f(s[i*1j)){2,194,13,60,l}@10^2*hertz&10^0*hertz&s[i
+.EQN 17 -5 2 19 
+é[i:è(f(s[i*1j))
+.TXT 0 23 1 34 
+a1,33,31,32
+Nyquist Plot of system function
+.EQN 3 -23 2 20 
+Mag[i:|f(s[i*1j)
+.EQN 0 28 14 51 
+1&-1&-sin(é[i)*Mag[i{2,2,12,35,l}@1&-1&cos(é[i)*Mag[i

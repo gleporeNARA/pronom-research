@@ -1,0 +1,27 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 ¬ áá  ¤«¨­  ¢p¥¬ï § àï¤
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.EQN 0 0 3 10 
+x:({3,1}ö2ö1ö0)
+.EQN 1 10 3 10 
+y:({3,1}ö6ö3ö5)
+.EQN 1 19 1 12 
+i:0;2
+.EQN 4 -28 4 24 
+({3,1}öcöböa):({3,3}ö4ö1ö0ö2ö1ö0ö1ö1ö1)^-1*({3,1}ö6ö3ö5)
+.EQN 5 7 3 16 
+({3,1}öcöböa)=?
+.EQN 1 17 2 24 
+l(p):a+b*p+c*p^2
+.EQN 1 26 1 17 
+p:0,0.05;2
+.EQN 3 -32 12 40 
+&&y[i,l(p){10,10,10,30,l}@&&x[i,p

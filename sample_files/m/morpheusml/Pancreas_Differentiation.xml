@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<MorpheusModel version="4">
+    <Description>
+        <Title>Pancreas Differentiation</Title>
+        <Details>Full Title: Lineage Specification in Pancreas Development - Spatio-temporal Multicellular Model
+
+This model reproduces a core element (a=1, b=20.8, eta=1e-4) of the parameter scan in Fig. 4b of the referenced paper. Equations and other parameter values are as published. Notch signaling in competition with lateral stabilization, both mediated by cell–cell interactions, can control the cell fate decision of multi-potent pancreatic progenitor cells between the exocrine and endocrine lineages and yield a scattered spatial distribution of endocrine cells, major constituents of the later islets of Langerhans.
+
+Creator of Morpheus model: walter@deback.net
+Date of Morpheus model: 21/09/2012
+Software: Morpheus (free, open-source), download from https://morpheus.gitlab.io
+Reference:
+Walter de Back, Joseph X. Zhou, Lutz Brusch, On the Role of Lateral Stabilization during Early Patterning in the Pancreas, Journal of The Royal Society Interface 10(79): 20120766, 2013.
+http://dx.doi.org/10.1098/rsif.2012.0766
+
+model-level annotations:
+http://identifiers.org/taxonomy/10090
+http://identifiers.org/BTO:0000988
+hybrid model of http://identifiers.org/mamo/MAMO_0000047 and http://identifiers.org/mamo/MAMO_0000052
+http://identifiers.org/pubmed/23193107
+</Details>
+    </Description>
+    <Global>
+        <Constant value="0" symbol="X"/>
+        <Constant value="0" symbol="Y"/>
+    </Global>
+    <Space>
+        <Lattice class="hexagonal">
+            <Size value="98, 98, 0" symbol="size"/>
+            <BoundaryConditions>
+                <Condition boundary="x" type="periodic"/>
+                <Condition boundary="y" type="periodic"/>
+            </BoundaryConditions>
+            <Neighborhood>
+                <Order>1</Order>
+            </Neighborhood>
+        </Lattice>
+        <SpaceSymbol symbol="space"/>
+    </Space>
+    <Time>
+        <StartTime value="0"/>
+        <StopTime value="30"/>
+        <TimeSymbol symbol="t"/>
+        <!--    <Disabled>
+        <RandomSeed value="2"/>
+    </Disabled>
+-->
+    </Time>
+    <CellTypes>
+        <CellType name="cells" class="biological">
+            <Property value="0.0" name="Ngn3" symbol="X"/>
+            <Property value="0.0" name="Ngn3-Neighbors" symbol="Xn"/>
+            <Property value="0" name="Ptf1a" symbol="Y"/>
+            <Property value="0" name="Ptf1a-neighbors" symbol="Yn"/>
+            <System solver="Euler-Maruyama [stochastic, O(1)]" time-step="0.02">
+                <Constant value="1" symbol="a"/>
+                <Constant value="20.8" symbol="b"/>
+                <Constant value="1" symbol="c"/>
+                <DiffEqn symbol-ref="X">
+                    <Expression>((th / (th + a*Xn^n)) - X) + rand_norm(0.0,noise)</Expression>
+                </DiffEqn>
+                <DiffEqn symbol-ref="Y">
+                    <Expression>(((th + b*(Y * Yn)^n) / (th + c*X^n + b*(Y * Yn)^n))  - Y ) + rand_norm(0.0,noise)</Expression>
+                </DiffEqn>
+                <Constant value="4" symbol="n"/>
+                <Constant value="1e-4" symbol="th"/>
+                <Constant value="1e-4" symbol="noise"/>
+            </System>
+            <NeighborhoodReporter>
+                <Input value="X" scaling="cell"/>
+                <Output symbol-ref="Xn" mapping="average"/>
+            </NeighborhoodReporter>
+            <NeighborhoodReporter>
+                <Input value="Y" scaling="cell"/>
+                <Output symbol-ref="Yn" mapping="average"/>
+            </NeighborhoodReporter>
+            <Event trigger="on change">
+                <Condition>tau == -1 and (X-Xn) > 0.05</Condition>
+                <Rule symbol-ref="tau">
+                    <Expression>t</Expression>
+                </Rule>
+            </Event>
+            <Property value="-1" name="time to cell fate decision" symbol="tau"/>
+        </CellType>
+    </CellTypes>
+    <CellPopulations>
+        <Population size="0" type="cells">
+            <InitCellLattice/>
+        </Population>
+    </CellPopulations>
+    <Analysis>
+        <Gnuplotter time-step="1">
+            <Terminal name="png" persist="true"/>
+            <!--    <Disabled>
+        <Plot>
+            <Cells max="1" min="0.0" value="X">
+                <ColorMap>
+                    <Color value="1.0" color="blue"/>
+                    <Color value="0.5" color="light-blue"/>
+                    <Color value="0.0" color="white"/>
+                </ColorMap>
+            </Cells>
+        </Plot>
+    </Disabled>
+-->
+            <Plot>
+                <Cells max="1" min="0.0" value="Y">
+                    <ColorMap>
+                        <Color value="1.0" color="red"/>
+                        <Color value="0.5" color="light-red"/>
+                        <Color value="0.0" color="white"/>
+                    </ColorMap>
+                </Cells>
+            </Plot>
+        </Gnuplotter>
+        <!--    <Disabled>
+        <Logger time-step="0.1">
+            <Input>
+                <Symbol symbol-ref="X"/>
+                <Symbol symbol-ref="Y"/>
+            </Input>
+            <Output>
+                <TextOutput file-separation="cell"/>
+            </Output>
+            <Plots>
+                <Plot time-step="-1">
+                    <Style style="lines" line-width="2"/>
+                    <Terminal terminal="png"/>
+                    <X-axis>
+                        <Symbol symbol-ref="t"/>
+                    </X-axis>
+                    <Y-axis>
+                        <Symbol symbol-ref="X"/>
+                    </Y-axis>
+                    <Color-bar>
+                        <Symbol symbol-ref="Y"/>
+                    </Color-bar>
+                    <Range>
+                        <Data increment="3"/>
+                    </Range>
+                </Plot>
+            </Plots>
+        </Logger>
+    </Disabled>
+-->
+        <!--    <Disabled>
+        <HistogramLogger number-of-bins="20" normalized="true" maximum="1.1" minimum="-0.1" time-step="5">
+            <Plot maximum="1.0" terminal="png" minimum="0"/>
+            <Column symbol-ref="X" celltype="cells"/>
+            <Column symbol-ref="Y" celltype="cells"/>
+        </HistogramLogger>
+    </Disabled>
+-->
+        <!--    <Disabled>
+        <HistogramLogger number-of-bins="30" normalized="true" maximum="30" minimum="0.0" time-step="-1">
+            <Plot maximum="1.0" terminal="png" minimum="0"/>
+            <Column symbol-ref="tau" celltype="cells"/>
+        </HistogramLogger>
+    </Disabled>
+-->
+        <DependencyGraph format="svg" include-tags="#untagged" reduced="false"/>
+    </Analysis>
+</MorpheusModel>

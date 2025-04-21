@@ -1,0 +1,277 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=10 zt=8 pr=6 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.EQN 0 14 2 10 
+i:\-1
+.EQN 18 44 2 11 
+ç:10^-5
+.EQN 1 -47 1 17 
+r1:910+100
+.EQN 0 21 1 12 
+r2:1500
+.EQN 0 13 1 12 
+r3:1500
+.EQN 2 -34 2 15 
+l:3.4*10^-3
+.EQN 0 21 2 16 
+c:0.51*10^-9
+.EQN 1 20 1 9 
+E:15
+.TXT 3 -50 1 18 
+a1,17,76,16
+Klassic method.
+.TXT 3 9 1 34 
+a1,33,67,32
+Diff.equinox sistem for circuit
+.TXT 2 1 1 4 
+a1,3,66,2
+{
+.TXT 0 5 1 11 
+a1,10,61,9
+i1=i3+i2
+.TXT 0 35 1 15 
+a1,14,26,13
+i2 = i1 - i3
+.TXT 1 -40 1 4 
+a1,3,66,2
+{
+.TXT 1 0 1 4 
+a1,3,66,2
+{
+.TXT 0 12 1 8 
+a1,7,54,6
+d(i1)
+.TXT 1 -12 1 4 
+a1,3,66,2
+{
+.TXT 0 5 1 40 
+a1,39,61,38
+i1r1 + -----l + r2i2 = E          (2)
+.TXT 1 -5 1 4 
+a1,3,66,2
+{
+.TXT 0 12 1 5 
+a1,4,54,3
+dt
+.TXT 1 -12 1 4 
+a1,3,66,2
+{
+.TXT 1 0 1 4 
+a1,3,66,2
+{
+.TXT 0 15 1 6 
+a1,5,51,4
+  2
+.TXT 1 -15 1 4 
+a1,3,66,2
+{
+.TXT 0 7 1 33 
+a1,32,59,31
+d(i1)    d (i1)     d(i3)   i3
+.TXT 1 -7 1 4 
+a1,3,66,2
+{
+.TXT 0 5 1 50 
+a1,49,61,48
+r1----- + l------ + r3----- + --  = 0       (3)
+.TXT 1 -11 1 11 
+a1,10,72,9
+      { 
+.TXT 0 13 1 34 
+a1,33,59,32
+  dt        2        dt      c 
+.TXT 1 -7 1 4 
+a1,3,66,2
+{
+.TXT 0 14 1 8 
+a1,7,52,6
+   dt
+.TXT 3 -5 1 8 
+a1,7,57,6
+d(i1)
+.TXT 0 28 1 32 
+a1,31,29,30
+ 1                     d(i1) 
+.TXT 1 -44 1 6 
+a1,5,73,4
+(2)
+.TXT 0 7 2 69 
+a2,68,66,132
+ r1i1 + l----- + r2(i1-i3) = E   i3 = --(-E + (r2 + r1)i1 + -----) 
+                                      r2                     dt
+.TXT 1 0 1 15 
+a1,14,66,13
+          dt
+.TXT 2 0 1 8 
+a1,7,66,6
+  2  
+.TXT 1 0 1 68 
+a1,67,66,66
+ d i1               d(i1)                      l    r1 + r2     E
+.TXT 1 -6 1 6 
+a1,5,72,4
+(3)
+.TXT 0 7 1 68 
+a1,67,65,67
+-----(lr2 + lr3) + -----(r1r2 + r1r3 + r2r3 + -) + -------- = --- 
+.TXT 1 0 1 67 
+a1,66,65,65
+   2                dt                        c        c       c
+.TXT 1 0 1 6 
+a1,5,65,4
+ dt
+.TXT 2 15 1 26 
+a1,25,50,24
+Characteristic  equinox
+.TXT 2 -11 1 6 
+a1,5,61,4
+  2
+.TXT 1 -7 1 53 
+a1,52,68,51
+(r3+r2)lÞ  + (r1r2+r1r3+r2r3+l/c)Þ + (r1+r2)/c = 0
+.EQN 2 20 3 32 
+b:r1*r2+r1*r3+r2*r3+l/c
+.EQN 1 -20 1 18 
+a:(r3+r2)*l
+.EQN 2 1 3 14 
+d:(r1+r2)/c
+.EQN 10 0 5 24 
+Þ1:(-b+\(b^2-4*a*d))/(2*a)
+.EQN 0 33 5 24 
+Þ2:(-b-\(b^2-4*a*d))/(2*a)
+.EQN 7 -20 1 10 
+Þ1=?
+.EQN 2 0 1 10 
+Þ2=?
+.EQN 2 -18 1 13 
+ß:Im(Þ1)
+.EQN 0 19 1 13 
+à:Re(Þ2)
+.TXT 3 -19 1 56 
+a1,55,72,54
+Type of function is i(t)=exp(àt)(c1cos(ßt)+c2sin(ßt))
+.TXT 2 0 1 39 
+a1,38,72,37
+Constrained component for i1 current
+.EQN 0 39 3 16 
+i1c:E/(r1+r2)
+.TXT 3 -39 1 36 
+a1,35,72,34
+Finding a constant for i1 current
+.EQN 1 27 3 15 
+c1:-E/(r1+r2)
+.TXT 1 -27 1 25 
+a1,24,72,23
+i1(0+)=i1(0-)    =>   
+.EQN 0 44 1 10 
+c1=?
+.EQN 3 -43 3 18 
+c3:E/(l*ß)-à*c1/ß
+.EQN 1 43 1 6 
+c3=?
+.EQN 4 -45 3 57 
+i1(t):exp(à*t)*(c3*sin(ß*t)+c1*cos(ß*t))+E/(r1+r2)
+.EQN 3 0 1 117 
+i(t):-E+(r2+r1)*i1(t)+l*ß*exp(à*t)*(-c1*sin(ß*t)+c3*cos(ß*t))+à*l*exp(à*t)*(c1*cos(ß*t)+c3*sin(ß*t))
+.EQN 4 17 2 26 
+t:0,0.5*10^-6;1*10^-5
+.EQN 3 18 3 27 
+uc(t):1/(c*r2)*(0&t`i(x)&x)
+.EQN 2 -34 2 30 
+s:10^-5,1.02*10^-5;2*10^-5
+.EQN 2 0 1 29 
+ucc(s):uc(ç)-uc(s-ç)
+.EQN 2 9 17 65 
+10&0&uc(t),ucc(s){10,10,15,50,l}@20*10^-6&0&t,s
+.TXT 23 -7 1 26 
+a1,25,70,24
+Laplace operator method
+.TXT 14 -1 1 57 
+a1,56,71,55
+ circuit (1)    I1(p)(r1 + pl + r2) + I2(p)(-r2) = E/p
+.TXT 2 0 1 59 
+a1,58,71,57
+ circuit (2)    I1(p)(-r2) + I2(p)(r2 + r3 + 1/(pc)) = 0
+.TXT 3 1 1 48 
+a1,47,70,46
+ (2)       I1(p) = I2(p)(r2 + r3 + 1/(pc))/r2
+.TXT 2 42 1 6 
+a1,5,28,4
+ 2 
+.TXT 1 -36 1 40 
+a1,39,64,38
+(r1 + r2 + 1/(pc))(r1 + pl + r2) - r2
+.TXT 1 -5 1 52 
+a1,51,69,50
+I2(p)-------------------------------------- = E/p
+.TXT 1 18 1 5 
+a1,4,51,3
+r2
+.TXT 3 -19 1 29 
+a1,28,70,27
+After some transformations
+.TXT 2 13 1 7 
+a1,6,57,5
+ Er2
+.TXT 1 -12 1 33 
+a1,32,69,31
+ I2(p) = -------------------  
+.TXT 1 11 1 4 
+a1,3,58,2
+2
+.TXT 1 -2 1 17 
+a1,16,60,15
+ap   +  bp + d
+.TXT 4 -12 1 62 
+a1,61,72,60
+Ir3(p) = I1(p) - I2(p) = I2(p)((r2 + r3 + 1/(pc))/r2 - 1) =
+.TXT 2 9 1 4 
+a1,3,63,2
+E
+.TXT 1 -8 1 36 
+a1,35,71,34
+ = ----------------(r3 + 1/(pc)) 
+.TXT 2 6 1 4 
+a1,3,65,2
+2
+.TXT 1 -2 1 15 
+a1,14,67,13
+ap  + bp + d
+.EQN 6 -2 6 50 
+Ir3(p):1/((p+b/(2*a))^2-(b/(2*a))^2+d/a)*(E/(a*c*p)+E*r3/a)
+.EQN 23 -4 3 13 
+c5:(b/(2*a))
+.EQN 1 22 1 22 
+c5=?
+.EQN 3 -22 4 16 
+c4:\(d/a-c5^2)
+.EQN 1 22 1 21 
+c4=?
+.EQN 4 -22 3 15 
+c6:r3*E/a*1/c4
+.EQN 1 23 1 17 
+c6=?
+.EQN 4 -23 3 11 
+c7:E/(d*c)
+.EQN 1 23 1 17 
+c7=?
+.EQN 3 -24 3 84 
+i3(t):c6*exp(-c5*t)*sin(\c4*t)+c7*(1-exp(-c5*t)*(cos(c4*t)+c5/c4*sin(c4*t)))
+.EQN 4 0 1 20 
+ur3(t):i3(t)*r3
+.EQN 2 0 2 22 
+t:0,2*10^-7;10^-5
+.EQN 0 25 2 30 
+q:10^-5,1.02*10^-5;2*10^-5
+.EQN 3 -4 1 31 
+urr(q):ur3(ç)-ur3(q-ç)
+.EQN 2 -13 17 66 
+10&0&ur3(t),urr(q){10,10,15,50,l}@2*10^-5&0&t,q

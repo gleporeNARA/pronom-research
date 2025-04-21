@@ -1,0 +1,212 @@
+*SANSMODEL*
+Perencanaan Portal Baja
+
+
+*NOTES*
+
+*VERSION*
+  VERSION No.  = 4.1
+  VERSION TYPE = Full Version
+  VERSION DATE = 01 May 1998
+  COPYRIGHT    = Nathan Madutujuh
+  LICENSEE     = PT ANUGRAH MULTI CIPTA KARYA, INDONESIA
+*MODELHISTORY*
+  Creation Date = 02/12/1997
+  Created  By   = Nathan
+  Creation Note = Creation Note =
+  Revision Date = 02/12/1997
+  Revised  By   = Nathan
+  Revision Note = Revision Note =
+*STRUCTURE*
+  Structure Model     = 3 : PFrame
+  Structure Material  = 2 : Steel
+  Structure Type      = 1 : NonductileFrame
+  Design Method       = 1 : Non-Capacity
+  Design Code         = 4 : BAJA-98
+  Steel Design Option = 1 : Linear
+  Importance Factor I = 1.5
+  Ductility  Factor K = 1
+*UNITS*
+  Unit Type     = 0
+  Unit Name     = kgcm
+  Modulus       = kg/cm2
+  Unit Weight   = kg/cm3
+  Length        = cm
+  Displacement  = cm
+  Force         = kg
+  Moment        = kg.cm
+  Torsion       = kg.cm
+  Stress        = kg/cm2
+  Gravity Accel = cm/s2
+*ANALYSIS*
+  Analysis Method      = 1 : Static
+  Linearity Model      = 1 : Linear
+  Rigid Floor          = 0
+  Number of Eigen      = 0
+  Damping Ratio        = 0
+  Earthquake Dir Comb  = 3
+  Total Earthquake Dir = 0
+  Gravity Acceleration = 981
+  Condensation Level   = 0
+  P-Delta Effects      = 0
+  Ductility Factor     = 1
+  #1 Lateral Load Case with Pdelta = 0
+  #2 Lateral Load Case with Pdelta = 0
+  Include Slab Thickness for Beam Weight = 0
+*PARAMETER*
+  Number of 2D Node             = 8
+  Number of 3D Node             = 0
+  Number of Supported Node      = 3
+  Number of Material Properties = 1
+  Number of Section Properties  = 2
+  Number of Design Data         = 2
+  Number of Texture Properties  = 0
+  Number of Element Set/ELSET   = 2
+  Number of Spring Element      = 0
+  Number of Truss Element       = 0
+  Number of Frame Element       = 7
+  Number of Plane Strs Element  = 0
+  Number of Plate Element       = 0
+  Number of Shell Element       = 0
+  Number of Nodal Mass          = 0
+  Number of Joint Load          = 4
+  Number of Truss Load Type     = 0
+  Number of Truss Load          = 0
+  Number of Frame Load Type     = 2
+  Number of Frame Load          = 6
+*MATERIAL*
+   1   1  ISOTROPIC   Bj-37 0
+      0 0 0.00875 2100000 810000 0
+*SECTION*
+   1  11 USER         0 0 WF300X150
+     WF300X150 2
+   2  11 USER         0 0 WF350X250
+     WF350X250 2
+*DESIGN*
+   1   3 STEEL_FRAME  WF300X150 3 1 1 1 0 0 1
+      0.8 0.8 0.6 0.65 0.6 0.6 0.6 1   1 1 1 1 1   0.85 0.85 1 1 1
+      STEELDSG = 0 0 0 WF300X150 NOSECTION 0 1 0  2100000 3700 2400  0 0 0 0 0.85
+   2   3 STEEL_FRAME  WF350X250 3 1 1 1 0 0 1
+      0.8 0.8 0.6 0.65 0.6 0.6 0.6 1   1 1 1 1 1   0.85 0.85 1 1 1
+      STEELDSG = 0 0 0 WF350X250 NOSECTION 0 0 0  2100000 3700 2400  0 0 0 0 0.85
+*TEXTURE*
+*ELSET*
+   1   1  1  1  0
+   2   1  2  2  0
+*LOADING*
+  Lateral Load Type = 1
+  Dead Load #1 = 1
+  Live Load #1 = 2
+  Dead Load #2 = 1
+  Live Load #2 = 2
+  Wind Load #1 = 0
+  Wind Load #2 = 0
+  Earthquake  Load #1 = 3
+  Earthquake  Load #2 = 4
+  Prestressed Load #1 =  0 : (Transfer)
+  Prestressed Load #2 =  0 : (Service)
+  Earth Press Load #1 = 0
+  LL Reduction for Earthquake  =  1.000
+  LL Reduction for Wind Load   =  1.000
+  LL Reduction for Weight/Mass =  1.000
+  LL Reduction for Main Girder =  1.000
+  Load Combination Type   = 4
+  Load Combination Option = 1
+  Number of Load System   = 2
+  Number of Load Case     = 3
+  Combination # 1 =    1.200   1.200   1.600   0.000   0.000   0.000
+  Combination # 2 =    1.050   1.050   1.050   1.050   0.000   0.000
+*NODE3D*
+*NODEXY*
+   1  0 0
+   2  0 400
+   3  600 500
+   4  1200 400
+   5  1200 300
+   6  1200 0
+   7  1700 250
+   8  1700 0
+*SUPPORT*
+     1  2 0 0 0 0 0 0 0 0
+     6  2 0 0 0 0 0 0 0 0
+     8  2 0 0 0 0 0 0 0 0
+*SPRING*
+*TRUSS*
+*FRAME*
+     1     1    2   2  2 0
+     2     2    3   2  2 0
+     3     3    4   2  2 0
+     4     6    5   2  2 0
+     5     5    4   2  2 0
+     6     5    7   1  2 0
+     7     8    7   1  2 0
+*QUAD4*
+*JLOAD*
+   1     4  -1000,0,0,0,0,0
+   1     7  -500,0,0,0,0,0
+   3     4  -1000,0,0,0,0,0
+   3     7  -500,0,0,0,0,0
+*TLOADTAB*
+*TLOAD*
+*FLOADTAB*
+    1  15  -2.5,0,1,0,0
+    2  15  -3,0,1,0,0
+*FLOAD*
+   1     2   1
+   1     3   1
+   1     6   1
+   2     2   2
+   2     3   2
+   2     6   2
+*WINDLOAD*
+*MASSES*
+  0 0 0 0
+*SPECTRUM*
+  Earthquake Zone = 0
+  Spectrum Type   = 1
+  Soil Type       = 1
+  Normalized      = 1
+  Number of Point = 0
+*SCREEN*
+  Snap to Grid        = 1
+  Snap Ratio          = 100
+  Auto Working Range  = 0
+  Building Floor Xmin = -200
+  Building Floor Xmax = 2000
+  Building Floor Ymin = -200
+  Building Floor Ymax = 1000
+  Grid Spacing,  DX   = 100
+  Grid Spacing,  DY   = 100
+  AutoScale Flag  = 1
+  Drawing  Scale  = 1
+  Zoom Factor     = 1
+  Deform   Scale  = 1
+  Rotation Scale  = 1
+  Drawing Scale, Column = 1
+  Drawing Scale, Wall   = 1
+  Drawing Scale, Beam   = 1
+  Drawing Scale, Surface Load        = 1
+  Drawing Scale, Distributed Force   = 1
+  Drawing Scale, Distributed Torsion = 1
+  Drawing Scale, Point   Force       = 1
+  Drawing Scale, Point   Moment      = 1
+  Drawing Scale, Point   Torsion     = 1
+*DRAWING*
+  Paper Size    = 1
+  Border        = 1
+  Project       = Noname
+  Location      = Indonesia
+  Owner Name    = Nathan
+  Architect     = Yahya
+  Consultant    = 1
+  Contractor    = 1
+  Job Name      = 1
+  Drawing       = 1
+  Engineer      = 1
+  Drafter       = 1
+  Approved By   = 1
+  Drawing Code  = 1
+  Drawing No    = 1
+  Total Page    = 1
+  Drawing Scale = 1
+*END*

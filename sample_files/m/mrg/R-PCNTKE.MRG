@@ -1,0 +1,71 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against RBBS-PC.BAS to produce R-PCNTKE.BAS
+* RBBS-PC.BAS:  Date 6-20-1992  Size 147219 bytes
+* ------------[ Created 06-25-1992 19:24:11 ]------------
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+760 ZLastIndex = 0                                                   
+    GOSUB 755
+    CALL AllCaps (ZWasZ$)
+    LSET ZPswd$ = ZWasZ$
+    CALL QuickTPut1 ("Please REMEMBER your password")
+    ZUserTextColor = 37
+    ZTempSecLevel = ZUserSecLevel
+    CALL Protocol
+    ZUserXferDefault$ = "N"
+    ZProtoPrompt$ = "None"
+    IF ZNewUserSetsDefaults THEN _
+       ZBypassTimeCheck = ZTrue : _
+       GOSUB 43000 : _
+       ZBypassTimeCheck = ZFalse : _
+       CALL Graphic (ZFileName$) : _                                 
+       GOSUB 42805 :  _
+       GOSUB 42700 _
+    ELSE ZUpperCase = ZFalse : _                                     
+         ZNulls = ZFalse
+    ZPageLength = ZPageLengthDef
+    CALL SetNewUserDef                                               
+    GOSUB 5135
+    CALL DefaultU
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+4240 CALL Toggle(8)						     ' BC-NTKE1
+     RETURN
+'
+' ****  T)opic - QUICK SCAN MESSAGES  ***
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+5410 CALL Toggle(-8)						     ' BC-NTKE1
+     GOSUB 43020
+     ZFF = INSTR(ZDefaultXfer$,ZUserXferDefault$)
+     CALL Toggle(-5)
+     GOSUB 42810
+     CALL Toggle(-3)
+     CALL Toggle(-6)
+     CALL Toggle(-7)
+     CALL Toggle(-9)						     ' BC-NTKE1
+     CALL Toggle(-2)
+     CALL Toggle(-4)
+'     CALL Toggle(-8)						     ' BC-NTKE1
+     CALL Toggle(-1)
+     IF ZRestrictByDate AND ZDaysInRegPeriod > 0 THEN _
+        IF ZUserSecLevel > ZTempExpiredSec THEN _                    
+           CALL QuickTPut1 ("Registration expires " + ZExpirationDate$)
+     RETURN
+'
+' *****  B - COMMAND FROM UTILITY MENU (Bank Time)  ****
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+42700 CALL SkipLine(1)
+'      CALL QuickTPut1 ("TurboKey: act on 1 char command without waiting for [ENTER]")   ' BC-NTKE1
+'      ZOutTxt$ = "Use TurboKey (Y,[N])"                             ' BC-NTKE1
+'      GOSUB 12999						     ' BC-NTKE1
+'      ZTurboKeyUser = NOT ZYes					     ' BC-NTKE1
+'      CALL Toggle (8)						     ' BC-NTKE1
+      RETURN
+'
+' *  F - COMMAND FROM UTILITY MENU (FILE Transfer DEFALUT MODE)
+' *  FILE Transfer DEFAULT SET FOR NEW USERS
+'

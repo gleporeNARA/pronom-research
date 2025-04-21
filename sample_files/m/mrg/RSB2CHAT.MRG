@@ -1,0 +1,135 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against OLD\RBBSSUB2.BAS to produce RBBSSUB2.BAS
+* OLD\RBBSSUB2.BAS:  Date 8-26-1990  Size 138112 bytes
+* ------------[ Created 08-28-1990 14:11:04 ]------------
+* REPLACING old line(s) by new
+9600 ' $SUBTITLE: 'DefaultU - subroutine to update user defauts'
+' $PAGE
+'
+'  NAME    -- DefaultU
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'             ZAutoDownDesired
+'             ZBoldText$              Ansi bold (0 no, 1 yes)
+'             ZCheckBulletLogon
+'             ZExpertUser
+'             ZWasGR
+'             ZLastMsgRead
+'             ZLineFeeds
+'             ZNulls
+'             ZPageLength
+'             ZPromptBell
+'             ZRegDate$
+'             ZReqQuesAnswered
+'             ZRightMargin
+'             ZSkipFilesLogon
+'             ZTimesLoggedOn
+'             ZUpperCase
+'             ZUserOption$
+'             ZUserTextColor          Ansi of color (31-37)
+'             ZUserXferDefault$
+'
+'  OUTPUTS--  USER.OPTONS$
+'
+'  PURPOSE --  To update the user's record with their options.
+'  Meaning of graphics preference stored is as follows: where # is
+'  value stored for the color.  E.g. if graphics perference for text
+'  files is color, and preference for normal text is light yellow,
+'  graphics preference stored is 38.  Colors are Red, Green, Yellow,
+'  Blue, Purple, Cyan, and White.
+'
+'             normal                  bold
+' Graphics R  G  Y  B  P  C  W    R  G  Y  B  P  C  W
+'   none  30 33 36 39 42 45 48 | 51 54 57 60 63 66 69
+'   ansi  31 34 37 40 43 46 49 | 52 55 58 61 64 67 70
+'  color  32 35 38 41 44 47 50 | 53 56 59 62 65 68 71
+'
+     SUB DefaultU STATIC
+     ZWasA =    -ZPromptBell          -2 * ZExpertUser _
+            -4 * ZNulls               -8 * ZUpperCase _
+           -16 * ZLineFeeds          -32 * ZCheckBulletLogon _
+           -64 * ZSkipFilesLogon    -128 * ZAutoDownDesired _
+          -256 * ZReqQuesAnswered   -512 * ZMailWaiting _
+         -1024 * (NOT ZHiLiteOff)  -2048 * ZTurboKeyUser _           ' KG112101
+         -4096 * ZFileWaiting      -8192 * ZUknown _                 ' KG112101
+* ------[ first line different ]------
+        -16384 * ZAvailableForChat
+     WasX = 3*ZUserTextColor - 63 + 21*VAL(ZBoldText$) + ZWasGR
+     IF WasX < 1 OR WasX > 255 THEN _
+        WasX = 48
+     LSET ZUserOption$ = _
+        MKI$(ZTimesLoggedOn) + _
+        MKI$(ZLastMsgRead) + _
+        ZUserXferDefault$ + _
+        CHR$(WasX) + _
+        MKI$(ZRightMargin) + _
+        MKI$(ZWasA) + _
+        ZRegDate$ + _
+        CHR$(ZPageLength) + _
+        ZEchoer$
+     END SUB
+* REPLACING old line(s) by new
+9801 ' $SUBTITLE: 'WhosOn - subroutine to display who is on'
+' $PAGE
+'
+'  NAME    -- WhosOn
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'                NumNodes                   # of nodes to check
+'                ZActiveMessageFile$        Current message file
+'                ZOrigMsgFile$              Main msg file
+'
+'  OUTPUTS --  None
+'
+'  PURPOSE --  To display who is on each node.
+'
+     SUB WhosOn (NumNodes) STATIC
+     WasA1$ = ZActiveMessageFile$
+     ZActiveMessageFile$ = ZOrigMsgFile$
+     CALL OpenMsg
+     FIELD 1, 128 AS ZMsgRec$
+     FOR NodeIndex = 2 TO NumNodes + 1
+        GET 1,NodeIndex
+        ZOutTxt$ = ZFG1$ + "Node" + _
+             STR$(NodeIndex - 1) + ZFG2$
+        RecIndex = -VAL(MID$(ZMsgRec$,44,2))
+        IF RecIndex >= 0 THEN _
+           RecIndex = -1
+        WasAX$ = MID$(ZBaudRates$,(-5 * RecIndex ),5) + _
+              " BPS: "
+        IF MID$(ZMsgRec$,55,2) = "-1" AND NOT ZSysop THEN _
+           ZWasY$ = "SYSOP" + SPACE$(21) _
+        ELSE ZWasY$ = MID$(ZMsgRec$,1,26)
+        WasAX$ = WasAX$ + ZFG3$ + ZWasY$
+* ------[ first line different ]------
+        IF MID$(ZMsgRec$,40,2) <> "-1" THEN                          ' RCHAT
+           CALL SaveUserActivity(WhatTheyDoin$, NodeIndex, ZTrue)    ' RCHAT
+           IF WhatTheyDoin$ = "C" THEN                               ' RCHAT
+              WasAX$ = WasAX$ + ZFG4$ + "[In Chat System]"           ' RCHAT
+            ELSEIF WhatTheyDoin$ = "F" THEN                          ' RCHAT
+              WasAX$ = WasAX$ + ZFG4$ + "[In File System]"           ' RCHAT
+            ELSEIF WhatTheyDoin$ = "M" THEN                          ' RCHAT
+              WasAX$ = WasAX$ + ZFG4$ + "[In Message System]"        ' RCHAT
+            ELSE                                                     ' RCHAT
+              WasAX$ = WasAX$ + ZFG4$ + MID$(ZMsgRec$,93,22)         ' RCHAT
+           END IF                                                    ' RCHAT
+         ELSE                                                        ' RCHAT
+           WasAX$ = WasAX$ + ZFG4$ + "[Has Opened a Door]"           ' RCHAT
+        END IF                                                       ' RCHAT
+        IF MID$(ZMsgRec$,57,1) = "A" THEN _
+           ZOutTxt$ = ZOutTxt$ + "  Online at " + _
+                WasAX$ _
+        ELSE IF NOT ZSysop THEN _
+                ZOutTxt$ = ZOutTxt$ + _
+                     " Waiting for next caller" _
+             ELSE ZOutTxt$ = ZOutTxt$ + _
+                       " Offline at " + _
+                       WasAX$
+        CALL QuickTPut1 (ZOutTxt$)
+        CALL AskMore ("",ZTrue,ZTrue,ZAnsIndex,ZFalse)
+        IF ZNo THEN _
+           NodeIndex = NumNodes + 2
+     NEXT
+     ZActiveMessageFile$ = WasA1$
+     CALL QuickTPut (ZEmphasizeOff$,0)
+     END SUB

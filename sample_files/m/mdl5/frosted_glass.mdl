@@ -1,0 +1,29 @@
+mdl 1.3;
+
+
+import ::adobe::mtl::standard;
+import ::base::rotation_translation_scale;
+import ::base::tangent_space_normal_texture;
+import ::base::texture_coordinate_info;
+import ::base::transform_coordinate;
+import ::state::texture_coordinate;
+import ::state::texture_tangent_u;
+import ::state::texture_tangent_v;
+import ::tex::gamma_mode;
+import ::tex::wrap_mode;
+import ::state::normal;
+
+export material MATERIAL_FROSTED_GLASS(*)
+ = ::adobe::mtl::standard(
+    baseColor: color(1.f, 1.f, 1.f),
+    opacity: 1.f,
+    glow: 0.f,
+    roughness: 0.f,
+    metallic: 0.f,
+    translucence: 1.f,
+    indexOfRefraction: 1.33f,
+    density: 0.f,
+    interiorColor: color(1.f, 1.f, 1.f),
+    normal: ::base::tangent_space_normal_texture(texture_2d("frosted_glass/frosted_glass_normal.jpg", ::tex::gamma_linear), 1.f, false, false, ::base::transform_coordinate(::base::rotation_translation_scale(float3(0.f), float3(0.f), float3(1.f)), ::base::texture_coordinate_info(::state::texture_coordinate(0), ::state::texture_tangent_u(0), ::state::texture_tangent_v(0))), float2(0.f, 1.f), float2(0.f, 1.f), ::tex::wrap_repeat, ::tex::wrap_repeat, false, 1.f, 0.f),
+    height: 0.5f,
+    heightScale: 1.f);

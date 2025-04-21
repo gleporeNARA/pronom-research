@@ -1,0 +1,153 @@
+.MCD 25000 60
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=12 zt=15 pr=2 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 4 1 29 
+a1,28,26,27
+HOME MORTGAGE CALCULATIONS
+.TXT 3 0 3 20 
+a3,20,18,50
+First, define some 
+convenient 
+abbreviations ...
+.EQN 0 26 1 9 
+mo:1
+.EQN 0 11 1 13 
+yr:12*mo
+.TXT 4 -37 2 19 
+a2,19,17,31
+Set up parameters 
+of loan ...
+.EQN 0 26 1 23 
+House_price:120000
+.EQN 0 23 1 19 
+Down_pmt:20000
+.EQN 2 -23 1 39 
+Loan_amount:House_price-Down_pmt
+.EQN 2 0 1 12 
+last:15
+.TXT 0 20 1 19 
+a1,19,17,18
+(number of years)
+.EQN 2 -20 1 14 
+N:last*yr
+.TXT 0 20 1 16 
+a1,16,14,15
+(term of loan)
+.EQN 2 -20 3 12 
+i:10*%/yr
+.TXT 1 20 1 17 
+a1,17,15,16
+(interest rate)
+.EQN 2 -20 5 39 
+payment:Loan_amount*i*(1+i)^N/((1+i)^N-1)
+.TXT 1 -26 3 17 
+a3,17,15,35
+Compute the 
+monthly  
+payment ...
+.EQN 4 26 1 21 
+payment=?
+.TXT 2 -26 3 15 
+a3,15,13,38
+Now compute a 
+table of 
+payments ...
+.EQN 0 26 1 12 
+j:1;N
+.TXT 0 17 2 18 
+a2,18,16,32
+Payments through 
+term of loan.
+.TXT 3 -17 3 40 
+a3,40,38,100
+To compute monthly balance, start with 
+Loan amount and each month add 
+interest, subtract payment.
+.EQN 4 0 2 25 
+balance[0:Loan_amount
+.EQN 3 0 2 42 
+balance[j:balance[(j-1)*(1+i)-payment
+.TXT 3 0 2 45 
+a2,45,43,54
+Also compute principal and interest in each 
+payment.
+.EQN 3 0 2 22 
+int[j:balance[(j-1)*i
+.EQN 0 25 2 22 
+p[j:payment-int[j
+.EQN 3 -25 2 35 
+equity[j:House_price-balance[j
+.TXT 3 -30 1 1 
+x1,1,0,0
+.TXT 1 30 1 41 
+a1,41,39,40
+Choose eight sample months in the loan:
+.EQN 2 0 1 15 
+samp:1;8
+.EQN 0 20 10 15 
+MO[samp:1,2,1*yr,1*yr+1,2*yr,2*yr+1,last*yr-1,last*yr
+.TXT 11 -43 1 46 
+a1,46,44,45
+Table of values for the eight sample months:
+.TXT 2 -1 2 72 
+a2,72,70,142
+MONTH     BALANCE AT END   EQUITY      INTEREST PAID   PRINCIPAL PAID  
+-----     --------------   ------      -------------   --------------
+.EQN 2 11 11 15 
+balance[(MO[samp)=
+.EQN 0 16 11 14 
+equity[(MO[samp)=
+.EQN 0 14 11 11 
+int[(MO[samp)=
+.EQN 0 16 11 11 
+p[(MO[samp)=
+.EQN 1 -56 10 8 
+MO[samp=
+.TXT 12 -4 3 17 
+a3,17,15,45
+Plot equity and 
+loan balance 
+over time ...
+.EQN 0 28 9 49 
+House_price&0&equity[j,balance[j{1,1,8,30,l}@last*yr&0&j
+.TXT 9 -27 2 18 
+a2,17,15,24
+Compute 
+summations ...
+.TXT 1 25 1 13 
+a1,12,10,11
+First year
+.TXT 0 25 1 17 
+a1,16,14,15
+Whole mortgage
+.EQN 2 -28 1 15 
+k:1;1*yr
+.EQN 2 0 4 27 
+k$payment=?
+.EQN 0 27 4 28 
+j$payment=?
+.TXT 1 -49 1 16 
+a1,15,13,14
+All payments:
+.EQN 4 22 4 21 
+k$p[k=?
+.EQN 0 27 4 20 
+j$p[j=?
+.TXT 1 -49 1 18 
+a1,17,15,16
+Principal only:
+.EQN 4 22 4 23 
+k$int[k=?
+.EQN 0 27 4 24 
+j$int[j=?
+.TXT 1 -49 1 17 
+a1,16,14,15
+Interest only:

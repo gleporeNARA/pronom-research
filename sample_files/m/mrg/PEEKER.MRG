@@ -1,0 +1,40 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* This merge allows you to use PEEKER by Mark Kimes in ANSI color mode!
+* PEEKER is an online archive viewer for XBBS, but can be used with RBBS.
+* With PEEKER you can let your users view, extract, and even compress and
+* download pieces of files!  PEEKER requires a fossil driver but who doesn't
+* use one???  It also supports those who multitask.  It can support ANY
+* archive - past/present/future - through a configuration file.
+* PEEKER is free of charge.
+*
+* This merge was originally for RBBS-PC 17.3C and has been found to work
+* okay with stock RBBS 17.4 (no, I do not run stock code).  It basically just
+* writes a "1" to to the temporary file that RBBS-PC writes to view an archive
+* and you should pass this as the %3 variable to PEEKER.  See my sample batch
+* file to get your feet wet, and Mark's documentation covers it also.  Feel free
+* to drop me a note if you run into problems and I'll be glad to lend a hand.
+*
+* Eddie Rowe 1:19/124@fidonet.org
+*
+* Merge this against rbbssub2.old to produce rbbssub2.bas
+* rbbssub2.old:  Date 6-20-1992  Size 140946 bytes
+* ------------[ Created 09-01-1992 15:00:27 ]------------
+* REPLACING old line(s) by new
+20148 WasX$ = ZDiskForDos$ + "V" + Ext$ + ".BAT"
+      CALL FindIt (WasX$)
+      IF NOT ZOK THEN _
+         GOTO 20150
+      ZGSRAra$(3) = MID$(RIGHT$(ZComPort$,1)+"0",1-ZLocalUser, 1)
+      CALL ReadDir (2,1)
+* ------[ first line different ]------
+      IF ZWasGR = 2 THEN ZPeeker$ = "1" Else ZPeeker$ = "0"          ' ER051701
+      IF EOF(2) THEN _
+         ZWasZ$ = ZOutTxt$ : _
+         ZGSRAra$(1) = ZFileName$ : _
+         ZGSRAra$(2) = ZArcWork$ _
+      ELSE ZWasZ$ = WasX$ + " " + ZFileName$ + _
+                " " + ZArcWork$ + " " + ZGSRAra$(3) + _              ' ER051701
+                " " + ZPeeker$                                       ' ER051701
+      CALL ShellExit (ZWasZ$)
+      CALL BufFile (ZArcWork$,WasX)
+      RETURN

@@ -1,0 +1,68 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 33 
+a1,33,31,32
+RANDOM COIN FLIPS ... Histogram
+.EQN 2 1 1 15 
+trials:200
+.TXT 0 19 2 28 
+a2,27,25,44
+200 trials, each consists 
+of 6 coin flips.
+.EQN 2 -19 1 12 
+flips:6
+.EQN 2 0 1 17 
+j:1;trials
+.EQN 2 0 1 16 
+k:1;flips
+.EQN 2 0 4 24 
+Heads[j:k$flip(1)
+.TXT 1 26 1 31 
+a1,31,29,30
+... Number of heads per trial
+.TXT 2 5 1 48 
+a1,48,46,47
+(See below for definition of "flip" function.)
+.TXT 2 -32 1 29 
+a1,29,27,28
+The data looks like this...
+.EQN 2 2 10 34 
+7&-1&Heads[j{1,1,9,25,+}@trials&0&j
+.TXT 11 -1 1 25 
+a1,25,23,24
+Now create a histogram.
+.EQN 2 1 1 21 
+k1:0;flips+1
+.EQN 2 0 2 19 
+intervals[k1:k1
+.TXT 0 22 1 22 
+a1,21,19,20
+... Interval limits
+.EQN 3 -22 1 31 
+freq:hist(intervals,Heads)
+.EQN 0 33 2 23 
+freq[(last(freq)+1):0
+.EQN 3 -33 16 59 
+80&0&freq[k1{1,1,15,50,b}@flips+2&-1&k1
+.TXT 0 61 2 11 
+a2,11,9,21
+Frequency 
+table ...
+.EQN 3 7 10 8 
+freq[k1=
+.EQN 1 -5 9 5 
+k1=
+.TXT 13 -65 1 74 
+a1,73,71,72
+To see another 200 trials, put cursor in equation below and press [F9].
+.EQN 2 20 1 29 
+flip(coin)~è(rnd(1)-.5)

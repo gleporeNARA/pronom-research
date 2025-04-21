@@ -1,0 +1,57 @@
+mdl 1.5;
+
+import state::*;
+import math::*;
+import anno::*;
+import base::*;
+
+export base::anisotropy_return anisotropy_conversion(
+    float roughness = 0.0 [[
+        ::anno::description("Roughness of the surface reflections."),
+        ::anno::display_name("Roughness"),
+        ::anno::hard_range(0.f,1.f),
+        ::anno::soft_range(0.f,1.f)
+    ]],
+    float anisotropy = 0.0 [[
+        ::anno::description("Anisotropy of surface specular layer reflections. (0 = isotropic)"),
+        ::anno::display_name("Specular Anisotropy Level"),
+        ::anno::soft_range(0.f,1.f),
+        ::anno::hard_range(0.f,1.f)
+    ]],
+    float anisotropy_rotation = 0.0 [[
+        ::anno::description("Rotation of anisotropy of surface specular layer, normalized from [0,360°] counterclockwise to [0,1]."),
+        ::anno::display_name("Specular Anisotropy Angle"),
+        ::anno::soft_range(0.f,1.f),
+        ::anno::hard_range(0.f,1.f)
+    ]],
+    float3 tangent_u = state::texture_tangent_u(0) [[
+        anno::description("Tangent to align the anisotropy with. \"coordinate_source\" or \"coordinate_projection\" are possible sources")
+    ]]
+)
+[[
+    anno::description("Convert scalar anisotropy controls into vectorized ones"),
+    anno::noinline()
+]]
+{
+    base::anisotropy_return return_value(
+        roughness_u: roughness * roughness,
+        roughness_v: roughness * roughness,
+        tangent_u: tangent_u
+    );
+
+    if (anisotropy > 0.f) {
+        // Allows for infinite anisotropy when roughness==0, full roughness when anisotropy==0 (saturated later on)
+        return_value.roughness_u += math::pow(anisotropy,4);
+
+        if (anisotropy_rotation > 0.f && anisotropy_rotation < 1.f) {
+            float3 tangent_v = math::cross(state::normal(), tangent_u);         // assumed these are normalized already
+            float rotation_angle = 2.f * math::PI * anisotropy_rotation;
+            return_value.tangent_u = tangent_u * math::cos(rotation_angle) - tangent_v * math::sin(rotation_angle);
+        }
+    }
+
+    return_value.roughness_u = math::min(1.f, return_value.roughness_u);
+    return_value.roughness_v = math::min(1.f, return_value.roughness_v);
+    
+    return return_value;
+}

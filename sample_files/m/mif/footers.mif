@@ -1,0 +1,180 @@
+<MIFFile 11.00> # hand generated
+<Document
+  <DPageSize 7.5" 9.00">
+  <DTwoSides Yes>               # Make this a two-sided document
+  <DParity FirstRight>          # First body page is a right page.
+> # end of Document
+
+# To add footers, create text frames on the master pages.
+
+# Create right master page.  
+<Page
+ <PageType RightMasterPage>
+ <PageTag `Right'>
+ <PageSize 7.5" 9.00">
+ <PageOrientation Portrait>
+  <TextRect
+   <ID 1>
+   <Pen 15>
+   <Fill 15>
+   <ShapeRect 2" 1" 5" 7.5">
+  > # end of TextRect
+  # Add a text frame for a footer.
+  <TextRect 
+   <ID 20>
+   <ShapeRect 2" 8.7" 5" 0.15">
+  > # end of TextRect
+> # end of Page
+
+# Create left master page.  
+<Page
+ <PageType LeftMasterPage>
+ <PageTag `Left'>
+ <PageSize 7.5" 9.00">
+ <PageOrientation Portrait>
+ <TextRect
+  <ID 2>
+  <Pen 15>
+  <Fill 15>
+  <ShapeRect 1.5" 1" 5" 7.5">
+ > # end of TextRect                
+ # Add a text frame for the footer.
+ <TextRect
+  <ID 21>
+  <ShapeRect 1.5" 8.7" 5.0" 0.15">
+ > # end of TextRect
+> # end of Page
+
+# Create first master page.  
+<Page
+ <PageType OtherMasterPage>
+ <PageTag `First'>
+ <PageSize 7.5" 9.00">
+ <PageOrientation Portrait>
+ <TextRect
+  <ID 3>
+  <Pen 15>
+  <Fill 15>
+  <ShapeRect 2.0" 2.5" 5" 6.0">
+ > # end of TextRect                
+ # Add a text frame for the footer.
+ <TextRect
+  <ID 22>
+  <ShapeRect  2.0" 8.7" 5.0" 0.15">
+ > # end of TextRect
+> # end of Page
+
+
+# Create body page.
+<Page
+ <PageType BodyPage>
+ # Change page background to use first master page.
+ <PageBackground `First'> 
+ <PageSize 7.5" 9.00">
+ <PageOrientation Portrait>
+ <TextRect
+  <ID 4>
+  # Make sure these dimensions match the first master page.
+  <ShapeRect 2" 2.5" 5" 6.0">
+ > # end of TextRect    
+> # end of Page
+
+# This empty text flow refers to the right master page.
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <ParaLine
+   # This ID statement links this text flow to the TextRect
+   # on the right master page.
+   <TextRectID 1>
+  > 
+ > # end of Para
+> # end of TextFlow
+
+# This empty text flow refers to the left master page.
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <ParaLine
+   # This ID statement links this text flow to the TextRect
+   # on the left master page.
+   <TextRectID 2>
+   >
+  > # end of Para
+> # end of TextFlow
+
+# This empty text flow refers to the first master page.
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <ParaLine
+   # This ID statement links this text flow to the TextRect
+   # on the first master page.
+   <TextRectID 3>
+   >
+  > # end of Para
+> # end of TextFlow
+
+# Create untagged text flows for the footers on the master pages.
+# These text flows must be untagged; FrameMaker treats untagged text
+# flows on the master pages as background text.
+
+# Text flow for left page footer.
+<TextFlow 
+ <Para 
+  <PgfTag `Body'>
+  <ParaLine 
+   <TextRectID 20>
+   <String `Left page footer'>
+  >
+ > # end of Para
+> # end of TextFlow
+
+# Text flow for right page footer.
+<TextFlow 
+ <Para 
+  <PgfTag `Body'>
+  <ParaLine 
+   <TextRectID 21>
+   <String `Right page footer'>
+  >
+ > # end of Para
+> # end of TextFlow
+
+# Text flow for first page footer.
+<TextFlow 
+ <Para 
+  <PgfTag `Body'>
+  <ParaLine 
+   <TextRectID 22>
+   <String `First page footer'>
+  >
+ > # end of Para
+> # end of TextFlow
+
+
+# This text flow contains the actual document text
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <TextRectID 4>
+  <PgfTag `Body'>
+  <ParaLine
+    <String `Hello world! '>
+  >
+  <ParaLine
+    <String `Goodbye world!'>
+  >
+> # end of para
+
+ <Para
+  <ParaLine
+   <String `A second paragraph.'>
+  >
+ > # end of Para
+> # end of TextFlow
+

@@ -1,0 +1,80 @@
+<MIFFile 11.00>
+# This is a sparse dot-dash line
+<PolyLine
+ <Pen 0>
+ <Fill 15>
+ <PenWidth 4pt>
+ <ObColor `Black'>
+ <DashedPattern
+  <DashedStyle Dashed>
+  <NumSegments 4>
+  <DashSegment 10pt>
+  <DashSegment 10pt>
+  <DashSegment 0.5pt>
+  <DashSegment 10pt>
+ > # end of DashedPattern
+ <HeadCap Round>
+ <TailCap Round>
+ <NumPoints 2>
+ <Point 1.0" 1">
+ <Point 7.5" 1">
+> # end of PolyLine
+# This is a very sparse dotted line
+<PolyLine
+ <DashedPattern
+  <DashedStyle Dashed>
+  <NumSegments 2>
+  <DashSegment 0.5pt>
+  <DashSegment 20pt>
+ > # end of DashedPattern
+ <NumPoints 2>
+ <Point 1.0" 2">
+ <Point 7.5" 2">
+> # end of PolyLine
+# This is a wild one!
+<PolyLine
+ <DashedPattern
+  <DashedStyle Dashed>
+  <NumSegments 8>
+  <DashSegment  4pt> # solid
+  <DashSegment  8pt>
+  <DashSegment 12pt> # solid 
+  <DashSegment 16pt>
+  <DashSegment 20pt> # solid
+  <DashSegment 24pt>
+  <DashSegment 20pt> # solid
+  <DashSegment 16pt>
+  <DashSegment 12pt> # solid
+  <DashSegment  8pt>
+ > # end of DashedPattern
+ <HeadCap Butt>
+ <TailCap Butt>
+ <NumPoints 2>
+ <Point 1.0" 3">
+ <Point 7.5" 3">
+> # end of PolyLine
+# This one has a missing <DashSegment>
+<PolyLine
+ <DashedPattern
+  <DashedStyle Dashed>
+  # missing <NumSegments>
+  <DashSegment 10pt>
+  # missing a second <DashSegment>
+ >
+ <NumPoints 2>
+ <Point 1.0" 4">
+ <Point 7.5" 4">
+> # end PolyLine
+# This one is a really dense dotted line
+<PolyLine
+ <DashedPattern
+  <DashedStyle Dashed>
+  <DashSegment 1pt>
+  <DashSegment 1pt>
+ >
+ <PenWidth 1pt>
+ <NumPoints 2>
+ <Point 1.0" 5">
+ <Point 7.5" 5">
+> # end PolyLine
+

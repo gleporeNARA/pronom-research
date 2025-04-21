@@ -1,0 +1,48 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=6 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.EQN 0 0 1 13 
+t:0;20
+.TXT 1 32 2 28 
+a2,28,68,46
+SIMULTANEOUS ITERATION IN
+SPREAD OF EPIDEMIC
+.TXT 1 -32 2 14 
+a2,14,78,25
+Seed values
+- - - - - -
+.EQN 3 0 8 17 
+({4,1}ör[0öd[0ös[0öi[0):({4,1}ö0ö0ö22000ö50)
+.EQN 0 19 8 31 
+({4,1}ör[(t+1)öd[(t+1)ös[(t+1)öi[(t+1)):({4,1}ör[t+0.45*i[töd[t+0.55*i[tös[t-0.0001*s[t*i[tö0.0001*s[t*i[t)
+.TXT 0 31 1 16 
+a1,16,16,15
+. . . infected
+.TXT 2 0 2 22 
+a2,22,20,19
+. . . susceptible
+
+.TXT 2 0 1 16 
+a1,16,16,15
+. . . deceased
+.TXT 2 0 1 17 
+a1,17,16,16
+. . . recovered
+.EQN 3 -40 23 13 
+d[t=
+.EQN 0 13 23 12 
+i[t=
+.EQN 0 12 23 13 
+s[t=
+.EQN 0 13 23 12 
+r[t=
+.EQN 1 -48 22 6 
+t=

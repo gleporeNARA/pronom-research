@@ -1,0 +1,57 @@
+<MIFFile 11.00> # Hand generated
+<Document
+ <DPageSize 7.5" 9.0">          # Set the document page size.
+ <DTwoSides No>                 # Make this a single-sided document.
+> # end of Document
+
+# Create a right master page.
+<Page
+ <PageType RightMasterPage>
+ <PageTag `Right'>
+ <TextRect                      # Set up text frame.
+   <ID 1>                       # Give text frame a unique ID number.
+   <Pen 15>                     # Set pen style
+   <Fill 15>                    # Set fill pattern (none)
+   <ShapeRect 2" 1" 5" 7.5">    # Specify text frame size.
+   <TRNumColumns 1>		# Specify number of text columns.
+   <TRColumnGap 0.0">		# Specify gap between text columns.
+ > # end of TextRect
+> # end of Page
+
+# Create a blank body page.
+<Page
+ <PageType BodyPage>
+ <PageBackground `Default'>
+ <TextRect
+   <ID 2>                       # This text rect has a unique ID.
+   <ShapeRect 2" 1" 5" 7.5">    # These dimensions match the master page.
+   <TRNumColumns 1>             # The column layout matches the master page.
+   <TRColumnGap 0.0">
+ > # end TextRect
+> # end Page
+
+# Create a dummy text flow and link it to the master page.
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <ParaLine
+   <TextRectID 1>
+  > # end of ParaLine
+ > # end of Para
+> # end of TextFlow
+
+# Create the document text flow and link it to the body page.
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <TextRectID 2>
+  <PgfTag `Body'>
+  <ParaLine
+   <String `This appears on a body page within a text flow'>
+   <String ` tagged A.'>
+  > # end of ParaLine
+ > # end of Para
+> # end of TextFlow
+# End of MIFfile

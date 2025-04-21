@@ -1,0 +1,54 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 1 1 41 
+a1,40,38,39
+SOLUTION TO GENERAL QUADRATIC EQUATION
+.TXT 2 8 1 26 
+a1,26,24,25
+Coefficients as follows:
+.EQN 0 32 1 8 
+a:1
+.EQN 0 13 1 9 
+b:-3
+.EQN 0 13 1 8 
+c:2
+.EQN 2 -32 2 23 
+discrim:b^2-4*a*c
+.TXT 1 -26 1 23 
+a1,23,21,22
+Compute discriminant:
+.EQN 0 53 1 15 
+discrim=?
+.TXT 2 -49 3 67 
+a3,67,65,170
+-> If discriminant is positive, both roots real.                 
+-> If discriminant is negative, roots are complex conjugates.
+-> If discriminant is zero, double root.
+.TXT 4 -4 1 16 
+a1,16,14,15
+Compute roots:
+.TXT 0 44 2 26 
+a2,26,24,51
+Check ... should be zero 
+------------------------
+.EQN 2 -42 4 21 
+x1:(-b+\discrim)/(2*a)
+.EQN 1 43 2 24 
+a*x1^2+b*x1+c=?
+.EQN 1 -16 1 10 
+x1=?
+.EQN 3 -27 4 21 
+x2:(-b-\discrim)/(2*a)
+.EQN 1 43 2 24 
+a*x2^2+b*x2+c=?
+.EQN 1 -16 1 10 
+x2=?

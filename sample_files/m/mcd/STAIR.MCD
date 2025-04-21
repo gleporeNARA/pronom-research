@@ -1,0 +1,149 @@
+.MCD 25000 0
+.CMD SURFACEFORMAT rot=10 tilt=35 vScale=20 size=15,30
+.CMD SKETCHFORMAT mag=1.000000,1.000000 center=0.500000,0.500000 size=15,30 box=y
+.CMD PLOTFORMAT logs=0,0 subdivs=1,1 size=5,15 type=l
+.CMD FORMAT  rd=d ct=10 im=i et=3 zt=15 pr=3 mass length time charge
+.CMD SET ORIGIN 0
+.CMD SET TOL 0.001000
+.CMD MARGIN 0
+.CMD LINELENGTH 78
+.CMD SET PRNCOLWIDTH 8
+.CMD SET PRNPRECISION 4
+.TXT 1 0 1 19 
+a1,18,16,17
+STAIRCASE DESIGN
+.TXT 0 26 3 44 
+a3,44,42,114
+Based on equations in "Building Design and 
+Construction Handbook, 4th Edition," 
+edited by S. Frederick Merritt.
+.TXT 4 -26 1 42 
+a1,41,39,40
+(Enter your values on lines marked "*")
+.TXT 2 7 1 8 
+a1,8,6,7
+Units:
+.EQN 0 14 1 10 
+in:1L
+.EQN 0 11 1 13 
+ft:12*in
+.TXT 3 -31 1 4 
+a1,3,1,2
+*
+.TXT 0 6 1 19 
+a1,19,17,18
+Enter total rise:
+.EQN 0 23 1 22 
+rise:12*ft+6*in
+.TXT 2 -29 1 3 
+a1,3,1,2
+*
+.TXT 0 6 2 17 
+a2,17,15,31
+Enter guess for 
+riser height:
+.EQN 1 23 1 18 
+rh_guess:8*in
+.TXT 2 -30 1 33 
+a1,32,30,31
+Determine actual riser height:
+.EQN 2 8 3 26 
+stairs_guess:rise/rh_guess
+.EQN 4 0 1 32 
+stairs1:floor(stairs_guess)
+.EQN 0 33 1 31 
+stairs2:ceil(stairs_guess)
+.EQN 2 -33 1 16 
+stairs1=?
+.EQN 0 33 1 16 
+stairs2=?
+.EQN 2 -33 3 16 
+rh1:rise/stairs1
+.EQN 0 33 3 16 
+rh2:rise/stairs2
+.EQN 4 -33 1 16 
+rh1=?in
+.EQN 0 33 1 16 
+rh2=?in
+.TXT 2 -34 1 60 
+a1,60,58,59
+(Equations below select answer closest to original guess.)
+.EQN 2 1 1 46 
+which:|(rh2-rh_guess)>|(rh1-rh_guess)
+.EQN 2 0 1 25 
+rh:if(which,rh1,rh2)
+.EQN 2 0 1 37 
+stairs:if(which,stairs1,stairs2)
+.EQN 2 0 1 15 
+rh=?in
+.EQN 0 19 1 15 
+stairs=?
+.TXT 2 -27 1 50 
+a1,50,48,49
+Estimate tread depth, using empirical equations:
+.EQN 2 7 1 20 
+d1:25*in-2*rh
+.EQN 0 23 4 14 
+d3:(75*in^2)/rh
+.EQN 0 24 1 15 
+d1=?in
+.EQN 2 -47 1 20 
+d2:17.5*in-rh
+.EQN 0 47 1 15 
+d2=?in
+.EQN 2 0 1 13 
+d3=?in
+.TXT 2 -54 1 63 
+a1,63,61,62
+Enter a tread depth, based on values of d1, d2, and d3 above:
+.TXT 2 1 1 3 
+a1,3,1,2
+*
+.EQN 0 6 1 17 
+depth:9.5*in
+.TXT 3 -7 1 27 
+a1,27,25,26
+Calculate horizontal run:
+.EQN 2 6 1 22 
+treads:stairs-1
+.EQN 2 0 1 21 
+run:treads*depth
+.EQN 0 23 1 14 
+run=?in
+.EQN 2 -23 1 25 
+run_in:mod(run,1*ft)
+.EQN 0 29 1 24 
+run_ft:run-run_in
+.EQN 2 -29 1 16 
+run_ft=?ft
+.TXT 0 16 3 3 
+a3,3,1,8
+\ 
+|
+/
+.TXT 1 5 1 26 
+a1,25,23,24
+Run, in feet and inches
+.EQN 1 -21 1 15 
+run_in=?in
+.TXT 3 -6 1 22 
+a1,22,20,21
+Picture of staircase
+.EQN 2 7 1 17 
+i:1;stairs
+.EQN 2 0 2 21 
+x[i:(i-1)*depth
+.EQN 0 23 2 12 
+y[i:i*rh
+.EQN 3 -23 20 52 
+rise&0L&y[i{1,1,18,45,s}@run&0L&x[i
+.EQN 0 53 1 15 
+rise=?in
+.EQN 2 0 1 14 
+run=?in
+.EQN 2 0 1 15 
+stairs=?
+.EQN 2 0 1 15 
+rh=?in
+.EQN 2 0 1 16 
+depth=?in

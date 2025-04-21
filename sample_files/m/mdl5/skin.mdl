@@ -1,0 +1,195 @@
+mdl 1.6;
+
+using ::state import *;
+using ::tex import *;
+using ::anno import *;
+
+//- Custom annotation for Substance Designer specifics
+import ::alg::base::annotations::*;
+
+//- Core functions and materials for Substance Designer specifics
+import ::alg::base::core::ALLEGORITHMIC_AUTHOR;
+import ::alg::base::core::ALLEGORITHMIC_COPYRIGHT;
+
+import ::alg::materials::designer::legacy::physically_metallic_roughness_sss::physically_metallic_roughness_sss;
+
+export material physically_metallic_roughness_sss(
+    varying color baseColor = color(0.214041) [[
+        anno::display_name("Base Color/Diffuse")
+        , anno::in_group("Base Color")
+        , anno::description("Base Color channel")
+        , anno::usage("baseColor")
+        , alg::base::annotations::gamma_type(gamma_srgb)
+        , alg::base::annotations::visible_by_default(true)
+    ]],
+
+    varying float3 normal = state::normal() [[
+        anno::display_name("Normal")
+        , anno::in_group("Normal")
+        , anno::description("Normal channel")
+        , anno::usage("normal")
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+        , alg::base::annotations::visible_by_default(true)
+    ]],
+
+    varying float roughness = float(0.5) [[
+        anno::display_name("Roughness")
+        , anno::in_group("Roughness")
+        , anno::description("Roughness channel")
+        , anno::usage("roughness")
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+        , alg::base::annotations::visible_by_default(true)
+    ]],
+
+    varying float metallic = float(0) [[
+        anno::display_name("Metallic")
+        , anno::in_group("Metallic")
+        , anno::description("Metallic channel")
+        , anno::usage("metallic")
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+        , alg::base::annotations::visible_by_default(true)
+    ]],
+
+    varying float height = float(0.5) [[
+        anno::display_name("Height")
+        , anno::in_group("Height")
+        , anno::description("Height channel")
+        , anno::usage("height")
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+        , alg::base::annotations::visible_by_default(true)
+    ]],
+
+    uniform float heightScale = float(0) [[
+        anno::display_name("Scale")
+        , anno::in_group("Height")
+        , anno::description("provides significant physical detail to the surface by manipulating the vertices of the mesh")
+        , anno::usage("heightScale")
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    uniform float ior = float(1.5) [[
+        anno::display_name("IOR")
+        , anno::in_group("Subsurface Scattering")
+        , anno::description("Desrcibes the index of refraction of the material medium")
+    ]],
+
+    varying float scattering = float(0) [[
+        anno::display_name("Scattering")
+        , anno::in_group("Subsurface Scattering")
+        , anno::usage("scattering")
+        , anno::description("How much to blend the SSS material to take into account vs. the usual PBR shader")
+        , alg::base::annotations::visible_by_default(true)
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+    ]],
+
+    uniform float scatteringScale = float(0) [[
+        anno::display_name("Scale")
+        , anno::in_group("Subsurface Scattering")
+        , anno::description("Artistict control to tweak the subsurface scattering effect")
+        , anno::soft_range(0.0, 10.0)
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    uniform color scatteringColor = color(1) [[
+        anno::display_name("Color")
+        , anno::in_group("Subsurface Scattering")
+        , anno::description("Describes at which probability each wavelength scatters within the volume")
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    varying float ambientOcclusion = float(1) [[
+        anno::display_name("Ambient Occlusion")
+        , anno::in_group("Ambient Occlusion")
+        , anno::description("Ambient Occlusion channel")
+        , anno::usage("ambientOcclusion")
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    varying float anisotropyLevel = float(0) [[
+        anno::display_name("Anisotropy Level")
+        , anno::in_group("Anisotropy")
+        , anno::description("Anisotropy Level channel")
+        , anno::usage("anisotropyLevel")
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    varying float anisotropyAngle = float(0) [[
+        anno::display_name("Anisotropy Angle")
+        , anno::in_group("Anisotropy")
+        , anno::description("Anisotropy Angle channel")
+        , anno::usage("anisotropyAngle")
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    varying color emissiveColor = color(0) [[
+        anno::display_name("Emissive")
+        , anno::in_group("Emissive")
+        , anno::description("Emissive channel")
+        , anno::usage("emissive")
+        , alg::base::annotations::gamma_type(gamma_srgb)
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    uniform float emissiveIntensity = float(1) [[
+        anno::display_name("Emissive Intensity")
+        , anno::in_group("Emissive")
+        , anno::description("Controls how much light is emitted from the surface")
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    varying float specularLevel = float(0.5) [[
+        anno::display_name("Specular Level")
+        , anno::in_group("Specular")
+        , anno::description("Specular Level channel")
+        , anno::usage("specularLevel")
+        , alg::base::annotations::gamma_type(::tex::gamma_linear)
+        , alg::base::annotations::visible_by_default(false)
+    ]],
+
+    uniform float scalarZeroValue = float(0.5) [[
+        anno::display_name("Scalar Zero Value")
+        , anno::in_group("Height")
+        , anno::usage("heightScalarZeroValue")
+        , anno::soft_range(0.0, 1.0)
+        , anno::description("Determine the neutral height value")
+    ]],
+
+    uniform float tiling = float(1.0) [[
+        anno::display_name("Tiling")
+        , anno::in_group("Height")
+        , anno::usage("materialTiling")
+        , anno::soft_range(0.0, 10.0)
+        , anno::description("Tiling value to keep displacement tiling independent")
+    ]]
+) [[
+    anno::display_name("Physically Metallic Roughness - SSS")
+    , anno::description("Mixture of the usual PBR shader with a Subsurface scattering one")
+    , anno::version( 2020, 8, 21 )
+    , anno::created( 2019, 8, 12, "Built as a blend with alg::materials::physically_metallic_roughness::physically_metallic_roughness" )
+    , anno::modified(2020, 8, 21, "Added scalarZeroValue to be able to interpret different height texture correctly")
+    , anno::modified(2020, 8, 21, "Added tiling to be able to express displacement in a tiling independent manner")
+    , anno::author(alg::base::core::ALLEGORITHMIC_AUTHOR)
+    , anno::copyright_notice(alg::base::core::ALLEGORITHMIC_COPYRIGHT)
+]] = ::alg::materials::designer::legacy::physically_metallic_roughness_sss::physically_metallic_roughness_sss(
+    baseColor         : baseColor,
+    normal            : normal,
+    roughness         : roughness,
+    metallic          : metallic,
+    height            : height,
+    heightScale       : heightScale,
+    ior               : ior,
+    scattering        : scattering,
+    scatteringScale   : scatteringScale,
+    scatteringColor   : scatteringColor,
+    ambientOcclusion  : ambientOcclusion,
+    anisotropyLevel   : anisotropyLevel,
+    anisotropyAngle   : anisotropyAngle,
+    emissiveColor     : emissiveColor,
+    emissiveIntensity : emissiveIntensity,
+    specularLevel     : specularLevel,
+    scalarZeroValue   : scalarZeroValue,
+    tiling            : tiling
+);

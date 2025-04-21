@@ -1,0 +1,1814 @@
+<!DOCTYPE MAGE-ML SYSTEM "../MAGE-ML.dtd">
+<MAGE-ML identifier="MAGE-ML:DrosophilaDataset">
+
+  <AuditAndSecurity_package>	
+    <Contact_assnlist>
+      <Person 
+	      identifier="Person:John_Smith"
+	      name="John_Smith"
+	      lastName="Smith"
+	      firstName="John"
+	      phone="(800) 555 4325 x 561"
+	      email="jsmith@imakearrays.com"
+	      URI="http://www.imakearrays.com/~jsmith">
+		  <Affiliation_assnref>
+		    <Organization_ref identifier="Organization:imakearrays"/>
+		  </Affiliation_assnref>
+      </Person>
+      <Person 
+	      identifier="Person:Ennio_DeGregorio"
+	      name="Ennio_DeGregorio"
+	      lastName="DeGregorio"
+	      firstName="Ennio">
+      </Person>
+      <Person 
+	      identifier="Person:Jane_N_Rogers"
+	      name="John_Rogers"
+	      lastName="Rogers"
+	      firstName="Jane"
+	      midInitials="N"
+	      email="jrogers@higglesworth.edu"
+	      URI="http://bio.higglesworth.edu/~jrogers">
+		  <Affiliation_assnref>
+		    <Organization_ref identifier="Organization:Higglesworth_University"/>
+		  </Affiliation_assnref>
+      </Person>
+      <Person 
+	      identifier="Person:Paul_T_Spellman"
+	      name="Paul_Spellman"
+	      lastName="Spellman"
+	      firstName="Paul"
+	      midInitials="T"
+	      email="ptspellman@bdgp.lbl.gov"
+	      URI="http://beamish.lbl.gov">
+		  <Affiliation_assnref>
+		    <Organization_ref identifier="Organization:UC_Berkeley"/>
+		  </Affiliation_assnref>
+      </Person>
+      <Organization
+		    identifier="Organization:imakearrays"
+		    name="I Make Arrays Inc."
+		    address="1099 Pasteur Dr, San Benito, NM 79850"
+		    tollFreePhone="(800) 555 4325"
+		    email="orders@imakearrays.com"
+		    fax="(800) 555 4325"
+		    URI="http://www.imakearrays.com/" />
+      <Organization
+		    identifier="Organization:Higglesworth_University"
+		    name="Higglesworth University"
+		    address="453 Baron Ln, Brownsville, NV 87631"
+		    URI="http://www.higglesworth.edu/" />
+      <Organization
+		    identifier="Organization:UC_Berkeley"
+		    name="University of California, Berkeley"
+		    address="LSA, Berkeley, CA"
+		    URI="http://mcb.berkeley.edu/" />
+      <Organization
+		    identifier="Organization:Affymetrix"
+		    name="Affymetrix Inc."
+		    address="Santa Clara, CA"
+		    URI="http://www.affymetrix.com/" />
+
+    </Contact_assnlist>
+    <SecurityGroup_assnlist>
+      <SecurityGroup	identifier="SecurityGroup:Administrators"
+		     name="Administrators">
+	<Members_assnreflist>
+	  <Person_ref identifier="Person:Jane_N_Rogers" />
+	</Members_assnreflist>
+      </SecurityGroup>
+      <SecurityGroup	identifier="SecurityGroup:Everyone"
+		     name="Everyone">
+	<Members_assnreflist>
+	  <Person_ref identifier="Person:Jane_N_Rogers" />
+	  <Person_ref identifier="Person:John_Smith" />
+	</Members_assnreflist>
+      </SecurityGroup> 
+    </SecurityGroup_assnlist>
+    <Security_assnlist>
+      <Security	identifier="Security:Array"
+		name="Array" >
+	<Owner_assnref>
+	  <Person_ref identifier="Person:Jane_N_Rogers" />
+	</Owner_assnref>
+	<ReadGroups_assnreflist>
+	  <SecurityGroup_ref identifier="SecurityGroup:Everyone" />
+	</ReadGroups_assnreflist>
+	<WriteGroups_assnreflist>
+	  <SecurityGroup_ref identifier="SecurityGroup:Administrators" />
+	</WriteGroups_assnreflist>
+      </Security>
+      <Security	identifier="Security:Data"
+		name="Data" >
+	<Owner_assnref>
+	  <Person_ref identifier="Person:Jane_N_Rogers" />
+	</Owner_assnref>
+	<ReadGroups_assnreflist>
+	  <SecurityGroup_ref identifier="SecurityGroup:Administrators" />
+	</ReadGroups_assnreflist>
+	<WriteGroups_assnreflist>
+	  <SecurityGroup_ref identifier="SecurityGroup:Administrators" />
+	</WriteGroups_assnreflist>
+      </Security>
+    </Security_assnlist>
+  </AuditAndSecurity_package>
+
+  <Description_package>
+    <Database_assnlist>
+      <Database	identifier="Database:PubMed"
+		name="PubMed" 
+		URI="http://www.ncbi.nlm.nih.gov/entrez/query.fcgi?db=PubMed"/>
+      <Database	identifier="Database:GenBank"
+		name="GenBank" 
+		URI="http://www3.ncbi.nlm.nih.gov/"/>
+      <Database	identifier="Database:GadFly"
+		name="GadFly"
+		version="Release 1"
+		URI="http://www.fruitfly.org/annot/index.html" />
+      <Database	identifier="Database:Flybase"
+		name="Flybase"
+		URI="http://www.flybase.org" />
+      <Database	identifier="Database:BDGP"
+		name="BDGP"
+		URI="http://www.fruitfly.org" />
+      <Database	identifier="Database:Affymetrix:LIMS"
+		name="Affymetrix LIMS" />
+    </Database_assnlist>
+  </Description_package>
+
+  <Protocol_package>
+    <Hardware_assnlist>
+      <Hardware identifier="Hardware:PCR1"
+		name="PE TC 9700"
+		model="9700"
+		make="Perkin Elmer">
+      </Hardware>
+      <Hardware identifier="Hardware:OligoSynthesizer1"
+		name="Synthesizer"
+		make="Gene Machines">
+      </Hardware>
+      <Hardware identifier="Hardware:Scanner1"
+		name="Axon Scanner"
+		model="4000A"
+		make="Axon Instruments">
+      </Hardware>
+      <Hardware identifier="Hardware:Arrayer1"
+		name="DeRisi class arrayer"
+		model="version 1.0">
+      </Hardware>
+    </Hardware_assnlist>
+    <Software_assnlist>
+      <Software identifier="Software:GenePix3.0"
+		name="GenePix">
+      </Software>
+    </Software_assnlist>
+    <Protocol_assnlist>
+      <Protocol identifier="Protocol:Affymetrix:ArrayDesign"
+		name="Affymetrix array design and layout">
+      </Protocol>
+      <Protocol identifier="Protocol:Affymetrix:FeatureExtraction"
+		name="Affymetrix feature extraction">
+      </Protocol>
+      <Protocol identifier="Protocol:Affymetrix:Hybridization:Standard"
+		name="Affymetrix hybridization, eukaryotic">
+      </Protocol>
+      <Protocol identifier="Protocol:Affymetrix:Manufacture"
+		name="Affymetrix manufacture">
+      </Protocol>
+      <Protocol identifier="Protocol:Affymetrix:Wash:Standard"
+		name="Affymetrix wash, eukaryotic">
+      </Protocol>
+      <Protocol identifier="Protocol:Affymetrix:RNAExtract"
+		name="Affymetrix RNA extaction protocol, Trizol">
+      </Protocol>
+      <Protocol identifier="Protocol:Affymetrix:RNALabel"
+		name="Affymetrix RNA labeling, in vitro transcribed cRNA">
+      </Protocol>
+      <Protocol identifier="Protocol:Affymetrix:BioAssayMap:Normalization:1"
+		name="No normalization">
+      </Protocol>
+      <Protocol identifier="Protocol:Affymetrix:BioAssayMap:Normalization:2"
+		name="signals normalized by location">
+      </Protocol>
+      <Protocol identifier="Protocol:SepticInjury"
+		name="Septic injury of drosophila"
+		text="Drosophila were pricked in the abdomen with a needlet that had been dipped in a solution of gram positive and gram negative bacteria"
+		>
+      </Protocol>
+      <Protocol identifier="Protocol:Wait:Minutes"
+		name="Wait Minutes"
+		text="Wait a certain number of minutes"
+		>
+	<ParameterType_assnlist>
+	  <Parameter identifier="Parameter:Wait:Minutes" 
+		     name="Wait Minutes"/>
+	</ParameterType_assnlist>
+      </Protocol>
+      <Protocol identifier="Protocol:OligoSynthesis"
+		name="Oligonucleotide Synthesis"
+		text="70mer oligos were synthesized">
+	<Hardware_assnreflist>
+	  <Hardware_ref identifier="Hardware:OligoSynthesizer1" />
+	</Hardware_assnreflist>
+      </Protocol>
+      <Protocol identifier="Protocol:PCRcDNA"
+		name="PCR of cDNA"
+		text="cDNAs were amplified using vector primers.">
+	<ParameterType_assnlist>
+	  <Parameter identifier="Parameter:ForwardPrimer" 
+		     name="Forward Primer"/>
+	  <Parameter identifier="Parameter:ReversePrimer" 
+		     name="Reverse Primer"/>
+	</ParameterType_assnlist>
+	<Hardware_assnreflist>
+	  <Hardware_ref identifier="Hardware:PCR1" />
+	</Hardware_assnreflist>
+      </Protocol>
+      <Protocol identifier="Protocol:ArrayPrinting"
+		name="Array Printing">
+	<ParameterType_assnlist>
+	  <Parameter identifier="ParameterType:TipNumber" 
+		     name="Tip Number"/>
+	  <Parameter identifier="ParameterType:TipSpacing" 
+		     name="Tip Spacing"/>
+	  <Parameter identifier="ParameterType:SpotSpacing" 
+		     name="Spot Spacing"/>
+	  <Parameter identifier="ParameterType:ZoneColumns" 
+		     name="Zone Columns"/>
+	  <Parameter identifier="ParameterType:ZoneRows" 
+		     name="Zone Rows"/>
+	</ParameterType_assnlist>
+	<Hardware_assnreflist>
+	  <Hardware_ref identifier="Hardware:Arrayer1" />
+	</Hardware_assnreflist>
+      </Protocol>
+      <Protocol identifier="Protocol:Hybridization"
+		name="Hybridization and wash">
+	<ParameterType_assnlist>
+	  <Parameter identifier="ParameterType:HybridizationTime"
+		     name="Hybridization Time" />
+	  <Parameter identifier="ParameterType:Wash1Time"
+		     name="Wash 1 Time" />
+	  <Parameter identifier="ParameterType:Wash2Time"
+		     name="Wash 2 Time" />
+	</ParameterType_assnlist>
+      </Protocol>
+      <Protocol identifier="Protocol:Scan"
+		name="Scan">
+	<ParameterType_assnlist>
+	  <Parameter identifier="ParameterType:PMT_voltage_635"
+		     name="PMT Voltage" />
+	  <Parameter identifier="ParameterType:PMT_voltage_532"
+		     name="PMT Voltage" />
+	</ParameterType_assnlist>
+	<Hardware_assnreflist>
+	  <Hardware_ref identifier="Hardware:Scanner1" />
+	</Hardware_assnreflist>
+	<Software_assnreflist>
+	  <Software_ref identifier="Software:GenePix3.0" />
+	</Software_assnreflist>
+      </Protocol>
+      <Protocol identifier="Protocol:FeatureExtraction"
+		name="Feature Extraction">
+	<ParameterType_assnlist>
+	  <Parameter identifier="ParameterType:FeatureSpacing" 
+		     name="Feature Spacing"/>
+	  <Parameter identifier="ParameterType:Featurepacing" 
+		     name="Spot Spacing"/>
+	  <Parameter identifier="ParameterType:FeatureDiameter" 
+		     name="Spot Diameter"/>
+	</ParameterType_assnlist>
+	<Software_assnreflist>
+	  <Software_ref identifier="Software:GenePix3.0" />
+	</Software_assnreflist>
+      </Protocol>
+      <Protocol identifier="Protocol:QuantitationTypeMap:AverageLogSubtracted"
+		name="Reporter Intensity to composite Intensity, average">
+      </Protocol>
+      <Protocol identifier="Protocol:QuantitationTypeMap:Corrected"
+		name="Feature Intensity to Reporter Intensity">
+      </Protocol>
+      <Protocol identifier="Protocol:QuantitationTypeMap:LogSubtracted"
+		name="Reporter Intensity to composite Intensity">
+      </Protocol>
+    </Protocol_assnlist>
+  </Protocol_package>
+
+  <BioMaterial_package>
+    <Compound_assnlist>
+      <Compound	identifier="Compound:Biotin"
+		name="Biotin"
+		isSolvent="false" />
+      <Compound	identifier="Compound:Cy3"
+		name="Cy3 dCTP"
+		isSolvent="false" />
+      <Compound	identifier="Compound:Cy5"
+		name="Cy5 dCTP"
+		isSolvent="false" />
+    </Compound_assnlist>
+    <BioMaterial_assnlist>
+      <BioSource 	identifier="BioSource:Drosophila:OregonR"
+		 name="Drosophila strain, Oregon R">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="Organism"/>
+	</MaterialType>
+	<Characteristic_assnlist>
+	  <OntologyEntry	category="MGED:Organism"
+			 value="Drosophila melanogaster"/>
+	  <OntologyEntry	category="Flybase:Genotype"
+			 value="wild type"/>
+	  <OntologyEntry	category="Flybase:Strain"
+			 value="Oregon R"/>
+	  <OntologyEntry	category="MGED:Age:DaysPostEclosion"
+			 value="3"/>
+	</Characteristic_assnlist>
+	<SourceContact>
+	  <Person_ref identifier="Person:Ennio_DeGregorio" />
+	</SourceContact>
+      </BioSource>
+      <BioSource 	identifier="BioSource:Drosophila:OregonR:spz-"
+		 name="Drosophila strain, Oregon R, spaetzle mutant">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="Organism"/>
+	</MaterialType>
+	<Characteristic_assnlist>
+	  <OntologyEntry	category="MGED:Organism"
+			 value="Drosophila melanogaster"/>
+	  <OntologyEntry	category="Flybase:Genotype"
+			 value="spz-"/>
+	  <OntologyEntry	category="Flybase:Strain"
+			 value="Oregon R"/>
+	  <OntologyEntry	category="MGED:Age:DaysPostEclosion"
+			 value="3"/>
+	</Characteristic_assnlist>
+      </BioSource>
+      <BioSource 	identifier="BioSource:Drosophila:OregonR:imd-"
+		 name="Drosophila strain, Oregon R, imd mutant">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="Organism"/>
+	</MaterialType>
+	<Characteristic_assnlist>
+	  <OntologyEntry	category="MGED:Organism"
+			 value="Drosophila melanogaster"/>
+	  <OntologyEntry	category="Flybase:Genotype"
+			 value="imd-"/>
+	  <OntologyEntry	category="Flybase:Strain"
+			 value="Oregon R"/>
+	  <OntologyEntry	category="MGED:Age:DaysPostEclosion"
+			 value="3"/>
+	</Characteristic_assnlist>
+      </BioSource>
+      <BioSource 	identifier="BioSource:Drosophila:OregonR:Toll10b"
+		 name="Drosophila strain, Oregon R, toll gain of function">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="Organism"/>
+	</MaterialType>
+	<Characteristic_assnlist>
+	  <OntologyEntry	category="MGED:Organism"
+			 value="Drosophila melanogaster"/>
+	  <OntologyEntry	category="Flybase:Genotype"
+			 value="spz-"/>
+	  <OntologyEntry	category="Flybase:Strain"
+			 value="Toll10b"/>
+	  <OntologyEntry	category="MGED:Age:DaysPostEclosion"
+			 value="3"/>
+	</Characteristic_assnlist>
+      </BioSource>
+      <BioSample	identifier="BioSample:Drosophila:OregonR:SepticInjury0090minutes"
+		 name="Drosophila strain, Oregon R, 90 minutes after septic injury">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="Organism" />
+	</MaterialType>
+	<Treatment_assnlist>
+	  <Treatment	identifier="Treatment:SepticInjury:1"
+		     order="1">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication	activityDate="20010301">
+		<Protocol_ref identifier="Protocol:SepticInjury" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	    <Action>
+	      <OntologyEntry	category="Spellman:Action"
+			     value="SepticInjury" />
+	    </Action>
+	    <SourceBioMaterialMeasurement_assnlist>
+	      <BioMaterialMeasurement>
+		<BioSource_ref identifier="BioSource:Drosophila:OregonR" />
+	      </BioMaterialMeasurement>
+	    </SourceBioMaterialMeasurement_assnlist>
+	  </Treatment>
+	  <Treatment	identifier="Treatment:Wait:1"
+		     order="2">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication	activityDate="20010301">
+		<ParameterValue_assnlist>
+		  <ParameterValue value="90">
+		    <Parameter_ref identifier="Parameter:Wait:Minutes" />
+		  </ParameterValue>
+		</ParameterValue_assnlist>
+		<Protocol_ref identifier="Protocol:SepticInjury" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	    <Action>
+	      <OntologyEntry	category="MGED:Action"
+			     value="Wait" />
+	    </Action>
+	    <ActionMeasurement>
+	      <Measurement	type="change"
+			   value="90"
+			   kindCV="time">
+		<TimeUnit unitNameCV="m"/>
+	      </Measurement>
+	    </ActionMeasurement>
+	  </Treatment>
+	</Treatment_assnlist>
+	<SourceBioMaterials_assnreflist>
+	  <BioSource_ref identifier="BioSource:Drosophila:OregonR" />
+	</SourceBioMaterials_assnreflist>
+	<Type>				
+	  <OntologyEntry	category="MGED:BioSample:Type"
+			 value="Organism" />
+	</Type>
+      </BioSample>
+      <BioSample	identifier="BioSample:Drosophila:OregonR:SepticInjury0180minutes"
+		 name="Drosophila strain, Oregon R, 180 minutes after septic injury">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="Organism" />
+	</MaterialType>
+	<Treatment_assnlist>
+	  <Treatment	identifier="Treatment:Wait:2"
+		     order="1">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication	activityDate="20010301">
+		<ParameterValue_assnlist>
+		  <ParameterValue value="90">
+		    <Parameter_ref identifier="Parameter:Wait:Minutes" />
+		  </ParameterValue>
+		</ParameterValue_assnlist>
+		<Protocol_ref identifier="Protocol:SepticInjury" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	    <Action>
+	      <OntologyEntry	category="MGED:Action"
+			     value="Wait" />
+	    </Action>
+	    <ActionMeasurement>
+	      <Measurement	type="change"
+			   value="90"
+			   kindCV="time">
+		<TimeUnit unitNameCV="m"/>
+	      </Measurement>
+	    </ActionMeasurement>
+	    <SourceBioMaterialMeasurement_assnlist>
+	      <BioMaterialMeasurement>
+		<BioSample_ref identifier="BioSample:Drosophila:OregonR:SepticInjury0090minutes" />
+	      </BioMaterialMeasurement>
+	    </SourceBioMaterialMeasurement_assnlist>
+	  </Treatment>
+	</Treatment_assnlist>
+	<SourceBioMaterials_assnreflist>
+	  <BioSource_ref identifier="BioSource:Drosophila:OregonR" />
+	</SourceBioMaterials_assnreflist>
+	<Type>				
+	  <OntologyEntry	category="MGED:BioSample:Type"
+			 value="Organism" />
+	</Type>
+      </BioSample>
+      <BioSample	identifier="BioSample:Affymetrix:SpottedPCR:12345678">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="DNA" />
+	</MaterialType>
+	<Treatment_assnlist>
+	  <Treatment	identifier="Treatment:PCR"
+		     order="1">
+	    <Action>
+	      <OntologyEntry	category="MGED:Action"
+			     value="ThermalCycle" />
+	    </Action>
+	  </Treatment>
+	</Treatment_assnlist>
+	<Type>				
+	  <OntologyEntry	category="MGED:BioSample:Type"
+			 value="Organism" />
+	</Type>
+      </BioSample>
+      <LabeledExtract	identifier="LabeledExtract:Drosophila:OregonR"
+		      name="Labeled cRNA, Oregon R Drosophila">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="RNA" />
+	</MaterialType>
+	<Treatment_assnlist>
+	  <Treatment	identifier="Treatment:Affymetrix:RNAExtract"
+		     order="1">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication	activityDate="20010301">
+		<Protocol_ref identifier="Protocol:Affymetrix:RNAExtract" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	    <Action>
+	      <OntologyEntry	category="MGED:Action"
+			     value="Extract" />
+	    </Action>
+	    <SourceBioMaterialMeasurement_assnlist>
+	      <BioMaterialMeasurement>
+		<BioSource_ref identifier="BioSource:Drosophila:OregonR" />
+	      </BioMaterialMeasurement>
+	    </SourceBioMaterialMeasurement_assnlist>
+	  </Treatment>
+	  <Treatment	identifier="Treatment:AffymetrixRNALabel"
+		     order="2">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication	activityDate="20010301">
+		<Protocol_ref identifier="Protocol:Affymetrix:RNALabel" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	    <Action>
+	      <OntologyEntry	category="MGED:Action"
+			     value="Label" />
+	    </Action>
+	  </Treatment>
+	</Treatment_assnlist>
+	<SourceBioMaterials_assnreflist>
+	  <BioSource_ref identifier="BioSource:Drosophila:OregonR" />
+	</SourceBioMaterials_assnreflist>
+	<Labels_assnreflist>
+	  <Compound_ref identifier="Compound:Biotin" />
+	</Labels_assnreflist>
+      </LabeledExtract>	
+      <LabeledExtract	identifier="LabeledExtract:Drosophila:OregonR:SepticInjury0090minutes"
+		      name="Labeled cRNA, Oregon R Drosophila bacterial infection 90 minutes">
+	<MaterialType>
+	  <OntologyEntry	category="MGED:MaterialType"
+			 value="RNA" />
+	</MaterialType>
+	<Treatment_assnlist>
+	  <Treatment	identifier="Treatment:AffymetrixRNAExtract"
+		     order="1">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication	activityDate="20010301">
+		<Protocol_ref identifier="Protocol:Affymetrix:RNAExtract" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	    <Action>
+	      <OntologyEntry	category="MGED:Action"
+			     value="Extract" />
+	    </Action>
+	    <SourceBioMaterialMeasurement_assnlist>
+	      <BioMaterialMeasurement>
+		<BioSample_ref identifier="BioSample:Drosophila:OregonR:SepticInjury0090minutes" />
+	      </BioMaterialMeasurement>
+	    </SourceBioMaterialMeasurement_assnlist>
+	  </Treatment>
+	  <Treatment	identifier="Treatment:AffymetrixRNALabel"
+		     order="2">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication	activityDate="20010301">
+		<Protocol_ref identifier="Protocol:Affymetrix:RNALabel" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	    <Action>
+	      <OntologyEntry	category="MGED:Action"
+			     value="Label" />
+	    </Action>
+	  </Treatment>
+	</Treatment_assnlist>
+	<SourceBioMaterials_assnreflist>
+	  <BioSample_ref identifier="BioSample:Drosophila:OregonR:SepticInjury0090minutes" />
+	</SourceBioMaterials_assnreflist>
+	<Labels_assnreflist>
+	  <Compound_ref identifier="Compound:Biotin" />
+	</Labels_assnreflist>
+      </LabeledExtract>	
+    </BioMaterial_assnlist>
+  </BioMaterial_package>
+
+  <BioSequence_package>
+    <BioSequence_assnlist>
+      <BioSequence	identifier="BioSequence:BDGP:CK00026"
+		   name="BDGP CK00026"
+		   sequence="CTTTTTTTGGCTAGGCATTTAATAAATTCTCGGCAANCTAAGAAACGAAACATTTTTTGAGGATTACATGTCAGGGCATTAAAGCCAGCAGCCCATGCNGTTGATGCCGCAGCAGTGGCGGTGCTGCAGGCTGATCTTGATCTTGTTGCGCAACAACTCCTCCNCGTATTGGCNCGGACAGATGGACNATNGCNGATGGCGGGGCGTCTCGTGGACGCCGGCCTCCTGGACAGTCCAATCCA">
+	<SequenceDatabase_assnlist>
+	  <DatabaseEntry accession="CK00026">
+	    <Database_ref identifier="Database:BDGP" />
+	  </DatabaseEntry>
+	</SequenceDatabase_assnlist>
+	<PolymerType>
+	  <OntologyEntry 	category="MGED:PolymerType"
+			 value="DNA" />
+	</PolymerType>
+	<Type>
+	  <OntologyEntry	category="MGED:Type:BioSequence"
+			 value="Clone" />
+	</Type>
+	<Species>
+	  <OntologyEntry 	category="NCBI:Taxonomy"
+			 value="Drosophila melanogaster" />
+	</Species>
+      </BioSequence>
+      <BioSequence	identifier="BioSequence:BDGP:BACR16J08"
+		   name="BDGP BACR16J08" >
+	<SequenceDatabase_assnlist>
+	  <DatabaseEntry accession="BACR16J08">
+	    <Database_ref identifier="Database:BDGP" />
+	  </DatabaseEntry>
+	</SequenceDatabase_assnlist>
+	<PolymerType>
+	  <OntologyEntry 	category="MGED:PolymerType"
+			 value="DNA" />
+	</PolymerType>
+	<Type>
+	  <OntologyEntry	category="MGED:Type:BioSequence"
+			 value="BAC" />
+	</Type>
+	<Species>
+	  <OntologyEntry 	category="NCBI:Taxonomy"
+			 value="Drosophila melanogaster" />
+	</Species>
+      </BioSequence>
+    </BioSequence_assnlist>
+  </BioSequence_package>
+
+  <DesignElement_package>
+    <CompositeSequence_assnlist>
+      <CompositeSequence	identifier="CompositeSequence:BDGP:CK00026"
+			 name="CK library CK00026">
+	<BiologicalCharacteristics_assnreflist>
+	  <BioSequence_ref identifier="BioSequence:BDGP:CK00026" />
+	</BiologicalCharacteristics_assnreflist>
+	<ReporterCompositeMaps_assnreflist>
+	  <ReporterCompositeMap_ref identifier="ReporterCompositeMap:CK00026:CK00026" />
+	</ReporterCompositeMaps_assnreflist>
+      </CompositeSequence>
+      <CompositeSequence	identifier="CompositeSequence:BDGP:BACR16J08"
+			 name="BDGP BAC library BACR16J08">
+	<BiologicalCharacteristics_assnreflist>
+	  <BioSequence_ref identifier="BioSequence:BDGP:BACR16J08" />
+	</BiologicalCharacteristics_assnreflist>
+	<CompositeCompositeMaps_assnreflist>
+	  <CompositeCompositeMap_ref identifier="CompositeCompositeMap:CK00026:BACR16J08" />
+	</CompositeCompositeMaps_assnreflist>
+      </CompositeSequence>
+    </CompositeSequence_assnlist>
+    <Reporter_assnlist>
+      <Reporter	identifier="Reporter:BDGP:CK00026:3primeEST"
+		name="CK library CK00026">
+	<ImmobilizedCharacteristics_assnreflist>
+	  <BioSequence_ref identifier="BioSequence:BDGP:CK00026" />
+	</ImmobilizedCharacteristics_assnreflist>
+	<FeatureReporterMaps_assnreflist>
+	  <FeatureReporterMap_ref identifier="FeatureReporterMap:CK00026:3primeEST" />
+	</FeatureReporterMaps_assnreflist>
+      </Reporter>
+    </Reporter_assnlist>
+    <CompositeCompositeMap_assnlist>
+      <CompositeCompositeMap	identifier="CompositeCompositeMap:CK00026:BACR16J08">
+	<CompositeSequence_ref identifier="CompositeSequence:BDGP:BACR16J08" />
+	<CompositePosition_assnlist>
+	  <CompositePosition	start="146025"
+			     end="148347">
+	    <CompositeSequence_ref	identifier="CompositeSequence:BDGP:CK00026" />
+	  </CompositePosition>
+	</CompositePosition_assnlist>
+      </CompositeCompositeMap>
+    </CompositeCompositeMap_assnlist>
+    <ReporterCompositeMap_assnlist>
+      <ReporterCompositeMap	identifier="ReporterCompositeMap:CK00026:CK00026">
+	<CompositeSequence_ref identifier="CompositeSequence:BDGP:CK00026" />
+	<ReporterPosition_assnlist>
+	  <ReporterPosition	start="1"
+			    end="2322">
+	    <Reporter_ref	identifier="Reporter:BDGP:CK00026:3primeEST" />
+	  </ReporterPosition>
+	</ReporterPosition_assnlist>
+      </ReporterCompositeMap>
+    </ReporterCompositeMap_assnlist>
+    <FeatureReporterMap_assnlist>
+      <FeatureReporterMap identifier="FeatureReporterMap:CK00026:3primeEST">
+	<Reporter_ref	identifier="Reporter:BDGP:CK00026:3primeEST" />
+	<FeatureInformation_assnlist>
+	  <FeatureInformation>
+	    <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+	  </FeatureInformation>
+	  <FeatureInformation>
+	    <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0006474" />
+	  </FeatureInformation>
+	</FeatureInformation_assnlist>
+      </FeatureReporterMap>
+    </FeatureReporterMap_assnlist>
+  </DesignElement_package>
+
+  <ArrayDesign_package>
+    <ReporterGroup_assnlist>
+      <ReporterGroup identifier="ReporterGroup:Affymetrix:DrosGenome1:00001">
+	<Type_assnlist>
+	  <OntologyEntry	category="MGED:DesignElement:Type"
+			 value="EST" />
+	</Type_assnlist>
+	<Species>
+	  <OntologyEntry	category="NCBI:Taxonomy"
+			 value="Drosophila melanogaster" />
+	</Species>
+	<Reporters_assnreflist>
+	  <Reporter_ref identifier="Reporter:BDGP:CK00026:3primeEST" />
+	</Reporters_assnreflist>
+      </ReporterGroup>
+    </ReporterGroup_assnlist>
+    <CompositeGroup_assnlist>
+      <CompositeGroup identifier="CompositeGroup:Affymetrix:DrosGenome1:00001">
+	<CompositeSequences_assnreflist>
+	  <CompositeSequence_ref	identifier="CompositeSequence:BDGP:CK00026" />
+	</CompositeSequences_assnreflist>
+      </CompositeGroup>
+    </CompositeGroup_assnlist>
+    <ArrayDesign_assnlist>
+      <PhysicalArrayDesign	identifier="PhysicalArrayDesign:Affymetrix:DrosGenome1"
+			   name="DrosGenome1">
+	<ProtocolApplication_assnlist>
+	  <ProtocolApplication activityDate="2000-10-01">
+	    <Protocol_ref identifier="Protocol:Affymetrix:ArrayDesign" />
+	  </ProtocolApplication>
+	</ProtocolApplication_assnlist>
+	<FeatureGroup_assnlist>
+	  <FeatureGroup	featureWidth="18"
+			featureLength="18">
+	    <TechnologyType>
+	      <OntologyEntry	category="MGED:FeatureGroup:TechnologyType"
+			     value="in situ synthesized oligonucleotide" />
+	    </TechnologyType>
+	    <FeatureShape>
+	      <OntologyEntry	category="MGED:FeatureGroup:FeatureShape"
+			     value="square" />
+	    </FeatureShape>
+	    <DistanceUnit unitNameCV="um" />
+	    <Feature_assnlist>
+	      <Feature identifier="Feature:Affymetrix:DrosGenome1:0005834">
+		<ControlledFeatures_assnreflist>
+		  <Feature_ref identifier="Feature:Affymetrix:DrosGenome1:0006474" />
+		</ControlledFeatures_assnreflist>
+		<Position	x="400"
+			  y="321" />
+		<Zone_ref identifier="Zone:Affymetrix:DrosGenome1:00001" />
+	      </Feature>
+	      <Feature identifier="Feature:Affymetrix:DrosGenome1:0006474">
+		<ControlFeatures_assnreflist>
+		  <Feature_ref identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+		</ControlFeatures_assnreflist>
+		<Position	x="400"
+			  y="322" />
+		<Zone_ref identifier="Zone:Affymetrix:DrosGenome1:00001" />
+	      </Feature>
+	      <Feature identifier="Feature:Affymetrix:DrosGenome1:1000000">
+		<Position	x="100"
+			  y="100" />
+		<Zone_ref identifier="Zone:Affymetrix:DrosGenome1:00001" />
+	      </Feature>
+	    </Feature_assnlist>
+	  </FeatureGroup>
+	</FeatureGroup_assnlist>
+	<ReporterGroups_assnreflist>
+	  <ReporterGroup_ref identifier="ReporterGroup:Affymetrix:DrosGenome1:00001" />
+	</ReporterGroups_assnreflist>
+	<CompositeGroups_assnreflist>
+	  <CompositeGroup_ref identifier="CompositeGroup:Affymetrix:DrosGenome1:00001" />
+	</CompositeGroups_assnreflist>
+	<Organization_ref identifier="Organization:Affymetrix" />
+	<SurfaceType>
+	  <OntologyEntry	category="MGED:PhysicalArrayDesign:SurfaceType"
+			 value="silicon" />
+	</SurfaceType>
+	<ZoneGroup_assnlist>
+	  <ZoneGroup	spacingBetweenZonesX="0"
+		     spacingBetweenZonesY="0">
+	    <DistanceUnit unitNameCV="um" />
+	    <ZoneLayout	numFeaturesPerRow="640"
+			numFeaturesPerCol="640"
+			spacingBetweenRows="0"
+			spacingBetweenCols="0">
+	      <DistanceUnit unitNameCV="um" />
+	    </ZoneLayout>
+	    <ZoneLocation_assnlist>
+	      <Zone	identifier="Zone:Affymetrix:DrosGenome1:00001"
+		    name="Main zone"
+		    upperLeftX="0"
+		    upperLeftY="0"
+		    lowerRightX="10000"
+		    lowerRightY="10000">
+		<DistanceUnit unitNameCV="um" />
+	      </Zone>
+	    </ZoneLocation_assnlist>
+	  </ZoneGroup>
+	</ZoneGroup_assnlist>
+      </PhysicalArrayDesign>
+    </ArrayDesign_assnlist>
+  </ArrayDesign_package>
+
+  <Array_package>
+    <ArrayPackage_assnlist>
+      <ArrayPackage	identifier="ArrayPackage:Affymetrix:DrosGenome1:00001"
+		    name="Affy Cassette 1"
+		    barcode="NONE"
+		    arraySpacingX="0"
+		    arraySpacingY="0"
+		    numArrays="1"
+		    orientationMark="Cassette grips"
+		    orientationMarkPosition="top"
+		    width="2.5"
+		    length="4">
+	<Fiducial_assnlist>
+	  <Fiducial>
+	    <FiducialType>
+	      <OntologyEntry	category="MGED:Fiducial:FiducialType"
+			     value="Stripe" />
+	    </FiducialType>
+	    <Position	x="0"
+		      y="0">
+	      <DistanceUnit unitNameCV="um" />
+	    </Position>
+	  </Fiducial>
+	</Fiducial_assnlist>
+	<Arrays_assnreflist>
+	  <Array_ref	identifier="Array:Affymetrix:DrosGenome1:00001" />
+	</Arrays_assnreflist>
+	<PackageType>
+	  <OntologyEntry	category="MGED:ArrayPackage:PackageType"
+			 value="Cassette" />
+	</PackageType>
+	<DistanceUnit unitNameCV="cm" />
+      </ArrayPackage>
+    </ArrayPackage_assnlist>
+    <Array_assnlist>
+      <Array	identifier="Array:Affymetrix:DrosGenome1:00001"
+	     arrayIdentifier="ArrayIdentifier:00001"
+	     arrayXOrigin="0"
+	     arrayYOrigin="0"
+	     originRelativeTo="TOpLeft">
+	<ArrayDesign_ref identifier="PhysicalArrayDesign:Affymetrix:DrosGenome1" />
+	<ArrayManufacture_ref identifier="ArrayManufacture:Affymetrix:DrosGenome1:00001" />
+	<ArrayPackage_ref identifier="ArrayPackage:Affymetrix:DrosGenome1:00001" />
+	<ArrayManufactureDeviation_assnlist>
+	  <ArrayManufactureDeviation>
+	    <ZoneDefect_assnlist>
+	      <ZoneDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:ZoneDefect:DefectTyoe"
+				 value="Move" />
+		</DefectType>
+		<PositionDelta	deltaX="0"
+			       deltaY="0">
+		  <DistanceUnit unitNameCV="um" />
+		</PositionDelta>
+		<Zone_ref identifier="Zone:Affymetrix:DrosGenome1:00001" />
+	      </ZoneDefect>
+	    </ZoneDefect_assnlist>
+	    <FeatureDefect_assnlist>
+	      <FeatureDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:FeatureDefect:DefectType"
+				 value="Not Synthesized" />
+		</DefectType>
+		<Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:1000000" />
+	      </FeatureDefect>
+	      <FeatureDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:FeatureDefect:DefectType"
+				 value="Move" />
+		</DefectType>
+		<PositionDelta	deltaX="10"
+			       deltaY="10">
+		  <DistanceUnit unitNameCV="um" />
+		</PositionDelta>
+		<Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+	      </FeatureDefect>
+	    </FeatureDefect_assnlist>
+	  </ArrayManufactureDeviation>
+	</ArrayManufactureDeviation_assnlist>
+      </Array>
+      <Array	identifier="Array:Affymetrix:DrosGenome1:00002"
+	     arrayIdentifier="ArrayIdentifier:00002"
+	     arrayXOrigin="0"
+	     arrayYOrigin="0"
+	     originRelativeTo="TOpLeft">
+	<ArrayDesign_ref identifier="PhysicalArrayDesign:Affymetrix:DrosGenome1" />
+	<ArrayManufacture_ref identifier="ArrayManufacture:Affymetrix:DrosGenome1:00001" />
+	<ArrayPackage_ref identifier="ArrayPackage:Affymetrix:DrosGenome1:00001" />
+	<ArrayManufactureDeviation_assnlist>
+	  <ArrayManufactureDeviation>
+	    <ZoneDefect_assnlist>
+	      <ZoneDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:ZoneDefect:DefectTyoe"
+				 value="Move" />
+		</DefectType>
+		<PositionDelta	deltaX="0"
+			       deltaY="0">
+		  <DistanceUnit unitNameCV="um" />
+		</PositionDelta>
+		<Zone_ref identifier="Zone:Affymetrix:DrosGenome1:00001" />
+	      </ZoneDefect>
+	    </ZoneDefect_assnlist>
+	    <FeatureDefect_assnlist>
+	      <FeatureDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:FeatureDefect:DefectType"
+				 value="Not Synthesized" />
+		</DefectType>
+		<Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:1000000" />
+	      </FeatureDefect>
+	      <FeatureDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:FeatureDefect:DefectType"
+				 value="Move" />
+		</DefectType>
+		<PositionDelta	deltaX="10"
+			       deltaY="10">
+		  <DistanceUnit unitNameCV="um" />
+		</PositionDelta>
+		<Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+	      </FeatureDefect>
+	    </FeatureDefect_assnlist>
+	  </ArrayManufactureDeviation>
+	</ArrayManufactureDeviation_assnlist>
+      </Array>
+      <Array	identifier="Array:Affymetrix:DrosGenome1:00003"
+	     arrayIdentifier="ArrayIdentifier:00003"
+	     arrayXOrigin="0"
+	     arrayYOrigin="0"
+	     originRelativeTo="TOpLeft">
+	<ArrayDesign_ref identifier="PhysicalArrayDesign:Affymetrix:DrosGenome1" />
+	<ArrayManufacture_ref identifier="ArrayManufacture:Affymetrix:DrosGenome1:00001" />
+	<ArrayPackage_ref identifier="ArrayPackage:Affymetrix:DrosGenome1:00001" />
+	<ArrayManufactureDeviation_assnlist>
+	  <ArrayManufactureDeviation>
+	    <ZoneDefect_assnlist>
+	      <ZoneDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:ZoneDefect:DefectTyoe"
+				 value="Move" />
+		</DefectType>
+		<PositionDelta	deltaX="0"
+			       deltaY="0">
+		  <DistanceUnit unitNameCV="um" />
+		</PositionDelta>
+		<Zone_ref identifier="Zone:Affymetrix:DrosGenome1:00001" />
+	      </ZoneDefect>
+	    </ZoneDefect_assnlist>
+	    <FeatureDefect_assnlist>
+	      <FeatureDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:FeatureDefect:DefectType"
+				 value="Not Synthesized" />
+		</DefectType>
+		<Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:1000000" />
+	      </FeatureDefect>
+	      <FeatureDefect>
+		<DefectType>
+		  <OntologyEntry	category="MGED:FeatureDefect:DefectType"
+				 value="Move" />
+		</DefectType>
+		<PositionDelta	deltaX="10"
+			       deltaY="10">
+		  <DistanceUnit unitNameCV="um" />
+		</PositionDelta>
+		<Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+	      </FeatureDefect>
+	    </FeatureDefect_assnlist>
+	  </ArrayManufactureDeviation>
+	</ArrayManufactureDeviation_assnlist>
+      </Array>
+    </Array_assnlist>
+    <ArrayManufacture_assnlist>
+      <ArrayManufacture	identifier="ArrayManufacture:Affymetrix:DrosGenome1:00001"
+			name="First synthesis"
+			manufacturingDate="2001-01-01"
+			tolerance="0.1">
+	<Arrays_assnreflist>
+	  <Array_ref	identifier="Array:Affymetrix:DrosGenome1:00001" />
+	  <Array_ref	identifier="Array:Affymetrix:DrosGenome1:00002" />
+	  <Array_ref	identifier="Array:Affymetrix:DrosGenome1:00003" />
+	</Arrays_assnreflist>
+	<ArrayManufacturers_assnreflist>
+	  <Organization_ref	identifier="Organization:Affymetrix" />
+	  <Person_ref	identifier="Person:Paul_T_Spellman" />
+	</ArrayManufacturers_assnreflist>
+	<QualityControlStatistic_assnlist>
+	  <NameValueType	name="SynthesisYield"
+			 value="100"
+			 type="percent" />
+	</QualityControlStatistic_assnlist>
+	<ManufactureLIMS_assnlist>
+	  <ManufactureLIMS	quality="good" >
+	    <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+	    <LIMSIdentifier>
+	      <DatabaseEntry	accession="UTP1"
+			     accessionVersion="1.0">
+		<Database_ref	identifier="Database:Affymetrix:LIMS" />
+	      </DatabaseEntry>
+	    </LIMSIdentifier>
+	  </ManufactureLIMS>
+	  <ManufactureLIMSBioMaterial	bioMaterialPlateIdentifier="Plate1"
+				      bioMaterialPlateRow="A"
+				      bioMaterialPlateCol="1">
+	    <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:1000000" />
+	    <BioSample_ref	identifier="BioSample:Affymetrix:SpottedPCR:12345678" />
+	  </ManufactureLIMSBioMaterial>
+	</ManufactureLIMS_assnlist>
+	<ProtocolApplication_assnlist>
+	  <ProtocolApplication activityDate="2001-01-01">
+	    <Protocol_ref	identifier="Protocol:Affymetrix:Manufacture" />
+	  </ProtocolApplication>
+	</ProtocolApplication_assnlist>
+      </ArrayManufacture>
+    </ArrayManufacture_assnlist>
+  </Array_package>
+
+  <BioAssay_package>
+    <Channel_assnlist>
+      <Channel	identifier="Channel:Affymetrix:ScannerChannel"
+	       name="Default Affymetrix scanning channel">
+	<Labels_assnreflist>
+	  <Compound_ref identifier="Compound:Biotin" />
+	</Labels_assnreflist>
+      </Channel>
+      <Channel	identifier="Channel:CH1"
+	       name="GenePix Channel1">
+	<Labels_assnreflist>
+	  <Compound_ref identifier="Compound:Cy3" />
+	</Labels_assnreflist>
+      </Channel>
+      <Channel	identifier="Channel:CH2"
+	       name="GenePix Channel2">
+	<Labels_assnreflist>
+	  <Compound_ref identifier="Compound:Cy5" />
+	</Labels_assnreflist>
+      </Channel>
+    </Channel_assnlist>
+    <BioAssay_assnlist>	
+      <PhysicalBioAssay	identifier="PhysicalBioAssay:Drosophila:OregonR:1"
+			name="Hybridization Drosophila Oregon R 1">
+	<Channels_assnreflist>
+	  <Channel_ref identifier="Channel:Affymetrix:ScannerChannel" />
+	</Channels_assnreflist>
+	<TargetBioAssay_assnref>
+	  <MeasuredBioAssay_ref  identifier="MeasuredBioAssay:Drosophila:OregonR:1" />
+	</TargetBioAssay_assnref>
+	<FactorValues_assnreflist>
+	  <FactorValue_ref identifier="FactorValue:Drosophila:OregonR" />
+	  <FactorValue_ref identifier="FactorValue:Drosophila:WT" />
+	</FactorValues_assnreflist>
+	<PhysicalBioAssayData_assnlist>
+	  <Image	identifier="Image:Affymetrix:Drosophila:OregonR:1"
+		 name="file_name"
+		 URI="http://beamish.lbl.gov/immunity/data/file1.tif">
+	    <Channels_assnreflist>
+	      <Channel_ref identifier="Channel:Affymetrix:ScannerChannel" />
+	    </Channels_assnreflist>
+	    <Format>
+	      <OntologyEntry	category="Affymetrix:Image"
+			     value="DAT" />
+	    </Format>
+	  </Image>
+	</PhysicalBioAssayData_assnlist>
+	<Hybridization	identifier="Hybridization:Drosophila:OregonR:1">
+	  <ProtocolApplication_assnlist>
+	    <ProtocolApplication activityDate="20010416">
+	      <Protocol_ref identifier="Protocol:Affymetrix:Hybridization:Standard" />
+	    </ProtocolApplication>
+	  </ProtocolApplication_assnlist>
+	  <SourceBioMaterialMeasurement_assnlist>
+	    <BioMaterialMeasurement>
+	      <Measurement	type="absolute"
+			   value="20"
+			   kindCV="mass">
+		<MassUnit unitNameCV="ug"/>
+	      </Measurement>
+	      <LabeledExtract_ref identifier="LabeledExtract:Drosophila:OregonR" />
+	    </BioMaterialMeasurement>
+	  </SourceBioMaterialMeasurement_assnlist>
+	  <Array_assnref>
+	    <Array_ref  identifier="Array:Affymetrix:DrosGenome1:00001"/>
+	  </Array_assnref>
+	</Hybridization>
+	<BioAssayTreatment_assnlist>
+	  <BioAssayTreatment identifier="BioAssayTreatment:Wash1">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication activityDate="20010417">
+		<Protocol_ref identifier="Protocol:Affymetrix:Wash:Standard" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	  </BioAssayTreatment>
+	  <ImageAcquisition identifier="BioAssayTreatment:Scan1">
+	    <ProtocolApplication_assnlist>
+	      <ProtocolApplication activityDate="20010417">
+		<Protocol_ref identifier="Protocol:Affymetrix:Wash:Standard" />
+	      </ProtocolApplication>
+	    </ProtocolApplication_assnlist>
+	    <Images_assnreflist>
+	      <Image_ref identifier="Image:Affymetrix:Drosophila:OregonR:1" />
+	    </Images_assnreflist>
+	  </ImageAcquisition>
+	</BioAssayTreatment_assnlist>
+      </PhysicalBioAssay>
+      <MeasuredBioAssay identifier="MeasuredBioAssay:Drosophila:OregonR:1"
+			name="feature extracted data, Drosophila Oregon R 1">
+	<Channels_assnreflist>
+	  <Channel_ref identifier="Channel:Affymetrix:ScannerChannel" />
+	</Channels_assnreflist>
+	<SourceBioAssays_assnreflist>
+	  <PhysicalBioAssay_ref  identifier="PhysicalBioAssay:Drosophila:OregonR:1" />
+	</SourceBioAssays_assnreflist>
+	<FactorValues_assnreflist>
+	  <FactorValue_ref identifier="FactorValue:Drosophila:OregonR" />
+	  <FactorValue_ref identifier="FactorValue:Drosophila:WT" />
+	</FactorValues_assnreflist>
+	<FeatureExtraction identifier="FeatureExtraction:Drosophila:OregonR:1">
+	  <ProtocolApplication_assnlist>
+	    <ProtocolApplication activityDate="20010620">
+	      <Protocol_ref identifier="Protocol:Affymetrix:FeatureExtraction" />
+	    </ProtocolApplication>
+	  </ProtocolApplication_assnlist>
+	  <PhysicalBioAssay_ref identifier="PhysicalBioAssay:Drosophila:OregonR:1" />
+	</FeatureExtraction>
+	<MeasuredBioAssayData_assnreflist>
+	  <MeasuredBioAssayData_ref identifier="MeasuredBioAssayData:Drosophila:OregonR:1:Tuples"/>
+	</MeasuredBioAssayData_assnreflist>
+      </MeasuredBioAssay>
+      <DerivedBioAssay identifier="DerivedBioAssay:Drosophila:OregonR:1A"
+		       name="Fully processed data, Drosophila Oregon R 1, normalization 1">
+	<Channels_assnreflist>
+	  <Channel_ref identifier="Channel:Affymetrix:ScannerChannel" />
+	</Channels_assnreflist>
+	<SourceBioAssays_assnreflist>
+	  <MeasuredBioAssay_ref	identifier="MeasuredBioAssay:Drosophila:OregonR:1" />
+	</SourceBioAssays_assnreflist>
+	<FactorValues_assnreflist>
+	  <FactorValue_ref identifier="FactorValue:Drosophila:OregonR" />
+	  <FactorValue_ref identifier="FactorValue:Drosophila:WT" />
+	</FactorValues_assnreflist>
+	<Type>
+	  <OntologyEntry	category="MGED:DerivedBioAssay"
+			 value="XXX" />
+	</Type>
+	<DerivedBioAssayData_assnreflist>
+	  <DerivedBioAssayData_ref identifier="DerivedBioAssayData:Drosophila:OregonR:1:Reporter:Tuple"/>
+	  <DerivedBioAssayData_ref identifier="DerivedBioAssayData:Drosophila:OregonR:1:Composite:Tuple"/>
+	</DerivedBioAssayData_assnreflist>
+      </DerivedBioAssay>
+      <DerivedBioAssay identifier="DerivedBioAssay:Drosophila:OregonR:1B" name="Fully processed data, Drosophila Oregon R 1, normalization 2">
+	<Channels_assnreflist>
+	  <Channel_ref identifier="Channel:Affymetrix:ScannerChannel" />
+	</Channels_assnreflist>
+	<SourceBioAssays_assnreflist>
+	  <MeasuredBioAssay_ref	identifier="MeasuredBioAssay:Drosophila:OregonR:1" />
+	</SourceBioAssays_assnreflist>
+	<FactorValues_assnreflist>
+	  <FactorValue_ref identifier="FactorValue:Drosophila:OregonR" />
+	  <FactorValue_ref identifier="FactorValue:Drosophila:WT" />
+	</FactorValues_assnreflist>
+	<Type>
+	  <OntologyEntry	category="MGED:DerivedBioAssay"
+			 value="XXX" />
+	</Type>
+	<DerivedBioAssayData_assnreflist>
+	  <DerivedBioAssayData_ref identifier="DerivedBioAssayData:Drosophila:OregonR:1:Reporter:Tuple"/>
+	  <DerivedBioAssayData_ref identifier="DerivedBioAssayData:Drosophila:OregonR:1:Composite:Tuple"/>
+	</DerivedBioAssayData_assnreflist>
+      </DerivedBioAssay>
+    </BioAssay_assnlist>
+  </BioAssay_package>
+
+  <QuantitationType_package>
+    <QuantitationType_assnlist>
+      <MeasuredSignal 	identifier="MeasuredSignal:Intensity" 
+		      name="Affymetrix Intensity"
+		      isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </MeasuredSignal>
+      <MeasuredSignal 	identifier="MeasuredSignal:CH1I" 
+		      name="Cy3 Foreground"
+		      isBackground="false">
+	<Channel_ref identifier="Channel:CH1" />
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </MeasuredSignal>
+      <MeasuredSignal 	identifier="MeasuredSignal:CH1B" 
+		      name="Cy3 Background"
+		      isBackground="true">
+	<Channel_ref identifier="Channel:CH1" />
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </MeasuredSignal>
+      <DerivedSignal 	identifier="DerivedSignal:CH1D" 
+		     name="Cy3 Net"
+		     isBackground="false">
+	<Channel_ref identifier="Channel:CH1" />
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </DerivedSignal>
+      <MeasuredSignal 	identifier="MeasuredSignal:CH2I" 
+		      name="Cy5 Foreground"
+		      isBackground="false">
+	<Channel_ref identifier="Channel:CH2" />
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </MeasuredSignal>
+      <MeasuredSignal 	identifier="MeasuredSignal:CH2B" 
+		      name="Cy5 Background"
+		      isBackground="true">
+	<Channel_ref identifier="Channel:CH2" />
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </MeasuredSignal>
+      <DerivedSignal 	identifier="DerivedSignal:CH2D" 
+		     name="Cy5 Net"
+		     isBackground="false">
+	<Channel_ref identifier="Channel:CH2" />
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </DerivedSignal>
+      <Ratio 	identifier="Ratio:CH2/CH1" 
+	     name="Cy5/Cy3"
+	     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Log base2"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </Ratio>
+      <DerivedSignal 	identifier="DerivedSignal:LogCorrectedIntensity" 
+		     name="Affymetrix Log base2 Intensity, match - mismatch"
+		     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Log base2"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </DerivedSignal>
+      <Ratio 	identifier="Ratio:LogSubtractedIntensity" 
+	     name="Affymetrix LogCorrectedIntensity (1) - LogCorrectedIntensity (2)"
+	     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Log base2"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </Ratio>
+      <Ratio 	identifier="Ratio:AverageLogSubtractedIntensity" 
+	     name="Average Affymetrix LogSubtractedIntensity [1..n]"
+	     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Log base2"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+      </Ratio>
+      <ExpectedValue	identifier="ExpectedValue:CH2/CH1Expected"
+		     name="Expected CH2/Ch1"
+		     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+	<TargetQuantitationType_assnref>
+	  <Ratio_ref identifier="Ratio:CH2/CH1" />
+	</TargetQuantitationType_assnref>
+      </ExpectedValue>
+      <ExpectedValue	identifier="ExpectedValue:IntensityExpected"
+		     name="Expected Affymetrix Intensity"
+		     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Linear"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+	<TargetQuantitationType_assnref>
+	  <MeasuredSignal_ref identifier="MeasuredSignal:Intensity" />
+	</TargetQuantitationType_assnref>
+      </ExpectedValue>
+      <ExpectedValue	identifier="ExpectedValue:LogCorrectedIntensityExpected"
+		     name="Log Corrected Expected Affymetrix Intensity"
+		     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Log base2"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+	<TargetQuantitationType_assnref>
+	  <DerivedSignal_ref identifier="DerivedSignal:LogCorrectedIntensity" />
+	</TargetQuantitationType_assnref>
+      </ExpectedValue>
+      <ExpectedValue	identifier="ExpectedValue:LogSubtractedIntensityExpected"
+		     name="Expected Affymetrix Log ratio"
+		     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Log base2"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+	<TargetQuantitationType_assnref>
+	  <Ratio_ref identifier="Ratio:LogSubtractedIntensity" />
+	</TargetQuantitationType_assnref>
+      </ExpectedValue>
+      <ExpectedValue	identifier="ExpectedValue:AverageLogSubtractedIntensityExpected"
+		     name="Expected Affymetrix averaged log ratio"
+		     isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Log base2"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"	/>
+	</DataType>
+	<TargetQuantitationType_assnref>
+	  <Ratio_ref identifier="Ratio:AverageLogSubtractedIntensity" />
+	</TargetQuantitationType_assnref>
+      </ExpectedValue>
+      <SpecializedQuantitationType	identifier="SpecializedQuantitationType:CH1PIXGTBG"
+				   name="Percent CH1 Pixels greater than background"
+				   isBackground="false">
+	<Scale>
+	  <OntologyEntry	category="MGED:Scale"
+			 value="Percent"	/>
+	</Scale>
+	<DataType>
+	  <OntologyEntry	category="MGED:DataType"
+			 value="float"/>
+	</DataType>
+      </SpecializedQuantitationType>
+    </QuantitationType_assnlist>
+  </QuantitationType_package>
+
+  <BioAssayData_package>
+    <BioAssayDimension_assnlist>
+      <BioAssayDimension	identifier="BioAssayDimension:MeasuredBioAssay:1">
+	<BioAssays_assnreflist>
+	  <MeasuredBioAssay_ref	identifier="MeasuredBioAssay:Drosophila:OregonR:1" />
+	</BioAssays_assnreflist>
+      </BioAssayDimension>
+      <BioAssayDimension	identifier="BioAssayDimension:DerivedBioAssay:1">
+	<BioAssays_assnreflist>
+	  <DerivedBioAssay_ref	identifier="DerivedBioAssay:Drosophila:OregonR:1A" />
+	  <DerivedBioAssay_ref	identifier="DerivedBioAssay:Drosophila:OregonR:1B" />
+	</BioAssays_assnreflist>
+      </BioAssayDimension>
+    </BioAssayDimension_assnlist>
+    <DesignElementDimension_assnlist>
+      <DesignElementDimension	identifier="DesignElementDimension:FeatureDimension:1">
+	<DesignElements_assnreflist>
+	  <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:1000000" />
+	  <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+	  <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0006474" />
+	</DesignElements_assnreflist>
+      </DesignElementDimension>
+      <DesignElementDimension	identifier="DesignElementDimension:FeatureDimension:2">
+	<DesignElements_assnreflist>
+	  <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:1000000" />
+	</DesignElements_assnreflist>
+      </DesignElementDimension>
+      <DesignElementDimension	identifier="DesignElementDimension:FeatureDimension:3">
+	<DesignElements_assnreflist>
+	  <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+	</DesignElements_assnreflist>
+      </DesignElementDimension>
+      <DesignElementDimension	identifier="DesignElementDimension:FeatureDimension:4">
+	<DesignElements_assnreflist>
+	  <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0006474" />
+	</DesignElements_assnreflist>
+      </DesignElementDimension>
+      <DesignElementDimension	identifier="DesignElementDimension:ReporterDimension:1">
+	<DesignElements_assnreflist>
+	  <Reporter_ref	identifier="Reporter:BDGP:CK00026:3primeEST" />
+	</DesignElements_assnreflist>
+      </DesignElementDimension>
+      <DesignElementDimension	identifier="DesignElementDimension:CompositeSequenceDimension:1">
+	<DesignElements_assnreflist>
+	  <CompositeSequence_ref	identifier="CompositeSequence:BDGP:CK00026" />
+	  <CompositeSequence_ref	identifier="CompositeSequence:BDGP:BACR16J08" />
+	</DesignElements_assnreflist>
+      </DesignElementDimension>
+    </DesignElementDimension_assnlist>
+    <QuantitationTypeDimension_assnlist>
+      <QuantitationTypeDimension	identifier="QuantitationTypeDimension:Affymetrix:Feature">
+	<QuantitationTypes_assnreflist>
+	  <MeasuredSignal_ref	identifier="MeasuredSignal:Intensity" />
+	  <ExpectedValue_ref	identifier="ExpectedValue:IntensityExpected" />
+	</QuantitationTypes_assnreflist>
+      </QuantitationTypeDimension>
+      <QuantitationTypeDimension	identifier="QuantitationTypeDimension:Affymetrix:Reporter">
+	<QuantitationTypes_assnreflist>
+	  <DerivedSignal_ref	identifier="DerivedSignal:LogCorrectedIntensity" />
+	  <ExpectedValue_ref	identifier="ExpectedValue:LogCorrectedIntensityExpected" />
+	</QuantitationTypes_assnreflist>
+      </QuantitationTypeDimension>
+      <QuantitationTypeDimension	identifier="QuantitationTypeDimension:Affymetrix:CompositeSequence">
+	<QuantitationTypes_assnreflist>
+	  <Ratio_ref	identifier="Ratio:LogSubtractedIntensity" />
+	  <Ratio_ref	identifier="Ratio:AverageLogSubtractedIntensity" />
+	  <ExpectedValue_ref	identifier="ExpectedValue:LogSubtractedIntensityExpected" />
+	  <ExpectedValue_ref	identifier="ExpectedValue:AverageLogSubtractedIntensityExpected" />
+	</QuantitationTypes_assnreflist>
+      </QuantitationTypeDimension>
+    </QuantitationTypeDimension_assnlist>
+    <BioAssayMap_assnlist>
+      <BioAssayMap	identifier="BioAssayMap:MeasuredBioAssay:Normalization:1">
+	<ProtocolApplication_assnlist>
+	  <ProtocolApplication	activityDate="2001-08-01">
+	    <Protocol_ref	identifier="Protocol:Affymetrix:BioAssayMap:Normalization:1" />
+	  </ProtocolApplication>
+	</ProtocolApplication_assnlist>
+	<DerivedBioAssay_ref identifier="DerivedBioAssay:Drosophila:OregonR:1A"/>
+	<SourceBioAssays_assnreflist>
+	  <MeasuredBioAssay_ref identifier="MeasuredBioAssay:Drosophila:OregonR:1" />
+	</SourceBioAssays_assnreflist>
+      </BioAssayMap>
+      <BioAssayMap	identifier="BioAssayMap:MeasuredBioAssay:Normalization:1">
+	<ProtocolApplication_assnlist>
+	  <ProtocolApplication	activityDate="2001-08-01">
+	    <Protocol_ref	identifier="Protocol:Affymetrix:BioAssayMap:Normalization:2" />
+	  </ProtocolApplication>
+	</ProtocolApplication_assnlist>
+	<DerivedBioAssay_ref identifier="DerivedBioAssay:Drosophila:OregonR:1B"/>
+	<SourceBioAssays_assnreflist>
+	  <MeasuredBioAssay_ref identifier="MeasuredBioAssay:Drosophila:OregonR:1" />
+	</SourceBioAssays_assnreflist>
+      </BioAssayMap>
+    </BioAssayMap_assnlist>
+    <QuantitationTypeMap_assnlist>
+      <QuantitationTypeMap	identifier="QuantitationTypeMap:DerivedBioAssay:Corrected" >
+	<ProtocolApplication_assnlist>
+	  <ProtocolApplication	activityDate="2001-08-01">
+	    <Protocol_ref	identifier="Protocol:QuantitationTypeMap:Corrected" />
+	  </ProtocolApplication>
+	</ProtocolApplication_assnlist>
+	<TargetQuantitationType_assnref>
+	  <DerivedSignal_ref	identifier="DerivedSignal:LogCorrectedIntensity" />
+	</TargetQuantitationType_assnref>
+	<SourceQuantitationTypes_assnreflist>
+	  <MeasuredSignal_ref	identifier="MeasuredSignal:Intensity" />
+	</SourceQuantitationTypes_assnreflist>
+      </QuantitationTypeMap>
+      <QuantitationTypeMap	identifier="QuantitationTypeMap:DerivedBioAssay:LogSubtracted" >
+	<ProtocolApplication_assnlist>
+	  <ProtocolApplication	activityDate="2001-08-01">
+	    <Protocol_ref	identifier="Protocol:QuantitationTypeMap:LogSubtracted" />
+	  </ProtocolApplication>
+	</ProtocolApplication_assnlist>
+	<TargetQuantitationType_assnref>
+	  <Ratio_ref	identifier="Ratio:LogSubtractedIntensity" />
+	</TargetQuantitationType_assnref>
+	<SourceQuantitationTypes_assnreflist>
+	  <DerivedSignal_ref	identifier="DerivedSignal:LogCorrectedIntensity" />
+	</SourceQuantitationTypes_assnreflist>
+      </QuantitationTypeMap>
+      <QuantitationTypeMap	identifier="QuantitationTypeMap:DerivedBioAssay:AveragedLogSubtracted" >
+	<ProtocolApplication_assnlist>
+	  <ProtocolApplication	activityDate="2001-08-01">
+	    <Protocol_ref	identifier="Protocol:QuantitationTypeMap:AverageLogSubtracted" />
+	  </ProtocolApplication>
+	</ProtocolApplication_assnlist>
+	<TargetQuantitationType_assnref>
+	  <Ratio_ref	identifier="Ratio:AverageLogSubtractedIntensity" />
+	</TargetQuantitationType_assnref>
+	<SourceQuantitationTypes_assnreflist>
+	  <Ratio_ref	identifier="Ratio:LogSubtractedIntensity" />
+	</SourceQuantitationTypes_assnreflist>
+      </QuantitationTypeMap>
+    </QuantitationTypeMap_assnlist>
+    <BioAssayData_assnlist>
+      <MeasuredBioAssayData	identifier="MeasuredBioAssayData:Drosophila:OregonR:1:Tuples">
+	<SummaryStatistic_assnlist> 
+	  <NameValueType	name="Test"
+			 value="NULL" />
+	</SummaryStatistic_assnlist> 
+	<BioDataTuples>
+	  <QuantitationTypeDimension_ref	identifier="QuantitationTypeDimension:Affymetrix:Feature" />
+	  <DesignElementDimension_ref	identifier="DesignElementDimension:FeatureDimension:1" />
+	  <BioAssayDimension_ref	identifier="BioAssayDimension:MeasuredBioAssay:1" />
+	  <BioAssayTuple>
+	    <MeasuredBioAssay_ref	identifier="MeasuredBioAssay:Drosophila:OregonR:1" />
+	    <DesignElementTuple>
+	      <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:1000000" />
+	      <QuantitationTypeTuple>							
+		<MeasuredSignal_ref	identifier="MeasuredSignal:Intensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:IntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	    </DesignElementTuple>
+	    <DesignElementTuple>
+	      <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0005834" />
+	      <QuantitationTypeTuple>							
+		<MeasuredSignal_ref	identifier="MeasuredSignal:Intensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:IntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	    </DesignElementTuple>
+	    <DesignElementTuple>
+	      <Feature_ref	identifier="Feature:Affymetrix:DrosGenome1:0006474" />
+	      <QuantitationTypeTuple>							
+		<MeasuredSignal_ref	identifier="MeasuredSignal:Intensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:IntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	    </DesignElementTuple>
+	  </BioAssayTuple>	
+	</BioDataTuples>
+      </MeasuredBioAssayData>
+
+      <MeasuredBioAssayData	identifier="MeasuredBioAssayData:Drosophila:OregonR:1:Cube">
+	<BioDataCube>
+	  <DesignElementDimension_ref	identifier="DesignElementDimension:FeatureDimension:1" />
+	  <QuantitationTypeDimension_ref	identifier="QuantitationTypeDimension:Affymetrix:Feature" />
+	  <BioAssayDimension_ref	identifier="BioAssayDimension:MeasuredBioAssay:1" />
+	  <DataInternal>	2	2	2	2	2	2
+	  </DataInternal>
+	</BioDataCube>
+      </MeasuredBioAssayData>
+
+      <DerivedBioAssayData	identifier="DerivedBioAssayData:Drosophila:OregonR:1:Reporter:Tuple">
+	<BioDataTuples>
+	  <QuantitationTypeDimension_ref	identifier="QuantitationTypeDimension:Affymetrix:Reporter" />
+	  <DesignElementDimension_ref	identifier="DesignElementDimension:ReporterDimension:1" />
+	  <BioAssayDimension_ref	identifier="BioAssayDimension:DerivedBioAssay:1" />
+	  <BioAssayTuple>
+	    <DerivedBioAssay_ref	identifier="DerivedBioAssay:Drosophila:OregonR:1A" />
+	    <DesignElementTuple>
+	      <Reporter_ref	identifier="Reporter:BDGP:CK00026:3primeEST" />
+	      <QuantitationTypeTuple>							
+		<DerivedSignal_ref	identifier="DerivedSignal:LogCorrectedIntensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:LogCorrectedIntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	    </DesignElementTuple>
+	  </BioAssayTuple>	
+	  <BioAssayTuple>
+	    <DerivedBioAssay_ref	identifier="DerivedBioAssay:Drosophila:OregonR:1B" />
+	    <DesignElementTuple>
+	      <Reporter_ref	identifier="Reporter:BDGP:CK00026:3primeEST" />
+	      <QuantitationTypeTuple>							
+		<DerivedSignal_ref	identifier="DerivedSignal:LogCorrectedIntensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:LogCorrectedIntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	    </DesignElementTuple>
+	  </BioAssayTuple>	
+	</BioDataTuples>
+	<ProducerTransformation>
+	  <Transformation	identifier="Transformation:DerivedBioAssay:Reporter:CorrectedSignal">
+	  </Transformation>
+	</ProducerTransformation>
+      </DerivedBioAssayData>
+      <DerivedBioAssayData	identifier="DerivedBioAssayData:Drosophila:OregonR:1:Composite:Tuple">
+	<BioDataTuples>
+	  <QuantitationTypeDimension_ref	identifier="QuantitationTypeDimension:Affymetrix:CompositeSequence" />
+	  <DesignElementDimension_ref	identifier="DesignElementDimension:CompositeSequenceDimension:1" />
+	  <BioAssayDimension_ref	identifier="BioAssayDimension:DerivedBioAssay:1" />
+	  <BioAssayTuple>
+	    <DerivedBioAssay_ref	identifier="DerivedBioAssay:Drosophila:OregonR:1A" />
+	    <DesignElementTuple>
+	      <CompositeSequence_ref	identifier="CompositeSequence:BDGP:BACR16J08" />
+	      <QuantitationTypeTuple>							
+		<Ratio_ref	identifier="Ratio:LogSubtractedIntensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:LogSubtractedIntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<Ratio_ref	identifier="Ratio:AverageLogSubtractedIntensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:AverageLogSubtractedIntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	    </DesignElementTuple>
+	    <DesignElementTuple>
+	      <CompositeSequence_ref	identifier="CompositeSequence:BDGP:CK00026" />
+	      <QuantitationTypeTuple>							
+		<Ratio_ref	identifier="Ratio:LogSubtractedIntensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:LogSubtractedIntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<Ratio_ref	identifier="Ratio:AverageLogSubtractedIntensity" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	      <QuantitationTypeTuple>							
+		<ExpectedValue_ref	identifier="ExpectedValue:AverageLogSubtractedIntensityExpected" />
+		<Datum	Value="2" />
+	      </QuantitationTypeTuple>
+	    </DesignElementTuple>
+	  </BioAssayTuple>
+	</BioDataTuples>
+	<ProducerTransformation>
+	  <Transformation	identifier="Transformation:DerivedBioAssay:Composite:Ratio">
+	  </Transformation>
+	</ProducerTransformation>
+      </DerivedBioAssayData>
+      <DerivedBioAssayData	identifier="DerivedBioAssayData:Drosophila:OregonR:1:Composite:Cube">
+	<BioDataCube>
+	  <BioAssayDimension_ref	identifier="BioAssayDimension:DerivedBioAssay:1"/>
+	  <DesignElementDimension_ref	identifier="DesignElementDimension:CompositeSequenceDimension:1"/>
+	  <QuantitationTypeDimension_ref	identifier="QuantitationTypeDimension:Affymetrix:CompositeSequence"/>
+	  <DataExternal	dataFormat="MGED:BioDataCube:DataFormat:TabDelimitedText"
+			filenameURI="dataCube.txt" />
+	</BioDataCube>
+	<ProducerTransformation>
+	  <Transformation	identifier="Transformation:DerivedBioAssay:Composite:Ratio">
+	  </Transformation>
+	</ProducerTransformation>
+      </DerivedBioAssayData>
+    </BioAssayData_assnlist>
+  </BioAssayData_package>
+
+  <Experiment_package>
+    <Experiment_assnlist>
+      <Experiment	identifier="Experiment:Drosophila:OregonR">
+	<ExperimentDesign>
+	  <TopLevelBioAssays_assnreflist>
+	    <PhysicalBioAssay_ref	identifier="PhysicalBioAssay:Drosophila:OregonR:1" />
+	    <MeasuredBioAssay_ref	identifier="MeasuredBioAssay:Drosophila:OregonR:1" />
+	    <DerivedBioAssay_ref	identifier="DerivedBioAssay:Drosophila:OregonR:1A" />
+	  </TopLevelBioAssays_assnreflist>
+	  <ExperimentalFactor_assnlist>
+	    <ExperimentalFactor	identifier="ExperimentalFactor:Drosophila:Strain">
+	      <Category>
+		<OntologyEntry	category="MGED:ExperimentalFactor:Drosophila"
+			       value="Strain" />
+	      </Category>
+	      <FactorValue_assnlist>
+		<FactorValue	identifier="FactorValue:Drosophila:OregonR">
+		  <Measurement	value="OregonR" />
+		</FactorValue>
+	      </FactorValue_assnlist>
+	    </ExperimentalFactor>
+	    <ExperimentalFactor	identifier="ExperimentalFactor:Drosophila:Genotype">
+	      <Category>
+		<OntologyEntry	category="MGED:ExperimentalFactor:Drosophila"
+			       value="Genotype" />
+	      </Category>
+	      <FactorValue_assnlist>
+		<FactorValue	identifier="FactorValue:Drosophila:WT">
+		  <Measurement	value="Wild Type" />
+		</FactorValue>
+		<FactorValue	identifier="FactorValue:Drosophila:spz-">
+		  <Measurement	value="spaetzle" />
+		</FactorValue>
+		<FactorValue	identifier="FactorValue:Drosophila:toll10b">
+		  <Measurement	value="toll10b" />
+		</FactorValue>
+	      </FactorValue_assnlist>
+	    </ExperimentalFactor>
+	  </ExperimentalFactor_assnlist>
+	  <Type_assnlist>
+	    <OntologyEntry	category="MGED:ExperimentDesign:Type"
+			   value="GeneExpression" />		
+	  </Type_assnlist>
+	  <QualityControlDescription>
+	    <Description>
+	    </Description>
+	  </QualityControlDescription>
+	  <NormalizationDescription>
+	    <Description>
+	    </Description>
+	  </NormalizationDescription>
+	  <ReplicateDescription>
+	    <Description>
+	    </Description>
+	  </ReplicateDescription>				
+	</ExperimentDesign>
+      </Experiment>
+    </Experiment_assnlist>
+  </Experiment_package>
+
+  <HigherLevelAnalysis_package>
+    <BioAssayDataCluster_assnlist>
+      <BioAssayDataCluster	identifier="BioAssayDataCluster:MeasuredBioAssay:Feature">
+	<MeasuredBioAssayData_ref	identifier="MeasuredBioAssayData:Drosophila:OregonR:1:Tuples" />
+	<Node_assnlist>
+	  <Node>
+	    <Node_assnlist>
+	      <Node>
+		<NodeContent_assnlist>
+		  <NodeContent>
+		    <DesignElementDimension_ref	identifier="DesignElementDimension:FeatureDimension:2" />
+		  </NodeContent>
+		  <NodeContent>
+		    <DesignElementDimension_ref	identifier="DesignElementDimension:FeatureDimension:3" />
+		  </NodeContent>
+		</NodeContent_assnlist>
+	      </Node>
+	    </Node_assnlist>
+	  </Node>
+	  <Node>
+	    <Node_assnlist>
+	      <Node>
+		<NodeContent_assnlist>
+		  <NodeContent>
+		    <DesignElementDimension_ref	identifier="DesignElementDimension:FeatureDimension:4" />
+		  </NodeContent>
+		</NodeContent_assnlist>
+	      </Node>
+	    </Node_assnlist>
+	  </Node>
+	</Node_assnlist>
+      </BioAssayDataCluster>
+    </BioAssayDataCluster_assnlist>
+  </HigherLevelAnalysis_package>
+
+</MAGE-ML>

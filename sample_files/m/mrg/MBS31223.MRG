@@ -1,0 +1,2361 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against E:\RBBS\STOCK\RBBSSUB3.BAS to produce E:\RBBS\CHAT\RBBSSUB3.BAS
+* E:\RBBS\STOCK\RBBSSUB3.BAS:  Date 6-20-1992  Size 129071 bytes
+* ------------[ Created 12-23-1992 04:55:08 ]------------
+* REPLACING old line(s) by new
+' $linesize:132
+' $title: 'RBBSSUB3.BAS 17.4, Copyright 1986 - 92 by D. Thomas Mack'
+'  Copyright 1990 by D. Thomas Mack, all rights reserved.
+'  Name ...............: RBBSSUB3.BAS
+'  First Released .....: June 21, 1992
+'  Subsequent Releases.: 
+'  Copyright ..........: 1986 - 1992
+'  Purpose.............: The Remote Bulletin Board System for the IBM PC,
+'     RBBS-PC.BAS utilizes a lot of common subroutines.  Those that do not
+'     require error trapping are incorporated within RBBSSUB 2-5 as
+'     separately callable subroutines in order to free up as much
+'     code as possible within the 64K code segment used by RBBS-PC.BAS.
+'  Parameters..........: Most parameters are passed via a COMMON statement.
+'
+' Subroutine  Line               Function of Subroutine
+'   Name     Number
+'  AllCaps         58050 Convert a string to all upper case characters
+'  AMorPM          41498 Calculate the current time as AM or PM
+'  AskGraphics     43004 Determine users graphic default
+* ------[ first line different ]------
+'  BadFile         20841 Check for system crash attempt with bad device name 'Pe 09/11/91
+'  Carrier         42000 Test for whether to continue in RBBS
+'  CheckTime       58070 Test to insure that users don't exceed their time
+'  CheckCarrier    42005 Checks whether still have carrier
+'  CheckNewBul     58110 Check for new bulletins based on their file creation date
+'  CheckTimeRemain 41007 Set up to log off if time exceeded  'Lk 10/24/91
+'  CommInfo        44020 Get users baud rate and parity in a string format
+'  CountLines      58160 Count categories a file can be classified into
+'  CountNewFiles   58150 Check for number of files uploaded after a specific date
+'  DelayTime       50495 Wait number of seconds specified before returning
+'  DispCall        57001 Display callers file
+'  DispTimeRemain  41032 Compute and display time remaining
+'  DispUpDir       58165 Display the shared directory of the FMS mng. sys.
+'  FileLock        21993 Allow files to be shared among multiple RBBS-PC's
+'  FindFKey        30595 Handle local keyboard's function & ZSysop's keys
+'  FindLast        58600 Finds last occurence of a string in a string
+'  FlushKeys       35000  Completely flush all user input
+'  Graphic         43031 Determines if graphic ver of file exists, opens as #2
+'  GraphicX        43031 Determines if graphic ver of file exists, any file #
+'  HashRBBS        58080 "Hash" to a user's record in the USERS file
+'  InitFMS         58162 Initialize the RBBS-PC's File Management System
+'  InitIBM         30000 Open/create NetBIOS semaphore file
+'  AddCommas       58130 Format commands in the command prompt
+'  Library         21105 Provide support for "library" drives
+'  LinesInFile     58161 Counts lines in a file
+'  LoadNew         58140 Find the latest uploads
+'  ModemPut        52070 Write a modem command string to the modem
+'  NameCaps        58060 Convert a string to Proper Case (for name output)
+'  OpenMsg         30500 Open the messages file as file number 1
+'  PageUp          33202 Display user info. on local screen for ZSysop
+'  ReadProf        44000 Read user's profile on return from a "door"
+'  SaveProf        43068 Save the user's provile when exiting to "doors" or DOS
+'  SetOpts         58100 Set correct prompt line for each subsystem
+'  SortString      58120 Sort characters in a string
+'  TimeRemain      41010 Compute time remaining in minutes
+'  UpdtUpload      20705 Updates upload directory file
+'  WildFile        20290 Determines whether string matches a pattern
+'  XferType        21600 Identify the file transfer protocol
+'
+'  $INCLUDE: 'RBBS-VAR.BAS'
+'
+* REPLACING old line(s) by new
+20290 ' $SUBTITLE: 'WildFile -- Matches file to a filespec'
+' $PAGE
+'  NAME    -- WildFile
+'
+'  INPUTS  -- PARAMETER             MEANING
+'             Pattern$           PATTERN TO CHECK AGAINST
+'             ItemToMatch$       FILE NAME TO MATCH
+'
+'  OUTPUTS -- DoesMatch         WHETHER MATCHES
+'
+'  PURPOSE  Determine whether a file name is an instance of
+'    a file specification.  Exactly like DOS except that ? must have a
+'    character.
+'
+      SUB WildFile (Pattern$,ItemToMatch$,DoesMatch) STATIC
+      IF Pattern$ <> PrevPattern$ THEN _
+         CALL BreakFileName (Pattern$,PDrive$,PPrefix$,PExt$,ZFalse) : _
+         PrevPattern$ = Pattern$
+      CALL BreakFileName (ItemToMatch$,IDrive$,IPrefix$,IExt$,ZFalse)
+      DoesMatch = ZFalse
+      IF PDrive$ <> "" AND PDrive$ <> IDrive$ THEN _
+         EXIT SUB
+      CALL WildCard (PPrefix$,IPrefix$)
+      IF NOT ZOK THEN _
+         EXIT SUB
+      CALL WildCard (PExt$,IExt$)
+      DoesMatch = ZOK
+      END SUB
+* ------[ first line different ]------
+'
+' Pe 02/03/90---- Removed SendName and Testuser subs
+'
+'
+
+' ********* Maple UPDTU... ******
+'
+'
+* DELETING old line(s)
+20293
+20295
+20296
+20298
+20300
+20305
+20306
+20310
+20313
+20315
+* REPLACING old line(s) by new
+20705 ' $SUBTITLE: 'UpdtUpload -- Updates upload directory'
+' $PAGE
+* ------[ first line different ]------
+'  SUBROUTINE NAME    -- UpdtUpload
+'
+'  INPUT PARAMETERS   -- PARAMETER             MEANING
+'                        ZFileName$
+'                        ZUpldDir$
+'                        ZFileNameHold$
+'                        ZShareIt
+'                        ZFMSDirectory$
+'                        ZWasQ!
+'                        TCA!
+'
+'  OUTPut PARAMETERS  -- ZBytesInFile#
+'                        ZSecsPerSession!
+'
+'  SUBROUTINE PURPOSE -- UPON A SUCCESSFUL UPLOAD, ADD ENTRY TO THE UPLOAD
+'                        DIRECTORY AND GIVE ANY SESSION TIME CREDIT.
+'
+      SUB UpdtUpload (ZCategoryName$(1),ZCategoryCode$(1),LinesInDesc,WasFF) STATIC '<===
+      ON WasFF GOTO 20710,20724,20722   'Pe 11/20/89
+* DELETING old line(s)
+20708
+20709
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20710 ZAlreadyGiven = ZFalse         'Pe BatchUp Mod
+      ZAbort = ZFalse    ' PE ZAbort MOD
+      Call QuickTput1 ("Describe " + ZFileNameHold$ +ZCrLf$ + _
+     "( Begin with /  if for SysOp only) or enter Abort to cancel)" +ZCrLF$ + _
+       (LEFT$("|-----<Min----+---2+0---+---3+0---+---4+0---+-",_
+      ZMaxDescLen - 4) + "Max>"))    'JW03-20-92
+      ZOutTxt$ = ""
+      ZSubParm = 1
+      ZParseOff = ZTrue
+      CALL TGet
+      CALL Carrier
+      IF ZSubParm = -1 THEN _                'Pe 11/20/89
+         EXIT SUB                            'Pe 11/20/89
+      TempUserIn$ = ZUserIn$                 'Pe 02/17/90
+      CALL AllCaps (TempUserIn$)             'Pe 02/17/90
+      IF TempUserIn$ = "ABORT" THEN _        'Pe 02/17/90
+      ZAbort = ZTrue : _
+      TempUserIn$ = "" : _                    'Pe 02/17/90
+      EXIT SUB
+      IF LEN(ZUserIn$) > ZMaxDescLen OR LEN(ZUserIn$) < 7 THEN _
+CALL QuickTput1(" Description must be 7 chars min," + STR$(ZMaxDescLen) +_
+      " chars max" +ZCrLF$ +" ENTER the word Abort to cancel transfer...") : _
+         GOTO 20710
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20712 ZDesc$ = ZUserIn$
+      IF NOT ZLimitSearchToFMS THEN _
+         IF ZFMSDirectory$ <> ZUpldDir$ THEN _
+      IF LEFT$(ZUserIn$,1) = "/" OR LEFT$(ZUserIn$,1) = "\" THEN _
+             GOTO 20719_
+            ELSE GOTO 20716
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20715  IF LEFT$(ZUserIn$,1) = "/" OR LEFT$(ZUserIn$,1) = "\" THEN _
+         ZUCat$ = "***" : _
+         GOTO 20719
+* INSERTING new line(s)
+20716 ZUCat$ = ZDefaultCatCode$
+      IF ZSubParm = -1 OR _
+      ZUserSecLevel < ZSLCategorizeUplds THEN _
+      GOTO 20719
+     If ZMplPersUpload = Ztrue Then _                      'Pe 06/08/91
+               Goto 20719
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20717 TempIndex = ZLastIndex             'Pe 09/14/91
+      CALL BufFile (ZUpcatHelp$,WasX)
+      ZLastIndex = TempIndex             'Pe 09/14/91
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20718 ZOutTxt$ = "Upload best fits what category "
+      ZSubParm = 1
+      CALL TGet
+      CALL AraAllCaps (ZUserIn$(),1)
+      IF ZSubParm = -1 THEN _
+       EXIT SUB                                   'Pe 11/20/89
+      IF ZWasQ = 0 THEN _
+         GOTO 20717
+      IF ZUserIn$(1) = "H" OR _
+         ZUserIn$(1) = "*" OR _
+         ZUserIn$(1) = "?" THEN _
+         GOTO 20717
+      CALL SearchArray (ZUserIn$(1),ZCategoryName$(),ZNumCategories,Found)
+      IF Found > 0 THEN _
+         ZUCat$ = ZCategoryCode$(Found) : _
+         IF LEN(ZUCat$) > 0 AND LEN(ZUCat$) < 4 AND INSTR(ZUCat$,",") = 0 THEN _
+            GOTO 20719
+      ZUCat$ = ""
+      IF NOT ZLimitSearchToFMS THEN _
+         StrewTo$ = ZDirPath$ + _
+                     ZUserIn$(1) + _
+                     "." + _
+                     ZDirExtension$ : _
+   CALL FindIt (StrewTo$) : _                  'Pe 11/21/89
+    IF ZOK THEN _
+            GOTO 20719 _
+         ELSE CALL WORDInFile (ZUpcatHelp$,ZUserIn$(1),ZOK) : _
+              IF ZOK THEN _
+                 GOTO 20719
+      StrewTo$ = ""
+      CALL QuickTPut1 ("No such category " + ZUserIn$(1))
+      GOTO 20717                                      'Pe 11/21/89
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20719 IF ZUpBatchTransfer Then _
+      CALL BatchUpLoad (ZDesc$,ZUCat$,1) : _
+         Goto 20720
+          IF ZMplPersUpload = ZTrue THEN _
+           ZMplPersUpload = ZFalse : _
+          GOTO 20720
+        IF ZUserSecLevel >= ZAskExtendedDesc AND _
+         ZMaxExtendedLines > 0 AND ZSubParm <> -1 THEN _
+         ZOutTxt$ = "Add an EXTENDED DESCRIPTION of " + _
+              ZFileNameHold$ + " (Y,[N])" : _
+         ZTurboKey = -ZTurboKeyUser : _
+         ZSubParm = 1 : _
+         CALL TGet : _
+     IF ZSubParm <> -1 THEN _
+        IF  ZYes THEN _
+       CALL SkipLine (2):_
+      CALL QuickTPut1 (Chr$(7)+" Description will be Entered AFTER the UPLOAD is Completed"+ZCrLF$) : _
+    CALL DelayTime (2) :_
+   ZGetExtDesc = ZTrue
+  '
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20720 CALL OpenOutW ("UPDESC" +ZNodeID$ +".LST")
+          Print #2, ZFileName$
+          Print #2, ZFileNameHold$
+          Print #2, ZDesc$
+          Print #2, ZUCat$
+          Print #2, ZActiveFMSDir$
+          Print #2, ZFMSDirectory$
+          Print #2, ZAbort
+          Print #2, ZGetExtDesc
+          Print #2, StrewTo$
+          Print #2, ZAllwaysStrewTo$
+          Print #2, ZUpldDir$
+          Close 2
+  EXIT SUB
+' *********   routine AFTER the Upload is successfull and Extended = True *****
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20722 GOSUB 20760       'Pe 09/12/91
+      GOTO 20732        'Pe 09/12/91
+'
+'***** ENTRY POINT WHEN UPLOAD is Finished ***********
+'
+* DELETING old line(s)
+20723
+* INSERTING new line(s)
+ 20724 IF ZPrivateDoor THEN
+        CALL OpenWork (2,"UPDESC" +ZNodeID$ +".LST")
+         While Not EOF(2)
+          Input #2, ZFileName$
+          Input #2, ZFileNameHold$
+          Input #2, ZDesc$
+          Input #2, ZUCat$
+          Input #2, ZActiveFMSDir$
+          Input #2, ZFMSDirectory$
+          Input #2, ZAbort
+          Input #2, ZGetExtDesc
+          Input #2, StrewTo$
+          Input #2, ZAllwaysStrewTo$
+          InPut #2, ZUpldDir$
+         Wend
+        Close 2
+    END IF
+     CALL KillWork ("UPDESC" +ZNodeID$ +".LST")      'Pe 06/10/92
+         IF ZErrCode > 0 THEN _                      'Pe 06/10/92
+            ZErrCode = 0                             'Pe 06/10/92
+  GOSUB 20738        'find uploaded file
+'
+If Not ZAlreadyGiven THEN
+    CALL TimeRemain (MinsRemaining)
+      IF ZPrivateDoor THEN _
+         WasX! = ZUpldTimeFactor! * ZWasQ! _
+      ELSE WasX! = ZUpldTimeFactor! * (ZSecsUsedSession! - ZWasQ!)
+END IF
+'
+'************************ New Convert code begins here *******************
+' added X2ZIP?.LST.......01/18/90
+'
+'      Zip Convert code.  Does the following:
+'     IF X2ZIP? (?=Node #) is found then any file extension
+'     Listed in this file is NOT touched any other file will
+'     Be converted to ZIP format. IF the file is NOT found then
+'     user is asked to convert file....!! 
+'     The First line determins weather to ask user to Convert or not
+'     This should either be a Yes or NO (in Upper case only) if Yes
+'     then  user has the option of converting the file the rest of the
+'     file should have one EXTENSION  per line including the "."
+'    ex: .ARC <CR> 
+'
+'      PKUNZIP, PKZIP, PKUNPAK, PAK, LHARC, ZOO.BAT, WHAT.EXE, and LOOZ.EXE
+'         should be in the DOS path or the RBBS directory.  WHAT is used by
+'         ZOO.BAT
+'
+'      The Library work path (Config parm # 304) is used for a work area !!!
+'
+  IF ZAbort = ZTrue THEN _     'Corrects aborted uploads
+    EXIT SUB                'corrects aborted uploads
+     CALL BreakFileName (ZFileName$, WDR$, WZZ$, WX$, ZTrue)    'Pe 11/26/89
+      Ext$ = WX$
+'
+' Pe 09/25/91 to next comment
+'
+CALL BreakFileName (ZFileName$,Pre$,Body$,Ext$,ZFalse)
+  WasX$ = ZDiskForDos$ + "T" + Ext$ + ".BAT"
+   CALL FindIt (WasX$)
+    IF ZOK THEN
+     IF ZSysop OR ZUserSecLevel >= ZAddDirSecurity THEN ' DD120201
+        ZSubParm = 1                                    ' DD120201
+        ZOutTxt$ = "Test " + _             ' DD120201 'Pe 12/05/92
+                   ZFileName$ + "([Y],N)?"              ' DD120201
+        ZTurboKey = -ZTurboKeyUser                      ' DD120201
+        CALL TGet                                       ' DD120201
+        IF ZSubParm = -1 THEN _                         ' DD120201
+           EXIT SUB                                     ' DD120201
+        IF ZNO THEN _                                   ' DD120201
+           GOTO 20727                                   ' DD120201
+     END IF                                             ' DD120201
+     CALL QuickTPut1 ("Testing upload...")
+      CALL ReadDir (2,1)
+       ZGSRAra$(2) = ZNodeWorkDrvPath$ + "VCHK" + ZNodeFileID$
+         IF EOF(2) THEN _
+           WasX$ = ZOutTxt$ : _
+           ZGSRAra$(1) = ZFileName$ _
+          ELSE WasX$ = WasX$ + " " + _
+               ZFileName$ + " " + ZGSRAra$(2)
+           CALL ShellExit (WasX$)
+         CALL FindIt (ZGSRAra$(2))
+       IF ZOK THEN _
+         IF LOF(2) > 2 THEN _
+            ZBytesInFile# = 0.0 : _
+             WasX$ = "Deleting BAD upload " + ZFileNameHold$ : _
+              CALL QuickTPut1 (WasX$) : _
+             CALL UpdtCalr (WasX$,2) : _
+            CALL KillWork (ZFileName$) : _
+           EXIT SUB
+         GOTO 20727
+End if
+       WasX$ = ZDiskForDos$ + "C" + Ext$ + ZDefaultExtension$ + ".BAT"
+        CALL FindIt (WasX$)
+         IF NOT ZOK THEN _
+          GOTO 20727
+'
+     TooZip$ = ZDirPath$+"X2ZIP" + ZNodeID$ + ".LST"   'Pe 06/01/92
+   CALL FindIt (TooZip$)
+  IF NOT ZOK THEN _    'Pe 06/01/92
+    GOTO 20726
+      CALL OpenWork (2,TooZip$)
+       WHILE NOT EOF(2)
+         INPUT #2, Check$
+           IF Check$ = "Yes" or Check$ = "YES" THEN _
+             AskToConvert = Ztrue :_
+            CLOSE 2 : _
+           GOTO 20725
+          IF WX$ = Check$ THEN _ 
+         CLOSE 2: _
+        GOTO 20727
+       WEND
+     CLOSE 2 
+'
+20725 IF ZAutoEnd = 1 THEN                                        'Pe 01/24/90
+       IF WX$ = Check$ THEN GOTO 20727 Else GOTO 20726            'Pe 01/24/90
+      END IF
+IF ZSysop OR ZUserSecLevel > = ZAddDirSecurity OR AskToConvert = ZTrue THEN 
+AskToConvert = ZFalse
+ ZSubParm = 1
+  ZOutTxt$ = "Convert or verify " + ZFileName$ + " ([Y],N) "
+   ZTurboKey = -ZTurboKeyUser
+     CALL TGet 
+      IF ZSubParm = -1 THEN _
+        EXIT SUB
+         IF ZNO THEN _
+        GOTO 20727
+     END IF
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20726  ZOutTxt$ = "Converting"         'Pe 01/26/92
+     IF Ext$ = ZDefaultExtension$ THEN _
+    ZOutTxt$ = "Re-" + ZOutTxt$
+  CALL QuickTPut1 (ZOutTxt$ + " upload to "+ZDefaultExtension$+".  Please wait...")
+CALL OpenWork (2,WasX$)      'Pe 09/25/91
+     CALL ReadDir (2,1)
+      IF EOF(2) THEN _
+         WasX$ = ZOutTxt$
+      ZGSRAra$(1) = ZFileName$
+      CALL BreakFileName (ZFileName$,Pre$,Body$,Ext$,ZTrue)
+      ZFileNameHold$ = Body$ + "." + ZDefaultExtension$
+      ZUserIn$(0) = ZFileName$
+      ZFileName$ = Pre$ + ZFileNameHold$
+      CALL ShellExit (WasX$ + " " + Body$ + " " + ZNodeID$ + " " + Pre$) 'lk 06/03/91
+      CALL FindIt (ZFileName$)
+      IF NOT ZOK THEN _
+      CALL UpdtCalr (ZFileName$ + " < ABORTED in Cnvt >",2) : _
+         ZFileName$ = ZGSRAra$(1) : _
+         CALL FindIt (ZFileName$) : _
+         ZFileNameHold$ = Body$ + Ext$ : _
+         IF ZOK THEN _
+           ZFileName$ = ZFileNameHold$
+'
+' ***  adds BBS name , users name and description to Zip comment if succesfull
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20727 GOSUB 20738     'Pe 11/21/89 calls findit if ok add bytes and upload#
+'
+'Pe 01/26/92  Changes to add Zip Comments via a BAT file
+'             ext$ = Extension of file to add comment  eg ARJCMT.BAT for Arj's
+'             ZIPCMT.BAT for Zips
+'             format of the ZIPCMT.BAT file is as follows
+'             PKZIP -z [1] < [2]
+'
+'             can also use %1 %2  were %1 = Drive/path/filename
+'                                      %2 = Drive/Path/CommentFileName 
+'                                      %3 = Commport ( don't ask Why) 
+'
+'    Here is a BAT file that will add an advertisment + the Comment
+'   created by Maple RBBS to the Zip header ( WHY ??)
+'
+'    @Echo off
+'    Copy c:\Upload\MyAd.txt+c:\upload\upload.cmt c:\upload\upload1.cmt
+'    copy c:\upload\upload1.cmt c:\upload\upload.cmt
+'    del c:\upload\upload1.cmt
+'    PKZIP -z %1 < %2
+'
+    IF ZBytesInFile# > 2.0 THEN
+      CALL BreakFileName (ZFileName$,Pre$,Body$,Ext$,ZTrue)  'Pe 11/30/92
+     WasX$ = ZDiskForDos$+Mid$(Ext$,2,3)+"CMT.BAT"
+      CALL FindIt (WasX$)
+        IF ZOK THEN
+          CLOSE 2
+          CALL QuickTPut1 ("Adding Your Name and File Description to "+ _
+                            ZFileNameHold$ + " ..." + ZCrLF$)
+           CommentName$ =ZUpldSubDir$ +"\UPLOAD.CMT
+          ADDCMT1$ =ZCrLf$ +"Uploaded to "+ ZRBBSName$ +" By: "+ZActiveUserName$
+         ADDCMT2$ = ZCrLf$ +"Description: " + ZDesc$
+        ADDCOMMENT$ =  ADDCMT1$ + ADDCMT2$ + ZCrLf$
+       CALL OpenOutW (CommentName$)
+      PRINT #2, ADDCOMMENT$
+     CLOSE 2
+
+          ZGSRAra$(3) = MID$(RIGHT$(ZComPort$,1)+"0",1-ZLocalUser, 1)
+           CALL OpenWork (2,WasX$)
+           CALL ReadDir (2,1)
+                IF EOF(2) THEN _
+                   ZWasZ$ = ZOutTxt$ : _
+                   ZGSRAra$(1) = ZFileName$ : _
+                   ZGSRAra$(2) = CommentName$ _
+                ELSE ZWasZ$ = WasX$ + " " + ZFileName$ + _
+                              " " + CommentName$ + " " + ZGSRAra$(3)
+            CALL ShellExit (ZWasZ$)
+
+         GOSUB 20738          ' Adjust Bytes in file make sure we got it
+     END IF
+   END IF
+  ZOK = 0
+   CALL CheckNovell (ZOK)
+    IF ZOK <> -1 THEN _
+      CALL SetSharedAttr (ZFileName$, ZOK) : _
+       IF ZOK <> 0 THEN _
+        CALL PScrn ("Error setting shared attribute")
+      IF ZGetExtDesc THEN _
+        EXIT SUB 
+GOSUB 20760                   'Pe 09/12/91
+
+* DELETING old line(s)
+20728
+20729
+20731
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20732 If ZMusic = ZFalse Then                                       'Pe 03/13/92
+      IF LEFT$(ZUserIn$,1) = "/" OR LEFT$(ZUserIn$,1) = "\" OR NumPersonals > 0 THEN _
+      WX$ = WX$+"*"    'Pe 01/25/92
+      CALL AMorPM                                                  'Pe 11/25/89
+   IF ZActiveUserName$ = ZSysopPswd1$ + " " + ZSysopPswd2$ THEN _  'Pe 11/25/89
+           ULBYNAME$ = "Sysop" _                                   'Pe 06/05/91
+         ELSE ULBYNAME$ = ZActiveUserName$                         'Pe 11/25/89
+      ULXXX$ = WZZ$+WX$+SPACE$(13-(LEN(WZZ$)+LEN(WX$)))            'Pe 01/24/90
+      UPLOADLG$ = "{C1"+ ULXXX$ + _                                'Pe 01/24/90
+                  "{C2"+ ULBYNAME$+SPACE$(34-LEN(ULBYNAME$)) + _   'Pe 01/24/90
+                  "{C3"+ DATE$ + "   " + _                         'Pe 01/24/90
+                  "{C4"+ ZTime$+" {C0"                             'Pe 01/24/90
+         CALL OpenWorkA (ZDirPath$ +"UPLOADLG.DEF")                'Pe 03/13/92
+         CALL PrintWorkA (UPLOADLG$)                               'Pe 11/25/89
+         CLOSE 2                                                   'Pe 01/18/90
+End IF                                                             'Pe 03/13/92
+         IF ZFMSDirectory$ <> ZUpldDir$ THEN _ 
+        IF LEFT$(ZUserIn$,1) = "/" OR LEFT$(ZUserIn$,1) = "\" THEN _
+         CALL UpdtCalr (ZUserIn$,2): _
+       GOTO 20733
+IF NumPersonals <> 0 THEN _ 
+         GOTO 20733            
+      IF ZPrivateDoor THEN _   
+         ZWasEN$ = ZUpldDoor$ _
+      ELSE ZWasEN$ = ZUpldDir$ 
+      GOSUB 20734 
+* INSERTING new line(s)
+20733 ZWasDF$ = " >> uploaded << "
+      CALL BreakFileName (ZFileName$,DR$,WasX$,Extension$,ZTrue)
+      ZWasZ$ = WasX$ + _
+           Extension$ + _
+           ZWasDF$ + _
+           " at " + _
+           ZTime$ + _
+           " using " + _
+           ZWasFT$ + _
+           STR$(ZBytesInFile#)
+      CALL UpdtCalr (ZWasZ$,2)
+      ZUplds = ZUplds + 1
+      ZGlobalUplds = ZGlobalUplds + 1
+      ZULBytes! = ZULBytes! + ZBytesInFile#
+      ZGlobalULBytes! = ZGlobalULBytes! + ZBytesInFile#
+'
+IF NOT ZAlreadyGiven THEN
+      CALL TimeRemain (MinsRemaining!)
+      MinsToAdd = WasX! / 60
+      CALL ChkAddedTime (MinsToAdd)
+      WasX! = MinsToAdd * 60!
+      ZTimeCredits! = ZTimeCredits! + WasX!
+      ZSecsPerSession! = ZSecsPerSession! + WasX!
+      IF ZPrivateDoor THEN _
+         WasX! = (WasX! - ZWasQ!) / 60.0 _
+      ELSE WasX! = (WasX! - ZSecsUsedSession! + ZWasQ!)/60.0
+      WasX$ = STR$(FIX(WasX!*10.0))
+      WasX$ = LEFT$(WasX$,LEN(WasX$)-1) + "." + RIGHT$(WasX$,1)
+        IF WasX! > 1.0 THEN _
+       CALL QuickTPut1 ("Session time increased by"+WasX$+" minutes")
+END IF
+      CALL QuickTPut ("Upload successful, Thanks for the file " + ZFirstName$ ,1)
+     CALL DelayTime (2)       'Pe 02/23/90
+    ZGetExtDesc = ZFalse
+  EXIT SUB
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20734 '          ---[ lock file ]---
+      IF ZWasEN$ = "" THEN _
+         RETURN
+      IF NOT ZPrivateDoor THEN                                       ' DD120501
+         tempfile$ = ZNodeWorkDrvPath$ + "FILE_ID.DIZ"               ' DD120501
+         CALL FindItX (tempfile$,7)                                  ' DD120501
+         IF ZOK THEN                                                 ' DD120501
+            ZGetExtDesc = ZTrue                                      ' DD120501
+            IF LEFT$(ZDesc$,1) <> "/" AND LEFT$(ZDesc$,1) <> "\" THEN _' DD120501
+               ZDesc$ = "Description within Distribution Package:"   ' DD120501
+            WasLL = ZRightMargin                                     ' DD120501
+            ZRightMargin = 30 + ZMaxDescLen                          ' DD120501
+            IF ZRightMargin > 74 THEN _                              ' DD120501
+               ZRightMargin = 74                                     ' DD120501
+            LinesInDesc = 0                                          ' DD120501
+            WHILE NOT EOF(7) AND LinesInDesc < ZMaxExtendedLines     ' DD120501
+               LinesInDesc = LinesInDesc + 1                         ' DD120501
+               LINE INPUT #7,ZOutTxt$(LinesInDesc)                   ' DD120501
+               IF LEN(ZOutTxt$(LinesInDesc - 1)) < (ZRightMargin - 10) AND _' DD120501
+                  LinesInDesc > 1 THEN _                             ' DD120501
+                  ZOutTxt$(LinesInDesc - 1) = ZOutTxt$(LinesInDesc - 1) + _' DD120501
+                     " " + ZOutTxt$(LinesInDesc) : _                 ' DD120501
+                  ZOutTxt$(LinesInDesc) = "" : _                     ' DD120501
+                  ZOutTxt$(LinesInDesc + 1) = "" : _                 ' DD120501
+                  LinesInDesc = LinesInDesc - 1                      ' DD120501
+            WEND                                                     ' DD120501
+            CLOSE 7                                                  ' DD120501
+            CALL WordWrap (ZRightMargin,LinesInDesc,ZOutTxt$())      ' DD120501
+            CALL QuickTPut1 (CHR$(7) + ZEmphasizeOn$ + _             ' DD120501
+                 " Using FILE_ID.DIZ for Upload Description " + _    ' DD120501
+                ZEmphasizeOff$)                                      ' DD120501
+            CALL KillWork (tempfile$)                                ' DD120501
+            ZRightMargin = WasLL                                     ' DD120501
+         END IF                                                      ' DD120501
+         tempfile$ = ZNodeWorkDrvPath$ + "DESC.SDI"                  ' DD120801
+         CALL FindItX (tempfile$,7)                                  ' DD120801
+         IF ZOK THEN                                                 ' DD120801
+            LINE INPUT #7,ZDesc$                                     ' DD120801
+            IF LEN(ZDesc$) > ZMaxDescLen THEN                        ' DD120801
+               LeftDesc$ = LEFT$(ZDesc$,ZMaxDescLen)                 ' DD120801
+               RightDesc$ = RIGHT$(ZDesc$,LEN(ZDesc$)-ZMaxDescLen)   ' DD120801
+            END IF                                                   ' DD120801
+            CLOSE 7                                                  ' DD120801
+            ZDesc$ = LeftDesc$                                       ' DD120801
+         END IF                                                      ' DD120801
+      END IF                                                         ' DD120501
+      FMSFormat = ZFalse
+      IF (ZWasEN$ = ZFMSDirectory$ OR ZLimitSearchToFMS _
+          OR NumPersonals > 0 OR (ZPrivateDoor AND ZFMSDoor)) THEN _
+             FMSFormat = ZTrue _
+      ELSE CALL FindIt (ZWasEN$) : _
+           IF ZOK THEN _
+              CALL ReadDir (2,1) : _       'Pe 11/22/89
+              IF ZErrCode = 0 THEN _
+                 FMSFormat = (LEFT$(ZOutTxt$,4) = "\FMS")
+      IF NOT FMSFormat THEN _
+         ReadBackwards = ZFalse : _
+         FixedLen = 0 : _
+         ZUserIn$ = ZDesc$ : _
+         GOTO 20735                                  'Pe 06/08/91
+      FixedLen = 34 + ZMaxDescLen 
+      IF NumPersonals > 0 THEN _
+         WasX$ = "*" : _                                             ' Pe060891
+         MaxLen = ZPersonalLen _
+      ELSE MaxLen = 3 : _
+           WasX$ = ""                                                ' Pe060891
+      ZUCat$ = LEFT$(ZUCat$,MaxLen)
+      ZUCat$ = ZUCat$ + SPACE$(MaxLen - LEN(ZUCat$))
+      ZUserIn$ = ZDesc$ + _
+                 SPACE$(ZMaxDescLen - LEN(ZDesc$)) + _
+                 ZUCat$ + WasX$                                       ' Pe060891
+           ReadBackwards = ZTrue : _
+           CALL FindIt (ZWasEN$) : _
+           IF ZOK THEN _
+              CALL ReadDir (2,1) : _
+              IF ZErrCode = 0 THEN _
+                 ReadBackwards = (INSTR(ZOutTxt$," TOP ") = 0)
+* INSERTING new line(s)
+20735 CALL LockAppend      
+      IF ZErrCode <> 0 THEN _
+         GOTO  20736
+
+IF ZVoiceType <> 0 THEN                                        ' Pe 05/29/92
+      IF ReadBackwards and NumPersonals = 0 THEN _                  'PE 10/27/91
+	 PRINT #2, using LEFT$("\                             " _  'BH042091
+                             + "                              " _  'BH042091
+                             + "                    ", _           'BH042091
+                   ZMaxDescLen + 32) + "\  ."; _                   'BH042091
+      	           "  Uploaded by "+ ZActiveUserName$              'BH042091
+     '          ---[ append ]---
+      IF ZGetExtDesc THEN _
+         IF ReadBackwards THEN _
+            FOR WasI = LinesInDesc TO 1 STEP -1 : _
+               GOSUB 20737 : _
+            NEXT
+      PRINT #2,USING "\           \########  &  &"; _
+                     ZFileNameHold$; _
+                     ZBytesInFile#; _
+                     ZWasZ$; _
+                     ZUserIn$
+      IF ZGetExtDesc THEN _
+         IF NOT ReadBackwards THEN _
+            FOR WasI = 1 TO LinesInDesc : _
+               GOSUB 20737 : _
+            NEXT
+      IF NOT ReadBackwards and NumPersonals = 0 THEN _              ,Pe 10/27/91
+	 PRINT #2, using LEFT$("\                             " _  'BH042091
+                             + "                              " _  'BH042091
+                             + "                    ", _           'BH042091
+                   ZMaxDescLen + 32) + "\  ."; _                   'BH042091
+      	           "  Uploaded by "+ ZActiveUserName$              'BH042091
+       GOTO 20736
+   End IF                                                  'Pe 05/29/92
+
+      IF ZGetExtDesc THEN _
+         IF ReadBackwards THEN _
+            FOR WasI = LinesInDesc TO 1 STEP -1 : _
+               GOSUB 20737 : _
+            NEXT
+      PRINT #2,USING "\           \########  &  &"; _
+                     ZFileNameHold$; _
+                     ZBytesInFile#; _
+                     ZWasZ$; _
+                     ZUserIn$
+      IF ZGetExtDesc THEN _
+         IF NOT ReadBackwards THEN _
+            FOR WasI = 1 TO LinesInDesc : _
+               GOSUB 20737 : _
+            NEXT
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+20736 CALL UnLockAppend      'Pe 06/08/91
+      FixedLen = 0
+      RETURN
+* INSERTING new line(s)
+20737 WasX$ = ZOutTxt$(WasI)   'Pe 06/08/91
+      CALL Trim (WasX$)
+      IF WasX$ = "" THEN _
+         RETURN
+      IF NOT FMSFormat THEN _
+         PRINT #2,"  ";ZOutTxt$(WasI) : _
+         RETURN
+      IF FixedLen > LEN(ZOutTxt$(WasI)) THEN _
+         WasX$ = SPACE$(FixedLen - 1 - LEN(ZOutTxt$(WasI))) + "." _
+      ELSE WasX$ = ""
+      PRINT #2, "  ";LEFT$(ZOutTxt$(WasI),FixedLen);WasX$
+      RETURN
+20738 CALL FindIt (ZFileName$)
+20739 IF NOT ZOK THEN _                         'Pe 06/08/91
+         ZBytesInFile# = 0.0_
+      ELSE ZBytesInFile# = LOF(2)
+      IF ZBytesInFile# < 2.0 THEN _
+       ZAutoLogOffReq = ZFalse : _           'Pe 10/20/91     
+         EXIT SUB
+      RETURN
+* DELETING old line(s)
+20741
+20742
+* INSERTING new line(s)
+20760 CALL FindItX (ZNodeWorkFile$,7)
+      ZUserIn$ = ZDesc$
+      WasX$ = DATE$
+      ZWasZ$ = LEFT$(WasX$,6) + _
+           RIGHT$(WasX$,2)
+      ZWasEN$ = ZPersonalDir$
+      NumPersonals = 0
+      IF NOT ZOK THEN _                                            'Pe 06/10/92
+         GOTO 20781                                                'Pe 06/10/92
+      UserFileIndexSave = ZUserFileIndex
+      UserRecordHold$ = ZUserRecord$
+      WHILE NOT EOF(7)
+         CALL ReadParmsX (7,ZWorkAra$(),2,1)
+IF LEFT$(ZWorkAra$(1),4) <> "ALL " AND _
+           ZWorkAra$(1) <> "ALL" AND VAL (ZWorkAra$(2)) > 0 THEN _ 'Pe 06/10/92
+            NumPersonals = NumPersonals + 1 : _
+            ZUCat$ = ZWorkAra$(1) : _
+            GOSUB 20734 : _ 
+            RcvrRecNum = VAL (ZWorkAra$(2)) : _
+            CALL SetUserFlag (RcvrRecNum,4096,"file")
+      WEND
+      CLOSE 7
+      IF NumPersonals > 0 THEN _
+         ZUserFileIndex = UserFileIndexSave : _
+         LSET ZUserRecord$ = UserRecordHold$
+20781 ZUserIn$ = ZDesc$
+      WasX$ = DATE$
+      ZWasZ$ = LEFT$(WasX$,6) + _
+               RIGHT$(WasX$,2)
+      ZWasEN$ = StrewTo$
+      GOSUB 20734
+      ZWasEN$ = ZAllwaysStrewTo$
+      GOSUB 20734
+      RETURN
+      END SUB
+20841 ' $SUBTITLE: 'BadFile - subroutine to find bad file names'  'Pe 09/12/91
+' $PAGE
+'
+'  NAME    -- BadFile
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'               ZViolation$
+'               ZViolationsThisSession
+'               FilName$                      NAME OF FILE
+'
+'  OUTPUTS -- Result                      1 = FILE NAME IS OK
+'                                         2 = CHARACTER NOT ALLOWED
+'                                         3 = SYSTEM CRASH ATTEMPT
+'             ZViolationsThisSession     NUMBER OF VIOLATIONS
+'             FilName$                    Gets capitalized
+'
+'  PURPOSE -- To protect RBBS-PC against the use of bad file names
+'             to either crash the system or to breach RBBS-PC's security.
+'
+      SUB BadFile (FilName$,Result) STATIC
+'
+'
+' *  TEST FOR INVALID CHARACTERS IN FILENAME
+'
+'
+      Result = 2
+      IF LEN(FilName$) < 1 THEN _
+         EXIT SUB
+      CALL BadFileChar (FilName$,ZOK)
+      IF NOT ZOK THEN _
+         EXIT SUB
+      CALL AllCaps (FilName$)
+      WasXX = INSTR(FilName$,".")
+      IF WasXX > 0 THEN _
+         IF WasXX < LEN(FilName$) THEN _
+            WasXX = INSTR(WasXX + 1,FilName$,".") : _
+            IF WasXX > 0 THEN _
+               EXIT SUB
+      WasXX = LEN(FilName$)
+      IF WasXX => 3 THEN _
+         IF INSTR("PRN:CON:AUX:NUL:",FilName$) THEN _
+            GOTO 20842
+      IF WasXX => 4 THEN _
+         IF INSTR("COM1:COM2:LPT1:LPT2:LPT3:SCRN:KYBD:CONS:CLOCK$:",FilName$) THEN _ ' DD081501
+            GOTO 20842
+      CALL BreakFileName (FilName$,Pre$,Body$,Ext$,ZFalse)
+      IF LEN(Pre$) > 64 OR LEN(Body$) > 8 OR LEN(Body$) < 1 OR LEN(Ext$) > 3 THEN _
+         EXIT SUB
+      WasXX = LEN(Body$)
+      IF WasXX => 3 THEN _
+         IF INSTR("PRN:CON:AUX:NUL:",Body$) THEN _
+            GOTO 20842
+      IF WasXX => 4 THEN _
+         IF INSTR("COM1:COM2:LPT1:LPT2:LPT3:SCRN:KYBD:CONS:CLOCK$:",Body$) THEN _ ' DD081501
+            GOTO 20842
+      Result = 1
+      EXIT SUB
+20842 ZViolationsThisSession = ZMaxViolations   'Pe 09/12/91
+      ZViolation$ = ZViolation$ + _
+                   FilName$
+      Result = 3
+      END SUB
+'
+* DELETING old line(s)
+21105
+21110
+21115
+21117
+21120
+21121
+21122
+21126
+21130
+21140
+21145
+21150
+21151
+21152
+21153
+21155
+21156
+21157
+21158
+21159
+* REPLACING old line(s) by new
+21993 ' $SUBTITLE: 'FileLock - subroutine to share RBBS-PC files'
+' $PAGE
+'
+'  NAME    -- FileLock
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'             ZSubParm               = 1 UNLOCK USERS AND MESSAGES
+'                                      2 FLUSH MESSAGE RECORD TO DISK
+'                                        AND UNLOCK MESSAGES
+'                                      3 LOCK MESSAGE FILE
+'                                      4 UNLOCK MESSAGE FILE
+'                                      5 LOCK USER FILE
+'                                      6 LOCK 4 RECORD BLOCK IN USER
+'                                        FILE
+'                                      7 UNLOCK USER FILE
+'                                      8 UNLOCK 4 RECORD BLOCK IN USER
+'                                        FILE
+'                                      9 LOCK UPLOAD DIRECTORY OR
+'                                        COMMENTS FILE
+'                                     10 UNLOCK UPLOAD DIRECTORY OR
+'                                        COMMENTS FILE
+'               ACTIVE.MESSAGE FILE$     NAME OF MESSAGE FILE
+'               ZActiveUserFile$         NAME OF USER FILE
+'               CONFIG.FILE.NAME$        FILE NAME TO FLUSH RECORD FROM
+'               ZWasEN$                  UPLOAD DIRECTORY OR COMMENTS
+'                                        FILE NAME TO LOCK/UNLOCK
+'               ZNetworkType             TYPE OF NETWORK LOCKING TO USE
+'
+'  OUTPUTS -- ZSubParm = -1 TERMINATE RBBS-PC IMMEDATELY
+'             ZBlk
+'             ZLockDrive
+'             ZLockFileName$
+'             ZLockStatus$
+'             ZMsgFileLock
+'             ZUserBlockLock
+'             ZUserFileLock
+'             ZUserFileIndex
+'
+'  PURPOSE -- To lock and unlock the shared RBBS-PC files when
+'             multiple copies of RBBS-PC are sharing the same
+'             files in either a multi-tasking DOS environment or
+'             in a local area network environment
+'
+      SUB FileLock STATIC
+* ------[ first line different ]------
+If ZNetworkType = 0 THEN _                          'Pe 06/26/92
+    Exit Sub                                        'Pe 06/26/92
+      ON ZSubParm GOSUB 21995,21996,22000,25000,26000, _
+                                    26500,27000,27500,29000,29500
+      EXIT SUB
+'
+'
+' *  UNLOCK USERS AND MESSAGES
+'
+'
+* REPLACING old line(s) by new
+22000 IF ZMsgFileLock = ZTrue THEN _
+         RETURN
+      ZMsgFileLock = ZTrue
+      MID$(ZLockStatus$,1,2) = "LM"
+      ZSubParm = 2
+      CALL Line25
+      ZLockFileName$ = ZActiveMessageFile$
+      ON ZNetworkType GOTO 22100,22200,22300,22400,22500,29700
+      RETURN
+'
+'
+* ------[ first line different ]------
+' *  LOCK MESSAGE FILE (MULTI-LINK) removed in Maple code
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+22100   RETURN
+'
+'
+' *  LOCK MESSAGE FILE (OMNINET)
+'
+'
+* REPLACING old line(s) by new
+25000 IF NOT ZMsgFileLock THEN _
+         RETURN
+      ZMsgFileLock = ZFalse
+      MID$(ZLockStatus$,1,2) = "UM"
+      ZSubParm = 2
+      CALL Line25
+      ZLockFileName$ = ZActiveMessageFile$
+      ON ZNetworkType GOTO 25100,25200,25300,25400,25500,29800
+      RETURN
+'
+'
+* ------[ first line different ]------
+' *  UNLOCK MESSAGE FILE (MULTI-LINK) removed in maple code
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+25100  RETURN
+'
+'
+' *  UNLOCK MESSAGE FILE (OMNINET)
+'
+'
+* REPLACING old line(s) by new
+26000 IF ZUserFileLock = ZTrue THEN _
+         RETURN
+      ZUserFileLock = ZTrue
+      MID$(ZLockStatus$,4,2) = "LU"
+      ZSubParm = 2
+      CALL Line25
+      ZLockFileName$ = ZActiveUserFile$
+      ON ZNetworkType GOTO 26100,26200,22300,26300,22500,29720
+      RETURN
+'
+'
+* ------[ first line different ]------
+' *  LOCK USER FILE (MULTI-LINK) removed in maple code
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+26100  RETURN
+'
+'
+' *  LOCK USER FILE (OMNINET)
+'
+'
+* REPLACING old line(s) by new
+26500 IF ZUserBlockLock = ZTrue THEN _
+         RETURN
+      ZUserBlockLock = ZTrue
+      ZBlk = (ZUserFileIndex / 4) + .26
+      MID$(ZLockStatus$,7,2) = "LB"
+      ZSubParm = 2
+      CALL Line25
+      ON ZNetworkType GOTO 26600,26700,26800,26750,26900,29730
+      RETURN
+'
+'
+* ------[ first line different ]------
+' *  LOCK 4 RECORD BLOCK IN USER FILE (MULTI-LINK)  removed in maple code
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+26600  RETURN
+'
+'
+' *  LOCK 4 RECORD BLOCK IN USER FILE (OMNINET)
+'
+'
+* REPLACING old line(s) by new
+27000 IF NOT ZUserFileLock THEN _
+         RETURN
+      ZUserFileLock = ZFalse
+      MID$(ZLockStatus$,4,2) = "UU"
+      ZSubParm = 2
+      CALL Line25
+      ZLockFileName$ = ZActiveUserFile$
+      ON ZNetworkType GOTO 27100,27200,25300,27300,25500,29820
+      RETURN
+'
+'
+* ------[ first line different ]------
+' *  UNLOCK USER FILE (MULTI-LINK) removed in maple code
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+27100  RETURN
+'
+'
+' *  UNLOCK USER FILE (OMNINET)
+'
+'
+* REPLACING old line(s) by new
+27500 IF NOT ZUserBlockLock THEN _
+         RETURN
+      ZUserBlockLock = ZFalse
+      ZBlk = (ZUserFileIndex / 4) + .26
+      MID$(ZLockStatus$,7,2) = "UB"
+      ZSubParm = 2
+      CALL Line25
+      ON ZNetworkType GOTO 27600,27700,27800,27750,27900,29830
+      RETURN
+'
+'
+* ------[ first line different ]------
+' *  UNLOCK 4 RECORD BLOCK IN USER FILE (MULTI-LINK) removed in maple code
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+27600  RETURN
+'
+'
+' *  UNLOCK 4 RECORD BLOCK IN USER FILE (OMNINET)
+'
+'
+* REPLACING old line(s) by new
+29010 RETURN
+'
+'
+* ------[ first line different ]------
+' *  LOCK UPLOAD DIRECTORY OR COMMENTS (MULTI-LINK) removed in mpl code
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+29100 RETURN
+'
+'
+' *  LOCK UPLOAD DIRECTORY AND COMMENTS (DESQVIEW)
+'
+'
+* REPLACING old line(s) by new
+29510 RETURN
+'
+'
+* ------[ first line different ]------
+' *  UNLOCK UPLOAD DIRECTORY OR COMMENTS  (MULTI-LINK) remove in maple code
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+29600  EXIT SUB
+'
+'
+' *  UNLOCK UPLOAD DIRECTORY AND COMMENTS (DESQVIEW)
+'
+'
+* REPLACING old line(s) by new
+30500 ' $SUBTITLE: 'OpenMsg - open the MESSAGES file'
+' $PAGE
+'
+'  NAME    -- OpenMsg
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'              ZActiveMessageFile$
+'              ZShareIt
+'
+'  OUTPUTS --  ZMsgRec$
+'
+      SUB OpenMsg STATIC
+'
+'
+' *  OPEN AND DEFINE MESSAGE FILE
+'
+'
+* ------[ first line different ]------
+     CLOSE 1
+      IF ZShareIt THEN _
+         OPEN ZActiveMessageFile$ ACCESS READ WRITE SHARED AS #1 _
+      ELSE OPEN "R",1,ZActiveMessageFile$
+      FIELD 1,128 AS ZMsgRec$
+      END SUB
+* REPLACING old line(s) by new
+30595 ' $SUBTITLE: 'FindFKey - sub to handle local keyboard functions'
+' $PAGE
+'
+'  NAME    -- FindFKey
+'
+'  INPUTS  --  PARAMETER                 MEANING
+'             ZActiveMenu$              INDICATOR OF ACTIVE MENU
+'             ZAdjustedSecurity         Switch INDICATING TEMP. SECURITY CHANGE
+* ------[ first line different ]------
+'             ZFullScreenEditor         USER'S PREFERENCE FOR ANSIed
+'             ZCallersFile$             NAME OF CALLERS FILE
+'             ZChatAvail                Toggle INDICATING IF Sysop WILL CHAT
+'             ZCheckBulletLogon         USER'S PREFERENCE FOR BULLETIN CHECK
+'             ZConfMode                 INDICATOR THAT USER IS IN A CONFERENCE
+'             ZCursorLine               LINE THAT THE CURSOR IS AT
+'             ZCursorRow                ROW THAT THE CURSOR IS AT
+'             ZDiskForDos$              DISK TO LOAD COMMAND.COM FROM
+'             ZDiskFullGoOffline        INDICATOR OF WHAT TO DO WHEN DISK FULL
+'             ZExitToDoors              FLAG INDICATING EXITING TO DOORS
+'             ZExpertUser               FLAG FOR EXPERT/NOVICE USER MODE
+'             ZFirstName$               LOGGED ON USER'S First NAME
+'             ZF1Key                    FUNCTION KEY ONE VALUE
+'             ZF10Key                   FUNCTION KEY TEN VALUE
+'             ZWasGR                    GRAPHICS PREFERENCE OF USER
+'             ZLineFeeds                SWTICH FOR USER'S LINE FEED PREFERENCE
+'             ZLocalUser                FLAG INDICATING USER IS LOCAL
+'             ZMinLogonSec              MINIMUM SECURITY TO LOGON
+'             ZModemGoOffHookCmd$       COMMAND TO TAKE MODEM OFF-HOOK
+'             ZModemInitBaud$           BAUD TO INITIALIZE MODEM AT
+'             ZNodeID$                  NODE IDENTIFIER
+'             ZNodeRecIndex             NODE RECORD Index FOR THIS NODE
+'             ZNulls                    Switch FOR USER'S PREFERENCE FOR Nulls
+'             ZPrinter                  Toggle INDICATING Printer IS AVAILABLE
+'             ZPromptBell               USER'S PREFERENCE FOR BELLS ON PROMPTS
+'             SECONDS.PER.SESSION       TIME LEFT IN CURRENT USER SESSION
+'             ZSkipFilesLogon           USER'S LOGON NOTIFICIATION PREFERENCE
+'             ZSnoop                    Toggle INDICATING Snoop STATUS
+'             ZSubParm                  -8  = Sysop'S OPTION 6 REMOTELY
+'                                       -9  = GOT TO DOS
+'                                       -10 = Sysop GET'S SYSTEM NEXT
+'             ZSysop                    INDICATOR THAT USER IS Sysop
+'             ZSysopAnnoy               Toggle INDICATING Sysop IS AVAILABLE
+'             ZSysopNext                Toggle SO Sysop GETS SYSTEM NEXT
+'             ZUpperCase                USER'S PREFERENCE FOR UPPER/LOWER CASE
+'             ZUserFileIndex            Index INTO THE USER FILE FOR CALLER
+'             ZUserSecLevel             USER'S SECURITY LEVEL
+'             USERT.TRANSFER.DEFAULT    USER'S FILE Transfer DEFAULT PREFERENCE
+'
+'  OUTPUTS --
+'             ZAdjustedSecurity         Switch INDICATING TEMP. SECURITY CHANGE
+'             ZChatAvail                Toggle INDICATING IF Sysop WILL CHAT
+'             ZFunctionKey              VALUE 1 TO 10 CORRESPONDING TO
+'                                       THE FUNCTION KEY THAT WAS PRESSED
+'             ZKeyPressed$              CHARACTER STRING GENERATED BY KEY
+'             ZPrinter                  TOGGLE INDICATING Printer IS AVAILABLE
+'             ZSnoop                    Toggle INDICATING Snoop STATUS
+'             ZSysop                    INDICATOR THAT USER IS Sysop
+'             ZSysopAnnoy               Toggle INDICATING Sysop IS AVAILABLE
+'             ZSysopNext                Toggle SO Sysop GETS SYSTEM NEXT
+'             ZSubParm                  -1 Carrier LOST
+'                                       -2 CHAT MODE ACTIVATED
+'                                       -3 FORCE CALLER ON-LINE
+'                                       -4 EXIT TO SYSTEM IMMEDIATELY
+'                                       -5 EXIT TO SYSTEM AFTER MULTI-LINK CALL
+'                                       -6 TELL USER ACCESS IS DENIED
+'                                       -7 UPDATE CALLERS FILE AND DENY ACCESS
+'             ZUserSecLevel      USER'S SECURITY LEVEL
+'
+'  PURPOSE -- To determine if a function has been pressed on
+'             the PC'S keyboard that is running RBBS-PC.
+'
+      SUB FindFKey STATIC
+      LookUp = ZSubParm
+      IF ZSubParm < -1 THEN _
+         ZSubParm = 0 : _
+         IF LookUp = - 8 THEN _
+            GOTO 33070 _
+         ELSE IF LookUp = - 9 THEN _
+                 GOTO 31000 _
+              ELSE IF LookUp = - 10 THEN _
+                      GOTO 33090
+'
+'
+' *  TEST FOR FUNCTION KEY PRESSED
+'
+'
+* REPLACING old line(s) by new
+31398 IF NOT ZLocalUser THEN _
+         CALL Carrier : _
+         IF ZSubParm = -1 THEN _
+            GOTO 33970
+* ------[ first line different ]------
+'      IF INSTR("MUF",ZActiveMenu$) > 0 THEN 
+      IF INSTR("|@",ZActiveMenu$) = 0 THEN _      'Pe\05\30\91
+         GOTO 31399
+      ZCursorLine = CSRLIN
+      ZCursorRow = POS(0)
+      LOCATE 25,1
+      WasD$ = SPACE$(79)
+      GOSUB 33210
+      LOCATE 25,1
+      WasD$ ="Cannot FORCE OFF until user reaches MAIN menu"
+      GOSUB 33210
+      CALL DelayTime (1)
+      LOCATE ZCursorLine,ZCursorRow
+      ZSubParm = 1
+      CALL Line25
+      GOTO 33970
+* REPLACING old line(s) by new
+31399 IF ZFunctionKey = 22 THEN _
+         CALL SkipLine (2) : _
+* ------[ first line different ]------
+         CALL QuickTPut1 ("Sorry, " + ZFirstName$ + ", SysOp needs the system.") : _
+         CALL DelayTime (8 + ZBPS) : _
+         ZSubParm = -6 : _   'Pe 07/11/91
+         GOTO 33970
+      CALL QuickTPut1 (ZFirstName$ + ", goodbye and don't call back")
+      CALL DelayTime (8 + ZBPS) : _
+      IF ZUserFileIndex < 1 THEN _
+         ZSubParm = -6 : _                'Pe 07/11/91
+         GOTO 33970
+      ZUserSecLevel = ZMinLogonSec - 1
+      CALL DenyAccess
+      ZSubParm = -7                       'Pe 07/11/91
+      GOTO 33970
+'
+'
+' * F2 - COMMAND FROM LOCAL KEYBOARD (SYSOP EXIT TO DOS AND RETURN)
+'
+'
+
+* REPLACING old line(s) by new
+32000 IF NOT ZLocalUser THEN _
+         CALL SkipLine (1) : _
+         CALL QuickTPut1 ("Sysop exiting to DOS. Please wait...") : _
+         ZFunctionKey = 0 : _
+         CALL DelayTime (3)
+      CALL ShellExit (ZDiskForDos$ + "COMMAND")
+      'SHELL ZDiskForDos$ + _
+      '      "COMMAND"
+      CLS
+      IF NOT ZLocalUser THEN _
+         CALL Carrier : _
+         IF ZSubParm = -1 THEN _
+            GOTO 33970
+      ZSubParm = 2
+      CALL Line25
+      CALL QuickTPut1 ("Sysop back from DOS.  Returning control to you.")
+      ZCommPortStack$ = ZCarriageReturn$
+* ------[ first line different ]------
+      ZWasCM = 0                                                     ' DD062901/ANSICHAT
+      GOTO 33970
+'
+'
+' * F3 - COMMAND FROM LOCAL KEYBOARD (Printer Toggle)
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+33150 IF ZWasCM = ZTrue THEN _                                       ' DD070401/ANSICHAT
+         GOTO 33970                                                  ' DD070401/ANSICHAT
+      GOTO 33160
+* REPLACING old line(s) by new
+33160 CALL UpdtCalr ("Sysop began chat",1)
+      ZPageStatus$ = ""
+* ------[ first line different ]------
+      ZSysopGreeting$ = "Hi " + ZFirstName$ + ", this is " + _       ' DD062801/ANSICHAT
+                        ZSysopFirstName$ + " " + ZSysopLastName$ + _ ' DD062801/ANSICHAT
+                        ".  Sorry to break in and CHAT but..."       ' DD062801/ANSICHAT
+
+      IF NOT ZLimitMinsPerSession THEN _                       ' LK 08/17/91
+      CALL TimeBack (1)
+
+      IF ZCanANSIChat = ZTrue THEN                                   ' DD071301/ANSICHAT
+         CALL ANSIChat                                               ' DD062801/ANSICHAT
+      ELSE
+         CALL SkipLine (1)
+         CALL QuickTPut1 (ZSysopGreeting$)
+         CALL SysopChat
+      END IF
+'Sysop chat allows overstay of Scheduled Events- no way to control giveback
+      IF NOT ZLimitMinsPerSession THEN _                       ' LK 08/17/91
+      CALL TimeBack (2)
+      ZCommPortStack$ = CHR$(13)
+      GOTO 33155
+'
+'
+' * UP / CTRL-UP: INCREASE THE ON-LINE USER'S SECURITY BY ONE / FIVE
+'
+'
+* REPLACING old line(s) by new
+33190 ZAdjustedSecurity = ZTrue
+      ZUserSecSave = ZUserSecLevel
+      IF (NOT ZConfMode) AND (NOT ZSubBoard) THEN _
+         ZOrigSec = ZUserSecLevel
+      ZSubParm = 2
+      CALL Line25
+      CALL SetPrompt
+      GOTO 33970
+'
+* ------[ first line different ]------
+'
+' * PGUP DISPLAY USER PROFILE
+'
+'
+* REPLACING old line(s) by new
+33200 IF NOT ZLocalUser THEN _
+         CALL Carrier : _
+         IF ZSubParm = -1 THEN _
+            GOTO 33970
+* ------[ first line different ]------
+      CALL PageUp
+      WasD$ = MID$("NoviceExPERT",1 -6 * ZExpertUser,6)
+      GOSUB 33210
+      WasD$ = "GRAPHICS: " + _
+           MID$("None AsciiColor",ZWasGR * 5 + 1,5)
+      GOSUB 33210
+      WasD$ = "Protocol : " + _
+           ZUserXferDefault$
+      GOSUB 33210
+      WasD$ = "UPPER CASE " + _
+           MID$("and lowerONLY", 1 - 9 * ZUpperCase,9)
+      GOSUB 33210
+      WasD$ = "Line Feeds " + FNOffOn$(ZLineFeeds)
+      GOSUB 33210
+      WasD$ = "Nulls " + FNOffOn$(ZNulls)
+      GOSUB 33210
+      WasD$ = "Prompt Bell " + FNOffOn$(ZPromptBell)
+      GOSUB 33210
+      WasD$ = MID$("SKIP CHECK",1 -5 * ZCheckBulletLogon,5) + _
+           " old BULLETINS on logon."
+      GOSUB 33210
+      WasD$ = MID$("CHECKSKIP ",1 -5 * ZSkipFilesLogon,5) + _
+           " new files on logon."
+      GOSUB 33210
+      WasD$ = "AnsiEditor " + FNOffOn$(ZFullScreenEditor)
+      GOSUB 33210
+      ZTalkAll = ZFalse
+      GOTO 33970
+* REPLACING old line(s) by new
+33220 IF NOT ZLocalUser THEN _
+         CALL Carrier : _
+         IF ZSubParm = -1 THEN _
+            GOTO 33970
+      CLS
+* ------[ first line different ]------
+      ZWasCM = 0                                                     ' DD070401/ANSICHAT
+      GOTO 33155
+'
+'
+' * LEFT ARROW - DECREASE THE ON-LINE USER'S TIME BY ONE MINUTE
+'
+'
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+33970 IF ZFunctionKey < 22 AND ZFunctionKey > 15 THEN _           'DGS-L25MOD
+         MinsRemaining = (ZSecsPerSession! - ZSecsUsedSession!) / 60 : _ 'DGS-L25
+         CALL Line25                                              'DGS-L25
+      END SUB                                                     'DGS-L25MOD
+* REPLACING old line(s) by new
+33990 ' $SUBTITLE: 'PageUp - Display user profile to Sysop'
+' $PAGE
+'
+'  NAME    -- PageUp
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'                 ZActiveUserName$       CURRENT USER NAME
+'                 ZDnlds                 # OF FILES DOWNLOADED
+'                 ZExpirationDate$       REGISTRATION EXPIRATION
+'                 ZLastDateTimeOnSave$   Last DATE & TIME ON SYSTEM
+'                 ZLastMsgRead           Last MESSAGE READ BY USER
+'                 ZPswdSave$             USERS PASSWORD
+'                 ZTimesLoggedOn         TIMES USER HAS LOGGED ON
+'                 ZUplds                 # OF FILES UPLOADED
+'                 ZUserSecSave           USERS SECURITY LEVEL
+'
+'  OUTPUTS -- ZMsgRec$
+'
+      SUB PageUp STATIC
+      CALL LPrnt (" ",1)
+      CALL LPrnt ("USER NAME : " + ZActiveUserName$,1)
+      CALL LPrnt ("SECURITY  :" + STR$(ZUserSecSave),1)
+* ------[ first line different ]------
+      CALL LPrnt ("PASSWORD  : " + ZPswdSave$,1)
+      CALL LPrnt ("BAUD RATE : "+  ZCBaud$ + " Bps",1)       'Pe 06/01/92
+      CALL LPrnt ("READ MSG. :" + STR$(ZLastMsgRead),1)
+      CALL LPrnt ("TIMES ON  :" + STR$(ZTimesLoggedOn),1)
+      CALL LPrnt ("LAST ON   : " + ZLastDateTimeOnSave$,1)
+      CALL LPrnt ("DOWNLOADS :" + STR$(ZDnlds),1)
+      CALL LPrnt ("UPLOADS   :" + STR$(ZUplds),1)
+      IF ZEnforceRatios THEN _
+         CALL LPrnt ("DL-BYTES  :" + STR$(ZDLBytes!),1) : _
+         CALL LPrnt ("UL-BYTES  :" + STR$(ZULBytes!),1)
+      IF ZRestrictByDate THEN _
+         CALL LPrnt ("EXPIRATION: " + ZExpirationDate$,1)
+      CALL LPrnt ("User's Profile",1)
+      END SUB
+* INSERTING new line(s)
+41005 ' $SUBTITLE: 'CheckTimeRemain - Kicks off if no time remaining'
+' $PAGE
+'
+'  NAME    -- CheckTimeRemain
+'
+'  INPUTS  -- PARAMETER                 MEANING
+'
+'  OUTPUTS -- PARAMETER                 MEANING
+'             MinsRemaining         TIME IN MINUTES LEFT IN SESSION
+'             ZSecsUsedSession!     TIME USED IN SECONDS
+'             ZSubParm              -1 IF No TIME LEFT
+'
+      SUB CheckTimeRemain (MinsRemaining) STATIC
+      CALL TimeRemain (MinsRemaining)
+      IF ZBypassTimeCheck THEN _
+         EXIT SUB
+     GOTO 41009
+41007 IF MinsRemaining < 1 AND ZBankTime < 1  THEN _
+        ZSubParm = -1 : _
+         Return 
+       ZOutTxt$ = ZFG1$+" Your Time has Expired"+ZFG2$+" - "+ZFG3$+ _
+                    " Access The Time Bank  ([Y],N) "
+       ZTurboKey = -ZTurboKeyUser
+       CALL TGet
+       IF ZSubParm = -1 THEN _
+        Return
+         IF ZNO THEN _
+          ZSubParm = -1 : _
+         return
+        CALL BankTime
+       IF MinsRemaining <= 0 THEN _
+      ZSubParm = -1 : _
+      return
+* DELETING old line(s)
+41008
+* INSERTING new line(s)
+41009  IF MinsRemaining < 1 THEN _
+          GOSUB 41007
+       IF ZSubParm = -1 Then _
+          EXIT SUB
+        END SUB
+* REPLACING old line(s) by new
+41032 ' $SUBTITLE: 'DispTimeRemain - Display users time remaining'
+' $PAGE
+'
+'  NAME    -- DispTimeRemain
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'              MinsRemaining
+'
+'  OUTPUTS --     PARAMETER                    MEANING
+'                MinsRemaining               TIME IN MINUTES LEFT IN SESSION
+'
+      SUB DispTimeRemain (MinsRemaining) STATIC
+      CALL TimeRemain (MinsRemaining)
+      CALL QuickTPut1 (ZEmphasizeOff$ + STR$(MinsRemaining) + " min left")
+* ------[ first line different ]------
+      Call Line25            'Pe 05/30/91
+      END SUB
+* REPLACING old line(s) by new
+42000 ' $SUBTITLE: 'Carrier - sub to monitor carrier on comm. port'
+' $PAGE
+'
+'  NAME    -- Carrier
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'              ZAutoLogoffReq                  -1 if in autologoff request
+'
+'  OUTPUTS --  ZSubParm = 0                    CONTINUE
+'              ZSubParm = -1                   TERMINATE (No Carrier)
+'
+'  PURPOSE --  To test whether should continue in RBBS.  Reasons
+'              NOT to continue are:  autologoff, out of time, or
+'              carrier dropped.
+'
+* ------[ first line different ]------
+      SUB Carrier STATIC                                             ' KG010902
+      'IF ZAutoLogoffReq THEN _
+      '   IF NOT ZSuspendAutologoff THEN _
+      '      ZSubParm = -1 : _
+      '      EXIT SUB
+      CALL CheckCarrier
+      END SUB
+* REPLACING old line(s) by new
+43007 CALL QuickTPut1 ("GRAPHICS for text files and menus")
+      ZOutTxt$ = "Change from " + MID$("NAC",ZWasGR+1,1) + " to N)one, A)scii-IBM, C)olor-IBM, H)elp" + ZPressEnterExpert$
+* ------[ first line different ]------
+      ZSubParm = 1
+      ZTurboKey = -ZTurboKeyUser
+      CALL TGet
+      IF ZSubParm = -1 THEN _
+         EXIT SUB
+      IF ZWasQ = 0 THEN _
+         CALL QuickTPut1 ("Unchanged") : _
+         EXIT SUB
+      CALL AraAllCaps (ZUserIn$(),1)
+      ZWasGR = INSTR("NAC",ZUserIn$(1))
+      IF ZWasGR = 2 AND NOT ZEightBit THEN _
+         CALL QuickTPut1 ("Ascii unavailable.  Requires 8 bit") : _
+         GOTO 43007
+      IF ZWasGR = 0 THEN _
+         GOTO 43006
+      ZWasGR = ZWasGR - 1
+      CALL SetGraphic (ZWasGR)
+      END SUB
+'
+* REPLACING old line(s) by new
+43068 ' $SUBTITLE: 'SaveProf - subroutine to read a user profile'
+' $PAGE
+'
+'  NAME    -- SaveProf
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'              ZBPS
+'              ZEightBit
+'              ZExitToDoors
+'              ZWasGR
+'              ZMsgRec$
+'              ZNodeRecIndex
+'              ZSysop
+'              ZUpperCase
+'              ZTimeLoggedOn$
+'              ZPrivateDoor
+'              ZReliableMode
+'
+'  OUTPUTS -- NONE
+'
+'  PURPOSE -- Saves a user's options and communications parameters
+'             in the node record when a user exits to a "door" so
+'             that he is in the same status as when he exited.
+'
+      SUB SaveProf (IParm) STATIC
+* ------[ first line different ]------
+      ON IParm GOTO 43070,43080,43075
+* REPLACING old line(s) by new
+43070 ZActiveMessageFile$ = ZOrigMsgFile$
+      ZSubParm = 3
+      CALL FileLock
+      CALL OpenMsg
+      FIELD 1, 128 AS ZMsgRec$
+      GET 1,ZNodeRecIndex
+      IF ZGlobalSysop THEN _
+         MID$(ZMsgRec$,1,30) = "SYSOP" + SPACE$(25)
+      MID$(ZMsgRec$,40,2) = STR$(ZExitToDoors)
+      MID$(ZMsgRec$,42,2) = STR$(ZEightBit)
+* ------[ first line different ]------
+      MID$(ZMsgRec$,44,2) = RIGHT$(STR$(-ZBPS),2)    ' KG032604 ' MID$(ZMsgRec$,44,2) = STR$(ZBPS)
+      MID$(ZMsgRec$,46,2) = STR$(ZUpperCase)
+      MID$(ZMsgRec$,48,5) = MKS$(ZNumDnldBytes!) + MID$(STR$(-ZBatchTransfer),2)
+      MID$(ZMsgRec$,53,2) = STR$(ZWasGR)
+      MID$(ZMsgRec$,55,2) = STR$(ZSysop)
+      MID$(ZMsgRec$,65,3) = CHR$(VAL(LEFT$(ZOrigTimeLoggedOn$,2))) + _
+                            CHR$(VAL(MID$(ZOrigTimeLoggedOn$,4,2))) + _
+                            CHR$(VAL(MID$(ZOrigTimeLoggedOn$,7,2)))
+      MID$(ZMsgRec$,72,2) = STR$(ZPrivateDoor)
+      MID$(ZMsgRec$,74,1) = MID$(STR$(ZTransferFunction),2,1)
+      MID$(ZMsgRec$,75,1) = ZWasFT$
+      MID$(ZMsgRec$,113,2) = MKI$(CINT(ZTimeCredits!)/60)
+      MID$(ZMsgRec$,79,8) = LEFT$(ZDooredTo$+"        ",8)
+      MID$(ZMsgRec$,91,2) = STR$(ZReliableMode)
+      CALL BreakFileName (ZCurPUI$,ZOutTxt$,ZUserIn$,ZWasZ$,ZFalse)
+      MID$(ZMsgRec$,93,8) = ZUserIn$ + SPACE$(8 - LEN(ZUserIn$))
+      IF ZLocalUser THEN _
+         ZWasZ$ = ZCarriageReturn$ + ZCarriageReturn$ _
+      ELSE ZWasZ$ = " 0"
+      MID$(ZMsgRec$,101,2) = ZWasZ$
+      MID$(ZMsgRec$,103,2) = STR$(ZLocalUserMode)
+      ZConfName$ = LEFT$(ZConfName$,INSTR(ZConfName$ + " "," ") - 1)
+      MID$(ZMsgRec$,105,8) = ZConfName$ + SPACE$(8 - LEN(ZConfName$))
+      MID$(ZMsgRec$,115,1) = MID$(STR$(ZAutoLogoffReq),2,1)
+      MID$(ZMsgRec$,117,2) = STR$(ZMenuIndex)
+      MID$(ZMsgRec$,119,2) = LEFT$(DATE$,2)
+      MID$(ZMsgRec$,121,2) = MID$(DATE$,4,2)
+      MID$(ZMsgRec$,123,2) = RIGHT$(DATE$,2)
+      MID$(ZMsgRec$,125,2) = LEFT$(TIME$,2)
+      MID$(ZMsgRec$,127,2) = MID$(TIME$,4,2)
+' ***   Save additional parameters for door restoral
+* INSERTING new line(s)
+43075 CALL OpenOutW (ZNodeWorkDrvPath$+"DRST"+ZNodeFileID$+".DEF")
+      CALL PrintWorkA (STR$(ZLimitMinsPerSession))
+      CALL PrintWorkA (ZWasNG$)
+      CALL PrintWorkA (ZIndivValue$)
+      CALL PrintWorkA (ZOrigDateTimeOn$)
+      CALL PrintWorkA (ZOrigTimeLoggedOn$)
+      CALL PrintWorkA (STR$(ZUserFileIndex))
+      CALL PrintWorkA (ZUpldDir$)
+      ZOutTxt$ = STR$(ZUpldDir$ = ZFMSDirectory$ OR ZLimitSearchToFMS)
+      CALL PrintWorkA (ZOutTxt$)
+      CALL PrintWorkA (ZCBaud$)
+      CALL PrintWorkA (STR$(ZCanANSIChat))                           ' DD071901/ANSICHAT
+      CALL PrintWorkA (STR$(ZBankTime))        'lk 08/17/91 Save for Xpress
+      CALL PrintWorkA (STR$(ZBPS))                   'Pe 07/11/92
+      Call PrintWorkA (STR$(ZCBPS))                  'Pe 07/11/92
+      Call PrintWorkA (ZLastDateTimeOn$)             'Pe 12/20/92
+      Call PrintWorkA (ZCityState$)                  'Pe 12/23/92
+      Call PrintWorkA (ZListNewDate$)                'Pe 12/23/92
+      CLOSE 2
+If IPARM = 3 Then Exit Sub       'Pe 07/12/92
+* REPLACING old line(s) by new
+44000 ' $SUBTITLE: 'ReadProf - subroutine to restore a user profile'
+' $PAGE
+'
+'  NAME    -- ReadProf
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'              ZNodeRecIndex               NODE RECORD TO USE
+'              ZSysopPswd1$               Sysop'S PSEUDONYM 1
+'              ZSysopPswd2$               Sysop'S PSEUDONYM 2
+'
+'  OUTPUTS -- USER'S OPTIONS AND COMMUNICATIONS PARAMETERS
+'             UPON EXITING RBBS-PC TO A "DOOR"
+'
+'  PURPOSE -- Reset a user's options and communications parameters
+'             that were saved in the node record when a user exited
+'             to a "door" so that he is in the same status as when
+'             he exited.
+'
+* ------[ first line different ]------
+      SUB ReadProf (Iparm)STATIC
+On Iparm Goto 44001,44005
+* INSERTING new line(s)
+44001  FIELD 1, 128 AS ZMsgRec$
+      GET 1,ZNodeRecIndex
+      ZReliableMode = VAL(MID$(ZMsgRec$,91,2))
+      MID$(ZMsgRec$,40,2) = "00"
+      ZEightBit = VAL(MID$(ZMsgRec$,42,2))
+      ZBPS = -VAL(MID$(ZMsgRec$,44,2))        ' ZBPS = VAL(MID$(ZMsgRec$,44,2))
+      CALL CommInfo
+      ZBaudTest! = VAL(MID$(ZBaudRates$,(-5 * ZBPS),5))
+      ZUpperCase = VAL(MID$(ZMsgRec$,46,2))
+      ZNumDnldBytes! = CVS(MID$(ZMsgRec$,48,4))
+      ZBatchTransfer = (MID$(ZMsgRec$,52,1) = "1")
+      ZWasGR = VAL(MID$(ZMsgRec$,53,2))
+      HourLoggedOn$ = RIGHT$("0"+MID$(STR$(ASC(MID$(ZMsgRec$,65,1))),2),2)
+      MinLoggedOn$  = RIGHT$("0"+MID$(STR$(ASC(MID$(ZMsgRec$,66,1))),2),2)
+      SecLoggedOn$  = RIGHT$("0"+MID$(STR$(ASC(MID$(ZMsgRec$,67,1))),2),2)
+      ZTimeLoggedOn$ = HourLoggedOn$ + _
+                        ":" + _
+                        MinLoggedOn$ + _
+                        ":" + _
+                        SecLoggedOn$
+      ZTransferFunction = VAL(MID$(ZMsgRec$,74,1))
+      ZWasFT$ = MID$(ZMsgRec$,75,1)
+      ZTimeCredits! = 60!*CVI(MID$(ZMsgRec$,113,2))
+      ZDooredTo$ = MID$(ZMsgRec$,79,8)
+      CALL Trim (ZDooredTo$)
+      IF ZExitToDoors AND ZDooredTo$ <> "" THEN _
+         CALL OpenWork (2,ZDoorsDef$) : _
+         IF ZErrCode = 0 THEN _
+            CALL ReadParms (ZOutTxt$(),8,1) : _
+            WHILE ZErrCode = 0 AND ZOutTxt$(1) <> ZDooredTo$ : _
+               CALL ReadParms (ZOutTxt$(),8,1) : _
+            WEND : _
+            IF ZOutTxt$(1) = ZDooredTo$ THEN _
+               ZDoorSkipsPswd = (ZOutTxt$(6) <> "Y")
+      ZErrCode = 0
+      ZMenuIndex = VAL(MID$(ZMsgRec$,117,2))
+      ZCurPUI$ = MID$(ZMsgRec$,93,8)
+      CALL Remove (ZCurPUI$," ")
+      IF ZCurPUI$ <> "" THEN _
+         CALL BreakFileName (ZMainPUI$,ZOutTxt$,ZUserIn$,ZWasZ$,ZTrue) : _
+         ZCurPUI$ = ZOutTxt$ + ZCurPUI$ + ZWasZ$
+      ZCustomPUI = (ZCurPUI$ <> "")
+      ZLocalUser = (MID$(ZMsgRec$,101,2) = ZCarriageReturn$ + ZCarriageReturn$)
+      ZLocalUserMode = VAL(MID$(ZMsgRec$,103,2))
+      ZHomeConf$ = MID$(ZMsgRec$,105,8)
+      ZAutoLogoffReq = (VAL(MID$(ZMsgRec$,115,1)) <> 0)
+      CALL Trim (ZHomeConf$)
+      IF ZHomeConf$ = "MAIN" THEN _
+         ZHomeConf$ = ""
+      IF ZRequiredRings > 0 AND _
+         INSTR(ZModemInitCmd$,"S0=255") THEN _
+         COLOR 7,0,0 _
+      ELSE COLOR ZFG,ZBG,ZBorder
+      IF ZLocalUserMode THEN _
+         GOTO 44003
+      CALL SetBaud
+* REPLACING old line(s) by new
+44003 ZUserLogonTime! = VAL(HourLoggedOn$) * 3600! + _
+                        VAL(MinLoggedOn$) * 60! + _
+                        VAL(SecLoggedOn$)
+      HourLoggedOn$ = ""
+      MinLoggedOn$ = ""
+      SecLoggedOn$ = ""
+      IF ZMinsPerSession < 1 THEN _
+         ZMinsPerSession = 3
+      IF NOT ZEightBit THEN _
+         OUT ZLineCntlReg,&H1A
+      IF LEFT$(ZMsgRec$,7) = "SYSOP  " THEN _
+         ZFirstName$ = ZSysopPswd1$ : _
+* ------[ first line different ]------
+         ZActiveUserName$ = ZSysopPswd1$ + " " + ZSysopPswd2$ _
+      ELSE ZFirstNameEnd = INSTR(ZMsgRec$," ") : _
+           ZLastNameEnd = INSTR(ZFirstNameEnd + 1,ZMsgRec$ + " ","  ") : _
+           ZFirstName$ = LEFT$(ZMsgRec$,ZFirstNameEnd-1) : _
+           ZLastName$ = MID$(ZMsgRec$,ZFirstNameEnd + 1,ZLastNameEnd - (ZFirstNameEnd + 1)) : _
+           ZActiveUserName$ = MID$(ZFirstName$ + " " + ZLastName$,1,31)
+      ZWasZ$ = ZFirstName$
+* INSERTING new line(s)
+44005 CALL OpenWork (2,ZNodeWorkDrvPath$+"DRST"+ZNodeFileID$+".DEF")
+      CALL ReadDir (2,1)
+      ZLimitMinsPerSession = VAL (ZOutTxt$)
+      CALL ReadDir (2,1)
+      ZWasNG$ = ZOutTxt$
+      CALL ReadDir (2,1)
+      ZIndivValue$ = ZOutTxt$
+      CALL ReadDir (2,1)
+      ZOrigDateTimeOn$ = ZOutTxt$
+      CALL ReadDir (2,1)
+      ZOrigTimeLoggedOn$ = ZOutTxt$
+      CALL ReadDir (2,1)
+      ZUserFileIndex = VAL(ZOutTxt$)
+      CALL ReadDir (2,1)
+      ZUpldDoor$ = ZOutTxt$
+      CALL ReadDir (2,1)
+      ZFMSDoor = VAL(ZOutTxt$)
+      CALL ReadDir (2,1)
+      ZCBaud$ = ZOutTxt$
+      CALL ReadDir (2,1)                                             ' DD071901/ANSICHAT
+      ZCanANSIChat = VAL(ZOutTxt$)
+      CALL ReadDir (2,1)                          'lk 08/17/91  Xpress
+      ZTempBankTime = VAL (ZOutTxt$)              'lk 08/17/91 for Xpress
+      CALL ReadDir (2,1)                          'Pe 07/11/92
+      ZBPS = Val(ZOutTxt$)                        'Pe 07/11/92
+      CALL ReadDir (2,1)                          'Pe 07/11/92
+      ZCBPS = Val(ZOutTxt$)                       'Pe 07/11/92
+      CALL ReadDir (2,1)                          'Pe 12/20/92
+      ZLastDateTimeOn$ = ZOutTxt$                 'Pe 12/20/92
+      Call ReadDir (2,1)                          'Pe 12/23/92
+      ZCityState$ = ZOutTxt$                      'Pe 12/23/92
+      Call ReadDir (2,1)                          'Pe 12/23/92
+      ZListNewDate$ = ZOutTxt$                    'Pe 12/23/92
+      CLOSE 2
+      CALL DoorReturn
+      END SUB
+* REPLACING old line(s) by new
+44020 ' $SUBTITLE: 'CommInfo - sub for variable of users baud/parity'
+' $PAGE
+'
+'  NAME    -- CommInfo
+'
+'  INPUTS  --     PARAMETER                    MEANING
+'                 ZBPS                BAUD RATE INDICATOR
+'                 ZEightBit           INDICATE FOR N/8/1
+'
+'  OUTPUTS -- ZBaudParity$
+'
+'  PURPOSE -- Create a string that shows a users baud rate and parity
+'
+      SUB CommInfo STATIC
+'
+'
+' *  DETERMINE BAUD AND PARITY
+'
+'
+  IF ZReliableMode THEN _
+     ReliableMode$ = "-R," _
+  ELSE ReliableMode$ = ","
+  ZBaudParity$ = MID$(ZBaudRates$,(-5 * ZBPS),5) + _
+* ------[ first line different ]------
+                 " BAUD" + _                             'Pe 07/18/91
+                 ReliableMode$ + _
+                 MID$("N,8,1E,7,1",6 + 5 * ZEightBit,5)
+  ZBaudTest! = VAL(ZBaudParity$)
+  END SUB
+* REPLACING old line(s) by new
+57001 ' $SUBTITLE: 'DispCall - subroutine to display callers file'
+' $PAGE
+'
+'  NAME    -- DispCall
+'
+'  INPUTS  --     PARAMETER           MEANING
+'
+'  OUTPUTS --  (NONE)
+'
+'  PURPOSE -- Displays callers file to sysops and callers
+'
+      SUB DispCall STATIC
+      IF ZCallersFilePrefix$ = "" THEN _
+         EXIT SUB
+      PrevCal$ = ZCallersFile$
+      OrigCal$ = ZCallersFile$
+* ------[ first line different ]------
+      IF (ZUserSecLevel < ZSysopSecLevel) THEN _
+         GOTO 57004
+      CALL LinesInFile (ZCallersLst$,NumItems)
+      IF NumItems < 1 THEN _
+         GOTO 57004
+      IF ZAnsIndex < ZLastIndex THEN _
+         GOTO 57003
+* REPLACING old line(s) by new
+57005 IF CallersFileIndexTemp! < 1 OR ZRet THEN _
+* ------[ first line different ]------
+         CLOSE 4 : _                                ' Pe 07/09/92
+         GOTO 57101
+* REPLACING old line(s) by new
+57025 CallersFileIndexTemp! = CallersFileIndexTemp! - 1
+      GET 4,CallersFileIndexTemp!
+      WasZ = INSTR(ZCallersRecord$,"{")
+      IF WasZ < 1 OR WasZ > 15 THEN _
+         WasZ = 15
+* ------[ first line different ]------
+      IF ZSysop OR _
+         LEFT$(ZOutTxt$,3) <> "   " THEN _
+         ZOutTxt$ = ZOutTxt$ + LEFT$(ZCallersRecord$,WasZ - 1)
+      GOSUB 57100
+      IF ZSysop THEN _
+         ZOutTxt$ = MID$(ZCallersRecord$,WasZ) : _
+         GOSUB 57100
+      GOTO 57045
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+57030 IF ZSysop THEN _
+         GOSUB 57100
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+57100 IF INSTR(ZOutTxt$,"LOGON DENIED") THEN _
+         IF NOT ZSysop THEN _
+            RETURN
+      IF ZJumpSearching THEN _
+         ZWasDF$ = ZOutTxt$ : _
+         CALL AllCaps (ZWasDF$) : _
+         IF INSTR(ZWasDF$,ZJumpTo$) = 0 THEN _
+            RETURN _
+         ELSE CALL CheckColor (ZOutTxt$,ZJumpTo$,"") : _
+              ZJumpSearching = ZFalse
+      ZSubParm = 5
+      CALL TPut
+      WasX = 1
+      CALL AskMore ("",ZTrue,ZTrue,WasX,ZFalse)
+      IF ZSubParm = -1 THEN _                                        ' RH070402
+         GOTO 57102 _                                                ' RH070402
+      ELSE IF ZNo THEN _                                             ' RH070402
+         GOTO 57101                                                  ' RH070402
+      RETURN
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+57101 IF WasX < 999 AND ZSysOp AND NumItems > 1 THEN _
+         PrevCal$ = ZCallersFile$ : _
+         GOTO 57003
+* REPLACING old line(s) by new
+57102 ZJumpSupported = ZFalse
+* ------[ first line different ]------
+      IF OrigCal$ <> ZCallersFile$ THEN _                            ' RH070401
+         ZCallersFile$ = OrigCal$ : _
+         CALL SetCall
+      END SUB
+* REPLACING old line(s) by new
+58141 PrevLoadNew$ = ZFMSDirectory$
+      CALL OpenFMS (LastRec,WasL)
+      FIELD 2, 23 AS PreDate$, _
+                2 AS WasMM$, _
+                1 AS Fill1$, _
+                2 AS WasDD$, _
+                1 AS Fill2$, _
+                2 AS Year$, _
+* ------[ first line different ]------
+                (2 + ZMaxDescLen) AS ZDesc$, _
+                3 AS Category$, _
+                2 AS Fill4$
+      MaxRecs = UBOUND(Ara,1)
+      IF MaxRecs < 1 THEN _
+         MaxRecs = 1 _
+      ELSE IF MaxRecs > 23 THEN _
+              MaxRecs = 23
+      WasL = 0
+      WasK = LastRec
+      WHILE WasK > 0 AND WasL < MaxRecs
+         GET #2,WasK
+         IF INSTR("*\ ",LEFT$(PreDate$,1)) > 0 THEN _
+            GOTO 58142
+         IF (ZCanDnldFromUp OR Category$ <> ZDefaultCatCode$) THEN _
+            IF VAL(Year$) > 79 THEN _
+               WasL = WasL + 1 : _
+               Ara(WasL,1) = 372! * (VAL(Year$) - 80!) + 31! * VAL(WasMM$) + VAL(WasDD$) _
+            ELSE IF FirstWarning THEN _
+                    FirstWarning = ZFalse : _
+                    ZWasZ$ = "Invalid FMS format " + ZFMSDirectory$ : _
+                    ZSnoop = ZTrue : _
+                    CALL LPrnt (ZWasZ$,1) : _
+                    CALL UpdtCalr (ZWasZ$,2)
+         IF NOT ZCanDnldFromUp THEN _
+            WasX = ZMinSecToView _
+         ELSE IF Category$ = "***" THEN _
+                 WasX = ZSysopSecLevel _
+              ELSE IF Category$ = ZDefaultCatCode$ THEN _
+                      WasX = ZMinSecToView _
+              ELSE IF LEFT$(PreDate$,1) = "=" THEN _
+                      CALL CheckInt (ZDesc$) : _
+                      WasX = ZTestedIntValue _
+              ELSE WasX = ZOptSec(19)
+         Ara(WasL,2) = WasX
+* REPLACING old line(s) by new
+58165 ' $SUBTITLE: 'DispUpDir - sub to display FMS directory'
+' $PAGE
+'
+'  NAME    -- DispUpDir
+'
+'  INPUTS  -- PARAMETER             MEANING
+'             PassedCats$         FILE "CATEGORIES" TO BE INCLUDED IN
+'                                 THE SEARCH.
+'             SearchString$       STRING TO SEARCH ON WITHIN THE
+'                                 FILE "CATEGORIES" SELECTED
+'             SearchDate$         DATE EQUAL TO OR GREATER THAN TO BE
+'                                 SEARCHED FOR WITH THE "CATEGORIES"
+'                                 AND THE STRING TO SEARCH.
+'             DnldFlag            SET TO RECORD # OF LINE TO BEGIN
+'                                 VIEWING - 0 IF AT END
+'
+'  OUTPUTS -- DnldFlag            WHENEVER DOWNLOAD REQUESTED, SETS
+'                                 TO 1.  OTHERWISE LEAVES AT ZERO
+'  PURPOSE -- Display the files that meet the criteria selected in
+'             RBBS-PC upload management system on the users screen.
+'
+      SUB DispUpDir (PassedCats$,SearchString$, _
+                    SearchDate$,DnldFlag,AbortIndex) STATIC
+      IF AtEndList THEN _
+         AtEndList = ZFalse : _
+         IF DnldFlag > 0 THEN _
+            GOSUB 58185 : _
+            GOTO 58184
+      CALL AllCaps (SearchString$)
+      Blank$ = " "
+      ZStopInterrupts = ZFalse
+      Categories$ = "," + _
+                    PassedCats$ + _
+                    ","
+      CanDnld = (ZUserSecLevel => ZOptSec(19))
+      CanView = (ZUserSecLevel => ZOptSec(26))
+      ZJumpSupported = ZTrue
+      ZJumpSearching = ZFalse
+      GOSUB 58185
+      OrigDir$ = ZActiveFMSDir$
+      InList = (RelistAt > 0 AND ReListAt <= LastRec)
+      IF InList AND DnldFlag > 0 THEN _
+         UpldIndex = RelistAt : _
+         DnldFlag = 0 : _
+         GOTO 58179
+      ZJumpLast$ = ""
+      SearchFor$ = SearchString$
+* ------[ first line different ]------
+      ExtraPrompt$ = LEFT$(",T)ype",6+4*ZExpertUser)                 'Pe 10/21/89
+      ExtraPrompt$ = ExtraPrompt$ + LEFT$(",V)iew",6+4*ZExpertUser)  'Pe 10/21/89
+      IF ZPersonalDnld THEN _
+         ExtraPrompt$ = ExtraPrompt$ + ",*)new"
+      IF CanDnld THEN _
+         ExtraPrompt$ = ExtraPrompt$ + ",E)xtra,M)ark,D)nld"    'Pe 11/07/91
+      MaxPrint = ZPageLength - 1
+      BelowMinSec = (ZUserSecLevel < ZMinSecToView)
+      ZNonStop = ZNonStop OR (ZPageLength < 1)
+      FMSCheckPoint = 0
+      WildSearch = (INSTR(SearchString$,"?") > 0) _
+                     OR (INSTR(SearchString$,"*") > 0)
+      CALL AraAllCaps (ZUserIn$(),ZAnsIndex)
+      IF ZAnsIndex > 0 THEN _
+        IF ZLastCommand$ = "FP" AND INSTR("Ll",ZUserIn$(ZLastIndex)) = 0 THEN _
+            ZUserIn$(ZAnsIndex) = "D" : _
+            IF (UpldIndex > 0 AND UpldIndex <= LastRec) THEN _
+               GOTO 58180 _
+            ELSE Temp$ = "" : _
+                 GOTO 58196
+* REPLACING old line(s) by new
+58174 IF SearchDate$ <> "" THEN _
+         HoldCat$ = MID$(PartToPrint$,30,2) + _
+                MID$(PartToPrint$,24,2) + _
+                MID$(PartToPrint$,27,2) : _
+         IF HoldCat$ < SearchDate$ THEN _
+            IF ZDateOrderedFMS THEN _
+* ------[ first line different ]------
+               GOTO 58184 _
+            ELSE GOTO 58168
+'
+'
+' * Allow the FMS to be both fast and interruptable if a local
+' * user or there is nothing in the input buffer by using QuickTPut.
+'
+'
+* REPLACING old line(s) by new
+58180 WasX$ = ZUserIn$(ZAnsIndex)
+      CALL AllCaps (WasX$)
+      IF InList AND (ZAnsIndex >= ZLastIndex OR WasX$ <> "D") THEN _
+         ZTurboKey = -ZTurboKeyUser : _
+         ZStackC = ZTrue : _
+         CALL AskMore (ExtraPrompt$, ZTrue, ZFalse,AbortIndex,ZFalse) : _
+         IF ZSubParm = -1 THEN _
+            EXIT SUB _
+         ELSE ZLastIndex = ZWasQ :_
+* ------[ first line different ]------
+         IF NOT ZNo THEN _
+            ZAnsIndex = 1
+      IF ZSubParm = -1 THEN _
+         GOTO 58198
+      IF ZNo THEN _
+         ZLastIndex = 0 : _
+         GOTO 58198
+      WasX$ = ZUserIn$(ZAnsIndex)
+      CALL AllCaps (WasX$)
+'
+'Type TXT file mod  Pe 10/21/89
+'
+      IF WasX$ = "T" THEN _
+         CALL TypeFile : _
+         ZwasA = UpldIndex : _
+         GOSUB 58185 : _
+         UpldIndex = ZwasA : _
+         GOTO 58180
+'
+'
+      IF WasX$ = "V" THEN IF CanView THEN _
+         CALL GetArc : _
+         ZJumpSupported = ZTrue : _
+         ZWasA = UpldIndex : _
+         GOSUB 58185 : _
+         UpldIndex = ZWasA : _
+         GOTO 58180
+'
+'   
+     IF WasX$ = "E" THEN _                  'Pe 11/07/91
+      ZExtendedOff=NOT ZExtendedOff: _       'Pe 11/07/91
+      CALL QuickTPut1 ("Extended directory display "+FNOffOn$(NOT ZExtendedOff)) : _
+      GOTO 58168
+'
+'
+* REPLACING old line(s) by new
+58181 MarkingFiles = ZFalse
+      IF (WasX$ = "D" OR WasX$ = "M") THEN IF CanDnld THEN _
+* ------[ first line different ]------
+ MarkingFiles = (WasX$ = "M") : _
+         AtEndList = ZFalse : _                                  'PE 08/04/91
+         CALL AskItems ("DM",WasX$,ZTrue,"file",ZMarkedFiles$) : _   ' KG062401
+         IF ZWasQ = 0 THEN _
+            GOTO 58183
+      IF WasX$ = "*" THEN IF ZPersonalDnld THEN _
+         GOTO 58193
+* REPLACING old line(s) by new
+58183 IF ZJumpSearching THEN _
+         PrevSearch$ = SearchFor$ : _
+         SearchFor$ = ZJumpTo$ _
+      ELSE SearchFor$ = SearchString$ : _
+           IF NOT ZYes AND CanDnld THEN _
+              GOSUB 58188 : _
+* ------[ first line different ]------
+IF WasX$ <> "L" AND ZLastIndex >= ZAnsIndex AND NOT MarkingFiles AND NOT AtEndList THEN _ ' Pe 080391
+                 CALL SkipLine (1) : _
+                 DnldFlag = 1 : _
+                 ReListAt = UpldIndex : _
+                 EXIT SUB _
+              ELSE IF UpldIndex = CutoffRec THEN _
+                      GOTO 58184
+      IF ZNonStop THEN IF UpldIndex > 999 THEN _
+         IF (SearchDate$ = "" OR NOT ZExpertUser) THEN _
+            ZOutTxt$ = STR$(UpldIndex) + _
+               " lines left to search.  Really go non-stop? (Y,[N])" : _
+            ZNoAdvance = ZTrue : _
+            ZTurboKey = -ZTurboKeyUser : _
+            ZSubParm = 1 : _
+            CALL TGet : _
+            CALL WipeLine (79) : _
+            ZNonStop = ZYes
+      GOTO 58168
+* REPLACING old line(s) by new
+58184 IF ZChainedDir$ <> "" THEN _
+         ZActiveFMSDir$ = ZChainedDir$ : _
+         GOSUB 58185 : _
+         LastFName = 0 : _
+         GOTO 58168
+* ------[ first line different ]------
+      IF ZNo THEN _
+         GOTO 58198
+      Temp$ = "End list. "
+      AtEndList = ZTrue
+      UpldIndex = CutOffRec - ZUpInc
+      ZLastIndex = 0
+      GOTO 58196
+* REPLACING old line(s) by new
+58185 IF PassedCats$ = "P" THEN _
+         ZActiveFMSDir$ = ZPersonalDir$
+      CALL OpenFMS (UpldIndex,CatLen)
+      LastRec = UpldIndex
+      EndDesc = 33 + ZMaxDescLen
+      IF CatLen > 3 THEN _
+         Categories$ = ZActiveUserName$ : _
+         CALL Trim (Categories$) : _
+         Categories$ = "," + Categories$ + "," + LEFT$(",SYSOP,",-7*ZSysOp) : _
+         CanDnld = ZTrue : _
+         StatLen = 1 _
+      ELSE StatLen = 0
+* ------[ first line different ]------
+      FIELD 2, EndDesc AS PartToPrint$, _
+               CatLen AS Category$, _
+               StatLen AS PersonalStatus$, _
+               2 AS Filler$
+      PrevFMS$ = ZActiveFMSDir$
+* REPLACING old line(s) by new
+58188 IF ProcessedNew OR MarkingFiles OR NOT ZListOnly THEN _
+         ProcessedNew = ZFalse : _
+         RETURN
+      ZUserIn$(0) = ""
+      WasI = ZAnsIndex              ' check whether in dir
+      WHILE WasI <= ZLastIndex
+         CALL AraAllCaps (ZUserIn$(),WasI)
+         ZWasZ$ = ZUserIn$(WasI)
+         CALL UnMarkItems (ZMarkedFiles$,WasI,ZLastIndex,WasX,ZTrue)
+         Temp$ = ZUserIn$(WasI)
+* ------[ first line different ]------
+         CALL AllCaps (Temp$)                                        ' KG062401
+         IsProto = (LEN(Temp$) = 1 AND _
+                    INSTR(ZDefaultXfer$,Temp$) > 0)
+         ZOK = IsProto
+         WasJ = LastRec + 1
+         WasX = INSTR(Temp$,".")
+         AltTemp$ = ""
+         IF NOT IsProto THEN _
+            IF WasX = 0 THEN _
+               AltTemp$ = Temp$ + "." + ZDefaultExtension$ _
+            ELSE IF WasX = LEN(Temp$) THEN _
+                    AltTemp$ = LEFT$(Temp$,WasX-1)
+         WHILE WasJ > 1 AND NOT ZOK
+            WasJ = WasJ - 1
+            GET #2,WasJ
+            GOSUB 58191
+            IF CanGet THEN _
+               MID$(PartToPrint$,13,1) = " " : _
+               WasX$ = LEFT$(PartToPrint$,INSTR(PartToPrint$," ") - 1) : _
+               ZOK = (Temp$ = WasX$) : _
+               IF NOT ZOK THEN _
+                  IF AltTemp$ <> "" THEN _
+                  ZOK = (AltTemp$ = WasX$)
+         WEND
+         IF ZOK THEN _
+            GOSUB 58189 : _
+            IF ZOK OR IsProto THEN _
+               WasX$ = MID$(STR$(WasJ),2) : _
+               ZUserIn$(0) = ZUserIn$(0) + _
+                       WasX$ + _
+                       SPACE$(5 - LEN(WasX$))
+         IF NOT ZOK AND NOT IsProto THEN _
+            CALL QuickTPut1 (ZWasZ$ + " not found - omitted") : _
+            FOR WasK = WasI + 1 TO ZLastIndex : _
+               ZUserIn$(WasK - 1) = ZUserIn$(WasK) : _
+            NEXT : _
+            ZLastIndex = ZLastIndex - 1 : _
+            WasI = WasI - 1
+         WasI = WasI + 1
+      WEND
+      ZWasQ = ZLastIndex
+      RETURN
+* REPLACING old line(s) by new
+58189 IF IsProto THEN _
+         RETURN
+      ZUserIn$(WasI) = LEFT$(PartToPrint$,INSTR(PartToPrint$," ") - 1)
+      CALL FindFile (ZPersonalDrvPath$ + ZUserIn$(WasI),ZOK)
+      IF ZOK THEN _
+         ZUserIn$(WasI) = ZPersonalDrvPath$ + ZUserIn$(WasI) _
+* ------[ first line different ]------
+     ELSE CALL RotorsDir (ZUserIn$(WasI),ZSubDir$(),ZSubDirCount + _
+                      ((ZUserSecLevel < ZMinSecToView) OR _
+                       NOT ZCanDnldFromUp),ZTrue,"D") : _
+           GOSUB 58185
+      RETURN
+* REPLACING old line(s) by new
+58196 CALL QuickTPut (ZEmphasizeOff$,0)
+* ------[ first line different ]------
+      ZOutTxt$ = Temp$ + "L)ist,A)bort,T)ype,V)iew," + _             ' Pe 03/30/92
+                 LEFT$("*)dnld new,",-11*ZPersonalDnld) + _
+                 "M)ark" + LEFT$(",D)ownload",-10*CanDnld) + ZPressEnterExpert$
+      ZTurboKey = -ZTurboKeyUser
+If ZDnldCompleted and ZAutoEnd = 1 THEN _   'Pe 10/22/91
+         ZNonStop = ZTrue : _                            ' DD092501
+         ZStopInterrupts = ZTrue : _                     ' DD092501
+         ZAutoLogOffReq = ZTrue : _                      ' DD092501
+         GOTO 58199                                      ' DD092501
+      CALL PopCmdStack
+      WasX$ = ZUserIn$(ZAnsIndex)
+      CALL AllCaps (WasX$)
+      IF WasX$ = "A" THEN ZRet = ZTrue
+      IF ZWasQ = 0 OR ZRet OR ZSubParm < 0 THEN _
+         GOTO 58198
+'
+      IF WasX$ = "L" THEN _
+         ZActiveFMSDir$ = OrigDir$ : _
+         GOSUB 58185 : _
+         AtEndList = ZFalse : _
+         GOTO 58168   
+'
+'Type TXT file mod  Pe 10/21/89
+'
+      IF WasX$ = "T" THEN _
+         CALL TypeFile : _
+         ZwasA = UpldIndex : _
+         GOSUB 58185 : _
+         UpldIndex = ZwasA : _
+         GOTO 58180
+'
+'
+      IF WasX$ = "V" THEN IF CanView THEN _
+         CALL GetArc : _
+         ZJumpSupported = ZTrue : _
+         ZWasA = UpldIndex : _
+         GOSUB 58185 : _
+         UpldIndex = ZWasA : _
+         GOTO 58180
+         ZYes = ZFalse 
+         Goto 58181
+* REPLACING old line(s) by new
+58198 CLOSE 2
+      ZNonStop = (ZPageLength < 1)
+      ZStopInterrupts = ZFalse
+* ------[ first line different ]------
+* INSERTING new line(s)
+58199 ZOutTxt$ = ""                                      ' DD092501
+      ZActiveFMSDir$ = ""
+      ZJumpSupported = ZFalse
+      DnldFlag = 0
+      EXIT SUB
+      END SUB
+'
+' $SUBTITLE: 'TypeFile - subroutine to TYPE an ASCII FILE'
+' $PAGE
+'
+'  NAME    -- TYPEAFILE
+'
+'  PARAMETERs          
+'                      
+'                      
+'                      
+'
+'  PURPOSE -- Type a ASCII file to screen
+'
+      SUB TypeFile STATIC
+59141 CALL SkipLine (1)
+       ZOutTxt$ = "What ASCII file(s) to Type"+ZPressEnterExpert$
+        CALL PopCmdStack
+       IF ZSubParm = -1 OR ZWasQ = 0 THEN _
+      EXIT SUB
+59142 ZViolation$ = "TYPE File"
+      WasX = ZAnsIndex
+     FOR ZAnsIndex = WasX TO ZLastIndex
+      GOSUB 59143
+        IF ZSubParm < 0 THEN _
+       ZAnsIndex = ZLastIndex + 1
+      NEXT ZAnsIndex
+      IF ZLastIndex > 1 THEN _
+         EXIT SUB _
+      ELSE GOTO 59141
+59143  WasZ$ = ZUserIn$(ZAnsIndex)
+       CALL AllCaps (WasZ$)
+    IF INSTR(WasZ$,"*") OR INSTR(WasZ$,"?") THEN _
+   CALL QuickTPut ("Sorry Wildcards NOT allowed !",1) : _
+    RETURN
+       ZFileName$ = WasZ$
+        ZFileNameHold$ = WasZ$
+         CALL BadFile (ZFileNameHold$,BadFileNameIndex)
+        ON BadFileNameIndex GOTO 59145,59148,59150
+59145 CALL BadName (BadFileNameIndex,ZTrue)          'Pe 06/03/91
+      ON BadFileNameIndex GOTO 59146,59150
+59146 CALL RotorsDir (ZFileName$,ZSubDir$(),ZSubDirCount + (NOT ZSysop),ZTrue,"V") 'Pe 02/25/90
+       IF ZOK THEN _        ' Pe 02/06/90
+        GOTO 59158
+'
+'**********************8 Pe 08/12/91 next 5 lines *********
+If ZPersonalDnld Then _
+  ZFileName$ = ZPersonalDrvPath$ + WasZ$ : _
+CALL FindFile (ZFileName$,ZOK)
+ IF ZOK THEN _
+    GOTO 59158
+'************************************************************
+59148 WasZ$ = ZUserIn$(ZAnsIndex) + _
+           " not found!"
+      CALL UpdtCalr (WasZ$,2)
+      ZOutTxt$ = WasZ$ + _
+           " Type correct filename" + ZPressEnterExpert$
+      ZSubParm = 1
+      CALL TGet
+      IF ZSubParm = -1 OR ZWasQ = 0 THEN _
+         RETURN
+      ZUserIn$(ZAnsIndex) = ZUserIn$(1) 
+      GOTO 59143
+59150 CALL SecViolation
+      IF ZDenyAccess THEN _
+         EXIT SUB
+      GOTO 59148
+59158 CALL BreakFileName (WasZ$,Drive$,Prefix$,Ext$,ZFalse)
+      IF Ext$ = "" THEN _
+        GOTO 59160
+      IF INSTR("DWC,COM,EXE,GIF,PIC,DAT,BIN,ZIP,ARC,LZH,ZOO,PAK,ARJ,",Ext$+",") > 0 THEN _
+ CALL QuickTPut ("Not an ASCII File, Cannot Type files with " +Ext$ + " Extensions",1) : _
+         RETURN
+59160  CALL BufFile (ZFileName$,WasX) 
+       RETURN
+       END SUB
+'************************ Pe 01/25/92  to end of file **************
+'
+' $SUBTITLE: 'WhoDidIt - subroutine to Display Who Uploaded that file'
+' $PAGE
+'
+'  NAME    -- WhoDidIt
+'
+'  PARAMETERs None
+'                      
+'                      
+'                      
+'
+'PURPOSE - Maple Version of RBBS creates a file Called Uploadlg.def
+'          this file keeps track of who Uploaded what file
+'          File location is Drive/Path were *.DIR files are stored 'Pe 03/13/92
+'          Allows reading UPLOADLG.DEF file in reverse order
+'
+      SUB WhoDidIt STATIC
+59500 CALL SkipLine (3)
+
+ZOutTxt$ = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" + ZCrLF$+_
+" File Name    Uploader                          Date         Time"+ZCRLF$ + _
+           "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~" 
+Call QuickTput1 (ZOutTxt$)
+    Close 8
+   IF ZShareIt THEN _
+     OPEN ZDirPath$ +"UPLOADLG.DEF" FOR RANDOM SHARED AS #8 LEN=86 _  'Pe 03/13/92
+        ELSE OPEN "R",8,ZDirPAth$ +"UPLOADLG.DEF",86                  'Pe 03/13/92
+                   FIELD 8,84 AS ShowUp$, _
+                   2 AS fill$
+         RecordNum! = FIX(LOF(8) / 86)
+        ZJumpSupported = ZTrue
+       ZJumpSearching = ZFalse
+      ZJumpLast$ = ""
+59502 If RecordNum! < 1 OR ZRet THEN  _
+       GOTO 59560
+        Get #8, RecordNum!
+         ZOutTxt$ = ShowUp$
+          RecordNum! = RecordNum! - 1
+
+' Do Not display Sysop only and Personall Uploads
+
+ IF INSTR(ZOutTxt$,"*") > 0 and NOT ZSysop THEN _
+          GOTO 59502
+
+         GOSUB 59550
+        GOTO 59502      
+
+59550   IF ZJumpSearching THEN _
+          ZWasDF$ = ZOutTxt$ : _
+           CALL AllCaps (ZWasDF$) : _
+            IF INSTR(ZWasDF$,ZJumpTo$) = 0 THEN _
+               Return _
+             ELSE CALL CheckColor (ZOutTxt$,ZJumpTo$,"") : _
+              ZJumpSearching = ZFalse
+             ZSubParm = 5
+            CALL SmartText (ZOutTxt$,ZTrue,ZFalse)
+           CALL Tput
+          WasX=1
+        CALL AskMore ("",ZTrue,ZTrue,WasX,ZFalse)
+         IF ZNo OR ZSubParm = -1 THEN _
+            ZJumpSupported = ZFalse : _
+              ZJumpSearching = ZFalse : _
+               ZJumpLast$ = "" : _
+              Close 8 : _
+           Exit Sub 
+      Return
+59560 IF ZJumpSearching Then _
+      Call QuickTput1 ("...Search string NOT found"+ZCrLf$)
+      ZJumpSupported = ZFalse
+      ZJumpSearching = ZFalse
+      ZJumpLast$ = ""
+      Close 8
+     End Sub

@@ -1,0 +1,191 @@
+{VERSION 2 3 "IBM INTEL NT" "2.3" }
+{USTYLETAB {CSTYLE "Maple Input" -1 0 "Courier" 0 1 255 0 0 1 0 1 0 0 
+1 0 0 0 0 }{CSTYLE "2D Math" -1 2 "Times" 0 1 0 0 0 0 0 0 2 0 0 0 0 0 
+0 }{CSTYLE "2D Output" 2 20 "" 0 1 0 0 255 1 0 0 0 0 0 0 0 0 0 }
+{PSTYLE "Normal" -1 0 1 {CSTYLE "" -1 -1 "" 0 1 0 0 0 0 0 0 0 0 0 0 0 
+0 0 }0 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "Maple Output" 0 11 1 
+{CSTYLE "" -1 -1 "" 0 1 0 0 12 0 0 0 0 0 0 0 0 0 0 }3 3 0 -1 -1 -1 0 
+0 0 0 0 0 -1 0 }{PSTYLE "" 0 256 1 {CSTYLE "" -1 -1 "" 0 1 121 136 0 
+0 1 1 0 0 0 0 0 0 0 }3 0 0 -1 -1 -1 0 0 0 0 0 0 -1 0 }{PSTYLE "" 0 
+257 1 {CSTYLE "" -1 -1 "" 0 1 16 0 0 0 1 1 0 0 0 0 0 0 0 }3 0 0 -1 -1 
+-1 0 0 0 0 0 0 -1 0 }}
+{SECT 0 {EXCHG {PARA 256 "" 0 "" {TEXT -1 20 "Programming In Maple" }
+{MPLTEXT 1 0 0 "" }}{PARA 257 "" 0 "" {TEXT -1 18 "D.R.Brook, mat8drb
+" }{MPLTEXT 1 0 0 "" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "Problem 1" 
+}{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 7 "x:=1.0:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "f:=x->x^3+4*x+3;" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 11 "g:=D(f)(x):" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "
+while f(x)>1.0e-5 do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "    newx:=x
+-f(x)/g(x):" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "    x:=newx: " }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "    print(`X`=x);" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 28 "print (
+`The solution is`,x);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "restart;" }
+}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"fG:6#%\"xG6\"6$%)operatorG%&arrow
+GF(,(*$9$\"\"$\"\"\"F.\"\"%F/F0F(F(" }}{PARA 11 "" 1 "" {XPPMATH 20 "6
+#/%\"XG$!*Vr&G9!\"*" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/%\"XG$!+`Uz$*[
+!#5" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/%\"XG$!+VCi:i!#5" }}{PARA 11 "
+" 1 "" {XPPMATH 20 "6#/%\"XG$!+FP]1m!#5" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#/%\"XG$!+/\"\\^q'!#5" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/%\"XG$!
++6opGn!#5" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/%\"XG$!+DbBMn!#5" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#/%\"XG$!+eO`Nn!#5" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#/%\"XG$!+^w$et'!#5" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/
+%\"XG$!+D)3ft'!#5" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/%\"XG$!+)[Dft'!#
+5" }}{PARA 11 "" 1 "" {XPPMATH 20 "6$%0The~solution~isG$!+)[Dft'!#5" }
+}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "Problem 2" }{MPLTEXT 1 0 0 "" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "restart;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 7 "x:=0.7:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "n:=1:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "b:=1:" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 9 "funct:=1:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "a:=1:" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 23 "while abs(b)>1.0e-10 do" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 24 "   b:=b*x*(0.5-(a-1))/a:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 18 "   funct:=funct+b:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+10 "   a:=a+1:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 14 "print (funct);" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#$\"+z/%QI\"!\"*" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "Problem 3
+" }{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 37 "A:=array([[1
+,3,7],[-1,2,0],[6,1,2]]):" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "B:=arr
+ay(1..3,1..3):" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "for i to 3 do" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "   for j to 3 do" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 26 "      B[i,j]:=A[j,i];     " }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 6 "   od;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "C:=array(1..3,1..3):" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 13 "for i to 3 do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 16 "   for j to 3 do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "      s:=
+0;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 19 "      for k to 3 do" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 28 "         s:=s+A[i,k]*B[k,j];" }}{PARA 0 "
+> " 0 "" {MPLTEXT 1 0 9 "      od;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+17 "       C[i,j]:=s;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "   od;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 10 "trace_:=0:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "for r to 3 do" 
+}}{PARA 0 "> " 0 "" {MPLTEXT 1 0 25 "   trace_:=trace_+C[r,r]:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 36 "print(`trace of matrix AB`= trace_);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 0 "" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#/%3trace~of~matrix
+~ABG\"$0\"" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "Problem 4" }
+{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 24 "for n from 400 \+
+to 500 do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 26 "   if isprime(n)=true \+
+then" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 30 "     if isprime(n+2)=true t
+hen" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "        print(n, n+2);" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "     fi;       " }}{PARA 0 "> " 0 "
+" {MPLTEXT 1 0 6 "   fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od;" }}
+{PARA 11 "" 0 "" {TEXT -1 0 "" }}{PARA 11 "" 1 "" {XPPMATH 20 "6$\"$>%
+\"$@%" }}{PARA 11 "" 1 "" {XPPMATH 20 "6$\"$J%\"$L%" }}{PARA 11 "" 1 "
+" {XPPMATH 20 "6$\"$h%\"$j%" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "Pro
+blem 5" }{MPLTEXT 1 0 1 " " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "for a
+ to 9 do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 23 "   for b from 0 to 9 do
+" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 25 "     for c from 0 to 9 do" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 43 "         if (a^3+b^3+c^3)=100*a+10*
+b+c then" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 34 "              print(100
+*a+10*b+c);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 12 "         fi:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "     od:  " }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 5 "  od:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od:" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#\"$`\"" }}{PARA 11 "" 1 "" {XPPMATH 
+20 "6#\"$q$" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#\"$r$" }}{PARA 11 "" 1 
+"" {XPPMATH 20 "6#\"$2%" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "Problem
+ 6" }{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "restart;" }
+}{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "n:=6:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 24 "v:=array([5,3,7,2,7,3]);" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 8 "m:=v[1]:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 20 "for i f
+rom 2 to n do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 18 "   if v[i]>m then \+
+" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "      m:=v[i]:" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 11 "      p:=i:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 
+"   fi;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 71 "print (`One of the Maximum elements of vector v`=m, `
+with position`=p);" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#>%\"vG-%'VECTORG
+6#7(\"\"&\"\"$\"\"(\"\"#F+F*" }}{PARA 11 "" 1 "" {XPPMATH 20 "6$/%HOne
+~of~the~Maximum~elements~of~vector~vG\"\"(/%.with~positionG\"\"$" }}}
+{EXCHG {PARA 0 "" 0 "" {TEXT -1 284 "Problem 7 (This may seem a little
+ bit strange, but trust me this does work as long as you put in the va
+lue of n with any n entry vector. Its not exactly tight code, but I ca
+n't think of a better way to do it. And it does work for even work for
+ a 198 entry vector of (1,2,..99,1,2..99)" }{MPLTEXT 1 0 1 " " }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "n:=6:" }}{PARA 0 "> " 0 "" {MPLTEXT 
+1 0 24 "v:=array([5,3,7,2,7,3]);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "
+m:=v[1]:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "t:=0:" }}{PARA 0 "> " 0 
+"" {MPLTEXT 1 0 20 "for q from 1 to n do" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 25 "   for i from 2 to n-t do" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 14 "      comp:=0:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "
+      if v[i]>=m then " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "         \+
+m:=v[i]:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "         v[i]:=v[n-t]:
+" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 19 "         v[n-t]:=m:" }}{PARA 0 
+"> " 0 "" {MPLTEXT 1 0 16 "         comp:=1" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 9 "      fi:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "   od:
+" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "   if comp=0 then" }}{PARA 0 ">
+ " 0 "" {MPLTEXT 1 0 15 "       m:=v[1];" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 20 "       v[1]:=v[n-t];" }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 19 "       v[n-t]:=m;  " }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "   fi:
+" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "   t:=t+1:" }}{PARA 0 "> " 0 "
+" {MPLTEXT 1 0 11 "   m:=v[1];" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od
+:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "print (v);" }}{PARA 11 "" 1 "
+" {XPPMATH 20 "6#>%\"vG-%'VECTORG6#7(\"\"&\"\"$\"\"(\"\"#F+F*" }}
+{PARA 11 "" 1 "" {XPPMATH 20 "6#-%'VECTORG6#7(\"\"#\"\"$F(\"\"&\"\"(F*
+" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 9 "Problem 8" }{MPLTEXT 1 0 0 "" 
+}}{PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "height:=proc(x)" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 10 "local n,a;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "
+a:=x:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "n:=1:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 13 "while a<>1 do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 " \+
+  if irem(a,2)=0 then" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "      a:=a
+/2;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 7 "   else" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 15 "      a:=3*a+1;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "
+   fi:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "n:=n+1" }}{PARA 0 "> " 0 "
+" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 9 "print(n);" 
+}}{PARA 0 "> " 0 "" {MPLTEXT 1 0 4 "end:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 10 "height(1);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "heig
+ht(3);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "height(27);" }}{PARA 11 "
+" 1 "" {XPPMATH 20 "6#\"\"\"" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#\"\")
+" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#\"$7\"" }}}{EXCHG {PARA 0 "" 0 "" 
+{TEXT -1 84 "Problem 9 (I've combined the commands to display the 'hei
+ght' of 27 and the maxterm)" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 16 "heig
+ht1:=proc(x)" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "local n,a;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 15 "global maxterm;" }}{PARA 0 "> " 0 "
+" {MPLTEXT 1 0 5 "a:=x:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 11 "maxterm:
+=0:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 5 "n:=1:" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 13 "while a<>1 do" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 " \+
+  if irem(a,2)=0 then" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "      a:=a
+/2;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 7 "   else" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 15 "      a:=3*a+1;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "
+   fi:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "   n:=n+1;" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 20 "   if a>maxterm then" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 18 "       maxterm:=a:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 
+6 "   fi:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 3 "od:" }}{PARA 0 "> " 0 "
+" {MPLTEXT 1 0 72 "print(`terms required to reach 1`=n, `with maximum \+
+term value`=maxterm);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 4 "end:" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "height1 (27);" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6$/%:terms~required~to~reach~1G\"$7\"/%8with~maximum~term
+~valueG\"%K#*" }}}{EXCHG {PARA 0 "" 0 "" {TEXT -1 10 "Problem 10" }
+{MPLTEXT 1 0 0 "" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "restart;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 13 "sin1:=proc(x)" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 20 "   local term,sum,n;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 
+0 11 "   term:=x;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "   sum:=x;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "   n:=1;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 29 "   while abs(term)>1.0e-10 do" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 38 "      term:=-1*term*x^2/(2*n*(2*n+1));" }}{PARA 0 "> \+
+" 0 "" {MPLTEXT 1 0 20 "      sum:=sum+term;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 13 "      n:=n+1;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "  \+
+ od;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "   print(sum);" }}{PARA 0 "
+> " 0 "" {MPLTEXT 1 0 7 "   end:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 
+"sin1(1.0);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "sin1(3.14159);" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "sin1(31.4159);" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#$\"+Z)4ZT)!#5" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$\"+^Y
+h`E!#:" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$!+Q'[wH*!\"(" }}}{EXCHG 
+{PARA 0 "" 0 "" {TEXT -1 10 "Problem 11" }{MPLTEXT 1 0 0 "" }}{PARA 0 
+"> " 0 "" {MPLTEXT 1 0 13 "sin2:=proc(x)" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 25 "   local m,y,answer,yoda;" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 8 "   y:=x:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 21 "   yoda
+:=evalf(Pi/2);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 8 "   m:=0:" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 24 "   while abs(y)>=yoda do" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 26 "       y:=x-m*(evalf(Pi));" }}{PARA 0 "> " 0 "" 
+{MPLTEXT 1 0 14 "       m:=m+1;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 " \+
+  od;" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 22 "   y:=x-(m)*evalf(Pi);" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 24 "   if irem(m-1,2)=0 then" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 21 "      answer:=sin1(y)" }}{PARA 0 "> " 0 "
+" {MPLTEXT 1 0 7 "   else" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 24 "      \+
+answer:=-1*sin1(y)" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 6 "   fi;" }}
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 17 "   print(answer);" }}{PARA 0 "> " 
+0 "" {MPLTEXT 1 0 7 "   end:" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 10 "sin
+2(1.0);" }}{PARA 0 "> " 0 "" {MPLTEXT 1 0 14 "sin2(3.14159);" }}{PARA 
+0 "> " 0 "" {MPLTEXT 1 0 14 "sin2(31.4159);" }}{PARA 11 "" 1 "" 
+{XPPMATH 20 "6#$\"+Z)4ZT)!#5" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$\"+Z8
+,bE!#:" }}{PARA 11 "" 1 "" {XPPMATH 20 "6#$\"+rmo`E!#9" }}}{EXCHG 
+{PARA 0 "> " 0 "" {MPLTEXT 1 0 0 "" }}}}{MARK "10 18 0" 0 }{VIEWOPTS 
+1 1 0 1 1 1803 }

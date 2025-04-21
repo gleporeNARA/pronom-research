@@ -1,0 +1,128 @@
+<MIFFile 11.00> # Hand generated
+<Document
+  <DPageSize 7.5" 9.00">        # Set the document page size.
+  <DTwoSides Yes>               # Make this a two-sided document.
+  <DParity FirstRight>          # First body page is a right page.
+> # end of Document
+
+# Page definitions must come before textflow.
+
+# Create right master page.  
+<Page
+ <PageType RightMasterPage>
+ <PageTag `Right'>
+  # Note that each page's TextRect has a unique ID.
+  <TextRect
+   <ID 1>
+   <Pen 15>
+   <Fill 15>
+  # Left (inside) margin varies to accommodate binding.
+   <ShapeRect 2" 1" 5" 7.5">
+  > # end of TextRect
+> # end of Page
+
+# Create left master page.  
+<Page
+ <PageType LeftMasterPage>
+ <PageTag `Left'>
+ <TextRect
+  <ID 2>
+  <Pen 15>
+  <Fill 15>
+  # Left (inside) margin varies to accommodate binding.
+  <ShapeRect 1.5" 1" 5" 7.5">
+ > # end of TextRect                
+> # end of Page
+
+# Create first master page.  
+<Page
+ <PageType OtherMasterPage>
+ <PageTag `First'>
+ <TextRect
+  <ID 3>
+  <Pen 15>
+  <Fill 15>
+  # Text frame has same inside margin as right master page, but is
+  # 1 inch shorter (a common style for first pages in a chapter).
+  <ShapeRect 2.0" 2.5" 5" 6.0">
+ > # end of TextRect                
+> # end of Page
+
+
+# Create blank body page.  The body page dimensions must match those
+# of the master page that will be applied first.  Because <DParity
+# FirstRight> applies the right master page to the first body page,
+# this ShapeRect has the same dimensions as those of the right master
+# page.
+<Page
+ <PageType BodyPage>
+ # Change page background to use first master page.
+ <PageBackground `First'> 
+ <TextRect
+  <ID 4>
+  # Make sure these dimensions match the first master page.
+  <ShapeRect 2" 2.5" 5" 6.0">
+ > # end of TextRect    
+> # end of Page
+
+# This empty text flow refers to the right master page.
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <ParaLine
+   # This ID statement links this text flow to the TextRect
+   # on the right master page.
+   <TextRectID 1>
+  > 
+ > # end of Para
+> # end of TextFlow
+
+# This empty text flow refers to the left master page.
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <ParaLine
+   # This ID statement links this text flow to the TextRect
+   # on the left master page.
+   <TextRectID 2>
+   >
+  > # end of Para
+> # end of TextFlow
+
+# This empty text flow refers to the first master page.
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <ParaLine
+   # This ID statement links this text flow to the TextRect
+   # on the first master page.
+   <TextRectID 3>
+   >
+  > # end of Para
+> # end of TextFlow
+
+# This text flow contains the actual document text
+<TextFlow
+ <TFTag `A'>
+ <TFAutoConnect Yes>
+ <Para
+  <TextRectID 4>
+  <PgfTag `Body'>
+  <ParaLine
+    <String `Hello world! '>
+  >
+  <ParaLine
+    <String `Goodbye world!'>
+  >
+> # end of para
+
+ <Para
+  <ParaLine
+   <String `A second paragraph.'>
+  >
+ > # end of Para
+> # end of TextFlow
+

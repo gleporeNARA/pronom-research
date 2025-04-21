@@ -1,0 +1,307 @@
+* ------------[ BLED merge (c) Ken Goosens ]-------------
+* Merge this against CONFIG.BAS to produce CONFIG.NEW
+* CONFIG.BAS:  Date 6-20-1992  Size 157813 bytes
+* BusiMod (tm) mods for RBBS v17.4 - (c) 1993,94 by respective authors
+* RBBS v17.4 (c) 1986,1992 by D Thomas Mack
+* ------------[ Created 04-06-1994 22:00:00 ]------------
+* REPLACING old line(s) by new
+12160 KEY OFF
+'
+' * IF A MESSAGE FILE EXISTS, READ IN THE PARAMETERS IN IT.
+'
+      FILE$ = MAIN.MESSAGE.FILE$
+      GOSUB 30000
+      NO.OLD.FILE = FALSE
+      IF OKAY THEN _           ' IF MESSAGE FILE EXISTS, READ CHECKPOINT RECORD
+         GOTO 12170
+      NO.OLD.FILE = TRUE
+      A$ = "Message file " + MAIN.MESSAGE.FILE$ + " not found.  Create new one"
+      CALL GETNUMYN (A$,AB)
+      IF NOT AB THEN _
+         IF CONFERENCE.MODE > 0 THEN _
+            MAIN.MESSAGE.FILE$ = MAINMSG$ : _
+            MAIN.USER.FILE$ = MAINUSR$ : _
+            GOTO 12151 _
+         ELSE _
+            SYSTEM
+      CALLS.TODATE! = 0                                 ' FIRST MSG#    -- 0
+      FIRST.USER.RECORD = 1                             ' USERS file    -- first record number
+      CURRENT.USER.COUNT = FIRST.USER.RECORD            ' USERS file    -- next available record number
+      HIGHEST.USER.RECORD = MAX.USR.FILE.SIZE.FRM.DEF   ' USERS file    -- last record number
+      FIRST.MESSAGE.RECORD = 2+MAXIMUM.NUMBER.OF.NODES  ' MESSAGES file -- first record of messages
+      NEXT.MESSAGE.RECORD = FIRST.MESSAGE.RECORD        ' MESSAGES file -- next available record number
+* ------[ first line different ]------
+      HIGHEST.MESSAGE.RECORD! = 5 * MAX.ALLOWED.MSGS.FRM.DEF _       ' RM12279301
+                               + 1 _
+                               + MAXIMUM.NUMBER.OF.NODES ' MESSAGES file -- last record number
+      MAXIMUM.NUMBER.OF.MSGS = MAX.ALLOWED.MSGS.FRM.DEF  ' MESSAGES file -- maximum number of messages
+      B1 = MAXIMUM.NUMBER.OF.NODES
+      B3! = HIGHEST.MESSAGE.RECORD!                                  ' RM12279301
+      GOSUB 22080
+      GOSUB 30450                        ' UPDATE CHECKPOINT RECORD
+* REPLACING old line(s) by new
+12170 GOSUB 30040                        ' READ THE CHECKPOINT RECORD
+* ------[ first line different ]------
+      MAX.MSG.FILE.SIZE.FRM.DEF! = HIGHEST.MESSAGE.RECORD!           ' RM12279301
+      MAX.ALLOWED.MSGS.FRM.DEF  = INT((HIGHEST.MESSAGE.RECORD! - FIRST.MESSAGE.RECORD) / 5) + 1 ' RM12279301
+      IF MAX.ALLOWED.MSGS.FRM.DEF > 9999 THEN _            'STUNY174/020901
+         MAX.ALLOWED.MSGS.FRM.DEF = 9999                   'STUNY174/020901
+      IF MAXIMUM.NUMBER.OF.MSGS < 1 THEN _
+         MAXIMUM.NUMBER.OF.MSGS = MAX.ALLOWED.MSGS.FRM.DEF : _
+         GOSUB 30450                     ' READ THE CHECKPOINT RECORD
+      FILE$ = MAIN.USER.FILE$            ' Check for USERS file
+      GOSUB 30000
+      NO.OLD.FILE = FALSE
+      IF OKAY THEN _
+         GOSUB 50500 : _
+         GOTO 12189
+      NO.OLD.FILE = TRUE
+      B1 = MAX.USR.FILE.SIZE.FRM.DEF
+      A$ = MAIN.USER.FILE$
+      GOSUB 22140
+      GOSUB 22150
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+13890 J = 9999                                             'STUNY174/020901
+      IF NOT MESSAGES.CAN.GROW THEN _
+         IF ((MAX.MSG.FILE.SIZE.FRM.DEF! - 1 - MAXIUM.NUMBER.OF.NODES) / 5) < J THEN _
+            J = (MAX.MSG.FILE.SIZE.FRM.DEF! - 1 - MAXIMUM.NUMBER.OF.NODES) / 5
+      CALL GETINIT ("Set maximum number of messages allowed (MAX = " + _
+            STR$(FIX(J)) + _
+            ")",24,1,9999,MAX.ALLOWED.MSGS.FRM.DEF,CR)     'STUNY174/020901
+      IF CR THEN _
+         GOTO 13890
+      IF MAX.ALLOWED.MSGS.FRM.DEF < J + 1 THEN _
+         GOTO 13929
+      IF MESSAGES.CAN.GROW THEN _
+         GOTO 13929
+      CALL GETNUMYN ("Increase the " + _
+                      MAIN.MESSAGE.FILE$ + _
+                     " file to " + _
+                       STR$((MAX.ALLOWED.MSGS.FRM.DEF * 5) + 1 + MAXIMUM.NUMBER.OF.NODES) + _
+                     " records?",AB)
+      IF NOT AB THEN _
+         GOTO 13890
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+16124 CALL MMREAL ("Rate (300,1200,2400,4800,9600,19200,38400,57600) to open modem:",300!,57600!,B1!) ' BB070801/RM09059301/RM09269301/RM12279301
+      IF B1! = 300 OR B1! = 1200 OR B1! = 2400 OR B1! = 4800 OR B1! = 9600 OR _
+         B1! = 19200 OR B1! = 38400 OR B1! = 57600 THEN _            ' BB070801/BB09059301/RM09269301/RM12279301
+            GOTO 16128 _
+      ELSE GOTO 16124
+* REPLACING old line(s) by new
+16128 IF FOSSIL OR B1! < 38400 THEN _
+         GOTO 16129
+      CLS
+      LOCATE 5,13
+* ------[ first line different ]------
+      PRINT "Above 19200 available with FOSSIL driver only"          ' BB070801/RM12279301
+      LOCATE 6,10
+      PRINT "First set communications port and fossil driver"
+      CALL ASKRO ("  INITIAL BPS RATE not changed.  Press [ENTER] to continue",10,ANS$)
+      RETURN
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+16790 CALL MMINTEGER ("Maximum number of lines allowed per message (1-125)",1,125,MAX.MESSAGE.LINES) 'STUNY174/020901/RM11279301/RM04069401
+      RETURN
+* REPLACING old line(s) by new
+23160 A$ = "Pack the Message File"
+      GOSUB 22580
+      B1 = MAXIMUM.NUMBER.OF.NODES
+* ------[ first line different ]------
+      B3! = HIGHEST.MESSAGE.RECORD!                                  ' RM12279301
+      PURGE = -1
+      GOSUB 30610
+      RETURN
+'
+' * POINT TO THE NEXT MESSAGE HEADER IN THE MESSAGE FILE
+'
+* REPLACING old line(s) by new
+23730 GET 1,1
+      MID$(MESSAGE.RECORD$,1,8) = SPACE$(8)
+      MID$(MESSAGE.RECORD$,1,8) = STR$(SK)
+      HJ$ = RIGHT$("0"+MID$(STR$(MAXIMUM.NUMBER.OF.NODES),2),2)
+      MID$(MESSAGE.RECORD$,127,2) = HJ$
+      PUT 1,1
+      CLOSE 1
+      DELAY! = FNTI! + 5
+      GOSUB 60440
+      RETURN
+'
+* ------[ first line different ]------
+' * ROUTINE TO INITIALIZE THE MODEM'S FIRMWARE                       ' RM09269301
+'
+* REPLACING old line(s) by new
+23731 LOCATE 25,5
+      COMPORT% = VAL(RIGHT$(COM.PORT$,1)) -1
+      IF COMPORT% < 0 THEN _
+         PRINT "COM port cannot be set while using COM0" : _
+         DELAY! = FNTI! + 3 : _
+         GOSUB 60440 : _
+         RETURN
+      FOS.BUF$ = SPACE$(80)
+      CLS
+      PRINT "Setting modem firmware for RBBS-PC on " + COM.PORT$
+      IF NOT FOSSIL THEN _
+         GOTO 23732
+      CALL FOSINIT(COMPORT%,RESULT%)
+      IF RESULT% = -1 THEN _
+         PRINT "ERROR initializing FOSSIL.  Firmware reset aborted." : _
+         GOTO 23736
+* ------[ first line different ]------
+      IF MODEM.INIT.BAUD$ = "19200" THEN _                            ' BB09249301
+         FOSSIL.BAUD% = &H4B00 _                                      ' BB09249301
+      ELSE IF MODEM.INIT.BAUD$ = "38400" THEN _                       ' BB09249301
+         FOSSIL.BAUD% = &H9600 _
+      ELSE IF MODEM.INIT.BAUD$ = "57600" THEN _                       ' BB09239301
+         FOSSIL.BAUD% = &HE100 _                                      ' BB09239301
+      ELSE FOSSIL.BAUD% = VAL(MODEM.INIT.BAUD$)
+      CALL FOSSPEED(COMPORT%,FOSSIL.BAUD%, 2, 3, 1)
+      STATE% = 1
+      CALL FOSDTR(COMPORT%,STATE%)
+      GOTO 23733
+* REPLACING old line(s) by new
+* ------[ first line different ]------
+24111 IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN A$ FOR RANDOM SHARED AS #2 LEN = 128 _
+      ELSE OPEN "R",2,A$,128
+      FIELD 2,  31 AS USER.NAME.N$, _
+                15 AS PASSWORD.N$, _
+                 2 AS SECURITY.LEVEL.N$, _
+                14 AS USER.OPTIONS.N$, _
+                24 AS CITY.STATE.N$, _
+                19 AS MACHINE.TYPE.N$, _
+                14 AS LAST.DATE.TIME.ON.N$, _
+                 3 AS LIST.NEW.DATE.N$, _
+                 2 AS USER.DOWN.LOADS.N$, _
+                 2 AS USER.UPLOADS.N$, _
+                 2 AS ELAPSED.TIME.N$
+      FIELD 2, 128 AS USER.RECORD.N$
+      CURRENT.MONTH = VAL(LEFT$(DATE$,2)) + (VAL(RIGHT$(DATE$,2)) * 12)
+      A! = 0
+      GOSUB 50840
+      CURRENT.USER.COUNT = 1
+      IF NO.OLD.FILE THEN _
+         HIGHEST.USER.RECORD = A! : _
+         MAX.USR.FILE.SIZE.FRM.DEF = HIGHEST.USER.RECORD : _
+         GOSUB 30450 : _
+         RETURN
+      A! = LOF(1) / 128.0!
+      GOSUB 24025
+      PURGED.COUNT = 0
+* REPLACING old line(s) by new
+30040 FILNUM = 2
+      GOSUB 30050
+      FIELD 2,128 AS RR$
+      GET 2,1
+      CALLS.TODATE! = VAL(MID$(RR$,1,8))             '  1-  8 = number of last message on system
+      AUTO.ADD.SECURITY = CVI(MID$(RR$,9,2))         '  9- 10 = min. security to auto. add a user
+      WriteMsgSec$ = MID$(RR$,21,3)                  ' 21- 23 = Msg Sec allowed
+      IF MID$(WriteMsgSec$,1,1) = "/" THEN _
+         ZMsgSecCats$ = "" _
+      ELSE ZMsgSecCats$ = "U"
+      IF MID$(WriteMsgSec$,2,1) <> "/" THEN _
+         ZMsgSecCats$ = ZMsgSecCats$ + "R"
+      IF MID$(WriteMsgSec$,3,1) <> "/" THEN _
+         ZMsgSecCats$ = ZMsgSecCats$ + "P"
+      IF MAIN.MESSAGE.FILE$ = MAINMSG$ THEN _
+         AUTO.ADD.SECURITY = 0
+      CURRENT.USER.COUNT = VAL(MID$(RR$,57,5))       ' 57- 61 = next avail. user record
+      FIRST.MESSAGE.RECORD = VAL(MID$(RR$,68,7))     ' 68- 74 = first rec. of msgs file
+      IF FIRST.MESSAGE.RECORD < 3 THEN _
+         FIRST.MESSAGE.RECORD = 3
+      NEXT.MESSAGE.RECORD = VAL(MID$(RR$,75,7))      ' 75- 81 = next avail. msgs record
+* ------[ first line different ]------
+      HIGHEST.MESSAGE.RECORD! = VAL(MID$(RR$,82,7))   ' 82- 88 = last rec. of msgs file ' RM12279301
+      MAXIMUM.NUMBER.OF.MSGS = VAL(MID$(RR$,89,7))   ' 89- 95 = maximum number of messages
+      MAXIMUM.NUMBER.OF.NODES = VAL(MID$(RR$,127,2)) '127-128 = maximum number of "nodes"
+      IF MAXIMUM.NUMBER.OF.NODES < 1 THEN _
+         MAXIMUM.NUMBER.OF.NODES = 1
+      CLOSE 2
+      FIRST.USER.RECORD = 1
+      IF MAIN.MESSAGE.FILE$ = MAINMSG$ THEN _
+         AUTO.ADD.SECURITY$ = "CONF. ONLY" _
+      ELSE AUTO.ADD.SECURITY$ = MID$(STR$(AUTO.ADD.SECURITY),2)
+      RETURN
+' * OPEN MESSAGE FILE
+* REPLACING old line(s) by new
+30050 CLOSE FILNUM
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN MAIN.MESSAGE.FILE$ FOR RANDOM SHARED AS #FILNUM LEN = 128 _
+      ELSE OPEN "R",FILNUM,MAIN.MESSAGE.FILE$,128
+      RETURN
+' * OPEN USER FILE
+* REPLACING old line(s) by new
+30060 CLOSE 1
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN MAIN.USER.FILE$ FOR RANDOM SHARED AS #1 LEN = 128 _
+      ELSE OPEN "R",1,MAIN.USER.FILE$,128
+      RETURN
+'
+' * COMMON ROUTINE TO UPDATE AUTO ADD SECURITY TO CONFERENCE FILE
+'
+* REPLACING old line(s) by new
+30450 FILNUM = 2
+      GOSUB 30050
+      FIELD 2,128 AS RR$
+      GET 2,1
+      X$ = MKI$(AUTO.ADD.SECURITY)
+      MID$(RR$,9,2)   = MKI$(AUTO.ADD.SECURITY)      '  9- 10 = min. security to auto. add a user
+      MID$(RR$,57,5)  = LEFT$(STR$(CURRENT.USER.COUNT)  +SPACE$(5),5) ' 57- 61 = next avail. user record
+      MID$(RR$,68,7)  = LEFT$(STR$(FIRST.MESSAGE.RECORD)+SPACE$(7),7) ' 68- 74 = first rec. of msgs file
+      MID$(RR$,75,7)  = LEFT$(STR$(NEXT.MESSAGE.RECORD) +SPACE$(7),7) ' 75- 81 = next avail. msgs record
+* ------[ first line different ]------
+      MID$(RR$,82,7)  = LEFT$(STR$(HIGHEST.MESSAGE.RECORD!)+SPACE$(7),7) ' 82- 88 = last rec. of msgs file ' RM12279301
+      MID$(RR$,89,7)  = LEFT$(STR$(MAXIMUM.NUMBER.OF.MSGS)+SPACE$(7),7) ' 89- 95 = maximum number of messages
+      HJ$ = STR$(MAXIMUM.NUMBER.OF.NODES)
+      IF MAXIMUM.NUMBER.OF.NODES>9 THEN _
+         HJ$ = MID$(STR$(MAXIMUM.NUMBER.OF.NODES),2,2)
+      MID$(RR$,127,2) = HJ$                          '127-128 = maximum number of "nodes"
+      PUT 2,1
+      CLOSE 2
+      RETURN
+'
+' * COMMON ROUTINE TO EXPAND/CONTRACT A MESSAGES FILE
+'
+* REPLACING old line(s) by new
+30612 CLOSE 2
+* ------[ first line different ]------
+      IF NETWORK.TYPE = 6 OR NETWORK.TYPE = 7 THEN _                 ' RM10019301
+         OPEN A$ FOR RANDOM SHARED AS #2 LEN = 128 _
+      ELSE OPEN "R",2,A$,128
+      FIELD 2,128 AS RR$
+      A$="Copying"
+      IF NO.OLD.FILE THEN _
+         A$ = "Creating preformatted"
+      OE = B1
+      IF MAXIMUM.NUMBER.OF.NODES <= B1 THEN _
+         OE = MAXIMUM.NUMBER.OF.NODES
+      GOSUB 25030
+      FOR J=1 TO OE + 1                 ' WRITE CHECKPOINT AND NODE RECORDS
+         IF NO.OLD.FILE AND J = 1 THEN _
+            GOSUB 31040
+         IF NO.OLD.FILE AND J <> 1 THEN _
+            GOSUB 31050
+         IF NO.OLD.FILE = FALSE THEN _
+            GET 1,J : _
+            LSET RR$ = MESSAGE.RECORD$
+         PUT 2
+      NEXT
+      IF NO.OLD.FILE THEN _
+         GOTO 30850
+      IF B1 <= MAXIMUM.NUMBER.OF.NODES THEN _
+         GOTO 30780
+      FOR J = OE + 1 TO B1             ' WRITE OUT EXPANISON NODE RECORDS
+         GOSUB 31050
+         PUT 2
+      NEXT
+* REPLACING old line(s) by new
+30960 FIRST.MESSAGE.RECORD = 1 + MAXIMUM.NUMBER.OF.NODES + 1
+      NEXT.MESSAGE.RECORD = B1
+      IF NEXT.MESSAGE.RECORD < FIRST.MESSAGE.RECORD THEN _
+         NEXT.MESSAGE.RECORD = FIRST.MESSAGE.RECORD
+* ------[ first line different ]------
+      HIGHEST.MESSAGE.RECORD! = LOC(2)                               ' RM12279301
+      CLOSE 2
