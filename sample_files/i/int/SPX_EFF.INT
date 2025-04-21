@@ -1,0 +1,40 @@
+Unit SPX_EFF;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+Uses SPX_VGA;
+
+const
+  wmax = 100;                           { Maximum cosine table size for wave }
+
+type
+  usercp       = procedure (f,t,yline:longint);
+  Pcycle       = ^Tcycle;
+  Tcycle       = object
+                   cyc_next,
+                   from_x,from_y,
+                   cyc_x,cyc_y,
+                   cyc_width,
+                   cyc_height,
+                   cycley,
+                   cyclex,fr_size,
+                   am_size         : word;
+                   cycle_cos       : array[0..wmax-1] of integer;
+                   constructor init(freq,size:integer);
+                   destructor done;virtual;
+                   procedure changewave(freq,size:integer);virtual;
+                   procedure docycle(from,too,mode:byte); virtual;
+                   procedure cycle_move; virtual;
+                   procedure adjustcyclenext; virtual;
+                 end;
+
+var
+  usercycle : usercp;     { user cycle procedure }
+
+
+procedure linemove(s,d:longint;cnt:word);
+procedure wordmove(var source,dest;cnt:word);
+procedure cycleline(f,t:longint;cyclex,cycle_width:word);
+

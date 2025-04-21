@@ -1,0 +1,498 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'WorkspaceManager'                                                        
+    EditorExePath     = 'WorkspaceManager.DLL'                                                    
+    EditorDescription = 'Project Manager'                                                     
+    Version           = 'Version 10.0.0.30000'                                                      
+    Date              = '24-Apr-2013'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = True     
+End
+
+EditorWindowKind
+    Name                  = 'ProjectGroup'     
+    NewWindowCaption      = 'ProjectGroup'
+    NewWindowExtention    = 'DsnWrk'
+    WindowKindDescription = 'Design Workspace'
+    IconName              = 'Workspace'
+
+    LoadFilters
+        'Design Workspace files (*.DsnWrk)'
+    End
+
+    SaveFilters
+        'Project Groups (*.DsnWrk)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'FreeDocsProject'        
+    NewWindowCaption      = 'Free Documents'         
+    NewWindowExtention    = 'FreeDocs'               
+    WindowKindDescription = 'Free Documents Project' 
+    IconName              = 'FreeDocs'               
+End
+
+EditorWindowKind
+    Name                  = 'DefaultPcb'   
+    NewWindowCaption      = 'PCB'          
+    NewWindowExtention    = 'PCB'          
+    WindowKindDescription = 'PCB Document' 
+    IconName              = 'DefaultPcb'   
+End
+
+EditorWindowKind
+    Name                  = 'DefaultPcbLib'        
+    NewWindowCaption      = 'PcbLib'               
+    NewWindowExtention    = 'PcbLib'               
+    WindowKindDescription = 'PCB Library Document' 
+    IconName              = 'DefaultPcbLib'        
+End
+
+EditorWindowKind
+    Name                  = 'PcbProject'
+    NewWindowCaption      = 'PCB_Project'
+    NewWindowExtention    = 'PrjPCB'
+    WindowKindDescription = 'PCB Project'
+    IconName              = 'PcbProject'
+
+    EditorBar Name = 'MNProjectView'      BarType = Menu    End
+    EditorBar Name = 'TBProjectView'      BarType = Toolbar End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar End
+    EditorBar Name = 'TBlayout'           BarType = Toolbar End
+    EditorBar Name = 'TBAssemblyVariants' BarType = Toolbar End
+
+    LoadFilters
+        'PCB Projects (*.PrjPcb)'
+    End
+
+    SaveFilters
+        'PCB Projects (*.PrjPcb)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'ScriptProject'  
+    NewWindowCaption      = 'Script_Project' 
+    NewWindowExtention    = 'PrjScr'         
+    WindowKindDescription = 'Script Project' 
+    IconName              = 'ScriptProject'  
+
+    EditorBar Name = 'MNProjectView' BarType = Menu    End
+    EditorBar Name = 'TBProjectView' BarType = Toolbar End
+    EditorBar Name = 'TBNavigation'  BarType = Toolbar End
+    EditorBar Name = 'TBLayout'      BarType = Toolbar End
+
+    LoadFilters
+        'Script Project files (*.PrjScr)'
+    End
+
+    SaveFilters
+        'Script Project files (*.PrjScr)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'IntLibrary'        
+    NewWindowCaption      = 'Compiled_Library'  
+    NewWindowExtention    = 'IntLib'            
+    WindowKindDescription = 'Compiled Library'  
+    IconName              = 'IntegratedLibrary' 
+
+    EditorClasses
+        'LibraryDocument'
+    End
+
+    LoadFilters
+        'Compiled Library files (*.IntLib)'
+    End
+
+    SaveFilters
+        'Compiled Library files (*.IntLib)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'IntegratedLibrary'  
+    NewWindowCaption      = 'Integrated_Library' 
+    NewWindowExtention    = 'LibPkg'             
+    WindowKindDescription = 'Integrated Library' 
+    IconName              = 'IntegratedLibrary'  
+
+    EditorBar Name = 'MNProjectView' BarType = Menu    End
+    EditorBar Name = 'TBProjectView' BarType = Toolbar End
+    EditorBar Name = 'TBNavigation'  BarType = Toolbar End
+    EditorBar Name = 'TBLayout'      BarType = Toolbar End
+
+    LoadFilters
+        'Integrated Library files (*.LibPkg)'
+    End
+
+    SaveFilters
+        'Integrated Library files (*.LibPkg)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'DatabaseLink'
+    NewWindowCaption      = 'Database_Links'
+    NewWindowExtention    = 'DbLink'
+    WindowKindDescription = 'Database Link File'
+    IconName              = 'DatabaseLink'
+
+    EditorBar Name = 'MNDatabaseLink'     BarType = Menu        End
+    EditorBar Name = 'HTDatabaseLink'     BarType = HotkeyTable End
+    EditorBar Name = 'TBDatabaseLink'     BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'           BarType = Toolbar     End
+
+    LoadFilters
+        'Database Link files (*.DbLink)'
+    End
+
+    SaveFilters
+        'Database Link files (*.DbLink)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'OutputJob'       
+    NewWindowCaption      = 'Job'             
+    NewWindowExtention    = 'OutJob'          
+    WindowKindDescription = 'Output Job File' 
+    IconName              = 'OutputJob'       
+
+    EditorBar Name = 'MNJobManager'       BarType = Menu        End
+    EditorBar Name = 'HTJobManager'       BarType = HotkeyTable End
+    EditorBar Name = 'TBJobManager'       BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'           BarType = Toolbar     End
+
+    LoadFilters
+        'Job configuration files (*.OutJob)'
+    End
+
+    SaveFilters
+        'Job configuration files (*.OutJob)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'PCBReleaseView'        
+    NewWindowCaption      = 'Boards'         
+    NewWindowExtention    = 'PCBReleaseView'               
+    WindowKindDescription = 'Boards' 
+    IconName              = 'PCBReleaseView'               
+
+    EditorBar Name = 'MNPCBReleaseView'     BarType = Menu        End
+    EditorBar Name = 'HTDefault'        BarType = HotkeyTable End
+    EditorBar Name = 'TBPCBReleaseView'     BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'     BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'         BarType = Toolbar     End
+
+    EditorClasses
+        'ControlPanel'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'PickATask' 
+    NewWindowCaption      = 'Tasks'     
+    NewWindowExtention    = 'PickATask' 
+    WindowKindDescription = 'Tasks'     
+    IconName              = 'PickATask' 
+
+    EditorBar Name = 'MNNoDocument'       BarType = Menu        End
+    EditorBar Name = 'HKNoDocument'       BarType = HotkeyTable End
+    EditorBar Name = 'TLNoDocument'       BarType = Toolbar     End
+    EditorBar Name = 'TLUNFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TBlayout'           BarType = Toolbar     End
+
+    EditorClasses
+        'ControlPanel'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'BOM'
+    NewWindowCaption      = 'BOM'
+    NewWindowExtention    = 'BomDoc'
+    WindowKindDescription = 'BOM Document'
+    IconName              = 'BOM'
+
+    EditorBar Name = 'MNBOMMenu'          BarType = Menu        End
+    EditorBar Name = 'TBBOMToolBar'       BarType = Toolbar     End
+    EditorBar Name = 'HKBOMDocument'      BarType = HotkeyTable End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'   BarType = Toolbar     End
+    EditorBar Name = 'TBlayout'           BarType = Toolbar     End
+    EditorBar Name = 'TBAssemblyVariants' BarType = Toolbar     End
+    LoadFilters
+        'BOM ASCII Files (*.BomDoc)'
+    End
+
+    SaveFilters
+        'BOM ASCII Files (*.BomDoc)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'SeaOfDocuments'
+    NewWindowCaption      = 'Workspace'
+    NewWindowExtention    = 'ControlPanel'
+    WindowKindDescription = 'Workspace'
+    IconName              = 'SeaOfDocuments'
+
+    EditorBar Name = 'MNNoDocument'       BarType = Menu        End
+    EditorBar Name = 'HKNoDocument'       BarType = HotkeyTable End
+    EditorBar Name = 'TLNoDocument'       BarType = Toolbar     End
+    EditorBar Name = 'TLUNFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TBlayout'           BarType = Toolbar     End
+
+    EditorClasses
+        'ControlPanel'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'Altium3DModelDocument'
+    NewWindowCaption      = 'Altium3DModelDocument'
+    NewWindowExtention    = 'Altium3DModelDocument'
+    WindowKindDescription = 'Altium 3D Model Document'
+    IconName              = 'Altium3DModelDocument'
+
+    EditorBar Name = 'MNNoDocument'       BarType = Menu        End
+    EditorBar Name = 'HKNoDocument'       BarType = HotkeyTable End
+    EditorBar Name = 'TLNoDocument'       BarType = Toolbar     End
+    EditorBar Name = 'TLUNFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TBlayout'           BarType = Toolbar     End
+
+    EditorClasses
+        'ControlPanel'
+    End
+End
+
+PanelInfo
+    Name              = 'NewDocuments' 
+    Category          = '&System'      
+    Bitmap            = ''             
+    Hotkey            = 'F'            
+    ButtonVisible     = True           
+    CanDockVertical   = True           
+    CanDockHorizontal = False          
+End
+
+PanelInfo
+    Name              = 'Workspace' 
+    Category          = '&System'   
+    Bitmap            = ''          
+    Hotkey            = 'P'         
+    ButtonVisible     = True        
+    CanDockVertical   = True        
+    CanDockHorizontal = True        
+End
+
+PanelInfo
+    Name              = 'Messages' 
+    Category          = '&System'  
+    Bitmap            = ''         
+    Hotkey            = 'M'        
+    ButtonVisible     = True       
+    CanDockVertical   = True       
+    CanDockHorizontal = True       
+End
+
+PanelInfo
+    Name              = 'Output'  
+    Category          = '&System' 
+    Bitmap            = ''        
+    Hotkey            = 'O'       
+    ButtonVisible     = False     
+    CanDockVertical   = True      
+    CanDockHorizontal = True      
+End
+
+PanelInfo
+    Name              = 'ToDo'    
+    Category          = '&System' 
+    Bitmap            = ''        
+    Hotkey            = 'T'       
+    ButtonVisible     = True      
+    CanDockVertical   = True      
+    CanDockHorizontal = True      
+End
+
+PanelInfo
+    Name              = 'Clipboard' 
+    Category          = '&System'   
+    Bitmap            = ''          
+    Hotkey            = 'C'         
+    ButtonVisible     = True        
+    CanDockVertical   = True        
+    CanDockHorizontal = True        
+End
+
+PanelInfo
+    Name              = 'Navigator'        
+    Category          = '&Design Compiler' 
+    Bitmap            = ''                 
+    Hotkey            = 'N'                
+    ButtonVisible     = True               
+    CanDockVertical   = True               
+    CanDockHorizontal = False              
+End
+
+PanelInfo
+    Name              = 'InternalProperties' 
+    Category          = '&Design Compiler'   
+    Bitmap            = ''                   
+    Hotkey            = 'U'                  
+    ButtonVisible     = False                
+    CanDockVertical   = True                 
+    CanDockHorizontal = True                 
+End
+
+PanelInfo
+    Name              = 'Errors'           
+    Category          = '&Design Compiler' 
+    Bitmap            = ''                 
+    Hotkey            = 'E'                
+    ButtonVisible     = False              
+    CanDockVertical   = True               
+    CanDockHorizontal = True               
+End
+
+PanelInfo
+    Name              = 'Differences'      
+    Category          = '&Design Compiler' 
+    Bitmap            = ''                 
+    Hotkey            = 'D'                
+    ButtonVisible     = False              
+    CanDockVertical   = True               
+    CanDockHorizontal = True               
+End
+
+PanelInfo
+    Name              = 'Browser'          
+    Category          = '&Design Compiler' 
+    Bitmap            = ''                 
+    Hotkey            = 'B'                
+    ButtonVisible     = True               
+    CanDockVertical   = False              
+    CanDockHorizontal = False              
+End
+
+PanelInfo
+    Name              = 'QuickLaunch'
+    Category          = '&System'   
+    Bitmap            = ''          
+    Hotkey            = 'Q'         
+    ButtonVisible     = True        
+    CanDockVertical   = True        
+    CanDockHorizontal = True        
+End
+
+OptionsSet
+    Name     = 'EmbeddedOptions' 
+    SortName = '000'             
+
+    ProjectKinds
+        'EmbeddedProject'
+        'C'
+        'CPP'
+        'ASM'
+    End
+End
+
+OptionsPage
+    ServerName  = 'WorkspaceManager'
+    ServerImage = 'Preferences_System.ico'
+    Image       = 'ProjectGroup.bmp'
+    Caption     = 'System'
+    OrderIndex  = 10
+
+    OptionsPage
+        Caption  = 'General settings'
+        FormName = 'General'
+        OrderIndex = 4
+    End
+//    OptionsPage
+//        Caption  = 'Account Management'
+//        FormName = 'AccountManagement'
+//        OrderIndex = 5
+//    End
+//    OptionsPage
+//        Caption  = 'Default Locations'
+//        FormName = 'DefaultLocations'
+//        OrderIndex = 10
+//        CanSaveToCloud = True
+//    End
+    OptionsPage
+        Caption  = 'Last Open Workspace'
+        FormName = 'LastWorkspace'
+        OrderIndex = 14
+        OnlyImportAtStartup = True
+        ShowInOptionsDialog = False
+    End
+    OptionsPage
+        Caption  = 'Customizations'
+        FormName = 'Customizations'
+        OrderIndex = 15
+        CanSaveToCloud = True
+        ShowInOptionsDialog = False
+    End
+End
+
+Command Name = 'BeginDebugSession'        LongSummary = 'Begin a debug session for the specified project'                      End
+Command Name = 'BrowseReleases'           LongSummary = 'Browse releases of all projects'                                      End
+Command Name = 'ChangeObject'             LongSummary = 'Change Object'                                                        End
+Command Name = 'ClipboardAction'          LongSummary = 'Clipboard Action'                                                     End
+Command Name = 'CloseObject'              LongSummary = 'Close Object'                                                         End
+Command Name = 'Compare'                  LongSummary = 'Compare Project with implementation'                                  End
+Command Name = 'Compile'                  LongSummary = 'Compile the Project'                                                  End
+Command Name = 'CompileAbort'             LongSummary = 'Abort compilation of the Projects'                                    End
+Command Name = 'CurrentProjectVariant'    LongSummary = 'Current Project Variant'                                              End
+Command Name = 'DeleteObject'             LongSummary = 'Delete Object'                                                        End
+Command Name = 'Difference'               LongSummary = 'Show differences between documents'                                   End
+Command Name = 'DocumentOptions'          LongSummary = 'Setup document options'                                               End
+Command Name = 'EditDebugSettings'        LongSummary = 'Edit the debugger settings for the specified project'                 End
+Command Name = 'EmbeddedOptions'          LongSummary = 'Setup options for embedded projects and documents'                    End
+Command Name = 'EmbeddedScanDependencies' LongSummary = 'Scan the dependencies for the entire project'                         End
+Command Name = 'EmbeddedSelectToolchain'  LongSummary = 'Select a new toolchain'                                               End
+Command Name = 'ExploreTo'                LongSummary = 'Open Windows Explorer'                                                End
+Command Name = 'FPGAPins'                 LongSummary = 'Edit FPGA Pin Settings'                                               End
+Command Name = 'FPGAWorkspace'            LongSummary = 'Run the FPGA workspace view'                                          End
+Command Name = 'GenerateReport'           LongSummary = 'Generate a report/netlist from the current document or project'       End
+Command Name = 'GenerateSymbol'           LongSummary = 'Generate a schematic library symbol from the current document'        End
+Command Name = 'HideObject'               LongSummary = 'Hide the specified document or all documents in the specified object' End
+Command Name = 'InsertObject'             LongSummary = 'Insert Object'                                                        End
+Command Name = 'OpenObject'               LongSummary = 'Open Object'                                                          End
+Command Name = 'Print'                    LongSummary = 'Print'                                                                End
+Command Name = 'RunWizard'                LongSummary = 'Run project wizard'                                                   End
+Command Name = 'SaveObject'               LongSummary = 'Save Object'                                                          End
+Command Name = 'SetCurrentProject'        LongSummary = 'Set the focused project as the active project'                        End
+Command Name = 'SetSubProject'            LongSummary = 'Set the Sub Project for a component'                                  End
+Command Name = 'SetupPreferences'         LongSummary = 'Setup Preferences'                                                    End
+Command Name = 'ShowHiddenDocument'       LongSummary = 'Show hidden document with the specified index'                        End
+Command Name = 'ShowHide'                 LongSummary = 'Toggle Compiled View'                                                 End
+Command Name = 'Synchronize'              LongSummary = 'Synchronize'                                                          End
+Command Name = 'VersionControl'           LongSummary = 'Version Control'                                                      End
+Command Name = 'View'                     LongSummary = 'View'                                                                 End
+Command Name = 'Import_99SE_DDB'          LongSummary = 'Import Design from 99SE DDB'                                          End
+Command Name = 'SplitLibrary'             LongSummary = 'Split Schematic, PCB, and PCB3D Libraries'                            End
+Command Name = 'LibraryToSVN'             LongSummary = 'Convert Schematic, PCB, Database, and Integrated Libraries to SVN'    End
+Command Name = 'IntLibMaker'              LongSummary = 'Convert Database and SVN Database Libraries to Integrated Libraries'  End
+Command Name = 'ConfirmReloadDocuments'   LongSummary = 'Confirm to reload documents, modified outside of PCBWorks'            End
+Command Name = 'ChooseVariantsScope'      LongSummary = 'Choose Output Job Variant Scope'                                      End
+Command Name = 'ShowPCBReleaseView'       LongSummary = 'Show PCB Release View to allow validation, management and release of board outputs.' End
+Command Name = 'ConvertToManagedObject'   LongSummary = 'Convert Project to Managed Project'                                   End
+Command Name = 'FileLessReleaseToVault'   LongSummary = 'Release current document to new revision in Vault'                    End
+Command Name = 'SaveManagedObject'        LongSummary = 'Save Managed Object'                                                  End
+Command Name = 'CancelFileLessEditing'    LongSummary = 'Discard changes and cancel editing document from Vault'               End
+Command Name = 'PreviewDocument_URL'      LongSummary = 'Open Document for preview'                                            End

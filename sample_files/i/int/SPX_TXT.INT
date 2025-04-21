@@ -1,0 +1,26 @@
+Unit SPX_TXT;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+Uses SPX_VGA,SPX_FNC;
+
+type
+  chartype = array[0..15] of word;
+  charlist = array[1..255] of chartype;
+
+var
+  cp      : integer;                  { current X postion }
+  ot,                                 { character width }
+  cofs    : array[1..255] of byte;    { character offset }
+  cdata   : charlist;                 { default character set }
+  maxltx,                             { max width of font }
+  maxlty  : byte;                     { max height of font }
+
+function stlen(s:string):word;
+procedure putletter(x,y:integer;c:byte;s:string);
+procedure putchar(x,y:integer;h:char;c:byte);
+procedure setchb(var buff);
+procedure loadchb(fn:string;var cdata:charlist);
+

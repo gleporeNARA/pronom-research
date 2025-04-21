@@ -1,0 +1,46 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'HelpAdvisor'                                                             
+    EditorExePath     = 'HelpAdvisor.DLL'                                                         
+    EditorDescription = 'Help Advisor'                                                            
+    Version           = 'Version 1.0.0.29585'                                                         
+    Date              = '29-Aug-2013'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = True                                                                      
+End
+
+PanelInfo
+    Name              = 'HelpAdvisor' 
+    Category          = '&Help'       
+    Bitmap            = ''            
+    Hotkey            = 'H'           
+    ButtonVisible     = False         
+    CanDockVertical   = True          
+    CanDockHorizontal = True          
+End
+
+PanelInfo
+    Name              = 'Help'  
+    Category          = '&Help' 
+    Bitmap            = ''      
+    Hotkey            = 'H'     
+    ButtonVisible     = False   
+    CanDockVertical   = True    
+    CanDockHorizontal = True    
+End
+
+PanelInfo
+    Name              = 'Shortcuts'  
+    Category          = '&Help' 
+    Bitmap            = ''      
+    Hotkey            = ''     
+    ButtonVisible     = False   
+    CanDockVertical   = True    
+    CanDockHorizontal = True    
+End
+
+Command Name = 'RunHelpTopic'  LongSummary = 'Run a help topic ' End
+Command Name = 'ShowDynamicHelp'                                 End
+Command Name = 'UpdateHotkeysPanel'                              End

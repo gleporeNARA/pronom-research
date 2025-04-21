@@ -1,0 +1,48 @@
+Unit SPX_SND;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+Uses Crt,Dos,LimEms;
+
+type
+  Psound    = ^Tsound;
+  Tsound    = object
+                sblk    : pointer;
+                size,
+                sport   : word;
+                sb_play : boolean;
+                constructor init(sndfile:string;prt:word;_sb:boolean);
+                function loadsnd(sndfile:string;prt:word;_sb:boolean):boolean; virtual;
+                function filesnd(var fil:file;bsize,prt:word;_sb:boolean):boolean; virtual;
+                procedure cleansnd; virtual;
+                procedure play(canstop:boolean); virtual;
+                procedure stop; virtual;
+                destructor done; virtual;
+              end;
+  PEmsSound = ^TEmsSound;
+  TEmsSound = object(Tsound)
+                EMSseg,handle : word;
+                EMSok         : boolean;
+                constructor init(sndfile:string;prt:word;_sb:boolean);
+                function loadsnd(sndfile:string;prt:word;_sb:boolean):boolean; virtual;
+                procedure cleansnd; virtual;
+                procedure play(canstop:boolean); virtual;
+                destructor done; virtual;
+              end;
+
+var
+  cs,                               { Can stop flag. (Interrupt sound) }
+  playing     : boolean;            { TRUE - if playing a sound        }
+  f_clk,                            { fast clock counters              }
+  s_clk : array[0..3] of word;      { 18.2per sec. slow clock counters }
+  rate,                             { Current fast clock rate          }
+  cntime : word;                    { RESERVED - do not modify         }
+
+function SBFindBase:word;
+function SBReset(BaseAddr : word) : boolean;
+procedure globalstop;
+procedure setrate(cycles:word);
+procedure wait(seconds,which:integer);
+

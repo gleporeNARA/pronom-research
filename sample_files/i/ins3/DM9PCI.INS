@@ -1,0 +1,28 @@
+InS_StArT
+DM9PCI.COM
+1.0
+^CNET PRO200 PCI Fast Ethernet Adapter,DM9PCI.COM,0E0
+?This driver supports both 10Mbps and 100Mbps media types
+$O0E0(NODE ADDRESS)Optional Node Address
+0
+FFFFFFFFFFFF
+*O0E0(FRAME)Media Frame Type(s)
+?NOTE: Ethernet_802.2 is now the default frame type for ODI Drivers.
+@Ethernet_802.2
+Ethernet_802.3
+Ethernet_II
+Ethernet_SNAP
+!O0E0()Media Access Type
+?NOTE: The default Media type is AUTODETECT.
+@AUTODETECT
+AUTOFULL
+AUTOHALF
+100FULL
+100HALF
+10FULL
+10HALF
+!O0E0(SPEED)Line Speed
+?NOTE: The default Line Speed will be selected on driver's loading.
+10
+100
+InS_EnD

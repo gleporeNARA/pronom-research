@@ -1,0 +1,279 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'TextEdit'                                                                
+    EditorExePath     = 'TextEdit.DLL'                                                            
+    EditorDescription = 'Text Editor'                                                         
+    Version           = 'Version 6.7.0.8580'                                                      
+    Date              = '04-Jan-2007'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SupportsDDB       = True                                                                      
+
+    ResourceDependencies
+        'HelpAdvisor'
+        'Sim'
+        'Macro'
+    End
+End
+
+
+EditorWindowKind
+    Name                  = 'Harness'
+    NewWindowCaption      = 'Harness Definitions File'
+    NewWindowExtention    = 'Harness'
+    WindowKindDescription = 'Harness Definitions File'
+    IconName              = 'Harness'
+
+    EditorBar Name = 'MNTextEditMenu'   BarType = Menu        End
+    EditorBar Name = 'HTDefault'        BarType = HotkeyTable End
+    EditorBar Name = 'TLTextTools'      BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'       BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'     BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'         BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    LoadFilters
+        'Harness Definitions (*.Harness)' 
+    End
+
+    SaveFilters
+        'Harness Definitions (*.Harness)' 
+    End
+End
+
+EditorWindowKind
+    Name                  = 'Text'
+    NewWindowCaption      = 'Doc'           
+    NewWindowExtention    = 'Txt'           
+    WindowKindDescription = 'Text Document'
+    IconName              = 'TEXT'          
+
+    EditorBar Name = 'MNTextEditMenu'   BarType = Menu        End
+    EditorBar Name = 'HTDefault'        BarType = HotkeyTable End
+    EditorBar Name = 'TLTextTools'      BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'       BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'     BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'         BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    LoadFilters
+        'Text files (*.txt)'
+    End
+
+    SaveFilters
+        'Text files (*.txt)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'Annotation'
+    NewWindowCaption      = 'Annotation'
+    NewWindowExtention    = 'Annotation'
+    WindowKindDescription = 'Annotation Document'
+    IconName              = 'TEXT'
+
+    EditorBar Name = 'MNTextEditMenu'   BarType = Menu        End
+    EditorBar Name = 'HTDefault'        BarType = HotkeyTable End
+    EditorBar Name = 'TLTextTools'      BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'       BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'     BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'         BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    LoadFilters
+        'Physical Annotation files (*.Annotation)'
+    End
+
+    SaveFilters
+        'Physical Annotation files (*.Annotation)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'ProtelNetlist'
+    NewWindowCaption      = 'Netlist'
+    NewWindowExtention    = 'Net'
+    WindowKindDescription = 'Netlist File'
+    IconName              = 'ProtelNetlist'
+
+    EditorBar Name = 'MNTextNetlistFileMenu' BarType = Menu        End
+    EditorBar Name = 'HTDefault'             BarType = HotkeyTable End
+    EditorBar Name = 'TLTextTools'           BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'            BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'      BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'          BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'              BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+        'PCBSource'
+    End
+
+    LoadFilters
+        'Protel Netlist files (*.net)'
+    End
+
+    SaveFilters
+        'Protel Netlist files (*.net)'
+    End
+End
+
+PanelInfo
+    Name              = 'SnippetsView' 
+    Category          = '&System'      
+    Bitmap            = ''             
+    Hotkey            = 'S'            
+    ButtonVisible     = False          
+    CanDockVertical   = True           
+    CanDockHorizontal = True           
+End
+
+OptionsPage
+    ServerName  = 'TextEdit'
+    ServerImage = 'Preferences_Text.ico'
+    Image       = 'Text.bmp'
+    Caption     = 'Text Editors'
+    OrderIndex  = 70
+
+    OptionsPage
+        Caption  = 'General'
+    FormName = 'General'
+        OrderIndex = 1
+        CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'Display'
+        FormName = 'Display'
+        OrderIndex = 2
+        CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'Colors'
+        FormName = 'Colors'
+        OrderIndex = 3
+        CanSaveToCloud = True
+    End
+End
+
+Command Name = 'Clear'                                     LongSummary = 'Delete all the selected text from the current document'                                              End
+Command Name = 'ClearBrowserMarks'                         LongSummary = 'Clears any browser marks like : mask, select, graph'                                                 End
+Command Name = 'ClearLocationMark'                         LongSummary = 'Clear the location mark from the current document'                                                   End
+Command Name = 'CommentSelected'                           LongSummary = 'Comments the selected block'                                                                         End
+Command Name = 'Copy'                                      LongSummary = 'Copy the selected text to the clipboard'                                                             End
+Command Name = 'CrossProbeChoose'                          LongSummary = 'Choose object to cross-probe'                                                                        End
+Command Name = 'CrossProbeNotify'                          LongSummary = 'Notifys the SCH server of a cross-probe message'                                                     End
+Command Name = 'Cut'                                       LongSummary = 'Cur the selected text to the clipboard'                                                              End
+Command Name = 'DeleteCharacter'                           LongSummary = 'Delete the right character from the cursor'                                                          End
+Command Name = 'DeleteCharacterToLeft'                     LongSummary = 'Delete the left character from the cursor'                                                           End
+Command Name = 'DeleteLine'                                LongSummary = 'Delete the current line of the cursor'                                                               End
+Command Name = 'DeleteToBeginningOfWord'                   LongSummary = 'Delete to the beginning of the word from the cursor'                                                 End
+Command Name = 'DeleteToEndOfLine'                         LongSummary = 'Delete to the end of the line from the cursor'                                                       End
+Command Name = 'DeleteToEndOfWord'                         LongSummary = 'Delete to the end of the word from the cursor'                                                       End
+Command Name = 'DuplicateSelected'                         LongSummary = 'Copy and paste the selected text from the current document'                                          End
+Command Name = 'EditSyntax'                                LongSummary = 'Edit the current syntax of the current document'                                                     End
+Command Name = 'ExecuteSystemCommand'                      LongSummary = 'Execute a system command'                                                                            End
+Command Name = 'ExtendSelectionColumnOnePageDown'          LongSummary = 'Extends selection column one page down from the cursor'                                              End
+Command Name = 'ExtendSelectionColumnOnePageUp'            LongSummary = 'Extends selection column one page up from the cursor'                                                End
+Command Name = 'ExtendSelectionColumnOneWordLeft'          LongSummary = 'Extends selection column one word left from the cursor'                                              End
+Command Name = 'ExtendSelectionColumnOneWordRight'         LongSummary = 'Extends selection column one word right from the cursor'                                             End
+Command Name = 'ExtendSelectionColumnToBottomOfWindow'     LongSummary = 'Extends selection column to the bottom of window from the cursor'                                    End
+Command Name = 'ExtendSelectionColumnToFileBegin'          LongSummary = 'Extends selection column to the beginning of file from the cursor'                                   End
+Command Name = 'ExtendSelectionColumnToFileEnd'            LongSummary = 'Extends selection column to the end of file from the cursor'                                         End
+Command Name = 'ExtendSelectionColumnToLineBegin'          LongSummary = 'Extends selection column to the beginning of the line from the cursor'                               End
+Command Name = 'ExtendSelectionColumnToLineEnd'            LongSummary = 'Extends selection column to the end of line from the cursor'                                         End
+Command Name = 'ExtendSelectionColumnToTopOfWindow'        LongSummary = 'Extends selection column to top of window from the cursor'                                           End
+Command Name = 'ExtendSelectionLeftOneCharacter'           LongSummary = 'Extends selection left one character from the cursor'                                                End
+Command Name = 'ExtendSelectionLeftOneWord'                LongSummary = 'Extends selection left one word from the cursor'                                                     End
+Command Name = 'ExtendSelectionOneColumnDown'              LongSummary = 'Extends selection one column down from the cursor'                                                   End
+Command Name = 'ExtendSelectionOneColumnLeft'              LongSummary = 'Extends selection one column left from the cursor'                                                   End
+Command Name = 'ExtendSelectionOneColumnRight'             LongSummary = 'Extends selection one column right from the cursor'                                                  End
+Command Name = 'ExtendSelectionOneColumnUp'                LongSummary = 'Extends selection one column up from the cursor'                                                     End
+Command Name = 'ExtendSelectionOnePageDown'                LongSummary = 'Extends selection one page down from the cursor'                                                     End
+Command Name = 'ExtendSelectionRightOneCharacter'          LongSummary = 'Extends selection right one character from the cursor'                                               End
+Command Name = 'ExtendSelectionRightOneWord'               LongSummary = 'Extends selection right one word from the cursor'                                                    End
+Command Name = 'ExtendSelectionToBeginningOfFile'          LongSummary = 'Extends selection to the beginning of the file from the cursor'                                      End
+Command Name = 'ExtendSelectionToBeginningOfLine'          LongSummary = 'Extends selection to the beginning of the line from the cursor'                                      End
+Command Name = 'ExtendSelectionToBottomOfWindow'           LongSummary = 'Extends selection to the bottom of the window from the cursor'                                       End
+Command Name = 'ExtendSelectionToEndOfFile'                LongSummary = 'Extends selection to the end of file from the cursor'                                                End
+Command Name = 'ExtendSelectionToEndOfLine'                LongSummary = 'Extends selection to the end of line from the cursor'                                                End
+Command Name = 'ExtendSelectionToOnePageUp'                LongSummary = 'Extends selection one page up from the cursor'                                                       End
+Command Name = 'ExtendSelectionToSameColumnOnNextLine'     LongSummary = 'Extends selection to the same column on the next line from the cursor'                               End
+Command Name = 'ExtendSelectionToSameColumnOnPreviousLine' LongSummary = 'Extends selection to the same column on the previous line from the cursor'                           End
+Command Name = 'ExtendSelectionToTopOfWindow'              LongSummary = 'Extends selection to the top of the window from the cursor'                                          End
+Command Name = 'Find'                                      LongSummary = 'Search for and jump to text in current document'                                                     End
+Command Name = 'FindAndReplace'                            LongSummary = 'Search for and replace text in the current document'                                                 End
+Command Name = 'FindNext'                                  LongSummary = 'Search for and jump to the next found text in the current document'                                  End
+Command Name = 'FindNextSelected'                          LongSummary = 'Search for and jump to the next occurence of the text currently selected'                            End
+Command Name = 'FindReplaceInFiles'                        LongSummary = 'Search for and replace text in opened documents and in files on disk'                                End
+Command Name = 'GetTextAt'                                 LongSummary = 'Get text at a specified line number'                                       Parameters = 'LineNumber' End
+Command Name = 'GotoLineNumber'                            LongSummary = 'Jump to a specific line in the current document'                                                     End
+Command Name = 'IndentTextBlock'                           LongSummary = 'Indent selected text'                                                                                End
+Command Name = 'InsertLine'                                LongSummary = 'Insert a new line'                                                                                   End
+Command Name = 'InsertReturn'                              LongSummary = 'Insert a carriage return at the current cursor position'                                             End
+Command Name = 'InsertShiftTab'                            LongSummary = 'Insert a reverse tab at the current cursor position'                                                 End
+Command Name = 'InsertTab'                                 LongSummary = 'Insert a tab at the current cursor position'                                                         End
+Command Name = 'InsertText'                                LongSummary = 'Insert text at current cursor position'                                                              End
+Command Name = 'JumpLocationMark'                          LongSummary = 'Jump to a location previously specified'                                                             End
+Command Name = 'JumpToHelpTopicUnderCursor'                LongSummary = 'Open the help for the current word under the cursor'                                                 End
+Command Name = 'JumpToLineFromPanel'                       LongSummary = 'Internal process used when when jumping from found instances list box'                               End
+Command Name = 'MoveCursorDown'                            LongSummary = 'Moves the cursor down one character'                                                                 End
+Command Name = 'MoveCursorLeft'                            LongSummary = 'Moves the cursor left one character'                                                                 End
+Command Name = 'MoveCursorLeftOneWord'                     LongSummary = 'Moves the cursor left by one word'                                                                   End
+Command Name = 'MoveCursorRight'                           LongSummary = 'Moves the cursor right one character'                                                                End
+Command Name = 'MoveCursorRightOneWord'                    LongSummary = 'Moves the cursor right by one word'                                                                  End
+Command Name = 'MoveCursorToBeginningOfLine'               LongSummary = 'Moves the cursor to the beginning of the line'                                                       End
+Command Name = 'MoveCursorToBottomOfDocument'              LongSummary = 'Moves the cursor to the bottom of the document'                                                      End
+Command Name = 'MoveCursorToBottomOfWindow'                LongSummary = 'Moves the cursor to the bottom of the window'                                                        End
+Command Name = 'MoveCursorToEndOfLine'                     LongSummary = 'Moves the cursor to the end of line'                                                                 End
+Command Name = 'MoveCursorToLastPosition'                  LongSummary = 'Move the cursor to the previous cursor position'                                                     End
+Command Name = 'MoveCursorToTopOfDocument'                 LongSummary = 'Move the cursor to the top of the document'                                                          End
+Command Name = 'MoveCursorToTopOfWindow'                   LongSummary = 'Move the cursor to the top of the window'                                                            End
+Command Name = 'MoveCursorUp'                              LongSummary = 'Move the cursor up one character'                                                                    End
+Command Name = 'OpenDocumentUnderCursor'                   LongSummary = 'Attempt to open the document under the cursor with the same filename'                                End
+Command Name = 'PageDown'                                  LongSummary = 'Scroll the screen one page down'                                                                     End
+Command Name = 'PageUp'                                    LongSummary = 'Scroll the screen one page up'                                                                       End
+Command Name = 'Paste'                                     LongSummary = 'Paste text from the clipboard'                                                                       End
+Command Name = 'PrintDocument'                             LongSummary = 'Print the current document'                                                                          End
+Command Name = 'QuoteSelected'                             LongSummary = 'Add reply quotes to the current selected text'                                                       End
+Command Name = 'Redo'                                      LongSummary = 'Redo previous undo command'                                                                          End
+Command Name = 'ReloadTextFile'                            LongSummary = 'Update the current text document'                                                                    End
+Command Name = 'ScrollDownOneLine'                         LongSummary = 'Scroll the window down one line'                                                                     End
+Command Name = 'ScrollUpOneLine'                           LongSummary = 'Scroll the window up one line'                                                                       End
+Command Name = 'SelectAll'                                 LongSummary = 'Select all the text in the current document'                                                         End
+Command Name = 'SelectLine'                                LongSummary = 'Select the current line in the current document'                                                     End
+Command Name = 'SelectWord'                                LongSummary = 'Selects the current word for the current document'                                                   End
+Command Name = 'SetLocationMark'                           LongSummary = 'Set location mark on the current document'                                                           End
+Command Name = 'SetSelectedToCapitalize'                   LongSummary = 'Capitalize all words in the selected text'                                                           End
+Command Name = 'SetSelectedToLowerCase'                    LongSummary = 'Sets the selected text to all lower case characters'                                                 End
+Command Name = 'SetSelectedToUpperCase'                    LongSummary = 'Sets the selected text to all upper case characters'                                                 End
+Command Name = 'SetTextAt'                                 LongSummary = 'Set text at a specified line number'                                                                 End
+Command Name = 'SetupLanguage'                             LongSummary = 'Setup the language settings for the text editor'                                                     End
+Command Name = 'SetupPreferences'                          LongSummary = 'Setup the preferences of the text editor'                                                            End
+Command Name = 'SetupPrinter'                              LongSummary = 'Setup the printing preferences for the current document'                                             End
+Command Name = 'SetWordToCapitalize'                       LongSummary = 'Capitalize the current word on the cursor'                                                           End
+Command Name = 'SetWordToLowerCase'                        LongSummary = 'Set the current word on the cursor to all lower case'                                                End
+Command Name = 'SetWordToUpperCase'                        LongSummary = 'Set the current word on the cursor to all upper case'                                                End
+Command Name = 'ShowCodeTemplates'                         LongSummary = 'Show the code templates for the current document'                                                    End
+Command Name = 'SplitEditor'                               LongSummary = 'Split or combine editor'                                                                             End
+Command Name = 'ToggleAutoIndent'                          LongSummary = 'Toggles auto indent mode'                                                                            End
+Command Name = 'ToggleInsertMode'                          LongSummary = 'Toggles insert mode'                                                                                 End
+Command Name = 'UncommentSelected'                         LongSummary = 'Uncomments the selected block'                                                                       End
+Command Name = 'Undo'                                      LongSummary = 'Undos the previous command'                                                                          End
+Command Name = 'UnindentTextBlock'                         LongSummary = 'Unindents the current selected block'                                                                End
+Command Name = 'UpdateFoundInstanceList'                   LongSummary = 'Internal process used to update the found instance list'                                             End
+Command Name = 'UpdateLocationMarks'                       LongSummary = 'Internal process used to update the location marks on the panel'                                     End
+Command Name = 'UpdateSearchListOnPanel'                   LongSummary = 'Internal prorcess used to update the search list on the panel'                                       End
+Command Name = 'WordWrap'                                  LongSummary = 'Wraps the text around the cursor/margin for the current text document'                               End

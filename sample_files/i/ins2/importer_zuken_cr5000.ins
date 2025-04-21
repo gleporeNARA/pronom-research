@@ -1,0 +1,28 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'Importer_Zuken_CR5000'
+    EditorExePath     = 'Importer_Zuken_CR5000.DLL'
+    EditorDescription = 'Importer Zuken CR5000'
+    Version           = 'Version 1.0.3.0'
+    Date              = '19-Feb-2017'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.'
+    Copyright         = 'Copyright © Altium Limited 2017'
+    SystemExtension   = False
+End
+
+OptionsPage
+    ServerName  = 'ImporterManager'
+    ServerImage = 'Preferences_ImporterOrcad.ico'
+    Image       = 'ProjectGroup.bmp'
+    Caption     = 'Importers'
+    OrderIndex  = 110
+
+    OptionsPage
+        ServerName  = 'Importer_Zuken_CR5000'
+        ServerImage = 'Preferences_ImporterZuken_CR5000.ico'
+        Caption     = 'Zuken CR5000'
+        FormName    = 'ZukenCR5000'
+        OrderIndex  = 25
+    End
+End

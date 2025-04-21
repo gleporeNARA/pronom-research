@@ -1,0 +1,436 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'Sch'                                                                     
+    EditorExePath     = 'AdvSch.dll'                                                              
+    EditorDescription = 'Schematic Editor'
+    Version           = 'Version 10.0.0.28714'                                                      
+    Date              = '25-Jun-2013'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+
+    ResourceDependencies
+        'Sim'
+        'LoadPCADSCH'
+        'Macro'
+        'SavePCADSCH'
+        'SchDwgUtility'
+        'EditVHDL'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'Sch'                
+    NewWindowCaption      = 'Sheet'              
+    NewWindowExtention    = 'SchDoc'             
+    WindowKindDescription = 'Schematic Document' 
+    IconName              = 'SCH'                
+
+    EditorBar Name = 'MNSchematicMenu'     BarType = Menu        End
+    EditorBar Name = 'HTSchematicHotKeys'  BarType = HotkeyTable End
+    EditorBar Name = 'TLSchematicTools'    BarType = Toolbar     End
+    EditorBar Name = 'TLSimulationSources' BarType = Toolbar     End
+    EditorBar Name = 'TLFormatting'        BarType = Toolbar     End
+    EditorBar Name = 'TBAssemblyVariants'  BarType = Toolbar     End
+    EditorBar Name = 'TLSchUtilities'      BarType = Toolbar     End
+    EditorBar Name = 'TLWiringTools'       BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'        BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'            BarType = Toolbar     End
+    EditorBar Name = 'HTSchInteractiveHotKeys'       BarType = HotkeyTable End
+
+    EditorClasses
+        'PCBSource'
+        'FPGASource'
+        'CoreSource'
+    End
+
+    LoadFilters
+        'Advanced Schematic binary files (*.schdoc)'
+        'Advanced Schematic binary files (*.sch)'
+        'Advanced Schematic ascii files (*.schdoc)'
+    End
+
+    SaveFilters
+        'Advanced Schematic binary (*.SchDoc)'
+        'Advanced Schematic template (*.SchDot)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'SchLib'                     
+    NewWindowCaption      = 'Schlib'                     
+    NewWindowExtention    = 'SchLib'                     
+    WindowKindDescription = 'Schematic Library Document' 
+    IconName              = 'SCHLIB'                     
+
+    EditorBar Name = 'MNSchLibMenu'      BarType = Menu        End
+    EditorBar Name = 'HTSchLibHotKeys'   BarType = HotkeyTable End
+    EditorBar Name = 'TLSchLibTools'     BarType = Toolbar     End
+    EditorBar Name = 'TLSchLibUtilities' BarType = Toolbar     End
+    EditorBar Name = 'TLModeToolbar'     BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'      BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'          BarType = Toolbar     End
+    EditorBar Name = 'HTSchLibInteractiveHotKeys'  BarType = HotkeyTable End
+
+    EditorClasses
+        'LibraryDocument'
+    End
+
+    LoadFilters
+        'Advanced Schematic binary library (*.schlib)'
+        'Advanced Schematic binary library (*.lib)'
+    End
+
+    SaveFilters
+        'Advanced Schematic binary library (*.SchLib)'
+    End
+End
+
+PanelInfo
+    Name              = 'SchLibraryPanel' 
+    Category          = 'S&CH'            
+    Bitmap            = ''                
+    Hotkey            = 'B'               
+    ButtonVisible     = True              
+    CanDockVertical   = True              
+    CanDockHorizontal = False             
+End
+
+PanelInfo
+    Name              = 'SchExplorerEditor' 
+    Category          = 'S&CH'              
+    Bitmap            = ''                  
+    Hotkey            = 'S'                 
+    ButtonVisible     = True                
+    CanDockVertical   = True                
+    CanDockHorizontal = True                
+End
+
+PanelInfo
+    Name              = 'SchObjectInspector' 
+    Category          = 'S&CH'               
+    Bitmap            = ''                   
+    Hotkey            = 'I'                  
+    ButtonVisible     = True                 
+    CanDockVertical   = True                 
+    CanDockHorizontal = False                
+
+    DocumentKinds
+        'Sch'
+    End
+End
+
+PanelInfo
+    Name              = 'SchLibObjectInspector' 
+    Category          = 'S&CH'                  
+    Bitmap            = ''                      
+    Hotkey            = 'I'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = False
+
+    DocumentKinds
+        'SchLib'
+        'SymLib'
+    End
+End
+
+PanelInfo
+    Name              = 'OpenBusObjectInspector'
+    Category          = '&OpenBus'               
+    Bitmap            = ''                   
+    Hotkey            = 'I'                  
+    ButtonVisible     = True                 
+    CanDockVertical   = True                 
+    CanDockHorizontal = False                
+
+    DocumentKinds
+        'OpenBus'
+    End
+End
+
+PanelInfo
+    Name              = 'FSMObjectInspector'
+    Category          = '&FSM'               
+    Bitmap            = ''                   
+    Hotkey            = 'I'                  
+    ButtonVisible     = True                 
+    CanDockVertical   = True                 
+    CanDockHorizontal = False                
+
+    DocumentKinds
+        'FSM'
+    End
+End
+
+PanelInfo
+    Name              = 'LibList'
+    Category          = 'S&CH'
+    Bitmap            = ''
+    Hotkey            = 'L'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'SchLib'
+        'SymLib'
+    End
+End
+
+PanelInfo
+    Name              = 'List'
+    Category          = 'S&CH'
+    Bitmap            = ''
+    Hotkey            = 'L'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'Sch'
+    End
+End
+
+PanelInfo
+    Name              = 'OpenBusList'
+    Category          = '&OpenBus'
+    Bitmap            = ''
+    Hotkey            = 'L'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'OpenBus'
+    End
+End
+
+PanelInfo
+    Name              = 'FSMList'
+    Category          = '&FSM'
+    Bitmap            = ''
+    Hotkey            = 'L'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'FSM'
+    End
+End
+
+PanelInfo
+    Name              = 'MiniViewer'
+    Category          = 'S&CH'
+    Bitmap            = ''
+    Hotkey            = 'T'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'Sch'
+    End
+End
+
+PanelInfo
+    Name              = 'OpenBus Palette'
+    Category          = '&OpenBus'
+    Bitmap            = ''
+    Hotkey            = 'T'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'OpenBus'
+    End
+End
+
+OptionsPage
+    ServerName  = 'Sch'
+    ServerImage = 'Preferences_Schematic.ico'
+    Image       = 'Sch.bmp'
+    Caption     = 'Schematic'
+    OrderIndex  = 20
+
+    OptionsPage
+        Caption  = 'General'
+        FormName = 'Schematic'
+        OrderIndex = 1
+        CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'Graphical Editing'
+        FormName = 'GraphEdit'
+        OrderIndex = 2
+        CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'Compiler'
+        FormName = 'Compiler'
+        OrderIndex = 4
+	    CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'Grids'
+        FormName = 'GridsAndUnits'
+        OrderIndex = 7
+	    CanSaveToCloud = True
+    End
+End
+
+Command Name = 'AddComponentPart'                  LongSummary = 'Add a new part to the currently displayed component '                                               End
+Command Name = 'AddRemoveLibraryInSchEditor'       LongSummary = 'Add and remove libraries from the schematic editor library list'                                    End
+Command Name = 'ManageUnions'                      LongSummary = 'Add, remove and organize Unions'                                                                    End
+Command Name = 'AlignObjects'                      LongSummary = 'Align selected objects according to parameters or dialog settings'                                  End
+Command Name = 'AskForXYLocation'                  LongSummary = ' Prompt for a user specified X and Y location '                                                     End
+Command Name = 'BringObjectToFront'                LongSummary = 'Bring an object graphically to the front of all other objects'                                      End
+Command Name = 'BringObjectToFrontOf'              LongSummary = 'Bring an object to the front of another object'                                                     End
+Command Name = 'ChangeComponentName'               LongSummary = 'Change the name of the current component in the current library'                                    End
+Command Name = 'ChangeCurrentTemplate'             LongSummary = 'Change the current template to a different template file '                                          End
+Command Name = 'ChangeObject'                      LongSummary = 'Select and use dialog to change objects'                                                            End
+Command Name = 'ChangeObjectGraphically'           LongSummary = 'Select and change objects on current document'                                                      End
+Command Name = 'ChangeObjectGraphicallyOrSetFocus' LongSummary = 'Select and change objects on current document'                                                      End
+Command Name = 'ChangeSingleObject'                LongSummary = 'Use dialog to change object under the cursor '                                                      End
+Command Name = 'Clear'                             LongSummary = 'Delete all selected objects from the current document'                                              End
+Command Name = 'ClearLocationMark'                 LongSummary = 'Clear location mark (1-10) on the current document'                                                 End
+Command Name = 'ComponentRuleCheck'                LongSummary = 'Validate changes to current library '                                                               End
+Command Name = 'Copy'                              LongSummary = 'Copy all selected objects to the clipboard'                                                         End
+Command Name = 'CopyComponentToLibrary'            LongSummary = 'Copy component from current library to another library file '                                       End
+Command Name = 'CreateComponent'                   LongSummary = 'Add a new component to library'                                                                     End
+Command Name = 'CreateLibraryFromProject'          LongSummary = 'Make a library of parts contained in the current project'                                           End
+Command Name = 'CreateSheetFromFPGAPart'           LongSummary = 'Creates a new vhdl document and adds ports for the pins as well as other FPGA parameters'           End
+Command Name = 'CreateSheetFromSheetSymbol'        LongSummary = 'Creates a new schematic document and adds ports for the sheet entries that are on the sheet symbol' End
+Command Name = 'CreateSheetSymbolFromSheet'        LongSummary = 'Create a sheet symbol that represents the current schematic document '                              End
+Command Name = 'CrossProbeChoose'                  LongSummary = 'Choose object to cross-probe '                                                                      End
+Command Name = 'CrossProbeNetOnSch'                LongSummary = 'Internal process used when cross probing nets from Advanced PCB'                                    End
+Command Name = 'CrossProbeNotify'                  LongSummary = 'called by the Client module to notify the Advanced Schematic server of a cross-probe message'       End
+Command Name = 'CrossReference'                    LongSummary = 'Add Port Cross References'                                                                          End
+Command Name = 'Cut'                               LongSummary = 'Copy selected objects to clipboard and remove from current document '                               End
+Command Name = 'DeleteComponentFromLibrary'        LongSummary = 'Remove component from the current library '                                                         End
+Command Name = 'DeleteObjects'                     LongSummary = 'Select and delete objects on current document'                                                      End
+Command Name = 'DeSelect'                          LongSummary = 'De-Select selected objects  '                                                                       End
+Command Name = 'DocumentPreferences'               LongSummary = 'Setup options for current document window '                                                         End
+Command Name = 'DownHierarchy'                     LongSummary = 'Switch to the parent or a child sheet of the current sheet'                                         End
+Command Name = 'Drag'                              LongSummary = 'Move objects together with connected wires/buses '                                                  End
+Command Name = 'ExportLibraryToDatabase'           LongSummary = 'Export a Library to database'                                                                       End
+Command Name = 'ExportSchematicToDatabase'         LongSummary = 'Export schematic to a database '                                                                    End
+Command Name = 'FilterSelect'                      LongSummary = 'Selects a filter from an object '                                                                   End
+Command Name = 'FindAndReplaceText'                LongSummary = 'Search for and replace text strings'                                                                End
+Command Name = 'FindNextText'                      LongSummary = 'Search for and jump to the next matching text string'                                               End
+Command Name = 'FindText'                          LongSummary = 'Search for and jump to a text string'                                                               End
+Command Name = 'FirstComponentLibraryEditor'       LongSummary = 'Show the first component in the library'                                                            End
+Command Name = 'IncrementComponentPartNumber'      LongSummary = 'Increment Part Number '                                                                             End
+Command Name = 'Jump'                              LongSummary = 'Jump to a specified Location '                                                                      End
+Command Name = 'JumpComponent'                     LongSummary = 'Jump to Components '                                                                                End
+Command Name = 'LastComponentLibraryEditor'        LongSummary = 'Show the last component in the library '                                                            End
+Command Name = 'LibraryDocumentDescription'        LongSummary = 'Description of current library document'                                                            End
+Command Name = 'ListAllSelectedPins'               LongSummary = 'List all selected pins'                                                                             End
+Command Name = 'MeasureDistance'                   LongSummary = 'MeasureDistance'                                                                                    End
+Command Name = 'MirrorSelectedSheetSymbol'         LongSummary = 'Flip selected sheet symbol along the X or Y-axis'                                                   End
+Command Name = 'MoveComponentToLibrary'            LongSummary = 'Move component from current library to another library file'                                        End
+Command Name = 'MoveCursor'                        LongSummary = 'Move the cursor along the snap grid'                                                                End
+Command Name = 'MoveObject'                        LongSummary = 'Select and move objects in current document '                                                       End
+Command Name = 'MoveObjectToFront'                 LongSummary = 'Move and place an object in the front of all other objects '                                        End
+Command Name = 'MoveSelectedObjects'               LongSummary = 'Move selected objects to another area of the document'                                              End
+Command Name = 'MoveSingleObject'                  LongSummary = 'Select and move objects on the current document '                                                   End
+Command Name = 'NextComponentLibraryEditor'        LongSummary = 'Show the next component in the library '                                                            End
+Command Name = 'NextComponentPart'                 LongSummary = 'Show the next part of the currently displayed component '                                           End
+Command Name = 'Paste'                             LongSummary = 'Place clipboard contents onto current document'                                                     End
+Command Name = 'PlaceAnnotation'                   LongSummary = 'Place single line text on the current document '                                                    End
+Command Name = 'PlaceArc'                          LongSummary = 'Place graphical arcs on the current document '                                                      End
+Command Name = 'PlaceArray'                        LongSummary = 'Place array with the last set array placement options'                                              End
+Command Name = 'PlaceBezier'                       LongSummary = 'Place bezier curves on the current document '                                                       End
+Command Name = 'PlaceBus'                          LongSummary = 'Place bus lines on the current schematic document '                                                 End
+Command Name = 'PlaceBusEntry'                     LongSummary = 'Place bus entry on the current schematic document '                                                 End
+Command Name = 'PlaceComponentFromLibraryEditor'   LongSummary = '   Places part from library editor into the current schematic editor document'                      End
+Command Name = 'PlaceEllipse'                      LongSummary = 'Place elliptical shapes on the current document'                                                    End
+Command Name = 'PlaceEllipticalArc'                LongSummary = 'Place elliptical arcs on the current document'                                                      End
+Command Name = 'PlaceGraphicImage'                 LongSummary = 'Place graphical images on the current document'                                                     End
+Command Name = 'PlaceIEEESymbol'                   LongSummary = 'Place specified IEEE symbol on the current library document '                                       End
+Command Name = 'PlaceIntegratedComponent'          LongSummary = 'Place integrated components on the current schematic document'                                      End
+Command Name = 'PlaceJunction'                     LongSummary = 'Place junctions on the current schematic document '                                                 End
+Command Name = 'PlaceLine'                         LongSummary = 'Place graphical lines on the current document'                                                      End
+Command Name = 'PlaceNetLabel'                     LongSummary = 'Place net labels on the current schematic document'                                                 End
+Command Name = 'PlaceNoERC'                        LongSummary = 'Silence compilation errors on a net'                                                                End
+Command Name = 'PlaceNote'                         LongSummary = 'Place multi-line text Notes on the current document '                                               End
+Command Name = 'PlaceCompileMask'                  LongSummary = 'Place compile masks on the current document '                                                       End
+Command Name = 'PlaceOffSheetConnector'            LongSummary = 'Place off-sheet connector on the current schematic document '                                       End
+Command Name = 'PlaceParameterSet'                 LongSummary = 'Places a set of parameters'                                                                         End
+Command Name = 'PlaceDifferentialPair'             LongSummary = 'Places a differential pair object on the current schematic document'                                End
+Command Name = 'PlacePart'                         LongSummary = 'Place parts on the current schematic document'                                                      End
+Command Name = 'PlacePartFromLibraryEditor'        LongSummary = 'Place a part from the library editor panel'                                                         End
+Command Name = 'PlacePartFromSchEditorPanel'       LongSummary = 'Place a part from the schematic editor panel '                                                      End
+Command Name = 'PlacePCBLayoutDirective'           LongSummary = 'Add directives to nets for PCB routing '                                                            End
+Command Name = 'PlacePieChart'                     LongSummary = 'Place pie shapes on the current document'                                                           End
+Command Name = 'PlacePin'                          LongSummary = 'Place electrical pin on the current library document'                                               End
+Command Name = 'PlacePolygon'                      LongSummary = 'Place graphical polygon shapes on the current document '                                            End
+Command Name = 'PlacePort'                         LongSummary = 'Place ports on the current schematic document'                                                      End
+Command Name = 'PlacePowerPort'                    LongSummary = 'Place power ports on the current schematic document '                                               End
+Command Name = 'PlaceProbe'                        LongSummary = 'Add net to list of nets to be traced by digital simulator '                                         End
+Command Name = 'PlaceRectangle'                    LongSummary = 'Place rectangles on the current document '                                                          End
+Command Name = 'PlaceRoundRectangle'               LongSummary = 'Place round rectangles on the current document '                                                    End
+Command Name = 'PlaceSheetEntry'                   LongSummary = 'Add net connections to sheet symbols '                                                              End
+Command Name = 'PlaceSheetSymbol'                  LongSummary = 'Place hierarchical sheet symbols on the current schematic document'                                 End
+Command Name = 'PlaceStimulus'                     LongSummary = 'Add stimulus information to nets for digital simulation '                                           End
+Command Name = 'PlaceTestVectorIndex'              LongSummary = 'Mark nets to identify which simulation vector to use '                                              End
+Command Name = 'PlaceTextFrame'                    LongSummary = 'Place multi-line text frames on the current document '                                              End
+Command Name = 'PlaceWire'                         LongSummary = 'Place electrical wires on the current schematic document '                                          End
+Command Name = 'PreviousComponentLibraryEditor'    LongSummary = '  Show the previous component in the library '                                                      End
+Command Name = 'PreviousComponentPart'             LongSummary = 'Show the previous part of the currently displayed component '                                       End
+Command Name = 'PrintDocument'                     LongSummary = 'Print the current document with the last set printer options'                                       End
+Command Name = 'Redo'                              LongSummary = 'Redo previous undo command '                                                                        End
+Command Name = 'RemoveComponentPart'               LongSummary = 'Remove a part from the currently displayed component'                                               End
+Command Name = 'RemoveDuplicateComponentNames'     LongSummary = 'Remove duplicate components from library'                                                           End
+Command Name = 'RemoveTemplate'                    LongSummary = 'Remove any template information from the current schematic document'                                End
+Command Name = 'RenameObjectText'                  LongSummary = 'Changes the text field associated with an object from the Browser'                                  End
+Command Name = 'ReportComponent'                   LongSummary = 'Display component information for current library document '                                        End
+Command Name = 'ReportComponentLibrary'            LongSummary = 'Display library statistics'                                                                         End
+Command Name = 'ResetUniqueIds'                    LongSummary = 'Reset Component Unique IDs'                                                                         End
+Command Name = 'ReverseSelectedSheetEntryOrder'    LongSummary = 'Reverse the order of selected sheet entries'                                                        End
+Command Name = 'RotateSelectedObjects'             LongSummary = 'Select and rotate objects on the current document '                                                 End
+Command Name = 'Select'                            LongSummary = 'Select specified objects'                                                                           End
+Command Name = 'SelectionMemory'                   LongSummary = 'Selection Memory'                                                                                   End
+Command Name = 'SendObjectToBack'                  LongSummary = 'Send an object to the back of all other objects'                                                    End
+Command Name = 'SendObjectToBackOf'                LongSummary = 'Send an object to the back of another object '                                                      End
+Command Name = 'SetChannel'                        LongSummary = 'Set Displayed Channe'                                                                               End
+Command Name = 'SetLocationMark'                   LongSummary = 'Set location mark (1-10) on the current document '                                                  End
+Command Name = 'SetupArrayPlacement'               LongSummary = 'Define an array placement of clipboard contents '                                                   End
+Command Name = 'SetupPreferences'                  LongSummary = 'Setup Schematic and Library Editor Preferences '                                                    End
+Command Name = 'SetupPrinter'                      LongSummary = 'Printer and page setup'                                                                             End
+Command Name = 'SwapSelectedSheetEntrySide'        LongSummary = 'Swap selected sheet entries to the other side of the sheet symbols'                                 End
+Command Name = 'SynchronizeHierarchy'              LongSummary = 'Synchronizes hierarchy elements like ports, sheet entries, sheet symbols, ...'                      End
+Command Name = 'ToggleComponentFittedInPhysicalSheet' LongSummary = 'Toggle component fitted or not fitted in current variant'                                        End
+Command Name = 'ToggleComponentDisplayMode'        LongSummary = 'Display component in the specified notation'                                                        End
+Command Name = 'ToggleElectricalGrid'              LongSummary = 'Turn the electrical grid on or off'                                                                 End
+Command Name = 'ToggleHiddenPins'                  LongSummary = 'Show/Hide hidden component pins in library documents'                                               End
+Command Name = 'ToggleIOTypeInSelectedSheetSymbol' LongSummary = 'Toggle the I/O type of all sheet entries in selected sheet symbols'                                 End
+Command Name = 'ToggleSelectedSheetEntryIO'        LongSummary = 'Toggle the I/O type of selected sheet entries'                                                      End
+Command Name = 'ToggleSelection'                   LongSummary = 'Toggle selection-state of objects '                                                                 End
+Command Name = 'ToggleSingleObjectSelection'       LongSummary = 'Toggle selection-state of objects'                                                                  End
+Command Name = 'ToggleSnapGrid'                    LongSummary = 'Turn the snap grid on or off  '                                                                     End
+Command Name = 'ToggleVisibleGrid'                 LongSummary = 'Turn the visible grid on or off  '                                                                  End
+Command Name = 'Undo'                              LongSummary = 'Undo previous command '                                                                             End
+Command Name = 'UpdateComponentsFromLibraryEditor' LongSummary = 'Update components in all opened schematic documents  '                                              End
+Command Name = 'UpdateCurrentTemplate'             LongSummary = 'Update the current schematic document from its template file.'                                      End
+Command Name = 'UpdateLibraryMask'                 LongSummary = 'Internal process used when updating library editor component list box '                             End
+Command Name = 'UpdatePartDatabaseLinks'           LongSummary = 'Update all schematic parts database links '                                                         End
+Command Name = 'UpdatePartFromLibraryEditor'       LongSummary = 'Update part from library editor'                                                                    End
+Command Name = 'UpdatePartsFromLibraryList'        LongSummary = 'Update all parts from listed libraries '                                                            End
+Command Name = 'Zoom'                              LongSummary = 'Perform Zoom action depending on defined parameters'                                                End
+Command Name = 'ChangeCursorStyle'                 LongSummary = 'Changes mouse cursor style'                                                                         End
+Command Name = 'GenerateLibraryReport'             LongSummary = 'Generate library report'                                                                            End
+Command Name = 'ConvertCrossJunctions'             LongSummary = 'Convert Cross Junctions'                                                                            End
+Command Name = 'OffsetSelection'                   LongSummary = 'Offset Selected Objects by X, Y'                                                                    End
+Command Name = 'LinkOpenBusPorts'                  LongSummary = 'Link OpenBus Devices'                                                                               End
+Command Name = 'AddOpenBusPort'                    LongSummary = 'Add OpenBus bus port'                                                                               End
+Command Name = 'OpenBusSignalManager'              LongSummary = 'Manage OpenBus Signals and Interrupts'                                                              End
+Command Name = 'ReportOpenBus'                     LongSummary = 'Generate report from OpenBus sheet'                                                                 End
+Command Name = 'ChangeOpenBusLinkShape'            LongSummary = 'Change OpenBus Link(s) Shape'                                                                       End
+Command Name = 'PlaceHighLevelCodeSymbol'          LongSummary = 'Place a C code symbol on the current schematic document'                                            End
+Command Name = 'PlaceHighLevelCodeEntry'           LongSummary = 'Place a C parameter code entry onto a C code symbol'                                                End
+Command Name = 'PlaceFSMState'                     LongSummary = 'Place State on the current FSM document'                                                            End
+Command Name = 'PlaceFSMTransition'                LongSummary = 'Place Transition on the current FSM document'                                                       End
+Command Name = 'CreateCommentThread'               LongSummary = 'Begin new comments thread for managed project'                                                      End

@@ -1,0 +1,90 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'SimView'                                                                 
+    EditorExePath     = 'SimView.DLL'                                                             
+    EditorDescription = 'Simulation Data Viewer'                                                  
+    Version           = 'Version 6.3.0.6221'                                                      
+    Date              = '16-May-2006'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+
+    ResourceDependencies
+        'TextEdit'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'SimData'             
+    NewWindowCaption      = 'Untitled'            
+    NewWindowExtention    = 'sdf'                 
+    WindowKindDescription = 'Simulation Document' 
+    IconName              = 'SIMDATA_DOC'         
+
+    EditorBar Name = 'MNSimViewMenu'        BarType = Menu        End
+    EditorBar Name = 'HTSimViewHotKeyTable' BarType = HotkeyTable End
+    EditorBar Name = 'TLSimViewToolBar'     BarType = Toolbar     End
+    EditorBar Name = 'TLWaveTools'          BarType = Toolbar     End
+    EditorBar Name = 'TLCursorTools'        BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'     BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'         BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'             BarType = Toolbar     End
+
+    LoadFilters
+        'sdf files (*.sdf)'
+    End
+End
+
+PanelInfo
+    Name              = 'SimDataPanel' 
+    Category          = '&Editor'      
+    Bitmap            = ''             
+    Hotkey            = 'S'            
+    ButtonVisible     = True           
+    CanDockVertical   = True           
+    CanDockHorizontal = False          
+End
+
+Command Name = 'AbortSimulation'      LongSummary = 'Abort the current simulation'                                 End
+Command Name = 'AddPlot'              LongSummary = 'Add a new plot'                                               End
+Command Name = 'AddSourceData'        LongSummary = 'Add source data to the current chart'                         End
+Command Name = 'AddWaveToPlot'        LongSummary = 'Add a wave to the current plot'                               End
+Command Name = 'AddYAxis'             LongSummary = 'Add a Y Axis to the current plot'                             End
+Command Name = 'ChartSettings'        LongSummary = 'Define chart settings for the active chart'                   End
+Command Name = 'Clear'                LongSummary = 'Clear all selections from the current document'               End
+Command Name = 'Copy'                 LongSummary = 'Copy the selection in the current document'                   End
+Command Name = 'CopyToClip'           LongSummary = 'Copy the current document to clipboard'                       End
+Command Name = 'CreateFFTChart'       LongSummary = 'Create a Fast Fourier Transform of the chart'                 End
+Command Name = 'CrossProbeChoose'     LongSummary = 'Choose object and create cross-probe message'                 End
+Command Name = 'CrossProbeNotify'     LongSummary = 'Respond to cross-probe message'                               End
+Command Name = 'CursorA'              LongSummary = 'Turn on Cursor A for selected wave'                           End
+Command Name = 'CursorB'              LongSummary = 'Turn on Cursor B for selected wave'                           End
+Command Name = 'Cut'                  LongSummary = 'Cut the selection in the current document'                    End
+Command Name = 'Delete'               LongSummary = 'Delete all selections from the current document'              End
+Command Name = 'DeleteChart'          LongSummary = 'Delete the currently selected chart'                          End
+Command Name = 'DeleteSourceData'     LongSummary = 'Delete source data for the current chart'                     End
+Command Name = 'EditSourceData'       LongSummary = 'Edit the selected source data wave'                           End
+Command Name = 'EditWaveform'         LongSummary = 'Edit the currently selected waveform'                         End
+Command Name = 'ExportChart'          LongSummary = 'Export the currently selected chart'                          End
+Command Name = 'ExportPlot'           LongSummary = 'Export the currently selected plot'                           End
+Command Name = 'ExportWaveform'       LongSummary = 'Export the currently selected waveform'                       End
+Command Name = 'FormatWave'           LongSummary = 'Format  the selected waveform'                                End
+Command Name = 'ImportWaveforms'      LongSummary = 'Imports one or more waveforms into the active chart'          End
+Command Name = 'InsertCell'           LongSummary = 'Insert a new cell above the selected item'                    End
+Command Name = 'ModifyWaveColors'     LongSummary = 'Modify wave colors'                                           End
+Command Name = 'MoveWaveCursor'       LongSummary = 'Function to move cursor along selected waveform'              End
+Command Name = 'NewChart'             LongSummary = 'Add a new chart to simulation file'                           End
+Command Name = 'Paste'                LongSummary = 'Place clipboard contents into current document'               End
+Command Name = 'PlotSettings'         LongSummary = 'Customise Plot Settings'                                      End
+Command Name = 'PrintDocument'        LongSummary = 'Print the current document with the last set printer options' End
+Command Name = 'RecallWaveform'       LongSummary = 'Recall a stored waveform'                                     End
+Command Name = 'RemovePlot'           LongSummary = 'Remove the selected Plot'                                     End
+Command Name = 'RemoveWave'           LongSummary = 'Remove the selected waveform'                                 End
+Command Name = 'RemoveYAxis'          LongSummary = 'Remove the selected Y Axis'                                   End
+Command Name = 'Scroll'               LongSummary = 'Scroll'                                                       End
+Command Name = 'SetCurrentAnalysis'   LongSummary = 'Set the current analysis'                                     End
+Command Name = 'SetupDocumentOptions' LongSummary = 'Setup document options'                                       End
+Command Name = 'SetupPrinter'         LongSummary = 'Printer and page setup'                                       End
+Command Name = 'StoreWaveform'        LongSummary = 'Store a waveform for later recall'                            End
+Command Name = 'YAxisSettings'        LongSummary = 'Settings for selected Y Axis'                                 End
+Command Name = 'Zoom'                 LongSummary = 'Zoom'                                                         End

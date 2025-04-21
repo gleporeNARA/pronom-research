@@ -1,0 +1,28 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'Importer_EAGLE'
+    EditorExePath     = 'Importer_EAGLE.IWZ'
+    EditorDescription = 'Importer EAGLE'
+    Version           = 'Version 1.0.0.0'
+    Date              = '22-Sep-2014'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.'
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = False
+End
+
+OptionsPage
+    ServerName  = 'ImporterManager'
+    ServerImage = 'Preferences_ImporterEagle.ico'
+    Image       = 'ProjectGroup.bmp'
+    Caption     = 'Importers'
+    OrderIndex  = 110
+
+    OptionsPage
+        ServerName  = 'Importer_EAGLE'
+        ServerImage = 'Preferences_ImporterEagle.ico'
+        Caption     = 'EAGLE'
+        FormName    = 'Eagle'
+        OrderIndex  = 0
+    End
+End

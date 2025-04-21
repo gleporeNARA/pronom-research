@@ -1,0 +1,98 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'Wave'                                                                    
+    EditorExePath     = 'Wave.DLL'                                                                
+    EditorDescription = 'Waveform Editor'                                                         
+    Version           = 'Version 10.0.0.20552'                                                      
+    Date              = '21-Jul-2010'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+End
+
+EditorWindowKind
+    Name                  = 'Wave'              
+    NewWindowCaption      = 'Wave'              
+    NewWindowExtention    = 'SO'                
+    WindowKindDescription = 'Waveform Document' 
+    IconName              = 'Wave'              
+
+    EditorBar Name = 'MNWaveMenu'        BarType = Menu        End
+    EditorBar Name = 'HTWaveHotkeys'     BarType = HotkeyTable End
+    EditorBar Name = 'TLWaveMainToolBar' BarType = Toolbar     End
+    EditorBar Name = 'TLVHDLToolbar'     BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'  BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'      BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'          BarType = Toolbar     End
+
+    LoadFilters
+        'Wave files (*.so)'
+    End
+
+    SaveFilters
+        'Wave files (*.so)'
+    End
+End
+
+PanelInfo
+    Name              = 'WavePanel' 
+    Category          = '&Editor'   
+    Bitmap            = ''          
+    Hotkey            = 'W'         
+    ButtonVisible     = True        
+    CanDockVertical   = True        
+    CanDockHorizontal = False       
+End
+
+OptionsPage
+    ServerName  = 'Wave'
+    ServerImage = 'Preferences_Wave.ico'
+    Caption     = 'Wave'
+    Image       = 'Wave.bmp'
+    OrderIndex  = 100
+
+    OptionsPage
+        Caption  = 'General'
+        FormName = 'General'
+        OrderIndex = 1
+        CanSaveToCloud = True
+    End
+End
+
+Command Name = 'AddNewCursor'                      LongSummary = 'Add a new cursor'                                                                           End
+Command Name = 'AddTransition'                     LongSummary = 'Add transitions to a signal on the current wave document'                                   End
+Command Name = 'Change'                            LongSummary = 'Change the values of a signal or transition'                            Parameters = 'Item' End
+Command Name = 'ChangeColor'                       LongSummary = 'Change the color of signals that are currenlty selected'                                    End
+Command Name = 'ChangeFont'                        LongSummary = 'Change the font style of signal names that are currently selected'                          End
+Command Name = 'ChangeFormatRadix'                 LongSummary = 'Change the format or the radix of the signal currently selected'                            End
+Command Name = 'ChangeSignalGraphicallyOrMove'     LongSummary = 'Select and change signal transition start time value'                                       End
+Command Name = 'ChangeSignalGraphicallyOrSetFocus' LongSummary = 'Set the focus state of a signal'                                                            End
+Command Name = 'Clear'                             LongSummary = 'Clear the contents of all selected signals'                                                 End
+Command Name = 'CollapseRow'                       LongSummary = 'Collapse the expanded tree of the selected signal'                                          End
+Command Name = 'Copy'                              LongSummary = 'Copy the contents of all selected signals to the clipboard'                                 End
+Command Name = 'CrossProbeChoose'                  LongSummary = 'Choose object and create cross-probe message'                                               End
+Command Name = 'CrossProbeNotify'                  LongSummary = 'Respond to cross-probe message'                                                             End
+Command Name = 'Cut'                               LongSummary = 'Copy contents of selected signals to clipboard and clear from document'                     End
+Command Name = 'Delete'                            LongSummary = 'Removes selected signals and transitions from the document'                                 End
+Command Name = 'DeleteCursor'                      LongSummary = 'Delete a cursor'                                                                            End
+Command Name = 'DeleteSignals'                     LongSummary = 'Hide selected signals from the current document '                                           End
+Command Name = 'ExpandRow'                         LongSummary = 'Expanded the children of the selected signal'                                               End
+Command Name = 'InsertSignal'                      LongSummary = 'Insert a signal into the current document'                                                  End
+Command Name = 'Jump'                              LongSummary = 'Jump to a new time, time mark or transition'                                                End
+Command Name = 'JumpToCursor'                      LongSummary = 'Jump to a cursor'                                                                           End
+Command Name = 'Legend'                            LongSummary = 'Legend'                                                                                     End
+Command Name = 'MakeBus'                           LongSummary = 'Create a bus from the currently selected signals'                                           End
+Command Name = 'MakeComparison'                    LongSummary = 'Create a comparison from the currently selected signals'                                    End
+Command Name = 'MeasureTime'                       LongSummary = 'Measure a time between two time locations'                                                  End
+Command Name = 'PasteNewSignal'                    LongSummary = 'Insert clipboard contents as a new signal'                                                  End
+Command Name = 'PasteView'                         LongSummary = 'Place clipboard contents onto current document'                                             End
+Command Name = 'PrintDocument'                     LongSummary = 'Print the current document with the last set printer options'                               End
+Command Name = 'Scroll'                            LongSummary = 'Scroll around the current document view'                                                    End
+Command Name = 'Select'                            LongSummary = 'Select signals in the current document window'                                              End
+Command Name = 'SetNameDepth'                      LongSummary = 'Set waveform name display depth'                                                            End
+Command Name = 'SetTimeMark'                       LongSummary = 'Set a new time mark location'                                                               End
+Command Name = 'Setup'                             LongSummary = 'RunSpectra Setup'                                                                           End
+Command Name = 'SetupPreferences'                  LongSummary = 'Setup Wave editor preferences.'                                                             End
+Command Name = 'SetupPrinter'                      LongSummary = 'Printer and page setup'                                                                     End
+Command Name = 'ShowSignals'                       LongSummary = 'Unhide signals and display them on the current document'                                    End
+Command Name = 'Zoom'                              LongSummary = 'Perform zoom action depending on defined parameters'                                        End

@@ -1,0 +1,110 @@
+Unit SPX_VGA;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+Uses Dos,SPX_FNC;
+
+const
+  MaxPages   = 8;                  { maximum allowed for allocated pages }
+  WinMinX    : integer = 0;        { Clip borders }
+  WinMinY    : integer = 0;
+  WinMaxX    : integer = 319;
+  WinMaxY    : integer = 199;
+  NormalPut  = 0;                  { Constants for fput_mask }
+  CopyPut    = 0;
+  XORPut     = 1;
+  OrPut      = 2;
+  AndPut     = 3;
+
+type
+  RGBType    = record
+                 red,green,blue : byte;
+               end;
+  RGBlist    = array[0..255] of RGBType;
+  PtrRec     = record
+                 ofs,seg : word;
+               end;
+  VidHdrType = record
+                 position,count : word;
+               end;
+  cpu_type   = (c8086,c80186,c80286,c80286p,
+                c80386,c80386p,c80486,c80486p,undefined);
+
+
+var
+  PrevMode,                                      { previous mode }
+  crpg          : byte;                          { current page number }
+  cpu           : cpu_type;                      { current cpu }
+  scnseg,scnofs : word;                          { current page address }
+  pages         : array[1..MaxPages] of pointer; { page pointers }
+  thdmat        : set of byte;                   { mask set for MATTEVSP }
+  vspcnt,                                        { vsp last load count }
+  maxpage       : word;                          { pages used }
+  zdc           : RGBlist;                       { all black palette }
+  YOff          : array[0..199] of word;         { Row offset table }
+
+procedure MatteVsp(var from,too);
+procedure VSinc;
+procedure SetDefaultColors;
+procedure Switch(var a,b:integer);
+procedure Parse(var x,y:integer);
+function BuffSize(x,y:integer):word;
+function ImageSize(var image):word;
+procedure ImageDims(var image;var x,y:integer);
+procedure SetPtr(var i:PtrRec;var buff);
+function pt(x,y:integer):word;
+procedure OpenMode(npages:byte);
+function Point(x,y:integer;pg:byte):byte;
+procedure Pset(x,y:integer;n:byte);
+procedure fPcopy(var from,too);
+procedure Pcopy(from,too:byte);
+procedure CopyRect(x1,y1,x2,y2:integer;var from,too);
+procedure fwCopyRect(x1,y1,x2,y2:integer;var from,too);
+procedure SwapRect(x1,y1,x2,y2:integer;from,too:byte);
+procedure Line_clip(x1,y1,x2,y2:integer;n:byte);
+procedure Line(x1,y1,x2,y2:integer;n:byte);
+procedure Bar(x1,y1,x2,y2:integer;n:byte);
+procedure Rectangle(x1,y1,x2,y2:integer;n:byte);
+procedure Circle(x1,y1,r:integer;n:byte);
+procedure Ellipse(xc,yc,a0,b0:integer;c:byte);
+procedure ftput(x,y:integer;var buff;center:boolean);
+procedure ftput_clip(x,y:integer;var buff;center:boolean);
+procedure cls(b:byte);
+procedure CloseMode;
+procedure fget(x1,y1,x2,y2:integer;var image);
+procedure fput(x1,y1:integer;var image;center:boolean);
+procedure fput_mask(x1,y1:integer;var image;rmw:byte);
+procedure fput_clip(x,y:integer;var buff;center:boolean);
+procedure SetPageActive(page:byte);
+procedure GetColor(num:byte;var red,green,blue:byte);
+procedure SetColor(num,red,green,blue:byte);
+procedure fSetColors(var colors);
+procedure fGetColors(var colors);
+procedure FadeIn(steps:word;var color);
+procedure FadeOut(steps:word;var color);
+procedure ColorsChange(var color:rgblist;filter:rgbtype);
+procedure ColorCycle(var colors:rgblist;start:byte;count:integer;fwd:boolean);
+function LoadColors(filename:string;var colors;count:integer):integer;
+function SaveColors(filename:string;var colors;count:integer):integer;
+procedure Paint(x,y:integer;n:byte);
+procedure CopyTo(x1,y1,x2,y2,x,y:integer;var from,too);
+function LoadVSP(fn:string;var buff):integer;
+function FileVSP(var fil:file;var buff;size:longint):integer;
+procedure ScaleVSP(var src,dest;nx,ny:word);
+function AnalyzeScreen:byte;
+procedure MemWrite(var source,dest;size:word;var off:longint);
+procedure MemRead(var source,dest;size:word;var off:longint);
+procedure fwput(x1,y1:integer;var image);
+procedure moveDW(var source,dest;size:word);
+procedure fputDW(x:word;var buff);
+procedure PcopyDW(var from,too);
+procedure fillDW(var dest;c:word;v:byte);
+procedure clsDW(c:byte);
+procedure displayer(x,y:integer;var pic,virt;plv:byte);
+procedure eraselayer(x,y:integer;bkpage:byte;var pic,virt;plv:byte);
+procedure dispvirt(x,y:integer;var pic,virt;plv:byte);
+procedure erasevirt(x,y:integer;var pic,virt;plv:byte);
+procedure copyvirt(x,y:integer;var pic,v1,v2;plv:byte);
+

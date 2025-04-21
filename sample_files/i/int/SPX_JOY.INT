@@ -1,0 +1,23 @@
+Unit SPX_JOY;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+interface
+
+Uses dos;
+
+const
+  gravis : boolean = false;   { Set to true if using Gravis GamePad or }
+                              { other four button joystick }
+
+var
+   stickx,                             { X locations for joystick 1 & 2 }
+   sticky   : array[1..2] of integer;  { Y locations for joystick 1 & 2 }
+   button1,                            { button 1 for joystick 1 & 2 }
+   button2  : array[1..2] of boolean;  { button 2 for joystick 1 & 2 }
+
+function joythere : boolean;           { TRUE if A joystick is present }
+function joy1there : boolean;          { TRUE if joystick 1 is present }
+function joy2there : boolean;          { TRUE if joystick 2 is present }
+procedure setstick(h:integer);         { Read joystick inputs }
+

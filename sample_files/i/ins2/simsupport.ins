@@ -1,0 +1,53 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'SIM'                                                                     
+    EditorExePath     = 'SimSupport.DLL'
+    EditorDescription = 'Simulation Support Server'
+    Version           = 'Version 7.2.98'
+    Date              = '21-Jul-2010'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.'
+    Copyright         = 'Copyright © Altium Limited 2015'
+End
+
+EditorWindowKind
+    Name                  = 'SimModel'
+    NewWindowCaption      = 'SimModel'
+    NewWindowExtention    = 'SimModel'
+    WindowKindDescription = 'Simulation Model Implementation Document'
+    IconName              = 'SimModel'
+
+    EditorBar Name = 'MNSimModelEditorMenu'           BarType = Menu        End
+    EditorBar Name = 'TBSimModelEditorTools'          BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'                   BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                       BarType = Toolbar     End
+
+    LoadFilters
+        'Simulation Model Implementation Document (*.SimModel)'
+    End
+
+    SaveFilters
+        'Simulation Model Implementation Document (*.SimModel)'
+    End
+End
+
+OptionsPage
+    ServerName  = 'SIM'
+    ServerImage = 'Preferences_SIM.ico'
+    Caption     = 'Simulation'
+    Image       = 'SIM.bmp'
+    OrderIndex  = 100
+
+    OptionsPage
+        Caption  = 'General'
+        FormName = 'General'
+        OrderIndex = 1
+    End
+End
+
+Command Name = 'RunXSpiceModelWizard'       LongSummary = 'Run XSpice Model Wizard'                     End
+Command Name = 'LinkDocumentToReleaseVault' LongSummary = 'Link Document To Release Vault'              End
+Command Name = 'ReleaseDocument'            LongSummary = 'Release Document To Vault'                   End
+Command Name = 'Undo'                       LongSummary = 'Undo previous command'                       End
+Command Name = 'Redo'                       LongSummary = 'Redo previous undo command'                  End
+

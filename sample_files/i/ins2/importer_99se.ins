@@ -1,0 +1,28 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'Importer_99SE'                                                       
+    EditorExePath     = 'Importer_99SE.IWZ'                                                   
+    EditorDescription = 'Importer Protel 99SE'                                               
+    Version           = 'Version 1.0.0.0'                                                         
+    Date              = '03-Oct-2014'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2014'
+    SystemExtension   = False                                                                      
+End
+
+OptionsPage
+    ServerName  = 'ImporterManager'
+    ServerImage = 'Preferences_Importer99SE.ico'
+    Image       = 'ProjectGroup.bmp'
+    Caption     = 'Importers'
+    OrderIndex  = 110
+
+    OptionsPage
+        ServerName  = 'Importer_99SE'
+        ServerImage = 'Preferences_Importer99SE.ico'
+        Caption     = 'Protel 99SE'
+        FormName    = 'Protel99SE'
+        OrderIndex  = 10
+    End
+End

@@ -1,0 +1,28 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'Importer_LoadDXF'                                                           
+    EditorExePath     = 'LoadDXF.IWZ'                                                       
+    EditorDescription = 'Dxf Importer for AdvPcb'                                        
+    Version           = 'Version 7.2.98'                                                          
+    Date              = '10-Mar-2014'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2014'                                         
+End
+
+
+OptionsPage
+    ServerName  = 'ImporterManager'
+    ServerImage = 'Preferences_LoadDXF.ico'
+    Image       = 'ProjectGroup.bmp'
+    Caption     = 'Importers'
+    OrderIndex  = 110
+
+    OptionsPage
+        ServerName  = 'Importer_LoadDXF'
+        ServerImage = 'Preferences_LoadDXF.ico'
+        Caption     = 'AutoCAD PCB'
+        FormName    = 'LoadDXF'
+        OrderIndex  = 30
+    End
+End

@@ -1,0 +1,25 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'ExtensionManager'
+    EditorExePath     = 'ExtensionManager.DLL'
+    EditorDescription = 'Extension Manager'
+    Version           = 'Version 1.0.0.1'
+    Date              = '31-July-2013'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.'
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = True                                                                      
+End
+
+OptionsPage
+    ServerName  = 'ExtensionManager'
+    ServerImage = 'Preferences_System.ico'
+    Image       = 'ProjectGroup.bmp'
+    ParentID    = 'WorkspaceManager:'
+
+    Caption  = 'Installation'
+    FormName = 'AltiumUpdate'
+    OrderIndex = 40
+End
+
+Command Name = 'ManageExtensions'   LongSummary = 'Manage Extensions'    End

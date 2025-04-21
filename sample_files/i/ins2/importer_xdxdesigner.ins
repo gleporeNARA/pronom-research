@@ -1,0 +1,28 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'Importer_xDxDesigner'
+    EditorExePath     = 'Importer_xDxDesigner.IWZ'
+    EditorDescription = 'Importer Mentor xDX Designer'
+    Version           = 'Version 1.0.0.0'
+    Date              = '19-Feb-2015'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.'
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = False
+End
+
+OptionsPage
+    ServerName  = 'ImporterManager'
+    ServerImage = 'Preferences_ImporterOrcad.ico'
+    Image       = 'ProjectGroup.bmp'
+    Caption     = 'Importers'
+    OrderIndex  = 110
+
+    OptionsPage
+        ServerName  = 'Importer_xDxDesigner'
+        ServerImage = 'Preferences_ImporterxDxDesigner.ico'
+        Caption     = 'Mentor xDX Designer'
+        FormName    = 'xDxDesigner'
+        OrderIndex  = 25
+    End
+End

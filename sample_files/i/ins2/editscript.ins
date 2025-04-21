@@ -1,0 +1,442 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'EditScript'
+    EditorExePath     = 'EditScript.DLL'
+    EditorDescription = 'Script Editor'
+    Version           = 'Version 9.0.0.17035'
+    Date              = '06-May-2009'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.'
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SupportsDDB       = True
+
+    ResourceDependencies
+        'TextEdit'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'EditScript'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = '   '
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptDS'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'PAS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+
+    EditorBar Name = 'MNEditScriptMainMenuDebug' BarType = Menu        End
+    EditorBar Name = 'HTEditScriptHotKeys'       BarType = HotkeyTable End
+    EditorBar Name = 'TLScriptToolsStandard'     BarType = Toolbar     End
+    EditorBar Name = 'TLScriptToolsDebug'        BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'                BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'          BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'              BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                  BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    SaveFilters
+        'Delphi Script (*.pas)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptDSUnit'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'PAS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptDSForm'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'PAS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptDSDataModule'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'PAS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptBas'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'BAS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+
+    EditorBar Name = 'MNEditScriptMainMenuDebug' BarType = Menu        End
+    EditorBar Name = 'HTEditScriptHotKeys'       BarType = HotkeyTable End
+    EditorBar Name = 'TLScriptToolsStandard'     BarType = Toolbar     End
+    EditorBar Name = 'TLScriptToolsDebug'        BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'                BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'          BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'              BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                  BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    SaveFilters
+        'Enable Basic (*.bas)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptTcl'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'TCL'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+
+    EditorBar Name = 'MNEditScriptMainMenuRunOnly' BarType = Menu        End
+    EditorBar Name = 'HTEditScriptHotKeys'         BarType = HotkeyTable End
+    EditorBar Name = 'TLScriptToolsStandard'       BarType = Toolbar     End
+    EditorBar Name = 'TLScriptToolsRunOnly'        BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'                  BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'            BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'                BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                    BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    SaveFilters
+        'TCL Script (*.tcl)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptVBS'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'VBS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+
+    EditorBar Name = 'MNEditScriptMainMenuDebug' BarType = Menu        End
+    EditorBar Name = 'HTEditScriptHotKeys'       BarType = HotkeyTable End
+    EditorBar Name = 'TLScriptToolsStandard'     BarType = Toolbar     End
+    EditorBar Name = 'TLScriptToolsDebug'        BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'                BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'          BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'              BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                  BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    SaveFilters
+        'VB Script (*.vbs)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptVBSUnit'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'VBS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptVBSForm'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'VBS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptVBSDataModule'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'VBS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptJS'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'JS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+
+    EditorBar Name = 'MNEditScriptMainMenuDebug' BarType = Menu        End
+    EditorBar Name = 'HTEditScriptHotKeys'       BarType = HotkeyTable End
+    EditorBar Name = 'TLScriptToolsStandard'     BarType = Toolbar     End
+    EditorBar Name = 'TLScriptToolsDebug'        BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'                BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'          BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'              BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                  BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    SaveFilters
+        'Java Script (*.js)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptJSUnit'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'JS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptJSForm'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'JS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptJSDataModule'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'JS'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptInstrument'
+    NewWindowCaption      = 'EditScriptInstrument'
+    NewWindowExtention    = 'Instrument'
+    WindowKindDescription = 'Instrument Script Document'
+    IconName              = 'EditSCRIPT'
+
+    EditorBar Name = 'MNEditScriptMainMenuDebug' BarType = Menu        End
+    EditorBar Name = 'HTEditScriptHotKeys'       BarType = HotkeyTable End
+    EditorBar Name = 'TLScriptToolsStandard'     BarType = Toolbar     End
+    EditorBar Name = 'TLScriptToolsDebug'        BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'                BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'          BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'              BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                  BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'EditScriptInclude'
+    NewWindowCaption      = 'EditScript'
+    NewWindowExtention    = 'INC'
+    WindowKindDescription = 'Script Document'
+    IconName              = 'EditSCRIPT'
+
+    EditorBar Name = 'MNEditScriptMainMenuDebug' BarType = Menu        End
+    EditorBar Name = 'HTEditScriptHotKeys'       BarType = HotkeyTable End
+    EditorBar Name = 'TLScriptToolsStandard'     BarType = Toolbar     End
+    EditorBar Name = 'TLScriptToolsDebug'        BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'                BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'          BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'              BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                  BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    SaveFilters
+        'Delphi Script Include (*.inc)'
+    End
+End
+
+PanelInfo
+    Name              = 'EditScriptBreakPoints'
+    Category          = 'S&cript'
+    Bitmap            = ''
+    Hotkey            = 'B'
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'EditScriptDS'
+        'EditScriptDSForm'
+        'EditScriptDSUnit'
+        'EditScriptDSDataModule'
+        'EditScriptInclude'
+        'EditScriptVBS'
+        'EditScriptVBSForm'
+        'EditScriptVBSUnit'
+        'EditScriptVBSDataModule'
+        'EditScriptJS'
+        'EditScriptJSForm'
+        'EditScriptJSUnit'
+        'EditScriptJSDataModule'
+        'EditScriptTcl'
+    End
+End
+
+PanelInfo
+    Name              = 'EditScriptCallStack'
+    Category          = 'S&cript'
+    Bitmap            = ''
+    Hotkey            = 'S'
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'EditScriptDS'
+        'EditScriptDSForm'
+        'EditScriptDSUnit'
+        'EditScriptDSDataModule'
+        'EditScriptInclude'
+        'EditScriptVBS'
+        'EditScriptVBSForm'
+        'EditScriptVBSUnit'
+        'EditScriptVBSDataModule'
+        'EditScriptJS'
+        'EditScriptJSForm'
+        'EditScriptJSUnit'
+        'EditScriptJSDataModule'
+        'EditScriptTcl'
+    End
+End
+
+PanelInfo
+    Name              = 'EditScriptWatchList'
+    Category          = 'S&cript'
+    Bitmap            = ''
+    Hotkey            = 'W'
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'EditScriptDS'
+        'EditScriptDSForm'
+        'EditScriptDSUnit'
+        'EditScriptDSDataModule'
+        'EditScriptInclude'
+        'EditScriptVBS'
+        'EditScriptVBSForm'
+        'EditScriptVBSUnit'
+        'EditScriptVBSDataModule'
+        'EditScriptJS'
+        'EditScriptJSForm'
+        'EditScriptJSUnit'
+        'EditScriptJSDataModule'
+        'EditScriptTcl'
+    End
+End
+
+PanelInfo
+    Name              = 'EditScriptCodeExplorer'
+    Category          = 'S&cript'
+    Bitmap            = ''
+    Hotkey            = 'X'
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'EditScriptDS'
+        'EditScriptDSForm'
+        'EditScriptDSUnit'
+        'EditScriptDSDataModule'
+        'EditScriptInclude'
+        'EditScriptVBS'
+        'EditScriptVBSForm'
+        'EditScriptVBSUnit'
+        'EditScriptVBSDataModule'
+        'EditScriptJS'
+        'EditScriptJSForm'
+        'EditScriptJSUnit'
+        'EditScriptJSDataModule'
+        'EditScriptTcl'
+    End
+End
+
+PanelInfo
+    Name              = 'EditScriptComponentPalette'
+    Category          = 'S&cript'
+    Bitmap            = ''
+    Hotkey            = 'P'
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'EditScriptDS'
+        'EditScriptDSForm'
+        'EditScriptDSUnit'
+        'EditScriptDSDataModule'
+        'EditScriptInclude'
+        'EditScriptVBS'
+        'EditScriptVBSForm'
+        'EditScriptVBSUnit'
+        'EditScriptVBSDataModule'
+        'EditScriptJS'
+        'EditScriptJSForm'
+        'EditScriptJSUnit'
+        'EditScriptJSDataModule'
+        'EditScriptTcl'
+    End
+End
+
+PanelInfo
+    Name              = 'EditScriptObjectInspector'
+    Category          = 'S&cript'
+    Bitmap            = ''
+    Hotkey            = 'I'
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'EditScriptDS'
+        'EditScriptDSForm'
+        'EditScriptDSUnit'
+        'EditScriptDSDataModule'
+        'EditScriptInclude'
+        'EditScriptVBS'
+        'EditScriptVBSForm'
+        'EditScriptVBSUnit'
+        'EditScriptVBSDataModule'
+        'EditScriptJS'
+        'EditScriptJSForm'
+        'EditScriptJSUnit'
+        'EditScriptJSDataModule'
+        'EditScriptTcl'
+    End
+End
+
+Command Name = 'AddBreakPoint'                    End
+Command Name = 'AddWatch'                         End
+Command Name = 'RunMacro'                         End
+Command Name = 'RunScriptingSystemSettingsDialog' End
+Command Name = 'RunToCursor'                      End
+Command Name = 'SetProjectStartupProc'            End
+Command Name = 'ShowEvaluateDialog'               End
+Command Name = 'StepInto'                         End
+Command Name = 'StepOver'                         End
+Command Name = 'Stop'                             End
+Command Name = 'ToggleBreakPoint'                 End
+Command Name = 'ToggleFormDesigner'               End

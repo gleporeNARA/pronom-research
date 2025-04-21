@@ -1,0 +1,28 @@
+Unit SPX_KEY;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+interface
+
+var
+  ch           : char;                        { ASCII key pressed }
+  np           : array[1..9,1..2] of boolean; { KEYPAD flags      }
+  portb        : byte;                        { PORT $60 value    }
+  cleared,                                    { TRUE - if int is disabled }
+  cold,                                       { TRUE - call old int }
+  funct,                                      { TRUE - extended char pressed }
+  plus,                                       { plus key pressed }
+  minus,                                      { minus key pressed }
+  lshft,rshft,                                { shift keys pressed }
+  space,                                      { space key pressed }
+  bspc,                                       { backspace pressed }
+  esc,                                        { esc pressed }
+  enter            : boolean;                 { enter pressed }
+
+procedure clearbuffer;
+procedure clearkeyint;
+procedure installkeyint;
+function anykey:boolean;
+procedure cli; inline($fa);
+procedure sti; inline($fb);
+

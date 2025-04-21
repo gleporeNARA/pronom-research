@@ -1,0 +1,202 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'EditSim'                                                                 
+    EditorExePath     = 'EditSim.DLL'                                                             
+    EditorDescription = 'Mixed Sim Editor'                                                    
+    Version           = 'Version 8.2.0.1773'                                                      
+    Date              = '21-Jun-2004'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SupportsDDB       = True                                                                      
+
+    ResourceDependencies
+        'TextEdit'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'CKT'                     
+    NewWindowCaption      = 'Sub_Circuit'             
+    NewWindowExtention    = 'Ckt'                     
+    WindowKindDescription = 'AdvancedSim Sub-Circuit' 
+    IconName              = 'CKT'                     
+
+    EditorBar Name = 'MNTextAdvSimFileMenu' BarType = Menu        End
+    EditorBar Name = 'HTDefault'            BarType = HotkeyTable End
+    EditorBar Name = 'TLEditSimTools'       BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'           BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'     BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'         BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'             BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+        'SearchPathDocument'
+        'LibraryDocument'
+    End
+
+    LoadFilters
+        'AdvancedSim Sub-Circuit files (*.ckt)'
+    End
+
+    SaveFilters
+        'AdvancedSim Sub-Circuit files (*.ckt)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'MDL'                     
+    NewWindowCaption      = 'Model'                   
+    NewWindowExtention    = 'MDL'                     
+    WindowKindDescription = 'AdvancedSim Model'       
+    IconName              = 'MDL'                     
+
+    EditorBar Name = 'MNTextAdvSimFileMenu' BarType = Menu        End
+    EditorBar Name = 'HTDefault'            BarType = HotkeyTable End
+    EditorBar Name = 'TLEditSimTools'       BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'           BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'     BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'         BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'             BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+        'SearchPathDocument'
+        'LibraryDocument'
+    End
+
+    LoadFilters
+        'AdvancedSim Model files (*.mdl)'
+    End
+
+    SaveFilters
+        'AdvancedSim Model files (*.mdl)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'LB'                     
+    NewWindowCaption      = 'SIMetrix/SIMPLIS Model Library'                   
+    NewWindowExtention    = 'LB'                     
+    WindowKindDescription = 'SIMetrix/SIMPLIS Model Library File'       
+    IconName              = 'LB'                     
+
+    EditorBar Name = 'MNTextAdvSimFileMenu' BarType = Menu        End
+    EditorBar Name = 'HTDefault'            BarType = HotkeyTable End
+    EditorBar Name = 'TLEditSimTools'       BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'           BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'     BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'         BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'             BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+        'SearchPathDocument'
+        'LibraryDocument'
+    End
+
+    LoadFilters
+        'SIMetrix/SIMPLIS Model Library files (*.lb)'
+    End
+
+    SaveFilters
+        'SIMetrix/SIMPLIS Model Library files (*.lb)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'IBS'
+    NewWindowCaption      = 'Ibis Model File'
+    NewWindowExtention    = 'IBS'
+    WindowKindDescription = 'Ibis Model File'
+    IconName              = 'IBIS'
+
+    EditorBar Name = 'MNTextAdvSimFileMenu' BarType = Menu        End
+    EditorBar Name = 'HTDefault'            BarType = HotkeyTable End
+    EditorBar Name = 'TLEditSimTools'       BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'           BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'     BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'         BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'             BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+        'SearchPathDocument'
+        'LibraryDocument'
+    End
+
+    LoadFilters
+        'Ibis Model File (*.ibs)'
+    End
+
+    SaveFilters
+        'Ibis Model File (*.ibs)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'NSX'                      
+    NewWindowCaption      = 'Sim_Netlist'              
+    NewWindowExtention    = 'Nsx'                      
+    WindowKindDescription = 'AdvancedSim Netlist'      
+    IconName              = 'NSX'                      
+
+    EditorBar Name = 'MNTextAdvSimFileMenu' BarType = Menu        End
+    EditorBar Name = 'HTDefault'            BarType = HotkeyTable End
+    EditorBar Name = 'TLEditSimTools'       BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'     BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'           BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'         BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'             BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    LoadFilters
+        'AdvancedSim Netlist files (*.nsx)'
+    End
+
+    SaveFilters
+        'AdvancedSim Netlist files (*.nsx)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'NET'                      
+    NewWindowCaption      = 'SIMetrix/SIMPLIS Netlist'              
+    NewWindowExtention    = 'Net'                      
+    WindowKindDescription = 'SIMetrix/SIMPLIS Netlist'      
+    IconName              = 'NET'                      
+
+    EditorBar Name = 'MNTextAdvSimFileMenu' BarType = Menu        End
+    EditorBar Name = 'HTDefault'            BarType = HotkeyTable End
+    EditorBar Name = 'TLEditSimTools'       BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'     BarType = Toolbar     End
+    EditorBar Name = 'TLTextUtil'           BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'         BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'             BarType = Toolbar     End
+
+    EditorClasses
+        'TextDocument'
+    End
+
+    LoadFilters
+        'SIMetrix/SIMPLIS Netlist files (*.net)'
+    End
+
+    SaveFilters
+        'SIMetrix/SIMPLIS Netlist files (*.net)'
+    End
+End
+
+PanelInfo
+    Name              = 'SimSearchPanel' 
+    Category          = '&Editor'        
+    Bitmap            = ''               
+    Hotkey            = 'R'              
+    ButtonVisible     = True             
+    CanDockVertical   = True             
+    CanDockHorizontal = False            
+End

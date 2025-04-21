@@ -1,0 +1,46 @@
+InS_StArT
+ETH16I.COM
+1.0
+^ICL EtherTeam16i ETH16I,ETH16I.COM,IE0
+^ICL EtherTeam32 ETH16I,ETH16I.COM,E0
+?Please select the options that match your board's setup.
+!OIE0(INT)Hardware Interrupt
+?As a default, the IRQ from the Setup is used. If selected, must match to the Setup of your adapter. NOTE! IRQ Numbers 3, 7, 11 and 12 are for EtherTeam32 (EISA) only, do not select them for EtherTeam16i.
+5
+9
+10
+15
+3
+7
+11
+12
+!OIE0(PORT)Base I/O Port
+?As a default, the Base I/O Port is searched. If selected, must match to the Setup of your adapter. NOTE! Base I/O Port is not used for EtherTeam32, use Slot.
+240
+260
+280
+2A0
+300
+340
+380
+!O0E0 (SLOT)EISA Bus Slot
+?As a default, the Slot is searched. Otherwise select the slot number that corresponds to the slot where the adapter is installed. NOTE! Slot is not used for EtherTeam32, use Base I/O Port.
+1
+2
+3
+4
+5
+6
+7
+8
+$OIE0(NODE ADDRESS)Optional Node Address
+0
+FFFFFFFFFFFF
+*RIE0(FRAME)Media Frame Type(s)
+?NOTE: Ethernet_802.2 is now the default frame type for ODI Drivers. Existing LANs may be using Ethernet_802.3.
+@Ethernet_802.2
+Ethernet_802.3
+Ethernet_II
+Ethernet_SNAP
+InS_EnD
+

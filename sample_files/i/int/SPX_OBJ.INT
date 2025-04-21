@@ -1,0 +1,38 @@
+Unit SPX_OBJ;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+type
+  plist   = ^tlist;
+  PObjs   = ^TObjs;
+  TObjs   = object
+              powner           : plist;
+              killed,cankill,
+              overshow         : boolean;
+              id               : integer;
+              constructor init;
+              procedure drawitemobject;virtual;
+              procedure calcitemobject;virtual;
+              function checkhit(hx,hy:integer;var item:pobjs):boolean;virtual;
+              destructor done; virtual;
+            end;
+  tlist = record
+            item      : pobjs;
+            prev,next : plist;
+          end;
+  pkill = ^tkill;
+  tkill = record
+            tk   : plist;
+            next : pkill;
+          end;
+
+procedure addp(var nkbeg,nkend,p:plist);
+procedure deletep(var nkbeg,nkend,p:plist);
+procedure calcitems(var nkbeg:plist);
+procedure drawitems(var nkbeg:plist;over:boolean);
+procedure add2kill_list(var kill:pkill;var i:plist);
+procedure cleankill_list(var kill:pkill;var nkbeg,nkend:plist);
+procedure clean_plist(var nkbeg,nkend:plist);
+

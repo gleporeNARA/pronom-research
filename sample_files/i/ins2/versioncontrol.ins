@@ -1,0 +1,94 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'VersionControl'                                                            
+    EditorExePath     = 'VersionControl.DLL'                                                        
+    EditorDescription = 'Version Control Support'                                                
+    Version           = 'Version 1.0.0.25707'                                                      
+    Date              = '11-Sep-2012'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright c Altium Limited 2015'
+    SystemExtension   = True                                                                      
+    SupportsDDB       = True                                                                      
+End
+
+PanelInfo
+    Name              = 'History' 
+    Category          = '&System'      
+    Bitmap            = ''             
+    Hotkey            = 'H'            
+    ButtonVisible     = True           
+    CanDockVertical   = False
+    CanDockHorizontal = True          
+End
+
+PanelInfo
+    Name              = 'StorageExplorer' 
+    Category          = '&System'      
+    Bitmap            = ''             
+    Hotkey            = 'V'            
+    ButtonVisible     = True           
+    CanDockVertical   = True
+    CanDockHorizontal = True          
+End
+
+OptionsPage
+    ServerName  = 'VersionControl'
+    ServerImage = 'Preferences_DataManagement.ico'
+    Image       = 'ReleaseVault_Small.bmp'
+    Caption     = 'Version Control'
+    FormName    = 'ProviderSetupForm'
+    ParentID    = 'IntegratedLibrary:'
+    OrderIndex  = 1
+    
+    OptionsPage
+        Caption     = 'Design Repositories'
+        FormName    = 'RegisteredDesignVaults'
+        ServerImage = 'Preferences_DataManagement.ico'
+        Image       = 'ReleaseVault_Small.bmp'
+        ParentID    = 'IntegratedLibrary:'
+        OrderIndex  = 2
+    End
+    OptionsPage
+        Caption     = 'Local History'
+        FormName    = 'LocalHistorySetupForm'
+        ServerImage = 'Preferences_DataManagement.ico'
+        Image       = 'ReleaseVault_Small.bmp'
+        ParentID    = 'IntegratedLibrary:'
+        OrderIndex  = 8
+    End
+    OptionsPage
+        Caption     = 'SVN Libraries'
+        FormName    = 'SVNDbLibSetupForm'
+        ServerImage = 'Preferences_DataManagement.ico'
+        Image       = 'ReleaseVault_Small.bmp'
+        ParentID    = 'IntegratedLibrary:'
+        OrderIndex  = 12
+    End
+End
+
+Command Name        = 'VersionControl'   LongSummary = 'Version Control'                                End
+Command Name        = 'CheckOut'         LongSummary = 'Check out documents from Version Control'       End
+Command Name        = 'Open'             LongSummary = 'Open document(s) selected in storage manager'   End
+Command Name        = 'Delete'           LongSummary = 'Delete document(s) selected in storage manager' End
+Command Name        = 'Rename'           LongSummary = 'Rename document selected in storage manager'    End
+Command Name        = 'Copy'             LongSummary = 'Copy document(s) to clipboard'                  End
+Command Name        = 'Paste'            LongSummary = 'Paste document(s) to current folder'            End
+Command Name        = 'DeleteFolder'     LongSummary = 'Delete selected folder'                         End
+Command Name        = 'RenameFolder'     LongSummary = 'Rename selected folder'                         End
+Command Name        = 'NewFolder'        LongSummary = 'Create new subfolder'                           End
+Command Name        = 'CompareHistory'   LongSummary = 'Compare selected versions from history'         End
+Command Name        = 'ShowExplorer'     LongSummary = 'Show storage manager'                           End
+Command Name        = 'ShowHistory'      LongSummary = 'Show Local History dialog'                      End
+Command Name        = 'Refresh'          LongSummary = 'Refresh storage manager'                        End
+Command Name        = 'LocalRevert'      LongSummary = 'Revert to a version in Local History'           End
+Command Name        = 'ShowAutobackups'  LongSummary = 'Show autobackups in Local History'              End
+Command Name        = 'LabelVersion'     LongSummary = 'Assign label to a version in Local History'     End
+Command Name        = 'DeleteVersion'    LongSummary = 'Delete version from Local History'              End
+Command Name        = 'OpenVersion'      LongSummary = 'Open version from Local History'                End
+Command Name        = 'CompareRevisions' LongSummary = 'Compare selected revisions from VCS'            End
+Command Name        = 'OpenRevision'     LongSummary = 'Open revision from VCS'                         End
+Command Name        = 'DeleteHistory'    LongSummary = 'Delete history for selected documents'          End
+Command Name        = 'CreateRepository' LongSummary = 'Create new empty version control repository'    End
+Command Name        = 'VCSWizard'        LongSummary = 'Run version control wizard'                     End
+Command Name        = 'ExploreRelease'   LongSummary = 'Open the folder where the release is stored'    End

@@ -1,0 +1,32 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'EDMSInterface'                                                       
+    EditorExePath     = 'EDMSInterface.DLL'                                                   
+    EditorDescription = 'EDMS Interface'                                               
+    Version           = 'Version 6.7.0.8061'                                                         
+    Date              = '26-Mar-2008'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = True                                                                      
+End
+
+OptionsPage
+    ServerName  = 'EDMSInterface'
+    ServerImage = 'Preferences_DataManagement.ico'
+    Image       = 'ReleaseVault_Small.bmp'
+    Caption     = 'Vaults'
+    FormName    = 'InstalledVaults'
+    ParentID    = 'IntegratedLibrary:'
+    OrderIndex  = 3
+End
+
+OptionsPage
+    ServerName  = 'EDMSInterface'
+    ServerImage = 'Preferences_System.ico'
+    Image       = 'ProjectGroup.bmp'
+    Caption     = 'Altium Vault'
+    FormName    = 'DXPSeverPrefs'
+    ParentID    = 'WorkspaceManager:'
+    OrderIndex  = 100
+End

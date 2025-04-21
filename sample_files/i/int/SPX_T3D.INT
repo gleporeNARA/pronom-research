@@ -1,0 +1,22 @@
+Unit SPX_T3D;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+interface
+
+Uses SPX_VGA;
+
+var
+  xc,yc,                               { center of screen     }
+  xv,yv,zv,                            { Viewer's position    }
+  sx,sy,sz  : integer;                 { Scale factors        }
+  sine,                                { sine table           }
+  cosine    : array[0..255] of integer;{ cosine table         }
+
+procedure setpoints(xx,yy,zz:longint; var xd,yd : integer);
+procedure pset3d(xx,yy,zz:integer;n:byte);
+procedure line3d(x1,y1,z1,x2,y2,z2:integer;n:byte;clip:boolean);
+procedure rectangle3d(x1,y1,z1,x2,y2,z2:integer;n:byte);
+procedure rotate256xy(var x,y:integer;angle:byte);
+procedure rotate256xyz(var x,y,z:integer;xa,ya,za:byte);
+

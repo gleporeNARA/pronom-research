@@ -1,0 +1,128 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'IntegratedLibrary'                                                       
+    EditorExePath     = 'IntegratedLibrary.DLL'                                                   
+    EditorDescription = 'Integrated Library Server'                                               
+    Version           = 'Version 10.0.0.20552'                                                         
+    Date              = '21-Jul-2010'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = True                                                                      
+End
+
+PanelInfo
+    Name              = 'LibraryBrowser' 
+    Category          = '&System'        
+    Bitmap            = ''               
+    Hotkey            = 'L'              
+    ButtonVisible     = True             
+    CanDockVertical   = True             
+    CanDockHorizontal = False            
+End
+
+PanelInfo
+    Name              = 'SupplierSearch'
+    Category          = '&System'
+    Bitmap            = ''
+    Hotkey            = 'U'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+End
+
+PanelInfo
+    Name              = 'SupplierInfo'
+    Category          = 'S&CH'
+    Bitmap            = ''
+    Hotkey            = 'U'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+    DocumentKinds
+        'Sch'
+    End
+End
+
+PanelInfo
+    Name              = 'UnifiedBrowser'
+    Category          = '&System'
+    Bitmap            = ''
+    Hotkey            = 'U'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = False
+End
+
+OptionsSet
+    Name     = 'IntegratedLibrary_Options' 
+    SortName = '055'                       
+
+    ProjectKinds
+        'IntegratedLibrary'
+    End
+End
+
+OptionsPage
+    ServerName  = 'IntegratedLibrary'
+    ServerImage = 'Preferences_DataManagement.ico'
+    Image       = 'ReleaseVault_Small.bmp'
+    Caption     = 'Data Management'
+    OrderIndex  = 15
+
+    OptionsPage
+        Caption    = 'Installed Libraries'
+        FormName   = 'Installed'
+        OrderIndex = 10
+    End
+    
+    OptionsPage
+        Caption    = 'Suppliers'
+        FormName   = 'Suppliers'
+        OrderIndex = 13
+    End
+End
+
+Command Name = 'DebugRepository'                   LongSummary = 'This command is for Altium internal use only'                                 End
+
+Command Name = 'Commit'                            LongSummary = 'Check in changes to repository'                                               End
+Command Name = 'Copy'                              LongSummary = 'Copy selected cells to the clipboard'                                         End
+Command Name = 'CopyDocument'                      LongSummary = 'Copy selected subdocuments to the clipboard'                                  End
+Command Name = 'Cut'                               LongSummary = 'Copy selected cells to the clipboard and remove from current document'        End
+Command Name = 'CutDocument'                       LongSummary = 'Copy selected subdocuments to the clipboard and remove from current document' End
+Command Name = 'Delete'                            LongSummary = 'Delete components from current document'                                      End
+Command Name = 'DeleteDocument'                    LongSummary = 'Delete subdocuments from current document'                                    End
+Command Name = 'EditDocument'                      LongSummary = 'Edit entity in current document'                                              End
+Command Name = 'DocumentOptions'                   LongSummary = 'Edit options for the current document'                                        End
+Command Name = 'Insert'                            LongSummary = 'Insert new components into current document'                                  End
+Command Name = 'InsertDocument'                    LongSummary = 'Insert new components into current document'                                  End
+Command Name = 'NavigateBack'                      LongSummary = 'Return to where you were before you clicked a hyperlink'                      End
+Command Name = 'NavigateForward'                   LongSummary = 'Repeat following a hyperlink after going back'                                End
+Command Name = 'OpenFromRepository'                LongSummary = 'Download and open a new Altium Library document from your repository'         End
+Command Name = 'Paste'                             LongSummary = 'Place clipboard contents onto current document'                               End
+Command Name = 'PasteDocument'                     LongSummary = 'Place clipboard contents onto current document'                               End
+Command Name = 'Place'                             LongSummary = 'Place component from current document into a design'                          End
+Command Name = 'Redo'                              LongSummary = 'Redo the most recently undone command'                                        End
+Command Name = 'Refresh'                           LongSummary = 'Refresh from repository'                                                      End
+Command Name = 'RenameDocument'                    LongSummary = 'Rename a subdocument in the current document'                                 End
+Command Name = 'Undo'                              LongSummary = 'Undo previous command '                                                       End
+Command Name = 'Update'                            LongSummary = 'Check out changes from repository'                                            End
+
+Command Name = 'AddRemoveLibraries'                LongSummary = 'Add or remove from the list of installed libraries'                           End
+Command Name = 'EditParameterColumns'              LongSummary = 'Select which parameters to display for each item'                             End
+Command Name = 'FindComponent'                     LongSummary = 'Find a component in Integrated, Schematic or PCB libraries'                   End
+Command Name = 'GenerateComponentReport'           LongSummary = 'Generate a list of components in the current library'                         End
+Command Name = 'GenerateComponentReportAdvanced'   LongSummary = 'Generate a list of components/entities in the current library'                End
+Command Name = 'PlaceCurrentComponent'             LongSummary = 'Place the component currently selected in the library browser'                End
+Command Name = 'PlaceLibraryComponent'             LongSummary = 'Place a component from a PCB, Schematic or Integrated Library'                End
+Command Name = 'RefreshInstalledLibraries'         LongSummary = 'Refresh one or all installed libraries'                                       End
+Command Name = 'EditComponent'                     LongSummary = 'Edit a component in Schematic or PCB libraries'                               End
+Command Name = 'CreateLibraryFromProject'          LongSummary = 'Make an integrated library of parts contained in the current project'         End
+Command Name = 'ShowComponentLink'                 LongSummary = 'Show a URL linked to the current component'                                   End
+Command Name = 'ShowComponentInVaultExplorer'      LongSummary = 'Show component in Vault Explorer'                                             End
+Command Name = 'InstallCurrentLibrary'             LongSummary = 'Install the library currently selected in the query results'                  End
+
+Command Name = 'FindOctopartComponent'             LongSummary = 'Find a component'                                 							End
+Command Name = 'OctopartItemSelected_URL'          LongSummary = '"Component selected" command'                                 				End
+Command Name = 'PlaceOctopartComponent_URL'        LongSummary = 'Place a component'                                 							End
+Command Name = 'SelectOctopartModel_URL'           LongSummary = 'Select model from an existing component'                                 		End

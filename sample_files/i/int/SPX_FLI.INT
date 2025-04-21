@@ -1,0 +1,44 @@
+Unit SPX_FLI;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+Uses SPX_VGA,SPX_SND,SPX_KEY;
+
+const
+  leavelast   : boolean = false; { TRUE - don't play last frame }
+  leavefirst  : boolean = false; { TRUE - don't play first frame }
+
+type
+  frameproc = procedure(totframe,frame,loop:longint;var fquit:boolean);
+  delayproc = procedure(speed:integer);
+  fli_hdr   = record
+                 size          : longint;
+                 magic,frames,
+                 width,height,
+                 depth,next    : word;
+                 speed,frit    : longint;
+                 reserved      : array[1..104] of byte;
+               end;
+  frame_hdr = record
+                size         : longint;
+                magic,chunks : word;
+                reserved     : array[1..8] of byte;
+              end;
+
+var
+  every_frame   : frameproc;      { procedure called for every frame }
+  userdelay     : delayproc;      { delay procedure }
+  crnthdr       : fli_hdr;        { current FLI file header }
+  framesdid,                      { number of frames played }
+  crntfrm       : longint;        { current frame playing }
+
+procedure IncPtr(var marker:pointer;incby:longint);
+function fli_header(fl:string):boolean;
+function read_header(fl:string;var fil:file):boolean;
+function memReadHeader(var p:pointer):boolean;
+function fli_play(fl:string;sp,tms:integer):boolean;
+function memFliPlay(var at;sp,tms:integer):boolean;
+procedure memNextframe(var p:pointer);
+

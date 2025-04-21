@@ -1,0 +1,57 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'UnifiedComponent'                                                       
+    EditorExePath     = 'UnifiedComponent.DLL'                                                   
+    EditorDescription = 'Component Library Server'                                               
+    Version           = 'Version 10.0.0.20552'                                                         
+    Date              = '21-Jul-2010'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = True                                                                      
+End
+
+EditorWindowKind
+    Name                  = 'CmpLib'                     
+    NewWindowCaption      = 'CmpLib'                     
+    NewWindowExtention    = 'CmpLib'                     
+    WindowKindDescription = 'Component Library Document' 
+    IconName              = 'CmpLib'                     
+
+    EditorBar Name = 'MNComponentLibMenu'             BarType = Menu        End
+    EditorBar Name = 'HTComponentLibHotKeys'          BarType = HotkeyTable End
+    EditorBar Name = 'TBComponentLibTools'            BarType = Toolbar     End
+    EditorBar Name = 'TBAssemblyVariants'             BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'                   BarType = Toolbar     End
+
+    EditorClasses
+        'LibraryDocument'
+    End
+
+    LoadFilters
+        'Component library (*.CmpLib)'
+    End
+
+    SaveFilters
+        'Component library (*.CmpLib)'
+    End
+End
+
+Command Name = 'Add'                               LongSummary = 'Add'                                                                          End
+Command Name = 'ClearContents'                     LongSummary = 'Clear contents'                                                               End
+Command Name = 'Copy'                              LongSummary = 'Copy'                                                                         End
+Command Name = 'Cut'                               LongSummary = 'Cut'                                                                          End
+Command Name = 'Delete'                            LongSummary = 'Delete'                                                                       End
+Command Name = 'Disable'                           LongSummary = 'Disable'                                                                      End
+Command Name = 'Enable'                            LongSummary = 'Enable'                                                                       End
+Command Name = 'GenerateComponents'                LongSummary = 'Run component generator'                                                      End
+Command Name = 'ImportDesignLib'                   LongSummary = 'ImportDesignLib'                                                              End
+Command Name = 'Insert'                            LongSummary = 'Insert'                                                                       End
+Command Name = 'EditPinMapping'                    LongSummary = 'EditPinMapping'                                                               End
+Command Name = 'Paste'                             LongSummary = 'Paste'                                                                        End
+Command Name = 'Redo'                              LongSummary = 'Redo'                                                                         End
+Command Name = 'Refresh'                           LongSummary = 'Refresh'                                                                      End
+Command Name = 'Release'                           LongSummary = 'Release'                                                                      End
+Command Name = 'Undo'                              LongSummary = 'Undo'                                                                         End
+Command Name = 'CreateNewComponent_URL'            LongSummary = 'Create new component with octopart id'                                        End
+

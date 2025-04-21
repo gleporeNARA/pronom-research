@@ -1,0 +1,396 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'PCB'                                                                     
+    EditorExePath     = 'ADVPCB.DLL'                                                              
+    EditorDescription = 'PCB Editor'                                        
+    Version           = 'Version 10.0.0.28714'                                                      
+    Date              = '25-Jun-2013'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SupportsDDB       = True                                                                      
+
+    ResourceDependencies
+        'AutoPlacer'
+        'CompMake'
+        'HSEdit'
+        'LayerStackupAnalyzer'
+        'Macro'
+        'MakeLib'
+        'PCB3D'
+        'PCBMaker'
+        'PCBMiter'
+        'Placer'
+        'HelpAdvisor'
+        'OrcadLayoutImporter'
+        'SavePCADPCB'
+        'AutoPlacer'
+        'PinSwapper'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'PWPCB'
+    NewWindowCaption      = 'PCB'
+    NewWindowExtention    = 'SWPcbDoc'
+    WindowKindDescription = 'PCB Document'
+    IconName              = 'SWPCB'
+
+    EditorBar Name = 'MNPCBMenu'         BarType = Menu        End
+    EditorBar Name = 'HTPCBHotKeys'      BarType = HotkeyTable End
+    EditorBar Name = 'TLPCBToolbar'      BarType = Toolbar     End
+    EditorBar Name = 'TLFilter'          BarType = Toolbar     End
+    EditorBar Name = 'TBAssemblyVariants'BarType = Toolbar     End
+    EditorBar Name = 'TLPCBUtilities'    BarType = Toolbar     End
+    EditorBar Name = 'TLPCBWiring'       BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'      BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'          BarType = Toolbar     End
+
+    LoadFilters
+        'PCB Files (*.SWPcbDoc)'
+    End
+
+    SaveFilters
+        'PCB Binary Files (*.SWPcbDoc)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'PCBLib'               
+    NewWindowCaption      = 'PcbLib'               
+    NewWindowExtention    = 'PcbLib'               
+    WindowKindDescription = 'PCB Library Document' 
+    IconName              = 'PcbLib'               
+
+    EditorBar Name = 'MNPCBLibMenu'           BarType = Menu        End
+    EditorBar Name = 'HTPCBLibHotKeys'        BarType = HotkeyTable End
+    EditorBar Name = 'TLPCBLibToolbar'        BarType = Toolbar     End
+    EditorBar Name = 'TLPCBLibPlacementTools' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'           BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'               BarType = Toolbar     End
+
+    EditorClasses
+        'LibraryDocument'
+        'SearchPathDocument'
+    End
+
+    LoadFilters
+        'PCB Library Files (*.PcbLib)'
+        'PCB Library Files (*.lib)'
+    End
+
+    SaveFilters
+        'PCB Library File (*.PcbLib)'
+    End
+End
+
+PanelInfo
+    Name              = 'PCBMultiview' 
+    Category          = '&PCB'               
+    Bitmap            = ''                   
+    Hotkey            = ''                  
+    ButtonVisible     = True                 
+    CanDockVertical   = True                 
+    CanDockHorizontal = False                
+End
+
+PanelInfo
+    Name              = 'PCBObjectInspector' 
+    Category          = '&PCB'               
+    Bitmap            = ''                   
+    Hotkey            = 'I'                  
+    ButtonVisible     = True                 
+    CanDockVertical   = True                 
+    CanDockHorizontal = False                
+End
+
+PanelInfo
+    Name              = 'PCBNavigator' 
+    Category          = '&PCB'         
+    Bitmap            = ''             
+    Hotkey            = 'P'            
+    ButtonVisible     = True           
+    CanDockVertical   = True           
+    CanDockHorizontal = False          
+End
+
+PanelInfo
+    Name              = 'PCBMerge' 
+    Category          = '&PCB'        
+    Bitmap            = ''            
+    Hotkey            = ''           
+    ButtonVisible     = True          
+    CanDockVertical   = True          
+    CanDockHorizontal = True
+
+    DocumentKinds
+        'Pcb'
+    End
+End
+
+PanelInfo
+    Name              = 'PCBLibPanel' 
+    Category          = '&PCB'        
+    Bitmap            = ''            
+    Hotkey            = 'B'           
+    ButtonVisible     = True          
+    CanDockVertical   = True          
+    CanDockHorizontal = False         
+End
+
+PanelInfo
+    Name              = 'PCBExplorer' 
+    Category          = '&PCB'        
+    Bitmap            = ''            
+    Hotkey            = 'C'           
+    ButtonVisible     = True          
+    CanDockVertical   = True          
+    CanDockHorizontal = True          
+End
+
+PanelInfo
+    Name              = 'PCBExpressionFilter' 
+    Category          = '&PCB'                
+    Bitmap            = ''                    
+    Hotkey            = 'L'
+    ButtonVisible     = True                  
+    CanDockVertical   = True                  
+    CanDockHorizontal = True                  
+End
+
+PanelInfo
+    Name              = 'PCBFilter' 
+    Category          = '&PCB'                
+    Bitmap            = ''                    
+    Hotkey            = 'F'                   
+    ButtonVisible     = True                  
+    CanDockVertical   = True                  
+    CanDockHorizontal = True                  
+End
+
+PanelInfo
+    Name              = 'PCBLibFilter' 
+    Category          = '&PCB'                
+    Bitmap            = ''                    
+    Hotkey            = 'F'                   
+    ButtonVisible     = True                  
+    CanDockVertical   = True                  
+    CanDockHorizontal = True                  
+End
+
+PanelInfo
+    Name              = 'PCBPlacement' 
+    Category          = '&PCB'                
+    Bitmap            = ''                    
+    Hotkey            = 'M'                   
+    ButtonVisible     = True                  
+    CanDockVertical   = True                  
+    CanDockHorizontal = True                  
+End
+
+PanelInfo
+    Name              = 'BoardInSight'
+    Category          = '&PCB'                
+    Bitmap            = ''                    
+    Hotkey            = ''                   
+    ButtonVisible     = True                  
+    CanDockVertical   = True
+    CanDockHorizontal = True
+End
+
+PanelInfo
+    Name              = 'PCBRulesAndViolationsNavigator'
+    Category          = '&PCB'
+    Bitmap            = ''
+    Hotkey            = 'V'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = False
+End
+
+PanelInfo
+    Name              = 'PCB3DMoviesNavigator'
+    Category          = '&PCB'
+    Bitmap            = ''
+    Hotkey            = 'D'
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = False
+End
+
+OptionsPage
+    ServerName  = 'PCB'
+    ServerImage = 'Preferences_PCB.ico'
+    Image       = 'PCB.bmp'
+    Caption     = 'PCB Editor'
+    OrderIndex  = 50
+
+    OptionsPage
+        Caption  = 'General'
+        FormName = 'General'
+        OrderIndex = 1
+        CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'Display'
+        FormName = 'Display'
+        OrderIndex = 2
+        CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'DRC Violations Display'
+        FormName = 'DRCVIOLATIONSDISPLAY'
+        OrderIndex = 7
+        CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'Interactive Routing'
+        FormName = 'RoutingOptions'
+        OrderIndex = 8
+        CanSaveToCloud = True
+    End
+    OptionsPage
+        Caption  = 'Layer Colors'
+        FormName = 'LayerColors'
+        OrderIndex = 13
+        CanSaveToCloud = True
+    End
+End
+
+Command Name = 'AlignComponents'                    LongSummary = 'AlignComponents'                                           End
+Command Name = 'Annotate'                           LongSummary = 'Annotate'                                                  End
+Command Name = 'ApertureLibrary'                    LongSummary = 'ApertureLibrary'                                           End
+Command Name = 'ArrangeComponents'                  LongSummary = 'ArrangeComponents'                                         End
+Command Name = 'AutopositionComponentTexts'         LongSummary = 'AutopositionComponentTexts'                                End
+Command Name = 'AutoRoute'                          LongSummary = 'AutoRoute'                                                 End
+Command Name = 'BackAnnotate'                       LongSummary = 'BackAnnotate'                                              End
+Command Name = 'BoardInformation'                   LongSummary = 'BoardInformation'                                          End
+Command Name = 'BreakTrack'                         LongSummary = 'BreakTrack'                                                End
+Command Name = 'ChangeComponentName'                LongSummary = 'ChangeComponentName'                                       End
+Command Name = 'ChangeObject'                       LongSummary = 'ChangeObject'                                              End
+Command Name = 'Clear'                              LongSummary = 'Clear'                                                     End
+Command Name = 'ComponentRuleCheck'                 LongSummary = 'ComponentRuleCheck'                                        End
+Command Name = 'ConvertSelected'                    LongSummary = 'ConvertSelected'                                           End
+Command Name = 'Copy'                               LongSummary = 'Copy'                                                      End
+Command Name = 'CopyComponent'                      LongSummary = 'CopyComponent'                                             End
+Command Name = 'CreateApertureList'                 LongSummary = 'CreateApertureList'                                        End
+Command Name = 'CreateComponent'                    LongSummary = 'CreateComponent'                                           End
+Command Name = 'CrossProbeChoose'                   LongSummary = 'CrossProbeChoose'                                          End
+Command Name = 'CrossProbeNotify'                   LongSummary = 'CrossProbeNotify'                                          End
+Command Name = 'Cut'                                LongSummary = 'Cut'                                                       End
+Command Name = 'DeleteComponentFromLibrary'         LongSummary = 'DeleteComponentFromLibrary'                                End
+Command Name = 'DeleteObjects'                      LongSummary = 'DeleteObjects'                                             End
+Command Name = 'DensityMap'                         LongSummary = 'DensityMap'                                                End
+Command Name = 'DeSelect'                           LongSummary = 'DeSelect'                                                  End
+Command Name = 'DesignRuleCheck'                    LongSummary = 'DesignRuleCheck'                                           End
+Command Name = 'DocumentPreferences'                LongSummary = 'DocumentPreferences'                                       End
+Command Name = 'EditClasses'                        LongSummary = 'EditClasses'                                               End
+Command Name = 'EditFromTo'                         LongSummary = 'EditFromTo'                                                End
+Command Name = 'EditInternalPlanes'                 LongSummary = 'EditInternalPlanes'                                        End
+Command Name = 'EditRules'                          LongSummary = 'EditRules'                                                 End
+Command Name = 'EngineeringChangeOrder'             LongSummary = 'EngineeringChangeOrder'                                    End
+Command Name = 'EqualizeNetLengths'                 LongSummary = 'EqualizeNetLengths'                                        End
+Command Name = 'ExplodeComponent'                   LongSummary = 'ExplodeComponent'                                          End
+Command Name = 'Export'                             LongSummary = 'Export'                                                    End
+Command Name = 'Fanout'                             LongSummary = 'Fanout'                                                    End
+Command Name = 'FilterSelect'                       LongSummary = 'FilterSelect'                                              End
+Command Name = 'FindTestPoints'                     LongSummary = 'FindTestPoints'                                            End
+Command Name = 'TestpointManager'                   LongSummary = 'TestpointManager'                                          End
+Command Name = 'FirstComponent'                     LongSummary = 'FirstComponent'                                            End
+Command Name = 'FlipSelectedObjects'                LongSummary = 'FlipSelectedObjects'                                       End
+Command Name = 'GotoLibraryComponent'               LongSummary = 'GotoLibraryComponent'                                      End
+Command Name = 'GroupPrimitives'                    LongSummary = 'GroupPrimitives'                                           End
+Command Name = 'HideConnections'                    LongSummary = 'HideConnections'                                           End
+Command Name = 'IdentifyNet'                        LongSummary = 'IdentifyNet'                                               End
+Command Name = 'Import'                             LongSummary = 'Import'                                                    End
+Command Name = 'Jump'                               LongSummary = 'Jump'                                                      End
+Command Name = 'LastComponent'                      LongSummary = 'LastComponent'                                             End
+Command Name = 'LibraryBrowse'                      LongSummary = 'LibraryBrowse'                                             End
+Command Name = 'ListAllSelectedPins'                LongSummary = 'ListAllSelectedPins'                                       End
+Command Name = 'ListComponents'                     LongSummary = 'ListComponents'                                            End
+Command Name = 'ListInternalPlanePins'              LongSummary = 'ListInternalPlanePins'                                     End
+Command Name = 'ListNets'                           LongSummary = 'ListNets'                                                  End
+Command Name = 'ManageUnions'      LongSummary = 'Manage Unions of Objects'          End
+Command Name = 'ManualRoute'                                                                                                  End
+Command Name = 'MeasureDistance'                    LongSummary = 'MeasureDistance'                                           End
+Command Name = 'MeasureSelectedObjects'             LongSummary = 'MeasureSelectedObjects'                                    End
+Command Name = 'MoveAllComponentsToGrid'            LongSummary = 'MoveAllComponentsToGrid'                                   End
+Command Name = 'MoveCursor'                         LongSummary = 'MoveCursor'                                                End
+Command Name = 'MoveObject'                         LongSummary = 'MoveObject'                                                End
+Command Name = 'Netlist'                            LongSummary = 'Netlist'                                                   End
+Command Name = 'NextComponent'                      LongSummary = 'NextComponent'                                             End
+Command Name = 'OutlineSelectedObjects'             LongSummary = 'OutlineSelectedObjects'                                    End
+Command Name = 'Paste'                              LongSummary = 'Paste'                                                     End
+Command Name = 'PasteComponent'                     LongSummary = 'PasteComponent'                                            End
+Command Name = 'PinSwap'                            LongSummary = 'PinSwap'                                                   End
+Command Name = 'PlaceArc'                           LongSummary = 'PlaceArc'                                                  End
+Command Name = 'PlaceBoardOutline'                  LongSummary = 'Place Board Outline defining boundaries of the PCB design' End
+Command Name = 'PlaceComponent'                     LongSummary = 'PlaceComponent'                                            End
+Command Name = 'PlaceComponentFromLibraryEditor'    LongSummary = 'PlaceComponentFromLibraryEditor'                           End
+Command Name = 'PlaceComponentsFromFile'            LongSummary = 'PlaceComponentsFromFile'                                   End
+Command Name = 'PlaceCoordinate'                    LongSummary = 'PlaceCoordinate'                                           End
+Command Name = 'PlaceEmbeddedBoard'                 LongSummary = 'PlaceEmbeddedBoard'                                        End
+Command Name = 'PlaceDimension'                     LongSummary = 'PlaceDimension'                                            End
+Command Name = 'PlaceFill'                          LongSummary = 'PlaceFill'                                                 End
+Command Name = 'PlaceRegion'                        LongSummary = 'Place Copper or Cutout Region'                             End
+Command Name = 'PlaceComponentBody'                 LongSummary = 'Place 3D Body'                                             End
+Command Name = 'PlaceDifferentialPair'              LongSummary = 'Place Differential Pair'                                   End
+Command Name = 'PlacePad'                           LongSummary = 'PlacePad'                                                  End
+Command Name = 'PlacePolygonPlane'                  LongSummary = 'PlacePolygonPlane'                                         End
+Command Name = 'PlaceRoom'                          LongSummary = 'PlaceRoom'                                                 End
+Command Name = 'PlaceString'                        LongSummary = 'PlaceString'                                               End
+Command Name = 'PlaceTrack'                         LongSummary = 'PlaceTrack'                                                End
+Command Name = 'PlaceVia'                           LongSummary = 'PlaceVia'                                                  End
+Command Name = 'DoViaStitching'                     LongSummary = 'DoViaStitching'                                            End
+Command Name = 'PreviousComponent'                  LongSummary = 'PreviousComponent'                                         End
+Command Name = 'PrimitiveSelect'                    LongSummary = 'PrimitiveSelect'                                           End
+Command Name = 'PrintDocument'                      LongSummary = 'PrintDocument'                                             End
+Command Name = 'ReAnnotate'                         LongSummary = 'ReAnnotate'                                                End
+Command Name = 'Redo'                               LongSummary = 'Redo'                                                      End
+Command Name = 'ReportBoardSpecs'                   LongSummary = 'ReportBoardSpecs'                                          End
+Command Name = 'ReportBOM'                          LongSummary = 'ReportBOM'                                                 End
+Command Name = 'ReportNetlistStatus'                LongSummary = 'ReportNetlistStatus'                                       End
+Command Name = 'ReportPickPlace'                    LongSummary = 'ReportPickPlace'                                           End
+Command Name = 'ResetAllErrorMarkers'               LongSummary = 'ResetAllErrorMarkers'                                      End
+Command Name = 'ResetOrigin'                        LongSummary = 'ResetOrigin'                                               End
+Command Name = 'ResetCamera'                        LongSummary = 'ResetCamera'                                               End
+Command Name = 'RotateSelectedObjects'              LongSummary = 'RotateSelectedObjects'                                     End
+Command Name = 'RunQuery'                           LongSummary = 'RunQuery'                                                  End
+Command Name = 'RunQueryBuilder'                    LongSummary = 'RunQueryBuilder'                                           End
+Command Name = 'RunScissors'                        LongSummary = 'Run Polygon Scissors'                                      End
+Command Name = 'RunSpecctraForDos'                  LongSummary = 'RunSpecctraForDos'                                         End
+Command Name = 'RunSpecctraForWindows'              LongSummary = 'RunSpecctraForWindows'                                     End
+Command Name = 'Select'                             LongSummary = 'Select'                                                    End
+Command Name = 'SelectionMemory'                    LongSummary = 'Selection Memory'                                          End
+Command Name = 'SetComponentReference'              LongSummary = 'SetComponentReference'                                     End
+Command Name = 'SetCurrentLayer'                    LongSummary = 'SetCurrentLayer'                                           End
+Command Name = 'SetOrigin'                          LongSummary = 'SetOrigin'                                                 End
+Command Name = 'Setup'                              LongSummary = 'Setup'                                                     End
+Command Name = 'SetupOutputOptions'                 LongSummary = 'SetupOutputOptions'                                        End
+Command Name = 'SetupPreferences'                   LongSummary = 'SetupPreferences'                                          End
+Command Name = 'SetupPrinter'                       LongSummary = 'SetupPrinter'                                              End
+Command Name = 'SetupSpecctraInterface'             LongSummary = 'SetupSpecctraInterface'                                    End
+Command Name = 'ShoveComponents'                    LongSummary = 'ShoveComponents'                                           End
+Command Name = 'ShowApplicableRules'                LongSummary = 'ShowApplicableRules'                                       End
+Command Name = 'ShowConnections'                    LongSummary = 'ShowConnections'                                           End
+Command Name = 'ShowNetlistLength'                  LongSummary = 'ShowNetlistLength'                                         End
+Command Name = 'SnapGrid'                           LongSummary = 'SnapGrid'                                                  End
+Command Name = 'SwitchTo2D3D'                       LongSummary = 'SwitchTo2D3D'                                              End
+Command Name = 'TearDropSelectedPads'               LongSummary = 'TearDropSelectedPads'                                      End
+Command Name = 'ToggleSelection'                    LongSummary = 'ToggleSelection'                                           End
+Command Name = 'Undo'                               LongSummary = 'Undo'                                                      End
+Command Name = 'UnRoute'                            LongSummary = 'UnRoute'                                                   End
+Command Name = 'UpdateFootprints'                   LongSummary = 'UpdateFootprints'                                          End
+Command Name = 'UpdateRotationOnSelectedComponents' LongSummary = 'UpdateRotationOnSelectedComponents'                        End
+Command Name = 'Zoom'                               LongSummary = 'Zoom'                                                      End
+Command Name = 'GenerateLibraryReport'              LongSummary = 'Generate library report'                                   End
+Command Name = 'OffsetSelection'                    LongSummary = 'Offset Selected Objects by X, Y'                           End
+Command Name = 'ConfigureHeadsUpDisplay'   LongSummary = 'Configure the Heads Up Display'         End
+Command Name = 'ConnectSubnets'                       LongSummary = 'Automatically Connect Subnets'                             End
+Command Name = 'RunPolygonManager'                    LongSummary = 'Run Polygon Manager'                                       End
+Command Name = 'RunConvertDrilledSMTPadsToMultilayer' LongSummary = 'Run Convert Drilled SMT Pads To Multilayer'                End
+Command Name = 'ManageLayerSets'                      LongSummary = 'Manage Board Layer Sets'                                   End
+Command Name = 'TestGraphicsSystem'                    LongSummary = 'Test performance of the GDI and DirectX graphics systems' End
+Command Name = 'ReportLayerStackupCompatibility'       LongSummary = 'Report Layer Stackup compatibility issues for the boards embedded in board arrays' End
+Command Name = 'ConfigureColorOverride'                 LongSummary = 'Configure Net Color Override Behaviour' End
+Command Name = 'CreateCommentThread'                LongSummary = 'Begin new comments thread for managed project'             End

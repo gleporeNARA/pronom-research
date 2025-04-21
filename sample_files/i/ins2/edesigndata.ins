@@ -1,0 +1,133 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'EDesignData'                                                       
+    EditorExePath     = 'EDesignData.DLL'                                                   
+    EditorDescription = 'Electronic Design Data'                                               
+    Version           = 'Version 1.0.0.27124'                                                         
+    Date              = '24-Dec-2012'
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+    SystemExtension   = True                                                                      
+End
+
+EditorWindowKind
+    Name                  = 'ReleasedItem'
+    NewWindowCaption      = 'ReleasedItem'
+    NewWindowExtention    = 'Item'
+    WindowKindDescription = 'Released Item'
+    IconName              = 'ReleasedItem'
+
+    EditorBar Name = 'MNNoDocument'       BarType = Menu        End
+    EditorBar Name = 'HKNoDocument'       BarType = HotkeyTable End
+    EditorBar Name = 'TLNoDocument'       BarType = Toolbar     End
+    EditorBar Name = 'TLUNFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TBlayout'           BarType = Toolbar     End
+
+    EditorClasses
+        'ControlPanel'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'HWPart'
+    NewWindowCaption      = 'Part'
+    NewWindowExtention    = 'Part'
+    WindowKindDescription = 'Hardware Part Document'
+    IconName              = 'HWPart'
+
+    EditorBar Name = 'MNHWPartEditorMenu'           BarType = Menu        End
+    EditorBar Name = 'TBHWPartEditorTools'          BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'                 BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'                     BarType = Toolbar     End
+
+    LoadFilters
+        'Part Files (*.Part)'
+    End
+
+    SaveFilters
+        'Part Files (*.Part)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'PartChoiceList'
+    NewWindowCaption      = 'Part Choice List'
+    NewWindowExtention    = 'PCL'
+    WindowKindDescription = 'Part Choice List Document'
+    IconName              = 'PartChoiceList'
+
+    EditorBar Name = 'MNHWPartEditorMenu' BarType = Menu        End
+
+    LoadFilters
+        'Part Choice List Files (*.pcl)'
+    End
+
+    SaveFilters
+        'Part Choice List Files (*.pcl)'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'AltiumBinaryFileDocument'
+    NewWindowCaption      = 'AltiumBinaryFileDocument'
+    NewWindowExtention    = 'AltiumBinaryFileDocument'
+    WindowKindDescription = 'Altium Binary File Document'
+    IconName              = 'AltiumBinaryFileDocument'
+
+    EditorBar Name = 'MNNoDocument'       BarType = Menu        End
+    EditorBar Name = 'HKNoDocument'       BarType = HotkeyTable End
+    EditorBar Name = 'TLNoDocument'       BarType = Toolbar     End
+    EditorBar Name = 'TLUNFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TBlayout'           BarType = Toolbar     End
+
+    EditorClasses
+        'ControlPanel'
+    End
+End
+
+PanelInfo
+    Name              = 'Vault Explorer'
+    Category          = '&System'
+    Bitmap            = ''
+    Hotkey            = 'R'
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = False
+End
+
+PanelInfo
+    Name              = 'CompareItemRevisions'          
+    Category          = '&System'
+    Bitmap            = ''                 
+    Hotkey            = 'C'                
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = True              
+End
+
+
+PanelInfo
+    Name              = 'AltiumLive'          
+    Category          = '&System' 
+    Bitmap            = ''                 
+    Hotkey            = 'P'                
+    ButtonVisible     = False               
+    CanDockVertical   = True
+    CanDockHorizontal = True              
+End
+
+OptionsPage
+    ServerName  = 'EDesignData'
+    ServerImage = 'Preferences_DataManagement.ico'
+    Image       = 'ReleaseVault_Small.bmp'
+    Caption     = 'Publishing Destinations'
+    FormName    = 'PublishingPreferences'
+    ParentID    = 'IntegratedLibrary:'
+    OrderIndex  = 5
+End
+
+Command Name = 'CloneItemRevision' End
+Command Name = 'ActivateSearchFilter' End

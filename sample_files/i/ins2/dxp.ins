@@ -1,0 +1,90 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'Client'                                                                  
+    EditorExePath     = 'DXP.Exe'                                                                 
+    EditorDescription = 'DXP'                                                                     
+    Version           = 'Version 1.0.0.30000'                                                      
+    Date              = '19-Oct-2005'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+
+    ResourceDependencies
+        'ImporterManager'
+        'HelpAdvisor'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'DefaultEditor' 
+    NewWindowCaption      = 'DefaultEditor' 
+    NewWindowExtention    = 'Ddb'           
+    WindowKindDescription = 'No Document'   
+    IconName              = 'FOLDER'        
+
+    EditorBar Name = 'MNNoDocument'       BarType = Menu        End
+    EditorBar Name = 'HKNoDocument'       BarType = HotkeyTable End
+    EditorBar Name = 'TLNoDocument'       BarType = Toolbar     End
+    EditorBar Name = 'TLUNFocusedProject' BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'       BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'           BarType = Toolbar     End
+End
+
+PanelInfo
+    Name              = 'Favorites' 
+    Category          = '&System'   
+    Bitmap            = ''          
+    Hotkey            = 'V'         
+    ButtonVisible     = False       
+    CanDockVertical   = True        
+    CanDockHorizontal = True        
+End
+
+PanelInfo
+    Name              = 'Snippets'
+    Category          = '&System'
+    Bitmap            = ''
+    Hotkey            = 'S'
+    ButtonVisible     = False
+    CanDockVertical   = True
+    CanDockHorizontal = True
+End
+
+PanelInfo
+    Name              = 'StylesPalette'
+    Category          = '&System'
+    Bitmap            = ''
+    Hotkey            = ''
+    ButtonVisible     = True
+    CanDockVertical   = True
+    CanDockHorizontal = True
+End
+
+Command Name = 'ArrangeAllWindows'       LongSummary = 'Arrange all opened windows horizontally or vertically'                            End
+Command Name = 'CascadeAllOpenDocuments' LongSummary = 'Cascade all open document windows'                                                End
+Command Name = 'ChangeTransparency'      LongSummary = 'Control the transparency of floating windows'                                     End
+Command Name = 'CrossProbe'              LongSummary = 'Cross probing is a technique of locating matching objects in different documents' End
+Command Name = 'CustomizeResources'      LongSummary = 'Allocate menus, shortcut keys and toolbar resources for current Editor '          End
+Command Name = 'Favorites'               LongSummary = 'Favorites'                                                                        End
+Command Name = 'FullScreen'              LongSummary = 'FullScreen'                                                                       End
+Command Name = 'HelpAbout'               LongSummary = 'Display the version number and copyright of EDA/Client '                          End
+Command Name = 'Licensing'               LongSummary = 'Run the licensing dialog'                                                         End
+Command Name = 'Navigate'                LongSummary = 'Navigate'                                                                         End
+Command Name = 'NewDocumentForm'         LongSummary = 'Creates a new application window'                                                 End
+Command Name = 'QuitFromEDAClient'       LongSummary = 'Quit from EDA/Client '                                                            End
+Command Name = 'RestoreLayout'           LongSummary = 'Restores the current desktop from a layout'                                       End
+Command Name = 'RunCommonDialog'         LongSummary = 'Run a common file, document, process, or color dialog  '                          End
+Command Name = 'RunProcess'              LongSummary = 'Run Client Process  '                                                             End
+Command Name = 'SaveLayout'              LongSummary = 'Saves the current desktop as a layout'                                            End
+Command Name = 'SetupEDAServers'         LongSummary = 'Install and configure EDA servers'                                                End
+Command Name = 'SetupPreferences'        LongSummary = 'Setup Preferences'                                                                End
+Command Name = 'SwitchDocumentAndPanel'  LongSummary = 'Switches focus between panel and active document'                                 End
+Command Name = 'SwitchViews'             LongSummary = 'Change the active view'                                                           End
+Command Name = 'TileAllOpenDocuments'    LongSummary = 'Tile all open document windows '                                                  End
+Command Name = 'ToggleClientStatusBar'   LongSummary = 'Turn the Status Line on or off  '                                                 End
+Command Name = 'ToggleFloatingBars'      LongSummary = 'Shows or hides floating windows'                                                  End
+Command Name = 'ToggleProcessStatusBar'  LongSummary = 'Turn the Process Status Line on or off  '                                         End
+Command Name = 'ViewToolsMenu'           LongSummary = 'Displays the toolbars and panels menus'                                           End
+Command Name = 'ImportSpeedsettings'     LongSummary = 'Imports predefined settings'                                                      End
+Command Name = 'SelectNextDocumentOfTheSameKind' LongSummary = 'Activates next document of the same kind'                                 End
+

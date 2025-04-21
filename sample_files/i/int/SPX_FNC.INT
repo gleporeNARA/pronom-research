@@ -1,0 +1,35 @@
+Unit SPX_FNC;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+function sgn(h:integer):integer;
+function strint(s:string):longint;
+function intstr(l:longint):string;
+function ups(s:string):string;
+function st(h:longint):string;
+function compare(s1,s2:string):boolean;
+function dtcmp(var s1,s2;size:word):boolean;
+function cmp(var s1,s2;size:word):boolean;
+function lz(i,w:longint):string;
+function vl(h:string):longint;
+function spaces(h:integer):string;
+function repstr(h:integer;ch:char):string;
+procedure ifix(var a:integer;min,max:integer);
+procedure rfix(var a:real;min,max:real);
+function anything(s:string):boolean;
+function exist(f:string):boolean;
+function errmsg(n:integer):string;
+function turboerror(errorcode:integer) : string;
+procedure funpad(var s:string);
+procedure unpad(var s:string);
+procedure munpad(var s:string;b:byte);
+function fpad(s:string;h:integer):string;
+procedure pad(var s:string;h:integer);
+procedure fix(var s:string;h:string);
+procedure fixh(var s:string);
+function range(x,y,x1,y1,x2,y2:integer) : boolean;
+function rrange(x,y,x1,y1,x2,y2:real) : boolean;
+function between(x,x1,x2:longint):boolean;
+

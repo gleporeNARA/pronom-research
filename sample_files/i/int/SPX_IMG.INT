@@ -1,0 +1,27 @@
+Unit SPX_IMG;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+Uses SPX_VGA;
+
+type
+  VidHdrType = record
+                 position,count : word;
+               end;
+
+var
+  rgb256         : RGBlist;     { palette of last loaded PCX file }
+  x1pcx,y1pcx,                  { pcx size from load PCX file loaded }
+  x2pcx,y2pcx  : word;          {  using loadspcx }
+
+function loadpcx(pfilename:string):integer;
+procedure filepcx(var pcxfile:file;size:longint);
+function loadspcx(fname:string;x,y:integer):boolean;
+procedure drawpcx(var p;size:word);
+procedure drawspcx(var start;size:longint;x,y:integer);
+procedure DrawPtr(var p;merge:boolean;sz:longint);
+function LoadPTR(fn:string;merge:boolean):integer;
+function SavePTR(fn:string):integer;
+

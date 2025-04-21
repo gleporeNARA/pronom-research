@@ -1,0 +1,41 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'WaveSim'                                                                 
+    EditorExePath     = 'WaveSim.DLL'                                                             
+    EditorDescription = 'Waveform Editor'                                                         
+    Version           = 'Version 8.2.0.1773'                                                      
+    Date              = '21-Jun-2004'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright © Altium Limited 2015'
+
+    ResourceDependencies
+        'Wave'
+        'EditVHDL'
+    End
+End
+
+EditorWindowKind
+    Name                  = 'WaveSim'           
+    NewWindowCaption      = 'WaveSim'           
+    NewWindowExtention    = 'SO'                
+    WindowKindDescription = 'Waveform Document' 
+    IconName              = 'WaveSim'           
+
+    EditorBar Name = 'MNWaveSimMenu'        BarType = Menu        End
+    EditorBar Name = 'HTWaveSimHotkeys'     BarType = HotkeyTable End
+    EditorBar Name = 'TLWaveSimMainToolBar' BarType = Toolbar     End
+    EditorBar Name = 'TLFocusedProject'     BarType = Toolbar     End
+    EditorBar Name = 'TLWaveTransition'     BarType = Toolbar     End
+    EditorBar Name = 'TLVHDLToolbar'        BarType = Toolbar     End
+    EditorBar Name = 'TBNavigation'         BarType = Toolbar     End
+    EditorBar Name = 'TBLayout'             BarType = Toolbar     End
+
+    LoadFilters
+        'Wave files (*.so)'
+    End
+
+    SaveFilters
+        'Wave files (*.so)'
+    End
+End

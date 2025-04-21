@@ -1,0 +1,32 @@
+Unit SPX_GEO;
+
+{ SPX Library Version 1.0  Copyright 1993 Scott D. Ramsay }
+
+Interface
+
+Uses SPX_VGA,SPX_FNC;
+
+type
+  Pmorph = ^Tmorph;
+  Tmorph = object
+             gofsx,gofsy,ts,
+             gv_width,gv_height : byte;
+             gmx,gmy,gsx,gsy,
+             hvx,hvy,
+             smapx,smapy        : integer;
+             constructor init(geomx,geomy,gvw,gvh,scrx,scry:integer);
+             destructor done; virtual;
+             function geomap(x,y:integer):integer;virtual;
+             procedure drawmap(vx,vy:integer);virtual;
+             procedure drawmap_wd(vx,vy:integer);virtual;
+             procedure drawmap_n16(vx,vy:integer);virtual;
+             procedure placegeo_wd(nd:word;geonum:integer);virtual;
+             procedure nogogeo_wd(nd:word);virtual;
+             procedure placegeo(x,y,geonum:integer);virtual;
+             procedure nogogeo(x,y:integer);virtual;
+             procedure pre_map; virtual;
+             procedure post_map; virtual;
+           end;
+
+function loadGMP(f:string;var piclist,map):integer;
+

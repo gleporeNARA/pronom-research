@@ -1,0 +1,34 @@
+ClientInsFile 1.0
+
+Server
+    EditorName        = 'ADVSIM'
+    EditorExePath     = 'ADVSIM.DLL'                                                              
+    EditorDescription = 'Mixed Mode Simulation Server'                                            
+    Version           = 'Version 7.2.98'                                                          
+    Date              = '21-Jul-2010'                                                             
+    HelpAboutInfo     = 'This software is protected by copyright law and international treaties.' 
+    Copyright         = 'Copyright c Altium Limited 2010'                                         
+    Updates           = 'AdvSch'
+End
+
+EditorWindowKind
+    Name              = 'SCH'
+    EditorBar Name    = 'TLAdvSimTools'  BarType = Toolbar  End
+End
+
+OptionsPage
+    ServerName  = 'ADVSIM'
+    ServerImage = 'Preferences_Sim.ico'
+    Image       = 'SIM.bmp'
+    Caption     = 'Mixed Sim'
+    FormName    = 'AdvSim'
+    ParentID    = 'SIM:'
+    OrderIndex  = 2
+End
+
+Command Name = 'AddNsxToNewProject'                                                                     End
+Command Name = 'RunSimulator'               LongSummary = 'Run simulation'                              End
+Command Name = 'StopSimulator'              LongSummary = 'Stop simulation'                             End
+Command Name = 'ViewError'                  LongSummary = 'View Netlist Generation Error'               End
+Command Name = 'RunDialog_AnalysesSetup'    LongSummary = 'Run analyses setup dialog'                   End
+
