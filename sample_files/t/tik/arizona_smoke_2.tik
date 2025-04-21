@@ -1,0 +1,58 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+		svflags +broadcast
+		spawncull 0		
+	}
+	client
+	{
+		cache smoke_dyn_02.spr
+		cache smoke_dyn_03.spr
+		cache smoke_dyn_04.spr
+		
+		originemitter smoke1
+		(
+			spawnrange 100000
+			spawnrate 7
+			model smoke_dyn_02.spr smoke_dyn_03.spr smoke_dyn_04.spr
+			color 0.456 0.456 0.456
+			varycolor
+			scale 5
+			scaley 5
+			life 10 0
+			scalerate 0.4
+			scaleratey 0.4
+			lockscale 1
+			vspeed 0.059
+			uscale 0.5
+			vscale 0.5
+			randvelaxis range -2 -3 range -253 -469 range 34 145
+			angles 0 0 range 76 90
+			avelocity 0 0 range -6 3
+			scalemin 4
+			scaleminy 4
+			scalemax 6
+			scalemaxy 6
+			fade
+			fadein 1
+			sprite_lighting 0.20
+		)
+	}
+}		
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}

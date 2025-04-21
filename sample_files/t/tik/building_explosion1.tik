@@ -1,0 +1,212 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		rendereffects +dontdraw
+		notsolid
+		life 0.1
+		anim idle
+	}
+	client
+	{
+		cache models/fx/debris/wood/debris_wood_plank_long.gr2
+		cache models/fx/debris/wood/debris_wood_board_long.gr2
+		cache fireball_001.spr
+		cache fire_dyn_01.spr
+		cache fire_dyn_02.spr
+		cache smoke_dyn_01.spr
+	}
+}
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		entry sound destroy_gastank
+		
+			entry commanddelay 0.4 originspawn
+			(
+				spawnrange 3500
+				count 1
+				model fireball_001.spr
+				color 1 1 1
+				scale 0.1
+				scaley 0.1
+				life 4 0
+				scalerate 151
+				scaleratey 151
+				scalecap 4
+				scalecap_y 4
+				vspeed 0.094
+				randvel crandom 120 150 range 300 500
+				friction 0.8
+				avelocity 0 0 13
+				fade
+				fadein 0.5
+			)
+			entry commanddelay 0.4 originspawn
+			(
+				spawnrange 3500
+				count 1
+				model fireball_001.spr
+				color 1 1 1
+				scale 0.1
+				scaley 0.1
+				life 4 0
+				scalerate 151
+				scaleratey 151
+				scalecap 4
+				scalecap_y 4
+				uspeed 0.063
+				vspeed 0.063
+				uscale 0.5
+				vscale 0.5
+				randvel crandom 120 -300 range 300 600
+				friction 0.8
+				avelocity 0 0 -13
+				fade
+				fadein 0.5
+			)
+			entry commanddelay 0.4 originspawn
+			(
+				spawnrange 3500
+				count 3
+				count2 3
+				model fire_dyn_02.spr
+				color 1 1 1
+				life 2 0
+				scalerate 12
+				scaleratey 12
+				scalecap 5
+				scalecap_y 5
+				uvrotate 22
+				uscale 2
+				vscale 2
+				uscalerate 0.1
+				vscalerate 0.1
+				uscalecap 1
+				vscalecap 1
+				randvel crandom 123 crandom 123 range 300 800
+				friction 1.1
+				angles 0 0 -360
+				avelocity 0 0 crandom 23
+				scalemin 0.5
+				scaleminy 0.5
+				scalemax 1
+				scalemaxy 1
+				fade
+			)
+			entry commanddelay 0.7 originspawn
+			(
+				spawnrange 3500
+				count 5
+				model smoke_dyn_01.spr
+				color 0.659 0.659 0.648
+				scale 2
+				scaley 2
+				life 4 0
+				scalerate 12
+				scaleratey 12
+				scalecap 1
+				scalecap_y 1
+				lockscale 1
+				uspeed 0.094
+				uvrotate 7
+				randvel crandom 120 crandom 120 range 300 400
+				friction 0.5
+				offsetalongaxis 0 0 range 200 100
+				angles 0 0 crandom 360
+				fade
+				fadein 1
+				sprite_lighting 0.25
+			)
+			entry originspawn
+			(
+				spawnrange 3500
+				count 12
+				count2 8
+				model models/fx/debris/wood/debris_wood_plank_long.gr2
+				color 1 1 1
+				life 4 0
+				randvel range -1900 3700 range -1900 3700 range 700 1400
+				accel 0 0 -1000
+				angles crandom 45 crandom 45 crandom 45
+				avelocity 0 crandom 500 crandom 1200
+				scalemin 0.5
+				scaleminy 0.5
+				scalemax 2
+				scalemaxy 2
+			)
+			entry commanddelay 0.1 originspawn
+			(
+				spawnrange 3500
+				count 10
+				count2 10
+				model models/fx/debris/wood/debris_wood_board_long.gr2
+				color 1 1 1
+				life 4 0
+				randvel crandom 400 crandom 400 range 600 1000
+				accel 0 0 -1000
+				angles crandom 45 crandom 45 crandom 45
+				avelocity crandom 700 crandom 700 crandom 1200
+			)
+			entry commanddelay 0.1 originspawn
+			(
+				spawnrange 3500
+				count 5
+				count2 3
+				model smoke_dyn_01.spr
+				color 1 0.864 0.761
+				life 3 0
+				scalerate 24
+				scaleratey 24
+				scalecap 3
+				scalecap_y 3
+				radius 133
+				velocity -100
+				vspeed 0.031
+				randvel crandom 230 crandom 230 0
+				angles 0 0 90
+				fade
+				circle
+				sprite_lighting 0.25
+			)
+			entry originspawn
+			(
+				spawnrange 3500
+				count 3
+				count2 6
+				model fire_dyn_01.spr
+				color 1 1 1
+				life 2 0
+				scalerate 23
+				scaleratey 23
+				scalecap 2
+				scalecap_y 2
+				radius 123
+				uvrotate 31
+				randvel crandom 230 crandom 230 0
+				friction 1.5
+				fade
+				circle
+			)
+		}
+		server
+		{
+			last commanddelay 1 remove
+		}
+	}
+}
+

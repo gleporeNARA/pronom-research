@@ -1,0 +1,226 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+init
+{
+	server
+	{
+		classname Animate
+		rendereffects +dontdraw
+		notsolid
+		life 0.1
+		anim idle
+		spawncull 0
+		svflags +broadcast
+	}
+	client
+	{
+		cache models/fx/debris/wood/debris_wood_board_long_03.gr2
+		cache models/fx/debris/metal/debris_metal_pipe.gr2
+		cache smoke_dyn_01.spr
+		cache flash_bang1001.spr
+		cache fire_dyn_02.spr
+		cache fire_dyn_01.spr
+		cache smoke_dyn_03.spr
+		cache nomip_flash_bang1001_2sd.spr
+	}
+}
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		entry sound expl_flak_far
+		entry commanddelay 0.2 originspawn
+		(
+			spawnrange 30000
+			count 23
+			model fire_dyn_02.spr fire_dyn_01.spr
+			color 1 1 1
+			scale 29
+			scaley 29
+			life 3 0
+			scalerate 15
+			scaleratey 15
+			scalecap 23
+			scalecap_y 23
+			lockscale 1
+			vspeed 0.118
+			uscale 0.5
+			vscale 0.5
+			randvel 0 range -120 -133 random 3455
+			offset 0 0 range -1450 3500
+			angles 0 0 range -170 240
+			avelocity 0 0 range -8 4
+			scalemin 3
+			scaleminy 3
+			scalemax 7
+			scalemaxy 7
+			fade
+			mustkeep
+		)
+		entry commanddelay 0.2 originspawn
+		(
+			spawnrange 30000
+			count 4
+			model flash_bang1001.spr
+			color 1 0.778 0.667
+			scale 21
+			scaley 21
+			life 1 0
+			scalerate 8
+			scaleratey 8
+			uvrotate 12
+			randvel 0 0 range 3000 6000
+			scalemin 13
+			scaleminy 13
+			scalemax 21
+			scalemaxy 21
+			fade
+			mustkeep
+		)
+		entry originspawn
+		(
+			spawnrange 30000
+			count 2
+			model flash_bang1001.spr
+			color 1 0.833 0.722
+			scale 23
+			scaley 23
+			life 1 0
+			scalerate 21
+			scaleratey 21
+			randvel crandom 600 crandom 600 0
+			offset 0 crandom 300 0
+			fade
+			sprite_lighting 0.25
+			mustkeep
+		)
+		entry commanddelay 1 originspawn
+		(
+			spawnrange 30000
+			count 14
+			count2 5
+			model smoke_dyn_03.spr
+			color 1 1 1
+			scale 35
+			scaley 35
+			life 7 0
+			vspeed 0.059
+			uvrotate 2
+			uscale 0.5
+			vscale 0.5
+			offset crandom 1300 crandom 1300 range 500 7000
+			angles 0 0 crandom 360
+			fade
+			fadein 2
+			sprite_lighting 0.21
+			mustkeep
+		)
+		entry originspawn
+		(
+			spawnrange 30000
+			count 12
+			count2 14
+			model nomip_flash_bang1001_2sd.spr
+			color 1 1 1
+			life 1 0
+			randvel crandom 5000 crandom 5000 crandom 5000
+			accel 0 0 -600
+			fade
+			alignstretch 0.05
+			sprite_oriented
+			mustkeep
+		)
+		entry originspawn
+		(
+			spawnrange 30000
+			count 12
+			count2 17
+			model models/fx/debris/metal/debris_metal_pipe.gr2
+			color 1 1 1
+			scale 3
+			scaley 3
+			life 8 0
+			lockscale 1
+			randvel crandom 2400 crandom 1400 range 400 2800
+			accel 0 0 -400
+			avelocity crandom 600 crandom 30 crandom 3
+			scalemin 3
+			scaleminy 3
+			scalemax 5
+			scalemaxy 5
+			dietouch
+			sprite_lighting 0.17
+			mustkeep
+		)
+		entry originspawn
+		(
+			spawnrange 30000
+			count 5
+			count2 7
+			model models/fx/debris/wood/debris_wood_board_long_03.gr2
+			color 1 1 1
+			scale 3
+			scaley 3
+			life 8 0
+			lockscale 1
+			randvel crandom 1400 crandom 1400 range 400 2800
+			accel 0 0 -400
+			avelocity crandom 600 crandom 30 crandom 3
+			scalemin 3
+			scaleminy 3
+			scalemax 5
+			scalemaxy 5
+			dietouch
+			sprite_lighting 0.17
+			mustkeep
+		)
+		entry originspawn
+		(
+			spawnrange 30000
+			count 13
+			count2 12
+			model body_navy_01.spr body_navy_02.spr body_navy_03.spr
+			color 1 1 1
+			scale 0.6
+			scaley 0.6
+			life 3 0
+			velocity 0.3
+			randvel crandom 900 crandom 900 range 1200 400
+			accel 0 0 -1300
+			friction 1
+			offset crandom 1280 crandom 1280 0
+			angles 0 0 range 90 -120
+			avelocity 0 0 crandom 32
+			fade
+			sprite_lighting 0.25
+			texture_framerate 0.80
+			texture_numframes 16.00
+			mustkeep
+		)
+		entry commanddelay 0.5 originspawn
+		(
+			spawnrange 30000
+			count 3
+			model models/fx/the_fourth.tik
+			color 1 1 1
+			life 1 0
+			offset range 300 700 crandom 180 0
+			sprite_lighting 0.25
+			mustkeep
+		)
+		}
+		server
+		{
+			last commanddelay 1 remove
+		}
+	}
+}
+
+//8 particles

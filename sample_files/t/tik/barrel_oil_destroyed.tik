@@ -1,0 +1,46 @@
+TIKI
+setup
+{
+	scale 0.02
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	client
+	{
+		cache models/fx/metal_section.tik
+	}
+}
+
+animations
+{
+	aaaa dummy2.skc // hack to allow the idle anim's entry commands to run
+	idle dummy2.skc
+	{
+		client
+		{
+			enter originspawn
+			(
+			model models/fx/metal_section.tik
+			count 15
+			color 1.00 1.00 1.00
+			collision
+			bouncefactor 0.30
+			scale 0.40
+			life 3.00
+			velocity 600.00
+			accel 0.00 0.00 -200.00
+			offsetalongaxis range 20 -80 range 20 -60 range 20 -50
+			angles crandom -32 crandom -32 crandom -32
+			avelocity range 20 400 range 230 1800 range 303 1000
+			scalemin 0.10
+			scalemax 0.40
+			alignstretch 0.02
+			randomroll
+			sphere
+			)
+		}
+	}
+}

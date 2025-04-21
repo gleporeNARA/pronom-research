@@ -1,0 +1,204 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+init
+{
+	server
+	{
+		classname Animate
+		rendereffects +dontdraw
+		notsolid
+		life 0.1
+		anim idle
+	}
+	client
+	{
+		cache fire_dyn_01.spr
+		cache fire_dyn_02.spr
+		cache flash_bang1001_2sd.spr
+		cache fireball_001.spr
+		cache flash_bang1001.spr
+		cache smoke_dyn_01.spr
+		cache smoke_dyn_02.spr
+	}
+}
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+			entry playsound Small_Tank_Destroy
+			entry commanddelay 0.2 originspawn
+			(
+				count 7
+				count2 10
+				model flash_bang1001_2sd.spr
+				color 1 0.367 0
+				scale 0.2
+				scaley 0.3
+				life 3 0
+				scalerate 0.1
+				scaleratey 7
+				velocity 56
+				randvel crandom 500 crandom 500 range 300 1000
+				accel 0 0 -150
+				friction -1
+				angles crandom 45 0 0
+				align
+				sprite_oriented_blur
+			)
+			entry commanddelay 0.2 originspawn
+			(
+				spawnrange 14000
+				count 4
+				count2 10
+				model fireball_001.spr
+				color 1 1 1
+				scale 0.1
+				scaley 0.1
+				life 1 0
+				scalerate 41
+				scaleratey 41
+				scalecap 0.1
+				scalecap_y 0.1
+				lockscale 1
+				vspeed -0.059
+				uvrotate 26
+				uscalerate 0.1
+				vscalerate 0.1
+				randvel range -43 89 range -43 89 range 3 167
+				accel 0 0 156
+				friction 0.6
+				offsetalongaxis 0 0 range 34 124
+				angles 0 0 crandom 360
+				avelocity 0 0 -13
+				scalemin 0.2
+				scaleminy 0.2
+				scalemax 0.4
+				scalemaxy 0.4
+				fade
+			)
+			entry originspawn
+			(
+				spawnrange 14000
+				count 3
+				model fireball_001.spr
+				color 1 1 1
+				scale 0.1
+				scaley 0.1
+				life 1 0
+				scalerate 58
+				scaleratey 58
+				scalecap 0.1
+				scalecap_y 0.1
+				lockscale 1
+				vspeed -0.059
+				uvrotate -26
+				uscalerate 0.1
+				vscalerate 0.1
+				randvel range -3 9 range -3 9 range 34 167
+				accel 0 0 272
+				friction 0.9
+				offsetalongaxis 0 0 range 34 43
+				angles 0 0 crandom 360
+				avelocity 0 0 13
+				scalemin 0.1
+				scaleminy 0.1
+				scalemax 0.4
+				scalemaxy 0.4
+				fade
+				//fadein 1
+			)
+			entry originspawn
+			(
+				spawnrange 14000
+				count 1
+				model fireball_001.spr
+				alpha 0.578
+				color 1 1 1
+				scale 0.5
+				scaley 0.5
+				life 0.5 0
+				scalerate 23
+				scaleratey 23
+				angles 0 0 crandom 360
+				fade
+			)
+			entry originspawn
+			(
+				spawnrange 14000
+				count 2
+				count2 3
+				model flash_bang1001.spr
+				color 1 0.789 0.567
+				scale 0.2
+				scaley 0.2
+				life 0.2 0
+				scalerate 90
+				scaleratey 90
+				randvel crandom 300 crandom 300 range 100 600
+				offsetalongaxis crandom 34 crandom 34 range 4 8
+				angles 0 0 crandom 360
+				fade
+			)
+			entry originspawn
+			(
+				spawnrange 14000
+				count 4
+				count2 6
+				model fire_dyn_02.spr fire_dyn_03.spr
+				color 1 1 1
+				scale 0.1
+				scaley 0.1
+				life 1 0
+				scalerate 3.5
+				scaleratey 3.5
+				lockscale 1
+				vspeed 0.176
+				uvrotate 35
+				randvel 0 0 range 34 267
+				friction 0.5
+				offsetalongaxis crandom 13 crandom 13 random 34
+				angles 0 0 crandom 360
+				avelocity 0 0 -25
+				scalemin 0.1
+				scaleminy 0.1
+				scalemax 0.3
+				scalemaxy 0.3
+				fade
+			)
+			entry commanddelay 1.5 originspawn
+			(
+				spawnrange 14000
+				count 6
+				model smoke_dyn_01.spr smoke_dyn_02.spr
+				alpha 0.633
+				color 0.311 0.3 0.311
+				life 4 0
+				scalerate 0.9
+				scaleratey 0.9
+				lockscale 1
+				vspeed 0.059
+				uvrotate 12
+				randvel crandom 64 crandom 64 range 23 154
+				accel 0 -24 0
+				friction 0.1
+				offsetalongaxis 0 0 range 19 245
+				angles 0 0 crandom 360
+				avelocity 0 0 crandom 12
+				fade
+				fadein 1
+				sprite_lighting 0.26
+			)
+		}
+		server
+		{
+			last commanddelay 15 remove
+		}
+	}
+}

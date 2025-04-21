@@ -1,0 +1,193 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Explosion
+		rendereffects +dontdraw
+		notsolid
+		radiusdamage 10
+		radius 50
+		meansofdeath grenade
+		life 0.1
+		anim idle
+		svflags +broadcast
+	}
+	client
+	{
+		//cache some stuff used in this effect
+		
+		cache flash_bang1001.spr
+		cache ammocrate_gibs.spr
+		cache ash_glowing.spr
+		cache smoke_dyn_01.spr
+		cache fire_dyn_03.spr
+		
+	}
+}
+animations
+{
+	idle dummy3.skc 
+	{
+	client
+		{
+
+		entry originspawn
+		(
+			spawnrange 10000
+			count 3
+			count2 5
+			model flash_bang1001.spr
+			color 0.8 0.489 0.278
+			life 0.05 0
+			scalerate 21
+			scaleratey 21
+			lockscale 1
+			randvel crandom 600 crandom 600 range 400 1100
+			friction 13
+			scalemin 0.6
+			scaleminy 0.6
+			scalemax 1
+			scalemaxy 1
+			mustKeep
+		)
+		entry originspawn
+		(
+			spawnrange 8000
+			count 12
+			model fire_dyn_03.spr
+			alpha 0.544
+			color 0.744 0.833 0.733
+			scale 0.1
+			scaley 0.1
+			life 0.5 0
+			scalerate 23
+			scaleratey 23
+			uspeed -0.059
+			vspeed -0.059
+			uvrotate 23
+			uscale 0.5
+			vscale 0.5
+			randvel crandom 400 crandom 400 range 200 800
+			friction 3
+			angles 0 0 crandom 360
+			fade
+		)
+		entry originspawn
+		(
+			spawnrange 6000
+			count 3
+			model ammocrate_gibs.spr
+			color 1 0.867 0.556
+			life 3 0
+			randvel crandom 2000 crandom 2000 range 1300 2000
+			accel 0 -55 -900
+			friction 5
+			angles 0 0 crandom 360
+			avelocity 0 0 range -501 1001
+			scalemin 0.06
+			scaleminy 0.06
+			scalemax 0.1
+			scalemaxy 0.1
+			fade
+			sprite_lighting 0.25
+			texture_framelock 1
+			texture_numframes 4.00
+		)
+		entry originspawn
+		(
+			spawnrange 6000
+			count 3
+			model ammocrate_gibs.spr
+			color 1 0.867 0.556
+			life 3 0
+			randvel crandom 2000 crandom 2000 range 1300 2000
+			accel 0 -55 -900
+			friction 5
+			angles 0 0 crandom 360
+			avelocity 0 0 range -501 1001
+			scalemin 0.06
+			scaleminy 0.06
+			scalemax 0.1
+			scalemaxy 0.1
+			fade
+			sprite_lighting 0.25
+			texture_framelock 3
+			texture_numframes 4.00
+		)
+		entry originspawn
+		(
+			spawnrange 6000
+			count 3
+			model ammocrate_gibs.spr
+			color 1 0.867 0.556
+			life 3 0
+			randvel crandom 2000 crandom 2000 range 1300 2000
+			accel 0 -55 -900
+			friction 5
+			angles 0 0 crandom 360
+			avelocity 0 0 range -501 1001
+			scalemin 0.06
+			scaleminy 0.06
+			scalemax 0.1
+			scalemaxy 0.1
+			fade
+			sprite_lighting 0.25
+			texture_framelock 4
+			texture_numframes 4.00
+		)
+		entry originspawn
+		(
+			spawnrange 2000
+			count 16
+			model ash_glowing.spr
+			color 1 1 0.3
+			life 4 0
+			randvel range 23 64 range -23 -64 -60
+			offset crandom 44 crandom 44 range 140 200
+			avelocity 0 0 crandom 500
+			scalemin 0.01
+			scaleminy 0.01
+			scalemax 0.1
+			scalemaxy 0.1
+			fade
+		)
+		entry originspawn
+		(
+			spawnrange 10000
+			count 6
+			model smoke_dyn_01.spr
+			alpha 0.789
+			color 0.822 0.8 0.744
+			life 3 0
+			scalerate 2.5
+			scaleratey 2.5
+			vspeed 0.059
+			uvrotate -23
+			uscale 0.6
+			vscale 0.6
+			randvel crandom 2000 crandom 2000 range 1200 3400
+			accel 0 -2000 0
+			friction 16
+			offset 0 0 -23
+			angles 0 0 crandom 360
+			fade
+			sprite_lighting 0.25
+			mustKeep
+		)
+
+		}
+	server
+		{
+		last commanddelay 1 remove
+		}
+	}
+
+}

@@ -1,0 +1,54 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	server
+	{
+		 enter setshadertime 0
+	}
+
+	client
+	{
+		sfx originspawn
+		(
+			model snowclump.spr
+			count 9
+			color 0.81 0.81 0.83
+			life .5
+			randvel crandom 30 crandom 30 range 7 25
+			accel 0 0 -450
+			angles 0 0 crandom 75
+			avelocity 0 0 crandom 50
+			scalemin 0.08
+			scalemax 0.18
+			fade
+		)
+
+		sfx originspawn
+		(
+			model snowPlume_02.spr
+			count 5
+			life .4
+			alpha .6
+			scalerate 5
+			randvel crandom 10 crandom 10 range 30 50
+			friction 2
+			angles 0 0 crandom 90
+			avelocity crandom 20 crandom 20 crandom 50
+			scalemin 0.05
+			scalemax 0.1
+			fade
+		)
+	}
+}
+
+animations
+{
+	idle dummy2.skc
+}

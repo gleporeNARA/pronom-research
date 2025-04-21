@@ -1,0 +1,53 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+		svflags +broadcast
+	}
+	client
+	{
+		cache daytime_ambient.spr
+		
+
+		originemitter name1
+		(
+			spawnrange 150000
+			spawnrate 2
+			model daytime_ambient.spr
+			color 0.411 0.478 0.667
+			life 6 0
+			uspeed 0.059
+			vspeed -0.059
+			uscale 0.5
+			vscale 0.5
+			randvelaxis range -60 15 crandom 40 range -30 17
+			offset crandom 300 crandom 300 0
+			angles range 110 5 0 0
+			avelocity 0 0 crandom 12
+			scalemin 12
+			scaleminy 12
+			scalemax 25
+			scalemaxy 25
+			fade
+			fadein 1
+		)
+
+	}
+}		
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}
+//coords for 4_1_intro are x -3154, y 7719, z -2181

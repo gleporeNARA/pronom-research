@@ -1,0 +1,44 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+ 
+init
+{
+	server
+	{
+		classname Animate
+		notsolid
+		rendereffects +dontdraw
+	}
+
+}
+
+animations
+{
+	idle dummy2.skc
+	start dummy2.skc
+	{
+		server    
+		{ 
+			last commanddelay 1 anim idle
+		}
+
+		client
+		{
+//			entry tagdlight tag_barrel 0.25 0.2 0.15 150 0.11
+			//	blockdlight [radius] [life]
+			entry blockdlight 500 120
+			(
+			color 1 1 1
+			//color 0.89 0.9 0.8039			
+			colorvelocity 0 0 0
+			scalerate 0
+			)
+
+		}
+	}
+}

@@ -1,0 +1,202 @@
+// This is a template tiki file for converting emitters generated with the In-Game editor (IGE)
+// Copy and paste this file, name it appropriately and fill in the proper fields (see TODO)
+
+TIKI
+setup
+{
+	// DO NOT MODIFY THIS BLOCK!!!	
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		// TODO
+		// Cache the sprite info here, example:		
+		 cache water_mist_blend.spr
+		 cache smoke_white1.spr
+		 cache wake_froth.spr
+		 
+		originemitter watertrickle1
+		(
+			spawnrange 2800
+			spawnrate 3
+			count 6
+			model smoke_white1.spr
+			alpha 0.756
+			color 1 1 1
+			scale 1.5
+			scaley 1.5
+			life 2 0
+			randvel 120 40 0
+			accel 0 15 0
+			offsetalongaxis 0 crandom -50 0
+			avelocity 0 crandom -20 0
+			fadedelay 0.2
+			fadein 1
+			sprite_oriented
+		)
+		originemitter watertrickle1
+		(
+			spawnrange 3800
+			spawnrate 3
+			count 6
+			model wake_froth.spr
+			alpha 0.756
+			color 1 1 1
+			scale 1.5
+			scaley 1.5
+			life 5 0
+			randvel 120 40 0
+			accel 0 15 0
+			offsetalongaxis 0 crandom -50 0
+			avelocity 0 crandom -20 0
+			fadedelay 0.2
+			fadein 1
+			sprite_oriented
+		)
+		originemitter mist1
+		(
+			spawnrange 3800
+			spawnrate 5
+			count 5
+			model water_mist_blend.spr
+			alpha 0.4
+			color 1 1 1
+			scale 0.5
+			scaley 0.5
+			life 1 0
+			scalerate 1
+			scaleratey 1
+			randvel 0 0 50
+			offset range 50 -200 0 0
+			offsetalongaxis 0 0 50
+			avelocity 0 0 range 30 -75
+			fadedelay 0.2
+			fadein 0.2
+		)
+		originemitter name1
+		(
+			spawnrange 2800
+			spawnrate 5
+			model smoke_white1.spr
+			alpha 0.2
+			color 0.622 0.667 0.678
+			scale 1
+			scaley 1.5
+			life 8 0
+			scalerate 0.2
+			scaleratey 0.2
+			uspeed 0.059
+			vspeed 0.059
+			uvrotate 0.1
+			uscale 0.9
+			vscale 0.9
+			randvel range 4 13 0 0
+			accel 0 0 2
+			angles range 3 -3 crandom 360 0
+			fade
+			fadein 1
+		)
+		originemitter splash1
+		(
+			spawnrange 3800
+			spawnrate 8
+			count 4
+			count2 5
+			model wake_froth.spr
+			alpha 0.6
+			color 1 1 1
+			scale 0.1
+			scaley 0.1
+			life 1 0
+			scalerate 8
+			scaleratey 4
+			lockscale 1
+			randvelaxis crandom -30 crandom 21 range 10 10
+			accel 0 0 -150
+			offsetalongaxis 0 crandom -50 0
+			angles 0 0 crandom 360
+			avelocity 0 0 crandom 7
+			scalemin 0.1
+			scaleminy 0.1
+			scalemax 0.15
+			scalemaxy 0.15
+			fade
+		)
+		originemitter splash2
+		(
+			spawnrange 3800
+			spawnrate 8
+			count 3
+			count2 5
+			model wake_froth.spr
+			alpha 0.6
+			color 1 1 1
+			scale 0.1
+			scaley 0.1
+			life 1 0
+			scalerate 8
+			scaleratey 4
+			lockscale 1
+			randvelaxis crandom -30 crandom 21 range 10 10
+			accel 0 0 -150
+			offset 0 crandom 4 crandom 4
+			offsetalongaxis -30 random -50 50
+			angles 0 0 crandom 360
+			avelocity 0 0 crandom -15
+			scalemin 0.1
+			scaleminy 0.1
+			scalemax 0.15
+			scalemaxy 0.15
+			fade
+		)
+		originemitter splash3
+		(
+			spawnrange 3800
+			spawnrate 8
+			count 4
+			count2 5
+			model wake_froth.spr
+			alpha 0.6
+			color 1 1 1
+			scale 0.1
+			scaley 0.1
+			life 1 0
+			scalerate 8
+			scaleratey 4
+			lockscale 1
+			randvelaxis crandom -30 crandom 21 range 10 10
+			accel 0 0 -150
+			offsetalongaxis random -60 100 0
+			avelocity 0 0 crandom 7
+			scalemin 0.1
+			scaleminy 0.1
+			scalemax 0.15
+			scalemaxy 0.15
+			fade
+		)
+
+	}
+}
+		
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		// TODO
+		// PASTE contents of txt file here (generated from IGE)
+
+		}
+	}
+}

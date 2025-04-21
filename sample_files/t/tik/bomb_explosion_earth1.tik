@@ -1,0 +1,281 @@
+TIKI
+setup
+{
+	// DO NOT MODIFY THIS BLOCK!!!	
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		// TODO
+		// Cache the sprite info here, example:		
+		 cache dirt_tiles.spr
+		 cache smoke_single_1.spr
+		 cache flash_bang1001.spr
+		 cache fire_spheric_single1001.spr
+		 cache granite_impact_tile.spr
+		// The name of the sprite is given in the IGE under 'general' tab in the 'model' field
+		cache granite_impact_tile.spr
+	}
+}
+		
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		// TODO
+		// PASTE contents of txt file here (generated from IGE)
+
+		delayedsfx 0.1 originspawn
+		(
+			count 1
+			count2 1
+			model dirt_tiles.spr
+			color 1 1 1
+			scale 0.1
+			scaley 0.1
+			life 1 0
+			scalerate 8
+			scaleratey 8
+			radius 20
+			randvel crandom -10 crandom -10 range 100 900
+			accel 0 0 -1500
+			offset crandom -20 crandom -20 0
+			angles 0 0 crandom -360
+			avelocity 0 0 crandom -10
+			fade
+			sphere
+			texture_framelock 4
+			texture_numframes 4.00
+		)
+		delayedsfx 0.1 originspawn
+		(
+			count 3
+			count2 3
+			model dirt_tiles.spr
+			color 1 1 1
+			scale 0.1
+			scaley 0.1
+			life 1 0
+			scalerate 4
+			scaleratey 7
+			randvel crandom -200 crandom -200 range 300 1000
+			accel 0 0 -900
+			friction 1
+			angles 0 0 crandom -360
+			avelocity 0 0 crandom -5
+			fade
+			sprite_lighting 0.25
+			texture_framelock 3
+			texture_numframes 4.00
+		)
+		delayedsfx 0.1 originspawn
+		(
+			count 10
+			count2 5
+			model smoke_single_1.spr
+			alpha 0.841
+			color 0.511 0.466 0.42
+			varycolor
+			scale 0.4
+			scaley 0.4
+			life 1 0
+			scalerate 5
+			scaleratey 5
+			radius 56
+			randvel crandom -200 crandom -200 range 400 1900
+			accel 0 0 -232
+			friction 4.5
+			offset 0 0 range 4 200
+			offsetalongaxis range 34 -64 range 34 -64 0
+			angles 0 0 range 60 -180
+			avelocity 0 0 crandom -5
+			scalemin 0.4
+			scaleminy 0.4
+			scalemax 0.6
+			scalemaxy 0.6
+			fade
+			circle
+			sprite_lighting 0.25
+			texture_framelock 0
+		)
+		sfx originspawn
+		(
+			count 10
+			count2 4
+			model smoke_single_1.spr
+			color 0.705 0.591 0.477
+			varycolor
+			scale 0.3
+			scaley 0.3
+			life 1 0
+			scalerate 12
+			scaleratey 12
+			radius 50
+			randvel crandom -600 crandom -600 range 100 1000
+			accel 0 0 -700
+			friction 2.5
+			angles 0 0 crandom -90
+			avelocity 0 0 crandom -2
+			fade
+			circle
+		)
+		sfx originspawn
+		(
+			count 2
+			count2 2
+			model flash_bang1001.spr
+			alpha 0.739
+			color 1 0.659 0.398
+			scale 5
+			scaley 5
+			life 0.1 0
+			randvel crandom -2400 crandom -2400 range 200 2400
+			friction 9
+			offset crandom -23 crandom -23 crandom -23
+			fade
+			sprite_lighting 0.25
+		)
+		sfx originspawn
+		(
+			count 1
+			count2 1
+			model flash_bang1001.spr
+			color 1 1 1
+			scale 10
+			scaley 10
+			life 0.1 0
+			randvel 0 0 range 1000 1000
+			offset crandom -12 crandom -12 0
+			fade
+			sprite_lighting 0.25
+		)
+		sfx originspawn
+		(
+			count 3
+			count2 4
+			model fire_spheric_single1001.spr
+			alpha 0.761
+			color 1 1 1
+			scale 0.3
+			scaley 0.3
+			life 0.7 0
+			scalerate 23
+			scaleratey 23
+			radius 13
+			radialvelocity 12 0 0
+			randvel crandom -400 crandom -400 range 40 700
+			friction 0.5
+			angles 0 0 crandom -360
+			fade
+			sprite_lighting 0.25
+		)
+		sfx originspawn
+		(
+			count 1
+			count2 4
+			model dirt_tiles.spr
+			alpha 0.25
+			color 0.92 0.784 0.693
+			scale 0.2
+			scaley 0.2
+			life 0.2 0
+			scalerate 122
+			scaleratey 122
+			sprite_lighting 0.25
+			texture_framelock 1
+			texture_numframes 4.00
+		)
+		sfx originspawn
+		(
+			count 3
+			count2 3
+			model smoke_single_2.spr
+			alpha 0.398
+			color 1 1 1
+			scale 0.3
+			scaley 0.3
+			life 0.5 0
+			scalerate 12
+			scaleratey 12
+			randvel crandom -2130 crandom -2130 range 200 400
+			friction 3
+			angles 0 0 crandom -360
+			avelocity 0 0 crandom -20
+			fade
+			sprite_lighting 0.25
+		)
+		sfx originspawn
+		(
+			count 2
+			count2 2
+			model granite_impact_tile.spr
+			alpha 0.67
+			color 0.727 0.659 0.614
+			scale 0.1
+			scaley 0.1
+			life 0.3 0
+			scalerate 221
+			scaleratey 221
+			randvel crandom -50 crandom -50 range 50 100
+			accel 0 0 -800
+			friction 4
+			angles 0 0 crandom -360
+			fade
+			texture_framelock 2
+			texture_numframes 4.00
+		)
+		sfx originspawn
+		(
+			count 5
+			count2 7
+			model granite_impact_tile.spr
+			color 1 1 1
+			scale 0.1
+			scaley 0.1
+			life 2 0
+			randvel crandom -900 crandom -900 range 900 1200
+			accel 0 0 -900
+			avelocity 0 0 crandom -45
+			scalemin 0.1
+			scaleminy 0.1
+			scalemax 0.2
+			scalemaxy 0.2
+			fade
+			randomroll
+			texture_framelock 4
+			texture_numframes 4.00
+		)
+		sfx originspawn
+		(
+			count 4
+			count2 5
+			model granite_impact_tile.spr
+			alpha 0.818
+			color 1 1 1
+			life 1.5 0
+			scalerate 4
+			scaleratey 4
+			randvel crandom -1140 crandom -1140 0
+			accel 0 0 -800
+			friction 4
+			angles 0 0 crandom -360
+			avelocity 0 0 crandom -12
+			fade
+			texture_framelock 3
+			texture_numframes 4.00
+		)
+		}
+	}
+}

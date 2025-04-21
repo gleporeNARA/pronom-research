@@ -1,0 +1,205 @@
+
+TIKI
+setup
+{
+	// DO NOT MODIFY THIS BLOCK!!!	
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{	
+		 cache flash1.spr
+		 cache smoke_dyn_01.spr
+		  cache smoke_dyn_02.spr
+		 cache flash_bang1001.spr
+		 cache smoke1.spr
+		 cache smoke_single_1drk.spr
+		 cache smoke_single_1.spr
+		 cache smoke_white1.spr
+		 cache wake_froth.spr
+		 
+	}
+}		
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		entry originspawn
+		(
+			count 1
+			count2 1
+			model flash_bang1001.spr
+			alpha 0.667
+			color 1 1 1
+			scale 10
+			scaley 10
+			life 0.1 0
+			lockscale 5
+			randvel 0 0 range 1000 1000
+			offset crandom -12 crandom -12 0
+			fadedelay 0.1
+			sprite_lighting 0.25
+		)
+		entry originspawn
+		(
+			count 1
+			count2 1
+			model flash1.spr
+			color 1 1 1
+			scale 20
+			scaley 20
+			life 0.3 0
+			scalerate 5
+			scaleratey 5
+			fadedelay 0.1
+		)
+		entry originspawn
+		(
+			count 3
+			count2 1
+			model smoke1.spr
+			color 0.6 0.6 0.6
+			scale 2
+			scaley 2
+			life 0.3 0
+			offsetalongaxis range -200 250 0 range 130 160
+			fadedelay 0.1
+		)
+		entry originspawn
+		(
+			count 3
+			count2 1
+			model smoke_single_1drk.spr
+			color 0.6 0.6 0.6
+			life 10 0
+			scalerate 0.5
+			scaleratey 0.5
+			randvelaxis range -2000 3000 random 1000 1000
+			friction 15
+			offsetalongaxis range -200 200 0 100
+			avelocity 0 0 range -15 15
+			fadedelay 3
+		)
+		entry originspawn
+		(
+			count 4
+			count2 1
+			model smoke_dyn_01.spr
+			color 0.278 0.256 0.156
+			scale 3
+			scaley 3
+			life 10 0
+			scalerate 0.25
+			scaleratey 0.25
+			offsetalongaxis range -300 400 0 0
+			fadedelay 3
+		)
+		entry originspawn
+		(
+			count 4
+			count2 1
+			model smoke_dyn_02.spr
+			color 0.5 0.4 0.4
+			scale 2
+			scaley 2
+			life 7 0
+			scalerate 0.3
+			scaleratey 0.3
+			randvel range -6000 8000 0 range 6000 1000
+			accel 0 0 1000
+			friction 18
+			avelocity 0 0 range -30 30
+			fadedelay 3
+		)
+		entry originspawn
+		(
+			count 3
+			count2 1
+			model smoke_single_1.spr
+			color 0.478 0.433 0.378
+			scale 2
+			scaley 2
+			life 7 0
+			scalerate 0.3
+			scaleratey 0.3
+			randvel 0 range 5000 8000 range 7500 9000
+			accel 0 0 -2000
+			friction 20
+			avelocity 0 0 range -50 75
+			fadedelay 3
+		)
+		entry originspawn
+		(
+			count 1
+			model smoke_white1.spr
+			color .6 .6 .6
+			scale 4
+			scaley 4
+			life 2 0
+			scalerate 1
+			scaleratey 1
+			offsetalongaxis 0 0 -400
+			fadedelay 0.5
+			sprite_oriented
+		)
+		entry originspawn
+		(
+			count 1
+			count2 1
+			model wake_froth.spr
+			color 1 1 1
+			scale 6
+			scaley 6
+			life 5 0
+			scalerate 1
+			scaleratey 1
+			offsetalongaxis 0 0 -400
+			fadedelay 0.5
+			sprite_oriented
+		)
+		entry originspawn
+		(
+			count 10
+			model smoke_single_1.spr
+			color 0.4 0.4 0.3
+			life 12 14
+			scalerate 0.25
+			scaleratey 0.25
+			randvel 0 -500 0
+			accel 0 0 25
+			friction 2
+			offset range 600 1000 0 -100
+			fadedelay 4
+			fadein 2
+		)
+
+		entry originspawn
+		(
+			count 3
+			count2 1
+			model smoke_single_1drk.spr
+			color 0.478 0.389 0.322
+			life 8 0
+			scalerate 0.2
+			scaleratey 0.2
+			randvelaxis 3000 -3000 -1500
+			accel 0 0 -150
+			friction 17
+			offsetalongaxis 0 0 100
+			avelocity 0 0 range -15 15
+			fadedelay 3
+		)
+
+		}
+	}
+}

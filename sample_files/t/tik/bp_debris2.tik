@@ -1,0 +1,47 @@
+TIKI
+setup
+{
+	scale .5		// Set default scale to 16/30.5 since world is in 16 units per foot and model is in cm's
+	path models/fx/destruction/bp_debris1
+	skelmodel bp_debris1.skd
+	surface material1 shader bp_debris2
+}
+
+init
+{
+	server
+	{
+//		classname ScriptModel
+//		setsize "-4 -4 0" "4 4 4"
+//		seatoffset "-14 0 24"
+//		gravity 1.5
+//		vehiclespeed 800
+	}
+client
+	{
+		originemitter slagtrail
+		(
+				model vsssource.spr
+//				velocity 100
+//				friction 0.25
+				randvel crandom 10 crandom 10 crandom 10
+				accel 0 0 50
+				spawnrate 7
+				color .3 .3 .3
+				alpha 0.3
+				scalemin 0.3
+				scalemax 0.5
+				scalerate 1.0
+				life 3.5
+				fade
+		)
+    	}
+}
+
+animations
+{
+	idle     bp_debris1.skc
+}
+
+/*QUAKED fx_misc_barreldebris2(0.0 0.75 0.5) (-16 -16 0) (8 16 56)
+*/

@@ -1,0 +1,53 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+		svflags +broadcast
+	}
+	client
+	{
+		cache sunray2.spr
+		
+
+		originemitter rays
+		(
+ 			spawnrange 150000
+			spawnrate 22
+			model sunray2.spr
+			alpha 0.378
+			color 0.411 0.478 0.667
+			life 6 0
+			uspeed 0.059
+			vspeed -0.059
+			uscale 0.5
+			vscale 0.5
+			randvelaxis range -600 150 crandom 400 range -300 1700
+			offset crandom 3000 crandom 3000 0
+			angles range 110 5 0 0
+			scalemin 36
+			scaleminy 0.5
+			scalemax 56
+			scalemaxy 3
+			fade
+			fadein 1
+			sprite_parallel_longaxis
+		)
+	}
+}		
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}
+//coords for 4_1_intro are x -4605, y 11555, z -3212

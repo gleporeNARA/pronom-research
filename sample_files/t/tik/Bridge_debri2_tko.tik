@@ -1,0 +1,50 @@
+// This is a template tiki file for converting emitters generated with the In-Game editor (IGE)
+// Copy and paste this file, name it appropriately and fill in the proper fields (see TODO)
+
+TIKI
+setup
+{
+	// DO NOT MODIFY THIS BLOCK!!!	
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		// TODO
+		// Cache the sprite info here, example:		
+			cache crate_chunks02.gr2
+			
+
+	}
+}
+		
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		ENTRY originspawn
+		(
+			count 10
+			model models/fx/debris/crate/crate_chunks02.gr2
+			color 1 1 1
+			life 8 0
+			randvel range -100 100 range -100 100 range 1200 3000
+			accel 0 0 -1000
+			avelocity 0 0 range -200 200
+		)
+
+
+		}
+	}
+}

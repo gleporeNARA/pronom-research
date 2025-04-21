@@ -1,0 +1,133 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 20203.20.1110.1623                               -->
+<datasource formatted-name='federated.0hgpf0j1fdpvv316shikk0mmdlec' inline='true' source-platform='win' version='18.1' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <document-format-change-manifest>
+    <_.fcp.ObjectModelEncapsulateLegacy.true...ObjectModelEncapsulateLegacy />
+    <_.fcp.ObjectModelTableType.true...ObjectModelTableType />
+    <_.fcp.SchemaViewerObjectModel.true...SchemaViewerObjectModel />
+  </document-format-change-manifest>
+  <connection class='federated'>
+    <named-connections>
+      <named-connection caption='Sales Target (US)' name='excel-direct.1sj83no0zjgqcn11x69nn1f7rbzm'>
+        <connection class='excel-direct' cleaning='no' compat='no' dataRefreshTime='' filename='C:/Users/eengland/Desktop/tds-sample.tds Files/Data/Superstore/Sales Target (US).xlsx' interpretationMode='0' password='' server='' validate='no' />
+      </named-connection>
+    </named-connections>
+    <_.fcp.ObjectModelEncapsulateLegacy.false...relation connection='excel-direct.1sj83no0zjgqcn11x69nn1f7rbzm' name='Sheet1' table='[Sheet1$]' type='table'>
+      <columns gridOrigin='A1:D4604:no:A1:D4604:0' header='yes' outcome='6'>
+        <column datatype='string' name='Category' ordinal='0' />
+        <column datatype='date' name='Order Date' ordinal='1' />
+        <column datatype='string' name='Segment' ordinal='2' />
+        <column datatype='integer' name='Sales Target' ordinal='3' />
+      </columns>
+    </_.fcp.ObjectModelEncapsulateLegacy.false...relation>
+    <_.fcp.ObjectModelEncapsulateLegacy.true...relation connection='excel-direct.1sj83no0zjgqcn11x69nn1f7rbzm' name='Sheet1' table='[Sheet1$]' type='table'>
+      <columns gridOrigin='A1:D4604:no:A1:D4604:0' header='yes' outcome='6'>
+        <column datatype='string' name='Category' ordinal='0' />
+        <column datatype='date' name='Order Date' ordinal='1' />
+        <column datatype='string' name='Segment' ordinal='2' />
+        <column datatype='integer' name='Sales Target' ordinal='3' />
+      </columns>
+    </_.fcp.ObjectModelEncapsulateLegacy.true...relation>
+    <metadata-records>
+      <metadata-record class='capability'>
+        <remote-name />
+        <remote-type>0</remote-type>
+        <parent-name>[Sheet1]</parent-name>
+        <remote-alias />
+        <aggregation>Count</aggregation>
+        <contains-null>true</contains-null>
+        <attributes>
+          <attribute datatype='integer' name='context'>0</attribute>
+          <attribute datatype='string' name='gridOrigin'>&quot;A1:D4604:no:A1:D4604:0&quot;</attribute>
+          <attribute datatype='boolean' name='header'>true</attribute>
+          <attribute datatype='integer' name='outcome'>6</attribute>
+        </attributes>
+      </metadata-record>
+      <metadata-record class='column'>
+        <remote-name>Category</remote-name>
+        <remote-type>130</remote-type>
+        <local-name>[Category]</local-name>
+        <parent-name>[Sheet1]</parent-name>
+        <remote-alias>Category</remote-alias>
+        <ordinal>0</ordinal>
+        <local-type>string</local-type>
+        <aggregation>Count</aggregation>
+        <contains-null>true</contains-null>
+        <collation flag='1' name='LEN_RUS_S2' />
+        <attributes>
+          <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+        </attributes>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Sheet1_66AF038055174B6D8F7445FD0BC80ED3]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+      </metadata-record>
+      <metadata-record class='column'>
+        <remote-name>Order Date</remote-name>
+        <remote-type>7</remote-type>
+        <local-name>[Order Date]</local-name>
+        <parent-name>[Sheet1]</parent-name>
+        <remote-alias>Order Date</remote-alias>
+        <ordinal>1</ordinal>
+        <local-type>date</local-type>
+        <aggregation>Year</aggregation>
+        <contains-null>true</contains-null>
+        <attributes>
+          <attribute datatype='string' name='DebugRemoteType'>&quot;DATE&quot;</attribute>
+        </attributes>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Sheet1_66AF038055174B6D8F7445FD0BC80ED3]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+      </metadata-record>
+      <metadata-record class='column'>
+        <remote-name>Segment</remote-name>
+        <remote-type>130</remote-type>
+        <local-name>[Segment]</local-name>
+        <parent-name>[Sheet1]</parent-name>
+        <remote-alias>Segment</remote-alias>
+        <ordinal>2</ordinal>
+        <local-type>string</local-type>
+        <aggregation>Count</aggregation>
+        <contains-null>true</contains-null>
+        <collation flag='1' name='LEN_RUS_S2' />
+        <attributes>
+          <attribute datatype='string' name='DebugRemoteType'>&quot;WSTR&quot;</attribute>
+        </attributes>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Sheet1_66AF038055174B6D8F7445FD0BC80ED3]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+      </metadata-record>
+      <metadata-record class='column'>
+        <remote-name>Sales Target</remote-name>
+        <remote-type>20</remote-type>
+        <local-name>[Sales Target]</local-name>
+        <parent-name>[Sheet1]</parent-name>
+        <remote-alias>Sales Target</remote-alias>
+        <ordinal>3</ordinal>
+        <local-type>integer</local-type>
+        <aggregation>Sum</aggregation>
+        <contains-null>true</contains-null>
+        <attributes>
+          <attribute datatype='string' name='DebugRemoteType'>&quot;I8&quot;</attribute>
+        </attributes>
+        <_.fcp.ObjectModelEncapsulateLegacy.true...object-id>[Sheet1_66AF038055174B6D8F7445FD0BC80ED3]</_.fcp.ObjectModelEncapsulateLegacy.true...object-id>
+      </metadata-record>
+    </metadata-records>
+  </connection>
+  <aliases enabled='yes' />
+  <_.fcp.ObjectModelTableType.true...column caption='Sales Target (US)' datatype='table' name='[__tableau_internal_object_id__].[Sheet1_66AF038055174B6D8F7445FD0BC80ED3]' role='measure' type='quantitative' />
+  <layout _.fcp.SchemaViewerObjectModel.false...dim-percentage='0.5' _.fcp.SchemaViewerObjectModel.false...measure-percentage='0.4' dim-ordering='alphabetic' measure-ordering='alphabetic' show-structure='true' />
+  <semantic-values>
+    <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+  </semantic-values>
+  <_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+    <objects>
+      <object caption='Sales Target (US)' id='Sheet1_66AF038055174B6D8F7445FD0BC80ED3'>
+        <properties context=''>
+          <relation connection='excel-direct.1sj83no0zjgqcn11x69nn1f7rbzm' name='Sheet1' table='[Sheet1$]' type='table'>
+            <columns gridOrigin='A1:D4604:no:A1:D4604:0' header='yes' outcome='6'>
+              <column datatype='string' name='Category' ordinal='0' />
+              <column datatype='date' name='Order Date' ordinal='1' />
+              <column datatype='string' name='Segment' ordinal='2' />
+              <column datatype='integer' name='Sales Target' ordinal='3' />
+            </columns>
+          </relation>
+        </properties>
+      </object>
+    </objects>
+  </_.fcp.ObjectModelEncapsulateLegacy.true...object-graph>
+</datasource>

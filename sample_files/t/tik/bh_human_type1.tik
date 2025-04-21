@@ -1,0 +1,51 @@
+TIKI
+setup
+{
+	scale .5
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	server
+	{
+	}
+	client
+	{
+		cache fluffystuff.spr
+		
+		sfx originspawn
+		(
+			count 1
+			model fluffystuff.spr
+			alpha 0.6
+			color 0.733 0.178 0.144
+			scale 0.01
+			scaley 0.01
+			life 0.25 0
+			scalerate 6
+			scaleratey 6
+			radius 12
+			lockscale 1
+			randvel crandom 45 crandom 45 crandom 45
+			accel 0 0 -300
+			angles 0 0 crandom -360
+			avelocity 0 0 range -2 1
+			scalemin 0.1
+			scaleminy 0.1
+			scalemax 0.2
+			scalemaxy 0.2
+			fade
+			circle
+			sprite_lighting 0.37
+			texture_numframes 4.00
+		)
+	}
+}
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}

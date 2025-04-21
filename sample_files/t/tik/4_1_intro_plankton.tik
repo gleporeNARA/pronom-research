@@ -1,0 +1,49 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+		svflags +broadcast
+	}
+	client
+	{
+		cache plankton.spr
+		
+ 		originemitter plankton
+ 		(
+ 			spawnrange 150000
+ 			spawnrate 4
+ 			model plankton.spr
+ 			alpha 0.711
+ 			color 0.511 0.722 0.733
+ 			life 7 0
+ 			lockscale 1
+ 			randvelaxis range -1300 -4600 range -1400 -400 0
+ 			offsetalongaxis crandom 2500 crandom 2500 crandom 800
+ 			angles 0 0 crandom 360
+ 			avelocity 0 0 crandom 24
+ 			scalemin 7
+ 			scaleminy 7
+ 			scalemax 14
+ 			scalemaxy 14
+ 			fade
+ 			fadein 2
+		)
+	}
+}		
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}
+//coords for 4_1_intro are x -3153, y 13730, z -5453

@@ -1,0 +1,53 @@
+TIKI
+setup
+{
+	scale .3
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		cache body1_32fr_afge.spr
+	}
+}
+
+
+animations
+{
+	idle dummy2.skc
+	{
+		client
+		{
+			entry originspawn
+			(
+				count 50
+				model body1_32fr_afge.spr
+				color 0.744 0.733 0.722
+				scale 0.27
+				scaley 0.46
+				life 1000 0
+				randvelaxis range 45 67 crandom 2 0
+				offsetalongaxis crandom 400 crandom 400 0
+				angles 0 0 90
+				fade
+				sprite_parallel_upright
+				sprite_lighting 0.41
+				texture_framerate 0.50
+				texture_numframes 32.00
+				sprite_origin 0.5 0
+			)
+		}
+		server
+		{
+			last commanddelay 1 remove
+		}
+	}
+}

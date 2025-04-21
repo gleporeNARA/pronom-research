@@ -1,0 +1,59 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	server
+	{
+	}
+	client
+	{
+		cache wake_froth2.spr
+          	cache models/vfx/watertrail_impact.tik
+		
+		delayedsfx 0.1 originspawn
+		(
+			spawnrange 1000
+			count 1
+			model models/vfx/watertrail_impact.tik
+			color 1 1 1
+			life 0.1 0
+			globalscale .5
+			randvel crandom 100 crandom 100 range 300 600
+		)
+		sfx originspawn
+		(
+			spawnrange 6000
+			count 2
+			model wake_froth2.spr
+			alpha 0.766
+			color 1 1 1
+			scale 0.1
+			scaley 0.06
+			life 0.4 0
+			scalerate 90
+			scaleratey 22
+			globalscale 1
+			//randvelaxis 10 200 range 0 range 0
+			accel 0 0 500
+			avelocity 0 0 crandom -1800
+			scalemin 0.01
+			scalemax 0.04
+			fade
+			align
+			sprite_parallel_upright
+		)
+			
+	}
+}
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}

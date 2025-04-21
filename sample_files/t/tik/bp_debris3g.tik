@@ -1,0 +1,25 @@
+TIKI
+setup
+{
+	scale .5			// Set default scale to 16/30.5 since world is in 16 units per foot and model is in cm's
+	path models/fx/destruction/bp_debris1
+	skelmodel bp_debris1.skd
+	surface material1 shader bp_debris3g
+}
+
+init
+{
+	server
+	{
+//		classname ScriptModel
+//		setsize "-4 -4 0" "4 4 4"
+//		seatoffset "-14 0 24"
+//		gravity 1.5
+//		vehiclespeed 800
+	}
+}
+
+animations
+{
+	idle     bp_debris1.skc
+}

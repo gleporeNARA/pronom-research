@@ -1,0 +1,48 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	server
+	{
+	}
+	client
+	{
+		//cache some stuff used in this effect
+		cache dirtSmoke.spr
+		cache dirtSolid.spr
+
+	sfx originspawn
+	(
+	animateonce
+	model models/vfx/5_6_Grenade_Explosion/particles/KAbulletHitSmoke.particle
+	count 1
+	scalemin .5
+	scalemax 1
+	angles crandom 7 crandom 360 crandom 7
+	)
+	sfx originspawn
+	(
+	animateonce
+	model models/vfx/5_6_Grenade_Explosion/particles/bulletHitSolid7.particle
+	count 1
+	scalemin .5
+	scalemax 1
+	angles crandom 7 crandom 360 crandom 7
+	)
+	
+	
+			
+	}
+}
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}

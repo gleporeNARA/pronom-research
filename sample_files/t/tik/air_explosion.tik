@@ -1,0 +1,237 @@
+// This is a template tiki file for converting emitters generated with the In-Game editor (IGE)
+// Copy and paste this file, name it appropriately and fill in the proper fields (see TODO)
+
+TIKI
+setup
+{
+	// DO NOT MODIFY THIS BLOCK!!!	
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		// TODO
+		// Cache the sprite info here, example:		
+		 cache granite_impact_tile.spr
+		 cache flash_bang1001.spr
+		 cache smoke_dyn_01.spr
+		// The name of the sprite is given in the IGE under 'general' tab in the 'model' field
+
+	}
+}
+		
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		// TODO
+		// PASTE contents of txt file here (generated from IGE)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 3
+			count2 4
+			model flash_bang1001.spr
+			color 0.511 0.523 0.5
+			scale 2
+			scaley 2
+			life 0.1 0
+			randvel crandom -400 crandom -400 random 300
+			offset crandom -12 crandom -12 crandom -12
+		)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 3
+			count2 5
+			model flash_bang1001.spr
+			color 0.875 0.807 0.784
+			scale 0.1
+			scaley 0.1
+			life 2 0
+			scalerate 1
+			scaleratey 1
+			randvelaxis crandom -1900 crandom -1900 range 2300 1000
+			accel 0 0 -500
+			offsetalongaxis crandom -5 crandom -5 0
+			fade
+			alignstretch 0.01			sprite_oriented
+		)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 5
+			count2 7
+			model flash_bang1001.spr
+			color 1 1 1
+			scale 0.1
+			scaley 0.1
+			life 2.5 0
+			randvelaxis crandom -900 crandom -900 random 1000
+			accel 0 0 -300
+			sphere
+		)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 1
+			count2 7
+			model flash_bang1001.spr
+			color 0.193 0.148 0.148
+			scale 4
+			scaley 4
+			life 0.1 0
+			scalerate 10
+			scaleratey 10
+			randvel 0 0 range 1900 1900
+			offset crandom -10 crandom -10 0
+			offsetalongaxis 0 0 range -30 -30
+			fade
+			sprite_lighting 0.25
+		)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 1
+			count2 7
+			model flash_bang1001.spr
+			color 0.193 0.148 0.148
+			scale 4
+			scaley 4
+			life 0.1 0
+			scalerate 10
+			scaleratey 10
+			randvel 0 0 range -1900 -1900
+			offset crandom -10 crandom -10 0
+			offsetalongaxis 0 0 range -30 -30
+			fade
+			sprite_lighting 0.25
+		)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 2
+			count2 2
+			model granite_impact_tile.spr
+			alpha 0.67
+			color 0.727 0.659 0.614
+			scale 0.1
+			scaley 0.1
+			life 0.3 0
+			scalerate 221
+			scaleratey 221
+			lockscale 5
+			randvel crandom -50 crandom -50 range 50 100
+			accel 0 0 -200
+			friction 4
+			angles 0 0 crandom -360
+			fade
+			texture_framelock 2
+			texture_numframes 4.00
+		)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 5
+			count2 7
+			model granite_impact_tile.spr
+			color 1 1 1
+			scale 0.1
+			scaley 0.1
+			life 2 0
+			lockscale 5
+			randvel crandom -900 crandom -900 range 900 1200
+			avelocity 0 0 crandom -45
+			scalemin 0.1
+			scaleminy 0.1
+			scalemax 0.2
+			scalemaxy 0.2
+			fade
+			randomroll
+			texture_framelock 4
+			texture_numframes 4.00
+		)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 4
+			count2 5
+			model granite_impact_tile.spr
+			alpha 0.818
+			color .5 .5 .5
+			life 1.5 0
+			scalerate 4
+			scaleratey 4
+			lockscale 5
+			randvel crandom -1140 crandom -1140 0
+			accel 0 0 -800
+			friction 4
+			angles 0 0 crandom -360
+			avelocity 0 0 crandom -12
+			fade
+			texture_framelock 3
+			texture_numframes 4.00
+		)
+
+		entry originspawn
+		(
+			spawnrange 3800
+			count 1
+			count2 12
+			model smoke_dyn_01.spr
+			color 0.15 0.15 0.15
+			life 0.5 0
+			scalerate 4
+			scaleratey 4
+			lockscale 1
+			uspeed 0.125
+			randvelaxis 40 0 0
+			friction 5
+			offset 0 0 -34
+			angles 0 0 crandom -360
+			fade
+			sprite_lighting 0.25
+		)
+		entry originspawn
+		(
+			count 0
+			count2 5
+			model none
+			color 1 1 1
+			life 1 0
+			fadedelay 0.1
+		)
+		entry originspawn
+		(
+			count 0
+			count2 5
+			model none
+			color 1 1 1
+			life 1 0
+			fadedelay 0.1
+		)
+		entry originspawn
+		(
+			count 0
+			count2 5
+			model none
+			color 1 1 1
+			life 1 0
+			fadedelay 0.5
+		)
+		
+
+		}
+	}
+}

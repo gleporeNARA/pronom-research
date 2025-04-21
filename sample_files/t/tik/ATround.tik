@@ -1,0 +1,50 @@
+TIKI
+
+//used for anti-tank rifles
+
+
+setup
+{
+	scale 1.0	// Needs to be unnaturally large so it is visible
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+
+init
+{
+	server
+	{
+		rendereffects 		+dontdraw
+		classname		Projectile
+		setsize			"-4 -4 -4" "4 4 4"
+		speed			6000
+		addownervelocity	0
+		hitdamage		25000
+		life			20.0
+		meansofdeath		explosion
+//		impactmarkshader	blastmark
+//		impactmarkradius	50
+//		impactmarkorientation	random
+		explosionmodel		models/fx/explosionTIGERshell.tik
+//		notouchdamage
+		explodeontouch
+		smashthroughglass 64
+//		gravity 0.8
+//		addvelocity 0 0 200
+//		avelocity random 90 random 90 60
+		knockback			500
+//		dlight 0.5 0.2 0.1 256 // red green blue radius
+
+		cache blastmark.spr
+		cache models/fx/explosionTIGERshell.tik
+	}
+	client
+	{
+	}
+}
+
+animations
+{
+	idle dummy3.skc
+}

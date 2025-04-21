@@ -1,0 +1,44 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	client
+	{
+		//cache some stuff used in this effect
+		cache models/fx/barrel_oil_long.tik
+		cache barrel_oil_splat.spr
+
+		// single splatting piece
+		sfx originspawn
+		(
+			model models/fx/barrel_oil_long.tik
+			align
+			alpha 1.0
+			count 1
+			life 1.0
+//			fadedelay 0.75
+            scalemin 2.0
+            scalemax 2.5
+            scalerate 1.5
+			velocity 64
+			accel 0 0 -800
+			collision
+			dietouch
+//			bouncedecal 
+//			decalshader barrel_oil_splat
+//			decalradius 24
+		)
+	}
+}
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc
+}

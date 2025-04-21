@@ -1,0 +1,66 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+init
+{
+	server
+	{
+		classname Animate
+		rendereffects +dontdraw
+		notsolid
+		life 0.1
+		anim idle
+	}
+	client
+	{
+		cache explosion_core2.spr
+		cache shock_ring.spr
+	}
+}
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		entry sound expl_flak_near
+		entry originspawn
+		(
+			count 2
+			model explosion_core2.spr
+			color 1 1 1
+			life 0.1 0
+			scalerate 24
+			scaleratey 24
+			globalscale 2
+			uscale 1
+			vscale 1
+			angles 0 0 crandom 360
+			fade
+		)
+		entry originspawn
+		(
+			count 1
+			model shock_ring.spr
+			alpha 0.507
+			color 1 1 1
+			life 0.1 0
+			scalerate 533
+			scaleratey 533
+			uscale 1
+			vscale 1
+			fade
+		)
+		}
+		server
+		{
+			last commanddelay 1 remove
+		}
+	}
+}
+
+//8 particles

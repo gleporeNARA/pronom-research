@@ -1,0 +1,56 @@
+TIKI
+setup
+{
+	scale .3
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	server
+	{
+	}
+	client
+	{
+		cache rice_single.spr
+		cache rice_cluster.spr
+		
+		sfx originspawn 
+		(
+			count 5
+			model rice_single.spr
+			color 1 1 1
+			collision
+			bouncefactor 0.3
+			scale 0.035
+			scaley 0.1
+			life 1.5 0
+			randvelaxis range 23 34 range -23 64 range -200 -250
+			accel 0 0 -200
+			fade
+			randomroll
+		)
+		sfx originspawn 
+		(
+			count 5
+			model rice_single.spr
+			color 1 1 1
+			//collision
+			//bouncefactor 0.3
+			scale 0.035
+			scaley 0.1
+			life 1.5 0
+			randvelaxis range 23 34 range -23 64 range -200 -250
+			accel 0 0 -200
+			fade
+			randomroll
+		)
+	}
+}
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc
+}

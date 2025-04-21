@@ -1,0 +1,51 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		cache flash_bang1001_2sd.spr
+		
+		originemitter aa_tracer
+		(
+			spawnrate 12
+			model flash_bang1001_2sd.spr
+			color 1 0.852 0.398
+			scale 6
+			scaley 0.5
+			life 3 0
+			scalerate 1
+			radialvelocity 33 0 0
+			lockscale 0
+			uscale 1
+			vscale 1
+			randvelaxis 7000 0 0
+			offset 0 crandom 20 0
+			angles 0 0 90
+			avelocity crandom 33 crandom 33 0
+			align
+			sprite_oriented
+			sprite_origin 0.5 1
+		)
+
+
+	}
+}		
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}
+//models/vfx/hellcat_extended.tik

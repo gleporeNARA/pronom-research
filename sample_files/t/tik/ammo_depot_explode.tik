@@ -1,0 +1,216 @@
+// This is a template tiki file for converting emitters generated with the In-Game editor (IGE)
+// Copy and paste this file, name it appropriately and fill in the proper fields (see TODO)
+
+TIKI
+setup
+{
+	// DO NOT MODIFY THIS BLOCK!!!	
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		cache dry_debris_palm2sd.spr
+		cache smoke_single_1.spr
+		cache flash_bang1001.spr
+		cache fire_dyn_01.spr
+		cache ammocrate_gibs.spr
+		cache dirt2
+	}
+}
+		
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		entry originspawn
+		(
+			count 15
+			count2 6
+			model dry_debris_palm2sd.spr
+			color 0.727 0.739 0.761
+			life 5 0
+			randvelaxis crandom -2000 crandom -2000 range 3600 4000
+			accel 0 0 -3000
+			friction 4
+			angles 0 0 crandom -360
+			avelocity range 56 -100 range 23 45 range 75 123
+			fade
+			sprite_oriented
+			sprite_lighting 0.25
+			texture_framelock 1
+			texture_numframes 4.00
+		)
+
+		entry originspawn
+		(
+			count 8
+			count2 3
+			model flash_bang1001_2sd.spr
+			color 0.875 0.807 0.784
+			scale 0.1
+			scaley 0.1
+			life 2 0
+			scalerate 1
+			scaleratey 1
+			randvelaxis crandom -1900 crandom -1900 range 2300 1000
+			accel 0 0 -500
+			offsetalongaxis crandom -5 crandom -5 0
+			fade
+			alignstretch 0.01			sprite_oriented
+		)
+
+		entry originspawn
+		(
+			count 10
+			count2 4
+			model smoke_single_1.spr
+			color 0.625 0.58 0.511
+			varycolor
+			scale 0.3
+			scaley 0.3
+			life 2 0
+			scalerate 12
+			scaleratey 12
+			radius 50
+			lockscale 5
+			randvel crandom -600 crandom -600 range 100 1000
+			accel 0 0 -700
+			friction 2.5
+			offset crandom -143 crandom -143 random 46
+			angles 0 0 crandom -90
+			avelocity 0 0 crandom -2
+			fadedelay 0.1
+		)
+
+		entry originspawn
+		(
+			count 2
+			count2 2
+			model flash_bang1001.spr
+			alpha 0.398
+			color 1 0.659 0.398
+			scale 5
+			scaley 5
+			life 0.1 0
+			lockscale 5
+			randvel crandom -2400 crandom -2400 range 200 2400
+			friction 9
+			offset crandom -23 crandom -23 crandom -23
+			fadedelay 0.1
+			sprite_lighting 0.25
+		)
+
+		entry originspawn
+		(
+			count 1
+			count2 1
+			model flash_bang1001.spr
+			alpha 0.5
+			color 1 1 1
+			scale 10
+			scaley 10
+			life 0.1 0
+			lockscale 5
+			randvel 0 0 range 1000 1000
+			offset crandom -12 crandom -12 0
+			fadedelay 0.1
+			sprite_lighting 0.25
+		)
+
+		entry originspawn
+		(
+			count 3
+			count2 6
+			model fire_dyn_01.spr
+			color 1 1 1
+			life 2 0
+			scalerate 23
+			scaleratey 23
+			scalecap 2
+			scalecap_y 2
+			radius 123
+			uvrotate 31
+			randvel crandom 230 crandom 230 0
+			friction 1.5
+			fadedelay 0.5
+			circle
+		)
+
+		entry originspawn
+		(
+			count 1
+			count2 6
+			model flash_bang1001.spr
+			color 0.193 0.148 0.148
+			scale 4
+			scaley 4
+			life 0.1 0
+			scalerate 10
+			scaleratey 10
+			lockscale 2
+			randvel 0 0 range 1900 1900
+			offset crandom -10 crandom -10 0
+			offsetalongaxis 0 0 range -30 -30
+			fadedelay 0.5
+			sprite_lighting 0.25
+		)
+		entry originspawn
+		(
+			spawnrange 3800
+			count 3
+			count2 4
+			model dirt02.spr
+			alpha 0.6
+			color 0.733 0.667 0.378
+			life 5 0
+			scalerate 1.5
+			scaleratey 1.5
+			velocity 10
+			randvel range 50 -50 range 50 -50 range 500 600
+			accel 0 0 -400
+			friction 1
+			offset range 30 -30 range 30 -30 0
+			avelocity 0 0 range 20 -20
+			fadedelay 3
+			inwardsphere
+			sprite_parallel_upright
+			sprite_lighting 0.82
+		)
+
+		entry originspawn
+		(
+			count 10
+			model ammocrate_gibs.spr
+			color 0.784 0.784 0.807
+			scale 0.3
+			scaley 0.3
+			life 3 0
+			radius -34
+			lockscale 4
+			randvelaxis 0 crandom 300 range 1200 800
+			accel 0 0 -2000
+			angles 0 0 crandom 360
+			avelocity 0 0 range -1245 2590
+			scalemin 0.06
+			scaleminy 0.06
+			scalemax 0.1
+			scalemaxy 0.1
+			sphere
+			texture_framelock 2
+			texture_numframes 4.00
+		)
+		}
+	}
+}

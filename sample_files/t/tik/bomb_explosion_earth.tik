@@ -1,0 +1,217 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server  
+	{
+		classname Explosion
+//		ghost
+//		svflags +sendonce
+		rendereffects +dontdraw
+		notsolid
+//		radiusdamage 125
+//		radius 300
+		radiusdamage 110
+		knockback 200
+		radius 350
+		meansofdeath explosion
+		life 0.1
+	}
+	client
+	{
+		//cache some stuff used in this effect
+		
+		cache dirt_tiles.spr
+		cache smoke_single_1.spr
+		cache flash_bang1001.spr
+		cache fire_spheric_single1001.spr
+		cache dirt_tiles.spr
+		cache smoke_single_2.spr
+		cache granite_impact_tile.spr
+		cache models/fx/bomb_explosion_earth_part2.tik
+		cache models/fx/3fuel_tank_explosion.tik
+	}
+}
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy3.skc 
+	{
+        client
+        {
+	    entry sound explode_mortar_dirt
+	    entry originspawn
+	    (
+		spawnrange 30000
+		count 1
+		anim idle
+		life 1
+		model models/fx/bomb_explosion_earth_part2.tik
+	    )
+	    entry originspawn
+	    (
+		spawnrange 30000
+		count 1
+		anim idle
+		life 1
+		model models/fx/3fuel_tank_explosion2.tik
+	    )
+	    enter commanddelay 0.1 originspawn
+	    (
+		spawnrange 30000
+		count 1
+		count2 1
+		model dirt_tiles.spr
+		color 1 1 1
+		scale 0.1
+		scaley 0.1
+		life 1 0
+		scalerate 8
+		scaleratey 8
+		radius 20
+		globalscale 1
+		randvel crandom -10 crandom -10 range 100 900
+		accel 0 0 -1500
+		offset crandom -20 crandom -20 0
+		angles 0 0 crandom -360
+		avelocity 0 0 crandom -10
+		fade
+		sphere
+		texture_framelock 4
+		texture_numframes 4.00
+	    )
+	    enter commanddelay 0.1 originspawn
+	    (
+		spawnrange 30000
+		count 3
+		count2 3
+		model dirt_tiles.spr
+		color 1 1 1
+		scale 0.1
+		scaley 0.1
+		life 1 0
+		scalerate 4
+		scaleratey 7
+		globalscale 1
+		randvel crandom -200 crandom -200 range 300 1000
+		accel 0 0 -900
+		friction 1
+		angles 0 0 crandom -360
+		avelocity 0 0 crandom -5
+		fade
+		sprite_lighting 0.25
+		texture_framelock 3
+		texture_numframes 4.00
+	    )
+	    enter commanddelay 0.1 originspawn
+	    (
+		spawnrange 30000
+		count 9
+		count2 5
+		model smoke_single_1.spr
+		alpha 0.83
+		color 0.523 0.455 0.352
+		varycolor
+		scale 0.4
+		scaley 0.4
+		life 1 1
+		scalerate 7
+		scaleratey 7
+		radius 56
+		globalscale 1
+		randvel crandom -200 crandom -200 range 400 1900
+		accel 0 0 100
+		friction 4
+		offset 0 0 range 4 200
+		offsetalongaxis range 34 -64 range 34 -64 0
+		angles 0 0 range 60 -180
+		avelocity 0 0 crandom -5
+		scalemin 0.4
+		scaleminy 0.4
+		scalemax 0.6
+		scalemaxy 0.6
+		fade
+		circle
+		sprite_lighting 0.25
+		texture_framelock 0
+	    )
+		entry commanddelay 0.2 originspawn
+		(
+			spawnrange 8000
+			count 4
+			count2 6
+			model g_mortar_dirt.spr
+			color 0.611 0.602 0.568
+			life 2 0
+			scalerate 1
+			scaleratey 3
+			radialvelocity 0 0 321
+			lockscale 1
+			randvelaxis 0 0 random 500
+			accel 0 0 -1000
+			offsetalongaxis 0 0 range -6 -19
+			angles 0 0 crandom -36
+			scalemin 0.9
+			scaleminy 0.9
+			scalemax 1
+			scalemaxy 2
+			fadedelay 0.1
+			circle
+			sprite_lighting 0.25
+			texture_framelock 0
+			sprite_origin 0 0.5
+		)
+		entry originspawn
+		(
+			spawnrange 10000
+			count 3
+			count2 2
+			model flash_bang1001.spr
+			color 0.875 0.833 0.9
+			scale 3
+			scaley 3
+			life 0.02 0
+			scalerate 4
+			scaleratey 4
+			lockscale 8
+			randvelaxis 0 0 range 100111 12421
+			friction 4.5
+			offsetalongaxis crandom 45 crandom 45 range 3 134
+			angles 0 0 crandom -360
+			avelocity 0 0 range 35 -60
+			fadedelay 0.1
+		)
+		entry originspawn
+		(
+			spawnrange 10000
+			count 1
+			count2 1
+			model flash_bang1001.spr
+			alpha 0.25
+			color 0.852 0.807 0.75
+			scale 0.1
+			scaley 0.1
+			life 0.05 0
+			scalerate 1200
+			scaleratey 1200
+			lockscale 8
+			randvel 0 0 random 3523
+			friction 21
+			offsetalongaxis crandom -33 crandom -33 range -10 -74
+			angles 0 0 crandom -360
+			fadedelay 0.5
+		)
+		}
+		server
+		{
+			last commanddelay 25 remove
+		}
+	}
+}

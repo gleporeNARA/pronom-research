@@ -1,0 +1,31 @@
+TIKI
+setup
+{
+	scale .5
+	path models/fx/dummy
+	skelmodel dummy2.skd
+}
+
+init
+{
+	server
+	{
+	}
+	client
+	{
+		cache cloth_impact_2sd.spr
+		
+		enter originspawn
+		(
+			count 1
+			life 1
+			model models/fx/bh_human_type1.tik models/fx/bh_human_type2.tik models/fx/bh_human_type3.tik models/fx/bh_human_type4.tik models/fx/bh_human_type5.tik
+		)
+	}
+}
+
+// This section is just needed to be a valid tiki file
+animations
+{
+	idle dummy2.skc 
+}

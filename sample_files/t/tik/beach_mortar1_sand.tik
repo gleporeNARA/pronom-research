@@ -1,0 +1,229 @@
+// This is a template tiki file for converting emitters generated with the In-Game editor (IGE)
+// Copy and paste this file, name it appropriately and fill in the proper fields (see TODO)
+
+TIKI
+setup
+{
+	// DO NOT MODIFY THIS BLOCK!!!	
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		// TODO
+		// Cache the sprite info here, example:		
+		 cache SMOKE_64-01.spr
+		 cache sand01.spr
+		 cache sand03.spr
+		// The name of the sprite is given in the IGE under 'general' tab in the 'model' field
+
+	}
+}
+		
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		// TODO
+		// PASTE contents of txt file here (generated from IGE)
+		enter originspawn
+		(
+			spawnrange 3800
+			count 4
+			count2 2
+			model flash1.spr
+			alpha 0.656
+			color 0.711 0.711 0.744
+			scale 2
+			scaley 4
+			life 0.1 0
+			scalerate 20
+			scaleratey 20
+			offset range 30 -30 range 30 -30 range 30 -30
+			angles 0 0 range 360 -360
+			fade
+			sprite_lighting 0.25
+		)
+		enter originspawn
+		(
+			spawnrange 3800
+			count 3
+			count2 8
+			model SMOKE_64-01.spr
+			alpha 0.956
+			color 1 1 1
+			life 7 0
+			scalerate 0.3
+			scaleratey 0.3
+			randvel range -10 35 range 0.5 20 random 50
+			angles 0 0 crandom 45
+			avelocity 0 0 range 30 -30
+			fadedelay 1
+			fadein 1
+			sprite_lighting 0.61
+		)
+		enter originspawn
+		(
+			spawnrange 3800
+			count 4
+			count2 6
+			model sand03.spr
+			color 0.789 0.778 0.8
+			scale 0.5
+			scaley 0.5
+			life 6 0
+			scalerate 1
+			scaleratey 1
+			velocity 10
+			randvel range 50 -50 range 50 -50 600
+			accel 0 0 -700
+			friction 1
+			offset range 30 -30 range 30 -30 0
+			avelocity 0 0 range 20 -20
+			fadedelay 3
+			inwardsphere
+			sprite_parallel_upright
+			sprite_lighting 0.82
+		)
+		enter originspawn
+		(
+			spawnrange 3800
+			count 4
+			count2 6
+			model sand03.spr
+			color 0.689 0.678 0.667
+			scale 0.5
+			scaley 0.5
+			life 3 0
+			scalerate 1
+			scaleratey 3
+			velocity 10
+			randvel range 50 -50 range 50 -50 range 100 50
+			accel 0 0 -400
+			friction 1
+			offset range 30 -30 range 30 -30 0
+			avelocity 0 0 range 20 -20
+			fadedelay 3
+			inwardsphere
+			sprite_parallel_upright
+			sprite_lighting 0.82
+		)
+		enter originspawn
+		(
+			spawnrange 3800
+			count 4
+			count2 6
+			model sand01.spr
+			color 0.378 0.367 0.378
+			scale 0.025
+			scaley 0.25
+			life 3 0
+			scalerate 0.2
+			scaleratey 0.6
+			randvel range 50 -50 range 50 -50 range 900 50
+			accel 0 0 -800
+			friction 1
+			offset range 30 -30 range 30 -30 0
+			angles range 30 -30 range 30 -30 range 30 -30
+			avelocity 0 0 range 20 -20
+			scalemin 0.02
+			scaleminy 0.02
+			scalemax 1
+			scalemaxy 0.3
+			fadedelay 3
+			sprite_parallel_upright
+			sprite_lighting 0.82
+		)
+		enter originspawn
+		(
+			spawnrange 3800
+			count 4
+			count2 6
+			model sand01.spr
+			color 1 1 1
+			scale 0.5
+			scaley 0.5
+			life 5 0
+			scalerate 1
+			scaleratey 0.5
+			randvel 0 0 range 350 300
+			accel 0 0 -350
+			offset range 30 -30 range 30 -30 0
+			scalemin 0.25
+			scaleminy 0.25
+			scalemax 1
+			scalemaxy 1
+			fadedelay 3
+			fadein 1
+			sprite_lighting 0.64
+		)
+		enter originspawn
+		(
+			count 0
+			count2 8
+			model none
+			color 1 1 1
+			life 1 0
+			fadedelay 1
+		)
+		enter originspawn
+		(
+			count 0
+			count2 8
+			model none
+			color 1 1 1
+			life 1 0
+			fadedelay 1
+		)
+		enter originspawn
+		(
+			count 0
+			count2 8
+			model none
+			color 1 1 1
+			life 1 0
+			fadedelay 1
+		)
+		enter originspawn
+		(
+			count 0
+			count2 8
+			model none
+			color 1 1 1
+			life 1 0
+			fadedelay 1
+		)
+		enter originspawn
+		(
+			count 0
+			count2 2
+			model none
+			color 1 1 1
+			life 1 0
+			fadedelay 1
+		)
+		enter originspawn
+		(
+			count 0
+			count2 2
+			model none
+			alpha 0.556
+			color 1 1 1
+			life 1 0
+			fadedelay 1
+		)
+
+		}
+	}
+}

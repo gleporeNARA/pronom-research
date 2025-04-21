@@ -1,0 +1,24 @@
+TIKI
+setup
+{
+	scale 1			// Set default scale to 16/30.5 since world is in 16 units per foot and model is in cm's
+	path models/fx/destruction/blockcrete
+	skelmodel blockcrete.skd
+	surface material1 shader blockcrete
+}
+
+init
+{
+	server
+	{
+		classname Object
+	}
+}
+
+animations
+{
+	idle     blockcrete.skc
+}
+
+/*QUAKED fx_debrisobject_blockcrete(0.0 0.75 0.5) (-16 -16 0) (8 16 56)
+*/

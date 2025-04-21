@@ -1,0 +1,529 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		notsolid
+		rendereffects +dontdraw
+		anim fire
+	}
+}
+
+animations
+{
+	idle	dummy3.skc
+	fire	dummy3.skc
+	{
+		client
+		{
+
+
+			
+			
+                  entry originspawn
+			(
+				animateonce
+				model models/vfx/Generic_FireBall_v1/particles/fireBall8.particle
+				count 1
+			//scale .7
+			offset 0 0 0
+			)
+			
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/Generic_FireBall_v1/particles/fireBallSub8.particle
+				count 1
+			scale .9
+			offset 0 0 -1
+			)
+			
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/Smoke10.particle
+				count 1
+			offset 0 -1 -2
+			)
+			
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/Smoke11_light.particle
+				count 1
+			offset 0 0 0
+			entry originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/airExplodeSmoke11.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+				scale .6
+				offset 0 0 0
+			)
+			entry originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/airExplode11.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+				scale .6
+				offset 0 0 0
+			)
+
+			
+			entry originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/airExpHot11.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+				scale .6
+				offset 0 0 0
+			)
+			
+			
+			/*
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Bunker_Explosion/particles/SmokeShad_v1.particle
+				scale 80
+				offset -150 0 0
+				count 1
+			)
+			
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Bunker_Explosion/particles/Smoke_v2.particle
+				scale 80
+				offset -150 0 0
+				count 1
+			)
+			*/
+			
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/groundFire7.particle
+				count 1
+			scale .7
+			offset 0 0 -40
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/embers3.particle
+				count 1
+			scale 1
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/flash4.particle
+				count 1
+				offset 0 0 6
+    				scale .3
+			)
+			
+			/*
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/Generic_FireBall_v1/particles/dirtFlood1.particle
+				count 1
+				offset 0 0 0
+    				scale 1			)
+			*/
+
+
+			/*
+                  entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/bulletHitSmoke3.particle
+				count 1
+			offset 0 0 0
+			)
+	
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/newMushCloud19.particle
+				count 1
+			scale 1.3
+			offset 0 0 0
+			)
+			
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/Smoke10.particle
+				count 1
+			offset 0 -1 -2
+			)
+	
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/MushCloud10B2.particle
+				count 1
+			scale 2
+			offset 0 0 0
+			)
+	
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/Smoke11_light.particle
+				count 1
+			offset 0 0 0
+			)
+                  entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/groundFire7.particle
+				count 1
+			scale .5
+			offset 0 0 -40
+			)       
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/groundSmoke5.particle
+				count 1
+			scale 2
+			offset 0 0 0
+			)
+	
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/Debris_v4.particle
+				count 1
+			scale 17
+			)
+	
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/embers3.particle
+				count 1
+			scale 1
+			)
+	
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/Grass_v1.particle
+				count 1
+			scale 60
+			)
+	
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/flash4.particle
+				count 1
+				offset 0 0 6
+    				scale .3
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/dirt9.particle
+				count 1	
+			scale 1.3
+			offset 0 0 0
+			)
+	
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/newMushCloud19.particle
+				count 1	
+			scale 1
+			offset 0 0 0
+			)
+			*/
+
+
+			/*
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/Generic_WaterExplosion_v1/particles/waterMist11.particle
+				count 1
+			scale .5
+			offset 0 0 0
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/Generic_WaterExplosion_v1/particles/waterExplosion11.particle
+				count 1
+			scale .5
+			offset 0 0 0
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/waterCoreSolid3.particle
+				count 1
+			scale 2
+			offset 0 0 0
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/waterSplashSolid.particle
+				count 1
+			scale 1
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/waterSideSpray3.particle
+				count 1
+			scale 2
+			offset -40 -50 0
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/waterSplashSteam2.particle
+				count 1
+			scale 2
+			)
+
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/waterCoreSolid5.particle
+				count 1
+			scale 2.4
+			offset 0 0 0
+			)
+			*/
+			
+			
+			
+			
+
+
+
+
+			/*
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/smallWaterCore8.particle
+				count 1
+			scale  1
+			offset 0 0 0
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/waterBulletHitSolid8.particle
+				count 1
+			scale 1
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/waterBulletHitSmoke8.particle
+				count 1
+			scale 1
+			)
+			*/
+
+
+
+
+			/*
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/bulletHitSolid12.particle
+				count 1
+			scale 1
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/bulletHitSmoke12.particle
+				count 1
+			scale 1
+			)
+			*/
+
+			/*
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Generic_SmokeTrail1/particles/flameCore3.particle
+				count 1
+			scale 4
+			offset 0 0 10
+			)
+
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Generic_SmokeTrail1/particles/flameTrail3.particle
+				count 1
+			scale 4
+			offset 0 0 10
+			)
+			*/
+
+			/*
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/bulletCore12.particle
+				count 1
+				//scalemin 1.75
+				//scalemax 2
+				//angles crandom 5 0 crandom 5
+				offset 0 0 -20
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/bulletHitSmoke12.particle
+				count 1
+				//scalemin 1.1
+				//scalemax 2
+				//angles crandom 7 crandom 360 crandom 7
+				scale 1.5
+				offset 0 0 5
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/bulletSpray12.particle
+				count 1
+				//scalemin 1.1
+				//scalemax 2
+				//angles crandom 10 crandom 180 crandom 10
+				scale 2
+				offset 0 0 50
+			)
+			entry originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/bulletHitSolid12.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+			)
+              	*/
+
+			/*
+			entry originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/airExplodeSmoke10.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+				scale .6
+				offset 0 0 250
+			)
+			entry originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/airExplode10.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+				scale .6
+				offset 0 0 250
+			)
+
+			
+			entry originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/airExpHot10.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+				scale .6
+				offset 0 0 250
+			)
+			entry originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/flash4.particle
+				count 1
+				offset 0 0 250
+    				scale .2
+			)
+			*/
+						
+
+
+			/*
+			deladedsfx .7 originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/airExpHot9.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+				scale .4
+				offset 0 0 350
+			)
+
+			delayedsfx .7 originspawn
+			(	
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/airExplode9.particle
+				count 1
+				//scalemin .1
+				//scalemax .3
+				//angles crandom 7 crandom 360 crandom 7
+				scale .4
+				offset 0 0 350
+			)
+
+			delayedsfx .7 originspawn
+			(
+				animateonce
+				model models/vfx/5_6_Grenade_Explosion/particles/flash4.particle
+				count 1
+				offset 0 0 350
+    				scale .15
+			)
+			*/
+
+
+
+   last anim idle
+		}
+	}
+}

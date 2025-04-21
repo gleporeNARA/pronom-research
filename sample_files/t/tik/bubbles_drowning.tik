@@ -1,0 +1,48 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+init
+{
+	server
+	{
+		classname Animate
+		rendereffects +dontdraw
+		notsolid
+		life 0.1
+		anim idle
+	}
+	client
+	{
+		cache rain_droplett.spr
+		
+		originemitter bubbles
+		(
+			spawnrate 6
+			model rain_droplett.spr
+			color 0.756 0.822 0.911
+			life 8 0
+			scalerate 0.3
+			scaleratey 0.3
+			lockscale 1
+			randvelaxis crandom 1 crandom 1 range 13 1
+			friction 0.2
+			angles 0 0 crandom 36
+			avelocity 0 0 range 12 23
+			scalemin 0.02
+			scaleminy 0.02
+			scalemax 0.03
+			scalemaxy 0.03
+			sprite_lighting 0.21
+		)
+	}
+}
+animations
+{
+	idle dummy3.skc 
+	{
+	}
+}

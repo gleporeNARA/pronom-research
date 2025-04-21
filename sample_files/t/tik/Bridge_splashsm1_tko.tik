@@ -1,0 +1,179 @@
+// This is a template tiki file for converting emitters generated with the In-Game editor (IGE)
+// Copy and paste this file, name it appropriately and fill in the proper fields (see TODO)
+
+TIKI
+setup
+{
+	// DO NOT MODIFY THIS BLOCK!!!	
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname Animate
+		anim idle
+	}
+	client
+	{
+		// TODO
+		// Cache the sprite info here, example:		
+			cache bh_Water_vaped001.spr
+			
+		//originemitter name1
+		(
+			spawnrate 5
+			count2 3
+			model bh_Water_vaped001.spr
+			color 1 1 1
+			scale 0.2
+			scaley 0.2
+			life 0.5 0
+			scalerate 6
+			scaleratey 3
+			randvelaxis crandom -10 crandom -10 range 10 20
+			accel 0 0 -100
+			offsetalongaxis range -500 500 range -500 500 -400
+			angles 0 0 crandom -360
+			avelocity 0 0 crandom -30
+			fade
+			sprite_lighting 0.25
+		)
+		//originemitter name1
+		(
+			spawnrate 5
+			model wake_froth2.spr
+			color 1 1 1
+			scale 0.2
+			scaley 0.2
+			life 0.7 0
+			scalerate 0.5
+			scaleratey 0.5
+			randvelaxis crandom -10 crandom -10 0
+			offsetalongaxis range -500 500 range -500 500 -400
+			fadedelay 0.2
+			sprite_oriented
+			sprite_lighting 0.25
+		)
+		//originemitter name1
+		(
+			spawnrate 5
+			model wake_froth.spr
+			color 1 1 1
+			scale 0.2
+			scaley 0.2
+			life 0.7 0
+			scalerate 0.5
+			scaleratey 0.5
+			randvelaxis crandom -10 crandom -10 0
+			offsetalongaxis range -500 500 range -500 500 -400
+			fadedelay 0.2
+			sprite_oriented
+			sprite_lighting 0.25
+		)
+		//originemitter name1
+		(
+			spawnrate 5
+			count2 3
+			model bh_Water_vaped001.spr
+			alpha 0.533
+			color 1 1 1
+			scale 0.2
+			scaley 0.2
+			life 1 0
+			scalerate 1
+			scaleratey 40
+			randvelaxis crandom -10 crandom -10 range 100 200
+			accel 0 0 -5000
+			offsetalongaxis range -500 500 range -500 500 -400
+			fadedelay 0.1
+			sprite_lighting 0.25
+		)
+
+	}
+}
+		
+animations
+{
+	idle dummy3.skc 
+	{
+		client
+		{
+		entry originspawn
+		(
+			count 5
+			count2 3
+			model bh_Water_vaped001.spr
+			color 1 1 1
+			scale 0.2
+			scaley 0.2
+			life 0.5 0
+			scalerate 6
+			scaleratey 3
+			randvelaxis crandom -10 crandom -10 range 10 20
+			accel 0 0 -100
+			offsetalongaxis range -500 500 range -500 500 -400
+			angles 0 0 crandom -360
+			avelocity 0 0 crandom -30
+			fade
+			sprite_lighting 0.25
+		)
+		entry originspawn
+		(
+			count 5
+			count2 3
+			model wake_froth2.spr
+			color 1 1 1
+			scale 0.2
+			scaley 0.2
+			life 0.7 0
+			scalerate 0.5
+			scaleratey 0.5
+			randvelaxis crandom -10 crandom -10 0
+			offsetalongaxis range -500 500 range -500 500 -400
+			fadedelay 0.2
+			sprite_oriented
+			sprite_lighting 0.25
+		)
+		entry originspawn
+		(
+			count 5
+			count2 3
+			model wake_froth.spr
+			color 1 1 1
+			scale 0.2
+			scaley 0.2
+			life 0.7 0
+			scalerate 0.5
+			scaleratey 0.5
+			randvelaxis crandom -10 crandom -10 0
+			offsetalongaxis range -500 500 range -500 500 -400
+			fadedelay 0.2
+			sprite_oriented
+			sprite_lighting 0.25
+		)
+		entry originspawn
+		(
+			count 5
+			count2 3
+			model bh_Water_vaped001.spr
+			alpha 0.533
+			color 1 1 1
+			scale 0.2
+			scaley 0.2
+			life 1 0
+			scalerate 1
+			scaleratey 40
+			randvelaxis crandom -10 crandom -10 range 100 200
+			accel 0 0 -5000
+			offsetalongaxis range -500 500 range -500 500 -400
+			fadedelay 0.1
+			sprite_lighting 0.25
+		)
+
+		}
+	}
+}

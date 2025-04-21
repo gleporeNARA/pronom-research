@@ -1,0 +1,44 @@
+TIKI
+setup
+{
+	scale 1.0
+	path models/fx/dummy
+	skelmodel dummy3.skd
+}
+
+init
+{
+	server
+	{
+		classname effectentity
+		notsolid
+		rendereffects +dontdraw
+	}
+	client
+	{
+		originemitter firesmoke
+		(
+			volumetric
+			model smokegrenade
+			count 1
+			alpha 0.64
+			color 0.77 0.69 0.56
+			bouncefactor 0.30
+			scale 10.00
+			life 20.00
+			spawnrate 1.00
+			scalemin 1000.00
+			scalemax 1000.00
+ 		)
+	}
+}
+
+animations
+{
+	idle dummy3.skc
+}
+
+/*QUAKED fx_smoke_m1tankdust3 (0.0 0.5 0.5) (-8 -8 -8) (8 8 8)
+Smoke from a burning pile of rubble. 
+Does collide.
+*/
