@@ -1,0 +1,1388 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--This biomodel was generated in VCML Version 0.4-->
+<vcml xmlns="http://sourceforge.net/projects/vcell/vcml" Version="0.4">
+   <BioModel Name="Haffez2017 - RAR interaction with synthetic analogues">
+      <Model Name="Haffez2017_RAR_interaction_with_synthetic_analogues">
+         <Compound Name="L">
+            <Annotation>L</Annotation>
+         </Compound>
+         <Compound Name="LR">
+            <Annotation>LR</Annotation>
+         </Compound>
+         <Compound Name="R">
+            <Annotation>R</Annotation>
+         </Compound>
+         <Compound Name="CA">
+            <Annotation>CA</Annotation>
+         </Compound>
+         <Compound Name="LRCA">
+            <Annotation>LRCA</Annotation>
+         </Compound>
+         <Feature Name="RAR_retinoids" />
+         <LocalizedCompound Name="L" CompoundRef="L" Structure="RAR_retinoids" OverrideName="true" />
+         <LocalizedCompound Name="LR" CompoundRef="LR" Structure="RAR_retinoids" OverrideName="true" />
+         <LocalizedCompound Name="R" CompoundRef="R" Structure="RAR_retinoids" OverrideName="true" />
+         <LocalizedCompound Name="CA" CompoundRef="CA" Structure="RAR_retinoids" OverrideName="true" />
+         <LocalizedCompound Name="LRCA" CompoundRef="LRCA" Structure="RAR_retinoids" OverrideName="true" />
+         <SimpleReaction Structure="RAR_retinoids" Name="LR_complx" FluxCarrierValence="0" FluxOption="MolecularOnly">
+            <Reactant LocalizedCompoundRef="L" Stoichiometry="1" />
+            <Reactant LocalizedCompoundRef="R" Stoichiometry="1" />
+            <Product LocalizedCompoundRef="LR" Stoichiometry="1" />
+            <Kinetics KineticsType="GeneralKinetics">
+               <Parameter Name="J" Role="reaction rate" Unit="uM.s-1">(((k1 * L * R) - (k2 * LR)) * sbmlRateFactor)</Parameter>
+               <Parameter Name="k1" Role="user defined" Unit="1.6666666666666667E-8 mole.uM-2.second-1.litre-1">0.6</Parameter>
+               <Parameter Name="k2" Role="user defined" Unit="1.6666666666666667E-8 mole.litre-1.uM-1.second-1">0.1</Parameter>
+               <Parameter Name="sbmlRateFactor" Role="user defined" Unit="60000000 second.litre.uM.s-1.mole-1">0.016666666666667</Parameter>
+            </Kinetics>
+         </SimpleReaction>
+         <SimpleReaction Structure="RAR_retinoids" Name="LRCA_complx" FluxCarrierValence="0" FluxOption="MolecularOnly">
+            <Reactant LocalizedCompoundRef="LR" Stoichiometry="1" />
+            <Reactant LocalizedCompoundRef="CA" Stoichiometry="1" />
+            <Product LocalizedCompoundRef="LRCA" Stoichiometry="1" />
+            <Kinetics KineticsType="GeneralKinetics">
+               <Parameter Name="J" Role="reaction rate" Unit="uM.s-1">(((k1 * LR * CA) - (k2 * LRCA)) * sbmlRateFactor)</Parameter>
+               <Parameter Name="k1" Role="user defined" Unit="1.6666666666666667E-8 mole.uM-2.second-1.litre-1">0.014</Parameter>
+               <Parameter Name="k2" Role="user defined" Unit="1.6666666666666667E-8 mole.litre-1.uM-1.second-1">0.2</Parameter>
+               <Parameter Name="sbmlRateFactor" Role="user defined" Unit="60000000 second.litre.uM.s-1.mole-1">0.016666666666667</Parameter>
+            </Kinetics>
+         </SimpleReaction>
+         <Diagram Name="RAR_retinoids" Structure="RAR_retinoids" />
+      </Model>
+      <SimulationSpec Name="Haffez2017_RAR_interaction_with_synthetic_analogues_Compartmental" Stochastic="false" UseConcentration="true">
+         <Geometry Name="Compartmental" Dimension="0">
+            <Extent X="10.0" Y="10.0" Z="10.0" />
+            <Origin X="0.0" Y="0.0" Z="0.0" />
+            <SubVolume Name="Compartment" Handle="0" Type="Compartmental" />
+         </Geometry>
+         <GeometryContext>
+            <FeatureMapping Feature="RAR_retinoids" GeometryClass="Compartment" SubVolume="Compartment" Size="1.0000000000000001E15">
+               <BoundariesTypes Xm="Flux" Xp="Flux" Ym="Flux" Yp="Flux" Zm="Flux" Zp="Flux" />
+            </FeatureMapping>
+         </GeometryContext>
+         <ReactionContext>
+            <LocalizedCompoundSpec LocalizedCompoundRef="L" ForceConstant="false" WellMixed="false">
+               <InitialConcentration>5.0E-4</InitialConcentration>
+               <Diffusion>0.0</Diffusion>
+            </LocalizedCompoundSpec>
+            <LocalizedCompoundSpec LocalizedCompoundRef="LR" ForceConstant="false" WellMixed="false">
+               <InitialConcentration>0.0</InitialConcentration>
+               <Diffusion>0.0</Diffusion>
+            </LocalizedCompoundSpec>
+            <LocalizedCompoundSpec LocalizedCompoundRef="R" ForceConstant="false" WellMixed="false">
+               <InitialConcentration>0.0035</InitialConcentration>
+               <Diffusion>0.0</Diffusion>
+            </LocalizedCompoundSpec>
+            <LocalizedCompoundSpec LocalizedCompoundRef="CA" ForceConstant="false" WellMixed="false">
+               <InitialConcentration>30.0</InitialConcentration>
+               <Diffusion>0.0</Diffusion>
+            </LocalizedCompoundSpec>
+            <LocalizedCompoundSpec LocalizedCompoundRef="LRCA" ForceConstant="false" WellMixed="false">
+               <InitialConcentration>0.0</InitialConcentration>
+               <Diffusion>0.0</Diffusion>
+            </LocalizedCompoundSpec>
+            <ReactionSpec ReactionStepRef="LR_complx" ReactionMapping="included" />
+            <ReactionSpec ReactionStepRef="LRCA_complx" ReactionMapping="included" />
+         </ReactionContext>
+         <MicroscopeMeasurement Name="fluor">
+            <ConvolutionKernel Type="ProjectionZKernel" />
+         </MicroscopeMeasurement>
+      </SimulationSpec>
+      <pathwayModel>
+         <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:bp="http://www.biopax.org/release/biopax-level3.owl#" version="3.0" />
+      </pathwayModel>
+      <relationshipModel>
+         <RMNS version="3.0" />
+      </relationshipModel>
+      <vcmetadata>
+         <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#">
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI0">
+               <bqbiol:hasTaxon xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node0">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/taxonomy/131567" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqbiol:hasTaxon>
+               <bqbiol:isPartOf xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node1">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/go/GO:0048384" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqbiol:isPartOf>
+               <bqmodel:is xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node2">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/biomodels.db/MODEL1702240000" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqmodel:is>
+               <bqmodel:is xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node3">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/biomodels.db/BIOMD0000000629" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqmodel:is>
+               <bqmodel:isDescribedBy xmlns:bqmodel="http://biomodels.net/model-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node4">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/doi/10.1039/C6MD00680A" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqmodel:isDescribedBy>
+               <dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">
+                  <rdf:Bag rdf:nodeID="node5">
+                     <rdf:_1>
+                        <rdf:Description rdf:nodeID="node16">
+                           <vcard:EMAIL xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">kothamav@babraham.ac.uk</vcard:EMAIL>
+                           <vcard:N xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node30">
+                                 <vcard:Family>Kothamachu</vcard:Family>
+                                 <vcard:Given>Varun</vcard:Given>
+                              </rdf:Description>
+                           </vcard:N>
+                           <vcard:ORG xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node31">
+                                 <vcard:Orgname>Babraham Institute</vcard:Orgname>
+                              </rdf:Description>
+                           </vcard:ORG>
+                        </rdf:Description>
+                     </rdf:_1>
+                     <rdf:_2>
+                        <rdf:Description rdf:nodeID="node17">
+                           <vcard:EMAIL xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">d.r.chisholm@durham.ac.uk</vcard:EMAIL>
+                           <vcard:N xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node34">
+                                 <vcard:Family>Chisholm</vcard:Family>
+                                 <vcard:Given>David</vcard:Given>
+                              </rdf:Description>
+                           </vcard:N>
+                           <vcard:ORG xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node35">
+                                 <vcard:Orgname>Chemistry Department, Durham University</vcard:Orgname>
+                              </rdf:Description>
+                           </vcard:ORG>
+                        </rdf:Description>
+                     </rdf:_2>
+                     <rdf:_3>
+                        <rdf:Description rdf:nodeID="node18">
+                           <vcard:EMAIL xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">royvalentine@highforceresearch.com</vcard:EMAIL>
+                           <vcard:N xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node36">
+                                 <vcard:Family>Valentine</vcard:Family>
+                                 <vcard:Given>Roy</vcard:Given>
+                              </rdf:Description>
+                           </vcard:N>
+                           <vcard:ORG xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node23" />
+                           </vcard:ORG>
+                        </rdf:Description>
+                     </rdf:_3>
+                     <rdf:_4>
+                        <rdf:Description rdf:nodeID="node19">
+                           <vcard:EMAIL xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">ehmke.pohl@durham.ac.uk</vcard:EMAIL>
+                           <vcard:N xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node24">
+                                 <vcard:Family>Pohl</vcard:Family>
+                                 <vcard:Given>Ehmke</vcard:Given>
+                              </rdf:Description>
+                           </vcard:N>
+                           <vcard:ORG xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node25">
+                                 <vcard:Orgname>Chemistry Department, Durham University</vcard:Orgname>
+                              </rdf:Description>
+                           </vcard:ORG>
+                        </rdf:Description>
+                     </rdf:_4>
+                     <rdf:_5>
+                        <rdf:Description rdf:nodeID="node20">
+                           <vcard:EMAIL xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">andy.whiting@durham.ac.uk</vcard:EMAIL>
+                           <vcard:N xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node26">
+                                 <vcard:Family>Whiting</vcard:Family>
+                                 <vcard:Given>Andy</vcard:Given>
+                              </rdf:Description>
+                           </vcard:N>
+                           <vcard:ORG xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node27">
+                                 <vcard:Orgname>Chemistry Department, Durham University</vcard:Orgname>
+                              </rdf:Description>
+                           </vcard:ORG>
+                        </rdf:Description>
+                     </rdf:_5>
+                     <rdf:_6>
+                        <rdf:Description rdf:nodeID="node21">
+                           <vcard:EMAIL xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">chris.redfern@newcastle.ac.uk</vcard:EMAIL>
+                           <vcard:N xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node28">
+                                 <vcard:Family>Redfern</vcard:Family>
+                                 <vcard:Given>Chris</vcard:Given>
+                              </rdf:Description>
+                           </vcard:N>
+                           <vcard:ORG xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node29">
+                                 <vcard:Orgname>NICR, Newcastle University</vcard:Orgname>
+                              </rdf:Description>
+                           </vcard:ORG>
+                        </rdf:Description>
+                     </rdf:_6>
+                     <rdf:_7>
+                        <rdf:Description rdf:nodeID="node22">
+                           <vcard:EMAIL xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">h.r.haffez@durham.ac.uk</vcard:EMAIL>
+                           <vcard:N xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node32">
+                                 <vcard:Family>Haffez</vcard:Family>
+                                 <vcard:Given>Hesham</vcard:Given>
+                              </rdf:Description>
+                           </vcard:N>
+                           <vcard:ORG xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                              <rdf:Description rdf:nodeID="node33">
+                                 <vcard:Orgname>Department of Chemistry, Durham University</vcard:Orgname>
+                              </rdf:Description>
+                           </vcard:ORG>
+                        </rdf:Description>
+                     </rdf:_7>
+                  </rdf:Bag>
+               </dc:creator>
+               <dcterms:created xmlns:dcterms="http://purl.org/dc/terms/">
+                  <rdf:Description rdf:nodeID="node6">
+                     <dcterms:W3CDTF>2013-01-31T10:18:30Z</dcterms:W3CDTF>
+                  </rdf:Description>
+               </dcterms:created>
+               <dcterms:modified xmlns:dcterms="http://purl.org/dc/terms/">
+                  <rdf:Description rdf:nodeID="node7">
+                     <dcterms:W3CDTF>2017-04-20T14:49:49Z</dcterms:W3CDTF>
+                  </rdf:Description>
+               </dcterms:modified>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI1">
+               <bqbiol:hasProperty xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node8">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/go/GO:0005623" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqbiol:hasProperty>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI2">
+               <bqbiol:is xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node9">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/chebi/CHEBI:15367" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqbiol:is>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI3">
+               <bqbiol:hasPart xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node10">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/chebi/CHEBI:15367" />
+                     </rdf:_1>
+                     <rdf:_2>
+                        <rdf:Description rdf:about="http://identifiers.org/uniprot/P10276" />
+                     </rdf:_2>
+                  </rdf:Bag>
+               </bqbiol:hasPart>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI4">
+               <bqbiol:isVersionOf xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node11">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/uniprot/P10276" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqbiol:isVersionOf>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI5">
+               <bqbiol:hasVersion xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node12">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/chebi/CHEBI:42492" />
+                     </rdf:_1>
+                     <rdf:_2>
+                        <rdf:Description rdf:about="http://identifiers.org/chebi/CHEBI:16670" />
+                     </rdf:_2>
+                  </rdf:Bag>
+               </bqbiol:hasVersion>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI6">
+               <bqbiol:hasPart xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node13">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/chebi/CHEBI:15367" />
+                     </rdf:_1>
+                     <rdf:_2>
+                        <rdf:Description rdf:about="http://identifiers.org/uniprot/P10276" />
+                     </rdf:_2>
+                  </rdf:Bag>
+               </bqbiol:hasPart>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI7">
+               <bqbiol:isVersionOf xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node14">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/go/GO:0016922" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqbiol:isVersionOf>
+            </rdf:Description>
+            <rdf:Description rdf:about="http://www.sbml.org/sbml/level2/version4/COPASI8">
+               <bqbiol:hasPart xmlns:bqbiol="http://biomodels.net/biology-qualifiers/">
+                  <rdf:Bag rdf:nodeID="node15">
+                     <rdf:_1>
+                        <rdf:Description rdf:about="http://identifiers.org/go/GO:0016922" />
+                     </rdf:_1>
+                  </rdf:Bag>
+               </bqbiol:hasPart>
+            </rdf:Description>
+            <rdf:Description rdf:nodeID="node23">
+               <vcard:Orgname xmlns:vcard="http://www.w3.org/2001/vcard-rdf/3.0#">High Force Research Ltd., Bowburn North Industrial Estate</vcard:Orgname>
+            </rdf:Description>
+         </rdf:RDF>
+         <nonrdfAnnotationList>
+            <nonrdfAnnotation vcid="Structure(RAR_retinoids)">
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI1">
+                           
+      
+                           <CopasiMT:is rdf:resource="urn:miriam:sbo:SBO:0000290" />
+                           
+      
+                           <CopasiMT:isVersionOf>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/go/GO:0005737" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:isVersionOf>
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+            <nonrdfAnnotation vcid="Species(LRCA)">
+               <notes>
+                  
+  
+                  <body xmlns="http://www.w3.org/1999/xhtml">
+                     
+    
+                     <pre>Ligand-Receptor-CoActivator represents the final complex formation between ligand, retinoic acid receptor and co-activator in μmol
+The formation of this complex is controlled by k3/k4 ratio which represents the ligand- receptor complex binding to co-activator and measured practically as EC50.
+The higher k3/k4 ratio, the better binding interaction of the intermediate complex to its co-activator.</pre>
+                     
+  
+                  </body>
+                  
+
+               </notes>
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI6">
+                           
+      
+                           <CopasiMT:hasPart>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:15367" />
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/uniprot/P10276" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:hasPart>
+                           
+      
+                           <CopasiMT:is rdf:resource="urn:miriam:sbo:SBO:0000296" />
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+            <nonrdfAnnotation vcid="Species(L)">
+               <notes>
+                  
+  
+                  <body xmlns="http://www.w3.org/1999/xhtml">
+                     
+    
+                     <pre>Ligand is either natural retinoid (ATRA), or synthetic retinoid as EC19, EC23,...</pre>
+                     
+  
+                  </body>
+                  
+
+               </notes>
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI2">
+                           
+      
+                           <CopasiMT:is rdf:resource="urn:miriam:sbo:SBO:0000280" />
+                           
+      
+                           <CopasiMT:is>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:15367" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:is>
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+            <nonrdfAnnotation vcid="ReactionStep(LRCA_complx)">
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI8">
+                           
+      
+                           <CopasiMT:hasPart>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/go/GO:0016922" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:hasPart>
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+            <nonrdfAnnotation vcid="Species(R)">
+               <notes>
+                  
+  
+                  <body xmlns="http://www.w3.org/1999/xhtml">
+                     
+    
+                     <pre>Examples of receptors; Retinoic acid receptor (RAR)-alpha,-beta and -gamma.
+The principle is the same and the concentrations used here are for RAR-alpha</pre>
+                     
+  
+                  </body>
+                  
+
+               </notes>
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI4">
+                           
+      
+                           <CopasiMT:is rdf:resource="urn:miriam:sbo:SBO:0000244" />
+                           
+      
+                           <CopasiMT:isVersionOf>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/uniprot/P10276" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:isVersionOf>
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+            <nonrdfAnnotation vcid="ReactionStep(LR_complx)">
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI7">
+                           
+      
+                           <CopasiMT:is rdf:resource="urn:miriam:sbo:SBO:0000526" />
+                           
+      
+                           <CopasiMT:isVersionOf>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/go/GO:0016922" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:isVersionOf>
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+            <nonrdfAnnotation vcid="BioModel(Haffez2017 - RAR interaction with synthetic analogues)">
+               <notes>
+                  
+  
+                  <body xmlns="http://www.w3.org/1999/xhtml">
+                     
+    
+                     <div class="dc:title">Haffez2017 - RAR interaction with synthetic
+analogues</div>
+                     
+    
+                     <div class="dc:description">
+                        
+      
+                        <br />
+                        
+    
+                     </div>
+                     
+    
+                     <div class="dc:bibliographicCitation">
+                        
+      
+                        <p>This model is described in the article:</p>
+                        
+      
+                        <div class="bibo:title">
+                           
+        
+                           <a href="http://identifiers.org/doi/10.1039/C6MD00680A" title="Access to this publication">The molecular basis of the
+    interactions between synthetic retinoic acid analogues and the
+    retinoic acid receptors</a>
+                           
+      
+                        </div>
+                        
+      
+                        <div class="bibo:authorList">Hesham Haffez, David R. Chisholm,
+  Roy Valentine, Ehmke Pohl, Christopher Redfern and Andrew
+  Whiting</div>
+                        
+      
+                        <div class="bibo:Journal">MedChemComm</div>
+                        
+      
+                        <p>Abstract:</p>
+                        
+      
+                        <div class="bibo:abstract">
+                           
+        
+                           <p>All-trans-retinoic acid (ATRA) and its synthetic analogues
+    EC23 and EC19 direct cellular differentiation by interacting as
+    ligands for the retinoic acid receptor (RARÎ±,
+    Î² and Î³) family of nuclear receptor
+    proteins. To date, a number of crystal structures of natural
+    and synthetic ligands complexed to their target proteins have
+    been solved, providing molecular level snap-shots of ligand
+    binding. However, a deeper understanding of receptor and ligand
+    flexibility and conformational freedom is required to develop
+    stable and effective ATRA analogues for clinical use.
+    Therefore, we have used molecular modelling techniques to
+    define RAR interactions with ATRA and two synthetic analogues,
+    EC19 and EC23, and compared their predicted biochemical
+    activities to experimental measurements of relative ligand
+    affinity and recruitment of coactivator proteins. A
+    comprehensive molecular docking approach that explored the
+    conformational space of the ligands indicated that ATRA is able
+    to bind the three RAR proteins in a number of conformations
+    with one extended structure being favoured. In contrast the
+    biologically-distinct isomer, 9-cis-retinoic acid (9CRA),
+    showed significantly less conformational flexibility in the RAR
+    binding pockets. These findings were used to inform docking
+    studies of the synthetic retinoids EC23 and EC19, and their
+    respective methyl esters. EC23 was found to be an excellent
+    mimic for ATRA, and occupied similar binding modes to ATRA in
+    all three target RAR proteins. In comparison, EC19 exhibited an
+    alternative binding mode which reduces the strength of key
+    polar interactions in RARÎ±/Î³ but is
+    well-suited to the larger RARÎ² binding pocket. In
+    contrast, docking of the corresponding esters revealed the loss
+    of key polar interactions which may explain the much reduced
+    biological activity. Our computational results were
+    complemented using an in vitro binding assay based on FRET
+    measurements, which showed that EC23 was a strongly binding,
+    pan-agonist of the RARs, while EC19 exhibited specificity for
+    RARÎ², as predicted by the docking studies. These
+    findings can account for the distinct behaviour of EC23 and
+    EC19 in cellular differentiation assays, and additionally, the
+    methods described herein can be further applied to the
+    understanding of the molecular basis for the selectivity of
+    different retinoids to RARÎ±, Î² and
+    Î³.</p>
+                           
+      
+                        </div>
+                        
+    
+                     </div>
+                     
+    
+                     <div class="dc:publisher">
+                        
+      
+                        <p>
+                           This model is hosted on
+  
+                           <a href="http://www.ebi.ac.uk/biomodels/">BioModels Database</a>
+                           
+  and identified by:
+  
+                           <a href="http://identifiers.org/biomodels.db/BIOMD0000000629">BIOMD0000000629</a>
+                           .
+                        </p>
+                        
+    
+                        <p>
+                           To cite BioModels Database, please use:
+  
+                           <a href="http://identifiers.org/pubmed/20587024" title="Latest BioModels Database publication">BioModels Database:
+  An enhanced, curated and annotated resource for published
+  quantitative kinetic models</a>
+                           .
+                        </p>
+                        
+
+                     </div>
+                     <div class="dc:license">
+                        
+  
+                        <p>
+                           To the extent possible under law, all copyright and related or
+  neighbouring rights to this encoded model have been dedicated to
+  the public domain worldwide. Please refer to
+  
+                           <a href="http://creativecommons.org/publicdomain/zero/1.0/" title="Access to: CC0 1.0 Universal (CC0 1.0), Public Domain Dedication">CC0
+  Public Domain Dedication</a>
+                            for more information.
+                        </p>
+                        
+
+                     </div>
+                     
+
+                  </body>
+                  
+
+               </notes>
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#" xmlns:bqbiol="http://biomodels.net/biology-qualifiers/" xmlns:dcterms="http://purl.org/dc/terms/" xmlns:vCard="http://www.w3.org/2001/vcard-rdf/3.0#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI0">
+                           
+      
+                           <bqbiol:hasProperty>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/go/GO:0048384" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </bqbiol:hasProperty>
+                           
+      
+                           <bqbiol:hasTaxon>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/taxonomy/131567" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </bqbiol:hasTaxon>
+                           
+      
+                           <dcterms:bibliographicCitation>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li>
+                                    
+            
+                                    <rdf:Description>
+                                       
+              
+                                       <CopasiMT:isDescribedBy rdf:resource="http://identifiers.org/doi/10.1039/C6MD00680A" />
+                                       
+            
+                                    </rdf:Description>
+                                    
+          
+                                 </rdf:li>
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </dcterms:bibliographicCitation>
+                           
+      
+                           <dcterms:created>
+                              
+        
+                              <rdf:Description>
+                                 
+          
+                                 <dcterms:W3CDTF>2013-01-31T10:18:30Z</dcterms:W3CDTF>
+                                 
+        
+                              </rdf:Description>
+                              
+      
+                           </dcterms:created>
+                           
+      
+                           <dcterms:creator>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li>
+                                    
+            
+                                    <rdf:Description>
+                                       
+              
+                                       <vCard:EMAIL>kothamav@babraham.ac.uk</vCard:EMAIL>
+                                       
+              
+                                       <vCard:N>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Family>Kothamachu</vCard:Family>
+                                             
+                  
+                                             <vCard:Given>Varun</vCard:Given>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:N>
+                                       
+              
+                                       <vCard:ORG>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Orgname>Babraham Institute</vCard:Orgname>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:ORG>
+                                       
+            
+                                    </rdf:Description>
+                                    
+          
+                                 </rdf:li>
+                                 
+          
+                                 <rdf:li>
+                                    
+            
+                                    <rdf:Description>
+                                       
+              
+                                       <vCard:EMAIL>h.r.haffez@durham.ac.uk</vCard:EMAIL>
+                                       
+              
+                                       <vCard:N>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Family>Haffez</vCard:Family>
+                                             
+                  
+                                             <vCard:Given>Hesham</vCard:Given>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:N>
+                                       
+              
+                                       <vCard:ORG>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Orgname>Department of Chemistry, Durham University</vCard:Orgname>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:ORG>
+                                       
+            
+                                    </rdf:Description>
+                                    
+          
+                                 </rdf:li>
+                                 
+          
+                                 <rdf:li>
+                                    
+            
+                                    <rdf:Description>
+                                       
+              
+                                       <vCard:EMAIL>d.r.chisholm@durham.ac.uk</vCard:EMAIL>
+                                       
+              
+                                       <vCard:N>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Family>Chisholm</vCard:Family>
+                                             
+                  
+                                             <vCard:Given>David</vCard:Given>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:N>
+                                       
+              
+                                       <vCard:ORG>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Orgname>Chemistry Department, Durham University</vCard:Orgname>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:ORG>
+                                       
+            
+                                    </rdf:Description>
+                                    
+          
+                                 </rdf:li>
+                                 
+          
+                                 <rdf:li>
+                                    
+            
+                                    <rdf:Description>
+                                       
+              
+                                       <vCard:EMAIL>royvalentine@highforceresearch.com</vCard:EMAIL>
+                                       
+              
+                                       <vCard:N>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Family>Valentine</vCard:Family>
+                                             
+                  
+                                             <vCard:Given>Roy</vCard:Given>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:N>
+                                       
+              
+                                       <vCard:ORG>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Orgname>High Force Research Ltd., Bowburn North Industrial Estate</vCard:Orgname>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:ORG>
+                                       
+            
+                                    </rdf:Description>
+                                    
+          
+                                 </rdf:li>
+                                 
+          
+                                 <rdf:li>
+                                    
+            
+                                    <rdf:Description>
+                                       
+              
+                                       <vCard:EMAIL>ehmke.pohl@durham.ac.uk</vCard:EMAIL>
+                                       
+              
+                                       <vCard:N>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Family>Pohl</vCard:Family>
+                                             
+                  
+                                             <vCard:Given>Ehmke</vCard:Given>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:N>
+                                       
+              
+                                       <vCard:ORG>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Orgname>Chemistry Department, Durham University</vCard:Orgname>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:ORG>
+                                       
+            
+                                    </rdf:Description>
+                                    
+          
+                                 </rdf:li>
+                                 
+          
+                                 <rdf:li>
+                                    
+            
+                                    <rdf:Description>
+                                       
+              
+                                       <vCard:EMAIL>andy.whiting@durham.ac.uk</vCard:EMAIL>
+                                       
+              
+                                       <vCard:N>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Family>Whiting</vCard:Family>
+                                             
+                  
+                                             <vCard:Given>Andy</vCard:Given>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:N>
+                                       
+              
+                                       <vCard:ORG>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Orgname>Chemistry Department, Durham University</vCard:Orgname>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:ORG>
+                                       
+            
+                                    </rdf:Description>
+                                    
+          
+                                 </rdf:li>
+                                 
+          
+                                 <rdf:li>
+                                    
+            
+                                    <rdf:Description>
+                                       
+              
+                                       <vCard:EMAIL>chris.redfern@newcastle.ac.uk</vCard:EMAIL>
+                                       
+              
+                                       <vCard:N>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Family>Redfern</vCard:Family>
+                                             
+                  
+                                             <vCard:Given>Chris</vCard:Given>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:N>
+                                       
+              
+                                       <vCard:ORG>
+                                          
+                
+                                          <rdf:Description>
+                                             
+                  
+                                             <vCard:Orgname>NICR, Newcastle University</vCard:Orgname>
+                                             
+                
+                                          </rdf:Description>
+                                          
+              
+                                       </vCard:ORG>
+                                       
+            
+                                    </rdf:Description>
+                                    
+          
+                                 </rdf:li>
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </dcterms:creator>
+                           
+      
+                           <dcterms:modified>
+                              
+        
+                              <rdf:Description>
+                                 
+          
+                                 <dcterms:W3CDTF>2017-03-24T14:53:22Z</dcterms:W3CDTF>
+                                 
+        
+                              </rdf:Description>
+                              
+      
+                           </dcterms:modified>
+                           
+      
+                           <CopasiMT:encodes>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/go/GO:0042974" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:encodes>
+                           
+      
+                           <CopasiMT:is>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/biomodels.db/MODEL1702240000" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:is>
+                           
+      
+                           <CopasiMT:is>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/biomodels.db/BIOMD0000000629" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:is>
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+            <nonrdfAnnotation vcid="Species(CA)">
+               <notes>
+                  
+  
+                  <body xmlns="http://www.w3.org/1999/xhtml">
+                     
+    
+                     <pre>Examples for co-activators:
+steroid receptor co-activator-1 (SRC-1), co-activator-X (COACT-X) and CREB binding protein (CBP) (also known as P-300)</pre>
+                     
+  
+                  </body>
+                  
+
+               </notes>
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI5">
+                           
+      
+                           <CopasiMT:hasVersion>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:16670" />
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:42492" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:hasVersion>
+                           
+      
+                           <CopasiMT:is rdf:resource="urn:miriam:sbo:SBO:0000459" />
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+            <nonrdfAnnotation vcid="Species(LR)">
+               <notes>
+                  
+  
+                  <body xmlns="http://www.w3.org/1999/xhtml">
+                     
+    
+                     <pre>Ligand-Receptor represents the intermediate complex formation between ligand and retinoic acid receptor in μmol
+The formation of this complex is controlled by k1/k2 ratio which represents the ligand binding affinity.
+The higher k1/k2 ratio, the better binding interaction of ligand to its cognate receptor</pre>
+                     
+  
+                  </body>
+                  
+
+               </notes>
+               <annotationList>
+                  <COPASI xmlns="http://www.copasi.org/static/sbml">
+                     
+  
+                     <rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:CopasiMT="http://www.copasi.org/RDF/MiriamTerms#">
+                        
+    
+                        <rdf:Description rdf:about="#COPASI3">
+                           
+      
+                           <CopasiMT:hasPart>
+                              
+        
+                              <rdf:Bag>
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/chebi/CHEBI:15367" />
+                                 
+          
+                                 <rdf:li rdf:resource="http://identifiers.org/uniprot/P10276" />
+                                 
+        
+                              </rdf:Bag>
+                              
+      
+                           </CopasiMT:hasPart>
+                           
+      
+                           <CopasiMT:is rdf:resource="urn:miriam:sbo:SBO:0000296" />
+                           
+    
+                        </rdf:Description>
+                        
+  
+                     </rdf:RDF>
+                     
+
+                  </COPASI>
+               </annotationList>
+            </nonrdfAnnotation>
+         </nonrdfAnnotationList>
+         <uriBindingList>
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI3" vcid="Species(LR)" />
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI4" vcid="Species(R)" />
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI0" vcid="BioModel(Haffez2017 - RAR interaction with synthetic analogues)" />
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI1" vcid="Structure(RAR_retinoids)" />
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI7" vcid="ReactionStep(LR_complx)" />
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI5" vcid="Species(CA)" />
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI6" vcid="Species(LRCA)" />
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI2" vcid="Species(L)" />
+            <uriBinding uri="http://www.sbml.org/sbml/level2/version4/COPASI8" vcid="ReactionStep(LRCA_complx)" />
+         </uriBindingList>
+      </vcmetadata>
+   </BioModel>
+</vcml>
+
