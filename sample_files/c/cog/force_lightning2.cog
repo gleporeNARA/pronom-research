@@ -1,0 +1,136 @@
+# Jedi Knight Cog Script
+#
+# FORCE_LIGHTNING.COG
+#
+# FORCEPOWER Script - Lightning
+#  Dark Side Power
+#  Bin 32
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+
+flex        cost=0.0                         local
+int         rank                             local
+int         mana                             local
+int         bin                              local
+
+template    lightning=+force_lightning       local
+
+sound       fireSound=ForceLitning02.wav     local
+int         fireChannel=-1                   local
+int         modeTrack=-1                     local
+
+flex        autoAimFOV=180                    local
+
+message     startup
+message     activated
+message     deactivated
+message     fire
+message     killed
+message     selected
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+
+   Return;
+
+# ........................................................................................
+
+fire:
+   mana = GetInv(player, 14);
+   if((mana >= cost) && (GetThingHealth(player) > 0))
+   {
+      if(GetInv(player, 64) != 1) ChangeInv(player, 14, -cost);
+
+      if(fireChannel == -1)
+         fireChannel = PlaySoundThing(fireSound, player, 1.0, -1, -1, 0x81);
+
+      FireProjectile(player, lightning, -1, -1, '-0.025 9.99 0', '0 0 0', 1.0, 0, autoAimFOV, autoAimFOV);
+  
+ 
+}
+   else
+   {
+      if(fireChannel != -1)
+      {
+         StopSound( fireChannel, 0.1);
+         fireChannel = -1;
+      }
+   }
+   return;
+
+# ........................................................................................
+
+activated:
+   bin = GetSenderRef();
+   rank = GetInv(player, 32);
+
+   if(rank == 1)
+      cost = 40.0;
+   else if(rank == 2)
+      cost = 35.0;
+   else if(rank == 3)
+      cost = 30.0;
+   else if(rank == 4)
+      cost = 25.0;
+
+   ActivateBin(player, 0.0000000000001, bin);
+   if (modeTrack == -1)
+      modeTrack = PlayMode(player, 24);
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 32);
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   bin = GetSenderRef();
+   DeactivateBin(player, bin);
+   call stop_power;
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+   call stop_power;
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   if(fireChannel != -1)
+   {
+      StopSound( fireChannel, 0.1);
+      fireChannel = -1;
+   }
+
+   if(modeTrack != -1)
+   {
+      StopKey(player,modeTrack,0.5);
+      modeTrack = -1;
+   }
+
+   Return;
+
+end
+
+

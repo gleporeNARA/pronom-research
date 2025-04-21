@@ -1,0 +1,200 @@
+# Jedi Knight Cog Script
+#
+# WEAP_BRYAR.COG
+#
+# WEAPON 2 Script - Bryar Pistol
+#
+#
+#
+# -Not Affected by MagSealed sectors/surfaces.
+# Made For HM by HM_DAVID
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+model       povModel=bryv.3do                   local
+model       weaponMesh=b-key.3do                local
+
+keyframe    mountAnim=bryvmnt.key               local
+keyframe    dismountAnim=bryvdis.key            local
+keyframe    povfireAnim=bryvpst1.key            local
+keyframe    holsterAnim=kyhlstr.key             local
+
+sound       outSound=pistout1.wav               local
+sound       mountSound=df_bry_ready.wav         local
+sound       dismountSound=PutWeaponAway01.wav   local
+sound       fireSound=pistol-1.wav              local
+
+template    projectile=+concbullet              local
+
+thing       player                              local
+thing       victim                              local
+thing       potential                           local
+
+flex        dot                                 local
+flex        maxDot                              local
+
+flex        fireWait=0.1                        local
+flex        holsterWait                         local
+flex        fireDelay=0.6                       local
+flex        powerBoost                          local
+flex        autoAimFOV=30                       local
+flex        autoAimMaxDist=5                    local
+
+int         weaponIndex                         local
+int         trackID=-1                          local
+thing       dummy                               local
+int         mode                                local
+int         holsterTrack                        local
+template    smoke_tpl=+heavysmoke               local
+model       fuck=01frt.3do                      local
+
+message     activated
+message     deactivated
+message     selected
+message     deselected
+message     autoselect
+message     fire
+message     timer
+
+end
+
+# ========================================================================================
+
+code
+
+fire:
+   player = GetSourceRef();
+
+   // Check that the player is still alive.
+   if(GetThingHealth(player) <= 0)
+   {
+      Return;
+   }
+
+   // Check Ammo - If we are out, autoselect best weapon.
+   if(GetInv(player, 11) < 1.0)
+   {
+      PlaySoundThing(outSound, player, 1.0, -1.0, -1.0, 0x80);
+      if(GetAutoSwitch() & 1)
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+      Return;
+   }
+
+   SetPOVShake('0.0 -.003 0.0', '1.0 0.0 0.0', .05, 80.0);
+   dummy = FireProjectile(player, projectile, fireSound, 8, '0.0135 0.1624 0.0', '0 0 0', 1.0, 0x20, autoAimFOV, autoAimFOV*2);
+   ChangeInv(player, 11, -1.0);
+   jkPlayPOVKey(player, povfireAnim, 1, 0x38);
+
+   powerBoost = SetThingModel(dummy, fuck);
+   ChangeFireRate(player, fireWait/powerBoost);
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+   powerBoost = GetInv(player, 63);
+   ActivateWeapon( player, fireWait/powerBoost, mode );
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+   DeactivateWeapon( player, mode );
+   Return;
+
+# ........................................................................................
+
+selected:
+   player = GetSourceRef();
+
+   // Setup the meshes and models.
+   jkSetPOVModel(player, povModel);
+   jkSetWeaponMesh(player, weaponMesh);
+   SetArmedMode(player, 1);
+
+   // Play mounting sound.
+   PlayMode(player, 41);
+   PlaySoundThing(mountSound, player, 1.0, -1.0, -1.0, 0x80);
+
+   // Play the animation (NOLOOP + UNIQUE + ENDPAUSE).
+   // The animation is held at the last frame after it is played.
+   trackID = jkPlayPOVKey(player, mountAnim, 0, 0x14);
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+
+   // Clear saber flags, and allow activation of the weapon
+   jkClearFlags(player, 0x5);
+   SetCurWeapon(player, 2);
+   SetMountWait(player, GetKeyLen(mountAnim));
+
+   Return;
+
+# ........................................................................................
+
+deselected:
+   player = GetSourceRef();
+   weaponIndex = GetSenderRef();
+   
+   PlaySoundThing(dismountSound, player, 1.0, -1, -1, 0x80);
+   jkPlayPOVKey(player, dismountAnim, 0, 0x18);
+   
+   holsterWait = GetKeyLen(holsterAnim);
+   SetMountWait(player, holsterWait);
+   holsterTrack = PlayKey(player, holsterAnim, 1, 0x4);
+   SetTimerEx(holsterWait, 2, 0.0, 0.0);
+   if (trackID != -1)
+   {
+      jkStopPOVKey(player, trackID, 0);
+      trackID = -1;
+   }
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   Return;
+
+# ........................................................................................
+
+autoselect:
+   player = GetSourceRef();
+
+   // If the player has the weapon
+   if(GetInv(player, 2) != 0.0)
+   {
+      // If the player has ammo
+      if(GetInv(player, 11) != 0.0)
+      {
+         ReturnEx(500.0);
+      }
+      else
+      {
+         ReturnEx(-1.0);
+      }
+   }
+   else
+   {
+      ReturnEx(-1.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   StopKey(player, holsterTrack, 0.0);
+   Return;
+
+end
+
+
+
+
+

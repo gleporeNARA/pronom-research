@@ -1,0 +1,68 @@
+# Jedi Knight Cog Script
+#The first, original, one but not only thanks to the rites of xanthus!!,
+#
+# KICK.COG
+#
+# Let's you kick ass!!! Literally. No matter which weapon allows you to kick.
+#Only one fire, not actually a weapon.......just an attack.
+#
+#Like what ya see??? congrats are nice. Zekk02@aol.com
+#
+# This Cog is Not supported by LucasArts Entertainment Co
+
+symbols
+
+thing		player			local
+template    projectilek=+kick		local
+
+flex        kickWait=1.24			local
+
+sound       fireSound2=SwingFist02.wav		local
+
+message		activated
+message		timer
+
+# ........................................................................................
+# External animations
+
+keyframe kick=kick.key        local
+
+
+end                                                                           
+
+# ========================================================================================
+
+code
+activated:
+player = GetLocalPlayerThing();
+
+   if(IsInvActivated(player, 116)) Return;
+      SetInvActivated(player, 116, 1);
+
+      SetPOVShake('0.03 -.03 0.0', '3.0 0.0 0.0', .05, 80.0);
+      PlaySoundThing(fireSound2, player, 1.0, 0.5, 2.5, 0x80);
+
+				PlayKey(player, kick, 1, 0x38);
+SetTimerEx(.5, 2, 0, 0);
+SetTimerEx(1.47, 3, 0, 0);
+# ........................................................................................
+
+timer:
+   id = GetSenderId();
+
+   if (id == 2)
+   {
+      FireProjectile(player, projectilek, -1, 0, '-0.02 0.03 0', '0 0 0', 1.0, 0, 0.0, 0.0);
+      SetFireWait(player, kickWait);
+   }
+	else
+	if (id == 3)
+	{
+   SetInvActivated(player, 116, 0);
+	}
+
+  return;
+
+end
+
+

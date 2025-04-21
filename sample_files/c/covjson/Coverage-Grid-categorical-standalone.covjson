@@ -1,0 +1,68 @@
+{
+  "type" : "Coverage",
+  "domain" : {
+    "type" : "Domain",
+    "domainType" : "Grid",
+    "axes": {
+      "x" : { "values": [-10,-5,0] },
+      "y" : { "values": [40,50] },
+      "z" : { "values": [ 5] },
+      "t" : { "values": ["2010-01-01T00:12:20Z"] }
+    },
+    "rangeAxisOrder": ["t","z","y","x"],
+    "referencing": [{
+      "coordinates": ["y","x","z"],
+      "system": {
+        "type": "GeodeticCRS",
+        "id": "http://www.opengis.net/def/crs/EPSG/0/4979"
+      }
+    }, {
+      "coordinates": ["t"],
+      "system": {
+        "type": "TemporalRS",
+        "calendar": "Gregorian"
+      }
+    }]
+  },
+  "parameters" : {
+    "LC": {
+      "type" : "Parameter",
+      "description" : {
+        "en": "Land Cover according to xyz classification"
+      },
+      "observedProperty" : {
+        "id" : "http://foo/land_cover",
+        "label" : {
+          "en": "Land Cover"
+        },
+        "categories" : [{
+          "id": "http://.../landcover1/categories/grass",
+          "label": {
+            "en": "Grass"
+          },
+          "description": {
+            "en": "Very green grass."
+          }
+        }, {
+          "id": "http://.../landcover1/categories/rocks",
+          "label": {
+            "en": "Rock"
+          },
+          "description": {
+            "en": "Just rocks."
+          }
+        }]
+      },
+      "categoryEncoding": {
+        "http://.../landcover1/categories/grass": 1,
+        "http://.../landcover1/categories/rocks": 2
+      }
+    }
+  },
+  "ranges" : {
+    "LC" : {
+      "type" : "Range",
+      "values" : [ 1, 1, null, 2, 1, 2 ]
+    }
+  }
+}

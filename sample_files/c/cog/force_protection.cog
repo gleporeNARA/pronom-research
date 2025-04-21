@@ -1,0 +1,190 @@
+# Jedi Knight Cog Script
+#
+# FORCE_PROTECTION.COG
+#
+# FORCEPOWER Script - Protection
+#  Light Side Power
+#  Bin 29
+#
+# This script controls the activation and maintenance of force armor.
+# It uses Bin 61 for the armor amount.
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+
+flex        cost=0.0                       local
+flex        damage                          local
+flex        type                            local
+flex        forceArmor=0.0                  local
+flex        deterioration=5.0                local
+
+int         count                            local
+int         limit                            local
+int         flags=30                         local
+int         rank                             local
+
+int         shield=-1                        local
+template    shield_tpl=+force_shield         local
+
+sound       protectionSound=ForceProtect01.wav  local
+sound       protectionSound2=ForceProtect02.wav local
+int         channel=-1                       local
+
+vector      position                         local
+
+message     startup
+message     damaged
+message     activated
+message     pulse
+message     newplayer
+message     killed
+message     selected
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+damaged:
+   damage = GetParam(0);
+
+   forceArmor = GetInv(player, 61);
+   if(forceArmor > 0)
+   {
+      // If damage from energy, fire, magic, saber
+      type = GetParam(1);
+      if(BitTest(flags, type))
+      {
+         AddDynamicTint(player, 0, damage/100, damage/100);
+         forceArmor = forceArmor - damage;
+
+         if(forceArmor < 0)
+            damage = -forceArmor;
+         else
+            damage = 0;
+
+         // Inventory system will limit Bin 61 to a minimum of 0.
+         SetInv(player, 61, forceArmor);
+      }
+   }
+   ReturnEx(damage);
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   if(!IsInvActivated(player, 29))
+   {
+      SetInvActivated(player, 29, 1);
+      if(GetInv(player, 65) != 1) ChangeInv(player, 14, -cost);
+      rank = GetInv(player, 29);
+
+      PlayMode(player, 24);
+
+      // Play activation sound
+      PlaySoundThing(protectionSound, player, 1.0, -1, -1, 0x80);
+
+      // Play loop sound at 0.0 volume and fade it in to 0.8 volume in 0.75 secs
+      channel = PlaySoundThing(protectionSound2, player, 0.0, -1, -1, 0x81);
+      ChangeSoundVol(channel, 0.8, 0.75);
+
+      // 75 hp of protection per rank
+      SetInv(player, 61, rank * 75);
+
+      limit = rank * 15;
+
+      // Create the shield
+      shield = CreateThingAtPos(shield_tpl, GetThingSector(player), GetThingPos(player) , '0 0 0');
+
+      //AttachThingToThing(shield, player);
+      //SetThingAttachFlags(shield, 0x8);
+      AttachThingToThingEx(shield, player, 0x8);
+
+      // Make the player magsealed
+      SetThingFlags(player, 400000);
+
+      count = 0;
+      SetPulse(0.5);
+   }
+
+   Return;
+
+# ........................................................................................
+
+pulse:
+   if(GetThingHealth(player) < 1)
+   {
+      call stop_power;
+      Return;
+   }
+   forceArmor = GetInv(player, 61);
+   count = count + 1;
+   if(count > limit)
+   {
+      forceArmor = forceArmor - deterioration;
+      SetInv(player, 61, forceArmor);
+      if(forceArmor <= 0)
+      {
+         call stop_power;
+         Return;
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 29);
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   SetPulse(0);
+   if(channel != -1)
+   {
+      StopSound(channel, 0.1);
+      channel = -1;
+   }
+   SetInvActivated(player, 29, 0);
+   ClearThingFlags(player, 4);
+   SetInv(player, 61, 0);
+   if(shield != -1)
+   {
+      DestroyThing(shield);
+      shield = -1;
+   }
+
+   Return;
+
+end
+
+
+

@@ -1,0 +1,548 @@
+# Jedi Knight Cog Script
+#
+# WEAP_SABER.COG
+#
+# WEAPON Script - Lightsaber
+#
+# [CYW]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+# ========================================================================================
+
+
+symbols
+
+message  startup
+message  activated
+message  deactivated
+message  selected
+message  deselected
+message  newplayer
+message  autoselect
+message  timer
+message  fire
+message	killed
+
+# ........................................................................................
+
+model    povModel=sabv.3do             local
+model    saberMesh=str0.3do            local
+
+# ........................................................................................
+# POV animations
+
+keyframe mountAnim=SabVmnt.key         local
+keyframe dismountAnim=SabVdis.key      local
+keyframe holdAnim=SabVhold.key			local
+
+keyframe povSnapAnim1=SabVf1.key       local
+keyframe povSnapAnim2=SabVf2.key       local
+keyframe povSnapAnim3=SabVf1.key       local
+
+keyframe povPreFireAnim=SabVrdy.key    local
+keyframe povFireAnimF1=SabVsnp1.key    local
+keyframe povFireAnimF2=SabVsnp2.key    local
+keyframe povFireAnimB1=SabVb1.key      local
+keyframe povFireAnimB2=SabVb2.key      local
+keyframe povFireAnimL1=SabVl1.key      local
+keyframe povFireAnimR1=SabVr1.key      local
+keyframe povChargeAnim=SabVch.key      local
+
+keyframe povPreBlockAnim=SabVblk.key   local
+
+# ........................................................................................
+# External animations
+
+keyframe preFireAnimL=KYreadyl.key     local
+keyframe preFireAnimR=KYreadyr.key     local
+keyframe fireAnimF1=KYsnap1.key        local
+keyframe fireAnimF2=KYsnap2.key        local
+keyframe fireAnimB1=KYsabrb1.key       local
+keyframe fireAnimB2=KYsabrb2.key       local
+keyframe fireAnimL1=KYsabrl1.key       local
+keyframe fireAnimR1=KYsabrr1.key       local
+
+keyframe snapAnim1=KYsabrf1.key        local
+keyframe snapAnim2=KYsabrf2.key        local
+keyframe snapAnim3=KYsabrf1.key        local
+keyframe chargeAnim=KYcharge.key       local
+
+keyframe preBlockAnim=KYblock.key      local
+keyframe	holsterAnim=kyhlstr.key    	local
+
+# ........................................................................................
+
+sound    dismountSound=LtSaberOff01.WAV         local
+sound    mountSound=LtSaberOn01.WAV             local
+sound    hitSound01=LtSaberHit01.WAV            local
+sound    hitSound02=LtSaberHit02.WAV            local
+sound    hitSound03=LtSaberHit03.WAV            local
+sound    hitSound12=LtSaberHit12.WAV            local
+sound    hitSound14=LtSaberHit14.WAV            local
+sound    swingSound01=LtSaberSwing01.WAV        local
+sound    swingSound02=LtSaberSwing02.WAV        local
+sound    swingSound03=LtSaberSwing03.WAV        local
+sound    swingSound04=LtSaberSwing04.WAV        local
+sound    swingSound05=LtSaberSwing05.WAV        local
+sound    swingSound06=LtSaberSwing06.WAV        local
+sound    swingSound07=LtSaberSwing07.WAV        local
+sound    swingSound08=LtSaberSwing08.WAV        local
+sound    swingSoundDbl01=.WAV  local
+sound    humSound01=.WAV             local
+
+flex     damage                                 local
+flex     bladeLen                               local
+flex		holsterWait										local
+
+thing    player                                 local
+thing    antagonist                             local
+
+vector   ppos                                   local
+vector   apos                                   local
+vector   diff                                   local
+vector   thrust                                 local
+
+flex     damage                                 local
+flex     type                                   local
+flex     dot                                    local
+
+# ........................................................................................
+# Animation tracks
+
+int      mountAnimID                            local
+int      preAnimID                              local
+int      povPreAnimID                           local
+int      slashAnimID                            local
+int      povSlashAnimID                         local
+
+# ........................................................................................
+
+int      mode                                   local
+int      slash                                  local
+int      nextAttack                             local    # 0=right 1=left
+int      humChannel										local
+int		holsterTrack									local
+int		slashSound										local
+
+int 		assign											local
+int		nosaber											local
+
+vector   shakePos											local
+vector   shakeAngle										local
+
+cog		kyleCog											local
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   // Set up player with saber.
+   player = GetLocalPlayerThing();
+	
+	kyleCog = GetThingClassCog(player);
+
+   ClearActorFlags(player, 0x2000);
+	jkDisableSaber(player);
+   slash = 0;
+   nextAttack = 0;
+   slashAnimID=-1;
+   povSlashAnimID=-1;
+   return;
+
+# ........................................................................................
+
+timer:
+   id = GetSenderId();
+
+   if (id == 0)
+   {
+      // Play mounting sound.
+      PlaySoundThing(mountSound, player, 1.0, -1, -1, 0x80);
+      humChannel = PlaySoundThing(humSound01, player, 1.0, -1, -1, 0x81);
+      jkSetFlags(player, 0x5);
+   }
+	else
+	if (id == 1)
+	{
+		// Make sure a loose timer doesn't come in and reset the block after we deselect the saber.
+		if (nosaber == 0)
+			SetActorFlags(player, 0x2000);
+	}
+	else
+	if (id == 2)
+	{
+		StopKey(player, holsterTrack, 0.0);
+	}
+	
+   return;
+
+# ........................................................................................
+
+selected:
+	assign = GetSenderRef();
+
+	// Go to external
+	if ((jkGetSaberCam() == 1) && (GetCurrentCamera() == 0) && (GetPrimaryFocus(0) == player))
+		CycleCamera();
+	
+	// Setup the meshes and models.
+	jkSetPOVModel( player, povModel );
+	SetArmedMode( player, 2 );
+	jkSetWeaponMesh( player, saberMesh );
+	jkSetWaggle(player, '10.0 7.0 0.0', 350);
+	
+	if (assign == 0)
+	{
+		// Play the animation (NOLOOP + UNIQUE + ENDPAUSE).
+		// The animation is held at the last frame after it is played.
+		PlayMode(player, 42);
+		mountAnimID = jkPlayPOVKey( player, mountAnim, 0, 0x14 );
+		SetTimerEx(0.7, 0, 0, 0);
+	}
+	else
+	{
+		mountAnimID = jkPlayPOVKey( player, holdAnim, 0, 0x14 );
+      humChannel = PlaySoundThing(humSound01, player, 1.0, -1, -1, 0x81);
+      jkSetFlags(player, 0x80);
+	}
+		
+	SetMountWait(player, GetKeyLen(mountAnim));
+	
+	// Set saber flags, and allow activation of the weapon
+	SetCurWeapon( player, 10 );
+	
+	// Set autoblock on.
+	SetActorFlags(player, 0x2000);
+	jkDisableSaber(player);
+	nosaber = 0;
+   return;
+
+# ........................................................................................
+
+deselected:
+	// Back to POV
+	if ((jkGetSaberCam() == 1) && (GetCurrentCamera() == 1) && (GetPrimaryFocus(1) == player))
+		CycleCamera();
+	
+   // Shrink saber.
+   jkSetFlags(player, 0x8);
+
+   // Dismount the Lightsaber.
+   PlaySoundThing(dismountSound, player, 1.0, -1, -1, 0x80);
+   jkPlayPOVKey( player, dismountAnim, 0, 18 );
+
+	holsterWait = GetKeyLen(holsterAnim);
+   SetMountWait(player, holsterWait);
+   holsterTrack = PlayKey(player, holsterAnim, 1, 0x4);
+	SetTimerEx(holsterWait, 2, 0.0, 0.0);
+	if (mountAnimID != -1)
+	{
+		jkStopPOVKey( player, mountAnimID, 0 );
+		mountAnimID = -1;
+	}
+
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+	
+   // Clear variables
+   slash = 0;
+   nextAttack = 0;
+   slashAnimID = -1;
+   povSlashAnimID = -1;
+
+   StopSound( humChannel, 0.5 );
+
+   // Disable autoblock
+	KillTimerEx(1);
+   ClearActorFlags(player, 0x2000);
+	jkDisableSaber(player);
+	nosaber = 1;
+   return;
+
+# ........................................................................................
+
+activated:
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   if (mode > 1)
+      return;
+
+   povPreAnimID = -1;
+   preAnimID = -1;
+
+   ActivateWeapon( player, 0.5, mode );
+
+	// Disable autoblock
+   ClearActorFlags(player, 0x2000);
+	
+   return;
+
+# ........................................................................................
+
+deactivated:
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+   DeactivateWeapon( player, mode );
+
+   // Enable autoblock
+	SetTimerEx(0.5, 1, 0, 0);
+
+   return;
+
+# ........................................................................................
+
+fire:
+	// Stop block animations, by sending a message to kyle.cog.
+	SendMessage( kyleCog, user0 );
+
+	// Underwater saber attacks.
+	if (GetMajorMode(player) == 5)
+	{
+		jkEnableSaber( player, 50, 0.15, 0.25 );
+		
+		if (nextAttack == 0)
+		{
+			PlayMode( player, 8);
+			jkPlayPOVKey( player, povFireAnimR1, 2, 0x38 );
+			nextAttack = 1;
+		}
+		else
+		{
+			PlayMode( player, 18);
+			jkPlayPOVKey( player, povFireAnimL1, 2, 0x38 );
+			nextAttack = 0;
+		}
+
+		shakePos = VectorScale(RandVec(),.001);
+		shakeAngle = VectorScale(RandVec(),.5);
+		SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+		
+		SetFireWait(player, 1.0);
+		
+		slashSound = Rand()*7;
+		PlaySoundThing(swingSound01[slashSound], player, 1.0, -1, -1, 0x80);
+	}
+	else
+	{
+		mode = GetSenderRef();
+		if (mode == 0)
+		{
+			// If we do another attack, reset the quick slash counter.
+			thrust = GetThingThrust( player );
+	
+			// RIGHT Regular Strike
+			if (VectorX(thrust) > 0)
+			{
+				jkEnableSaber( player, 50, 0.15, 0.25 );
+	
+				jkPlayPOVKey( player, povFireAnimR1, 2, 0x38 );
+				PlayKey(player, fireAnimR1, 1, 0x38);
+	
+				shakePos = VectorScale(RandVec(),.001);
+				shakeAngle = VectorScale(RandVec(),.5);
+				SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+	
+//				PlaySoundThing(swingSound02, player, 1.0, -1, -1, 0x80);
+				slashSound = Rand()*7;
+				PlaySoundThing(swingSound01[slashSound], player, 1.0, -1, -1, 0x80);
+				SetFireWait(player, 0.8);
+			}
+			else
+			// LEFT Regular Strike
+			if (VectorX(thrust) < 0)
+			{
+				jkEnableSaber( player, 50, 0.15, 0.25 );
+	
+				jkPlayPOVKey( player, povFireAnimL1, 2, 0x38 );
+				PlayKey(player, fireAnimL1, 1, 0x38);
+	
+				shakePos = VectorScale(RandVec(),.001);
+				shakeAngle = VectorScale(RandVec(),.5);
+				SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+	
+//				PlaySoundThing(swingSound02, player, 1.0, -1, -1, 0x80);
+				slashSound = Rand()*7;
+				PlaySoundThing(swingSound01[slashSound], player, 1.0, -1, -1, 0x80);
+				SetFireWait(player, 0.8);
+			}
+			else
+			// BACKWARDS Strike
+			if (VectorY(thrust) < -0.1)
+			{
+				jkEnableSaber( player, 50, 0.15, 0.25 );
+	
+				if (nextAttack == 0)
+				{
+					jkPlayPOVKey( player, povFireAnimB1, 2, 0x38 );
+					PlayKey(player, fireAnimB1, 2, 0x38);
+					nextAttack = 1;
+				}
+				else
+				{
+					jkPlayPOVKey( player, povFireAnimB2, 2, 0x38 );
+					PlayKey(player, fireAnimB2, 2, 0x38);
+					nextAttack = 0;
+				}
+				shakePos = VectorScale(RandVec(),.001);
+				shakeAngle = VectorScale(RandVec(),.5);
+				SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+	
+				slashSound = Rand()*7;
+				PlaySoundThing(swingSound01[slashSound], player, 1.0, -1, -1, 0x80);
+				SetFireWait(player, 0.8);
+			}
+			else
+			// STANDING Strike
+			if (VectorY(thrust) < 0.1)
+			{
+				jkEnableSaber( player, 50, 0.25, 0.7 );
+	
+				if (nextAttack == 0)
+				{
+					jkPlayPOVKey( player, povFireAnimF1, 2, 0x38 );
+					PlayKey(player, fireAnimF1, 2, 0x38);
+					nextAttack = 1;
+				}
+				else
+				{
+					jkPlayPOVKey( player, povFireAnimF2, 2, 0x38 );
+					PlayKey(player, fireAnimF2, 2, 0x38);
+					nextAttack = 0;
+				}
+	
+				shakePos = VectorScale(RandVec(),.001);
+				shakeAngle = VectorScale(RandVec(),.5);
+				SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+	
+//				PlaySoundThing(swingSound02, player, 1.0, -1, -1, 0x80);
+				slashSound = Rand()*7;
+				PlaySoundThing(swingSound01[slashSound], player, 1.0, -1, -1, 0x80);
+				SetFireWait(player, 0.8);
+			}
+			else
+			{
+				// QUICK slash.
+				if (slash == 0)
+				{
+					// If after a second, we haven't attacked again, reset slash to 0.
+					jkEnableSaber( player, 40, 0.15, 0.25 );
+		
+					povSlashAnimID = jkPlayPOVKey( player, povSnapAnim1, 2, 0x38);
+					slashAnimID = PlayKey(player, snapAnim1, 1, 0x38);
+					PlaySoundThing(swingSound01, player, 1.0, -1, -1, 0x80);
+		
+					shakePos = VectorScale(RandVec(),.001);
+					shakeAngle = VectorScale(RandVec(),.5);
+					SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+		
+					SetFireWait(player, 0.25);
+					slash = 1;
+				}
+				else
+				if (slash == 1)
+				{
+					// Allow another second for the 3rd attack.
+					jkEnableSaber( player, 40, 0.15, 0.25 );
+		
+					povSlashAnimID = jkPlayPOVKey( player, povSnapAnim2, 2, 0x38 );
+					slashAnimID = PlayKey(player, snapAnim2, 1, 0x38);
+					PlaySoundThing(swingSound03, player, 1.0, -1, -1, 0x80);
+		
+					shakePos = VectorScale(RandVec(),.001);
+					shakeAngle = VectorScale(RandVec(),.5);
+					SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+		
+					SetFireWait(player, 0.25);
+					slash = 2;
+				}
+				else
+				if (slash == 2)
+				{
+					jkEnableSaber( player, 60, 0.2, 0.25 );
+		
+					povSlashAnimID = jkPlayPOVKey( player, povSnapAnim3, 2, 0x38 );
+					slashAnimID = PlayKey(player, snapAnim3, 1, 0x38);
+					PlaySoundThing(swingSound02, player, 1.0, -1, -1, 0x80);
+		
+					shakePos = VectorScale(RandVec(),.001);
+					shakeAngle = VectorScale(RandVec(),.5);
+					SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+		
+					SetFireWait(player, 1.0);
+					slash = 0;
+				}
+			}
+		}
+		// mode == 1
+		else
+		{
+			// HEAVY slash.
+			{
+                                jkEnableSaber( player, 160000000000, 0.3, 1.2 );
+				jkPlayPOVKey( player, povChargeAnim, 2, 0x38 );
+				PlayKey(player, chargeAnim, 2, 0x38);
+	
+				shakePos = VectorScale(RandVec(),.001);
+				shakeAngle = VectorScale(RandVec(),.5);
+				SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+	
+				PlaySoundThing(swingSoundDbl01, player, 1.0, -1, -1, 0x80);
+                                SetFireWait(player, 1.0);
+			}
+		}
+	}
+   return;
+
+# ........................................................................................
+
+newplayer:
+   slash = 0;
+   nextAttack = 0;
+   slashAnimID=-1;
+   povSlashAnimID=-1;
+   // Disable autoblock
+   ClearActorFlags(player, 0x2000);
+	jkDisableSaber(player);
+
+	// Back to POV, since the saber should never get autoselected at start for a multiplayer game.
+	if ((jkGetSaberCam() == 1) && (GetCurrentCamera() == 1) && (GetPrimaryFocus(1) == player))
+		CycleCamera();
+		
+   return;
+
+# ........................................................................................
+
+autoselect:
+   // Return the saber when out of everthing except the fists
+
+   // If the player has the weapon
+   if(GetInv(player, 10) != 0.0)
+   {
+      ReturnEx(200.0);
+   }
+   else
+   {
+      ReturnEx(-1.0);
+   }
+
+   Return;
+	
+# ........................................................................................
+	
+killed:
+	if (player == GetSenderRef())
+	{
+		if (GetCurWeapon(player) == 10)
+			PlaySoundThing(dismountSound, player, 1.0, -1, -1, 0x80);
+		nosaber = 1;
+	}
+	Return;
+	
+
+end
+

@@ -1,0 +1,131 @@
+# Jedi Knight Cog Script
+#
+# force_push.COG
+#
+# FORCEPOWER Script - Push
+# Whatever power Speak wants it
+# Bin 31 or 27 I think
+# 
+# (C) 1999 fourwood
+# LucasArts Entertainment Company doesn't support this cog in any way
+
+symbols
+thing       player                           local
+thing       victim                           local
+thing       lastvictim                       local
+thing       potential                        local
+
+flex        mana                             local
+flex        cost=10.0                        local
+int	     rank			           local
+
+sound       pushsound=ForceDsight01.wav      local
+
+int         active=0                         local
+int         done=0                           local
+
+message     startup
+message     activated
+message     pulse
+message     killed
+message     newplayer
+message     selected
+message     timer
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetlocalPlayerThing();
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   if(active) Return;
+
+   mana = GetInv(player, 14);
+   rank = GetInv(player, 27);
+   SetPulse(0.1);
+
+# ........................................................................................
+
+pulse:
+   if (active == 1) 
+   {
+      SetPulse(0);
+      return;
+   }
+   victim = FirstThingInView(player, 300, 8, 0x404);
+   while(victim != -1)
+   {
+      if(
+         HasLOS(player, victim) &&
+         (victim != player) &&
+         (VectorDist(GetThingPos(player), GetThingPos(victim)) <= 1.5) &&
+         !(GetThingFlags(victim) & 0x200) &&
+         !(GetThingFlags(victim) & 0x2) &&
+         !(GetActorFlags(victim) & 0x100) &&
+         !((jkGetFlags(victim) & 0x20) && !IsInvActivated(player, 23))
+        )
+      {
+   //      victim = potential;
+   //      potential = NextThingInView();
+   //      lastvictim = victim;
+      }
+      else
+         victim = NextThingInView();  
+      if (victim != -1)
+      {
+         if (mana >= cost)
+         {
+            if(HasLOS(player, victim) && (victim != player))
+            {         
+               PlayMode(player, 24);
+               PlaySoundThing(pushsound, player, 1.0, -1, -1, 0x80);
+               DetachThing(victim);
+               ApplyForce(victim, VectorScale(VectorNorm(VectorSub(GetThingPos(victim),GetThingPos(player))), 120 * rank));
+               ChangeInv(player, 14, -cost);
+               active = 1;
+               SetTimer(5);
+            }
+         }
+      }
+//      if (potential = -1) 
+//         SetPulse(0);
+      victim = NextThingInView();
+      if (victim == -1)
+      {
+         SetPulse(0);
+      }
+   }
+   return;
+
+selected:
+   print("Force Push");
+   return;
+
+killed:
+   call stop_power;	
+   return;
+
+newplayer:
+   call stop_power;
+   return;
+
+stop_power:
+   SetPulse(0);
+   victim = -1;
+   potential = -1;
+   return;
+
+timer:
+   active = 0;
+   return;
+
+end
+

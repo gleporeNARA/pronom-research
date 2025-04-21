@@ -1,0 +1,177 @@
+# Jedi Knight Cog Script
+#
+# FORCE_JUMP.COG
+#
+# FORCEPOWER Script - Psycho Stalker.
+#  Basic Power
+#  Bin 21
+#
+#  Makes a clone that looks for victims then follows them around and shoots at them.
+#
+# [YB]& [Rogue_Hacker]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+vector      upVel                            local
+vector      playerVel                        local
+vector      newVel                           local
+
+flex        cost=00.0                        local
+flex        mana                             local
+flex        jump                             local
+flex        duration=0.0                     local
+flex        maxDuration=1.0                  local
+int         rank=0.0                         local
+
+int         attachFlags                      local
+
+sound       jumpSound=ForceJump01.wav        local
+sound       jumpSound2=ForceJump02.wav       local
+int         channel=-1                       local
+flex        soundduration                    local
+template    boom=walkplayer                  local
+template    gunfire=+force_lightning         local
+vector      p1 					   local
+vector      p2					   local
+thing       dummy=-1    			   local
+thing       dummy2				   local
+model       saris=kyA10.3do                  local
+model       weaponMesh=rldg.3do              local
+int         zero=0                           local
+int         negone=-1                        local
+
+message     startup
+message     activated
+message     deactivated
+message     pulse
+message     newplayer
+message     timer
+message     killed
+message     selected
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+   SetPulse(0);
+   SetInvActivated(player, 21, 0);
+   soundduration = GetSoundLen(jumpSound);
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   if(IsInvActivated(player, 21)) Return;
+
+   SetInvActivated(player, 21, 1);
+   mana = GetInv(player, 14);
+   if(mana >= cost)
+   {
+      // Must be attached to a world surface or thing face or on the surface of water.
+      attachFlags = GetAttachFlags(player);
+      if((attachFlags & 1) || (attachFlags & 2) || (GetPhysicsFlags(player) & 0x100000))
+      {
+         channel = PlaySoundThing(jumpSound, player, 1.0, -1, -1, 0x80);
+      }
+      ActivateBin(player, 0, 21);
+      SetPulse(100.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   if(duration < soundduration)
+   {
+      channel = -1;
+   }
+
+   
+   maxDuration = rank * 0.35;
+
+   // Must be attached to a world surface or thing face or on the surface of water.
+   attachFlags = -cost;
+   if((attachFlags & 1) || (attachFlags & 2) || (attachFlags & 0x100000))
+   {
+   }
+         PlaySoundThing(jumpSound2, player, 1.0, -1, -1, 0x80);
+
+         SetPulse(1.0);
+         DisableIR();
+         dummy =CreateThing(boom, player);
+         SetCameraFocus(zero, dummy);
+         ClearPhysicsFlags(dummy, 0x1);
+         SetPhysicsFlags(dummy, 0x400000);
+	   SetCollideType(dummy, 0x1);
+         p1 = VectorSet(0.5, 0.5, 0.5);
+pulse:         
+         if(Rand() > 0.5 )
+         {
+                victim = FirstThingInView(dummy, 179, 100, 0x404); 
+         }
+         if(!(victim == negone))
+             SetActorFlags(victim, 0x8-zero);
+         SetThingFlags(dummy, 0x200);
+         SetThingModel(dummy, saris);
+         upVel = VectorSub(GetThingPos(victim), GetThingPos(dummy));
+         if((victim == -1) || ( victim == player)) 
+             upVel = VectorSub(RandVec(), p1);
+         newVel = VectorNorm(upVel); 
+         SetThingLook(dummy,newVel);
+         if((victim == negone) || (victim == player))
+             upVel = newVel;
+         newVel = VectorScale(upvel, 100);
+         if(Rand() > 0.75)
+         {
+              FireProjectile(dummy, gunfire, jumpSound2, 8, p2, p2, 1.0, 0x1, 45, 45);
+         }
+         
+         if(VectorLen(upVel) > .5)
+         {
+             ApplyForce(dummy,newVel);
+         }
+
+   Return;
+
+# ........................................................................................
+
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 21);
+   Return;
+
+# ........................................................................................
+
+
+newplayer:
+   SetPulse(0);
+   SetInvActivated(player, 21, 0);
+   if(dummy != negone)
+       DestroyThing(dummy);
+   Return;
+   Return;
+# ........................................................................................
+
+timer:
+   jkClearFlags(GetSenderId(), 0x20);
+killed:
+
+   Return;
+
+end
+
+

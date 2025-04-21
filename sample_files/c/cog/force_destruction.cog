@@ -1,0 +1,79 @@
+# Jedi Knight Cog Script
+#
+# FORCE_DESTRUCTION.COG
+#
+# FORCEPOWER Script - Destruction
+#  Dark Side Bonus Power
+#  Bin 33
+#
+# Modified by Fliblo
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+
+template    destProj1=+force_dest_p1         local
+template    destProj2=+force_dest_p2         local
+template    destProj3=+force_dest_p3         local
+template    destProj4=+force_dest_p4         local
+sound       destSound=ForceDestruct01.wav    local
+
+flex        cost=200.0                       local
+flex        mana                             local
+int         rank                             local
+
+flex        autoAimFOV=10                    local
+
+message     startup
+message     activated
+message     selected
+
+# ........................................................................................
+# External animations
+
+keyframe destr=kydestr0.key        local
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   mana = GetInv( player, 14 );
+   if(mana >= cost)
+   {
+      if(GetInv(player, 64) != 1) ChangeInv(player, 14, -cost);
+      rank = GetInv(player, 33);
+      AddDynamicTint(player, 0.3, 0.0, 0.15);
+      PlayKey(player, destr, 1, 0x38);
+
+      FireProjectile(player, destProj1[rank-1], destSound, 24, '0 0 0', '0 0 0', 1.0, 0, autoAimFOV, autoAimFOV);
+
+      SetBinWait(player, 33, 3.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 33);
+
+   Return;
+
+end
+
+

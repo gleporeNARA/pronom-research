@@ -1,0 +1,139 @@
+# Jedi Knight Cog Script
+#
+# POW_SUPERSHIELD.COG
+#
+# POWERUP Script - 90 Second Extended SuperShield
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+# Re-Edited by Steve Melville 1999 spike_uk@btinternet.com
+
+
+symbols
+
+thing       powerup                          local
+thing       player                           local
+int         bin=62                           local
+sound       pickupsnd=helthpu1.wav           local
+sound       outsnd=SCAlarm.wav               local
+sound       respawnsnd=Activate01.wav        local
+
+message     touched
+message     taken
+message     timer
+message     respawn
+message     newplayer
+message     pulse
+
+end
+
+# ========================================================================================
+
+code
+
+touched:
+   player = GetSourceRef();
+
+   powerup = GetSenderRef();
+   TakeItem(powerup, player);
+
+   Return;
+
+# ........................................................................................
+
+taken:
+   player = GetSourceRef();
+   powerup = GetSenderRef();
+
+   // Print("SuperShield");
+   jkPrintUNIString(player, bin);
+
+   // Do effects.
+   PlaySoundThing(pickupsnd, powerup, 1.0, -1, -1, 0);
+   AddDynamicTint(player, 0.0, 0.0, 0.2);
+
+   // Increase shields by 50.
+   ChangeInv(player, 60, 50);
+
+   // Make the player invulnerable
+   // jkSetInvulnerable(player, 1);
+   SetActorFlags(player, 8);
+
+   // Make the player magsealed
+   SetThingFlags(player, 4);
+
+   SetInvActivated(player, bin, 1);
+
+   // Set the font to yellow
+   jkSetSuperFlags(2);
+
+   // Effect lasts 90 seconds, expand if already on.
+   KillTimerEx(1);
+   SetTimerEx(90, 1, player, 1);
+   SetTimerEx(90 - 3 * GetSoundLen(outsnd) - 0.5, 1, player, 0);
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   if(GetParam(1) == 0)
+   {
+      // Power will end soon...
+      SetPulse(0.33);
+      PlaySoundLocal(outsnd, 1.0, 0.0, 0);
+      Sleep(GetSoundLen(outsnd) + 0.25);
+      PlaySoundLocal(outsnd, 1.0, 0.0, 0);
+      Sleep(GetSoundLen(outsnd) + 0.25);
+      PlaySoundLocal(outsnd, 1.0, 0.0, 0);
+   }
+   else
+   {
+      SetPulse(0);
+      ClearThingFlags(GetParam(0), 4);
+      ClearActorFlags(GetParam(0), 8);
+      SetInvActivated(GetParam(0), bin, 0);
+      jkClearSuperFlags(2);
+   }
+
+   Return;
+
+# ........................................................................................
+
+pulse:
+   if(jkGetSuperFlags() & 2)
+      jkClearSuperFlags(2);
+   else
+      jkSetSuperFlags(2);
+
+   Return;
+
+# ........................................................................................
+
+respawn:
+   powerup = GetSenderRef();
+   PlaySoundThing(respawnsnd, powerup, 0.6, 5.0, 10.0, 0);
+
+   Return;
+
+# ........................................................................................
+
+newplayer:
+   player = GetSenderRef();
+   SetPulse(0);
+   if(IsInvActivated(player, bin))
+   {
+      KillTimerEx(1);
+      ClearThingFlags(player, 4);
+      ClearActorFlags(player, 8);
+      SetInv(player, bin, 1.0);
+      SetInvActivated(player, bin, 0);
+      jkClearSuperFlags(2);
+   }
+
+   Return;
+
+end
+
+

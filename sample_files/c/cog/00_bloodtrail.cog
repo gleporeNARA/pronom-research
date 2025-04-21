@@ -1,0 +1,127 @@
+# Jedi Knight Cog Script
+#
+# 00_BLOODTRAIL.COG
+#
+# Leave a blood trail behind a severed limb
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+flags=0x240
+
+symbols
+
+template    blood=+limb_blood                local
+int         dummy                            local
+
+int         victim                           local
+int         bot                              local
+
+message     damaged
+message     created
+message     pulse
+message     timer
+message     skill
+message     splash
+
+end
+
+# ========================================================================================
+
+code
+damaged:
+   if(GetParam(1)==32)      // Bot is drowning...
+   {
+      Print("The Illusion is drowning...");
+      Return;
+   }
+
+   Print("The Force confuses the minds of the weak...");
+
+#----------This code will be implemented in the future version! ;-) ----------
+
+   //victim=NextThingInView();
+
+   # Freeze victim in place
+   //SetActorFlags(victim, 0x40000);
+
+   # Create a sphere around our victim, for a cool visual effect...
+   //sphere = CreateThingAtPosNR(sphere_tpl, GetThingSector(victim), GetThingPos(victim), '0.0 0.0 0.0');
+   //AttachThingToThingEx(sphere, victim, 0x8);
+   //SetParticleGrowthSpeed(sphere, -0.1);
+   //SetLifeLeft(sphere, 9.8);
+
+   # Set player free in 10.0 seconds, and destroy his sphere
+   //SetTimerEx(10.0, 66, victim, 0);
+
+   # Play freeze sound
+   //PlaySoundThing(absorbSound2, player, 1.0, -1, -1, 0x80);
+
+   # Add blue tint to victim's screen for visual effect...
+   //AddDynamicTint(victim, 0.0, 0.0, 1.0);
+   # Set pulse message to be activated every 0.5 secs
+   //SetPulse(0.5);
+
+   Return;
+
+created:
+   victim = -1;
+   bot = GetSenderRef();
+   SetArmedMode(GetSenderRef, 2 );
+   jkSetWeaponMesh(GetSenderRef, saberMesh );
+   jkSetWaggle(GetSenderRef, '10.0 7.0 0.0', 350);
+
+   //SetThingPulse(GetSenderRef(), 0.05);            // set 50 msec timer for blood release
+   //SetTimerEx(1.1, GetSenderRef(), 0, 0);          // cut it after 1.1 seconds
+   Return;
+
+# ........................................................................................
+
+pulse:
+   AddDynamicTint(victim, 0.0, 0.0, 1.0);
+   Return;
+
+# ........................................................................................
+
+timer:
+   if(GetSenderId() == 66)
+   {
+      ClearActorFlags(victim, 0x40000);
+      DestroyThing(sphere);
+      victim = -1;
+      Return;
+   }
+
+   //SetThingPulse(GetSenderId(), 0);
+   Return;
+
+splash:
+
+   sender = GetSenderRef();
+   source = GetSourceRef();
+
+   // actor or player ?
+   if((GetThingType(sender) == 2) || (GetThingType(sender) == 10))
+   {
+      // whatever source (i.e. enter or leave, don't care)
+      a_splash = CreateThingAtPosNR(splash_tpl2, GetThingSector(sender), GetThingPos(sender), '0 0 0');
+   }
+   // these are mostly the projectiles...
+   else
+   {
+      // on entering only
+      if(source == 1)
+         // not if player is submerged, but still do it if he's on the surface
+         if(!(GetThingFlags(player) & 0x2000000) || (GetPhysicsFlags(player) & 0x100000))
+            a_splash = CreateThingNR(splash_tpl, sender);
+   }
+
+   Return;
+
+skill:
+  Print("The Force can create many illusions in the minds of the weak...");
+  ReturnEx(0);
+  Return;
+
+end

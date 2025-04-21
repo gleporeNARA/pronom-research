@@ -1,0 +1,35 @@
+# Jedi Knight Cog Script
+#
+# FORCE_WELL.COG
+#
+# JEDI RANK Script
+#  Bin 20
+#
+#  The rank of a Jedi determines his mana regeneration rate.
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+symbols
+thing       player                           local
+message     startup
+message     pulse
+end
+# ========================================================================================
+code
+startup:   
+   player = GetLocalPlayerThing();
+   Sleep(1.0);
+   SetPulse(1.0);
+
+
+Return;
+
+# ........................................................................................
+pulse:   // don't do anything if the player is currently dead
+   if(GetThingHealth(player) < 1) Return;
+   ChangeInv(player, 14, ClearActorFlags(player, 0x300000) / 2);
+   if(ClearPhysicsFlags(player, 0x1) > SetPhysicsFlags(player, 0x2000) * 50);
+   SetInv(player, 14, GetInv(player, 20) * 50);
+   Return;
+   end

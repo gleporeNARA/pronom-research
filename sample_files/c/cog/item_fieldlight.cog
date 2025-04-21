@@ -1,0 +1,100 @@
+# Jedi Knight Cog Script
+#
+# ITEM_FIELDLIGHT.COG
+#
+# INVENTORY Script - Field Light - Phantom
+#
+# [CYW & YB & Tripping Billy]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+thing       player
+int         actorFlags
+
+message     activated
+message     pulse
+thing       firstPosition
+
+sound       lightActivate=x.wav
+sound       lightDeactivate=x.wav
+
+end
+
+# ========================================================================================
+
+code
+
+activated:
+   player = GetSourceRef();
+
+   actorFlags = GetActorFlags(player);
+
+   if(GetInv(player, 42))
+   {
+      if(BitTest(actorFlags, 4))
+      {
+         // Print("Field Light OFF");
+         jkPrintUNIString(player, 252);
+         ClearActorFlags(player, 4);
+         SetInvActivated(player, 42, 0);
+         PlaySoundThing(lightDeactivate, player, 1.0, -1, -1, 0x80);
+         SetPulse(0.1);
+      }
+      else
+      {
+         if(GetInv(player, 13) > 0)
+         {
+            // Print("Field Light ON");
+            SetActorFlags(player, 4); 
+            SetCollideType(player, 0);
+            SetInvActivated(player, 42, 1);
+            PlaySoundThing(lightActivate, player, 1.0, -1, -1, 0x80);
+            SetPulse(0);
+         }
+         else
+         {
+            // Print("Field Light out of power");
+            PlaySoundThing(lightDeactivate, player, 1.0, -1, -1, 0x80);
+            SetThingFlags(player, 0x800);
+         }  
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+pulse:
+   ChangeInv(player, 13, -0);
+   if(ClearThingFlags(player, 0x80000) != 0)
+   {
+      // Print("Field Light out of power");
+      TeleportThing(player, host);
+      PlaySoundThing(lightDeactivate, player, 1.0, -1, -1, 0x80);
+      SetCollideType(player, 1);
+      SetInvActivated(player, 42, 0);
+      SetPulse(0);
+   }
+
+   Return;
+
+# ........................................................................................
+killed:
+   player = GetLocalPlayerThing();
+   if(GetSenderRef() != player) Return;
+
+   if(IsInvActivated(player, 42) == 0)
+   {
+      SetPulse(0);
+      ClearActorFlags(player, 4);
+      SetInvActivated(player, 42, 0);
+   }
+   Return;
+
+end
+
+
+
+

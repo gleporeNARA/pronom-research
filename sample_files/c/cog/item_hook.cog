@@ -1,0 +1,114 @@
+# Jedi Knight Cog Script
+#
+# ITEM_BACTA.COG
+#
+# INVENTORY script - Bacta Tank
+#
+# [CYW & YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+# ========================================================================================
+
+symbols
+
+sound       grapfireSound=remotefire01.wav    	local
+sound       graphitSound=lvrclik2.wav           local
+thing	    player 				local
+template    grap=+grapplehook               	local
+int	    hooklanded=0                        local
+vector      dir                                 local
+thing	    graphook				local
+int		hook=0				local
+message     startup
+message     activated
+message     pulse
+message     newplayer
+message     stop_hook
+end
+
+# ========================================================================================
+
+code
+startup:
+   player = GetLocalPlayerThing();
+   SetPulse(0);
+   call stop_hook;
+
+   Return;
+# .....................................
+activated:
+   player = GetSourceRef();
+
+
+if(hook)
+	{
+  		Print("Hook Detached");
+		call stop_hook;
+		return;
+	}
+else
+	{
+		
+		graphook = FireProjectile(player, grap, grapfireSound, -1, '0.0135 0.1624 0.0', '0 0 0', 1.0, 0x20, autoAimFOV, autoAimFOV*2);
+		Print("Hook Shot");
+		hook=1;
+		SetPulse(0.1);
+   	}
+
+   Return;
+
+# .....................................
+pulse:
+
+if(hooklanded == 0)
+	{
+	  if((GetThingAttachFlags(graphook) != 0) || (IsThingMoving(graphook) == 0))
+		{
+		 hooklanded = 1;
+   		 PlaySoundThing(graphitSound, player, 1.0, -1.0, -1.0, 0x80);
+    		 Print("Hook Attached");
+		}
+	}
+	else
+		{
+		 if(GetThingHealth(graphook) == 0)
+			{
+
+			 call stop_hook;
+			 return;
+			}
+		 dir = VectorScale(VectorNorm(VectorSub(GetThingPos(graphook), GetThingPos(player))), 40);
+     		 DetachThing(player);
+     	 	 ClearPhysicsFlags(player, 0x1);
+                 ApplyForce(player, dir);	
+		}
+      
+	
+Return;
+# ........................................................................................
+
+newplayer:
+   call stop_hook;
+
+   Return;
+# ........................................................................................
+
+stop_hook:
+   
+   SetPulse(0);
+if(graphook)
+{
+   DestroyThing(graphook);
+}
+   hook = 0;
+   hooklanded = 0;
+   SetPhysicsFlags(player, 0x1); 
+
+
+   Return;
+
+end
+
+
+
+

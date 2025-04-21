@@ -1,0 +1,74 @@
+# Jedi Knight Cog Script
+#
+# SABER_TOGGLE.COG
+#
+# Toggles the saber between Lightsaber and Lightstaff
+# 
+#
+# This Cog is Not supported by LucasArts Entertainment Co
+flags=0x240
+symbols
+message		activated
+message		newplayer
+message	trigger
+thing		player		local
+
+
+int			staff		local
+
+end
+
+# ========================================================================================
+
+code
+
+newplayer:
+if(GetSenderRef() != GetLocalPlayerThing()) return;
+staff=0;
+
+SendTrigger(-1, 5551212, GetPlayerNum(GetLocalPlayerThing()), 0, 0, 0); 
+return;
+
+activated:
+if(GetCurWeapon(GetLocalPlayerThing()) == 10)
+	SendMessage(GetInvCog(GetLocalPlayerThing(), 10), user0);
+
+//sends a trigger to let the other cogs know to change the pup
+if(staff) 
+	{
+		SendTrigger(-1, 5551212, GetPlayerNum(GetLocalPlayerThing()), 0, 0, 0); 
+	}
+
+else
+	{
+		SendTrigger(-1, 5551212, GetPlayerNum(GetLocalPlayerThing()), 1, 0, 0); 
+	}
+
+return;
+
+trigger:
+if(GetSourceRef() != 5551212) return;
+//Print("Trigger to switch received");
+player=GetPlayerThing(GetParam(0));
+
+if(GetParam(1) == 1)
+	{
+		//Give the player the double saber .pup
+	//	Print("Trigger to switch to lightstaff received");
+		ParseArg(player, "puppet=kydub.pup");
+            if(player==GetLocalPlayerThing()) staff=1;
+	}
+if(GetParam(1) == 0)
+	{
+		//Give the player the regular .pup
+	//	Print("Trigger to switch to lightsaber received");
+		ParseArg(player, "puppet=ky.pup");
+	if(player==GetLocalPlayerThing()) staff=0;
+	}
+
+
+
+end
+
+
+

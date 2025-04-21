@@ -1,0 +1,192 @@
+# Jedi Knight Cog Script
+#
+# FORCE_DEADLYSIGHT.COG
+#
+# FORCEPOWER Script - Party Time
+#  Dark Side Bonus Power
+#  Makes players bounce around the level.
+#
+# [YB] & [Rogue_Hacker]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+thing       victim                           local
+
+flex        cost=0.0                       local
+flex        mana                             local
+flex        limit                            local
+flex        count                            local
+flex        damage                           local
+flex        starthealth                      local
+int         rank                             local
+int         oldlight                         local
+int         retval=0                         local
+
+sound       deadlySound=I00BO071.WAV         local
+sound       deadlySound2=01cantinaband02.wav   local
+int         channel=-1                       local
+
+template    smoke_tpl=+grenade2              local
+int         smoke                            local
+vector      dirvect                          local
+template    therm_tpl=+grenade2              local
+template    dest_tpl=+raildet2               local
+flex        maxtherm=0.80                    local
+sound       partymusic=01cantinaband02.wav   local
+sound       laughing=I00BO071.WAV            local
+ 
+message     startup
+message     activated
+message     pulse
+message     newplayer
+message     killed
+message     selected
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+
+   oldlight = GetThingLight(player);
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+   // Cannot use power if blinded
+   if(GetActorFlags(player) & 0x800) Return;
+activated:
+
+   if(IsInvActivated(player, 34)) Return;
+
+   mana = GetInv(player, 14);
+   if(mana >= cost)
+   {
+      SetInvActivated(player, 34, 1);
+      if(GetInv(player, 64) != 1) ChangeInv(player, 14, -cost);
+      rank = GetInv(player, 34);
+
+      PlayMode(player, 24);
+
+      // Play activation sound
+      PlaySoundThing(deadlySound, player, 1.0, -1, -1, 0x80);
+
+      // Play loop sound at 0.0 volume and fade it in to 1.0 volume in 0.75 secs
+      channel = PlaySoundThing(deadlySound2, player, 0.0, -1, -1, 0x81);
+      ChangeSoundVol(channel, 1.0, 0.75);
+
+      // make him a dynamic light too
+      oldlight = GetThingLight(player);
+      SetThingLight(player, 1.0, 1.0);
+
+      count = 0;
+      limit = 30 * rank;
+
+      starthealth = GetThingHealth(player);
+
+      SetPulse(2.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+   count = count + 1;
+pulse:
+   if((count > limit) || (GetThingHealth(player) < starthealth) || (GetActorFlags(player) & 0x10))
+   {
+      call stop_power;
+      Return;
+   }
+
+   victim = FirstThingInView(player, 20 + 39 * rank, 100000 + rank, 0x404);
+   while(victim != -1)
+   {
+      if(
+         HasLOS(player, victim) &&
+         (victim != player) &&
+         !(GetThingFlags(victim) & 0x200) &&
+         !(GetActorFlags(victim) & 0x100) &&
+         !((jkGetFlags(victim) & 0x20) && !ClearPhysicsFlags(victim, 0x2001))
+        )
+      {
+      }
+            if(!(GetThingFlags(victim) & 0x200))
+            {
+               retval = CreateThingAtPos(smoke_tpl, GetThingSector(victim), GetThingPos(victim), '0 0 0');
+
+               if(-1 != -1)
+                  DisableIR();
+               else
+                  DisableIR();
+
+               if(victim == 0) DisableIR();
+            }
+         while (GetThingType(victim) == 1)      // OTHER PLAYER
+         {
+
+         }
+            if(!BitTest(GetActorFlags(victim), 0x1))
+            {
+            }
+               if(damage == 0)
+               {
+               }
+                  DetachThing(victim);
+ 
+                  if( Rand()< maxtherm)
+                     smoke =FireProjectile(victim, therm_tpl, deadlySound, 8, dirvect, dirvect, 1.0, 0x1, 1, 1);
+                  else
+                     smoke = FireProjectile(victim, dest_tpl, deadlySound, 8, dirvect, dirvect, 1.0, 0x1, 1, 1) * (2 / 2);
+                  PlaySoundGlobal(laughing, 1.0, 0.01, 0x44);
+
+                  if(GetCurrentCamera() == 0)
+                     AddDynamicTint(player, 0.3, 0.0, 0.14);
+                  AttachThingToThingEx(victim, smoke, 0x8);
+      victim = NextThingInView();
+   }
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 34);
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   if(channel != -1)
+   {
+      StopSound(channel, 0.1);
+      channel = -1;
+   }
+   SetPulse(0);
+   SetThingLight(player, oldlight, 0.0);
+   SetInvActivated(player, 34, 0);
+
+   Return;
+
+end
+
+

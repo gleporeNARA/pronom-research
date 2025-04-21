@@ -1,0 +1,210 @@
+# Jedi Knight Cog Script
+#
+# FORCE_THROW.COG
+#
+# FORCEPOWER Script - Force Throw
+#  Dark Side Power
+#  Bin 30
+#
+# Modified by Fliblo
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+thing       potential                        local
+thing       debris                           local
+thing       victim                           local
+
+flex        mana                             local
+flex        maxDot                           local
+flex        dot                              local
+flex        cost=30                          local
+int         rank                             local
+
+vector      dir                              local
+
+sound       throwSound=ForceThrow01.WAV      local
+
+int         active=0                         local
+
+message     startup
+message     activated
+message     deactivated
+message     pulse
+message     newplayer
+message     killed
+message     deselected
+message     selected
+
+# ........................................................................................
+# External animations
+
+keyframe throw=kyrthro1.key        local
+
+end
+
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   // Cannot use power if blinded
+   if(GetActorFlags(player) & 0x800) Return;
+
+   if(active) Return;
+
+   mana = GetInv(player, 14);
+   rank = GetInv(player, 30);
+
+   if(mana >= cost)
+   {
+      victim = -1;
+      active = 1;
+      SetInvActivated(player, 30, 1);
+      SetPulse(0.33);
+   }
+   Return;
+
+# ........................................................................................
+
+pulse:
+   // Check all things for our victim.
+   victim = -1;
+   maxDot = 0;
+
+   // Search for all players and actors.
+   potential = FirstThingInView(player, 50 + 10 * rank, 7, 0x404);
+   while(potential != -1)
+   {
+      if(
+         HasLOS(player, potential) &&
+         (potential != player) &&
+         (VectorDist(GetThingPos(player), GetThingPos(potential)) <= 4) &&
+         !(GetThingFlags(potential) & 0x200) &&
+         !(GetActorFlags(potential) & 0x100) &&
+         !((jkGetFlags(potential) & 0x20) && !IsInvActivated(player, 23))
+        )
+      {
+         dot = ThingViewDot(player, potential);
+         if(dot > maxDot)
+         {
+            victim = potential;
+            maxDot = dot;
+         }
+      }
+      potential = NextThingInView();
+   }
+
+   // If we have a victim...
+   if(victim != -1)
+   {
+      jkSetTargetColors(6, 7, 8);
+      jkSetTarget(victim);
+   }
+   else
+   {
+      jkEndTarget();
+   }
+
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   if((victim == -1) || (GetThingHealth(player) <= 0))
+   {
+      call stop_power;
+      Return;
+   }
+
+   // Cannot use power if blinded
+   if(GetActorFlags(player) & 0x800)
+   {
+      call stop_power;
+      Return;
+   }
+
+   SetPulse(0);
+   jkEndTarget();
+
+   mana = GetInv(player, 14);
+
+   if(mana >= cost)
+   {
+      if(HasLOS(player, victim))             // check that we still have a LOS on it...
+      {
+         PlayMode(player, 24);
+
+         PlayKey(player, throw, 1, 0x38);
+         PlaySoundThing(throwSound, player, 1.0, -1, -1, 0x80);
+         if(GetInv(player, 64) != 1) ChangeInv(player, 14, -cost);
+         SetBinWait(player, 30, 0.2);
+
+         // Check for debris objects in view.
+         debris = FirstThingInView(player, 40 + 20 * rank, 3 + rank, 0x010);   // 0x010 debris
+         while(debris != -1)
+         {
+            if(HasLOS(player, debris))
+            {
+               dir = VectorScale(VectorNorm(VectorSub(GetThingPos(victim), GetThingPos(debris))), 300.0);
+               DetachThing(debris);
+               ApplyForce(debris, dir);
+            }
+            debris = NextThingInView();
+         }
+      }
+   }
+
+   active = 0;
+   SetInvActivated(player, 30, 0);
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 30);
+   Return;
+
+# ........................................................................................
+
+deselected:
+   jkEndTarget();
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   SetPulse(0);
+   SetInvActivated(player, 30, 0);
+   active = 0;
+   jkEndTarget();
+
+   Return;
+
+end
+
+

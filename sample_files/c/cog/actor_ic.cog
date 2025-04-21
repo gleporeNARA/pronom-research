@@ -1,0 +1,125 @@
+# Jedi Knight Cog Script
+#
+# ACTOR_IC.COG
+#
+#
+# Actor COG for Commandos with Rifles
+# Creates powerup upon death
+#
+# 7/28/97 [CR] Doubled saber damage for single player gameplay reasons
+#
+# [CR]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+#
+# ========================================================================================
+
+symbols
+
+message          killed
+message          skill
+message          damaged
+
+template         limb=+ichead                  local
+template         arm=+icarm                  local
+template         powerup=+Dstrifle       local
+thing            newThing                local
+thing            newThing1                local
+thing            victim                  local
+int              damage                  local
+int              bin                     local
+int         newThing                         local
+int         newThing1                         local
+int              senderref=-1            local
+ai               flee_ai=noweapon.ai     local
+
+end
+
+# ========================================================================================
+
+code
+
+damaged:
+   damage = GetParam(0);
+   if(GetParam(1) == 16)
+   {
+      damage = (damage * 2.0);
+      victim = GetSenderRef();
+      if(GetThingHealth(victim) <= damage) // but only if damage is sufficient to kill
+      {
+         if(rand() < 0.27)                   // random chance 
+        {
+            AmputateJoint(victim, 0);
+            newThing1 = CreateThingAtPos(limb, GetThingSector(victim), GetThingPos(victim), '0 0 0');
+            SetThingVel(newThing1, '0.0 0.7 1.4');
+         }
+}
+else
+         if(rand() < 0.49)                   // random chance 
+{
+            AmputateJoint(victim, 5);
+            newThing1 = CreateThingAtPos(arm, GetThingSector(victim), GetThingPos(victim), '0 0 0');
+            SetThingVel(newThing1, '0.0 0.7 1.4');
+
+                  SetActorWeapon(victim, 1, -1);
+      senderref = GetSenderRef();
+      newThing = CreateThing(powerup, GetSenderRef());
+      SetLifeleft(newThing, 30.0);
+      ReturnEx(newThing);
+
+      AISetClass(senderref, flee_ai);
+      AIFlee(senderref, GetLocalPlayerThing());
+
+      return;
+
+      }
+   }
+   ReturnEx(damage);
+   return;
+
+# ........................................................................................
+
+killed:
+   victim = GetSenderRef();
+   if (GetActorWeapon( victim, 1 ) != -1)
+   {
+      AmputateJoint( victim, 3 );
+      newThing = CreateThing(powerup, victim);
+      SetLifeleft(newThing, 200.0);
+   }
+   return;
+
+# ........................................................................................
+
+skill:
+   bin = GetParam(0);
+   if (bin == 24)       // Force Pull
+   {
+      senderref = GetSenderRef();
+      newThing = CreateThing(powerup, GetSenderRef());
+      SetLifeleft(newThing, 30.0);
+      ReturnEx(newThing);
+
+      AISetClass(senderref, flee_ai);
+      AIFlee(senderref, GetLocalPlayerThing());
+
+      return;
+   }
+   else
+   if (bin == 31)       // Force Grip
+   {
+      ReturnEx(10);     // return base damage that is taken by this actor.
+      return;
+   }
+   else
+   if (bin == 34)       // Deadly Sight
+   {
+      ReturnEx(5);      // return base damage that is taken by this actor.
+      return;
+   }
+
+   ReturnEx(-1);
+   return;
+
+end
+

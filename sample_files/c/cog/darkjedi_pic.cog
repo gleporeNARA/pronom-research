@@ -1,0 +1,160 @@
+# Jedi Knight Cog Script
+#
+# DARKJEDI_PIC.COG
+#
+# DARK JEDI Script - Pic
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+symbols
+
+message     startup
+message     newplayer
+message     damaged
+message     killed
+message     user0
+message     user1
+message     pulse
+message     skill
+
+thing       darkjedi                         mask=0xfff
+
+material    tip_mat=saberorange0.mat         local
+material    side_mat=saberorange1.mat        local
+
+template    tpl_wall=+ssparks_wall           local
+template    tpl_blood=+ssparks_blood         local
+template    tpl_saber=+ssparks_saber         local
+
+int         victim                           local
+int         forcepower                       local
+int         forcepulse                       local
+int         okay=0                           local
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+newplayer:
+   jkSetPersuasionInfo(darkjedi, 5, 13);
+   jkSetSaberInfo(darkjedi, side_mat, tip_mat, 0.003, 0.001, 0.09, tpl_wall, tpl_blood, tpl_saber);
+   jkSetFlags(darkjedi, 0x15);
+
+   Return;
+
+# ........................................................................................
+
+killed:
+   SetPulse(0);
+
+   ClearActorFlags(darkjedi, 0x80);
+   jkClearFlags(darkjedi, 0x20);
+   SetThingCurGeoMode(darkjedi, GetThingGeoMode(darkjedi));
+
+   jkSetFlags(darkjedi, 0x8);
+
+   Return;
+
+# ........................................................................................
+
+damaged:
+   damage = GetParam(0);
+   damageType = GetParam(1);
+
+   if(damageType & 1)                        // IMPACT
+      damage = damage / 2;
+   else
+   if(damageType & 2)                        // ENERGY
+      damage = damage / 2;
+   else
+   if(damageType & 4)                        // FIRE
+      damage = damage / 10;
+   else
+   if(damageType & 8)                        // FORCE
+      damage = damage;
+   else
+   if(damageType & 16)                       // SABER
+      damage = damage;
+
+   ReturnEx(damage);
+   Return;
+
+# ........................................................................................
+
+pulse:
+   if(forcepulse == 6)
+   {
+      ClearActorFlags(darkjedi, 0x80);
+      jkClearFlags(darkjedi, 0x20);
+      SetThingCurGeoMode(darkjedi, GetThingGeoMode(darkjedi));
+      SetPulse(0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+user1:
+   // Receives message from 11_endlevel.cog once game starts
+   okay = 1;
+   return;
+
+
+user0:
+   // Don't start until receved message from 11_endlevel.cog
+   if(okay == 0) Return;
+
+   victim = GetParam(0);
+   forcepower = GetParam(1);
+
+   if(forcepower == 1)
+   {
+      // Print("Force Power 1 : FORCE PERSUASION...");
+
+      // Pic has no MAGIC anim...
+      // PlayMode(darkjedi, 24);
+      // Sleep(0.3);
+
+      SetActorFlags(darkjedi, 0x80);
+      SetThingCurGeoMode(darkjedi, 0);
+      jkSetFlags(darkjedi, 0x20);
+      forcepulse = 6;
+      SetPulse(10.0);
+   }
+   else if(forcepower == 2)
+   {
+      // Print("Force Power 2");
+   }
+   else if(forcepower == 3)
+   {
+      // Print("Force Power 3");
+   }
+
+   Return;
+
+# ........................................................................................
+
+skill:
+   bin = GetParam(0);
+   if(bin == 31)                             // Force Grip
+   {
+      ReturnEx(10);
+      Return;
+   }
+   else
+   if(bin == 34)                             // Deadly Sight
+   {
+      ReturnEx(5);
+      Return;
+   }
+
+   ReturnEx(-1);
+   Return;
+
+end
+

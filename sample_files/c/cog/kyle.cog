@@ -1,0 +1,515 @@
+# Jedi Knight Cog Script
+#
+# KYLE.COG
+#
+# Main script for the player. Handles things like saber info,
+# saber blocking animations, invulnerability at respawn, etc.
+#
+# [YB & CYW]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+symbols
+
+thing       player                           local
+
+int         nextBlock=0                      local
+int         bin                              local
+int         rank                             local
+
+int         force_blinding=0                 local
+int         blindingEffectHandle=-1          local
+int         PulledWeapon                     local
+
+int         playersector                     local
+vector      playerpos                        local
+int         bub                              local
+
+template    tpl=+FPBryarPistol               local
+template    tpl1=+FPBryarPistol              local
+template    tpl2=+FPBryarPistol              local
+template    tpl3=+FPSTrifle                  local
+template    tpl4=+FPDetonator                local
+template    tpl5=+FPCrossbow                 local
+template    tpl6=+FPRepeaterGun              local
+template    tpl7=+FPRailGun                  local
+template    tpl8=+FPSeqCharge                local
+template    tpl9=+FPConcRifle                local
+
+template    smoke_tpl=+heavysmoke            local
+int         smoke                            local
+
+template    teleport_particles=+telesparks   local
+sound       teleportsnd=ForceThrow01.WAV     local
+
+template    bubble_tpl=bubble                local
+template    bubble_tpl2=bubble2              local
+template    bubble_tpl3=bubble3              local
+
+template    splash_tpl=+watersplash          local
+template    splash_tpl2=+watersplash2        local
+int         a_splash                         local
+int         sender                           local
+int         source                           local
+
+keyframe    povBlockAnim0=SabVblk0.key       local
+keyframe    povBlockAnim1=SabVblk1.key       local
+keyframe    povBlockAnim2=SabVblk2.key       local
+
+keyframe    blockAnim0=KYblock0.key          local
+keyframe    blockAnim1=KYblock1.key          local
+keyframe    blockAnim2=KYblock2.key          local
+
+int         dummy=0                          local
+int         blockPOVTrack=-1                 local
+int         blockTrack=-1                    local
+
+int         griptrackID=-1                   local
+
+message     startup
+message     killed
+message     newplayer
+message     timer
+message     blocked
+message     skill
+message     damaged
+message     splash
+message     user0
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+
+   if(!IsMulti()) call init_kyle;
+
+   // Bubbles
+   if(IsMulti())
+      SetTimerEx(4 + 5 * rand(), 2, 0, 0);
+   else
+      SetTimerEx(2 + 5 * rand(), 2, 0, 0);
+
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(player != GetSenderRef()) Return;
+
+   if(IsMulti())
+   {
+      CreateBackpack(player);
+      ClearActorFlags(player, 0x2000);
+   }
+
+   // clean up force powers stuff
+   if(blindingEffectHandle!=-1)
+   {
+      freeColorEffect(blindingEffectHandle);
+      blindingEffectHandle = -1;
+   }
+   ClearActorFlags(player, 0x800);
+   KillTimerEx(27);
+   force_blinding = 0;
+
+   ClearActorFlags(player, 0x40000);
+
+   if(griptrackID != -1)
+   {
+      StopKey(player, griptrackID, 0.1);
+      griptrackID = -1;
+   }
+
+   Return;
+
+# ........................................................................................
+
+damaged:
+   if(GetParam(1) == 32) call make_bubbles;
+
+   ReturnEx(GetParam(0));
+   Return;
+
+# ........................................................................................
+
+make_bubbles:
+   playersector = GetThingSector(player);
+   playerpos    = VectorAdd(GetThingPos(player), '0 0 0.075');
+
+   for(bub = 1; bub < 1 + 3 * rand(); bub = bub + 1)
+   {
+      CreateThingAtPosNR(bubble_tpl[3 * rand()], playersector, VectorAdd(playerpos, VectorScale(VectorNorm(VectorSet(rand()-0.5, rand()-0.5, rand()-0.5)), 0.05)), '0 0 0');
+      Sleep(0.05);
+
+      // Don't create too many bubbles over the network...
+      if(!IsMulti())
+      {
+         CreateThingAtPos(bubble_tpl3, playersector, VectorAdd(playerpos, VectorScale(VectorNorm(VectorSet(rand()-0.5, rand()-0.5, rand()-0.5)), 0.05)), '0 0 0');
+         Sleep(0.05);
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+newplayer:
+
+   call init_kyle;
+
+   // If it's multiplayer
+   if(IsMulti()) call init_multi_kyle;
+
+   // Start Bubbles
+   SetTimerEx(2 + 5 * rand(), 2, 0, 0);
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   if(GetSenderId() == 1)                    // Invulnerable for a while
+   {
+      // jkSetInvulnerable(GetParam(0), 0);
+      ClearActorFlags(GetParam(0), 8);
+      Return;
+   }
+   else
+   if(GetSenderId() == 2)                    // Bubbles check
+   {
+      if(GetThingHealth(player) < 1) Return;
+
+      if((GetThingFlags(player) & 0x2000000) && !(GetPhysicsFlags(player) & 0x100000))
+         call make_bubbles;
+
+      if(IsMulti())
+         SetTimerEx(4 + 5 * rand(), 2, 0, 0);
+      else
+         SetTimerEx(2 + 5 * rand(), 2, 0, 0);
+
+      Return;
+   }
+   else
+   if(GetSenderId() == 24)
+   {
+      // A pulled weapon must be made takeable again
+      SetCollideType(GetParam(0), 1);
+      Return;
+   }
+   else
+   if(GetSenderId() == 27)
+   {
+      if(blindingEffectHandle!=-1)
+      {
+         freeColorEffect(blindingEffectHandle);
+         blindingEffectHandle = -1;
+      }
+      // Get the effect ramping down
+      AddDynamicTint(player, 200 + 8 * rank, 210 + 10 * rank, 200 + 8 * rank);
+      ClearActorFlags(player, 0x800);
+      force_blinding = 0;
+      Return;
+   }
+   else
+   if(GetSenderId() == 31)
+   {
+      if(griptrackID != -1)
+      {
+         StopKey(player, griptrackID, 0.1);
+         griptrackID = -1;
+      }
+      ClearActorFlags(player, 0x40000);
+      Return;
+   }
+
+   Return;
+
+# ........................................................................................
+
+blocked:
+   if(player != GetSenderRef()) Return;
+
+   if (blockPOVTrack != -1)
+   {
+      jkStopPOVKey( player, blockPOVTrack, 0.1 );
+      blockPOVTrack = -1;
+   }
+   if (blockTrack != -1)
+   {
+      StopKey( player, blockTrack, 0.1 );
+      blockTrack = -1;
+   }
+
+   // PlaySoundThing(hitSound14, player, 1.0, -1, -1, 0);
+   blockPOVTrack = jkPlayPOVKey(player, povBlockAnim0[nextBlock], 2, 0x1a);
+   blockTrack = PlayKey(player, blockAnim0[nextBlock], 2, 0x1a);
+
+   nextBlock = nextBlock + 1;
+   if(nextBlock > 2)
+      nextBlock = 0;
+
+   Return;
+
+# ........................................................................................
+
+// This message is sent from the weap_saber.cog
+user0:
+   if (blockPOVTrack != -1)
+   {
+      jkStopPOVKey( player, blockPOVTrack, 0.1 );
+      blockPOVTrack = -1;
+   }
+   if (blockTrack != -1)
+   {
+      StopKey( player, blockTrack, 0.1 );
+      blockTrack = -1;
+   }
+   Return;
+
+# ........................................................................................
+
+skill:
+
+   // player might be dead when skill: arrives over the net...
+   if(GetThingHealth(player) <= 0) Return;
+
+   // Handle multiplayer force power effects
+   bin = GetParam(0);
+   rank = GetParam(1);
+
+   if(bin == 24)                             // Force Pull
+   {
+      ReturnEx(0);
+      if(!IsInvActivated(player, 28))        // Absorb makes player immune to Pull
+      {
+         if((GetCurWeapon(player) != 1) && (GetCurWeapon(player) != 10))
+         {
+            // Create a powerup corresponding to the current weapon
+            PulledWeapon = CreateThingAtPos(tpl[GetCurWeapon(player)], GetThingSector(player), GetThingPos(player), '0 0 0');
+
+            // Make the powerup collide later
+            SetTimerEx(0.2, 24, PulledWeapon, 0);
+
+            // Duplicate for internet games
+            SetTimerEx(0.25, 24, PulledWeapon, 0);
+
+            // Throw the powerup at the player
+            ApplyForce(PulledWeapon, VectorScale(VectorNorm(VectorSub(GetThingPos(GetSourceRef()), GetThingPos(player))), 30));
+
+            // Remove the weapon from the player
+            ChangeInv(player, GetCurWeapon(player), -1);
+
+            // Switch to fists
+            SelectWeapon(player, 1);
+
+            ReturnEx(1);
+         }
+      }
+
+      Return;
+   }
+   else
+   if (bin == 27)                            // Force Blinding
+   {
+      if((!force_blinding) && (!IsInvActivated(player, 23)))   // Seeing makes player immune to Blinding
+      {
+         force_blinding = 1;
+         blindingEffectHandle = newColorEffect(0, 0, 0, 0, 0, 0, 200 + 8 * rank, 210 + 10 * rank, 200 + 8 * rank, 1.0);
+         SetActorFlags(player, 0x800);
+         SetTimerEx(4 * rank, 27, player, 0);
+         ReturnEx(1);
+      }
+      else
+      {
+         ReturnEx(0);
+      }
+
+      Return;
+   }
+   else
+   if (bin == 31)                            // Force Grip
+   {
+      if(!IsInvActivated(player, 29))        // Protection makes player immune to Grip
+      {
+         griptrackID = PlayMode(player, 25);
+         SetActorFlags(player, 0x40000);
+
+         // Print("You are taking Grip damage");
+         jkPrintUNIString(player, 300);
+         DamageThing(player, 2 * rank, 0x8, GetSourceRef());
+         SetTimerEx(0.5, 31, player, 0);
+         ReturnEx(1);
+      }
+      else
+      {
+         ReturnEx(0);
+      }
+
+      Return;
+   }
+   else
+   if (bin == 34)                            // Deadly Sight
+   {
+      // Print("You are taking Deadly Sight damage");
+      jkPrintUNIString(player, 301);
+      DamageThing(player, 4 * rank, 0x8, GetSourceRef());
+      smoke = CreateThingAtPosNR(smoke_tpl, GetThingSector(player), GetThingPos(player), '0 0 0');
+      // Raise the tint above the normal damage tint
+      if(GetCurrentCamera() == 0)
+         AddDynamicTint(player, 0.15, 0.0, 0.07);
+      ReturnEx(1);
+      Return;
+   }
+
+   ReturnEx(-1);
+   Return;
+
+# ........................................................................................
+
+splash:
+   // splash: messages are only sent to the local player's cogs
+   // (class cog and capture cog) for performance reasons...
+
+   sender = GetSenderRef();
+   source = GetSourceRef();
+
+   // actor or player ?
+   if((GetThingType(sender) == 2) || (GetThingType(sender) == 10))
+   {
+      // whatever source (i.e. enter or leave, don't care)
+      a_splash = CreateThingAtPosNR(splash_tpl2, GetThingSector(sender), GetThingPos(sender), '0 0 0');
+   }
+   // these are mostly the projectiles...
+   else
+   {
+      // on entering only
+      if(source == 1)
+         // not if player is submerged, but still do it if he's on the surface
+         if(!(GetThingFlags(player) & 0x2000000) || (GetPhysicsFlags(player) & 0x100000))
+            a_splash = CreateThingNR(splash_tpl, sender);
+   }
+
+   Return;
+
+# ........................................................................................
+
+init_kyle:
+   SetActorFlags(player, 8);
+   SetTimerEx(1.50, 1, player, 0);
+
+   // Set Health to full
+   SetThingHealth(player, 100);
+
+   // Set Mana to full
+   SetInv(player, 14, GetInv(player, 20) * 50);
+
+   // Set Shields to max
+   SetInv(player, 60, 200);
+
+   // Set Battery to 100 minimum
+   SetInv(player, 13, 600);
+
+   // Set the power boost to 1.0
+   SetInv(player, 63, 1.0);
+
+   // When player starts, give him fists, and a saber.
+   SetInv(player, 10, 1.0);
+   SetInv(player, 1, 1.0);
+
+   // Give 50 energy minimum
+   if(GetInv(player, 11) < 50) SetInv(player, 11, 50.0);
+
+   // Bacta
+   if(GetInv(player, 40) == 0)
+      SetInvAvailable(player, 40, 0);
+   else
+      SetInvAvailable(player, 40, 1);
+
+   // Force
+   SetInv(player, 21, 2);
+   SetInv(player, 23, 2);
+   SetInv(player, 25, 1);
+   SetInv(player, 28, 2);
+   SetInv(player, 22, 2);
+   SetInv(player, 24, 4);
+   SetInv(player, 27, 4);
+   SetInv(player, 31, 4);
+   SetInv(player, 30, 2);
+
+   SetInvAvailable(player, 21, 1);
+   SetInvAvailable(player, 23, 1);
+   SetInvAvailable(player, 25, 1);
+   SetInvAvailable(player, 28, 1);
+   SetInvAvailable(player, 22, 1);
+   SetInvAvailable(player, 24, 1);
+   SetInvAvailable(player, 27, 1);
+   SetInvAvailable(player, 31, 1);
+   SetInvAvailable(player, 30, 1);
+
+// Force ranking
+  SetInv(player, 20, 9);
+
+   // IR Goggles
+   if(GetInv(player, 41))
+      SetInvAvailable(player, 41, 1);
+   else
+      SetInvAvailable(player, 41, 0);
+   SetInvActivated(player, 41, 0);
+
+   // Field Light
+   SetInv(player, 42, 1);
+   SetInvAvailable(player, 42, 1);
+   SetInvActivated(player, 42, 0);
+   ClearActorFlags(player, 4);
+
+   jkEndTarget();
+
+   Return;
+
+# ........................................................................................
+
+init_multi_kyle:
+
+   // Set Weapons
+   SetInv(player, 1, 1.0);
+   SetInv(player, 2, 1.0);
+   SetInv(player, 3, 0.0);
+   SetInv(player, 4, 0.0);
+   SetInv(player, 5, 0.0);
+   SetInv(player, 6, 0.0);
+   SetInv(player, 7, 0.0);
+   SetInv(player, 8, 0.0);
+   SetInv(player, 9, 0.0);
+   SetInv(player, 10, 1.0);
+
+   // Set Ammo
+   SetInv(player, 11, 50.0);
+   SetInv(player, 12, 0.0);
+   SetInv(player, 15, 0.0);
+
+   // Remove bacta tank and IR goggles
+   SetInv(player, 40, 0);
+   SetInv(player, 41, 0);
+   SetInvAvailable(player, 40, 0);
+   SetInvAvailable(player, 41, 0);
+
+   // Set shields to 100
+   SetInv(player, 60, 100);
+
+   // Do respawn effects
+   dummy = CreateThingAtPos(teleport_particles, GetThingSector(player), GetThingPos(player), '0 0 0');
+   dummy = PlaySoundThing(teleportsnd, player, 1.0, -1, -1, 0x180);
+
+   SetFireWait(player, -1);
+   SetMountWait(player, 0);
+   SetCurInvWeapon(player, 0);
+   SelectWeapon(player, AutoSelectWeapon(player, 1));
+
+   Return;
+
+end
+

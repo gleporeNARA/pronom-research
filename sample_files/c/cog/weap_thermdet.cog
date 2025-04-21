@@ -1,0 +1,301 @@
+# Jedi Knight Cog Script
+#
+# WEAP_THERMDET.COG
+#
+# WEAPON 4 Script - Thermal Detonator
+#
+# Fun to use and handy for clearing some elbow room.  Not recommending
+#  for those with noodle arms. The longer you hold down the fire key
+#  (CTRL/Z) the farther you throw the detonator.
+#
+# The primary fire throws the detonator with the 3 second delay, the
+#  secondary makes it explode on impact.
+#
+# - Not affected by MagSealed sectors/surfaces.
+#
+# [YB & CYW]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+# ========================================================================================
+
+symbols
+
+model       povModel=detv.3do             local
+model       weaponMesh=detg.3do           local
+
+keyframe    mountAnim=detvmnt.key         local
+keyframe    dismountAnim=detvdis.key      local
+keyframe    povFireAnim=detvpst1.key      local
+keyframe    prePOVThrowAnim=detvpre1.key  local
+#keyframe   preThrowAnim=kyrthro0.key     local
+keyframe    holsterAnim=kyhlstr.key       local
+
+template    projectile=+grenade1          local
+template    projectile1=+grenade2         local
+
+sound       throwSound=ThermalThrow01.wav local
+sound       clickSound=ThermClick01.wav   local
+sound       clickSound2=ThermClick02.wav  local
+sound       loopSound=ThermLoop01.wav     local
+
+flex        delayTime=0.0                 local
+flex        throwWait=0.1                 local
+flex        mountWait                     local
+flex        autoAimFOV=15                 local
+flex        autoAimMaxDist=5              local
+flex        holsterWait                   local
+
+thing       player                        local
+
+int         preThrowTrack                 local
+int         selectTrack                   local
+int         prePOVThrowTrack              local
+int         mode                          local
+int         cocked=0                      local
+int         holsterTrack                  local
+
+int         selectMode=1                  local
+
+message     startup
+message     activated
+message     deactivated
+message     selected
+message     deselected
+message     autoselect
+message     timer
+message     newplayer
+message     pulse
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   // Setup delays and variables.
+   mountWait    = GetKeyLen(mountAnim);
+
+   preThrowTrack=-1;
+   selectTrack=-1;
+   prePOVThrowTrack=-1;
+
+   Return;
+
+# ........................................................................................
+   player = GetSourceRef();
+   mode = GetSenderRef();
+   if (mode > 1)
+      Return;
+
+
+   PlaySoundThing(clickSound[mode], player, 1.0, -1.0, -1.0, 0x80);
+
+   // Cock arm back for throw.
+   if(preThrowTrack == -1 && prePOVThrowTrack == -1)
+   {
+      prePOVThrowTrack = jkPlayPOVKey(player, prePOVThrowAnim, 1, 0x14);
+      preThrowTrack = PlayMode( player, 38 );
+      ActivateWeapon(player, 0, mode);
+   }
+   Return;
+
+# ........................................................................................
+
+
+   player = GetSourceRef();
+   mode = GetSenderRef();
+
+   delayTime = DeactivateWeapon(player, mode);        // allow activated messages again.
+
+   // Make sure both keys are up before continuing.
+   if (GetCurWeaponMode() != -1)
+      Return;
+
+   // Set maximum scale factor (2 second hold.)
+   if(delayTime > 2)
+      delayTime = 2;
+
+   // Set minimum scale factor
+   if(mode == 0)
+   {
+      if(delayTime < 0.7) delayTime = 0.7;
+   }
+   else
+   {
+      if(delayTime < 0.25) delayTime = 0.25;
+   }
+   if(preThrowTrack != -1 && prePOVThrowTrack != -1)
+   {
+      jkStopPOVKey(player, prePOVThrowTrack, 0);
+      StopKey(player, preThrowTrack, 0);
+      preThrowTrack = -1;
+      prePOVThrowTrack = -1;
+   }
+   // Throw the appropriate detonator.
+   PlaySoundThing(throwSound, player, 1.0, 0.5, 2.5, 0x80, 4, 0.0);
+   SetPOVShake('0.0 -.003 0.0', '0.5 0.0 0.0', .05, 40.0);
+   jkPlayPOVKey(player, povfireAnim, 1, 0x38);
+   activated:
+   pulse:
+   FireProjectile(player, projectile[mode], -1, -1, '0.0 0.01 0', '0 0 0', 1, 0x20, 179.0, 179.0);
+   SetPulse(0.1);
+   SetMountWait(player, throwWait);
+
+   // If out of ammo try to autoswitch to another weapon
+   // if autoswitch is enabled else just switch to fists.
+   if(GetInv(player, 4) < 1)
+   {
+      if(GetAutoSwitch() & 1)
+      {
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+      }
+      else
+      {
+         SelectWeapon(player, 1);
+      }
+   }
+
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+   SetTimerEx(throwWait, 0, 0, 0);
+
+
+   Return;
+
+# ........................................................................................
+timer:
+   if (GetSenderId() == 0)
+   {
+      // Start waggling after the throw.
+      jkSetWaggle(player, '10.0 7.0 0.0', 350);
+   }
+   else
+   if (GetSenderId() == 2)
+   {
+      StopKey(player, holsterTrack, 0.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   player = GetSourceRef();
+
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+
+   // Play external mounting animation
+   PlayMode(player, 40);
+
+   // Setup the meshes and models.
+   jkSetPOVModel(player, povModel);
+   SetArmedMode(player, 0);
+   jkSetWeaponMesh(player, weaponMesh);
+
+   // Play the animation (NOLOOP + UNIQUE + ENDPAUSE).
+   // The animation is held at the last frame after it is played.
+   selectTrack = jkPlayPOVKey(player, mountAnim, 0, 0x14);
+   SetMountWait(player, GetKeyLen(mountAnim));
+
+   // Clear Lightsaber flag, and enable activation messages.
+   jkClearFlags(player, 0x5);
+   SetCurWeapon(player, 4);
+   SetMountWait(player, GetKeyLen(mountAnim));
+
+   Return;
+
+# ........................................................................................
+deselected:
+   player = GetSourceRef();
+
+   jkPlayPOVKey(player, dismountAnim, 0, 18);
+   SetMountWait(player, 0.4);
+   holsterTrack = PlayKey(player, holsterAnim, 1, 0x4);
+   SetTimerEx(0.4, 2, 0.0, 0.0);
+   if(selectTrack != -1)
+   {
+      jkStopPOVKey(player, selectTrack, 0);
+      selectTrack = -1;
+   }
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+deactivated:
+   SetPulse(0);
+   holsterWait = KillTimerEx(0);
+   if(preThrowTrack != -1 && prePOVThrowTrack != -1)
+   {
+      jkStopPOVKey(player, prePOVThrowTrack, 0);
+      StopKey(player, preThrowTrack, 0);
+      preThrowTrack = -1;
+      prePOVThrowTrack = -1;
+   }
+
+   Return;
+
+# ........................................................................................
+
+autoselect:
+
+   selectMode = GetSenderRef();
+   player = GetSourceRef();
+
+   // If the player has ammo
+   if(GetInv(player, 4) != 0)
+   {
+
+      // query for ammo
+      if(selectMode == -1)
+      {
+         ReturnEx(400.0);
+         Return;
+      }
+
+      if((selectMode == 0) && !(GetAutoPickup() & 2))
+      {
+         ReturnEx(400.0);
+         Return;
+      }
+
+      if((selectMode == 1) && !(GetAutoSwitch() & 2))
+      {
+         ReturnEx(400.0);
+         Return;
+      }
+
+      if((selectMode == 2) && !(GetAutoPickup() & 2))
+      {
+         ReturnEx(400.0);
+         Return;
+      }
+
+      ReturnEx(-2.0);
+      Return;
+
+   }
+   else
+   {
+      ReturnEx(-1.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+newplayer:
+   if(preThrowTrack != -1 && prePOVThrowTrack != -1)
+   {
+      jkStopPOVKey(player, prePOVThrowTrack, 0);
+      StopKey(player, preThrowTrack, 0);
+      preThrowTrack = -1;
+      prePOVThrowTrack = -1;
+   }
+   Return;
+
+# ........................................................................................
+
+
+end
+
+
+
+

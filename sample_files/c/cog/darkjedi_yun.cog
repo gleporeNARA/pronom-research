@@ -1,0 +1,220 @@
+# Jedi Knight Cog Script
+#
+# DARKJEDI_YUN.COG
+#
+# DARK JEDI Script - Yun
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+symbols
+
+message     startup
+message     newplayer
+message     damaged
+message     killed
+message     user0
+message     user1
+message     pulse
+message     skill
+
+thing       darkjedi                         mask=0xfff
+
+flex        damage                           local
+int         damageType                       local
+
+material    tip_mat=saberyellow0.mat         local
+material    side_mat=saberyellow1.mat        local
+
+template    tpl_wall=+ssparks_wall           local
+template    tpl_blood=+ssparks_blood         local
+template    tpl_saber=+ssparks_saber         local
+
+int         victim                           local
+int         forcepower                       local
+int         forcepulse                       local
+int         okay=0                           local
+
+sound       lightside_snd=i00yu02z.wav       local
+int         said_taunt=0                     local
+
+# FORCE BLINDING
+template    cone_tpl=+force_blind            local
+sound       blindingSound=ForceBlind01.WAV   local
+int         effectHandle=-1                  local
+model		yun=yu.3do			local
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+newplayer:
+   jkSetPersuasionInfo(darkjedi, 8, 16);
+   jkSetSaberInfo(darkjedi, side_mat, tip_mat, 0.003, 0.001, 0.100, tpl_wall, tpl_blood, tpl_saber);
+   jkSetFlags(darkjedi, 0x15);
+   Return;
+
+# ........................................................................................
+
+killed:
+   SetPulse(0);
+
+   if(effectHandle!=-1)
+   {
+      freeColorEffect(effectHandle);
+      effectHandle = -1;
+      AddDynamicAdd(victim, 180, 260, 230);
+   }
+   ClearActorFlags(victim, 0x800);
+
+   ClearActorFlags(darkjedi, 0x80);
+   jkClearFlags(darkjedi, 0x20);
+   SetThingCurGeoMode(darkjedi, GetThingGeoMode(darkjedi));
+
+   jkSetFlags(darkjedi, 0x8);
+
+   Return;
+
+# ........................................................................................
+
+damaged:
+   damage = GetParam(0);
+   damageType = GetParam(1);
+
+   if(damageType & 1)                        // IMPACT
+      damage = damage / 2;
+   else
+   if(damageType & 2)                        // ENERGY
+      damage = damage / 2;
+   else
+   if(damageType & 4)                        // FIRE
+      damage = damage / 10;
+   else
+   if(damageType & 8)                        // FORCE
+      damage = damage;
+   else
+   if(damageType & 16)                       // SABER
+      damage = damage;
+
+   ReturnEx(damage);
+   Return;
+
+# ........................................................................................
+
+pulse:
+   if(forcepulse == 6)
+   {
+      ClearActorFlags(darkjedi, 0x80);
+      jkClearFlags(darkjedi, 0x20);
+      SetThingCurGeoMode(darkjedi, GetThingGeoMode(darkjedi));
+      SetPulse(0);
+   }
+   else
+   if(forcepulse == 7)
+   {
+      if(effectHandle!=-1)
+      {
+         freeColorEffect(effectHandle);
+         effectHandle = -1;
+         AddDynamicAdd(victim, 180, 260, 230);
+      }
+      ClearActorFlags(victim, 0x800);
+      SetPulse(0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+user1:
+   // Receives message from 07_rahnlines once game starts
+   okay = 1;
+   return;
+
+user0:
+   // Don't start until receved message from 07_rahnlines.cog
+   if(okay == 0) Return;
+
+   victim = GetParam(0);
+   forcepower = GetParam(1);
+
+   if(said_taunt == 0)
+      if(GetThingHealth(victim) < 50)
+      {
+         PlaySoundThing(lightside_snd, darkjedi, 1.0, -1, -1, 0x180);
+         said_taunt = 1;
+         Sleep(1.5);
+      }
+
+   if(forcepower == 1)
+   {
+      // Print("Force Power 1 : FORCE PERSUASION...");
+      PlayMode(darkjedi, 24);
+      Sleep(0.3);
+      // He could die during the sleep
+      if(GetThingHealth(darkjedi) <= 0) Return;
+
+      SetActorFlags(darkjedi, 0x80);
+      SetThingCurGeoMode(darkjedi, 0);
+      jkSetFlags(darkjedi, 0x20);
+      forcepulse = 6;
+      SetPulse(10.0);
+   }
+   else
+   if(forcepower == 2)
+   {
+      if(effectHandle == -1)
+      {
+         // Print("Force Power 2 : FORCE BLINDING...");
+         PlayMode(darkjedi, 24);
+         Sleep(0.3);
+         // He could die during the sleep
+         if(GetThingHealth(darkjedi) <= 0) Return;
+
+         dummy = CreateThingAtPos(cone_tpl, GetThingSector(darkjedi), VectorAdd(GetThingPos(darkjedi), '0.0 0.0 0.04'), '0.0 0.0 0.0');
+         SetThingLook(dummy, VectorSub(GetThingPos(victim), GetThingPos(darkjedi)));
+         PlaySoundThing(blindingSound, darkjedi, 1.0, -1, -1, 0x80);
+
+         // If the player doesn't have Seeing active.
+         if(!IsInvActivated(victim, 23))
+         {
+            effectHandle = newColorEffect(0, 0, 0, 0, 0, 0, 180, 260, 230, 1.0);
+            SetActorFlags(victim, 0x800);
+            forcepulse = 7;
+            SetPulse(5.0);
+         }
+      }
+   }
+   else
+   if(forcepower == 3)
+   {
+      // Print("Force Power 3");
+   }
+
+   Return;
+
+# ........................................................................................
+
+skill:
+   bin = GetParam(0);
+   if(bin == 31)                             // Force Grip
+   {
+      ReturnEx(10);
+      Return;
+   }
+   else
+   if(bin == 34)                             // Deadly Sight
+   {
+      ReturnEx(5);
+      Return;
+   }
+
+   ReturnEx(-1);
+   Return;
+
+end
+

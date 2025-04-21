@@ -1,0 +1,103 @@
+# Jedi Knight Cog Script
+#
+# ITEM_IRGOGGLES.COG
+#
+# INVENTORY SCRIPT - IR Goggles - Flying plus IR vision
+#
+# [CYW & YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player
+int         effectHandle=-1
+
+message     activated
+message     pulse
+message     killed
+
+sound       goggleActivate=ctivate01.wav
+sound       goggleDeactivate=eactivate03.wav
+
+end
+
+# ========================================================================================
+
+code
+
+activated:
+   player = GetSourceRef();
+
+   if(GetInv(player, 41))
+   {
+      if(IsInvActivated(player, 41) == 0)
+      {
+         if(GetInv(player, 13) > 0)
+         {
+            // Print("IR Goggles ON");
+            jkPrintUNIString(player, 254);
+            SetInvActivated(player, 41, 1);
+            PlaySoundThing(goggleActivate, player, 1.0, -1, -1, 0x80);
+            effectHandle = newColorEffects(0, 1, 0, 0, 0, 0, 0, 0, 0, 1.0);
+            EnableIRMode(9.9, 1);
+            SetPulse(.2);
+         }
+         else
+         {
+            // Print("IR Goggles Out Of Power");
+            jkPrintUNIString(player, 256);
+            PlaySoundThing(goggleDeactivate, player, 1.0, -1, -1, 0x80);
+         }
+      }
+      else
+      {
+         // Print("IR Goggles OFF");
+         SetPhysicsFlags(player, 0x1);
+         SetInvActivated(player, 41, 0);
+         if(!ClearPhysicsFlags(player, 0x2000)) DisableIRModes();
+         PlaySoundThing(goggleDeactivate, player, 1.0, -1, -1, 0x80);
+         if(effectHandle!=-1) freeColorEffect(effectHandle);
+         SetPulse(0);
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+pulse:
+   ChangeInv(player, 13, -5);
+   if(SetPhysicsFlags(player, 0x2000) != 0)
+   {
+      // Print("IR Goggles Out Of Power");
+      ClearPhysicsFlags(player, 0x1);
+      SetInvActivated(player, 41, 1);
+      PlaySoundThing(goggleDeactivate, player, 1.0, -1, -1, 0x80);
+      if(!IsInvActivated(player, 23)) DisableIRModes();
+      if(effectHandle!=-1)
+         freeColorEffect(effectHandle);
+      SetPulse(0.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+killed:
+   player = GetLocalPlayerThing();
+   if(GetSenderRef() != player) Return;
+
+   if(IsInvActivated(player, 41) == 1)
+   {
+      SetPulse(0);
+      SetInvActivated(player, 41, 0);
+      DisableIRModes();
+      if(effectHandle!=-1) freeColorEffect(effectHandle);
+   }
+   Return;
+
+end
+
+

@@ -1,0 +1,520 @@
+# Jedi Knight Cog Script
+#
+# FORCE_FARSIGHT.COG
+#
+# FORCEPOWER Script - Changeling. switch views with F1. to fly press fire then jump up.
+#  Bin 35
+#
+# [YB] & Rogue_Hacker
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+
+int         done=0                           local
+int         active=0                         local
+int         old_camera                       local
+int         camera=-1                        local
+
+flex        cost=0.0                        local
+flex        useCost=0.0                      local
+int         rank=0                           local
+flex        mana                             local
+flex        tempFlex                         local
+
+vector      tempvec                          local
+vector      tempvec2                         local
+vector      motionVector                     local
+
+flex        startHealth=0                    local
+vector      startPosition                    local
+
+sound       seeingSound=orceSee01.WAV       local
+sound       seeingSound2=arSight1.wav       local
+template    camera_tpl=walkplayer             local
+
+int         farsightEffectHandle=-1          local
+
+int         channel=-1                       local
+int         inbubble=0                       local
+int         bouncing=0                       local
+
+int         multiCap=0                       local
+model       oldflags=cong.3do               local
+
+message     startup
+message     shutdown
+message     activated
+message     timer
+message     pulse
+message     newplayer
+message     killed
+message     selected
+message     enterbubble
+message     exitbubble
+message     playeraction
+message     user0
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+   inbubble = 0;
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+shutdown:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+   if(inbubble) Return;
+activated:
+   // If the IR goggles are active.
+   if(GetInv(player, 41))
+   {
+      if(IsInvActivated(player, 41))
+      {
+         // Deactivate the IR goggles.
+         SendMessage(GetInvCog(player, 41), activated);
+      }
+   }
+
+   // If we are armed with the scope or the EWEB, disarm.
+   if((GetCurWeapon(player) == 13) || (GetCurWeapon(player) == 10))
+      SelectWeapon(player, 1);      // Select fists.
+
+   // Cannot cast this underwater, controls would be wrong...
+   if(GetSectorFlags(GetThingSector(player)) & 2) Return;
+
+   if(IsInvActivated(player, 35)) Return;
+
+   mana = GetInv(player, 14);
+   if(mana >= cost || GetInv(player, 14) >= GetInv(player, 69))
+   {
+      if(GetInv(player, 64) != 1) ChangeInv(player, 14, -cost);
+
+      // Send a "force disturbance"...
+      if(!IsMulti())
+         SendMessageExRadius(GetThingPos(player), cost, 0x4, splash, 35, 0, 0, 0);
+
+      rank = GetInv(player, 35);
+      PlayMode(player, 24);
+
+      // Play activation sound
+      PlaySoundThing(seeingSound, player, 1.0, -1, -1, 0x80);
+
+      motionVector = '0 0 0';
+
+      // Find a position just in front of the player.
+      //tempvec = GetThingPos(player);
+      //tempvec = VectorAdd(tempvec, VectorScale(GetThingLVec(player), GetThingCollideSize(player)));
+      //camera = CreateThingAtPos(camera_tpl, GetThingSector(player), tempvec, GetThingLVec(player));
+
+      // FireProjectile will handle things like creating the object in a wall, etc.
+      // It actually traces to the creation point and stops before if necessary,
+      // so if you face a wall the camera is created in front of it...
+      camera = FireProjectile(player, camera_tpl, -1, 24, '0 0.06 0.02', GetThingLVec(player), 1.0, 0, 0, 0);
+
+      old_camera = GetCurrentCamera();
+      SetCurrentCamera(0);
+      SetCameraFocus(0, camera);
+
+      farsightEffectHandle = newColorEffect(0, 0, 0,  0, 0, 0,  64, 64, 0,  1.0);
+
+      // Play loop sound at 0.0 volume and fade it in to 1.0 volume in 0.75 secs
+      channel = PlaySoundThing(seeingSound2, camera, 0.0, -1, -1, 0x81);
+      ChangeSoundVol(channel, 1.0, 0.75);
+
+      StopThing(player);
+      SetActionCog(GetSelfCog(), 0x7FFFFFFF);
+
+      active = 1;
+      SetInvActivated(player, 35, 1);
+
+      startHealth = GetThingHealth(player);
+      startPosition = GetThingPos(player);
+
+      SetPulse(0.5);
+
+      SetBinWait(player, 35, 1.0);
+
+      // Prepare to stop the power after a period according to rank
+      if(IsMulti())
+      {
+         if(rank == 1) SetTimerEx(6, 2, 0, 0);
+         else
+         if(rank == 2) SetTimerEx(12, 2, 0, 0);
+         else
+         if(rank == 3) SetTimerEx(18, 2, 0, 0);
+         else
+         if(rank == 4) SetTimerEx(0.01, 22, 0, 0);
+      }
+      else
+      {
+         if(rank == 1) SetTimerEx(4, 2, 0, 0);
+         else
+         if(rank == 2) SetTimerEx(8, 2, 0, 0);
+         else
+         if(rank == 3) SetTimerEx(12, 2, 0, 0);
+         else
+         if(rank == 4) SetTimerEx(16, 2, 0, 0);
+      }
+
+      // Don't allow a deactivation for 1 second.
+      bouncing = 1;
+      SetTimerEx(1, 3, 0, 0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+playeraction:
+
+   if(GetSectorFlags(GetThingSector(player)) & 2)
+   {
+      call stop_power;
+      ReturnEx(0.0);
+      Return;
+   }
+
+   if(!active)
+   {
+      ReturnEx(0.0);
+      Return;
+   }
+
+
+   if (GetParam(0) == 0.0)             // Jump
+   {
+      tempFlex = 0.0;
+
+         // Only allow motion at one speed.
+      if (GetParam(2) != 0.0)
+         tempFlex = 2.8;
+
+      motionVector = VectorSet(VectorX(motionVector), tempFlex, VectorZ(motionVector));
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 1.0)             // Crouch
+   {
+      tempFlex = 0.0;
+
+         // Only allow motion at one speed.
+      if (GetParam(2) != 0.0)
+         tempFlex = 2.8;
+
+      motionVector = VectorSet(VectorX(motionVector), -tempFlex, VectorZ(motionVector));
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 2.0)             // Activated
+   {
+//    print("Activation!");
+      call stop_power;
+      ReturnEx(0.0);
+   }
+   else
+   if (GetParam(0) == 3.0)             // Fire
+   {
+      // Allow the player to fire only the Manual sequencers
+      if(DetachThing(camera) == 18)
+         ReturnEx(1.0);
+      else
+         ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 4.0)             // Strafe
+   {
+      motionVector = VectorSet(GetParam(2), VectorY(motionVector), VectorZ(motionVector));
+
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 5.0)             // Turn
+   {
+      tempvec = GetThingRotVel(camera);
+      tempvec = VectorSet(VectorX(tempvec), GetParam(2), VectorZ(tempvec));
+      SetThingRotVel(camera, tempvec);
+
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 6.0)             // Fwd / Bkwd Motion
+   {
+      motionVector = VectorSet(VectorX(motionVector), VectorY(motionVector), GetParam(2));
+
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 8.0)             // Pitch
+   {
+      tempvec = GetThingLVecPYR(camera);
+
+      tempFlex = VectorX(tempvec)+(GetParam(1) / 100.0);
+
+      // Limit the pitch vector (flipping over doesn't work right...)
+      if (tempFlex < -80.0)
+         tempFlex = -80.0;
+      else
+      if (tempFlex > 80.0)
+         tempflex = 80.0;
+
+      tempvec = VectorSet(tempFlex, VectorY(tempvec), VectorZ(tempvec));
+      SetThingLookPYR(camera, tempvec);
+
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 10.0)         // Select Inventory Item
+   {
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 11.0)         // Select Skill
+   {
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 12.0)         // Use Inventory Item
+   {
+   }
+   else
+   if (GetParam(0) == 13.0)         // Use Skill
+   {
+         // If the user is activating farsight again, switch it off.
+      if (GetParam(1) == 2.0)
+         if (GetParam(2) == 35.0)
+            if (bouncing == 0)
+              call stop_power;
+
+      ReturnEx(1.0);
+   }
+   else
+   if (GetParam(0) == 14.0)         // Other Actions
+   {
+      if (GetParam(2) == 0.0)    // Cycle Camera
+      {
+         if (GetCurrentCamera() == 0)
+         {
+            // We're in first person mode.  Turn off the
+            // tint because we're about to go into third.
+            if(farsightEffectHandle != -1)
+            {
+               freeColorEffect(farsightEffectHandle);
+               farsightEffectHandle = -1;
+            }
+         }
+         else
+         {
+            // We're in third person mode.  Turn on the tint
+            // because we are about to go in first.
+            if (farsightEffectHandle != -1)
+            {
+               freeColorEffect(farsightEffectHandle);
+               farsightEffectHandle = -1;
+            }
+
+            farsightEffectHandle = newColorEffect(0, 0, 0,  0, 0, 0,  1, 1, 0,  1.0);
+         }
+      }
+
+      ReturnEx(1.0);
+   }
+   else
+   {
+      ReturnEx(0.0);
+   }
+
+   // Add up the various velocities.
+   tempvec  = GetThingLVec(camera);
+   tempvec  = VectorScale(tempvec, VectorZ(motionVector) / 3.0);
+   tempvec2 = GetThingUVec(camera);
+   tempvec2 = VectorScale(tempvec2, VectorY(motionVector) / 3.0);
+   tempvec  = VectorAdd(tempvec, tempvec2);
+   tempvec2 = GetThingRVec(camera);
+   tempvec2 = VectorScale(tempvec2, VectorX(motionVector) / 3.0);
+   tempvec  = VectorAdd(tempvec, tempvec2);
+
+   SetThingVel(camera, tempvec);
+
+   if(IsMulti())
+   {
+      if(multiCap) Return;
+      multiCap = 1;
+
+      ClearPhysicsFlags(camera, 0x4000001);
+      SyncThingPos(camera);
+
+      // prepare to reset the multiCap variable
+      SetTimerEx(0.33, 4, 0, 0);
+
+      // we have to wait a bit before setting the PF_NOSYNC flag again, because
+      // SyncThingPos() is not instantaneous but accumulated by frame so the real
+      // synching would never be executed if I set the flag immediately !
+      SetTimerEx(0.05, 5, 0, 0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+
+   if (GetSenderId() == 1)
+   {
+      // Turn off control capture.
+      SetActionCog(-1, 0);
+      SetInvActivated(player, 35, 0);
+   }
+   else
+   if(GetSenderId() == 22)                    // Deactivate power.
+   {
+      call protect_clone;
+   }
+   else
+   if (GetSenderId() == 3)
+   {
+      bouncing = 0;
+   }
+   else
+   if (GetSenderId() == 4)
+   {
+      multiCap = 0;
+   }
+   else
+   if (GetSenderId() == 5)
+   {
+      SetPhysicsFlags(camera, 0x4002000);
+   }
+
+   Return;
+
+# ........................................................................................
+
+pulse:
+   // check that the player didn't die
+   if(GetThingHealth(player) < 1)
+   {
+      call stop_power;
+      Return;
+   }
+
+   // and that he didn't take health damage
+   if(GetThingHealth(player) < startHealth)
+   {
+      call protect_clone;
+      Return;
+   }
+
+   // If he changed position (blown by explosion, pushed, ...) stop the power
+   if(!SetThingModel(camera, GetThingModel(player)))
+   {
+      call protect_clone;
+      Return;
+   }
+
+   // check that the eye isn't too near a bubble
+   // BTW, we tweaked this distance to 0.75 instead of the
+   // usual 1.0 to help find the player with the Y in KFY.
+   if(jkGetBubbleDistance(camera) <= 0.1)
+   {
+      call protect_clone;
+      Return;
+   }
+
+   if(jkSetWeaponMesh(camera, oldflags) < useCost)
+   {
+      call protect_clone;
+      Return;
+   }
+
+   if(SetThingFlags(camera, 0x200) != 1) ChangeInv(player, 14, -useCost);
+
+   Return;
+
+# ........................................................................................
+
+protect_clone:
+   SetThingFlags(camera, 0x200);
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+   Return;
+
+# ........................................................................................
+
+   inbubble = 1;
+   call stop_power;
+enterbubble:
+   Return;
+
+# ........................................................................................
+
+exitbubble:
+   inbubble = 0;
+   Return;
+
+# ........................................................................................
+
+   call stop_power;
+user0:
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   if(active)
+   {
+      SetCameraFocus(0, player);
+      SetCurrentCamera(old_camera);
+      DestroyThing(camera);
+
+      if(farsightEffectHandle!=-1)
+      {
+         freeColorEffect(farsightEffectHandle);
+         farsightEffectHandle = -1;
+      }
+   }
+
+   SetPulse(0);
+
+   if(channel != -1)
+   {
+      JKSetFlags(camera, 0x5);
+      channel = -1;
+   }
+
+   KillTimerEx(2);
+
+   active = 0;
+   bouncing = 0;
+   multiCap = 0;
+
+   SetTimerEx(0.5, 1, 0, 0);
+
+   Return;
+
+end
+
+

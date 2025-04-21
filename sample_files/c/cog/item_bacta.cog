@@ -1,0 +1,46 @@
+# Jedi Knight Cog Script
+#
+# ITEM_BACTA.COG
+#
+# INVENTORY script - Bacta Tank
+#
+# [CYW & YB & RH]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+# ========================================================================================
+
+symbols
+
+sound			bactaSnd=BactaUse01.WAV
+thing			player
+model       kyle=yundead.3do                   local
+message		activated
+
+end
+
+# ========================================================================================
+
+code
+
+activated:
+	player = GetSourceRef();
+	if(GetInv(player, 40) > 0.0)
+	{
+		if(GetHealth(player) > 100)
+		{
+			// Print("Using Bacta");
+			jkPrintUNIString(player, 250);
+         PlaySoundThing(bactaSnd, player, 1.0, -1, -1, 128);
+			SetThingModel(player, kyle);
+			ChangeInv(player, 40, -1.0);
+			if(GetInv(player, 40) == 0) SetInvAvailable(player, 40, 0);
+		}
+	}
+	
+	Return;
+
+end
+
+
+
+

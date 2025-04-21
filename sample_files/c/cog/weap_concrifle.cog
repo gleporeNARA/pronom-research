@@ -1,0 +1,258 @@
+# Jedi Knight Cog Script
+#
+# WEAP_CONCRIFLE.COG
+#
+# WEAPON 9 Script - Concussion Rifle
+#
+# The trusty weapon of the Bossk race. It fires a concussive blast with a maximum
+# range of 30 meters, from there it creates an explosion that has a spread of about
+# 4 meters in diameter.
+#
+# - Not affected by MagSealed sectors/surfaces.
+#
+# [YB & CYW]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+# ========================================================================================
+
+symbols
+
+model       povModel=conv.3do                   local
+model       weaponMesh=cong.3do                 local
+
+keyframe    mountAnim=ConVmnt.key               local
+keyframe    dismountAnim=ConVdis.key            local
+keyframe    povfireAnim=ConVpst1.key            local
+keyframe    holsterAnim=kyhlstr.key             local
+
+sound       mountSound=df_rif_ready.wav         local
+sound       dismountSound=PutWeaponAway01.wav   local
+sound       fireSound=concuss5.wav              local
+sound       outSound=concuss1.wav               local
+
+flex        fireWait=1.2                        local
+flex        powerBoost                          local
+flex        autoAimFOV=30                       local
+flex        autoAimMaxDist=5                    local
+flex        holsterWait                         local
+
+int         dummy                               local
+
+template    projectile=3x20catwalk              local
+template    projectile3=landpad                 local
+
+thing       player                              local
+int         trackID=-1                          local
+int         mode                                local
+int         holsterTrack                        local
+
+int         selectMode=1                  local
+
+message     activated
+message     deactivated
+message     selected
+message     deselected
+#message     newplayer
+message     autoselect
+message     fire
+message     timer
+
+end
+
+# ========================================================================================
+
+code
+
+fire:
+   // Check that the player is still alive.
+   if(GetThingHealth(player) <= 0)
+   {
+      Return;
+   }
+
+   // Check Ammo - If we are out, autoselect best weapon.
+   if(GetInv(player, 12) < 8.0)
+   {
+      PlaySoundThing(outSound, player, 1.0, -1, -1, 0x80);
+      if(GetAutoSwitch() & 1)
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+      Return;
+   }
+
+   SetPOVShake('0.0 -.03 0.0', '4.0 0.0 0.0', .05, 80.0);
+   if(mode == 0)
+   {
+      dummy = FireProjectile(player, projectile, fireSound, 18, '0.02 0.15 0.0', '0 0 0', 1.0, 0x20, autoAimFOV, autoAimMaxDist);
+      ChangeInv(player, 12, -8.0);
+   }
+   else
+   {
+      dummy = FireProjectile(player, projectile3, fireSound, 18, '0.0 0.0 0.0', '0 0 0', 1.0, 0x20, autoAimFOV, autoAimMaxDist);
+      ChangeInv(player, 12, -4.0);
+   }
+
+   jkPlayPOVKey(player, povfireAnim, 1, 0x38);
+
+   // Provide a kick backwards
+   ApplyForce(player, VectorScale(GetThingLVec(player), -80));
+
+   powerBoost = GetInv(player, 63);
+   ChangeFireRate(player, fireWait/powerBoost);
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   powerBoost = GetInv(player, 63);
+   ActivateWeapon( player, fireWait/powerBoost, mode );
+
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+   DeactivateWeapon( player, mode );
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   player = GetSourceRef();
+
+   // Play external mounting animation
+   PlayMode(player, 41);
+
+   // Setup the meshes and models.
+   jkSetPOVModel(player, povModel);
+   SetArmedMode(player, 1);
+   jkSetWeaponMesh(player, weaponMesh);
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+
+   // Play mounting sound.
+   PlaySoundThing(mountSound, player, 1.0, -1.0, -1.0, 0x80);
+
+   // Play the animation (NOLOOP + UNIQUE + ENDPAUSE).
+   // The animation is held at the last frame after it is played.
+   trackID = jkPlayPOVKey(player, mountAnim, 0, 20);
+   SetMountWait(player, GetKeyLen(mountAnim));
+
+   // Clear saber flags, and allow activation of the weapon
+   jkClearFlags(player, 0x5);
+   SetCurWeapon(player, 9);
+
+   // Check Ammo - If we are out, autoselect best weapon.
+   if(GetInv(player, 12) < 2.0)
+   {
+      PlaySoundThing(outSound, player, 1.0, -1, -1, 0x80);
+      if(GetAutoSwitch() & 1)
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+   }
+
+   Return;
+
+# ........................................................................................
+
+deselected:
+   player = GetSourceRef();
+
+   PlaySoundThing(dismountSound, player, 1.0, -1, -1, 0x80);
+   jkPlayPOVKey(player, dismountAnim, 0, 18);
+
+   holsterWait = GetKeyLen(holsterAnim);
+   SetMountWait(player, holsterWait);
+   holsterTrack = PlayKey(player, holsterAnim, 1, 0x4);
+   SetTimerEx(holsterWait, 2, 0.0, 0.0);
+   if (trackID != -1)
+   {
+      jkStopPOVKey(player, trackID, 0);
+      trackID = -1;
+   }
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   Return;
+
+# ........................................................................................
+
+//newplayer:
+// player = GetSourceRef();
+//
+// // Make sure that if the player is respawning, the old mount isn't playing anymore.
+// if (trackID != -1)
+//    jkStopPOVKey(player, trackID, 0);
+//
+// Return;
+
+# ........................................................................................
+
+autoselect:
+   selectMode = GetSenderRef();
+   player = GetSourceRef();
+
+   // If the player has the weapon
+   if(GetInv(player, 9) != 0.0)
+   {
+      // If the player has ammo
+      if(GetInv(player, 12) > 7.0)
+      {
+
+         // query for ammo
+         if(selectMode == -1)
+         {
+            ReturnEx(1000.0);
+            Return;
+         }
+
+         if((selectMode == 0) && !(GetAutoPickup() & 2))
+         {
+            ReturnEx(1000.0);
+            Return;
+         }
+
+         if((selectMode == 1) && !(GetAutoSwitch() & 2))
+         {
+            ReturnEx(1000.0);
+            Return;
+         }
+
+         if((selectMode == 2) && !(GetAutoPickup() & 2))
+         {
+            ReturnEx(1000.0);
+            Return;
+         }
+
+         ReturnEx(-2.0);
+         Return;
+
+      }
+      else
+      {
+         ReturnEx(-1.0);
+      }
+   }
+   else
+   {
+      ReturnEx(-1.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   StopKey(player, holsterTrack, 0.0);
+   Return;
+
+end
+
+

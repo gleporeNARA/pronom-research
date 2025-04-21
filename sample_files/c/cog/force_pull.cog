@@ -1,0 +1,314 @@
+# Jedi Knight Cog Script
+#
+# FORCE_PULL.COG
+#
+# FORCEPOWER Script - Force Pull
+#  Basic Power
+#  Bin 24
+#
+# Modified by Fliblo
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+template    powerup                          local
+
+int         player                           local
+int         victim                           local
+int         potential                        local
+int         throwThing                       local
+
+flex        cost=20.0                        local
+int         rank                             local
+flex        mana                             local
+flex        dot                              local
+flex        maxDot                           local
+
+int         type                             local
+int         retval=0                         local
+
+vector      dir                              local
+
+sound       pullSound=ForcePull01.WAV        local
+
+int         IsAFlag=0                        local
+
+message     startup
+message     activated
+message     deactivated
+message     pulse
+message     timer
+message     newplayer
+message     killed
+message     deselected
+message     selected
+
+# ........................................................................................
+# External animations
+
+keyframe pull=kyfpull0.key        local
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   // Cannot use power if blinded
+   if(GetActorFlags(player) & 0x800) Return;
+
+   if(IsInvActivated(player, 24)) Return;
+
+   mana = GetInv(player, 14);
+   rank = GetInv(player, 24);
+
+   if(mana >= cost)
+   {
+      victim = -1;
+      SetInvActivated(player, 24, 1);
+      SetPulse(0.33);
+   }
+   Return;
+
+# ........................................................................................
+
+pulse:
+   // Check all things for our victim.
+   victim = -1;
+   maxDot = 0;
+
+   // Search for all players, actors and items.
+   potential = FirstThingInView(player, 20 + 15 * rank, 5.5, 0x424);
+   while(potential != -1)
+   {
+      if(
+         HasLOS(player, potential) &&
+         (potential != player) &&
+         (VectorDist(GetThingPos(player), GetThingPos(potential)) <= (0.5 + rank / 2)) &&
+         !(GetThingFlags(potential) & 0x200) &&
+         !(GetActorFlags(potential) & 0x100) &&
+         !((jkGetFlags(potential) & 0x20) && !IsInvActivated(player, 23))
+        )
+      {
+         // Hack to avoid targetting a CTF flag...
+         IsAFlag = 0;
+         if(GetThingType(potential == 5))
+         {
+            if(GetItemFlags(potential) & 8)
+            {
+               IsAFlag = 1;
+            }
+         }
+
+         if(!IsAFlag)
+         {
+            dot = ThingViewDot(player, potential);
+            if(dot > maxDot)
+            {
+               victim = potential;
+               maxDot = dot;
+            }
+         }
+
+      }
+      potential = NextThingInView();
+   }
+
+   // If we have a victim...
+   if(victim != -1)
+   {
+      jkSetTargetColors(18, 19, 20);
+      jkSetTarget(victim);
+   }
+   else
+   {
+      jkEndTarget();
+   }
+
+   Return;
+
+# ........................................................................................
+
+deactivated:
+
+   if((victim == -1) || (GetThingHealth(player) <= 0))
+   {
+      call stop_power;
+      Return;
+   }
+
+   SetPulse(0);
+   jkEndTarget();
+
+   mana = GetInv(player, 14);
+
+   if(mana >= cost)
+   {
+      if(HasLOS(player, victim))             // check that we still have a LOS on it...
+      {
+         PlayMode(player, 24);
+         PlayKey(player, pull, 1, 0x38);
+         PlaySoundThing(pullSound, player, 1.0, -1, -1, 0x80);
+         if((GetInv(player, 64) != 1) && (GetInv(player, 65) != 1)) ChangeInv(player, 14, -cost);
+         SetBinWait(player, 24, 0.2);
+
+         throwThing = -1;
+         type = GetThingType(victim);
+         if(type == 2)                       // ACTOR
+         {
+            if(GetActorWeapon(victim, 1) != -1)
+            {
+               // Make victim drop powerup.
+               throwThing = SkillTarget(victim, player, 24, 0);
+               if(throwThing != -1)
+               {
+                  SetActorWeapon(victim, 1, -1);
+                  AmputateJoint(victim, 3);
+               }
+            }
+            else
+            {
+               SetInvActivated(player, 24, 0);
+               Return;
+            }
+
+         }
+         else
+         if(type == 10)                      // OTHER PLAYER
+         {
+            if(!(GetThingFlags(victim) & 0x200))
+               retval = SkillTarget(victim, player, 24, rank);
+            SetInvActivated(player, 24, 0);
+            Return;
+         }
+         else
+         if(type == 5)                       // ITEM
+         {
+            retval = SkillTarget(victim, player, 24, rank);
+            if(retval != 0)
+            {
+               if(!GetLifeLeft(victim)) SetLifeleft(victim, 30.0);
+               throwThing = victim;
+            }
+            else
+            {
+               SetInvActivated(player, 24, 0);
+               Return;
+            }
+         }
+
+         // Throw item at player.
+         if(throwThing != -1)
+         {
+            SetTimerEx(1.5, 1, throwThing, 0);
+
+            // Duplicate sends for lost packets
+            SetTimerEx(3.5, 2, throwThing, 0);
+            SetTimerEx(3.6, 2, throwThing, 0);
+
+            if(IsMulti())
+            {
+               // Kill the thing
+               SetTimerEx(4.0, 3, throwThing, 0);
+               // Duplicate send for lost packets
+               SetTimerEx(4.1, 4, throwThing, 0);
+            }
+
+            // Turn off gravity for the thing
+            ClearPhysicsFlags(throwThing, 0x1);
+
+            dir = VectorScale(VectorNorm(VectorSub(GetThingPos(player), GetThingPos(throwThing))), 30);
+
+            ApplyForce(throwThing, dir);
+         }
+      }
+   }
+
+   SetInvActivated(player, 24, 0);
+
+   Return;
+
+# ........................................................................................
+
+timer:
+
+   if(GetSenderId() == 1)
+   {
+      // We MUST set gravity whatever the original setting,
+      // else objects might just float around...
+      SetPhysicsFlags(GetParam(0), 1);
+      Return;
+   }
+   else
+   if(GetSenderId() == 2)
+   {
+      // Set back to no gravity after the object had a chance to
+      // settle down for next time they respawn...
+      ClearPhysicsFlags(GetParam(0), 1);
+      Return;
+   }
+   else
+   if(GetSenderId() == 3)
+   {
+      // SITH_TF_DISABLED
+      SetThingFlags(GetParam(0), 0x80000);
+      SetLifeLeft(GetParam(0), 26);
+      Return;
+   }
+   else
+   if(GetSenderId() == 4)
+   {
+      SetThingFlags(GetParam(0), 0x80000);
+      SetLifeLeft(GetParam(0), 25.9);
+      Return;
+   }
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 24);
+   Return;
+
+# ........................................................................................
+
+deselected:
+   call stop_power;
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   SetPulse(0);
+   SetInvActivated(player, 24, 0);
+   victim = -1;
+   jkEndTarget();
+
+   Return;
+
+end
+
+

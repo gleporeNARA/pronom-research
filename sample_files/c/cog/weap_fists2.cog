@@ -1,0 +1,202 @@
+# Jedi Knight Cog Script
+#
+# WEAP_FISTS.COG
+#
+# WEAPON 1 Script - Fists
+#
+# The primary fire for is a punch with the left fist and then the right fist.
+# 
+# _|_|_|    _|      _|  _|      _|  
+# _|    _|  _|_|  _|_|    _|  _|    
+# _|    _|  _|  _|  _|      _|      
+# _|    _|  _|      _|    _|  _|    
+# _|_|_|    _|      _|  _|      _|
+#
+# - Not affected by MagSealed sectors/surfaces.
+#
+# [YB & CYW]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+model       povModel=fistv.3do
+model       weaponMesh=fistg.3do
+
+keyframe    mountAnim=FistVmnt.key			local
+keyframe    dismountAnim=FistVdis.key		local
+keyframe    povfireAnim1=FistVl.key			local
+keyframe    povfireAnim2=FistVr.key			local
+keyframe    holsterAnim=kyhlstr.key  		local
+
+sound       fireSound1=SwingFist01.wav		local
+sound       fireSound2=SwingFist04.wav		local
+
+template    projectile=+punch			local
+
+thing       player					local
+
+flex        leftWait=0.01		      	local
+flex        rightWait=0.01				local
+flex        mountWait					local
+flex        holsterWait					local
+int         trackID=-1					local
+int         nextAnim=0					local
+int		holsterTrack      			local
+
+message     startup
+message     activated
+message     deactivated
+message     selected
+message     deselected
+#message     newplayer
+message     autoselect
+message     fire
+message		timer
+
+end
+
+# ========================================================================================
+
+code
+
+
+   player = jkGetLocalPlayer();
+
+   // Setup delays.
+   leftWait     = GetKeyLen(povfireAnim1);
+   rightWait    = GetKeyLen(povfireAnim2);
+   mountWait    = GetKeyLen(mountAnim);
+startup:
+   Return;
+
+# ........................................................................................
+
+fire:
+   // Check that the player is still alive.
+   if(GetThingHealth(player) <= 0)
+   {
+      Return;
+   }
+
+   // Alternate fists.
+   if(nextAnim == 0)
+   {
+      SetPOVShake('-0.01 -.01 0.0', '1.0 0.0 0.0', .05, 80.0);
+      PlaySoundThing(fireSound1, player, 1.0, 0.5, 2.5, 0x80);
+      FireProjectile(player, projectile, -1, 8, '-0.02 0.03 0', '0 0 0', 1.0, 0, 0.0, 0.0);
+      SetFireWait(player, leftWait);
+   }
+   else
+   {
+      SetPOVShake('0.01 -.01 0.0', '1.0 0.0 0.0', .05, 80.0);
+      PlaySoundThing(fireSound1, player, 1.0, 0.5, 2.5, 0x80);
+      FireProjectile(player, projectile, -1, 18, '0.02 0.03 0', '0 0 0', 1.0, 0, 0.0, 0.0);
+      SetFireWait(player, rightWait);
+   }
+
+   jkPlayPOVKey(player, povfireAnim1[nextAnim], 1, 0x0a);
+   nextAnim = 1-nextAnim;
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+   ActivateWeapon( player, leftWait, mode );
+
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+   DeactivateWeapon( player, mode );
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   player = GetSourceRef();
+
+   PlayMode(player, 40);
+
+   // Setup the meshes and models.
+   jkSetPOVModel(player, povModel);
+   jkSetWeaponMesh(player, weaponMesh);
+   SetArmedMode(player, 0);
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+
+   // Play the animation (NOLOOP + UNIQUE + ENDPAUSE).
+   // The animation is held at the last frame after it is played.
+   trackID = jkPlayPOVKey(player, mountAnim, 0, 20);
+   SetMountWait(player, mountWait);
+
+   // Clear saber flags, and allow activation of the weapon
+   jkClearFlags(player, 0x5);
+   SetCurWeapon(player, 1);
+
+   Return;
+
+# ........................................................................................
+
+deselected:
+   player = GetSourceRef();
+
+   // Stop the mount's last frame animation, and play the dismount.
+   jkPlayPOVKey(player, dismountAnim, 0, 18);
+	
+	holsterWait = GetKeyLen(holsterAnim);
+   SetMountWait(player, holsterWait);
+   holsterTrack = PlayKey(player, holsterAnim, 1, 0x4);
+	SetTimerEx(holsterWait, 2, 0.0, 0.0);
+	if (trackID != -1)
+	{
+		jkStopPOVKey(player, trackID, 0);
+		trackID = -1;
+	}
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   Return;
+
+# ........................................................................................
+
+//newplayer:
+//   player = GetSourceRef();
+//
+//   // Make sure that if the player is respawning, the old mount isn't playing anymore.
+//   if (trackID != -1)
+//   {
+//      jkStopPOVKey(player, trackID, 0);
+//      trackID = -1;
+//   }
+//
+//   Return;
+
+# ........................................................................................
+
+autoselect:
+
+   // Select fists when out of everything else...
+   ReturnEx(100.0);
+
+   Return;
+
+# ........................................................................................
+
+timer:
+	StopKey(player, holsterTrack, 0.0);
+	Return;
+
+end
+
+

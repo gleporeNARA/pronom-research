@@ -1,0 +1,284 @@
+# Jedi Knight Cog Script
+#
+# FORCE_GRIP.COG
+#
+# FORCEPOWER Script - The Grip
+#  Dark Side Power
+#  Bin 31
+#
+# This power chokes the enemy in the target cone, slowly causing damage.
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+thing       victim                           local
+thing       potential                        local
+
+flex        cost=50.0                        local
+flex        mana                             local
+flex        dot                              local
+flex        maxDot                           local
+flex        damage                           local
+flex        starthealth                      local
+int         rank                             local
+int         retval=0                         local
+
+sound       gripSound=ForceGrip01.WAV        local
+
+int         limit                            local
+int         count                            local
+
+int         active=0                         local
+int         targetting=0                     local
+
+message     startup
+message     activated
+message     deactivated
+message     pulse
+message     timer
+message     newplayer
+message     killed
+message     selected
+message     deselected
+
+# ........................................................................................
+# External animations
+
+keyframe grip=kygrip0.key        local
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+
+   SetInvActivated(player, 31, 0);
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   // Cannot use power if blinded
+   if(GetActorFlags(player) & 0x800) Return;
+
+   if(active) Return;
+
+   mana = GetInv(player, 14);
+   if(mana >= cost)
+   {
+      victim = -1;
+      active = 1;
+      targetting = 1;
+      SetPulse(0.33);
+   }
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   // If no victim was found just cleanup and exit
+   if((victim == -1) || (GetThingHealth(player) <= 0) || !active)
+   {
+      call stop_power;
+      Return;
+   }
+
+   SetPulse(0);
+   jkEndTarget();
+   targetting = 0;
+
+   mana = GetInv(player, 14);
+   if(mana >= cost)
+   {
+      if(HasLOS(player, victim))             // check that we still have a LOS on it...
+      {
+         SetBinWait(player, 31, rank + 0.5);
+
+         PlayMode(player, 24);
+				PlayKey(player, grip, 1, 0x38);
+         if(GetInv(player, 64) != 1) ChangeInv(player, 14, -cost);
+         rank = GetInv(player, 31);
+         limit = rank * 2;
+         starthealth = GetThingHealth(player);
+
+         if(GetThingType(victim) == 10)
+         {
+            // Multiplayer enemies
+            if(!(GetThingFlags(victim) & 0x200))
+            {
+               retval = SkillTarget(victim, player, 31, rank);
+               SetPulse(0.1);
+               count = 0;
+               SetInvActivated(player, 31, 1);
+            }
+            else
+            {
+               Return;
+            }
+         }
+         else
+         {
+            damage = SkillTarget(victim, player, 31, 0);
+
+            if(damage > 0.0)
+            {
+               // Play choke animation on the victim.
+               PlayMode(victim, 25);
+
+               SetPulse(0.1);
+               count = 0;
+               SetInvActivated(player, 31, 1);
+            }
+         }
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+pulse:
+   if(targetting == 1)
+   {
+      // Check all things for our victim.
+      victim = -1;
+      maxDot = 0;
+
+      // Search for all players and actors.
+      potential = FirstThingInView(player, 70, 4, 0x404);
+      while(potential != -1)
+      {
+         if(
+            HasLOS(player, potential) &&
+            (potential != player) &&
+            (VectorDist(GetThingPos(player), GetThingPos(potential)) <= 1) &&
+            !(GetThingFlags(potential) & 0x200) &&
+            !(GetActorFlags(potential) & 0x100) &&
+            !((jkGetFlags(potential) & 0x20) && !IsInvActivated(player, 23))
+           )
+         {
+            if(!BitTest(GetActorFlags(potential), 0x100))
+            {
+               dot = ThingViewDot(player, potential);
+               if(dot > maxDot)
+               {
+                  victim = potential;
+                  maxDot = dot;
+               }
+            }
+         }
+         potential = NextThingInView();
+      }
+
+      // If we have a victim...
+      if(victim != -1)
+      {
+         jkSetTargetColors(6, 7, 8);
+         jkSetTarget(victim);
+      }
+      else
+      {
+         jkEndTarget();
+      }
+   }
+   // this is the real Grip pulse
+   else
+   {
+      if((count > limit) ||
+         (GetThingHealth(player) < starthealth) ||
+         (GetActorFlags(player) & 0x800) ||
+         (GetThingFlags(victim) & 0x200)
+        )
+      {
+         call stop_power;
+         Return;
+      }
+
+      if(HasLOS(player, victim))
+      {
+         if(GetThingType(victim) == 10)      // OTHER PLAYER
+         {
+            // everything is done in the victim's KYLE.COG handler
+            if(!(GetThingFlags(victim) & 0x200))
+               retval = SkillTarget(victim, player, 31, rank);
+         }
+         else                                // ENEMY
+         {
+            DamageThing(victim, damage * rank / 2, 0x8, player);
+            // Force the victim to stay in place
+            SetActorFlags(victim, 0x40000);
+            // But prepare to free it again in 0.45 seconds
+            SetTimerEx(0.45, victim, GetThingSignature(victim), 0);
+         }
+
+         PlaySoundThing(gripSound, victim, 1.0, -1, -1, 0x80);
+         count = count + 1;
+         SetPulse(0.5);
+      }
+      else
+      {
+         // break the power if LOS is lost
+         call stop_power;
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   // This checks that the thing ref is still assigned to the same thing
+   if(GetThingSignature(GetSenderId()) == GetParam(0))
+   {
+      ClearActorFlags(GetSenderId(), 0x40000);
+   }
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 31);
+   Return;
+
+# ........................................................................................
+
+deselected:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   SetPulse(0);
+   SetInvActivated(player, 31, 0);
+   targetting = 0;
+   victim = -1;
+   active = 0;
+   jkEndTarget();
+
+   Return;
+
+end
+
+

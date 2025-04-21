@@ -1,0 +1,306 @@
+# Jedi Knight Cog Script
+#
+# WEAP_REPEATER.COG
+#
+# WEAPON 6 Script - Repeater
+# This is the same rifle that was in Dark Forces with the heat sink shield and the
+# three barrel design. It is a rapid fire rifle. With the option button you can fire
+# all three barrels at once at a slower rate.
+#
+# - Affected by MagSealed sectors/surfaces.
+#
+# [YB & CYW]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+model       povModel=rptv.3do                   local
+model       weaponMesh=rptg.3do                 local
+
+keyframe    mountAnim=RptVmnt.key               local
+keyframe    dismountAnim=RptVdis.key            local
+keyframe    povfireAnim=RptVpst1.key            local
+keyframe    holsterAnim=kyhlstr.key             local
+
+sound       mountSound=df_bry_ready.wav         local
+sound       dismountSound=PutWeaponAway01.wav   local
+sound       fireSound=rpeatrlp.wav              local
+sound       fireSound1=repeat-1.wav             local
+sound       outSound=trprout.wav                local
+
+vector      fireOffset                          local
+vector      adjOffset                           local
+vector      shakePos                            local
+vector      shakeAngle                          local
+
+template    projectile=+raildet                 local
+
+thing       player                              local
+
+flex        fireWait=0.1                        local
+flex        powerBoost                          local
+flex        lastFireTime=0                      local
+flex        curFireTime=0                       local
+flex        autoAimFOV=25                       local
+flex        autoAimMaxDist=5                    local
+flex        numExpectedFires                    local
+flex        extraSimTime                        local
+flex        holsterWait                         local
+
+int         trackID=-1                          local
+int         mode                                local
+int         fireChannel=-1                      local
+int         dummy                               local
+int         ammoCost                            local
+int         holsterTrack                        local
+
+message     startup
+message     activated
+message     deactivated
+message     selected
+message     deselected
+message     newplayer
+message     killed
+message     autoselect
+message     fire
+message     timer
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+   fireOffset = '0.0186 0.0102 0.00';
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   mode   = GetSenderRef();
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   if(mode > 1) Return;
+
+   if (mode == 0) ammoCost = 1.0;
+   else if (mode == 1) ammoCost = 3.0;
+   if(GetInv(player, 12) < ammoCost)
+   {
+      PlaySoundThing(outSound, player, 1.0, -1, -1, 0x180);
+      Return;
+   }
+
+   if (mode == 0)
+   {
+      if(fireChannel == -1)
+         fireChannel = PlaySoundThing(fireSound, player, 1.0, -1, -1, 0x181);
+      fireWait = 0.1;
+   }
+   else
+   if (mode == 1)
+   {
+      fireWait = 0.3;
+   }
+
+   powerBoost = GetInv(player, 63);
+   ActivateWeapon(player, fireWait/powerBoost, mode);
+   jkPlayPOVKey(player, povfireAnim, 1, 0x38);
+
+   Return;
+
+# ........................................................................................
+
+fire:
+   mode = GetSenderRef();
+
+   // Check that the player is still alive.
+   if(GetThingHealth(player) <= 0)
+   {
+      if(fireChannel != -1)
+      {
+         StopSound( fireChannel, 0.1 );
+         fireChannel = -1;
+         dummy = PlaySoundThing(fireSound1, player, 1.0, -1, -1, 0x180);
+      }
+      Return;
+   }
+
+   if (mode == 0) ammoCost = 1.0;
+   else
+   if (mode == 1) ammoCost = 3.0;
+
+   if(GetInv(player, 12) < ammoCost)
+   {
+      if (fireChannel != -1)
+      {
+         StopSound( fireChannel, 0.1 );
+         fireChannel = -1;
+         dummy = PlaySoundThing(fireSound1, player, 1.0, -1, -1, 0x180);
+      }
+
+      if(GetAutoSwitch() & 1)
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+
+      Return;
+   }
+
+   shakePos = VectorScale(RandVec(),.001);
+   shakeAngle = VectorScale(RandVec(),1);
+   SetPOVShake(shakePos, shakeAngle, .05, 80.0);
+
+   if (mode == 0)
+   {
+      dummy = FireProjectile(player, projectile, -1, 8, fireOffset, '0 0 0', 1.0, 0x30, autoAimFOV, autoAimFOV*2 );
+   }
+   else
+   if (mode == 1)
+   {
+      dummy = FireProjectile(player, projectile, fireSound1, 8, fireOffset, '4.0 0 0', 1.0, 0, autoAimFOV, autoAimMaxDist );
+      dummy = FireProjectile(player, projectile, -1, 8, fireOffset, '-2.5 2.5 0', 1.0, 0, autoAimFOV, autoAimMaxDist );
+      dummy = FireProjectile(player, projectile, -1, 8, fireOffset, '-2.5 -2.5 0', 1.0, 0, autoAimFOV, autoAimMaxDist );
+   }
+
+   ChangeInv(player, 12, -ammoCost);
+
+   powerBoost = GetInv(player, 63);
+   ChangeFireRate(player, fireWait/powerBoost);
+
+   if(GetInv(player, 12) == 0)
+   {
+      if (fireChannel != -1)
+      {
+         StopSound( fireChannel, 0.1 );
+         fireChannel = -1;
+         dummy = PlaySoundThing(fireSound1, player, 1.0, -1, -1, 0x180);
+      }
+
+      if(GetAutoSwitch() & 1)
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+   }
+
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+   if(fireChannel != -1)
+   {
+      StopSound( fireChannel, 0.1);
+      fireChannel = -1;
+      PlaySoundThing(fireSound1, player, 1.0, -1, -1, 0x180);
+   }
+   DeactivateWeapon( player, mode );
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   PlayMode(player, 41);
+   PlaySoundThing(mountSound, player, 1.0, -1, -1, 0x80);
+
+   jkSetPOVModel(player, povModel);
+   SetArmedMode(player, 1);
+   jkSetWeaponMesh(player, weaponMesh);
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+
+   trackID = jkPlayPOVKey(player, mountAnim, 0, 20);
+   SetMountWait(player, GetKeyLen(mountAnim));
+
+   jkClearFlags(player, 0x5);
+   SetCurWeapon(player, 6);
+
+   Return;
+
+# ........................................................................................
+
+deselected:
+   if(fireChannel != -1)
+   {
+      StopSound(fireChannel, 0.1);
+      fireChannel = -1;
+   }
+
+   PlaySoundThing(dismountSound, player, 1.0, -1, -1, 0x80);
+   jkPlayPOVKey(player, dismountAnim, 0, 18);
+
+   holsterWait = GetKeyLen(holsterAnim);
+   SetMountWait(player, holsterWait);
+   holsterTrack = PlayKey(player, holsterAnim, 1, 0x4);
+   SetTimerEx(holsterWait, 2, 0.0, 0.0);
+   if (trackID != -1)
+   {
+      jkStopPOVKey(player, trackID, 0);
+      trackID = -1;
+   }
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   Return;
+
+# ........................................................................................
+
+newplayer:
+//   // Make sure that if the player is respawning, the old mount isn't playing anymore.
+//   if(trackID != -1) jkStopPOVKey(player, trackID, 0);
+
+   if(fireChannel != -1)
+   {
+      StopSound(fireChannel, 0.1);
+      fireChannel = -1;
+   }
+
+   Return;
+   
+# ........................................................................................
+
+killed:
+   if (player == GetSenderRef())
+   {  
+      if(fireChannel != -1)
+      {
+         StopSound(fireChannel, 0.1);
+         fireChannel = -1;
+      }
+   }
+   Return;
+
+# ........................................................................................
+
+autoselect:
+   // If the player has the weapon
+   if(GetInv(player, 6) != 0.0)
+   {
+      // If the player has ammo
+      if(GetInv(player, 12) != 0.0)
+      {
+         ReturnEx(800.0);
+      }
+      else
+      {
+         ReturnEx(-1.0);
+      }
+   }
+   else
+   {
+      ReturnEx(-1.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   StopKey(player, holsterTrack, 0.0);
+   Return;
+
+end
+
+

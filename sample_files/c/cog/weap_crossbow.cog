@@ -1,0 +1,326 @@
+# Jedi Knight Cog Script
+#
+# WEAP_CROSSBOW.COG
+#
+# WEAPON 5 Script - Crossbow
+#
+# - Affected by MagSealed sectors/surfaces.
+#
+# [YB & CYW]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+model       povModel=BowV.3do                   local
+model       weaponMesh=BowG.3do                 local
+
+keyframe    mountAnim=BowVmnt.key               local
+keyframe    dismountAnim=BowVdis.key            local
+keyframe    povfireAnim=BowVpst1.key            local
+keyframe    holsterAnim=kyhlstr.key             local
+
+sound       mountSound=df_bry_ready.wav         local
+sound       dismountSound=PutWeaponAway01.wav   local
+
+sound       chargeSound=BCChargeUp.wav          local
+sound       fireSound1=BCFire01.wav             local
+sound       fireSound2=BCFire02.wav             local
+sound       outSound=trprout.wav                local
+
+template    projectile=+raildet2                local
+template    projectile2=+force_lightning        local
+template    projectile3=+force_dest_p4          local
+
+flex        fireWait=0.6                        local
+flex        delayTime                           local
+flex        error                               local
+flex        autoAimFOV=30                       local
+flex        autoAimMaxDist=10                   local
+flex        powerBoost                          local
+flex        holsterWait                         local
+
+vector      errorVec                            local
+
+thing       player                              local
+
+int         trackID=-1                          local
+int         channel=-1                          local
+int         holsterTrack                        local
+
+message     startup
+message     activated
+message     deactivated
+message     selected
+message     deselected
+message     newplayer
+message     autoselect
+message     fire
+message     killed
+message     timer
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   // Check Ammo - If we are out, autoselect best weapon.
+   if(GetInv(player, 12) < 2.0)
+   {
+      if((GetAutoSwitch() & 1))
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+      else
+         PlaySoundThing(outSound, player, 1.0, -1, -1, 0x80);
+
+      Return;
+   }
+
+   if(mode == 0)
+   {
+      ActivateWeapon(player, 0, mode);
+
+      if(channel == -1)
+      {
+         channel = PlaySoundThing(chargeSound, player, 0.0, -1, -1, 0x181);
+
+         if(channel != -1)
+         {
+            ChangeSoundPitch(channel, 0.3, 0.01);
+            Sleep(0.03);
+
+            // looks stupid... but if the user taps quickly deactivated:
+            // gets called during the sleep, and channel becomes invalid !
+            if(channel != -1)
+            {
+               ChangeSoundVol(channel, 1.0, 0.6);
+               ChangeSoundPitch(channel, 1.0, 1.2);
+            }
+         }
+      }
+   }
+   else
+   {
+      powerBoost = GetInv(player, 63);
+      ActivateWeapon( player, fireWait/powerBoost, mode);
+   }
+
+   Return;
+
+# ........................................................................................
+
+fire:
+   // Check that the player is still alive.
+   if(GetThingHealth(player) <= 0) Return;
+
+   // Check Ammo - If we are out, autoselect best weapon.
+   if(GetInv(player, 12) < 2.0)
+   {
+      SelectWeapon(player, AutoSelectWeapon(player, 1));
+      Return;
+   }
+
+   SetPOVShake('0.0 -.01 0.0', '2.0 0.0 0.0', .05, 80.0);
+   dummy = FireProjectile(player, projectile3, fireSound2, 18, '0.0207 0.0888 0.00', '0 0 0', 1.0, 0x20, autoAimFOV, autoAimFOV*2);
+   ChangeInv(player, 12, -2.0);
+   jkPlayPOVKey(player, povfireAnim, 1, 0x38);
+
+   powerBoost = GetInv(player, 63);
+   ChangeFireRate(player, fireWait/powerBoost);
+
+   Return;
+
+
+# ........................................................................................
+
+deactivated:
+   mode = GetSenderRef();
+
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+
+   if(mode == 0)
+   {
+      delayTime = DeactivateWeapon(player, mode);
+
+      if(channel != -1)
+      {
+         StopSound(channel, 0);
+         channel = -1;
+      }
+
+      // Set a delay, even if we don't fire here.
+      SetMountWait(player, fireWait/powerBoost);
+
+      // Make sure both keys are up before continuing.
+      if (GetCurWeaponMode() != -1) Return;
+
+      // make sure we still have ammo
+      if(GetInv(player, 12) < 2.0) Return;
+
+      // Always fire one projectile straight-ahead
+      SetPOVShake('0.0 -.01 0.0', '2.0 0.0 0.0', .05, 80.0);
+      FireProjectile(player, projectile, fireSound2, 18, '0.0207 0.0888 0.00', '0 0 0', 0, 0, autoAimFOV, autoAimFOV*2);
+
+      ChangeInv(player, 12, -2.0);
+
+      if(delayTime > 0.6)
+      {
+         if(GetInv(player, 12) > 1.0)
+         {
+            FireProjectile(player, projectile2, -1, 18, '0.0207 0.0888 0.00', '0 6 0', 0, 0, autoAimFOV, autoAimMaxDist);
+            FireProjectile(player, projectile2, -1, 18, '0.0207 0.0888 0.00', '0 -6 0', 0, 0, autoAimFOV, autoAimMaxDist);
+            ChangeInv(player, 12, -2.0);
+         }
+      }
+
+      if(delayTime > 1.2)
+      {
+         if(GetInv(player, 12) > 1.0)
+         {
+            FireProjectile(player, projectile2, -1, 18, '0.0207 0.0888 0.00', '0 12 0', 0, 0, autoAimFOV, autoAimMaxDist);
+            FireProjectile(player, projectile2, -1, 18, '0.0207 0.0888 0.00', '0 -12 0', 0, 0, autoAimFOV, autoAimMaxDist);
+            ChangeInv(player, 12, -2.0);
+         }
+      }
+
+      // Play animation and set delay.
+      jkPlayPOVKey(player, povfireAnim, 1, 0x38);
+      powerBoost = GetInv(player, 63);
+   }
+   else
+   {
+      DeactivateWeapon(player, mode);
+   }
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   // Play external animation
+   PlayMode(player, 41);
+
+   // Set up meshes and models.
+   jkSetPOVModel(player, povModel);
+   SetArmedMode(player, 1);
+   jkSetWeaponMesh(player, weaponMesh);
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+
+   // Play sound and animation.
+   PlaySoundThing(mountSound, player, 1.0, -1, -1, 0x80);
+   trackID = jkPlayPOVKey(player, mountAnim, 0, 20);
+   SetMountWait(player, GetKeyLen(mountAnim));
+
+   // Set flags, etc.
+   jkClearFlags(player, 0x5);
+   SetCurWeapon(player, 5);
+
+   // Check Ammo - If we are out, autoselect best weapon.
+   if(GetInv(player, 12) < 2.0)
+   {
+      if((GetAutoSwitch() & 1))
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+   }
+
+   Return;
+
+# ........................................................................................
+
+deselected:
+   PlaySoundThing(dismountSound, player, 1.0, -1, -1, 0x80);
+   jkPlayPOVKey(player, dismountAnim, 0, 18);
+   
+   holsterWait = GetKeyLen(holsterAnim);
+   SetMountWait(player, holsterWait);
+   holsterTrack = PlayKey(player, holsterAnim, 1, 0x4);
+   SetTimerEx(holsterWait, 2, 0.0, 0.0);
+   if (trackID != -1)
+   {
+      jkStopPOVKey(player, trackID, 0);
+      trackID = -1;
+   }
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+   
+   if(channel != -1)
+   {
+      StopSound(channel, 0.1);
+      channel = -1;
+   }
+
+   Return;
+
+# ........................................................................................
+
+killed:
+   if (player == GetSenderRef())
+   {
+      if(channel != -1)
+      {
+         StopSound(channel, 0.1);
+         channel = -1;
+      }
+   }
+   Return;
+
+# ........................................................................................
+
+newplayer:
+//   // Make sure that if the player is respawning, the old mount isn't playing anymore.
+//   if (trackID != -1)
+//   {
+//      jkStopPOVKey(player, trackID, 0);
+//      trackID = -1;
+//   }
+
+   if(channel != -1)
+   {
+      StopSound(channel, 0.1);
+      channel = -1;
+   }
+
+   Return;
+
+# ........................................................................................
+
+autoselect:
+   // If the player has the weapon
+   if(GetInv(player, 5) != 0.0)
+   {
+      // If the player has ammo
+      if(GetInv(player, 12) > 1.0)
+      {
+         ReturnEx(700.0);
+      }
+      else
+      {
+         ReturnEx(-1.0);
+      }
+   }
+   else
+   {
+      ReturnEx(-1.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   StopKey(player, holsterTrack, 0.0);
+   Return;
+
+end
+

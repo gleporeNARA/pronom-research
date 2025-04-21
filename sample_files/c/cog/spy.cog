@@ -1,0 +1,165 @@
+# Jedi Knight Cog Script
+#
+# FORCE_SEEING.COG
+#
+# FORCEPOWER Script - Seeing
+#  Light Side Power
+#  Bin 23
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+
+flex        cost=0.0                         local
+flex        mana                             local
+
+sound       seeingSound=orceSee01.WAV       local
+sound       seeingSound2=orceSee02.WAV      local
+int         channel=-1                       local
+
+int         rank=0                           local
+int         flags=0                          local
+int         old_flags=0                      local
+
+int         effectHandle=-1                  local
+
+message     startup
+message     shutdown
+message     activated
+message     timer
+message     pulse
+message     newplayer
+message     killed
+message     selected
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+   old_flags = GetMapModeFlags();
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+shutdown:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   if(!IsInvActivated(player, 23))
+   {
+      mana = GetInv(player, 14);
+      if(mana >= cost)
+      {
+         if(GetInv(player, 65) != 1) ChangeInv(player, 14, -cost);
+
+         rank = GetInv(player, 23);
+         if(rank == 1) flags = 0xc;          // players & actors
+         else if(rank == 2) flags = 0xc;     // players & actors
+         else if(rank == 3) flags = 0x1c;    // players & actors & items
+         else if(rank == 4) flags = 0x3c;    // players & actors & items & projectiles
+
+         PlayMode(player, 24);
+
+         // Play activation sound
+         PlaySoundThing(seeingSound, player, 1.0, -1, -1, 0x80);
+
+         // Play loop sound at 0.0 volume and fade it in to 1.0 volume in 0.75 secs
+         channel = PlaySoundThing(seeingSound2, player, 0.0, -1, -1, 0x81);
+         ChangeSoundVol(channel, 1.0, 0.75);
+
+         effectHandle = newColorEffect(0, 1, 1, 0, 0, 0, 0, 0, 0, 1.0);
+         EnableIRMode(0.3 + 0.05 * rank, 1);
+         old_flags = GetMapModeFlags();
+         SetMapModeFlags(flags);
+         SetInvActivated(player, 23, 1);
+         SetTimerEx(50 + 50 * rank, 1, 0, 0);
+         SetPulse(0.5);
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   call stop_power;
+
+   Return;
+
+
+# ........................................................................................
+
+pulse:
+   // check that the player didn't die
+   if(GetThingHealth(player) < 1)
+   {
+      call stop_power;
+   }
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 23);
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   SetPulse(0);
+   KillTimerEx(1);
+   if(channel != -1)
+   {
+      StopSound(channel, 0.1);
+      channel = -1;
+   }
+
+   if(effectHandle!=-1)
+   {
+      freeColorEffect(effectHandle);
+      effectHandle = -1;
+   }
+
+   // Don't disable IR mode if IR Goggles are on...
+   if(!IsInvActivated(player, 41))
+      DisableIRMode();
+
+   // Clear the map mode flags
+   ClearMapModeFlags(0xffff);
+
+   // and reset them to what they were.
+   SetMapModeFlags(old_flags);
+
+   SetInvActivated(player, 23, 0);
+
+   Return;
+
+end
+
+

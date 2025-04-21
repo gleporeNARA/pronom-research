@@ -1,0 +1,288 @@
+# Jedi Knight Cog Script
+#
+# DARKJEDI_SARISS.COG
+#
+# DARK JEDI Script - Sariss
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+symbols
+
+message     startup
+message     newplayer
+message     killed
+message     damaged
+message     user0
+message     user1
+message     pulse
+message     timer
+message     skill
+
+thing       darkjedi                         mask=0xfff
+
+flex        damage                           local
+int         damageType                       local
+
+material    tip_mat=saberblue0.mat           local
+material    side_mat=saberblue1.mat          local
+
+template    tpl_wall=+ssparks_wall           local
+template    tpl_blood=+ssparks_blood         local
+template    tpl_saber=+ssparks_saber         local
+
+int         victim                           local
+int         forcepower                       local
+int         forcepulse                       local
+
+sound       deadlySound=ForceDSight01.WAV    local
+sound       deadlySound2=ForceDSight02.WAV   local
+int         channel=-1                       local
+
+template    smoke_tpl=+heavysmoke            local
+int         smoke                            local
+
+sound       pullSound=ForcePull01.WAV        local
+
+template    tpl=BryarPistol                  local
+template    tpl1=BryarPistol                 local
+template    tpl2=BryarPistol                 local
+template    tpl3=STrifle                     local
+template    tpl4=SingleDetonator             local
+template    tpl5=Crossbow                    local
+template    tpl6=RepeaterGun                 local
+template    tpl7=RailGun                     local
+template    tpl8=SingleSeqCharge             local
+template    tpl9=ConcRifle                   local
+
+int         PulledWeapon                     local
+int         okay                             local
+
+flex        starthealth                      local
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+newplayer:
+   jkSetSaberInfo(darkjedi, side_mat, tip_mat, 0.003, 0.001, 0.118, tpl_wall, tpl_blood, tpl_saber);
+   jkSetFlags(darkjedi, 0x15);
+   SetTimerEx(3, 2, 0, 0);
+
+   Return;
+
+# ........................................................................................
+
+killed:
+   SetPulse(0);
+   if(channel != -1)
+   {
+      StopSound(channel, 0.0);
+      channel = -1;
+   }
+   jkSetFlags(darkjedi, 0x8);
+
+   Return;
+
+# ........................................................................................
+
+damaged:
+   damage = GetParam(0);
+   damageType = GetParam(1);
+
+   if(damageType & 1)                        // IMPACT
+      damage = damage / 2;
+   else
+   if(damageType & 2)                        // ENERGY
+      damage = damage / 2;
+   else
+   if(damageType & 4)                        // FIRE
+      damage = damage / 10;
+   else
+   if(damageType & 8)                        // FORCE
+      damage = damage;
+   else
+   if(damageType & 16)                       // SABER
+      damage = damage;
+
+   ReturnEx(damage);
+   Return;
+
+# ........................................................................................
+
+pulse:
+   if(forcepulse == 4)                       // FORCE PULL
+   {
+      SetPulse(0);
+      if(GetHealth(victim) > 0)
+      {
+         if((GetCurWeapon(victim) != 1) && (GetCurWeapon(victim) != 10))
+         {
+            PlayMode(darkjedi, 35);
+            Sleep(0.3);
+
+            PlaySoundThing(pullSound, victim, 1.0, -1, -1, 0x80);
+
+            // Create a powerup corresponding to the current weapon
+            PulledWeapon = CreateThingAtPos(tpl[GetCurWeapon(victim)], GetThingSector(victim), GetThingPos(victim), '0 0 0');
+
+            // Set the created powerup to no collide for now...
+            SetCollideType(PulledWeapon, 0);
+
+            // ...and set a timer to make it collide again later
+            SetTimerEx(0.3, 1, PulledWeapon, 0);
+
+            // Throw the powerup at the DJ
+            ApplyForce(PulledWeapon, VectorScale(VectorNorm(VectorSub(GetThingPos(darkjedi), GetThingPos(victim))), 30));
+
+            // Remove the weapon from the player
+            ChangeInv(victim, GetCurWeapon(victim), -1);
+
+            SelectWeapon(victim, 1);               
+         }
+      }
+   }
+
+   else
+
+   if(forcepulse == 14)                      // FORCE DEADLY SIGHT
+   {
+      if((count > limit) ||
+         (GetThingHealth(darkjedi) < starthealth) ||
+         (GetHealth(victim) < 1) ||
+         !HasLOS(darkjedi, victim)
+        )
+      {
+         SetPulse(0);
+         ClearActorFlags(darkjedi, 0x40000);
+         if(channel != -1)
+         {
+            StopSound(channel, 0.0);
+            channel = -1;
+         }
+         Return;
+      }
+
+      // Print("You are taking Deadly Sight damage");
+      jkPrintUNIString(player, 301);
+      DamageThing(victim, 5, 0x8, darkjedi);
+      smoke = CreateThingAtPos(smoke_tpl, GetThingSector(victim), GetThingPos(victim), '0 0 0');
+
+      count = count + 1;
+
+      // Add a tint if the victim is in 1st person view
+      if((victim == GetLocalPlayerThing()) && (GetCurrentCamera() == 0))
+      {
+         AddDynamicTint(victim, 0.3, 0.0, 0.15);
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+user1:
+   // Receives message from 17_rahnlines.cog once game starts
+   okay = 1;
+   return;
+
+
+user0:
+   // Don't start until receved message from 17_rahnlines.cog
+   if(okay == 0) Return;
+
+   victim = GetParam(0);
+   forcepower = GetParam(1);
+   starthealth = GetThingHealth(darkjedi);
+
+   if(forcepower == 1)
+   {
+      // Print("Force Power 1 : FORCE DEADLY SIGHT...");
+      PlayMode(darkjedi, 24);
+      Sleep(0.3);
+
+      // She could die during the sleep
+      if(GetThingHealth(darkjedi) <= 0) Return;
+
+      SetActorFlags(darkjedi, 0x40000);
+
+      // Play activation sound
+      PlaySoundThing(deadlySound, victim, 1.0, -1, -1, 0x80);
+
+      // Play loop sound at 0.0 volume and fade it in to 1.0 volume in 0.75 secs
+      channel = PlaySoundThing(deadlySound2, victim, 0.0, -1, -1, 0x81);
+      if(channel != -1) ChangeSoundVol(channel, 1.0, 0.75);
+
+      count = 0;
+      limit = 16;
+      forcepulse = 14;
+      SetPulse(0.5);
+   }
+   else
+   if(forcepower == 2)
+   {
+      // Print("Force Power 2 : FORCE PULL...");
+      if(!IsInvActivated(victim, 28))
+      {
+         forcepulse = 4;
+         SetPulse(0.1);
+      }
+   }
+   else
+   if(forcepower == 3)
+   {
+      // Print("Force Power 3");
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   if(GetSenderId() == 1)                    // Pull
+   {
+      // A pulled weapon must be made takeable again
+      SetCollideType(GetParam(0), 1);
+
+      // Set gravity to them so they don't float around
+      SetPhysicsFlags(GetParam(0), 1);
+
+      // Make the powerup last hours
+      SetLifeLeft(GetParam(0), 36000);
+   }
+   else
+   if(GetSenderId() == 2)                    // blinding protection
+   {
+      // This makes the DJ nearly immune to blinding
+      // by removing the blind flag every 3 seconds
+      ClearActorFlags(darkjedi, 0x800);
+      SetTimerEx(3, 2, 0, 0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+skill:
+   bin = GetParam(0);
+   if(bin == 31)                             // Force Grip
+   {
+      ReturnEx(10);
+      Return;
+   }
+   else
+   if(bin == 34)                             // Deadly Sight
+   {
+      ReturnEx(5);
+      Return;
+   }
+
+   ReturnEx(-1);
+   Return;
+
+end
+

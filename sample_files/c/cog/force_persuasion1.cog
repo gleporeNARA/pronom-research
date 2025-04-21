@@ -1,0 +1,136 @@
+# Jedi Knight Cog Script
+#
+# FORCE_PERSUASION.COG
+#
+# FORCEPOWER Script - Persuasion
+#  Light Side Power
+#  Bin 26
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+
+flex        mana                             local
+flex        cost=0.0                         local
+int         rank                             local
+
+sound       persuasionSound=ForcePersuas01.WAV  local
+sound       persuasionSound2=ForcePersuas02.WAV local
+int         channel=-1                       local
+
+message     startup
+message     activated
+message     timer
+message     pulse
+message     newplayer
+message     killed
+message     selected
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   if(!IsInvActivated(player, 26))
+   {
+      mana = GetInv(player, 14);
+      if(mana >= cost)
+      {
+         if(GetInv(player, 65) != 1) ChangeInv(player, 14, -cost);
+         SetInvActivated(player, 26, 1);
+
+         PlayMode(player, 24);
+
+         // Play activation sound
+         PlaySoundThing(persuasionSound, player, 1.0, -1, -1, 0x80);
+
+         // Play loop sound at 0.0 volume and fade it in to 1.0 volume in 0.75 secs
+         channel = PlaySoundThing(persuasionSound2, player, 0.0, -1, -1, 0x81);
+         ChangeSoundVol(channel, 1.0, 0.75);
+
+         rank = GetInv(player, 26);
+         SetTimerEx(rank * 0.1, 1, 0, 0);
+
+         // Set player invisible to AI
+         SetActorFlags(player, 0x80);
+
+         // Set player "invisible" to real players
+         if(rank == 1) jkSetPersuasionInfo(player, 14, 22);
+         else if(rank == 2) jkSetPersuasionInfo(player, 11, 19);
+         else if(rank == 3) jkSetPersuasionInfo(player, 8, 16);
+         else if(rank == 4) jkSetPersuasionInfo(player, 5, 13);
+
+         SetThingCurGeoMode(player, 5);
+         jkSetFlags(player, 0x01);
+
+         SetPulse(0.5);
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+pulse:
+   if(GetThingHealth(player) < 1) call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 26);
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   SetPulse(0);
+   KillTimerEx(1);
+   if(channel != -1)
+   {
+      StopSound(channel, 0.1);
+      channel = -1;
+   }
+   SetInvActivated(player, 26, 0);
+   ClearActorFlags(player, 0x80);
+   SetSectorFlags(GetThingSector(player), 0x2);
+   jkClearFlags(player, 0x20);
+
+   Return;
+
+end
+
+

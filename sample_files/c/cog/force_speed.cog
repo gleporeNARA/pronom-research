@@ -1,0 +1,142 @@
+# Jedi Knight Cog Script
+#
+# FORCE_SPEED.COG
+#
+# FORCEPOWER Script - Speed
+#  Basic Power
+#  Bin 22
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+flex        cost=20.0                        local
+flex        mana                             local
+flex        speed=99999.0                    local
+int         rank=0                           local
+
+sound       speedSound=ForceSpeed01.WAV      local
+sound       speedSound2=ForceSpeed02.WAV     local
+int         channel=-1                       local
+
+int         inbubble=0                       local
+
+message     startup
+message     timer
+message     activated
+message     newplayer
+message     killed
+message     selected
+message     enterbubble
+message     exitbubble
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+   inbubble = 0;
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   if(inbubble) Return;
+
+   if(!IsInvActivated(player, 22))
+   {
+      mana = GetInv(player, 14);
+      if(mana >= cost || GetInv(player, 14) >= GetInv(player, 69))
+      {
+         if(GetInv(player, 64) != 1) ChangeInv(player, 14, -cost);
+
+         // Send a "force disturbance"...
+         if(!IsMulti())
+            SendMessageExRadius(GetThingPos(player), cost, 0x4, splash, 22, 0, 0, 0);
+
+         rank = GetInv(player, 22);
+         SetInvActivated(player, 22, 1);
+
+         PlayMode(player, 24);
+
+         // Play activation sound
+         PlaySoundThing(speedSound, player, 1.0, -1, -1, 0x80);
+
+         // Play loop sound at 0.0 volume and fade it in to 1.0 volume in 0.75 secs
+         channel = PlaySoundThing(speedSound2, player, 0.0, -1, -1, 0x81);
+         ChangeSoundVol(channel, 1.0, 0.75);
+
+         SetActorExtraSpeed(player, 0.5 + rank / 2);
+         SetTimer(5 + rank * 2.5);
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   if(channel != -1)
+   {
+      ChangeSoundPitch(channel, 0.05, 0.75);
+      Sleep(0.75);
+   }
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 22);
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+   Return;
+
+# ........................................................................................
+
+enterbubble:
+   inbubble = 1;
+   call stop_power;
+   Return;
+
+# ........................................................................................
+
+exitbubble:
+   inbubble = 0;
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   if(channel != -1)
+   {
+      StopSound(channel, 0.1);
+      channel = -1;
+   }
+   SetPulse(0);
+   SetInvActivated(player, 22, 0);
+   SetActorExtraSpeed(player, 0);
+
+   Return;
+
+end
+
+
+

@@ -1,0 +1,247 @@
+# Jedi Knight Cog Script
+#
+# WEAP_RAILDET.COG
+#
+# WEAPON 7 Script - Rail Detonator Gun
+#
+# This is a missile launcher type of weapon. It sends out an explosive device with
+#  two options, impact or trigger explosion. The charge with the trigger option will
+#  stick to a wall.
+#
+# - Not affected by MagSealed sectors/surfaces.
+#
+# [YB & CYW]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+model       povModel=rldv.3do                   local
+model       weaponMesh=rldg.3do                 local
+sound       mountSound=RailChargeArm01.WAV      local
+sound       dismountSound=PutWeaponAway01.wav   local
+sound       fireSound=RailChargeFire01.WAV      local
+sound       outSound=RailChargeEmpty01.WAV      local
+
+thing       player                             local
+
+keyframe    mountAnim=RldVmnt.key               local
+keyframe    dismountAnim=RldVdis.key            local
+keyframe    povfireAnim=RldVpst1.key            local
+keyframe    holsterAnim=kyhlstr.key             local
+
+template    projectile=+raildet                 local
+template    projectile2=+raildet2               local
+
+thing       rail                                local
+
+flex        fireWait=0.1                        local
+flex        powerBoost                          local
+flex        autoAimFOV=25                       local
+flex        autoAimMaxDist=5                    local
+flex        holsterWait                         local
+
+keyframe    railAnim=rld0anim.key               local
+
+int         trackID=-1                          local
+int         mode                                local
+int         holsterTrack                        local
+
+int         selectMode=1                        local
+
+message     activated
+message     deactivated
+message     selected
+message     deselected
+#message     newplayer
+message     autoselect
+message     fire
+message     timer
+
+end
+
+# ========================================================================================
+
+code
+
+fire:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+
+   // Check that the player is still alive.
+   if(GetThingHealth(player) <= 0)
+   {
+      Return;
+   }
+
+   // Check Ammo - If we are out, autoselect best weapon.
+   if(GetInv(player, 15) < 1.0)
+   {
+      PlaySoundThing(outSound, player, 1.0, -1, -1, 0x80);
+      if(GetAutoSwitch() & 1)
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+      Return;
+   }
+
+   jkPlayPOVKey(player, povfireAnim, 1, 0x38);
+   SetPOVShake('0.0 -.01 0.0', '4.0 0.0 0.0', .05, 80.0);
+
+   rail = FireProjectile(player, projectile[mode], fireSound, 18, '0.0214 0.15 0.00', '0 0 0', 1.0, 0x20, autoAimFOV, autoAimFOV*2);
+   if((mode == 1) && (rail != -1))
+   {
+      PlayKey(rail, railAnim, 1, 20);
+   }
+
+   // Provide a kick backwards
+   ApplyForce(player, VectorScale(GetThingLVec(player), -40));
+
+   ChangeInv(player, 15, -1.0);
+
+   powerBoost = GetInv(player, 63);
+   ChangeFireRate(player, fireWait/powerBoost);
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+   powerBoost = GetInv(player, 63);
+   ActivateWeapon( player, fireWait/powerBoost, mode );
+   Return;
+
+# ........................................................................................
+
+deactivated:
+   player = GetSourceRef();
+   mode = GetSenderRef();
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+   DeactivateWeapon( player, mode );
+   Return;
+
+# ........................................................................................
+
+selected:
+   player = GetSourceRef();
+
+   PlayMode(player, 41);
+   PlaySoundThing(mountSound, player, 1.0, -1, -1, 0x80);
+   jkSetPOVModel(player, povModel);
+   SetArmedMode(player, 1);
+   jkSetWeaponMesh(player, weaponMesh);
+   jkSetWaggle(player, '10.0 7.0 0.0', 350);
+
+   trackID = jkPlayPOVKey(player, mountAnim, 0, 20);
+   SetMountWait(player, GetKeyLen(mountAnim));
+   jkClearFlags(player, 0x5);
+   SetCurWeapon(player, 7);
+
+   // Check Ammo - If we are out, autoselect best weapon.
+   if(GetInv( player, 15 ) < 1.0)
+   {
+      PlaySoundThing(outSound, player, 1.0, -1, -1, 0x80);
+      if(GetAutoSwitch() & 1)
+         SelectWeapon(player, AutoSelectWeapon(player, 1));
+   }
+
+   Return;
+
+# ........................................................................................
+
+deselected:
+   player = GetSourceRef();
+
+   PlaySoundThing(dismountSound, player, 1.0, -1, -1, 0x80);
+   jkPlayPOVKey( player, dismountAnim, 0, 18 );
+
+   holsterWait = GetKeyLen(holsterAnim);
+   SetMountWait(player, holsterWait);
+   holsterTrack = PlayKey(player, holsterAnim, 1, 0x4);
+   SetTimerEx(holsterWait, 2, 0.0, 0.0);
+   if (trackID != -1)
+   {
+      jkStopPOVKey( player, trackID, 0 );
+      trackID = -1;
+   }
+   jkSetWaggle(player, '0.0 0.0 0.0', 0);
+
+   Return;
+
+# ........................................................................................
+
+//newplayer:
+//   player = GetSourceRef();
+//
+//   // Make sure that if the player is respawning, the old mount isn't playing anymore.
+//   if (trackID != -1)
+//      jkStopPOVKey(player, trackID, 0);
+//
+//   Return;
+
+# ........................................................................................
+
+autoselect:
+   selectMode = GetSenderRef();
+   player = GetSourceRef();
+
+   // If the player has the weapon
+   if(GetInv(player, 7) != 0.0)
+   {
+      // If the player has ammo
+      if(GetInv(player, 15) != 0.0)
+      {
+
+         // query for ammo
+         if(selectMode == -1)
+         {
+            ReturnEx(900.0);
+            Return;
+         }
+
+         if((selectMode == 0) && !(GetAutoPickup() & 2))
+         {
+            ReturnEx(900.0);
+            Return;
+         }
+
+         if((selectMode == 1) && !(GetAutoSwitch() & 2))
+         {
+            ReturnEx(900.0);
+            Return;
+         }
+
+         if((selectMode == 2) && !(GetAutoPickup() & 2))
+         {
+            ReturnEx(900.0);
+            Return;
+         }
+
+         ReturnEx(-2.0);
+         Return;
+
+      }
+      else
+      {
+         ReturnEx(-1.0);
+         Return;
+      }
+   }
+   else
+   {
+      ReturnEx(-1.0);
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+   StopKey(player, holsterTrack, 0.0);
+   Return;
+
+end
+
+

@@ -1,0 +1,242 @@
+# Jedi Knight Cog Script
+#
+# DARKJEDI_MAW.COG
+#
+# DARK JEDI Script - Maw
+#
+# [YB]
+#
+# 8/22 [CR] Added lines to receive message from 15_rahnlines.cog
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+symbols
+
+message     startup
+message     newplayer
+message     damaged
+message     killed
+message     user0
+message     user1
+message     pulse
+message     skill
+
+thing       darkjedi                         mask=0xfff
+
+thing       ghost
+thing       ghost1
+thing       ghost2
+thing       ghost3
+thing       ghost4
+thing       ghost5
+thing       ghost6
+thing       ghost7
+thing       ghost8
+thing       ghost9
+thing       ghost10
+thing       ghost11
+thing       ghost12
+thing       ghost13
+thing       ghost14
+thing       ghost15
+
+material    tip_mat=saberdred0.mat           local
+material    side_mat=saberdred1.mat          local
+
+template    tpl_wall=+ssparks_wall           local
+template    tpl_blood=+ssparks_blood         local
+template    tpl_saber=+ssparks_saber         local
+
+template    tpl_rock=ThrowShrapnel_1         local
+template    tpl_rock2=ThrowShrapnel_2        local
+template    tpl_rock3=ThrowShrapnel_3        local
+template    tpl_rock4=ThrowShrapnel_4        local
+template    tpl_rock5=ThrowShrapnel_5        local
+
+sound       throwSound=ForceThrow01.WAV      local
+
+int         victim                           local
+int         forcepower                       local
+int         forcepulse                       local
+int         i                                local
+int         throwthing                       local
+int         griptrackID=-1                   local
+int         okay=0                           local
+
+vector      dir                              local
+
+flex        starthealth                      local
+
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+newplayer:
+   jkSetSaberInfo(darkjedi, side_mat, tip_mat, 0.0045, 0.0015, 0.125, tpl_wall, tpl_blood, tpl_saber);
+   jkSetFlags(darkjedi, 0x15);
+
+   Return;
+
+# ........................................................................................
+
+killed:
+   SetPulse(0);
+   jkSetFlags(darkjedi, 0x8);
+
+   Return;
+
+# ........................................................................................
+
+damaged:
+   damage = GetParam(0);
+   damageType = GetParam(1);
+
+   if(damageType & 1)                        // IMPACT
+      damage = damage / 2;
+   else
+   if(damageType & 2)                        // ENERGY
+      damage = damage / 2;
+   else
+   if(damageType & 4)                        // FIRE
+      damage = damage / 10;
+   else
+   if(damageType & 8)                        // FORCE
+      damage = damage;
+   else
+   if(damageType & 16)                       // SABER
+      damage = damage;
+
+   ReturnEx(damage);
+   Return;
+
+# ........................................................................................
+
+pulse:
+   if(forcepulse == 10)                      // FORCE GRIP
+   {
+      if((count > limit) ||
+         (GetThingHealth(darkjedi) < starthealth) ||
+         (GetHealth(victim) < 1) ||
+         !HasLOS(darkjedi, victim)
+        )
+      {
+         ClearActorFlags(victim, 0x40000);
+         ClearActorFlags(darkjedi, 0x40000);
+         SetPulse(0);
+         Return;
+      }
+
+      // Print("You are taking Grip damage");
+      jkPrintUNIString(victim, 300);
+
+      if(griptrackID != -1)
+      {
+         StopKey(player, griptrackID);
+         griptrackID = -1;
+      }
+
+      DamageThing(victim, 5, 0x8, darkjedi);
+      count = count + 1;
+   }
+
+   Return;
+
+# ........................................................................................
+
+user1:
+   // Receives message from 15_rahnlines once game starts
+   okay = 1;
+   return;
+
+
+# ........................................................................................
+
+user0:
+   // Don't start until receved message from 15_rahnlines.cog
+   if(okay == 0) Return;
+
+   victim = GetParam(0);
+   forcepower = GetParam(1);
+   starthealth = GetThingHealth(darkjedi);
+
+   if(forcepower == 1)
+   {
+      // Print("Force Power 1 : FORCE THROW...");
+      PlayMode(darkjedi, 35);
+      Sleep(0.3);
+      // He could die during the sleep
+      if(GetThingHealth(darkjedi) <= 0) Return;
+
+      PlaySoundThing(throwSound, darkjedi, 1.0, -1, -1, 0x80);
+
+      for(i=0; i<16; i=i+1)
+      {
+         if(ghost[i] > -1)
+         {
+            if(HasLOS(darkjedi, ghost[i]))
+            {
+               // Print("Got a LOS...");
+               throwthing = CreateThing(tpl_rock[5 * rand()], ghost[i]);
+               dir = VectorScale(VectorNorm(VectorSub(GetThingPos(victim), GetThingPos(throwthing))), 200.0);
+
+               // just in case of
+               DetachThing(throwthing);
+               ApplyForce(throwthing, dir);
+               SetLifeLeft(throwthing, 10);
+            }
+         }
+      }
+   }
+   else
+   if(forcepower == 2)
+   {
+      // Print("Force Power 2 : FORCE GRIP...");
+      if(!IsInvActivated(player, 29))
+      {
+         PlayMode(darkjedi, 24);
+         SetActorFlags(darkjedi, 0x40000);
+         Sleep(0.3);
+         // He could die during the sleep
+         if(GetThingHealth(darkjedi) <= 0) Return;
+
+         SetActorFlags(victim, 0x40000);
+         PlayMode(victim, 25);
+         count = 0;
+         limit = 5;
+         forcepulse = 10;
+         SetPulse(0.5);
+      }
+   }
+   else
+   if(forcepower == 3)
+   {
+      // Print("Force Power 3");
+   }
+
+   Return;
+
+# ........................................................................................
+
+skill:
+   bin = GetParam(0);
+   if (bin == 31)                            // Force Grip
+   {
+      ReturnEx(10);
+      Return;
+   }
+   else
+   if (bin == 34)                            // Deadly Sight
+   {
+      ReturnEx(5);
+      Return;
+   }
+
+   ReturnEx(-1);
+   Return;
+
+end
+

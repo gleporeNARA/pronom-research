@@ -1,0 +1,176 @@
+# Jedi Knight Cog Script
+#
+# FORCE_ABSORB.COG
+#
+# FORCEPOWER Script - Absorb
+#  Light Side Power
+#  Bin 28
+#
+# Modified by Fliblo
+#
+# [YB]
+#
+# (C) 1997 LucasArts Entertainment Co. All Rights Reserved
+
+
+symbols
+
+thing       player                           local
+
+flex        mana                             local
+flex        cost=200.0                       local
+flex        damage                           local
+flex        type                             local
+flex        absorb                           local
+
+int         flags=8                          local
+int         rank                             local
+
+sound       absorbSound2=ForceAbsorb02.WAV   local
+
+template    sphere_tpl=+force_heal           local
+int         sphere=-1                        local
+vector      position                         local
+
+flex        absorption=0.0                   local
+int         allowfx=1                        local
+
+message     startup
+message     damaged
+message     activated
+message     timer
+message     pulse
+message     newplayer
+message     killed
+message     selected
+
+# ........................................................................................
+# External animations
+
+keyframe absor=kydestr0.key        local
+
+end
+
+# ========================================================================================
+
+code
+
+startup:
+   player = GetLocalPlayerThing();
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+damaged:
+   damage = GetParam(0);
+
+   if(IsInvActivated(player, 28))
+   {
+      // If damage from magic
+      type = GetParam(1);
+      if(BitTest(flags, type))
+      {
+         AddDynamicTint( player, 0, 0, damage/100 );
+         PlaySoundThing(absorbSound2, player, 1.0, -1, -1, 0x80);
+
+         if(allowfx)
+         {
+            // Add some visual effects, but not too often
+            allowfx = 0;
+            SetTimerEx(1, 2, 0, 0);
+            sphere = CreateThingAtPosNR(sphere_tpl, GetThingSector(player), GetThingPos(player), '0.0 0.0 0.0');
+            AttachThingToThingEx(sphere, player, 0x8);
+            SetParticleGrowthSpeed(sphere, -0.8);
+            SetLifeLeft(sphere, 0.5);
+         }
+
+         rank = GetInv(player, 28);
+         absorption = rank / 4;
+
+         // Convert part of the damage to mana.
+         ChangeInv(player, 14, damage * absorption);
+         damage = damage * (1-absorption);
+      }
+   }
+   ReturnEx(damage);
+
+   Return;
+
+# ........................................................................................
+
+activated:
+   if(!IsInvActivated(player, 28))
+   {
+      mana = GetInv(player, 14);
+      if(mana >= cost)
+      {
+         if(GetInv(player, 65) != 1) ChangeInv(player, 14, -cost);
+         SetInvActivated(player, 28, 1);
+
+         PlayMode(player, 24);
+
+         PlayKey(player, absor, 1, 0x38);
+
+         //PlaySoundThing(absorbSound, player, 1.0, -1, -1, 0x80);
+         rank = GetInv(player, 28);
+         SetTimerEx(rank * 5, 1, 0, 0);
+         SetPulse(0.5);
+      }
+   }
+
+   Return;
+
+# ........................................................................................
+
+timer:
+
+   if(GetSenderId() == 1)
+   {
+      call stop_power;
+   }
+   else
+   if(GetSenderId() == 2)
+   {
+      allowfx = 1;
+   }
+
+
+   Return;
+
+# ........................................................................................
+
+pulse:
+   // check that the player didn't die
+   if(GetThingHealth(player) < 1) call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+selected:
+   jkPrintUNIString(player, 28);
+   Return;
+
+# ........................................................................................
+
+killed:
+   if(GetSenderRef() != player) Return;
+
+newplayer:
+   call stop_power;
+
+   Return;
+
+# ........................................................................................
+
+stop_power:
+   SetPulse(0);
+   KillTimerEx(1);
+   SetInvActivated(player, 28, 0);
+
+   Return;
+
+end
+
