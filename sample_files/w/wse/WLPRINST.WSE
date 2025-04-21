@@ -1,0 +1,1835 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=WLPR Spooler Installation v1.0alpha
+  Flags=00010110
+  Split=1420
+  Languages=65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=128 128 128
+  Windows Flags=00000000000000000000101000011000
+  Log Pathname=%TEMP%\LPRSpool.log
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  FTP Cluster Size=20
+end
+item: Remark
+  Text=*************************************************************
+end
+item: Remark
+  Text=****************** Begin WLPR Installer *****************
+end
+item: Remark
+  Text=*************************************************************
+end
+item: Remark
+end
+item: Remark
+  Text=// 1.0 by Jonathan Venezian (jjv@mit.edu) 6/16/97
+end
+item: Remark
+  Text=// Uses Version 4.2a of LPRSpooler
+end
+item: Remark
+  Text=// Standardizes to approved list of printers
+end
+item: Remark
+  Text=// Offers Mink Installation
+end
+item: Remark
+end
+item: Remark
+  Text=// 0.0 written by Jeremy Nimmer (mistere@mit.edu)
+end
+item: Remark
+end
+item: Add Text to INSTALL.LOG
+  Text=Installation package for LPR Spooler
+end
+item: Add Text to INSTALL.LOG
+end
+item: Remark
+end
+item: Remark
+  Text=* Write standard comments, timestamp, etc.
+end
+item: Include Script
+  Pathname=STARTING.WSE
+end
+item: Set Variable
+  Variable=CLEANUP_ON
+  Value=0
+end
+item: Remark
+end
+item: Remark
+  Text=*************************************************************
+end
+item: Remark
+  Text=********************* SECTION ONE *********************
+end
+item: Remark
+  Text=*************************************************************
+end
+item: Remark
+end
+item: Set Variable
+  Variable=HOSTADDR
+  Value=net-dist.mit.edu
+end
+item: Set Variable
+  Variable=FTPUSER
+  Value=anonymous
+end
+item: Set Variable
+  Variable=FTPPASS
+  Value=lprs-installer@mit.edu
+end
+item: Remark
+end
+item: Remark
+  Text=*** Description and Licensing ***
+end
+item: Remark
+end
+item: Display Graphic
+  Pathname=SPLLOGO.BMP
+  Y Position=10
+  Flags=0000001010001000
+end
+item: Display Graphic
+  Pathname=IS.BMP
+  Y Position=100
+  Flags=0000000000001000
+end
+item: Display Message
+  Title=Windows Print Spooler Installation
+  Text=You are about to install the Windows LPR spooler, a program which allows you to easily print from your computer to Athena or network printers.
+  Text=
+  Text=Select OK to install the software, or cancel to abort.
+  Flags=00000100
+end
+item: Remark
+end
+item: Remark
+  Text=*** add Kerberos if needed ***
+end
+item: Remark
+end
+item: Remark
+  Text=// Is kerberos installed ?  ... if not run MINK ...
+end
+item: Display Message
+  Title=Kerberos Update?
+  Text=Would you like to install the most recent versions of kerberos 4 binaries and check the configuration of your system ? 
+  Flags=00101101
+end
+item: Include Script
+  Pathname=C:\INSTALLS\KTELNET\SOURCE\MINKCRIP.WSE
+end
+item: End Block
+end
+item: Display Message
+  Title=License Information
+  Text=This software is licensed for use only by MIT students and staff while at MIT.  Unauthorized use is not permitted and is illegal.  Further information is available in the help or readme files.
+  Text=
+  Text=Select yes if you agree to the terms of this licensing agreement.
+  Flags=00101101
+end
+item: Else Statement
+end
+item: Display Message
+  Title=License Agreement Declined
+  Text=Sorry, the software cannot be installed unless you abide by the licensing terms.
+  Text=
+  Text=Select OK to exit.
+  Flags=00110000
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Ask Custom or Standard ***
+end
+item: Remark
+end
+item: Display Message
+  Title=Use Express Setup?
+  Text=This installation has an Express Setup option which will use the standard default choices whenever possible, speeding the installation process.
+  Text=
+  Text=Select YES to use EXPRESS setup.
+  Text=Select NO to use CUSTOM setup.
+  Flags=00001101
+end
+item: Set Variable
+  Variable=EXPRESS
+  Value=1
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=EXPRESS
+  Value=0
+end
+item: End Block
+end
+item: Remark
+end
+item: Add Text to INSTALL.LOG
+  Text=*** Express Setup Option Used: %EXPRESS%
+end
+item: Remark
+end
+item: Remark
+  Text=*** Show ReadMe ***
+end
+item: Remark
+end
+item: Install File
+  Source=README.TXT
+  Destination=%TEMP%\README.TXT
+  Flags=0000000000000010
+end
+item: Display ReadMe File
+  Pathname=%TEMP%\README.TXT
+  Title=Windows LPR Spooler Readme Upadates
+end
+item: Delete File
+  Pathname=%TEMP%\README.TXT
+end
+item: Remark
+end
+item: Remark
+  Text=*** Look for required files ***
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=KERBDIR
+  Pathname List=KRBV4WIN.DLL
+  Description=Locating Kerberos Files...
+end
+remarked item: Set Variable
+  Variable=KERBDIR
+  Value=C:\NET\MIT
+end
+remarked item: Find File in Path
+  Variable=WINSOCK
+  Pathname List=winsock.dll
+  Description=Locating WinSock Files...
+end
+item: Set Variable
+  Variable=WINSOCK
+  Value=C:\NET\MIT
+end
+remarked item: Search for File
+  Variable=PREVDIR
+  Pathname List=wlprspl.exe
+  Description=Locating WLPRSPL.EXE...
+end
+item: Set Variable
+  Variable=PREVDIR
+end
+item: Remark
+end
+item: Add Text to INSTALL.LOG
+  Text=*** KERBDIR = '%KERBDIR%'
+end
+item: Add Text to INSTALL.LOG
+  Text=*** WINSOCK = '%WINSOCK%'
+end
+item: Add Text to INSTALL.LOG
+  Text=*** PREVDIR = '%PREVDIR%'
+end
+item: Remark
+end
+item: Remark
+  Text=*** Confirm required files ***
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=KERBDIR
+end
+item: Display Message
+  Title=Error: No Kerberos!
+  Text=WARNING!!! You have not installed the kerberos authentication system on this computer.  You may not be able to print without it.  For instructions on installation, see the HELP and README files for this installer, or use:
+  Text=
+  Text="http://web.mit.edu/win95/kerberos.html"
+  Text=
+  Text=Would you like to continue even WITHOUT the kerberos files?
+  Flags=00101101
+end
+item: Else Statement
+end
+item: Display Message
+  Title=Installation aborted...
+  Text=Installation halted...
+  Text=
+  Text=See the README or HELP files for more information on installing Kerberos.
+  Flags=00100000
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=WINSOCK
+end
+item: Display Message
+  Title=WINSOCK Not Found
+  Text=The winsock.dll is needed to open a network connection.  This library must be present on your system to use NetInstaller.  See the README or HELP files for further information.
+  Text=
+  Flags=00110000
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=PREVDIR
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=EXPRESS
+  Value=0
+  Flags=00000001
+end
+item: Set Variable
+  Variable=PREVDIR
+end
+item: Else Statement
+end
+item: Display Message
+  Title=Previous Version Found
+  Text=The windows spooler is already installed in "%PREVDIR%".  This can be used, as long as it is version 4.1 or above.  If you're not sure, you should just install this version.
+  Text=
+  Text=Would you like to install the new version?
+  Flags=00101101
+end
+item: Set Variable
+  Variable=PREVDIR
+end
+item: Else Statement
+end
+remarked item: Set Variable
+  Variable=DESTDIR
+  Value=PREVDIR
+  Flags=00001100
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Create Temp directories ***
+end
+item: Set Variable
+  Variable=LPTEMP
+  Value=%TEMP%\LPRSPOOL
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=C:\MIT\LPRSPOOL
+end
+item: Remark
+end
+item: Check if File/Dir Exists
+  Pathname=%LPTEMP%
+  Flags=00000100
+end
+item: Display Message
+  Title=Directory Already Exists!
+  Text=Your hard drive has a temporary directory remaining called %LPTEMP%.  This is most likely caused by a previous aborted installation, but could be used in other places.  If would like to continue, you must remove this directory.  Shall I do it for you?
+  Flags=00110001
+end
+item: Delete File
+  Pathname=%LPTEMP%\*.*
+  Flags=00001100
+end
+item: Else Statement
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: End Block
+end
+item: Create Directory
+  Pathname=%LPTEMP%
+end
+item: Set Variable
+  Variable=TEMPBIN
+  Value=%LPTEMP%
+end
+item: Set Variable
+  Variable=TEMPFTP
+  Value=%LPTEMP%
+end
+item: Set Variable
+  Variable=TEMPINI
+  Value=%LPTEMP%
+end
+item: Set Variable
+  Variable=CLEANUP_ON
+  Value=1
+end
+item: Get Environment Variable
+  Variable=COMSPEC
+  Environment=%COMSPEC%
+  Default=C:\COMMAND.COM
+end
+item: Remark
+end
+item: Remark
+  Text=*** Install INIFTP ***
+end
+item: Remark
+end
+item: Check Disk Space
+  Space1=300
+  Variable1=TEMP
+end
+item: Install File
+  Source=INIFTP.EXE
+  Destination=%TEMPBIN%\INIFTP.EXE
+  Flags=0000000000000010
+end
+item: Install File
+  Source=FTP4W.DLL
+  Destination=%TEMPBIN%\FTP4W.DLL
+  Flags=0000000000000010
+end
+item: Install File
+  Source=FTPFIRST.INI
+  Destination=%TEMPINI%\FTPFIRST.INI
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Remark
+  Text=*** FTP the first files needed (FTP_SOFT, FTP_Q, USER_OPT) ***
+end
+item: Remark
+end
+item: Allow Floppy Disk Change
+end
+item: Edit INI File
+  Pathname=%TEMPINI%\FTPFIRST.INI
+  Settings=[Connect]
+  Settings=Host=%HOSTADDR%
+  Settings=user=%FTPUSER%
+  Settings=passwd=%FTPPASS%
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMPINI%\FTPFIRST.INI
+  Settings=[Dir1]
+  Settings=TargetDir=%TEMPINI%
+  Settings=
+end
+item: Remark
+end
+item: Execute Program
+  Pathname=%TEMPBIN%\INIFTP.EXE
+  Command Line=-l%TEMPBIN%\LPR_FTP.LOG %TEMPINI%\FTPFIRST.INI
+  Default Directory=%TEMPBIN%
+  Flags=00000010
+end
+item: Read INI Value
+  Variable=FTPERR
+  Pathname=%TEMPINI%\FTPFIRST.INI
+  Section=ExitCode
+  Item=Abort
+  Default=No
+end
+item: Delete File
+  Pathname=%TEMPINI%\FTPFIRST.INI
+end
+item: Add Text to INSTALL.LOG
+  Text=*** FTP_FIRST::FTPERR: '%FTPERR%'
+end
+item: If/While Statement
+  Variable=FTPERR
+  Value=No
+  Flags=00000001
+end
+item: Display Message
+  Title=Error during FTP
+  Text=There was an error during the file transfer from the server.  See the README or HELP files for help.
+  Text=
+  Text=BREAK SECTION:
+  Text=FTP_FIRST
+  Flags=00110000
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// install proper version of wshelper.dll
+end
+item: Remark
+  Text=// not the way i'd normally do it (i'd iniftp the right one in)
+end
+item: Remark
+  Text=// but this isn't using my iniftp subscript yet ...
+end
+item: Remark
+end
+item: Install File
+  Source=C:\INSTALLS\LPRSPOOL\SOURCE\WSHELPER.DLL
+  Destination=%WINSOCK%\WSHELPER.DLL
+  Flags=0000001000000010
+end
+item: Remark
+end
+item: Remark
+  Text=*** Ask user to select own type ***
+end
+item: Remark
+end
+item: Set Variable
+  Variable=USERLIST
+end
+item: Read/Write File Data
+  Pathname=%TEMPINI%\USER_OPT.TXT
+  Variable=USERLIST
+  Offset=0
+  Max Length=100
+  Flags=00000001
+end
+item: Delete File
+  Pathname=%TEMPINI%\USER_OPT.TXT
+end
+item: Set Variable
+  Variable=USERTYPE
+  Value=None
+end
+item: Custom Dialog Set
+  Name=Select User Level
+  item: Dialog
+    Title=Select User Level
+    Width=119
+    Height=107
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=10 10 101 32
+      Create Flags=01010000000000000000000000000001
+      Text=Select the type of user who will be using the spooler
+    end
+    item: Static
+      Rectangle=2 5 112 35
+      Action=3
+      Create Flags=01010000000000000000000000001000
+    end
+    item: Combobox
+      Rectangle=6 38 108 90
+      Variable=USERTYPE
+      Create Flags=01010000001000010000001000000011
+      Text=%USERLIST%
+    end
+    item: Push Button
+      Rectangle=13 72 48 87
+      Create Flags=01010000000000010000000000000001
+      Text=OK
+    end
+    item: Push Button
+      Rectangle=61 72 96 87
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+    end
+  end
+end
+item: Set Variable
+  Variable=USERTYPE
+  Value=%USERTYPE%
+  Flags=00011000
+end
+item: Remark
+end
+item: Remark
+  Text=*** If needed, actually go through and install the software binaries ***
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=PREVDIR
+end
+item: Set Variable
+  Variable=MAININI
+  Value=%TEMPINI%\FTP_SOFT.INI
+end
+item: Remark
+end
+item: Remark
+  Text=*** Install the program -- ask where! ***
+end
+item: Remark
+end
+item: Read INI Value
+  Variable=DESTDIR
+  Pathname=%MAININI%
+  Section=Installer
+  Item=DefaultDir
+end
+item: If/While Statement
+  Variable=EXPRESS
+  Value=1
+  Flags=00000001
+end
+item: Browse for Directory
+  Variable=DESTDIR
+  Flags=1
+  Window Name=Destination Directory
+  Prompt Description=The Windows spooler will now be installed on your system.  Select the destination directory where the program files will be stored.  We strongly recommend you use the default value.
+  Prompt Name=Destination
+  Default Value=%DESTDIR%
+  Flags=00000001
+end
+item: End Block
+end
+item: Set Variable
+  Variable=DESTDIR
+  Value=%DESTDIR%
+  Flags=00001100
+end
+item: Check Disk Space
+  Space1=300
+  Variable1=DESTDIR
+end
+item: Create Directory
+  Pathname=%DESTDIR%
+end
+item: Remark
+end
+item: Remark
+  Text=*** Read in count of parts and check overall disk space ***
+end
+item: Remark
+end
+item: Read INI Value
+  Variable=MAIN_NUMPARTS
+  Pathname=%MAININI%
+  Section=Installer
+  Item=NumParts
+  Default=0
+end
+item: If/While Statement
+  Variable=MAIN_NUMPARTS
+  Value=0
+end
+item: Display Message
+  Title=Error during Installation
+  Text=Error: The main installer definition file (FTP_SOFT.INI) is corrupt.  Refer to the README or HELP files for support.
+  Text=
+  Text=*** This is likely a server-side problem.  You may want to contact Information Systems for extra support ***
+  Flags=00010000
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: Read INI Value
+  Variable=MAIN_SPACEREQ
+  Pathname=%MAININI%
+  Section=Installer
+  Item=SpaceNeeded
+  Default=0
+end
+item: Check Disk Space
+  Space1=%MAIN_SPACEREQ%
+  Variable1=TEMPFTP
+end
+item: Remark
+end
+item: Remark
+  Text=*** Revise the INIFTP commands for "DestDir=..." ***
+end
+item: Remark
+end
+item: Set Variable
+  Variable=MAIN_CURPART
+  Value=%MAIN_NUMPARTS%
+end
+item: If/While Statement
+  Variable=MAIN_CURPART
+  Value=0
+  Flags=00010001
+end
+item: Set Variable
+  Variable=GRABDEST
+  Value=%TEMPFTP%\%MAIN_CURPART%
+end
+item: Create Directory
+  Pathname=%GRABDEST%
+end
+item: Edit INI File
+  Pathname=%MAININI%
+  Settings=[Dir%MAIN_CURPART%]
+  Settings=TargetDir=%GRABDEST%
+  Settings=
+end
+item: Remark
+end
+item: Remark
+  Text=*** Read in information about this section ***
+end
+item: Remark
+end
+item: Set Variable
+  Variable=CURNAME_INST
+  Value=Install%MAIN_CURPART%
+end
+item: Read INI Value
+  Variable=INI_OPTIONAL
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=Optional
+  Default=0
+end
+item: Read INI Value
+  Variable=INI_DEFOPT
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=OptionDefault
+  Default=0
+end
+item: Read INI Value
+  Variable=INI_FILECOUNT
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=FileCount
+  Default=0
+end
+item: Read INI Value
+  Variable=INI_QUESTION
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=Question
+  Default=<Missing Question>
+end
+item: Remark
+end
+item: Remark
+  Text=*** If necessary, ask to install a component ***
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=INI_OPTIONAL
+  Value=1
+end
+item: If/While Statement
+  Variable=EXPRESS
+  Value=1
+end
+item: Set Variable
+  Variable=INSTALL_THIS
+  Value=%INI_DEFOPT%
+end
+item: Else Statement
+end
+item: Display Message
+  Title=Optional Component
+  Text=%INI_QUESTION%
+  Flags=00101101
+end
+item: Set Variable
+  Variable=INSTALL_THIS
+  Value=1
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=INSTALL_THIS
+  Value=0
+end
+item: End Block
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=INSTALL_THIS
+  Value=1
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Don't install this, so FTP a "null" file ***
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=INSTALL_THIS
+  Value=0
+end
+item: Set Variable
+  Variable=LOOP
+  Value=%INI_FILECOUNT%
+end
+item: If/While Statement
+  Variable=LOOP
+  Value=0
+  Flags=00010001
+end
+item: Edit INI File
+  Pathname=%MAININI%
+  Settings=[Dir%MAIN_CURPART%]
+  Settings=File%LOOP%=
+  Settings=
+end
+item: Set Variable
+  Variable=LOOP
+  Value=%LOOP%
+  Flags=00001000
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=MAIN_CURPART
+  Value=%MAIN_CURPART%
+  Flags=00001000
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Run INIFTP commands (grab everything at once) ***
+end
+item: Display Message
+  Title=check me
+  Text=check %MAININI%
+end
+item: Remark
+end
+item: Execute Program
+  Pathname=%TEMPBIN%\INIFTP.EXE
+  Command Line=-l%TEMPBIN%\LPR_FTP.LOG %MAININI%
+  Default Directory=%TEMPBIN%
+  Flags=00000010
+end
+item: Allow Floppy Disk Change
+end
+item: Read INI Value
+  Variable=FTPERR
+  Pathname=%MAININI%
+  Section=ExitCode
+  Item=Abort
+  Default=No
+end
+item: Add Text to INSTALL.LOG
+  Text=*** FTP_MAIN::FTPERR: '%FTPERR%'
+end
+item: If/While Statement
+  Variable=FTPERR
+  Value=No
+  Flags=00000001
+end
+item: Display Message
+  Title=Error during FTP
+  Text=There was an error during the file transfer from the server.  See the README or HELP files for help.
+  Text=
+  Text=BREAK SECTION:
+  Text=FTP_MAIN
+  Flags=00110000
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Now process each individual section, copying files to their final locations ***
+end
+item: Remark
+end
+item: Set Variable
+  Variable=MAIN_CURPART
+  Value=%MAIN_NUMPARTS%
+end
+item: If/While Statement
+  Variable=MAIN_CURPART
+  Value=0
+  Flags=00010001
+end
+item: Remark
+end
+item: Set Variable
+  Variable=GRABDEST
+  Value=%TEMPFTP%\%MAIN_CURPART%
+end
+item: Set Variable
+  Variable=CURNAME_DIR
+  Value=Dir%MAIN_CURPART%
+end
+item: Set Variable
+  Variable=CURNAME_INST
+  Value=Install%MAIN_CURPART%
+end
+item: Remark
+end
+item: Remark
+  Text=*** Read in this part's specific options ***
+end
+item: Remark
+end
+item: Read INI Value
+  Variable=INI_FILECOUNT
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=FileCount
+end
+item: Read INI Value
+  Variable=INI_ASKWHERE
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=AskWhere
+end
+item: Read INI Value
+  Variable=INI_WHERE
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=Where
+end
+item: Read INI Value
+  Variable=INI_REPLOLD
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=ReplaceOlder
+  Default=1
+end
+item: Read INI Value
+  Variable=INI_WHEREMSG
+  Pathname=%MAININI%
+  Section=%CURNAME_INST%
+  Item=WhereMsg
+end
+item: Remark
+end
+item: Remark
+  Text=*** Change any special cases ***
+end
+item: Remark
+end
+item: Set Variable
+  Variable=FTPDEST
+  Value=%INI_WHERE%
+end
+item: If/While Statement
+  Variable=FTPDEST
+  Value=_DEST_
+end
+item: Set Variable
+  Variable=FTPDEST
+  Value=%DESTDIR%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FTPDEST
+  Value=_DESTDIR_
+end
+item: Set Variable
+  Variable=FTPDEST
+  Value=%DESTDIR%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FTPDEST
+  Value=_WINSYS_
+end
+item: Set Variable
+  Variable=FTPDEST
+  Value=%SYS%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FTPDEST
+  Value=_SYS_
+end
+item: Set Variable
+  Variable=FTPDEST
+  Value=%SYS%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FTPDEST
+  Value=_SYSTEM_
+end
+item: Set Variable
+  Variable=FTPDEST
+  Value=%SYS%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FTPDEST
+  Value=_WINDOWS_
+end
+item: Set Variable
+  Variable=FTPDEST
+  Value=%WIN%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FTPDEST
+  Value=_WIN_
+end
+item: Set Variable
+  Variable=FTPDEST
+  Value=%WIN%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=INI_ASKWHERE
+  Value=1
+end
+item: Browse for Directory
+  Variable=FTPDEST
+  Flags=1
+  Window Name=Component Installation
+  Prompt Description=%INI_WHEREMSG%
+  Prompt Name=Install to:
+  Default Value=%FTPDEST%
+  Flags=00000001
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Go through and copy each file individually to the right destination ***
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=INI_FILECOUNT
+  Value=0
+  Flags=00010001
+end
+item: Read INI Value
+  Variable=FNAME
+  Pathname=%MAININI%
+  Section=%CURNAME_DIR%
+  Item=File%INI_FILECOUNT%
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=FNAME
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=INI_REPLOLD
+  Value=1
+end
+item: Copy Local File
+  Source=%GRABDEST%\%FNAME%
+  Destination=%FTPDEST%\%FNAME%
+  Description=(Spooler component)
+  Flags=0000011001110010
+end
+item: Else Statement
+end
+item: Copy Local File
+  Source=%GRABDEST%\%FNAME%
+  Destination=%FTPDEST%\%FNAME%
+  Description=(Spooler component)
+  Flags=0000001001101010
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=INI_FILECOUNT
+  Value=%INI_FILECOUNT%
+  Flags=00001000
+end
+item: End Block
+end
+item: Remark
+end
+item: Delete File
+  Pathname=%GRABDEST%\*.*
+  Flags=00001100
+end
+item: Remark
+end
+item: Set Variable
+  Variable=MAIN_CURPART
+  Value=%MAIN_CURPART%
+  Flags=00001000
+end
+item: Remark
+  Text=* EndIf -> While MAIN_CURPART
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Ask to add icons ***
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=EXPRESS
+  Value=0
+  Flags=00000001
+end
+item: Add ProgMan Icon
+  Group=StartUp
+  Icon Name=Windows Print Spooler
+  Command Line=%DESTDIR%\WLPRSPL.EXE
+  Icon Pathname=%DESTDIR%\WLPRSPL.EXE
+  Icon Number=128
+  Default Directory=%DESTDIR%
+end
+item: Else Statement
+end
+item: Display Message
+  Title=Add to Startup?
+  Text=Would you like to add an icon to your StartUp group so that the spooler loads every time you use Windows?
+  Flags=00101101
+end
+item: Add ProgMan Icon
+  Group=StartUp
+  Icon Name=Windows Print Spooler
+  Command Line=%DESTDIR%\WLPRSPL.EXE
+  Icon Pathname=%DESTDIR%\WLPRSPL.EXE
+  Icon Number=128
+  Default Directory=%DESTDIR%
+end
+item: Else Statement
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Want to put 95 and NT specific stuff in here ...
+end
+item: Remark
+end
+item: Add ProgMan Icon
+  Group=LPR Print Spooler
+  Icon Name=Windows Print Spooler
+  Command Line=%DESTDIR%\WLPRSPL.EXE
+  Icon Pathname=%DESTDIR%\WLPRSPL.EXE
+  Default Directory=%DESTDIR%
+end
+item: Add ProgMan Icon
+  Group=LPR Print Spooler
+  Icon Name=Print Spooler Help
+  Command Line=%DESTDIR%\WLPRSPL.HLP
+end
+item: Add ProgMan Icon
+  Group=LPR Print Spooler
+  Icon Name=MIT ReadMe
+  Command Line=NOTEPAD %DESTDIR%\README.MIT
+end
+item: Remark
+end
+item: Remark
+  Text=* EndIf -> If PREVDIR
+end
+item: End Block
+end
+item: Delete File
+  Pathname=%TEMPINI%\FTP_SOFT.INI
+end
+item: Remark
+end
+item: Remark
+  Text=*************************************************************
+end
+item: Remark
+  Text=********************* SECTION TWO *********************
+end
+item: Remark
+  Text=*************************************************************
+end
+item: Remark
+end
+item: Remark
+  Text=*** Set the FTP info for the current user ***
+end
+item: Remark
+end
+item: Edit INI File
+  Pathname=%TEMPINI%\FTP_Q.INI
+  Settings=[Dir1]
+  Settings=File1=%USERTYPE%.QS
+  Settings=
+  Settings=
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMPINI%\FTP_Q.INI
+  Settings=[Dir1]
+  Settings=File2=%USERTYPE%.SIN
+  Settings=
+  Settings=
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMPINI%\FTP_Q.INI
+  Settings=[Dir1]
+  Settings=File3=%USERTYPE%.LST
+  Settings=
+  Settings=
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMPINI%\FTP_Q.INI
+  Settings=[Dir1]
+  Settings=File4=%USERTYPE%.INI
+  Settings=
+  Settings=
+  Settings=
+end
+item: Remark
+end
+item: Remark
+  Text=*** Grab files and check for errors ***
+end
+item: Remark
+end
+item: Set Variable
+  Variable=GRABDEST
+  Value=%TEMPFTP%\Q
+end
+item: Create Directory
+  Pathname=%GRABDEST%
+end
+item: Edit INI File
+  Pathname=%TEMPINI%\FTP_Q.INI
+  Settings=[Dir1]
+  Settings=TargetDir=%GRABDEST%
+  Settings=
+end
+item: Allow Floppy Disk Change
+end
+item: Remark
+end
+item: Execute Program
+  Pathname=%TEMPBIN%\INIFTP.EXE
+  Command Line=-l%TEMPBIN%\LPR_FTP.LOG %TEMPINI%\FTP_Q.INI
+  Default Directory=%TEMPBIN%
+  Flags=00000010
+end
+item: Read INI Value
+  Variable=FTPERR
+  Pathname=%TEMPINI%\FTP_Q.INI
+  Section=ExitCode
+  Item=Abort
+  Default=No
+end
+item: Add Text to INSTALL.LOG
+  Text=*** FTP_QUEUE::FTPERR: '%FTPERR%'
+end
+item: If/While Statement
+  Variable=FTPERR
+  Value=No
+  Flags=00000001
+end
+item: Display Message
+  Title=Error during FTP
+  Text=There was an error during the file transfer from the server.  See the README or HELP files for help.
+  Text=
+  Text=BREAK SECTION:
+  Text=FTP_QUEUE
+  Flags=00110000
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: Remark
+end
+remarked item: Delete File
+  Pathname=%TEMPFTP%\*.*
+  Flags=00001000
+end
+item: Remark
+end
+item: Remark
+  Text=** What These Files Are:
+end
+item: Remark
+  Text=* QS File: Default Queue Spool file (.QS) with all printers pre-defined
+end
+item: Remark
+  Text=* SIN File: the C:\WINDOWS\WLPRSPL.INI file, for mit users only
+end
+item: Remark
+  Text=* LST file: What the use sees as his choicesm like: 
+end
+item: Remark
+  Text=* INI file (POS): Gives lines to add to the Quque Def'n file, like:
+end
+item: Remark
+  Text=*    Queue4=NIL.Q,nil,athena,KWLPR2.DLL,Nil in E40 (work)
+end
+item: Remark
+end
+item: Set Variable
+  Variable=FILE_QS
+  Value=%GRABDEST%\%USERTYPE%.QS
+end
+item: Set Variable
+  Variable=FILE_SIN
+  Value=%GRABDEST%\%USERTYPE%.SIN
+end
+item: Set Variable
+  Variable=FILE_LST
+  Value=%GRABDEST%\%USERTYPE%.LST
+end
+item: Set Variable
+  Variable=FILE_POS
+  Value=%GRABDEST%\%USERTYPE%.INI
+end
+item: Remark
+end
+item: Remark
+  Text=*** Determine Spool Directory ***
+end
+item: Remark
+end
+item: Read INI Value
+  Variable=SPOOLDIR
+  Pathname=%TEMPINI%\FTP_Q.INI
+  Section=Installer
+  Item=DefaultDest
+  Default=C:\NET\MIT\
+end
+item: Set Variable
+  Variable=SPOOLDIR
+  Value=%SPOOLDIR%
+  Flags=00001100
+end
+item: If/While Statement
+  Variable=EXPRESS
+  Value=0
+end
+item: Browse for Directory
+  Variable=SPOOLDIR
+  Flags=1
+  Window Name=Select Directory to Spool to
+  Prompt Description=You must now select the directory where the spooled files will be temporarity stored until they are moved on to the printer.  It is strongly recommend that you use the default value.
+  Prompt Name=Spool Directory:
+  Default Value=%SPOOLDIR%
+  Flags=00000001
+end
+item: End Block
+end
+item: Delete File
+  Pathname=%TEMPINI%\FTP_Q.INI
+end
+item: Remark
+end
+item: Remark
+  Text=*** Copy default spool definition file ***
+end
+item: Remark
+end
+item: Check if File/Dir Exists
+  Pathname=%SPOOLDIR%\WLPRSPL.QS
+  Title=Previous Definition Found
+  Flags=00000100
+end
+item: Copy Local File
+  Source=%SPOOLDIR%\WLPRSPL.QS
+  Destination=%SPOOLDIR%\WLPRSPL.QS~
+  Flags=0000000001100010
+end
+item: End Block
+end
+item: Copy Local File
+  Source=%FILE_POS%
+  Destination=%DESTDIR%\WPRBRWSE.DAT
+  Flags=0000000001000010
+end
+item: Remark
+end
+item: Remark
+  Text=*** Copy spooler's WIN\INI file, with old version support ***
+end
+item: Remark
+end
+item: Check if File/Dir Exists
+  Pathname=%WIN%\WLPRSPL.INI
+  Flags=00000100
+end
+item: If/While Statement
+  Variable=EXPRESS
+  Value=1
+end
+item: Copy Local File
+  Source=%WIN%\WLPRSPL.INI
+  Destination=%WIN%\WLPRSPL.IN~
+  Flags=0000000001100010
+end
+item: Copy Local File
+  Source=%FILE_SIN%
+  Destination=%WIN%\WLPRSPL.INI
+  Flags=0000000001100010
+end
+item: Else Statement
+end
+item: Display Message
+  Title=Previous Settings Found
+  Text=The file %WIN%\WLPRSPL.INI already exists, most likely created by a previous version of this software.  This file specifies varied settings for the spooler.  You can use the currently installed settings or install new settings (saving the old ones).  Would you like to install the new settings?
+  Flags=00101101
+end
+item: Copy Local File
+  Source=%WIN%\WLPRSPL.INI
+  Destination=%WIN%\WLPRSPL.IN~
+  Flags=0000000001100010
+end
+item: Copy Local File
+  Source=%FILE_SIN%
+  Destination=%WIN%\WLPRSPL.INI
+  Flags=0000000001100010
+end
+item: Display Message
+  Title=Old version saved
+  Text=The old settings have been moved to the file: %WIN%\WLPRSPL.IN~.
+  Flags=00100000
+end
+item: Else Statement
+end
+item: End Block
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Copy Local File
+  Source=%FILE_SIN%
+  Destination=%WIN%\WLPRSPL.INI
+  Flags=0000000001100010
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Update INI's for new spool dir and protocols ***
+end
+item: Remark
+end
+item: Edit INI File
+  Pathname=%WIN%\WLPRSPL.INI
+  Settings=[Preferences]
+  Settings=SpoolDir=%SPOOLDIR%\
+  Settings=
+end
+item: Edit INI File
+  Pathname=%WIN%\WLPRSPL.INI
+  Settings=[Preferences]
+  Settings=QueueSetupFile=%SPOOLDIR%\WLPRSPL.QS
+  Settings=
+end
+item: Edit INI File
+  Pathname=%WIN%\WIN.INI
+  Settings=[HSoft NetPrint Protocols]
+  Settings=BSD LPR/LPD Protocol=WLPR2.DLL
+  Settings=HP JetDirect Protocol=WJETDIR.DLL
+  Settings=BSD Kerberos LPR/LPD Protocol=KWLPR2.DLL
+  Settings=
+end
+item: Remark
+end
+item: Remark
+  Text=*** Now Setup Individual Printers -- Read possibilities***
+end
+item: Remark
+end
+item: Allow Floppy Disk Change
+end
+item: Read/Write File Data
+  Pathname=%FILE_LST%
+  Variable=QPOSSIBLE
+  Offset=0
+  Max Length=500
+  Flags=00000001
+end
+item: Custom Dialog Set
+  Name=Select Printers to Add
+  item: Dialog
+    Title=Select Printers to Add
+    Width=140
+    Height=200
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=9 6 124 42
+      Create Flags=01010000000000000000000000000000
+      Text=You may now select which printers (if any) to setup to use with this software.  Choose from the list below
+    end
+    item: Static
+      Rectangle=5 4 129 42
+      Action=3
+      Create Flags=01010000000000000000000000001000
+    end
+    item: Listbox
+      Rectangle=4 50 129 154
+      Variable=QSEL
+      Create Flags=01010000101000010001000101001010
+      Flags=0000010000010000
+      Text=%QPOSSIBLE%
+    end
+    item: Push Button
+      Rectangle=19 160 54 175
+      Create Flags=01010000000000010000000000000000
+      Text=OK
+    end
+    item: Push Button
+      Rectangle=67 160 102 175
+      Create Flags=01010000000000010000000000000000
+      Text=Cancel
+    end
+  end
+end
+item: Remark
+end
+item: Remark
+  Text=*** Parse QSEL into QLIST ***
+end
+item: Remark
+end
+item: Set Variable
+  Variable=QLIST
+end
+item: If/While Statement
+  Variable=QSEL
+  Flags=00010001
+end
+item: Parse String
+  Source=%QSEL%
+  Pattern=*
+  Variable1=QSEL
+  Variable2=ANAME
+  Flags=00000101
+end
+item: Parse String
+  Source=%ANAME%
+  Pattern=-
+  Variable1=ANAME
+  Variable2=JUNK
+  Flags=00000001
+end
+item: Set Variable
+  Variable=QLIST
+  Value=%QLIST%%ANAME% 
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Change the QS file to a temp INI so I can edit it ***
+end
+item: Remark
+end
+item: Copy Local File
+  Source=%FILE_QS%
+  Destination=%TEMPINI%\WLPRSPL.INI
+  Flags=0000000001100010
+end
+item: Set Variable
+  Variable=FILE_QS
+  Value=%TEMPINI%\WLPRSPL.INI
+end
+item: Remark
+end
+item: Remark
+  Text=*** The major loop -- install the printer "CURNAME" ***
+end
+item: Read INI Value
+  Variable=TOTAL_PREDEF
+  Pathname=%FILE_POS%
+  Section=Queues
+  Item=QueueNumber
+  Default=0
+end
+item: Remark
+end
+item: Remark
+  Text=* QLOOP stores the names left to be processed
+end
+item: Remark
+  Text=* QNUM is the outer iteration number
+end
+item: Remark
+end
+item: Set Variable
+  Variable=QLOOP
+  Value=%QLIST%
+end
+item: Set Variable
+  Variable=QNUM
+  Value=0
+end
+item: If/While Statement
+  Variable=QLOOP
+  Flags=00010001
+end
+item: Parse String
+  Source=%QLOOP%
+  Pattern= 
+  Variable1=CURNAME
+  Variable2=QLOOP
+  Flags=00000001
+end
+item: Set Variable
+  Variable=QNUM
+  Value=%QNUM%
+  Flags=00000100
+end
+item: Remark
+end
+item: Remark
+  Text=*** Search the pre-defined queues for the number of the correct one to add ***
+end
+item: Remark
+end
+item: Set Variable
+  Variable=DEFNUM
+  Value=0
+end
+item: Set Variable
+  Variable=CUR_SEARCH
+  Value=%TOTAL_PREDEF%
+end
+item: If/While Statement
+  Variable=CUR_SEARCH
+  Value=0
+  Flags=00010001
+end
+item: Read INI Value
+  Variable=ADEF
+  Pathname=%FILE_POS%
+  Section=Queues
+  Item=Queue%CUR_SEARCH%
+end
+item: Set Variable
+  Variable=CORRECT
+  Value=%ADEF%
+end
+item: If/While Statement
+  Variable=ADEF
+  Flags=00000001
+end
+item: Parse String
+  Source=%ADEF%
+  Pattern=,
+  Variable1=FNAME
+  Variable2=ADEF
+  Flags=00000001
+end
+item: Parse String
+  Source=%ADEF%
+  Pattern=,
+  Variable1=PRNNAME
+  Variable2=ADEF
+  Flags=00000001
+end
+item: Parse String
+  Source=%ADEF%
+  Pattern=,
+  Variable1=SERVNAME
+  Variable2=ADEF
+  Flags=00000001
+end
+item: Parse String
+  Source=%ADEF%
+  Pattern=,
+  Variable1=DLLNAME
+  Variable2=DESC
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=PRNNAME
+  Value=%CURNAME%
+  Flags=00000100
+end
+item: Set Variable
+  Variable=DEFNUM
+  Value=%CUR_SEARCH%
+end
+item: Set Variable
+  Variable=CUR_SEARCH
+  Value=1
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=CUR_SEARCH
+  Value=%CUR_SEARCH%
+  Flags=00001000
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=*** Now copy pre-defined number DEFNUM to current QNUM ***
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=DEFNUM
+  Value=0
+  Flags=00000001
+end
+item: Edit INI File
+  Pathname=%FILE_QS%
+  Settings=[Queues]
+  Settings=Queue%QNUM%=%CORRECT%
+  Settings=
+end
+item: Else Statement
+end
+item: Display Message
+  Title=Searching -- Error?
+  Text=Internal search error in installer -- remote setup files might be skewed.  Setup should still work.  One of the printers you chose may not be configured correctly.  If it doesn't, notify Information Services of this problem or see the README or HELP files.
+  Text=
+  Text=Current: '%CURNAME%'
+  Flags=00110000
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=******************** SECTION THREE ********************
+end
+item: Remark
+end
+item: Remark
+  Text=*** Install a driver for 'CURNAME' ***
+end
+item: Remark
+  Text=* This is proving to be VERY difficult *
+end
+item: Remark
+  Text=* Left Out Until Later Date *
+end
+item: Remark
+  Text=*
+end
+item: Remark
+  Text=* The user himself will have to do this section for now
+end
+item: Remark
+end
+item: Remark
+  Text=* EndIf -> While QLOOP not NUL
+end
+item: End Block
+end
+item: Edit INI File
+  Pathname=%FILE_QS%
+  Settings=[Queues]
+  Settings=QueueNumber=%QNUM%
+  Settings=
+end
+item: Remark
+end
+item: Remark
+  Text=*** Change the QS file back from an INI so it can be used ***
+end
+item: Remark
+end
+item: Copy Local File
+  Source=%FILE_QS%
+  Destination=%SPOOLDIR%\WLPRSPL.QS
+  Flags=0000000001100010
+end
+item: Delete File
+  Pathname=%FILE_QS%
+end
+item: Remark
+end
+item: Display Message
+  Title=Installation Complete
+  Text=The software has been successfully installed!
+  Text=
+  Text=If you would like to add printers in the future, please see the HELP and README files for this installer.
+  Flags=00101000
+end
+item: Remark
+end
+item: Remark
+  Text=************************ CLEANUP ************************
+end
+item: Remark
+end
+item: Remark
+  Text=* We can delete everything because we created these directories ourselves
+end
+item: Remark
+end
+item: Delete File
+  Pathname=%TEMPBIN%\*.*
+  Flags=00001100
+end
+item: Delete File
+  Pathname=%TEMPFTP%\*.*
+  Flags=00001100
+end
+item: Delete File
+  Pathname=%TEMPINI%\*.*
+  Flags=00001100
+end
+item: Remark
+end
+item: Remark
+  Text=* END *
+end

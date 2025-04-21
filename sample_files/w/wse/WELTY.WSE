@@ -1,0 +1,2751 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=Eudora Installation
+  Flags=00010100
+  Languages=65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=128 128 128
+  Windows Flags=00000000000000010010110000001000
+  Log Pathname=%MAINDIR%\WELTY.LOG
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  FTP Cluster Size=20
+end
+item: Remark
+  Text=// Mink Installer Rev 1.0.0 (Beta/Release) 9/3/97, jjv
+end
+item: Remark
+  Text=// includeds mfc40.dll
+end
+item: Remark
+  Text=// better UI for win 16/ win 95
+end
+item: Remark
+  Text=// fixes some setting differences between this & Mac version
+end
+item: Remark
+end
+item: Remark
+  Text=// Version 0.9.0  6/19/97, jjv
+end
+item: Remark
+  Text=// Alpha of Eudora Installer
+end
+item: Remark
+end
+item: Remark
+  Text=// Do we want to copy/append and old .log files to an oldWELTY.log file ?
+end
+item: Remark
+  Text=// I think it just appends the .log file itself, which is why you can de-Mink when you uninstall Eudora
+end
+item: Remark
+end
+item: Custom Dialog Set
+  Name=Intro
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=86 8 257 30
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Welcome!
+      Text French=Bienvenue !
+      Text German=Willkommen!
+      Text Spanish=¡Bienvenido!
+      Text Italian=Benvenuti!
+    end
+    item: Push Button
+      Rectangle=141 186 195 202
+      Variable=CANCEL
+      Value=No
+      Action=1
+      Create Flags=01010000000000010000000000000001
+      Text=&Continue
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Variable=CANCEL
+      Value=Yes
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=&Exit
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=86 42 256 131
+      Create Flags=01010000000000000000000000000000
+      Text=First, you may optionally install the required Kerberos binaries so that Eudora will function properly at MIT.
+      Text=
+      Text=This installation requires an active network connection from a registered MITnet IP address.  This connection can be from either direct ethernet or the Tether PPP service. 
+      Text French=Ce programme d'installation va installer %APPTITLE%.
+      Text French=
+      Text French=Cliquez sur le bouton Suite pour démarrer l'installation. Vous pouvez cliquer sur le bouton Quitter l'installation si vous ne voulez pas installer %APPTITLE% tout de suite.
+      Text German=Mit diesem Installationsprogramm wird %APPTITLE% installiert.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um mit der Installation zu beginnen. Klicken Sie auf "Abbrechen", um die Installation von %APPTITLE% abzubrechen.
+      Text Spanish=Este programa de instalación instalará %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Presione el botón Siguiente para iniciar la instalación. Puede presionar el botón Salir de instalación si no desea instalar %APPTITLE% en este momento.
+      Text Italian=Questo programma installerà %APPTITLE%.
+      Text Italian=
+      Text Italian=Per avvviare l'installazione premere il pulsante Avanti. Se non si desidera installare %APPTITLE% ora, premere il pulsante Esci dall'installazione.
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Push Button
+      Rectangle=7 179 257 180
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+    end
+  end
+  item: Dialog
+    Title=Hello!
+    Width=201
+    Height=84
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=51 26 156 37
+      Create Flags=01010000000000000000000000000000
+      Text=Written by: Jonathan Venezian
+    end
+    item: Static
+      Rectangle=31 34 172 42
+      Create Flags=01010000000000000000000000000000
+      Text=Copyright © 1997, MIT DCNS Applications
+    end
+    item: Push Button
+      Rectangle=85 48 120 63
+      Create Flags=01010000000000010000000000000000
+      Text=OK
+    end
+    item: Static
+      Rectangle=0 2 196 26
+      Create Flags=01010000000000000000000000000001
+      Flags=0000000000000001
+      Name=Arial
+      Font Style=-15 0 0 0 700 0 0 0 0 3 2 1 34
+      Text=Installation Utility for %APPTITLE%
+    end
+  end
+end
+item: If/While Statement
+  Variable=CANCEL
+  Value=Yes
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=NETMITPATH
+  Pathname List=krbv4win.dll
+  Flags=00000001
+end
+item: Remark
+  Text=// Is kerberos installed ?  ... if not run MINK ...
+end
+item: Display Message
+  Title=Kerberos Update?
+  Text=Would you like to install the most recent versions of kerberos 4 binaries and check the configuration of your system ? 
+  Flags=00101101
+end
+item: Include Script
+  Pathname=C:\INSTALLS\KTELNET\SOURCE\MINKCRIP.WSE
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=NETMITPATH
+end
+item: Set Variable
+  Variable=NETMITPATH
+  Value=C:\net\mit
+end
+item: Display Message
+  Title=Kerberos Update?
+  Text=Can't find some of the basic Kerberos files.
+  Text=This installation wil *not* function if kerberos is not installed.
+  Text=
+  Text=Do you want to install the Kerberos binaries?
+  Flags=00101101
+end
+item: Include Script
+  Pathname=C:\INSTALLS\KTELNET\SOURCE\MINKCRIP.WSE
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=NETMITPATH
+end
+item: Set Variable
+  Variable=NETMITPATH
+  Value=C:\net\mit
+end
+item: End Block
+end
+item: Remark
+end
+item: Create Directory
+  Pathname=%TEMP%\WELTY
+end
+item: Create Directory
+  Pathname=%TEMP%\WELTY\BACKUP
+end
+item: Get Temporary Filename
+  Variable=READMEFILE
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\README.TXT
+  Destination=%TEMP%\%READMEFILE%
+  Flags=0000000000100010
+end
+item: Get Temporary Filename
+  Variable=LICINFOFILE
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\LICINFO.TXT
+  Destination=%TEMP%\%LICINFOFILE%
+  Flags=0000000000100010
+end
+item: Set Variable
+  Variable=FTPLOG
+  Value=WELTYFTP.LOG
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\WELTY.LOG
+  Destination=%TEMP%\%FTPLOG%
+  Flags=0000000000100010
+end
+item: Remark
+end
+item: Remark
+  Text=//  Set FTP info
+end
+item: Set Variable
+  Variable=FILESFTPED
+end
+item: Set Variable
+  Variable=HOSTADDR
+  Value=net-dist.mit.edu
+end
+item: Set Variable
+  Variable=FTPUSER
+  Value=anonymous
+end
+item: Set Variable
+  Variable=FTPPASS
+  Value=Eudora-installer@mit.edu
+end
+item: Remark
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=C:\Eudora
+end
+item: Set Variable
+  Variable=MAINDIR16
+  Value=C:\Eudora16
+end
+item: Remark
+end
+item: Remark
+  Text=// Check writability of various directories 
+end
+item: Check if File/Dir Exists
+  Pathname=%WIN%
+  Flags=10000100
+end
+item: Set Variable
+  Variable=WIN
+  Value=%MAINDIR%
+end
+item: End Block
+end
+item: Check if File/Dir Exists
+  Pathname=%SYS%
+  Flags=10000100
+end
+item: Set Variable
+  Variable=SYS
+  Value=%WIN%
+end
+item: End Block
+end
+item: Set Variable
+  Variable=SYSDIR
+  Value=%SYS%
+end
+item: Remark
+end
+item: Set Variable
+  Variable=OSGROUP
+  Value=Start Menu
+end
+item: Set Variable
+  Variable=GROUP
+  Value=Eudora
+end
+item: Set Variable
+  Variable=BINTYPE
+  Value=B
+end
+item: Remark
+end
+item: Remark
+  Text=// Check System type ...
+end
+item: Check Configuration
+  Flags=10000110
+end
+item: Remark
+  Text=// This is a hack check to see if we're on an Alpha ...
+end
+item: Remark
+  Text=We're taking a short cut. If this isn't a 286 or better it must be an ALPHA
+end
+item: Remark
+  Text=This will change when we support other flavors of NT
+end
+item: Remark
+  Text=// If below is true, then we're running WIN16 on an ALPHA ?!?
+end
+item: Check Configuration
+  Message=It appears you are not runing some non-NT Windows on an ALPHA.  This shouldn't happen. Please contact someone for help.
+  Title=Problems Detecting System
+  Flags=01000000
+end
+item: Display Message
+  Title=System Warning!
+  Text=It appears that you are installing onto an Alpha.  This program has binaries written for Intel platforms.  If you have FX32 installed, these should run.  Do you want to install ?
+  Flags=00001000
+end
+item: Set Variable
+  Variable=SYSTYPE
+  Value=ALPHA
+end
+item: Else Statement
+end
+item: Remark
+  Text=// OK, so we're on some sort of intel chip ...
+end
+item: Check Configuration
+  Flags=10011010
+end
+item: Set Variable
+  Variable=OSGROUP
+  Value=Program
+end
+item: Set Variable
+  Variable=BINTYPE
+  Value=A
+end
+item: Set Variable
+  Variable=SYSTYPE
+  Value=WIN16
+end
+item: Set Variable
+  Variable=MAINDIR16
+  Value=C:\Eudora
+end
+item: Set Variable
+  Variable=GROUP
+  Value=Eudora
+end
+item: Else Statement
+end
+item: Win32 System Directory
+  Variable=SYSDIR
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Set Variable
+  Variable=SYSTYPE
+  Value=WINNT
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=SYSTYPE
+  Value=WIN95
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=APPTITLE
+  Value=Eudora
+end
+item: Remark
+end
+item: Set Variable
+  Variable=DISABLED
+  Value=!
+end
+item: Check Configuration
+  Flags=10111011
+end
+item: Get Registry Key Value
+  Variable=COMMON
+  Key=SOFTWARE\Microsoft\Windows\CurrentVersion
+  Default=C:\Program Files\Common Files
+  Value Name=CommonFilesDir
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=PROGRAM_FILES
+  Key=SOFTWARE\Microsoft\Windows\CurrentVersion
+  Default=C:\Program Files
+  Value Name=ProgramFilesDir
+  Flags=00000100
+end
+item: Set Variable
+  Variable=EXPLORER
+  Value=1
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=BACKUP
+  Value=%TEMP%\WELTY\BACKUP
+end
+item: Set Variable
+  Variable=MITDIR
+  Value=%MAINDIR%
+end
+item: Set Variable
+  Variable=MITDIR16
+  Value=%MAINDIR16%
+end
+item: Set Variable
+  Variable=DOBACKUP
+  Value=A
+end
+item: Remark
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=c:\Program files\wise\dialogs\template\WIZARD.BMP
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Dialog=Welcome
+  Dialog=Display Lic Info
+  Dialog=Display ReadMe
+  Dialog=Select Binary Types
+  Dialog=Select 16-bit Destination Directory
+  Dialog=Select 32-bit Destination Directory
+  Dialog=Backup Replaced Files
+  Dialog=Select Backup Directory
+  Variable=
+  Variable=
+  Variable=
+  Variable=SYSTYPE
+  Variable=BINTYPE
+  Variable=BINTYPE
+  Variable=
+  Variable=DOBACKUP
+  Value=
+  Value=
+  Value=
+  Value=WIN16
+  Value=A
+  Value=B
+  Value=
+  Value=B
+  Compare=0
+  Compare=0
+  Compare=0
+  Compare=0
+  Compare=3
+  Compare=3
+  Compare=0
+  Compare=0
+  Flags=00000011
+end
+item: Remark
+  Text=// This Set line forces it forward when making a quick pick for path ...
+end
+item: Custom Dialog Set
+  Name=Welcome
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=86 8 257 30
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Welcome!
+      Text French=Bienvenue !
+      Text German=Willkommen!
+      Text Spanish=¡Bienvenido!
+      Text Italian=Benvenuti!
+    end
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DISABLED
+      Value=!
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=86 42 256 131
+      Create Flags=01010000000000000000000000000000
+      Text=This installation program will install the %APPTITLE% files.
+      Text=
+      Text=Press the Next button to start the installation. You can press the Exit Setup button now if you do not want to install %APPTITLE% at this time.
+      Text French=Ce programme d'installation va installer %APPTITLE%.
+      Text French=
+      Text French=Cliquez sur le bouton Suite pour démarrer l'installation. Vous pouvez cliquer sur le bouton Quitter l'installation si vous ne voulez pas installer %APPTITLE% tout de suite.
+      Text German=Mit diesem Installationsprogramm wird %APPTITLE% installiert.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um mit der Installation zu beginnen. Klicken Sie auf "Abbrechen", um die Installation von %APPTITLE% abzubrechen.
+      Text Spanish=Este programa de instalación instalará %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Presione el botón Siguiente para iniciar la instalación. Puede presionar el botón Salir de instalación si no desea instalar %APPTITLE% en este momento.
+      Text Italian=Questo programma installerà %APPTITLE%.
+      Text Italian=
+      Text Italian=Per avvviare l'installazione premere il pulsante Avanti. Se non si desidera installare %APPTITLE% ora, premere il pulsante Esci dall'installazione.
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Push Button
+      Rectangle=7 179 257 180
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+    end
+  end
+  item: Dialog
+    Title=Hello!
+    Width=201
+    Height=84
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=51 26 156 37
+      Create Flags=01010000000000000000000000000000
+      Text=Written by: Jonathan Venezian
+    end
+    item: Static
+      Rectangle=31 34 172 42
+      Create Flags=01010000000000000000000000000000
+      Text=Copyright © 1997, MIT DCNS Applications
+    end
+    item: Push Button
+      Rectangle=85 48 120 63
+      Create Flags=01010000000000010000000000000000
+      Text=OK
+    end
+    item: Static
+      Rectangle=0 2 196 26
+      Create Flags=01010000000000000000000000000001
+      Flags=0000000000000001
+      Name=Arial
+      Font Style=-15 0 0 0 700 0 0 0 0 3 2 1 34
+      Text=Installation Utility for %APPTITLE%
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Display Lic Info
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=151 187 196 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Accept >
+    end
+    item: Push Button
+      Rectangle=106 187 151 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Refuse
+    end
+    item: Static
+      Rectangle=9 180 257 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Editbox
+      Rectangle=85 12 254 171
+      Value=%TEMP%\%LICINFOFILE%
+      Help Context=16711681
+      Create Flags=01010000101000000000100000000100
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Display ReadMe
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=151 187 196 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+    end
+    item: Push Button
+      Rectangle=106 187 151 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+    end
+    item: Static
+      Rectangle=9 180 257 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Editbox
+      Rectangle=85 12 254 171
+      Value=%TEMP%\%READMEFILE%
+      Help Context=16711681
+      Create Flags=01010000101000000000100000000100
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select Binary Types
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 9 258 43
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-21 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select Binaries to Install
+      Text French=Sélectionner le répertoire de destination
+      Text German=Zielverzeichnis wählen
+      Text Spanish=Seleccione el directorio de destino
+      Text Italian=Selezionare Directory di destinazione
+    end
+    item: Static
+      Rectangle=85 41 255 63
+      Create Flags=01010000000000000000000000000000
+      Text=Please select which binaries you wish to install:
+      Text French=Veuillez sélectionner le répertoire dans lequel les fichiers %APPTITLE% doivent être installés.
+      Text German=Geben Sie an, in welchem Verzeichnis die %APPTITLE%-Dateien installiert werden sollen.
+      Text Spanish=Por favor seleccione el directorio donde desee instalar los archivos de %APPTITLE%.
+      Text Italian=Selezionare la directory dove verranno installati i file %APPTITLE%.
+    end
+    item: Static
+      Rectangle=86 56 224 101
+      Action=1
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Checkbox
+      Rectangle=128 66 178 95
+      Variable=BINTYPE
+      Create Flags=01010000000000010000000000000011
+      Text=16-bit binaries
+      Text=32-bit binaries
+      Text=
+    end
+  end
+  item: Dialog
+    Title=Select Destination Directory
+    Title French=Sélectionner le répertoire de destination
+    Title German=Zielverzeichnis wählen
+    Title Spanish=Seleccione el directorio de destino
+    Title Italian=Selezionare Directory di destinazione
+    Width=221
+    Height=173
+    Font Name=Helv
+    Font Size=8
+    item: Listbox
+      Rectangle=4 5 162 149
+      Variable=MAINDIR
+      Create Flags=01010000100000010000000101000000
+      Flags=0000010000101010
+      Text=%MAINDIR%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+    end
+    item: Push Button
+      Rectangle=167 6 212 21
+      Create Flags=01010000000000010000000000000001
+      Text=OK
+      Text French=OK
+      Text German=OK
+      Text Spanish=Aceptar
+      Text Italian=OK
+    end
+    item: Push Button
+      Rectangle=167 25 212 40
+      Variable=MAINDIR
+      Value=%MAINDIR_SAVE%
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select 16-bit Destination Directory
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 9 258 43
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-21 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select 16-Bit Destination Directory
+      Text French=Sélectionner le répertoire de destination
+      Text German=Zielverzeichnis wählen
+      Text Spanish=Seleccione el directorio de destino
+      Text Italian=Selezionare Directory di destinazione
+    end
+    item: Static
+      Rectangle=86 42 256 64
+      Create Flags=01010000000000000000000000000000
+      Text=Please select the directory where the %APPTITLE% files are to be installed.
+      Text French=Veuillez sélectionner le répertoire dans lequel les fichiers %APPTITLE% doivent être installés.
+      Text German=Geben Sie an, in welchem Verzeichnis die %APPTITLE%-Dateien installiert werden sollen.
+      Text Spanish=Por favor seleccione el directorio donde desee instalar los archivos de %APPTITLE%.
+      Text Italian=Selezionare la directory dove verranno installati i file %APPTITLE%.
+    end
+    item: Static
+      Rectangle=87 87 257 114
+      Action=1
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Push Button
+      Rectangle=209 95 254 110
+      Variable=MAINDIR_SAVE
+      Value=%MAINDIR16%
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=B&rowse
+      Text French=Parcourir
+      Text German=Durchsuchen
+      Text Spanish=Buscar
+      Text Italian=Sfoglie
+    end
+    item: Static
+      Rectangle=91 98 207 109
+      Create Flags=01010000000000000000000000000000
+      Text=%MAINDIR16%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+    end
+    item: Push Button
+      Rectangle=113 121 219 136
+      Variable=MAINDIR
+      Value=%MITDIR16%
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=Default (%MITDIR16%)
+    end
+  end
+  item: Dialog
+    Title=Select Destination Directory
+    Title French=Sélectionner le répertoire de destination
+    Title German=Zielverzeichnis wählen
+    Title Spanish=Seleccione el directorio de destino
+    Title Italian=Selezionare Directory di destinazione
+    Width=221
+    Height=173
+    Font Name=Helv
+    Font Size=8
+    item: Listbox
+      Rectangle=4 5 162 149
+      Variable=MAINDIR16
+      Create Flags=01010000100000010000000101000000
+      Flags=0000010000101010
+      Text=%MAINDIR16%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+    end
+    item: Push Button
+      Rectangle=167 6 212 21
+      Create Flags=01010000000000010000000000000001
+      Text=OK
+      Text French=OK
+      Text German=OK
+      Text Spanish=Aceptar
+      Text Italian=OK
+    end
+    item: Push Button
+      Rectangle=167 25 212 40
+      Variable=MAINDIR
+      Value=%MAINDIR_SAVE%
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select 32-bit Destination Directory
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 9 258 43
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-21 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select 32-Bit Destination Directory
+      Text French=Sélectionner le répertoire de destination
+      Text German=Zielverzeichnis wählen
+      Text Spanish=Seleccione el directorio de destino
+      Text Italian=Selezionare Directory di destinazione
+    end
+    item: Static
+      Rectangle=86 42 256 64
+      Create Flags=01010000000000000000000000000000
+      Text=Please select the directory where the %APPTITLE% files are to be installed.
+      Text French=Veuillez sélectionner le répertoire dans lequel les fichiers %APPTITLE% doivent être installés.
+      Text German=Geben Sie an, in welchem Verzeichnis die %APPTITLE%-Dateien installiert werden sollen.
+      Text Spanish=Por favor seleccione el directorio donde desee instalar los archivos de %APPTITLE%.
+      Text Italian=Selezionare la directory dove verranno installati i file %APPTITLE%.
+    end
+    item: Static
+      Rectangle=87 87 257 114
+      Action=1
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Push Button
+      Rectangle=209 95 254 110
+      Variable=MAINDIR_SAVE
+      Value=%MAINDIR%
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=B&rowse
+      Text French=Parcourir
+      Text German=Durchsuchen
+      Text Spanish=Buscar
+      Text Italian=Sfoglie
+    end
+    item: Static
+      Rectangle=91 98 207 109
+      Create Flags=01010000000000000000000000000000
+      Text=%MAINDIR%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+    end
+    item: Push Button
+      Rectangle=113 121 219 136
+      Variable=MAINDIR
+      Value=%MITDIR%
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=Default (%MITDIR%)
+    end
+  end
+  item: Dialog
+    Title=Select Destination Directory
+    Title French=Sélectionner le répertoire de destination
+    Title German=Zielverzeichnis wählen
+    Title Spanish=Seleccione el directorio de destino
+    Title Italian=Selezionare Directory di destinazione
+    Width=221
+    Height=173
+    Font Name=Helv
+    Font Size=8
+    item: Listbox
+      Rectangle=4 5 162 149
+      Variable=MAINDIR
+      Create Flags=01010000100000010000000101000000
+      Flags=0000010000101010
+      Text=%MAINDIR%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+    end
+    item: Push Button
+      Rectangle=167 6 212 21
+      Create Flags=01010000000000010000000000000001
+      Text=OK
+      Text French=OK
+      Text German=OK
+      Text Spanish=Aceptar
+      Text Italian=OK
+    end
+    item: Push Button
+      Rectangle=167 25 212 40
+      Variable=MAINDIR
+      Value=%MAINDIR_SAVE%
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Backup Replaced Files
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Backup Replaced Files?
+      Text French=Effectuer une copie de sauvegarde des fichiers remplacés ?
+      Text German=Wollen Sie Sicherungskopien der überschriebenen Dateien anfertigen?
+      Text Spanish=¿Desea una copia de seguridad de los archivos reemplazados?
+      Text Italian=Backup dei file sostituiti?
+    end
+    item: Static
+      Rectangle=86 42 256 83
+      Create Flags=01010000000000000000000000000000
+      Text=This installation program can create backup copies of all files replaced during the installation.  Do you want to create backups of the replaced files?
+      Text French=Le programme d'installation peut créer des copies de sauvegarde de tous les fichiers remplacés pendant l'installation. Voulez-vous créer des copies de sauvegarde des fichiers remplacés ?
+      Text German=Mit diesem Installationsprogramm können Sie Sicherungskopien aller Dateien anfertigen, die bei der Installation überschrieben werden. Wollen Sie Sicherungskopien der überschriebenen Dateien anfertigen?
+      Text Spanish=Este programa de instalación puede crear copias de seguridad de todos los archivos reemplazados durante la instalación. ¿Desea crear copias de seguridad de los archivos reemplazados?
+      Text Italian=Questo programma di installazione può eseguire copie di backup di tutti i file sostituiti durante l'installazione. Si desidera creare file di backup per i file sostituiti?
+    end
+    item: Radio Button
+      Rectangle=142 87 169 113
+      Variable=DOBACKUP
+      Create Flags=01010000000000010000000000001001
+      Text=&Yes
+      Text=N&o
+      Text=
+      Text French=&Oui
+      Text French=&Non
+      Text French=
+      Text German=&Ja
+      Text German=N&ein
+      Text German=
+      Text Spanish=&Sí
+      Text Spanish=N&o
+      Text Spanish=
+      Text Italian=&Sì
+      Text Italian=N&o
+      Text Italian=
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select Backup Directory
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select Backup Directory
+      Text French=Sélectionner le répertoire des copies de sauvegarde
+      Text German=Verzeichnis für Sicherungskopien wählen.
+      Text Spanish=Seleccione directorio para copias de seguridad
+      Text Italian=Selezionare la Directory di backup
+    end
+    item: Static
+      Rectangle=86 42 256 59
+      Create Flags=01010000000000000000000000000000
+      Text=Please select the directory where the replaced  files will be copied.
+      Text French=Veuillez sélectionner le répertoire dans lequel les fichiers remplacés seront copiés.
+      Text German=Wählen Sie ein Verzeichnis, in das die überschriebenen Dateien kopiert werden sollen.
+      Text Spanish=Por favor, seleccione el directorio en el que desea copiar los archivos reemplazados.
+      Text Italian=Selezionare la Directory dove verranno copiati i file sostituiti.
+    end
+    item: Static
+      Rectangle=86 98 256 125
+      Action=1
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Push Button
+      Rectangle=208 106 253 121
+      Variable=BACKUP_SAVE
+      Value=%BACKUP%
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=B&rowse
+      Text French=Parcourir
+      Text German=Durchsuchen
+      Text Spanish=Buscar
+      Text Italian=Sfoglia
+    end
+    item: Static
+      Rectangle=90 109 206 120
+      Create Flags=01010000000000000000000000000000
+      Text=%BACKUP%
+      Text French=%BACKUP%
+      Text German=%BACKUP%
+      Text Spanish=%BACKUP%
+      Text Italian=%BACKUP%
+    end
+  end
+  item: Dialog
+    Title=Select Backup Directory
+    Title French=Sélectionner le répertoire des copies de sauvegarde
+    Title German=Verzeichnis für Sicherungskopien wählen.
+    Title Spanish=Seleccione directorio para copias de seguridad
+    Title Italian=Selezionare la Directory di backup
+    Width=221
+    Height=173
+    Font Name=Helv
+    Font Size=8
+    item: Listbox
+      Rectangle=5 5 163 149
+      Variable=BACKUP
+      Create Flags=01010000100000010000000101000000
+      Flags=0000110000100010
+      Text=%BACKUP%
+      Text French=%BACKUP%
+      Text German=%BACKUP%
+      Text Spanish=%BACKUP%
+      Text Italian=%BACKUP%
+    end
+    item: Push Button
+      Rectangle=167 6 212 21
+      Create Flags=01010000000000010000000000000001
+      Text=OK
+      Text French=OK
+      Text German=OK
+      Text Spanish=Aceptar
+      Text Italian=OK
+    end
+    item: Push Button
+      Rectangle=167 25 212 40
+      Variable=BACKUP
+      Value=%BACKUP_SAVE%
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select Eudora Group
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=82 8 262 31
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-21 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select EUDORA %OSGROUP% Group
+      Text French=Sélectionner le groupe du Gestionnaire de programme 
+      Text German=Bestimmung der Programm-Managergruppe
+      Text Spanish=Seleccione grupo del Administrador de programas
+      Text Italian=Selezionare il gruppo ProgMan 
+    end
+    item: Combobox
+      Rectangle=87 50 257 156
+      Variable=GROUP
+      Create Flags=01010000001000010000001100000001
+      Flags=0000000000000001
+      Text=%GROUP%
+      Text French=%GROUP%
+      Text German=%GROUP%
+      Text Spanish=%GROUP%
+      Text Italian=%GROUP%
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Get Names
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 15 258 37
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Arial
+      Font Style=-15 0 0 0 700 0 0 0 0 3 2 1 34
+      Text=The following information is needed for Eudora to function properly.
+      Text French=Prêt à installer !
+      Text German=Installationsbereit!
+      Text Spanish=¡Preparado para la instalación!
+      Text Italian=Pronto per l'installazione!
+    end
+    item: Static
+      Rectangle=116 47 151 62
+      Create Flags=01010000000000000000000000000000
+      Text=Username:
+    end
+    item: Editbox
+      Rectangle=152 45 210 60
+      Variable=USERNAME
+      Help Context=16711681
+      Create Flags=01010000100000010000000000000000
+      Text=<username>
+    end
+    item: Static
+      Rectangle=102 83 137 98
+      Create Flags=01010000000000000000000000000000
+      Text=Real Name:
+    end
+    item: Editbox
+      Rectangle=140 81 253 96
+      Variable=REALNAME
+      Help Context=16711681
+      Create Flags=01010000100000010000000000000000
+      Text=<name>
+    end
+    item: Static
+      Rectangle=86 63 263 76
+      Create Flags=01010000000000000000000000000000
+      Text=Do *not* include realm information.  (Enter foo, not foo@mit.edu)
+    end
+    item: Static
+      Rectangle=100 102 249 129
+      Create Flags=01010000000000000000000000000001
+      Text=This will show up in messages you send on the From: line.  You may use your full name, your first name, or any other convenient moniker.
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Start Installation
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Ready to Install!
+      Text French=Prêt à installer !
+      Text German=Installationsbereit!
+      Text Spanish=¡Preparado para la instalación!
+      Text Italian=Pronto per l'installazione!
+    end
+    item: Static
+      Rectangle=86 42 256 102
+      Create Flags=01010000000000000000000000000000
+      Text=You are now ready to install the %APPTITLE%.
+      Text=
+      Text=Press the Next button to begin the installation or the Back button to reenter the installation information.
+      Text French=Vous êtes maintenant prêt à installer les fichiers %APPTITLE%.
+      Text French=
+      Text French=Cliquez sur le bouton Suite pour commencer l'installation ou sur le bouton Retour pour entrer les informations d'installation à nouveau.
+      Text German=Sie können %APPTITLE% nun installieren.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um mit der Installation zu beginnen. Klicken Sie auf "Zurück", um die Installationsinformationen neu einzugeben.
+      Text Spanish=Ya está listo para instalar %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Presione el botón Siguiente para comenzar la instalación o presione Atrás para volver a ingresar la información para la instalación.
+      Text Italian=Ora è possibile installare %APPTITLE%.
+      Text Italian=
+      Text Italian=Premere il pulsante Avanti per avviare l'installazione o il pulsante Indietro per reinserire le informazioni di installazione.
+    end
+  end
+end
+item: End Block
+end
+item: Remark
+end
+item: Install File
+  Source=C:\NET\MIT\KERB16.EXE
+  Destination=%NETMITPATH%\KERB16.EXE
+  Flags=0000000000000011
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WIN16
+  Flags=00000001
+end
+item: Install File
+  Source=C:\NET\MIT\WSHELP32.DLL
+  Destination=%NETMITPATH%\WSHELP32.DLL
+  Flags=0000001000000011
+end
+item: End Block
+end
+item: Install File
+  Source=C:\NET\MIT\WSHELPER.DLL
+  Destination=%NETMITPATH%\WSHELPER.DLL
+  Flags=0000001000000011
+end
+item: Remark
+end
+item: Remark
+  Text=// If we're only installing 16-bit, then the log file should go into the 16 bit directory
+end
+item: Remark
+  Text=// and force backup/blow away of old log files ...
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\WELTY.LOG
+  Destination=%MAINDIR16%\WELTY.LOG
+  Flags=0000000000000010
+end
+item: Open/Close INSTALL.LOG
+  Pathname=%MAINDIR16%\WELTY.LOG
+end
+item: Else Statement
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\WELTY.LOG
+  Destination=%MAINDIR%\WELTY.LOG
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Do we want to copy these files to %MAINDIR%  ???
+end
+item: Remark
+end
+item: Remark
+  Text=// install files common to 16- an 32- bit versions (no binaries, despite dir name)
+end
+item: Remark
+end
+item: Remark
+  Text=// install files specific to version
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=B
+  Flags=00000010
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\LICINFO.TXT
+  Destination=%MAINDIR%\LICINFO.TXT
+  Flags=0000000000000010
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\README.TXT
+  Destination=%MAINDIR%\LICINFO.TXT
+  Flags=0000000000000010
+end
+item: Get Temporary Filename
+  Variable=INIFILE
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\LICINFO.TXT
+  Destination=%TEMP%\%LICINFOFILE%
+  Flags=0000000000100010
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\FTP32.INI
+  Destination=%TEMP%\%INIFILE%
+  Flags=0000000000100010
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+  Flags=00000010
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\LICINFO.TXT
+  Destination=%MAINDIR16%\LICINFO.TXT
+  Flags=0000000000000010
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\README.TXT
+  Destination=%MAINDIR16%\LICINFO.TXT
+  Flags=0000000000000010
+end
+item: Get Temporary Filename
+  Variable=INIFILE16
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\FTP16.INI
+  Destination=%TEMP%\%INIFILE16%
+  Flags=0000000000100010
+end
+item: End Block
+end
+item: Remark
+end
+item: Delete File
+  Pathname=%TEMP%\%READMEFILE%
+end
+item: Delete File
+  Pathname=%TEMP%\%LICINFOFILE%
+end
+item: Remark
+end
+item: Get Temporary Filename
+  Variable=INIFTP
+end
+item: Install File
+  Source=C:\INSTALLS\INIFTP\INIFTP.EXE
+  Destination=%TEMP%\INIFTP.EXE
+  Flags=0000000000000010
+end
+item: Get Temporary Filename
+  Variable=FTP4WDLL
+end
+item: Install File
+  Source=C:\INSTALLS\INIFTP\FTP4W.DLL
+  Destination=%TEMP%\FTP4W.DLL
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=MFCFOUND
+  Pathname List=MFC40.DLL
+  Default=***
+end
+item: If/While Statement
+  Variable=MFCFOUND
+  Value=***
+end
+item: Get Temporary Filename
+  Variable=MFCFTP
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\MFCFTP.INI
+  Destination=%TEMP%\%MFCFTP%
+  Flags=0000000000000010
+end
+item: Set Variable
+  Variable=HOSTADDR
+  Value=cvg.mit.edu
+end
+item: Set Variable
+  Variable=FTPUSER
+  Value=anonymous
+end
+item: Set Variable
+  Variable=FTPPASS
+  Value=Eudora-installer@mit.edu
+end
+item: Edit INI File
+  Pathname=%TEMP%\%MFCFTP%
+  Settings=[Dir1]
+  Settings=TargetDir=%TEMP%
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMP%\%MFCFTP%
+  Settings=[Connect]
+  Settings=Host=%HOSTADDR%
+  Settings=user=%FTPUSER%
+  Settings=passwd=%FTPPASS%
+  Settings=
+end
+item: Execute Program
+  Pathname=%TEMP%\INIFTP.EXE
+  Command Line=-l%TEMP%\%FTPLOG% %TEMP%\%MFCFTP%
+  Default Directory=%TEMP%
+  Flags=00000010
+end
+item: Copy Local File
+  Source=%TEMP%\MFC40.DLL
+  Destination=%SYS32%\MFC40.DLL
+  Flags=0000001001000010
+end
+item: Delete File
+  Pathname=%TEMP%\MFC40.DLL
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Adjust target dirs based on user selections
+end
+item: Remark
+  Text=//  Don't want to put host, user, password info into log file ...
+end
+item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: Remark
+end
+item: Remark
+  Text=//  TargetDir has been changed from MAINDIR to TEMP to accomodate the INIFTP problem, q.v.
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=B
+  Flags=00000010
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\Eudora.INI
+  Destination=%MAINDIR%\Eudora.INI
+  Flags=0000000000000010
+end
+item: Edit INI File
+  Pathname=%TEMP%\%INIFILE%
+  Settings=[Dir1]
+  Settings=TargetDir=%TEMP%
+  Settings=
+  Settings=[Dir2]
+  Settings=TargetDir=%TEMP%
+  Settings=
+  Settings=[Dir3]
+  Settings=TargetDir=%TEMP%
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMP%\%INIFILE%
+  Settings=[Connect]
+  Settings=Host=%HOSTADDR%
+  Settings=user=%FTPUSER%
+  Settings=passwd=%FTPPASS%
+  Settings=
+end
+item: Remark
+  Text=//  Add user data
+end
+item: Edit INI File
+  Pathname=%MAINDIR%\Eudora.INI
+  Settings=[Settings]
+  Settings=POPAccount=%USERNAME%@hesiod
+  Settings=ReturnAddress=%USERNAME%@mit.edu
+  Settings=RealName=%REALNAME%
+  Settings=
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+  Flags=00000010
+end
+item: Install File
+  Source=C:\INSTALLS\EUDORA\SOURCE\Eudora.INI
+  Destination=%MAINDIR16%\Eudora.INI
+  Flags=0000000000000010
+end
+item: Edit INI File
+  Pathname=%TEMP%\%INIFILE16%
+  Settings=[Dir1]
+  Settings=TargetDir=%TEMP%
+  Settings=
+  Settings=[Dir2]
+  Settings=TargetDir=%TEMP%
+  Settings=
+  Settings=[Dir3]
+  Settings=TargetDir=%TEMP%
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMP%\%INIFILE16%
+  Settings=[Connect]
+  Settings=Host=%HOSTADDR%
+  Settings=user=%FTPUSER%
+  Settings=passwd=%FTPPASS%
+  Settings=
+end
+item: Remark
+  Text=//  Add user data
+end
+item: Edit INI File
+  Pathname=%MAINDIR16%\Eudora.INI
+  Settings=[Settings]
+  Settings=POPAccount=%USERNAME%@hesiod
+  Settings=ReturnAddress=%USERNAME%@mit.edu
+  Settings=RealName=%REALNAME%
+  Settings=
+end
+item: End Block
+end
+item: Remark
+end
+item: Open/Close INSTALL.LOG
+end
+item: Remark
+  Text=// DLL and EXE files will go into the %TEMP% directory and will be version checked
+end
+item: Remark
+  Text=// before being put in their final locations.  Other files will be overwritten regardless.
+end
+item: Remark
+end
+item: Remark
+  Text=// This is known to be not a good thing, and should be changed should the means arise.
+end
+item: Set Variable
+  Variable=FTPERR
+  Value=No
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=B
+  Flags=00000010
+end
+item: Execute Program
+  Pathname=%TEMP%\INIFTP.EXE
+  Command Line=-l%TEMP%\%FTPLOG% %TEMP%\%INIFILE%
+  Default Directory=%TEMP%
+  Flags=00000010
+end
+item: Read INI Value
+  Variable=FTPERR
+  Pathname=%TEMP%\%INIFILE%
+  Section=ExitCode
+  Item=Abort
+  Default=No
+end
+item: Remark
+  Text=// Read all files from [Dir1] in INI file.  Move all .DLL's and .EXE's to %MAINDIR%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Set Variable
+  Variable=FILE
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00110001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%TEMP%\%FILE% ;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILE
+  Value=%FILE%
+  Flags=00011000
+end
+item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\%FILE%
+  Flags=0000000001000011
+end
+item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=%FILENUM%
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Read all files from [Dir2] in INI file.  Move all %MAINDIR%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Set Variable
+  Variable=FILE
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00110001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%TEMP%\%FILE% ;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILE
+  Value=%FILE%
+  Flags=00011000
+end
+item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\Scripts\%FILE%
+  Flags=0000000001000011
+end
+item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=%FILENUM%
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Read all files from [Dir3] in INI file.  Move all to %MAINDIR%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Set Variable
+  Variable=FILE
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00110001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%TEMP%\%FILE% ;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILE
+  Value=%FILE%
+  Flags=00011000
+end
+item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\plugins\%FILE%
+  Flags=0000000001000011
+end
+item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=%FILENUM%
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+  Flags=00000010
+end
+item: Execute Program
+  Pathname=%TEMP%\INIFTP.EXE
+  Command Line=-l%TEMP%\%FTPLOG% %TEMP%\%INIFILE16%
+  Default Directory=%TEMP%
+  Flags=00000010
+end
+item: End Block
+end
+item: Delete File
+  Pathname=%TEMP%\INIFTP.EXE
+end
+item: Delete File
+  Pathname=%TEMP%\FTP4W.DLL
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+  Flags=00000010
+end
+item: If/While Statement
+  Variable=FTPERR
+  Value=No
+end
+item: Read INI Value
+  Variable=FTPERR16
+  Pathname=%TEMP%\%INIFILE%
+  Section=ExitCode
+  Item=Abort
+  Default=No
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Read all files from [Dir1] in INI file.  Move all %MAINDIR%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Set Variable
+  Variable=FILE
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE16%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00110001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%TEMP%\%FILE% ;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILE
+  Value=%FILE%
+  Flags=00011000
+end
+item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR16%\%FILE%
+  Flags=0000000001000011
+end
+item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=%FILENUM%
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE16%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Read all files from [Dir2] in INI file.  Move all %MAINDIR%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Set Variable
+  Variable=FILE
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE16%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00110001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%TEMP%\%FILE% ;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILE
+  Value=%FILE%
+  Flags=00011000
+end
+item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR16%\Scripts\%FILE%
+  Flags=0000000001000011
+end
+item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=%FILENUM%
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE16%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Read all files from [Dir3] in INI file.  Move all to %MAINDIR%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Set Variable
+  Variable=FILE
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE16%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00110001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%TEMP%\%FILE% ;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILE
+  Value=%FILE%
+  Flags=00011000
+end
+item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR16%\plugins\%FILE%
+  Flags=0000000001000011
+end
+item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=%FILENUM%
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%INIFILE16%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=B
+  Flags=00000010
+end
+item: Delete File
+  Pathname=%TEMP%\%INIFILE%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+  Flags=00000010
+end
+item: Delete File
+  Pathname=%TEMP%\%INIFILE16%
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=FTPERR
+  Value=No
+  Flags=00000001
+end
+item: Display Message
+  Title=Error during FTP
+  Text=There was an error during the file transfer from the server.  Contact somebody to help you.
+  Flags=00110000
+end
+item: Remark
+  Text=// Want to force ABORT, not EXIT, so it cleans up after itself
+end
+item: Check if File/Dir Exists
+  Pathname=%TEMP%\snarkfoo.xyz
+  Message=Aborting Installation Due to FTP Error
+  Flags=00000011
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=//  Make icons for Kerberos help and kdestroy
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WIN16
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=Eudora Help
+  Command Line=%MAINDIR16%\Eudora.HLP
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=Eudora
+  Command Line=%MAINDIR16%\Eudora.EXE
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WINNT
+end
+item: Get Registry Key Value
+  Variable=GROUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Profiles\All Users\Start Menu\Programs
+  Value Name=Programs
+  Flags=00000100
+end
+item: Else Statement
+end
+item: Get Registry Key Value
+  Variable=GROUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Start Menu\Programs
+  Value Name=Programs
+  Flags=00000010
+end
+item: End Block
+end
+item: Set Variable
+  Variable=GROUPNT
+  Value=%GROUPDIR%\%GROUP%
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=B
+  Flags=00000010
+end
+item: Create Shortcut
+  Source=%MAINDIR%\Eudora.HLP
+  Destination=%GROUPNT%\EudHelp.lnk
+  Description=Help files for 32 bit Eudora
+  Key Type=1536
+  Flags=00000001
+end
+item: Create Shortcut
+  Source=%MAINDIR%\Eudora.exe
+  Destination=%GROUPNT%\Eudora.lnk
+  Description=Host Explorer
+  Key Type=1536
+  Flags=00000001
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+  Flags=00000010
+end
+item: Create Shortcut
+  Source=%MAINDIR16%\Eudora.HLP
+  Destination=%GROUPNT%\Help16.lnk
+  Description=Help files for 16 bit Eudora
+  Key Type=1536
+  Flags=00000001
+end
+item: Create Shortcut
+  Source=%MAINDIR16%\Eudora16.exe
+  Destination=%GROUPNT%\Eudora16.lnk
+  Description=Host Explorer
+  Key Type=1536
+  Flags=00000001
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Open/Close INSTALL.LOG
+end
+item: Remark
+end
+item: Check Disk Space
+  Component=COMPONENTS
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=%MAINDIR%
+  Flags=00010100
+end
+item: Self-Register OCXs/DLLs
+  Description=Updating System Configuration, Please Wait...
+end
+item: Remark
+end
+item: Remark
+  Text=// Only need one copy of Uninstaller ...
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=B
+  Flags=00000010
+end
+item: Create Directory
+  Pathname=%MAINDIR%\Nickname
+end
+item: Create Directory
+  Pathname=%MAINDIR%\Sigs
+end
+item: Create Directory
+  Pathname=%MAINDIR%\Stat
+end
+item: Create Directory
+  Pathname=%MAINDIR%\Attach
+end
+item: Install File
+  Source=C:\PROGRA~1\WISE\UNWISE.EXE
+  Destination=%MAINDIR%\UNWELL.EXE
+  Description=Eudora Uninstaller
+  Flags=0000000000000010
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+  Flags=00000010
+end
+item: Create Directory
+  Pathname=%MAINDIR16%\Nickname
+end
+item: Create Directory
+  Pathname=%MAINDIR16%\Sigs
+end
+item: Create Directory
+  Pathname=%MAINDIR16%\Stat
+end
+item: Create Directory
+  Pathname=%MAINDIR16%\Attach
+end
+item: Install File
+  Source=C:\PROGRA~1\WISE\UNWISE.EXE
+  Destination=%MAINDIR16%\UNWELL.EXE
+  Description=Eudora Uninstaller
+  Flags=0000000000000010
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=//  Add Uninstall Icon
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WIN16
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=EUDORA Uninstaller
+  Command Line=%MAINDIR16%\UNWELL.EXE %MAINDIR16%\WELTY.LOG
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=B
+  Flags=00000010
+end
+item: Create Shortcut
+  Source=%MAINDIR%\UNWELL.EXE
+  Destination=%GROUPNT%\Uninstall.lnk
+  Command Options=%MAINDIR%\WELTY.LOG
+  Description=EUDORA Uninstaller
+  Key Type=1536
+  Flags=00000001
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=BINTYPE
+  Value=A
+  Flags=00000010
+end
+item: Create Shortcut
+  Source=%MAINDIR16%\UNWELL.EXE
+  Destination=%GROUPNT%\Uninstall.lnk
+  Command Options=%MAINDIR16%\WELTY.LOG
+  Description=EUDORA Uninstaller
+  Key Type=1536
+  Flags=00000001
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=c:\Program files\wise\dialogs\template\WIZARD.BMP
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Finished
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Finish
+      Text French=&Fin
+      Text German=&Weiter
+      Text Spanish=&Terminar
+      Text Italian=&Fine
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DISABLED
+      Value=!
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Variable=DISABLED
+      Value=!
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Installation Completed!
+      Text French=Installation terminée !
+      Text German=Die Installation ist abgeschlossen!
+      Text Spanish=¡Instalación terminada!
+      Text Italian=Installazione completata!
+    end
+    item: Static
+      Rectangle=86 42 256 102
+      Create Flags=01010000000000000000000000000000
+      Text=The %APPTITLE% has been successfully installed.
+      Text=
+      Text=Press the Finish button to exit this installation.
+      Text French=%APPTITLE% est maintenant installé.
+      Text French=
+      Text French=Cliquez sur le bouton Fin pour quitter l'installation.
+      Text German=%APPTITLE% wurde erfolgreich installiert.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um die Installation zu beenden.
+      Text Spanish=%APPTITLE% se ha instalado con éxito.
+      Text Spanish=
+      Text Spanish=Presione el botón Terminar para salir de esta instalación.
+      Text Italian=L'installazione %APPTITLE% è stata portata a termine con successo.
+      Text Italian=
+      Text Italian=Premere il pulsante Fine per uscire dall'installazione.
+    end
+  end
+end
+item: End Block
+end
+item: New Event
+  Name=Cancel
+end
+item: Display Message
+  Title=Files FTPed
+  Text=About to delete the files that were FTP'ed in to your system:                                      %FILESFTPED%
+  Flags=00000001
+end
+remarked item: Display Message
+  Title=Installation Aborted
+  Flags=00100001
+end
+item: Parse String
+  Source=%FILESFTPED%
+  Pattern=;
+  Variable1=FILE
+  Variable2=FILESFTPED
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00010001
+end
+item: Delete File
+  Pathname=%FILE%
+end
+item: Parse String
+  Source=%FILESFTPED%
+  Pattern=;
+  Variable1=FILE
+  Variable2=FILESFTPED
+end
+item: End Block
+end
+item: End Block
+end

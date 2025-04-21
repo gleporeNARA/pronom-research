@@ -1,0 +1,265 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  FTP Cluster Size=20
+end
+item: Check Disk Space
+  Component=SEARCHTYPE
+end
+item: Remark
+end
+item: Display Message
+  Title=Confirm Search & Delete
+  Text=You have older Kerberos files on your system and have chosen not to back up existing files.  Would you like to search out and destroy old versions of Kerberos files?
+  Flags=00000001
+end
+item: Set Variable
+  Variable=SEARCHTYPE
+  Value=A
+end
+item: Set Variable
+  Variable=FILELIST
+  Value=ABC
+end
+item: Remark
+  Text=// the skip statement for the warning check if type contains B, rather than if it is B
+end
+item: Remark
+  Text=//  This is so it will not display for either B or ABORT...   :)
+end
+item: Wizard Block
+  Direction Variable=DIRECTION2
+  Display Variable=DISPLAY2
+  X Position=0
+  Y Position=0
+  Filler Color=0
+  Dialog=Search Type
+  Dialog=Warning
+  Variable=
+  Variable=SEARCHTYPE
+  Value=
+  Value=B
+  Compare=0
+  Compare=2
+end
+item: Custom Dialog Set
+  Name=Search Type
+  Display Variable=DISPLAY2
+  item: Dialog
+    Title=Search Type
+    Width=239
+    Height=185
+    Font Name=Helv
+    Font Size=8
+    item: Checkbox
+      Rectangle=67 42 140 73
+      Variable=FILELIST
+      Create Flags=01010000000000010000000000000011
+      Text=KrbDll.dll
+      Text=KrbV4Win.dll
+      Text=KClient.dll
+      Text=
+    end
+    item: Radio Button
+      Rectangle=69 96 174 122
+      Variable=SEARCHTYPE
+      Create Flags=01010000000000010000000000001001
+      Text=Search all local hard drives
+      Text=Search only in path
+      Text=
+    end
+    item: Push Button
+      Rectangle=111 143 146 158
+      Variable=DIRECTION2
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+    end
+    item: Push Button
+      Rectangle=76 143 111 158
+      Variable=DISABLED
+      Value=!
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+    end
+    item: Static
+      Rectangle=68 83 157 94
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-15 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Where should I search?
+    end
+    item: Static
+      Rectangle=67 16 156 39
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-15 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=What old files should I try to eliminate?
+    end
+    item: Push Button
+      Rectangle=176 143 211 158
+      Variable=SEARCHTYPE
+      Value=ABORT
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Warning
+  Display Variable=DISPLAY2
+  item: Dialog
+    Title=Search Type
+    Width=239
+    Height=185
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=117 143 175 158
+      Variable=DIRECTION2
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Start Search
+    end
+    item: Push Button
+      Rectangle=75 143 110 158
+      Variable=DIRECTION2
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Rethink
+    end
+    item: Static
+      Rectangle=34 64 217 89
+      Create Flags=01010000000000000000000000000000
+      Text=The search you have specified may take a long time to complete.  Are you sure you want to proceed?
+    end
+    item: Static
+      Rectangle=35 48 92 63
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-16 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Warning!
+    end
+  end
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=SEARCHTYPE
+  Value=ABORT
+  Flags=00000001
+end
+item: Remark
+end
+item: Set Variable
+  Variable=FILES
+end
+item: If/While Statement
+  Variable=FILELIST
+  Value=A
+  Flags=00000010
+end
+item: Set Variable
+  Variable=FILES
+  Value=krbdll.dll;
+  Flags=00000001
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FILELIST
+  Value=B
+  Flags=00000010
+end
+item: Set Variable
+  Variable=FILES
+  Value=krbV4win.dll;
+  Flags=00000001
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FILELIST
+  Value=C
+  Flags=00000010
+end
+item: Set Variable
+  Variable=FILES
+  Value=kclient.dll;
+  Flags=00000001
+end
+item: End Block
+end
+item: Remark
+end
+item: Parse String
+  Source=%FILES%
+  Pattern=;
+  Variable1=FILE
+  Variable2=FILES
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00010001
+end
+item: Set Variable
+  Variable=FOUND
+  Value=foo
+end
+item: If/While Statement
+  Variable=SEARCHTYPE
+  Value=A
+end
+item: Search for File
+  Variable=FOUND
+  Pathname List=%FILE%
+end
+item: Else Statement
+end
+item: Find File in Path
+  Variable=FOUND
+  Pathname List=%FILE%
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=FOUND
+  Flags=00010001
+end
+item: Delete File
+  Pathname=%FOUND%
+end
+item: Set Variable
+  Variable=FOUND
+end
+item: End Block
+end
+item: Parse String
+  Source=%FILES%
+  Pattern=;
+  Variable1=FILE
+  Variable2=FILES
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end

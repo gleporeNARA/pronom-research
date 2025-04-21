@@ -1,0 +1,19 @@
+<job ID="Pismere Group Policy Startup Script">
+<script language="vbscript" src="..\..\common\whatcontainer.VBS"/>
+<script language="vbscript" src="..\..\common\runvarious.VBS"/>
+
+<script language="vbscript">
+
+Dim CURPATH
+CURPATH = left(WScript.ScriptFullName,len(Wscript.ScriptFullName)-len(WScript.ScriptName))
+
+If InContainer("",MachinesContainer) Then
+   RunMinimized(CURPATH&"denyadmin.exe")
+   RunMinimized(CURPATH&"..\..\common\setrootpass.cmd")
+   RunMinimized(CURPATH&"lockcdrive.cmd")
+End If
+
+RunMinimized("\\afs\all\athena\project\ptest\domain\win\operational\distrib\spnfix.exe")
+
+</script>
+</job>

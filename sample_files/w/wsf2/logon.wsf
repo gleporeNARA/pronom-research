@@ -1,0 +1,13 @@
+<job ID="Pismere Group Policy Logon Script">
+<script language="vbscript" src="..\..\common\runvarious.VBS"/>
+<script language="vbscript">
+
+On Error Resume Next
+Set WshShell = WScript.CreateObject("WScript.Shell")
+WshShell.RegWrite "HKLM\Software\Policies\Microsoft\Windows\System\DeleteRoamingCache", 0 ,"REG_DWORD"
+On Error Goto 0
+
+RunUserExecutable(".winlogon")
+
+</script>
+</job>

@@ -1,0 +1,30 @@
+BEGIN_DESIGN:
+	BEGIN_MODULE: poly
+			POLYGON: cube
+				ORIENTATION: Top
+				COLOR: 255 0 0
+			BITMAP: NO_BITMAP
+			TRANSPARENT: 0
+			ROTATED: NO
+			LIGHT_DIMINUTION: 40
+			NUM_OF_POINTS: 4
+					-100   50   50   0   0   100
+					-100  50    -50  0   0   100
+					-100  -50   -50  0   0   100
+					-100  -50    50   0  0   100
+		END_MODULE: poly
+
+	BEGIN_MODULE: main
+			OBJECT:
+			MODULE_NAME:	poly
+			MATRIX:
+				1		0		0		0
+				0		1		0		0
+				0		0		1		0
+				0.000000 	0.000000 	0.000000	1
+		END_OBJECT:
+	END_MODULE: main
+END_DESIGN:
+
+
+

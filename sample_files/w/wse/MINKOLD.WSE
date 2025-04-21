@@ -1,0 +1,2494 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title= Installation
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=128 128 128
+  Windows Flags=00000000000000010010110000001000
+  Log Pathname=%TEMP%\MINK\MINK.LOG
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  FTP Cluster Size=20
+end
+item: Create Directory
+  Pathname=%TEMP%\MINK
+end
+item: Create Directory
+  Pathname=%TEMP%\MINK\BACKUP
+end
+item: Get Temporary Filename
+  Variable=READMEFILE
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\README.TXT
+  Destination=%TEMP%\%READMEFILE%
+  Flags=0000000000100010
+end
+item: Get Temporary Filename
+  Variable=LICINFOFILE
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\LICINFO.TXT
+  Destination=%TEMP%\%LICINFOFILE%
+  Flags=0000000000100010
+end
+item: Remark
+end
+remarked item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: Remark
+end
+item: Remark
+  Text=//  Set FTP info
+end
+item: Set Variable
+  Variable=FILESFTPED
+end
+item: Set Variable
+  Variable=HOSTADDR
+  Value=net-dist.mit.edu
+end
+item: Set Variable
+  Variable=FTPUSER
+  Value=anonymous
+end
+item: Set Variable
+  Variable=FTPPASS
+  Value=mink-installer@mit.edu
+end
+item: Remark
+end
+item: Remark
+  Text=// Check writability of various directories 
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=C:\net\mit
+end
+item: Check if File/Dir Exists
+  Pathname=%WIN%
+  Flags=10000100
+end
+item: Set Variable
+  Variable=WIN
+  Value=%MAINDIR%
+end
+item: End Block
+end
+item: Check if File/Dir Exists
+  Pathname=%SYS%
+  Flags=10000100
+end
+item: Set Variable
+  Variable=SYS
+  Value=%WIN%
+end
+item: End Block
+end
+item: Set Variable
+  Variable=SYSDIR
+  Value=%SYS%
+end
+item: Remark
+end
+item: Remark
+  Text=// Check System type ...
+end
+item: Check Configuration
+  Flags=10000110
+end
+item: Remark
+  Text=// This is a hack check to see if we're on an Alpha ...
+end
+item: Remark
+  Text=We're taking a short cut. If this isn't a 286 or better it must be an ALPHA
+end
+item: Remark
+  Text=This will change when we support other flavors of NT
+end
+item: Remark
+  Text=// If below is true, then we're running WIN16 on an ALPHA ?!?
+end
+item: Check Configuration
+  Message=It appears you are not runing some non-NT Windows on an ALPHA.  This shouldn't happen. Please contact someone for help.
+  Title=Problems Detecting System
+  Flags=01000000
+end
+item: Get Temporary Filename
+  Variable=INIFILE
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\FTPALPHA.INI
+  Destination=%TEMP%\%INIFILE%
+  Flags=0000000000100010
+end
+item: Set Variable
+  Variable=SYSTYPE
+  Value=ALPHA
+end
+item: Else Statement
+end
+item: Remark
+  Text=// OK, so we're on some sort of intel chip ...
+end
+item: Check Configuration
+  Flags=10011010
+end
+item: Get Temporary Filename
+  Variable=INIFILE
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\FTPWIN16.INI
+  Destination=%TEMP%\%INIFILE%
+  Flags=0000000000100010
+end
+item: Set Variable
+  Variable=SYSTYPE
+  Value=WIN16
+end
+item: Else Statement
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Get Temporary Filename
+  Variable=INIFILE
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\FTPI386.INI
+  Destination=%TEMP%\%INIFILE%
+  Flags=0000000000100010
+end
+item: Set Variable
+  Variable=SYSTYPE
+  Value=WINNT
+end
+item: Win32 System Directory
+  Variable=SYSDIR
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=SYSTYPE
+  Value=WIN95
+end
+item: Get Temporary Filename
+  Variable=INIFILE
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\FTPWIN95.INI
+  Destination=%TEMP%\%INIFILE%
+  Flags=0000000000100010
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=APPTITLE
+  Value=Kerberos version 4 binaries and configuration 
+end
+item: Set Variable
+  Variable=GROUP
+  Value=Kerberos Utilities
+end
+item: Remark
+end
+item: Set Variable
+  Variable=DISABLED
+  Value=!
+end
+item: Check Configuration
+  Flags=10111011
+end
+item: Get Registry Key Value
+  Variable=COMMON
+  Key=SOFTWARE\Microsoft\Windows\CurrentVersion
+  Default=C:\Program Files\Common Files
+  Value Name=CommonFilesDir
+  Flags=00000100
+end
+item: Get Registry Key Value
+  Variable=PROGRAM_FILES
+  Key=SOFTWARE\Microsoft\Windows\CurrentVersion
+  Default=C:\Program Files
+  Value Name=ProgramFilesDir
+  Flags=00000100
+end
+item: Set Variable
+  Variable=EXPLORER
+  Value=1
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=BACKUP
+  Value=%TEMP%\MINK\BACKUP
+end
+item: Set Variable
+  Variable=DOBACKUP
+  Value=A
+end
+item: Set Variable
+  Variable=MITDIR
+  Value=%MAINDIR%
+end
+item: Get Environment Variable
+  Variable=NDIR
+  Environment=NDIR
+end
+item: Set Variable
+  Variable=NDIR
+  Value=%NDIR%
+  Flags=00011100
+end
+item: Remark
+end
+item: Remark
+  Text=// alter NDIR (the Wise variable, not the enviornmental) to target for the .con files.
+end
+item: Remark
+  Text=// We won't be setting/resetting NDIR as an environment variable, so this is just internal spoofing
+end
+item: If/While Statement
+  Variable=NDIR
+  Value=c:\net
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=NDIR
+end
+item: Set Variable
+  Variable=NDIR
+  Value=%WIN%
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=NDIR
+  Value=%NDIR%\kerb
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Set Variable
+  Variable=NDIR
+  Value=%NDIR%\kerb
+end
+item: End Block
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=CONPATH
+  Pathname List=krb.con
+  Flags=00000001
+end
+item: Find File in Path
+  Variable=CONPATH2
+  Pathname List=krbrealm.con
+  Search Directories=%CONPATH%
+end
+item: Remark
+end
+item: Remark
+  Text=// If cons are in different dirs, try to find one dir that has them both ...
+end
+item: Remark
+  Text=// The below should only trigger if krbrealm is not found where krb was first found ...
+end
+item: If/While Statement
+  Variable=CONPATH
+  Value=%CONPATH2%
+  Flags=00000001
+end
+item: Find File in Path
+  Variable=CONPATH2
+  Pathname List=krbrealm.con
+  Flags=00000001
+end
+item: Find File in Path
+  Variable=CONPATH
+  Pathname List=krb.con
+  Search Directories=%CONPATH2%
+  Flags=00000001
+end
+item: Remark
+  Text=// The below should only trigger if krb is not found where krbrealm was first found ...
+end
+item: If/While Statement
+  Variable=CONPATH
+  Value=%CONPATH2%
+  Flags=00000001
+end
+item: Remark
+  Text=// Having trouble finding krb and krbrealm in same dir ...
+end
+item: Remark
+  Text=// Will assume for now that this means they aren't anywhere coherent, so blank the variables
+end
+item: Remark
+  Text=// At this point, CONPATH should already be blank, but am being paranoid ...
+end
+item: Set Variable
+  Variable=CONPATH
+end
+item: Remark
+  Text=// And this isn't used when checking whether to reset paths, but am resetting it anyway
+end
+item: Set Variable
+  Variable=CONPATH2
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+end
+item: Remark
+  Text=// If cons where found together, we want to move them to %NDIR%\kerb or %WIN% if NDIR isn't set
+end
+item: If/While Statement
+  Variable=CONPATH
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=CONPATH
+  Value=%NDIR%
+  Flags=00000001
+end
+item: Copy Local File
+  Source=%CONPATH%\krb.con
+  Destination=%NDIR%\krb.con
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%CONPATH%\krb.con
+end
+item: Copy Local File
+  Source=%CONPATH2%\krbrealm.con
+  Destination=%NDIR%\krbrealm.con
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%CONPATH2%\krbrealm.con
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=//  Check to see if we have older kerb files, to prompt for old group name ...
+end
+item: Remark
+  Text=//  Otherwise, we will force groupname to Kerberos Utilities
+end
+item: Find File in Path
+  Variable=OLDVER
+  Pathname List=krbv4win.dll
+end
+item: Remark
+end
+item: Set Variable
+  Variable=SUPPORT
+  Value=True
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=c:\Program files\wise\dialogs\template\WIZARD.BMP
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Dialog=Welcome
+  Dialog=Display Lic Info
+  Dialog=Display ReadMe
+  Dialog=Select Kerberos Group
+  Dialog=Select Destination Directory
+  Dialog=Unsupported Destination
+  Dialog=Backup Replaced Files
+  Dialog=Select Backup Directory
+  Variable=
+  Variable=
+  Variable=
+  Variable=OLDVER
+  Variable=
+  Variable=SUPPORT
+  Variable=
+  Variable=DOBACKUP
+  Value=
+  Value=
+  Value=
+  Value=
+  Value=
+  Value=True
+  Value=
+  Value=B
+  Compare=0
+  Compare=0
+  Compare=0
+  Compare=0
+  Compare=0
+  Compare=0
+  Compare=0
+  Compare=0
+  Flags=00000011
+end
+item: Remark
+  Text=// This Set line forces it forward when making a quick pick for path ...
+end
+item: Set Variable
+  Variable=DIRECTION
+end
+item: Custom Dialog Set
+  Name=Welcome
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Welcome!
+      Text French=Bienvenue !
+      Text German=Willkommen!
+      Text Spanish=¡Bienvenido!
+      Text Italian=Benvenuti!
+    end
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DISABLED
+      Value=!
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=86 42 256 131
+      Create Flags=01010000000000000000000000000000
+      Text=This installation program will install the %APPTITLE% files.
+      Text=
+      Text=Press the Next button to start the installation. You can press the Exit Setup button now if you do not want to install %APPTITLE% at this time.
+      Text French=Ce programme d'installation va installer %APPTITLE%.
+      Text French=
+      Text French=Cliquez sur le bouton Suite pour démarrer l'installation. Vous pouvez cliquer sur le bouton Quitter l'installation si vous ne voulez pas installer %APPTITLE% tout de suite.
+      Text German=Mit diesem Installationsprogramm wird %APPTITLE% installiert.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um mit der Installation zu beginnen. Klicken Sie auf "Abbrechen", um die Installation von %APPTITLE% abzubrechen.
+      Text Spanish=Este programa de instalación instalará %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Presione el botón Siguiente para iniciar la instalación. Puede presionar el botón Salir de instalación si no desea instalar %APPTITLE% en este momento.
+      Text Italian=Questo programma installerà %APPTITLE%.
+      Text Italian=
+      Text Italian=Per avvviare l'installazione premere il pulsante Avanti. Se non si desidera installare %APPTITLE% ora, premere il pulsante Esci dall'installazione.
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Push Button
+      Rectangle=7 179 257 180
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+    end
+  end
+  item: Dialog
+    Title=Hello!
+    Width=201
+    Height=84
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=51 26 156 37
+      Create Flags=01010000000000000000000000000000
+      Text=Written by: Jonathan Venezian
+    end
+    item: Static
+      Rectangle=31 34 172 42
+      Create Flags=01010000000000000000000000000000
+      Text=Copyright © 1997, MIT DCNS Applications
+    end
+    item: Push Button
+      Rectangle=85 48 120 63
+      Create Flags=01010000000000010000000000000000
+      Text=OK
+    end
+    item: Static
+      Rectangle=0 2 196 26
+      Create Flags=01010000000000000000000000000001
+      Flags=0000000000000001
+      Name=Arial
+      Font Style=-15 0 0 0 700 0 0 0 0 3 2 1 34
+      Text=Installation Utility for %APPTITLE%
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Display Lic Info
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=151 187 196 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Accept >
+    end
+    item: Push Button
+      Rectangle=106 187 151 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Refuse
+    end
+    item: Static
+      Rectangle=9 180 257 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Editbox
+      Rectangle=85 12 254 171
+      Value=%TEMP%\%LICINFOFILE%
+      Help Context=16711681
+      Create Flags=01010000101000000000100000000100
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Display ReadMe
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=151 187 196 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+    end
+    item: Push Button
+      Rectangle=106 187 151 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+    end
+    item: Static
+      Rectangle=9 180 257 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Editbox
+      Rectangle=85 12 254 171
+      Value=%TEMP%\%READMEFILE%
+      Help Context=16711681
+      Create Flags=01010000101000000000100000000100
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select Destination Directory
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select Destination Directory
+      Text French=Sélectionner le répertoire de destination
+      Text German=Zielverzeichnis wählen
+      Text Spanish=Seleccione el directorio de destino
+      Text Italian=Selezionare Directory di destinazione
+    end
+    item: Static
+      Rectangle=86 42 256 64
+      Create Flags=01010000000000000000000000000000
+      Text=Please select the directory where the %APPTITLE% files are to be installed.
+      Text French=Veuillez sélectionner le répertoire dans lequel les fichiers %APPTITLE% doivent être installés.
+      Text German=Geben Sie an, in welchem Verzeichnis die %APPTITLE%-Dateien installiert werden sollen.
+      Text Spanish=Por favor seleccione el directorio donde desee instalar los archivos de %APPTITLE%.
+      Text Italian=Selezionare la directory dove verranno installati i file %APPTITLE%.
+    end
+    item: Static
+      Rectangle=86 117 256 144
+      Action=1
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Push Button
+      Rectangle=208 125 253 140
+      Variable=MAINDIR_SAVE
+      Value=%MAINDIR%
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=B&rowse
+      Text French=Parcourir
+      Text German=Durchsuchen
+      Text Spanish=Buscar
+      Text Italian=Sfoglie
+    end
+    item: Static
+      Rectangle=90 128 206 139
+      Create Flags=01010000000000000000000000000000
+      Text=%MAINDIR%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+    end
+    item: Static
+      Rectangle=86 63 256 74
+      Create Flags=01010000000000000000000000000000
+      Text=Alternate recommended directories:
+      Text French=Veuillez sélectionner le répertoire dans lequel les fichiers %APPTITLE% doivent être installés.
+      Text German=Geben Sie an, in welchem Verzeichnis die %APPTITLE%-Dateien installiert werden sollen.
+      Text Spanish=Por favor seleccione el directorio donde desee instalar los archivos de %APPTITLE%.
+      Text Italian=Selezionare la directory dove verranno installati i file %APPTITLE%.
+    end
+    item: Push Button
+      Rectangle=112 77 219 92
+      Variable=MAINDIR
+      Value=%WIN%
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=%WIN%
+    end
+    item: Push Button
+      Rectangle=112 97 218 112
+      Variable=MAINDIR
+      Value=%SYS%
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=%SYS%
+    end
+    item: Push Button
+      Rectangle=112 151 218 166
+      Variable=MAINDIR
+      Value=%MITDIR%
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=Default (%MITDIR%)
+    end
+  end
+  item: Dialog
+    Title=Select Destination Directory
+    Title French=Sélectionner le répertoire de destination
+    Title German=Zielverzeichnis wählen
+    Title Spanish=Seleccione el directorio de destino
+    Title Italian=Selezionare Directory di destinazione
+    Width=221
+    Height=173
+    Font Name=Helv
+    Font Size=8
+    item: Listbox
+      Rectangle=4 5 162 149
+      Variable=MAINDIR
+      Create Flags=01010000100000010000000101000000
+      Flags=0000010000101010
+      Text=%MAINDIR%
+      Text French=%MAINDIR%
+      Text German=%MAINDIR%
+      Text Spanish=%MAINDIR%
+      Text Italian=%MAINDIR%
+    end
+    item: Push Button
+      Rectangle=167 6 212 21
+      Create Flags=01010000000000010000000000000001
+      Text=OK
+      Text French=OK
+      Text German=OK
+      Text Spanish=Aceptar
+      Text Italian=OK
+    end
+    item: Push Button
+      Rectangle=167 25 212 40
+      Variable=MAINDIR
+      Value=%MAINDIR_SAVE%
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+    end
+  end
+end
+item: If/While Statement
+  Variable=MAINDIR
+  Value=%MITDIR%
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=MAINDIR
+  Value=%WIN%
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=MAINDIR
+  Value=%SYS%
+  Flags=00000001
+end
+item: Set Variable
+  Variable=SUPPORT
+  Value=False
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Custom Dialog Set
+  Name=Unsupported Destination
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Unsupported Destination!
+      Text French=Prêt à installer !
+      Text German=Installationsbereit!
+      Text Spanish=¡Preparado para la instalación!
+      Text Italian=Pronto per l'installazione!
+    end
+    item: Static
+      Rectangle=86 42 256 102
+      Create Flags=01010000000000000000000000000000
+      Text=You have selected a non-standard installation directory for the program files.  Please be aware that you will receive only minimal support because of this.
+      Text French=Vous êtes maintenant prêt à installer les fichiers %APPTITLE%.
+      Text French=
+      Text French=Cliquez sur le bouton Suite pour commencer l'installation ou sur le bouton Retour pour entrer les informations d'installation à nouveau.
+      Text German=Sie können %APPTITLE% nun installieren.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um mit der Installation zu beginnen. Klicken Sie auf "Zurück", um die Installationsinformationen neu einzugeben.
+      Text Spanish=Ya está listo para instalar %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Presione el botón Siguiente para comenzar la instalación o presione Atrás para volver a ingresar la información para la instalación.
+      Text Italian=Ora è possibile installare %APPTITLE%.
+      Text Italian=
+      Text Italian=Premere il pulsante Avanti per avviare l'installazione o il pulsante Indietro per reinserire le informazioni di installazione.
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Backup Replaced Files
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Backup Replaced Files?
+      Text French=Effectuer une copie de sauvegarde des fichiers remplacés ?
+      Text German=Wollen Sie Sicherungskopien der überschriebenen Dateien anfertigen?
+      Text Spanish=¿Desea una copia de seguridad de los archivos reemplazados?
+      Text Italian=Backup dei file sostituiti?
+    end
+    item: Static
+      Rectangle=86 42 256 83
+      Create Flags=01010000000000000000000000000000
+      Text=This installation program can create backup copies of all files replaced during the installation.  Do you want to create backups of the replaced files?
+      Text French=Le programme d'installation peut créer des copies de sauvegarde de tous les fichiers remplacés pendant l'installation. Voulez-vous créer des copies de sauvegarde des fichiers remplacés ?
+      Text German=Mit diesem Installationsprogramm können Sie Sicherungskopien aller Dateien anfertigen, die bei der Installation überschrieben werden. Wollen Sie Sicherungskopien der überschriebenen Dateien anfertigen?
+      Text Spanish=Este programa de instalación puede crear copias de seguridad de todos los archivos reemplazados durante la instalación. ¿Desea crear copias de seguridad de los archivos reemplazados?
+      Text Italian=Questo programma di installazione può eseguire copie di backup di tutti i file sostituiti durante l'installazione. Si desidera creare file di backup per i file sostituiti?
+    end
+    item: Radio Button
+      Rectangle=142 87 169 113
+      Variable=DOBACKUP
+      Create Flags=01010000000000010000000000001001
+      Text=&Yes
+      Text=N&o
+      Text=
+      Text French=&Oui
+      Text French=&Non
+      Text French=
+      Text German=&Ja
+      Text German=N&ein
+      Text German=
+      Text Spanish=&Sí
+      Text Spanish=N&o
+      Text Spanish=
+      Text Italian=&Sì
+      Text Italian=N&o
+      Text Italian=
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Select Backup Directory
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select Backup Directory
+      Text French=Sélectionner le répertoire des copies de sauvegarde
+      Text German=Verzeichnis für Sicherungskopien wählen.
+      Text Spanish=Seleccione directorio para copias de seguridad
+      Text Italian=Selezionare la Directory di backup
+    end
+    item: Static
+      Rectangle=86 42 256 59
+      Create Flags=01010000000000000000000000000000
+      Text=Please select the directory where the replaced  files will be copied.
+      Text French=Veuillez sélectionner le répertoire dans lequel les fichiers remplacés seront copiés.
+      Text German=Wählen Sie ein Verzeichnis, in das die überschriebenen Dateien kopiert werden sollen.
+      Text Spanish=Por favor, seleccione el directorio en el que desea copiar los archivos reemplazados.
+      Text Italian=Selezionare la Directory dove verranno copiati i file sostituiti.
+    end
+    item: Static
+      Rectangle=86 98 256 125
+      Action=1
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Push Button
+      Rectangle=208 106 253 121
+      Variable=BACKUP_SAVE
+      Value=%BACKUP%
+      Destination Dialog=1
+      Action=2
+      Create Flags=01010000000000010000000000000000
+      Text=B&rowse
+      Text French=Parcourir
+      Text German=Durchsuchen
+      Text Spanish=Buscar
+      Text Italian=Sfoglia
+    end
+    item: Static
+      Rectangle=90 109 206 120
+      Create Flags=01010000000000000000000000000000
+      Text=%BACKUP%
+      Text French=%BACKUP%
+      Text German=%BACKUP%
+      Text Spanish=%BACKUP%
+      Text Italian=%BACKUP%
+    end
+  end
+  item: Dialog
+    Title=Select Backup Directory
+    Title French=Sélectionner le répertoire des copies de sauvegarde
+    Title German=Verzeichnis für Sicherungskopien wählen.
+    Title Spanish=Seleccione directorio para copias de seguridad
+    Title Italian=Selezionare la Directory di backup
+    Width=221
+    Height=173
+    Font Name=Helv
+    Font Size=8
+    item: Listbox
+      Rectangle=5 5 163 149
+      Variable=BACKUP
+      Create Flags=01010000100000010000000101000000
+      Flags=0000110000100010
+      Text=%BACKUP%
+      Text French=%BACKUP%
+      Text German=%BACKUP%
+      Text Spanish=%BACKUP%
+      Text Italian=%BACKUP%
+    end
+    item: Push Button
+      Rectangle=167 6 212 21
+      Create Flags=01010000000000010000000000000001
+      Text=OK
+      Text French=OK
+      Text German=OK
+      Text Spanish=Aceptar
+      Text Italian=OK
+    end
+    item: Push Button
+      Rectangle=167 25 212 40
+      Variable=BACKUP
+      Value=%BACKUP_SAVE%
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=Cancel
+      Text French=Annuler
+      Text German=Abbrechen
+      Text Spanish=Cancelar
+      Text Italian=Annulla
+    end
+  end
+end
+item: If/While Statement
+  Variable=DISPLAY
+  Value=Backup Replaced Files
+end
+item: If/While Statement
+  Variable=DOBACKUP
+  Value=B
+end
+item: If/While Statement
+  Variable=DIRECTION
+  Value=N
+end
+item: If/While Statement
+  Variable=OLDVER
+  Flags=00000001
+end
+item: Include Script
+  Pathname=C:\INSTALLS\SOURCE\DELFILES.WSE
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+  Text=//  If there is a prior group AND backup is not chosen, we want to kick into the seek&kill script.
+end
+item: Custom Dialog Set
+  Name=Select Kerberos Group
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Flags=0000000000000001
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 30
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Select Kerberos Group
+      Text French=Sélectionner le groupe du Gestionnaire de programme 
+      Text German=Bestimmung der Programm-Managergruppe
+      Text Spanish=Seleccione grupo del Administrador de programas
+      Text Italian=Selezionare il gruppo ProgMan 
+    end
+    item: Static
+      Rectangle=86 34 256 58
+      Create Flags=01010000000000000000000000000000
+      Text=Enter the name of the Program Manager group where prior Kerberos-related icons are stored:
+      Text French=Entrez le nom du groupe du Gestionnaire de programme dans lequel vous souhaitez ajouter les icônes de %APPTITLE% :
+      Text German=Geben Sie den Namen der Programmgruppe ein, der das Symbol %APPTITLE% hinzugefügt werden soll:
+      Text Spanish=Escriba el nombre del grupo del Administrador de programas en el que desea agregar los iconos de %APPTITLE%:
+      Text Italian=Inserire il nome del gruppo Program Manager per aggiungere le icone %APPTITLE% a:
+    end
+    item: Combobox
+      Rectangle=86 69 256 175
+      Variable=GROUP
+      Create Flags=01010000001000010000001100000001
+      Flags=0000000000000001
+      Text=%GROUP%
+      Text French=%GROUP%
+      Text German=%GROUP%
+      Text Spanish=%GROUP%
+      Text Italian=%GROUP%
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Start Installation
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DIRECTION
+      Value=B
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Ready to Install!
+      Text French=Prêt à installer !
+      Text German=Installationsbereit!
+      Text Spanish=¡Preparado para la instalación!
+      Text Italian=Pronto per l'installazione!
+    end
+    item: Static
+      Rectangle=86 42 256 102
+      Create Flags=01010000000000000000000000000000
+      Text=You are now ready to install the %APPTITLE%.
+      Text=
+      Text=Press the Next button to begin the installation or the Back button to reenter the installation information.
+      Text French=Vous êtes maintenant prêt à installer les fichiers %APPTITLE%.
+      Text French=
+      Text French=Cliquez sur le bouton Suite pour commencer l'installation ou sur le bouton Retour pour entrer les informations d'installation à nouveau.
+      Text German=Sie können %APPTITLE% nun installieren.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um mit der Installation zu beginnen. Klicken Sie auf "Zurück", um die Installationsinformationen neu einzugeben.
+      Text Spanish=Ya está listo para instalar %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Presione el botón Siguiente para comenzar la instalación o presione Atrás para volver a ingresar la información para la instalación.
+      Text Italian=Ora è possibile installare %APPTITLE%.
+      Text Italian=
+      Text Italian=Premere il pulsante Avanti per avviare l'installazione o il pulsante Indietro per reinserire le informazioni di installazione.
+    end
+  end
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Do we want to copy these files to %MAINDIR%  ???
+end
+item: Delete File
+  Pathname=%TEMP%\%READMEFILE%
+end
+item: Delete File
+  Pathname=%TEMP%\%LICINFOFILE%
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=DOBACKUP
+  Value=A
+end
+item: Set Variable
+  Variable=BACKUPDIR
+  Value=%BACKUP%
+end
+item: Remark
+end
+item: Remark
+  Text=// Old DOS files to move to backup - we want them out, but they won't be overwritten ...
+end
+item: Find File in Path
+  Variable=FILE
+  Pathname List=klist.exe
+  Search Directories=%MAINDIR%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00000001
+end
+item: Add Text to INSTALL.LOG
+  Text=Old version of %MAINDIR%\Klist.exe moved to %BACKUPDIR%
+end
+item: Copy Local File
+  Source=%MAINDIR%\klist.exe
+  Destination=%BACKUPDIR%\klist.exe
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%MAINDIR%\klist.exe
+end
+item: End Block
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=FILE
+  Pathname List=kdestroy.exe
+  Search Directories=%MAINDIR%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00000001
+end
+item: Add Text to INSTALL.LOG
+  Text=Old version of %MAINDIR%\Kdestroy.exe moved to %BACKUPDIR%
+end
+item: Copy Local File
+  Source=%MAINDIR%\kdestroy.exe
+  Destination=%BACKUPDIR%\kdestroy.exe
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%MAINDIR%\kdestroy.exe
+end
+item: End Block
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=FILE
+  Pathname List=kinit.exe
+  Search Directories=%MAINDIR%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00000001
+end
+item: Add Text to INSTALL.LOG
+  Text=Old version of %MAINDIR%\Kinit.exe moved to %BACKUPDIR%
+end
+item: Copy Local File
+  Source=%MAINDIR%\kinit.exe
+  Destination=%BACKUPDIR%\kinit.exe
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%MAINDIR%\kinit.exe
+end
+item: End Block
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=FILE
+  Pathname List=kexpire.exe
+  Search Directories=%MAINDIR%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00000001
+end
+item: Add Text to INSTALL.LOG
+  Text=Old version of %MAINDIR%\Kexpire.exe moved to %BACKUPDIR%
+end
+item: Copy Local File
+  Source=%MAINDIR%\kexpire.exe
+  Destination=%BACKUPDIR%\kexpire.exe
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%MAINDIR%\kexpire.exe
+end
+item: End Block
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=FILE
+  Pathname List=lpr.exe
+  Search Directories=%MAINDIR%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00000001
+end
+item: Add Text to INSTALL.LOG
+  Text=Old version of %MAINDIR%\lpr.exe moved to %BACKUPDIR%
+end
+item: Copy Local File
+  Source=%MAINDIR%\lpr.exe
+  Destination=%BACKUPDIR%\lpr.exe
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%MAINDIR%\lpr.exe
+end
+item: End Block
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=FILE
+  Pathname List=from.exe
+  Search Directories=%MAINDIR%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00000001
+end
+item: Add Text to INSTALL.LOG
+  Text=Old version of %MAINDIR%\from.exe moved to %BACKUPDIR%
+end
+item: Copy Local File
+  Source=%MAINDIR%\from.exe
+  Destination=%BACKUPDIR%\from.exe
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%MAINDIR%\from.exe
+end
+item: End Block
+end
+item: Remark
+end
+item: Find File in Path
+  Variable=FILE
+  Pathname List=rkinit.exe
+  Search Directories=%MAINDIR%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00000001
+end
+item: Add Text to INSTALL.LOG
+  Text=Old version of %MAINDIR%\RKinit.exe moved to %BACKUPDIR%
+end
+item: Copy Local File
+  Source=%MAINDIR%\rkinit.exe
+  Destination=%BACKUPDIR%\rkinit.exe
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%MAINDIR%\rkinit.exe
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Remark
+end
+item: Remark
+  Text=// Old files to blow away
+end
+item: Add Text to INSTALL.LOG
+  Text=Old version of klist, kdestroy, kinit, kexpire, lpr, from, rkinit in %MAINDIR% were delete (if present) 
+end
+item: Delete File
+  Pathname=%MAINDIR%\klist.exe
+end
+item: Delete File
+  Pathname=%MAINDIR%\kdestroy.exe
+end
+item: Delete File
+  Pathname=%MAINDIR%\kinit.exe
+end
+item: Delete File
+  Pathname=%MAINDIR%\kexpire.exe
+end
+item: Delete File
+  Pathname=%MAINDIR%\lpr.exe
+end
+item: Delete File
+  Pathname=%MAINDIR%\from.exe
+end
+item: Delete File
+  Pathname=%MAINDIR%\rkinit.exe
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=MAINDIR
+  Value=%MITDIR%
+end
+item: Add Directory to Path
+  Directory=%MITDIR%
+end
+item: Else Statement
+end
+item: Display Message
+  Title=Add path ?
+  Text=Do you want to add the directory %MAINDIR% to your path if it isn't already included ?
+  Flags=00000001
+end
+item: Add Text to INSTALL.LOG
+  Text=%MAINDIR% added to path, if not already in path
+end
+item: Remark
+  Text=// May want to do this in registry for WINNT ...
+end
+item: Add Directory to Path
+  Directory=%MAINDIR%
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+remarked item: Get Temporary Filename
+  Variable=INIFTP
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\INIFTP.EXE
+  Destination=%TEMP%\INIFTP.EXE
+  Flags=0000000000000010
+end
+remarked item: Get Temporary Filename
+  Variable=FTP4WDLL
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\FTP4W.DLL
+  Destination=%TEMP%\FTP4W.DLL
+  Flags=0000000000000010
+end
+item: Set Variable
+  Variable=FTPALL
+  Value=FTPALL.INI
+end
+remarked item: Get Temporary Filename
+  Variable=FTPALL
+end
+item: Install File
+  Source=C:\INSTALLS\SOURCE\FTPALL.INI
+  Destination=%TEMP%\%FTPALL%
+  Flags=0000000000100010
+end
+item: Remark
+end
+item: Remark
+  Text=// Adjust target dirs based on user selections
+end
+item: Remark
+  Text=//  Don't want to put host, user, password info into log file ...
+end
+item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: Edit INI File
+  Pathname=%TEMP%\%FTPALL%
+  Settings=[connect]
+  Settings=Host=%HOSTADDR%
+  Settings=user=%FTPUSER%
+  Settings=passwd=%FTPPASS%
+  Settings=
+end
+item: Remark
+  Text=// Target for Dir1 has been changed from MAINDIR to TEMP to accomodate the INIFTP problem, q.v.
+end
+item: Edit INI File
+  Pathname=%TEMP%\%FTPALL%
+  Settings=[Dir1]
+  Settings=TargetDir=%TEMP%
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMP%\%FTPALL%
+  Settings=[Dir2]
+  Settings=TargetDir=%NDIR%
+  Settings=
+end
+item: Open/Close INSTALL.LOG
+end
+item: Allow Floppy Disk Change
+end
+remarked item: Display Message
+  Title=INI Files trnsferred
+end
+item: Remark
+end
+item: Remark
+  Text=// May want to break out iniftp transfer into a separate script, since that would be a useful thing.
+end
+item: Remark
+  Text=// It would also save on maintainence, since it is used twice in this script.
+end
+item: Remark
+end
+item: Remark
+  Text=// DLL and EXE files will go into the %TEMP% directory and will be version checked
+end
+item: Remark
+  Text=// before being put in their final locations.  Other files will be overwritten regardless.
+end
+item: Remark
+  Text=// This is known to be not a good thing, and should be changed should the means arise.
+end
+item: Remark
+end
+item: Remark
+  Text=// Also, does this alter date/time ???
+end
+item: Remark
+end
+item: Execute Program
+  Pathname=%TEMP%\INIFTP.EXE
+  Command Line=-l%TEMP%\MINK\MINKFTP.LOG %TEMP%\%FTPALL%
+  Default Directory=%TEMP%
+  Flags=00000010
+end
+item: Read INI Value
+  Variable=FTPERR
+  Pathname=%TEMP%\%FTPALL%
+  Section=ExitCode
+  Item=Abort
+  Default=No
+end
+item: Remark
+end
+item: Remark
+end
+item: Remark
+  Text=//   Note: if FTP fails partway through, old version files in the %MAINDIR% may be deleted if BACKUP was not selected.
+end
+item: Remark
+end
+item: Remark
+  Text=// Read all files from [Dir1] in INI file.  Move all .DLL's and .EXE's to %MAINDIR%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%FTPALL%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00010001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%FILE%\%FILE%;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILE
+  Value=%FILE%
+  Flags=00011000
+end
+item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\%FILE%
+  Flags=0000000001000011
+end
+item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+item: Remark
+  Text=// The below lines are for when INIFTP works as the doc indicates and xfers .exe's and .dll's into the temp directory
+end
+item: Remark
+  Text=// (and only the temp directory)  Testing 3/1x/97 showed that it put them in both temp and target ... :(
+end
+remarked item: If/While Statement
+  Variable=FILE
+  Value=DLL
+  Flags=00000010
+end
+remarked item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\%FILE%
+  Flags=0000000001000011
+end
+remarked item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+remarked item: Else Statement
+end
+remarked item: If/While Statement
+  Variable=FILE
+  Value=EXE
+  Flags=00000010
+end
+remarked item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\%FILE%
+  Flags=0000000001000011
+end
+remarked item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+remarked item: End Block
+end
+remarked item: End Block
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=%FILENUM%
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%FTPALL%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Read all files from [Dir2] in INI file, for uninstall purposes.
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%FTPALL%
+  Section=Dir2
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00010001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%NDIR%\%FILE%;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=%FILENUM%
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%FTPALL%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=//  Make icons for leash and kview
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WIN16
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=Leash
+  Command Line=%MAINDIR%\Leash.EXE
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=KView
+  Command Line=%MAINDIR%\KView.EXE
+end
+item: Else Statement
+end
+item: Get Registry Key Value
+  Variable=GROUPDIR
+  Key=Software\Microsoft\Windows\CurrentVersion\Explorer\Shell Folders
+  Default=%WIN%\Profiles\All Users\Start Menu\Programs
+  Value Name=Programs
+  Flags=00000100
+end
+item: Set Variable
+  Variable=GROUPNT
+  Value=%GROUPDIR%\%GROUP%
+end
+item: Create Shortcut
+  Source=%MAINDIR%\LEASH.EXE
+  Destination=%GROUPNT%\Leash.lnk
+  Description=Leash
+  Key Type=1536
+  Flags=00000001
+end
+item: Create Shortcut
+  Source=%MAINDIR%\KView.EXE
+  Destination=%GROUPNT%\Kview.lnk
+  Description=Kview
+  Key Type=1536
+  Flags=00000001
+end
+item: End Block
+end
+item: Remark
+end
+item: Delete File
+  Pathname=%TEMP%\%FTPALL%
+end
+item: If/While Statement
+  Variable=FTPERR
+  Value=No
+  Flags=00000001
+end
+item: Display Message
+  Title=Error during FTP
+  Text=There was an error during the file transfer from the server.  Contact somebody to help you.
+  Flags=00110000
+end
+item: Exit Installation
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=// Adjust target dirs based on user selections
+end
+item: Remark
+  Text=//  Don't want to put host, user, password info into log file ...
+end
+item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: Remark
+  Text=//  TargetDir has been changed from MAINDIR to TEMP to accomodate the INIFTP problem, q.v.
+end
+item: Edit INI File
+  Pathname=%TEMP%\%INIFILE%
+  Settings=[Dir1]
+  Settings=TargetDir=%TEMP%
+  Settings=
+end
+item: Edit INI File
+  Pathname=%TEMP%\%INIFILE%
+  Settings=[Connect]
+  Settings=Host=%HOSTADDR%
+  Settings=user=%FTPUSER%
+  Settings=passwd=%FTPPASS%
+  Settings=
+end
+item: Open/Close INSTALL.LOG
+end
+item: Remark
+end
+item: Remark
+  Text=// DLL and EXE files will go into the %TEMP% directory and will be version checked
+end
+item: Remark
+  Text=// before being put in their final locations.  Other files will be overwritten regardless.
+end
+item: Remark
+  Text=// This is known to be not a good thing, and should be changed should the means arise.
+end
+item: Execute Program
+  Pathname=%TEMP%\INIFTP.EXE
+  Command Line=-l%TEMP%\MINK\MINKFTP.LOG %TEMP%\%INIFILE%
+  Default Directory=%TEMP%
+  Flags=00000010
+end
+item: Delete File
+  Pathname=%TEMP%\INIFTP.EXE
+end
+item: Delete File
+  Pathname=%TEMP%\FTP4W.DLL
+end
+item: Read INI Value
+  Variable=FTPERR
+  Pathname=%TEMP%\%INIFILE%
+  Section=ExitCode
+  Item=Abort
+  Default=No
+end
+item: Remark
+end
+item: Remark
+  Text=//   Note: if FTP fails partway through, old version files in the %MAINDIR% may be deleted if BACKUP was not selected.
+end
+item: Remark
+end
+item: Remark
+  Text=// Read all files from [Dir1] in INI file.  Move all .DLL's and .EXE's to %MAINDIR%
+end
+item: Set Variable
+  Variable=FILENUM
+  Value=1
+end
+item: Set Variable
+  Variable=FILE
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%FTPALL%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00110001
+end
+item: Set Variable
+  Variable=FILESFTPED
+  Value=%TEMP%\%FILE%;
+  Flags=00011001
+end
+item: Set Variable
+  Variable=FILE
+  Value=%FILE%
+  Flags=00011000
+end
+item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\%FILE%
+  Flags=0000000001000011
+end
+item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+item: Remark
+  Text=// The below lines are for when INIFTP works as the doc indicates and xfers .exe's and .dll's into the temp directory
+end
+item: Remark
+  Text=// (and only the temp directory)  Testing 3/1x/97 showed that it put them in both temp and target ... :(
+end
+remarked item: If/While Statement
+  Variable=FILE
+  Value=DLL
+  Flags=00000010
+end
+remarked item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\%FILE%
+  Flags=0000000001000011
+end
+remarked item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+remarked item: Else Statement
+end
+remarked item: If/While Statement
+  Variable=FILE
+  Value=EXE
+  Flags=00000010
+end
+remarked item: Copy Local File
+  Source=%TEMP%\%FILE%
+  Destination=%MAINDIR%\%FILE%
+  Flags=0000000001000011
+end
+remarked item: Delete File
+  Pathname=%TEMP%\%FILE%
+end
+remarked item: End Block
+end
+remarked item: End Block
+end
+item: Set Variable
+  Variable=FILENUM
+  Flags=00000100
+end
+item: Read INI Value
+  Variable=FILE
+  Pathname=%TEMP%\%FTPALL%
+  Section=Dir1
+  Item=File%FILENUM%
+end
+item: End Block
+end
+item: Remark
+end
+item: Delete File
+  Pathname=%TEMP%\%INIFILE%
+end
+item: If/While Statement
+  Variable=FTPERR
+  Value=No
+  Flags=00000001
+end
+item: Display Message
+  Title=Error during FTP
+  Text=There was an error during the file transfer from the server.  Contact somebody to help you.
+  Flags=00110000
+end
+item: Exit Installation
+end
+item: End Block
+end
+remarked item: Display Message
+  Title=INIFTP
+  Text=executed with %INIFILE%
+end
+item: Remark
+end
+item: Remark
+  Text=//  Make icons for Kerberos help and kdestroy
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WIN16
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=Kerberos Help
+  Command Line=%MAINDIR%\Kerberos.HLP
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=KDestroy
+  Command Line=%MAINDIR%\KDestroy.EXE
+end
+item: Else Statement
+end
+item: Create Shortcut
+  Source=%MAINDIR%\Kerberos.HLP
+  Destination=%GROUPNT%\Kerberos.lnk
+  Description=Kerberos Help
+  Key Type=1536
+  Flags=00000001
+end
+item: Create Shortcut
+  Source=%MAINDIR%\KDestroy.exe
+  Destination=%GROUPNT%\Kdestroy.lnk
+  Description=Kdestroy
+  Key Type=1536
+  Flags=00000001
+end
+item: End Block
+end
+item: Remark
+end
+item: Set Variable
+  Variable=CHANGETZ
+  Value=False
+end
+item: Get Environment Variable
+  Variable=TZ
+  Environment=TZ
+end
+item: If/While Statement
+  Variable=TZ
+end
+item: Remark
+  Text=// Decided if it wasn't set not to touch it ... might want to set it in WIN16, though ...
+end
+remarked item: Set Variable
+  Variable=CHANGETZ
+  Value=True
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=TZ
+  Value=EST5EDT
+  Flags=00000001
+end
+item: If/While Statement
+  Variable=TZ
+  Value=EDT5EDT
+end
+item: Set Variable
+  Variable=CHANGETZ
+  Value=True
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Remark
+  Text=// Decided if it was set, but not the the bogus value we wouldn't touch it ...
+end
+item: Remark
+  Text=// This is one place where we could check to see if install is being done into a legal timezone ...
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=CHANGETZ
+  Value=True
+end
+item: Set Variable
+  Variable=LWPFILE
+  Value=LANWP.BAT
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WINNT
+end
+item: Remark
+  Text=// Should this just get commented out too  ???
+end
+item: Edit Registry
+  Key=SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+  New Value=EST5EDT
+  Value Name=TZ
+  Root=2
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WIN95
+end
+item: Remark
+  Text=// Is it the same in WIN95  ???
+end
+remarked item: Edit Registry
+  Key=SYSTEM\CurrentControlSet\Control\Session Manager\Environment
+  New Value=EST5EDT
+  Value Name=TZ
+  Root=2
+end
+item: Else Statement
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WIN16
+end
+item: Remark
+  Text=// The below line may look a little odd, but it works ...
+end
+item: Find File in Path
+  Variable=LWPFILE
+  Pathname List=%LWPFILE%
+  Default=C:\AUTOEXEC.BAT
+end
+item: Insert Line into Text File
+  Pathname=%LWPFILE%
+  New Text=SET TZ = EST5EDT
+  Search Text=SET TZ =
+  Line Number=0
+  Flags=00001010
+end
+item: Else Statement
+end
+item: Remark
+  Text=// Only thing left is SYSTYPE ALPHA
+end
+item: Remark
+  Text=// What do we want to do here  ???
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Open/Close INSTALL.LOG
+end
+item: Check Disk Space
+  Component=COMPONENTS
+end
+item: Set Variable
+  Variable=MAINDIR
+  Value=%MAINDIR%
+  Flags=00010100
+end
+item: Check Configuration
+  Flags=10111011
+end
+item: Else Statement
+end
+item: End Block
+end
+item: Self-Register OCXs/DLLs
+  Description=Updating System Configuration, Please Wait...
+end
+item: Install File
+  Source=C:\PROGRA~1\WISE\UNWISE.EXE
+  Destination=%MAINDIR%\UNMINK.EXE
+  Flags=0000000000000010
+end
+item: Remark
+end
+item: Remark
+  Text=//  Add Uninstall Icon
+end
+item: If/While Statement
+  Variable=SYSTYPE
+  Value=WIN16
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=Kerberos Uninstaller
+  Command Line=%MAINDIR%\UNMINK.EXE %MAINDIR%\MINK.LOG
+end
+item: Else Statement
+end
+item: Create Shortcut
+  Source=%MAINDIR%\UNMINK.EXE
+  Destination=%GROUPNT%\UNMINK.lnk
+  Command Options=%MAINDIR%\MINK.LOG
+  Description=Kerberos Uninstaller
+  Key Type=1536
+  Flags=00000001
+end
+item: End Block
+end
+item: Remark
+end
+item: Copy Local File
+  Source=%TEMP%\MINK\MINK.LOG
+  Destination=%MAINDIR%\MINK.LOG
+  Flags=0000000001000010
+end
+item: Copy Local File
+  Source=%TEMP%\MINK\MINKFTP.LOG
+  Destination=%MAINDIR%\MINKFTP.LOG
+  Flags=0000000001000010
+end
+item: Delete File
+  Pathname=%TEMP%\MINK\MINKFTP.LOG
+end
+item: Delete File
+  Pathname=%TEMP%\MINK\MINK.LOG
+end
+item: Delete File
+  Pathname=%TEMP%\MINK.LOG
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=c:\Program files\wise\dialogs\template\WIZARD.BMP
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Finished
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Create Flags=01010000000000010000000000000001
+      Text=&Finish
+      Text French=&Fin
+      Text German=&Weiter
+      Text Spanish=&Terminar
+      Text Italian=&Fine
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DISABLED
+      Value=!
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Variable=DISABLED
+      Value=!
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Installation Completed!
+      Text French=Installation terminée !
+      Text German=Die Installation ist abgeschlossen!
+      Text Spanish=¡Instalación terminada!
+      Text Italian=Installazione completata!
+    end
+    item: Static
+      Rectangle=86 42 256 102
+      Create Flags=01010000000000000000000000000000
+      Text=The %APPTITLE% has been successfully installed.
+      Text=
+      Text=Press the Finish button to exit this installation.
+      Text French=%APPTITLE% est maintenant installé.
+      Text French=
+      Text French=Cliquez sur le bouton Fin pour quitter l'installation.
+      Text German=%APPTITLE% wurde erfolgreich installiert.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um die Installation zu beenden.
+      Text Spanish=%APPTITLE% se ha instalado con éxito.
+      Text Spanish=
+      Text Spanish=Presione el botón Terminar para salir de esta instalación.
+      Text Italian=L'installazione %APPTITLE% è stata portata a termine con successo.
+      Text Italian=
+      Text Italian=Premere il pulsante Fine per uscire dall'installazione.
+    end
+  end
+end
+item: End Block
+end
+item: New Event
+  Name=Cancel
+end
+remarked item: Display Message
+  Title=Files FTPed
+  Text=About to delete the following files that were FTP'ed in to your system:                                      %FILESFTPED%
+  Flags=00000001
+end
+item: Display Message
+  Title=Files FTPed
+  Text=About to delete the files that were FTP'ed in to your system during he installation.
+  Flags=00000001
+end
+item: Parse String
+  Source=%FILESFTPED%
+  Pattern=;
+  Variable1=FILE
+  Variable2=FILESFTPED
+end
+item: If/While Statement
+  Variable=FILE
+  Flags=00010001
+end
+item: Delete File
+  Pathname=%FILE%
+end
+item: Parse String
+  Source=%FILESFTPED%
+  Pattern=;
+  Variable1=FILE
+  Variable2=FILESFTPED
+end
+item: End Block
+end
+item: End Block
+end

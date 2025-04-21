@@ -1,0 +1,142 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=[NON-EXECUTABLE] Startup Utils
+  Flags=00000100
+  Split=1420
+  Languages=65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000000000101000001000
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  FTP Cluster Size=20
+end
+item: Remark
+  Text=***************************************
+end
+item: Remark
+  Text=**** STANDARD BEGINNING ****
+end
+item: Remark
+  Text=***************************************
+end
+item: Remark
+end
+item: Remark
+  Text=Write current system stats to LogFile
+end
+item: Add Text to INSTALL.LOG
+  Text=******************************************
+end
+item: Get System Information
+  Variable=MYPUT
+end
+item: Add Text to INSTALL.LOG
+  Text=* Reported Begin Time: %MYPUT%
+end
+item: Get System Information
+  Variable=MYPUT
+  Flags=00000010
+end
+item: Add Text to INSTALL.LOG
+  Text=* Reported DOS Version: %MYPUT%
+end
+item: Get System Information
+  Variable=MYPUT
+  Flags=00000011
+end
+item: Add Text to INSTALL.LOG
+  Text=* Reported Memory Free (kb): %MYPUT%
+end
+item: Get System Information
+  Variable=MYPUT
+  Flags=00001101
+end
+item: Add Text to INSTALL.LOG
+  Text=* Reported Installation Pathname: %MYPUT%
+end
+item: Remark
+end
+item: Remark
+  Text=*** Determine Windows Version ***
+end
+item: Set Variable
+  Variable=WINVER
+end
+item: Get System Information
+  Variable=MYPUT
+  Flags=00000001
+end
+item: Check Configuration
+  Flags=10011010
+end
+item: If/While Statement
+  Variable=MYPUT
+  Value=3.10
+end
+item: Set Variable
+  Variable=WINVER
+  Value=Win310
+end
+item: Else Statement
+end
+item: Display Message
+  Title=You Have No WinVer!!!
+  Text=Could Not Determine Windows Version!!!
+  Flags=00110000
+end
+item: End Block
+end
+item: Else Statement
+end
+item: Check Configuration
+  Flags=10111001
+end
+item: Set Variable
+  Variable=WINVER
+  Value=Win95
+end
+item: Else Statement
+end
+item: Check Configuration
+  Flags=10100000
+end
+item: Set Variable
+  Variable=WINVER
+  Value=WinNT
+end
+item: Else Statement
+end
+item: Display Message
+  Title=You Have No WinVer!!!
+  Text=Could Not Determine Windows Version!!!
+  Flags=00110000
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Add Text to INSTALL.LOG
+  Text=* Reported Windows Version: %MYPUT%
+end
+item: Remark
+end
+item: Add Text to INSTALL.LOG
+  Text=* Winver is '%MYPUT%' ==> '%WINVER%'
+end
+item: Remark
+end
+item: Add Text to INSTALL.LOG
+  Text=******************************************
+end
+item: Remark
+end

@@ -1,0 +1,844 @@
+Document Type: WSE
+item: Global
+  Version=5.0
+  Title=Ksign Installation
+  Flags=00000100
+  Languages=65 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0
+  Japanese Font Name=MS Gothic
+  Japanese Font Size=10
+  Start Gradient=0 0 255
+  End Gradient=0 0 0
+  Windows Flags=00000000000000010010110100011001
+  Log Pathname=%MAINDIR%\INSTALL.LOG
+  Message Font=MS Sans Serif
+  Font Size=8
+  Disk Label=ksign2
+  Disk Filename=SETUP
+  Patch Flags=0000000000000001
+  Patch Threshold=85
+  Patch Memory=4000
+  FTP Cluster Size=20
+  Variable Name1=_SYS_
+  Variable Default1=D:\WINNT\System32
+  Variable Flags1=00001000
+  Variable Name2=_ODBC16_
+  Variable Default2=D:\WINNT\System32
+  Variable Flags2=00001000
+  Variable Name3=_ODBC32_
+  Variable Default3=D:\WINNT\System32
+  Variable Flags3=00001000
+  Variable Name4=_WISE_
+  Variable Default4=D:\Program Files\Wise
+  Variable Flags4=00001000
+end
+item: Remark
+  Text=Revison 1.0
+end
+item: Remark
+  Text=February 18, 1997
+end
+item: Remark
+  Text=This is the Windows 3.11 Ksign Installer script
+end
+item: Open/Close INSTALL.LOG
+  Flags=00000001
+end
+item: Remark
+end
+item: Check if File/Dir Exists
+  Pathname=%SYS%
+  Flags=10000100
+end
+item: Set Variable
+  Variable=SYS
+  Value=%WIN%
+end
+item: End Block
+end
+item: Set Variable
+  Variable=APPTITLE
+  Value=Ksign
+end
+item: Set Variable
+  Variable=GROUP
+  Value=Kerberos Utilities
+end
+item: Set Variable
+  Variable=DISABLED
+  Value=!
+end
+item: Set Variable
+  Variable=WIN
+  Value=c:\windows\
+end
+item: Set Variable
+  Variable=ROOTDIR
+  Value=C:
+end
+item: Set Variable
+  Variable=DOBACKUP
+  Value=B
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=D:\Program Files\Wise\DIALOGS\TEMPLATE\WIZARD.BMP
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Dialog=Select Program Manager Group
+  Dialog=Select Backup Directory
+  Dialog=Display Registration Information
+  Dialog=Get Registration Information
+  Variable=EXPLORER
+  Variable=DOBACKUP
+  Variable=DOBRAND
+  Variable=DOBRAND
+  Value=1
+  Value=A
+  Value=1
+  Value=1
+  Compare=0
+  Compare=1
+  Compare=0
+  Compare=1
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Welcome
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Welcome!
+      Text French=Bienvenue !
+      Text German=Willkommen!
+      Text Spanish=¡Bienvenido!
+      Text Italian=Benvenuti!
+    end
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Action=1
+      Create Flags=01010000000000010000000000000001
+      Text=&Next >
+      Text French=&Suite >
+      Text German=&Weiter >
+      Text Spanish=&Siguiente >
+      Text Italian=&Avanti >
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DISABLED
+      Value=!
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=86 42 256 131
+      Create Flags=01010000000000000000000000000000
+      Text=This installation program will install %APPTITLE%.
+      Text=
+      Text=Press the Next button to start the installation. You can press the Cancel button now if you do not want to install  %APPTITLE% at this time.
+      Text French=Ce programme d'installation va installer %APPTITLE%.
+      Text French=
+      Text French=Cliquez sur le bouton Suite pour démarrer l'installation. Vous pouvez cliquer sur le bouton Quitter l'installation si vous ne voulez pas installer %APPTITLE% tout de suite.
+      Text German=Mit diesem Installationsprogramm wird %APPTITLE% installiert.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um mit der Installation zu beginnen. Klicken Sie auf "Abbrechen", um die Installation von %APPTITLE% abzubrechen.
+      Text Spanish=Este programa de instalación instalará %APPTITLE%.
+      Text Spanish=
+      Text Spanish=Presione el botón Siguiente para iniciar la instalación. Puede presionar el botón Salir de instalación si no desea instalar %APPTITLE% en este momento.
+      Text Italian=Questo programma installerà %APPTITLE%.
+      Text Italian=
+      Text Italian=Per avvviare l'installazione premere il pulsante Avanti. Se non si desidera installare %APPTITLE% ora, premere il pulsante Esci dall'installazione.
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+  end
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=Use krnl386.exe to determine version number
+end
+item: Get System Information
+  Variable=WINVER
+  Pathname=c:\windows\system\krnl386.exe
+  Flags=00000101
+end
+item: Remark
+end
+item: If/While Statement
+  Variable=WINVER
+  Value=3.11
+  Flags=00000011
+end
+item: Open/Close INSTALL.LOG
+end
+item: Remark
+end
+item: Remark
+  Text=Abort installation
+end
+item: Add Text to INSTALL.LOG
+  Text=Operating System is %WINVER%
+end
+item: Custom Dialog Set
+  Name=Installation Incomplete
+  item: Dialog
+    Title=Installation Incomplete
+    Width=150
+    Height=149
+    Font Name=Helv
+    Font Size=8
+    item: Editbox
+      Rectangle=8 1 138 93
+      Help Context=16711681
+      Create Flags=01010000101100010000100000000101
+      Text=This version of Ksign can only be installed on systems running the Windows 3.11 operating system.
+    end
+    item: Push Button
+      Rectangle=42 104 106 119
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel Installation
+    end
+  end
+end
+item: End Block
+end
+item: Remark
+end
+item: Open/Close INSTALL.LOG
+end
+item: Check Disk Space
+end
+item: Browse for Directory
+  Variable=MAINDIR
+  Flags=0
+  Window Name=Select Destination Directory
+  Prompt Description=Ksign and the other necessary Kerberos utilities will be installed in the C:\NET\MIT directory
+  Prompt Name=Select Destination Directory
+  Default Value=C:\NET\MIT
+end
+item: Set Variable
+  Variable=BACKUP
+  Value=%MAINDIR%\BACKUP
+end
+item: If/While Statement
+  Variable=DOBACKUP
+  Value=A
+end
+item: Set Variable
+  Variable=BACKUPDIR
+  Value=%BACKUP%
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=Set temp installation directory in TEMP
+end
+item: Get Environment Variable
+  Variable=TEMP
+  Environment=TEMP
+  Default=c:\temp
+end
+item: Browse for Directory
+  Variable=TEMP
+  Flags=0
+  Window Name=Temporary Directory
+  Prompt Description=Temporary files needed by the installer wil be placed in the directory that you are using for temporary files, %TEMP%
+  Prompt Name=Select Temporary File Directory
+  Default Value=%TEMP%
+end
+item: Remark
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\K5dstroy.exe
+  Destination=%MAINDIR%\K5dstroy.exe
+  Description=Clean up after using Kerberos
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\Krb5.exe
+  Destination=%MAINDIR%\Krb5.exe
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\Ksign.exe
+  Destination=%MAINDIR%\Ksign.exe
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\Gssapi.dll
+  Destination=%MAINDIR%\Gssapi.dll
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\krb5_16.dll
+  Destination=%MAINDIR%\krb5_16.dll
+  Description=Was libkrb5.dll
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\Vs.dll
+  Destination=%MAINDIR%\Vs.dll
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\Uninstal.exe
+  Destination=%MAINDIR%\Uninstal.exe
+  Description=To uninstall Ksign
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\Krb5.ini
+  Destination=%WIN%\Krb5.ini
+  Description=Kerberos 5 ini file
+  Flags=0000010000010010
+end
+item: Remark
+end
+item: Remark
+  Text=The following are the text, readme and dialog files for the installation
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\ksreadme.txt
+  Destination=%MAINDIR%\ksreadme.txt
+  Description=Netscape configuration instructions for Ecat
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\notz.txt
+  Destination=%MAINDIR%\notz.txt
+  Description=Time zone change instructions
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\readenvi.txt
+  Destination=%MAINDIR%\readenvi.txt
+  Description=Expand environment space instructions
+  Flags=0000010000010010
+end
+item: Install File
+  Source=D:\Program Files\Wise\source\ks2test\ksabort.dlg
+  Destination=%TEMP%\ksabort.dlg
+  Description=Screen to abort installation for wrong O/S
+  Flags=0000010000010010
+end
+item: Remark
+end
+item: Add ProgMan Icon
+  Group=%WIN%\startup
+  Icon Name=Kerberos 5 Logout
+  Command Line=%MAINDIR%\K5dstroy.exe
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=Kerberos 5 Logout
+  Command Line=%MAINDIR%\K5dstroy.exe
+  Default Directory=%MAINDIR%
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=Kerberos 5 Login
+  Command Line=%MAINDIR%\Krb5.exe
+  Default Directory=%MAINDIR%
+end
+item: Add ProgMan Icon
+  Group=%GROUP%
+  Icon Name=Uninstall %APPTITLE%
+  Command Line=%MAINDIR%\uninstal.exe
+  Default Directory=%MAINDIR%
+end
+item: Remark
+  Text=Do we need an icon here for Ksign?
+end
+item: Wizard Block
+  Direction Variable=DIRECTION
+  Display Variable=DISPLAY
+  Bitmap Pathname=D:\Program Files\Wise\DIALOGS\TEMPLATE\WIZARD.BMP
+  X Position=9
+  Y Position=10
+  Filler Color=8421440
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Finished
+  Display Variable=DISPLAY
+  item: Dialog
+    Title=%APPTITLE% Installation
+    Title French=Installation de %APPTITLE%
+    Title German=Installation von %APPTITLE%
+    Title Spanish=Instalación de %APPTITLE%
+    Title Italian=Installazione di %APPTITLE%
+    Width=271
+    Height=224
+    Font Name=Helv
+    Font Size=8
+    item: Push Button
+      Rectangle=150 187 195 202
+      Variable=DIRECTION
+      Value=N
+      Action=1
+      Create Flags=01010000000000010000000000000001
+      Text=&Finish>
+      Text French=&Fin
+      Text German=&Weiter
+      Text Spanish=&Terminar
+      Text Italian=&Fine
+    end
+    item: Push Button
+      Rectangle=105 187 150 202
+      Variable=DISABLED
+      Value=!
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=< &Back
+      Text French=< &Retour
+      Text German=< &Zurück
+      Text Spanish=< &Atrás
+      Text Italian=< &Indietro
+    end
+    item: Push Button
+      Rectangle=211 187 256 202
+      Variable=DISABLED
+      Value=!
+      Action=3
+      Create Flags=01010000000000010000000000000000
+      Text=&Cancel
+      Text French=&Annuler
+      Text German=&Abbrechen
+      Text Spanish=&Cancelar
+      Text Italian=&Annulla
+    end
+    item: Static
+      Rectangle=8 180 256 181
+      Action=3
+      Create Flags=01010000000000000000000000000111
+    end
+    item: Static
+      Rectangle=86 8 258 42
+      Create Flags=01010000000000000000000000000000
+      Flags=0000000000000001
+      Name=Times New Roman
+      Font Style=-24 0 0 0 700 255 0 0 0 3 2 1 18
+      Text=Installation Completed!
+      Text French=Installation terminée !
+      Text German=Die Installation ist abgeschlossen!
+      Text Spanish=¡Instalación terminada!
+      Text Italian=Installazione completata!
+    end
+    item: Static
+      Rectangle=86 49 256 152
+      Create Flags=01010000000000000000000000000000
+      Text= %APPTITLE% has been successfully installed.
+      Text=
+      Text=There are two tasks left to complete the process.
+      Text=1. Ensure that the Time Zone is set correctly
+      Text=2. Ensure the allocation for Environment space is large enough.
+      Text=
+      Text=The installer will do these for you or allow you to do them yourself later.
+      Text=
+      Text=Press the Finish button to complete this installation.
+      Text French=%APPTITLE% est maintenant installé.
+      Text French=
+      Text French=Cliquez sur le bouton Fin pour quitter l'installation.
+      Text German=%APPTITLE% wurde erfolgreich installiert.
+      Text German=
+      Text German=Klicken Sie auf "Weiter", um die Installation zu beenden.
+      Text Spanish=%APPTITLE% se ha instalado con éxito.
+      Text Spanish=
+      Text Spanish=Presione el botón Terminar para salir de esta instalación.
+      Text Italian=L'installazione %APPTITLE% è stata portata a termine con successo.
+      Text Italian=
+      Text Italian=Premere il pulsante Fine per uscire dall'installazione.
+    end
+    item: Editbox
+      Rectangle=5 5 40 20
+      Value=%TEMP%\ksreadme.txt
+      Help Context=16711681
+      Create Flags=01010000101100010000100000000100
+    end
+  end
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=Test for correct time zone and correct if needed
+end
+item: Get Environment Variable
+  Variable=TZYES
+  Environment=TZ
+end
+item: Set Variable
+  Variable=TZYES
+  Value=%TZYES%
+  Flags=00011000
+end
+item: If/While Statement
+  Variable=TZYES
+  Value=EST5EDT
+  Flags=00000011
+end
+item: Custom Dialog Set
+  Name=Time Zone Change
+  item: Dialog
+    Title=Time Zone Change
+    Width=150
+    Height=150
+    Font Name=Helv
+    Font Size=8
+    item: Editbox
+      Rectangle=5 5 135 85
+      Help Context=16711681
+      Create Flags=01010000101100010000100000000100
+      Text=The time zone on your system
+      Text= needs to be synchronized
+      Text= with Kerberos
+    end
+    item: Push Button
+      Rectangle=14 93 49 108
+      Variable=DOITLATER
+      Value=FALSE
+      Action=1
+      Create Flags=01010000000000010000000000000001
+      Text=Do It &Now
+    end
+    item: Push Button
+      Rectangle=82 94 125 108
+      Variable=DOITLATER
+      Value=TRUE
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=Wait Till &Later
+    end
+  end
+end
+item: Remark
+end
+item: Remark
+  Text=Give user option to change time zone here or do it themselves later
+end
+item: If/While Statement
+  Variable=DOITLATER
+  Value=TRUE
+end
+item: Execute Program
+  Pathname=WRITE
+  Command Line=notz.txt
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: Else Statement
+end
+item: Check if File/Dir Exists
+  Pathname=%ROOTDIR%\lanwp.bat
+  Title=LANwp check
+  Flags=01000100
+end
+item: Search for File
+  Variable=LWP
+  Pathname List=lanwp.bat
+  Description=Searching for Lan Workplace 
+  Flags=00001001
+end
+item: Remark
+end
+item: Remark
+  Text=If any existing TZ is there replace it with EST5EDT and REM out original line
+end
+item: Insert Line into Text File
+  Pathname=%LWP%\lanwp.bat
+  New Text=SET TZ=EST5EDT
+  Search Text=TZ=
+  Comment Text=REM 
+  Line Number=0
+  Flags=00110100
+end
+item: Else Statement
+end
+item: Remark
+end
+item: Remark
+  Text=Or do same thing for Autoexec.bat
+end
+item: Add to AUTOEXEC.BAT
+  New Text=SET TZ=EST5EDT
+  Search Text=SET TZ=
+  Comment Text=REM 
+  Line Number=0
+  Flags=00110100
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=To check if Environment space test is needed
+end
+item: Set Variable
+  Variable=SETTZ
+  Value=True
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=Test for enough environment space and correct if needed
+end
+item: If/While Statement
+  Variable=SETTZ
+  Value=True
+end
+item: Execute Program
+  Pathname=WRITE
+  Command Line=readenvi.txt
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: Remark
+end
+item: Remark
+  Text=Give user option to change environment space here or do it themselves later
+end
+item: Custom Dialog Set
+  Name=Set Environment Space
+  item: Dialog
+    Title=Set Environment Space
+    Width=150
+    Height=150
+    Font Name=Helv
+    Font Size=8
+    item: Editbox
+      Rectangle=5 5 135 82
+      Help Context=16711681
+      Create Flags=01010000100000010000100000000100
+      Text=You may need to expand your environment space due to adding the Time Zone setting,  You can do it later or have the installer do it for you now.
+    end
+    item: Push Button
+      Rectangle=13 90 48 105
+      Variable=SETENVIR
+      Value=True
+      Action=1
+      Create Flags=01010000000000010000000000000001
+      Text=Do It &Now
+    end
+    item: Push Button
+      Rectangle=88 90 123 105
+      Variable=SETENVIR
+      Value=False
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=Do It &Later
+    end
+  end
+end
+item: If/While Statement
+  Variable=SETENVIR
+  Value=True
+end
+item: Set Variable
+  Variable=ESPACE
+  Value=False
+end
+item: Remark
+end
+item: Remark
+  Text=     Next, we look for the SHELL command in the CONFIG.SYS file.
+end
+item: Read/Update Text File
+  Variable=LINE
+  Pathname=%ROOTDIR%\CONFIG.SYS
+end
+item: Remark
+end
+item: Remark
+  Text=     Convert the line to all upper case.
+end
+item: Parse String
+  Source=%LINE%
+  Pattern=SHELL=
+  Variable2=DOS_PARAMS
+end
+item: If/While Statement
+  Variable=DOS_PARAMS
+  Value=2048
+  Flags=00000011
+end
+item: Set Variable
+  Variable=ESPACE
+  Value=True
+end
+item: End Block
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=ESPACE
+  Value=True
+end
+item: Add to CONFIG.SYS
+  New Text=SHELL=C:\COMMAND.COM /e:2048 /P
+  Search Text=SHELL=
+  Comment Text=REM 
+  Line Number=0
+  Flags=00010100
+end
+item: End Block
+end
+item: End Block
+end
+item: End Block
+end
+item: Remark
+end
+item: Remark
+  Text=Check if User wants to configure Netscape now or later
+end
+item: Custom Dialog Set
+  Name=Configuring Netscape 
+  item: Dialog
+    Title=Configuring Netscape 
+    Width=220
+    Height=193
+    Font Name=Helv
+    Font Size=8
+    item: Editbox
+      Rectangle=50 4 198 124
+      Help Context=16711681
+      Create Flags=01010000101000010000100000000100
+      Text=You should configure Netscape now, but you have the option of doing it at a later time.
+    end
+    item: Push Button
+      Rectangle=10 152 86 166
+      Variable=NETNOW
+      Value=true
+      Action=1
+      Create Flags=01010000000000010000000000000001
+      Text=Run Netscape &Now
+    end
+    item: Push Button
+      Rectangle=94 151 129 166
+      Create Flags=01010000000000010000000000000000
+      Text=<&Back
+    end
+    item: Push Button
+      Rectangle=138 151 207 166
+      Variable=NETNOW
+      Value=false
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=Run Netscape &Later
+    end
+  end
+end
+item: Custom Dialog Set
+  Name=Netscape Configuration Instructions
+  item: Dialog
+    Title=Netscape Configuration Instructions
+    Width=269
+    Height=184
+    Font Name=Helv
+    Font Size=8
+    item: Editbox
+      Rectangle=5 5 251 86
+      Help Context=16711681
+      Create Flags=01010000101100010000100000000100
+      Text=Netscape must be configured to
+      Text=be able to use Ecat.  You can
+      Text=display the instructions for doing
+      Text=that here.
+      Text=
+      Text=We recommend your printing out the
+      Text=instructions for configuring Netscape. 
+    end
+    item: Push Button
+      Rectangle=27 103 107 117
+      Variable=NETSHOW
+      Value=nsy
+      Action=1
+      Create Flags=01010000000000010000000000000001
+      Text=&Display Instructions
+    end
+    item: Push Button
+      Rectangle=129 103 230 117
+      Variable=NETSHOW
+      Value=nsn
+      Action=1
+      Create Flags=01010000000000010000000000000000
+      Text=Do&n't Show Instructions
+    end
+  end
+end
+item: If/While Statement
+  Variable=NETSHOW
+  Value=nsy
+end
+item: Execute Program
+  Pathname=write
+  Command Line=ksreadme.txt
+  Default Directory=%MAINDIR%
+  Flags=00000010
+end
+item: End Block
+end
+item: If/While Statement
+  Variable=NETNOW
+  Value=true
+end
+item: Search for File
+  Variable=NETS
+  Pathname List=Netscape.exe
+  Default=c:\netscape
+  Description=Searching forNetscape
+end
+item: Execute Program
+  Pathname=%NETS%\
+  Command Line=netscape
+end
+item: End Block
+end
+item: Exit Installation
+end
