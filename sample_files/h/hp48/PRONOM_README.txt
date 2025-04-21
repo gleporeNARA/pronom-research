@@ -1,0 +1,3 @@
+The HP 48 is a series of graphing calculators using Reverse Polish Notation (RPN) and the RPL programming language, designed and produced by Hewlett-Packard from 1990 until 2003.[1] The series includes the HP 48S, HP 48SX, HP 48G, HP 48GX, and HP 48G+, the G models being expanded and improved versions of the S models. The models with an X suffix are expandable via special RAM (memory expansion) and ROM (software application) cards. In particular, the GX models have more onboard memory than the G models. The G+ models have more onboard memory only. The SX and S models have the same amount of onboard memory.
+
+https://en.wikipedia.org/wiki/HP_48_series
