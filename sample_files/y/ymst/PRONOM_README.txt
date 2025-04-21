@@ -1,0 +1,3 @@
+YM (YM2149 Music) is an audio format that logs instructions sent to an AY-3-8910 or YM2149 chip. Playback occurs by emulating the chips and sending the logged data to them. Because the format merely logs the instructions to the chip, it doesn't preserve the original content of the music format. The format is similar to VGM, DRO and GYM formats in this respect. Although YM technically supports any platform that uses the specified chips, the logging community has mostly limited its efforts to the Amstrad CPC. The format has partial support for the YM2149F used in Atari ST.
+
+http://www.vgmpf.com/Wiki/index.php?title=YM
