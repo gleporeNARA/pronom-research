@@ -1,0 +1,3 @@
+FamiTracker is an open source audio tracker program for Windows designed to faithfully emulate the audio chips used on various NES games including the RP2A03, RP2C33, MMC5, VRC VI, VRC VII, and NAMCO163. Future development will include the Sunsoft 5B chip. FamiTracker supports many helpful features to expedite the composition process including the ability to import MIDI files and make custom instruments. The user can also export their music into a variety of formats including NSF files, BIN files, PRG files, and even NES files to play back on a real NES or emulator. According to the program's creator Jonathan Liss, FamiTracker's design was based off of MadTracker.
+
+http://www.vgmpf.com/Wiki/index.php?title=FamiTracker
