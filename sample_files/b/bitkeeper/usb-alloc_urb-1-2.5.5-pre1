@@ -1,0 +1,84 @@
+# This is a BitKeeper generated patch for the following project:
+# Project Name: Linux kernel tree
+# This patch format is intended for GNU patch command version 2.5 or higher.
+# This patch includes the following deltas:
+#	           ChangeSet	1.334   -> 1.335  
+#	 include/linux/usb.h	1.20    -> 1.21   
+#	   drivers/usb/hub.c	1.15    -> 1.16   
+#	   drivers/usb/usb.c	1.31    -> 1.32   
+#
+# The following is the BitKeeper ChangeSet Log
+# --------------------------------------------
+# 02/02/13	greg@kroah.com	1.335
+# Added mem_flags to usb_submit_urb(), this is the USB core code changes.
+# --------------------------------------------
+#
+diff -Nru a/drivers/usb/hub.c b/drivers/usb/hub.c
+--- a/drivers/usb/hub.c	Wed Feb 13 17:51:13 2002
++++ b/drivers/usb/hub.c	Wed Feb 13 17:51:13 2002
+@@ -303,7 +303,7 @@
+ 	if (maxp > sizeof(hub->buffer))
+ 		maxp = sizeof(hub->buffer);
+ 
+-	hub->urb = usb_alloc_urb(0);
++	hub->urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!hub->urb) {
+ 		err("couldn't allocate interrupt urb");
+ 		kfree(hub->descriptor);
+diff -Nru a/drivers/usb/usb.c b/drivers/usb/usb.c
+--- a/drivers/usb/usb.c	Wed Feb 13 17:51:13 2002
++++ b/drivers/usb/usb.c	Wed Feb 13 17:51:13 2002
+@@ -1085,6 +1085,7 @@
+ /**
+  * usb_alloc_urb - creates a new urb for a USB driver to use
+  * @iso_packets: number of iso packets for this urb
++ * @mem_flags: the type of memory to allocate, see kmalloc() for a list of valid options for this.
+  *
+  * Creates an urb for the USB driver to use, initializes a few internal
+  * structures, incrementes the usage counter, and returns a pointer to it.
+@@ -1096,13 +1097,13 @@
+  *
+  * The driver must call usb_free_urb() when it is finished with the urb.
+  */
+-struct urb *usb_alloc_urb(int iso_packets)
++struct urb *usb_alloc_urb(int iso_packets, int mem_flags)
+ {
+ 	struct urb *urb;
+ 
+ 	urb = (struct urb *)kmalloc(sizeof(struct urb) + 
+ 		iso_packets * sizeof(struct usb_iso_packet_descriptor),
+-		in_interrupt() ? GFP_ATOMIC : GFP_KERNEL);
++		mem_flags);
+ 	if (!urb) {
+ 		err("alloc_urb: kmalloc failed");
+ 		return NULL;
+@@ -1368,7 +1369,7 @@
+ 	int retv;
+ 	int length;
+ 
+-	urb = usb_alloc_urb(0);
++	urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!urb)
+ 		return -ENOMEM;
+   
+@@ -1456,7 +1457,7 @@
+ 	if (len < 0)
+ 		return -EINVAL;
+ 
+-	urb=usb_alloc_urb(0);
++	urb=usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!urb)
+ 		return -ENOMEM;
+ 
+diff -Nru a/include/linux/usb.h b/include/linux/usb.h
+--- a/include/linux/usb.h	Wed Feb 13 17:51:13 2002
++++ b/include/linux/usb.h	Wed Feb 13 17:51:13 2002
+@@ -856,7 +856,7 @@
+ #define FILL_INT_URB(URB,DEV,PIPE,TRANSFER_BUFFER,BUFFER_LENGTH,COMPLETE,CONTEXT,INTERVAL) \
+     usb_fill_int_urb(URB,DEV,PIPE,TRANSFER_BUFFER,BUFFER_LENGTH,COMPLETE,CONTEXT,INTERVAL)
+ 
+-extern struct urb *usb_alloc_urb(int iso_packets);
++extern struct urb *usb_alloc_urb(int iso_packets, int mem_flags);
+ extern void usb_free_urb(struct urb *urb);
+ #define usb_put_urb usb_free_urb
+ extern struct urb *usb_get_urb(struct urb *urb);

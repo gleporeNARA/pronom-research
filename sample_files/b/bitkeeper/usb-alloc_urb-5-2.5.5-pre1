@@ -1,0 +1,126 @@
+# This is a BitKeeper generated patch for the following project:
+# Project Name: Linux kernel tree
+# This patch format is intended for GNU patch command version 2.5 or higher.
+# This patch includes the following deltas:
+#	           ChangeSet	1.338   -> 1.339  
+#	drivers/media/video/cpia_usb.c	1.6     -> 1.7    
+#	drivers/input/joystick/iforce.c	1.9     -> 1.10   
+#	drivers/bluetooth/hci_usb.c	1.5     -> 1.6    
+#	drivers/isdn/hisax/st5481_usb.c	1.8     -> 1.9    
+#
+# The following is the BitKeeper ChangeSet Log
+# --------------------------------------------
+# 02/02/13	greg@kroah.com	1.339
+# mem_flags added to usb_submit_urb().
+# This fixes usb drivers outside of the drivers/usb directory.
+# --------------------------------------------
+#
+diff -Nru a/drivers/bluetooth/hci_usb.c b/drivers/bluetooth/hci_usb.c
+--- a/drivers/bluetooth/hci_usb.c	Wed Feb 13 17:51:33 2002
++++ b/drivers/bluetooth/hci_usb.c	Wed Feb 13 17:51:33 2002
+@@ -547,17 +547,17 @@
+ 	husb->udev = udev;
+ 	husb->bulk_out_ep_addr = bulk_out_ep->bEndpointAddress;
+ 
+-	if (!(husb->ctrl_urb = usb_alloc_urb(0))) {
++	if (!(husb->ctrl_urb = usb_alloc_urb(0, GFP_KERNEL))) {
+ 		ERR("Can't allocate: control URB");
+ 		goto probe_error;
+ 	}
+ 
+-	if (!(husb->write_urb = usb_alloc_urb(0))) {
++	if (!(husb->write_urb = usb_alloc_urb(0, GFP_KERNEL))) {
+ 		ERR("Can't allocate: write URB");
+ 		goto probe_error;
+ 	}
+ 
+-	if (!(husb->read_urb = usb_alloc_urb(0))) {
++	if (!(husb->read_urb = usb_alloc_urb(0, GFP_KERNEL))) {
+ 		ERR("Can't allocate: read URB");
+ 		goto probe_error;
+ 	}
+@@ -578,7 +578,7 @@
+ 	pipe = usb_rcvintpipe(udev, ep->bEndpointAddress);
+ 	size = usb_maxpacket(udev, pipe, usb_pipeout(pipe));
+ 
+-	if (!(husb->intr_urb = usb_alloc_urb(0))) {
++	if (!(husb->intr_urb = usb_alloc_urb(0, GFP_KERNEL))) {
+ 		ERR("Can't allocate: interrupt URB");
+ 		goto probe_error;
+ 	}
+diff -Nru a/drivers/input/joystick/iforce.c b/drivers/input/joystick/iforce.c
+--- a/drivers/input/joystick/iforce.c	Wed Feb 13 17:51:33 2002
++++ b/drivers/input/joystick/iforce.c	Wed Feb 13 17:51:33 2002
+@@ -1024,18 +1024,18 @@
+ 	if (!(iforce = kmalloc(sizeof(struct iforce) + 32, GFP_KERNEL))) return NULL;
+ 	memset(iforce, 0, sizeof(struct iforce));
+ 
+-	iforce->irq = usb_alloc_urb(0);
++	iforce->irq = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!iforce->irq) {
+ 		kfree(iforce);
+ 		return NULL;
+ 	}
+-	iforce->out = usb_alloc_urb(0);
++	iforce->out = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!iforce->out) {
+ 		usb_free_urb(iforce->irq);
+ 		kfree(iforce);
+ 		return NULL;
+ 	}
+-	iforce->ctrl = usb_alloc_urb(0);
++	iforce->ctrl = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!iforce->ctrl) {
+ 		usb_free_urb(iforce->out);
+ 		usb_free_urb(iforce->irq);
+diff -Nru a/drivers/isdn/hisax/st5481_usb.c b/drivers/isdn/hisax/st5481_usb.c
+--- a/drivers/isdn/hisax/st5481_usb.c	Wed Feb 13 17:51:33 2002
++++ b/drivers/isdn/hisax/st5481_usb.c	Wed Feb 13 17:51:33 2002
+@@ -265,7 +265,7 @@
+ 	}
+ 
+ 	// Allocate URB for control endpoint
+-	urb = usb_alloc_urb(0);
++	urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!urb) {
+ 		return -ENOMEM;
+ 	}
+@@ -280,7 +280,7 @@
+ 	fifo_init(&ctrl->msg_fifo.f, ARRAY_SIZE(ctrl->msg_fifo.data));
+ 
+ 	// Allocate URBs and buffers for interrupt endpoint
+-	urb = usb_alloc_urb(0);
++	urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!urb) { 
+ 		return -ENOMEM;
+ 	}
+@@ -416,7 +416,7 @@
+ 
+ 	for (j = 0; j < 2; j++) {
+ 		retval = -ENOMEM;
+-		urb[j] = usb_alloc_urb(num_packets);
++		urb[j] = usb_alloc_urb(num_packet, GFP_KERNEL);
+ 		if (!urb[j])
+ 			goto err;
+ 
+diff -Nru a/drivers/media/video/cpia_usb.c b/drivers/media/video/cpia_usb.c
+--- a/drivers/media/video/cpia_usb.c	Wed Feb 13 17:51:33 2002
++++ b/drivers/media/video/cpia_usb.c	Wed Feb 13 17:51:33 2002
+@@ -201,7 +201,7 @@
+ 	ucpia->workbuff = ucpia->buffers[1];
+ 
+ 	/* We double buffer the Iso lists */
+-	urb = usb_alloc_urb(FRAMES_PER_DESC);
++	urb = usb_alloc_urb(FRAMES_PER_DESC, GFP_KERNEL);
+ 	if (!urb) {
+ 		printk(KERN_ERR "cpia_init_isoc: usb_alloc_urb 0\n");
+ 		retval = -ENOMEM;
+@@ -222,7 +222,7 @@
+ 		urb->iso_frame_desc[fx].length = FRAME_SIZE_PER_DESC;
+ 	}
+ 
+-	urb = usb_alloc_urb(FRAMES_PER_DESC);
++	urb = usb_alloc_urb(FRAMES_PER_DESC, GFP_KERNEL);
+ 	if (!urb) {
+ 		printk(KERN_ERR "cpia_init_isoc: usb_alloc_urb 1\n");
+ 		retval = -ENOMEM;

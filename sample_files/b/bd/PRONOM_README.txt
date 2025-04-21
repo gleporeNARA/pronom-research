@@ -1,0 +1,5 @@
+In Microsoft Windows, the Briefcase is a special folder that supports a simple two-way file synchronization between itself and another folder. The Briefcase is designed for mobile PC users so that they may transfer it to a removable drive and have it synchronize with the computer to which the removable drive is attached. It follows the same metaphor as the file and file folder and then, while the file management tasks are performed by Windows Explorer, the briefcase behaves just like another folder, i.e. with support for copy-paste and drag-and-drop. It has additional functions and toolbar buttons for updating out-of-sync files. The Windows Briefcase was introduced in Windows 95[1] and was deprecated (although not removed) in Windows 8 and completely disabled (but still present and accessible via modification of the Windows Registry) in Windows 10[2] until it was finally removed in Windows 10 build 14942.[3]
+...
+A second file called "Briefcase Database", bearing "hidden" and "system" attributes, and no filename extension, serves as the Briefcase index. Its fourCC is "DDSH".
+
+https://en.wikipedia.org/wiki/Briefcase_(Microsoft_Windows)

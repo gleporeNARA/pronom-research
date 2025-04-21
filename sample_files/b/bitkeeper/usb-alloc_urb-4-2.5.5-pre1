@@ -1,0 +1,45 @@
+# This is a BitKeeper generated patch for the following project:
+# Project Name: Linux kernel tree
+# This patch format is intended for GNU patch command version 2.5 or higher.
+# This patch includes the following deltas:
+#	           ChangeSet	1.337   -> 1.338  
+#	drivers/usb/storage/usb.c	1.13    -> 1.14   
+#
+# The following is the BitKeeper ChangeSet Log
+# --------------------------------------------
+# 02/02/13	greg@kroah.com	1.338
+# added mem_flags to usb_submit_urb().
+# Fixes drivers/usb/storage.
+# Patch done by Oliver Neukum.
+# --------------------------------------------
+#
+diff -Nru a/drivers/usb/storage/usb.c b/drivers/usb/storage/usb.c
+--- a/drivers/usb/storage/usb.c	Wed Feb 13 17:51:28 2002
++++ b/drivers/usb/storage/usb.c	Wed Feb 13 17:51:28 2002
+@@ -515,7 +515,7 @@
+ 	down(&(ss->irq_urb_sem));
+ 
+ 	/* allocate the URB */
+-	ss->irq_urb = usb_alloc_urb(0);
++	ss->irq_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!ss->irq_urb) {
+ 		up(&(ss->irq_urb_sem));
+ 		US_DEBUGP("couldn't allocate interrupt URB");
+@@ -730,7 +730,7 @@
+ 		}
+ 
+ 		/* allocate the URB we're going to use */
+-		ss->current_urb = usb_alloc_urb(0);
++		ss->current_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 		if (!ss->current_urb) {
+ 			usb_dec_dev_use(dev);
+ 			return NULL;
+@@ -756,7 +756,7 @@
+ 		memset(ss, 0, sizeof(struct us_data));
+ 
+ 		/* allocate the URB we're going to use */
+-		ss->current_urb = usb_alloc_urb(0);
++		ss->current_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 		if (!ss->current_urb) {
+ 			kfree(ss);
+ 			usb_dec_dev_use(dev);

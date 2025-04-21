@@ -1,0 +1,532 @@
+# This is a BitKeeper generated patch for the following project:
+# Project Name: Linux kernel tree
+# This patch format is intended for GNU patch command version 2.5 or higher.
+# This patch includes the following deltas:
+#	           ChangeSet	1.335   -> 1.336  
+#	drivers/usb/konicawc.c	1.1     -> 1.2    
+#	drivers/usb/mdc800.c	1.11    -> 1.12   
+#	drivers/usb/usbnet.c	1.14    -> 1.15   
+#	drivers/usb/dabusb.c	1.10    -> 1.11   
+#	drivers/usb/CDCEther.c	1.7     -> 1.8    
+#	 drivers/usb/wacom.c	1.9     -> 1.10   
+#	drivers/usb/stv680.c	1.6     -> 1.7    
+#	drivers/usb/bluetooth.c	1.17    -> 1.18   
+#	drivers/usb/scanner.c	1.14    -> 1.15   
+#	 drivers/usb/se401.c	1.8     -> 1.9    
+#	 drivers/usb/ov511.c	1.14    -> 1.15   
+#	 drivers/usb/vicam.c	1.7     -> 1.8    
+#	drivers/usb/usbmouse.c	1.9     -> 1.10   
+#	drivers/usb/auerswald.c	1.6     -> 1.7    
+#	drivers/usb/usbkbd.c	1.11    -> 1.12   
+#	 drivers/usb/audio.c	1.12    -> 1.13   
+#	drivers/usb/pegasus.c	1.16    -> 1.17   
+#	drivers/usb/usb-skeleton.c	1.7     -> 1.8    
+#	  drivers/usb/catc.c	1.8     -> 1.9    
+#	drivers/usb/usbvideo.c	1.7     -> 1.8    
+#	 drivers/usb/devio.c	1.17    -> 1.18   
+#	drivers/usb/microtek.c	1.13    -> 1.14   
+#	drivers/usb/hid-core.c	1.13    -> 1.14   
+#	drivers/usb/kaweth.c	1.13    -> 1.14   
+#	drivers/usb/pwc-if.c	1.12    -> 1.13   
+#	drivers/usb/hpusbscsi.c	1.8     -> 1.9    
+#
+# The following is the BitKeeper ChangeSet Log
+# --------------------------------------------
+# 02/02/13	greg@kroah.com	1.336
+# Added mem_flags to usb_submit_urb().
+# This modifies the drivers in drivers/usb.
+# Patch done by Oliver Neukum.
+# --------------------------------------------
+#
+diff -Nru a/drivers/usb/CDCEther.c b/drivers/usb/CDCEther.c
+--- a/drivers/usb/CDCEther.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/CDCEther.c	Wed Feb 13 17:51:18 2002
+@@ -1144,18 +1144,18 @@
+ 	// Zero everything out.
+ 	memset(ether_dev, 0, sizeof(ether_dev_t));
+ 
+-	ether_dev->rx_urb = usb_alloc_urb(0);
++	ether_dev->rx_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!ether_dev->rx_urb) {
+ 		kfree(ether_dev);
+ 		return NULL;
+ 	}
+-	ether_dev->tx_urb = usb_alloc_urb(0);
++	ether_dev->tx_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!ether_dev->tx_urb) {
+ 		usb_free_urb(ether_dev->rx_urb);
+ 		kfree(ether_dev);
+ 		return NULL;
+ 	}
+-	ether_dev->intr_urb = usb_alloc_urb(0);
++	ether_dev->intr_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!ether_dev->intr_urb) {
+ 		usb_free_urb(ether_dev->tx_urb);
+ 		usb_free_urb(ether_dev->rx_urb);
+diff -Nru a/drivers/usb/audio.c b/drivers/usb/audio.c
+--- a/drivers/usb/audio.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/audio.c	Wed Feb 13 17:51:19 2002
+@@ -2829,14 +2829,14 @@
+ 	init_waitqueue_head(&as->usbin.dma.wait);
+ 	init_waitqueue_head(&as->usbout.dma.wait);
+ 	spin_lock_init(&as->lock);
+-	as->usbin.durb[0].urb = usb_alloc_urb(0);
+-	as->usbin.durb[1].urb = usb_alloc_urb(0);
+-	as->usbin.surb[0].urb = usb_alloc_urb(0);
+-	as->usbin.surb[1].urb = usb_alloc_urb(0);
+-	as->usbout.durb[0].urb = usb_alloc_urb(0);
+-	as->usbout.durb[1].urb = usb_alloc_urb(0);
+-	as->usbout.surb[0].urb = usb_alloc_urb(0);
+-	as->usbout.surb[1].urb = usb_alloc_urb(0);
++	as->usbin.durb[0].urb = usb_alloc_urb(0, GFP_KERNEL);
++	as->usbin.durb[1].urb = usb_alloc_urb(0, GFP_KERNEL);
++	as->usbin.surb[0].urb = usb_alloc_urb(0, GFP_KERNEL);
++	as->usbin.surb[1].urb = usb_alloc_urb(0, GFP_KERNEL);
++	as->usbout.durb[0].urb = usb_alloc_urb(0, GFP_KERNEL);
++	as->usbout.durb[1].urb = usb_alloc_urb(0, GFP_KERNEL);
++	as->usbout.surb[0].urb = usb_alloc_urb(0, GFP_KERNEL);
++	as->usbout.surb[1].urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if ((!as->usbin.durb[0].urb) ||
+ 	    (!as->usbin.durb[1].urb) ||
+ 	    (!as->usbin.surb[0].urb) ||
+diff -Nru a/drivers/usb/auerswald.c b/drivers/usb/auerswald.c
+--- a/drivers/usb/auerswald.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/auerswald.c	Wed Feb 13 17:51:18 2002
+@@ -699,7 +699,7 @@
+         dr = kmalloc (sizeof (struct usb_ctrlrequest), GFP_KERNEL);
+ 	if (!dr)
+ 		return -ENOMEM;
+-	urb = usb_alloc_urb (0);
++	urb = usb_alloc_urb (0, GFP_KERNEL);
+ 	if (!urb) {
+         	kfree (dr);
+ 		return -ENOMEM;
+@@ -802,7 +802,7 @@
+                 if (!bep->bufp) goto bl_fail;
+                 bep->dr = (struct usb_ctrlrequest *) kmalloc (sizeof (struct usb_ctrlrequest), GFP_KERNEL);
+                 if (!bep->dr) goto bl_fail;
+-                bep->urbp = usb_alloc_urb (0);
++                bep->urbp = usb_alloc_urb (0, GFP_KERNEL);
+                 if (!bep->urbp) goto bl_fail;
+                 list_add_tail (&bep->buff_list, &bcp->free_buff_list);
+         }
+@@ -1130,7 +1130,7 @@
+ 
+ 	/* allocate the urb and data buffer */
+         if (!cp->inturbp) {
+-                cp->inturbp = usb_alloc_urb (0);
++                cp->inturbp = usb_alloc_urb (0, GFP_KERNEL);
+                 if (!cp->inturbp) {
+                         ret = -ENOMEM;
+                         goto intoend;
+diff -Nru a/drivers/usb/bluetooth.c b/drivers/usb/bluetooth.c
+--- a/drivers/usb/bluetooth.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/bluetooth.c	Wed Feb 13 17:51:18 2002
+@@ -1123,7 +1123,7 @@
+ 	
+ 	/* create our control out urb pool */ 
+ 	for (i = 0; i < NUM_CONTROL_URBS; ++i) {
+-		struct urb  *urb = usb_alloc_urb(0);
++		struct urb  *urb = usb_alloc_urb(0, GFP_KERNEL);
+ 		if (urb == NULL) {
+ 			err("No free urbs available");
+ 			goto probe_error;
+@@ -1134,7 +1134,7 @@
+ 
+ 	/* set up the endpoint information */
+ 	endpoint = bulk_in_endpoint[0];
+-	bluetooth->read_urb = usb_alloc_urb (0);
++	bluetooth->read_urb = usb_alloc_urb (0, GFP_KERNEL);
+ 	if (!bluetooth->read_urb) {
+ 		err("No free urbs available");
+ 		goto probe_error;
+@@ -1154,7 +1154,7 @@
+ 	
+ 	/* create our write urb pool */ 
+ 	for (i = 0; i < NUM_BULK_URBS; ++i) {
+-		struct urb  *urb = usb_alloc_urb(0);
++		struct urb  *urb = usb_alloc_urb(0, GFP_KERNEL);
+ 		if (urb == NULL) {
+ 			err("No free urbs available");
+ 			goto probe_error;
+@@ -1170,7 +1170,7 @@
+ 	bluetooth->bulk_out_buffer_size = endpoint->wMaxPacketSize * 2;
+ 
+ 	endpoint = interrupt_in_endpoint[0];
+-	bluetooth->interrupt_in_urb = usb_alloc_urb(0);
++	bluetooth->interrupt_in_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!bluetooth->interrupt_in_urb) {
+ 		err("No free urbs available");
+ 		goto probe_error;
+diff -Nru a/drivers/usb/catc.c b/drivers/usb/catc.c
+--- a/drivers/usb/catc.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/catc.c	Wed Feb 13 17:51:19 2002
+@@ -694,10 +694,10 @@
+ 	catc->timer.data = (long) catc;
+ 	catc->timer.function = catc_stats_timer;
+ 
+-	catc->ctrl_urb = usb_alloc_urb(0);
+-	catc->tx_urb = usb_alloc_urb(0);
+-	catc->rx_urb = usb_alloc_urb(0);
+-	catc->irq_urb = usb_alloc_urb(0);
++	catc->ctrl_urb = usb_alloc_urb(0, GFP_KERNEL);
++	catc->tx_urb = usb_alloc_urb(0, GFP_KERNEL);
++	catc->rx_urb = usb_alloc_urb(0, GFP_KERNEL);
++	catc->irq_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if ((!catc->ctrl_urb) || (!catc->tx_urb) || 
+ 	    (!catc->rx_urb) || (!catc->irq_urb)) {
+ 		err("No free urbs available.");
+diff -Nru a/drivers/usb/dabusb.c b/drivers/usb/dabusb.c
+--- a/drivers/usb/dabusb.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/dabusb.c	Wed Feb 13 17:51:18 2002
+@@ -226,7 +226,7 @@
+ 		}
+ 		memset (b, 0, sizeof (buff_t));
+ 		b->s = s;
+-		b->purb = usb_alloc_urb(packets);
++		b->purb = usb_alloc_urb(packets, GFP_KERNEL);
+ 		if (!b->purb) {
+ 			err("usb_alloc_urb == NULL");
+ 			kfree (b);
+diff -Nru a/drivers/usb/devio.c b/drivers/usb/devio.c
+--- a/drivers/usb/devio.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/devio.c	Wed Feb 13 17:51:19 2002
+@@ -181,7 +181,7 @@
+         if (!as)
+                 return NULL;
+         memset(as, 0, assize);
+-	as->urb = usb_alloc_urb(numisoframes);
++	as->urb = usb_alloc_urb(numisoframes, GFP_KERNEL);
+ 	if (!as->urb) {
+ 		kfree(as);
+ 		return NULL;
+diff -Nru a/drivers/usb/hid-core.c b/drivers/usb/hid-core.c
+--- a/drivers/usb/hid-core.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/hid-core.c	Wed Feb 13 17:51:19 2002
+@@ -1311,14 +1311,14 @@
+ 		if (endpoint->bEndpointAddress & USB_DIR_IN) {
+ 			if (hid->urbin)
+ 				continue;
+-			if (!(hid->urbin = usb_alloc_urb(0)))
++			if (!(hid->urbin = usb_alloc_urb(0, GFP_KERNEL)))
+ 				goto fail;
+ 			pipe = usb_rcvintpipe(dev, endpoint->bEndpointAddress);
+ 			FILL_INT_URB(hid->urbin, dev, pipe, hid->inbuf, 0, hid_irq_in, hid, endpoint->bInterval);
+ 		} else {
+ 			if (hid->urbout)
+ 				continue;
+-			if (!(hid->urbout = usb_alloc_urb(0)))
++			if (!(hid->urbout = usb_alloc_urb(0, GFP_KERNEL)))
+ 				goto fail;
+ 			pipe = usb_sndbulkpipe(dev, endpoint->bEndpointAddress);
+ 			FILL_BULK_URB(hid->urbout, dev, pipe, hid->outbuf, 0, hid_irq_out, hid);
+@@ -1360,7 +1360,7 @@
+ 
+ 	kfree(buf);
+ 
+-	hid->urbctrl = usb_alloc_urb(0);
++	hid->urbctrl = usb_alloc_urb(0, GFP_KERNEL);
+ 	FILL_CONTROL_URB(hid->urbctrl, dev, 0, (void*) &hid->cr, hid->ctrlbuf, 1, hid_ctrl, hid);
+ 
+ 	return hid;
+diff -Nru a/drivers/usb/hpusbscsi.c b/drivers/usb/hpusbscsi.c
+--- a/drivers/usb/hpusbscsi.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/hpusbscsi.c	Wed Feb 13 17:51:19 2002
+@@ -56,12 +56,12 @@
+ 		return NULL;
+ 	DEBUG ("Allocated memory\n");
+ 	memset (new, 0, sizeof (struct hpusbscsi));
+-	new->dataurb = usb_alloc_urb(0);
++	new->dataurb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!new->dataurb) {
+ 		kfree (new);
+ 		return NULL;
+ 	}
+-	new->controlurb = usb_alloc_urb(0);
++	new->controlurb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!new->controlurb) {
+ 		usb_free_urb (new->dataurb);
+ 		kfree (new);
+diff -Nru a/drivers/usb/kaweth.c b/drivers/usb/kaweth.c
+--- a/drivers/usb/kaweth.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/kaweth.c	Wed Feb 13 17:51:19 2002
+@@ -873,8 +873,8 @@
+ 	
+ 	kaweth_dbg("Initializing net device.");
+ 
+-	kaweth->tx_urb = usb_alloc_urb(0);
+-	kaweth->rx_urb = usb_alloc_urb(0);
++	kaweth->tx_urb = usb_alloc_urb(0, GFP_KERNEL);
++	kaweth->rx_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 
+ 	kaweth->net = init_etherdev(0, 0);
+ 	if (!kaweth->net) {
+@@ -977,7 +977,7 @@
+         set_current_state(TASK_INTERRUPTIBLE);
+         add_wait_queue(&awd.wqh, &wait);
+         urb->context = &awd;
+-        status = usb_submit_urb(urb, GFP_KERNEL);
++        status = usb_submit_urb(urb, GFP_ATOMIC);
+         if (status) {
+                 // something went wrong
+                 usb_free_urb(urb);
+@@ -1020,7 +1020,7 @@
+         int retv;
+         int length;
+ 
+-        urb = usb_alloc_urb(0);
++        urb = usb_alloc_urb(0, GFP_KERNEL);
+         if (!urb)
+                 return -ENOMEM;
+ 
+diff -Nru a/drivers/usb/konicawc.c b/drivers/usb/konicawc.c
+--- a/drivers/usb/konicawc.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/konicawc.c	Wed Feb 13 17:51:18 2002
+@@ -629,7 +629,7 @@
+ 		/* Here uvd is a fully allocated uvd_t object */
+ 
+ 		for(i = 0; i < USBVIDEO_NUMSBUF; i++) {
+-			konicawc_data->sts_urb[i] = usb_alloc_urb(FRAMES_PER_DESC);
++			konicawc_data->sts_urb[i] = usb_alloc_urb(FRAMES_PER_DESC, GFP_KERNEL);
+ 		}
+ 
+ 		switch(size) {
+diff -Nru a/drivers/usb/mdc800.c b/drivers/usb/mdc800.c
+--- a/drivers/usb/mdc800.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/mdc800.c	Wed Feb 13 17:51:18 2002
+@@ -969,9 +969,9 @@
+ 	try (mdc800->write_urb_buffer=kmalloc (8, GFP_KERNEL));
+ 	try (mdc800->download_urb_buffer=kmalloc (64, GFP_KERNEL));
+ 
+-	try (mdc800->irq_urb=usb_alloc_urb (0));
+-	try (mdc800->download_urb=usb_alloc_urb (0));
+-	try (mdc800->write_urb=usb_alloc_urb (0));
++	try (mdc800->irq_urb=usb_alloc_urb (0, GFP_KERNEL));
++	try (mdc800->download_urb=usb_alloc_urb (0, GFP_KERNEL));
++	try (mdc800->write_urb=usb_alloc_urb (0, GFP_KERNEL));
+ 
+ 	/* Register the driver */
+ 	if (usb_register (&mdc800_usb_driver) < 0)
+diff -Nru a/drivers/usb/microtek.c b/drivers/usb/microtek.c
+--- a/drivers/usb/microtek.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/microtek.c	Wed Feb 13 17:51:19 2002
+@@ -936,7 +936,7 @@
+ 	}
+ 
+ 	memset( new_desc, 0, sizeof(*new_desc) );
+-	new_desc->urb = usb_alloc_urb(0);
++	new_desc->urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!new_desc->urb) {
+ 		kfree(new_desc);
+ 		return NULL;
+diff -Nru a/drivers/usb/ov511.c b/drivers/usb/ov511.c
+--- a/drivers/usb/ov511.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/ov511.c	Wed Feb 13 17:51:18 2002
+@@ -4426,7 +4426,7 @@
+ 	}
+ 
+ 	for (n = 0; n < OV511_NUMSBUF; n++) {
+-		urb = usb_alloc_urb(FRAMES_PER_DESC);
++		urb = usb_alloc_urb(FRAMES_PER_DESC, GFP_KERNEL);
+ 	
+ 		if (!urb) {
+ 			err("init isoc: usb_alloc_urb ret. NULL");
+diff -Nru a/drivers/usb/pegasus.c b/drivers/usb/pegasus.c
+--- a/drivers/usb/pegasus.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/pegasus.c	Wed Feb 13 17:51:19 2002
+@@ -858,25 +858,25 @@
+ 	pegasus->dev_index = dev_index;
+ 	init_waitqueue_head( &pegasus->ctrl_wait );
+ 
+-	pegasus->ctrl_urb = usb_alloc_urb(0);
++	pegasus->ctrl_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!pegasus->ctrl_urb) {
+ 		kfree (pegasus);
+ 		return NULL;
+ 	}
+-	pegasus->rx_urb = usb_alloc_urb(0);
++	pegasus->rx_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!pegasus->rx_urb) {
+ 		usb_free_urb (pegasus->ctrl_urb);
+ 		kfree (pegasus);
+ 		return NULL;
+ 	}
+-	pegasus->tx_urb = usb_alloc_urb(0);
++	pegasus->tx_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!pegasus->tx_urb) {
+ 		usb_free_urb (pegasus->rx_urb);
+ 		usb_free_urb (pegasus->ctrl_urb);
+ 		kfree (pegasus);
+ 		return NULL;
+ 	}
+-	pegasus->intr_urb = usb_alloc_urb(0);
++	pegasus->intr_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!pegasus->intr_urb) {
+ 		usb_free_urb (pegasus->tx_urb);
+ 		usb_free_urb (pegasus->rx_urb);
+diff -Nru a/drivers/usb/pwc-if.c b/drivers/usb/pwc-if.c
+--- a/drivers/usb/pwc-if.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/pwc-if.c	Wed Feb 13 17:51:19 2002
+@@ -827,7 +827,7 @@
+ 
+ 	ret = 0;
+ 	for (i = 0; i < MAX_ISO_BUFS; i++) {
+-		urb = usb_alloc_urb(ISO_FRAMES_PER_DESC);
++		urb = usb_alloc_urb(ISO_FRAMES_PER_DESC, GFP_KERNEL);
+ 		if (urb == NULL) {
+ 			Err("Failed to allocate urb %d\n", i);
+ 			ret = -ENOMEM;
+diff -Nru a/drivers/usb/scanner.c b/drivers/usb/scanner.c
+--- a/drivers/usb/scanner.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/scanner.c	Wed Feb 13 17:51:18 2002
+@@ -974,7 +974,7 @@
+ 	}
+ 	memset (scn, 0, sizeof(struct scn_usb_data));
+ 
+-	scn->scn_irq = usb_alloc_urb(0);
++	scn->scn_irq = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!scn->scn_irq) {
+ 		kfree(scn);
+ 		up(&scn_mutex);
+diff -Nru a/drivers/usb/se401.c b/drivers/usb/se401.c
+--- a/drivers/usb/se401.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/se401.c	Wed Feb 13 17:51:18 2002
+@@ -644,7 +644,7 @@
+ 	}
+ 
+ 	for (i=0; i<SE401_NUMSBUF; i++) {
+-		urb=usb_alloc_urb(0);
++		urb=usb_alloc_urb(0, GFP_KERNEL);
+ 		if(!urb)
+ 			return ENOMEM;
+ 
+@@ -1465,7 +1465,7 @@
+ 	se401->readcount=0;
+ 
+ 	/* Start interrupt transfers for snapshot button */
+-	se401->inturb=usb_alloc_urb(0);
++	se401->inturb=usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!se401->inturb) {
+ 		info("Allocation of inturb failed");
+ 		return 1;
+diff -Nru a/drivers/usb/stv680.c b/drivers/usb/stv680.c
+--- a/drivers/usb/stv680.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/stv680.c	Wed Feb 13 17:51:18 2002
+@@ -804,7 +804,7 @@
+ 	}
+ 
+ 	for (i = 0; i < STV680_NUMSBUF; i++) {
+-		urb = usb_alloc_urb (0);
++		urb = usb_alloc_urb (0, GFP_KERNEL);
+ 		if (!urb)
+ 			return ENOMEM;
+ 
+diff -Nru a/drivers/usb/usb-skeleton.c b/drivers/usb/usb-skeleton.c
+--- a/drivers/usb/usb-skeleton.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/usb-skeleton.c	Wed Feb 13 17:51:19 2002
+@@ -573,7 +573,8 @@
+ 		if (((endpoint->bEndpointAddress & 0x80) == 0x00) &&
+ 		    ((endpoint->bmAttributes & 3) == 0x02)) {
+ 			/* we found a bulk out endpoint */
+-			dev->write_urb = usb_alloc_urb(0);
++			/* a probe() may sleep and has no restrictions on memory allocations */
++			dev->write_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 			if (!dev->write_urb) {
+ 				err("No free urbs available");
+ 				goto error;
+diff -Nru a/drivers/usb/usbkbd.c b/drivers/usb/usbkbd.c
+--- a/drivers/usb/usbkbd.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/usbkbd.c	Wed Feb 13 17:51:19 2002
+@@ -196,12 +196,12 @@
+ 	if (!(kbd = kmalloc(sizeof(struct usb_kbd), GFP_KERNEL))) return NULL;
+ 	memset(kbd, 0, sizeof(struct usb_kbd));
+ 
+-	kbd->irq = usb_alloc_urb(0);
++	kbd->irq = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!kbd->irq) {
+ 		kfree(kbd);
+ 		return NULL;
+ 	}
+-	kbd->led = usb_alloc_urb(0);
++	kbd->led = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!kbd->led) {
+ 		usb_free_urb(kbd->irq);
+ 		kfree(kbd);
+diff -Nru a/drivers/usb/usbmouse.c b/drivers/usb/usbmouse.c
+--- a/drivers/usb/usbmouse.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/usbmouse.c	Wed Feb 13 17:51:18 2002
+@@ -122,7 +122,7 @@
+ 	if (!(mouse = kmalloc(sizeof(struct usb_mouse), GFP_KERNEL))) return NULL;
+ 	memset(mouse, 0, sizeof(struct usb_mouse));
+ 
+-	mouse->irq = usb_alloc_urb(0);
++	mouse->irq = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!mouse->irq) {
+ 		kfree(mouse);
+ 		return NULL;
+diff -Nru a/drivers/usb/usbnet.c b/drivers/usb/usbnet.c
+--- a/drivers/usb/usbnet.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/usbnet.c	Wed Feb 13 17:51:18 2002
+@@ -420,7 +420,7 @@
+ 	}
+ 
+ 	// allocate irq urb
+-	if ((priv->irq_urb = usb_alloc_urb (0)) == 0) {
++	if ((priv->irq_urb = usb_alloc_urb (0, GFP_KERNEL)) == 0) {
+ 		dbg ("%s: cannot allocate private irq urb per device",
+ 			dev->net.name);
+ 		kfree (priv);
+@@ -1589,7 +1589,7 @@
+ 		}
+ 	}
+ 
+-	if (!(urb = usb_alloc_urb (0))) {
++	if (!(urb = usb_alloc_urb (0, GFP_ATOMIC))) {
+ 		dbg ("no urb");
+ 		goto drop;
+ 	}
+@@ -1723,7 +1723,7 @@
+ 			struct urb	*urb;
+ 			int		i;
+ 			for (i = 0; i < 3 && dev->rxq.qlen < RX_QLEN; i++) {
+-				if ((urb = usb_alloc_urb (0)) != 0)
++				if ((urb = usb_alloc_urb (0, GFP_ATOMIC)) != 0)
+ 					rx_submit (dev, urb, GFP_ATOMIC);
+ 			}
+ 			if (temp != dev->rxq.qlen)
+diff -Nru a/drivers/usb/usbvideo.c b/drivers/usb/usbvideo.c
+--- a/drivers/usb/usbvideo.c	Wed Feb 13 17:51:19 2002
++++ b/drivers/usb/usbvideo.c	Wed Feb 13 17:51:19 2002
+@@ -1077,7 +1077,7 @@
+ 
+ 	down(&uvd->lock);
+ 	for (i=0; i < USBVIDEO_NUMSBUF; i++) {
+-		uvd->sbuf[i].urb = usb_alloc_urb(FRAMES_PER_DESC);
++		uvd->sbuf[i].urb = usb_alloc_urb(FRAMES_PER_DESC, GFP_KERNEL);
+ 		if (uvd->sbuf[i].urb == NULL) {
+ 			err("usb_alloc_urb(%d.) failed.", FRAMES_PER_DESC);
+ 			uvd->uvd_used = 0;
+diff -Nru a/drivers/usb/vicam.c b/drivers/usb/vicam.c
+--- a/drivers/usb/vicam.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/vicam.c	Wed Feb 13 17:51:18 2002
+@@ -884,7 +884,7 @@
+ 	}
+ 	memset(vicam, 0, sizeof(*vicam));
+ 
+-	vicam->readurb = usb_alloc_urb(0);
++	vicam->readurb = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!vicam->readurb) {
+ 		kfree(vicam);
+ 		return NULL;
+diff -Nru a/drivers/usb/wacom.c b/drivers/usb/wacom.c
+--- a/drivers/usb/wacom.c	Wed Feb 13 17:51:18 2002
++++ b/drivers/usb/wacom.c	Wed Feb 13 17:51:18 2002
+@@ -359,7 +359,7 @@
+ 	if (!(wacom = kmalloc(sizeof(struct wacom), GFP_KERNEL))) return NULL;
+ 	memset(wacom, 0, sizeof(struct wacom));
+ 
+-	wacom->irq = usb_alloc_urb(0);
++	wacom->irq = usb_alloc_urb(0, GFP_KERNEL);
+ 	if (!wacom->irq) {
+ 		kfree(wacom);
+ 		return NULL;

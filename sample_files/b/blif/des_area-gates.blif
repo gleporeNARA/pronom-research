@@ -1,0 +1,6027 @@
+.model ori_des_area-gates
+.inputs key1[4] roundSel[5] roundSel[4] decrypt FP_R_11 key3[51] key2[31] key3[31] R_119 key1[31] desIn[55] key3[17] key1[17] key2[17] FP_R_26 key3[38] FP_R_29 roundSel[1] roundSel[2] roundSel[0] roundSel[3] key2[49] key3[49] key1[49] key2[29] key3[11] key1[29] key3[29] key2[53] key3[53] R_114 key1[53] desIn[29] key2[34] key1[34] key3[34] FP_R_19 key2[47] FP_R_6 FP_R_8 key3[10] key1[10] key2[10] key1[39] key3[39] desIn[27] key2[39] R_106 key3[48] key1[48] key2[48] FP_R_18 FP_R_4 FP_R_42 L_73 desIn[42] key3[55] key2[55] desIn[19] FP_R_27 R_107 key3[12] key1[12] key2[12] key1[18] key3[18] FP_R_57 L_88 FP_R_31 desIn[54] desIn[12] FP_R_46 key2[7] L_77 key1[7] desIn[10] key3[7] FP_R key2[51] FP_R_34 L_65 key1[51] desIn[40] key2[25] key1[25] FP_R_59 key3[25] L_90 desIn[38] FP_R_10 FP_R_12 desIn[0] L_70 FP_R_39 R_96 desIn[3] R_109 desIn[35] R_105 key1[13] key3[13] key2[50] key2[13] key1[50] key3[50] FP_R_23 FP_R_25 FP_R_58 L_89 desIn[46] key3[1] key2[14] FP_R_63 key1[14] L_94 key3[14] desIn[6] key2[37] key3[37] key1[37] FP_R_2 key3[26] FP_R_20 key1[26] key2[42] key2[26] R_120 desIn[47] key3[35] FP_R_40 key2[38] key1[38] key2[44] key1[44] key3[44] FP_R_15 FP_R_61 L_92 FP_R_17 desIn[22] R_116 desIn[13] FP_R_13 key2[36] key1[36] key3[36] key3[4] key2[4] key3[27] key1[27] key2[27] FP_R_41 L_72 desIn[50] desIn[11] R_108 FP_R_33 FP_R_7 L_64 key2[28] key1[28] key3[28] key2[23] key1[23] FP_R_9 FP_R_56 L_87 desIn[62] FP_R_5 key1[47] key3[47] key2[40] key2[8] key3[40] key1[40] key2[20] FP_R_24 key1[11] key2[11] key3[19] key1[19] key2[19] FP_R_30 R_98 desIn[25] R_118 desIn[63] key2[18] key1[32] key3[32] key2[32] FP_R_16 key2[21] key1[21] key3[21] key2[2] key3[2] key1[2] FP_R_22 key2[24] key1[24] desIn[41] key2[52] key3[52] key1[52] key2[30] key1[30] key3[30] key2[43] key1[43] R_111 key3[43] desIn[53] key2[0] key3[0] key1[0] R_122 desIn[31] key1[42] FP_R_50 key3[42] L_81 desIn[44] key2[9] key1[9] FP_R_14 key3[9] R_124 desIn[15] key3[23] key1[46] key3[46] key2[46] R_104 desIn[43] L_71 desIn[58] FP_R_32 L desIn[56] key1[8] key3[8] key2[15] FP_R_47 key3[15] L_78 key1[15] desIn[2] desIn[1] R_101 desIn[57] R key2[22] key3[22] FP_R_36 key1[22] L_67 desIn[24] key2[45] key1[45] key3[45] R_123 desIn[23] R_97 desIn[48] desIn[33] R_100 desIn[9] R_125 desIn[7] FP_R_43 key1[20] L_74 key3[20] desIn[34] key2[33] key1[33] R_113 key3[33] desIn[37] key2[54] key3[54] IN-clk key1[54] R_95 desIn[49] FP_R_37 L_68 desIn[16] FP_R_62 L_93 desIn[14] R_112 desIn[45] key3[6] FP_R_52 key1[6] L_83 key2[6] desIn[28] key3[24] key1[3] key3[3] key2[3] desIn[61] R_110 key1[55] R_103 desIn[51] FP_R_49 key2[16] L_80 key1[16] desIn[52] key3[16] FP_R_51 L_82 desIn[36] R_121 desIn[39] FP_R_45 L_76 desIn[18] key2[35] key1[35] key3[5] key1[5] key2[5] FP_R_60 L_91 key3[41] desIn[30] key1[41] key2[1] key2[41] key1[1] R_115 desIn[21] FP_R_53 L_84 desIn[20] FP_R_54 L_85 FP_R_28 FP_R_38 L_69 desIn[8] FP_R_35 L_66 desIn[32] R_99 desIn[17] FP_R_48 L_79 desIn[60] FP_R_3 R_117 desIn[5] FP_R_55 L_86 desIn[4] R_102 desIn[59] FP_R_1 FP_R_21 FP_R_44 L_75 desIn[26]
+.outputs desOut[48] desOut[22] desOut[46] desOut[24] desOut[38] desOut[8] desOut[44] desOut[26] desOut[6] desOut[56] desOut[42] desOut[28] desOut[4] desOut[54] desOut[40] n_7546 desOut[2] desOut[52] desOut[18] desOut[0] desOut[50] desOut[14] desOut[60] desOut[12] n_6880 n_7660 clk n_7627 1'b1 desOut[30] n_7688 n_7631 desOut[32] desOut[34] desOut[1] desOut[3] desOut[5] desOut[7] desOut[9] desOut[10] desOut[11] desOut[13] desOut[15] desOut[16] desOut[17] desOut[19] desOut[20] desOut[21] desOut[23] desOut[25] desOut[27] desOut[29] desOut[31] desOut[33] desOut[35] desOut[36] desOut[37] desOut[39] desOut[41] desOut[43] desOut[45] desOut[47] desOut[49] desOut[51] desOut[53] desOut[55] desOut[57] desOut[58] desOut[59] desOut[61] desOut[62] desOut[63]
+.names n618 n727 n692 n1737
+1-0 1
+10- 1
+.names n725 roundSel[4] decrypt n726 key1[9] roundSel[5] n727
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n690 roundSel[4] decrypt n691 key3[16] roundSel[5] n692
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names roundSel[0] roundSel[1] roundSel[2] roundSel[3] n618
+0001 1
+.names n1088 roundSel[4] decrypt n1089 key1[4] roundSel[5] n1090
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names roundSel[5] key3[4] n1089
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[4] n1088
+0011 1
+.names n634 n814 n597 n1736
+1-0 1
+10- 1
+.names n812 roundSel[4] decrypt n813 key3[36] roundSel[5] n814
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n595 roundSel[4] decrypt n596 key1[44] roundSel[5] n597
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[1] roundSel[3] roundSel[2] roundSel[0] n634
+0011 1
+.names n571 roundSel[5] roundSel[4] n572
+0-1 1
+00- 1
+.names roundSel[0] roundSel[1] roundSel[2] roundSel[3] n570
+0000 1
+.names desIn[35] roundSel[4] roundSel[5] n842
+000 1
+.names R_105 n570 roundSel[4] roundSel[5] n843
+00-- 1
+0-11 1
+.names n681 n804 n703 n1735
+1-0 1
+10- 1
+.names n802 roundSel[4] decrypt n803 key3[22] roundSel[5] n804
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n701 roundSel[4] decrypt n702 key1[31] roundSel[5] n703
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[0] roundSel[1] roundSel[3] roundSel[2] n681
+0001 1
+.names n1733 desOut[33] n1732 n1734
+0-1 1
+00- 1
+.names n1717 n1719 n1726 n1730 n1731 n1732
+11111 1
+.names desOut[33] n1719 n1726 n1730 n1731 n1717 n1733
+011111 1
+.names n2494 n2478 n2498 n1070 n2488 n2489 n2499
+001-11 1
+0011-- 1
+.names n2474 n2475 n1241 n2488
+0-0 1
+00- 1
+.names n2477 n1202 n1252 n1174 n1224 n2489
+0-0-- 1
+01--- 1
+0--01 1
+.names n1069 desOut[31] n1053 n1060 n1064 n1068 n1070
+00---- 1
+0-1111 1
+.names n1146 n2493 n2492 n1174 n2468 n2475 n2494
+1-1--- 1
+11---- 1
+1--001 1
+.names n1255 n1226 n2478
+11 1
+.names n2486 n1070 n2487 n2495 n1224 n1241 n2498
+1-010- 1
+10---- 1
+1-01-0 1
+.names n1718 n642 n608 n863 n1719
+0-11 1
+00-- 1
+.names n1724 n1725 n1723 n626 n747 n751 n1726
+000-11 1
+0000-- 1
+.names n1721 n1727 n1720 n570 n589 n817 n1730
+000-11 1
+0000-- 1
+.names n1728 n1729 n1722 n579 n624 n727 n1731
+000-11 1
+0000-- 1
+.names n1716 n681 n724 n764 n1717
+0-11 1
+00-- 1
+.names n1222 n1223 n1224
+00 1
+.names n1174 n1202 n1241
+11 1
+.names n1174 n1202 n1224 n2487
+000 1
+.names n2476 n1146 n1043 n1225 n1174 n1224 n2495
+0--01- 1
+0-0--- 1
+01---- 1
+0--0-1 1
+.names n2485 n570 n2484 FP_R_41 n572 n2486
+00--- 1
+0-0-1 1
+0-01- 1
+.names n622 roundSel[4] decrypt n623 key3[15] roundSel[5] n624
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names roundSel[1] roundSel[0] roundSel[2] roundSel[3] n579
+0111 1
+.names n666 n768 n720 n1728
+1-0 1
+10- 1
+.names n602 n744 n645 n1729
+10- 1
+1-0 1
+.names n618 n869 n582 n1722
+1-0 1
+10- 1
+.names n2494 n2496 n2478 n1070 n2488 n2489 n2497
+000-11 1
+0001-- 1
+.names n1070 n2495 n2487 n1241 n1224 n2496
+1--11 1
+1-1-- 1
+10--- 1
+.names n579 n1076 n991 n1469
+1-0 1
+10- 1
+.names n1074 roundSel[4] decrypt n1075 key1[12] roundSel[5] n1076
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n989 roundSel[4] decrypt n990 key3[20] roundSel[5] n991
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n587 roundSel[4] decrypt n588 key3[43] roundSel[5] n589
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n815 roundSel[4] decrypt n816 key1[36] roundSel[5] n817
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n610 n732 n600 n1721
+10- 1
+1-0 1
+.names n658 n755 n656 n1727
+1-0 1
+10- 1
+.names n689 n759 n740 n1720
+1-0 1
+10- 1
+.names n594 n1101 n1011 n1468
+1-0 1
+10- 1
+.names n1099 roundSel[4] decrypt n1100 key3[55] roundSel[5] n1101
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n1009 roundSel[4] decrypt n1010 key1[34] roundSel[5] n1011
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names roundSel[1] roundSel[2] roundSel[3] roundSel[0] n594
+0001 1
+.names n1173 desOut[15] n1166 n1168 n1171 n1174
+0-111 1
+00--- 1
+.names n1202 n1224 n1225
+01 1
+.names n1043 n1202 n1146 n2476
+001 1
+.names n1145 desOut[23] n1144 n1146
+0-1 1
+00- 1
+.names n1042 desOut[57] n957 n985 n1013 n1041 n1043
+0-1111 1
+00---- 1
+.names n570 n1134 n1023 n1467
+1-0 1
+10- 1
+.names n1132 roundSel[4] decrypt n1133 key1[41] roundSel[5] n1134
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n1021 roundSel[4] decrypt n1022 key3[48] roundSel[5] n1023
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n1043 n2460 n2459 n1202 n2461
+01-- 1
+0-01 1
+.names n1224 n2464 n2466 n2462 n2467
+01-- 1
+0--1 1
+0-1- 1
+.names n2471 n1043 n2470 n2469 n2472
+00-- 1
+0-00 1
+.names n2480 n570 n2479 FP_R_33 n572 n2481
+0-0-1 1
+0-01- 1
+00--- 1
+.names n2461 n2467 n2481 n2472 n2482
+0001 1
+.names n1070 n1202 n2468
+01 1
+.names n1043 n1224 n2475
+00 1
+.names n2475 n2473 n1174 n1202 n1043 n2493
+001-0 1
+0011- 1
+.names n2491 n2490 n1174 n1043 n2492
+11-- 1
+1-00 1
+.names n610 n1142 n970 n1466
+1-0 1
+10- 1
+.names n1140 roundSel[4] decrypt n1141 key1[46] roundSel[5] n1142
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n968 roundSel[4] decrypt n969 key3[11] roundSel[5] n970
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[0] roundSel[3] roundSel[2] roundSel[1] n610
+0011 1
+.names n698 roundSel[4] decrypt n699 key3[51] roundSel[5] n700
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names roundSel[5] key1[51] n699
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[51] n698
+0111 1
+.names n1200 n1201 n1202
+00 1
+.names n1200 n1201 n1222 n1223 n2473
+0000 1
+.names n658 n1125 n1032 n1465
+1-0 1
+10- 1
+.names n1123 roundSel[4] decrypt n1124 key3[12] roundSel[5] n1125
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n1030 roundSel[4] decrypt n1031 key1[20] roundSel[5] n1032
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[0] roundSel[2] roundSel[3] roundSel[1] n658
+0001 1
+.names n797 n1983 n1991 n915 n1993
+0--0 1
+0-1- 1
+01-- 1
+.names n797 n875 n1991 n775 n710 n840 n1992
+1-0-1- 1
+1-01-- 1
+10---- 1
+1-0--0 1
+.names n1995 n570 n1994 FP_R_61 n572 n1996
+0-0-1 1
+0-01- 1
+00--- 1
+.names n875 n1986 n1984 n1985 n710 n1987
+0--11 1
+0-1-- 1
+01--- 1
+.names n1989 n1988 n875 n775 n1983 n1990
+11--- 1
+1-1-1 1
+1-10- 1
+.names n1987 n1990 n1996 n1993 n1992 n1997
+000-1 1
+0001- 1
+.names decrypt roundSel[5] roundSel[4] key2[31] n701
+0011 1
+.names n610 n736 n661 n2129
+1-0 1
+10- 1
+.names n734 roundSel[4] decrypt n735 key1[28] roundSel[5] n736
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n659 roundSel[4] decrypt n660 key3[52] roundSel[5] n661
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n2473 n1224 n1202 n2490
+0-1 1
+01- 1
+.names n1070 n2473 n1043 n2491
+0-1 1
+01- 1
+.names roundSel[5] key3[31] n702
+01 1
+.names n697 n847 n687 n2128
+10- 1
+1-0 1
+.names n845 roundSel[4] decrypt n846 key3[50] roundSel[5] n847
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n685 roundSel[4] decrypt n686 key1[2] roundSel[5] n687
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names roundSel[0] roundSel[1] roundSel[2] roundSel[3] n697
+1111 1
+.names R_119 n570 roundSel[4] roundSel[5] n1463
+0-11 1
+00-- 1
+.names n602 n716 n582 n2127
+1-0 1
+10- 1
+.names n714 roundSel[4] decrypt n715 key3[28] roundSel[5] n716
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n580 roundSel[4] decrypt n581 key1[52] roundSel[5] n582
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[1] roundSel[2] roundSel[0] roundSel[3] n602
+0011 1
+.names desIn[55] roundSel[4] roundSel[5] n1462
+000 1
+.names n697 n703 n700 n704
+1-0 1
+10- 1
+.names n642 n727 n589 n2126
+10- 1
+1-0 1
+.names roundSel[0] roundSel[1] roundSel[2] roundSel[3] n642
+0111 1
+.names n1197 n1198 n1196 n666 n1094 n1152 n1199
+0000-- 1
+000-11 1
+.names n1092 roundSel[4] decrypt n1093 key3[46] roundSel[5] n1094
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n1150 roundSel[4] decrypt n1151 key1[26] roundSel[5] n1152
+0--0-0 1
+0--00- 1
+0-0--- 1
+01---- 1
+.names roundSel[2] roundSel[3] roundSel[0] roundSel[1] n666
+0011 1
+.names n610 n1134 n1004 n1197
+10- 1
+1-0 1
+.names n689 n1155 n1142 n1198
+1-0 1
+10- 1
+.names n642 n1121 n935 n1196
+1-0 1
+10- 1
+.names n1460 desOut[39] n1447 n1451 n1455 n1459 n1461
+0-1111 1
+00---- 1
+.names n1445 n1446 n1444 n626 n1114 n1130 n1447
+0000-- 1
+000-11 1
+.names n1449 n1450 n1448 n570 n1001 n1004 n1451
+000-11 1
+0000-- 1
+.names n1453 n1454 n1452 n642 n1059 n1193 n1455
+000-11 1
+0000-- 1
+.names n1457 n1458 n1456 n666 n1138 n1142 n1459
+0000-- 1
+000-11 1
+.names desOut[39] n1451 n1455 n1459 n1447 n1460
+01111 1
+.names n601 n617 n633 n641 n665 n680 n705
+000000 1
+.names n594 n600 n597 n601
+1-0 1
+10- 1
+.names n610 n616 n613 n617
+1-0 1
+10- 1
+.names n626 n632 n629 n633
+1-0 1
+10- 1
+.names n634 n640 n637 n641
+10- 1
+1-0 1
+.names n658 n664 n661 n665
+10- 1
+1-0 1
+.names n570 n679 n676 n680
+1-0 1
+10- 1
+.names n2124 desOut[17] n2120 n2121 n2122 n2123 n2125
+0-1111 1
+00---- 1
+.names n2117 n2119 n2115 n642 n695 n826 n2120
+000-11 1
+0000-- 1
+.names n2116 n2118 n2114 n697 n661 n855 n2121
+000-11 1
+0000-- 1
+.names n2109 n2112 n2108 n570 n582 n869 n2122
+000-11 1
+0000-- 1
+.names n2111 n2113 n2110 n610 n687 n804 n2123
+0000-- 1
+000-11 1
+.names desOut[17] n2121 n2122 n2123 n2120 n2124
+01111 1
+.names n1153 roundSel[4] decrypt n1154 key3[26] roundSel[5] n1155
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names roundSel[0] roundSel[1] roundSel[2] roundSel[3] n689
+0011 1
+.names n609 n625 n593 n579 n582 n585 n706
+000-11 1
+0000-- 1
+.names n583 roundSel[4] decrypt n584 key3[30] roundSel[5] n585
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n602 n608 n605 n609
+10- 1
+1-0 1
+.names n618 n624 n621 n625
+10- 1
+1-0 1
+.names n586 n592 n589 n593
+1-0 1
+10- 1
+.names n1002 roundSel[4] decrypt n1003 key3[6] roundSel[5] n1004
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n649 n657 n673 n688 n696 n704 n707
+000000 1
+.names n642 n648 n645 n649
+1-0 1
+10- 1
+.names n650 n656 n653 n657
+1-0 1
+10- 1
+.names n666 n672 n669 n673
+1-0 1
+10- 1
+.names n681 n687 n684 n688
+1-0 1
+10- 1
+.names n689 n695 n692 n696
+10- 1
+1-0 1
+.names n658 n703 n684 n2111
+10- 1
+1-0 1
+.names n618 n817 n589 n2113
+1-0 1
+10- 1
+.names n602 n822 n629 n2110
+1-0 1
+10- 1
+.names n1119 roundSel[4] decrypt n1120 key1[18] roundSel[5] n1121
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n933 roundSel[4] decrypt n934 key3[54] roundSel[5] n935
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names desOut[3] n706 n707 n705 n708
+1-0- 1
+10-- 1
+1--0 1
+.names n867 roundSel[4] decrypt n868 key3[0] roundSel[5] n869
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n634 n669 n653 n2109
+1-0 1
+10- 1
+.names n594 n808 n672 n2112
+1-0 1
+10- 1
+.names n681 n664 n616 n2108
+10- 1
+1-0 1
+.names n1190 n1194 n1189 n626 n1109 n1125 n1195
+000-11 1
+0000-- 1
+.names n1107 roundSel[4] decrypt n1108 key1[3] roundSel[5] n1109
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names roundSel[2] roundSel[1] roundSel[0] roundSel[3] n626
+0111 1
+.names n658 n1114 n984 n1190
+1-0 1
+10- 1
+.names n634 n1193 n1130 n1194
+10- 1
+1-0 1
+.names n579 n1117 n955 n1189
+1-0 1
+10- 1
+.names desOut[3] n706 n707 n705 n709
+0111 1
+.names n853 roundSel[4] decrypt n854 key1[0] roundSel[5] n855
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n666 n640 n597 n2116
+1-0 1
+10- 1
+.names n586 n692 n621 n2118
+1-0 1
+10- 1
+.names n626 n605 n585 n2114
+10- 1
+1-0 1
+.names n1191 roundSel[4] decrypt n1192 key3[17] roundSel[5] n1193
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n1128 roundSel[4] decrypt n1129 key1[55] roundSel[5] n1130
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n693 roundSel[4] decrypt n694 key1[7] roundSel[5] n695
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n824 roundSel[4] decrypt n825 key3[45] roundSel[5] n826
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n579 n679 n632 n2117
+1-0 1
+10- 1
+.names n689 n648 n592 n2119
+1-0 1
+10- 1
+.names n650 n814 n637 n2115
+10- 1
+1-0 1
+.names roundSel[5] key1[17] n1192
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[17] n1191
+0111 1
+.names n1837 n1835 n681 n720 n736 n1839
+00-11 1
+000-- 1
+.names n718 roundSel[4] decrypt n719 key3[23] roundSel[5] n720
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n666 n764 n755 n1837
+1-0 1
+10- 1
+.names n634 n732 n724 n1835
+1-0 1
+10- 1
+.names n1824 n1825 n1826 n1828 n1830 n1831 n1838
+000000 1
+.names n642 n817 n624 n1824
+1-0 1
+10- 1
+.names n650 n808 n600 n1825
+1-0 1
+10- 1
+.names n594 n814 n656 n1826
+1-0 1
+10- 1
+.names n697 n804 n613 n1828
+1-0 1
+10- 1
+.names n579 n863 n740 n1830
+10- 1
+1-0 1
+.names n626 n759 n716 n1831
+1-0 1
+10- 1
+.names n762 roundSel[4] decrypt n763 key1[42] roundSel[5] n764
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n753 roundSel[4] decrypt n754 key3[9] roundSel[5] n755
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n1112 roundSel[4] decrypt n1113 key3[32] roundSel[5] n1114
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n982 roundSel[4] decrypt n983 key1[40] roundSel[5] n984
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n1484 desOut[55] n1482 n1485
+0-1 1
+00- 1
+.names n2227 n2225 n1508 n2223 n1570 n2228
+000-- 1
+00--1 1
+00-0- 1
+.names n2231 n2229 n1485 n1576 n2221 n2232
+001-1 1
+0010- 1
+.names n2234 n570 n2233 FP_R_51 n572 n2235
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1461 n1508 n2219 n2221 n1570 n2222
+001-- 1
+00-00 1
+.names n2222 n2235 n2232 n1485 n2228 n2236
+00-01 1
+001-- 1
+.names n570 n822 n608 n1836
+1-0 1
+10- 1
+.names n820 roundSel[4] decrypt n821 key1[22] roundSel[5] n822
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n606 roundSel[4] decrypt n607 key3[29] roundSel[5] n608
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n730 roundSel[4] decrypt n731 key1[14] roundSel[5] n732
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n722 roundSel[4] decrypt n723 key3[37] roundSel[5] n724
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n586 n747 n744 n1834
+1-0 1
+10- 1
+.names n745 roundSel[4] decrypt n746 key1[37] roundSel[5] n747
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n742 roundSel[4] decrypt n743 key3[14] roundSel[5] n744
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[0] roundSel[2] roundSel[1] roundSel[3] n586
+0011 1
+.names n1832 n658 n768 n847 n1833
+0-11 1
+00-- 1
+.names n766 roundSel[4] decrypt n767 key1[1] roundSel[5] n768
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n618 n826 n645 n1832
+10- 1
+1-0 1
+.names n643 roundSel[4] decrypt n644 key1[38] roundSel[5] n645
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names desOut[31] n1551 n1557 n1559 n1563 n1567 n1569
+000001 1
+.names n586 n945 n932 n1551
+1-0 1
+10- 1
+.names n594 n1059 n977 n1557
+10- 1
+1-0 1
+.names n689 n1029 n939 n1559
+1-0 1
+10- 1
+.names n666 n1036 n988 n1563
+1-0 1
+10- 1
+.names n1554 n1558 n1560 n1561 n1565 n1566 n1567
+000011 1
+.names n757 roundSel[4] decrypt n758 key1[23] roundSel[5] n759
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n1551 n1557 n1559 n1563 n1567 n1568
+00001 1
+.names n861 roundSel[4] decrypt n862 key1[50] roundSel[5] n863
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n738 roundSel[4] decrypt n739 key3[1] roundSel[5] n740
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n642 n1049 n1011 n1554
+1-0 1
+10- 1
+.names n602 n952 n942 n1558
+1-0 1
+10- 1
+.names n650 n1080 n1019 n1560
+10- 1
+1-0 1
+.names n634 n1026 n995 n1561
+1-0 1
+10- 1
+.names n1553 n1564 n1552 n579 n948 n960 n1565
+000-11 1
+0000-- 1
+.names n1556 n1562 n1555 n570 n1032 n1087 n1566
+000-11 1
+0000-- 1
+.names n1085 roundSel[4] decrypt n1086 key3[27] roundSel[5] n1087
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n697 n1083 n991 n1556
+1-0 1
+10- 1
+.names n681 n1016 n974 n1562
+1-0 1
+10- 1
+.names n618 n1090 n970 n1555
+1-0 1
+10- 1
+.names desIn[47] roundSel[4] roundSel[5] n1528
+000 1
+.names R_120 n570 roundSel[4] roundSel[5] n1529
+0-11 1
+00-- 1
+.names n946 roundSel[4] decrypt n947 key1[48] roundSel[5] n948
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n958 roundSel[4] decrypt n959 key3[24] roundSel[5] n960
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n658 n1023 n1001 n1553
+1-0 1
+10- 1
+.names n610 n1039 n981 n1564
+10- 1
+1-0 1
+.names n626 n1008 n967 n1552
+1-0 1
+10- 1
+.names n598 roundSel[4] decrypt n599 key3[38] roundSel[5] n600
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[5] key1[38] n599
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[38] n598
+0111 1
+.names n1037 roundSel[4] decrypt n1038 key1[25] roundSel[5] n1039
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n979 roundSel[4] decrypt n980 key3[47] roundSel[5] n981
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names desIn[23] roundSel[4] roundSel[5] n1071
+000 1
+.names R_123 n570 roundSel[4] roundSel[5] n1072
+00-- 1
+0-11 1
+.names n1461 n2226 n1570 n1583 n1508 n1572 n2229
+11---- 1
+1-0-11 1
+1-01-- 1
+.names n1507 desOut[63] n1505 n1508
+0-1 1
+00- 1
+.names n1525 n1548 n1526 desOut[47] n1547 n1572
+000-1 1
+0000- 1
+.names n1508 n1549 n1583
+00 1
+.names n1508 n1572 n1549 n1527 n2226
+00-1 1
+001- 1
+.names n1569 desOut[31] n1568 n1570
+0-1 1
+00- 1
+.names n1034 roundSel[4] decrypt n1035 key3[5] roundSel[5] n1036
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n986 roundSel[4] decrypt n987 key1[10] roundSel[5] n988
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n1461 n1527 n1549 n2223
+1-0 1
+10- 1
+-00 1
+.names n2226 n1570 n1508 n2220 n1632 n2227
+010-- 1
+01--1 1
+01-1- 1
+.names n1572 n2224 n1570 n1576 n2225
+1-01 1
+11-- 1
+.names n2582 n2586 n2589 n2590
+000 1
+.names n2581 n797 n2439 n775 n1983 n2582
+0--01 1
+0-1-- 1
+00--- 1
+.names n2583 n917 n898 n2585 n900 n710 n2586
+0-0--- 1
+01---- 1
+0---10 1
+0--0-- 1
+.names n2588 n570 n2587 FP_R_56 n572 n2589
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1014 roundSel[4] decrypt n1015 key3[19] roundSel[5] n1016
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n972 roundSel[4] decrypt n973 key1[53] roundSel[5] n974
+0--0-0 1
+0--00- 1
+0-0--- 1
+01---- 1
+.names decrypt roundSel[5] roundSel[4] key2[49] n603
+0011 1
+.names n1527 n1549 n2220
+01 1
+.names n1461 n1527 n1632
+11 1
+.names n697 n1090 n935 n1299
+10- 1
+1-0 1
+.names n1024 roundSel[4] decrypt n1025 key1[39] roundSel[5] n1026
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n993 roundSel[4] decrypt n994 key3[33] roundSel[5] n995
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names roundSel[5] key3[49] n604
+01 1
+.names n1548 desOut[47] n1547 n1549
+0-1 1
+00- 1
+.names n1525 n1526 n1527
+00 1
+.names n681 n1008 n939 n1298
+10- 1
+1-0 1
+.names n1006 roundSel[4] decrypt n1007 key3[53] roundSel[5] n1008
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n937 roundSel[4] decrypt n938 key1[5] roundSel[5] n939
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n1078 roundSel[4] decrypt n1079 key3[4] roundSel[5] n1080
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n1017 roundSel[4] decrypt n1018 key1[11] roundSel[5] n1019
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[3] roundSel[1] roundSel[2] roundSel[0] n650
+0111 1
+.names n603 roundSel[4] decrypt n604 key1[49] roundSel[5] n605
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n1461 n1508 n1576
+01 1
+.names n1508 n1461 n2224
+01 1
+.names n650 n1049 n1032 n1297
+1-0 1
+10- 1
+.names n1047 roundSel[4] decrypt n1048 key3[13] roundSel[5] n1049
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names roundSel[5] decrypt roundSel[4] key2[29] n606
+0111 1
+.names n618 n1059 n991 n1296
+1-0 1
+10- 1
+.names n1057 roundSel[4] decrypt n1058 key1[13] roundSel[5] n1059
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names roundSel[5] key1[11] n969
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[11] n968
+0111 1
+.names roundSel[5] key1[29] n607
+01 1
+.names n642 n1019 n981 n1295
+1-0 1
+10- 1
+.names n658 n970 n967 n971
+1-0 1
+10- 1
+.names n965 roundSel[4] decrypt n966 key1[19] roundSel[5] n967
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n1550 n2220 n2221
+00 1
+.names n1527 n1549 n1570 n2219
+001 1
+.names n586 n1023 n988 n1294
+10- 1
+1-0 1
+.names decrypt roundSel[5] roundSel[4] key2[53] n972
+0011 1
+.names n1549 n1527 n1550
+01 1
+.names roundSel[5] key3[53] n973
+01 1
+.names R_114 n570 roundSel[4] roundSel[5] n1292
+00-- 1
+0-11 1
+.names n1937 n1938 n1936 n1928 n1906 n1939
+000-0 1
+0001- 1
+.names n1927 desOut[59] n1914 n1918 n1922 n1926 n1928
+0-1111 1
+00---- 1
+.names n1904 n1905 n1906
+00 1
+.names n1844 n1883 desOut[1] n1882 n1937
+00-1 1
+000- 1
+.names n1865 n1928 n1938
+01 1
+.names n1844 n1883 n1882 desOut[1] n1936
+1-01 1
+11-- 1
+.names desIn[29] roundSel[4] roundSel[5] n1291
+000 1
+.names roundSel[5] decrypt roundSel[4] key2[34] n975
+0111 1
+.names n1864 desOut[51] n1851 n1855 n1859 n1863 n1865
+0-1111 1
+00---- 1
+.names n1289 desOut[37] n1276 n1280 n1284 n1288 n1290
+00---- 1
+0-1111 1
+.names n1274 n1275 n1273 n697 n1023 n1130 n1276
+000-11 1
+0000-- 1
+.names n1278 n1279 n1277 n626 n952 n960 n1280
+000-11 1
+0000-- 1
+.names n1282 n1283 n1281 n570 n948 n1101 n1284
+0000-- 1
+000-11 1
+.names n1286 n1287 n1285 n666 n995 n1059 n1288
+000-11 1
+0000-- 1
+.names desOut[37] n1280 n1284 n1288 n1276 n1289
+01111 1
+.names roundSel[5] key1[34] n976
+01 1
+.names n1867 n1869 n1873 n1877 n1879 n1881 n1882
+111111 1
+.names n1843 desOut[35] n1842 n1844
+0-1 1
+00- 1
+.names desOut[1] n1882 n1883
+01 1
+.names n975 roundSel[4] decrypt n976 key3[34] roundSel[5] n977
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names desIn[37] roundSel[4] roundSel[5] n1270
+000 1
+.names R_113 n570 roundSel[4] roundSel[5] n1271
+0-11 1
+00-- 1
+.names n586 n977 n974 n978
+1-0 1
+10- 1
+.names n1928 n1930 n1906 n1844 n1934 n1931 n1935
+1-00-1 1
+1-001- 1
+11---- 1
+.names n1823 n1883 n1882 desOut[1] n1934
+01-- 1
+0-01 1
+.names n1865 n1884 n1931
+01 1
+.names n1844 n1823 n1865 n1884 n1906 n1930
+10-01 1
+100-- 1
+1-001 1
+.names roundSel[5] decrypt roundSel[4] key2[47] n979
+0111 1
+.names n1822 desOut[27] n1812 n1813 n1820 n1821 n1823
+00---- 1
+0-1111 1
+.names n1823 n1865 n1933
+01 1
+.names n1823 n1865 n1932
+00 1
+.names n666 n751 n676 n1669
+1-0 1
+10- 1
+.names n749 roundSel[4] decrypt n750 key3[42] roundSel[5] n751
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n674 roundSel[4] decrypt n675 key1[51] roundSel[5] n676
+0--0-0 1
+0--00- 1
+0-0--- 1
+01---- 1
+.names n1883 desOut[1] n1882 n1884
+0-1 1
+00- 1
+.names n1667 desOut[49] n1660 n1662 n1664 n1666 n1668
+0-1111 1
+00---- 1
+.names n1655 n1659 n570 n605 n740 n1660
+01-11 1
+010-- 1
+.names n1656 n1661 n666 n732 n814 n1662
+01-11 1
+010-- 1
+.names n1651 n1663 n618 n648 n747 n1664
+010-- 1
+01-11 1
+.names n1654 n1665 n681 n847 n855 n1666
+01-11 1
+010-- 1
+.names desOut[49] n1662 n1664 n1666 n1660 n1667
+01111 1
+.names n2352 desOut[29] n2341 n2351 n2339 n2353
+00--- 1
+0-011 1
+.names n2449 n2446 n2390 n2295 n2316 n2450
+0--00 1
+0-0-- 1
+01--- 1
+.names n2455 n570 n2454 FP_R_58 n572 n2456
+0-01- 1
+00--- 1
+0-0-1 1
+.names n2353 n2447 n2388 n2393 n2448
+0-11 1
+01-- 1
+.names n2452 n2316 n2451 n2388 n2387 n2453
+0-0-0 1
+0-00- 1
+01--- 1
+.names n2448 n2456 n2453 n2353 n2450 n2457
+001-1 1
+0010- 1
+.names n634 n808 n755 n1654
+10- 1
+1-0 1
+.names n1653 n642 n621 n751 n1665
+0-11 1
+00-- 1
+.names n619 roundSel[4] decrypt n620 key1[8] roundSel[5] n621
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n697 n768 n616 n1653
+1-0 1
+10- 1
+.names n602 n1101 n1032 n2329
+1-0 1
+10- 1
+.names n646 roundSel[4] decrypt n647 key3[44] roundSel[5] n648
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n602 n759 n679 n1651
+1-0 1
+10- 1
+.names n1652 n626 n863 n869 n1663
+0-11 1
+00-- 1
+.names n2001 n2002 n1570 n1590 n1550 n2003
+001-0 1
+0010- 1
+.names n1999 n2004 n2005 n2006
+001 1
+.names n2008 n570 n2007 FP_R_36 n572 n2009
+00--- 1
+0-0-1 1
+0-01- 1
+.names n2009 n2006 n2003 n2010
+0-1 1
+01- 1
+.names n681 n1193 n1152 n2328
+10- 1
+1-0 1
+.names n658 n804 n736 n1652
+10- 1
+1-0 1
+.names n642 n1117 n970 n2327
+1-0 1
+10- 1
+.names n1115 roundSel[4] decrypt n1116 key1[32] roundSel[5] n1117
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names desIn[9] roundSel[4] roundSel[5] n1441
+000 1
+.names R_100 n570 roundSel[4] roundSel[5] n1442
+00-- 1
+0-11 1
+.names n586 n826 n727 n1656
+10- 1
+1-0 1
+.names n1658 n594 n653 n764 n1661
+00-- 1
+0-11 1
+.names n697 n1098 n1039 n2326
+10- 1
+1-0 1
+.names n1096 roundSel[4] decrypt n1097 key3[18] roundSel[5] n1098
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n1371 n1395 n1311 n1310 n1399
+11-1 1
+111- 1
+.names desOut[29] n1306 n1309 n1304 n1311
+0111 1
+.names desOut[29] n1306 n1309 n1304 n1310
+1-0- 1
+10-- 1
+1--0 1
+.names n1370 desOut[61] n1366 n1367 n1368 n1369 n1371
+0-1111 1
+00---- 1
+.names n1394 desOut[45] n1390 n1391 n1392 n1393 n1395
+0-1111 1
+00---- 1
+.names n651 roundSel[4] decrypt n652 key3[8] roundSel[5] n653
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n610 n720 n703 n1658
+1-0 1
+10- 1
+.names n586 n1125 n963 n2325
+1-0 1
+10- 1
+.names n961 roundSel[4] decrypt n962 key1[6] roundSel[5] n963
+0--0-0 1
+0--00- 1
+0-0--- 1
+01---- 1
+.names n1397 n1333 n1312 n1353 n1398
+10-- 1
+1-01 1
+.names n1310 n1311 n1312
+00 1
+.names n1351 n1352 n1353
+00 1
+.names n1332 desOut[53] n1322 n1323 n1330 n1331 n1333
+00---- 1
+0-1111 1
+.names n1371 n1395 n1397
+01 1
+.names n689 n817 n744 n1655
+1-0 1
+10- 1
+.names n1657 n650 n597 n724 n1659
+00-- 1
+0-11 1
+.names n2321 n2322 n2320 n570 n942 n1121 n2324
+000-11 1
+0000-- 1
+.names n940 roundSel[4] decrypt n941 key3[25] roundSel[5] n942
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n650 n1134 n977 n2321
+1-0 1
+10- 1
+.names n658 n1094 n998 n2322
+1-0 1
+10- 1
+.names n689 n1109 n955 n2320
+10- 1
+1-0 1
+.names n2319 n610 n991 n1130 n2323
+00-- 1
+0-11 1
+.names n618 n1138 n1011 n2319
+10- 1
+1-0 1
+.names n1334 n1353 n1371 n1312 n1333 n1396
+0-0-- 1
+-00-- 1
+00--- 1
+0---1 1
+0--1- 1
+.names n1310 n1311 n1333 n1334
+001 1
+.names n594 n869 n645 n870
+1-0 1
+10- 1
+.names n996 roundSel[4] decrypt n997 key1[54] roundSel[5] n998
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names n1377 n1378 n1379 n1380 n1381 n1382 n1390
+000000 1
+.names n1385 n1387 n1383 n626 n942 n948 n1391
+000-11 1
+0000-- 1
+.names n1386 n1388 n1384 n689 n945 n1011 n1392
+000-11 1
+0000-- 1
+.names n1389 n642 n963 n1029 n1393
+00-- 1
+0-11 1
+.names desOut[45] n1391 n1392 n1393 n1390 n1394
+01111 1
+.names n681 n759 n751 n871
+1-0 1
+10- 1
+.names desIn[59] roundSel[4] roundSel[5] n1908
+000 1
+.names R_102 n570 roundSel[4] roundSel[5] n1909
+00-- 1
+0-11 1
+.names n870 n871 n866 n626 n720 n764 n872
+0000-- 1
+000-11 1
+.names n658 n744 n676 n866
+1-0 1
+10- 1
+.names n594 n759 n648 n2059
+1-0 1
+10- 1
+.names n953 roundSel[4] decrypt n954 key3[40] roundSel[5] n955
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n1027 roundSel[4] decrypt n1028 key3[10] roundSel[5] n1029
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n610 n1016 n998 n1389
+1-0 1
+10- 1
+.names desOut[35] n858 n865 n872 n851 n873
+1--0- 1
+1-0-- 1
+10--- 1
+1---0 1
+.names n856 n857 n852 n642 n600 n855 n858
+000-11 1
+0000-- 1
+.names n860 n864 n859 n570 n661 n808 n865
+000-11 1
+0000-- 1
+.names n849 n850 n848 n666 n716 n747 n851
+0000-- 1
+000-11 1
+.names n634 n822 n744 n2058
+1-0 1
+10- 1
+.names roundSel[5] key1[10] n1028
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[10] n1027
+0111 1
+.names n943 roundSel[4] decrypt n944 key3[39] roundSel[5] n945
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n697 n1193 n1001 n1386
+1-0 1
+10- 1
+.names n634 n1036 n1019 n1388
+1-0 1
+10- 1
+.names n594 n1004 n988 n1384
+1-0 1
+10- 1
+.names desOut[35] n858 n865 n872 n851 n874
+01111 1
+.names n586 n804 n732 n2057
+1-0 1
+10- 1
+.names n586 n970 n939 n1385
+1-0 1
+10- 1
+.names n602 n967 n935 n1387
+1-0 1
+10- 1
+.names n618 n955 n932 n1383
+10- 1
+1-0 1
+.names n873 n874 n875
+00 1
+.names n602 n736 n653 n2056
+1-0 1
+10- 1
+.names n681 n1039 n1023 n1377
+1-0 1
+10- 1
+.names n579 n1032 n1008 n1378
+10- 1
+1-0 1
+.names n650 n995 n984 n1379
+10- 1
+1-0 1
+.names n666 n1026 n977 n1380
+1-0 1
+10- 1
+.names n658 n991 n974 n1381
+1-0 1
+10- 1
+.names n570 n1183 n960 n1382
+1-0 1
+10- 1
+.names n775 n875 n876
+01 1
+.names n774 desOut[11] n773 n775
+0-1 1
+01- 1
+.names n689 n847 n808 n2055
+1-0 1
+10- 1
+.names n806 roundSel[4] decrypt n807 key1[45] roundSel[5] n808
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names roundSel[5] key3[39] n1025
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[39] n1024
+0011 1
+.names n710 n841 n876 n797 n840 n877
+1-001 1
+11--- 1
+.names n796 desOut[19] n795 n797
+00- 1
+0-1 1
+.names n838 n839 n840
+00 1
+.names n840 n797 n775 n841
+011 1
+.names n708 n709 n710
+00 1
+.names n2244 n2245 n1782 n1668 n1791 n2246
+01-00 1
+010-- 1
+.names n2248 n1668 n2247 n1734 n1795 n1753 n2249
+10---- 1
+1-0--0 1
+1-0-0- 1
+1-01-- 1
+.names n2251 n570 n2250 FP_R_59 n572 n2252
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1668 n2240 n2242 n1795 n1754 n2239 n2243
+01---- 1
+0--1-1 1
+0--11- 1
+0-0--- 1
+.names n2252 n2243 n2246 n2249 n2253
+0-00 1
+01-- 1
+.names n642 n720 n597 n2054
+1-0 1
+10- 1
+.names desIn[27] roundSel[4] roundSel[5] n878
+000 1
+.names n579 n755 n703 n2053
+1-0 1
+10- 1
+.names R_106 n570 roundSel[4] roundSel[5] n879
+0-11 1
+00-- 1
+.names n658 n727 n679 n2052
+1-0 1
+10- 1
+.names n677 roundSel[4] decrypt n678 key3[31] roundSel[5] n679
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names roundSel[5] key1[48] n1022
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[48] n1021
+0111 1
+.names n610 n716 n621 n2051
+1-0 1
+10- 1
+.names n2049 desOut[25] n2039 n2040 n2047 n2048 n2050
+0-1111 1
+00---- 1
+.names n2034 n2036 n2033 n697 n640 n764 n2039
+0000-- 1
+000-11 1
+.names n2037 n2038 n2035 n570 n592 n751 n2040
+000-11 1
+0000-- 1
+.names n2044 n2045 n2042 n586 n679 n863 n2047
+000-11 1
+0000-- 1
+.names n2043 n2046 n2041 n626 n817 n826 n2048
+000-11 1
+0000-- 1
+.names desOut[25] n2040 n2047 n2048 n2039 n2049
+01111 1
+.names n1767 n1768 n1766 n626 n624 n645 n1769
+000-11 1
+0000-- 1
+.names n697 n755 n669 n1767
+1-0 1
+10- 1
+.names n658 n724 n637 n1768
+1-0 1
+10- 1
+.names n586 n740 n582 n1766
+10- 1
+1-0 1
+.names n579 n1019 n1016 n1020
+10- 1
+1-0 1
+.names n635 roundSel[4] decrypt n636 key1[43] roundSel[5] n637
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n667 roundSel[4] decrypt n668 key1[16] roundSel[5] n669
+0--00- 1
+0-0--- 1
+01---- 1
+0--0-0 1
+.names desIn[45] roundSel[4] roundSel[5] n1374
+000 1
+.names R_112 n570 roundSel[4] roundSel[5] n1375
+0-11 1
+00-- 1
+.names n1763 n1764 n1762 n689 n608 n676 n1765
+0000-- 1
+000-11 1
+.names n642 n759 n629 n1763
+1-0 1
+10- 1
+.names n618 n716 n632 n1764
+1-0 1
+10- 1
+.names n610 n764 n672 n1762
+1-0 1
+10- 1
+.names n906 n840 n775 n710 n875 n2429
+011-- 1
+01-01 1
+.names n873 n874 n774 desOut[11] n773 n906
+000-1 1
+0001- 1
+.names n630 roundSel[4] decrypt n631 key1[21] roundSel[5] n632
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names desIn[25] roundSel[4] roundSel[5] n1755
+000 1
+.names R_98 n570 roundSel[4] roundSel[5] n1756
+0-11 1
+00-- 1
+.names n902 n903 n875 n710 n2428
+00-1 1
+000- 1
+.names n839 n838 n774 n773 desOut[11] n902
+00-00 1
+001-- 1
+.names n708 n709 n874 n873 n903
+00-1 1
+001- 1
+.names n627 roundSel[4] decrypt n628 key3[2] roundSel[5] n629
+0-1--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n915 n903 n2427
+00 1
+.names n710 n875 n915
+01 1
+.names n1433 n1353 n1434 n1395 n1312 n1371 n1435
+0--01- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n1429 n1430 n1290 n1312 n1431 n1407 n1432
+000-00 1
+0001-- 1
+.names n1437 n570 n1436 FP_R_38 n572 n1438
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1333 n1427 n1290 n1426 n1312 n1410 n1428
+0-1-01 1
+0-11-- 1
+01---- 1
+.names n1428 n1438 n1432 n1435 n1290 n1439
+00-11 1
+001-- 1
+.names n670 roundSel[4] decrypt n671 key3[7] roundSel[5] n672
+0--0-0 1
+0--00- 1
+0-1--- 1
+01---- 1
+.names n602 n1125 n1011 n1499
+1-0 1
+10- 1
+.names n1759 n1760 n1758 n570 n692 n727 n1761
+000-11 1
+0000-- 1
+.names n602 n751 n695 n1759
+1-0 1
+10- 1
+.names n634 n768 n661 n1760
+10- 1
+1-0 1
+.names n579 n747 n589 n1758
+10- 1
+1-0 1
+.names n2413 n2424 n2089 n2416 n2421 n2425
+00-00 1
+001-- 1
+.names n2125 n2414 n2150 n2415 n2416
+01-- 1
+0-11 1
+.names n2418 n2050 n2420 n2144 n2411 n2070 n2421
+0--011 1
+0-1--- 1
+01---- 1
+.names n2087 n2088 n2089
+00 1
+.names n2412 n2409 n2406 n2070 n2089 n2145 n2413
+0--0-- 1
+0-1--- 1
+01---- 1
+0---11 1
+.names n2423 n570 n2422 FP_R_42 n572 n2424
+00--- 1
+0-0-1 1
+0-01- 1
+.names n594 n1094 n1039 n1498
+1-0 1
+10- 1
+.names desIn[42] roundSel[4] roundSel[5] n2422
+000 1
+.names L_73 n570 roundSel[4] roundSel[5] n2423
+00-- 1
+0-11 1
+.names n658 n1106 n1019 n1497
+10- 1
+1-0 1
+.names n1104 roundSel[4] decrypt n1105 key3[3] roundSel[5] n1106
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n642 n1142 n942 n1496
+1-0 1
+10- 1
+.names n733 n737 n741 n748 n752 n765 n770
+000000 1
+.names n570 n732 n684 n733
+10- 1
+1-0 1
+.names n642 n736 n672 n737
+1-0 1
+10- 1
+.names n666 n740 n645 n741
+1-0 1
+10- 1
+.names n634 n747 n608 n748
+1-0 1
+10- 1
+.names n658 n751 n582 n752
+1-0 1
+10- 1
+.names n579 n764 n661 n765
+10- 1
+1-0 1
+.names n689 n1183 n935 n1495
+10- 1
+1-0 1
+.names n1181 roundSel[4] decrypt n1182 key1[17] roundSel[5] n1183
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n760 n756 n697 n632 n744 n771
+00-11 1
+000-- 1
+.names n610 n759 n589 n760
+1-0 1
+10- 1
+.names n618 n755 n687 n756
+1-0 1
+10- 1
+.names n2549 n570 n2548 FP_R_40 n572 n2550
+0-0-1 1
+0-01- 1
+00--- 1
+.names n2557 n2559 n2353 n2554 n2295 n2552 n2560
+01-00- 1
+010--- 1
+01-0-0 1
+.names n2557 n2561 n2353 n2554 n2295 n2552 n2562
+01-0-0 1
+01-00- 1
+010--- 1
+.names n2157 n2144 n2089 n2159
+01- 1
+0-1 1
+.names n2143 desOut[59] n2142 n2144
+0-1 1
+00- 1
+.names n2087 n2143 n2088 desOut[59] n2142 n2157
+000-1 1
+0000- 1
+.names n2107 n2125 n2411
+11 1
+.names n2069 desOut[1] n2068 n2070
+0-1 1
+00- 1
+.names n2144 n2419 n2107 n2070 n2420
+1-01 1
+11-- 1
+.names n2050 n2156 n2148 n2417 n2418
+1-00 1
+11-- 1
+.names n666 n1193 n998 n1494
+1-0 1
+10- 1
+.names n769 n761 n626 n656 n700 n772
+00-11 1
+000-- 1
+.names n654 roundSel[4] decrypt n655 key1[15] roundSel[5] n656
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n689 n768 n600 n769
+1-0 1
+10- 1
+.names n681 n676 n624 n761
+1-0 1
+10- 1
+.names n2089 n2144 n2158
+00 1
+.names n2106 desOut[9] n2096 n2097 n2104 n2105 n2107
+0-1111 1
+00---- 1
+.names n2125 n2069 n2068 desOut[1] n2419
+1-01 1
+11-- 1
+.names n697 n1114 n1026 n1493
+1-0 1
+10- 1
+.names n729 n770 n771 n772 n773
+1111 1
+.names n721 n728 n717 n586 n613 n724 n729
+000-11 1
+0000-- 1
+.names n2136 n2138 n2139 n2140 n2141 n2142
+11111 1
+.names desOut[33] n2076 n2078 n2082 n2086 n2074 n2087
+1---0- 1
+1--0-- 1
+1-0--- 1
+1----0 1
+10---- 1
+.names desOut[59] n2138 n2139 n2140 n2141 n2136 n2143
+011111 1
+.names desOut[33] n2076 n2078 n2082 n2086 n2074 n2088
+011111 1
+.names roundSel[5] key3[55] n1129
+01 1
+.names n618 n1101 n948 n1492
+1-0 1
+10- 1
+.names n729 n770 n771 n772 desOut[11] n774
+11111 1
+.names n2125 n2069 desOut[1] n2068 n2156
+00-1 1
+000- 1
+.names n2067 n2061 n2064 n2065 n2068
+1111 1
+.names desOut[1] n2061 n2064 n2065 n2067 n2069
+01111 1
+.names decrypt roundSel[5] roundSel[4] key2[55] n1128
+0011 1
+.names n650 n1130 n1023 n1491
+1-0 1
+10- 1
+.names n2107 n2069 n2068 desOut[1] n2155
+0-01 1
+01-- 1
+.names n1122 n1126 n1118 n579 n1001 n1114 n1127
+000-11 1
+0000-- 1
+.names n999 roundSel[4] decrypt n1000 key1[24] roundSel[5] n1001
+01---- 1
+0--0-0 1
+0--00- 1
+0-0--- 1
+.names n666 n1121 n1049 n1122
+1-0 1
+10- 1
+.names n650 n1125 n967 n1126
+1-0 1
+10- 1
+.names n658 n1117 n960 n1118
+1-0 1
+10- 1
+.names n634 n1152 n991 n1490
+10- 1
+1-0 1
+.names desIn[19] roundSel[4] roundSel[5] n776
+000 1
+.names desIn[39] roundSel[4] roundSel[5] n1203
+000 1
+.names R_121 n570 roundSel[4] roundSel[5] n1204
+0-11 1
+00-- 1
+.names n2151 n2150 n2152 n2089 n2107 n2154
+00-00 1
+001-- 1
+.names n2089 n2107 n2152
+11 1
+.names n2069 n2144 desOut[1] n2068 n2151
+01-1 1
+010- 1
+.names n2144 n2069 n2068 desOut[1] n2150
+0-01 1
+01-- 1
+.names R_107 n570 roundSel[4] roundSel[5] n777
+0-11 1
+00-- 1
+.names n2152 n2107 n2089 n2153
+0-1 1
+01- 1
+.names roundSel[5] key1[12] n1124
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[12] n1123
+0111 1
+.names n642 n656 n616 n779
+1-0 1
+10- 1
+.names n614 roundSel[4] decrypt n615 key3[49] roundSel[5] n616
+01---- 1
+0--0-0 1
+0--00- 1
+0-1--- 1
+.names n1868 n570 n585 n759 n1869
+0-11 1
+00-- 1
+.names n594 n724 n669 n1868
+1-0 1
+10- 1
+.names roundSel[5] key3[18] n1120
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[18] n1119
+0011 1
+.names n1866 n610 n684 n768 n1867
+0-11 1
+00-- 1
+.names n682 roundSel[4] decrypt n683 key3[21] roundSel[5] n684
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n658 n700 n687 n1866
+10- 1
+1-0 1
+.names n2442 n570 n2441 FP_R_50 n572 n2443
+0-01- 1
+00--- 1
+0-0-1 1
+.names n898 n2431 n797 n2430 n2432
+1-01 1
+10-- 1
+.names n2435 n2437 n898 n2438
+000 1
+.names n2432 n2438 n2443 n841 n2427 n2444
+0000- 1
+000-0 1
+.names n1849 n1850 n1848 n697 n629 n727 n1851
+000-11 1
+0000-- 1
+.names n1853 n1854 n1852 n570 n687 n755 n1855
+0000-- 1
+000-11 1
+.names n1857 n1858 n1856 n626 n653 n703 n1859
+000-11 1
+0000-- 1
+.names n1861 n1862 n1860 n579 n664 n814 n1863
+000-11 1
+0000-- 1
+.names desOut[51] n1855 n1859 n1863 n1851 n1864
+01111 1
+.names n2516 n2521 n2523 n2525 n2528 n2529
+00000 1
+.names n2050 n2515 n2514 n2404 n2157 n2516
+1-1-- 1
+11--- 1
+1--11 1
+.names n2520 n2518 n2519 n2159 n2155 n2521
+01--- 1
+0-1-0 1
+0-11- 1
+.names n2517 n2522 n2159 n2148 n2070 n2523
+1-1-0 1
+1-11- 1
+11--- 1
+.names n2524 n2159 n2155 n2525
+1-1 1
+11- 1
+.names n2527 n570 n2526 FP_R_57 n572 n2528
+0-01- 1
+00--- 1
+0-0-1 1
+.names n2017 n2014 n1290 n1371 n2015 n2016 n2018
+0011-- 1
+001-00 1
+.names n2020 n2021 n1290 n2023 n2022 n2024
+000-1 1
+0001- 1
+.names n1410 n1312 n1603 n2012
+111 1
+.names n2012 n2027 n2024 n2018 n2028
+00-1 1
+001- 1
+.names n2026 n570 n2025 FP_R_44 n572 n2027
+00--- 1
+0-0-1 1
+0-01- 1
+.names desIn[54] roundSel[4] roundSel[5] n2526
+000 1
+.names L_88 n570 roundSel[4] roundSel[5] n2527
+00-- 1
+0-11 1
+.names n662 roundSel[4] decrypt n663 key1[30] roundSel[5] n664
+0--0-0 1
+0--00- 1
+0-0--- 1
+01---- 1
+.names n594 n863 n692 n1861
+1-0 1
+10- 1
+.names n689 n804 n597 n1862
+1-0 1
+10- 1
+.names n634 n826 n605 n1860
+1-0 1
+10- 1
+.names desIn[7] roundSel[4] roundSel[5] n1175
+000 1
+.names R_125 n570 roundSel[4] roundSel[5] n1176
+00-- 1
+0-11 1
+.names desIn[12] roundSel[4] roundSel[5] n1599
+000 1
+.names n2407 n2107 n2158 n2524
+11- 1
+1-1 1
+.names n2125 n2050 n2407
+01 1
+.names n1596 n1593 n1589 n1581 n1597
+01-1 1
+011- 1
+.names n1588 n1586 n1527 n1577 n1582 n1583 n1589
+1-1-00 1
+1-11-- 1
+11---- 1
+.names n1570 n1579 n1580 n1527 n1485 n1576 n1581
+01---- 1
+0-00-0 1
+0-001- 1
+.names n1595 n570 n1594 FP_R_46 n572 n1596
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1592 n1527 n1590 n1461 n1508 n1549 n1593
+00---- 1
+0-0--0 1
+0-0-0- 1
+0-00-- 1
+.names n2107 n2144 n2148
+00 1
+.names n2144 n2155 n2070 n2107 n2522
+1-11 1
+11-- 1
+.names n2050 n2125 n2517
+01 1
+.names roundSel[4] roundSel[5] desIn[10] n1594
+001 1
+.names L_77 n570 roundSel[4] roundSel[5] n1595
+0-11 1
+00-- 1
+.names roundSel[5] decrypt roundSel[4] key2[7] n670
+0111 1
+.names roundSel[5] key1[7] n671
+01 1
+.names n2517 n2070 n2157 n2518
+011 1
+.names n2407 n2158 n2107 n2070 n2519
+0--0 1
+0-1- 1
+01-- 1
+.names n2107 n2125 n2050 n2158 n2070 n2157 n2520
+1--01- 1
+1-1--- 1
+11---- 1
+1--0-0 1
+.names n658 n939 n935 n2259
+10- 1
+1-0 1
+.names desIn[57] roundSel[4] roundSel[5] n927
+000 1
+.names R n570 roundSel[4] roundSel[5] n928
+0-11 1
+00-- 1
+.names n1461 n1485 n1508 n1590
+000 1
+.names n1527 n1485 n1591 n1549 n1592
+0111 1
+.names n642 n1016 n984 n2258
+1-0 1
+10- 1
+.names n1508 n1569 n1568 desOut[31] n1591
+0-01 1
+01-- 1
+.names decrypt roundSel[5] roundSel[4] key2[51] n674
+0011 1
+.names n2256 n570 n2255 FP_R_34 n572 n2257
+0-00- 1
+00--- 1
+0-0-1 1
+.names desIn[40] roundSel[4] roundSel[5] n2255
+000 1
+.names L_65 n570 roundSel[4] roundSel[5] n2256
+0-11 1
+00-- 1
+.names n1202 n1146 n1229
+01 1
+.names roundSel[5] key3[51] n675
+01 1
+.names n1225 n1202 n1227 n1228
+00- 1
+0-0 1
+.names n1146 n1224 n1227
+00 1
+.names roundSel[5] decrypt roundSel[4] key2[31] n677
+0111 1
+.names n1146 n1202 n1226
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[25] n940
+0111 1
+.names roundSel[5] key1[31] n678
+01 1
+.names roundSel[5] key1[25] n941
+01 1
+.names desIn[38] roundSel[4] roundSel[5] n2250
+000 1
+.names L_90 n570 roundSel[4] roundSel[5] n2251
+00-- 1
+0-11 1
+.names desOut[39] n1213 n1217 n1221 n1209 n1222
+10--- 1
+1---0 1
+1--0- 1
+1-0-- 1
+.names desOut[39] n1213 n1217 n1221 n1209 n1223
+01111 1
+.names n1211 n1212 n1210 n689 n960 n967 n1213
+000-11 1
+0000-- 1
+.names n1215 n1216 n1214 n697 n977 n1134 n1217
+000-11 1
+0000-- 1
+.names n1219 n1220 n1218 n626 n932 n1029 n1221
+0000-- 1
+000-11 1
+.names n1207 n1208 n1206 n570 n1011 n1138 n1209
+000-11 1
+0000-- 1
+.names roundSel[5] decrypt roundSel[4] key2[39] n943
+0111 1
+.names roundSel[5] key1[39] n944
+01 1
+.names n1958 n1906 n1884 n1942 n1969
+01-- 1
+0--0 1
+0-1- 1
+.names n1823 n1844 n1942
+01 1
+.names n1865 n1904 n1905 n1823 n1958
+0001 1
+.names n930 roundSel[4] decrypt n931 key1[33] roundSel[5] n932
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names n666 n1016 n1001 n1219
+1-0 1
+10- 1
+.names n634 n981 n974 n1220
+1-0 1
+10- 1
+.names n610 n1080 n1026 n1218
+10- 1
+1-0 1
+.names n1865 n1942 n1962 n1906 n1884 n1968
+1-1-- 1
+11--- 1
+1---0 1
+1--0- 1
+.names n1844 n1823 n1962
+01 1
+.names n1966 n1961 n1958 n1957 n1844 n1955 n1967
+1-010- 1
+11---- 1
+1-01-1 1
+.names n1954 n1823 n1906 n1955
+0-1 1
+01- 1
+.names n1928 n1960 n1959 n1907 n1844 n1961
+0--01 1
+0-1-- 1
+01--- 1
+.names n1928 n1823 n1844 n1907 n1957
+1--0 1
+1-1- 1
+11-- 1
+.names n1865 n1963 n1964 n1952 n1962 n1884 n1966
+0-1--- 1
+01---- 1
+0---01 1
+0--1-- 1
+.names decrypt roundSel[5] roundSel[4] key2[48] n946
+0011 1
+.names desIn[43] roundSel[4] roundSel[5] n1885
+000 1
+.names R_104 n570 roundSel[4] roundSel[5] n1886
+0-11 1
+00-- 1
+.names n1844 n1823 n1883 n1882 desOut[1] n1963
+01-01 1
+011-- 1
+.names n1823 n1905 n1904 n1964
+1-1 1
+11- 1
+.names n1823 n1904 n1905 n1952
+000 1
+.names roundSel[5] key3[48] n947
+01 1
+.names n1952 n1964 n1965
+00 1
+.names desOut[43] n1895 n1902 n1903 n1898 n1900 n1905
+001111 1
+.names desOut[43] n1895 n1902 n1903 n1898 n1900 n1904
+1----0 1
+11---- 1
+1---0- 1
+1--0-- 1
+1-0--- 1
+.names n681 n948 n945 n949
+1-0 1
+10- 1
+.names n1421 n570 n1420 FP_R_63 n572 n1422
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1409 n1418 n1290 n1417 n1395 n1414 n1419
+00-10- 1
+000--- 1
+00-1-1 1
+.names n1409 n1423 n1290 n1417 n1395 n1414 n1424
+01-1-1 1
+01-10- 1
+010--- 1
+.names n681 n672 n637 n1699
+10- 1
+1-0 1
+.names n1905 n1883 n1904 desOut[1] n1882 n1907
+0000- 1
+000-1 1
+.names n1904 n1905 n1823 n1960
+001 1
+.names n1883 n1823 n1844 desOut[1] n1882 n1959
+0000- 1
+000-1 1
+.names n1697 n650 n616 n768 n1698
+0-11 1
+00-- 1
+.names n618 n740 n605 n1697
+1-0 1
+10- 1
+.names n1695 n570 n648 n747 n1696
+0-11 1
+00-- 1
+.names n594 n700 n664 n1695
+1-0 1
+10- 1
+.names roundSel[5] roundSel[4] n571
+01 1
+.names n2541 n2070 n2539 n2050 n2145 n2403 n2542
+0-00-- 1
+00---- 1
+0-0-00 1
+.names n2537 n2534 n2089 n2144 n2536 n2535 n2538
+001--1 1
+001-1- 1
+0010-- 1
+.names n2544 n570 n2543 FP_R_32 n572 n2545
+00--- 1
+0-0-1 1
+0-01- 1
+.names n2403 n2419 n2050 n2156 n2531
+1-01 1
+11-- 1
+.names n2531 n2545 n2538 n2089 n2542 n2546
+00-01 1
+001-- 1
+.names n697 n724 n597 n1694
+10- 1
+1-0 1
+.names n634 n984 n977 n2359
+1-0 1
+10- 1
+.names n610 n656 n640 n1693
+1-0 1
+10- 1
+.names n638 roundSel[4] decrypt n639 key3[35] roundSel[5] n640
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names desIn[0] roundSel[4] roundSel[5] n573
+000 1
+.names n2357 n594 n1026 n1106 n2358
+0-11 1
+00-- 1
+.names n618 n1125 n939 n2357
+10- 1
+1-0 1
+.names n586 n1059 n1016 n1329
+1-0 1
+10- 1
+.names n658 n669 n600 n1692
+1-0 1
+10- 1
+.names L_70 n570 roundSel[4] roundSel[5] n574
+0-11 1
+00-- 1
+.names n666 n1029 n952 n1328
+1-0 1
+10- 1
+.names n950 roundSel[4] decrypt n951 key1[47] roundSel[5] n952
+0--0-0 1
+0--00- 1
+0-0--- 1
+01---- 1
+.names n574 n570 n573 FP_R_39 n572 n575
+00--- 1
+0-0-1 1
+0-01- 1
+.names n579 n1183 n942 n2356
+1-0 1
+10- 1
+.names n681 n960 n932 n1327
+10- 1
+1-0 1
+.names R_96 n570 roundSel[4] roundSel[5] n1690
+00-- 1
+0-11 1
+.names desIn[3] roundSel[4] roundSel[5] n576
+000 1
+.names n2354 n586 n955 n1011 n2355
+0-11 1
+00-- 1
+.names n681 n998 n991 n2354
+10- 1
+1-0 1
+.names n642 n1098 n1026 n1326
+1-0 1
+10- 1
+.names R_109 n570 roundSel[4] roundSel[5] n577
+0-11 1
+00-- 1
+.names n579 n1080 n974 n1325
+1-0 1
+10- 1
+.names n828 n833 n834 n835 desOut[61] n832 n838
+011111 1
+.names desOut[61] n828 n834 n835 n832 n833 n839
+01---- 1
+0---0- 1
+0--0-- 1
+0-0--- 1
+0----0 1
+.names n579 n1094 n1059 n2341
+1-0 1
+10- 1
+.names n2349 n2350 n2348 n681 n1121 n1138 n2351
+111-11 1
+1110-- 1
+.names n2338 n2337 n570 n988 n1193 n2339
+01-11 1
+010-- 1
+.names desOut[29] n2341 n2339 n2351 n2352
+0011 1
+.names n658 n1090 n1008 n1324
+1-0 1
+10- 1
+.names n1319 n1320 n1318 n570 n1039 n1114 n1323
+000-11 1
+0000-- 1
+.names n697 n1117 n942 n1319
+10- 1
+1-0 1
+.names n602 n1083 n1036 n1320
+10- 1
+1-0 1
+.names n618 n1134 n1023 n1318
+1-0 1
+10- 1
+.names n1136 roundSel[4] decrypt n1137 key3[41] roundSel[5] n1138
+0--00- 1
+0-1--- 1
+01---- 1
+0--0-0 1
+.names n2342 n2346 n2340 n642 n1001 n1106 n2349
+000-11 1
+0000-- 1
+.names n2343 n666 n1087 n1117 n2350
+0-11 1
+00-- 1
+.names n2345 n2347 n2344 n626 n1098 n1134 n2348
+0000-- 1
+000-11 1
+.names n1317 n1321 n1316 n689 n981 n988 n1322
+000-11 1
+0000-- 1
+.names n634 n1049 n967 n1317
+1-0 1
+10- 1
+.names n650 n1138 n948 n1321
+10- 1
+1-0 1
+.names n594 n1121 n945 n1316
+1-0 1
+10- 1
+.names n2075 n626 n736 n755 n2076
+0-11 1
+00-- 1
+.names n2077 n697 n645 n679 n2078
+0-11 1
+00-- 1
+.names n2080 n2081 n2079 n570 n600 n703 n2082
+000-11 1
+0000-- 1
+.names n2084 n2085 n2083 n579 n724 n855 n2086
+000-11 1
+0000-- 1
+.names n2072 n2073 n2071 n642 n700 n808 n2074
+0000-- 1
+000-11 1
+.names n697 n1183 n1029 n2343
+1-0 1
+10- 1
+.names roundSel[5] key3[13] n1058
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[13] n1057
+0011 1
+.names n1081 roundSel[4] decrypt n1082 key1[27] roundSel[5] n1083
+0--0-0 1
+0--00- 1
+0-0--- 1
+01---- 1
+.names roundSel[5] decrypt roundSel[4] key2[50] n845
+0111 1
+.names n689 n732 n720 n2084
+10- 1
+1-0 1
+.names n658 n869 n747 n2085
+1-0 1
+10- 1
+.names n681 n727 n716 n2083
+1-0 1
+10- 1
+.names roundSel[5] key1[50] n846
+01 1
+.names n610 n1019 n995 n1056
+10- 1
+1-0 1
+.names n634 n1039 n1016 n1055
+1-0 1
+10- 1
+.names n602 n847 n656 n848
+1-0 1
+10- 1
+.names n594 n1001 n991 n1054
+1-0 1
+10- 1
+.names n634 n740 n727 n849
+1-0 1
+10- 1
+.names n586 n847 n764 n2080
+10- 1
+1-0 1
+.names n594 n826 n676 n2081
+1-0 1
+10- 1
+.names n666 n759 n744 n2079
+1-0 1
+10- 1
+.names n2154 n2147 n2050 n2125 n2149 n2148 n2160
+001-00 1
+0010-- 1
+.names n2161 n2162 n2050 n2151 n2150 n2153 n2163
+0001-- 1
+000--0 1
+000-1- 1
+.names n2031 n570 n2030 FP_R_52 n572 n2032
+0-01- 1
+00--- 1
+0-0-1 1
+.names n2032 n2163 n2160 n2164
+01- 1
+0-1 1
+.names n1051 n1052 n1050 n570 n963 n1049 n1053
+0000-- 1
+000-11 1
+.names n650 n998 n981 n1051
+1-0 1
+10- 1
+.names n618 n952 n935 n1052
+1-0 1
+10- 1
+.names n579 n1029 n1011 n1050
+1-0 1
+10- 1
+.names desIn[5] roundSel[4] roundSel[5] n1267
+000 1
+.names R_117 n570 roundSel[4] roundSel[5] n1268
+0-11 1
+00-- 1
+.names n1793 n1734 n1799
+11 1
+.names n1688 n1711 n1775 n1793
+011 1
+.names n1797 n1796 n1712 n1795 n1734 n1798
+1--11 1
+1-1-- 1
+11--- 1
+.names n1775 n1711 n1795
+01 1
+.names n1734 n1775 n1796
+01 1
+.names n1711 n1688 n1712
+01 1
+.names n1753 n1734 n1688 n1775 n1797
+0--0 1
+0-0- 1
+01-- 1
+.names n1687 desOut[57] n1684 n1685 n1686 n1688
+0-111 1
+00--- 1
+.names n1774 desOut[25] n1761 n1765 n1769 n1773 n1775
+0-1111 1
+00---- 1
+.names n1751 n1752 n1753
+00 1
+.names n1710 desOut[41] n1708 n1711
+00- 1
+0-1 1
+.names n1240 n1224 n1230 n1174 n1070 n1146 n2459
+0-01-- 1
+00---- 1
+0-0--0 1
+0-0-0- 1
+.names n1173 n1070 desOut[15] n1171 n1166 n1168 n1230
+00-111 1
+000--- 1
+.names n1173 n1146 desOut[15] n1171 n1166 n1168 n1240
+000--- 1
+00-111 1
+.names n1793 n1792 n1688 n1791 n1794
+01-0 1
+010- 1
+.names n1711 n1775 n1791
+00 1
+.names n1753 n1734 n1711 n1775 n1792
+1-00 1
+10-- 1
+.names n1395 n1371 n1333 n1353 n1312 n1429
+01-01 1
+011-- 1
+.names desIn[46] roundSel[4] roundSel[5] n2454
+000 1
+.names L_89 n570 roundSel[4] roundSel[5] n2455
+0-11 1
+00-- 1
+.names n1371 n1353 n1410
+01 1
+.names n1395 n1371 n1312 n1426
+0-0 1
+01- 1
+.names n1312 n1395 n1372 n1353 n1290 n1427
+111-- 1
+11-01 1
+.names n1351 n1352 n1371 n1372
+001 1
+.names n1668 n1789 n1787 n1775 n1783 n1780 n1790
+0--0-1 1
+0--01- 1
+0-1--- 1
+01---- 1
+.names n1753 n1776 n1783
+01 1
+.names n1711 n1688 n1753 n1780
+011 1
+.names n1734 n1753 n1711 n1688 n1775 n1789
+1-011 1
+11-1- 1
+110-- 1
+.names n1734 n1786 n1778 n1712 n1753 n1787
+01--- 1
+0-000 1
+.names n2373 n2295 n2388
+01 1
+.names n2275 n2335 n2387
+11 1
+.names n2315 desOut[21] n2314 n2316
+0-1 1
+00- 1
+.names n2275 n2295 n2335 n2451
+001 1
+.names n2382 n2376 n2385 n2388 n2396 n2452
+1-000 1
+11--- 1
+.names roundSel[5] key1[1] n739
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[1] n738
+0111 1
+.names n2373 n2335 n2295 n2385
+1-0 1
+11- 1
+.names n2295 n2275 n2396
+01 1
+.names n2295 n2335 n2376
+01 1
+.names n2316 n2352 desOut[29] n2341 n2351 n2339 n2382
+01---- 1
+0-1--0 1
+0-1-0- 1
+0-11-- 1
+.names n1334 n1413 n1412 n1371 n1333 n1312 n1414
+0-011- 1
+01---- 1
+0-01-1 1
+.names n1416 n1415 n1403 n1404 n1417
+00-0 1
+000- 1
+.names n1290 n1401 n1373 n1398 n1395 n1396 n1409
+0--1-- 1
+0-1--- 1
+01---- 1
+0---00 1
+.names n1422 n1395 n1406 n1404 n1423
+11-- 1
+1--0 1
+1-0- 1
+.names n1934 n1938 n1943 n1952 n1964 n2189
+00000 1
+.names n1928 n1865 n1943
+01 1
+.names n2274 desOut[13] n2261 n2265 n2269 n2273 n2275
+00---- 1
+0-1111 1
+.names n2294 desOut[37] n2291 n2292 n2293 n2295
+0-111 1
+00--- 1
+.names n2334 desOut[5] n2333 n2335
+00- 1
+0-1 1
+.names n1371 n1333 n1406
+01 1
+.names n1312 n1353 n1404
+00 1
+.names roundSel[5] decrypt roundSel[4] key2[14] n742
+0111 1
+.names n1865 n2187 n1884 n1906 n1928 n1823 n2188
+01---- 1
+0-0-01 1
+0-01-- 1
+.names n1928 n1934 n1884 n1964 n2187
+1-11 1
+11-- 1
+.names n2387 n2393 n2446
+00 1
+.names n2388 n2389 n2390
+00 1
+.names n2393 n2387 n2389 n2388 n2295 n2380 n2449
+001--- 1
+00--01 1
+00-1-- 1
+.names desIn[6] roundSel[4] roundSel[5] n1420
+000 1
+.names L_94 n570 roundSel[4] roundSel[5] n1421
+0-11 1
+00-- 1
+.names roundSel[5] key1[14] n743
+01 1
+.names n610 n1094 n1001 n1159
+10- 1
+1-0 1
+.names n2185 n1934 n1965 n2186
+1-0 1
+11- 1
+.names n1943 n1884 n1906 n1823 n2185
+1-00 1
+11-- 1
+.names n681 n1098 n1083 n1158
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[37] n745
+0011 1
+.names n642 n1125 n932 n1157
+1-0 1
+10- 1
+.names roundSel[5] key3[37] n746
+01 1
+.names n650 n1106 n988 n1156
+10- 1
+1-0 1
+.names desIn[41] roundSel[4] roundSel[5] n1689
+000 1
+.names n2179 n2168 n2182 n1928 n2172 n2183
+001-1 1
+0010- 1
+.names n2171 n1823 n2169 n1931 n1844 n2172
+01--- 1
+0--00 1
+0-1-- 1
+.names n1865 n2176 n2178 n2175 n2179
+1--1 1
+1-1- 1
+11-- 1
+.names n2167 n570 n2166 FP_R_60 n572 n2168
+0-0-1 1
+0-01- 1
+00--- 1
+.names n2181 n1928 n2173 n1932 n1929 n2182
+0-00- 1
+01--- 1
+0-0-0 1
+.names roundSel[5] key1[26] n1154
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[26] n1153
+0111 1
+.names roundSel[5] decrypt roundSel[4] key2[42] n749
+0111 1
+.names n1884 n1906 n1929
+01 1
+.names n1906 n1844 n1932 n1884 n2173
+00-0 1
+001- 1
+.names n1953 n2180 n1844 n1928 n1906 n2181
+1-001 1
+11--- 1
+.names n1865 n1844 n1905 n1904 n2180
+011- 1
+01-1 1
+.names n1883 n1823 desOut[1] n1882 n1953
+010- 1
+01-1 1
+.names roundSel[5] key3[26] n1151
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[26] n1150
+0011 1
+.names n1259 n1260 n1257 n1251 n1070 n1234 n1261
+01-00- 1
+011--- 1
+01-0-0 1
+.names n1254 n1256 n1255 n1257 n1070 n1258
+0-000 1
+00--- 1
+.names n1252 n1230 n1043 n1227 n1253
+01-1 1
+011- 1
+.names n1253 n1264 n1261 n1258 n1265
+00-0 1
+001- 1
+.names n1263 n570 n1262 FP_R_55 n572 n1264
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1888 n570 n597 n700 n1899
+0-11 1
+00-- 1
+.names n666 n869 n727 n1888
+1-0 1
+10- 1
+.names n1896 n1894 n681 n744 n863 n1898
+01-11 1
+010-- 1
+.names n650 n740 n621 n1896
+1-0 1
+10- 1
+.names n1892 n1893 n1891 n626 n732 n847 n1894
+000-11 1
+0000-- 1
+.names n697 n676 n648 n1897
+10- 1
+1-0 1
+.names n689 n855 n755 n1895
+1-0 1
+10- 1
+.names n2558 n2388 n2389 n2380 n2378 n2377 n2559
+0-1--- 1
+01---- 1
+0---00 1
+0--0-- 1
+.names n2335 n2373 n2378
+11 1
+.names n2335 n2373 n2377
+00 1
+.names n2275 n2295 n2335 n2316 n2373 n2558
+00011 1
+.names n2295 n2373 n2389
+01 1
+.names n2316 n2275 n2380
+01 1
+.names n610 n822 n751 n1892
+1-0 1
+10- 1
+.names n634 n817 n716 n1893
+1-0 1
+10- 1
+.names n658 n826 n759 n1891
+1-0 1
+10- 1
+.names n2372 desOut[63] n2370 n2373
+0-1 1
+01- 1
+.names n2555 n2556 n2391 n2316 n2387 n2390 n2557
+11---- 1
+1-01-0 1
+1-011- 1
+.names n2552 n2397 n2556
+01 1
+.names n2387 n2389 n2388 n2391
+1-1 1
+11- 1
+.names n2353 n2378 n2551 n2380 n2555
+01-- 1
+0--0 1
+0-1- 1
+.names n2275 n2335 n2373 n2552
+011 1
+.names n2316 n2275 n2373 n2295 n2397
+01-- 1
+0--0 1
+0-1- 1
+.names n2295 n2335 n2551
+11 1
+.names n618 n768 n653 n1890
+1-0 1
+10- 1
+.names desOut[5] n1512 n1516 n1520 n1524 n1510 n1525
+1--0-- 1
+1-0--- 1
+1----0 1
+10---- 1
+1---0- 1
+.names desOut[5] n1512 n1516 n1520 n1524 n1510 n1526
+011111 1
+.names n2553 n2316 n2391 n2385 n2388 n2396 n2554
+0-1--- 1
+00---- 1
+0--000 1
+.names n2552 n2397 n2373 n2396 n2295 n2374 n2553
+01-0-0 1
+01-00- 1
+011--- 1
+.names n1511 n634 n942 n963 n1512
+00-- 1
+0-11 1
+.names n1514 n1515 n1513 n570 n1016 n1076 n1516
+0000-- 1
+000-11 1
+.names n1518 n1519 n1517 n689 n977 n998 n1520
+000-11 1
+0000-- 1
+.names n1522 n1523 n1521 n626 n991 n1019 n1524
+000-11 1
+0000-- 1
+.names n1509 n666 n935 n1011 n1510
+00-- 1
+0-11 1
+.names n2316 n2335 n2374
+00 1
+.names roundSel[5] key1[35] n639
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[35] n638
+0111 1
+.names n681 n1032 n970 n1522
+1-0 1
+10- 1
+.names n586 n1039 n1004 n1523
+10- 1
+1-0 1
+.names n579 n1023 n984 n1521
+10- 1
+1-0 1
+.names n666 n1032 n955 n2289
+1-0 1
+10- 1
+.names desIn[58] roundSel[4] roundSel[5] n2548
+000 1
+.names L_71 n570 roundSel[4] roundSel[5] n2549
+0-11 1
+00-- 1
+.names n634 n1183 n970 n2288
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[38] n643
+0011 1
+.names n642 n1076 n1023 n2287
+1-0 1
+10- 1
+.names n1251 n1043 n1233 n1174 n1070 n1259
+01-00 1
+011-- 1
+.names n1224 n1146 n1233
+01 1
+.names n1070 n1224 n1251
+00 1
+.names roundSel[5] key3[38] n644
+01 1
+.names n618 n1094 n1026 n2286
+1-0 1
+10- 1
+.names n1043 n1174 n1255
+01 1
+.names n1174 n1043 n1257
+01 1
+.names n1225 n1070 n1146 n1043 n1174 n1256
+10--- 1
+1-0-0 1
+1-01- 1
+.names n1238 n1252 n1174 n1070 n1043 n1254
+10--1 1
+10-0- 1
+101-- 1
+1-10- 1
+.names n658 n955 n948 n1518
+1-0 1
+10- 1
+.names n618 n1106 n974 n1519
+1-0 1
+10- 1
+.names n602 n1193 n1026 n1517
+10- 1
+1-0 1
+.names n658 n1155 n1011 n2285
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[44] n646
+0111 1
+.names n2353 n2391 n2386 n2295 n2377 n2316 n2392
+1-0--- 1
+11---- 1
+1--011 1
+.names n2353 n2395 n2399 n2397 n2373 n2396 n2400
+0-0-01 1
+0-00-- 1
+00---- 1
+.names n2379 n2381 n2382 n2335 n2295 n2383
+01--- 1
+0---0 1
+0--1- 1
+0-1-- 1
+.names n2392 n2400 n2257 n2383 n2401
+0001 1
+.names n602 n1106 n1039 n2284
+1-0 1
+10- 1
+.names roundSel[5] key1[44] n647
+01 1
+.names n610 n1109 n942 n2283
+1-0 1
+10- 1
+.names n775 n797 n840 n710 n875 n910
+11-00 1
+110-- 1
+1-000 1
+.names n697 n1101 n939 n2282
+1-0 1
+10- 1
+.names n1146 n1043 n1252
+01 1
+.names n1202 n1224 n1238
+00 1
+.names n838 n839 n796 desOut[19] n795 n911
+000-1 1
+0000- 1
+.names n782 n786 n790 n794 n795
+1111 1
+.names desOut[19] n786 n790 n794 n782 n796
+01111 1
+.names n594 n1125 n948 n2281
+1-0 1
+10- 1
+.names n775 n875 n911 n797 n710 n912
+01-00 1
+011-- 1
+.names n650 n1142 n945 n2280
+1-0 1
+10- 1
+.names n912 n910 n898 n840 n797 n710 n913
+000--0 1
+000-0- 1
+0001-- 1
+.names n897 desOut[27] n884 n888 n892 n896 n898
+0-1111 1
+00---- 1
+.names n710 n875 n840 n914
+001 1
+.names n1527 n1585 n1577 n1485 n1508 n1549 n1999
+1-11-- 1
+11---- 1
+1--111 1
+1-1-1- 1
+.names n1485 n1508 n1461 n1585
+001 1
+.names n1461 n1549 n1577
+00 1
+.names n710 n840 n875 n916
+011 1
+.names n775 n916 n840 n710 n875 n917
+11--- 1
+1-011 1
+.names desIn[22] roundSel[4] roundSel[5] n1994
+000 1
+.names L_92 n570 roundSel[4] roundSel[5] n1995
+0-11 1
+00-- 1
+.names n838 n839 n774 desOut[11] n773 n918
+000-1 1
+0001- 1
+.names n708 n774 n709 desOut[11] n773 n919
+000-1 1
+0001- 1
+.names desIn[53] roundSel[4] roundSel[5] n1313
+000 1
+.names R_111 n570 roundSel[4] roundSel[5] n1314
+0-11 1
+00-- 1
+.names n898 n840 n1983
+01 1
+.names n840 n898 n1991
+01 1
+.names n1569 n1508 n1527 desOut[31] n1568 n1629
+0110- 1
+011-1 1
+.names n1461 n1625 n1485 n1626 n1571 n1508 n1628
+1-0-11 1
+1-01-- 1
+11---- 1
+.names n1527 n1569 n1568 desOut[31] n1571
+01-- 1
+0-01 1
+.names n1569 n1527 desOut[31] n1568 n1626
+010- 1
+01-1 1
+.names n1508 n1527 n1485 n1569 n1568 desOut[31] n1625
+001-01 1
+0011-- 1
+.names n1485 n1508 n1627
+11 1
+.names n840 n775 n898 n1988
+011 1
+.names n710 n775 n1981 n911 n1989
+1-00 1
+11-- 1
+.names R_116 n570 roundSel[4] roundSel[5] n1623
+0-11 1
+00-- 1
+.names desIn[13] roundSel[4] roundSel[5] n1622
+000 1
+.names n650 n1193 n1001 n1359
+1-0 1
+10- 1
+.names n658 n1080 n1076 n1358
+10- 1
+1-0 1
+.names n1601 n1612 n1403 n1615 n1619 n1620
+01-01 1
+011-- 1
+.names n1371 n1613 n1614 n1609 n1412 n1615
+0-1-1 1
+0-10- 1
+01--- 1
+.names n1618 n1617 n1353 n1395 n1290 n1312 n1619
+00--0- 1
+00-1-- 1
+001--- 1
+00---0 1
+.names n1333 n1371 n1403
+01 1
+.names n1600 n570 n1599 FP_R_54 n572 n1601
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1605 n1371 n1607 n1608 n1610 n1611 n1612
+00---- 1
+0-0-00 1
+0-01-- 1
+.names n2384 n2385 n2380 n2275 n2316 n2386
+0-1-- 1
+00--- 1
+0--01 1
+.names n2275 n2295 n2373 n2335 n2384
+0001 1
+.names n642 n1155 n952 n1357
+1-0 1
+10- 1
+.names n610 n1106 n1059 n1356
+10- 1
+1-0 1
+.names n681 n1134 n1114 n1355
+1-0 1
+10- 1
+.names n666 n692 n605 n810
+1-0 1
+10- 1
+.names n2380 n2316 n2275 n2381
+0-1 1
+00- 1
+.names n2275 n2295 n2375 n2373 n2379
+0011 1
+.names n666 n1130 n1098 n1354
+1-0 1
+10- 1
+.names n610 n695 n679 n811
+1-0 1
+10- 1
+.names n1395 n1371 n1333 n2019
+011 1
+.names desOut[3] n1342 n1346 n1350 n1338 n1351
+1-0-- 1
+10--- 1
+1---0 1
+1--0- 1
+.names desOut[3] n1342 n1346 n1350 n1338 n1352
+01111 1
+.names roundSel[5] decrypt roundSel[4] key2[36] n812
+0111 1
+.names n1395 n1333 n1353 n1312 n2015
+01-0 1
+010- 1
+.names n1395 n1334 n1312 n1333 n2016
+1-00 1
+11-- 1
+.names n1312 n1353 n1603 n2017
+001 1
+.names n1371 n1604 n1312 n2013 n1353 n1333 n2014
+1-11-- 1
+11---- 1
+1-1-00 1
+.names n1339 n1341 n689 n1106 n1130 n1342
+01-11 1
+010-- 1
+.names n1345 n1344 n681 n1125 n1142 n1346
+01-11 1
+010-- 1
+.names n1347 n1349 n658 n1138 n1183 n1350
+010-- 1
+01-11 1
+.names n1337 n1336 n570 n991 n1059 n1338
+01-11 1
+010-- 1
+.names roundSel[5] key1[36] n813
+01 1
+.names n1333 n1395 n1603
+00 1
+.names n1043 n1236 n1232 n1228 n1230 n1237
+0-1-- 1
+01--- 1
+0--01 1
+.names n1242 n1243 n1244 n1070 n1233 n1174 n1245
+001--0 1
+001-0- 1
+0010-- 1
+.names n1174 n1070 n1238 n1239
+001 1
+.names n1247 n570 n1246 FP_R_47 n572 n1248
+0-00- 1
+00--- 1
+0-0-1 1
+.names n1237 n1245 n1239 n1248 n1249
+0000 1
+.names n602 n1098 n984 n1347
+10- 1
+1-0 1
+.names n1348 n666 n1101 n1109 n1349
+00-- 1
+0-11 1
+.names decrypt roundSel[5] roundSel[4] key2[36] n815
+0011 1
+.names roundSel[5] key3[36] n816
+01 1
+.names n1351 n1352 n1395 n1333 n2013
+0001 1
+.names n1351 n1352 n1395 n1311 n1310 n1604
+001-1 1
+0011- 1
+.names roundSel[5] key1[27] n1086
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[27] n1085
+0111 1
+.names n697 n817 n608 n818
+1-0 1
+10- 1
+.names n2502 n570 n2501 FP_R_49 n572 n2503
+0-0-1 1
+0-01- 1
+00--- 1
+.names n2504 n2510 n2509 n1775 n2507 n2511
+0000- 1
+000-0 1
+.names n2504 n2510 n2509 n2503 n1775 n2507 n2512
+0000-0 1
+00000- 1
+.names n579 n687 n653 n819
+10- 1
+1-0 1
+.names n626 n1083 n1080 n1084
+1-0 1
+10- 1
+.names roundSel[5] key3[27] n1082
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[27] n1081
+0011 1
+.names roundSel[5] key1[4] n1079
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[4] n1078
+0111 1
+.names n697 n814 n637 n1724
+1-0 1
+10- 1
+.names n634 n736 n700 n1725
+1-0 1
+10- 1
+.names n594 n847 n613 n1723
+1-0 1
+10- 1
+.names n611 roundSel[4] decrypt n612 key1[29] roundSel[5] n613
+0--0-0 1
+0--00- 1
+0-0--- 1
+01---- 1
+.names n1174 n1234 n1043 n1202 n2477
+0111 1
+.names n1174 n1043 n1202 n1234 n2474
+0001 1
+.names n610 n1155 n1090 n1457
+10- 1
+1-0 1
+.names n634 n1125 n1121 n1458
+10- 1
+1-0 1
+.names n650 n955 n952 n1456
+1-0 1
+10- 1
+.names n1823 n1940 n1939 n1937 n1938 n1941
+1--11 1
+1-1-- 1
+11--- 1
+.names n1944 n1945 n1884 n1932 n1946
+00-- 1
+0-00 1
+.names n1948 n570 n1947 FP_R_45 n572 n1949
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1935 n1941 n1949 n1946 n1950
+0001 1
+.names desIn[50] roundSel[4] roundSel[5] n2484
+000 1
+.names L_72 n570 roundSel[4] roundSel[5] n2485
+0-11 1
+00-- 1
+.names n594 n1183 n1049 n1453
+1-0 1
+10- 1
+.names n618 n984 n981 n1454
+1-0 1
+10- 1
+.names n602 n1152 n1080 n1452
+10- 1
+1-0 1
+.names desIn[11] roundSel[4] roundSel[5] n711
+000 1
+.names n590 roundSel[4] decrypt n591 key1[35] roundSel[5] n592
+0-0--- 1
+01---- 1
+0--0-0 1
+0--00- 1
+.names R_108 n570 roundSel[4] roundSel[5] n712
+0-11 1
+00-- 1
+.names desIn[48] roundSel[4] roundSel[5] n2479
+000 1
+.names L_64 n570 roundSel[4] roundSel[5] n2480
+0-11 1
+00-- 1
+.names desIn[1] roundSel[4] roundSel[5] n924
+000 1
+.names R_101 n570 roundSel[4] roundSel[5] n925
+00-- 1
+0-11 1
+.names n658 n1109 n1087 n1449
+1-0 1
+10- 1
+.names n681 n1117 n1101 n1450
+10- 1
+1-0 1
+.names n586 n1098 n1076 n1448
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[28] n714
+0111 1
+.names n1186 n1187 n1185 n570 n970 n1090 n1188
+000-11 1
+0000-- 1
+.names n618 n1087 n1032 n1186
+1-0 1
+10- 1
+.names n681 n1106 n1076 n1187
+1-0 1
+10- 1
+.names n697 n1080 n1019 n1185
+10- 1
+1-0 1
+.names roundSel[5] key1[28] n715
+01 1
+.names n594 n716 n695 n717
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[23] n718
+0111 1
+.names n1179 n1180 n1178 n586 n1101 n1183 n1184
+000-11 1
+0000-- 1
+.names n602 n1138 n963 n1179
+10- 1
+1-0 1
+.names n650 n1083 n991 n1180
+1-0 1
+10- 1
+.names n594 n1098 n998 n1178
+1-0 1
+10- 1
+.names roundSel[5] key1[23] n719
+01 1
+.names desIn[51] roundSel[4] roundSel[5] n1845
+000 1
+.names R_103 n570 roundSel[4] roundSel[5] n1846
+0-11 1
+00-- 1
+.names roundSel[5] key3[17] n1182
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[17] n1181
+0011 1
+.names n602 n869 n676 n1829
+1-0 1
+10- 1
+.names n610 n855 n700 n1827
+1-0 1
+10- 1
+.names desIn[62] roundSel[4] roundSel[5] n2587
+000 1
+.names L_87 n570 roundSel[4] roundSel[5] n2588
+00-- 1
+0-11 1
+.names n1807 n1810 n1806 n570 n695 n744 n1812
+0000-- 1
+000-11 1
+.names n1809 n1811 n1808 n626 n621 n648 n1813
+000-11 1
+0000-- 1
+.names n1817 n1818 n1816 n642 n632 n869 n1820
+000-11 1
+0000-- 1
+.names n1815 n1819 n1814 n681 n597 n653 n1821
+0000-- 1
+000-11 1
+.names desOut[27] n1813 n1820 n1821 n1812 n1822
+01111 1
+.names desIn[17] roundSel[4] roundSel[5] n1803
+000 1
+.names R_99 n570 roundSel[4] roundSel[5] n1804
+0-11 1
+00-- 1
+.names n586 n822 n585 n1815
+1-0 1
+10- 1
+.names n579 n826 n592 n1819
+1-0 1
+10- 1
+.names n658 n808 n640 n1814
+1-0 1
+10- 1
+.names n837 n836 n774 n773 desOut[11] n900
+00-00 1
+001-- 1
+.names n898 n840 n775 n915 n903 n2583
+0-0-- 1
+01--- 1
+0--00 1
+.names n2584 n797 n914 n876 n710 n840 n2585
+01---- 1
+0-0--0 1
+0-0-0- 1
+0-00-- 1
+.names n634 n804 n664 n1817
+1-0 1
+10- 1
+.names n610 n814 n669 n1818
+1-0 1
+10- 1
+.names n602 n817 n692 n1816
+1-0 1
+10- 1
+.names n797 n920 n840 n875 n919 n2584
+11--- 1
+1-000 1
+.names n838 n839 n708 n709 n874 n873 n920
+0000-1 1
+00001- 1
+.names n710 n875 n918 n2439
+111 1
+.names n2440 n797 n2580 n906 n710 n2581
+0000- 1
+000-1 1
+.names decrypt roundSel[5] roundSel[4] key2[29] n611
+0011 1
+.names n875 n840 n919 n775 n710 n2440
+00-00 1
+001-- 1
+.names n898 n920 n775 n840 n875 n710 n2580
+0-0011 1
+01---- 1
+.names roundSel[5] key3[29] n612
+01 1
+.names n2205 n2208 n2209 n2216 n2213 n2211 n2217
+00011- 1
+0001-0 1
+.names n1711 n2212 n2204 n1775 n1688 n1668 n2213
+000--0 1
+000-1- 1
+0000-- 1
+00-01- 1
+.names n1799 n2210 n1753 n2211
+000 1
+.names n1795 n2204 n1688 n1753 n1668 n2205
+1-111 1
+11-1- 1
+111-- 1
+.names n2207 n1776 n1711 n1781 n2208
+1-01 1
+11-- 1
+.names n1734 n1753 n1784 n1668 n2206 n2209
+01-11 1
+011-- 1
+.names n2214 n2203 n2216
+01 1
+.names n877 n913 n909 n898 n710 n908 n921
+0-11-1 1
+0-111- 1
+01---- 1
+.names n575 n921 n922
+01 1
+.names n1668 n1784 n1785 n2214
+111 1
+.names n2202 n570 n2201 FP_R_43 n572 n2203
+0-0-1 1
+0-01- 1
+00--- 1
+.names roundSel[5] decrypt roundSel[4] key2[49] n614
+0111 1
+.names n2205 n2208 n2209 n2214 n2213 n2211 n2215
+00001- 1
+0000-0 1
+.names n602 n1121 n1008 n1286
+1-0 1
+10- 1
+.names n594 n1134 n1036 n1287
+1-0 1
+10- 1
+.names n634 n1080 n988 n1285
+1-0 1
+10- 1
+.names roundSel[5] key1[49] n615
+01 1
+.names n1688 n1775 n1784
+01 1
+.names n1751 n1752 n1710 desOut[41] n1708 n1785
+0000- 1
+000-1 1
+.names n1668 n1734 n2204
+01 1
+.names n1775 n1668 n1734 n1688 n2212
+010- 1
+0-01 1
+01-1 1
+.names roundSel[5] key1[47] n980
+01 1
+.names n1711 n1668 n1775 n1734 n1688 n2210
+1-0-1 1
+1-00- 1
+10--- 1
+.names n658 n1083 n1016 n1282
+1-0 1
+10- 1
+.names n586 n1090 n1029 n1283
+1-0 1
+10- 1
+.names n642 n1138 n939 n1281
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[40] n982
+0011 1
+.names decrypt roundSel[5] roundSel[4] key2[8] n619
+0011 1
+.names roundSel[5] key3[40] n983
+01 1
+.names n1912 n1913 n1911 n570 n640 n736 n1914
+000-11 1
+0000-- 1
+.names n1916 n1917 n1915 n642 n684 n764 n1918
+000-11 1
+0000-- 1
+.names n1920 n1921 n1919 n697 n592 n716 n1922
+0000-- 1
+000-11 1
+.names n1924 n1925 n1923 n626 n600 n613 n1926
+000-11 1
+0000-- 1
+.names desOut[59] n1918 n1922 n1926 n1914 n1927
+01111 1
+.names n971 n978 n964 n570 n981 n984 n985
+000-11 1
+0000-- 1
+.names n650 n963 n960 n964
+1-0 1
+10- 1
+.names n618 n1117 n945 n1278
+10- 1
+1-0 1
+.names n610 n1098 n974 n1279
+10- 1
+1-0 1
+.names n681 n1001 n981 n1277
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[10] n986
+0011 1
+.names n681 n645 n608 n1924
+1-0 1
+10- 1
+.names n658 n740 n695 n1925
+1-0 1
+10- 1
+.names n602 n724 n687 n1923
+1-0 1
+10- 1
+.names roundSel[5] key3[10] n987
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[20] n989
+0111 1
+.names n586 n700 n637 n1920
+1-0 1
+10- 1
+.names n594 n751 n632 n1921
+1-0 1
+10- 1
+.names n634 n676 n589 n1919
+1-0 1
+10- 1
+.names n579 n822 n716 n1657
+1-0 1
+10- 1
+.names desIn[63] roundSel[4] roundSel[5] n1486
+000 1
+.names R_118 n570 roundSel[4] roundSel[5] n1487
+0-11 1
+00-- 1
+.names n1779 n1668 n1794 n1798 n1799 n1800
+00--- 1
+0-000 1
+.names n1646 n570 n1645 FP_R_37 n572 n1647
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1790 n1647 n1800 n1801
+001 1
+.names n2317 n594 n1019 n1114 n2318
+0-11 1
+00-- 1
+.names n634 n1076 n1004 n2317
+1-0 1
+10- 1
+.names n2304 n2310 n2311 n2312 n2313 n2314
+11111 1
+.names desOut[21] n2310 n2311 n2312 n2313 n2304 n2315
+011111 1
+.names n2296 n2297 n2298 n2299 n2300 n2301 n2310
+000000 1
+.names n2307 n2302 n579 n1004 n1130 n2311
+000-- 1
+00-11 1
+.names n2305 n2308 n2312
+00 1
+.names n2309 n2306 n570 n977 n1083 n2313
+000-- 1
+00-11 1
+.names n2303 n626 n1106 n1152 n2304
+0-11 1
+00-- 1
+.names n586 n1094 n984 n2309
+1-0 1
+10- 1
+.names n594 n1138 n1032 n2306
+1-0 1
+10- 1
+.names n681 n1155 n1109 n2305
+10- 1
+1-0 1
+.names n666 n1183 n1125 n2308
+1-0 1
+10- 1
+.names n634 n869 n621 n881
+1-0 1
+10- 1
+.names n602 n1114 n998 n2307
+1-0 1
+10- 1
+.names n650 n1121 n970 n2302
+1-0 1
+10- 1
+.names n650 n716 n592 n882
+10- 1
+1-0 1
+.names n610 n755 n597 n2043
+10- 1
+1-0 1
+.names n689 n869 n822 n2046
+1-0 1
+10- 1
+.names n634 n847 n703 n2041
+1-0 1
+10- 1
+.names n658 n1101 n963 n2296
+1-0 1
+10- 1
+.names n634 n1142 n955 n2297
+1-0 1
+10- 1
+.names n689 n1193 n1076 n2298
+10- 1
+1-0 1
+.names n642 n1134 n991 n2299
+1-0 1
+10- 1
+.names n610 n1117 n935 n2300
+1-0 1
+10- 1
+.names n618 n1098 n1019 n2301
+1-0 1
+10- 1
+.names n586 n855 n653 n883
+1-0 1
+10- 1
+.names n602 n727 n648 n2044
+10- 1
+1-0 1
+.names n642 n716 n605 n2045
+10- 1
+1-0 1
+.names n594 n736 n616 n2042
+1-0 1
+10- 1
+.names roundSel[5] key3[11] n1018
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[11] n1017
+0011 1
+.names n882 n883 n881 n626 n804 n808 n884
+000-11 1
+0000-- 1
+.names n689 n814 n703 n885
+1-0 1
+10- 1
+.names n666 n817 n679 n886
+1-0 1
+10- 1
+.names roundSel[5] key1[19] n1015
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[19] n1014
+0111 1
+.names n642 n755 n664 n887
+10- 1
+1-0 1
+.names n886 n887 n885 n570 n669 n720 n888
+0000-- 1
+000-11 1
+.names n681 n826 n822 n889
+1-0 1
+10- 1
+.names n1005 n1012 n992 n642 n995 n998 n1013
+000-11 1
+0000-- 1
+.names n618 n1004 n1001 n1005
+10- 1
+1-0 1
+.names n634 n1011 n1008 n1012
+1-0 1
+10- 1
+.names n602 n991 n988 n992
+1-0 1
+10- 1
+.names n658 n732 n653 n2037
+1-0 1
+10- 1
+.names n650 n720 n664 n2038
+1-0 1
+10- 1
+.names n618 n759 n585 n2035
+10- 1
+1-0 1
+.names roundSel[5] key3[34] n1010
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[34] n1009
+0011 1
+.names desIn[15] roundSel[4] roundSel[5] n1147
+000 1
+.names R_124 n570 roundSel[4] roundSel[5] n1148
+0-11 1
+00-- 1
+.names n1753 n1734 n1754
+01 1
+.names desOut[7] n1742 n1746 n1750 n1738 n1751
+10--- 1
+1---0 1
+1--0- 1
+1-0-- 1
+.names desOut[7] n1742 n1746 n1750 n1738 n1752
+01111 1
+.names n2107 n2144 n2417
+11 1
+.names n1740 n1741 n1739 n570 n632 n716 n1742
+000-11 1
+0000-- 1
+.names n1744 n1745 n1743 n697 n684 n736 n1746
+0000-- 1
+000-11 1
+.names n1748 n1749 n1747 n666 n653 n808 n1750
+000-11 1
+0000-- 1
+.names n1736 n1737 n1735 n626 n679 n822 n1738
+000-11 1
+0000-- 1
+.names n579 n1109 n970 n1489
+1-0 1
+10- 1
+.names n2050 n2107 n2415
+01 1
+.names n2070 n2403 n2414
+11 1
+.names n602 n863 n585 n1748
+1-0 1
+10- 1
+.names n579 n869 n605 n1749
+1-0 1
+10- 1
+.names n658 n855 n616 n1747
+1-0 1
+10- 1
+.names n2107 n2144 n2403
+01 1
+.names n681 n695 n629 n780
+1-0 1
+10- 1
+.names n2125 n2144 n2145
+00 1
+.names n2410 n2070 n2144 n2411 n2089 n2404 n2412
+000--- 1
+00-0-0 1
+00-00- 1
+.names n2407 n2408 n2157 n2125 n2409
+01-0 1
+011- 1
+.names n2107 n2089 n2405 n2125 n2050 n2144 n2406
+11-0-- 1
+111--- 1
+1-10-- 1
+11--01 1
+.names n1474 n1477 n1479 n1480 n1481 n1473 n1482
+011111 1
+.names n1474 n1477 n1479 n1480 n1483 n1473 n1484
+011111 1
+.names n579 n640 n613 n781
+1-0 1
+10- 1
+.names n2107 n2125 n2404
+00 1
+.names n2144 n2125 n2107 n2089 n2050 n2410
+01-11 1
+010-- 1
+.names n618 n1114 n1039 n1474
+10- 1
+1-0 1
+.names n1476 n642 n977 n1130 n1477
+0-11 1
+00-- 1
+.names n1465 n1466 n1467 n1468 n1470 n1471 n1479
+000000 1
+.names n1478 n1475 n666 n963 n1155 n1480
+00-11 1
+000-- 1
+.names n1469 desOut[55] n586 n998 n1106 n1483
+000-- 1
+00-11 1
+.names n1472 n626 n984 n1193 n1473
+0-11 1
+00-- 1
+.names n780 n781 n779 n697 n621 n740 n782
+000-11 1
+0000-- 1
+.names n2070 n2089 n2149
+00 1
+.names n658 n608 n592 n783
+1-0 1
+10- 1
+.names n1469 n586 n998 n1106 n1481
+0-11 1
+00-- 1
+.names n634 n692 n582 n784
+1-0 1
+10- 1
+.names n2146 n2070 n2125 n2144 n2107 n2089 n2147
+01-1-0 1
+01-10- 1
+011--- 1
+.names n2089 n2125 n2146
+01 1
+.names n618 n700 n597 n785
+1-0 1
+10- 1
+.names roundSel[5] key3[32] n1116
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[32] n1115
+0011 1
+.names n602 n1094 n1019 n1478
+10- 1
+1-0 1
+.names n689 n1152 n1004 n1475
+1-0 1
+10- 1
+.names n784 n785 n783 n689 n637 n684 n786
+000-11 1
+0000-- 1
+.names n626 n687 n672 n787
+1-0 1
+10- 1
+.names n594 n624 n605 n788
+10- 1
+1-0 1
+.names n2133 n634 n600 n764 n2138
+0-11 1
+00-- 1
+.names n2134 n2137 n2132 n570 n629 n863 n2139
+0000-- 1
+000-11 1
+.names n2127 n2129 n2126 n689 n624 n747 n2140
+000-11 1
+0000-- 1
+.names n2130 n2131 n2128 n666 n656 n724 n2141
+000-11 1
+0000-- 1
+.names n2135 n681 n700 n768 n2136
+0-11 1
+00-- 1
+.names n610 n645 n585 n789
+10- 1
+1-0 1
+.names roundSel[5] key1[32] n1113
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[32] n1112
+0111 1
+.names n650 n732 n672 n2130
+1-0 1
+10- 1
+.names n594 n755 n637 n2131
+1-0 1
+10- 1
+.names desIn[61] roundSel[4] roundSel[5] n798
+000 1
+.names R_110 n570 roundSel[4] roundSel[5] n799
+0-11 1
+00-- 1
+.names n1549 n1630 n1628 n1570 n1574 n1508 n1631
+01---- 1
+0--111 1
+0-1--- 1
+.names n1549 n1636 n1570 n1582 n1508 n1632 n1637
+1-0-01 1
+1-01-- 1
+10---- 1
+.names n1638 n1570 n1632 n1485 n1639
+1-11 1
+10-- 1
+.names n1641 n570 n1640 FP_R_62 n572 n1642
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1642 n1637 n1639 n1631 n1643
+1-1- 1
+11-- 1
+1--1 1
+.names n586 n808 n616 n1857
+1-0 1
+10- 1
+.names n681 n679 n621 n1858
+1-0 1
+10- 1
+.names n602 n855 n640 n1856
+1-0 1
+10- 1
+.names n1110 n570 n974 n1106 n1111
+0-11 1
+00-- 1
+.names n697 n1109 n1008 n1110
+1-0 1
+10- 1
+.names n618 n732 n684 n1853
+10- 1
+1-0 1
+.names n658 n817 n585 n1854
+10- 1
+1-0 1
+.names n642 n847 n669 n1852
+1-0 1
+10- 1
+.names n2156 n2159 n2515
+11 1
+.names n2159 n2411 n2089 n2070 n2514
+010- 1
+01-0 1
+.names n1461 n1485 n1582
+00 1
+.names n1585 n1527 n1485 n1461 n1586
+00-1 1
+000- 1
+.names n1570 n1508 n1587 n1461 n1549 n1588
+1-1-- 1
+10--- 1
+1--01 1
+.names n650 n744 n632 n1849
+1-0 1
+10- 1
+.names n610 n869 n592 n1850
+10- 1
+1-0 1
+.names n666 n822 n648 n1848
+1-0 1
+10- 1
+.names n1549 n1485 n1461 n1587
+0-1 1
+00- 1
+.names n2506 n1668 n1776 n2238 n1777 n1754 n2507
+0-00-0 1
+0-000- 1
+01---- 1
+.names n1711 n1734 n1668 n1775 n1753 n1688 n2504
+0110-- 1
+01-000 1
+011-00 1
+.names n1688 n1775 n1776 n2510
+001 1
+.names n1688 n2508 n1775 n1734 n1668 n2509
+1-011 1
+11--- 1
+.names n1485 n1508 n1584
+00 1
+.names roundSel[5] decrypt roundSel[4] key2[21] n682
+0111 1
+.names n1788 n1795 n1734 n2247
+001 1
+.names n1688 n1788 n1782 n2248
+0-0 1
+00- 1
+.names n1734 n1711 n1776
+01 1
+.names roundSel[5] key1[21] n683
+01 1
+.names n1711 n1775 n1788
+01 1
+.names n1734 n1753 n1782
+00 1
+.names n1578 n1527 n1508 n1575 n1579
+01-0 1
+011- 1
+.names n1549 n1485 n1461 n1508 n1580
+0-11 1
+00-- 1
+.names decrypt roundSel[5] roundSel[4] key2[2] n685
+0011 1
+.names n1668 n1795 n1788 n1753 n2244
+1-11 1
+11-- 1
+.names n1688 n1734 n1795 n1753 n2245
+1--0 1
+1-0- 1
+11-- 1
+.names n642 n1087 n948 n1215
+1-0 1
+10- 1
+.names n586 n1008 n952 n1216
+1-0 1
+10- 1
+.names n681 n995 n988 n1214
+1-0 1
+10- 1
+.names roundSel[5] key3[2] n686
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[47] n950
+0011 1
+.names n1688 n1753 n1734 n2239
+0-1 1
+00- 1
+.names n1734 n1753 n1688 n1711 n1775 n2240
+01-01 1
+010-1 1
+0100- 1
+.names n2241 n1788 n1795 n1777 n1781 n2242
+0--1- 1
+0-1-- 1
+01--- 1
+0---0 1
+.names roundSel[5] key3[47] n951
+01 1
+.names n1688 n1711 n1777
+00 1
+.names n1734 n1753 n1781
+11 1
+.names n1753 n1734 n1775 n1711 n1688 n2241
+011-1 1
+0110- 1
+.names n618 n1121 n942 n1211
+1-0 1
+10- 1
+.names n602 n1090 n945 n1212
+1-0 1
+10- 1
+.names n594 n1083 n1023 n1210
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[40] n953
+0111 1
+.names n2576 n2571 n2388 n2551 n2316 n2577
+1--1- 1
+1-1-- 1
+11--- 1
+1---1 1
+.names n2574 n2275 n2572 n2571 n2388 n2374 n2575
+1-000- 1
+10---- 1
+1-00-0 1
+.names n2565 n570 n2564 FP_R_48 n572 n2566
+0-0-1 1
+0-01- 1
+00--- 1
+.names n2567 n2552 n2569 n2295 n2377 n2378 n2570
+0-01-- 1
+01---- 1
+0-0-00 1
+.names n2570 n2566 n2577 n2575 n2578
+00-1 1
+001- 1
+.names roundSel[5] key1[40] n954
+01 1
+.names n697 n955 n952 n956
+10- 1
+1-0 1
+.names n1823 n1928 n1956
+11 1
+.names n949 n956 n936 n666 n939 n942 n957
+000-11 1
+0000-- 1
+.names n594 n935 n932 n936
+10- 1
+1-0 1
+.names roundSel[5] decrypt roundSel[4] key2[24] n958
+0111 1
+.names n1823 n1883 n1882 desOut[1] n1954
+11-- 1
+1-01 1
+.names roundSel[5] key1[24] n959
+01 1
+.names n1676 n1677 n1678 n1680 n1682 n1683 n1684
+000000 1
+.names n1679 n1681 n1674 n626 n724 n768 n1685
+000-11 1
+0000-- 1
+.names n1669 n1670 n1671 n1672 n1673 n1675 n1686
+000000 1
+.names desOut[57] n1685 n1686 n1684 n1687
+0111 1
+.names n642 n732 n661 n1670
+1-0 1
+10- 1
+.names n634 n759 n624 n1671
+1-0 1
+10- 1
+.names n602 n755 n613 n1672
+1-0 1
+10- 1
+.names n570 n855 n672 n1673
+10- 1
+1-0 1
+.names n610 n727 n608 n1675
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[52] n580
+0011 1
+.names n579 n736 n600 n1679
+1-0 1
+10- 1
+.names n658 n716 n645 n1681
+1-0 1
+10- 1
+.names n618 n847 n637 n1674
+1-0 1
+10- 1
+.names roundSel[5] key3[52] n581
+01 1
+.names n650 n1155 n932 n2342
+1-0 1
+10- 1
+.names n658 n1142 n1049 n2346
+1-0 1
+10- 1
+.names n586 n1130 n1080 n2340
+1-0 1
+10- 1
+.names n689 n764 n700 n1676
+1-0 1
+10- 1
+.names n650 n863 n589 n1677
+10- 1
+1-0 1
+.names n697 n869 n695 n1678
+1-0 1
+10- 1
+.names n594 n744 n582 n1680
+1-0 1
+10- 1
+.names n681 n747 n740 n1682
+1-0 1
+10- 1
+.names n586 n720 n656 n1683
+1-0 1
+10- 1
+.names n618 n1152 n995 n2345
+10- 1
+1-0 1
+.names n594 n1109 n960 n2347
+10- 1
+1-0 1
+.names n689 n1114 n1083 n2344
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[30] n583
+0111 1
+.names roundSel[5] key1[30] n584
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[43] n587
+0111 1
+.names n650 n817 n608 n850
+1-0 1
+10- 1
+.names roundSel[5] key1[43] n588
+01 1
+.names n618 n814 n613 n852
+1-0 1
+10- 1
+.names n610 n817 n740 n2077
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[0] n853
+0011 1
+.names roundSel[5] key1[13] n1048
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[13] n1047
+0111 1
+.names n1305 n666 n945 n967 n1306
+10-- 1
+1-11 1
+.names n1308 n1307 n689 n1016 n1026 n1309
+110-- 1
+11-11 1
+.names n1302 n1301 n610 n960 n1011 n1304
+01-11 1
+010-- 1
+.names roundSel[5] key3[0] n854
+01 1
+.names n650 n822 n624 n2075
+1-0 1
+10- 1
+.names n586 n768 n755 n856
+1-0 1
+10- 1
+.names n618 n804 n656 n2072
+10- 1
+1-0 1
+.names n602 n814 n768 n2073
+1-0 1
+10- 1
+.names n634 n863 n751 n2071
+1-0 1
+10- 1
+.names n697 n826 n582 n857
+1-0 1
+10- 1
+.names R_122 n570 roundSel[4] roundSel[5] n1045
+0-11 1
+00-- 1
+.names desIn[31] roundSel[4] roundSel[5] n1044
+000 1
+.names n579 n732 n700 n859
+1-0 1
+10- 1
+.names n1033 n1040 n1020 n626 n1023 n1026 n1041
+0000-- 1
+000-11 1
+.names desOut[57] n985 n1013 n1041 n957 n1042
+01111 1
+.names n610 n1032 n1029 n1033
+10- 1
+1-0 1
+.names n689 n1039 n1036 n1040
+1-0 1
+10- 1
+.names n1688 n1711 n1778
+01 1
+.names n1688 n1775 n1785 n1786
+011 1
+.names n1694 n1698 n1705 n1706 n1707 n1696 n1708
+011111 1
+.names n1696 n1698 n1705 n1706 n1707 n1709 n1710
+111111 1
+.names n2275 n2335 n2393
+00 1
+.names n2376 n2316 n2396 n2385 n2447
+01-1 1
+011- 1
+.names n1395 n1406 n1404 n1418
+011 1
+.names n1312 n1403 n1395 n1353 n1416
+0001 1
+.names n1408 n1312 n1371 n1333 n1402 n1415
+011-1 1
+0111- 1
+.names roundSel[5] key1[42] n750
+01 1
+.names desIn[44] roundSel[4] roundSel[5] n2441
+000 1
+.names L_81 n570 roundSel[4] roundSel[5] n2442
+0-11 1
+00-- 1
+.names n1351 n1352 n1395 n1402
+000 1
+.names n1351 n1352 n1333 n1408
+001 1
+.names n1333 n1371 n1353 n1312 n1413
+00-0 1
+000- 1
+.names n1353 n1312 n1412
+01 1
+.names n2170 n2174 n1954 n1928 n2176
+11-- 1
+1-11 1
+.names n1906 n2177 n1954 n1844 n1928 n2178
+11--- 1
+1-011 1
+.names n1844 n1928 n1953 n1934 n2175
+01-1 1
+011- 1
+.names roundSel[5] decrypt roundSel[4] key2[9] n753
+0111 1
+.names n1928 n1823 n1844 n1883 desOut[1] n1882 n2177
+0-00-1 1
+0-000- 1
+01---- 1
+.names roundSel[5] key1[9] n754
+01 1
+.names n1310 n1311 n1371 n1411
+001 1
+.names n1823 n1883 desOut[1] n1882 n2174
+00-1 1
+000- 1
+.names n1844 n1905 n1904 n2170
+1-1 1
+11- 1
+.names decrypt roundSel[5] roundSel[4] key2[23] n757
+0011 1
+.names n1095 n1103 n1111 n1127 n1143 n1144
+11111 1
+.names desOut[23] n1103 n1111 n1127 n1143 n1095 n1145
+011111 1
+.names roundSel[5] key3[23] n758
+01 1
+.names n1102 n689 n1059 n1098 n1103
+00-- 1
+0-11 1
+.names n1135 n1139 n1131 n594 n1029 n1142 n1143
+000-11 1
+0000-- 1
+.names n1084 n1091 n1077 n642 n988 n1094 n1095
+000-11 1
+0000-- 1
+.names n1907 n1844 n1865 n1906 n1884 n2169
+01--1 1
+01-1- 1
+011-- 1
+.names n1884 n2170 n1865 n1823 n2171
+0001 1
+.names n586 n1134 n981 n1135
+10- 1
+1-0 1
+.names n634 n1138 n952 n1139
+1-0 1
+10- 1
+.names n602 n1130 n995 n1131
+1-0 1
+10- 1
+.names roundSel[5] key3[46] n1141
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[46] n1140
+0011 1
+.names n579 n808 n720 n1889
+10- 1
+1-0 1
+.names n1871 n1872 n1870 n697 n664 n720 n1873
+000-11 1
+0000-- 1
+.names n1875 n1876 n1874 n626 n582 n608 n1877
+000-11 1
+0000-- 1
+.names n1878 n689 n589 n645 n1879
+00-- 1
+0-11 1
+.names n1880 n681 n613 n661 n1881
+0-11 1
+00-- 1
+.names n579 n676 n629 n1880
+1-0 1
+10- 1
+.names desIn[56] roundSel[4] roundSel[5] n2543
+000 1
+.names L n570 roundSel[4] roundSel[5] n2544
+00-- 1
+0-11 1
+.names n642 n1152 n1036 n1514
+10- 1
+1-0 1
+.names n610 n1183 n945 n1515
+1-0 1
+10- 1
+.names n594 n1155 n939 n1513
+1-0 1
+10- 1
+.names n2050 n2125 n2417 n2148 n2539
+01-1 1
+011- 1
+.names n2070 n2540 n2050 n2125 n2148 n2541
+0-1-1 1
+0-11- 1
+01--- 1
+.names roundSel[5] decrypt roundSel[4] key2[8] n651
+0111 1
+.names n2050 n2107 n2144 n2125 n2540
+010- 1
+01-0 1
+.names roundSel[5] key1[8] n652
+01 1
+.names n586 n1193 n1019 n2279
+1-0 1
+10- 1
+.names n650 n1109 n1008 n1511
+1-0 1
+10- 1
+.names n570 n1130 n1036 n2278
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[15] n654
+0011 1
+.names n681 n963 n935 n2277
+1-0 1
+10- 1
+.names desIn[2] roundSel[4] roundSel[5] n1246
+000 1
+.names L_78 n570 roundSel[4] roundSel[5] n1247
+0-11 1
+00-- 1
+.names n697 n1125 n967 n1509
+10- 1
+1-0 1
+.names roundSel[5] key3[15] n655
+01 1
+.names n579 n1152 n977 n2276
+1-0 1
+10- 1
+.names n2259 n2260 n2258 n570 n995 n1152 n2261
+0000-- 1
+000-11 1
+.names n2263 n2264 n2262 n681 n942 n1011 n2265
+000-11 1
+0000-- 1
+.names n2267 n2268 n2266 n666 n948 n970 n2269
+000-11 1
+0000-- 1
+.names n2271 n2272 n2270 n626 n977 n1039 n2273
+0000-- 1
+000-11 1
+.names desOut[13] n2265 n2269 n2273 n2261 n2274
+01111 1
+.names n1146 n1174 n1202 n1070 n1224 n1242
+011-- 1
+0-111 1
+01-11 1
+.names n1146 n1174 n1070 n1202 n1243
+1-00 1
+10-0 1
+100- 1
+.names n1043 n1174 n1238 n1070 n1244
+1-0- 1
+11-- 1
+1--0 1
+.names n602 n1004 n974 n2271
+10- 1
+1-0 1
+.names n634 n1032 n945 n2272
+1-0 1
+10- 1
+.names n610 n1008 n963 n2270
+1-0 1
+10- 1
+.names n905 n840 n907 n875 n775 n908
+0-0-1 1
+0-01- 1
+01--- 1
+.names n901 n875 n899 n710 n840 n775 n909
+0-00-- 1
+0--00- 1
+01---- 1
+0-0--1 1
+0-0-0- 1
+.names roundSel[5] decrypt roundSel[4] key2[52] n659
+0111 1
+.names n797 n840 n1981
+00 1
+.names n1163 n1164 n1170 n618 n1029 n1109 n1171
+001-11 1
+0010-- 1
+.names n1159 n1165 n1161 n634 n1059 n1114 n1166
+011-11 1
+0110-- 1
+.names n1167 n658 n981 n1130 n1168
+1-11 1
+10-- 1
+.names n1166 n1168 n1170 n1172 n1173
+1111 1
+.names n775 n898 n911 n1981 n1985
+11-- 1
+-11- 1
+1--1 1
+1-1- 1
+.names n898 n1982 n797 n900 n1986
+1-01 1
+11-- 1
+.names n918 n1981 n898 n709 n708 n797 n1984
+000-1- 1
+0001-- 1
+000--0 1
+.names n775 n797 n1982
+11 1
+.names n1312 n1353 n1606 n1618
+001 1
+.names n1616 n1312 n1353 n1333 n1290 n1617
+011-0 1
+0111- 1
+.names n1290 n1395 n1606
+00 1
+.names n1333 n1395 n1290 n1616
+1-0 1
+10- 1
+.names n1290 n1395 n1609
+01 1
+.names n1312 n1353 n1333 n1290 n1395 n1613
+00011 1
+.names n1333 n1609 n1312 n1353 n1614
+1-01 1
+11-- 1
+.names n2316 n2335 n2375
+01 1
+.names n1609 n1353 n1312 n1610
+011 1
+.names n1353 n1334 n1333 n1312 n1611
+00-1 1
+001- 1
+.names n1395 n1353 n1312 n1333 n1290 n1608
+00--- 1
+0--01 1
+0-0-- 1
+.names n1312 n1606 n1290 n1333 n1395 n1353 n1607
+00-0-1 1
+00-00- 1
+000--- 1
+.names n1333 n1290 n1604 n1395 n1312 n1605
+001-- 1
+00-01 1
+.names n579 n1193 n1134 n1348
+1-0 1
+10- 1
+.names n634 n1155 n1117 n1345
+10- 1
+1-0 1
+.names n1343 n586 n1114 n1152 n1344
+00-- 1
+0-11 1
+.names n2355 n2358 n2366 n2367 n2368 n2369 n2370
+111111 1
+.names n2355 n2358 n2366 n2367 n2368 n2371 n2372
+111111 1
+.names decrypt roundSel[5] roundSel[4] key2[22] n820
+0011 1
+.names n2363 n610 n1023 n1152 n2366
+0-11 1
+00-- 1
+.names n2361 n2365 n2360 n626 n935 n1032 n2367
+000-11 1
+0000-- 1
+.names n2364 n2362 n666 n1004 n1019 n2368
+000-- 1
+00-11 1
+.names n2356 n2359 desOut[63] n570 n1008 n1142 n2371
+001-11 1
+0010-- 1
+.names n642 n1083 n1004 n1343
+10- 1
+1-0 1
+.names roundSel[5] key3[22] n821
+01 1
+.names desIn[24] roundSel[4] roundSel[5] n2007
+000 1
+.names L_67 n570 roundSel[4] roundSel[5] n2008
+0-11 1
+00-- 1
+.names n2359 n2356 n570 n1008 n1142 n2369
+00-11 1
+000-- 1
+.names n594 n1087 n963 n1339
+1-0 1
+10- 1
+.names n1340 n618 n998 n1080 n1341
+0-11 1
+00-- 1
+.names n594 n822 n589 n823
+1-0 1
+10- 1
+.names n650 n1090 n935 n1340
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[45] n824
+0111 1
+.names n1527 n1590 n1583 n1461 n1549 n1508 n2004
+0-01-0 1
+0-010- 1
+01---- 1
+.names n1570 n1587 n1575 n1584 n1627 n2005
+01--- 1
+0--00 1
+0-1-- 1
+.names roundSel[5] key1[45] n825
+01 1
+.names n1461 n1485 n1575
+11 1
+.names n618 n1076 n1016 n1077
+1-0 1
+10- 1
+.names roundSel[5] key3[12] n1075
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[12] n1074
+0011 1
+.names n650 n826 n582 n827
+10- 1
+1-0 1
+.names n2000 n1461 n1549 n1527 n1508 n2001
+01-01 1
+010-- 1
+.names n1550 n1573 n1584 n1627 n2002
+0000 1
+.names n602 n703 n672 n828
+1-0 1
+10- 1
+.names n1527 n1461 n1573
+01 1
+.names n634 n648 n632 n829
+1-0 1
+10- 1
+.names n1485 n1633 n1527 n1508 n2000
+00-1 1
+001- 1
+.names n1525 n1526 n1507 desOut[63] n1505 n1633
+000-1 1
+0000- 1
+.names n650 n855 n661 n1718
+1-0 1
+10- 1
+.names n1055 n1056 n1054 n697 n1004 n1059 n1060
+000-11 1
+0000-- 1
+.names n1062 n1063 n1061 n681 n1026 n1036 n1064
+000-11 1
+0000-- 1
+.names n1066 n1067 n1065 n626 n939 n945 n1068
+0000-- 1
+000-11 1
+.names desOut[31] n1060 n1064 n1068 n1053 n1069
+01111 1
+.names n586 n716 n676 n1716
+10- 1
+1-0 1
+.names R_97 n570 roundSel[4] roundSel[5] n1714
+0-11 1
+00-- 1
+.names desIn[33] roundSel[4] roundSel[5] n1713
+000 1
+.names n1146 n1224 n1234
+01 1
+.names n1693 n1692 n689 n582 n629 n1705
+00-11 1
+000-- 1
+.names n1700 n1701 n1699 n626 n589 n695 n1706
+000-11 1
+0000-- 1
+.names n1703 n1704 n1702 n642 n585 n676 n1707
+000-11 1
+0000-- 1
+.names desOut[41] n1694 n1709
+00 1
+.names n697 n963 n960 n1445
+1-0 1
+10- 1
+.names n579 n1106 n1083 n1446
+1-0 1
+10- 1
+.names n689 n1134 n1094 n1444
+10- 1
+1-0 1
+.names desOut[7] n1188 n1195 n1199 n1184 n1200
+1-0-- 1
+10--- 1
+1---0 1
+1--0- 1
+.names desOut[7] n1188 n1195 n1199 n1184 n1201
+01111 1
+.names n1070 n1174 n1229 n1226 n1224 n2470
+11-01 1
+111-- 1
+.names n1174 n1234 n1070 n1202 n2469
+010- 1
+0-01 1
+01-1 1
+.names n1174 n1225 n1146 n2471
+111 1
+.names n602 n720 n637 n721
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[37] n722
+0111 1
+.names n2093 n2094 n2092 n570 n656 n804 n2096
+000-11 1
+0000-- 1
+.names n2091 n2095 n2090 n697 n624 n822 n2097
+0000-- 1
+000-11 1
+.names n2102 n2103 n2100 n642 n613 n653 n2104
+000-11 1
+0000-- 1
+.names n2099 n2101 n2098 n626 n669 n684 n2105
+000-11 1
+0000-- 1
+.names desOut[9] n2097 n2104 n2105 n2096 n2106
+01111 1
+.names roundSel[5] key1[37] n723
+01 1
+.names n634 n695 n585 n2099
+1-0 1
+10- 1
+.names n610 n648 n582 n2101
+1-0 1
+10- 1
+.names n602 n661 n597 n2098
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[9] n725
+0011 1
+.names n579 n637 n616 n2102
+1-0 1
+10- 1
+.names n594 n621 n608 n2103
+10- 1
+1-0 1
+.names n689 n687 n640 n2100
+10- 1
+1-0 1
+.names roundSel[5] key3[9] n726
+01 1
+.names n650 n727 n629 n728
+1-0 1
+10- 1
+.names n1157 n1169 n697 n1016 n1152 n1170
+010-- 1
+01-11 1
+.names n1163 n1164 desOut[15] n618 n1029 n1109 n1172
+000-11 1
+0000-- 1
+.names n602 n1142 n960 n1163
+10- 1
+1-0 1
+.names n579 n1101 n952 n1164
+10- 1
+1-0 1
+.names n1158 n594 n995 n1076 n1169
+0-11 1
+00-- 1
+.names n650 n847 n687 n1809
+1-0 1
+10- 1
+.names n689 n679 n605 n1811
+1-0 1
+10- 1
+.names n594 n855 n684 n1808
+1-0 1
+10- 1
+.names n666 n703 n616 n1807
+1-0 1
+10- 1
+.names n618 n863 n629 n1810
+10- 1
+1-0 1
+.names n697 n732 n672 n1806
+10- 1
+1-0 1
+.names n2377 n2378 n2295 n2571
+000 1
+.names n2353 n2388 n2387 n2576
+1-0 1
+10- 1
+.names n1537 n1538 n1545 n1546 n1547
+1111 1
+.names desOut[47] n1538 n1545 n1546 n1537 n1548
+01111 1
+.names n1534 n1536 n1533 n570 n935 n952 n1538
+000-11 1
+0000-- 1
+.names n1542 n1543 n1540 n689 n1117 n1125 n1545
+000-11 1
+0000-- 1
+.names n1541 n1544 n1539 n626 n1101 n1142 n1546
+0000-- 1
+000-11 1
+.names n1532 n1535 n1531 n586 n1109 n1138 n1537
+000-11 1
+0000-- 1
+.names n2551 n2373 n2572
+11 1
+.names n2353 n2573 n2568 n2398 n2574
+000- 1
+00-0 1
+.names n2295 n2373 n2275 n2568
+11- 1
+1-0 1
+.names n2316 n2373 n2275 n2398
+1-1 1
+10- 1
+.names n2275 n2295 n2335 n2373 n2573
+0000 1
+.names n579 n1155 n1121 n1541
+1-0 1
+10- 1
+.names n634 n1134 n1106 n1544
+1-0 1
+10- 1
+.names n642 n1090 n955 n1539
+1-0 1
+10- 1
+.names n602 n1183 n1087 n1542
+1-0 1
+10- 1
+.names n681 n1130 n1094 n1543
+10- 1
+1-0 1
+.names n594 n1080 n984 n1540
+1-0 1
+10- 1
+.names roundSel[5] key3[8] n620
+01 1
+.names n1775 n1688 n2206
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[15] n622
+0111 1
+.names n2206 n1784 n1734 n1668 n2207
+00-0 1
+001- 1
+.names n2316 n2568 n2353 n2569
+11- 1
+1-0 1
+.names n2316 n2378 n2275 n2377 n2295 n2567
+0-1-- 1
+01--- 1
+0---0 1
+0--1- 1
+.names roundSel[5] key1[15] n623
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[2] n627
+0111 1
+.names desIn[34] roundSel[4] roundSel[5] n2201
+000 1
+.names L_74 n570 roundSel[4] roundSel[5] n2202
+0-11 1
+00-- 1
+.names n579 n1087 n967 n1274
+1-0 1
+10- 1
+.names n689 n1049 n932 n1275
+1-0 1
+10- 1
+.names n650 n1114 n1026 n1273
+1-0 1
+10- 1
+.names roundSel[5] key1[20] n990
+01 1
+.names roundSel[5] key1[2] n628
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[33] n993
+0111 1
+.names roundSel[5] key1[33] n994
+01 1
+.names n618 n720 n669 n1916
+1-0 1
+10- 1
+.names n610 n747 n629 n1917
+1-0 1
+10- 1
+.names n650 n759 n692 n1915
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[54] n996
+0011 1
+.names roundSel[5] key3[54] n997
+01 1
+.names n689 n661 n656 n1912
+10- 1
+1-0 1
+.names n579 n768 n672 n1913
+1-0 1
+10- 1
+.names n666 n624 n582 n1911
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[24] n999
+0011 1
+.names R_95 n570 roundSel[4] roundSel[5] n1649
+0-11 1
+00-- 1
+.names desIn[49] roundSel[4] roundSel[5] n1648
+000 1
+.names desIn[16] roundSel[4] roundSel[5] n1645
+000 1
+.names L_68 n570 roundSel[4] roundSel[5] n1646
+0-11 1
+00-- 1
+.names desIn[14] roundSel[4] roundSel[5] n1640
+000 1
+.names L_93 n570 roundSel[4] roundSel[5] n1641
+00-- 1
+0-11 1
+.names n697 n1087 n1011 n2303
+1-0 1
+10- 1
+.names n658 n863 n648 n890
+10- 1
+1-0 1
+.names n594 n727 n585 n891
+1-0 1
+10- 1
+.names n890 n891 n889 n618 n640 n736 n892
+000-11 1
+0000-- 1
+.names n579 n744 n621 n2034
+1-0 1
+10- 1
+.names n666 n855 n804 n2036
+10- 1
+1-0 1
+.names n681 n814 n808 n2033
+10- 1
+1-0 1
+.names n1334 n1372 n1373
+11 1
+.names n602 n732 n616 n893
+1-0 1
+10- 1
+.names n610 n744 n605 n894
+10- 1
+1-0 1
+.names roundSel[5] key1[53] n1007
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[53] n1006
+0111 1
+.names n1363 n1365 n1362 n626 n1117 n1138 n1366
+000-11 1
+0000-- 1
+.names n1356 n1357 n1354 n570 n932 n955 n1367
+000-11 1
+0000-- 1
+.names n1358 n1359 n1355 n634 n1083 n1094 n1368
+000-11 1
+0000-- 1
+.names n1361 n1364 n1360 n579 n1090 n1125 n1369
+000-11 1
+0000-- 1
+.names desOut[61] n1367 n1368 n1369 n1366 n1370
+01111 1
+.names n579 n847 n597 n895
+1-0 1
+10- 1
+.names n894 n895 n893 n697 n692 n759 n896
+000-11 1
+0000-- 1
+.names desOut[27] n888 n892 n896 n884 n897
+01111 1
+.names roundSel[5] key1[6] n1003
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[6] n1002
+0111 1
+.names n797 n775 n899
+01 1
+.names desIn[28] roundSel[4] roundSel[5] n2030
+000 1
+.names L_83 n570 roundSel[4] roundSel[5] n2031
+0-11 1
+00-- 1
+.names roundSel[5] key3[24] n1000
+01 1
+.names n594 n732 n640 n1744
+10- 1
+1-0 1
+.names n689 n826 n621 n1745
+1-0 1
+10- 1
+.names n610 n847 n664 n1743
+1-0 1
+10- 1
+.names n2107 n2144 n2050 n2408
+0-1 1
+00- 1
+.names n586 n817 n648 n1740
+1-0 1
+10- 1
+.names n650 n755 n669 n1741
+10- 1
+1-0 1
+.names n642 n744 n592 n1739
+1-0 1
+10- 1
+.names n2144 n2050 n2405
+01 1
+.names n697 n1138 n948 n1470
+1-0 1
+10- 1
+.names n650 n1117 n942 n1471
+10- 1
+1-0 1
+.names n634 n1109 n935 n1476
+1-0 1
+10- 1
+.names n788 n789 n787 n570 n653 n768 n790
+000-11 1
+0000-- 1
+.names n586 n669 n661 n791
+1-0 1
+10- 1
+.names n586 n751 n645 n2134
+10- 1
+1-0 1
+.names n579 n759 n608 n2137
+10- 1
+1-0 1
+.names n626 n740 n676 n2132
+1-0 1
+10- 1
+.names n650 n676 n648 n792
+1-0 1
+10- 1
+.names n2394 n2375 n2275 n2295 n2373 n2395
+0--0- 1
+0-0-- 1
+00--- 1
+0---0 1
+.names n2398 n2335 n2388 n2399
+1-0 1
+11- 1
+.names n681 n1183 n955 n1472
+1-0 1
+10- 1
+.names n602 n664 n600 n793
+1-0 1
+10- 1
+.names n618 n744 n695 n2133
+1-0 1
+10- 1
+.names roundSel[5] key3[3] n1108
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[3] n1107
+0011 1
+.names n792 n793 n791 n666 n589 n632 n794
+000-11 1
+0000-- 1
+.names n658 n720 n613 n2135
+1-0 1
+10- 1
+.names roundSel[5] key1[3] n1105
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[3] n1104
+0111 1
+.names n610 n1101 n932 n1102
+1-0 1
+10- 1
+.names roundSel[5] key1[55] n1100
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[55] n1099
+0111 1
+.names n1668 n1734 n1775 n1753 n1711 n2508
+0-011 1
+00-11 1
+000-- 1
+.names n1833 n1838 n1839 n1840 n1841 n1842
+11111 1
+.names desOut[35] n1838 n1839 n1840 n1841 n1833 n1843
+011111 1
+.names n1836 n1834 n689 n727 n751 n1840
+00-11 1
+000-- 1
+.names n1827 n1829 n1841
+00 1
+.names n1688 n1753 n2238
+11 1
+.names n2505 n1668 n1711 n1781 n1782 n2506
+01-00 1
+010-- 1
+.names n1711 n1734 n1753 n2505
+001 1
+.names n1461 n1549 n1508 n1578
+001 1
+.names desIn[52] roundSel[4] roundSel[5] n2501
+000 1
+.names L_80 n570 roundSel[4] roundSel[5] n2502
+0-11 1
+00-- 1
+.names roundSel[5] decrypt roundSel[4] key2[16] n690
+0111 1
+.names roundSel[5] key1[16] n691
+01 1
+.names n1461 n1527 n1574
+00 1
+.names decrypt roundSel[5] roundSel[4] key2[7] n693
+0011 1
+.names n579 n1049 n939 n1207
+10- 1
+1-0 1
+.names n658 n1059 n1036 n1208
+1-0 1
+10- 1
+.names n650 n1098 n1039 n1206
+1-0 1
+10- 1
+.names roundSel[5] key3[7] n694
+01 1
+.names desIn[36] roundSel[4] roundSel[5] n2233
+000 1
+.names L_82 n570 roundSel[4] roundSel[5] n2234
+0-11 1
+00-- 1
+.names n1570 n2230 n1549 n1508 n1573 n2231
+11--- 1
+1-011 1
+.names decrypt roundSel[5] roundSel[4] key2[6] n961
+0011 1
+.names n1461 n1527 n1549 n2230
+011 1
+.names roundSel[5] key3[6] n962
+01 1
+.names desIn[18] roundSel[4] roundSel[5] n1947
+000 1
+.names L_76 n570 roundSel[4] roundSel[5] n1948
+0-11 1
+00-- 1
+.names decrypt roundSel[5] roundSel[4] key2[19] n965
+0011 1
+.names roundSel[5] key3[19] n966
+01 1
+.names n1844 n1906 n1928 n1933 n1945
+01-1 1
+010- 1
+.names n1942 n1943 n1944
+11 1
+.names n1928 n1936 n1865 n1906 n1940
+010- 1
+01-1 1
+.names decrypt roundSel[5] roundSel[4] key2[35] n590
+0011 1
+.names roundSel[5] key3[35] n591
+01 1
+.names n610 n1125 n952 n2338
+1-0 1
+10- 1
+.names n2336 n602 n981 n1076 n2337
+0-11 1
+00-- 1
+.names n1303 n579 n995 n1039 n1308
+0-11 1
+00-- 1
+.names n1296 n1297 n1295 n570 n998 n1080 n1307
+000-11 1
+0000-- 1
+.names n634 n1101 n1090 n2336
+1-0 1
+10- 1
+.names n602 n1001 n977 n1303
+10- 1
+1-0 1
+.names decrypt roundSel[5] roundSel[4] key2[44] n595
+0011 1
+.names roundSel[5] key3[44] n596
+01 1
+.names n2318 n2323 n2324 n2331 n2332 n2333
+11111 1
+.names desOut[5] n2323 n2324 n2331 n2332 n2318 n2334
+011111 1
+.names n1294 n594 n952 n970 n1305
+0-11 1
+00-- 1
+.names n2326 n2328 n2325 n626 n1155 n1183 n2331
+000-11 1
+0000-- 1
+.names n2329 n2330 n2327 n579 n935 n1142 n2332
+000-11 1
+0000-- 1
+.names n689 n736 n724 n860
+10- 1
+1-0 1
+.names n634 n1029 n948 n1302
+1-0 1
+10- 1
+.names n1299 n1300 n1298 n626 n974 n1036 n1301
+000-11 1
+0000-- 1
+.names decrypt roundSel[5] roundSel[4] key2[50] n861
+0011 1
+.names n666 n1106 n984 n2330
+1-0 1
+10- 1
+.names roundSel[5] key3[50] n862
+01 1
+.names n2060 n570 n664 n724 n2061
+0-11 1
+00-- 1
+.names n2058 n2062 n2052 n681 n817 n869 n2064
+000-11 1
+0000-- 1
+.names n2059 n2054 n650 n605 n751 n2065
+00-11 1
+000-- 1
+.names n2051 n2055 n2056 n2057 n2066 n2067
+00001 1
+.names n658 n942 n932 n1300
+10- 1
+1-0 1
+.names n610 n863 n624 n864
+10- 1
+1-0 1
+.names n2063 n2053 n626 n814 n855 n2066
+00-11 1
+000-- 1
+.names roundSel[5] key3[25] n1038
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[25] n1037
+0011 1
+.names n697 n747 n585 n2063
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[0] n867
+0111 1
+.names n666 n863 n826 n2062
+1-0 1
+10- 1
+.names roundSel[5] key1[5] n1035
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[5] n1034
+0111 1
+.names roundSel[5] key1[0] n868
+01 1
+.names n618 n764 n616 n2060
+1-0 1
+10- 1
+.names roundSel[5] key3[20] n1031
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[20] n1030
+0011 1
+.names n1754 n1778 n1779
+11 1
+.names n1771 n1772 n1770 n666 n613 n700 n1773
+000-11 1
+0000-- 1
+.names desOut[25] n1765 n1769 n1773 n1761 n1774
+01111 1
+.names n650 n736 n684 n1771
+1-0 1
+10- 1
+.names n681 n656 n600 n1772
+1-0 1
+10- 1
+.names n594 n720 n687 n1770
+1-0 1
+10- 1
+.names n2434 n840 n2433 n775 n875 n710 n2435
+011--- 1
+01-0-0 1
+01-00- 1
+.names n840 n2436 n710 n775 n875 n797 n2437
+00--01 1
+001-0- 1
+00-1-1 1
+0011-- 1
+00-10- 1
+001--1 1
+.names n1353 n1399 n1395 n1400 n1401
+0-01 1
+01-- 1
+.names n775 n797 n903 n2436
+011 1
+.names n1406 n1405 n1333 n1353 n1407
+00-0 1
+001- 1
+.names n1371 n1352 n1351 n1405
+1-1 1
+11- 1
+.names n775 n875 n710 n797 n2433
+1-01 1
+11-- 1
+.names n710 n797 n906 n775 n875 n2434
+01-00 1
+011-- 1
+.names n2429 n903 n840 n710 n775 n2430
+01--- 1
+0--01 1
+0-1-- 1
+.names n904 n797 n2428 n902 n915 n2431
+0-0-0 1
+0-00- 1
+00--- 1
+.names decrypt roundSel[5] roundSel[4] key2[42] n762
+0011 1
+.names n902 n903 n904
+11 1
+.names roundSel[5] key3[42] n763
+01 1
+.names desIn[30] roundSel[4] roundSel[5] n2166
+000 1
+.names L_91 n570 roundSel[4] roundSel[5] n2167
+0-11 1
+00-- 1
+.names n1310 n1311 n1333 n1400
+000 1
+.names roundSel[5] key1[41] n1137
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[41] n1136
+0111 1
+.names decrypt roundSel[5] roundSel[4] key2[1] n766
+0011 1
+.names roundSel[5] key3[1] n767
+01 1
+.names n2089 n2107 n2070 n2125 n2144 n2161
+00111 1
+.names n2125 n2150 n2070 n2107 n2157 n2162
+0-111 1
+01--- 1
+.names roundSel[5] key3[41] n1133
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[41] n1132
+0011 1
+.names n634 n672 n656 n1878
+1-0 1
+10- 1
+.names n602 n740 n632 n1875
+10- 1
+1-0 1
+.names n618 n751 n592 n1876
+10- 1
+1-0 1
+.names n642 n747 n692 n1874
+1-0 1
+10- 1
+.names n2156 n2419 n2050 n2536
+000 1
+.names n2155 n2532 n2050 n2535
+001 1
+.names n2107 n2050 n2070 n2125 n2537
+0111 1
+.names n2144 n2533 n2532 n2415 n2107 n2050 n2534
+0-00-0 1
+0-001- 1
+01---- 1
+.names n666 n637 n600 n1871
+10- 1
+1-0 1
+.names n586 n695 n624 n1872
+1-0 1
+10- 1
+.names n650 n764 n640 n1870
+1-0 1
+10- 1
+.names n1498 n1501 n1502 n1503 n1504 n1500 n1505
+011111 1
+.names n1500 n1501 n1502 n1503 n1506 n1507
+11111 1
+.names n2069 n2125 desOut[1] n2068 n2532
+01-1 1
+010- 1
+.names n1492 n610 n977 n1076 n1500
+0-11 1
+00-- 1
+.names n1490 n1491 n1489 n626 n955 n963 n1501
+000-11 1
+0000-- 1
+.names n1497 n1496 n570 n945 n1117 n1502
+00-11 1
+000-- 1
+.names n1495 n1499 n1494 n586 n1032 n1155 n1503
+000-11 1
+0000-- 1
+.names n1493 n1498 desOut[63] n681 n984 n1004 n1506
+000-11 1
+0000-- 1
+.names n2069 n2050 n2125 n2107 desOut[1] n2068 n2533
+0011-1 1
+00110- 1
+.names n1493 n681 n984 n1004 n1504
+0-11 1
+00-- 1
+.names roundSel[5] key1[52] n660
+01 1
+.names n586 n1026 n991 n2267
+10- 1
+1-0 1
+.names n618 n1193 n988 n2268
+10- 1
+1-0 1
+.names n579 n1036 n998 n2266
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[30] n662
+0011 1
+.names roundSel[5] key3[30] n663
+01 1
+.names n697 n1155 n932 n2263
+1-0 1
+10- 1
+.names n650 n1183 n1029 n2264
+10- 1
+1-0 1
+.names n689 n1023 n1019 n2262
+1-0 1
+10- 1
+.names n1235 n1234 n1233 n1202 n1236
+1-1- 1
+11-- 1
+1--0 1
+.names n1174 n1231 n1225 n1070 n1232
+0-11 1
+01-- 1
+.names n1070 n1202 n1146 n1224 n1235
+1-00 1
+11-- 1
+.names decrypt roundSel[5] roundSel[4] key2[16] n667
+0011 1
+.names decrypt roundSel[5] roundSel[4] key2[33] n930
+0011 1
+.names roundSel[5] key3[16] n668
+01 1
+.names roundSel[5] key3[33] n931
+01 1
+.names n594 n967 n955 n2260
+1-0 1
+10- 1
+.names n1070 n1146 n1231
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[54] n933
+0111 1
+.names R_115 n570 roundSel[4] roundSel[5] n1979
+0-11 1
+00-- 1
+.names roundSel[5] key1[54] n934
+01 1
+.names desIn[21] roundSel[4] roundSel[5] n1978
+000 1
+.names n1975 n1967 n1968 n1972 n1970 n1976
+01--- 1
+0-1-1 1
+0-11- 1
+.names n1971 n1929 n1942 n1962 n1972
+1-00 1
+10-- 1
+.names n1957 n1969 n1965 n1907 n1844 n1970
+11-01 1
+111-- 1
+.names n1974 n570 n1973 FP_R_53 n572 n1975
+00--- 1
+0-0-1 1
+0-01- 1
+.names decrypt roundSel[5] roundSel[4] key2[5] n937
+0011 1
+.names desIn[20] roundSel[4] roundSel[5] n1973
+000 1
+.names L_84 n570 roundSel[4] roundSel[5] n1974
+0-11 1
+00-- 1
+.names roundSel[5] key3[5] n938
+01 1
+.names n1928 n1934 n1962 n1906 n1971
+0-1- 1
+01-- 1
+0--1 1
+.names n1333 n1395 n1602
+11 1
+.names n697 n1094 n974 n2364
+1-0 1
+10- 1
+.names n602 n1155 n948 n2362
+1-0 1
+10- 1
+.names L_85 n570 roundSel[4] roundSel[5] n1600
+00-- 1
+0-11 1
+.names n642 n1109 n945 n2361
+1-0 1
+10- 1
+.names n650 n1076 n1036 n2365
+10- 1
+1-0 1
+.names n689 n970 n963 n2360
+1-0 1
+10- 1
+.names n658 n1193 n1039 n2363
+1-0 1
+10- 1
+.names n626 n1094 n1076 n1337
+1-0 1
+10- 1
+.names n1335 n610 n955 n1121 n1336
+0-11 1
+00-- 1
+.names n697 n1049 n1032 n1335
+1-0 1
+10- 1
+.names n626 n664 n640 n830
+1-0 1
+10- 1
+.names n681 n592 n585 n831
+10- 1
+1-0 1
+.names n1328 n1329 n1324 n610 n939 n1087 n1330
+000-11 1
+0000-- 1
+.names n1326 n1327 n1325 n626 n995 n1001 n1331
+000-11 1
+0000-- 1
+.names desOut[53] n1323 n1330 n1331 n1322 n1332
+01111 1
+.names n831 n689 n616 n669 n832
+0-11 1
+00-- 1
+.names n810 n819 n823 n827 n829 n830 n833
+000000 1
+.names n658 n605 n589 n2091
+1-0 1
+10- 1
+.names n666 n629 n592 n2095
+10- 1
+1-0 1
+.names n586 n672 n664 n2090
+1-0 1
+10- 1
+.names n805 n801 n642 n637 n804 n834
+00-11 1
+000-- 1
+.names n586 n684 n597 n805
+10- 1
+1-0 1
+.names n658 n629 n621 n801
+1-0 1
+10- 1
+.names n650 n679 n645 n2093
+1-0 1
+10- 1
+.names n681 n692 n632 n2094
+1-0 1
+10- 1
+.names n618 n703 n600 n2092
+1-0 1
+10- 1
+.names n602 n970 n932 n1066
+10- 1
+1-0 1
+.names n642 n1032 n960 n1067
+10- 1
+1-0 1
+.names n689 n1008 n948 n1065
+1-0 1
+10- 1
+.names n811 n818 n809 n570 n613 n814 n835
+000-11 1
+0000-- 1
+.names n618 n808 n661 n809
+1-0 1
+10- 1
+.names desOut[61] n828 n834 n835 n832 n833 n836
+1----0 1
+11---- 1
+1---0- 1
+1--0-- 1
+1-0--- 1
+.names desOut[61] n828 n834 n835 n832 n833 n837
+001111 1
+.names n666 n1023 n974 n1062
+1-0 1
+10- 1
+.names n658 n988 n977 n1063
+10- 1
+1-0 1
+.names n586 n967 n942 n1061
+10- 1
+1-0 1
+.names n579 n692 n645 n1703
+1-0 1
+10- 1
+.names n586 n632 n608 n1704
+1-0 1
+10- 1
+.names n666 n687 n661 n1702
+1-0 1
+10- 1
+.names n634 n684 n613 n1700
+1-0 1
+10- 1
+.names n602 n624 n592 n1701
+10- 1
+1-0 1
+.names n1229 n1043 n1174 n1070 n2464
+0011 1
+.names n2465 n1174 n1043 n2463 n1146 n1202 n2466
+000--- 1
+00--11 1
+00-1-- 1
+.names n1070 n1202 n1146 n1043 n1174 n2462
+0-011 1
+01-1- 1
+010-- 1
+.names desIn[8] roundSel[4] roundSel[5] n1436
+000 1
+.names L_69 n570 roundSel[4] roundSel[5] n1437
+0-11 1
+00-- 1
+.names n1146 n1202 n1070 n2463
+001 1
+.names n1043 n1202 n1146 n2465
+0-0 1
+01- 1
+.names n1844 n2189 n1928 n1929 n2190
+000- 1
+00-0 1
+.names n2194 n2193 n1844 n1928 n1933 n1906 n2195
+0010-- 1
+001--0 1
+001-0- 1
+.names n2198 n2186 n2195 n2190 n2188 n2199
+0-00- 1
+01--- 1
+0-0-1 1
+.names n2197 n570 n2196 FP_R_35 n572 n2198
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1406 n1312 n1395 n1353 n1433
+1-01 1
+11-1 1
+110- 1
+.names n1411 n1395 n1371 n1333 n1312 n1434
+011-- 1
+01--1 1
+01-0- 1
+.names decrypt roundSel[5] roundSel[4] key2[14] n730
+0011 1
+.names roundSel[5] key3[14] n731
+01 1
+.names n1202 n1231 n1174 n1146 n1070 n1224 n2460
+01---- 1
+0-0011 1
+.names n1372 n1395 n1333 n1353 n1431
+01-1 1
+010- 1
+.names n1371 n1312 n1402 n1353 n1333 n1395 n1430
+01-011 1
+011--- 1
+.names desIn[32] roundSel[4] roundSel[5] n2196
+000 1
+.names L_66 n570 roundSel[4] roundSel[5] n2197
+0-11 1
+00-- 1
+.names decrypt roundSel[5] roundSel[4] key2[28] n734
+0011 1
+.names n1156 n570 n967 n1155 n1167
+0-11 1
+00-- 1
+.names roundSel[5] key3[28] n735
+01 1
+.names n2192 n1884 n1928 n1952 n1964 n2194
+001-- 1
+00-00 1
+.names n1884 n2191 n1958 n1956 n1823 n1906 n2193
+1-00-1 1
+1-001- 1
+11---- 1
+.names n1162 n689 n1090 n1138 n1165
+00-- 1
+0-11 1
+.names n1160 n626 n1087 n1121 n1161
+0-11 1
+00-- 1
+.names n1928 n1823 n1904 n1905 n2192
+1-00 1
+10-- 1
+.names n586 n1117 n1049 n1162
+1-0 1
+10- 1
+.names n1865 n1928 n1823 n1904 n1905 n2191
+01-00 1
+010-- 1
+.names n666 n1134 n1080 n1160
+1-0 1
+10- 1
+.names desIn[60] roundSel[4] roundSel[5] n2564
+000 1
+.names L_79 n570 roundSel[4] roundSel[5] n2565
+0-11 1
+00-- 1
+.names n666 n1114 n1076 n1534
+1-0 1
+10- 1
+.names n610 n1193 n1083 n1536
+10- 1
+1-0 1
+.names n618 n1049 n963 n1533
+10- 1
+1-0 1
+.names n650 n1059 n1004 n1532
+1-0 1
+10- 1
+.names n697 n998 n981 n1535
+1-0 1
+10- 1
+.names n658 n1152 n1098 n1531
+1-0 1
+10- 1
+.names decrypt roundSel[5] roundSel[4] key2[21] n630
+0011 1
+.names n2550 n2559 n2561
+01 1
+.names roundSel[5] key3[21] n631
+01 1
+.names decrypt roundSel[5] roundSel[4] key2[43] n635
+0011 1
+.names roundSel[5] key3[43] n636
+01 1
+.names n2276 n2277 n2278 n2279 n2280 n2282 n2291
+000000 1
+.names n2284 n2285 n2286 n2288 n2289 n2290 n2292
+000000 1
+.names n2283 n2287 n2281 n626 n998 n1004 n2293
+000-11 1
+0000-- 1
+.names desOut[37] n2292 n2293 n2291 n2294
+0111 1
+.names desIn[4] roundSel[4] roundSel[5] n1262
+000 1
+.names L_86 n570 roundSel[4] roundSel[5] n1263
+0-11 1
+00-- 1
+.names n775 n797 n710 n875 n901
+0011 1
+.names n689 n991 n984 n2290
+10- 1
+1-0 1
+.names n1202 n1146 n1174 n1070 n1224 n1260
+1-0-- 1
+10--- 1
+1--11 1
+.names n797 n900 n840 n875 n775 n905
+1-1-1 1
+1-11- 1
+11--- 1
+.names n797 n906 n907
+01 1
+.names n1889 n1901 n594 n679 n747 n1902
+010-- 1
+01-11 1
+.names n1897 n586 n736 n814 n1903
+0-11 1
+00-- 1
+.names n1899 n642 n703 n724 n1900
+1-11 1
+10-- 1
+.names n1890 n602 n764 n804 n1901
+0-11 1
+00-- 1
+.names n1508 n1582 n1570 n1638
+0-1 1
+01- 1
+.names n1634 n1527 n1635 n1591 n1461 n1636
+0--00 1
+0-1-- 1
+01--- 1
+.names n1461 n1485 n1508 n1569 n1568 desOut[31] n1635
+1-0-01 1
+100--- 1
+1-01-- 1
+10--01 1
+10-1-- 1
+.names n1461 n1633 n1485 n1508 n1634
+0-00 1
+01-- 1
+.names n618 n1183 n960 n1361
+1-0 1
+10- 1
+.names n594 n1152 n981 n1364
+1-0 1
+10- 1
+.names n602 n1109 n1049 n1360
+1-0 1
+10- 1
+.names n1629 n1485 n1570 n1573 n1508 n1630
+01-01 1
+011-1 1
+0110- 1
+.names n2335 n2275 n2373 n2295 n2394
+000- 1
+00-1 1
+.names n689 n1121 n1101 n1363
+1-0 1
+10- 1
+.names n586 n1142 n1087 n1365
+10- 1
+1-0 1
+.names n697 n995 n984 n1362
+1-0 1
+10- 1
+.names roundSel[5] decrypt roundSel[4] key2[22] n802
+0111 1
+.names desIn[26] roundSel[4] roundSel[5] n2025
+000 1
+.names L_75 n570 roundSel[4] roundSel[5] n2026
+0-11 1
+00-- 1
+.names roundSel[5] key1[22] n803
+01 1
+.names roundSel[5] key1[18] n1097
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[18] n1096
+0111 1
+.names n1395 n1371 n1408 n1312 n2023
+0-00 1
+01-- 1
+.names n1395 n1400 n1353 n1371 n1333 n2022
+100-- 1
+1-00- 1
+10--0 1
+10-0- 1
+.names n1353 n2019 n1312 n1397 n2020
+0-01 1
+01-- 1
+.names n1312 n1602 n1372 n1603 n2021
+01-- 1
+0-11 1
+.names decrypt roundSel[5] roundSel[4] key2[45] n806
+0011 1
+.names roundSel[5] key3[45] n807
+01 1
+.names n681 n1090 n1087 n1091
+1-0 1
+10- 1
+.names roundSel[5] key1[46] n1093
+01 1
+.names roundSel[5] decrypt roundSel[4] key2[46] n1092
+0111 1
+.names n2482 n2481 n2461 n2467 n2472 desOut[48]
+0-001 1
+00--- 1
+.names n1997 n1996 n1987 n1990 n1993 n1992 desOut[22]
+0-00-1 1
+0-001- 1
+00---- 1
+.names n2457 n2456 n2448 n2453 n2353 n2450 desOut[46]
+00---- 1
+0-01-1 1
+0-010- 1
+.names n2010 n2003 n2006 n2009 desOut[24]
+0--0 1
+0-1- 1
+01-- 1
+.names n2253 n2252 n2243 n2246 n2249 desOut[38]
+0-1-- 1
+00--- 1
+0--00 1
+.names n1439 n1438 n1428 n1432 n1435 n1290 desOut[8]
+1----- 1
+-1-0-0 1
+-1-00- 1
+-11--- 1
+.names n2444 n2443 n2432 n2438 n841 n2427 desOut[44]
+-11--- 1
+1----- 1
+-1--11 1
+-1-1-- 1
+.names n2028 n2027 n2012 n2018 n2024 desOut[26]
+-1-00 1
+-11-- 1
+1---- 1
+.names n1424 n1422 n1419 desOut[6]
+0-1 1
+01- 1
+.names n2546 n2545 n2531 n2538 n2089 n2542 desOut[56]
+0-0-01 1
+0-01-- 1
+00---- 1
+.names n2425 n2424 n2413 n2089 n2416 n2421 desOut[42]
+00---- 1
+0-0-00 1
+0-01-- 1
+.names n2164 n2160 n2163 n2032 desOut[28]
+0-1- 1
+01-- 1
+0--0 1
+.names n1265 n1264 n1253 n1261 n1258 desOut[4]
+-11-- 1
+1---- 1
+-1-01 1
+.names n2529 n2528 n2516 n2521 n2523 n2525 desOut[54]
+0-0000 1
+00---- 1
+.names n2401 n2257 n2392 n2400 n2383 desOut[40]
+-11-- 1
+1---- 1
+-1--0 1
+-1-1- 1
+.names desOut[36] n_7546
+1 1
+.names n1249 n1248 n1237 n1245 n1239 desOut[2]
+0-000 1
+00--- 1
+.names n2512 n2503 n2511 desOut[52]
+0-1 1
+00- 1
+.names n1950 n1949 n1935 n1941 n1946 desOut[18]
+0-001 1
+00--- 1
+.names n922 n921 n575 desOut[0]
+1-- 1
+-01 1
+.names n2499 n2486 n2497 desOut[50]
+0-1 1
+01- 1
+.names n1643 n1631 n1637 n1639 n1642 desOut[14]
+0-1-- 1
+01--- 1
+0---1 1
+0--1- 1
+.names n2578 n2566 n2570 n2577 n2575 desOut[60]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1620 n1601 n1612 n1403 n1615 n1619 desOut[12]
+0-1-01 1
+0-11-- 1
+00---- 1
+.names desOut[16] n_6880
+1 1
+.names desOut[10] n_7660
+1 1
+.names IN-clk clk
+1 1
+.names desOut[62] n_7627
+1 1
+.names 1'b1
+0
+.names n2183 n2168 n2179 n2182 n1928 n2172 desOut[30]
+0-010- 1
+00---- 1
+0-01-1 1
+.names desOut[58] n_7688
+1 1
+.names desOut[20] n_7631
+1 1
+.names n2199 n2186 n2198 n2195 n2188 n2190 desOut[32]
+01---- 1
+0--0-0 1
+0--01- 1
+0-0--- 1
+.names n2217 n2203 n2215 desOut[34]
+0-1 1
+01- 1
+.names n925 n570 n924 FP_R_7 n572 desOut[1]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n577 n570 n576 FP_R_15 n572 desOut[3]
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1268 n570 n1267 FP_R_23 n572 desOut[5]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1176 n570 n1175 FP_R_31 n572 desOut[7]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1442 n570 n1441 FP_R_6 n572 desOut[9]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1597 n1596 n1593 n1589 n1581 desOut[10]
+-1-00 1
+-10-- 1
+1---- 1
+.names n712 n570 n711 FP_R_14 n572 desOut[11]
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1623 n570 n1622 FP_R_22 n572 desOut[13]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1148 n570 n1147 FP_R_30 n572 desOut[15]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1801 n1647 n1790 n1800 desOut[16]
+0-01 1
+00-- 1
+.names n1804 n570 n1803 FP_R_5 n572 desOut[17]
+0-01- 1
+00--- 1
+0-0-1 1
+.names n777 n570 n776 FP_R_13 n572 desOut[19]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1976 n1967 n1975 n1968 n1970 n1972 desOut[20]
+-01-00 1
+-010-- 1
+1----- 1
+.names n1979 n570 n1978 FP_R_21 n572 desOut[21]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1072 n570 n1071 FP_R_29 n572 desOut[23]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1756 n570 n1755 FP_R_4 n572 desOut[25]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n879 n570 n878 FP_R_12 n572 desOut[27]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1292 n570 n1291 FP_R_20 n572 desOut[29]
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1045 n570 n1044 FP_R_28 n572 desOut[31]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1714 n570 n1713 FP_R_3 n572 desOut[33]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n843 n570 n842 FP_R_11 n572 desOut[35]
+0-01- 1
+00--- 1
+0-0-1 1
+.names n2236 n2235 n2222 n2232 n1485 n2228 desOut[36]
+1----- 1
+-1-0-0 1
+-1-01- 1
+-11--- 1
+.names n1271 n570 n1270 FP_R_19 n572 desOut[37]
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1204 n570 n1203 FP_R_27 n572 desOut[39]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1690 n570 n1689 FP_R_2 n572 desOut[41]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1886 n570 n1885 FP_R_10 n572 desOut[43]
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1375 n570 n1374 FP_R_18 n572 desOut[45]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1529 n570 n1528 FP_R_26 n572 desOut[47]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1649 n570 n1648 FP_R_1 n572 desOut[49]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n1846 n570 n1845 FP_R_9 n572 desOut[51]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n1314 n570 n1313 FP_R_17 n572 desOut[53]
+0-01- 1
+00--- 1
+0-0-1 1
+.names n1463 n570 n1462 FP_R_25 n572 desOut[55]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n928 n570 n927 FP_R n572 desOut[57]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n2562 n2550 n2560 desOut[58]
+0-1 1
+00- 1
+.names n1909 n570 n1908 FP_R_8 n572 desOut[59]
+0-0-1 1
+0-01- 1
+00--- 1
+.names n799 n570 n798 FP_R_16 n572 desOut[61]
+00--- 1
+0-0-1 1
+0-01- 1
+.names n2590 n2589 n2582 n2586 desOut[62]
+0-00 1
+00-- 1
+.names n1487 n570 n1486 FP_R_24 n572 desOut[63]
+0-0-1 1
+0-01- 1
+00--- 1
+.end

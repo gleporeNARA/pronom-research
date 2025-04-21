@@ -1,0 +1,979 @@
+.model ori_sasc-gates
+.inputs tx_fifo_wp[1] tx_fifo_wp[0] we_i tx_fifo_mem[3]_22 rx_fifo_rp[0] rx_fifo_mem[0]_12 rx_fifo_rp[1] din_i[0] din_i[3] din_i[2] rx_fifo_mem[1]_4 tx_bit_cnt[2] tx_bit_cnt[1] tx_bit_cnt[0] tx_bit_cnt[3] din_i[5] rx_fifo_mem[1]_8 din_i[4] tx_fifo_rp[0] tx_fifo_mem[0]_16 din_i[7] tx_fifo_mem[0]_10 tx_fifo_rp[1] tx_fifo_mem[2]_30 IN-txd_o tx_fifo_mem[2]_27 sio_ce_x4 tx_fifo_mem[1]_8 tx_fifo_mem[2] rx_fifo_wp[1] tx_fifo_mem[2]_26 rx_fifo_wp[0] hold_reg_5 tx_fifo_mem[3] rxr[2]_172 rxr[2]_174 sio_ce shift_en hold_reg_1 rxr[2]_175 rx_sio_ce rx_go rxr[2] tx_fifo_mem[1]_7 rxr[2]_177 rx_fifo_mem[3] tx_fifo_mem[0]_14 tx_fifo_gb rxr[2]_176 n_182 IN-rst tx_fifo_mem[3]_21 tx_fifo_mem[1]_6 rx_fifo_mem[2] hold_reg_2 rx_fifo_mem[0]_15 tx_fifo_mem[3]_20 rx_fifo_mem[0] hold_reg_6 rxr[2]_173 tx_fifo_mem[1]_3 rx_fifo_mem[0]_16 tx_fifo_mem[2]_28 rx_fifo_mem[3]_17 tx_fifo_mem[3]_17 hold_reg_7 rxd_r IN-rxd_s rx_fifo_mem[2]_24 tx_fifo_mem[2]_24 cts_i txf_empty_r hold_reg_3 tx_fifo_mem[1] rx_bit_cnt[0] tx_fifo_mem[1]_4 rx_fifo_gb rx_sio_ce_r2 rx_sio_ce_r1 dpll_state[0] change rx_fifo_mem[1]_5 rx_fifo_mem[1]_9 shift_en_r din_i[1] din_i[6] rx_fifo_mem[0]_10 rx_fifo_mem[0]_11 rxr[2]_171 rx_fifo_mem[2]_28 rx_fifo_mem[3]_20 tx_fifo_mem[3]_23 rx_valid_r IN-rx_valid rx_fifo_mem[3]_18 rx_fifo_mem[2]_27 rx_fifo_mem[2]_29 rx_fifo_mem[0]_13 rx_bit_cnt[2] rx_bit_cnt[3] rx_fifo_mem[3]_19 rx_fifo_mem[2]_30 tx_fifo_mem[0] rx_fifo_mem[3]_21 rx_fifo_mem[0]_14 rx_fifo_mem[1] tx_fifo_mem[0]_12 re_i rx_fifo_mem[1]_3 tx_fifo_mem[0]_13 rx_fifo_mem[3]_22 rx_fifo_mem[1]_6 tx_fifo_mem[0]_11 hold_reg IN-rts_o tx_fifo_mem[2]_29 tx_fifo_mem[1]_9 tx_fifo_mem[2]_25 tx_fifo_mem[3]_18 hold_reg_8 load tx_fifo_mem[0]_15 dpll_state[1] hold_reg_4 tx_fifo_mem[1]_5 hold_reg_9 tx_fifo_mem[3]_19 IN-clk rx_fifo_mem[1]_7 IN-rxd_i rx_fifo_mem[3]_23 rx_fifo_mem[2]_25 rx_fifo_mem[2]_26
+.outputs n_318 n_379 n_316 dout_o[2] n_98 n_377 dout_o[6] n_314 n_398 n_312 n_375 n_396 n_310 n_280 n_371 n_242 txd_o n_246 n_449 n_447 n_426 n_468 n_424 n_466 n_403 full_o n_445 n_443 n_485 n_483 n_462 n_138 n_309 n_307 empty_o n_305 n_347 n_389 dout_o[3] dout_o[7] n_270 n_383 n_381 n_274 n_276 n_299 n_278 rst n_459 n_478 n_455 n_476 n_432 n_474 n_453 n_451 n_472 n_183 n_470 n_143 n_105 n_149 dout_o[0] n_317 n_378 n_315 dout_o[4] n_313 n_376 n_397 n_311 n_395 n_330 n_393 n_283 n_370 n_391 rts_o n_201 n_285 n_429 n_427 n_406 n_448 n_404 n_446 n_425 n_465 n_402 n_444 n_400 n_484 n_463 n_461 n_440 n_482 n_480 n_308 n_329 n_306 clk n_553 dout_o[1] rxd_s n_304 dout_o[5] rx_valid 1'b1 n_384 n_382 n_273 n_380 rxd_i n_275 n_298 n_277 n_279 n_437 n_479 n_458 n_456 n_435 n_477 n_433 n_475 n_454 n_452 n_431 n_450 n_142 n_342 n_102
+.names tx_fifo_mem[3]_22 tx_fifo_wp[1] tx_fifo_wp[0] we_i n639
+1--0 1
+1-0- 1
+10-- 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[0]_12 n408
+0-1 1
+01- 1
+.names tx_fifo_wp[1] tx_fifo_wp[0] we_i n599
+011 1
+.names n599 tx_fifo_mem[1] n600_1
+01 1
+.names tx_fifo_wp[0] we_i n592
+01 1
+.names tx_fifo_mem[2]_26 tx_fifo_wp[1] n592 n618_1
+10- 1
+1-0 1
+.names n599 tx_fifo_mem[1]_4 n604_1
+01 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[0]_11 n404
+0-1 1
+01- 1
+.names n402 rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[2]_25 n403
+01-1 1
+011- 1
+.names tx_fifo_mem[2]_28 tx_fifo_wp[1] n592 n635
+1-0 1
+10- 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[0]_15 n420
+01- 1
+0-1 1
+.names n418 rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[2]_29 n419
+011- 1
+01-1 1
+.names n599 tx_fifo_mem[1]_6 n608_1
+01 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[1]_9 n553
+0-0 1
+00- 1
+.names n555 n531 hold_reg_9 n532 n556
+00-0 1
+001- 1
+.names n531 n554 tx_fifo_rp[0] tx_fifo_mem[2]_30 n557
+1-01 1
+10-- 1
+.names tx_fifo_mem[3] tx_fifo_wp[1] tx_fifo_wp[0] we_i n655
+1--0 1
+1-0- 1
+10-- 1
+.names tx_fifo_mem[2]_30 tx_fifo_wp[1] n592 n624_1
+1-0 1
+10- 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[1]_3 n565
+0-0 1
+00- 1
+.names n567 n531 hold_reg_3 n532 n569
+00-0 1
+000- 1
+.names n531 n566 tx_fifo_rp[0] tx_fifo_mem[2]_24 n568
+1-01 1
+10-- 1
+.names tx_fifo_mem[3]_18 tx_fifo_wp[1] tx_fifo_wp[0] we_i n657
+1--0 1
+1-0- 1
+10-- 1
+.names tx_fifo_mem[0] tx_fifo_wp[1] n592 n645
+1-0 1
+11- 1
+.names n531 tx_fifo_rp[0] n628_1
+11 1
+.names load sio_ce n531
+11 1
+.names tx_fifo_rp[1] n531 tx_fifo_rp[0] n629
+011 1
+.names tx_fifo_mem[2]_27 tx_fifo_wp[1] n592 n620_1
+1-0 1
+10- 1
+.names dpll_state[1] sio_ce_x4 change dpll_state[0] n679
+10-- 1
+1-00 1
+.names n599 tx_fifo_mem[1]_8 n610_1
+01 1
+.names tx_fifo_mem[2] tx_fifo_wp[1] n592 n614_1
+1-0 1
+10- 1
+.names rx_fifo_rp[1] rx_fifo_wp[1] n390
+01 1
+.names n531 n578 tx_fifo_rp[0] tx_fifo_mem[2]_26 n580
+10-- 1
+1-01 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[3]_19 n578
+1-0 1
+10- 1
+.names rx_fifo_rp[0] rx_fifo_wp[0] n391
+01 1
+.names n579 n531 hold_reg_5 n532 n581
+00-0 1
+000- 1
+.names shift_en sio_ce n532
+11 1
+.names hold_reg_4 sio_ce shift_en n579
+1-0 1
+10- 1
+.names rx_fifo_wp[0] rx_fifo_rp[0] n392
+01 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[3] n560
+1-0 1
+10- 1
+.names n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n487
+0001 1
+.names rx_fifo_mem[0]_11 n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n492
+1--1- 1
+1-1-- 1
+11--- 1
+1---0 1
+.names rx_fifo_mem[0]_13 n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n496
+1-1-- 1
+11--- 1
+1---0 1
+1--1- 1
+.names hold_reg_1 sio_ce shift_en n561
+1-0 1
+10- 1
+.names rxr[2]_174 rx_go rx_sio_ce n525
+10- 1
+1-0 1
+.names rx_fifo_wp[1] n432 rx_fifo_rp[0] rx_fifo_rp[1] rx_fifo_gb n434
+01-1- 1
+010-- 1
+01--0 1
+.names rx_fifo_mem[1] rx_fifo_wp[1] n432 rx_fifo_rp[1] rx_fifo_gb rx_fifo_rp[0] n457
+1--011 1
+1-0--- 1
+11---- 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[1]_7 n541
+0-0 1
+00- 1
+.names rxr[2]_176 rx_go rx_sio_ce n527
+1-0 1
+10- 1
+.names rx_fifo_mem[1]_4 rx_fifo_wp[1] n432 rx_fifo_rp[1] rx_fifo_gb rx_fifo_rp[0] n461
+1--011 1
+1-0--- 1
+11---- 1
+.names rx_fifo_mem[3] rx_fifo_rp[0] n394
+01 1
+.names n543 n531 hold_reg_7 n532 n545
+00-0 1
+000- 1
+.names n531 n542 tx_fifo_rp[0] tx_fifo_mem[2]_28 n544
+1-01 1
+10-- 1
+.names tx_fifo_wp[0] tx_fifo_rp[0] n386
+01 1
+.names tx_fifo_rp[0] tx_fifo_wp[0] n387
+01 1
+.names n384 tx_fifo_wp[1] tx_fifo_rp[1] n385
+01- 1
+0-0 1
+.names rx_fifo_mem[0]_15 n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n500
+1-1-- 1
+11--- 1
+1---0 1
+1--1- 1
+.names n531 n560 tx_fifo_rp[0] tx_fifo_mem[2] n562
+10-- 1
+1-01 1
+.names rx_bit_cnt[0] rx_sio_ce rx_go n506
+111 1
+.names n_182 rx_bit_cnt[0] rx_sio_ce rx_go n507
+1111 1
+.names rx_go rxd_r IN-rxd_s n505
+000 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[3]_21 n542
+10- 1
+1-0 1
+.names rx_fifo_wp[1] rx_fifo_rp[1] n389
+01 1
+.names re_i rx_fifo_gb n426
+01 1
+.names n427 n390 n392 n389 n428
+1-1- 1
+11-- 1
+1--1 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[1]_6 n584
+00- 1
+0-0 1
+.names n394 rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[2] n395
+01-1 1
+011- 1
+.names rxr[2]_172 rx_go rx_sio_ce n521
+1-0 1
+10- 1
+.names n561 n531 hold_reg_2 n532 n563
+00-0 1
+000- 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_gb n486
+001 1
+.names rx_valid_r IN-rx_valid n427
+11 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[3]_20 n585
+10- 1
+1-0 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[0] n396
+01- 1
+0-1 1
+.names rx_fifo_mem[1]_9 rx_fifo_wp[1] n432 rx_fifo_rp[1] rx_fifo_gb rx_fifo_rp[0] n437
+1-0--- 1
+11---- 1
+1--011 1
+.names rx_fifo_mem[1]_7 rx_fifo_wp[1] n432 rx_fifo_rp[1] rx_fifo_gb rx_fifo_rp[0] n467
+1--011 1
+1-0--- 1
+11---- 1
+.names hold_reg_6 sio_ce shift_en n543
+10- 1
+1-0 1
+.names hold_reg_5 sio_ce shift_en n586
+1-0 1
+10- 1
+.names rxr[2]_173 rx_go rx_sio_ce n523
+1-0 1
+10- 1
+.names rx_fifo_mem[0]_16 n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n502
+1--1- 1
+1-1-- 1
+11--- 1
+1---0 1
+.names n531 n585 tx_fifo_rp[0] tx_fifo_mem[2]_27 n587
+1-01 1
+10-- 1
+.names rx_fifo_mem[3]_17 rx_fifo_rp[0] n398
+01 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[3]_17 n566
+1-0 1
+10- 1
+.names rxd_r IN-rxd_s n504
+00 1
+.names n586 n531 hold_reg_6 n532 n588
+00-0 1
+000- 1
+.names n398 rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[2]_24 n399
+011- 1
+01-1 1
+.names hold_reg_2 sio_ce shift_en n567
+10- 1
+1-0 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[1]_8 n547
+0-0 1
+00- 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[3]_22 n548
+1-0 1
+10- 1
+.names hold_reg_7 sio_ce shift_en n549
+1-0 1
+10- 1
+.names tx_fifo_mem[3]_23 tx_fifo_wp[1] tx_fifo_wp[0] we_i n663
+1--0 1
+1-0- 1
+10-- 1
+.names rxr[2]_175 rx_go rx_sio_ce n529
+1-0 1
+10- 1
+.names tx_fifo_mem[3]_20 tx_fifo_wp[1] tx_fifo_wp[0] we_i n661
+1--0 1
+1-0- 1
+10-- 1
+.names dpll_state[0] sio_ce_x4 dpll_state[1] change n595
+1-01 1
+10-- 1
+.names IN-rst sio_ce txf_empty_r n590
+1-1 1
+11- 1
+.names n406 rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[2]_26 n407
+01-1 1
+011- 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[0]_16 n424
+0-1 1
+01- 1
+.names n422 rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[2]_30 n423
+011- 1
+01-1 1
+.names n599 tx_fifo_mem[1]_9 n612_1
+01 1
+.names tx_fifo_mem[2]_24 tx_fifo_wp[1] n592 n593
+1-0 1
+10- 1
+.names tx_fifo_mem[0]_15 tx_fifo_wp[1] n592 n669_1
+1-0 1
+11- 1
+.names tx_fifo_mem[0]_13 tx_fifo_wp[1] n592 n649
+1-0 1
+11- 1
+.names rx_fifo_rp[0] re_i n665_1
+11 1
+.names rx_fifo_rp[1] n665_1 n666
+01 1
+.names tx_fifo_mem[0]_11 tx_fifo_wp[1] n592 n653
+1-0 1
+11- 1
+.names rx_fifo_mem[0]_10 n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n490
+11--- 1
+1---0 1
+1--1- 1
+1-1-- 1
+.names rx_fifo_mem[3] rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n470
+1--111 1
+1-0--- 1
+10---- 1
+.names rx_fifo_wp[0] rx_valid_r IN-rx_valid n432
+111 1
+.names n432 rx_fifo_wp[1] rx_fifo_rp[0] rx_fifo_rp[1] rx_fifo_gb n469
+110-- 1
+11--0 1
+11-0- 1
+.names rx_fifo_mem[3]_17 rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n472
+1--111 1
+1-0--- 1
+10---- 1
+.names n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n440
+0011 1
+.names rx_fifo_mem[2]_26 n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n447
+11--- 1
+1---0 1
+1--0- 1
+1-1-- 1
+.names rx_fifo_mem[2]_28 n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n451
+1--0- 1
+1-1-- 1
+11--- 1
+1---0 1
+.names rx_fifo_rp[0] rx_fifo_rp[1] rx_fifo_gb n439
+011 1
+.names tx_fifo_mem[3]_21 tx_fifo_wp[1] tx_fifo_wp[0] we_i n641
+1--0 1
+1-0- 1
+10-- 1
+.names rx_fifo_mem[0]_12 n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n494
+1-1-- 1
+11--- 1
+1---0 1
+1--1- 1
+.names rx_fifo_wp[0] n427 n389 n390 rx_fifo_rp[0] rx_fifo_gb n431
+011--- 1
+01---0 1
+01--1- 1
+01-1-- 1
+.names rx_fifo_mem[3]_20 rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n478
+1-0--- 1
+10---- 1
+1--111 1
+.names rx_fifo_mem[3]_20 rx_fifo_rp[0] n410
+01 1
+.names rx_fifo_mem[2]_27 n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n449
+1-1-- 1
+11--- 1
+1---0 1
+1--0- 1
+.names rxr[2] rx_go rx_sio_ce n519
+1-0 1
+10- 1
+.names rx_fifo_mem[2]_29 n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n453
+11--- 1
+1---0 1
+1--0- 1
+1-1-- 1
+.names rx_fifo_mem[3]_18 rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n474
+1--111 1
+1-0--- 1
+10---- 1
+.names n410 rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[2]_27 n411
+011- 1
+01-1 1
+.names rx_fifo_mem[3]_22 rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n482
+10---- 1
+1--111 1
+1-0--- 1
+.names n504 IN-rxd_s rxd_r n643
+0-0 1
+00- 1
+.names rx_fifo_mem[0] n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n488
+1--1- 1
+1-1-- 1
+11--- 1
+1---0 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[0]_13 n412
+01- 1
+0-1 1
+.names rx_fifo_mem[2]_30 n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n455
+1-1-- 1
+11--- 1
+1---0 1
+1--0- 1
+.names rx_fifo_mem[1]_3 rx_fifo_wp[1] n432 rx_fifo_rp[1] rx_fifo_gb rx_fifo_rp[0] n459
+11---- 1
+1--011 1
+1-0--- 1
+.names rx_fifo_mem[3]_19 rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n476
+1-0--- 1
+10---- 1
+1--111 1
+.names rx_fifo_mem[1]_8 rx_fifo_wp[1] n432 rx_fifo_rp[1] rx_fifo_gb rx_fifo_rp[0] n435
+1--011 1
+1-0--- 1
+11---- 1
+.names rx_fifo_mem[3]_21 rx_fifo_rp[0] n414
+01 1
+.names rx_fifo_mem[0]_14 n486 rx_fifo_wp[0] rx_fifo_wp[1] n427 n498
+1--1- 1
+1-1-- 1
+11--- 1
+1---0 1
+.names n414 rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[2]_28 n415
+011- 1
+01-1 1
+.names tx_fifo_mem[0]_12 tx_fifo_wp[1] n592 n647
+11- 1
+1-0 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[0]_14 n416
+0-1 1
+01- 1
+.names rx_fifo_mem[3]_22 rx_fifo_rp[0] n418
+01 1
+.names n599 tx_fifo_mem[1]_3 n602_1
+01 1
+.names n599 tx_fifo_mem[1]_5 n606_1
+01 1
+.names n599 tx_fifo_mem[1]_7 n633
+01 1
+.names tx_fifo_mem[2]_29 tx_fifo_wp[1] n592 n622_1
+1-0 1
+10- 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[1] n559
+0-0 1
+00- 1
+.names tx_fifo_mem[3]_17 tx_fifo_wp[1] tx_fifo_wp[0] we_i n637
+1--0 1
+1-0- 1
+10-- 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[1]_4 n571
+0-0 1
+00- 1
+.names n573 n531 hold_reg_4 n532 n575
+00-0 1
+000- 1
+.names n531 n572 tx_fifo_rp[0] tx_fifo_mem[2]_25 n574
+1-01 1
+10-- 1
+.names IN-rst sio_ce hold_reg shift_en shift_en_r n626_1
+1-0-1 1
+1-01- 1
+10--- 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[1]_5 n577
+00- 1
+0-0 1
+.names n531 hold_reg_1 n532 n631
+0-0 1
+00- 1
+.names IN-rst n386 n384 tx_fifo_wp[1] tx_fifo_rp[1] n538
+1--01 1
+1-1-- 1
+11--- 1
+.names we_i n387 n384 tx_fifo_wp[1] tx_fifo_rp[1] n537
+11--- 1
+1-0-0 1
+1-01- 1
+.names n531 tx_fifo_gb IN-rst n539
+001 1
+.names n532 tx_bit_cnt[0] n597
+11 1
+.names n532 tx_bit_cnt[0] tx_bit_cnt[1] n533
+111 1
+.names tx_fifo_mem[2]_25 tx_fifo_wp[1] n592 n616_1
+1-0 1
+10- 1
+.names n531 n548 tx_fifo_rp[0] tx_fifo_mem[2]_29 n550
+1-01 1
+10-- 1
+.names n532 tx_bit_cnt[2] tx_bit_cnt[0] tx_bit_cnt[1] n534
+1111 1
+.names tx_bit_cnt[3] n532 tx_bit_cnt[2] tx_bit_cnt[0] tx_bit_cnt[1] n535
+0--0- 1
+0-0-- 1
+00--- 1
+0---0 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[3]_18 n572
+1-0 1
+10- 1
+.names n549 n531 hold_reg_8 n532 n551
+00-0 1
+000- 1
+.names rx_fifo_mem[1]_5 rx_fifo_wp[1] n432 rx_fifo_rp[1] rx_fifo_gb rx_fifo_rp[0] n463
+1-0--- 1
+11---- 1
+1--011 1
+.names hold_reg_3 sio_ce shift_en n573
+1-0 1
+10- 1
+.names tx_fifo_rp[1] tx_fifo_wp[1] n384
+01 1
+.names rx_bit_cnt[3] n507 rx_bit_cnt[2] n510
+011 1
+.names rx_fifo_mem[1]_6 rx_fifo_wp[1] n432 rx_fifo_rp[1] rx_fifo_gb rx_fifo_rp[0] n465
+1--011 1
+1-0--- 1
+11---- 1
+.names rx_fifo_mem[2] n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n441
+1---0 1
+1--0- 1
+1-1-- 1
+11--- 1
+.names tx_fifo_rp[1] tx_fifo_rp[0] tx_fifo_mem[3]_23 n554
+1-0 1
+10- 1
+.names rx_fifo_mem[2]_24 n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n443
+1--0- 1
+1-1-- 1
+11--- 1
+1---0 1
+.names n505 IN-rst rx_bit_cnt[2] n507 n513
+01-1 1
+011- 1
+.names hold_reg_8 sio_ce shift_en n555
+1-0 1
+10- 1
+.names rxr[2]_171 rx_go rx_sio_ce n515
+1-0 1
+10- 1
+.names rxr[2]_177 rx_go rx_sio_ce n517
+1-0 1
+10- 1
+.names tx_fifo_mem[3]_19 tx_fifo_wp[1] tx_fifo_wp[0] we_i n659
+1--0 1
+1-0- 1
+10-- 1
+.names rx_fifo_rp[1] rx_fifo_rp[0] rx_fifo_mem[0]_10 n400
+0-1 1
+01- 1
+.names tx_fifo_mem[0]_16 tx_fifo_wp[1] n592 n651
+1-0 1
+11- 1
+.names tx_fifo_mem[0]_14 tx_fifo_wp[1] n592 n671
+11- 1
+1-0 1
+.names tx_fifo_mem[0]_10 tx_fifo_wp[1] n592 n673
+1-0 1
+11- 1
+.names rx_fifo_mem[3]_21 rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n480
+1-0--- 1
+10---- 1
+1--111 1
+.names rx_fifo_mem[2]_25 n439 rx_fifo_wp[0] n427 rx_fifo_wp[1] n445
+1---0 1
+1--0- 1
+1-1-- 1
+11--- 1
+.names rx_fifo_mem[3]_23 rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n484
+1-0--- 1
+10---- 1
+1--111 1
+.names rx_fifo_mem[3]_23 rx_fifo_rp[0] n422
+01 1
+.names rx_fifo_mem[3]_18 rx_fifo_rp[0] n402
+01 1
+.names rx_fifo_mem[3]_19 rx_fifo_rp[0] n406
+01 1
+.names n600_1 n599 din_i[0] n_318
+1-- 1
+-11 1
+.names n618_1 n592 tx_fifo_wp[1] din_i[3] n_379
+-111 1
+1--- 1
+.names n604_1 n599 din_i[2] n_316
+-11 1
+1-- 1
+.names n403 n404 rx_fifo_mem[1]_4 rx_fifo_rp[0] dout_o[2]
+1--- 1
+-1-0 1
+-11- 1
+.names tx_bit_cnt[2] tx_bit_cnt[1] tx_bit_cnt[0] tx_bit_cnt[3] n_98
+---0 1
+--0- 1
+-1-- 1
+1--- 1
+.names n635 n592 tx_fifo_wp[1] din_i[5] n_377
+-111 1
+1--- 1
+.names n419 n420 rx_fifo_mem[1]_8 rx_fifo_rp[0] dout_o[6]
+-1-0 1
+-11- 1
+1--- 1
+.names n608_1 n599 din_i[4] n_314
+-11 1
+1-- 1
+.names n556 n557 n553 tx_fifo_rp[0] tx_fifo_mem[0]_16 n_398
+-1-01 1
+-10-- 1
+1---- 1
+.names n655 tx_fifo_wp[1] tx_fifo_wp[0] we_i din_i[0] n_312
+-1111 1
+1---- 1
+.names n624_1 n592 tx_fifo_wp[1] din_i[7] n_375
+1--- 1
+-111 1
+.names n569 n568 n565 tx_fifo_rp[0] tx_fifo_mem[0]_10 n_396
+1---- 1
+-1-01 1
+-10-- 1
+.names n657 tx_fifo_wp[1] tx_fifo_wp[0] we_i din_i[2] n_310
+-1111 1
+1---- 1
+.names n645 tx_fifo_wp[1] n592 din_i[0] n_280
+-011 1
+1--- 1
+.names n629 n628_1 tx_fifo_rp[1] n_371
+1-- 1
+-01 1
+.names n599 tx_fifo_wp[1] tx_fifo_wp[0] we_i n_242
+-10- 1
+1--- 1
+-1-0 1
+.names IN-txd_o txd_o
+1 1
+.names n679 n_102 sio_ce_x4 n_246
+1-- 1
+-11 1
+.names n492 n487 rxr[2]_172 n_449
+1-- 1
+-11 1
+.names n496 n487 rxr[2]_174 n_447
+-11 1
+1-- 1
+.names n525 rxr[2]_175 rx_sio_ce rx_go n_426
+-111 1
+1--- 1
+.names n457 n434 rxr[2] n_468
+-11 1
+1-- 1
+.names n527 rxr[2]_177 rx_sio_ce rx_go n_424
+-111 1
+1--- 1
+.names n461 n434 rxr[2]_172 n_466
+-11 1
+1-- 1
+.names n545 n544 n541 tx_fifo_rp[0] tx_fifo_mem[0]_14 n_403
+-1-01 1
+-10-- 1
+1---- 1
+.names n386 n387 tx_fifo_gb n385 full_o
+0001 1
+.names n500 n487 rxr[2]_176 n_445
+-11 1
+1-- 1
+.names IN-rst n507 n505 n_182 n506 n_443
+-001- 1
+0---- 1
+-00-1 1
+.names IN-rst n426 n428 n391 n390 n389 n_485
+11---- 1
+1-1-00 1
+1-11-- 1
+.names n437 n434 rxr[2]_177 n_483
+-11 1
+1-- 1
+.names n467 n434 rxr[2]_175 n_462
+-11 1
+1-- 1
+.names shift_en cts_i txf_empty_r n_138
+001 1
+.names n663 tx_fifo_wp[1] tx_fifo_wp[0] we_i din_i[7] n_309
+1---- 1
+-1111 1
+.names n661 tx_fifo_wp[1] tx_fifo_wp[0] we_i din_i[4] n_307
+-1111 1
+1---- 1
+.names n389 n390 n391 n392 rx_fifo_gb empty_o
+00000 1
+.names rx_sio_ce_r2 rx_sio_ce_r1 n_305
+00 1
+.names n595 dpll_state[0] change sio_ce_x4 n_347
+-001 1
+1--- 1
+.names n590 n386 n387 n385 tx_fifo_gb sio_ce n_389
+-00111 1
+0----- 1
+.names n407 n408 rx_fifo_mem[1]_5 rx_fifo_rp[0] dout_o[3]
+-1-0 1
+-11- 1
+1--- 1
+.names n423 n424 rx_fifo_mem[1]_9 rx_fifo_rp[0] dout_o[7]
+-1-0 1
+-11- 1
+1--- 1
+.names IN-rst n532 sio_ce shift_en_r n_270
+1-01 1
+11-- 1
+.names n612_1 n599 din_i[7] n_383
+-11 1
+1-- 1
+.names n593 n592 tx_fifo_wp[1] din_i[1] n_381
+-111 1
+1--- 1
+.names n669_1 tx_fifo_wp[1] n592 din_i[6] n_274
+-011 1
+1--- 1
+.names n649 tx_fifo_wp[1] n592 din_i[4] n_276
+-011 1
+1--- 1
+.names n666 n665_1 rx_fifo_rp[1] n_299
+-01 1
+1-- 1
+.names n653 tx_fifo_wp[1] n592 din_i[2] n_278
+-011 1
+1--- 1
+.names IN-rst rst
+1 1
+.names n472 n469 rxr[2]_171 n_459
+1-- 1
+-11 1
+.names n447 n440 rxr[2]_173 n_478
+-11 1
+1-- 1
+.names n478 n469 rxr[2]_174 n_455
+-11 1
+1-- 1
+.names n449 n440 rxr[2]_174 n_476
+-11 1
+1-- 1
+.names n519 rxr[2]_171 rx_sio_ce rx_go n_432
+-111 1
+1--- 1
+.names n453 n440 rxr[2]_176 n_474
+-11 1
+1-- 1
+.names n482 n469 rxr[2]_176 n_453
+-11 1
+1-- 1
+.names n488 n487 rxr[2] n_451
+1-- 1
+-11 1
+.names n455 n440 rxr[2]_177 n_472
+-11 1
+1-- 1
+.names rx_bit_cnt[0] rx_bit_cnt[2] n_182 rx_bit_cnt[3] n_183
+-1-- 1
+1--- 1
+---0 1
+--0- 1
+.names n459 n434 rxr[2]_171 n_470
+-11 1
+1-- 1
+.names n628_1 tx_fifo_rp[0] n531 n_143
+0-1 1
+01- 1
+.names n592 we_i tx_fifo_wp[0] n_105
+-01 1
+1-- 1
+.names n665_1 re_i rx_fifo_rp[0] n_149
+0-1 1
+01- 1
+.names n395 n396 rx_fifo_mem[1] rx_fifo_rp[0] dout_o[0]
+1--- 1
+-1-0 1
+-11- 1
+.names n602_1 n599 din_i[1] n_317
+1-- 1
+-11 1
+.names n620_1 n592 tx_fifo_wp[1] din_i[4] n_378
+1--- 1
+-111 1
+.names n606_1 n599 din_i[3] n_315
+1-- 1
+-11 1
+.names n411 n412 rx_fifo_mem[1]_6 rx_fifo_rp[0] dout_o[4]
+-11- 1
+1--- 1
+-1-0 1
+.names n633 n599 din_i[5] n_313
+1-- 1
+-11 1
+.names n622_1 n592 tx_fifo_wp[1] din_i[6] n_376
+-111 1
+1--- 1
+.names n563 n562 n559 tx_fifo_rp[0] tx_fifo_mem[0] n_397
+-10-- 1
+1---- 1
+-1-01 1
+.names n637 tx_fifo_wp[1] tx_fifo_wp[0] we_i din_i[1] n_311
+-1111 1
+1---- 1
+.names n575 n574 n571 tx_fifo_rp[0] tx_fifo_mem[0]_11 n_395
+-1-01 1
+-10-- 1
+1---- 1
+.names n626_1 sio_ce IN-txd_o n_330
+0-- 1
+-01 1
+.names n581 n580 n577 tx_fifo_rp[0] tx_fifo_mem[0]_12 n_393
+-10-- 1
+1---- 1
+-1-01 1
+.names IN-rst n643 sio_ce_x4 change n_283
+10-- 1
+1-01 1
+.names n631 hold_reg n532 n_370
+1-1 1
+11- 1
+.names n539 n538 n537 n_391
+1-- 1
+-11 1
+.names IN-rts_o rts_o
+1 1
+.names n_182 rx_bit_cnt[2] rx_bit_cnt[0] rx_bit_cnt[3] n_201
+0011 1
+.names n531 n533 IN-rst tx_bit_cnt[1] n597 n_285
+001-1 1
+0011- 1
+.names n521 rxr[2]_173 rx_sio_ce rx_go n_429
+-111 1
+1--- 1
+.names n523 rxr[2]_174 rx_sio_ce rx_go n_427
+-111 1
+1--- 1
+.names IN-rst n531 n535 tx_bit_cnt[3] n534 n_406
+-000- 1
+0---- 1
+-00-0 1
+.names n494 n487 rxr[2]_173 n_448
+1-- 1
+-11 1
+.names n531 n534 IN-rst tx_bit_cnt[2] n533 n_404
+0011- 1
+001-1 1
+.names n498 n487 rxr[2]_175 n_446
+-11 1
+1-- 1
+.names n529 rxr[2]_176 rx_sio_ce rx_go n_425
+1--- 1
+-111 1
+.names n463 n434 rxr[2]_173 n_465
+-11 1
+1-- 1
+.names n588 n587 n584 tx_fifo_rp[0] tx_fifo_mem[0]_13 n_402
+1---- 1
+-1-01 1
+-10-- 1
+.names n502 n487 rxr[2]_177 n_444
+-11 1
+1-- 1
+.names n551 n550 n547 tx_fifo_rp[0] tx_fifo_mem[0]_15 n_400
+-1-01 1
+-10-- 1
+1---- 1
+.names n431 rx_fifo_wp[0] n_342 n427 n_484
+-1-0 1
+-11- 1
+1--- 1
+.names n465 n434 rxr[2]_174 n_463
+-11 1
+1-- 1
+.names n470 n469 rxr[2] n_461
+-11 1
+1-- 1
+.names IN-rst n505 n510 rx_bit_cnt[3] n507 rx_bit_cnt[2] n_440
+-0-1-0 1
+-0-10- 1
+-01--- 1
+0----- 1
+.names n441 n440 rxr[2] n_482
+1-- 1
+-11 1
+.names n443 n440 rxr[2]_171 n_480
+-11 1
+1-- 1
+.names n659 tx_fifo_wp[1] tx_fifo_wp[0] we_i din_i[3] n_308
+-1111 1
+1---- 1
+.names IN-rst n531 n597 tx_bit_cnt[0] n532 n_329
+0---- 1
+-00-1 1
+-001- 1
+.names n641 tx_fifo_wp[1] tx_fifo_wp[0] we_i din_i[5] n_306
+-1111 1
+1---- 1
+.names IN-clk clk
+1 1
+.names n434 rx_fifo_wp[1] n432 rx_fifo_gb rx_fifo_rp[1] rx_fifo_rp[0] n_553
+1----- 1
+-1-111 1
+-10--- 1
+.names n399 n400 rx_fifo_mem[1]_3 rx_fifo_rp[0] dout_o[1]
+-1-0 1
+-11- 1
+1--- 1
+.names IN-rxd_s rxd_s
+1 1
+.names n639 tx_fifo_wp[1] tx_fifo_wp[0] we_i din_i[6] n_304
+1---- 1
+-1111 1
+.names n415 n416 rx_fifo_mem[1]_7 rx_fifo_rp[0] dout_o[5]
+-1-0 1
+-11- 1
+1--- 1
+.names IN-rx_valid rx_valid
+1 1
+.names 1'b1
+0
+.names n610_1 n599 din_i[6] n_384
+-11 1
+1-- 1
+.names n614_1 n592 tx_fifo_wp[1] din_i[0] n_382
+-111 1
+1--- 1
+.names n651 tx_fifo_wp[1] n592 din_i[7] n_273
+-011 1
+1--- 1
+.names n616_1 n592 tx_fifo_wp[1] din_i[2] n_380
+-111 1
+1--- 1
+.names IN-rxd_i rxd_i
+1 1
+.names n671 tx_fifo_wp[1] n592 din_i[5] n_275
+-011 1
+1--- 1
+.names n531 n532 hold_reg_9 n_298
+-1- 1
+1-- 1
+--1 1
+.names n647 tx_fifo_wp[1] n592 din_i[3] n_277
+-011 1
+1--- 1
+.names n673 tx_fifo_wp[1] n592 din_i[1] n_279
+-011 1
+1--- 1
+.names n506 n505 IN-rst rx_bit_cnt[0] rx_sio_ce rx_go n_437
+001-11 1
+0011-- 1
+.names n435 n434 rxr[2]_176 n_479
+-11 1
+1-- 1
+.names n474 n469 rxr[2]_172 n_458
+-11 1
+1-- 1
+.names n476 n469 rxr[2]_173 n_456
+1-- 1
+-11 1
+.names n513 rx_bit_cnt[2] n507 n_435
+10- 1
+1-0 1
+.names n445 n440 rxr[2]_172 n_477
+-11 1
+1-- 1
+.names n517 rx_sio_ce rx_go IN-rxd_s n_433
+-111 1
+1--- 1
+.names n451 n440 rxr[2]_175 n_475
+-11 1
+1-- 1
+.names n480 n469 rxr[2]_175 n_454
+-11 1
+1-- 1
+.names n484 n469 rxr[2]_177 n_452
+-11 1
+1-- 1
+.names n515 rxr[2]_172 rx_sio_ce rx_go n_431
+1--- 1
+-111 1
+.names n490 n487 rxr[2]_171 n_450
+-11 1
+1-- 1
+.names rx_sio_ce_r1 n_142
+0 1
+.names n389 n390 n391 n392 rx_fifo_gb n_342
+00001 1
+.names dpll_state[1] dpll_state[0] n_102
+01 1
+.end

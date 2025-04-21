@@ -1,0 +1,119 @@
+# This is a BitKeeper generated patch for the following project:
+# Project Name: Linux kernel tree
+# This patch format is intended for GNU patch command version 2.5 or higher.
+# This patch includes the following deltas:
+#	           ChangeSet	1.336   -> 1.337  
+#	drivers/usb/serial/kl5kusb105.c	1.2     -> 1.3    
+#	drivers/usb/serial/io_edgeport.c	1.22    -> 1.23   
+#	drivers/usb/serial/keyspan.c	1.20    -> 1.21   
+#	drivers/usb/serial/visor.c	1.22    -> 1.23   
+#	drivers/usb/serial/usbserial.c	1.23    -> 1.24   
+#	drivers/usb/serial/empeg.c	1.19    -> 1.20   
+#
+# The following is the BitKeeper ChangeSet Log
+# --------------------------------------------
+# 02/02/13	greg@kroah.com	1.337
+# added mem_flags to usb_submit_urb().
+# This fixes the drivers in drivers/usb/serial.
+# Patch done by Oliver Neukum.
+# --------------------------------------------
+#
+diff -Nru a/drivers/usb/serial/empeg.c b/drivers/usb/serial/empeg.c
+--- a/drivers/usb/serial/empeg.c	Wed Feb 13 17:51:23 2002
++++ b/drivers/usb/serial/empeg.c	Wed Feb 13 17:51:23 2002
+@@ -607,7 +607,7 @@
+ 	/* create our write urb pool and transfer buffers */ 
+ 	spin_lock_init (&write_urb_pool_lock);
+ 	for (i = 0; i < NUM_URBS; ++i) {
+-		urb = usb_alloc_urb(0);
++		urb = usb_alloc_urb(0, GFP_KERNEL);
+ 		write_urb_pool[i] = urb;
+ 		if (urb == NULL) {
+ 			err("No more urbs???");
+diff -Nru a/drivers/usb/serial/io_edgeport.c b/drivers/usb/serial/io_edgeport.c
+--- a/drivers/usb/serial/io_edgeport.c	Wed Feb 13 17:51:23 2002
++++ b/drivers/usb/serial/io_edgeport.c	Wed Feb 13 17:51:23 2002
+@@ -1091,7 +1091,7 @@
+ 		}
+ 
+ 		/* Allocate a URB for the write */
+-		edge_port->write_urb = usb_alloc_urb (0);
++		edge_port->write_urb = usb_alloc_urb (0, GFP_KERNEL);
+ 
+ 		if (!edge_port->write_urb) {
+ 			dbg(__FUNCTION__" - no memory");
+@@ -2462,7 +2462,7 @@
+ 	usb_serial_debug_data (__FILE__, __FUNCTION__, length, buffer);
+ 
+ 	/* Allocate our next urb */
+-	urb = usb_alloc_urb (0);
++	urb = usb_alloc_urb (0, GFP_KERNEL);
+ 	if (!urb)
+ 		return -ENOMEM;
+ 
+diff -Nru a/drivers/usb/serial/keyspan.c b/drivers/usb/serial/keyspan.c
+--- a/drivers/usb/serial/keyspan.c	Wed Feb 13 17:51:23 2002
++++ b/drivers/usb/serial/keyspan.c	Wed Feb 13 17:51:23 2002
+@@ -1051,7 +1051,7 @@
+ 		return NULL;		/* endpoint not needed */
+ 
+ 	dbg (__FUNCTION__ " alloc for endpoint %d.\n", endpoint);
+-	urb = usb_alloc_urb(0);		/* No ISO */
++	urb = usb_alloc_urb(0, GFP_KERNEL);		/* No ISO */
+ 	if (urb == NULL) {
+ 		dbg (__FUNCTION__ " alloc for endpoint %d failed.\n", endpoint);
+ 		return NULL;
+diff -Nru a/drivers/usb/serial/kl5kusb105.c b/drivers/usb/serial/kl5kusb105.c
+--- a/drivers/usb/serial/kl5kusb105.c	Wed Feb 13 17:51:23 2002
++++ b/drivers/usb/serial/kl5kusb105.c	Wed Feb 13 17:51:23 2002
+@@ -280,7 +280,7 @@
+ 
+ 		spin_lock_init (&priv->write_urb_pool_lock);
+ 		for (i=0; i<NUM_URBS; i++) {
+-			struct urb* urb = usb_alloc_urb(0);
++			struct urb* urb = usb_alloc_urb(0, GFP_KERNEL);
+ 
+ 			priv->write_urb_pool[i] = urb;
+ 			if (urb == NULL) {
+diff -Nru a/drivers/usb/serial/usbserial.c b/drivers/usb/serial/usbserial.c
+--- a/drivers/usb/serial/usbserial.c	Wed Feb 13 17:51:23 2002
++++ b/drivers/usb/serial/usbserial.c	Wed Feb 13 17:51:23 2002
+@@ -1203,7 +1203,7 @@
+ 	for (i = 0; i < num_bulk_in; ++i) {
+ 		endpoint = bulk_in_endpoint[i];
+ 		port = &serial->port[i];
+-		port->read_urb = usb_alloc_urb (0);
++		port->read_urb = usb_alloc_urb (0, GFP_KERNEL);
+ 		if (!port->read_urb) {
+ 			err("No free urbs available");
+ 			goto probe_error;
+@@ -1228,7 +1228,7 @@
+ 	for (i = 0; i < num_bulk_out; ++i) {
+ 		endpoint = bulk_out_endpoint[i];
+ 		port = &serial->port[i];
+-		port->write_urb = usb_alloc_urb(0);
++		port->write_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 		if (!port->write_urb) {
+ 			err("No free urbs available");
+ 			goto probe_error;
+@@ -1254,7 +1254,7 @@
+ 	for (i = 0; i < num_interrupt_in; ++i) {
+ 		endpoint = interrupt_in_endpoint[i];
+ 		port = &serial->port[i];
+-		port->interrupt_in_urb = usb_alloc_urb(0);
++		port->interrupt_in_urb = usb_alloc_urb(0, GFP_KERNEL);
+ 		if (!port->interrupt_in_urb) {
+ 			err("No free urbs available");
+ 			goto probe_error;
+diff -Nru a/drivers/usb/serial/visor.c b/drivers/usb/serial/visor.c
+--- a/drivers/usb/serial/visor.c	Wed Feb 13 17:51:23 2002
++++ b/drivers/usb/serial/visor.c	Wed Feb 13 17:51:23 2002
+@@ -787,7 +787,7 @@
+ 	/* create our write urb pool and transfer buffers */ 
+ 	spin_lock_init (&write_urb_pool_lock);
+ 	for (i = 0; i < NUM_URBS; ++i) {
+-		urb = usb_alloc_urb(0);
++		urb = usb_alloc_urb(0, GFP_KERNEL);
+ 		write_urb_pool[i] = urb;
+ 		if (urb == NULL) {
+ 			err("No more urbs???");
