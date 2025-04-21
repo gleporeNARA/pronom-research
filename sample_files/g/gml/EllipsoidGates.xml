@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gating:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gating="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <!-- Example of a 2D Ellipse Gate -->
+  <gating:EllipsoidGate gating:id="Lymphocytes">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:focus>
+      <gating:coordinate gating:value="320.1"/>
+      <gating:coordinate gating:value="270.7"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="224.7"/>
+      <gating:coordinate gating:value="155"/>
+    </gating:focus>
+    <gating:distance>176.78</gating:distance>
+  </gating:EllipsoidGate>
+
+  <!-- Example of a 2D Ellipse Gate -->
+  <gating:EllipsoidGate gating:id="x2">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:focus>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="15"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="40"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:focus>
+    <gating:distance>45</gating:distance>
+  </gating:EllipsoidGate>
+
+
+  <!-- Example of a 2D Ellipse Gate -->
+  <gating:EllipsoidGate gating:id="ellipse">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:focus>
+      <gating:coordinate gating:value="400"/>
+      <gating:coordinate gating:value="180"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="560"/>
+      <gating:coordinate gating:value="230"/>
+    </gating:focus>
+    <gating:distance>278.74</gating:distance>
+  </gating:EllipsoidGate>
+
+
+  <!-- Example of a 3D Ellipsoid Gate -->
+  <gating:EllipsoidGate gating:id="ellipsoid_3D">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:dimension gating:parameter="CD3-FITC-477nm"/>
+    <gating:focus>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="75"/>
+      <gating:coordinate gating:value="95"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="78"/>
+    </gating:focus>
+    <gating:distance>54</gating:distance>
+  </gating:EllipsoidGate>
+
+  <!-- Example of a 3D Ellipsoid Gate -->
+  <gating:EllipsoidGate gating:id="ellipsoid3D">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:dimension gating:parameter="CD3-FITC-477nm"/>
+    <gating:focus>
+      <gating:coordinate gating:value="380"/>
+      <gating:coordinate gating:value="430"/>
+      <gating:coordinate gating:value="350"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="404"/>
+      <gating:coordinate gating:value="470"/>
+      <gating:coordinate gating:value="300"/>
+    </gating:focus>
+    <gating:distance>274</gating:distance>
+  </gating:EllipsoidGate>
+
+  <!-- Example of a 3D Ellipsoid Gate -->
+  <gating:EllipsoidGate gating:id="ball3D">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:dimension gating:parameter="CD8-PERCP-633nm"/>
+    <gating:focus>
+      <gating:coordinate gating:value="200"/>
+      <gating:coordinate gating:value="300"/>
+      <gating:coordinate gating:value="250"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="300"/>
+      <gating:coordinate gating:value="250"/>
+      <gating:coordinate gating:value="280"/>
+    </gating:focus>
+    <gating:distance>212</gating:distance>
+  </gating:EllipsoidGate>
+
+  <!-- Example of a 2D Ellipse Gate -->
+  <!-- The two foci are the same - it is an circle, the distance is it's radius -->
+  <gating:EllipsoidGate gating:id="ellipse1">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:focus>
+      <gating:coordinate gating:value="40"/>
+      <gating:coordinate gating:value="25"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="40"/>
+      <gating:coordinate gating:value="25"/>
+    </gating:focus>
+    <gating:distance>15</gating:distance>
+  </gating:EllipsoidGate>
+
+  <!-- Example a) -->
+  <gating:EllipsoidGate gating:id="ellipse-a">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:focus>
+      <gating:coordinate gating:value="300"/>
+      <gating:coordinate gating:value="200"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="500"/>
+      <gating:coordinate gating:value="200"/>
+    </gating:focus>
+    <gating:distance>400</gating:distance>
+  </gating:EllipsoidGate>
+
+  <!-- Example of a 2D Ellipse Gate -->
+  <gating:EllipsoidGate gating:id="ellipse2">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:focus>
+      <gating:coordinate gating:value="40"/>
+      <gating:coordinate gating:value="25"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="60"/>
+      <gating:coordinate gating:value="40"/>
+    </gating:focus>
+    <gating:distance>40</gating:distance>
+  </gating:EllipsoidGate>
+
+  <gating:EllipsoidGate gating:id="ellipse1.1">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:focus>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:focus>
+    <gating:distance>40</gating:distance>
+  </gating:EllipsoidGate>
+
+
+</gating:Gating-ML>

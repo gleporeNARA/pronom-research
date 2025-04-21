@@ -1,0 +1,980 @@
+@database "OO.guide"
+@(C) 1993-1995 by Janne Siren, All Rights Reserved
+@author Janne Siren
+@remark gconv:40
+@node main "Offline Orbit User's Guide - Table of Contents"
+
+             Offline Orbit - Release 0.80 (September 16, 1995)
+
+         Copyright © 1993-1995 by Janne Siren, All Rights Reserved
+
+                            @{b} Table of Contents @{ub}
+
+  1. Politics
+                                       @{" 1.1 Disclaimer                  " link DISCLAIMER}
+                                       @{" 1.2 License Agreement           " link LICENSE}
+                                       @{" 1.3 Registration                " link REGISTRATION}
+  2. Introduction
+                                       @{" 2.1 Offline Orbit               " link INTRODUCTION}
+                                       @{" 2.2 System Requirements         " link SYSTEM_REQUIREMENTS}
+  3. Getting Started
+                                       @{" 3.1 First Steps                 " link FIRST_STEPS}
+                                       @{" 3.2 User Interface              " link USER_INTERFACE}
+                                       @{" 3.3 Localization                " link LOCALIZATION}
+  4. Command Reference
+                                       @{" 4.1 Control Panel               " link CONTROL_PANEL}
+                                       @{" 4.2 Project Menu                " link PROJECT_MENU}
+                                       @{" 4.3 Messages Menu               " link MESSAGES_MENU}
+                                       @{" 4.4 Extras Menu                 " link EXTRAS_MENU}
+                                       @{" 4.5 Prefs Menu                  " link PREFERENCES_MENU}
+  5. Basic Functions
+                                       @{" 5.1 Reading Messages            " link READING_MESSAGES}
+                                       @{" 5.2 Writing Messages            " link WRITING_MESSAGES}
+  6. Miscellaneous
+                                       @{" 6.1 Support                     " link SUPPORT}
+                                       @{" 6.2 Acknowledgements            " link ACKNOWLEDGEMENTS}
+                                       @{" 6.3 External Utilities          " link EXTERNAL_UTILITIES}
+                                       @{" 6.4 Frequently Asked Questions  " link FREQUENTLY_ASKED_QUESTIONS}
+                                       @{" 6.5 Known Bugs                  " link KNOWN_BUGS}
+
+                                       @{" Update History                  " link OO_history.guide/main}
+@endnode
+@node DISCLAIMER "Offline Orbit User's Guide - [1] Politics"
+@{b}[1.1] Disclaimer @{ub}
+
+OFFLINE ORBIT IS PROVIDED AS IS, WITH NO WARRANTIES EITHER IMPLIED OR
+EXPRESSED. ALL RISKS AND DAMAGES, INCIDENTAL OR OTHERWISE, ARISING FROM THE
+USE, MISUSE, OR INABILITY OF OFFLINE ORBIT ARE ENTIRELY AT THE
+RESPONSIBILITY OF THE USER.
+@endnode
+@node LICENSE "Offline Orbit User's Guide - [1] Politics"
+@{b}[1.2] License Agreement @{ub}
+
+The Offline Orbit software and documentation are copyright © 1993-1995 by
+Janne Siren. These files are protected under the copyright laws of Finland
+and other countries. You are not authorized to modify or reverse engineer
+them without written permission of the copyright holder.
+
+This version of Offline Orbit is shareware. After an evaluation period of
+twenty (20) days, you must either register or discontinue using it. The
+evaluation archive is freely distributable as long as all files remain
+together and unmodified. No profit may be realized for the distribution of
+Offline Orbit.
+
+Registration keyfiles are personal and may not be distributed.
+
+Offline Orbit may not be used in any unlawful or illegal manner.
+
+ReqTools and reqtools.library are copyright © 1991-1994 by Nico François.
+@endnode
+@node REGISTRATION "Offline Orbit User's Guide - [1] Politics"
+@{b}[1.3 Registration] @{ub}
+
+Offline Orbit is distributed under the concept of shareware. It is not
+free. Offline Orbit may be freely distributed, but after an evaluation
+period of twenty (20) days, you must either register or discontinue using
+it. In other words, you can try before you buy.
+
+No features have been removed from the unregistered version, only a
+requester reminds you of the registration. Actually, there is no special
+unregistered version. The evaluation versions will function as registered
+after you have installed your personal keyfile. To obtain this keyfile, you
+must register Offline Orbit. By registering, not only do you get the
+keyfile, but you also support the future development of Offline Orbit. To
+register, follow these instructions.
+
+The registration fee is $20 US dollars (70 Finnish marks). Cheques, money
+orders or credit cards aren't accepted, so you must send the money in the
+form of cash (only US dollars and Finnish marks are accepted).
+
+You should send the money along with a letter clearly stating your name,
+complete mailing address (you must state your address even if you are going
+to download the keyfile from the support BBS) and the method you'd like to
+use to obtain your keyfile. You can either have the keyfile sent to you on
+a floppy disk via regular mail or you can download it from the support BBS
+(Epsilon Indi, +358-0-505-4201). In the latter case, you must also mention
+the user name you use in Epsilon Indi. If you decide to wait for the floppy
+disk, please allow a few weeks for delivery.
+
+Send registrations to the following address:
+
+Offline Orbit Support
+c/o Janne Siren
+Oravamaentie 2 F 17
+02700 Kauniainen
+Finland
+@endnode
+@node INTRODUCTION "Offline Orbit User's Guide - [2] Introduction"
+@{b}[2.1] Offline Orbit @{ub}
+
+Before offline reading was invented, you could only transfer files and read
+messages in a BBS online, ie. a modem connection was required for the
+duration of the entire process. Offline reading doesn't make transfering
+files any different, but reading and writing messages will get easier. You
+can download new messages in a compressed form and then read them offline
+using a message reader, thus leaving your phone free for other use and
+saving in phone bills. Replies can be written using your favourite text
+editor and then uploaded to the BBS during your next call.
+
+Offline Orbit is a shareware multi-format offline message reader for the
+Amiga. It currently supports the message formats listed below. This manual
+only explains how to use Offline Orbit, beginners should ask their sysops
+for more information about downloading and uploading message bundles.
+
+Format         Designer                Version
+-------------- ----------------------- -----------
+Blue Wave      George Hatchew          Revision 2
+OMEN           Olli Majander           Revision H
+QWK            Mark Herring            (unknown)
+SOUP           Rhys Weatherley         Version 1.2
+WWF            Veli-Matti Lintu        V1
+@endnode
+@node SYSTEM_REQUIREMENTS "Offline Orbit User's Guide - [2] Introduction"
+@{b}[2.2] System Requirements @{ub}
+
+Offline Orbit requires an Amiga computer with AmigaOS version 2.04 or
+higher. It will also take advantage of reqtools.library, Workbench 2.1 and
+AmigaOS 3.0 if they are available. Users running systems equipped with a
+68020 or better processor can use the optimized version (OO_020).
+
+Memory requirements depend on the size of the message bundle. Each message
+takes approximately 350 bytes of memory for header information when the
+bundle is opened and more for the message body when the text is displayed.
+The program itself needs a couple of hundred kilobytes of memory, so 1 MB
+should suffice for reading most medium sized message bundles.
+@endnode
+@node FIRST_STEPS "Offline Orbit User's Guide - [3] Getting Started"
+@{b}[3.1] First Steps @{ub}
+
+You can start Offline Orbit either from the Workbench or shell. When you
+have the program up and running for the first time, press the right mouse
+button and select "Directory" in the Prefs menu. A window will appear with
+several string gadgets. Enter the required information and move to the next
+menu item, until you have reached the end of the menu. Then save the
+configuration by selecting "Save Prefs". See Command Reference for further
+information.
+
+If everything is set-up correctly, you can now open a message bundle and
+start reading messages. Simply press the Open gadget and a file requester
+appears allowing you to select a bundle to be opened.
+
+Example configuration files are included for beginners. To use them, copy
+OO.config and OO.packers to your boot disk's S directory. If you have no
+configuration files in the S directory, Offline Orbit will use it's few
+built-in defaults.
+@endnode
+@node USER_INTERFACE "Offline Orbit User's Guide - [3] Getting Started"
+@{b}[3.2] User Interface @{ub}
+
+Offline Orbit follows standard Amiga guidelines, with full support for both
+keyboard and mouse. Underscored characters in gadget titles mark the
+equivalent on keyboard, pull-down menus show keyboard equivalents next to
+the command. Listview gadgets can be controlled using the arrow keys.
+
+Most of the windows can be closed by pressing Escape. ReqTools requesters
+accept it as the keyboard equivalent for the rightmost gadget. Return will
+pick the highlighted gadget.
+
+If you don't have reqtools.library installed (why not?), Offline Orbit will
+replace ReqTools requesters with system requesters. System requesters have
+only limited keyboard support: Left-Amiga-V will select the leftmost and
+Left-Amiga-B will select the rightmost gadget. Other gadgets must be
+selected using the mouse.
+@endnode
+@node LOCALIZATION "Offline Orbit User's Guide - [3] Getting Started"
+@{b}[3.3] Localization @{ub}
+
+Offline Orbit supports localization on systems equipped with Workbench 2.1
+or higher. Localization allows you to use Offline Orbit in other languages
+besides English, which is built-in. Offline Orbit will automatically use
+the language you have chosen in AmigaOS's Locale Preferences if a catalog
+file for that language is available.
+
+Currently only Finnish catalogs are included. To use Offline Orbit in
+Finnish, copy Catalogs/suomi/OO.catalog to Locale:Catalogs/suomi and select
+suomi as your preferred language in Locale Preferences.
+@endnode
+@node CONTROL_PANEL "Offline Orbit User's Guide - [4] Command Reference"
+@{b}[4.1] Control Panel @{ub}
+
+@{" Open                      " link PROJECT_OPEN}
+@{" Pack                      " link PROJECT_PACK}
+@{" Area                      " link CONTROL_AREA}
+@{" Write                     " link CONTROL_WRITE}
+@{" Reply                     " link CONTROL_REPLY}
+@{" Edit                      " link CONTROL_EDIT}
+@{" List                      " link CONTROL_LIST}
+@{" Quit                      " link PROJECT_QUIT}
+@endnode
+@node CONTROL_AREA "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Area: @{ub}An area selector appears allowing you to change the current area.
+@endnode
+@node CONTROL_WRITE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Write: @{ub}Allows you to write a new message.
+@endnode
+@node CONTROL_REPLY "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Reply: @{ub}Allows you to reply to the current message.
+@endnode
+@node CONTROL_EDIT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Edit: @{ub}Allows you to edit the current message. This will only work in the
+replies area. You can edit the message text and header. Editing and reading
+replies isn't possible after packing them.
+@endnode
+@node CONTROL_LIST "Offline Orbit User's Guide - [4] Command Reference"
+@{b}List: @{ub}A message selector appears allowing you to browse through the
+message headers and change the current message.
+@endnode
+@node PROJECT_MENU "Offline Orbit User's Guide - [4] Command Reference"
+@{b}[4.2] Project Menu @{ub}
+
+@{" Open Bundle               " link PROJECT_OPEN}
+@{" Close Bundle              " link PROJECT_CLOSE}
+@{" Pack Replies              " link PROJECT_PACK}
+@{" New Session               " link PROJECT_NEW_SESSION}
+@{" Iconify                   " link PROJECT_ICONIFY}
+@{" Shell                     " link PROJECT_SHELL}
+@{" Puzzle                    " link PROJECT_PUZZLE}
+@{" Help                      " link PROJECT_HELP}
+@{" About                     " link PROJECT_ABOUT}
+@{" Quit                      " link PROJECT_QUIT}
+@endnode
+@node PROJECT_OPEN "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Open Bundle: @{ub}A file requester appears allowing you to select a message
+bundle to be opened. If you already have a bundle open, it will be closed
+first.
+
+You can also open a bundle by entering it's file name (with full path) as a
+command line parameter when starting Offline Orbit.
+@endnode
+@node PROJECT_CLOSE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Close Bundle: @{ub}Closes the currently open message bundle.
+@endnode
+@node PROJECT_PACK "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Pack Replies: @{ub}Packs your replies. All of the replies and new messages you
+have written will be compressed and moved to the Uploads directory.
+@endnode
+@node PROJECT_NEW_SESSION "Offline Orbit User's Guide - [4] Command Reference"
+@{b}New Session: @{ub}Starts another Offline Orbit.
+@endnode
+@node PROJECT_ICONIFY "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Iconify: @{ub}Iconifies Offline Orbit.
+@endnode
+@node PROJECT_SHELL "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Shell: @{ub}Opens a shell window on the Offline Orbit screen.
+@endnode
+@node PROJECT_PUZZLE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Puzzle: @{ub}Opens the built-in puzzle game.
+@endnode
+@node PROJECT_HELP "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Help: @{ub}Displays the online documentation using AmigaGuide. For this to work,
+you must have amigaguide.library in Libs: and OO.guide in the current
+directory (or in Help:English).
+@endnode
+@node PROJECT_ABOUT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}About: @{ub}Displays copyright and version information.
+@endnode
+@node PROJECT_QUIT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Quit: @{ub}Exits Offline Orbit.
+@endnode
+@node MESSAGES_MENU "Offline Orbit User's Guide - [4] Command Reference"
+@{b}[4.3] Messages Menu @{ub}
+
+@{" Mark Message              " link MESSAGES_MARK_MESSAGE}
+@{" Jump to Marked            " link MESSAGES_JUMP_TO_MARKED}
+@{" Jump to Message           " link MESSAGES_JUMP_TO_MESSAGE}
+@{" Search                    " link MESSAGES_SEARCH}
+@{" Repeat Search             " link MESSAGES_REPEAT_SEARCH}
+@{" Save Message              " link MESSAGES_SAVE_MESSAGE}
+@{" Pointers                  " link MESSAGES_POINTERS}
+@{" Mark Area                 " link MESSAGES_MARK_AREA}
+@{" Skip Thread               " link MESSAGES_SKIP_THREAD}
+@{" Add to User List          " link MESSAGES_ADD_TO_USER_LIST}
+@{" Steal Tag Lines           " link MESSAGES_STEAL_TAG_LINES}
+@{" Next Area                 " link MESSAGES_NEXT_AREA}
+@{" Previous Area             " link MESSAGES_PREVIOUS_AREA}
+@endnode
+@node MESSAGES_MARK_MESSAGE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Mark Message: @{ub}Marks the current message, so you can jump back to it later.
+@endnode
+@node MESSAGES_JUMP_TO_MARKED "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Jump to Marked: @{ub}Jumps to the marked message.
+@endnode
+@node MESSAGES_JUMP_TO_MESSAGE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Jump to Message: @{ub}Allows you to enter a message number to jump to.
+@endnode
+@node MESSAGES_SEARCH "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Search: @{ub}Searches for a string (entered in the String gadget) from the
+header and the body of messages (starting from the message following the
+one you are currently reading) until the string is found or the last
+message of the bundle is reached. The search is case sensitive if you check
+the Case Sensitive checkbox.
+@endnode
+@node MESSAGES_REPEAT_SEARCH "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Repeat Search: @{ub}Repeats the last search operation without opening a window.
+@endnode
+@node MESSAGES_SAVE_MESSAGE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Save Message: @{ub}Saves the current message to a file or printer. Depending on
+which sub-item you pick, the message text will be saved with or without the
+header. You can also save only the header.
+@endnode
+@node MESSAGES_POINTERS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Pointers: @{ub}Resets, stores or restores the message pointers. These commands
+are useful when you decide to stop reading and continue later. You can
+store the pointers and close the bundle. You can then restore the pointers
+when you continue reading. Pointers are stored in the Storage directory.
+
+Storing and restoring pointers can be automated by checking the Store
+Message Pointers checkbox in General Preferences.
+@endnode
+@node MESSAGES_MARK_AREA "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Mark Area: @{ub}Marks all messages in the current area read or unread.
+@endnode
+@node MESSAGES_SKIP_THREAD "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Skip Thread: @{ub}Marks read and skips the message thread you are reading. In
+this case successive messages with the exactly same subject (reply prefixes
+are ignored) are considered as a thread. Predecessing messages are not
+marked.
+
+This function is useful only if you have enabled Message Threading in
+General Preferences.
+@endnode
+@node MESSAGES_ADD_TO_USER_LIST "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Add to User List: @{ub}Adds the name of the current message's author's or
+addressee's name to the User List. The list isn't automatically saved after
+this operation.
+@endnode
+@node MESSAGES_STEAL_TAG_LINES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Steal Tag Lines: @{ub}Allows you to "steal" tag lines from messages.
+
+This command won't work, unless you have a tag file open.
+@endnode
+@node MESSAGES_NEXT_AREA "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Next Area: @{ub}Jumps to the next message area. (Keyboard equivalent: >)
+@endnode
+@node MESSAGES_PREVIOUS_AREA "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Previous Area: @{ub}Jumps to the previous message area. (Keyboard equivalent: <)
+@endnode
+@node EXTRAS_MENU "Offline Orbit User's Guide - [4] Command Reference"
+@{b}[4.4] Extras Menu @{ub}
+
+@{" New Files                 " link EXTRAS_NEW_FILES}
+@{" Bundle Info               " link EXTRAS_BUNDLE_INFO}
+@endnode
+@node EXTRAS_NEW_FILES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}New Files: @{ub}Displays a list of new files (if available).
+@endnode
+@node EXTRAS_BUNDLE_INFO "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Bundle Info: @{ub}Displays some information about the message bundle.
+@endnode
+@node PREFERENCES_MENU "Offline Orbit User's Guide - [4] Command Reference"
+@{b}[4.5] Prefs Menu @{ub}
+
+@{" Directory                 " link DIRECTORY_PREFERENCES}
+@{" Editor                    " link EDITOR_PREFERENCES}
+@{" General                   " link GENERAL_PREFERENCES}
+@{" Palette                   " link PALETTE_PREFERENCES}
+@{" Screen                    " link SCREEN_PREFERENCES}
+@{" Save Prefs                " link SAVE_PREFS}
+@{" Packer                    " link PACKER_PREFERENCES}
+@{" BBS                       " link BBS_PREFERENCES}
+@{" User List                 " link USER_LIST}
+@endnode
+@node DIRECTORY_PREFERENCES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Directory Preferences @{ub}
+
+@{" Downloads                 " link DIRECTORY_DOWNLOADS}
+@{" Uploads                   " link DIRECTORY_UPLOADS}
+@{" Replies                   " link DIRECTORY_REPLIES}
+@{" Storage                   " link DIRECTORY_STORAGE}
+@{" Capture                   " link DIRECTORY_CAPTURE}
+@{" Work                      " link DIRECTORY_WORK}
+@{" Unpack                    " link DIRECTORY_UNPACK}
+
+All directories must be created manually before using Offline Orbit!
+@endnode
+@node DIRECTORY_DOWNLOADS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Downloads: @{ub}A directory where downloaded message bundles will be found.
+@endnode
+@node DIRECTORY_UPLOADS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Uploads: @{ub}A directory to place reply packets in for uploading.
+@endnode
+@node DIRECTORY_REPLIES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Replies: @{ub}A directory where replies are kept temporarily.
+@endnode
+@node DIRECTORY_STORAGE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Storage: @{ub}A directory where message pointers are stored.
+@endnode
+@node DIRECTORY_CAPTURE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Capture: @{ub}A directory where messages you've chosen to be saved are saved by
+default.
+@endnode
+@node DIRECTORY_WORK "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Work: @{ub}A directory to hold the messages you are reading.
+@endnode
+@node DIRECTORY_UNPACK "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Unpack: @{ub}A directory where archives are unpacked temporarily.
+@endnode
+@node EDITOR_PREFERENCES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Editor Preferences @{ub}
+
+@{" Command                   " link EDITOR_COMMAND}
+@{" Signature                 " link EDITOR_SIGNATURE}
+@{" Tag File                  " link EDITOR_TAG_FILE}
+@{" Stack                     " link EDITOR_STACK}
+@{" Show                      " link EDITOR_SHOW}
+@{" Pack                      " link EDITOR_PACK}
+@{" Move Workbench Front      " link EDITOR_MOVE_WORKBENCH_FRONT}
+@{" Separate Quote File       " link EDITOR_SEPARATE_QUOTE_FILE}
+@endnode
+@node EDITOR_COMMAND "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Command: @{ub}A command to start your text editor.
+
+Modifiers:
+
+%f  File to store the text you are editing.
+%p  Name of the public screen Offline Orbit is using.
+%q  File containing the quoted contents of the message you are replying to
+    (use this only if you've checked the Separate Quote File checkbox).
+%%  '%' character.
+@endnode
+@node EDITOR_SIGNATURE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Signature: @{ub}A signature file for your replies.
+@endnode
+@node EDITOR_TAG_FILE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Tag File: @{ub}A file containing your tag lines. Tag lines are short comments
+that are appended to the end of each message you write. Tag files must have
+one tag on each line. Empty lines and lines beginning with '#' or ';' are
+considered as comments and are ignored.
+@endnode
+@node EDITOR_STACK "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Stack: @{ub}Initial stack size (bytes) for the editor.
+@endnode
+@node EDITOR_SHOW "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Show: @{ub}Determines what character set is used in the messages you are
+reading (ie. what characters are converted to ISO before displaying the
+message text). SF7 conversion is optional, IBM characters are always
+converted.
+
+Important: Only Ä, Ö, Å, ä, ö and å characters are converted, so this
+feature is useful only to scandinavian users. Users in other countries
+should select IBM.
+@endnode
+@node EDITOR_PACK "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Pack: @{ub}Determines what character set should be used in your replies. You
+must write your messages using ISO characters (keymap s) and let Offline
+Orbit handle the conversion.
+
+Important: Only Ä, Ö, Å, ä, ö and å characters are converted, so this
+feature is useful only to scandinavian users. Users in other countries
+should select ISO.
+@endnode
+@node EDITOR_MOVE_WORKBENCH_FRONT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Move Workbench Front: @{ub}If checked, Workbench screen will be moved to the
+front before executing the text editor. This is quite useful if you use an
+editor like Ed, which doesn't automatically move to the front.
+@endnode
+@node EDITOR_SEPARATE_QUOTE_FILE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Separate Quote File: @{ub}If checked, the quoted text is stored in a separate
+file. You can use this if your editor can hold two files at once and allow
+you to move convenient pieces from one to the other.
+@endnode
+@node GENERAL_PREFERENCES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}General Preferences @{ub}
+
+@{" Highlight Quote            " link GENERAL_HIGHLIGHT_QUOTE}
+@{" No Control Panel           " link GENERAL_NO_CONTROL_PANEL}
+@{" Discard Kludge-Lines       " link GENERAL_DISCARD_KLUDGE-LINES}
+@{" Flash Messages For You     " link GENERAL_FLASH_MESSAGES_FOR_YOU}
+@{" Mark Your Messages Read    " link GENERAL_MARK_YOUR_MESSAGES_READ}
+@{" Use Reply Prefix           " link GENERAL_USE_REPLY_PREFIX}
+@{" Skip Read Messages         " link GENERAL_SKIP_READ_MESSAGES}
+@{" Display RFC Headers        " link GENERAL_DISPLAY_RFC_HEADERS}
+@{" Automatic Open             " link GENERAL_AUTOMATIC_OPEN}
+@{" Store Message Pointers     " link GENERAL_STORE_MESSAGE_POINTERS}
+@{" Joystick Support           " link GENERAL_JOYSTICK_SUPPORT}
+@{" Quote Prefix               " link GENERAL_QUOTE_PREFIX}
+@{" After Open                 " link GENERAL_AFTER_OPEN}
+@{" Requester Library          " link GENERAL_REQUESTER_LIBRARY}
+@{" End of Area                " link GENERAL_END_OF_AREA}
+@{" Message Threading          " link GENERAL_MESSAGE_THREADING}
+@{" Iconification Method       " link GENERAL_ICONIFICATION_METHOD}
+@{" Default Puzzle Size        " link GENERAL_DEFAULT_PUZZLE_SIZE}
+@{" Warn If No BBS Preferences " link GENERAL_WARN_IF_NO_BBS_PREFERENCES}
+@{" Message Line Length        " link GENERAL_MESSAGE_LINE_LENGTH}
+@{" Quote Header               " link GENERAL_QUOTE_HEADER}
+@{" Match Pattern              " link GENERAL_MATCH_PATTERN}
+@endnode
+@node GENERAL_HIGHLIGHT_QUOTE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Highlight Quote: @{ub}If checked, quoted lines will be highlighted using
+another color for displaying them.
+@endnode
+@node GENERAL_NO_CONTROL_PANEL "Offline Orbit User's Guide - [4] Command Reference"
+@{b}No Control Panel: @{ub}Normally there are several button gadgets in the bottom
+of the Offline Orbit window. These gadgets will be removed if you check
+this box. Keyboard equivalents will remain operational.
+@endnode
+@node GENERAL_DISCARD_KLUDGE-LINES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Discard Kludge-Lines: @{ub}If checked, lines starting with CTRL-A won't be
+displayed. This is used to remove Fidonet kludge-lines from messages.
+@endnode
+@node GENERAL_FLASH_MESSAGES_FOR_YOU "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Flash Messages For You: @{ub}If checked, screen will flash when a message
+addressed to you is displayed. To avoid unnecessary flashing, this won't
+happen in the personal area, where all the messages are for you anyhow.
+@endnode
+@node GENERAL_MARK_YOUR_MESSAGES_READ "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Mark Your Messages Read: @{ub}If checked, your own messages will be marked
+read when opening a message bundle. This is useful in combination with the
+Skip Read Messages option.
+@endnode
+@node GENERAL_USE_REPLY_PREFIX "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Use Reply Prefix: @{ub}If checked, 'Re:' prefix is automatically added to the
+subject of your replies (unless it already exists). If you don't check this
+checkbox, existing 'Re:' prefixes will be removed instead.
+@endnode
+@node GENERAL_SKIP_READ_MESSAGES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Skip Read Messages: @{ub}If checked, read messages will skipped when you are
+browsing through the messages by pressing return, space or backspace. You
+can still display the read messages using the horizontal arrow keys.
+@endnode
+@node GENERAL_DISPLAY_RFC_HEADERS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Display RFC Headers: @{ub}If checked, full RFC headers are shown (SOUP).
+@endnode
+@node GENERAL_AUTOMATIC_OPEN "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Automatic Open: @{ub}If checked, a file requester appears automatically when
+you start the reader, allowing you to select a message bundle right away.
+@endnode
+@node GENERAL_STORE_MESSAGE_POINTERS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Store Message Pointers: @{ub}If checked, the message pointers are automatically
+stored and restored when closing and opening bundles.
+@endnode
+@node GENERAL_JOYSTICK_SUPPORT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Joystick Support: @{ub}If checked, you can browse through messages using a
+joystick. The joystick must be attached to port 2 (ie. not the mouse port,
+but the other one).
+@endnode
+@node GENERAL_QUOTE_PREFIX "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Quote Prefix: @{ub}Determines what quote prefix to use in your replies.
+@endnode
+@node GENERAL_AFTER_OPEN "Offline Orbit User's Guide - [4] Command Reference"
+@{b}After Open: @{ub}Determines what action is performed after opening a message
+bundle. You can choose between the first area, the personal area and the
+area selector.
+@endnode
+@node GENERAL_REQUESTER_LIBRARY "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Requester Library: @{ub}Determines what requester library is used. You can
+choose between ASL and ReqTools.
+
+You must have reqtools.library (V38) installed in order to use it.
+@endnode
+@node GENERAL_END_OF_AREA "Offline Orbit User's Guide - [4] Command Reference"
+@{b}End of Area: @{ub}Determines what action is performed when you reach the end of
+an area. You can choose between the next area and the area selector.
+@endnode
+@node GENERAL_MESSAGE_THREADING "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Message Threading: @{ub}If you select Subject, messages will be put in
+alphabetical order according to their subjects and position in the bundle.
+Real message threading may be supported in the future.
+@endnode
+@node GENERAL_ICONIFICATION_METHOD "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Iconification Method: @{ub}Determines how Offline Orbit is iconified. Icon
+means an icon in Workbench, Menu an item in Workbench Tools menu and Window
+a tiny window on your default public screen. The latter method is always
+used if Workbench is not running when Iconify is selected.
+@endnode
+@node GENERAL_DEFAULT_PUZZLE_SIZE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Default Puzzle Size: @{ub}Default size for the built-in puzzle game.
+@endnode
+@node GENERAL_WARN_IF_NO_BBS_PREFERENCES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Warn If No BBS Preferences: @{ub}If selected, Offline Orbit warns you with a
+requester when you are opening a bundle from a BBS that doesn't have an
+entry in your BBS Preferences.
+@endnode
+@node GENERAL_MESSAGE_LINE_LENGTH "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Message Line Length: @{ub}Number of characters in one line before wrapping.
+@endnode
+@node GENERAL_QUOTE_HEADER "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Quote Header: @{ub}A line of text to precede the quote in replies.
+
+Modifiers:
+
+%a  Name of the current area.
+%d  Date.
+%f  Author's full name.
+%n  Linefeed.
+%o  Addressee's first name.
+%r  Author's first name.
+%s  Subject.
+%t  Addressee's full name.
+%%  '%' character.
+@endnode
+@node GENERAL_MATCH_PATTERN "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Match Pattern: @{ub}An AmigaDOS wildcard pattern to limit the files that appear
+in the Open Bundle file requester.
+@endnode
+@node PALETTE_PREFERENCES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Palette Preferences @{ub}
+
+Palette Preferences window is a ReqTools palette requester. It is only
+available if reqtools.library is installed. Adjusting the palette is easy:
+pick a color from the Palette Colors gadget and adjust Red, Green and Blue
+sliders until you are satisfied with the color.
+
+24-bit palette is supported on AGA systems and machines equipped with
+compatible video boards.
+@endnode
+@node SCREEN_PREFERENCES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Screen Preferences @{ub}
+
+@{" Screen Attributes         " link SCREEN_SCREEN_ATTRIBUTES}
+@{" Window Settings           " link SCREEN_WINDOW_SETTINGS}
+@{" Use Workbench Palette     " link SCREEN_USE_WORKBENCH_PALETTE}
+@{" Blank Borders             " link SCREEN_BLANK_BORDERS}
+@{" Screen Font               " link SCREEN_SCREEN_FONT}
+@{" Message Font              " link SCREEN_MESSAGE_FONT}
+@endnode
+@node SCREEN_SCREEN_ATTRIBUTES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Screen Attributes: @{ub}Brings up a screen mode requester allowing you to
+choose a mode for the Offline Orbit screen. You can also edit overscan and
+screen size here.
+@endnode
+@node SCREEN_WINDOW_SETTINGS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Window Settings @{ub}
+
+@{" Screen                    " link SCREEN_WINDOW_SCREEN}
+@{" Width                     " link SCREEN_WINDOW_WIDTH}
+@{" Height                    " link SCREEN_WINDOW_HEIGHT}
+@{" Mode                      " link SCREEN_WINDOW_MODE}
+@endnode
+@node SCREEN_WINDOW_SCREEN "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Screen: @{ub}If you would like to move the Offline Orbit window into another
+public screen, enter the name of that screen here. For this to work, you
+must set the Mode gadget to "Public".
+@endnode
+@node SCREEN_WINDOW_WIDTH "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Width: @{ub}Width of the Offline Orbit window.
+@endnode
+@node SCREEN_WINDOW_HEIGHT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Height: @{ub}Height of the Offline Orbit window.
+@endnode
+@node SCREEN_WINDOW_MODE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Mode: @{ub}Determines how and where the Offline Orbit window is opened.
+@endnode
+@node SCREEN_USE_WORKBENCH_PALETTE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Use Workbench Palette: @{ub}If checked, Offline Orbit will use Workbench
+palette.
+@endnode
+@node SCREEN_BLANK_BORDERS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Blank Borders: @{ub}If checked, Offline Orbit's screen borders are blanked.
+
+Border blanking requires ECS Denise or AGA chip set.
+@endnode
+@node SCREEN_SCREEN_FONT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Screen Font: @{ub}Font for the texts in menus, windows and requesters.
+
+If a window doesn't fit the screen, topaz (size eight) will be used
+instead.
+@endnode
+@node SCREEN_MESSAGE_FONT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Message Font: @{ub}Font for the message text.
+@endnode
+@node SAVE_PREFS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Save Prefs: @{ub}Saves preferences.
+@endnode
+@node PACKER_PREFERENCES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Packer Preferences @{ub}
+
+Offline Orbit can be configured to automatically recognize and use most
+compression methods. To add configuration for a new packer, press "Add".
+Pressing it will open a window with the following gadgets. You can edit old
+entries by selecting them from the list.
+
+@{" Add                       " link PACKER_ADD}
+@{" Extract                   " link PACKER_EXTRACT}
+@{" Extension                 " link PACKER_EXTENSION}
+@{" Offset                    " link PACKER_SIGNATURE}
+@{" Signature                 " link PACKER_SIGNATURE}
+@{" Stack                     " link PACKER_STACK}
+@{" Remove                    " link PACKER_REMOVE}
+@endnode
+@node PACKER_ADD "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Add: @{ub}A command for compressing files.
+
+Modifiers:
+
+%a  Name of the archive to be created.
+%d  Files to be compressed.
+%%  '%' character.
+@endnode
+@node PACKER_EXTRACT "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Extract: @{ub}A command for decompressing files.
+
+Modifiers:
+
+%a  Name of the archive to be decompressed.
+%d  Destination directory (Offline Orbit will change the current directory
+    to the destination directory, so you may not necessarily need this).
+%%  '%' character.
+@endnode
+@node PACKER_EXTENSION "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Extension: @{ub}File extension for OMEN reply packets.
+@endnode
+@node PACKER_SIGNATURE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Offset and Signature @{ub}
+
+Offline Orbit requires compressor signatures for automatic recognition. The
+signature is a short string found in all of the files produced by a certain
+compressor. The signature should be entered in the Signature gadget as a
+group of hexadecimal values, separated by spaces. The Offset gadget should
+contain the start byte (usually zero) for the compressor signature. Here
+are signatures and offsets for some of the most commonly used packers.
+
+Compressor  Signature    Offset
+----------- ------------ -------
+ARC         1A 8         0
+LHA         2D 6C 68     2
+LZX         4C 5A 58     0
+ZIP         50 4B 3 4    0
+ZOO         5A 4F 4F 20  0
+
+If a compressor doesn't have a signature (which is very unlikely) or you
+don't know it's signature, leave the Signature gadget empty and make sure
+the compressor's entry is the last one in the Packer List.
+@endnode
+@node PACKER_STACK "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Stack: @{ub}Initial stack size (bytes) for the packer.
+@endnode
+@node PACKER_REMOVE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Remove: @{ub}Deletes the selected Packer Preferences entry.
+@endnode
+@node BBS_PREFERENCES "Offline Orbit User's Guide - [4] Command Reference"
+@{b}BBS Preferences @{ub}
+
+With BBS Preferences, you can set individual signature files, tag files and
+character conversions for different BBSs. To add configuration for a new
+BBS, press "Add" (a bundle from that BBS must be open). Pressing it will
+open a window with the following gadgets. You can edit old entries by
+selecting them from the list.
+
+@{" Signature                 " link EDITOR_SIGNATURE}
+@{" Tag File                  " link EDITOR_TAG_FILE}
+@{" User Name                 " link BBS_USER_NAME}
+@{" Quote Header              " link GENERAL_QUOTE_HEADER}
+@{" Show                      " link EDITOR_SHOW}
+@{" Pack                      " link EDITOR_PACK}
+@{" Remove                    " link BBS_REMOVE}
+
+You will see an asterisk in the title bar when individual settings are in
+use.
+@endnode
+@node BBS_USER_NAME "Offline Orbit User's Guide - [4] Command Reference"
+@{b}User Name: @{ub}The alias or name you use in the selected BBS. This will
+override any name included in the message bundle. If you leave this gadget
+empty, Offline Orbit will use the name that came with the bundle (if any).
+
+This feature is very useful when reading OMEN or SOUP bundles, as they
+don't contain your name and therefore Offline Orbit doesn't otherwise know
+which messages are for you.
+@endnode
+@node BBS_REMOVE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Remove: @{ub}Deletes the selected BBS Preferences entry.
+@endnode
+@node USER_LIST "Offline Orbit User's Guide - [4] Command Reference"
+@{b}User List @{ub}
+
+With User List, you can store user names and Fidonet addresses that you
+often use. These can then be easily inserted in the message's headers when
+you are writing a message. To add a name to the list, press "Add". Pressing
+it will open a window with the following gadgets. You can edit old entries
+by selecting them from the list.
+
+@{" User Name                 " link USER_USER_NAME}
+@{" Address                   " link USER_ADDRESS}
+@{" Remove                    " link USER_REMOVE}
+@endnode
+@node USER_USER_NAME "Offline Orbit User's Guide - [4] Command Reference"
+@{b}User Name: @{ub}Name to be stored in the list.
+@endnode
+@node USER_ADDRESS "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Address: @{ub}Fidonet address of the user whose name is in the User Name
+gadget. If the user has no Fidonet address, or you aren't going to use it,
+or the message format you use doesn't support it, just ignore this option.
+@endnode
+@node USER_REMOVE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}Remove: @{ub}Removes the selected name from the User List.
+@endnode
+@node READING_MESSAGES "Offline Orbit User's Guide - [5] Basic Functions"
+@{b}[5.1] Reading Messages @{ub}
+
+After successfully opening a message bundle you can start reading messages.
+The Offline Orbit window consists of three sections: at the top of the
+window there is the message header, message text is in the middle and the
+control panel (which may be disabled) at the bottom of the screen.
+
+The author, addressee, subject, date and area are shown in the message
+header. If the message text doesn't fit entirely on the screen, you can
+scroll it with the vertical arrow keys (up and down), space (down),
+backspace (up), return (down) or the scroll bar at the bottom of the
+screen. You can also use the numeric keypad.
+
+You can move to the next or previous message with the horizontal arrow
+keys, space, backspace or return. You can browse through message headers by
+pressing the List gadget.
+
+A joystick can also be used to browse through messages if you have checked
+the Joystick Support checkbox in General Preferences.
+
+The area can be changed by pressing the Area gadget. Offline Orbit will
+move automatically to the next area when you reach the end of an area.
+There are separate areas for your replies and messages addressed to you.
+@endnode
+@node WRITING_MESSAGES "Offline Orbit User's Guide - [5] Basic Functions"
+@{b}[5.2] Writing Messages @{ub}
+
+You can write new messages using the Write and Reply commands. These are
+available when you are reading messages. The latter one can be used to
+write a reply (including optional quote) to the current message. "Write" is
+used to post a completely new message.
+
+When you select either of these commands, a window will appear. You can
+edit the message header here and select whether the message should be
+public or private. In netmail areas you can enter a Fidonet address in the
+Address gadget and select whether the netmail is routed or crash (crash
+netmail is only supported by Blue Wave and OMEN). Button gadgets From and
+To allow you to select names from the User List.
+
+When the headers are set, press "Edit" to execute the text editor to edit
+the actual text of your message. After this you can accept the message by
+pressing "Save" or dump it by pressing "Cancel".
+
+Before messages can be uploaded to a BBS, they must be packed in the
+correct format. This can be done when closing the message bundle or by
+pressing the Pack gadget on the control panel. If a reply packet for the
+same BBS already exists, you have the option to either remove it or append
+new messages after the old ones (append may not fully work if the existing
+reply packet was generated using another reader). If you don't pack your
+replies before the bundle is closed, they will be destroyed!
+
+You can read and edit your replies before packing them. The replies are
+located in the replies area. If you wish to reject one of your messages,
+set the Status gadget in Edit Message window to "Killed". Killed messages
+are not included in the reply packet.
+@endnode
+@node SUPPORT "Offline Orbit User's Guide - [6] Miscellaneous"
+@{b}[6.1] Support @{ub}
+
+If you have any comments, suggestions, bug reports or questions, feel free
+to contact the author at any of the addresses below.
+
+Snail Mail: Offline Orbit Support
+            c/o Janne Siren
+            Oravamaentie 2 F 17
+            02700 Kauniainen
+            Finland
+
+Data Phone: Epsilon Indi BBS
+            +358-0-505-4201
+            V.32bis, 24h
+
+Internet:   siren@mikrobitti.fi
+@endnode
+@node ACKNOWLEDGEMENTS "Offline Orbit User's Guide - [6] Miscellaneous"
+@{b}[6.2] Acknowledgements @{ub}
+
+Special thanks to the following people for their help, support and
+products, making Offline Orbit possible (in alphabetical order): Lauri
+Aalto, Matthew Dillon (DICE/C), Jori Dubrovin, Jan Forsblom, Nico François
+(ReqTools), Dan Griffin, Jani Höglund, Anssi Johansson, Jari Karjalainen,
+Ville-Pertti Keinonen, Heimo Laukkanen, Chris Lawrence, Toni Miettinen,
+Marko Tamminen, Ralf Thanner (MemGuard), Harri Tolvanen, Veli-Matti
+Vuorensyrjä and Tomi Väisälä.
+
+This list is hardly complete. Thanks to the forgotten ones as well.
+@endnode
+@node EXTERNAL_UTILITIES "Offline Orbit User's Guide - [6] Miscellaneous"
+@{b}[6.3] External Utilities @{ub}
+
+Following utilities can be found in the Utilities directory.
+
+@{" gconv                     " link EXTERNAL_GCONV}
+@endnode
+@node EXTERNAL_GCONV "Offline Orbit User's Guide - [6] Miscellaneous"
+@{b}gconv @{ub}
+
+AmigaGuide versions are not fully backwards compatible. gconv was written
+by Ville-Pertti Keinonen for converting new AmigaGuide documents into a
+format that is compatible with older AmigaGuide versions. OO.guide,
+OO_suomi.guide, OO_history.guide and OO_history_suomi.guide are in
+AmigaGuide V40 format. If you are using an older version of the
+amigaguide.library, you should use gconv to convert the manuals.
+
+Usage: gconv [-d ver] [-o file] [-s ver] [--help] [--ignore] file
+
+Example: gconv OO.guide -o OO_guide
+@endnode
+@node FREQUENTLY_ASKED_QUESTIONS "Offline Orbit User's Guide - [6] Miscellaneous"
+@{b}[6.4] Frequently Asked Questions @{ub}
+
+This section contains answers to some common questions.
+
+Question:
+
+Offline Orbit tells me it has rejected some of my replies. Why?
+
+Answer:
+
+A reply can be rejected (not packed) for two reasons: the packing fails
+(eg. not enough memory) or you've set the message's status to Killed. If
+all of your replies are rejected, you should check your directory settings
+and try to free some memory.
+
+Question:
+
+I selected the AREAS file in the Open Bundle file requester, but Offline
+Orbit won't recognize it as a SOUP bundle. Should I select one of the MSG
+files instead?
+
+Answer:
+
+No. SOUP bundles, like all the other messages bundles, must be archives
+containing the message files in a compressed form. You must pack the AREAS
+file and the files with MSG extension into an archive and select this
+archive in the Open Bundle file requester.
+
+Question:
+
+The shell started from Offline Orbit won't find any of my commands. Why?
+
+Answer:
+
+The existing command paths are ignored by the shell if Offline Orbit was
+started asynchronously (eg. from Workbench). This is a bug in AmigaOS. Use
+full paths or start Offline Orbit from a shell. Same goes for the programs
+Offline Orbit executes.
+
+Question:
+
+Zip returns error code 12 when I'm trying to pack replies. What can I do?
+
+Answer:
+
+Get a newer version of Zip (2.0.1 works fine). If you can't find a newer
+version, try using the following string in Zip's Packer Preferences entry's
+Add gadget.
+
+Zip -r %a ""
+@endnode
+@node KNOWN_BUGS "Offline Orbit User's Guide - [6] Miscellaneous"
+@{b}[6.5] Known Bugs @{ub}
+
+@endnode
+@remark This node is for the online help system.
+@node REFERENCE "Offline Orbit User's Guide - [4] Command Reference"
+@{b}[4] Command Reference @{ub}
+
+@{" 4.1 Control Panel               " link CONTROL_PANEL}
+@{" 4.2 Project Menu                " link PROJECT_MENU}
+@{" 4.3 Messages Menu               " link MESSAGES_MENU}
+@{" 4.4 Extras Menu                 " link EXTRAS_MENU}
+@{" 4.5 Prefs Menu                  " link PREFERENCES_MENU}
+@endnode

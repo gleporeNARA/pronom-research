@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gating:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gating="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <!-- Example of a 2D Polytope Gate -->
+  <gating:PolytopeGate gating:id="PolyGate">
+    <gating:dimension gating:parameter="FSC"/>
+    <gating:dimension gating:parameter="SSC"/>
+    <gating:point>
+      <gating:coordinate gating:value="11.3"/>
+      <gating:coordinate gating:value="12"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="12.8"/>
+      <gating:coordinate gating:value="13"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="15"/>
+      <gating:coordinate gating:value="19.7"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="10.1"/>
+      <gating:coordinate gating:value="22"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+  <!-- Example  -->
+  <gating:PolytopeGate gating:id="Triangle">
+    <gating:dimension gating:parameter="FSC"/>
+    <gating:dimension gating:parameter="SSC"/>
+    <gating:point>
+      <gating:coordinate gating:value="0"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="400"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="400"/>
+      <gating:coordinate gating:value="300"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+  <gating:PolytopeGate gating:id="Rectangle_as_polytope">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:point>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="160"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="350"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="350"/>
+      <gating:coordinate gating:value="160"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+
+  <gating:PolytopeGate gating:id="Block-3D">
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:dimension gating:parameter="CD4-PE-543nm"/>
+    <gating:dimension gating:parameter="CD8-PerCP-633nm"/>
+    <gating:point>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+
+  <!-- Example of a 3D Polytope Gate (a cube) -->
+  <gating:PolytopeGate gating:id="cube">
+    <gating:dimension gating:parameter="FSC"/>
+    <gating:dimension gating:parameter="SSC"/>
+    <gating:dimension gating:parameter="PE-565nm"/>
+    <gating:point>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="60"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="60"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="60"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="60"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+
+</gating:Gating-ML>

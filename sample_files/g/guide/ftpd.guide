@@ -1,0 +1,357 @@
+@database ftpd.guide
+
+@Master ftpd.texinfo
+
+@Width 72
+
+
+This is the AmigaGuide® file ftpd.guide, produced by Makeinfo-1.55 from 
+the input file ftpd.texinfo.
+
+
+@Node Main "ftpd.guide"
+@Next "COPYRIGHTS"
+
+                              ftpd v1.2
+     
+                   a ftpd for AmiTCP 3.0b2 or higher
+     
+                        ported by Magnus Lilja
+
+
+ @{" COPYRIGHTS " Link "COPYRIGHTS"}                  Copyrights.
+ @{" Distribution " Link "Distribution"}                Distribution and status notes.
+ @{" Overview " Link "Overview"}                    Why another ftp-daemon for AmiTCP?
+ @{" Installation " Link "Installation"}                How to install this thing
+ @{" Options " Link "Options"}                     Program options.
+ @{" Bugreports " Link "Bugreports"}                  How to reach the author.
+ @{" History " Link "History"}                     Version history and 'to do'-list.
+ @{" Thanks " Link "Thanks"}                      Thanks goes to..
+
+
+@EndNode
+
+@Node "COPYRIGHTS" "ftpd.guide/COPYRIGHTS"
+@Next "Distribution"
+@Prev "Main"
+@Toc "Main"
+
+Copyrights
+==========
+
+   This ftpd is ported to AmiTCP using a source that is
+
+     Copyright (c) 1985, 1988, 1990 Regents of the University of California.
+     All rights reserved.
+     
+     Redistribution and use in source and binary forms, with or without
+     modification, are permitted provided that the following conditions
+     are met:
+     1. Redistributions of source code must retain the above copyright
+        notice, this list of conditions and the following disclaimer.
+     2. Redistributions in binary form must reproduce the above copyright
+        notice, this list of conditions and the following disclaimer in the
+        documentation and/or other materials provided with the distribution.
+     3. All advertising materials mentioning features or use of this software
+        must display the following acknowledgement:
+         This product includes software developed by the University of
+         California, Berkeley and its contributors.
+     4. Neither the name of the University nor the names of its contributors
+        may be used to endorse or promote products derived from this software
+        without specific prior written permission.
+     
+     THIS SOFTWARE IS PROVIDED BY THE REGENTS AND CONTRIBUTORS ``AS IS'' AND
+     ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+     IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+     ARE DISCLAIMED.  IN NO EVENT SHALL THE REGENTS OR CONTRIBUTORS BE LIABLE
+     FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+     DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+     OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION)
+     HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+     LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY
+     OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF
+     SUCH DAMAGE.
+
+   AmiTCP version of ftpd is
+
+   Copyright (C) 1994 by Magnus Lilja (lilja@lysator.liu.se)
+
+
+@EndNode
+
+@Node "Distribution" "ftpd.guide/Distribution"
+@Next "Overview"
+@Prev "COPYRIGHTS"
+@Toc "Main"
+
+Distribution
+============
+
+   This ftpd is Freeware, you may copy and spread it freely as long as
+you don't make a profit of it. That means you should only charge for
+the actual costs, like disk + p&p.
+
+   The AmiTCP-group has permission to include this package in
+AmiTCP-releases.
+
+   The source is not available at the moment, though you can find the
+original bsd-source at many ftp-sites. I found it on:
+
+   unix.hensa.ac.uk:/pub/uunet/systems/unix/bsd-sources/libexec/ftpd
+
+   If you would like to support the author you may send postcards,
+money, harddisks :), etc to:
+
+     Magnus Lilja
+     Alsattersgatan 9C:17
+     S-582 51 LINKOPING
+     SWEDEN
+
+   or send an email to: lilja@lysator.liu.se
+
+
+@EndNode
+
+@Node "Overview" "ftpd.guide/Overview"
+@Next "Installation"
+@Prev "Distribution"
+@Toc "Main"
+
+Overview
+========
+
+   Why a new port of ftpd?
+
+   I wasn't happy with the old one, there was no logging option (at
+least I didn't find it) and a couple of other things, so I started
+porting this one instead.
+
+   This ftpd offers:
+
+   * Log every connection that is made to ftpd (to AmiTCP-log).
+
+   * Log all file-transfers in AmiTCP:log/xferlog
+
+   * Supports all ftp-commands (not everyone has been tested though).
+
+   * You can have a file with usernames that are not allowed to use the
+     ftpd.
+
+   * Totally protect some directories from reading/writing even if you
+     don't have MuFS installed on them.
+
+   * Options to turn on/off debugging, logging and transferlogging.
+
+   * Supports timeout (ftpd exits if the user has been idle for more
+     that <timeout> seconds).
+
+   ftpd needs:
+
+   * AmiTCP 3.0beta2 or higher.
+
+   * and optionally, for better security, MultiUser v39 or higher.
+
+   The protection is not 100%, but hopefully it's enough for your
+needs. Note that all ftp-commands are implemented, like removedir
+makedir rename etc. An anonymous ftp-user cannot use makedir/removedir
+or rename/delete a file.
+
+
+@EndNode
+
+@Node "Installation" "ftpd.guide/Installation"
+@Next "Options"
+@Prev "Overview"
+@Toc "Main"
+
+Installation
+============
+
+   Installation is very simple:
+
+  1. Copy ftpd to AmiTCP:Serv/
+
+  2. Edit inetd.conf to look something like this:
+
+     ftp       stream      tcp nowait root AmiTCP:Serv/ftpd ftpd -x -b30
+
+     Look in @{"Options" Link "Options"} for information about the different options.
+
+  3. Make sure that every user that should be able to use the ftpd has
+     an entry in both AmiTCP:db/passwd and your Multiuser-passwd file.
+     The passwords must be the same. This is annoying, I know that, but
+     hopefully AmiTCP and MuFS will use the same passwd-crypt algorithm
+     in the future.  Important: You cannot just copy the passwd-files
+     since MuFS and AmiTCP uses different password-encryption routines
+     (at least AmiTCP 3.0b2 and MuFS <1.7). This will hopefully change
+     in the future.  Make sure that the user 'ftp' is present in both
+     files if you want to allow anonymous ftp logins.
+
+  4. If you want a transfer-log then make sure that everyone can write
+     to it (AmiTCP:log/xferlog).
+
+  5. If you want a wtmp-file, like on UNIX, then create the file
+     AmiTCP:log/wtmp.
+
+  6. Edit ftpusers and put it in AmiTCP:db/. No user that is listed in
+     this file can use the ftpd.
+
+  7. Edit ftpdir and copy it in AmiTCP:db/. Anonymous ftp-users will
+     only be able to access directories that are present in this file.
+     If you don't create a ftpdir-file anonymous users can access every
+     dir on your system.
+
+  8. Make sure that inetd has read the new inetd.conf by sending a
+     CTRL-F to it, with 'break x F', where x is the processnumber of
+     inetd.
+
+  9. ftpd looks for a list command named 'ls' in your path. The ls
+     command should at least support the following flags:
+          '-l'    produce long listing.
+          '-A'    show all files
+     The original AmiTCP:bin/ls handle these options.
+
+   Now you are ready to use the new ftpd!
+
+
+@EndNode
+
+@Node "Options" "ftpd.guide/Options"
+@Next "Bugreports"
+@Prev "Installation"
+@Toc "Main"
+
+Options
+=======
+
+   It's possible to send arguments to ftpd via inetd.conf:
+
+ftp       stream      tcp nowait root dh1:tcp/bsdftpd/ftpd ftpd -x -b30
+
+   These are the options that are recognized by ftpd:
+
+     -d,-v  Turns on debug-mode. A lot of info will show up in AmiTCP-log.
+     
+     -l     Turns on logging, ftpd will show things like 'user lilja logged
+            in from xxxx' in the AmiTCP-log.
+     
+     -x     Activates file-transfer logging, the log-file is
+            AmiTCP:log/xferlog.
+     
+     -bnnn  Specifies how large buffer ftpd should use when sending/receiving files.
+            The buffer will be nnn*512 bytes long. Default is nnn=10. This
+            was added in order to speed up file-transfers.
+     
+     -tnn   Timeout in seconds. ftpd will exit when the user has been idle for
+            nn seconds.
+     
+     -Tnn   Maximum timeout, the timeout setting must be below nn seconds.
+     
+     -u     Set umask (has no affect on Amiga version yet).
+     
+     -G     Allow uploads by anonymous users (the default is not to allow anonymous users to upload stuff).
+
+
+@EndNode
+
+@Node "Bugreports" "ftpd.guide/Bugreports"
+@Next "History"
+@Prev "Options"
+@Toc "Main"
+
+Bugreports
+==========
+
+   If you have any thoughts or suggestions concerning this port of ftpd
+then don't hesitate to write me an email, bug-reports are also welcome
+:)
+
+   Please send detailed bug-reports, that makes it easier for me to
+track the problem.
+
+(email: lilja@lysator.liu.se)
+
+
+@EndNode
+
+@Node "History" "ftpd.guide/History"
+@Next "Thanks"
+@Prev "Bugreports"
+@Toc "Main"
+
+History
+=======
+
+v1.2
+   - Changed internal function of timeouts.
+
+v1.1 released 1994-06-16
+   - Implemented timeouts. The ftpd will now exit when the user has
+     been idle for <timeout> seconds. You can change the timeout-value
+     with the -t option. Default is 900 seconds.
+
+   - 'cd .' 'cd ..' now works.
+
+v1.04 released 1994-06-10
+   - Major bug-fix. ftpd could trash your memory-list when you
+     put-files with it. Finally I have found the bug and corrected it.
+
+v1.03 released 1994-06-09
+   - MAJOR CHANGE: The ftppart file is obsolete. Use the file ftpdir in
+     order to define which directories that anonymous ftpusers should
+     be _allowed_ access to.
+
+   - Anonymous users cannot remove/rename files/dirs.
+
+   - If you want to allow anonymous uploads you have to use the new 'G'
+     option when starting ftpd.
+
+   - SYST now returns AmigaOS, instead of 'UNKNOWN Type: L8'.
+
+v1.02 released 1994-05-29
+   - Updated ftpd to use the new startup-code from AmiTCP-3.0b2.
+
+   - Major bug fixed. If you PUT a file and there wasn't enough space
+     left on disk ftpd would cause a GURU. This was because I didn't do
+     a pr->pr_WindowPtr=-1 when the ftpd was started.
+
+   - The buffer option now also turns on buffers when the ftpd is
+     receiving files.
+
+   - mget and ls with wildcards works now. The problem was that in the
+     DIR structure the dd_fd field wasn't a filedescription as it
+     should be. Shame on you SAS/C!
+
+   - ftpd no longer needs MultiUser but if you want better security
+     then I recommend muFS.
+
+v1.0 released 1994-04-30
+   - Initial release.
+
+To do:
+
+   Wildcards doesn't work with ls ('ls ami*').
+
+
+@EndNode
+
+@Node "Thanks" "ftpd.guide/Thanks"
+@Prev "History"
+@Toc "Main"
+
+Thanks
+======
+
+   Many thanks to:
+
+       AmiTCP-Group            For a great package, and for the help you provided!
+     
+       SAS/C                   Good compiler, although I want fcntl() and ioctl()
+                               functions :)
+     
+       Andreas Johansson       for help with debugging.
+     
+       Patrik Lantto           for the port of GNU-ls.
+
+@EndNode
+

@@ -1,0 +1,935 @@
+@database Guitar.Guide
+@Author "Stephan Müller , s.mueller@hit.handshake.de"
+@(c) "Copyright Stephan Müller"
+@$VER: Guitar.Guide 1.03 (17.02.1996)
+@Wordwrap
+@node main "Guitar-Guide Version 1.03 (17.02.1996)"
+@index guindex.guide/main
+
+@next main
+@prev main
+          @{bg shine}@{b}@{u}Inhaltsseite:@{uu}@{ub}@{bg back}
+
+
+      @{"Produkt-Info" link info}
+      @{"Benutzung" link ben}
+
+@{fg highlight}Der Gitarren-Guide soll Anfängern den Einstieg
+ins Gitarrenspiel erleichtern.@{fg text}
+
+      @{bg shine}Die Saiten und ihre Namen @{bg back} @{" " link Saiten}
+      @{bg shine}Das Stimmen  der Gitarre  @{bg back} @{" " link stimmen}
+      @{bg shine}Das Griffbrett            @{bg back} @{" " link brett}
+      @{bg shine}"Spiel den Blues"         @{bg back} @{" " link blues}
+      @{bg shine}Akkord-Theorie            @{bg back} @{" " link akkorde}
+      @{bg shine}Akkorde ansehen           @{bg back} @{" " link akk}
+      @{bg shine}Kapodastertabelle         @{bg back} @{" " link kapo}
+      @{bg shine}Verschiedene Skalen       @{bg back} @{" " link skalen}
+      @{bg shine}Unterschiedliche Gitarren @{bg back} @{" " link vgit}
+      @{bg shine}Effekte                   @{bg back} @{" " link effekte}
+      @{bg shine}Wichtige Requisiten!      @{bg back} @{" " link req}
+
+      Guitar-Guide @{"Credits" link credits}
+@endnode
+@node info
+@next main
+@prev main 
+Der Guitar.Guide läuft auf meinem A1200 mit OS3.0 + benötigt
+Multiview,das im Guitar-Drawer installierte DSound.
+Unter OS 2.0 dürfte er wegen dem fehlen von Multiview nicht laufen...
+Der Autor übernimmt keine Haftung für Schäden,die ihnen mit
+dem Gitarren-Guide entstanden sind.
+
+Obwohl ich mir nicht vorstellen kann,wie oder was er kapputt-
+machen kann ...
+
+Der Gitarren-Guide ist ab V1.01 @{b}@{u}Freeware@{ub}@{uu}
+DSound is Copyrighted Software (1991-1994) by Dave Schreiber.
+Der Gitarren-Guide lebt vom mitmachen!
+Wenn du schon Profi bist und helfen willst,den Gitarrenguide zu vergrößern
+male deine Akkorde,Skalen,sonstirgendwas in z.B.:PPaint und benutze dazu
+die in Guitar/IchHelfDir/ befindlichen Schablonen und sende mir
+dein Ergebnis zu. Ich bring das Ergebnis dann ins Netz und
+erwähne deinen Namen und dein Werk in @{"Credits" link credits}
+
+@{fg highlight}Es ist strikt untersagt den GuitarGuide zu verändern und ohne
+meine Genehmigung in Umlauf zu bringen!!@{fg text}
+
+@{u}Bugmeldungen,Verbesserungsvorschläge an:@{uu}
+
+E-mail: s.mueller@hit.handshake.de
+            teffy@outside.sb.sub.de
+Deutsche Schneckenpost:
+
+Stephan Mueller
+Am Torhaus 21a
+66113 Saarbruecken
+D - Bundesrepublik Deutschland
+@endnode
+@node ben "Benutzung auf eigene Gefahr !!"
+@next main
+@prev main 
+@{fg highlight}Die Benutzung ist denkbar einfach...@{fg Text}
+Wie man halt ein @{b}AmigaGuide-Script@{ub} benutzt...
+
+Auf der Inhaltsseite ein Gadget anklicken.
+Durch anklicken von "Zurückgehen" kommt man wieder einen Punkt zurück.
+"Index" ruft Guindex auf.
+"Inhalt" bringt dich wieder auf die Haupt-Seite
+"Hilfe" bringt die @{b}AmigaGuide OnlineHilfe@{ub} auf den Monitor.
+Nach anklicken eines Sound-Gadgets: @{"Sound" link sou}
+Gadget anklicken, Sound (bis zum Ende!) hören, `Zurückgehen` anklicken.!
+Die Benutzung von @{"DSound" link dsound.doc/main}!
+@endnode
+@node Saiten "Die Saiten und ihre Namen"
+@next main
+@prev main  
+@{fg highlight}Die Saiten-Namen@{fg text}
+
+Es gibt u.a.: Stahl und Nickel-Saiten unterschiedlicher Dicke.(.08/.09/.010)
+
+Die Dickste Saite ganz links nennt man die dicke @{b}E@{ub} Saite (E) @{"Sound" system "dsound -2 -s8500 sounds/Esaite"}
+Die Zweite Saite ist die @{b}A@{ub} Saite                         (A) @{"Sound" system "dsound -2 -s8500 sounds/asaite"}
+Die Dritte Saite ist die @{b}D@{ub} Saite                         (D) @{"Sound" system "dsound -2 -s8500 sounds/DSaite"}
+Die Vierte Saite ist die @{b}G@{ub} Saite                         (g) @{"Sound" system "dsound -2 -s8500 sounds/GSaite"}      @{"Grafik" link Sait.bsh/main}
+Die Fünfte Saite ist die @{b}B@{ub} Saite                         (b) @{"Sound" system "dsound -2 -s8500 sounds/hsaite"}
+Die Sechste Saite nennt man die dünne @{b}E@{ub} Saite            (e) @{"Sound" system "dsound -2 -s8500 sounds/klESaite"}
+@{b}Dies sollte man sich gut einprägen!@{ub} @{fg highlight}E A D g b e@{fg text}
+Am besten eine @{i}Eselsbrücke@{ui} bauen:
+@{fg highlight}(E)in (A)nfänger (d)er (g)ut (b)escheid weis ist (e)rfolgreich@{fg text}
+
+Die Sounds sind nicht zum Stimmen gedacht! Nimm dir zum Stimmen ein "A" eines
+Bandkumpels!
+
+Wie man hier schon sehen kann,verwende ich ab V1.02 die engl. Schreibweise!
+Das deutsche H steht für das engl. B
+Das deutsche B steht fur das engl. Bb (Bflät ausgesprochen)
+@{fg Highlight}Darauf sollte man achten, wenn man englischsprachige Literatur
+und Songbooks kauft.!@{fg text}
+
+@{fg highlight}Der Saiten-Wechsel@{fg text}
+Die Saiten haben am Ende eine Öse. Einige Besitzer von "Floyd Rose®"-Tremolo
+Systemen müssen diese "Ballends" entfernen und in ihrem System festklemmen.
+Das Wechseln der Saiten sollte nacheinander erfolgen, also:
+alte dicke E-Saite runter neue E-Saite drauf
+alte       A-Saite runter neue A-Saite drauf
+alte       D-Saite runter neue D-Saite drauf...und so weiter
+@{u}Für Besitzer von Akustikgitarren kein Problem:@{uu}
+Die Ballends werden in die Gitarre "gestopft" über den Steg zu den Saitenmechaniken
+geführt.Immer beachten das die Saite von innen in die Mechaniken geführt werden.
+Die Saite etwas(!) kürzen. Man läßt das Saitenende etwa 5 mm aus der Mechanik
+rauskucken. Die erste umwicklung geht unterhalb des Saitenendes herum.
+Der Rest wird oberhalb des Saitenendes gewickelt.
+So wird das Saitenende gut festgehalten.
+@{u}Besitzer von E-Gitarren@{uu} müssen die Saite von hinten durch ihr Tremolo (falls vorhanden)
+ziehen. Feinstimmer auf mittlere Stellung drehen.Die Saite etwas(!) kürzen. Man läßt
+das Saitenende etwa 5 mm aus der Mechanik rauskucken. Die erste umwicklung geht
+unterhalb des Saitenendes herum. Der Rest wird oberhalb des Saitenendes gewickelt.
+So wird das Saitenende gut festgehalten. Besitzer von "abtauchenden Tremolos"
+(also unterfräßte) haben sich hoffentlich vorher etwas unter den Tremoloblock gelegt
+Sonst geht jetzt nähmlich die irre Kurbelei an den Mechaniken los. Nach aufspannen
+der Saiten,und Stimmen selbiger können Besitzer eines Klemmsattels,die Klemmsattel-
+schrauben andrehen.Ab diesem Zeitpunkt wird nur noch an den Feinstimmer gestimmt! (Logisch)
+@{u}Konzertgitarrenbesitzer@{uu} müssen die Saite "anknoten" weil diese Saiten keine
+Ballends besitzen!
+@endnode
+@node stimmen "Das Stimmen der Gitarre"
+@next main
+@prev main 
+
+@{bg shine}Das Stimmen der Gitarre@{bg back}
+
+@{b}1. Methode (Kamerad)@{ub}
+
+Laß dir von einem Bandmitglied ein (Kammerton ) A geben
+Nach diesem Ton stimmst du deine A Saite .
+Dann greifst du im 5.Bund auf der  A Saite hier ertönt ein D
+Nach diesem Ton stimmst du die D Saite
+5. Bund D Saite erklingt ein G              @{"Grafik" link Stimmen.iff/main}
+                                            @{"Sounds" link saiten} 
+Stimme die G Saite danach
+Im 4. Bund auf der G Saite befindet sich das B-Saite stimmen!
+Im 5.Bund H-Saite befindet sich ein E
+Stimme die dünne E- Saite vorsichtig! (Diese Saite reißt gern!)
+Stimme die dicke E- Saite im 5. Bund nach der leeren A-Saite
+Spezialisten stimmen die Dicke E-Saite nach der dünnen
+E-Saite.
+
+@{b}2. Methode (Mein Favorit)@{ub}
+
+Ich stimme meine Gitarre am liebsten mit dem Stimmgerät.
+Dieses Gerät gibt es für ungefähr 50 - 100 DM im Musikhandel.
+Das Gerät hat meistens eine Nadelanzeige und einige Led`s
+@{b}Siehe dazu @{"Grafik" link st.bsh/main}@{ub}
+Man stellt die zu justierende Saite auf dem Gerät ein indem man die Wirbel
+der Gitarre solange dreht bis die LED nicht mehr schnell flackert sondern ruhig steht
+Man stellt dann über die Nadel 440 Hz ein. Fertig! (440 Hz=Kammerton A)
+@endnode
+@node Akkorde "Verschiedene Akkorde"
+@next main
+@prev main 
+In unserem Beispiel wollen wir uns den C-Dur Akkord ansehen.
+
+Ein Dur-Akkord besteht zumeist aus 3 Tönen.
+Der Prim,gr. Terz,die Quinte
+Den Tönen auf der ersten,dritten und fünften Stufe.
+Dies ist die C-Dur Tonleiter:
+
+1   3   5              Der Akkord C-Dur besteht also aus
+_   _   _
+C D E F G A B C        C,E,G
+
+
+Das ist die A-moll Tonleiter:
+                            Hier nehmen wir wieder die Prim(a),
+1   3   5                   die kl.Terz(c),die Quint(e)
+_   _   _
+A B C D E F G A             Der A-moll Akkord besteht aus a,c,e
+
+@{Highlight}@{u}Tip:@{uu} @{Highlight}Merke dir schon einmal das die C Dur und A moll Tonleiter aus den
+selben Tönen besteht! (Sie fangen nur an versch. Tönen an!)@{Text}
+Die A moll-Tonleiter ist gut zu merken,den er ist ein Auszug aus dem Alphabet:@{text}
+A moll Skala: A B C D E F G
+C dur  Skala:     C D E F G A B C
+Wo sind Terz,Prim,Quinte,Septime bei C-Dur??
+
+Die Diatonik ist die Tonordnung aus den natürlichen Ganz-, und Halbtönen der 7.Stufe
+einer Dur-, oder Molltonleiter. Gegensatz:Chromatik (mit Halbtönen)
+Prime   =Ton auf der 1. Stufe der diatonalen Tonleiter
+Sekunde =Ton auf der 2. Stufe  "        "
+Terz    =Ton auf der 3. Stufe  "/ Zusammenklang der 1. und 3.Tonst. einer Tonleiter
+gr. Terz=bezeichnet das  Dur-Geschlecht
+kl. Terz=bezeichnet das Moll-Geschlecht
+Quarte  =Ton auf der 4. Stufe  "
+Quinte  =Ton auf der 5.Tonstufe/ Zusammenklang der 1. und 5.Tonst. einer Tonleiter
+Sexte   =Ton auf der 6. Stufe der diat. Tonleiter
+        =Umkehrung des Dreiklangs.Die Terz liegt im Bass.
+Septime =Ton auf der 7. Stufe " /Zusammenklang der 1. und 7.Tonst. einer Tonleiter
+Oktave  =Ton auf der 8. Stufe der diatonalen Tonleiter.
+None    =Ton auf der 9. Stufe     "
+
+Töne                Intervall
+------------------------------
+c-des               kl.Sekunde
+c-d                 Sekunde
+c-es                kl. Terz
+c-e                 gr. Terz
+c-f                 Quarte
+c-ges               verm. Quinte
+c-g                 Quinte
+c-as                kl. Sexte
+c-a                 gr. Sexte
+c-bb                kl. Septime
+c-b                 gr. Septime
+c-C                 Oktave
+@endnode
+@node akk "Eine Auswahl an Akkorden"
+@next main
+@prev main 
+@{u}Eine Auswahl an Akkorden:@{uu}
+@{"Grafikerklärung" link Erklaerung.bsh/Main}
+@{"Easy Chords for Beginners" link EasyChords/Main}
+@{"Power Chords" link pk} 
+
+@{"C" link c.bsh/Main} @{"C6" link C6.bsh/Main} @{"C7" link c7.bsh/Main} @{"C9" link c9.bsh/Main} @{"Cmaj7" link Cmaj7.bsh/Main} @{"Cm" link Cm.bsh/Main} @{"Cm7" link Cm7.bsh/Main}
+
+@{"C#" link c#.bsh/main} @{"C#4" link C#4.bsh/main} @{"C#7" link C#7.bsh/Main} @{"C#m" link c#m.bsh/main}
+@{"C#m7" link C#m7.bsh/Main} @{"C#maj7" link C#maj7.bsh/Main}
+
+@{"D" link d.bsh/Main} @{"D6" link d6.bsh/Main} @{"D7" link d7.bsh/Main} 
+@{"Dm" link dm.bsh/Main}  @{"Dm7" link dm7.bsh/Main} @{"Dmaj7" link dmaj7.bsh/Main}
+
+@{"D#" link d#.bsh/Main} @{"D#4" link d#4.bsh/Main} @{"D#6" link d#6.bsh/Main} @{"D#7" link D#7.bsh/main}
+@{"D#m" link d#m.bsh/Main} @{"D#m7" link d#m7.bsh/main}
+@{"D#maj7" link d#maj7.bsh/Main}
+
+@{"E" link E.bsh/Main} @{"E6" link E6.bsh/Main} @{"E7" link E7.bsh/Main} 
+@{"Em" link Em.bsh/Main} @{"Em7" link Em7.bsh/Main} @{"Emaj7" link Emaj7.bsh/Main}
+
+@{"F" link f.bsh/Main} @{"F6" link F6.bsh/Main} @{"F7" link f7.bsh/main} 
+@{"Fm" link Fm.bsh/Main} @{"Fm7" link Fm7.bsh/Main}
+
+@{"F#" link f#.bsh/Main} @{"F#4" link F#4.bsh/main} @{"F#6" link F#6.bsh/Main} @{"F#7" link f#7.bsh/main} @{"F#m" link F#m.bsh/Main} @{"F#m7" link f#m7.bsh/Main}
+
+@{"G" link g.bsh/main} @{"G6" link g6.bsh/Main} @{"G7" link g7.bsh/main} @{"Gm" link gm.bsh/Main} @{"Gm7" link gm7.bsh/Main}
+
+@{"G#" link g#.bsh/Main} @{"G#4" link g#4.bsh/main} @{"G#6" link g#6.bsh/main} 
+@{"G#7" link g#7.bsh/main} @{"G#m" link g#m.bsh/main} @{"G#m7" link g#m7.bsh/main} 
+@{"G#maj7" link g#maj7.bsh/main} 
+
+
+@{"A" link a.bsh/Main} @{"A4" link a4.bsh/Main} @{"A6" link a6.bsh/Main} 
+@{"A7" link a7.bsh/Main} @{"Am" link am.bsh/Main}
+
+@{"Bb" link bb.bsh/Main} @{"Bb4" link bb4.bsh/Main} @{"Bb7" link bb7.bsh/Main}
+@{"Bbm" link bbm.bsh/Main} @{"Bbm7" link bbm7.bsh/Main} 
+
+@{"B" link B.bsh/Main}
+@{"Bm" link bm.bsh/main}
+@endnode
+@node Kapo "Transponieren und Kapodaster"
+@next main
+@prev main 
+@{fg highlight}
+
+Stell Dir vor Du spielst in einer Band. Die Band spielt einen Blues
+in E über A und B. Jetzt stellt Ihr fest , das euer(e) Sänger(in)
+das so nicht singen kann. Also versucht Ihr das Lied in einer
+höheren Lage zu spielen. Um das Lied mit den selben Griffen in einer höheren Lage zu spielen
+benutzt man den Kapodaster (in jedem gut geführten Musikgeschäft erhältlich). @{fg text}
+
+Der Kapodaster (auch @{i}"Klammer"@{ui} genannt) wird am Griffbrett zwischen
+zwei Bünden befestigt.
+ 
+Versucht Ihr das Lied z.Bsp. in A zu spielen
+Befestige den Kapo im 5. Bund. Siehe @{"Grafik" link kapoinflat.iff/Main}
+
+Wollt ihr das Lied in einer anderen Tonart spielen
+mit anderen Griffen, so benutze die Tabelle.
+Suche Ton E (oberste Reihe).
+Suche den Griff den du spielen willst z.Bsp. A Dur  
+Du wirst ihn in der 5.Reihe finden
+Suche jetzt in der Tabelle den Ton A und geh` 5 Reihen runter
+Suche dann Ton b und geh` wieder 5 Reihen runter.
+
+Wenn ihr Akkorde wie z.Bsp.:A@{u}4@{uu}, H@{u}7@{uu} ,E@{u}7@{uu} benutzt, so mußt du einfach den Akkord mit
+der 4 (Quart) bzw. 7 (Septime) erweitern.
+
+@{b}Anmerkung zur Kapo-Tabelle:@{ub}
+
+Selbstverständlich ist
+@{fg highlight}
+ Cis = Des , Dis = Es , Fis = Ges , Gis = As  u.s.w  ,
+ wenn du im Halbton vom Hauptton höher oder tiefer spielst@{fg text}
+
+@endnode
+@node skalen "Skalen"
+@next main
+@prev main 
+Skala (ital. scalare=leiter)
+
+Über jeden Akkord ,den du spielst gibt es eine passende
+Tonleiter. Hier eine Auflistung der wichtigsten Tonleitern.
+
+@{"Info:Blues-Licks" link Info_Blues_licks_II/main}
+@{u}In diesem Beispiel bin ich vom Grundton "C" ausgegangen @{uu}         Tonart
+                                                               ---------
+C-Ionisch     @{" " link ionisch.bsh/main} über maj7,maj9                                | C  Dur
+C-Dorisch     @{" " link Dorisch.bsh/Main} über min7,min9                                | B  Dur
+C-Phrygisch   @{" " link Phrygisch.bsh/main} über min7,PowerChords                         | G# Dur
+C-Lydisch     @{" " link lydisch.bsh/main} über maj7,maj9,maj7(#11)                      | G  Dur
+C-Mixolydisch @{" " link Mixolydisch.bsh/main} über Dom7                                     | F  Dur
+C-Aeolisch    @{" " link Aeolisch.bsh/Main} über min7,min9,min11                          | D# Dur
+C-Lokrisch    @{" " link lokrisch.bsh/main} halb vermindert z.B:(min7b5)                  | C# Dur
+
+Das sind die Namen der "Kirchentonleitern" ,an diesem Namen kann man sehen
+wie alt diese Skalen schon sind.
+Keine Angst:Sie werden auch gern im Hardrock/Jazz/Pop/Funk gespielt.
+
+Ionisch entspricht hier "Dur" und
+Aeolisch entspricht "natürlich Moll".
+@{b}Um schneller und sicherer beim Solispiel zu werden,
+übe täglich eine andere interessante Skala.@{ub}
+Aber spiele sie nicht nur halbherzig rauf und runter...
+Am besten du benutzt dafür die Intervalle (sekunde,terz,quart u.s.w...)
+
+@{u}Um den Aufbau der Tonleitern zu verstehen:@{uu}
+
+Beginnt man auf der C Dur Skala auf dem D (2.Mode) anstelle des C`s
+erhält man eine neue Tonleiter ! D-Dorisch !
+D-Dorisch       (D E F G A B C D) ist der 2. Mode von
+Ionisch C-Dur (C D E F G A B C)
+
+E-Phrygisch       (E F G A B C D E) ist der 3. Mode von
+Ionisch C Dur (C D E F G A B C)
+
+F-Lydisch           (F G A B C D E F) ist der 4. Mode von
+Ionisch C Dur (C D E F G A B C)
+
+G-Mixolydisch         (G A B C D E F G) ist der 5. mode von
+Ionisch C Dur (C D E F G A B C)
+
+A-Aeolisch (Natürlich Moll) (A B C D E F G A) ist der 6.Mode von
+Ionisch C Dur                   (C D E F G A B C)
+
+B-Lokrisch                (B C D E F G A B) ist der 7. Mode von
+Ionisch C Dur (C D E F G A B C)
+Hier die Zusammenfassung: @{" " link zus}
+@endnode
+@node zus "Zusammenfassung:"
+@next skalen
+@prev skalen
+C-Ionisch entspricht C-Dur
+C-Aeolisch entspricht "natürlich Moll"
+
+@{u}Hier die Tonleitern von verschiedenen Grundtönen ausgehend:@{uu}
+C-Ionisch    - C D E F G A B C
+D-Dorisch    - D E F G A B C D
+E-Phrygisch  - E F G A B C D E
+F-Lydisch    - F G A B C D E F
+G-Mixolydisch- G A B C D E F G
+A-Aeolisch   - A B C D E F G A
+B-Lokrisch   - B C D E F G A B
+
+@{u}Hier die Tonleitern von einem Grundton (hier "C") ausgehend:@{uu}
+C-Ionisch    - C D E F G A B C        |
+C-Dorisch    - C D D# F G A Bb C  oder auch C D Eb F G A Bb C
+C-Phrygisch  - C C# D# F G G# Bb C    |     C Db Eb F G Ab Bb C
+C-Lydisch    - C D E F# G A B C       |
+C-Mixolydisch- C D E F G A Bb C       |
+C-Aeolisch   - C D C# F G G# Bb C     |     C D Eb F G Ab Bb C
+C-Lokrisch   - C C# D# F G G# Bb C    |     C Db Eb F Gb Ab Bb C
+             ----------------------------------------------------
+      Schreibweise in # (sharp),(-is)| Schreibweise in b (flat),(-es)
+                          engl. ,Dtsch|                    engl.,Dtsch.
+
+natürlich auch hier wieder C#  = Db  , D#  = Eb , F#  = Gb  , G#  = Ab
+@{fg highlight}                           Cis = Des , Dis = Es , Fis = Ges , Gis = As  u.s.w  ,
+ wenn du im Halbton vom Hauptton höher oder tiefer spielst@{fg text} 
+
+
+
+@endnode
+@node vgit "Verschiedene Gitarren"
+@next main
+@prev main 
+@{fg highlight}Unter den Gitarren gibt es verschiedene Modelle, die sich
+unter anderem in Aussehen,Klang,Gewicht,Größe.
+
+Veschiedene Gitarrenarten:
+                  z.Bsp.:  Western         @{" " link west}
+                           Konzert         @{" " link konz}
+                           12 Saitig       @{" " link 12sa}
+                           E-(Elektrische) @{" " link egit}@{fg text}
+@endnode
+@node west "Western Gitarre"
+@next vgit
+@prev vgit
+Die Western Gitarre hat meist Stahlsaiten (.10 er Dicke).
+Zudem besitzt sie einen Stahlstab im Halsinnern.(siehe @{"E-Gitarren" link egit}
+Auch ein Schlagbrett zum Schutze der Gitarre vor deinen
+Plektrum-Kratzern. Viele Western Gitarren bieten auch die
+Möglichkeit ,über einen Verstärker gespielt zu werden.
+Dafür befindet sich im inneren der Gitarre unter dem Steg ein
+besonderer Tonabnehmer. Die Bedieneffekte sind im Korpus
+integriert ( Vol. / Middle / Treble / Bass ) und werden mittels
+einer Batterie gespeist.
+
+@{fg highlight}Läßt man sein Gitarrenkabel zu lang unbenutzt stecken,kann sich
+die Batterie entlehren! Viele Hersteller bieten dazu einen
+knopf bei den Bedieneffekten an (Batt. Test) @{fg Text}
+@endnode
+@node konz "Konzert Gitarre"
+@next vgit
+@prev vgit
+Die Ultimative Lerngitarre.
+@{fg highlight}Für jeden Anfänger geeignet.@{fg text}
+Sie hat ein breiteres Griffbrett als die E- oder Western-
+Gitarren und die Saiten liegen weiter auseinander.
+
+Man kommt also nicht so leicht an die anderen Saiten dran.
+
+Der Umstieg von einer Konzertgitarre auf eine andere Gitarre ist
+leichter als andersrum.
+@{b}Konzert Gitarren haben 3 Nylonsaiten (G/B/E).@{ub}
+@endnode
+@node egit "Elektrische Gitarren"
+@next vgit
+@prev vgit
+
+@{"E-Gitarre" link guitar.iff/main}
+Elektrische Gitarren gibt es in verschiedenen Ausführungen.
+Keine klingt wie eine andere.  (8er oder 9er dicke Saiten sind üblich).
+Die elektrische Gitarren haben ein Kratzbrett,zum Schutz der Gitarre
+vor deinen @{"Plektrum" link ple}kratzern.
+Auch ein @{"Whammy Bar" link wha} könnte vorhanden sein.
+@{b}Bsp.: Marken
+
+Es gibt Gitarren von u.a.:@{ub}
+@{fg highlight}
+Fender,Washburn,Aria,MusicMan,Ibanez,Hohner,Gibson,Rickenbaker,Peavey,Epiphone,
+Warmoth,Jackson,ESP,PRS,Guild,Yamaha,Carvin,B.C.Rich,Optek,Samick,Hamer,Fernandez,
+Kramer,Westone u.v.m... @{fg text}   ( all ©-righted!! )
+
+@{b}Bsp.: Form @{ub}
+
+Strat-Form (Klassisch),Flying V (umgedrehtes V),u.v.m.
+
+@{b}Bsp.: Tonabnehmer@{ub}
+
+@{fg highlight}Position der Tonabnehmer Hals,Mitte,Steg @{fg text}
+
+Single Coil - einfacher Tonabnehmer
+Humbucker   - Zwei Tonabnehmer untereinander
+
+
+Es gibt Git. mit 2 Single C. (Hals/Mitte)
+             und 1 Humbucker (Steg)
+
+             3 Single C. (Hals/Mitte/Steg)
+
+             2 Humbucker (Hals/Steg)     u.v.m.
+
+Der Single Coil ist ein einzelner Tonabnehmer der einfach mit
+Kupferdraht umwunden ist. Er hat einen klaren Klang, der manchmal
+ auch recht dünn klingen kann!
+Der Humbucker sind zwei untereinanderliegende Tonabnehmer,
+die zusammen mit Draht umwunden sind. Fetter Sound.
+Es gibt auch schräge oder gesplittete Tonabnehmer die anders
+im Klang sind.
+Willst du Tonabnehmer nachrüsten, so laß dich vom Fach-
+geschäft beraten. Deren Techniker baut sie dann auch ein.
+@endnode
+@node brett "Das Griffbrett"
+@next vgit
+@prev vgit
+@{b}Hier habe ich dir die einzelnen Töne des Griffbretts
+in einer @{"Grafik " link Griffbrett.bsh/main} dargestellt.
+
+@{ub} @{fg highlight}Anhand dieser Grafik sollte es dir möglich sein dich schneller
+mit dem Tonvorrat auf dem Griffbrett vertraut zu machen.
+Wenn du Skalen übst schaue dir auch an welche Töne du spielst.@{fg text}
+@endnode
+@node Effekte "Effekte"
+@next main
+@prev main 
+@{fg Highlight}Wer Abwechslung in sein E-Gitarrenspiel bringen will, kann sich
+Effektpedale zulegen.
+
+Die gibt es in verschiedenen Variationen, als Pedal
+oder Rackgerät...(über Midi-Fußpedalboard gesteuert)
+z.B.:Echo,Flanger,Chorus,Distortion,Oktaver,Reverb,Hall,Pitchshifter,
+Wah Wah,EQ,Talkbox,u.v.m... @{fg text}
+
+@{"Distortion" link dist}
+@{"Echo" link echo}
+@{"Flanger" link flanger}
+@{"Chorus" link chorus}
+@{"Wah Wah" link Wah}
+@{"Talkbox" link talk}
+@{"Reverse Reverb" link rev}
+@{"Vibrato" link vib}
+@{"Pitchshifter" link pit}
+
+@{b}Probiere sie, wenn du willst , im Guitarladen mal unverbindlich
+aus. Dagegen hat bestimmt kein Ladenbesitzer was einzumelden.
+(Es sei denn du spielst im @{i}Stairway to Heaven @{ui}, oder @{i}Streets of  
+London @{ui}vor) @{ub}:-)
+@endnode
+@node pit "Der Pitchshifter"
+Der Pitchshifter ist ein Modulationseffekt.
+Mit seiner Hilfe ist es möglich aus der Gitarre ein
+`Ufo` oder eine `singende Säge` zu machen.
+Einfach mal anhören: @{"UFO " system "dsound -2 -s7000 sounds/ps1.snd"}
+                     @{"Säge" system "dsound -2 -s10000 sounds/pitch.snd"}
+@endnode
+@node vib "Vibrato,Bending und Whammy Bar"
+@next effekte
+@prev effekte
+Der Vibrato-Effekt ist ein an- und abschwellen der Lautstärke.
+Viele Verstärker haben diesen Effekt Serienmäßig eingebaut.
+
+Ähnlich dem Vibrato ist das @{"Bending" link bend} (Dehnen) der Saiten
+und der @{"Whammy Bar" link wha}
+@endnode 
+@node dist " Distortion "
+@next effekte
+@prev effekte
+Der wohl bekannteste Effekt ist Distortion (Verzerrung)
+
+Auch unter @{i}Gain,Tube,MetalMaster,Drive @{ui}bekannt.
+Ich sag nur Röhr....
+@{"Distortion  " system "dsound -2 -s11000 sounds/runaway.snd"}
+@{"Distortion 2" system "dsound -2 -s11000 sounds/spirit.snd"}
+@endnode
+@node echo "Echo"
+@next effekte
+@prev effekte
+@{b}Echo@{ub} gibt es auch u.a. unter diesen Namen
+
+Delay (engl."Verzögern),Digital Delay,Analog Delay
+MultiTap gehört zur Echo-Familie...
+
+Ein analoges Delay ist meist ein Endlosband in einem Pedal
+eingebaut.
+@{"Delayed Sound Akkord" system "dsound -2 -s10000 sounds/delay.snd"}
+@{"Delayed Sound Ton   " system "dsound -2 -s10000 sounds/delayton.snd"}
+@{"Multitap Sound      " system "dsound -2 -s10000 sounds/Mtap.snd"}
+@{"Multitap Sound Ton  " system "dsound -2 -s10000 sounds/mtapton.snd"}
+@endnode
+@node flanger "Flanger"
+@next effekte
+@prev effekte
+@{fg highlight}Der Flangersound ist ein eigener Sound für sich.@{fg text}
+
+Anhörn...!!!   @{"Flangersound" system "dsound -2 -s10000 sounds/flan.snd"}
+@endnode
+@node rev "Reverse Reverb & Gated Reverb"
+@next effekte
+@prev effekte
+Reverb mal Rückwärts    Reverb aus dem Jenseits :-o
+
+Anhörn !! @{"RevReverb" system "dsound -2 -s10000  sounds/RevReverb.snd"}
+          @{"RevReverb Ton" system "dsound -2 -s10000 sounds/revreverbton.snd"}
+          @{"GatedReverb" system "dsound -2 -s10000 sounds/GatedReverb.snd"}
+@endnode
+@node chorus "Chorus"
+@next effekte
+@prev effekte
+Der @{b}Chorus@{ub} ist ein Effekt,da hört sich deine 6-String
+an wie eine 12-String...
+
+@{"Chorus" system "dsound -2 -s8000 sounds/chorus.snd"}
+@endnode
+@node wah "Wah Wah"
+@next effekte
+@prev effekte
+Das Wah Wah Pedal hat den Effekt das deine Gitarre währendessen
+du spielst immer "Wah Wah" sagt.
+
+Berühmte Wah Wah Spieler : Jimi Hendrix,Joe Satriani,Kim Thayil
+,Slash,Kirk Hamett,Steve Vai u.v.v.m...
+
+@{"Wah Wah" system "dsound -2 -s8000 sounds/wah1.snd"}
+@{"Wah Wah" system "dsound -2 -s8000 sounds/wah3.snd"}
+@endnode
+@node talk "Talkbox"
+@next effekte
+@prev effekte
+Talkbox...Mouthback...u.s.w...
+
+Ähnlich dem Wah Wah
+Eins ist gemeint:Du spielst Dir mittels eines Schlauchs der an
+einem Mitteltöner angebracht ist, Töne in den Mund und kannst sie
+dann durch Sprechen verformen. Das ganze wird über dein Mikrofon
+abgenommen.
+
+Berühmte Talkboxer:Peter Framton ("...Comes Alive" Anhörn...!)
+                   M. Jabs/Scorpions
+                   R. Sambora/Bon Jovi
+
+@{"Talkbox" system "dsound -o -2 -s10000 sounds/talkbox.snd"}
+Hör mal sie sagt `Bad Boy Boogie`
+Du must jetzt "DSound" schließen. (Closegadget ganz oben!)
+@endnode
+@node Sou "Sound-Benutzung"
+@next main
+@prev main
+
+
+Hey ! klick` hier nicht rum wenn ich was am erklären bin... :)
+
+Wenn du Dsound richtig installiert hast solltest du auch einen Ton hören
+wenn du ein Sound Gadget berührst... @{"A Dur Sound Test" system "dsound -2 -s8000 -w sounds/adur.snd"}
+
+(Lautsprecher,Stereoanlage ausgestellt? Monitor auf "Leise" eingestellt?
+Dann geht`s nicht!!)
+
+Jetzt @{b}"Zurückgehen"@{ub} anklicken !
+
+@endnode
+@node 12sa "12-saitige Gitarre"
+@next vgit
+@prev vgit
+Eine 12-saitige Gitarre hat, wie ihr name schon sagt 12 Saiten.
+Sie hat wie die 6 Saitigen eine E,A,D,g,b,e und zusätzlich
+vor jeder dicken Saite eine dünnere (E,A,D Saiten 1 Oktave höher gestimmt)
+(g,b,e normal, sonst würden sie reisen)
+@endnode
+@node pk "Die Power Chords"
+@next akk
+@prev akk
+Die @{b}Power-Chords@{ub} sind nicht nur in der Rock- und Punkmusik beliebte Griffe.
+Es sind weder Dur noch moll Griffe,einfach PowerChords.
+
+Sie bestehen nur aus drei Tönen, und werden auch nur mit drei bzw.zwei
+Finger (Ringfinger als kleinen Barre benutzen!) gegriffen.
+Die drei Töne sind der Grundton des Akkords,nochmal der
+Grundton ,eine Oktave höher gespielt!,und die Quinte!
+
+1       5     8    Prime, Quinte, Oktave
+_       _     _
+C D E F G A B C    <- C-Dur Skala
+
+Es fehlt der Terz ! (3. Ton (E))
+
+Im engl. auch bekannt als z.Bsp.: C5
+Den Ursprung des Akkords findest du immer auf der E und A Saite deiner Gitarre!
+Es wäre optimal,wenn du den Tonvorat der E-,und A-Saiten auswendig kennst.
+
+
+Der PowerChord C sähe dann so aus:  @{b}C G C@{ub}
+
+Der Unterschied zwischen C Dur Akkord und C5:
+Siehe hierzu @{"Grafik" link pch.bsh/main}
+Die nicht gegriffenen Saiten werden nicht angeschlagen!
+
+Wie finde ich jetzt z.Bsp. A5 ??
+Ganz einfach:Such dir auf der E oder A-Saite deinen Grundton...
+(in diesem Falle "A") Die @{"Griffbrett Grafik" link Griffbrett.bsh/Main} kann dir hierbei nützlich sein.
+Auf der E-Saite wirst du "A" im 5.ten Bund finden!
+Die Quinte wirst du 2 Bünde höher auf der A-Saite finden.(Also A-Saite 7.Bund!)
+Die Oktave findest du zwei Bünde höher als der Grundton auf der übernächsten Saite.
+(D-Saite 7.Bund).     Dann sähe A5 so aus: @{"A5" link A5.bsh/Main}
+
+@{fg highlight}Die Power-Chords sind keine "echten" Akkorde, denn wie wir wissen
+setzt sich ein Akkord aus mindestens 3 verschiedenen Tönen zusammen.@{fg text}
+
+Das war doch einfach,oder??
+Versuche auch die anderen Akkorde rauszufinden.
+@endnode
+@node req "Was sonst noch wichtig ist"
+@next main
+@prev main 
+Wichtige Requisiten:
+@{"Der Verstärker" link amp.txt/main}
+@{"Das Plektrum" link ple}
+@{"Der Kapodaster" link kapo}
+@{"Die Saitenkurbel" link kur}
+@{"Der Bottleneck (Slide)" link bot}
+@{"Reinigungsartikel" link rei}
+@{"Das Stimmgerät" link stimmen}
+@{"Der Whammy Bar" link wha}
+@endnode
+@node bot "Bottleneck"
+@next req
+@prev req
+Der Bottleneck / Slide...
+Dies ist ein abgeschnittener,entschärfter Flaschenhals, den du dir auf den
+kleinen Finger,oder Ringfinger deiner Greifhand steckst.
+Es gibt ihn auch zu kaufen:aus Plastik,Glas oder Metall
+Um die Bottleneck-Technik anzuwenden,kannst du deine Gitarre in ein @{b}"Open Tuning"@{ub}
+umstimmen. Das heisst,daß die Saiten leer angespielt schon einen Akkord ergeben.
+
+Open D-Tuning:
+Aus E wird:d
+Aus A wird:a
+Aus D wird:f#
+Aus g wird:d
+Aus h wird:a
+Aus e wird:d
+
+@{fg highlight}Du brauchst die Saiten nur mit dem Slide berühren. Nicht zu fest aufdrücken,
+sonst hört man das vorbeirattern an den Bundstäbchen. Das sollte man vermeiden!@{fg text}
+
+@{b}Du kannst jetzt jeden gewünschten Akkord in der Slide Technik spielen.@{ub}
+@endnode
+@node rei "Reinigung und Wartung der Gitarre"
+@next req
+@prev req
+@{b}Genauso wichtig wie die Reinigung deiner Möbel mit Möbelpolitur,ist das Reinigen
+deines Griffbretts. Dafür gibt es einige Mittelchen:@{ub}
+
+@{b}Fretboard/Griffbrett/Fingerboard-Öl .@{ub}
+Dazu sollte man,laut Anleitung, die Saiten entfernen.
+Etwas Öl auf das Griffbrett geben,und gut einreiben. Dabei sollte man drauf achten,
+daß man zur Struktur des Holzes reibt,und ein sauberes weiches Tuch benutzt.
+Anschließend überflüssiges Öl abwischen,und die Prozedur so oft wie nötig wiederholen.
+
+@{b}Auch Ölstempel sind beliebt :@{ub}
+Mit ihm ist es möglich die Gitarre zu reinigen,ohne die Saiten zu entfernen.
+Ausserdem reinigt er die Saite automatisch mit und "Läßt dich schneller spielen"
+(Bei mir hat es den Effekt,das ich mich manchmal nicht mehr bremsen kann ;)
+Mit dem Stempel fest über die Saiten reiben,@{b}vor und nach dem spielen !@{ub}
+Überflüssiges Öl wegwischen. Spielen!
+Kriegst du im gut sortierten Gitarrenhandel!
+@{b}Saitenreiniger@{ub}
+Weil du dir nie die Finger vorm Spielen waschen tust,werden deine Saiten schnell
+schmutzig.Sie klingen dann auch ganz mies.Um das zu umgehen,gibt es Saitenreiniger.
+Du ziehst mit einem Saitenreiniger-befeuchteten Tuch die Saiten hoch und runter,
+und machst somit dem Dreck ein Ende.
+@endnode
+@node wha "Der Whammy Bar"
+@next req
+@prev req
+Der @{i}"Whammy Bar"@{ui} ist dieser Hebel unten an deinem Tremolosystem.
+Mit ihm ist es möglich,durch drücken oder ziehen den gespielten Ton
+zu erhöhen,oder zu erniedrigen. @{b}Vorsicht beim erhöhen von Tönen!@{ub}.
+Hier ist schon so manche Saite draufgegangen...
+Achtung! Bei billigen (und bei einigen teuren) Tremolosystemen kann es passieren,
+das sich die Saiten verstimmen, wenn man zu viel am Whammy hantiert.
+Wenn du keinen Whammy Bar besitzt kannst du manchmal auf die @{"Bending" link bend} Technik
+zurückgreifen.
+@endnode
+@node bend "Das Dehnen der Saiten"
+@next wha
+@prev wha
+@{b}Die Bending Technik: Das Dehnen der Saiten.@{ub}
+
+Zum Dehnen benutzt man einen, manchmal ist aber auch ein zweiter
+Finger eine große Hilfe. Kommt auch auf die Stärke deiner Finger an!.
+Die anderen Finger verbleiben meistens hinter der gedehnten Saite .
+Das sind dann meistens Ring-,und kleiner Finger.
+
+@{u}Beispiel in D:@{uu}
+@{fg highlight}
+                                            1-Zeigefinger 
+             4                              2-Mittelfinger
+    1  3  1  3     1  3  1         <<--->>  3-Ringfinger
+                                            4-kleiner Finger (evtl.)
+ e           ~~~
+ |---------------------------|
+T|---------------------------|
+ |---------------------------|
+A|--------5--7(9)--5-----5---|
+ |--5--7--------------7------|
+B|---------------------------|
+ E                       @{fg text}
+
+(~~~): an dieser Stelle dehnst du die D-Saite im 7.ten Bund so, das der
+Ton, der im 9.ten Bund ist, erklingt. Also einen Ganztonschritt.
+@{b}Hör dir vorher den Ton im neunten Bund an!@{ub}
+
+Du kannst auch an der (~~~)-Stelle auf deinen Whammy Bar drücken,bis der gewünschte
+Ton erklingt.
+
+Du kannst die Saite aufwärts,aber auch abwärts dehnen.
+Für gewöhnlich dehnt man die E,A,D-Saiten nach unten (Richtung Hohe E-Saite),
+und die g,b,e-Saiten nach oben (Richtung Tiefe E-Saite).
+Du kannst aber auch schon vor dem Anschlagen der Saite die Saite dehnen.
+@endnode
+@node ple "Die Plektren"
+@next req
+@prev req
+Das Plektron / Plektrum / Die Plektren
+Das @{b}Plektrum@{ub},(oder auch Mehrzahl "Die Plektren") ist ein Plastikplättchen,
+das du benutzt um die Saiten anzuschlagen. Im Heavy-Bereich wird es auch gern
+dazu benutzt den "Hals hinaufzurutschen". @{"Guitarscratch" system "dsound -2 -s5000 sounds/guitarscratch.snd"}
+Es gibt Sie in vielfältigen Formen. Es wird zwischen Daumen und Zeigefinger gehalten.
+@{fg highlight}Einige Gitarristen benutzen auch Daumen und Mittelfinger.@{fg text}
+Andere benutzen kein Plektrum,dadurch spielen sie etwas leiser...
+Es gibt Leute die spielen mit fast allem,was sie zu Greifen bekommen:
+(Quelle:Umfrage!)
+Scheckkarte,Kronkorken,Personalausweis,Münze (Brian May/Queen),u.s.w...
+@endnode
+@node kur
+@next req
+@prev req
+Die @{b}Saitenkurbel@{ub} ist ein Hilfsmittel, um dir das langwierige Drehen an den
+Saitenwirbel beim Saitenwechseln zu ersparen.
+@{fg highlight}Sie wird einfach auf den Saitenwirbel aufgesetzt,und dann wird gekurbelt.
+Vor allem Besitzer einer  @{"12-saitigen-Gitarre" link 12sa} werden mit diesem Teil sehr
+froh sein!@{fg text}
+@endnode
+@node blues
+@next main
+@prev main 
+In diese Situation wird wohl jeder mal kommen:
+Irgendein Bandmitglied/Freund sagt:
+"Spiel mal `nen Blues"...
+
+Jetzt liegt es an dir, zu zeigen ob du ein "Blues-Man" bist.
+
+Ein typischer Blues ist eine Serie von Griffwechsel zwischen einem
+zentralen Chord(I) und den Akkorden auf der 4. (IV) und 5. (V) Stufe höher.
+Hier ein Beispiel eines Blues in E.
+_       _ _
+E F# G# A B C# D# E
+I      IV V             E A B
+
+Man sagt hierzu auch:
+I  = Tonika                             @{"Info:Blues-Licks" link Info_Blues_licks_II/main} 
+IV = Subdominante
+
+
+Siehe @{"Tabulatur" link tab1}
+
+Um hierdrüber ein Solo zu improvisieren wäre die Hauptquelle der Blues-Licks
+die @{"Bluesskala" link bluesk},die Pentatonic major und Pentatonic minor skalen.
+Da wir in unserem Beispiel keine G oder G# note haben,kannst du für jeden Chord
+von Pent.major nach Pent.minor wechseln!
+
+Der Blues klingt viel interessanter wenn du folgendermaßen vorgehst:
+Der E(I) Chord wird des öfteren als E7 gespielt, spiele hier die E Mixolydisch
+skala für Solo! Das hört sich gut an weil E Mixolydisch D# beinhaltet (die 7th. in
+E7) E-Dur skala:E F# G# A B C# D# <- D#= 7.th note.
+Genauso gehst du bei A(IV) vor!
+
+A wird im Blues oft als A7 gespielt.Deshalb kannst du hier A Mixolydisch oder
+E-Dorisch(beinhaltet die selben noten) spielen.
+Wenn du begonnen hast mit E Pent.maj. & E Pent.minor-wechsel,dann hat das den
+selben Effekt wie A Mixolydisch (wegen dem Wechsel zum moll-3ten (G#)) zu dem
+Zeitpunkt des Akkord-wechsel.Das wird dem Zuhörer seine Aufmerksamkeit erregen!
+
+Wenn der Wechsel zu E zurück kommt,hört es sich immer wieder gut an die Major/3th
+(G#). Über B spielst du B mixolydisch (wegen der flat 7ten),F# Dorisch (hat die
+selben noten) oder F# Pentatonic minor,welches A# beinhaltet.
+Diese Theorie sollte dir helfen den Blues zu spielen. Sie kann dir nur eines nicht
+beibringen: @{highlight}@{u) Gefühl @{uu}@{text} !
+
+Hör dir einfach die Platten von Bluesmeistern an wie z.Bsp.Albert King,B.B.King,
+John Lee Hooker,Gary Moore (Die Blues Alben! u.v a. ...)
+@endnode
+@node bluesk
+@next blues
+@prev blues
+Die Bluesskala besteht aus folgenden Tönen:
+den Grundtönen der 3 Begleitakkorde (in unserem Bsp. E, A, B.),
+aus den kleinen Septimen der Tonika(A) und der Subdominante(B)  (die Blue-Notes)
+Wie wir wissen ist eine Septime der 7.Tonleiter-Ton.
+Eine kleine Septime heißt deshalb so weil sie einen Ganzton vom nächsten (8.)Ton
+entfernt ist.
+Eine große Septime ist nur noch einen halbton vom (8.)Ton entfernt.
+
+@endnode
+@node tab1
+@next bluesk
+@prev bluesk
+
+      in E              in A             in B                    in A/2.Position
+|e|-----------------|-----------------|-----------------------|------------------|
+|b|-----------------|-----------------|-----------------------|------------------|
+|g|-----------------|-----------------|-----------------------|------------------|
+|D|-----------------|-2-2-4-4-5-5-4-4-|-----------------------|------------------|
+|A|-2-2-4-4-5-5-4-4-|-0-0-0-0-0-0-0-0-|-9-9-11-11-12-12-11-11-|-7-7-9-9-10-10-9-9|
+|E|-0-0-0-0-0-0-0-0-|-----------------|-7-7-7--7--7--7--7--7--|-5-5-5-5-5--5--5-5|
+
+Zum 12 taktigen Blues Schema spielst du obige Tabulatur folgendermaßen:
+4xE    (wird Tonika genannt!)
+2xA    (     Subdominante   )
+2xE    (     Dominante      )
+1xB
+1xA (2.Position)
+1xE
+1xB
+----
+12 Takte!
+@endnode
+@node Credits
+@next main
+@prev main 
+@{fg highlight}Guitar Guide 1.00:@{fg text}
+@{b}S.M.@{ub} alle Grafiken und Soundfiles....
+
+@{fg highlight}Guitar Guide 1.01:@{fg text}
+@{b}Michael Bauer@{ub} hatte u.a. einige interessante Änderungsvorschläge:
+So ist z.B.: Das sture fixing auf Topaz 11 weggefallen.
+Der Standard Screenfont wird benutzt. Dadurch kann es aber passieren,
+dass einige Buttons im "Herzlich Willkommen" Teil verschoben sind...
+Die Talkbox hat einen Mitteltöner! keinen Hochtöner!
+@{b}S.M.@{ub} hat den Guide nochmal überarbeitet und ist dabei auf
+einen Fehler gestossen:
+Beim verkleinern der Kapodastertabelle ist mir damals ein Missgeschick passiert...
+Einige G`s sehen aus wie C`s :(    Hab` das jetzt geändert und neugemalt.
+Eine Powerchord-Erklärung wurde beigefügt.
+
+@{fg highlight}Guitar Guide 1.02:@{fg text}
+@{b}Andreas Itten@{ub} hat die Easy chords for Beginners und Blues Licks beigesteuert
+@{b}S.M.@{ub} hat den Guide nochmal überarbeitet!
+Die internationale Noten-Schreibweise(B=H ,Bflat=B) wurde übernommen!
+Blues Grundlagen. Abspielen der Samples via "DSound".
+@{b}David Schreiber@{ub} gab mir die Erlaubnis @{i}DSound @{ui}mit dem Guitar.Guide
+zu vertreiben. Danke nochmals!!
+@{i}DSound @{ui} is Copyrighted Software (1991-1994) by Dave Schreiber.
+Ein kleiner Index wurde beigefügt.
+
+@{fg highlight}Guitar Guide 1.03:@{fg text}
+Danke an:@{b}Joachim Meyer@{ub} für die Pitchshifter-Samples.
+Der Flanger-Sound wurde aus dem Demo der Saarl. Hardrockband "MeierKurt" geklaut ;)
+Es ist der Anfang von "Good Times"!
+Sonstige Sounds gehen mal wieder auf meine Rechnung.
+
+@{fg highlight}Guitar Guide 2.0:@{fg text}
+Programmierer:Schaut mal in "IchHelfDir/" rein! So könnte GGuide2.0 aussehen!
+@endnode
+

@@ -1,0 +1,370 @@
+@database AmiNES-Famicom Emulator.
+@version $VER: AmiNES-Famicom.guide 0.85 (5.3.97)
+
+@node MAIN "AmiNES-Famicom Emulator."
+
+                     <=------------------------------=>
+                       AmiNES-Famicom Emulator v0.12ß
+                             (Preview Version)
+                     <=------------------------------=>
+
+
+                             @{"Introduction    " link Introduction}
+                             @{"Requirements    " link Requeriments}
+
+                             @{"Instructions    " link Instructions}
+                             @{"Joy-Control     " link JoyControl}
+
+                             @{"Emulation       " link Emulacio}
+                             @{"Technical data  " link Tecnics}
+                             @{"Future versions " link Futur}
+
+                             @{"Links to Webs   " link Webs}
+                             @{"Copyrights      " link Copyrights}
+                             @{"Author          " link Autors}
+                             @{"Thanks          " link Agraiments}
+
+@endnode
+
+
+@node Introduction "AmiNES-Famicom Emulator."
+
+    Introduction:
+    -------------
+
+    This is a NES or Famicom emulator for Amiga computers.
+
+    I started it ONLY for make a 6510 emulation for my future AmiPC-Engine
+Emulator.  If you are actually interested in a good NES emulator then
+register to coolNESs or A/NES.
+
+                     I WILL NOT FINISH AmiNES.  Sorry.
+
+    This is a fast compilation of my actual source.
+
+    It has got a lots of Bugs, I never was a 6502 programmer...
+
+    But the emulator works well with some software.
+
+    Enjoy this preview version.
+
+                                             Juan Antonio Gómez
+
+@endnode
+
+@node Requeriments "AmiNES-Famicom Emulator."
+
+    Requirements:
+    -------------
+
+    - AGA Amiga computer.
+    - MC68020+  (and 100% compatible with MC68030/MC68040/MC68060)
+    - PAL, or compatible monitor.
+    - asl.library
+
+
+    Requirements for real emulation:
+    --------------------------------
+
+    - MC68020 at 28Mz or MC68030 at 25Mz.
+    - 1Mb of real fast32bit memory.
+
+@endnode
+
+@node Instructions "AmiNES-Famicom Emulator."
+
+    Instructions:
+    -------------
+
+    These options don't work in this version.
+
+
+    * Load/Save Frozen:
+
+        Creates snatshops of your game.
+
+    * Cheat mode:
+
+        Find and set cheat adresses of your games.
+
+    * Save VRAM:
+
+        Saves NES VRAM as an IFF-ILBM.
+
+    * Save Prefs:
+
+        It will save actual preferences in  S:AmiNES.prefs
+
+    * Black Border:
+
+        Borders of NES will be black.
+
+    * No illogical moves:
+
+        Left  and  Right at once, or Up and Down at once in Joy-reads are not
+acepted.
+
+    * Ask for Reset:
+
+        Ask always before Power On a Cart.
+
+    * Auto Load RAM-Battery:
+
+        It will Read RAM-Battery (Cart.sav) when you insert a cart.
+
+    * Auto Save RAM-Battery:
+
+        It  will Save RAM-Battery (Cart.sav) when you Re-insert another cart
+or Quit emulator.
+
+    * Ask for Save RAM-Battery.
+
+        It will ask you for save RAM-Battery.
+
+    * Overwrite:
+
+        It will Ask you before delete a file.
+
+    * Use xpk for save.
+
+        For Save all files compresed with xpk.
+
+@endnode
+
+@node JoyControl "AmiNES-Famicom Emulator."
+
+    Joy-Control:
+    ------------
+
+    In future versions it will be totally configurable:
+
+
+        Keyboard Only:  (These keys work in all Joy-Control modes)
+        --------------
+
+                            ESC = Exit to menu.
+                            Del = Select
+                           Help = Start
+                          Enter = Start
+                     Left Shift = Button A
+                     Left Amiga = Button A
+                       Left Alt = Button B
+                          Space = Button B
+                        Cursors = Up/Down/Left/Right
+                     Left Mouse = Select
+                    Right Mouse = Start
+
+        Amiga JoyStick or compatible Joypad:
+        ------------------------------------
+
+                           Fire = Button A
+                    Second Fire = Button B  (If exists)  [pin 9]
+                     Third Fire = Start     (If exists)  [pin 5]
+
+                    Use keyboard keys for other buttons
+
+        CD32 Joypad:
+        ------------
+
+                         Play Button = Exit to menu
+                        Green Button = Select
+                       Yellow Button = Start
+                          Red Button = Button B
+                         Blue Button = Button A
+                       Rewind Button = Button B
+                     Fastward Button = Button A
+
+@endnode
+
+@node Webs "AmiNES-Famicom Emulator."
+
+    These are some Webs about Emulators for the Amiga:
+
+
+Emulator Central        www.geocities.com/Area51/Corridor/6825/index.html
+
+Tomas Amsrud            www.applausenett.no/~gdwarf/emu/
+
+Rodney Norton           www.aic.net.au/~rodneyn/index.html
+
+Carl Warrent            www.mechcity.demon.co.uk
+
+Niklas Berg             www.geocities.com/Baja/3812/
+
+Lennart Johannesson     www.netrunner.com.br/emulators-hq/index.htm
+
+
+@endnode
+
+@node Copyrights "AmiNES-Famicom Emulator."
+
+    DISCLAIMER
+    ----------
+
+ The author doesn't take any responsabilities for incorrect use of this
+ software.
+
+ NES is a registered trademark of Nintendo Corporation.
+
+ Devpac III              © HiSoft.
+
+ GadToolsBox             © Java Development.
+
+ Stc.library             © StoneWare SoftWorks.       (By Jouni Korhonen)
+
+ AmiMSX2 Emulator        © RED Soft               (By Juan Antonio Gómez)
+
+ AmiGameBoy Emulator     © RED Soft               (By Juan Antonio Gómez)
+
+ AmiMasterGear Emulator  © RED Soft               (By Juan Antonio Gómez)
+
+ fMSX Amiga Emulator     © Hans Guijt.
+
+ coolNESs Emulator       © Fredrik Olsson
+
+ A/NES Emulator          © Morgan Johansson & Fredrik Schultz.
+
+
+@endnode
+
+@node Autors "AmiNES-Famicom Emulator."
+
+    Author:
+    -------
+
+    If you are interested in getting in contact with me then write to:
+
+    Juan Antº Gómez
+    Apdo: 275
+    08940 Cornellà de Llobregat
+    BARCELONA
+    SPAIN
+
+
+    e-mail:  joanant@arrakis.es
+
+
+    I am losing a lot of time answering a lot of mails.  (my english is not
+very good) mail me only if it is necesary.
+
+
+    AmiEmuls Web available coming soon.
+
+
+                        ----------------------------
+
+    AmiNES-Famicom is 100% programmed and designed by Juan Antº Gómez.
+
+    All graphics and icons are drawn by Multivac.
+
+    Instaler Script by Tomas Amsrud.
+
+    Special Thanks to Skid/Ozone for your help in all my emulators.
+
+@endnode
+
+@node Tecnics "AmiNES-Famicom Emulator."
+
+    Technical data:
+    ----------------
+
+    AmiNES-Famicom is 100% programmed and optimized in MC68020 assembly language.
+
+    Design is totally based on the  AmiMSX2 Emulator.
+
+    Developed using an Amiga 1200+Bizzard 1220+2Gb Hard Disk.
+
+    Programmed using Devpac III
+
+    GUI created with GadToolsBox.
+
+    3875 lines of NES emulation code.
+    2182 lines of menu code.
+    4418 lines of GadToolsBox generated code.
+   ------
+   10475 lines   (28731 lines with macros expanded)
+
+    100% compatible with 020,030,040 and 060.
+
+
+@endnode
+
+@node Emulacio "AmiNES-Famicom Emulator."
+
+    NES Emulation:
+    --------------
+
+    This is only a preview version.  A lot of things are not yet finished.
+
+
+    6502 Processor:
+    ---------------
+
+    It's is finished but there are a lot of bugs.
+
+
+    NES System:
+    -----------
+
+    Only supported mappers:  0 and 2.
+
+    Line interrupts don't emulated well.
+
+
+    Video Emulation:
+    ----------------
+
+    Very incomplete.
+
+    Vertical mirroring emulation not finished.
+
+    Sprites are not finished.
+
+
+    Sound Emulation:
+    ----------------
+
+    Very incomplete, it is under developing.
+
+
+@endnode
+
+@node Futur "AmiNES-Famicom Emulator."
+
+    Future:
+    -------
+
+    This is unknonw, I am working with AmiMSX2 v2.4 and AmiGameBoy v0.9.
+
+    I only continue with AmiNES sometines.
+
+
+@endnode
+
+@node Agraiments "AmiNES-Famicom Emulator."
+
+    Thanks:
+    -------
+
+    Multivac for your Icons and graphics.
+
+    Skid/Ozone for your helps.
+
+    Roderick Mouthaan and Philippe Bezon for being good friends.
+
+    Manuel Hiniesta for being my best friend.
+
+    Pascal Willano for helping me to make my emulators compatible with 040.
+
+    Sergi Martínez for his help in AmiMSX2.
+
+    Matthew O'Neill for making this guide readable.  <mash@enterprise.net>
+
+    Tomas Amsrud for the Script instaler and WB icons.
+
+    Special thanks to:  Carl Warrent, Lennart Johannesson, Niklas Berg,
+Rodney Morton, Fredrik Olsson and Ben Cass.
+
+    My sister for annoying me.
+
+@endnode

@@ -1,0 +1,726 @@
+@database SID-Searcher.guide
+
+@node "Main" "SID-Searcher v1.99g"
+
+                                   SID-Searcher v1.99g
+
+                                           by
+
+                                    Mathias Roslund
+
+
+                          @{" What is SID-Searcher???          " link "what"}
+                          @{" How does it work???              " link "how"}
+                          @{" Which formats does it support??? " link "which"}
+
+                              @{" Transfering the SIDs... " link "transfer"}
+
+                                  @{" Installation... " link "installation"}
+                                  @{" Usage...        " link "usage"}
+                                  @{" Prefs...        " link "prefs"}
+
+                                    @{" Giftware??? " link "giftware"}
+
+                                  @{" Distribution... " link "distribution"}
+                                  @{" Requirements!!! " link "requirements"}
+
+                                   @{" Disclaimer!!!  " link "disclaimer"}
+                                   @{" IMPORTANT!!!   " link "important"}
+                                   @{" Known bugs!!!  " link "bugs"}
+                                   @{" Please help!!! " link "help"}
+
+                                   @{" Development... " link "development"}
+                                   @{" History...     " link "history"}
+
+                                    @{" Home Page!!! " link "homepage"}
+
+                                   @{" Things to do... " link "things"}
+
+                                @{" How to contact me... " link "me"}
+
+                           @{" People I would like to thank!!! " link "thanks"}
+
+@endnode
+
+@node "what" "What is SID-Searcher???"
+
+Well, lets take it from the beginning.
+
+A while ago when I got access to Internet I found out
+that there was a program called PlaySID, for playing
+SIDs, and since I had quite a collection myself I thought
+this piece of software would be really helpful to @{"ME" link "me"},
+since I then would be able to use my Amiga (with HD) to
+both store and play all those gorgious SIDs. But almost
+as soon as I had unpacked the archive I also found out
+that I would have to convert all those SIDs to be able
+to listen to them. Ouch! I just didn't have time to convert
+more than 500 SIDs by hand so I thought for a while,"-Why
+not make a program that would play all those songs whitout
+@{"ME" link "me"} having to convert them first?". And from that moment
+SID-Searcher was born!
+
+After a while I also noticed that there existed a piece
+of software for the PC, called SIDPlay, which had it's own
+format, so therefor SID-Searcher also supports that one!
+
+@endnode
+
+@node "how" "How does it work???"
+
+The idea is quite simple. Since most of my SID-songs were
+ripped by me with help of softwares such as AMS (Advanced
+Music Searcher). I just had a look at them to find out how
+they were able to recognize the songs. They searches for
+a specific byte at a specific address (actually four bytes),
+and so does SID-Searcher. Ofcourse this means that it isn't
+able to recognize all SID-songs, but atleast all of the one's
+I've ripped.
+
+But please keep in mind that this way of recognizing SID-songs
+isn't bullet proof. There is always a risk that it will
+think that a certain type is actually a different one. This
+might happend when new formats are being produced and doesn't
+differ as much as they should from older ones! One way to
+be a little bit more secure that it actually is the right
+type it have recognized is to just check the infowindow. If
+it displays crap, something sure is wrong! DONT PUSH PLAY!
+Or it might crash!
+
+@endnode
+
+@node "transfer" "Transfering the SIDs..."
+
+To be able to transfer the SIDs from the C64 to the Amiga I'm
+currently using Easy1541, with the Easy1541 cable, which can
+be bought from the author of Easy1541 for only $10!!!
+
+The cable connects a C1541 C64 diskdrive to the parallell-port
+of the Amiga. The diskdrive will then act like any other Amiga
+diskdrive exept the fact that you need to tell the Amiga, by
+clicking on an icon, when the disk have been changed.
+
+If you like, I can transfer your SIDs for you, if you don't have
+too many disks (more than 10) with SIDs. I will then send them
+to you lha/lzx packed with e-mail. If you don't have an e-mail
+address, please send some Amiga formatted disks DD or HD along
+with enogh money (NO COINS!!!) to cover the shipping charge!
+
+If you would like to get your C64 disks back, then you will
+have to send enough money to cover the shipping charge!
+
+And please don't forget to send @{"me" link "me"} a gift along with your disks!
+If you can't afford anything else, the disks them selves will do!
+
+@endnode
+
+@node "which" "Which formats does it support???"
+
+Converted:
+PSID - onefile
+PSID - twofile (icon)
+SIDPlay - twofile (*.sid and *.dat)
+
+Standard:
+Compute! - (*.mus) WARNING!!!
+                   SID-Searcher ONLY looks for .mus at the
+                   end of the filename!!!
+
++ a number of other SID-songs with builtin player. These are
+the players that the info window will tell you the amount of!
+
+@endnode
+
+@node "usage" "Usage..."
+
+The main thing to remember is that you MUST NOT remove the two
+bytes at the beginning of your transfered SID-songs, without
+them SID-Searcher will not be able to recognize the type of your
+SIDs.
+
+Since this program is growing all the time, I will quite soon
+update this guide to cover all the features of SID-Searcher.
+
+Change in v1.99f:
+
+The check file button, not only let's you check converted SIDs,
+it also let's you check through a memory rip. Just load a memory
+rip, press the check file button, and follow instructions.
+
+Very important: If your memory rip is saved with for example
+an Action Replay cartridge, the file will have two bytes at
+the beginning which gives the startaddress. To make SID-Searcher
+do it's job, you will therefor have to give startaddress-2,
+otherwise the two startaddressbytes will be "placed" in the
+memory location where the first two bytes of the memory-rip
+is supposed to be! The value which SID-Searcher suggests is just
+that, the computed startaddress-2!
+
+Note: You will be asked which type of "search mode" you would
+like to use. Most tunes in demos actally is at $1000, but a lot
+of them is also at other $x000 locations ($1000=4096), that's
+why there is a FAST mode. Future composer tunes seems often to
+be at $1800, just as well as other tunes can be at $xy00 locations,
+($100=256), which is the reason for the NORMAL mode. There shouldn't
+really be any reason to use the DEEP mode since not to many people
+will reallocate there tunes to such locations, but it's there just
+in case!
+
+Important: I don't really have much use of this function myself,
+but since I got a request for it, I decided to implent it. I haven't
+either spent to much time "bugtesting" it, so please report any strange
+behavior to @{"me" link "me"}!
+
+Version 1.99g also adds these functions:
+
+Any unknown SID with the size 65535 will automatically be treated
+as a RAM-rip with startaddress 0 (zero). It's also possible to continue
+a search after a SID has been found. Simply press the check file button.
+
+@endnode
+
+@node "prefs" "Prefs..."
+
+From v1.99c SID-Searcher preferences are no longer set in a text file
+since I've added a preferences window!
+
+I hope this will make things a lot easier for both you and me!
+
+In v1.99e I completely changed the way the prefs file is created,
+therefor you will have to set your preferences once again. If I
+ever change the format again, I will supply a prefs updater!
+
+IMPORTANT!!!
+
+As a requester will tell you, you will have to restart SID-Searcher
+for the changes to take effect. The ONLY exception is if you press
+the 'Use XPK Settings' button. The reason is quite simple, since
+the ability to turn XPK saving on/off is quite important.
+
+I recommend you to use the SHRI sub-library, since it produces the
+smallest files. Ofcourse it also is the slowest, but since the files
+are very small, even when unpacked, the time it takes to (un)pack
+a SID is hardly noticeable even on a slow (68000) Amiga.
+
+@endnode
+
+@node "giftware" "Giftware???"
+
+Yes! This piece of software is Giftware, which means that
+if you use it you MUST send @{"ME" link "me"} a gift of some kind.
+
+
+If you are a ShareWare/Commercial programmer, a Full/Registered
+version of Your software would be nice!
+
+
+Otherwise please choose one of the following:
+
+* C64 Hardware (Memory expansions, Diskdrives, Turbo's, Cartridges,
+               C64's, or anything else you don't use/want anymore!)
+
+* C64 software (ONLY original software with manuals!)
+
+* C64 books/magazines (Any you think I deserve!)
+
+* Some cash (USA Dollars, German mark, Brittish Pounds or
+            Swedish Crowns) NO COINS!!!
+
+* SIDs (not anything from The High Voltage SID Collection,
+       JCH-Collection, NemeSIDs-Collection or C64musicshow)
+
+* C64 demo(s), music software or other nice products
+
+Or if you can't afford anything else:
+
+* A postcard
+
+
+Please send ALL files/programs, except for the SIDs SID-Searcher asks
+you to send me, on a DISK, NOT by e-mail!
+
+If you have some hardware you don't use, but can't affort the shipping
+charge, then please write a letter and tell me what you have got, if I'm
+interested (and I got the money) I will pay ALL of the shipping charge!
+
+
+Thanks!!!
+
+
+If you think that it's not worth any gift and you prefer NOT
+to use it, than please send @{"ME" link "me"} an e-mail and tell @{"ME" link "me"} why.
+
+If you use it and find a bug, please let @{"ME" link "me"} know!
+
+@endnode
+
+@node "distribution" "Distribution..."
+
+This product may be copied freely as long as NO changes
+are made to neither the docs or SID-Searcher it self.
+
+@endnode
+
+@node "requirements" "Requirements!!!"
+
+Hardware:
+
+ * Any Amiga with OS1.3 or later and some RAM.
+
+Software:
+
+ * PlaySID.library copyright © Per Håkan Sundell & Ron Birk
+ * ReqTools.library copyright © Nico François and Magnus Holmgren
+
+ XPK-Support requires:
+ * Xpkmaster.library copyright © Dirk Stoecker, Christian von Roques, Urban Dominik Mueller, ...
+   + Sub-libraries (for example SQSH,SHRI,NUKE)
+
+Note for OS1.3 users:
+
+ * PlaySID.library requires OS2.x, and therefor you are NOT able to
+   play the found SIDs, but you can save them as PSIDs.
+
+ * K-P Koljonen, the author of HippoPlayer have made some sort of a
+   patch which makes you able to listen to PSIDs with HippoPlayer.
+
+ * As a conclusion to the above. Convert your SIDs with SID-Searcher
+   and listen to them with HippoPlayer.
+
+@endnode
+
+@node "disclaimer" "Disclaimer!!!"
+
+Remember! You use this piece of software at your own risk!
+I can never be held responsible for any sort of damage caused
+to your software or hardware by the use of this product!
+
+Bugreports and suggestions might be sent to one of @{"my addresses" link "me"}
+
+See also @{"IMPORTANT!!!" link "important"}
+
+@endnode
+
+@node "development" "Development..."
+
+This product has been developed totaly by @{"ME" link "me"} in AmigaE 3.1i.
+To produce the SID-Searcher.dat file I'm currently using
+AMOSPro v2.0, since it's the easiest way.
+
+Since I'm a student, I just don't have the time to spend
+several hours a day developing this product, especially
+when approaching Christmas and summer since I then will have
+a lot of schoolwork to finish. Therefor please don't write
+to @{"ME" link "me"} and complain about the slow development! Thanks!
+
+SID-Searcher was/is developed using:
+
+vX.XX-v1.12  Amiga1200HD, 020/28, FPU/28, 2+4MB
+v1.12-v?.??  Amiga1200HD, 030/50, FPU/50, 2+32MB
+     
+@endnode
+
+@node "help" "Please help!!!"
+
+I don't have ANY information about the different types or
+formats that SID-Searcher supports!!! The only things I
+know about them is what I have been able to find out by
+looking at a few different ones!!!
+
+If you do have any information regarding the different
+file formats, or perhaps you know about another one, then
+PLEASE let @{"ME" link "me"} know!!!
+
+I'm especially interested in information about the Compute!
+file format.
+
+@endnode
+
+@node "important" "IMPORTANT!!!"
+
+THIS PRODUCT HAS ONLY BEEN TESTED ON MY VERY OWN AMIGA.
+I THEREFOR CAN NOT GARANTEE IT WILL WORK ON YOUR SETUP!
+IT HAS NOT BEEN TESTED ON LOW MEMORY SYSTEMS AND THEREFOR
+I DO NOT KNOW WHAT WILL HAPPEND IF YOU RUN OUT OF MEMORY!
+PLEASE SEND @{"ME" link "me"} ALL INFORMATION YOU CAN TO HELP @{"ME" link "me"} IMPROVE
+THIS PRODUCT!
+
+AND ALWAYS REMEMBER! A PROGRAM ONLY GETS AS GOOD AS THE
+USERS WANT IT TO BE. SO IF YOU DO NOT SUPPORT @{"ME" link "me"}, SEND
+BUGREPORTS AND SUGGESTIONS, THIS PROGRAM WILL NEVER BE
+AS GOOD AS IT COULD HAVE!
+
+See also @{"Disclaimer!!!" link "disclaimer"}
+
+@endnode
+
+@node "bugs" "Known bugs!!!"
+
+* Caused by me?
+
+None.
+
+* Caused by incompatibilities in PlaySID.library
+
+Since a few types of tunes uses samples and thereby
+instructions that aren't supported by PlaySID.library
+some songs can't be played! I don't know which formats
+it is yet, but I'll try to find out and if it is possible
+SID-Searcher will automatically replace the old player
+with a new one, which is rewritten the way you can read
+about in the docs for PlaySID.
+
+I have also experienced problems with certain types that
+doesn't use samples. Sometimes you will be able to play
+a song of a certain type, but another song of the same
+type might not work! I don't know why yet! Press @{"here" link "troublemakers"}
+for a complete list of these "troublemakers"!
+
+I'm do not know much about assembler, but some player
+seem to use certain registers on the C64, that just
+aren't beeing emulated by PlaySID.library. I will make
+you unable to try to play this types, although SID-Searcher
+will be able to recognize them!
+
+@endnode
+
+@node "troublemakers" "Troublemakers!!!"
+
+* MAD V3.0 - one out of two won't work!
+* 20CC X - a lot of these different types won't work!
+
+There are several types of which I've found only one tune
+which won't work. These will NOT be included in this list
+since it might be just be THAT one which will NOT work!
+
+@endnode
+
+@node "installation" "Installation..."
+
+If you have booted from your HD, then klick the Install icon
+and SID-Searcher will automatically be installed for you.
+
+
+Otherwise do the following:
+
+* Copy SID-Searcher.dat to S:
+
+And if you haven't got a @{"prefs" link "prefs"} file already:
+
+* Copy SID-Searcher.prefs to S:
+
+
+After the installation you should copy SID-Searcher to whatever
+location you like, to a floppy, or onto you HD. You may also
+save this guide for future use.
+
+@endnode
+
+@node "me" "Me!!!"
+
+Please send gifts, bugreports and suggestions to the following address.
+
+Mathias Roslund
+Sveav. 2b, nb
+S-702 14 Örebro
+SWEDEN
+
+
+Bugreports, suggestions and short letters might also be sent by e-mail.
+
+e-mail: sidsearcher@hotmail.com
+
+or
+
+e-mail: mathiasroslund@hotmail.com
+
+@endnode
+
+@node "homepage" "Home Page!!!"
+
+Yes! Now SID-Searcher has got it's own Home Page!!!
+
+"http://hem2.passagen.se/sids/SID-Searcher/index.html"
+
+@endnode
+
+@node "things" "Things to do..."
+
+-Show played time...
+-Make SID-Searcher able to play SIDs under OS1.3...
+-More preferences...
+-Make windows multitask...
+-Perhaps a MUI userinterface???
+.
+.
+.
+And a lot of other ones I guess...
+
+@endnode
+
+@node "thanks" "People I would like to thank!!!"
+
+People who have given me a gift...
+
+None... Sadly...
+
+People I would like to thank anyway...
+
+Henning Peters - For helping me with the debugging!!!
+Jacques Fiset  - For sending me some SIDs by e-mail...
+
+Special thanks goes to...
+Wouter van Oortmerssen - For helping me with ALL my problems!!!
+
+@endnode
+
+@node "oldhistory" "Old history..."
+
+961028  -Starting to program in AmigaE for my first time ever!
+
+------  -A lot of small test versions and programs...
+
+961115  -First working version...Lot of bugs(?) and improvements to work with!
+
+961117  -Removed bug, did not close filehandle...
+
+961118  -Completely changed the way SID-Searcher looks...
+        -Made changes to save memory...
+        -Now also shows PSID-info...
+
+961121  -Added limited support for Compute! SID-songs, only searches
+         for .mus in the file name, and no info YET!...
+
+961125  -Made SID-Searcher smaller...
+
+961130  -Added support for SIDPlayer files (*.dat and *.sid)...
+        -Changed file format support checking procedure (Que?)...
+        -Added icon and turned filter off using KFO-program...
+
+961202  -Added support for PSID icon-format...
+        -Shows PSID icon-format-info...
+        -Added support for multi-song files...
+        -Possible to turn off and on channels...
+        -Removed some nasty bugs!...
+
+961203  -Rearrenged most of the code, is now much easier to change!...
+        -Saved some RAM, although the program grew bigger!...
+        -Removed bugs, shortened the program, and so on...
+
+961205  -Now shows Compute! SID-sogs info!...
+
+961206  -Worked a lot with the user interface...
+        -Removed a few small bugs...
+        -Added option to choose PAL/NTSC...
+        -I think that v1.00 is almost finished!...
+
+961209  -Removed one nasty bug!...
+        -A small improvement...
+        -Finally finished v1.00!...
+
+961211  -Completely rewrote everything that had anything to do with the
+         SID-Searcher.dat - file. Made SID-Searcher.dat 2 bytes longer,
+         saved 986 bytes of AmigaE-code, and 450 bytes of program file...
+        -Moved to v1.05 due to the changes...
+
+961212  -Removed a bug, had to add one byte to SID-Searcher.dat to do it...
+
+961218  -Found a bug a while ago, channel ON/OFF didn't work, fixed...
+
+961225  -Added a lot of types to the SID-Searcher.dat file...
+        -Added button to switch filter ON/OFF, no need for KFO anymore...
+        -Removed a few variables, guess I saved some RAM...
+        -Moved to v1.06...
+
+961227  -SID-Searcher now supports all 292 types supported by AMS v5.0...
+
+970106  -Removed file-requester bug...
+
+970107  -Removed silly bug, caused problems with short filenames...
+        -Moved to v1.07...
+        -Changed PAL/NTSC switching, buttons will now change...
+        -Made this guide out of a textfile...
+        -Removed another silly bug...
+
+970115  -Small improvement, SID-Searcher can now be told NOT to let
+         you play certain types...
+
+v1.08   -970119
+        -You can now save found SIDs in PSID-format, although it's slow...
+        -Updated and changed a few things, nothing big...
+
+v1.09   -970119
+        -Ouch... I found out what caused the problems with showing Compute!
+         SID-info... Have spent all day on that!!! I had to make my own C64
+         charset emulation, and a lot more!!!
+        -970128
+        -Improved charset emulation a bit, but there is still much to do! I
+         also rearranged some of the code to save some bytes of AmigaE-code...
+         
+v1.10   -970206
+        -No major changes... I mainly finished the char-emulation... It
+         doesn't support all characters (far from), but some of the most
+         used ones... Not much more done really...
+        -Uploaded SID-Searcher to Aminet...
+        -970210
+        -Now resets pausebutton when play is pushed...
+        -970213
+        -Some more cosmetics concerning info-displaying...
+
+v1.11   -970310
+        -SID-Searcher now uses reqtools.library instead of asl.library and
+         thereby supports OS1.3 (NO playing yet)...
+        -The saved files became one byte to long, fixed...
+        -Some cosmetics...
+
+v1.12   -970319
+        -Speeded up saving a lot, thanks to 'Wouter van Oortmerssen' (E-author)...
+        -Added prefs file, only default dir yet...
+        -970320
+        -Now shows Cumpute! PSIDs real info if other info is missing...
+        -Cosmetics, like always...
+        -More prefs (window x & y position)...
+        -970324
+        -Cosmetics...
+        -Found out which bit that controlled the filter, you are therefor able
+         to set it ON or OFF as default...
+        -??????
+        -Uploaded SID-Searcher to Aminet...
+        -970502
+        -Removed bug, jamed the system for a few seconds on 030(+?) machines...
+
+v1.13   -970516
+        -Completely rewrote everything that had anything to do with the
+         SID-Searcher.dat - file (again!). Saved 567 bytes on the file and
+         made updating a lot easier...
+        -970522
+        -Added 5 more types, now only one from 300!!!
+        -Improved info displaying, now displays the correct letters even if
+         the internal info is in POKE-codes...
+        -970525
+        -Updated the installation script...
+        -970526
+        -Added 2 more types...
+
+v1.14   -970611
+        -Mainly to announce the SID-Searcher Home Page!!!
+        -Some changes in this guide and in the info that SID-Searcher
+         will display at certain times...
+
+@endnode
+
+@node "history" "History..."
+
+@{"Old history (v1.00-v1.14)" link "oldhistory"}
+
+v1.99a  -970716
+        -It's now possible to enter the PSID info while saving files...
+
+v1.99b  -970719
+        -Automatically splits one-song PSIDs when loaded...
+        -Has gotten a check button for converted SIDs...
+        -Can now save either as PSID or Standard...
+        -970721
+        -Minor change, will not check Standard (incl. Compute!) SIDs...
+
+        -My trafo "broke down". It didn't like me getting an CD-ROM drive,
+         even though it was an 20A one!!!
+
+        -970807
+        -Finished check and save procedures...
+
+v1.99c  -970807
+        -Added preferences window, no buttons/options yet...
+        -970811
+        -Worked a few hours with the preferences window, the layout
+         is finished, but only the filter button is working...
+
+        Vacation... No comments...
+
+        -970828
+        -Got my self a new HomePage without filetype restrictions!!!
+        -970831
+        -Finally "finished" the prefs window!!! You are able to set a
+         default save path, although it will not work yet...
+        -Found a silly bug, I had forgotten a couple of () signs which
+         caused unknown SIDs to become Compute! ones... Removed!!!
+        -971013
+         Optimized the code a bit, tried to remove the "jam the system bug",
+         but no luck, as always!!!
+
+v1.99d  -971021
+        -Finally!!! I managed to remove ALL bugs I had found by the use of
+         Enforcer+Mungwall and EFindHit!!! Sometimes it's nice to have a MMU!!!
+        -The default save path is now working...
+        -971022
+        -Updated this guide...
+        -971023
+        -Worked an hour with updating of the dat-file... Checked some types for
+         playability and internal info, must be the most boring one can do!!!
+        -971111
+        -Removed overwriting when files had long filenames (silly!)...
+        -971114
+        -Removed silly "could not load files larger than 32k" bug...
+
+v1.99e  -980101
+        -Finally got some time over to work with SID-Searcher...
+        -Added XPK support (only loading right now, saving might come!!!)...
+        -980102
+        -Made XPK-support optional (No library installed means No XPK-support)...
+        -980103
+        -Completed the XPK support, now includes saving!!!
+        -Changed the preferences window to contain XPK saving ON/OFF and choice
+         of XPK sub-library...
+        -A few "bugs" removed, and some minor improvements, I also cleaned up
+         the code a little bit...
+        -980104
+        -Hopefully removed the stupid bug, which did disappear when I used the
+         SYM and DEBUG directives. I simply had forgotten one TAG_END in one
+         of the "change requester attributes" commands (ReqTools). Enforcer
+         doesn't report any illegal memory accesses anymore!!! This also made
+         the executable more than 10k smaller...
+
+int.    -980114
+        -Removed a VERY silly bug, when filenames were very long SID-Searcher
+         always though the file type was PSID (icon) (don't ask me what stupid
+         thing I had done!)...
+
+v1.99f  -980117
+        -I've implented an experimental "memory rip" search function after getting
+         such a request. It's able to play any tune found (but stop's searching
+         when one is found, NO continue yet!), it also removes the "garbage" in
+         front of the tune. But since it's almost impossible to know the end
+         address of the tune, all the "garbage" after it will be saved when you
+         saves the tune...
+        -Removed silly "cancel button in choose file to save window" didn't work bug...
+        -Some small changes as always...
+        -You can now choose a file-length manually when saving RAM-rip songs...
+        -Added three search mode requester (RAM-rip), not fully working...
+        -980118
+        -Finished the search modes...
+        -980118 (a few minutes later)
+        -Major oops!!! Made one VERY stupid thing, which caused "Normal" SID-tunes
+         to get their play and init 2 bytes to high!!! Fixed!!!
+        -980119
+        -As always I forgot to think about one thing, which made the RAM-rip
+         unable to play most found tunes... Fixed!!!
+        -SID-Searcher now suggests a startaddress... Also another improvement
+         which actually should have been there at the first place...
+
+v1.99g  -980122
+        -Unknown SIDs with the length 65535 will automatically be treated as RAM-rips,
+         for all other sizes you will have to press the checkbutton manually...
+        -Fixed "bug" in the PSID-split function. If the first two bytes of the SID
+         had been removed before the PSID was created SID-Searcher didn't like the
+         PSID, now the two bytes will automatically be inserted. A requster will tell
+         you what's going on though...
+        -It's now possible to continue a search of a RAM-rip when a SID has been found,
+         simply push the check file button, select mode, and the search will continue
+         automatically. This way you are able to rip ALL SIDs that is in the RAM-rip,
+         NOT only the one with the lowest startaddress!!!
+
+
+
+
+
+@endnode

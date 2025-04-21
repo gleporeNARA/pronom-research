@@ -1,0 +1,910 @@
+@database Easy1541
+$VER: Easy1541.guide 1.1.1 (15.10.96) by Fabrizio Farenga
+@node Main "Easy 1541. Really? Yes, it's easy!"
+
+
+
+
+	       Easy1541 v 1.1.1 (15-Oct-96)
+	    © Copyright 1996 Fabrizio Farenga
+
+
+
+
+		@{" Disclaimer               " link Disclaimer}
+		@{" Description              " link Description}
+		@{" Requirements             " link Requirements}
+		@{" Installation             " link Installation}
+		@{" Easy1541 toolkit         " link Toolkit}
+		@{" 1541 Commands            " link 1541CMD}
+		@{" Cable                    " link Cable}
+		@{" Developers               " link Developers}
+		@{" History                  " link History}
+		@{" About the Author...      " link Author}
+@endnode
+
+@node Disclaimer "DISCLAIMER:"
+@{b}
+DISCLAIMER
+----------
+@{ub}
+Fabrizio  Farenga  makes  no  warranties  either expressed or implied, with
+respect  to  this  software,  its  quality, performance, merchantability or
+fitness  for  any  particular  purpose.  This software is licensed "as is".
+The  entire  risk as to the quality and performance of the document is with
+the  user.   In  no  event  will  Fabrizio  Farenga  be  liable for direct,
+indirect,  incidental or consequential damages resulting from any defect in
+the  software  even  if  they  have been advised of the possibility of such
+damages.
+
+This  program  is  copyrighted  by  Fabrizio  Farenga,  but  can  be freely
+distributed, provided that the following rules are respected.
+
+ - No change is made to the program nor to the accompanying documentation
+ - The  package  is always distributed in its complete form.
+ - Every  form  of distribution is allowed and encouraged, but no fee can
+   be charged for this program except for, possibly, the cost of magnetic
+   media and/or disk duplication and shipping.
+ - Inclusion  in  PD  software  libraries is allowed.
+ - The  program  cannot  be distributed in any commercial product without
+   the written consent of the author.
+
+By  copying,  distributing  and/or  using  the  program  you  indicate your
+acceptance of the above rules.
+
+
+- Long live and prosperity to the Amiga.
+			@{i}Unknown Vulcan@{ui}
+
+
+- Commodorians, the force was with us!
+			@{i}Michael S. Tomczyk@{ui}
+
+
+@endnode
+
+
+@node Description "WHAT THE HELL IS EASY1541 ???"
+@{b}
+DESCRIPTION
+-----------
+@{ub}
+Easy1541  is  designed  to  provide EASY access to the Commodore 1541 drive
+(and  compatibles)  to  manage old 5.25" disks formatted using standard CBM
+DOS  2.6 filesystem.  Using the provided command set you can read and write
+disks  created  using  a  Commodore  1541 drive and an 8-bit Commodore home
+computer (C64, C16/+4 and C128).
+
+Just  plug  the  @{"cable" link Cable}  in  your  standard Amiga Parallel Port to connect a
+Commodore  1541  and enjoy the Easy1541 potentiality.  You can't connect the
+cable  to  a  non-standard parallel port (as the one in the BSC Multiserial
+Card).
+
+@{b}
+WHY TO USE EASY1541 ?
+---------------------
+@{ub}
+In  the  Internet  (aminet,  funet...)  you  can found many "Amiga To 1541"
+projects,  interfaces, software and so on.  Well, I tried most of them, and
+I got all kind of problems!
+
+- Interfaces doesn't iterface properly.
+
+- Cables are hard to build (and doesn't work!)
+
+- Provided utilities are crap.
+
+- You need the same Amiga of the auhor to avoid crashes...
+
+There's  only  a  software available (unfortunately it's not freeware) that
+works properly, the old but good "ReadySoft Transfer Utility".
+
+@{b}
+A BIT OF HISTORY
+----------------
+@{ub}
+In late '80, the great software house "ReadySoft", published a Commodore 64
+emulator  for  the  Amiga 500/1000/2000.  It was sold with a little program
+that  allowed  (using  a  provided cable) to copy files from/to a real 1541
+drive  connected to your Amiga.  The cable was very easy to build too.  You
+need no components at all, just solder some wires...  The bad news was that
+you  need  a  68000  7.14  Mhz  Amiga and Kickstart 1.x to run the transfer
+utility.
+
+Thanks  to Easy1541, you will be able to do on any Amiga the same thing you
+did using the ReadyTransfer utility on your old Amiga 500.
+
+@{i}Unfortunately a GUI is not yet provided...@{ui}
+
+
+@{b}Note for the programmers:@{ub}
+The  old  ReadySoft code was full of "busy loops", and it crashed trying to
+use it on a 68020+ and OS 2.x / 3.x based Amiga.
+
+@endnode
+
+
+
+@node Requirements "WHAT I NEED TO USE EASY1541 ?"
+@{b}
+REQUIREMENTS
+------------
+@{ub}
+Easy1541  needs  any  Amiga system, but it requires at least AmigaDos 2.04.
+Hard Disk or a lot of memory is @{b}not@{ub} required.
+
+- It works fine using an A500 2.04 with 512K of Ram and 1 Drive...
+
+- It works better using an A4000 3.1 with 6Mb of Ram and Hard Disk!
+
+
+You  need  a  Commodore 1541 Drive and a @{"cable" link Cable} to connect it.  The cable is
+the same used by the ReadySoft Commodore 64 emulator, so if you own it, use
+it.  If you don't, you'll find a electric scheme to build it yourself.
+
+@{b}If you like you can @{"order" link BuyCable} a cable from the author.@{ub}
+
+
+If  you own the special IEC cable by Christian Bauer, used by the Frodo C64
+Emulator, you can use it but you have to install the special "f" version of
+my iec.library.  Refer to the @{"installation" link Installation} chapter for further information.
+
+
+I tested several Commodore drives, and all worked:
+@{b}
+- Commodore 1541 Dark Grey
+- Commodore 1541 Light Grey
+- Commodore 1541-II
+@{ub}
+I tested them in conjunction with the following Amiga's:
+@{b}
+- Amiga 4000/40  OS 3.1
+- Amiga 500      OS 2.04
+@{ub}
+
+
+If you find some incompatibilities please report them to the author.
+
+
+
+@endnode
+
+@node Installation "TO INSTALL EASY1541 IS EASY."
+@{b}
+INSTALLATION
+------------
+@{ub}
+To install Easy1541, just copy the file @{b}libs/iec.library@{ub} in your @{b}libs:@{ub}
+directory.
+
+If you plan to use a Frodo Cable (the one used by the C64 Frodo Emulator by
+Christian  Bauer),  you  have  to  copy  the  proper  iec.library  version:
+@{b}libs/frodo/iec.library@{ub}
+
+Now you can use the @{"ToolKit" link ToolKit} commands. If you like you can copy them in your
+c: directory.
+
+
+---
+
+If  you  like to write an installation script (using the standard Commodore
+installer),  please  do  it and send it to me.  I'll include it in the next
+Easy1541 release!
+
+Thank you.
+
+---
+
+
+@endnode
+
+
+@node Toolkit "HOW TO USE THE PROVIDED COMMANDS"
+@{b}
+EASY1541 TOOLKIT
+----------------
+@{ub}
+Several  useful  commands  are  provided  with  Easy1541 and constitute the
+foundamental  toolkit.   You'll  find  them in the root of the installation
+directory (usually "Easy1541").  They are listed below:
+
+@{" IECCmd      " link IECCmd}
+@{" IECDir      " link IECDir}
+@{" IECLoad     " link IECLoad}
+@{" IECReadD64  " link IECReadD64}
+@{" IECSave     " link IECSave}
+@{" IECStatus   " link IECStatus}
+@{" IECUnit     " link IECUnit}
+@{" IECWriteD64 " link IECWriteD64}
+
+These  commands  allow  you  to accomplish all the basic operations working
+with a Commodore 1541 drive.
+
+At  least  a  brief  knowledge  of  the main commands and of the functional
+character of a Commodore 1541 Drive are required to use Easy1541.
+
+For  advanced (e.g.  low-level) management of a 1541 unit or CBM DOS disks,
+you need to take advantage of the iec.library.
+
+@{b}
+Note: don't issue any command to the 1541 if it is turned off. This will
+      lock up the Amiga!
+@{ub}
+@endnode
+
+@node IECCmd "HOW TO SEND A COMMAND TO THE 1541"
+@{b}
+IECCmd
+-------
+@{ub}
+@{b}Format:@{ub}        IECCmd <command> [device]
+@{b}Template:@{ub}      COMMAND/A,DEVICE/N
+@{b}Purpose@{ub}        To send a command string to the 1541 Drive
+@{b}Specification:@{ub} IECCmd  is  used  to  issue a command to the  1541
+Drive  Unit through the Command Channel (15).  Commands must be in standard
+1541  format  and  UPPERCASE.   If  you use special characters as space ( ),
+equals  (=), plus (+) and other, you must enclose the entire command string
+within  double  quotes.   [device] is the ID number (usually 8) of the 1541
+drive  connected  to  the  Amiga.   If  no device is given, IECCmd send the
+command to the drive unit 8. A list of useful @{"1541 Commands" link
+1541CMD} is included.
+
+
+
+@{b}Examples:@{ub}
+
+   1> IECCmd I
+
+Initializes disk driver 8 to power up condition. A disk must be inserted.
+
+   1> IECCmd "N:TEST,AA"
+
+formats the disk in the drive unit 8.  The disk name will be "TEST" and the
+DIskID AA.
+
+   1> IECCmd "S0:PROVA" 9
+
+erases files PROVA, from disk in drive unit 9
+
+@{b}Be careful using commands. IECCmd asks no confirm.@{ub}
+
+
+-----------------------------------------------
+Using Commodore Basic 2.0, this is the same of:
+
+OPEN 15,<device>,15,"<command>" : CLOSE 15
+-----------------------------------------------
+
+@endnode
+
+@node 1541CMD "THE 1541 COMMANDS QUICK REFERENCE"
+@{b}
+1541 Commands
+-------------
+@{ub}
+I @{"Initialize" link CMD_I} Initializes disk driver to power up condition
+N @{"New       " link CMD_N} Formats new disk or re-formats used one
+S @{"Scratch   " link CMD_S} Erase a file or files from the disk
+C @{"Copy      " link CMD_C} Duplicate an existing file
+R @{"Rename    " link CMD_R} Change the name of existing file
+V @{"Validate  " link CMD_V} Removes wasted spaces on disk
+
+@endnode
+
+
+@node CMD_I "INITIALIZE"
+@{b}
+Initialize
+----------
+@{ub}
+	PURPOSE: Initializes disk driver to power up condition.
+
+	FORMAT: IECCmd "I"
+
+Sometimes, an error condition on the disk will prevent you from performing
+an operation. INITIALIZE returns the disk drive to its original state when
+power is turned on.
+
+@endnode
+
+@node CMD_N "NEW"
+@{b}
+New
+---
+@{ub}
+	PURPOSE: Formats new disk or re-formats used one.
+
+	FORMAT: IECCmd "N0: disk name, id#"
+
+This command formats a new disk. It is also useful to erase an already-
+formatted disk, as it erases the entire disk, puts timing and block markers on,
+and creates the directory and the BAM. The disk name is for user convenience
+while the id# is a 2 digit alphanumeric identifier that is placed in the
+directory a every block on the disk. If you switch disks while writing data,
+the drive will know by checking the id#.
+
+	EXAMPLES: IECCmd "N0: TEST DISK, A1"
+
+		  IECCmd "N0: MY DISK, MY"
+
+If the disk needs erasing but not reformatting, the same 
+command is used, but leave out the id#.
+
+	EXAMPLE:  IECCmd "N0: NEW INFO"
+
+@endnode
+
+@node CMD_S "SCRATCH"
+@{b}
+Scratch
+-------
+@{ub}
+	PURPOSE: Erase a file or files from the disk.
+
+	FORMAT:	 IECCmd "S0: filename"
+
+This command erases one or more files from the disk, making room for new or
+longer files. Groups of files can be erased at one time by naming all of them
+in one scratch command.
+
+EXAMPLES:	IECCmd "S0: TEXT" (erases file called TEXT)
+
+		IECCmd "S0: TEXT, 0:TEST, 0: MUSIC"
+		(erases files TEXT, TEST and MUSIC)
+
+@endnode
+
+@node CMD_C "COPY"
+@{b}
+Copy
+----
+@{ub}
+	PURPOSE: Duplicate an existing file.
+
+	FORMAT:	IECCmd "C0:newfilename=0: oldfilename"
+
+COPY allows you to make a copy of any program or file on the disk. The new
+file's name must be different from the old one. COPY can also combine up to
+four files into one new one.
+
+	EXAMPLES: IECCmd "C0:BACKUP=0: ORIGINAL"
+
+		  IECCmd "C0: NEWFILE=0: OLD1,0: OLD2,0"
+			 (combines OLD1 and OLD2 into NEWFILE)
+
+@endnode
+
+@node CMD_R "RENAME"
+@{b}
+Rename
+------
+@{ub}
+	PURPOSE: Change Che name of existing file.
+
+	FORMAT:	IECCmd "R0: newname=0: oldname"
+
+This command lets you change the name of a file once it's in the disk
+directory. RENAME will not work on any files that are currently open.
+
+	EXAMPLE: IECCmd "R0:GOODNAME=0: DUMBNAME"
+
+@endnode
+
+@node CMD_V "VALIDATE"
+@{b}
+Validate
+--------
+@{ub}
+	PURPOSE: Removes wasted spaces on disk.
+
+	FORMAT: IECCmd "V0:"
+
+After a disk has had many files saved and erased, small gaps in the data begin
+to accumulate and waste memory space on the disk. VALIDATE reorganizes your
+disk so you can get the most memory from the available space. Also, this
+command removes files that were OPENed but never properly closed.
+
+CAUTION! VALIDATE erases random files. If your disk contains
+random files, DO NOT use this command!
+
+@endnode
+
+
+
+@node IECDir "HOW TO DISPLAY A DIRECTORY"
+@{b}
+IECDir
+-------
+@{ub}
+@{b}Format:@{ub}        IECDir [device]
+@{b}Template:@{ub}      DEVICE/N
+@{b}Purpose@{ub}        To display the list of files in a disk
+@{b}Specification:@{ub} IECDir displays the file names contained in the
+current  disk  inserted  in the drive.  If no device is given, IECDir
+displays the directory of the disk inserted in drive unit 8.
+
+
+@{b}Examples:@{ub}
+
+   1> IECDir
+
+Displays a list of files contained in the disk inserted in drive unit 8
+
+   1> IECDir 9
+
+Displays a list of files contained in the disk inserted in drive unit 9
+
+
+-----------------------------------------------
+Using Commodore Basic 2.0, this is the same of:
+
+LOAD "$",<device>
+
+LIST
+-----------------------------------------------
+
+@endnode
+
+@node IECLoad "HOW TO COPY A FILE FROM 1541 TO AMIGADOS"
+@{b}
+IECLoad
+-------
+@{ub}
+@{b}Format:@{ub}        IECLoad <name> [ [TO] <newname>] [device]
+@{b}Template:@{ub}      FROM/A,TO,DEVICE/N
+@{b}Purpose@{ub}        To copy a file from 1541 to AmigaDos
+@{b}Specification:@{ub} IECLoad copies the file specified with the <name>
+argument  from  the  disk  put  in  the  1541 drive to the current AmigaDos
+directory.  If <newname> is given, IECLoad copies the file to the AmigaDos
+file  and  directory specified.  If no device is given, IECLoad copies the
+file  from  drive unit 8.  On 1541 disks, filenames are up to 16 characters
+long and case-sensitive (and usually they are uppercase).
+
+
+
+@{b}Examples:@{ub}
+
+   1> IECLoad TEST
+
+copies  file  "TEST"  from  disk  inserted  in 1541 drive unit 8 to current
+AmigaDos directory.
+
+   1> IECLoad TEST RAM:test.c64 9
+
+copies  file  "TEST"  from  disk  inserted in 1541 drive unit 9 to AmigaDos
+directory RAM:  using the name "test.c64".
+
+@endnode
+
+@node IECReadD64 "HOW TO READ A 1541 DISK IMAGE"
+@{b}
+IECReadD64
+-----------
+@{ub}
+@{b}Format:@{ub}        IECReadD64 <filename> [device]
+@{b}Template:@{ub}      TO/A,DEVICE/N
+@{b}Purpose@{ub}        To create a @{"D64" link D64} image from the disk in the 1541 drive
+@{b}Specification:@{ub} IECReadD64 creates a disk image in @{"D64" link D64} format
+from  the  disk  inserted  in  the  drive  1541.   If  no  device is given,
+IECReadD64 generate the image from drive unit 8.
+
+@{b}Examples:@{ub}
+
+   1> IECReadD64 test.D64
+
+Create a @{"D64" link D64} image named "test.D64" from the disk inserted in
+drive unit 8
+
+   1> IECReadD64 test.D64 9
+
+Create a @{"D64" link D64} image named "test.D64" from the disk inserted in
+drive unit 9
+
+
+@endnode
+
+
+@node IECSave "HOW TO COPY A FILE FROM AMIGADOS TO 1541"
+@{b}
+IECSave
+-------
+@{ub}
+@{b}Format:@{ub}        IECSave <name> [ [TO] <newname>] [device]
+@{b}Template:@{ub}      FROM/A,TO,DEVICE/N
+@{b}Purpose@{ub}        To copy a file from AmigaDos to 1541
+@{b}Specification:@{ub} IECSave copies the file specified with the <name>
+argument  from AmigaDos to the disk put in the 1541 drive.  If <newname> is
+given,  IECSave  copies the file to the 1541 using the name specified.  If
+no device is given, IECSave copies the file to drive unit 8.
+
+
+@{b}Examples:@{ub}
+
+   1> IECSave TEST
+
+copies file "TEST" from current AmigaDos directory to disk inserted in 1541
+drive 8.
+
+   1> IECSave ram:test.c64 TEST 9
+
+copies file "test.c64" from AmigaDos directory RAM to disk inserted in 1541
+drive unit 9 using the name "TEST".
+
+   1> IECSave ram:test.c64 @0:TEST
+
+Overwrite file "TEST". You need to put "@0:" before the filename, to
+overwrite files on the 1541. Don't use @: (without the 0) due to an odd bug
+of some Commodore Drives.
+
+@endnode
+
+@node IECStatus "HOW TO DISPLAY THE STATUS OF THE DRIVE 1541"
+@{b}
+IECStatus
+----------
+@{ub}
+@{b}Format:@{ub}        IECStatus [device]
+@{b}Template:@{ub}      DEVICE/N
+@{b}Purpose@{ub}        To display the status of the drive 1541.
+@{b}Specification:@{ub} IECStatus displays the status message of the 1541
+drive.   If  no device is given, IECStatus display the status of the drive
+unit 8.
+
+
+@{b}Examples:@{ub}
+
+   1> IECStatus
+
+displays the status message of the drive unit 8
+
+   1> IECStatus 9
+
+displays the status message of the drive unit 9
+
+@endnode
+
+@node IECUnit "HOW TO CHANGE THE DRIVE UNIT NUMBER"
+@{b}
+IECUnit
+-------
+@{ub}
+@{b}Format:@{ub}        IECUnit <newdevice> [device]
+@{b}Template:@{ub}      NEWDEVICE/N/A, DEVICE/N
+@{b}Purpose@{ub}        To change the drive Device Number
+@{b}Specification:@{ub}  All  drives  need  an unique device numbers so the
+computer  can  identify  which  one  you  want to transfer data to or from.
+Normally  the 1541 drive is preset inside the hardware with a device number
+of 8, drive number 0.  The disk knows its own device number by looking at a
+hardware  jumper  on  the circuit board and writing the number based on the
+jumper into a section of its RAM. Using IECUnit you can change the
+DeviceNumber.
+First, turn on one drive and change its device number, then the next drive,
+until all the drives are on.
+
+
+@{b}Examples:@{ub}
+
+   1> IECDir 9
+
+Changes the device number of drive 8 to 9
+
+   1> IECUnit 10 9
+
+Changes the device number of drive 9 to 10
+
+
+
+-----------------------------------------------
+Using Commodore Basic 2.0, this is the same of:
+
+OPEN 15,<device>,15
+PRINT15,"M-W:"CHR$(119)CHR$(0)CHR$(2)CHR$(<newdevice>+32)CHR$(<newdevice>+64)
+CLOSE 15
+
+-----------------------------------------------
+
+@endnode
+
+
+@node IECWriteD64 "HOW TO WRITE A D64 FILE TO A 1541 DISK"
+@{b}
+IECWriteD64
+-------
+@{ub}
+@{b}Format:@{ub}        IECWriteD64 <filename> [device]
+@{b}Template:@{ub}      FROM/A,DEVICE/N
+@{b}Purpose@{ub}        To write a @{"D64" link D64} file to the disk in the 1541 drive
+@{b}Specification:@{ub} IECWriteD64 writes a disk image in @{"D64" link D64} format
+to  the  disk  inserted  in  the 1541 drive.  The disk have to be formatted
+before.   If  no  device is given, IECWriteD64 writes the disk image to the
+drive unit 8.  Writing a disk image, you erase all the previous contents of
+the disk.
+
+@{b}Examples:@{ub}
+
+   1> IECWriteD64 test.D64
+
+Writes the @{"D64" link D64} image "test.D64" to the disk inserted in drive unit 8
+
+   1> IECWriteD64 test.D64 9
+
+Writes the @{"D64" link D64} image "test.D64" to the disk inserted in drive unit 9
+
+@endnode
+
+@node D64 "D64? WHAT IS THIS?"
+@{b}
+WHAT ARE .d64 DISK IMAGES?
+--------------------------
+@{ub}
+.d64 files are the sector-by-sector contents of a Commodore 1541 formatted
+disk.
+These files are commonly used by PeeCee C-64 emulators to store C-64 files,
+and to xfer 1541 disks into a convenient method of storage for use by the
+emulators. The Amiga C64 Emulator "Frodo" by Christian Bauer supports D64
+images.
+
+@endnode
+
+
+@node Cable "MY IRON-SOLDER IS HOT!"
+@{b}
+THE CABLE
+---------
+
+***IMPORTANT***
+
+If  you  already own a "Frodo IEC Cable", you can use it!  Just install the
+special "libs/frodo/iec.library" version!
+@{ub}
+
+To build a cable to connect the Amiga to a Commodore 1541 is fairly simple.
+It  connects  the parallel port of the Amiga with the round 6-pin connector
+on the drive 1541.
+
+Simply  connect  the  pins  2,  3,  4, 5 and 6 of the serial 1541 connector
+to  the  pins  20,  5,  6,  7,  and  16  of  the  parallel  Amiga connector
+respectively. Don't forget to connect the pin 8 to the pin 6 and the pin 9
+to the pin 7, both on the Parallel Amiga connector side. That's all!
+@{b}No electronic components are required!@{ub}
+
+If  you are not skilled in building cables, you can @{"buy" link BuyCable} it directly from
+the author.
+
+
+ Serial 1541             Parallel Amiga
+male connector           male connector
+  6-pin DIN               25-pin DSUB
+
+
+     2_______________________20
+             GND
+     3_______________________5
+             ATN
+     4_______________________6
+             CLK         |
+                         |___8
+
+     5_______________________7
+             DATA        |
+                         |___9
+
+     6_______________________16
+             RESET
+
+
+@{b}Important  note:@{ub}@{i}   If  you  plan to build and connect such a cable, please
+remember  that  you  do  it  on  your  own  risk.   I  will  not  take  any
+responsibility  if  there  is  blue  smoke coming out from the back of your
+computer!@{ui}
+
+
+@endnode
+
+@node Developers "ARE YOU A PROGRAMMER? I'M A PROGRAMMER!"
+@{b}
+THE IEC.LIBRARY
+---------------
+@{ub}
+Easy1541   is  the  first  Amiga<->1541  interface  including  support  for
+developers.   A special iec.library allows you to write your own program to
+manage the Commodore 1541 Drive.  The iec.library provides the interface to
+the  1541  for  C,  assembly,  and  other  programming languages.  It is an
+Exec-style  library  that  -  like all shared libraries - must be jumped to
+with A6 holding the pointer to the base address of the library.
+You   can  find  the  description  of  all  the  public  functions  in  the
+"dev/iec.guide" file of your Easy1541 directory.
+The iec.library follows the CBM Kernal calling convention. It reproduces
+the  same  serial bus functions of the Kernal ROM you can find in the 8-bit
+Commodore computers.
+
+This make simple to apply old 8-bit Commodore procedures or routines to the
+Amiga.  Isn't this Easy1541?
+
+All the provided utilities of the @{" Easy1541 Toolkit" link Toolkit} use the iec.library, and
+the C sources are available in the "dev/examples/" directory.
+
+@{b}Please refer to the iec.library Autodocs for further information.@{ub}
+
+@endnode
+
+@node History "COMMODORE... THE NAME BECAME HISTORY!"
+
+@{b}1.1.1 (15-Oct-1996)@{ub}
+Another annoying maintenance upgrade... "IECWriteD64" 1.1 didn't work
+properly. Fixed now.
+
+
+@{b}1.1 (06-Oct-1996)@{ub}
+Fixed  a little bug in the timer routine.  Now Easy1541 works fine on 68000
+based  machines  (A600,  A500...)  and  doesn't  generate  "Enforcer  Hits"
+anymore.
+
+Now,  the  CIA  timer is released each time a call to CloseLibrary() occur.
+This improve compatibility with other programs like "PlaySid".
+
+Two tasks can't share iec.library anymore.  This produced odd bugs.
+
+Toolkit commands "IECReadD64", "IECWriteD64" and "IECDir" now handle Ctrl+C
+break sequence better (they didn't closed the iec.library).
+
+
+@{b}1.0.1 (17-Sep-1996)@{ub}
+This is only a maintenance upgrade.  I forgot to put the IECLoad command in
+the  previous release and now it is finally available.  I improved the docs
+adding a 1541 Command list too.
+
+
+@{b}1.0 (26-Aug-1996)@{ub}
+This is the first Easy1541 release...   I started this project in the early
+1995,  but  I  met  with  several  difficulties sending data from the Amiga
+Parallel  port  to the 1541.  Finally, on June 1996, a full working version
+of  my  Amiga->1541  code  was  on  my Hard Disk, so I started to write the
+library and to create the Easy1541 package.
+
+
+@{i}
+Expect great things from the future...
+@{ui}
+@endnode
+
+@node  Author "WHO ARE YOU? - SAID THE CLERK OF THE COMMODORE HQ"
+@{b}
+THE AUTHOR
+----------
+@{ub}
+Who am I?
+
+My  name is Fabrizio Farenga, and I'm a loyal Commodore user and programmer
+since  years...   I started using a little Commodore 16, and I proceeded in
+the  yers  buying  a  Commodore  64, a Commodore Amiga 500, and a Commodore
+Amiga 4000.
+
+Currently  I'm  a  Commodore  computers  collector, and I own several 8-bit
+models,  pheriperals  and  other  Commodore  things.  If you are interested
+visit my internet home page.  If you have old Commodore things or documents
+about Commodore, and you want to trade or sell them, please contact me!
+
+I'm  Technical  Editor  of the Italian "Amiga Magazine", Amiga Editor of "K
+Magazine"  and  Director  of  Holodream  Software  (r), but mainly, I'm the
+Software  Developer  Manager  of  the  Grapho  Marketing  &  Communications
+company.
+
+
+On  the  1992  I  written  "Top Wrestling" (Amiga) for the Italian Software
+House  "Genias",  and  in  1993  "F17  Challenge"  (Amiga and CD32) for the
+British  Team  17  Software.
+
+I  like  very  much code on old Commodore machines.  I think this keep them
+alive...   If  nobody  write  new  code  for a computer it is dead!  I just
+bought  a  Commodore Vic 20 Reference Programmers Guide and an 3K expansion
+cartridge.  So I'll start to write code for the Commodore Vic 20 too.
+
+
+Future  plans include to write a turbo for Amiga<->1541 communications, and
+a  full AmigaDOS device to use the 1541 as a standard Amiga diskdrive.  I'd
+like to connect a Commodore Datassette(tm) to the Amiga too.
+
+
+
+If you like to contact me, to exchange ideas, to report bugs, or just for
+fun, please use one of the following address:
+@{b}
+email          - f.farenga@agora.stm.it
+
+World Wide Web - http://www.agora.stm.it/F.Farenga
+
+Snail Mail     - Fabrizio Farenga
+                 Via C. De Fabritiis 55
+                 00136 Roma
+                 ITALY
+
+Fax            - +39/6/6869648
+@{ub}
+
+If you want to buy a Easy1541 cable, @{"click here" link BuyCable}
+
+_____________________
+
+I would like to thank the following people:
+
+@{b}Christian Bauer@{ub}
+   for the many hints and good suggestions
+
+@{b}The Unknown Ready Soft Programmer@{ub}
+   for the cable and the old "A64 Transfer"
+
+@{b}Francesco Simula@{ub}
+   for the moral support during the debugging sessions and for the proof
+   reading of this document
+
+@{b}The Commodore Engineers@{ub}
+   for the Commodore 8-bit technology
+
+@{b}The following guys for bug reports and useful suggestions!@{ub}
+   Richard Smedley
+   Enrico Vidale
+
+@endnode
+
+@node BuyCable "SO, YOU ARE NOT A SKILLED TECHNICIAN?"
+@{b}
+HOW MUCH IS IT FOR A CABLE?
+---------------------------
+@{ub}
+If you don't like to build a cable yourself, I can do it for you. You'll
+have to pay only for the cable components and for the shipping.
+
+The cable is not expensive, and as soon as I'll receive your money, I'll
+send the cable back to you in few days.
+
+The standard prices are the following:
+@{b}
+- 10,000 Italian lires for Italy
+- 10.00  US Dollars for Europe (except Italy)
+- 15.00  US Dollars outside Europe
+@{ub}
+@{i}@{b}Please note:@{ub}
+I DON'T MAKE MONEY SELLING CABLES. THE COSTS ABOVE COVER STRICTLY THE
+COMPONENTS AND THE SHIPPING.
+@{ui}
+
+@{b}
+HOW CAN I ORDER A CABLE?
+------------------------
+@{ub}
+The  easier  and  cheaper  method is to put the exact amount in an envelope
+(e.g.   a  $10  banknote),  together  with your full address.  Please state
+clear what Amiga system you own and that you want a Easy1541 cable.
+
+@{i}
+@{i}@{b}Note:@{ub}
+In  some  country is illegal to put money in an envelope and to mail it, so
+you  do  this at your own risk.  Put the banknote inside a folded paper, so
+nobody knows what you're sending.  @{ui}
+@{ui}
+Send money to:
+@{b}
+Fabrizio Farenga
+Via C. De Fabritiis 55
+00136 Roma
+ITALY
+@{ub}
+
+If you want to use a different way of payment, please contact me:
+
+@{b}Email: f.farenga@agora.stm.it@{ub}
+
+
+
+@endnode
+
+@node  ""
+@endnode
+
+@node  ""
+@endnode
+
+@node  ""
+@endnode
+

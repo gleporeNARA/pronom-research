@@ -1,0 +1,637 @@
+@database "C64Player V1.1 Guide" @width 80
+
+## $VER: C64Player V1.2 1997 April
+## Copyright (C) 1994-1997 Øyvind Jergan & Espen Skog
+##
+## C64Player Guide documentation
+##
+
+@node main "C64Player Documentation"
+@{b}
+
+
+                               C64Player V1.2
+
+                   © 1994-1997 Øyvind Jergan & Espen Skog
+@{ub}
+
+                       @{" Översättarnas kommentarer   " LINK "OEPIR_NU"}
+
+	               @{" Introduktion                " link Preface}
+	               @{" Vem gjorde vad?             " link Credits}
+	               @{" Att registrera programmet   " link Registration}
+		       @{" Systemkrav                  " link Requirements}
+	               @{" Att installera programmet   " link Installation}
+		       @{" Att använda C64Player       " link Controlling}
+	               @{" Programmets utveckling      " link History}
+		       @{" Kända buggar                " link bugs}
+	               @{" Upphovsmännen               " link ContactUs}
+		       @{" Tack till...                " link Hellos}
+@endnode
+
+@node archive "Arkiv"
+@{b}
+	C64PlayerV1.2-arkivet innehåller följande filer:@{ub}
+
+
+		
+	C64PLAY-$0800.64		Replayer för C64
+	C64PLAY-$8000.64		Replayer för C64
+	C64Player.Amiga			Huvudprogrammet
+	C64Player.Amiga.info		Ikon
+	C64PlayerEnglish.Guide		Amigaguide-dokumentation
+	C64PlayerEnglish.Guide.info	Ikon
+	C64PlayerSwedish.Guide		Svensk Amigaguide	
+	C64PlayerSwedish.Guide.info	Ikon
+	Connect.IFF			Iff-bild på parallellkabeln
+	Connect.IFF.info		Ikon
+
+	Libs/playsid.library		Kopiera detta till ditt libs:-bibliotek
+	Libs/reqtools.library		Kopiera detta till ditt libs:-bibliotek
+
+@endnode
+
+@node preface "Introduktion"
+@{b}
+	Introduktion till C64Player@{ub}
+
+
+	Välkommen till det första programmet som spelar C64-musik på just
+	en C64 i det att en Amiga används för dataöverföring. Vi tycker,
+	att @{" PlaySID " link playsid} inte emulerar 6581 SID-chipet helt perfekt,
+	även om det förvisso sker väldigt bra. Vissa delar, t.ex. "Ring-
+	Modulation" och en del filtereffekter lever helt enkelt inte upp
+	till den kvalitet som skulle erhållits ur en riktig C64. Vi ville
+	kunna överföra data från Amigan att spelas på C64, och detta är
+	varför vi gjorde C64Player.
+
+ 	C64Player är @{b}shareware@{ub}, och dess syfte är att förmedla den
+	@{b}fantastiska@{ub} C64-musik som finns i omlopp, och göra det på
+	en @{b}riktig Commodore 64@{ub}. Det var nog så, att vi blev trötta
+	på folk som gick omkring och gnällde över att C64-musik var löjlig,
+	dålig och av generellt låg kvalitet; de flesta av dessa idioter
+	fick dessa fördomar genom att lyssna på Amiga-emulerad C64-musik
+	(eller ännu värre - på en PC!). Vi förlåter emellertid de okunniga,
+	för de vandrar i blindo vad nämnda musik beträffar. Nu har du
+	alltså möjlighet att lyssna och jämföra, och vi råder dig
+	strängeligen att taga detta tillfälle i akt, för C64-musik är
+	rent ut sagt otroligt bra.
+
+
+@endnode
+
+@node Requirements "Systemkrav"
+@{b}
+	Systemkrav@{ub}
+
+
+	C64Player kräver följande:
+
+      -	En Amiga med OS3.0.
+      -	En Commodore 64/128.
+      -	@{" Parallellkabel " LINK parallell}.
+      -	@{" Mjukvara       " LINK software} för båda datorerna.
+
+
+@endnode
+
+@node parallell "Parallellkabel"
+@{b}
+	Parallellkabel @{ub}
+
+
+	
+	Du måste @{" tillverka en kabel  " LINK assembling} enligt nedan:
+	
+
+	   	  AMIGA		     C64	
+           	  -----              ---
+
+		Pin-namn:      Pin    Pin-Namn:   Pin	
+	        -------------------+-----------------
+		Databit 0	2  |  PB0	   C 	
+		Databit 1	3  |  PB1	   D 	
+		Databit 2	4  |  PB2	   E 	
+		Databit 3	5  |  PB3	   F 	
+		Databit 4	6  |  PB4	   H 	
+		Databit 5	7  |  PB5	   J 	
+		Databit 6	8  |  PB6	   K 	
+		Databit 7	9  |  PB7	   L  	
+		Ground	       25  |  Ground       A 	
+	        Strobe          1  |  Flag #2      B 	
+		Busy           11  |  PA2          M 	
+	        Acknowledge    10  |  PC2          8 	 
+
+
+	 (Att kopplas till Amigans parallellport och C64ans user-port)
+@endnode
+
+@node Software "Mjukvara"
+@{b}
+	Mjukvara @{ub}
+
+	Program för både Amigan och C64an behövs. C64-programmet fungerar
+	ungefär som en server i det att det väntar på kommandon typ
+	PLAY, STOP och FAST FORWARD (etc.) från Amigan.
+
+	De behöver @{" dessa filer " link archive}.
+
+@endnode
+
+
+@node ContactUs "Kontakta oss"
+@{b}
+	Kontakta upphovsmännen av följande anledningar: @{ub}
+
+
+      -	Betalandet av shareware-avgiften.
+      - Problem med eller förbättringsförslag till programmet.
+      - Swapping av C64-prylar (musik, spel, program och demos) på Amigan.
+
+	@{" Øyvind Jergan " link oyvind}
+	@{" Espen Skog    " link espen}
+
+@endnode
+
+@node espen "Espen Skog"
+
+	Espen Skog
+	Schønings gate 44
+	0362 Oslo
+	Norge
+
+	Telefon: +47-22594555
+	IRC    : Palm
+
+@endnode
+
+@node oyvind "Øyvind Jergan"
+
+
+	Øyvind Jergan
+	Vestbygaten 56
+	2000 Lillestrøm
+	Norge
+
+	Telefon: +47-63815894
+	E-Mail : oyvindje@stud.ntnu.no
+
+
+@endnode
+
+@node stian "Stian Olsen"
+
+	Stian Olsen
+	Orrelia 2
+	1440 Drøbak
+	Norge
+
+	Tel: +47-64 931591
+
+	E-Mail: stianol@ifi.uio.no
+
+	Sysop på @{" SilverHawk " link silverhawk} BBS
+
+@endnode
+
+@node silverhawk "SilverHawk"
+
+     _________  __   _  ________/\_____  __/\ _____    _._/\ __. /\__
+    /  _____/| / |__/ \/  _____~\____  \/ |  \\___ \  / ||  \  |/   /
+    \___~\|  |/  | ~\     \/ _/  \  / _/  |   \/ /  \/  || _/  /  _/
+   _/  /  \  /   |   \    /  \___/  \ ~\     _/  \   \  /\ ~\  \  \BBS
+   \  ____/__\_______/___/\_____~\__|\  \_|__\___/\___\___  /__|\  \_
+  ~~\/~~~~~~~~~~~~~~~~~~~~~~~~~~\/~~~~\__/Tactel~~~~~~~~~~\/~~~~~\__/~~
+
+                      * Många aktiva konferenser.
+                      * Många nya filer.
+                      * Aktiva C64-konferenser.
+                      * Aktiv schackkonferens.
+                      * The Saga och RPG vistas här.
+                      * Aktiv Diplomacy-konferens. 
+
+           !BBS Körs på (A)BBS av Geir Inge Høsteng!
+
+                       SysOp är @{b}Stian Olsen@{ub}
+                       CoSys är @{b}Espen Skog@{ub}
+
+         !Ring @{b}64 93 41 00@{ub} eller @{b}64 93 41 80@{ub} och få ett
+		             finger med i spelet!
+
+                            En Banana Dezign-bas
+
+
+@endnode
+
+@node assembling "Det att få ihop hårdvaran"
+@{b}
+	Att sätta ihop hårdvaran@{ub}
+
+	Att sätta ihop hårdvaran är faktiskt ganska lätt. Se till att 
+	skaffa två kontakter och en sladd med tolv inre ledare. Köp en
+	25Pin D-SUB han-kontakt och en "user-port"-kontakt till C64:an.
+
+	Att tillverka kabeln är en process som kan tyckas svår i teorin,
+	men som är enkel när man väl kommer till skott. Se bara till så att
+	du har lött rätt, för kortslutningar kan slå ut I/O-portarna på
+	både Amigan och C64:an (i värsta fall kan båda datorerna gå sönder
+	helt, vilket kan bli en dyr erfarenhet).
+
+	När du anser att kabeln är funktionsduglig är det bara att koppla
+	samman de två datorerna.
+
+@ENDNODE
+
+@node installation "Att installera programmet"
+@{b}
+	Att installera C64Player@{ub}
+
+
+      -	Förvissa dig om att båda datorerna är avstängda och anslut din
+	@{" parallellkabel " LINK parallell}.
+
+      -	Skapa ett HD-bibliotek kallat C64Player och kopiera alla @{" filer " link archive}
+	dit. Försäkra dig om att du har reqtools.library och playsid.library
+	i ditt libs-bibliotek (dessa filer följer även med arkivet).
+
+      -	Assigna C64Player: till det aktuella biblioteket. Detta kan se ut
+	så här: assign C64Player: DH1:Programs/OepirRisti/C64Player.
+
+      - Kopiera filen C64PLAY-$0800.64 till en 5½ C64-diskett. Om du har
+	problem med detta kan du skicka oss en dylik diskett så fixar vi
+	det. Se då till att även bifoga oanvända frimärken och shareware-
+	avgiften.
+
+@endnode
+
+@node Controlling "Att använda programmet"
+@{b}
+	Att använda C64Player@{ub}
+
+@{b}
+	Mallen för C64Player:@{ub}
+
+	NAME=FILENAME/K,OUTPUTC64/S
+
+	NAME		Namnet på musikfilen du vill spela.
+
+	OUTPUTC64	Om denna switch är påslagen kommer cycle-knappen
+		        Amiga / C64 vara i C64-läge när programmet startas.
+
+@{b}
+	Att komma igång@{ub}
+
+      -	Börja med att @{" installera " link installation} programmet på ett
+	korrekt sätt.
+ 
+      - Ladda filen C64PLAY-$0800.64 på C64an. Skriv run [cr], eller
+	sys2080 [cr] ($0820).
+
+      - Starta C64Player.Amiga på din Amiga. Du kan använda en musikfils
+	namn som argument. Om detta inte görs, dyker en filrequester upp.
+
+	(Musiken börjar nu spelas på Amigan.)
+
+      - Sätt cycleknappen "Amiga/CBM64" i CBM64-läge.
+
+      - Välj en ny musikfil med "Open"-knappen.
+
+	(Musiken skall nu börja spelas på C64an.)
+
+@{b}
+	Här är de valmöjligheter menyn erbjuder i C64Player: @{ub}
+
+      -	"Open" öppnar en requester så att du kan välja musikfil.
+
+      -	"About" öppnar fönster med information.
+
+      -	"Quit" avslutar programmet på Amigan men inte på C64an.
+
+      -	"Always load music". När detta läge är aktiverat kommer programmet
+	ladda och överföra dåvarande musik varje gång du trycker på "Play".
+	Denna funktion inkluderades därför att vissa låtar tidigare inte
+	fungerade på ett tillfredsställande sätt om du spelade fler
+	"del-låtar" i följd utan att ladda om filen efter varje.
+
+      -	"Stop music on quit". När detta läge är aktiverat kommer programmet
+	skicka en stoppsignal till C64an (vilket motsvaras av att trycka
+	på stopp-knappen) när programmet avslutas.
+
+
+@{b}
+	Här är de knappar som finns i C64Player: @{ub}
+
+      -	Precis som i PlaySID kan du se NAME (namn), AUTHOR (kompositör(er))
+	och COPYRIGHT för aktuell låt. Vi har emellertid lagt till en helt
+	ny rad, nämligen RIPPER (d.v.s. vem som rippat låten).
+
+      - "RIPPER=Øyvind Jergan & Espen Skog" är vad vi lägger till i alla de
+	låtar vi rippar. Detta kommer du se just när du spelar låtar som vi
+	har rippat och eller överfört.
+
+      -	Med TRACK-alterneraren kan du spela den "del-låt" du vill
+	(förutsatt, givetvis, att låten består av dylika; den engelska
+	termen för detta är "multi-tune music").
+
+      -	Statusfönstret visar "SENDING", "PLAYING", "STOPPED"
+	"FFORWARD" eller "PLAYER" beroende på vad av detta som just sker.
+	(När PLAYER visas, överförs en ny replayer till C64an.)
+
+      -	"OPEN" öppnar en requester från vilken du kan välja musikfil.
+
+      -	"PREV" spelar föregående del-låt i en multitune-musikfil.
+
+      -	"PLAY" återupptar spelandet efter det att du tryckt "STOP".
+
+      -	"FF" snabbspolar låten.
+
+      -	"NEXT" spelar nästa del-låt i en multitune-musikfil.
+
+      -	"STOP" avslutar uppspelandet.
+
+      - "Amiga/CBM64" cycle-knappen:
+	Amiga: Musiken emuleras via playsid.library på Amigan.
+	CBM64: Musiken skickas till C64an och spelas där.
+
+      - Den sista textknappen visar nuvarande startläge i minnet för
+	aktuell replayer.
+
+@{b}
+	När du använder C64Player kan C64an krascha @{ub}
+
+	För användaren ser det ut som programmet dyker. Skärmen kan fyllas
+	av förbryllande ASCII och musiken upphör (eller startar inte ens).
+		
+	Anledningen kan vara en av följande:
+
+      - Fel i musiken, inläsningen, initialiseringen eller play-adressen.
+
+      - Fel på parallellöverföringen av musiken.
+
+      - Musiken använder interrupts, vilket kan leda till oönskade
+        bieffketer (värden kan sättas till $01 med förödande resultat).
+
+      -	Musiken flyttar data utanför de tillåtna ramarna [inläsningsadress,
+        slutadress]. Många playsid-låtar gör just detta för att inkludera
+	del-låtar som upptar samma minnesadress i samma fil. När data då
+	flyttas kan replayers överskrivas.
+
+	Vad anledningen än är, gör följande för att få det hela på fötter
+	igen:
+
+      - Resetta din C64.
+
+      - Ladda lämplig replayer (disk) till C64an, motsvarande den som
+	sist var specificerad i textgadgeten i Amigaprogrammet.
+	Om det står "$0800", ladda C64-$0800.64 etc.
+
+      - Om Amiga-programmet visar "SENDING" eller "PLAYER" som rådande
+	status måste du först tömma din parallellbuffer. Detta gör du
+	genom att starta en rutin i replayern:
+
+	Ta den rådande replayer-inläsningsadressen och addera $23 (35).
+	(Om adressen är $0800 (2048) kommer du alltså få $0823. (2083)
+
+	Skriv sys [inläsningsadress+$23].
+	Resetta din C64 när Amiga-programmets status ändrats till
+	"PLAYING" (tar vanligtvis en sekund).
+
+      - Starta replayerprogrammet med sys [inläsningsadress+$20].
+ 
+      - Försök att spela samma låt igen. Det kan fungera, men förmodligen
+	kommer C64an krascha som förut.
+ 
+	Då kan du: 	Spela musiken på din Amiga.
+			Vända dig till oss och klaga.
+			Spela annan C64-musik.
+
+
+@endnode
+
+@node registration "Att registrera programmet"
+@{b}
+	Att registrera programmet@{ub}
+
+
+	C64Player är @{b}SHAREWARE@{ub} och inte Public Domain. Det innebär
+	att om du gillar programmet och skulle vilja ta del av kommande
+	utgåvor gör du allt bäst i att registrera. För att göra detta
+	skickar du 50 NOK (10 USD) till @{" oss " link contactus}.
+	Konceptet innebär även att du kan kopiera detta programmet så länge
+	som ALLA filer medföljer och INGENTING ändras. Det är inte
+	tillåtet att, vare sig för eget eller andras bruk, använda delar
+	av programmet i egna produktioner. Notera även att upphovsmännen
+	inte tar något som helst ansvar för vad som kan hända vid bruk,
+	lagrandet eller för den delen krasch av deras program och därtill
+	associerade filer och eller företeelser. Allt vad du gör med
+	programmet gör du alltså helt på egen risk.
+
+	Det är tillåtet att handhava det kompletta och omodifierade arkivet
+	på och via BBS:er, FTP-sites, CD Rom, medföljande tidning, på
+	diskett och i liknande sammanhang. Men andra ord är det inte bara
+	tillåtet utan även en god gärning att sprida detta program SÅ LÄNGE
+	SOM inga större summor (d.v.s. mer än vad som kan relateras till
+	kopierings- och distributionskostnader) tas ut för besväret.
+
+
+@endnode
+
+@node Credits "C64Player - vem gjorde vad?"
+@{b}
+	Vem gjorde vad? @{ub}
+
+
+	C64Player-projektet tog sin början sommaren 1994, men själva idén
+	fick vi långt tidigare. Det var emellertid inte förrän vi kom på
+	vissa lösningar som vi bestämde oss för att sätta planen i verket
+	och uppta arbetet med mjukvara och hårdvara. Resultatet har ni nu
+	i era händer, så döm själva.
+
+	Øyvind Jergan (f.d. Outlaw / WDL) skrev mjukvaran på både Amiga och
+	C64 medan Espen Skog (Znit / BDZ) stod för hårdvaran. Vi har
+	verkligen försökt tänka igenom det hela för att få det så bra som
+	möjligt, och vi är faktiskt rätt så stolta över resultatet...
+
+        @{b}Idea och design@{ub}        @{" Øyvind Jergan " link oyvind} och @{" Espen Skog " link espen}
+        @{b}Hårdvara@{ub}               @{" Espen Skog    " link espen}
+        @{b}Amigaguiden@{ub}            @{" Espen Skog    " link espen}
+                               @{" Øyvind Jergan " link oyvind}
+        @{b}Amiga-programmering@{ub}    @{" Øyvind Jergan " link oyvind}
+        @{b}CBM64-programmering@{ub}    @{" Øyvind Jergan " link oyvind}
+        @{b}Testkörning@{ub}            @{" Øyvind Jergan " link oyvind}
+                               @{" Espen Skog    " link espen}
+                               @{" Stian Olsen   " link stian}
+
+@endnode
+
+@node history "C64Players utveckling"
+@{b}
+	Programmets utveckling@{ub}
+
+@{b}
+	Version 1.2, 1997 April@{ub}
+
+      -	Lade till svensk dokumentation.
+
+	
+@{b}
+	Version 1.1@{ub}
+
+      -	Använder nu playsid.library.
+
+      -	Fixade buggar angående musikikoner i vilka det specificerade att
+	ladd- resp. initieringsadressen var 0.
+
+      - Ändrade från asl- till reqtools-requestrar.
+
+      -	Nu behöver inte längre ny replayer laddas; programmet känner
+	av när en replayer kommer skrivas över av vald musik. I detta läge
+	skickas helt enkelt en ny replayer över (givet att det finns till-
+	gängliga replayers som inte upptar det minne där musiken ligger).
+
+@{b}
+	Version 1.0@{ub}
+
+      -	Skapade GUI och C-källkod samt C64-programmet. Ingenting över sig,
+	men tillräckligt för att få det att fungera. Hårdvaran var redan
+	klar, det enda som behövdes var en till kabel för Øyvind så att
+	lämplig buggtestning kunde ske.
+
+      -	Brände in C64-programmet i EPROM då jag, @{" Espen Skog " link Espen},
+	tyckte det var segt att ladda C64-programmet varje gång jag
+	resettade datorn. Med denna EPROM-versionen behövs inga resets...
+	Nu har jag dessutom två stycken 1541or :)
+
+@endnode
+
+@node bugs "Kända buggar"
+@{b}
+	Kända buggar / brister @{ub}
+
+
+      -	Programmet fungerar inte på OS-versioner lägre än 3.0, detta främst
+	därför att gadtools.library-rutinen "GT_GetGadgetAttrs" inte finns
+	för kickstart 1.3 och 2.0.
+
+      -	FastForward-kommandot för @{" playsid " link playsid}.library
+	fungerar inte helt tillfredsställande.
+
+      -	Du kan inte specificera 0 som playaddress i en musikikon som du
+	kan i PlaySid. När 0 anges skall irq-vektorerna $0314-$0315
+	/ $fffe-$ffff, vilka sättas av initrutinen, användas som
+	"playadress". Vi känner inte direkt för att göra en rutin som
+	emulerar init-rutinen enkom för detta syfte (Irq-interruptet används
+	för den	delen redan av replayer-programmet för att kolla user-porten
+	och spela musik på samma gång).
+
+	Av samma anledning kan C64Player inte tillgodogöra sig musik som
+	använder samples. (Musiken använder ofta en loop för att spela
+	dessa samples och interruptet för anropandet av playaddressen.)
+
+      - C64Player kan inte använda sig av @{" PlaySIDs " link playsid}
+	enfilsformat. Vi rekommenderar att du @{b}inte@{ub} använder detta
+	format då det gör det mycket svårare att ändra och lista ikon-data
+	för en musikfil. Alltså hoppade vi över vi detta format.
+
+	C64Player stöder varken XPK eller Powerpackade filer som @{" PlaySID " link playsid}
+	gör.
+
+@endnode
+
+@node playsid "PlaySID"
+@{b}
+	PlaySid@{ub}
+
+
+	PlaySID, (C)1990-94 Per Håkan Sundell och  Ron Birk, var det
+	@{b}fantastiska@{ub} program som inspirerade oss att göra C64Player.
+	Tanken är att du skall med hjälp av C64Player kunna spela alla
+	låtar som PlaySid kan fast på din C64.
+
+
+@endnode
+
+@node hellos "Vi önskar framföra våra hälsningar till..."
+@{b}
+
+	...några framstående C64-kompositörer:@{ub}
+
+
+	Johannes Bjerregaard
+	Ben Daglish
+	Charles Deenen
+	Tim Follin
+	Martin Galway
+	Fred Gray
+	Matt Gray
+	Prosonix
+	Rob Hubbard
+	Chris Hülsbeck
+	Jeroen Tel
+	David Whittaker	
+
+
+@{b}
+	...några goda vänner:@{ub}
+
+
+	Bård Harald Fosse
+	Marius Kintel, Ludøls bane.
+	Thomas Leela
+	Geir Linnerud
+	Olav Mørkrid
+	Snorre Narum
+	Kjell Nordbø
+	Stian Olsen
+	Bjørn Røstøen
+	Kristian Røstøen
+	Børna Sjulstok
+	Eivind Sommersten
+
+@{b}
+	...och till sist till denna svenska guides upphovsmän:@{ub}
+
+
+	Henrik Nilsson
+	Johan Alfredsson
+
+@endnode
+
+@node OEPIR_NU "Översättarnas kommentarer"
+
+Översättarnas funderingar
+
+Vi har ingalunda försökt att skriva en komplett datormanual, utan endast
+översatt och i viss mån kompletterat den ursprungliga texten. Precis som
+i den engelska texten förutsätts en viss datorkunskap, och vi anser inte,
+att man skall ändra i en text som inte är ens egen.
+   Det primära syftet med översättningen är att förmedla C64Players manual
+till dem som av någon anledning föredrar svensk text framför engelsk.
+Vi påstår på intet sätt att vår översättning är den optimala, eller att
+våra ord är lag; vi vill bara ge en översiktstext för dem som kanske
+annars skulle avstått från att använda C64Player.
+   Vi gör inte heller anspråk på att vara perfekta; det kan mycket väl
+finnas fel och eller oklarheter i vår text. Dessa ber vi om ursäkt för.
+Emellertid anser vi att det är bättre att göra så gott man kan utifrån
+vad man har att tillgå än att inte göra någonting alls.
+   Alla dementier (disclaimers) är översatta till svenska för att ge en
+inblick i vad det hela handlar om. Vi hänvisar emellertid till de engelska
+originalen för närmare studier, då man egentligen inte skall hålla på
+och översätta dylika texter hur som helst (d.v.s. utan att författaren
+sitter bredvid). Tag alltså de svenska dementierna som en måttstock,
+och gör dina riktiga mätningar på de engelska.
+   Denna översättning har vi gjort utan att få någon som helst ersättning.
+Det är vår tro att man skall ställa upp för dem som har gjort någonting
+bra, och att man mycket väl kan göra det utan att pengar är med i leken.
+Vi hoppas nu, att vårt jobb kommer att falla er i smaken, och att ni
+mailar era eventuella synpunkter till oss. Vi är även öppna för diverse
+spännande förslag. 
+
+Askim, april 1997,
+
+Oepir Risti Translations in 1997 - Project 9
+
+Henrik "Puh" Nilsson (alvar@one.se)
+Johan "S.Duvan" Alfredsson (d95duvan@dtek.chalmers.se)
+
+@endnode

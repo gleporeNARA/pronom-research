@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<gating:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gating="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <!-- Example of a 2D Concave Polygon Gate -->
+  <gating:PolygonGate gating:id="polyGate1">
+    <gating:dimension gating:parameter="FSC"/>
+    <gating:dimension gating:parameter="SSC"/>
+    <gating:vertex>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="10"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="20"/>
+      <gating:coordinate gating:value="10"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="15"/>
+      <gating:coordinate gating:value="15"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="20"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:vertex>
+  </gating:PolygonGate>
+
+  <!-- Example of a Triangle Gate -->
+  <gating:PolygonGate gating:id="triangle">
+    <gating:dimension gating:parameter="FSC"/>
+    <gating:dimension gating:parameter="SSC"/>
+    <gating:vertex>
+      <gating:coordinate gating:value="0"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="4"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="4"/>
+      <gating:coordinate gating:value="3"/>
+    </gating:vertex>
+  </gating:PolygonGate>
+
+  <gating:PolygonGate gating:id="rectangle">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:vertex>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="160"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="350"/>
+      <gating:coordinate gating:value="160"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="350"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:vertex>
+  </gating:PolygonGate>
+
+  <gating:PolygonGate gating:id="pentagon">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:vertex>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="150"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="150"/>
+      <gating:coordinate gating:value="150"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="150"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:vertex>
+  </gating:PolygonGate>
+
+  <gating:PolygonGate gating:id="not_simple">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:vertex>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="150"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="150"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="150"/>
+      <gating:coordinate gating:value="150"/>
+    </gating:vertex>
+  </gating:PolygonGate>
+
+  <gating:PolygonGate gating:id="not_simple2">
+    <gating:dimension gating:parameter="FSC-H"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:vertex>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="150"/>
+      <gating:coordinate gating:value="50"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="150"/>
+      <gating:coordinate gating:value="150"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="50"/>
+      <gating:coordinate gating:value="150"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:vertex>
+  </gating:PolygonGate>
+
+
+</gating:Gating-ML>

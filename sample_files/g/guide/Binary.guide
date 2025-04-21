@@ -1,0 +1,171 @@
+@Database "AmigaFlight Binary Coded Decimal Instructions"
+@$VER: AmigaFlight® Binary Guide 1.2 (17.02.94)
+@Author Andrew Duffy & Chris Morris
+@(c) 1992-1994, XCNT Productions
+
+@Index "AmigaFlight:Help/Assembly/Assembly.guide/AssemblyIndex"}
+
+@Tab=8
+
+@Node Main "AmigaFlight® Help: Binary Coded Decimal Instructions"
+@Toc "AmigaFlight:Help/Assembly/Assembly.guide/InstructSet"
+Binary Coded Decimal Instructions
+=================================
+
+There are  three operations on numbers in BCD, each of which  operates on a
+byte only (two decimal digits) and incorporate the extend flag:
+
+
+	@{"ABCD            " LINK "ABCD"}  Add Decimal with Extend
+	@{"NBCD            " LINK "NBCD"}  Negate Decimal with Extend
+	@{"SBCD            " LINK "SBCD"}  Subtract Decimal with Extend
+@EndNode         
+
+@Node ABCD "AmigaFlight® Help: Add Decimal with Extend"
+ABCD	Add Decimal with Extend
+===============================
+
+	Add  the  source  operand to the  destination operand using Binary
+	Coded   Decimal   (BCD)   arithmetic.  Store  the  result  in  the
+	destination operand.
+
+	Destn + Source + X  -> Destn
+
+
+Assembler Syntax
+----------------
+	ABCD	Dy,Dx
+	ABCD	-(Ay),-(Ax)
+
+
+Data Size
+---------
+	Byte
+
+
+Status Flags
+------------
+	N  Undefined
+	Z  Clear if result non-zero else unchanged
+	V  Undefined
+	C  Set if carry (decimal) else clear
+	X  Set same as carry
+
+
+Instruction Size and Cycles to Execute
+--------------------------------------
+			#	p
+	Dy,Dx		2	6
+	-(Ay),-(Ax)	2	18
+
+	# = no. of program bytes
+	p = no. of instruction clock periods
+@EndNode
+
+@Node NBCD "AmigaFlight® Help: Negate Decimal with Extend"
+NBCD	Negate Decimal with Extend
+==================================
+
+	Subtract the destination operand and the  source  operand  and the
+	extend bit from zero, and store the result back in the destination
+	location. This produces a tens complement if  the extend bit is 0,
+	a nines complement if it is set. This is a byte operation only.
+
+	0 - Destn - X -> Destn
+
+
+Assembler Syntax
+----------------
+	NBCD	<ea>
+
+	<ea> - data alterable
+
+
+Addressing Modes
+----------------
+	Mode				     Source  Destination
+	
+	Data Register Direct			-	*
+	Address Register Direct			-	-
+	Address Register Indirect		-	*
+	Postincrement Register Indirect		-	*
+	Predecrement Register Indirect		-	*
+	Register Indirect with Offset		-	*
+	Register Indirect with Index		-	*
+	Absolute Short				-	*
+	Absolute Long				-	*
+	P.C. Relative with Offset		-	-
+	P.C. Relative with Index		-	-
+	Immediate				-	-
+
+
+Data Size
+---------
+	Byte
+
+
+Status Flags
+------------
+	N  Undefined
+	Z  Cleared if result non-zero, else unchanged
+	V  Undefined
+	C  Set if borrow (decimal), else cleared
+	X  Set same as carry bit
+
+
+Instruction Size and Cycles to Execute
+--------------------------------------
+	<ea>		#	p  
+	Dn		2	6  
+	(An)		2	12 
+	(An)+		2	12 
+	-(An)		2	14 
+	d16(An)		4	16 
+	d8(An,Ri)	4	18 
+	Abs short	4	16 
+	Abs long	6	20 
+
+	# = no. of program bytes
+	p = no. of instruction clock periods
+@EndNode
+
+@Node SBCD "AmigaFlight® Help: Subtract Decimal with Extend"
+SBCD	Subtract Decimal with Extend
+====================================
+
+	Subtract the  source  operand  from the destination  operand using
+	binary  coded  decimal  (BCD) arithmetic. Store the  result in the
+	destination operand.
+
+	Destn - Source - X  -> Destn
+
+
+Assembler Syntax
+----------------
+	SBCD	Dy,Dx
+	SBCD	-(Ay),-(Ax)
+
+
+Data Size
+---------
+	Byte
+
+
+Status Flags
+------------
+	N  Undefined
+	Z  Clear if result <> 0 else unchanged
+	V  Undefined
+	C  Set if borrow (decimal) else clear
+	X  Set same as carry
+
+
+Instruction Size and Cycles to Execute
+--------------------------------------
+			#	p
+	Dy,Dx		2	6
+	-(Ay),-(Ax)	2	18
+
+	# = no. of program bytes
+	p = no. of instruction clock periods
+@Endnode

@@ -1,0 +1,178 @@
+@database PcSID2PlaySID.guide
+@master PcSID2PlaySID.guide
+@$VER:  1.0i
+@author "László Török"
+@(c) "1995"
+
+@node "Main" "PcSid2Playsid Main"
+
+                          PcSID2PlaySID converter
+
+
+                           @{"   What's this?  " link "whats" 0}
+                           @{"  Requirements   " link "Requirements" 0}
+                           @{"     Features    " link "Features" 0}
+                           @{" Notes and Hints " link "Notes and Hints" 0}
+                           @{"   Who did it?   " link "Author" 0}
+                           @{"      To do      " link "To do" 0}
+                           @{"     History     " link "History" 9999}
+                           @{"     Thanks      " link "thanks" 0}
+                           @{"   Legal Stuff   " link "legal" 0}
+
+@endnode
+
+@node "Requirements" "Requirements"
+
+An Amiga computer with 150 kb of free memory.
+Some IBM PC format sid songs.
+PlaySID or Hippoplayer (or another sid player) if you want try the converted
+sounds..
+
+@endnode
+
+
+
+
+@node "whats" "What's this?"
+
+Now on IBM PC have a good SID player (but dont so good sound quality like 
+PlaySID on Amiga & no multitasking :), but the used file format is other, 
+which used by the PlaySID.
+
+With the help of this little program you able easy convert the sid zax to 
+PlaySID format, and dont need you to convert hunderts of files by hand :). 
+
+
+@endnode
+
+@node "Features" "Features"
+
+The program is very easy to use, simply run it from shell & give the sid 
+file name after the program name & go!
+The IBM PC's sidplayer using the following file format:
+
+myth.dat - the main song (c64 format)
+myth.sid - the player informations
+
+So, if you want convert it give the following command:
+
+PcSID2PlaySID myth
+or
+PcSID2PlaySID myth.sid
+or
+PcSID2PlaySID myth.dat
+
+And the converted file (if no errors while converting) will be save under 
+name "myth" .
+
+As you can see very easy to use it :) . 
+
+@endnode
+
+
+@node "Notes and Hints" "Notes and Hints"
+
+I converted with this program around 1000 files and almost all files
+converted sucessfull.
+
+If the program dont convert the file (saves nothing), then the file is not
+convertabe with this version.
+
+Please DONT! convert the .sid files with the commodity CrossDOS (part of
+AmigaOS from 2.1) , because the converter uses the orginal IBM PC eol 
+(End Of Line) signals during the conversion !!!
+
+The converter convert all files to "single playsid file" format, so you
+dont need to link the files with the program "SIDconv".
+
+I you want convert MUUUUCHHH files (more than 10), then you better use
+Directory OPUS (or other directory tool) & configure the converter into it.
+(I converted almost all of my files with Dopus 4)
+
+@endnode
+
+
+
+@node "Author" "Author"
+
+If you have any problems, suggestion, or GOOD sid zax (im a maniac SID zak
+collector), then try to reach me: (preferred with Email or iRC)
+
+snail mail:             László Török (Phoenix)
+                        H-8900 Zalaegerszeg 
+                        Cserfa 31
+                        Hungary
+or call:                +36 92 310 396 (only weekends)
+
+E-Mail : phoenix@master.fok.hu
+Or on the iRC: pH03N1x@iRC (#magyar, #amiga or #amigahu )
+
+You can check my homepage at: http://master.fok.hu/irc/phx.html
+
+PcSID2PlaySID was developed using ASM-ONE 1.25
+
+ps:as you can see my english knowledge is very poor, and my german knowledge
+is MUCH better, but i think the german language is not so preferred as 
+english... (but you can write me GERMAN :)
+
+@endnode
+
+@node "History" "History"
+
+1.00i (12.11.1995)      First publicrelease   
+
+@endnode
+
+@node "To do" "To do"
+Planned features for later versions:
+
+                - Online help
+                - GUI
+                - another...
+@endnode
+
+
+@node "Legal" "Legal"
+
+                      PcSID2PlaySID is SHAREWARE !!!
+
+
+ If you use it frequently please send me a donation of US$ 10 .
+
+
+Copyright
+---------
+PcSID2PlaySID is written and copyright © 1995 by László Török.  No parts
+of  this  program  may  be  altered by any means (this includes editing,
+reprogramming, crunching, resourceing etc.), except archiving.
+
+Disclaimer
+----------
+The  author  is in no way liable for any changes made to any part of the
+program,  or  consequences thereof as he is in no way liable for damages
+or loss of data directly or indirectly caused by this software.
+
+Distribution
+------------
+Neither  fees  may  be  charged nor profits may be made by distributing this
+piece  of  software.   Only a nominal fee for costs of magnetic media may be
+accepted,  the  amount  of US $5 shouldn't be exceeded for a disk containing
+PcSID2PlaySID.   CD  Manufactures  are  specifically  granted  the  right to
+include  this  program on CD collections, as long as they are for the Public
+Domain.  But the user still has to pay the Shareware fee!
+
+@endnode
+
+@node "Thanks" "Thanks"
+
+I want send thanks to the following persons:
+
+Hakan Sundell & Ron Birk  -     for the PlaySID & playsid.library
+
+K-P Koljonen              -     for Hippoplayer
+
+Psyco@master.fok.hu       -     For the harddisk support
+
+The developers of Amiga & the AmigaOS (the best personal computer & OS around)
+
+@endnode

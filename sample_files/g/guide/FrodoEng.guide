@@ -1,0 +1,694 @@
+@DATABASE "Frodo"
+@AUTHOR "Christian Bauer"
+@(C) "1994-1995 Christian Bauer"
+
+@NODE MAIN "Frodo Manual"
+
+                                   @{b}Frodo@{ub}
+                                Version 1.0
+
+                          A Commodore 64 emulator
+                       for Commodore-Amiga computers
+
+                   © Copyright 1994-1995 Christian Bauer
+                           Freely distributable
+
+
+ @{" Overview         " LINK Overview}  Why another C64 emulator?
+ @{" Installation     " LINK Installation}  How to install Frodo
+
+ @{" Start/quit       " LINK StartQuit}  There and back again
+ @{" Settings         " LINK Settings}  You only have to configure...
+ @{" Keyboard layout  " LINK Keyboard}  Where the hell is the "any" key?
+ @{" File access      " LINK Files}  A 64 with hard disk
+ @{" Printers         " LINK Printer}  Using C64 printers
+
+ @{" The SID card     " LINK SIDCard}  Where is the sound?
+ @{" The IEC cable    " LINK IECCable}  How to connect a 1541 to the Amiga
+
+ @{" Sample programs  " LINK DemoPrograms}  The included demo programs
+ @{" Tecnical info    " LINK TechnicalInfo}  Revealing the secrets
+ @{" The source       " LINK TheSource}  Use the source, Luke.
+ @{" Program messages " LINK Translation}  Translation of messages
+
+ @{" Copyright        " LINK LegalMush}  Legal mush
+ @{" Bug reports      " LINK BugReports}  Got some problems?
+ @{" Credits          " LINK Thanks}  The author wishes to thank...
+ @{" The author       " LINK EmulationWizard}  Programmer's address
+ @{" History          " LINK History}  Revision history of Frodo
+
+@ENDNODE
+
+
+@NODE Overview "Overview"
+
+  "Those days, the Third Age of Middle-earth,
+   are now long past, and the shape of all lands
+   has been changed."
+
+@{b}Frodo@{ub} is a multitasking C64 emulator for the Commodore Amiga and
+the world's first C64 emulator not bearing a "64" in its name. :-)
+
+Frodo was especially developed to reproduce the graphics of games and
+demos better than the existing emulators for the Amiga. Therefore Frodo
+needs much more computing power than other emulators. Even using a
+25MHz 68040 gives only slightly more than half of the 64's original
+speed. But on the other hand, Frodo can display raster effects
+correctly that only result in a flickering mess under "A64".
+
+An Amiga with (at least) OS2.1, a 68020 processor and 1MB RAM is
+required. Frodo can use the built-in Amiga graphic capabilities as well
+as access EGS graphics cards and the "Picasso" directly to improve
+performance.
+
+The program is not a 100% emulation (is there such?), the main missing
+things are:
+ · Only line-by-line raster effects possible
+ · No sprite-graphics priorities
+ · No sprite-background collisions
+ · Sound only over @{"SID card" LINK SIDCard}
+ · Neither Amiga printers nor RS232 usable
+
+But the next version is coming real soon now... :-)
+
+@ENDNODE
+
+
+@NODE Installation "Installation"
+
+The archive contains the following files:
+  README              - Short description
+  Frodo               - Main program
+  Frodo.info          - Its icon
+  Frodo.guide         - The german version of this manual
+  Frodo.guide.info    - Its icon
+  FrodoEng.guide      - This manual
+  FrodoEng.guide.info - Its icon
+  Frodo Prefs         - Preferences file
+  Frodo Prefs.info    - Its icon
+  Basic ROM.info      - Icon for Basic ROM
+  Kernal ROM.info     - Icon for Kernal ROM
+  Char ROM.info       - Icon for Character ROM
+  64prgs/#?           - Some sample programs
+  src/#?              - Source
+
+All you have to do is to unpack the archive somewhere onto your hard
+disk. Frodo doesn't need any assigns, but copies of the original
+C64 ROMs are required. For legal reasons these are not included in
+the archive and you have to get them elsewhere.
+
+Frodo looks for three ROM files named "Basic ROM", "Kernal ROM" and
+"Char ROM" in the same directory Frodo is in. If you already have
+ROM files for "A64 V2.0" (not the *.data files, these are not the
+real ROMs), you can simply rename them and use them with Frodo.
+Otherwise, they can be read from a real C64 by means of the following
+program:
+
+  10 OPEN 1,8,2,"BASIC ROM,S,W"
+  20 FOR X=40960 TO 49151:PRINT#1,CHR$(PEEK(X));:NEXT
+  30 CLOSE 1
+  40 OPEN 1,8,2,"KERNAL ROM,S,W"
+  50 FOR X=57344 TO 65535:PRINT#1,CHR$(PEEK(X));:NEXT
+  60 CLOSE 1
+  70 POKE 56334,0:POKE 1,51
+  80 FOR X=16384 TO 20479:POKE X,PEEK(X+36864):NEXT
+  90 POKE 1,55:POKE 56334,1
+ 100 OPEN 1,8,2,"CHAR ROM,S,W"
+ 110 FOR X=16384 TO 20479:PRINT#1,CHR$(PEEK(X));:NEXT
+ 120 CLOSE 1
+
+Unfortunately, Frodo has no function to get these files saved on a
+C64 disk to the Amiga, but you can transfer them via a null-modem
+cable or using A64 or any of the 1541-to-Amiga transfer utilities.
+(Frodo can indeed access C64 disk drives, but to start Frodo you
+must already have the ROMs %-).
+
+@ENDNODE
+
+
+@NODE StartQuit "Start/quit"
+
+After a double cklick on the icon, the window for the emulation
+@{"Settings" LINK Settings} appears.
+
+The actual emulation is started by a click on "OK". Then, at first
+a black screen should appear followed by the C64 startup message
+after some seconds. Clicking the right mouse button will quit the
+emulator at any time.
+
+@ENDNODE
+
+
+@NODE Settings "Settings"
+
+The settings window apprears directly after starting Frodo, or by
+pressing F9 in the running emulation. Sorry, the names of the gadgets
+are in german, but I'll give you the translations in brackets.
+
+"Zyklen pro Zeile (CPU)" [Cycles per line (CPU)] and "Zyklen pro Bad
+Line (CPU)" [Cycles per bad line (CPU)] control the relation of
+graphics speed and processor speed. The higher the values, the faster
+the emulated CPU, but the slower the graphics refresh speed. If a
+program is showing flickering lines or graphical flaws you should
+try to slightly alter both values.
+
+With "Zyklen pro Zeile (CIA)" [Cycles per line (CIA)] you can control
+the speed of the CIA timers. Entering a higher value increases the
+frequency of cursor blinking and key repeat. Some programs don't run
+correcly with the default value (e.g. "Ballblazer" which needs a
+value of 65).
+
+The settings for the three "Cycles" coming closest to an original PAL
+C64 are (63,23,63).
+
+"Joystick an Port 1/2" [Joystick on Port 1/2] relates to the Amiga ports.
+Normally, you will want to have port 1 switched off if you have your
+mouse connected there. With "Joysticks vertauschen" [Swap joysticks] you
+can swap the assignment of the Amiga ports to the C64 ports without
+having to plug out and in your joysticks. E.g. if a C64 game is using
+a joystick on port 1 you can simply activate "Joysticks vertauschen"
+and use a joystick in port 2 to play the game.
+
+The keyboard layout normally matches that of a german keyboard (Y and Z
+swapped). With "Amerik. Tastatur" [American keyboard] you can prevent
+the swapping (preferable, if you are not using a german keyboard).
+
+With "SID-Karte benutzen" [Use SID card] you specify if the sound
+emulation should be done over the @{"SID card" LINK SIDCard} or if there should not be any
+sound. If you don't have a SID card, you should leave this gadget
+switched off to prevent illegal memory accesses.
+
+The setting "Bildschirm-Typ" [Screen type] determines the way Frodo
+controls the graphics. The choices are "Amiga" (for using the built-in
+Amiga graphics), "EGS" (for EGS graphics cards) and "Picasso" (for the
+Picasso graphics card). After choosing the screen type, you have to
+select an appropriate resolution using "Bildschirmmodus" [Screen mode].
+The display on graphics cards is faster than the Amiga graphics.
+These settings can not be altered in the middle of the running
+emulation.
+
+Next to "Laufwerk 8" [Drive 8] to "Laufwerk 11" [Drive 11] you give the
+paths of directories (relative to the directory Frodo is in) that are
+used for the simulation of disk drives 8, 9, 10 and 11 (see @{"file access" LINK Files}).
+Clicking on the symbols to the right of the string gadgets will open a
+requester to select the directory more user friendly.
+
+The four checkmark gadgets under "IEC" control whether the belonging
+disk drive is to be accessed over the @{"IEC cable" LINK IECCable} as real C64 devices.
+If you have, for example, a real 1541 with drive number 8 connected to
+your Amiga, you have to activate the "IEC" checkmark for drive 8 to use
+the 1541 (instead of the simulated one).
+
+When the symbol "IEC für andere Geräte verwenden" [Use IEC for other
+devices] is active, Frodo uses the IEC cable also for device numbers
+4 to 7 and 12 to 15. So, if you have connected a @{"C64 printer" LINK Printer} with
+device numer 4, you should click on this gadget to use the printer.
+If this gadget is not activated, all device numbers except 8 to 11 give
+a "device not present error".
+
+By clicking "Sichern" [Save] the settings are saved on disk to be
+reloaded next time you start Frodo. "OK" will start the actual
+emulation (resp. return to it) and "Abbrechen" [Cancel] will discard
+your changes to the settings and quit Frodo (resp. discard the changes
+and return to the emulation).
+
+@ENDNODE
+
+
+@NODE Keyboard "Keyboard layout"
+
+The keyboard layout closely resembles that of a C64, but the "Y" and
+"Z" keys are normally swapped (german keyboard layout). This can be
+prevented by clicking on "Amerik. Tastatur" in the settings window.
+
+The individual rows of the keyboard are mapped as follows:
+
+<- 1 2 3 4 5 6 7 8 9 0 + - £
+    Q W E R T Z U I O P @ *
+    A S D F G H J K L : ; =
+   ^ Y X C V B N M , . /
+
+In addition, the following key are used:
+
+ ESC   - RUN/STOP
+ <-    - INS/DEL
+ Del   - CLR/HOME
+ Help  - RESTORE
+ Amiga - C=
+ F1-F8 - F1-F8
+ F9    - Opens the settings window
+ F10   - Resets the C64
+
+So the famous key combination RUN/STOP-RESTORE corresponds to ESC-Help
+on the Amiga keyboard. But you don't have to thrash the Help key the
+same way as the RESTORE key on the original C64. :-)
+
+The cursor (arrow) keys can be used as on the Amiga. I.e. "cursor up"
+corresponds to "Shift-cursor down" on the C64. The same applies to the
+function keys F2, F4, F6 and F8.
+
+@ENDNODE
+
+
+@NODE Files "File access"
+
+Frodo can simulate 1541 drives with the drive numbers 8, 9, 10 and 11
+in Amiga directories as well as access real C64 drives by means of an
+@{"IEC cable" LINK IECCable}. So you can store your C64 programs on your Amiga's hard disk
+and LOAD and SAVE them as usual from Frodo. The paths to the
+directories of the simulated drives are given in the settings window
+under "Laufwerk 8" to "Laufwerk 11".
+
+You can even load the directory with LOAD"$",8. All files marked as
+executable are displayed as "PRG", all the others as "SEQ". The file
+type "DIR" marks an Amiga subdirectory. To get into it you have to
+open the settings window and change the path for the drive, as the
+operating system of the C64 doesn't know about subdirectories.
+It is possible to use a "/" in the C64 file name to access these
+subdirectories, though (e.g. LOAD"GAMES/ELITE",8).
+
+The specification of file type and access mode in file names is not
+supported (e.g. OPEN1,8,2,"TESTFILE,S,W" doesn't work as expected).
+
+For connecting real C64 drives you need a special cable to hook them
+to your Amiga. Then you have to activate the symbol "IEC" for the
+corresponding drive number in the settings, so Frodo will know that
+this drive number belongs to a device on the IEC cable. Drives
+connected this way can be used like from the C64, but speed loaders
+are most probably not working.
+
+@ENDNODE
+
+
+@NODE Printer "Printers"
+
+Frodo can't use Amiga printers, but you can connect a C64 IEC printes
+using the @{"IEC cable" LINK IECCable} that is accessed as usual under the C64. You have
+to activate the gadget "IEC für andere Geräte verwenden" in the
+@{"settings window" LINK Settings} to use the printer.
+
+@ENDNODE
+
+
+@NODE SIDCard "The SID card"
+
+Frodo has no sound emulation over the Amiga's hardware. Instead, it
+expects a real C64 sound chip (SID) on a slot card in the Amiga.
+This card (a unique example for now) maps the SID into the address
+range starting at $a00001 (odd addresses).
+
+If you are interested in rebuilding the card, you can ask @{"me" LINK EmulationWizard} for
+the schematics. The design isn't very good, but the card does its job.
+
+@ENDNODE
+
+
+@NODE IECCable "The IEC cable"
+
+  "This is Ohm of Borg.
+   Resistance is voltage divided by electric current." :-)
+
+The best way to transfer your old C64 software to the Amiga is to
+connect a real C64 disk drive. To do this, you need a special cable
+with a small circuit that, together with Frodo's software, will
+expand your Amiga by the so-called "IEC" bus system that is used on the
+C64 for connecting disk drives and printers.
+
+If you already have such a cable for the "A64" you most probably can
+also use it with Frodo (untested). The cable described in the german
+"Amiga Magazin" issue 8/88, p.36 is not usable with Frodo as it has
+inverted output lines.
+
+Building an IEC cable is fairly simple, it connects the parallel port
+of the Amiga with the round 6-pin connector on the C64 devices.
+
+
+ Parallel port                      IEC connector
+    Amiga                               1541
+ DSUB, 25-pin                        DIN, 6-pin
+
+  Pin  Name                           Name  Pin
+   14  +5V ------------*--*--+
+                       |  |  |
+              7406    |¯||¯||¯|
+            (74LS05)  | || || | 1k each
+                      |_||_||_|
+               |\\      |  |  |
+    5  PB3 ----| O-----*--+--+------- ATN    3
+               |/         |  |
+                          |  |
+               |\\         |  |
+    6  PB4 ----| O--*-----*--+------- CLK    4
+               |/   |        |
+                    |        |
+               |\\   |        |
+    7  PB5 ----| O--+-*------*------- DATA   5
+               |/   | |
+                    | |
+    8  PB6 ---------+ |
+                      |
+    9  PB7 -----------+
+
+   25  GND -------------------------- GND    2
+
+The 7406 (a 74LS05 will do as well) must be connected to +5V and GND
+of course. The trained technician will notice that this is the same
+circuit found inside the real C64.
+
+[Important note: If you plan to build and connect such a cable, please
+remember that you do it on your own risk. I will not take any
+responsibility if there is blue smoke coming out from the back of your
+computer!]
+
+@ENDNODE
+
+
+@NODE DemoPrograms "Sample programs"
+
+The directory "64prgs" contains some little sample programs to show
+the capabilities (and weaknesses) of Frodo. They are all loaded with
+LOAD"<name>",8 and started with SYS49152. To do so, you have to type
+'64prgs' in the settings for "Laufwerk 8" so Frodo will find the
+programs.
+
+If you like, you can try these programs on other emulators or on
+a real C64.
+
+A short description of each program:
+  3fff     : Opens the top and bottom border and displays swinging
+             letters ("Zyklen pro Zeile (CPU)" should be set to 60
+             for this one)
+  colorbars: Flickering colors
+  dycp     : Scrolling with different Y character position
+  fld      : Demonstrates the FLD effect (flexible line distance)
+  stretch  : One thing Frodo is not (yet) able to emulate: variably
+             expanded sprites
+  tech-tech: Horizontal scrolling with large amplitude (use joystick
+             in port 2 to control)
+  text26   : Displays (nearly) 26 lines of text
+  monitor  : A simple machine language monitor
+
+@ENDNODE
+
+
+@NODE TechnicalInfo "Technical info"
+
+  "Wissen?" wiederholte Gandalf.
+  "Ich weiß vieles, was nur die Weisen wissen, Frodo."
+    [Does someone know the english original of this? LotR, (I, 2)]
+
+In contrast to A64 that is biased towards the Amiga hardware, Frodo
+tries to exactly imitate C64 hardware features. Now the 64's hardware
+(esp. the graphics chip "VIC") has a rather simple design resulting in
+many of the internal processes coming to the "outside". So there are
+lots of "undocumented features" you can do effects with the designers
+never dared to dream about.
+
+Frodo uses a line-by-line emulation, i.e. the function of the VIC
+and the processor (6510) are emulated for one raster line of the
+C64 screen at times. In practice, Frodo runs VIC and 6510 alternately
+for 63 simulated cycles each (corresponding to one raster line).
+At first, it emulates the processor for 63 cycles, then switches
+over to the VIC that paints one pixel row to the screen, then again
+63 cycles processor, and so on...
+
+Even though this is a heavy simplification of the processes in a
+real C64, it lets you perfectly emulate many graphical effects possible
+on the 64, e.g. FLD, FLI, DYCP, hyperscreen and many more. But this
+method has one big disadvantage: Changes made to VIC registers by the
+processor in the middle of a raster line will only take effect at the
+start of the next line. E.g. you can't change the border color in the
+middle of a line, the color change takes place in the next line.
+Therefore, very sophisticated techniques depending on the exact
+position of a register change can't be emulated. For instance, it is
+no problem to open the top and bottom border, but opening the left
+and right border is impossible (and therefore not implemented in the
+emulation).
+
+The next step above line-by-line emulation would be to resolve VIC and
+6510 into single cycles. The processes in the VIC and the 6510 for each
+cycle are quite well known, so there is no theoretical problem in the
+realization. The only real problem is speed. You would have to switch
+between VIC and 6510 after every cycle, instead of after 63 cycles as
+Frodo does in the moment. This would mean abandoning the register-based
+6510 emulation, as the overhead for storing and retrieving the complete
+register set for every switch would be too great.
+
+The present opcode dispatch model would have to be replaced by some
+kind of "cycle continuation pointer" pointing to the subroutine for
+the next cycle of the current opcode (or should the opcode dispatch
+table be extended by 8 entries for each opcode for the single cycles?).
+As a first estimation, the speed would go down by a factor of 4-10,
+so before the availability of faster Amigas there is no hope for
+cycle based emulation. Though you could emulate effects like AFLI and
+the VC and sprite counter confusions of the VIC precisely.
+
+@ENDNODE
+
+
+@NODE TheSource "The source"
+
+For those confused by the numbers: A small description of all modules:
+
+  6510.asm       - The processor
+  6526.asm       - The CIAs (in/output, keyboard, timers)
+  6569.asm       - The VIC (graphics)
+  6581.asm       - The SID (sound)
+  1541.asm       - File access and IEC routines
+  c2p4.asm       - Chunky->planar conversion
+  FrodoPrefs.#?  - GadToolsBox user interface of settings window
+  Frodo_rev.#?   - Version information
+  Main.asm       - The main module
+  Boopsi.o       - An object file from GadToolsBox to be linked in
+
+The calls for assembling and linking are:
+
+  PhxAss Main.asm INCPATH Include: OPT !
+  PhxAss 6510.asm INCPATH Include: OPT !
+  PhxAss 6569.asm INCPATH Include: OPT !
+  PhxAss 6526.asm INCPATH Include: OPT !
+  PhxAss 6581.asm INCPATH Include: OPT !
+  PhxAss 1541.asm INCPATH Include: OPT !
+  PhxAss FrodoPrefs.s INCPATH Include: OPT !
+  PhxAss c2p4.asm INCPATH Include: OPT !
+  PhxLnk Lib:RXstartup.obj Main.o 6510.o 6569.o c2p4.o 6526.o 6581.o
+    1541.o FrodoPrefs.o Boopsi.o Lib:small.lib TO Frodo
+
+@ENDNODE
+
+
+@NODE Translation "Translation of program messages"
+
+Requester texts:
+
+"Wählen Sie einen Bildschirmmodus"
+ - Choose a screen mode
+
+"Wählen Sie ein Verzeichnis"
+ - Choose a directory
+
+"Frodo benötigt mindestens einen 68020 Prozessor."
+ - Frodo requires at least a 68020 processor
+
+"Es steht nicht genügend Speicher zum Starten des Emulators
+ zur Verfügung."
+ - There is not enough memory to start the emulator
+
+"Der C64-Bildschirm kann nicht eingerichtet werden."
+ - The C64 screen cannot be created
+
+"EGS ist auf Ihrem Amiga nicht installiert.
+ Bitte wählen Sie 'Amiga' oder 'Picasso' als Bildschirmtyp."
+ - EGS is not installed on your Amiga. Please select 'Amiga'
+   or 'Picasso' for the screen type
+
+"Die 'vilintuisup.library' ist auf Ihrem Amiga nicht installiert.
+ Bitte wählen Sie 'Amiga' oder 'EGS' als Bildschirmtyp."
+ - The 'vilintuisup.library' is not installed on your Amiga.
+   Please select 'Amiga' or 'Picasso' for the screen type
+
+"Der gewählte Bildschirmmodus ist auf Ihrem Amiga nicht verfügbar."
+ - The selected screen mode is not available on your Amiga
+
+"Der von Ihnen gewählte Bildschirmmodus hatt eine zu geringe Auflösung.
+ Sie muß mindestens 384×288 betragen."
+ - The resolution of the selected screen mode is too small.
+   It must be greater than 384×288
+
+"Die Datei 'xxx' fehlt oder ist beschädigt."
+ - The file 'xxx' is missing or damaged
+
+"Der parallele Port ist zur Zeit von einem anderen Programm belegt.
+ Die Benutzung von IEC-Geräten ist daher nicht möglich."
+ - The parallel port is currently in use by another program.
+   So the use of IEC devices is not possible
+
+"Frodo kann keinen freien CIA-Timer finden. Die Benutzung von
+ IEC-Geräten ist daher nicht möglich."
+ - Frodo is unable to find a free CIA timer. So the use of IEC devices
+   is not possible
+
+"Unbekannter Opcode xx, PC yyyy"
+ - Unknown opcode xx, PC yyyy
+
+"Sprung in den I/O-Bereich, PC yyyy"
+ - Jump to I/O space, PC yyyy
+
+
+Requester gadgets:
+
+"Beenden"
+ - Quit
+
+"Macht nichts"
+ - Don't care
+
+"Reset"
+ - Reset (guessed that? :-)
+
+"Na und?"
+ - So what?
+
+@ENDNODE
+
+
+@NODE LegalMush "Copyright and distribution"
+
+The program "Frodo", this manual and the source code may be freely
+distributed as long as they remain unchanged (archiving and packing is
+allowed) and all files are included. You must not make any profit by
+selling Frodo, especially the price of a disk containing Frodo may not
+exceed US$ 5,- (or equivalent amounts in other currencies). Please feel
+free to distribute Frodo over bulletin board systems and networks and
+as part of shareware/freeware CD-ROMs.
+
+Anyone using this program agrees to incur the risk of using it for
+himself. In no way can the author be held responsible for any damage
+directly or indirectly caused by the use or misuse of this manual
+and/or the program.
+
+The rights on the source code remain at the author. It may not - not
+even in parts - used for commercial purposes without explicit written
+permission by the author. Permission to use it for non-commercial
+purposes is hereby granted als long as my copyright notice remains
+in the program. You are not allowed to use the source to create and
+distribute a modified version of Frodo.
+
+The user interface of the program was designed with GadToolsBox
+© Copyright 1991-1993 Jaba Development.
+
+Parts of the program are © Copyright 1992-1993 Jaba Development.
+
+@ENDNODE
+
+
+@NODE BugReports "Bug reports"
+
+If you find a bug or a misfeature in Frodo, or have an idea how to
+make some things better, then please drop me a note so I'll be able
+to improve Frodo in the future. My address can be found @{"here" LINK EmulationWizard}.
+
+I don't think the emulation can be made much faster without changing
+the concept but I'll be happy to find someone showing me how to do it.
+
+@ENDNODE
+
+
+@NODE Thanks "Credits"
+
+The following persons deserve special thanks from me as they made a
+significant contribution to the development of Frodo.
+
+ · Frank Wille <phoenix@komet.guru.sub.de>, whose PhxAss was used for
+   developing Frodo
+ · Jaba Development, whose GadToolsBox developed Frodo's user interface
+ · Peter McGavin <peterm@maths.grace.cri.nz>, who wrote the chunky-to-
+   planar conversion
+ · Andreas Boose <a.boose@ldb.han.de> and Marko Mäkelä
+   <marko.makela@hut.fi>, who provided me with precious information on
+   the VIC and on the C64 in general
+ · Markus Winklbauer <sysop@ng-box.wwb.sub.de>, for the docs for the
+   Picasso card
+ · J.R.R.Tolkien for the suggestion for the name of the emulator
+
+@ENDNODE
+
+
+@NODE EmulationWizard "The author"
+
+My address is:
+
+  Christian Bauer
+  Langenaustr. 65
+  56070 Koblenz
+  Germany
+
+EMail:
+  cebix@ng-box.wwb.sub.de         (Polled daily)
+  cbauer@mzdmza.zdv.uni-mainz.de  (More reliable but polled
+                                   less frequently)
+
+Questions, criticism, suggestions and @{"bug reports" LINK BugReports} are always
+welcome. EMail is preferred.
+
+Frodo is @{b}not@{ub} a shareware program, but I won't reject any
+gifts. :-)
+
+@ENDNODE
+
+
+@NODE History "History"
+
+This emulator started as a player routine for C64 music (therefore
+the SID card) until I saw A64 V3.0 and was so disappointed of it
+that I began to write a "real" C64 emulator (around christmas 1994).
+
+V0.4	05.Jan.1995
+  - First released version
+
+V0.5	10.Jan.1995
+  - Starting Frodo on a 68000 correcly gave a requester but then
+    the computer crashed. I told you this only works on 68020+ :-)
+  - Removed two enforcer hits in the memory configuration routine
+  - Frank Wille's email address corrected
+  - Sprite cycles are now calculated correctly
+  - Switching off a sprite in the middle of its display blanked it
+    immediately. Now it is drawn completely.
+  - Graphics speed for EGS/Picasso improved by means of a line
+    buffer (20% faster), other small optimizations to the graphics
+  - VIC interrupt flag is now clear on every write access to $d019
+    (a hack for RMW commands doing two write accesses)
+  - CIA timers B are now capable of counting underflows of timer A
+    (for "Ballblazer" :-)
+  - PLP and RTI clear the break flag
+  - Completely new 1541 emulation, 4 drives
+  - CPU cycle counter heavily optimized (again 25% gain in speed)
+
+V1.0	25.Jan.1995
+  - PHP now sets the break flag on stack
+  - HandleRESET erroneously set the I flag (don't trust a data sheet,
+    even if it's from the manufacturer...)
+  - A RESET will set the VIC bank to 0
+  - All illegal opcodes implemented
+  - New algorithm for the VIC's VC that is more close to the real VIC
+  - The VBlank routines now jump back to Periodic6569 as there was
+    a non-existant -1st line
+  - TOD clocks implemented
+  - ECM+BMM, ECM+MCM and ECM+BMM+MCM now correctly display a black
+    screen
+  - Access to SID card is now disable-able (!? :-)
+  - Some bugs in 1541 emulation corrected
+  - Use of IEC devices over an adapter cable is now possible
+  - Selecting the directories for the 1541 emulation can now be done
+    with a directory requester
+  - Turning off the screen using bit 4 of $D011 is working
+  - Setting for "raster frequency" removed
+  - Interrupt handling completely rewritten
+  - Some internal optimizations
+  - During a reset, the CBM80 signature is now only overwritten if
+    it is present
+  - Frodo now works on non-AGA machines
+  - Sprite-sprite collisions implemented
+  - Swapping of Y and Z keys is now a settings item
+
+@ENDNODE

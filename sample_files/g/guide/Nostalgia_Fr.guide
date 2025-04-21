@@ -1,0 +1,335 @@
+@database Nostalgia.guide
+@$VER: Nostalgia.guide 1.8 (03/09/2000)
+@(C) 1999-2000 Melina Softworks
+@wordwrap
+
+@node Main "Nostalgia"
+
+@{b}                            ####                   ####  ##
+  #### ##          ##  ##  ######  ##   ####   ## ###### ##
+  #######         ###  ##  ##  ##  ##  #####   ## ##  ## ##
+  #######  ####   ###  ### ##  ##  ## ####     ## ##  ## ##
+  ####### ######  ###  ### ##  ##  ## ### ##   ## ##  ## ##
+  ## #### ### ##   ### ##  ######  ## ### ###  ## ######
+  ## #### ### ##   ### ### ######  ## #### ##  ## ######
+  ##  ### ###### ##### ### ##  ##  ##  ######  ## ##  ## ##
+  ##  ###  ####  ###    ## ##  ##  ##   ####   ## ##  ## ## @{ub}
+
+
+             @{i}"Plus qu'une simple interface..."@{ui}
+
+
+
+
+                @{"   Introduction   " link INTRODUCTION}
+                @{"  Configuration   " link REQUIREMENTS}
+                @{"   Installation   " link INSTALLATION}
+                @{"      Usage       " link USAGE}
+                @{"     Astuces      " link TIPS}
+                @{"  Remerciements   " link GREETS}
+                @{"     Contact      " link CONTACT}
+                @{"    Historique    " link HISTORY}
+                @{"       Bugs       " link BUGS}
+                @{"     A faire...   " link TODO}
+
+
+
+
+
+
+@{i}(c) 1999-2000 Melina Softworks@{ui}
+
+
+@endnode
+@node MENUS "Les menus"
+
+Menu @{b}@{u}NoStAlGiA@{uu}@{ub} : - @{b}A propos@{ub} : Affiche le "A propos"
+                 - @{b}Quitter@{ub}  : Quitte Nostalgia!
+
+Menu @{b}@{u}Liste@{uu}@{ub} : - @{b}Jeux xxx@{ub} : N'affiche que les jeux de la console xxx (non actif)
+             - @{b}Tous les jeux@{ub} : affiche la liste complete de jeux
+
+@endnode
+@node keycut "Raccourcis clavier"
+
+@{b}ESC@{ub} : Ferme une fenêtre ou quitte Nostalgia!
+
+@{b}ESPACE@{ub} : Affiche/ferme l'affichage grandeur nature de la preview.
+
+@{b}ENTREE@{ub} : Lance l'émulation sélectionnée.
+
+@endnode
+
+@node REQUIREMENTS "Requirements"
+
+@{b}@{u}Configuration minimale :@{uu}@{ub}
+
+    - un Amiga :o)
+    - AmigaOS 3.x
+    - au moins un 68020
+    - un affichage en haute résolution (640*480 au moins)
+    - un peu de Fast RAM (4Mo devraient suffire...)
+
+@{b}@{u}Recommendé :@{uu}@{ub}
+
+    - 040 ou 060 et PPC (pas pour Nostalgia! mais pour les émulateurs...)
+    - une carte graphique (n'importe quelle émulation WB)
+    - 8Mo de Fast RAM.
+    - quelques roms :o)
+    - ces émulateurs : AmiGenerator, DarcNes, Handy, GBE, WarpSNES, WarpNeoMAME.
+
+@endnode
+
+@node BUGS "Known bugs"
+
+J'ai passé beaucoup de temps à débugger donc j'espère qu'il n'y a plus de bugs.
+Actuellement, il n'y a pas de bugs recencés mais si vous en rencontrez,
+@{"contactez" link CONTACT} moi.
+
+@endnode
+
+@node INSTALLATION "Installation"
+
+@{b}@{u}Pour Nostalgia! lui-même :@{uu}@{ub}
+
+    - Double cliquez sur l'icône d'installation.
+    - Pour désinstaller Nostalgia!, il vous suffit d'effacer le répertoire
+      Nostalgia, tous les fichiers de préférences sont à l'intérieur.
+
+
+@{b}@{u}Pour les émulateurs :@{uu}@{ub}
+
+@{b}!!! Nous considèrerons que "Nostalgia:" représente le chemin complet dans lequel est installé Nostalgia! !!!@{ub}
+
+    - @{b}AmiGenerator@{ub} : Récupérez l'archive, décompressez et copiez l'exécutable dans
+                     "Nostalgia:bin/.
+                     Le nom @{b}DOIT@{ub} être "amigenerator".
+
+    - @{b}DarcNes@{ub} : idem mais vous devez copier le fichier "COLECO.ROM"
+                dans le même répertoire que l'exécutable.
+                Le nom @{b}DOIT@{ub} être "darcnes".
+
+    - @{b}GBE@{ub} : idem.
+            Le nom @{b}DOIT@{ub} être "gbe".
+
+    - @{b}Handy@{ub} : idem mais vous devez copier le fichier "lynxboot.img" dans le même
+              répertoire que l'exécutable.
+              Le nom @{b}DOIT@{ub} être "handy".
+
+    - @{b}WarpSNES@{ub} : idem.
+                 Le nom @{b}DOIT@{ub} être "warpsnes".
+
+    - @{b}WarpNeoMAME@{ub} : idem mais vous devez copier le fichier "NEOGEO.ZIP" dans
+                 Nostalgia:roms/NeoGeo/.
+                 Le nom @{b}DOIT@{ub} être "warpneomame" et "warpkickstart".
+
+
+@{b}@{u}Pour les roms :@{uu}@{ub}
+
+    - Elles doivent toutes êtres copiées dans leur répertoire correspondant dans
+      "Nostalgia:roms/".
+      Ne placez @{b}JAMAIS@{ub} une rom directement dans roms/ sinon elle ne sera jamais listée,
+      placez la dans son tiroir correspondant (roms/Nes ou roms/ColecoVision par ex.)
+
+    - Les roms @{b}doivent@{ub} avoir une extension correcte.
+      Les extensions supportées sont :
+
+        - .bin, .smd pour les roms Megadrive/Genesis.
+        - .col pour les roms ColecoVision.  @{b}@{u}<=== IMPORTANT@{uu}@{ub}
+        - .sms pour les roms MasterSystem.
+        - .gg pour les roms GameGear
+        - .nes pour les roms NES.
+        - .pce pour les roms PCEngine.
+        - .gb pour les roms GameBoy et GameBoyColor.
+        - .smc, .swc, .fig, .sfc pour les roms SNES.
+        - .zip pour les roms NeoGeo
+
+
+
+@endnode
+
+@node TODO "To Do..."
+
+Nostalgia! est assez complet mais il peut encore être amélioré :
+
+    - Plus démulateurs supportés (N64 par ex.)
+    - Interface retaillable
+    - procédure de démarrage depuis le WB plus propre...
+    - Chemin pour les roms sélectionnable
+    - Affichage configurable de la liste des roms
+    - Plus de racourcis clavier
+
+
+@endnode
+
+@node HISTORY "History"
+
+1.8 : - Vérificateur de version qui permet de connaitre les versions des émulateurs installés
+        et permet de télécharger les dernières versions de ceux-ci directement depuis Nostalgia,
+        plus besoins de se casser la tête à les rechercher.
+      - Support pour WarpSNES 5.0 et WarpNeoMAME 0.5 (nécessaire car le support de la version
+        0.4 a été abandonné)
+      - Incorporation des réglages de la ChunkyPPC.library. (pour WarpSNES)
+      - élimination de l'auto preview après le déplacement par curseur ou après une émulation
+        car c'était buggé, ce sera corrigé plus tard.
+      - Rajout du déplacement dans la liste par curseur clavier.
+      - Un peu plus rapide.
+
+@{b}@{u}1.75@{uu}@{ub} : - Mide à jour mineure pour supporter la dernière version d'Handy (1.05)
+
+@{b}@{u}1.7@{uu}@{ub} : - *Liste triable fonctionnelle, vous pouvez afficher les roms d'un seul
+        type*
+      - Plus petit et plus rapide
+      - Fixé quelques bugs et nettoyage du code (Merci Farid)
+
+@{b}@{u}1.6ß@{uu}@{ub} : - Support de la NeoGeo (WarpNeoMAME)
+       - Ajout de quelques raccourcis clavier
+       - Ajout de menus en vue du tri de la liste
+
+@{b}@{u}1.25@{uu}@{ub} : - petite mise à jour pour supporter les nouvelles options d'AmiGenerator
+       - Quelques petites corrections
+
+@{b}@{u}1.2@{uu}@{ub} : - Beaucoup de bugs corrigés
+      - Correction du problême de pile avec DarcNES, maintenant, l'option de
+        capture d'écran est fonctionnelle.
+
+      - Interface réécrite pour éliminer les derniers bugs
+      - Astuce utilisée pour éviter le bug de lancement depuis le WB sous OS
+        3.x, Magellan et ScalOS.
+      - Ajout de l'option d'affichage de la preview.
+      - Plus petit et plus rapide
+      - Correction du rafraichissement de l'interface.
+
+@{b}@{u}1.0@{uu}@{ub} : Localisation ajoutée
+      Bug concernant les roms Nes et lynx qui étaient lancées avec GBE ==> fixé
+      Bug concernant certaines extensions en minuscules (comme les .bin) ==>fixé
+      Emulation Lynx fonctionne maintenant !
+      plus de problêmes de taille de pile.
+
+@{b}@{u}0.9ß@{uu}@{ub} : première sortie sur Aminet.
+       Beaucoup de correction, normalement tout devrait fonctionner correctement.
+       Support de WarpSNES ajouté.
+
+@{b}@{u}0.8ß@{uu}@{ub}  : Jamais sortie.
+       Fonctionnelle mais très instable.
+
+@endnode
+
+@node CONTACT "Contact"
+
+Tout l'univers de Melina Softworks ici : @{b}http://perso.club-internet.fr/wmoghrab@{ub}
+
+Vous pouvez me contacter par e-mail ou par la poste :
+
+@{u}e-mail@{uu} : @{i}wmoghrab@club-internet.fr@{ui}
+
+@{u}poste@{uu}  : @{i}Walid MOGHRABI
+         28 Square Michelet
+         13009 MARSEILLE - FRANCE @{ui}
+
+@endnode
+
+@node GREETS "Greets"
+
+@{b}Tous mes remerciements à ces gars là :@{ub}
+
+    - AmiDog pour ses émulateurs.
+    - MagicSN pour WarpSNES.
+    - Timm S. Muller pour sa fantastique GuiGFX.library.
+    - BadMax, Titan, Lanza, Tcheko, Kakace et tous les gars d'Artbas pour leur aide.
+    - Kaiser/iGlOo et FlyBuSt/iGlOo pour le soutien.
+    - Farid pour son aide précieuse.
+    - L'auteur de BlackSNESGui pour l'icône (désolé de l'avoir piquée mais elle est vraiment trop belle :op)
+    - Tous ceux qui m'ont signalés des bugs...
+
+
+
+@endnode
+
+@node TIPS "Tips"
+
+- Si vous avez un PPC rapide, réglez le frameskip à 0 dans DarcNes, ce sera plus fluide.
+
+- Il y'a beaucoup d'options par défaut dans les émulateurs, des fois, il peut être plus intéressant
+  de laisser l'émulateur coisir tout seul.
+
+- Nostalgia! peut subir quelques ralentissements au démarrage/changement de prefs/sortie.
+  C'est parce que Nostalgia! fait quelques actions internes sur le disque dur comme charger/sauver les préférences
+  ou lister les roms.
+  Ce n'est pas un bug et les ralentissements dépendent beaucoup de la vitesse de votre disque dur et du
+  nombre de roms que vous possédez.
+
+- Actuellement, il n'y a qu'un émulateur permettant de sauver une preview du jeu mais j'ai contacté les
+  auteurs et ils sont en train de travailler sur cette option.
+  Cependant, si vous désirez faire vos propres previews (avec un screen grabber par ex.), vous le pouvez, il
+  vous suffit de nommer le preview en "nom-du-jeu.smp".
+  Ne vous en faites pas pour le format de fichier, les datatypes sont utilisés pour la lecture...
+  Cependant, vous devriez sauver en IFF pour des histoires de vitesse de lecture et de compatibilité.
+
+- Attention : WarpSNES est assez lent pour charger les roms SNES, soyez patients, ce n'est pas un bug de Nostalgia!
+
+- WarpSNES utilise la RTGMaster.library qui affiche, lorsque vous le lancez pour
+  la première fois, une requete de sélection de mode écran.
+  Si vous rencontrez un problême pour le faire fonctionner en 8bits,
+  sélectionnez un écran 15/16 bits.
+
+- Actuellement, Handy, DarcNES, WarpSNES, WarpNeoMAME et AmiGenerator permettent la sauvegarde des
+  previews en appuyant sur HELP pendant le jeu.
+
+@endnode
+
+@node USAGE "Usage"
+
+Ca ne pourrait pas être plus simple !
+Exécutez Nostalgia! en double cliquant sur son icone.
+Les roms seront listées et triées par type, sélectionnez en une et cliquez sur "GO !".
+C'est tout !
+
+Si une preview existe, elle sera affichée.
+Vous pouvez modifier quelques réglages dans le menu "Emulator settings...".
+
+En cliquant sur "A propos", vous verrez apparaitre le Vérificateur de version.
+Pour cela, Nostalgia récupère les informations depuis les émulateurs installés.
+Cela prend beaucoup de temps car les exécutables des émulateurs sont très gros
+(jusqu'à plus de 1Mo).
+Cela dit, cette vérification n'est faite qu'une seule fois, vous pouvez donc
+revenir à cette fenêtre sans refaire la vérification.
+A partir du Vérificateur, vous pouvez également télécharger directement les dernières
+versions des émulateurs.
+
+@{"Les raccourcis clavier" link keycut}
+
+@{"Les menus             " link menus}
+
+@endnode
+
+@node INTRODUCTION "Introduction"
+
+Qu'est ce que Nostalgia! ????
+
+Et bien..., je n'étais pas satisfait quand j'utilisais les interfaces pour les différents émulateurs tout comme j'étais fatigué d'utiliser le shell de temps en temps...
+Ce que je voulais faire, c'est un système très intuitif qui me permettrait de lancer n'importe quel jeu que je possédais sans avoir à taper quoi que ce soit ou avoir à connaitre une longue liste de paramètres.
+Je ne voulais pas non plus avoir à penser au nom des émulateurs comme, par exemple, avoir à savoir que pour jouer à tel jeu, il me fallait utiliser tel émulateur.
+Finalement, je voulais un système qui soit capable de me présenter une preview du jeu que je choisis sans avoir à lancer le jeu pour savoir ce que c'est.
+
+Donc, j'ai fait Nostalgia!
+
+Avec Nostalgia!, la seule possibilité que vous avez, c'est choisir un jeu et jouer sans avoir à vous préoccuper de quoi que ce soit d'autre.
+
+@{b}@{u}Voici les possibilités de Nostalgia! :@{uu}@{ub}
+
+    - interface simple et intuitive
+    - support pour beaucoup d'émulateurs qui couvrent un grand nombre de consoles, d'autres à venir (PSX par ex.)
+    - sauve toutes les options pour chaque émulateur (vous n'avez pas à les changer tout le temps)
+    - preview des jeux (si disponible)
+    - auto retaillage/tramage des previews et des images (oui! Vous pouvez utiliser Nostalgia! sur un écran AGA avec peu de couleurs)
+    - chargement/sauvegarde automatique des préférences
+    - facile à installer et à désinstaller (pas d'assign, pas de fichiers copiés dans le système)
+    - Liste triable pour une meilleur lecture.
+    - Vérificateur de version et téléchargement auto.
+    - GRATUIT !!!
+
+
+@endnode
+
+

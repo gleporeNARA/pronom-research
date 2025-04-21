@@ -1,0 +1,505 @@
+@DATABASE VICVISION
+@NODE Main "VIC VISION Release Information"
+ *=----------------------------------------------------------------------=*
+
+                          >>  VIC-Vision V1.04  << 
+
+                         Last Updated:  7-July-1997
+
+
+                      The C64 To Amiga IFF GFX Converter       
+
+
+                            Amiga Programming By
+
+                        Kevin Picone & Daniel Martin
+
+
+                      C64 Format Reverse Engineering by
+        
+                               Daniel Martin
+
+
+       © Copyright 1996 Kevin Picone & Daniel Martin of Underware Design
+
+                            All Rights Reserved.
+
+  *=----------------------------------------------------------------------=*
+
+                      Vic Vision V1.04 DOC'S contains:
+
+  *=----------------------------------------------------------------------=*
+
+
+                        @{"     Copyright Notice      " link Copyright}
+                        @{"    Software Disclaimer    " link Disclaimer}
+                        @{"    Release Information    " link releaseinfo }
+                        @{"      Release History      " link releasehistory }
+                        @{"     Archive Contents      " link Contents}
+ 
+                        @{"       Introduction        " link intro}
+                        @{"        How to use         " link howtouse}
+                        @{"  Using the new features   " link newfeatures}
+                        @{"        Quick tips         " link victips}
+                        @{"   Foreseeable problems:   " link fproblems }
+                        @{" The future of VIC-Vision? " link vicvisionfuture }
+
+                        @{"        Greetings          " link greetings } 
+                        @{"  A note from the Authors  " link authorsnote  }
+
+ *=----------------------------------------------------------------------=*
+
+
+
+@ENDNODE
+
+@NODE Copyright "Copyright Notice"
+
+ Copyright:
+ ==========
+
+ The 'Vic Vision' executable, documents and related files are all ©
+ copyright 1993-1997 by Kevin Picone, All rights reserved.
+
+ Vic Vision is FREEWARE.  You may copy this software without restriction,
+ as long as you DON'T ask payment for it.  (A small fee is allowed to
+ cover your media costs, but should not exceed $5 Australian..)
+
+ Permission *IS* granted to upload 'Vic Vision' to bulletin boards and FTP
+ sites.  However, you must include all files, that were present in the
+ original archive, and they must remain unaltered, when distributing
+ 'Vic Vision'.  This includes all documents...
+
+ Permission *IS* also here by given for the FREEWARE version of Vic-Vision
+ to be included in PUBLIC DOMAIN / SHAREWARE packs such as, but not limited
+ too 'Aminet CD's' & 'Fred Fish' etc.. etc...
+
+ Permission is *NOT* given for 'Vic Vision' to be included in any form,
+ in whole or in part, within any Commercial Software without prior written 
+ consent from it's authors 'Kevin Picone' & 'Daniel Martin'.
+ 
+ These are our wishes please respect them, Thank You.
+
+
+
+@ENDNODE
+
+
+
+@NODE Disclaimer "Product Disclaimer"
+ 
+
+ Disclaimer:
+ ===========
+
+ The 'Vic Vision' software and documents are provided 'as is',  No guarantee
+ or warranties of any kind is given nor implied as too what 'Vic Vision'
+ does, or that the information in the related files is globally correct
+ in any way.
+
+ Furthermore, be aware that YOU are using this software at YOUR OWN RISK.
+ The authors of 'Vic Vision' are in NO WAY responsible for any loss of,
+ or damage to your data caused either directly or indirectly by usage of
+ this software.
+
+ If *YOU* are unhappy with these Terms !! please turn back now, and delete
+ your copy of the 'Vic Vision' archive, THANK YOU.
+
+ 
+
+
+@ENDNODE
+
+
+@NODE Contents "Archive Contents"
+
+ Archive contents:
+ =================
+
+    This release contains the following files and MUST be distributed in its
+ entirety, no files should be added or removed !!.
+
+                       * Vic_VisionV1.04
+                       * Vic_VisionV1.04.GUIDE   (obviously :)
+                       * Vic_VisionV1.04.Trouble.DOC
+                       * Example Pictures (Directory)
+                       * Example Fonts (Directory)
+                       * Example Sprites (Directory)
+
+    Also, we'd like to extend our infinite gratitude to all the known and
+ unfortunately unknown artists of the included pictures / fonts / sprites,
+ who all retain full copyright to their respective artwork(s).
+
+
+            Special credits must go to the following FLI artists:
+
+                  OGAMI of FAIRLIGHT (for the knight picture)
+
+                  ATTE of EXTEND (for various FLI's)
+
+                  ELECTRIC of EXTEND (for various FLI's)
+
+
+
+@ENDNODE
+
+@NODE Intro "Introduction"
+
+ Introduction:
+ =============
+
+     We believe that VIC-Vision is one of best and easy to use programs for
+ the conversion of C64 graphics formats to IFF, upon the Amiga.  It has
+ been developed for 64 artists, demo-coders, nostalgia freaks etc. etc...
+ Who are moving onto the Amiga and would also like to take their favourite
+ artwork with them.
+
+     The current version supports a number of popular formats as direct
+ inputs, such as - Koala Paint, Advanced Art Studio, Blazing Paddles,
+ Doodle, FLI, AFLI, CFLI ( an extremely rare format ), raw font data
+ (8*8, 8*16 & 16*16), Raw Sprite data ( Expanded X/Y ), Centauri Logo
+ Editor, Image System and finally Artist 64.  All formats which are
+ capable of multi or single colour modes, have been supported.  Moveover
+ a powerful parameter option has also been included, enabling you to
+ create your own custom bitmap conversions, that is, if you know how
+ the file in question is constructed.
+
+
+
+@ENDNODE
+
+
+@NODE howtouse "How to use Vic Vision  (walk through)"
+
+
+ How to use:
+ ===========
+
+ 
+ * First, a suitable file must be obtained, a common way is via the use of
+   a Null Modem between the C64 and your Amiga, in this example we'll assume
+   that a file called  'AVENGER II.FLI'  was obtained. 
+  
+ * Load VIC-Vision, insert the disk which contains your picture(s), then
+   from the main menu select 'LOAD FILE' option. A file requester will now
+   appear, use the mouse to select the file titled 'AVENGER II.FLI' (or
+   whatever picture/graphic you wish to convert).  In a few seconds the
+   file will have loaded and the main menu will now re-appear.
+
+ * To convert the image, select the menu option titled 'CONVERT MENU'. 
+   Doing so enters you into a listing of all currently supported
+   conversion methods.  To process the image, simply click upon the format
+   of the image you just loaded.  In this example we need to select the
+   FLI option, in the FLI Sub-Menu.
+
+   NOTE: You can ABORT a conversion at any time via holding down both 
+         the left and right mouse buttons.
+
+ * When Vic Vision has completed it's conversion, the image will be
+   automatically displayed for you.  If you should like to view the image
+   while it's being processing, you can do so via switching the 'VIEW MODE'
+   option to 'ON' in the CONVERT MENU.
+
+
+ * After the Image has been converted, and displayed for you, you'll be
+   returned once again to the main menu, where you can now save the
+   converted picture to disk as a standard IFF file.
+
+
+
+     A more advanced function is the EDIT PARAMETERS option, which is for 
+ creating your own customized conversion routines, which should allow you
+ to convert any (we hope! - probably just most, well some  ;) unsupported
+ Bit-Map formats, so if you have your own custom format, you should be
+ able too convert it without any problems.  No description of it's use will
+ be given here, as it's really geared towards advanced C64 users, who
+ understand how C64 GFX modes and files are constructed.  Hence, if you do
+ you should find it easy to come to grips with this particular feature.
+
+     If you'd like a place to start learning about such things, well you'll
+ need to find a copy of the 'C64 programmers reference guide' which outlines
+ how the C64 graphics modes work.
+
+
+
+@ENDNODE
+
+
+@NODE victips "Tips of getting the best usage of Vic Vision"
+
+ 
+ Some of handy tips:
+ ===================
+
+
+ * Main menu:
+
+           - You can avoid the 'Quit file requester' via either pressing 'Q',
+             'Esc' or via clicking your mouse pointer in the upper left hand
+             corner of the screen.
+
+
+ * Aborting Picture Conversion:
+
+           - During any picture conversion you can simply hold down both
+             mouse buttons to interrupt the conversion process.
+
+
+ * Multi tasking:
+
+           - Since 'Vic Vision' is actually written in gasp! 'AMOSPRO', it
+             doesn't task as generally other AMIGA applications do, although
+             you can actually toggle between VIC VISION and your Work Bench /
+             or other applications at any time via the usage of "LEFT AMIGA"
+             and the "A" key.  
+
+
+
+@ENDNODE
+
+
+ 
+@NODE newfeatures "Using the New Features"
+
+
+ New Features to V1.04
+ =====================
+
+
+  The most notable new features to Vic Vision can be found in the conversion
+ menu. These features are pretty simple but may need a little explanation.
+
+
+ * 'Load Add' (on/off)   
+
+            Generally all files saved on the commodore 64 include two extra
+            leading bytes, which the machine uses to determine the actual
+            location of the files data in memory, as it's being loaded.
+            These two bytes are hence commonly known as the files load
+            address.
+
+            There are situations that can occur when the load address
+            information has been removed in some way from the original
+            commodore 64 file. This would have presented a real problem for
+            older versions of Vic Vision which used to always assume
+            the two leading bytes would be present, but not any more.
+
+            Hence, this switch allows you too toggle Vic Vision between,
+            assuming the file you've loaded, has it's load address bytes
+            included (ON) or if it does not (OFF). 
+
+           
+ * 'Base Offset' $0000
+
+            Although this option is really geared towards experienced users,
+            it's actually quite simple to use.  Basically this option allows
+            users to input a numeric value, which Vic Vision uses as an
+            offset from the start or base address of it's the file buffer.
+  
+            Hence, this allows you to actually convert a variety of graphics
+            data(s) contained within a single file.  Ideal for porting
+            games / demo etc. etc. without ever needing to save out GFX data
+            in separate files.           
+
+
+
+@ENDNODE
+
+
+@NODE fproblems "Foreseeable Problems"
+
+
+ Foreseeable problems:
+ ====================
+
+  This program has been extensively tested and although appears to be
+ stable, however, problems may arise in the following areas:
+
+
+ * Vic Vision has been unfortunately developed in shock, horror, gasp!
+   'AMOSPRO' :) and is thus, not as AMIGA friendly as it could / should be.
+   Although, you should note that AMOSPRO programs can / do actually allow
+   a _form_ of task switching, and if you'd like to switch between Vic-Vision
+   and Workbench or other applications at any time, you can do use via the
+   usage of 'LEFT AMIGA - A', and to return to Vic Vision you obviously
+   again use 'LEFT AMIGA - A'.
+
+   Note: I've been asked a number of times why we used AMOS for this
+         project, and although it was originally written in 1993 :)
+         (which is probably reason enough ;) AMOS was selected purely to
+         speed up it's development, as originally, it was actually being
+         developed for our own in-house usage and not for public release,
+         but hey, things change... ;)
+       
+
+
+ * Also See "Vic_Vision.Troubleshoot.Doc"
+
+
+@ENDNODE
+
+
+@NODE releasehistory "Release History"
+
+
+ Update Information:
+ ===================
+
+   * V1.01 (Started 9/6/93, Completed 20/7/93) Released on the 22/07/1993
+
+   * V1.02 New features - 27/06/1995
+
+                   - Quit via 'ESC' from main menu 
+                   - Fixed Screen not open bug upon quiting
+                   - FLI centre & FLI's into one menu item 
+                   - Abort while converting  (both Mouse Buttons)
+                   - Multi custom param buttons are now active 
+                   - View screen while converting is in progress 
+                   - 8*16 & 16*16 font conversion
+                   - Set up FONTS button 
+                   - File Exists / replace ?
+                   - Expanded sprites options X & Y
+                   - Sprite Colour options 
+                   - Font colour select... 
+                   - Parameter editor menu
+                   - Parameter Saving/re-loading
+                   - Fixed the Conversion Complete bug
+                   - Updated the Custom GUI
+
+
+   * V1.03 New features - 10/03/1996
+
+                   - Fixed Small Pref's bug
+                   - Added Version string for AmigaDos  ;)
+
+
+   * V1.04 New Features - 24/06/1997  -> 7/07-1997
+
+                   - Fixed some small bugs in the FONT / SPRITE conversion
+                     pen colours requester.
+                   - Added a VIEW current buffer picture. 
+                   - Converted the crummy doc's from a plain text file to
+                     a crummy guide file.. ;)
+                   - Removed the 'Shareware' Requester stuff.
+                   - Added the 'Load addr' toggle switch to the conversion
+                     menu
+                   - Added the 'File Offset' to the conversion menu, this
+                     allows users to convert any pictures/fonts/sprites 
+                     that may be contained within any single file you load.
+                   - Updated the preference file format, to include the 
+                     'view mode' state and 'load address' state
+                   - Added protection to the load routines, so they screen
+                     out the loading of files larger than Vic Visions file
+                     buffer.
+                   - Added a 'file not found' check to the load routines.
+
+
+@ENDNODE
+
+
+   
+@NODE releaseinfo "Release Information"
+
+
+ Release Information:
+ ====================
+
+   This program (as of v1.04) has been re-released as FREEWARE, but if you
+ should like to, we'd truly appreciate it, if you now go to your bank
+ and withdraw all the money in your account(s) and then Forward it to us !,
+ or If that does not sound reasonable, a postcard / greeting card is
+ always nice.
+
+  
+  To contact UNDERWARE DESIGN for 'Vic Vision' Bug Reports, suggestions and
+                  update information write to either,
+ 
+ Snail Mail:
+
+              Kevin Picone                    Daniel Martin
+              74 Springs Road        or       P.O. Box 1735
+              RSD M539                        BALLARAT MAIL CENTRE 
+              BALLARAT VIC.                   VIC.  3354  
+              AUSTRALIA 3352                  AUSTRALIA
+
+
+ Email:
+
+            uwdesign&lin.cbl.com.au          dmartin&lin.cbl.com.au
+
+
+
+@ENDNODE
+
+
+
+
+
+@NODE vicvisionfuture "What's in the future of Vic Vision"
+
+
+ What's in the future of VIC-Vision?
+ ===================================
+
+     Depending on your support/feedback for our work, new features / updates
+ will be added as they become necessary.
+
+     If you would like a specialized none supported format(s) included in 
+ future versions, well, feel free to send your idea's and any related 
+ information to us.
+
+
+     Other future possible enhancements could be -
+
+
+            * IFF to FLI conversion.
+
+            * Amiga font to C64 font converter.
+
+            * C128 graphic modes support.
+
+            * Simple Auto Format Detection. ( possibly )
+
+            * Better Sprite Support.
+
+
+
+@ENDNODE
+
+@NODE greetings "Greetings"
+
+
+ Greetings:
+ ==========
+
+     Ben Hemming, Lars Jensen, Steven Sheedy, Chris McCallum, Graeme Cooper,
+ Bob Rye, Marcus Mroczkowski, Kris Roebuck, Stephen Walsh, Magnus Paulson,
+ Richard Orr, Simon (Style), John Sykes, Iain Stewart, Wayne (Rustler), Peter
+ (Ravager), Chris Leathley, Austex Software ( AGX RULES ), Beam Software,
+ Ted Bailey @ Guildhall Leisure, Vulcan, BSP Design, all at Ballarat Amiga
+ Users Group and of course all of Amiga users around the world.
+
+
+
+
+@ENDNODE
+
+
+
+@NODE authorsnote "Note from the authors"
+
+ 
+ Note From the Authors:
+ ====================== 
+ 
+     We would be very interested in seeing what all you creative
+ people out there use Vic Vision for ??.  So if you should feel the need,
+ please feel free to send us a Demo of your work ! Be it, perhaps a
+ Slide Show, Ported C64 Demo or perhaps even a classic C64 Game !!.
+
+    Anyway, I hope you enjoy using Vic Vision.
+
+
+@ENDNODE
+
+

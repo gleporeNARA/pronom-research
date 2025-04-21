@@ -1,0 +1,292 @@
+@database StatRam.guide
+
+@node MAIN StatRam
+
+                            StatRam 3.1
+
+
+	@{" Introduction " Link Introduction}
+	@{" Installation " Link Installation}
+	@{" Configuration " Link Configuration}
+
+	@{" StatRam and PC-Task " Link FixPCTask}
+
+	@{" Removing a volume " Link RemSD0}
+
+	@{" Hints and Tips " Link Hints}
+	@{" Questions and Answers " Link Questions}
+
+	@{" Note " Link Update} for users of previous versions of StatRam
+
+	@{" Authors " Link Authors}
+	@{" Distribution " Link Distribution}
+	@{" Aknowledgements " Link Aknowledgements}
+
+	@{" History " Link History}
+
+@endnode
+
+@node Introduction
+
+StatRam is a recoverable ram drive.
+It works on any Amiga using V2.04 or greater of the OS. It handles any
+filesystem (either Amiga or foreign, like e.g. CrossDOS(tm)), has ten units
+and may be layed out like a floppy disk for quick diskcopies.
+It is dynamic, that is it allocates and frees memory as files are copied and
+deleted, and is probably the most recoverable ram drive available. Even the
+worst system crash will not erase it, as long as the portion of memory where
+it resides is not corrupted.
+@endnode
+
+@node Installation
+
+This section explains the basic installation, which will leave you with a
+working StatRam volume. The setup may be modified to change the volume size
+or use different filesystems; refer to section @{" Configuration " Link Configuration}.
+
+	@{" Workbench 2.0 " Link 20Install}
+	@{" Workbench 2.1 or later " Link 21Install}
+@endnode
+
+@node 20Install "Installation on Workbench 2.0"
+
+- Copy statram.device to DEVS:
+- Join the file named "mountlist" to DEVS:Mountlist
+- Add the command
+   Mount SD0:
+  to S:user-startup
+
+- Reboot.
+@endnode
+
+@node 21Install "Installation on Workbench 2.1+"
+
+- Copy statram.device to DEVS:
+- Drag the icon SD0 to DEVS:DOSDrivers
+
+- To mount the volume, double click on the SD0 icon or just reboot.
+@endnode
+
+@node Configuration
+
+You may control various aspects of StatRam volumes:
+- Their size
+- The filesystem they use
+- Which type of memory they use to store the data
+
+These changes are performed modifying some parameters in the mount
+information.
+If you are using Workbench 2.04, you have to edit DEVS:Mountlist by hand;
+otherwise, modify the ToolTypes in the icon contained in DEVS:DOSDrivers.
+
+You may mount up to ten volumes at the same time; to create a new volume,
+just duplicate one of the sample entries (SD0 for DOS volumes, PC4 for
+CrossDOS volumes), change the UNIT field and modify the other parameters to
+obtain the desired result.
+
+
+Modifiable parameters are:
+
+UNIT
+  This is the statram.device unit that the volume shall use. It can be any
+  value from 0 to 9.
+  @{b}Make sure to change the UNIT field of every mountfile so that there are
+  no two volumes using the same unit.@{ub}
+
+
+HIGHCYL
+BLOCKSPERTRACK
+  These two determine the @{u}maximum@{uu} size of SD0. The device will dynamically
+  allocate memory only when it's needed, growing and shrinking as you copy
+  and delete files in it.
+  (Note: the dynamic @{i}allocation @{ui}is available for any filesystem; dynamic
+  @{i}deallocation, @{ui}however, is available only for Amiga filesystems. Therefore,
+  a CrossDOS volume will grow as you copy files in it, but will not shrink
+  when you delete them).
+
+  The total size in kilobytes of the volume is (HIGHCYL+1)*BLOCKSPERTRACK.
+
+  @{b}Remember that it is @{u}much@{uu} better to fill the disk than to run out of
+  memory. Make sure not to oversize the volume, or you'll get write errors
+  when you run out of free memory.@{ub}
+
+
+  Using appropriate values, you may DiskCopy from floppies to ram, and vice
+  versa; this is great for many purposes, like making multiple copies of a
+  disk, or preparing distribution disks.
+
+  Appropriate values are:
+                            Size   HIGHCYL   BLOCKSPERTRACK
+  Amiga Double Density      880K     79           11
+  Amiga High Density       1760K     79           22
+  CrossDOS Double Density   720K     79            9
+  CrossDOS High Density    1440K     79           18
+
+
+BUFMEMTYPE
+  This value determines which type of memory StatRam should use to store
+  the volume data. Possible values are:
+
+  1  Use Fast memory first, Chip memory last
+  3  Use only Chip memory
+  5  Use only Fast memory
+
+
+DOSTYPE
+  (This field is available for AmigaDOS volumes only)
+  This tells the system which file system to use. Possible values are:
+
+  0x444F5300  Old File System
+  0x444F5301  Fast File System
+  0x444F5302  Old File System International
+  0x444F5303  Fast File System International
+  0x444F5304  Old File System - Directory Cache  (OS 3.0 only)
+  0x444F5305  Fast File System - Directory Cache (OS 3.0 only)
+
+  You will most probably leave this field to its default value.
+  Note that there is really no point in using the Directory Cache file
+  systems on a ram disk - they will actually slow it down.
+@endnode
+
+@node FixPCTask
+
+The PC emulator @{i}PC-Task @{ui}by Chris Hames greatly benefits from a ram drive.
+StatRam is compatible with PC-Task (just use a suitable mountlist, like the
+supplied PC4).
+
+You can even use a StatRam volume as drive A:, for extra-fast boots.
+
+Unfortunately, versions 2.00 through 2.03 of PC-Task have a bug which
+prevents them from booting from a fast device like StatRam.
+The bug is alredy fixed in the French and German language versions, and will
+be fixed in the next release.
+
+In the meantime, we have provided a workaround. The patch is called
+FixPCTask. All you have to do is execute it from S:user-startup, and PC-Task
+will happily boot from a StatRam volume.
+@endnode
+
+@node RemSD0
+
+If you need memory for other tasks, StatRam volumes may be instantly removed
+from the system:
+
+  RemSD0               removes the first StatRam unit
+
+  RemSD0 name:         removes the StatRam unit of given name
+@endnode
+
+@node Hints "Hints and Tips"
+
+Some people like to completely replace the standard RAM: volume with the
+recoverable ram disk. This can be easily done by changing the name of the
+mount entry from SD0 to RAM, and adding the following lines at the
+beginning of the startup-sequence, before any reference to RAM: (but after
+SetPatch):
+
+Assign ENV: SYS:
+Assign RAM: DISMOUNT
+Mount RAM:
+
+(the Assign ENV: SYS: line is necessary because some versions of Mount
+would otherwise pop up a "Please insert volume ENV:" requester. ENV: is
+assigned to RAM:ENV later in the startup-sequence).
+
+Now find this line in the startup-sequence:
+
+C:MakeDir RAM:T RAM:Clipboards RAM:ENV RAM:ENV/Sys
+
+And replace it with:
+C:MakeDir >NIL: RAM:T RAM:Clipboards RAM:ENV RAM:ENV/Sys
+@endnode
+
+@node Questions "Questions and Answers"
+
+Q. I sometimes get read/write errors while WRITING to SD0:.
+A. You are probably running out of memory, because the ram disk is too
+   large. Lower the HIGHCYL parameter.
+
+Q. I sometimes get read errors while READING from SD0:.
+A. This means that the memory used by static.device to store the sector data
+   has been corrupted. Three possible causes are:
+   - You had previously ran out of memory, and StatRam reported a write
+     error. Subsequent accesses to sectors which couldn't be written due to
+     an out of memory error cause a read error. To fix the error, you may
+     use a disk repair utility like @{i}DiskSalv 2 @{ui}by Dave Haynie (the Validate
+     function is the most appropriate).
+   - You have used a defective program which has trashed the memory used by
+     StatRam to store the volume data.
+   - One of your ram chips is broken. Check your memory with a diagnostic
+     program. Note: the programs supplied with memory boards often don't
+     spot small faults like a single bit not keeping its state.
+     Don't think it cannot happen to you! It happened to ME!
+@endnode
+
+@node Update
+
+StatRam 3.0 is a completely new program. Even the device name has changed.
+Therefore, if you are upgrading from a previous version, delete the old
+device (static.device), KillSD0 and the mountlist, and restart installation
+from scratch.
+@endnode
+
+@node Authors
+
+StatRam was originally based on VD0:, a popular recoverable ram drive by
+Perry S. Kivolowitz.
+
+Since then it has been refined and rewritten by :
+
+   Nicola Salmoria
+   Via Piemonte 11
+   53100 Siena   ITALY
+
+   Internet : MC6489@mclink.it
+
+
+   Richard Waspe
+
+   Internet : waspy@cix.compulink.co.uk
+   CbmNet   : rwaspe@hamlet.adsp.sub.org
+   Fidonet  : 2:250/151.40
+
+@endnode
+
+@node Distribution
+
+This software is @{i}FreeWare. @{ui}It is freely distributable as long as the archive
+remains intact, and only a nominal fee is charged for its distribution.
+
+This software is provided "AS IS" without warranty of any kind, either
+expressed or implied. By using it, you agree to accept the entire risk as to
+the quality and performance of the program.
+@endnode
+
+@node Aknowledgements
+
+Many thanks to the Beta testers :
+
+    Ian Moran
+    Mark Fisher
+    Mike Walter
+    Steve Loughran
+    Bob Adams
+@endnode
+
+@node History
+
+Version 3.1
+
+- Fixed problem with the disk compressor Zoom. When uncompressing a .zom
+  file over a floppy-like StatRam volume, the automatic memory expunge
+  was done too soon, causing data corruption.
+
+- Can now be used with PFS by Michiel Pelt, just set the FileSystem and
+  DosType fields appropriately. Automatic memory expunge is not available,
+  just like with CrossDOS. The disk will grow as data is written to it and
+  never shrink.
+
+- At last, found and fixed the pyrotecnic crash which sometimes occured when
+  trying to remount a volume after its blocktable had been overwritten by
+  another volume.
+@endnode

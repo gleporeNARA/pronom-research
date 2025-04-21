@@ -1,0 +1,154 @@
+@database TransNibAm.guide
+@author Matt Francis
+@(c) 1993 Matt Francis
+
+@wordwrap
+
+
+
+@node Main "Contents"
+
+@{b}@{u}TRANSNIBAM V3.11@{uu}@{ub}
+
+	@{"Credits" link Credits}
+	@{"Requirments" link Requirments}
+	@{"Introduction" link Introduction}
+	@{"Using TransNibAm" link Usage}
+	@{"Acknowledgments" link Acknowledgments}
+	@{"History" link History}
+@endnode
+
+
+
+@node Credits
+
+
+
+                              @{b}@{u}TRANSNIBAM V3.11@{uu}@{ub}
+
+                          Created by Matt Francis
+                         ReqTools by Nico François
+                     GUI created with GadToolsBox V2.0c
+
+                 Comments, suggestions, bug reports etc. to
+                        m.p.francis@newcastle.ac.uk
+@endnode
+
+
+
+@node Requirments
+TransNibAm requires Kickstart V37 (release 2.04) or above.  Also required is Nico François' ReqTools library V38 or above (supplied).
+@endnode
+
+
+
+@node Introduction
+TransNibAm is the Amiga front-end for the TransNib V1.00 protocol (please read the TransNib docs if you haven't already).
+
+TransNibAm is totally OS-friendly, and will comfortably multi-task alongside the best of them.  Its window can be opened on any public screen, so you could operate it from something like Directory Opus should you wish.  The parallel port hardware is locked properly before a transfer commences, and unlocked as soon as the transfer finishes.  Any other OS-compliant tasks trying to use the parallel port while TransNibAm is transfering won't be granted access to it.  Likewise, if another program is using the parallel port (sending something to a printer for example), TransNibAm will inform you that it can't lock the port, and you can try again once the port is free.
+@endnode
+
+
+
+@node Usage "Using TransNibAm"
+TransNibAm can be started from a Shell or the Workbench.  The Shell particulars follow:
+
+   Format: TRANSNIBAM [[SENDDIR] <name of default send directory>]
+                      [[RECVDIR] <name of default receive directory>]
+                      [BUFFSIZE <buffer size in bytes>]
+                      [PUBSCREEN <public screen name>]
+ Template: SENDDIR,RECVDIR,BUFFSIZE/N/K,PUBSCREEN/K
+
+SENDDIR		- You can set this to the directory containing the files you
+		  wish to send.
+		  Default: the current directory.
+
+RECVDIR		- You can set this to the directory where you want received
+		  files to be saved.
+		  Default: the current directory.
+
+BUFFSIZE	- TransNibAm conducts all transfers in blocks.  The size of
+		  each block is determined by this option.
+		  Default: 1024 bytes.
+
+PUBSCREEN	- Set this to the name of the public screen you want
+		  TransNibAm to open on.
+		  Default: the default public screen (normally Workbench).
+
+When started from the Workbench, TransNibAm accepts tool-types whose names are identical to its Shell arguments.
+
+TransNibAm's window has a number of fields.  The Status field indicates what TransNibAm is currently up to, and will read "Ready" when a transfer is not taking place.  The File field will display the name of the filename currently being sent or received.  The Bytes field shows how many bytes of the current file remain to be sent or received during a transfer, and the field after it shows the actual length of the current file.
+
+TransNibAm's single menu is self-explanetory.
+
+TransNibAm has two modes of operation, @{"Send" link SendMode} and @{"Receive" link ReceiveMode}.
+
+Sending TransNibAm a @{"CTRL-D" link Signals} will cause it to pop up. TransNibAm can be killed with a @{"CTRL-C" link Signals}.
+@endnode
+
+
+
+@node SendMode "Send Mode"
+In this mode, you select one or more files to send.  Before the tranfer begins, you will be asked if you want to "Proceed" or "Cancel".  Make sure the target machine is ready to receive before clicking on "Proceed".
+
+If any problems occur (for example, a file cannot be opened or there is a read error), the whole operation will be aborted and TransNibAm will revert to its "Ready" state.
+@endnode
+
+
+
+@node ReceiveMode "Receive Mode"
+In this mode, you select the destination directory and click on "Proceed" when the sending machine is ready.  After that, everything will happen automatically until the transfer finishes.
+
+If any problems occur (for example, a file cannot be opened or there is a write error), the whole operation will be aborted and TransNibAm will revert to its "Ready" state.
+@endnode
+
+
+
+@node Signals
+If you started TransNibAm synchronously from a Shell (i.e.  you didn't use the Run command) you can send it a CTRL-C or CTRL-D signal just by pressing those keys.  If you started the program using the Run command, or you are in another Shell window, use the Status command to find TransNibAm's process number and then use the Break command to send it a signal.
+
+If you started TransNibAm from the Workbench, you will have to find its process number some other way or use a task monitor program (e.g.  TaskX or TaskE) to send it a signal.
+@endnode
+
+
+
+@node Acknowledgments
+Thanks to the following people:
+
+@{i}Nico François @{ui}for the ReqTools library, which makes life much more
+pleasant.
+
+@{i}Jan van den Baard @{ui}for GadToolsBox, which was used to design
+TransNibAm's GUI.
+
+@{i}CygnusSoft @{ui}for CygnusEd, the fastest, most stable and @{b}best
+@{ub}text editor for the Amiga (and, from what I've seen, for any
+computer!).  And it still works without problems on my A1200!
+
+@{i}Commodore @{ui}for brilliant computers which the competition just can't
+match.
+@endnode
+
+
+
+@node History
+@{b}V3.11@{ub}
+
+Modified to use new-look menus.
+
+@{b}V3.10@{ub}
+
+Restructured the GUI event handling code.  Changed the arguments and GUI slightly.  Made several incidental changes.  Added ID port feature to prevent two copies of TransNibAm from running at once.
+
+@{b}V3.00@{ub}
+
+At last, a custom GUI (thanks to GadToolsBox).  ReqTools is still in there, handling the requesters, but now TransNibAm has its own nice window, complete with status boxes and menus.  I also made this version totally system-friendly (the other versions didn't allocate the parallel port, and disabled multitasking while transferring).
+
+@{b}V2.00@{ub}
+
+After a few intermediate versions (which I didn't keep track of) I optimised the transfer routines and changed a few things round.  Still uses the ReqTools library for the interface though.
+
+@{b}V1.00@{ub}
+
+This version was written using nothing but ReqTools functions for the GUI. TransNib was still a little experimental in those days, but the system worked well enough.
+@endnode

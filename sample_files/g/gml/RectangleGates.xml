@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gating:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gating="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <!--  Range Gate -->
+  <gating:RectangleGate gating:id="CD3_Positive">
+    <gating:dimension gating:parameter="FSC-H" gating:min="100" gating:max="250"/>
+  </gating:RectangleGate>
+
+
+  <!-- Unlimited Range Gate, FL2 > 100 -->
+  <gating:RectangleGate gating:id="CD3">
+    <gating:dimension gating:parameter="FSC-H" gating:min="100"/>
+  </gating:RectangleGate>
+
+
+  <!-- 2D rectangle Gate -->
+  <gating:RectangleGate gating:id="CD5">
+    <gating:dimension gating:parameter="FSC-H" gating:min="100" gating:max="250"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="150" gating:max="300"/>
+  </gating:RectangleGate>
+
+
+  <!-- A "quad" gate -->
+  <gating:RectangleGate gating:id="G1">
+    <gating:dimension gating:parameter="FSC-H" gating:min="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="10"/>
+  </gating:RectangleGate>
+  <gating:RectangleGate gating:id="G2">
+    <gating:dimension gating:parameter="FSC-H" gating:max="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="10"/>
+  </gating:RectangleGate>
+  <gating:RectangleGate gating:id="G3">
+    <gating:dimension gating:parameter="FSC-H" gating:max="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:max="10"/>
+  </gating:RectangleGate>
+  <gating:RectangleGate gating:id="G4">
+    <gating:dimension gating:parameter="FSC-H" gating:min="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:max="10"/>
+  </gating:RectangleGate>
+
+
+  <!-- 3D rectangle Gate -->
+  <gating:RectangleGate gating:id="CD4">
+    <gating:dimension gating:parameter="FSC-H" gating:min="100" gating:max="250"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="150" gating:max="300"/>
+    <gating:dimension gating:parameter="CD3-FITC-477nm" gating:min="200" gating:max="300"/>
+  </gating:RectangleGate>
+
+
+  <!-- 3D rectangle Gate with one unbounded parameter -->
+  <gating:RectangleGate gating:id="CD4_test">
+    <gating:dimension gating:parameter="FSC-H" gating:min="100" gating:max="250"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="150" gating:max="300"/>
+    <gating:dimension gating:parameter="CD1a-FITC-514nm" gating:max="300"/>
+  </gating:RectangleGate>
+
+  <gating:RectangleGate gating:id="CD6positive">
+    <gating:dimension gating:parameter="FSC-H" gating:min="20" gating:max="40"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="10" gating:max="100"/>
+  </gating:RectangleGate>
+
+  <!-- 3D rectangle gate -->
+  <gating:RectangleGate gating:id="gate ">
+    <gating:dimension gating:parameter="FSC-H" gating:min="30" gating:max="80"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="10" gating:max="30"/>
+    <gating:dimension gating:parameter="CD3-FITC-477nm" gating:min="0" gating:max="20"/>
+  </gating:RectangleGate>
+
+
+  <!-- Example of a 4D "block" two unbounded parameter-->
+  <gating:RectangleGate gating:id="RectGate1">
+    <gating:dimension gating:parameter="CD1a-FITC-514nm" gating:min="90" gating:max="200"/>
+    <gating:dimension gating:parameter="FSC-H" gating:min="90" gating:max="-10"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="30"/>
+    <gating:dimension gating:parameter="CD3-FITC-477nm" gating:max="100"/>
+  </gating:RectangleGate>
+
+</gating:Gating-ML>

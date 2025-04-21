@@ -1,0 +1,471 @@
+@database AmiGameBoy Emulator.
+@version $VER: AmiGameBoy.guide 0.85 (5.3.97)
+
+@node MAIN "AmiGameBoy Emulator."
+
+                       <=--------------------------=>
+                         AmiGameBoy Emulator v0.85ß
+                             (Preview Version)
+                       <=--------------------------=>
+
+                             @{"Note from author" link Note}
+                             @{"Introduction    " link Introduccio}
+                             @{"Requirements    " link Requeriments}
+
+                             @{"Instructions    " link Instruccions}
+                             @{"Joy-Control     " link JoyControl}
+
+                             @{"Emulation       " link Emulacio}
+                             @{"Technical datas " link Tecnics}
+                             @{"Future versions " link Futur}
+
+                             @{"Copyrights      " link Copyrights}
+                             @{"Author          " link Autors}
+                             @{"Greetings       " link Agraiments}
+
+@endnode
+
+@node Note "AmiGameBoy Emulator."
+
+    Note from Author:
+    -----------------
+
+    After of some time i can back with a new version of this emulator.
+
+    I  am  the  author  of  AmiMSX2 Emulator and i started AmiGameBoy like a
+curiosity, NOT seriously.
+
+   I  found  hardware information about Game Boy in a CD of MSX, i read this
+information  and  thought:  "I can use my Z-80 emulation and Video Emulation
+systems for emulate a fast Game Boy"
+
+    Ok!   One  week  for  make  Z80A compatible with Game Boy Z80 and memory
+mapping and other one for make AmiGameBoy v0.8
+
+    I used AmiMSX2 menu for Game Boy, winning a lot of time!!!
+
+    Yeeeaaahhhh,  AmiGameBoy  run  very fast and screen refresh is always in
+real time!!!  (ONE frame)
+
+    I  thought:   "I can use my Z-80A emulation for make a Master System and
+Game Gear emulator!!!"
+
+    Ok!  BUT, where find hardware information?  Oh NO!  i found Nothing.
+
+    Well,  now  i  go  to  disassemble some games of Master System with some
+debuger of MSX (emulated with AmiMSX2!!!)
+
+    All  right.  Two weeks ago i released a fast Master System and Game Gear
+emulator.
+
+    My friend uploaded these two emulators to internet and him was bombarded
+with a lots of great e-mails asking for future versions.
+
+    Well,  I have done the most difficult, but i have the experience of make
+an  emulator.   This  needs a lots of time and dedication.  In consecuence i
+need make AmiGameBoy Shareware.
+
+    This is the last version freeware of AmiGameBoy.
+
+    Next version will be a DEMO version with time-limit.
+
+    After   of  make  AmiGameBoy  i  will  think  for  continue  and  finish
+AmiMasterGear.
+
+    Ok!  Enjoy this very-little preview version.
+
+
+                                             Juan Antonio Gómez
+
+                                         Barcelona, April 2th, 1997
+
+PS:
+
+    80% of this software is result of my hard work making AmiMSX2 Emulator.
+
+PS2:
+
+    Sorry my bad English.  Thanks.
+
+@endnode
+
+@node Introduccio "AmiGameBoy Emulator."
+
+    Introduction:
+    -------------
+
+    This is a Game Boy emulator for Amiga computers.
+
+    This  is  only  a  PREVIEW  version,  i am optimizing video routines and
+designing the interrupt emulation system with screen changes in real time.
+
+    The  'modified'  Z-80  is  not  totally  checked with the GameBoy memory
+mapping.
+
+    Sound emulation is not finished.
+
+    But the emulator work well with some software.
+
+    Well, this is all by now.
+
+    Wait for future versions, and please, don't use drugs.
+
+@endnode
+
+@node Requeriments "AmiGameBoy Emulator."
+
+    Requirements:
+    -------------
+
+    - Amiga AGA computer.
+    - MC68020+  (and 100% compatible with MC68030/MC68040/MC68060)
+    - PAL, NTSC or compatible monitor.
+    - asl.library
+    - stc.library  (Only for Stone Cracker decrunch support)
+
+
+    Requirements for real emulation:
+    --------------------------------
+
+    - MC68020 at 28Mz or MC68030 at 25Mz.
+    - 1Mb of real fast32bit memory.
+
+@endnode
+
+@node Instruccions "AmiGameBoy Emulator."
+
+    Instructions:
+    -------------
+
+    These options don't work in this version.
+
+
+    * Load/Save Frozen:
+
+        Creates snatshops of your game.
+
+    * Edit Palette:
+
+         Edit your own palette.
+
+    * Cheat mode:
+
+        Find and set cheat adresses of your games.
+
+    * Save VRAM:
+
+        Saves Game Boy VRAM as an IFF-ILBM.
+
+    * Save Prefs:
+
+        It will save actual preferences in S:AmiGameBoy.prefs
+
+    * Black Border:
+
+        Borders of Game Boy will be black.
+
+    * No illogical moves:
+
+        Left  and  Right at once or Up and Down at once in Joy-reads are not
+acepted.
+
+    * Ask for Reset:
+
+        Ask always before Power On a Cart.
+
+    * Auto Load RAM-Battery:
+
+        It will Read RAM-Battery (Cart.sav) when you insert a cart.
+
+    * Auto Save RAM-Battery:
+
+        It  will Save RAM-Battery (Cart.sav) when you Re-insert another cart
+or Quit emulator.
+
+    * Ask for Save RAM-Battery.
+
+        It will ask you for save RAM-Battery.
+
+    * Overwrite:
+
+        It will Ask you before delete a file.
+
+    * Use Unpack.library.
+
+        For unpack compresses files.
+
+    * Use xpk for save.
+
+        For Save all files compresed with xpk.
+
+@endnode
+
+@node JoyControl "AmiGameBoy Emulator."
+
+    Joy-Control:
+    ------------
+
+    In future versions it will be totally configurable:
+
+
+        Keyboard Only:  (This keys work in all Joy-Control modes)
+        --------------
+
+                            ESC = Exit to menu.
+                            Del = Select
+                           Help = Start
+                     Left Amiga = Button A
+                       Left Alt = Button B
+                          Space = Button B
+                        Cursors = Up/Down/Left/Right
+                     Left Mouse = Select
+                    Right Mouse = Start
+
+        Amiga JoyStick or compatible Joypad:
+        ------------------------------------
+
+                           Fire = Button A
+                    Second Fire = Button B  (If exists)  [pin 9]
+                     Third Fire = Start     (If exists)  [pin 5]
+
+                    Use keyboard keys for other buttons
+
+        CD32 Joypad:
+        ------------
+
+                         Play Button = Exit to menu
+                        Green Button = Select
+                       Yellow Button = Start
+                          Red Button = Button B
+                         Blue Button = Button A
+                       Reward Button = Button B
+                     Fastward Button = Button A
+
+@endnode
+
+@node Copyrights "AmiGameBoy Emulator."
+
+    DISCLAIMER
+    ----------
+
+ The author don't take responsabilities of a bad use of this software.
+
+ Game Boy is a registered trademark of Nintendo Corporation.
+
+ Devpac III              © HiSoft.
+
+ GadToolsBox             © Java Development.
+
+ Stc.library             © StoneWare SoftWorks.       (By Jouni Korhonen)
+
+ Wzonka-Lad              © Ville Helin.
+
+ AmiMSX2 Emulator        © RED Soft S.L.      (By Juan Antº Gómez Gálvez)
+
+ fMSX Amiga Emulator     © Hans Guijt.
+
+ VirtualGameBoy          © Marat Fayzullin.
+
+@endnode
+
+@node Autors "AmiGameBoy Emulator."
+
+    Author:
+    -------
+
+    If you are interested in contact with me then write to:
+
+    Juan Antº Gómez
+    Apdo: 275
+    08940 Cornellà de Llobregat
+    BARCELONA
+    SPAIN
+
+    e-mail:  Comming soon!!!
+
+
+    You can contact me via e-mail writting to my friend Skid/Ozone³:
+
+    skid@bcn.servicom.es
+
+                        ----------------------------
+
+    AmiGameBoy is 100% programmed and designed by Juan Antº Gómez.
+
+    All graphics and icons are drawed by Multivac.
+
+    Special Thanks to Skid/Ozone³ for search hardware information for me and
+all your helps!!!!
+
+@endnode
+
+@node Tecnics "AmiGameBoy Emulator."
+
+    Technical datas:
+    ----------------
+
+    AmiGameBoy is 100% programmed in optimized MC68020 assembly language.
+
+    80% of coding and design is totally based in AmiMSX2 Emulator.
+
+    Developed using an Amiga 1200+Bizzard 1220+2Gb Hard Disk.
+
+    Programmed using Devpac III
+
+    GUI created with GadToolsBox.
+
+    4987 lines of GameBoy emulation code.
+    2113 lines of menu code.
+    6078 lines of GadToolsBox generated code.
+   ------
+   13187 lines   (90381 lines with macros expanded)
+
+    100% compatible with 020,030,040 and 060.
+
+@endnode
+
+@node Emulacio "AmiGameBoy Emulator."
+
+    Game Boy Emulation:
+    -------------------
+
+    This is only a preview version.  A lots of things are not finished.
+
+
+    Z-80 processor:
+    ---------------
+
+    All works correctly except this:
+
+    -  Flags  N  and  H  are not emulated.  (but uses a special system for a
+right emulation of DAA instruction)
+    - SP register cannot read from ROM!
+    - SP register cannot write in hardware registers,
+
+    The AMIGA can NEVER crash!
+
+
+    Video Emulation:
+    ----------------
+
+    This version refresh all graphics and Sprites every Vertical Interrupt.
+    Emulation is always in one frame.  (100% identical to a real Game Boy)
+
+    Second palette of Sprites is not emulated.
+    Priortity between Sprites and Background is not emulated.
+    Sprites priorities are not emulated.
+
+
+    Game Boy System:
+    ----------------
+
+    Only emulated Vertical Interrupt.
+    Timer and Serial not emulated.
+    Raster register emulated, but not 100%.
+    DMA transfer emulated.
+
+
+    Sound Emulation:
+    ----------------
+
+    Only emulated first three channels.
+    This emulation is not finished.
+
+
+    About other GameBoy Emulations.
+    -------------------------------
+
+    After of make AmiGameBoy i found another Game Boy emulators:
+
+    - VitualGameBoy
+    - Wzonka-Lad
+
+    VGB  works  very  well  and compatible but very slow.  It is a UNIX-port
+programmed by Marat Fayzullin.
+
+
+    Wzonka-Lad  is  programmed  in  100%  asm  and  it  is multitask.  It is
+programmed  by  Ville  Helin.   It  is  very  compatible and run faster than
+VirtualGameBoy,  but the reason of to be Multitask and system-friendly makes
+that it run more slow than AmiGameBoy.
+
+    Huummm, it remenver to me fMSX of Hans Guijt against AmiMSX2...
+
+    AmiGameBoy  is  100%  programmed  and  designed  for work with Amiga AGA
+hardware  directly, without use AmigaOS.  The Video quality of AmiGameBoy is
+100% to a REAL Game Boy console.
+
+    This  version  is  a  super preview.  I can make a Game Boy Emulation as
+good as AmiMSX2 emulates a MSX2 computer.
+
+@endnode
+
+@node Futur "AmiGameBoy Emulator."
+
+    Future:
+    -------
+
+    Ok!  Now i will dedicate all my time in finish AmiGameBoy Shareware.
+
+    Next  version  will  be v0.9, This version will emulate 100% a Game Boy,
+but  this  emulation  will work only 5 minutes with one game.  You will mush
+register for obtain Unlimited time version.
+
+    Register  will  be $20 US Dollars via modem, or $25 by post.  But if you
+are a Registered user of my AmiMSX2 Emulator it will cost minus.
+
+    Actualizations of AmiGameBoy will be always free.
+
+
+    AmiGameBoy will be capable of:
+
+    - All interrupts emulated.
+    - All Screen changes in real time (palete,scroll,etc...)
+    - 100% Screen priorities and colours emulated.
+    - Speed will be faster than this version.
+    - Support for frozen games (snatshops)
+    - Support for Backed RAM-Battery.
+    - Cheat mode. (like AmiMSX2)
+    - All sound channels emulated.
+    - xpk support.
+    - Save GameBoy VRAM like a IFF-ILBM.  (Background/Window/Sprites)
+    - Edition of Palette of Background/Window/Sprites pal 0 and 1)
+
+
+    I  will  work  in  future  versions  for make AmiGameBoy compatible with
+non-PAL/NTSC frequencies.  But it never will be Multitask.
+
+    AmiGameBoy always will run with AGA.
+
+    But naturaly, it won't emulate 100% a GameBoy, but in this case you mush
+wait for future versions.
+
+    Yeeeaaahhhh!!!!  this is too work but i am a expert!!!  look AmiMSX2...
+
+
+    After of make AmiGameBoy i will think for finish AmiMasterGear.
+
+@endnode
+
+@node Agraiments "AmiGameBoy Emulator."
+
+    Greetings:
+    ----------
+
+    Special Greetings to the best Spanish group:  Ozone³
+
+    Multivac for your Icons and graphics.
+
+    Skid/Ozone³ for Modem support!!!
+
+    Roderick Mouthaan and Philippe Bezon for be good friends.
+
+    Manuel Hiniesta for be my best friend.
+
+    Pascal Willano for help me to make my emulators compatible with 040.
+
+    Sergi Martínez for your help in AmiMSX2.
+
+    My sister for annoy.
+
+@endnode

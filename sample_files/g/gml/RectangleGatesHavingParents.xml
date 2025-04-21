@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gating:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gating="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <!-- Parent gate 1 -->
+  <gating:RectangleGate gating:id="Lymphocytes_rt01">
+    <gating:dimension gating:parameter="FSC-H" gating:min="200" gating:max="650"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="150" gating:max="800"/>
+  </gating:RectangleGate>
+
+  <!-- Parent gate 2 -->
+  <gating:RectangleGate gating:id="parent_fl1_fl2_rt02">
+    <gating:dimension gating:parameter="FL1" gating:min="300" gating:max="792"/>
+    <gating:dimension gating:parameter="FL2" gating:min="400" gating:max="732"/>
+  </gating:RectangleGate>
+
+
+  <!-- CD3+ lymphocytes, FL2 > 100 -->
+  <gating:RectangleGate gating:id="CD3-Positive" gating:parent_id="Lymphocytes_rt01">
+    <gating:dimension gating:parameter="FL2" gating:min="100"/>
+  </gating:RectangleGate>
+
+
+  <!-- CD5+/CD3+ lymphocytes -->
+  <gating:RectangleGate gating:id="CD5Pos_CD3Pos" gating:parent_id="CD3-Positive">
+    <gating:dimension gating:parameter="FL1" gating:min="100" gating:max="250"/>
+    <gating:dimension gating:parameter="FL2" gating:min="150" gating:max="300"/>
+  </gating:RectangleGate>
+
+  <!-- CD5+/CD3+/CD8+ lymphocytes -->
+  <gating:RectangleGate gating:id="CD8Pos" gating:parent_id="CD5Pos_CD3Pos">
+    <gating:dimension gating:parameter="FL6" gating:min="500"/>
+  </gating:RectangleGate>
+
+
+  <!-- A "quad" gate defined by FSC/SSC applied to parent_fl1_fl2_rt02 -->
+  <gating:RectangleGate gating:id="G1" gating:parent_id="parent_fl1_fl2_rt02">
+    <gating:dimension gating:parameter="FSC-H" gating:min="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="10"/>
+  </gating:RectangleGate>
+  <gating:RectangleGate gating:id="G2">
+    <gating:dimension gating:parameter="FSC-H" gating:max="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:min="10"/>
+  </gating:RectangleGate>
+  <gating:RectangleGate gating:id="G3">
+    <gating:dimension gating:parameter="FSC-H" gating:max="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:max="10"/>
+  </gating:RectangleGate>
+  <gating:RectangleGate gating:id="G4">
+    <gating:dimension gating:parameter="FSC-H" gating:min="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:max="10"/>
+  </gating:RectangleGate>
+
+  <!-- 3D rectangle Gate CD4+ lymphocytes -->
+  <gating:RectangleGate gating:id="CD4-positive" gating:parent_id="Lymphocytes_rt01">
+    <gating:dimension gating:parameter="FL1" gating:min="100" gating:max="250"/>
+    <gating:dimension gating:parameter="FL2" gating:min="150" gating:max="300"/>
+    <gating:dimension gating:parameter="FL3" gating:min="200" gating:max="300"/>
+  </gating:RectangleGate>
+
+</gating:Gating-ML>

@@ -1,0 +1,348 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gating:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gating="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <!-- 4 Quadrants in a Plane  -->
+  <gating:RectangleGate gating:id="FS-P">
+    <gating:dimension gating:parameter="FS" gating:min="20"/>
+  </gating:RectangleGate>
+
+  <gating:BooleanGate gating:id="FS-">
+    <gating:not>
+      <gating:gateReference gating:ref="FS-P"/>
+    </gating:not>
+  </gating:BooleanGate>
+  <gating:RectangleGate gating:id="SS-P">
+    <gating:dimension gating:parameter="SS" gating:min="10"/>
+  </gating:RectangleGate>
+  <gating:BooleanGate gating:id="G1">
+    <gating:and>
+      <gating:gateReference gating:ref="FS-P"/>
+      <gating:gateReference gating:ref="SS-P"/>
+    </gating:and>
+  </gating:BooleanGate>
+  <gating:BooleanGate gating:id="G2">
+    <gating:and>
+      <gating:gateReference gating:ref="FS-"/>
+      <gating:gateReference gating:ref="SS-P"/>
+    </gating:and>
+  </gating:BooleanGate>
+  <gating:RectangleGate gating:id="G3">
+    <gating:dimension gating:parameter="FS" gating:max="20"/>
+    <gating:dimension gating:parameter="SS" gating:max="10"/>
+  </gating:RectangleGate>
+  <gating:BooleanGate gating:id="G4">
+    <gating:and>
+      <gating:gateReference gating:ref="FS-P"/>
+      <gating:RectangleGate gating:id="SS-">
+        <gating:dimension gating:parameter="SS" gating:max="10"/>
+      </gating:RectangleGate>
+    </gating:and>
+  </gating:BooleanGate>
+
+
+  <!-- The same 4 Quadrants others  -->
+  <gating:RectangleGate gating:id="FS1-P">
+    <gating:dimension gating:parameter="FS1" gating:min="20"/>
+  </gating:RectangleGate>
+  <gating:RectangleGate gating:id="SS1-P">
+    <gating:dimension gating:parameter="SS1" gating:min="10"/>
+  </gating:RectangleGate>
+  <gating:BooleanGate gating:id="g1">
+    <gating:and>
+      <gating:gateReference gating:ref="FS1-P"/>
+      <gating:gateReference gating:ref="SS1-P"/>
+    </gating:and>
+  </gating:BooleanGate>
+  <gating:BooleanGate gating:id="g2">
+    <gating:and>
+      <gating:BooleanGate gating:id="x1">
+        <gating:not>
+          <gating:gateReference gating:ref="FS1-P"/>
+        </gating:not>
+      </gating:BooleanGate>
+      <gating:gateReference gating:ref="SS1-P"/>
+    </gating:and>
+  </gating:BooleanGate>
+  <gating:BooleanGate gating:id="g3">
+    <gating:and>
+      <gating:BooleanGate gating:id="x2">
+        <gating:not>
+          <gating:gateReference gating:ref="FS1-P"/>
+        </gating:not>
+      </gating:BooleanGate>
+      <gating:BooleanGate gating:id="x3">
+        <gating:not>
+          <gating:gateReference gating:ref="SS1-P"/>
+        </gating:not>
+      </gating:BooleanGate>
+    </gating:and>
+  </gating:BooleanGate>
+  <gating:BooleanGate gating:id="g4">
+    <gating:and>
+      <gating:gateReference gating:ref="FS1-P"/>
+      <gating:BooleanGate gating:id="x4">
+        <gating:not>
+          <gating:gateReference gating:ref="SS1-P"/>
+        </gating:not>
+      </gating:BooleanGate>
+    </gating:and>
+  </gating:BooleanGate>
+
+
+  <!-- Example of a Boolean Gate -->
+  <gating:BooleanGate gating:id="BoolSample_1">
+    <gating:not>
+      <gating:BooleanGate gating:id="BoolSample2">
+        <gating:and>
+          <gating:gateReference gating:ref="RectGate1"/>
+          <gating:EllipsoidGate gating:id="Lymphocytes_1">
+            <gating:dimension gating:parameter="FS"/>
+            <gating:dimension gating:parameter="SS"/>
+            <gating:focus>
+              <gating:coordinate gating:value="25.1"/>
+              <gating:coordinate gating:value="19.3"/>
+            </gating:focus>
+            <gating:focus>
+              <gating:coordinate gating:value="14"/>
+              <gating:coordinate gating:value="80"/>
+            </gating:focus>
+            <gating:distance>114.4</gating:distance>
+          </gating:EllipsoidGate>
+          <gating:BooleanGate gating:id="x5">
+            <gating:or>
+              <gating:gateReference gating:ref="PolyGate1"/>
+              <gating:gateReference gating:ref="Lymphocytes"/>
+            </gating:or>
+          </gating:BooleanGate>
+        </gating:and>
+      </gating:BooleanGate>
+    </gating:not>
+  </gating:BooleanGate>
+
+
+  <!-- Referenced Gates -->
+  <!-- RectGate1 -->
+  <gating:RectangleGate gating:id="RectGate1">
+    <gating:dimension gating:parameter="FS" gating:min="20"/>
+    <gating:dimension gating:parameter="SS" gating:min="10"/>
+  </gating:RectangleGate>
+  <!-- Lymphocytes -->
+  <gating:RectangleGate gating:id="Lymphocytes">
+    <gating:dimension gating:parameter="FS" gating:min="100"/>
+    <gating:dimension gating:parameter="SS" gating:min="300"/>
+  </gating:RectangleGate>
+  <!-- PolyGate1 -->
+  <gating:PolytopeGate gating:id="PolyGate1">
+    <gating:dimension gating:parameter="FS"/>
+    <gating:dimension gating:parameter="SS"/>
+    <gating:point>
+      <gating:coordinate gating:value="1"/>
+      <gating:coordinate gating:value="10"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="3"/>
+      <gating:coordinate gating:value="30"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="1"/>
+      <gating:coordinate gating:value="13"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+
+  <!-- Example of a Boolean Gate -->
+  <gating:BooleanGate gating:id="BoolSample_2">
+    <gating:not>
+      <gating:BooleanGate gating:id="Bool_Sample_2">
+        <gating:or>
+          <gating:RectangleGate gating:id="x6">
+            <gating:dimension gating:parameter="FS" gating:min="10" gating:max="30"/>
+            <gating:dimension gating:parameter="SS" gating:min="10" gating:max="20"/>
+          </gating:RectangleGate>
+          <gating:EllipsoidGate gating:id="x7">
+            <gating:dimension gating:parameter="FS"/>
+            <gating:dimension gating:parameter="SS"/>
+            <gating:focus>
+              <gating:coordinate gating:value="30"/>
+              <gating:coordinate gating:value="15"/>
+            </gating:focus>
+            <gating:focus>
+              <gating:coordinate gating:value="10"/>
+              <gating:coordinate gating:value="0"/>
+            </gating:focus>
+            <gating:distance>32</gating:distance>
+          </gating:EllipsoidGate>
+        </gating:or>
+      </gating:BooleanGate>
+    </gating:not>
+  </gating:BooleanGate>
+
+
+  <!-- Example of a Boolean Gate -->
+  <gating:BooleanGate gating:id="Bool_Sample_3">
+    <gating:not>
+      <gating:BooleanGate gating:id="x8">
+        <gating:or>
+          <gating:gateReference gating:ref="Bool_Sample_2"/>
+          <gating:EllipsoidGate gating:id="x9">
+            <gating:dimension gating:parameter="FS"/>
+            <gating:dimension gating:parameter="SS"/>
+            <gating:focus>
+              <gating:coordinate gating:value="10"/>
+              <gating:coordinate gating:value="20"/>
+            </gating:focus>
+            <gating:focus>
+              <gating:coordinate gating:value="5"/>
+              <gating:coordinate gating:value="65"/>
+            </gating:focus>
+            <gating:distance>85</gating:distance>
+          </gating:EllipsoidGate>
+        </gating:or>
+      </gating:BooleanGate>
+    </gating:not>
+  </gating:BooleanGate>
+
+  <gating:BooleanGate gating:id="BoolSample1">
+    <gating:or>
+      <gating:RectangleGate gating:id="x11">
+        <gating:dimension gating:parameter="FSC-H" gating:min="10" gating:max="30"/>
+        <gating:dimension gating:parameter="SSC-H" gating:min="10" gating:max="20"/>
+      </gating:RectangleGate>
+      <gating:EllipsoidGate gating:id="x21">
+        <gating:dimension gating:parameter="FSC-H"/>
+        <gating:dimension gating:parameter="SSC-H"/>
+        <gating:focus>
+          <gating:coordinate gating:value="21.339746"/>
+          <gating:coordinate gating:value="15"/>
+        </gating:focus>
+        <gating:focus>
+          <gating:coordinate gating:value="38.660254"/>
+          <gating:coordinate gating:value="15"/>
+        </gating:focus>
+        <gating:distance>40</gating:distance>
+      </gating:EllipsoidGate>
+    </gating:or>
+  </gating:BooleanGate>
+
+  <gating:BooleanGate gating:id="BoolSample2a">
+    <gating:not>
+      <gating:gateReference gating:ref="BoolSample1"/>
+    </gating:not>
+  </gating:BooleanGate>
+
+  <gating:BooleanGate gating:id="BoolSample3">
+    <gating:not>
+      <gating:BooleanGate gating:id="BoolSample3a">
+        <gating:or>
+          <gating:gateReference gating:ref="BoolSample1"/>
+          <gating:EllipsoidGate gating:id="xb3">
+            <gating:dimension gating:parameter="FSC-H"/>
+            <gating:dimension gating:parameter="SSC-H"/>
+            <gating:focus>
+              <gating:coordinate gating:value="100"/>
+              <gating:coordinate gating:value="200"/>
+            </gating:focus>
+            <gating:focus>
+              <gating:coordinate gating:value="180"/>
+              <gating:coordinate gating:value="180"/>
+            </gating:focus>
+            <gating:distance>130</gating:distance>
+          </gating:EllipsoidGate>
+        </gating:or>
+      </gating:BooleanGate>
+    </gating:not>
+  </gating:BooleanGate>
+
+  <gating:RectangleGate gating:id="FSC-H-plus">
+    <gating:dimension gating:parameter="FSC-H" gating:min="20"/>
+  </gating:RectangleGate>
+  <gating:BooleanGate gating:id="FSC-H-minus">
+    <gating:not>
+      <gating:gateReference gating:ref="FSC-H-plus"/>
+    </gating:not>
+  </gating:BooleanGate>
+  <gating:RectangleGate gating:id="SSC-H-plus">
+    <gating:dimension gating:parameter="SSC-H" gating:min="10"/>
+  </gating:RectangleGate>
+
+  <gating:BooleanGate gating:id="G1x">
+    <gating:and>
+      <gating:gateReference gating:ref="FSC-H-plus"/>
+      <gating:gateReference gating:ref="SSC-H-plus"/>
+    </gating:and>
+  </gating:BooleanGate>
+
+  <gating:BooleanGate gating:id="G2x">
+    <gating:and>
+      <gating:gateReference gating:ref="FSC-H-minus"/>
+      <gating:gateReference gating:ref="SSC-H-plus"/>
+    </gating:and>
+  </gating:BooleanGate>
+
+  <gating:RectangleGate gating:id="G3x">
+    <gating:dimension gating:parameter="FSC-H" gating:max="20"/>
+    <gating:dimension gating:parameter="SSC-H" gating:max="10"/>
+  </gating:RectangleGate>
+
+  <gating:BooleanGate gating:id="G4x">
+    <gating:and>
+      <gating:gateReference gating:ref="FSC-H-plus"/>
+      <gating:RectangleGate gating:id="SSC-H-minus">
+        <gating:dimension gating:parameter="SSC-H" gating:max="10"/>
+      </gating:RectangleGate>
+    </gating:and>
+  </gating:BooleanGate>
+
+  <gating:RectangleGate gating:id="FSC-H-pluss">
+    <gating:dimension gating:parameter="FSC-H" gating:min="20"/>
+  </gating:RectangleGate>
+  <gating:RectangleGate gating:id="SSC-H-pluss">
+    <gating:dimension gating:parameter="SSC-H" gating:min="10"/>
+  </gating:RectangleGate>
+
+  <gating:BooleanGate gating:id="G1y">
+    <gating:and>
+      <gating:gateReference gating:ref="FSC-H-plus"/>
+      <gating:gateReference gating:ref="SSC-H-plus"/>
+    </gating:and>
+  </gating:BooleanGate>
+  <gating:BooleanGate gating:id="G2y">
+    <gating:and>
+      <gating:BooleanGate gating:id="just_random_1">
+        <gating:not>
+          <gating:gateReference gating:ref="FSC-H-plus"/>
+        </gating:not>
+      </gating:BooleanGate>
+      <gating:gateReference gating:ref="SSC-H-plus"/>
+    </gating:and>
+  </gating:BooleanGate>
+
+  <gating:BooleanGate gating:id="G3y">
+    <gating:and>
+      <gating:BooleanGate gating:id="just_random_2">
+        <gating:not>
+          <gating:gateReference gating:ref="FSC-H-plus"/>
+        </gating:not>
+      </gating:BooleanGate>
+      <gating:BooleanGate gating:id="just_random_3">
+        <gating:not>
+          <gating:gateReference gating:ref="SSC-H-plus"/>
+        </gating:not>
+      </gating:BooleanGate>
+    </gating:and>
+  </gating:BooleanGate>
+
+  <gating:BooleanGate gating:id="G4y">
+    <gating:and>
+      <gating:gateReference gating:ref="FSC-H-plus"/>
+      <gating:BooleanGate gating:id="just_random_4">
+        <gating:not>
+          <gating:gateReference gating:ref="SSC-H-plus"/>
+        </gating:not>
+      </gating:BooleanGate>
+    </gating:and>
+  </gating:BooleanGate>
+
+</gating:Gating-ML>

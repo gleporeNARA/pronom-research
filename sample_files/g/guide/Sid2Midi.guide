@@ -1,0 +1,164 @@
+@database Sid2Midi.guide
+@author "J.-F. Giorgi"
+@(c) "Copyright © 1994 J.-F. Giorgi"
+@$VER: Sid2Midi.guide 0.1 ß (07/03/95)
+
+@Node MAIN "Sid2Midi"
+
+@{b} SID2MIDI V0.1 ß@{ub}
+
+		@{" About Sid2Midi " link ABOUT}
+
+		@{" Requirements " link REQUIREMENTS}
+
+		@{" Usage " link USAGE}
+
+		@{" Technical Informations " link TECHINFO}
+
+		@{" Distribution " link DISTRIBUTION}
+
+		@{" Extra's " link EXTRAS}
+
+@ENDNODE
+
+@NODE ABOUT "About Sid2Midi"
+
+@{b} SID2MIDI V0.1 ß  @{ub}  (c)1994-1995 by @{"Jean-François Giorgi" link AUTHOR}
+
+
+
+         @{b} A SID song (C-64) to standard MIDIFile converter @{ub}
+
+
+
+Release date: 07 March 95
+
+   @{b} WARNING @{ub} 
+
+   @{fg shine} This is a BETA-RELEASE @{fg text}
+
+   So far this program has only be tested on the following system:
+
+    A1200 / OS3.0 / 2 Mb chip / 4 Mb fast + clock / 1 HD 170 Mo (GVP)
+
+This first and beta release is also my last release ... Sorry but I'm tired
+of it, and I don't thing I can do much more on it (apart from adding a nice
+GUI).
+
+If  someone  wants the sources (SAS/C 6.51) to continue the story, just ask
+me  (see @{"my e-mail address" link AUTHOR}). A SID to SoundTracker converter could easily
+be made from those sources.
+
+@ENDNODE
+
+@NODE REQUIREMENTS "Requirements"
+
+You'll need the following to use Sid2Midi
+
+    AmigaOS 3.0 (not tested under AmigaOS 2.0)
+
+    playsid.library V1.1 (by Per Håkan Sundell & Ron Birk)
+    which can be found in the PlaySID 3.0 package (available on aminet)
+@ENDNODE
+
+@NODE TECHINFO "Technical Informations"
+
+TECHNICAL INFO
+
+SID2MIDI  is  a  "on  the fly" (real-time) converter. While the SID file is
+played  by  playsid.library,  a  sub-process  of  SID2MIDI is called by the
+playsid.library  every time a new note is played. This sub-process converts
+the  note  into  a  MIDI  event  and  stores  it into memory (the memory is
+dynamically  allocated).  When  the  user  stop  the song, all the recorded
+events  are  written  to  a standard MIDI file, format 1 (1 track per audio
+channel or 1 track per sample (see UNMIX option)).
+
+There  is  no  program  changes  in  the  midifile.  With the @{"UNMIX option" link USAGE},
+SID2MIDI  will  put  the  notes  played with the same sample address (which
+might  not  correspond  to  the same instrument sometimes) in the same midi
+tracks. This option might lead to a huge number of midi tracks ...
+
+Whatever  the  option  choosen,  the  MIDI  channel  will reflect the audio
+channel.
+
+SID2MIDI  purpose  is only to help you into midifying a SID song, after the
+conversion you'll have to do a lot of work on the midifile to obtain a good
+result.  (You'll  notice  that  for some SID notes, there are a lot of midi
+notes  generated,  this  is due to arpegie effects (a la Soundtracker) used
+for the SID notes.
+
+@{b} MIDI File generation @{ub}:
+
+  SID2MIDI use the public domain Unix MIDIfile C package 
+  by  Tim Thompson (att!twitch!glimmer!tjt)
+  and Michael Czeiszperger (mike@pan.com)
+  I have adapted this package to SAS/C 6.51 and mixed the include files
+  with  Bill  Barton's  midi.library  include  files  (midi.library is not
+  required by SID2MIDI)
+
+SID player catching:
+
+  SID2MIDI uses two undocumented functions
+     SetDisplaySignal
+     SetDisplayEnable
+  from playsid.library whose initial purpose was to display the waveforms
+  (scope display).
+@ENDNODE
+
+@NODE USAGE "Usage"
+
+USAGE
+
+From CLI / Shell only:
+
+	sid2midi <sid-file-name> <song number> [UNMIX]
+
+	<sid-file-name>: the name of the SID file (@{b}ONE FILE@{ub} format
+	                 only, use SIDConv utility for old SID format)
+
+	<song number>  : the number of the song to be converted 
+	                 (starting from 1, out of range values will be
+	                  mapped to default song number)
+
+	[UNMIX]        : optional keyword (case insensitive)
+	                 Create a MIDI track per sound sample.
+	                 See @{"technical informations" link TECHINFO} for more.
+
+The result will be in RAM:SID2MIDI.MID (Sorry this is beta ...)
+@ENDNODE
+
+@NODE DISTRIBUTION "Distribution"
+
+Content of the archive
+
+	sid2midi       : the program
+	sid2midi.guide : this file
+	songs/#?.sid   : some SID files 
+	68020/sid2midi : same as sid2midi but compiled for 68020+ Amiga
+
+@ENDNODE
+
+@NODE AUTHOR "Author"
+
+  Jean-François Giorgi
+
+  INTERNET e-mail: giorgi@dialup.francenet.fr
+
+  Comments and suggestions are welcome.
+
+  Bugs will be forwarded to the people who will have requested the sources.
+
+@ENDNODE
+
+@NODE EXTRAS "Extra's"
+
+POINTERS TO OTHER AMIGA + MIDI STUFF (available on Aminet)
+
+@{b}MidiPlay@{ub} by Janne Syväniemi (THE MidiPlayer for Amiga)
+   E-mail: csjasy@uta.fi
+   WWW   : http://www.uta.fi/~csjasy/
+
+@{b}MasterMidi@{ub} by Pascal Serrarens (Good stuff but seems to be still under
+                                construction)
+   E-Mail: passerra@fwi.uva.nl
+@ENDNODE 

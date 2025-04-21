@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gating:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gating="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <!-- Example of a 2D Polytope Gate -->
+  <gating:PolytopeGate gating:id="PolyGateParent">
+    <gating:dimension gating:parameter="FSC"/>
+    <gating:dimension gating:parameter="SSC"/>
+    <gating:point>
+      <gating:coordinate gating:value="11.3"/>
+      <gating:coordinate gating:value="12"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="12.8"/>
+      <gating:coordinate gating:value="13"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="15"/>
+      <gating:coordinate gating:value="19.7"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="10.1"/>
+      <gating:coordinate gating:value="22"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+  <!-- Triangle applied on PolyGateParent  -->
+  <gating:PolytopeGate gating:id="Example_tr_on_poly" gating:parent_id="PolyGateParent">
+    <gating:dimension gating:parameter="FSC"/>
+    <gating:dimension gating:parameter="SSC"/>
+    <gating:point>
+      <gating:coordinate gating:value="0"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="400"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="400"/>
+      <gating:coordinate gating:value="300"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+  <!-- Rectangle applied on PolyGateParent  -->
+  <gating:PolytopeGate gating:id="Rect_on_poly" gating:parent_id="PolyGateParent">
+    <gating:dimension gating:parameter="FL1-W"/>
+    <gating:dimension gating:parameter="FL3-A"/>
+    <gating:point>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="100"/>
+      <gating:coordinate gating:value="160"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="350"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="350"/>
+      <gating:coordinate gating:value="160"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+  <!-- 3D block applied on PolyGateParent  -->
+  <gating:PolytopeGate gating:id="Block-3D-on-Rect_on_poly" gating:parent_id="Rect_on_poly">
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:dimension gating:parameter="CD4-PE-543nm"/>
+    <gating:dimension gating:parameter="CD8-PerCP-633nm"/>
+    <gating:point>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="0"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="10"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="80"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="30"/>
+      <gating:coordinate gating:value="20"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+</gating:Gating-ML>

@@ -1,0 +1,448 @@
+@DATABASE "A4"
+@AUTHOR "Thomas König"
+@(C) "1995, 96 Thomas König"
+@$VER: A4.guide V1.1
+
+@NODE MAIN "A4 - C-16/116/+4 Emulator"
+
+                                    @{b}A4 V0.2a@{ub}
+
+                           © 1995-96 by Thomas König
+                              
+            The only Commodore C-16/116/Plus4 Emulator for the Amiga
+            ========================================================
+                           @{" Download the ROM here! " LINK FTPSite}
+                                
+                                @{" Whats new ? " LINK history}
+
+
+            @{" Overview     " LINK overview    }    What is it?
+
+            @{" Installation " LINK install     }    How to get it running?
+
+            @{" Requirements " LINK reqirements }    Which Hard- and Software
+            
+            @{" How to use   " LINK hautojus    }    Hau tu jus #$§z8 <;-)
+            
+            @{" Features     " LINK features    }    What the A4 can do.
+
+            @{" Future       " LINK future      }    What it can`t do yet.
+
+
+            ===============
+        
+            @{" Registration " LINK reg         }    How to register
+            
+            @{" History      " LINK history     }    of A4
+
+            @{" Copyright    " LINK copyright   }    Copyright
+
+            @{" Author       " LINK author      }    Me
+@ENDNODE
+
+@NODE history "History"
+
+   Release history:
+   
+   V0.1     First Public Release
+   
+   V0.2     - Fixed several minor bugs
+            - real floppy drive access with cable
+            - Added Prefs-Requester
+            - Integrated R4 into A4
+            - 30-50 % faster
+            - Fixed bug in CMP command
+            - ROM-Module recognition (A4XROM.dat)
+            - Full Bankswitching implemented
+            - NO reqtolls.library required any more
+            - RUN/STOP key bug fixed
+            - added shareware keyfile recognition for registered users
+            - Accessing all drive IDs (Dirs and Floppy)
+
+(17.04.96)
+   V0.2a    - Fixed a bug which made the ROM from nic.funet.fi unusable
+@ENDNODE
+
+@NODE overview "Overview"
+
+   The A4 is a program that emulates the old Commodore machine Plus4.
+   Files can be loaded and saved to an Amiga directory or with a cable
+   directly to an external Floppy diskdrive. Bankswitching is supported.
+   Graphic capabilities are very limited right now but this will change
+   in the future. User defined char-sets can be used though. D64 Diskimage
+   files will be usable in V0.3 (soon)!
+   
+   A4 V0.2 is now Shareware.
+
+   SAVEing and Floppy access are disabled in the unregisterd version.
+   
+   This version is shareware.
+   
+   @{"Registrated" LINK reg} users will get a keyfile which enables ALL functions.
+@ENDNODE
+
+@NODE install "Installation"
+
+   Installation is very simple:
+   
+        1.) Copy the file A4 into any directory.
+        
+        2.) Place the @{"ROM Image file" LINK image} in the @{b}same@{ub} directory.
+            (The file has to be named @{b}A4ROM.dat@{ub} !)
+        
+        3.) Make sure there are directorys named @{b}A4Dir<ID>@{ub} in
+            the same path of A4!
+            
+            e.g. A4Dir08   <- ID8 Access with LOAD"XYZ",8
+                 A4Dir09   <- ID9
+                 etc...
+        
+        4.) Now start A4.
+            (Make sure ParPort is not in use and your desired monitor was
+             placed in the directory DEVS:Monitors at system startup time!)
+   
+   And now you should see this very familiar screen that says:
+   
+
+ COMMODORE BASIC V3.5 60671 BYTES FREE
+
+READY.
+*   
+
+^- well, this should be this great cursor :-)
+
+   
+   Basic v3.5, the simple builtin Assembler/Monitor and Floppy access
+   are available now.
+   
+   Now, have the same fun you had those days with your real C=16/116/+4
+   
+   ;-)
+@ENDNODE
+
+@NODE image "ROM Image"
+
+   The A4 needs a ROM Image file taken from an original C=16/116/+4.
+   The same old problem with almost every emulator.
+   
+   How to get the File:
+   
+        * The best way is to download it @{"here" LINK FTPSite}.
+          You will find the ROMs split into too parts. After download
+          simply merge them with the AmigaDOS command JOIN.
+          
+            e.g. JOIN file ROMFile1 file ROMFile2 TO A4ROM.dat
+            
+          Place the resulting file in the same Path the
+          Emulator is located.          
+        
+        * I used a serial cable from a +4 to the Amiga.
+          In this case the +4 needs to be equiped with a RS232 
+          driver circuit (e.g. MAX232). No problem for Mr. Solder :-)
+          A short program (@{b}A4Ser@{ub} (included within the archiv) will receive
+          32768 bytes (baud rate set in system prefs.) and save the
+          Image file: A4ROM.dat.
+
+        * If you have a 1541-Floppy Drive maybe this works:
+          1.) Save the rom to Disk:
+              in monitor type: 
+              
+              T 8000 FD00 8000
+              T FF40 FFFF FF40
+              S"A4ROM.DAT",8,8000,FFFF
+          
+          2.) Get this file somehow into your Amiga by using
+              @{"Frodo" LINK frodo} and the floppy cable described in
+              Frodo.guide (Aminet). This file needs a small correction.
+              The program @{b}A4Cor@{ub} does this for you.
+              
+              Otherwise try the 1541 Emulator on Aminet.
+@ENDNODE
+
+@NODE author "About me"
+
+   If you have problems check the docs and THEN contact me.
+   Please send me bug reports.
+   Tell me bugs in this A4.guide document too, because english is not
+   my native language.
+   
+   Internet:
+        
+        E-Mail: tomking@koenig.VOL.at
+        
+        WWW   : http://www.ping.at/members/tomking/A4/
+
+
+   Home-address:
+        
+        Thomas König
+        Höchster Straße 14
+        6850 Dornbirn
+        Austria
+@ENDNODE
+
+@NODE future "Future"
+
+   Please help to make A4 more featurerich by @{" registrating " LINK reg} !
+   
+   Things being worked on: (unordered list)
+   
+        * make the GRAPHIC command work (this is done next)
+        
+        * Using D64 Diskimage files
+        
+        * IRQs !!
+        
+        * Rasterline graphic refresh mode ( demos,... )
+        
+        * Support decimal mode for SBC and ADC
+        
+        * Undocumented OpCodes
+        
+        * Much better Graphic/Video support, COLORS!
+        
+        * Speed optimization (still some potential left)
+        
+        * Supporting jokers in filenames (they work on direct Floppy access!)
+        
+        * Better Floppy Drive emulation (DIRECTORY,DLOAD,DS$,....)
+        
+        * Datassette (if frequently requested)
+        
+        * Better Key mapping !! (There is no C= key right now :-( )
+        
+        * Better Prefs window.
+        
+        * Sound
+        
+        * And more ......
+@ENDNODE
+
+@NODE features "Features"
+
+    Please help to make A4 more featurerich by @{" registrating " LINK reg} !
+        
+        * emulates the Commodore C-16/116/Plus4 OS (Basic 3.5 + Ass. monitor)
+        
+        * allows data storage in Amiga directories (LOAD and SAVE)
+          - a floppy-drive emulation!
+          (SAVE is available in registrated version only)
+        
+        * allows data storage onto External Floppy diskdrive with
+          a special cable. The same @{"cable" LINK cable} as @{"Frodo" LINK frodo} uses.
+          (Available in registrated version only)
+          
+        * TED-Registers emulated so far:
+          
+          $FF12 - Charset RAM/ROM switch
+          $FF13 - Charset address
+        
+        * general Registers 
+          
+          Bank switching:
+          $FF3E - ROM On
+          $FF3F - RAM On
+        
+        * fully compatible Bankswitching
+          $FDD0 - $FDDF
+        
+        * external ROM Modules
+          ( A4XROM.dat )
+        
+@ENDNODE
+
+@NODE frodo "Frodo"
+
+   Great C=64 emulator © by Christian Bauer.
+   Available on Aminet. (misc/emu)
+@ENDNODE
+
+@NODE diskdrive "Drives."
+
+        There are 3 ways to use virtual or real diskdrives:
+        
+            1.) Access a real external Floppy Diskdrive, using a
+                @{" cabel " LINK cable}.
+                
+                All floppy commands do work. But dont`t expect speed
+                loaders to work, they require an almost unemulatable
+                timeing!
+                
+                DLOAD"xx", DSAVE"xx", SCRATCH, HEADER, etc. do work.
+                
+            2.) Access files stored in Amiga directories named A4Dir<ID>
+                where 'ID' is the unit number.
+                
+                Features still missing:
+                    -DLOAD, DSAVE, etc.. are not emulated right now.
+                    
+                    -Deleting files is not possible.
+                    
+                    -No DIRECTORY displayable
+                    
+                But this will change, see @{" future plans " LINK future}.
+                
+            3.) Access files stored in D64 compatible Disk imagefiles.
+                This will be implemented only in V 0.3 and later.
+@ENDNODE
+
+@NODE hautojus "How to use."
+        
+        After A4 went through the Init-procedure a Prefs-Requester pops up.
+        (Can be disabled with ToolType STARTUPSCR=NO) You can adjust the
+        displaymode to your needs and assign the emulation type of each
+        Disk drive ID. Then save the settings (Menu Save settings).
+        
+        After startup a remark is displayed that this is an unregistered
+        version. If you are registered and have a key-file your registration
+        info is displayed. Registered users can disable this textoutput by
+        setting the ToolType SHOWREGINFO=NO!
+        
+        Now, programs can be loaded ,saved and started.
+        
+        See @{" here " LINK diskdrive} for drive options!
+        
+        If you have a 32Kb image file of the 3-Plus-1 ROM-Software, which
+        is build into the Plus4 and name it A4XROM.dat this unusable piece
+        of software is running on your A4 :-) (Not to much testing done.)
+        
+        You even can write your own ROM-Moduls or use other ROMs. eg. from
+        expansion cards (are or were there some?)
+        
+        All Function keys are working F1-F8.
+        F10  equal CLR/HOME key.
+        Ctrl equal RUN/STOP key. (works now :-) )
+        All editor Esc-key sequences work!
+        
+        The Commodore Key is not available jet. :-( ugly..
+        
+        Key mapping is still unclear. Well see @{" future plans " LINK future}.
+        
+        Don`t use the GRAPHIC command -> wait for A4 V0.3
+        
+        By pressing the HELP key a small options window showes up which
+        gives you the following choices:
+        
+            Reset       - Resets the A4
+            
+            Goto        - Jumps to the address specified in the field
+                          'To:'
+            
+            Back        - Just leaves the window with no action executed
+            
+            Exit A4     - Well, exits A4
+            
+            The current ProcessorCounter is display in the field 'PC:'.
+        
+        Please help to make A4 more featurerich by @{" registrating " LINK reg} !
+@ENDNODE
+
+@NODE reqirements "Requirements"
+
+        * A Commodore Amiga :-)
+        
+        * A4 needs a 68020 Processor
+        
+        * OS-version 2.0 or later
+        
+        * For acceptable speed you need FastRam!
+        
+        * Desired Monitor driver installed in DEVS:Monitors
+        
+        * ROM Image file. See @{"here" LINK image}.
+        
+        * A4Key.dat for all functions. See @{" registration " LINK reg}.
+@ENDNODE
+
+@NODE FTPSite "FTP-Site"
+
+        You will find the required ROM file here:
+         
+         nic.funet.fi:/pub/cbm/firmware/c16/
+        
+        For some reason the file is split into too parts
+        Join them using the shell command:
+        
+         JOIN file <ROMFile1> file <ROMFile2> TO A4ROM.dat
+        
+        where
+        
+         ROMFile1 is the Basic part
+         ROMFile2 is the Kernel part
+        
+        Copy the resulting file (A4ROM.dat) into the A4 Path!
+@ENDNODE
+
+@NODE reg "Registration"
+
+    If you register you will get a keyfile which enables all features
+    in this version and all future versions!
+    
+    This @{" features " LINK disabled} have been disabled in the unregistered version.
+    
+    Your registration will help to improve the A4 by forcing
+    me not to stop coding and debuging and coding and debuging,.....
+    
+    The registration fee is only 5 US$.
+    
+    Please print the orderform (included within the archive), fill it in,
+    sign it and send it with the enclosed fee of 5 US$ to my @{" Home-address " LINK author}.
+    Unsigned forms are not accepted.
+    (Please send only cash in US$ - no check or moneyorders)
+    
+    You will receive your keyfile immediately via E-Mail (UUEncoded).
+    
+    If you don`t have E-Mail:
+        Send an empty disk (HD or DD) along with your registration.
+        I will return your disk to you with your keyfile on it. In this
+        case the fee is 10 US$ (includes shipping).
+        
+    Thank you in advance!
+@ENDNODE
+
+nic.funet.fi@NODE disabled "List."
+
+    Disabled features in the unregistered version:
+    
+        * real floppy access is disabled
+        
+        * saving to Amiga-directorys is not possible
+        
+        * using D64 Diskimage files will not be possible
+          (implemented in V0.3)
+@ENDNODE
+
+@NODE cable "Floppy cable"
+
+    You will find the instruction to build the cable in Christian Bauers
+    Frodo.guide included with his C64 emulator @{" Frodo " LINK frodo}.
+    
+    I had to write additional code to provide compatibility with this
+    cable but I assumed that most of you already have this cable.
+@ENDNODE
+
+@NODE copyright "Copyright"
+
+        
+        A4 is shareware!
+        
+        All programs in the archive A4.lha are copyright
+        by Thomas König 1995, 96.
+        
+        All files my be freely redistributed as long as the files and
+        the archive stays unchanged and no profit over 5 US$ is made.
+        
+        The @{"Author" LINK author} can not held liable for any damage
+        ( data loss, system perfomance, hardware failures ) directly or
+        indirectly caused by the programs or any information provided
+        in the A4.guide.
+        
+        The archive is provided as-is. I do not garantee that the included
+        programs are fit for any specific purpose.
+        
+        The A4 Keyfile may only be used on one (1) computer and must not
+        be passed to any other person, nor be copied or resold.
+        
+        The A4 Keyfile will work for all future releases of A4 and will
+        enable ALL function implemented in A4.
+@ENDNODE

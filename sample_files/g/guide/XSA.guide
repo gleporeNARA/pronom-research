@@ -1,0 +1,157 @@
+@DATABASE "XSA.guide"
+@$VER: XSA.guide 1.0 (10.6.1998)
+@AUTHOR "Deok-Min Yun"
+
+@NODE Main "XSA Documentation"
+
+@{JCENTER}This is documentation for XSA 1.0 for Amiga.
+
+@{JCENTER}XSC and XSD are ©1995 by Alex Wulms/XelaSoft
+@{JCENTER}Amiga ports have been done by Deok-Min Yun in 1998
+
+
+@{JCENTER}@{B}Table of Contents@{UB}
+
+@{JCENTER}@{" Introduction     " link Introduction}
+@{JCENTER}@{" Legal Stuff      " link LegalStuff}
+@{JCENTER}@{" Requirements     " link Requirements}
+@{JCENTER}@{" How To Install   " link Installation}
+@{JCENTER}@{" How To Use       " link Usage}
+@{JCENTER}@{" Revision History " link XSA.History/Main}
+@{JCENTER}@{" Things To Do     " link XSA.ToDo/Main}
+@{JCENTER}@{" Authors          " link Authors}
+
+@ENDNODE
+
+@NODE Introduction
+@{B}Introduction@{UB}
+
+XSA is an Amiga port of utilities XSC and XSD.
+
+The following is taken from the original documentation.
+
+The programs in this archive are designed to use disk-images created
+with XelaSoft's D2F and F2D tools on non-MSX systems. The programs 
+XSC and XSD are a general compression program and a general decompression
+program. The compression format used is compatible with the compression
+format used by D2F and F2D.
+
+The program XSC can be used to convert a .XSA disk image into a .DSK disk
+image, which then can be loaded into a MSX emulator supporting .DSK disk
+images or which can be copied to a disk with some appropriate tool.
+
+@ENDNODE
+
+@NODE LegalStuff
+@{B}Legal Stuff@{UB}
+
+@{U}@{FG SHINE}Copyright@{FG TEXT}@{UU}
+
+XSC and XSD are public domain.  You are free to use and distribute them.
+
+
+@{U}@{FG SHINE}Disclaimer@{FG TEXT}@{UU}
+
+These programs are provided "AS IS" without warranty of any kind.  The
+author assumes no responsibility or liability whatsoever for any damage
+or data loss caused by using these programs.
+
+@ENDNODE
+
+@NODE Requirements
+@{B}Requirements@{UB}
+
+- Workbench 1.3 or better (not tested).
+
+@ENDNODE
+
+@NODE Installation
+@{B}How To Install@{UB}
+
+There is no special installation procedure required.  Just copy both XSC
+and XSD files to any place you want.  Copying them to command search
+path such as C:  would be a good idea if you want to use them regularly.
+
+@ENDNODE
+
+@NODE Usage
+@{B}How To Use@{UB}
+
+XSC and XSD are CLI only utilities.  Please do not try to use them from
+Workbench.
+
+
+@{U}@{FG SHINE}XSC@{FG TEXT}@{UU}
+
+For compressing a file to .XSA format, type the following in the
+command-line.
+
+> XSC infile outfile[.xsa]
+
+infile is the file you want to compress.  outfile is the name of the
+resulting XSA file.  Unlike the original version of XSC, it is possible
+to supply .xsa extension.
+
+e.g. XSC Xanadu.DSK Xanadu
+     XSC Xak2 Xak2.XSA
+
+
+@{U}@{FG SHINE}XSD@{FG TEXT}@{UU}
+
+For decompressing a file from .XSA format, type the following in the
+command-line.
+
+> XSD inname[.xsa] outname
+
+inname is the file you want to decompress.  Unlike the original version
+of XSD, it is possible to supply .xsa extension.  outname is the name of
+the resulting file you want to call it as.
+
+e.g. XSD Xanadu.XSA Xanadu.DSK
+     XSD Xak2 Xak2
+
+@ENDNODE
+
+@NODE Authors
+@{B}Authors@{UB}
+
+@{U}@{FG SHINE}Original Author@{FG TEXT}@{UU}
+
+Alex Wulms
+
+When you like these programs, feel free to send a picture postcard of
+the place where you live to:
+
+A. Wulms
+Oude Singel 206
+2312 RJ Leiden (the Netherlands)
+
+When you have any comments, suggestions, bug reports, etc.  please send
+these to the above mentioned address or to:
+
+awulms@inter.nl.net
+
+
+@{U}@{FG SHINE}Amiga Port@{FG TEXT}@{UU}
+
+Name   : Deok-Min Yun
+E-Mail : dmyun@mailexcite.com
+         dmyun@hotmail.com
+         dmyun@rocketmail.com
+WWW    : http://www.geocities.com/SiliconValley/Horizon/7576/
+         http://members.tripod.com/~dmyun/
+
+Amiga specific bug reports or suggestions should be sent to me.
+
+My other programs include,
+
+Aminet2DB : Aminet RECENT, CSV, TSV converter.
+CUR2ILBM  : Windows cursor/icon to ILBM converter.
+KLS       : Korean Locale System for Amiga.
+MrCAMD    : GUI frontend for CAMD_Toolkit using MUIRexx.
+MrMIDI    : GUI frontend for GMPlay using MUIRexx.
+MrMPEG    : GUI frontend for MPEGA using MUIRexx.
+RGBx_DT   : RGBx DataType for RGBN and RGB8.
+XBM_DT    : X BitMap DataType.
+
+@ENDNODE

@@ -1,0 +1,1649 @@
+@database Default
+@author "gega"
+@$VER: cp4.guide 0.79 (25.2.00)
+@(c) "1998-2000 Gáti Gergely, gega"
+
+@node "main" "cp4 guide"
+@next "features"
+@prev "main"
+
+@{b}C= Commodore C+4 Emulator                                        by gega@{ub}
+
+@{" Hungarian " LINK cp4_HU.guide/main}
+
+@{" Features              " LINK "features"}
+@{" Requirements          " LINK "requirements"}
+@{" Installation          " LINK "install"} 
+@{" Video drivers         " LINK "videodriver"} 
+@{" 1541 Disk Drive       " LINK "f1541"}
+@{" SID-card              " LINK "sidcard"}
+@{" Keyboard              " LINK "bill"} 
+..@{" Keyboard layout     " LINK "billmatrix"}
+@{" Prefs file            " LINK "prefsfile"} 
+@{" Command line options  " LINK "opciok"} 
+@{" Prefs GUI             " LINK "prefsgui"} 
+..@{" SetMap GUI          " LINK "setmap"} 
+@{" Debug GUI             " LINK "debuggui"} 
+@{" Monitor GUI           " LINK "monitorgui"} 
+@{" Stack GUI             " LINK "stackgui"} 
+@{" For translators       " LINK "trans"}
+@{" For Amiga programmers " LINK "amigaprog"} 
+..@{" Video drivers       " LINK "amigaprogvideo"}
+@{" For Plus4 programmers " LINK "plus4prog"} 
+..@{" AssP4 help          " LINK "assp4"}
+..@{" Statistics          " LINK "stat"}
+@{" Screenshots           " LINK "scrshots"}
+@{" News                  " LINK "news"}
+
+@{u}Written by gega (Gáti Gergely)
+E-Mail:   gatig@dragon.klte.hu
+HomePage: www.klte.hu/~gatig/cp4.html
+@{uu}
+        Compiled with gcc and PhxAss, GUI designed with GadToolsBox.
+        I learnt the usage of SID libraries from the source of Frodo.
+        Thanks for writing the 6581sid.library and the playsid.library.
+        The Easy1541 package is a really easy way to add 1541 support
+        for programs, thanx. I used the LFLocalize for patch soruces.
+
+        It's freeware, but please, send an e-mail if you use it!
+
+@{b}@{u}Thanks to@{uu}@{ub}
+        @{i}(in alphabetical order :-)@{ui}
+        @{b}Fehér Imre@{ub}, for the Plus4 measurements and the programming advices,
+        @{b}Ipacs Zsolt@{ub} for the CPU-debugging and for the PC version,
+        @{b}Kémeri Csaba /UnReal/@{ub} for testing, hardware support, icon drawing,
+                and other stuff,
+        @{b}Rajnai Álmos@{ub} for encourageing me to start this project,
+        @{b}Tábori Imre (Roe-Pipi)@{ub} testing, support,
+        @{b}Zavacki Ferenc@{ub} for a lot of help and for all of the C2Ps,
+        ...and to everybody, who's interested in the Plus4
+@endnode
+
+@node "features" "Features"
+@next "requirements"
+@prev "main"
+
+        - Fast emulation
+        - Near full TED emulation
+        - 1541 Drive support via iec.library
+        - SID card emulation with 6581sid.library or playsid.library
+        - Joystick support or emulation
+        - Redefineable keymap
+        - Selectable screenmode
+        - Many external video driver (in window, scaleable, ecs, etc.)
+        - Realtime mode on slow machines (030/40+)
+        - Speed display
+        - D64 support (only the format with 174848 bytes, yet)
+        - Fontsensitive preferences gui (Gadtools only)
+        - Hardreset
+        - Internal debugger and monitor
+        - Localized, you can change the locale.prefs on the fly
+        - Snapshot creating and loading (with Xpk support)
+        - Illegal opcode support
+        - External palette selection
+        - Freeeeee!
+
+@endnode
+
+@node "requirements" "Requirements"
+@next "install"
+@prev "features"
+
+    Min. 2M RAM     - Usable videodrivers: mono, windowmono
+         3M RAM     - Recommended
+                      CHIP:  ~300Kb
+                      FAST: ~1600Kb
+    OCS,ECS         - Usable drivers: windowmono, mono, windowamiga, OCS
+    OS3.0           - Required
+    iec.library     - Only if you want to connect & use a real 1541
+    6581sid.library - One of this two sid emulator libraries, if you
+    playsid.library - want to emulate SID-card
+    Processor       - 020+
+    ROM images      - Original C=+4 roms
+
+    Do not use it with fblit, it will be faster without that!
+
+@endnode
+
+
+@node "install" "Install"
+@next "videodriver"
+@prev "requirements"
+
+        There  is  nothing  special  about  the installation. If you want to
+store your .prefs file in the ENV: & ENVARC: directories, you have to make a
+dummy  file  called  cp4.prefs  in ENV:, before you start the program! (echo
+>ENV:cp4.prefs)  Before  starting,  you have to copy the ROM images into the
+same directory using the following names:
+
+        rom.basic                (16K)
+        rom.kernal               (16K)
+        rom.funclow              (16K)
+        rom.funchigh             (16K)
+
+A  kernal  and  a basic ROM are required for using the emulator. If you only
+have  these  two, you will get a C16 emulation with 64 KBytes. At last, copy
+an icon next to the main program, and rename it appropriately.
+
+        If  you  haven't got a 1541 & a cable, to transfer the roms, use the
+MakeROM utility, to make the needed roms from the OS96 package.
+
+@endnode
+
+@node "videodriver" "Video Driverek"
+@next "f1541"
+@prev "install"
+
+        After  the first start, it is recommended to select a suitable video
+driver.  The most compatible and the default video driver is windowcard.c2p,
+because  it  works on most Amigas. This is a good choice if you have a video
+card, but it's very slow on AGA. Recommended video drivers for machines with
+more than 3M RAM:
+
+       @{u}@{b} Graphics                   -030                 040+         @{uu}@{ub}
+        VideoCard                  card, windowcard     +windowscale
+        AGA                        zavacki,noborder     +windowamiga
+        ECS,OCS                    OCS                  +windowamiga
+
+For less than 3M RAM, you must use the mono or the windowmono driver.
+
+If  you  are a programmer,  you can write a new @{" external video driver " link "amigaprogvideo" 0} for
+the emulator.
+
+@endnode
+
+
+@node "f1541" "1541 Disk Drive"
+@next "sidcard"
+@prev "videodriver"
+
+        You  can  download  the Easy1541 package from AmiNet. ( misc / emu /
+Easy1541.lha  )  You can use the Frodo cable and the Easy1541 cable too with
+the iec.library.
+
+@endnode
+
+
+@node "sidcard" "SID-Card"
+@next "bill"
+@prev "f1541"
+
+        6581sid.library found in the A64 package.
+        Playsid.library  included  in  this archive. Warning! You cannot use
+the  playsid.library  with  the iec.library at the same time! So the default
+SID library is the 6581sid.
+
+@endnode
+
+
+@node "bill" "Keystrokes"
+@next "billmatrix"
+@prev "sidcard"
+
+        Default keys:
+
+        F5        Display OFF
+                  Useful on slow machines, when you want to listen to music
+        F6        Binary file loading (LOAD"program",8,1)
+        F7        Swap joystick port (See: @{" Swap Joy " link "prefsgui" 16}-Gadget/Menu)
+        F8        Reset
+        F9        Hard Reset
+        F10       Debug
+        HELP      Prefs
+
+@endnode
+
+@node "billmatrix" "Keyboard matrix"
+@next "prefsfile"
+@prev "bill"
+
+Example keyboard layout: (on a german keyboard)
+
+C+4:	@	F3	F2	F1	HELP	£	Ret	InstDel
+Amiga:	ü	f3	f2	f1	f4	RAmiga	Enter	Backspace
+C+4:	Shift	E	S	Z	4	A	W	3
+Amiga:	Shift	e	s	y	4	a	w	3
+C+4:	X	T	F	C	6	D	R	5
+Amiga:	x	t	f	c	6	d	r	5
+C+4:	V	U	H	B	8	G	Y	7
+Amiga:	v	u	h	b	8	g	z	7
+C+4:	N	O	K	M	0	J	I	9
+Amiga:	n	o	k	m	0	j	i	9
+C+4:	,	-	:	.	Up	L	P	Down
+Amiga:	,	\	ö	.	Up	l	p	Down
+C+4:	/	+	=	Esc	Right	;	*	Left
+Amiga:	-	'	RAlt	Esc	Right	ä	#	Left
+C+4:	Run/St	Q	C=	Space	2	CTRL	Clr/H	1
+Amiga:	Ctrl	q	LAlt	Space	2	Tab	Del	1
+
+@endnode
+
+@node "prefsfile" "Prefs file"
+@next "opciok"
+@prev "billmatrix"
+
+        You  can  set  most  of  the  options in the program, via menuitems,
+gadgets or the keyboard, but there are some rarely used options which can be
+changed only by editing the .prefs file by hand. They are marked with a '!'.
+And  there are some - marked with '+' - which are adjustable by cli options.
+You may edit the .prefs file by hand, for setting any option. Where you must
+enter a number, you can use one of the following templates:
+
+        decimal_digits         - decimal default
+        $hex_digits            - hexadecimal (old format)
+        0xhex_digits           - hexadecimal ('C' format)
+
+        The  program  will  save  all  options  at every exit, which was not
+caused  by  an  error, so you do not have to save the modified options every
+time. These options include the position of every window.
+
+
+         TWOFRAME=NO                    See: Prefs,@{" TwoFrame-" link "prefsgui" 7}Gadget/Menu
+         C2P=card.c2p                   See: Prefs,@{" Chunky2Planar-" link "prefsgui" 15}Gadget
+         SPEEDLIMIT=YES                 See: Prefs,@{" Limit-" link "prefsgui" 6}Gadget
+         JOY=NORMAL|SWAPPED             See: Prefs, SwapJoy-Gadget/Menu
+         SOUND=YES                      See: Prefs,@{" Sound-" link "prefsgui" 5}Gadget/Menu
+         SID=NO                         See: Prefs/SID-Menu
+        !SIDTYPE=6581SID                The type of the SID library. When it
+                                        set to 'PLAYSID', cp4 try to open
+                                        the playsid.library first.
+         PERCENT=YES                    See: Prefs/@{" Display_Percent " link "prefsgui" 27} Menu
+        !PERCENTCOLOR1=$31              The body color of the percent display
+        !PERCENTCOLOR0=$51              The border color of the percent display
+                                        You must specify C+4 colors from 0 up to $7f
+         OVERSCAN=-1                    Overscan code
+         MODEID=-1                      ScreenmodeID
+                                        you have to select one, before the
+                                        first start of the program
+         P4PROGDIR=:                    Directory of C+4 programs (F6)
+                                        If you modify the path in the
+                                        filerequester, this will be modified
+                                        automatically
+        !INITMEM=0000FFFFFFFF0000       The initial contents of memory
+                                        Unlimited pattern of two digit hex numbers
+         IEC=YES                        Enable ROM patch for iec.library
+         REALTIME=NO                    Skip frames until reach a real Plus4 speed
+        +KERNAL=rom.kernal
+        +FUNCTIONLOW=rom.funclow
+        +FUNCTIONHIGH=rom.funchigh
+        +CARTRIDGE1LOW=NO               Name of the cartridge image file | NO
+        +CARTRIDGE1HIGH=NO
+        +CARTRIDGE2LOW=NO
+        +CARTRIDGE2HIGH=NO
+         MONWIN=NO                      Default state of Monitor window
+                                        NO  - closed
+                                        YES - opened
+         FOLLOW=NO                      See: Monitor/Follow-Menu
+         WITHDATA=NO                    See: Debug/???_With_Data-Menu
+         ILLOPCODES=NO                  See: Debug/Illegal_OpCodes-Menu
+         MONLEFT=30                     As I wrote above, the program stores
+         MONTOP=11                      the coordinates of the windows
+         PRFLEFT=0
+         PRFTOP=11
+         DBGLEFT=0
+         DBGTOP=11
+         STKTOP=25
+         STKLEFT=80
+         KMAPTOP=0                      Position of KeyMap Editor window
+         KMAPLEFT=0
+        !LISTINNERWIDTH=24              If you set the properties of the ListView
+                                        scroller to non standard values, then you
+                                        must calculate this value yourself:
+                                    A
+                       >-------------------------<
+                        ,---------------------+-+
+                        |                     | |
+                        |_____________________|X|
+                        |_____________________|X|
+                        |                     |X|
+                        |                     |X|
+                        |                     | |
+                        |                     | |
+                        |                     |_|
+                        |                     |^|
+                        |                     |v|
+                        `---------------------+-+
+                       >-<                   >---<
+                        B                      C
+         LISTINNERWIDTH = (A-(B+C))+2
+@endnode
+
+@node "opciok" "Options"
+@next "prefsgui"
+@prev "prefsfile"
+
+        Don't use these options, I will remove them!
+
+  -h  Help
+  -s  No sound
+  -t  No speed limit
+  -c  Select Chunky2Planar ('-c mono.c2p')
+  -v  ScreenModeID
+  -o  Overscan Mode (1-TEXT 2-STANDARD 3-MAX 4-VIDEO)
+  -f  Skip a frame
+  -p  No speed display
+
+ROM-image options:      (All ROM-image 16K!)
+  -b  Basic             (or -0)
+  -k  Kernal            (or -1)
+  -2  Function-Low
+  -3  Function-High
+  -4  Cartridge1-Low
+  -5  Cartridge1-High
+  -6  Cartridge2-Low
+  -7  Cartridge2-High
+
+@endnode
+
+@node "prefsgui" "Prefs GUI"
+@next "setmap"
+@prev "opciok"
+
+        Open this window with the HELP key
+
+        @{b}@{u}Gadgets@{uu}@{ub}
+        Drive:          You can use drives 8-11.
+                        With the gadget next to the drive selector, you
+                        can choose the required emulation mode
+                        Real 1541 with cable or D64 handling
+                        Due a known bug, you need iec.library for D64
+                        handling. It will be fixed soon.
+        ?               D64 file selection
+        ScreenMode:     ScreenMode requester
+        Keymap:         Select a keymap
+        ChunkyToPlanar: Video-driver selection
+        Save:           Save current settings to ENV:/ENVARC: or to
+                        PROGDIR: depending on the initial location of the
+                        prefs file
+        Use:            Use current settings
+        Cancel:         Back to emulation, without using the new settings
+        Quit:           Quit & Save
+
+        @{b}@{u}Menus@{uu}@{ub}
+        Project/
+                Load_File       Load a binary file into memory (LOAD"...",8,1)
+                Save_Prog       Save the file currently in memory (SAVE"...",8)
+                Reset           Like the Debug/Reset-Menu
+                Back            Like the Cancel gadget
+                SetMap...       Keymap settings
+                Make Snapshot   Save inner state of the c+4 to file
+                Load Snapshot   Reload an inner state
+                About           My address, etc
+                Quit            Like the Quit gadget
+        Prefs/
+                Sound           Sound enabled/disabled
+                Limit           Limit speed to the speed of a real Plus4
+                                (100%)
+                TwoFrame        Skip every second frame
+                                On an M68030/50 you can reach more than 90%
+                                using this option
+                Swap_Joy        Changes the interpretation of the second port
+                                of the Amiga either to port 1 or to port 2 of
+                                the Plus4 Checked means port 1
+                                On the keyboard, use opposite values for
+                                2-players
+                Display_Percent Speed display enabled/disabled
+                IEC             iec.library enabled/disabled
+                                With some programs the ROM-patch causes
+                                C+4 crash or other bug. Then try to
+                                disable this option.
+                RealTime        Skip frames until reach a real Plus4 speed
+                SID             SID-card enable/disable
+                                Try to use 6581sid.library, or if fail,
+                                the playsid.library. The iec.library cannot
+                                work with the playsid.library!
+
+@endnode
+
+@node "setmap" "SetMap GUI"
+@next "debuggui"
+@prev "prefsgui"
+
+        Open this window with the 'SetMap...' menuitem of Prefs/Project. The
+mesh represents the C+4 keymatrix. You can see the name of the edited keymap
+in  the window's titlebar. If you press a key, you can see the corresponding
+C+4 key in the status line.
+
+        @{b}@{u}Gadgets@{uu}@{ub}
+                Open:           Open another keymap
+                New:            New keymap
+                Save:           Save to disk (it is necessarry to save the
+                                keymap to use it)
+                Exit:           Back to Prefs window
+                Functions:      Set the special emulator functions:
+                                  - Debug       » Debug activate
+                                  - Percent     » Speed display ON/OFF
+                                  - HardReset   » HardReset
+                                  - Load File   » Load a C+4 file
+                                  - Prefs       » Prefs activate
+                                  - Reset       » Reset
+                                  - Limit       » Speed limit ON/OFF
+                                  - Swap Joy    » Swap Joysticks
+                                  - User Blank  » Display ON/OFF
+                                  - Joy Up      » Joystick UP
+                                  - Joy Down    » Joystick DOWN
+                                  - Joy Left    » Joystick LEFT
+                                  - Joy Right   » Joystick RIGHT
+                                  - Joy U-L     » Joystick UP-LEFT
+                                  - Joy U-R     » Joystick UP-RIGHT
+                                  - Joy D-L     » Joystick DOWN-LEFT
+                                  - Joy D-R     » Joystick DOWN-RIGHT
+                                  - Joy Fire    » Joystick FIRE Button
+                                  - Snapshot    » Save a snapshot
+                                  - Restore     » Load a snapshot
+                Buttons:        You can set the Amiga key for any C+4 key
+                                Use the 'Add' button to add the new key
+                                to the key list, or the 'Replace' button
+                                to replace the list with the new key.
+
+@endnode
+
+@node "debuggui" "Debug GUI"
+@next "monitorgui"
+@prev "setmap"
+
+        Open this window with the F10 key
+
+        @{b}@{u}Gadgets@{uu}@{ub}
+        DisAsm ListView   Disassembly of the running program
+                          The current statement under execution is marked
+                          with '>'
+                          Keys:
+                                   crsr:           move
+                                   sh+crsr:        page
+        PC                The next statement's address
+        A,X,Y,SP          Accu, X, Y-reg, Stack Pointer
+        Flagek            7501-flags
+        Run               Run the program
+        Trace             Execute only one statement
+        Step              One statement, but JSR is one too
+        BreakPoints       Breakpoints enabled
+        Clear             Clear all breakpoints
+        Add               The selected address will be assigned to the actual
+                          breakpoint
+
+        Below  of  these  is  the  actual  Plus4  display mode, and some TED
+information:
+
+        Amiga_raster      Not implemented yet
+        C+4_raster        Plus4 raster number
+        Raster_request    The raster request line (Plus4 raster)
+        Video_matrix      Video-Matrix address
+        Gfx_base          Graphics memory address
+        Ras/C#1/C#2/C#3   Enabled IRQs (+)
+
+        @{b}@{u}Menus@{uu}@{ub}
+
+        The menu is the same for the Debug, Monitor & Stack windows
+
+        Project/
+                Prefs           Open the Prefs window
+                SaveMem         Save the memory
+                Reset           Hard-Reset
+                Back            Back to the emulation
+                Quit            Quit & Save
+        Debug/
+                Trace           See: Trace-Gadget
+                Step            See: Step-Gadget
+                Run             See: Run-Gadget
+                ???_With_Data   Value after unknown Opcodes
+                BreakPoints     See: BreakPoints-Gadget
+                Illegal_OpCodes Display all Opcodes
+                Stack           Open the Stack window
+        Monitor/
+                OpenWin         Open the Monitor window
+                Follow          The Monitor's cursor is set to the
+                                executed statement's operand
+                Ascii           Display in ascii
+                ScreenCode      Display in screen-codes
+
+@endnode
+
+@node "monitorgui" "Monitor GUI"
+@next "stackgui"
+@prev "debuggui"
+
+        Ascii/ScrCode     See: Monitor/Ascii|ScreenCode-Menu
+        String gadget     Enter the string or hexa number to search for
+                          Starting with '$' it will be a hex number else
+                          it will be a string
+        Search            Search down
+        ListView          Plus4 memory
+                          Useful keys:
+                                   crsr:           move
+                                   sh+crsr:        page
+                                   numbers+'a-f'   modify
+        @{b}@{u}Menus@{uu}@{ub}
+
+        The @{" menu " link "debuggui" 35} is the same for the Debug, Monitor & Stack windows
+
+@endnode
+
+@node "stackgui" "Stack GUI"
+@next "trans"
+@prev "monitorgui"
+
+        The  stack backtrace window shows the contents of the stack. You can
+examine the caller of the running subroutine.
+
+        @{b}@{u}Menus@{uu}@{ub}
+
+        The @{" menu " link "debuggui" 35} is the same for the Debug, Monitor & Stack windows
+
+@endnode
+
+@node "trans" "For translators"
+@next "amigaprog"
+@prev "stackgui"
+
+        You  need  the  CatComp  for  translation  the package. You find two
+scripts  in  the  Localize  directory,  for  make  translation easier. These
+scripts uses the SetCT in the Util directory.
+
+    MakeLanguage <language>
+    ------------
+        This one will create the empty ct files for translate. It puts the
+files into the Translations/<language>
+
+    MakeCatalog <language>
+    -----------
+        When the translation finishes, you can create the catalog files,
+with this script. It sets the dates correctly. It put the catalogs into the
+New_Catalog drawer. You have to copy or move these into the Catalogs drawer
+in the main directory or the Locale: assign.
+
+@endnode
+
+
+@node "amigaprog" "For Amiga Programmers"
+@next "amigaprogvideo"
+@prev "trans"
+
+        I  will  send  the  sources  to  everyone  if  requested.  When I am
+satisfied  with  the  state  of  the  sources  I will upload them to Aminet.
+Requests & bug-reports can be mailed to gatig@dragon.klte.hu.
+
+@endnode
+
+@node "amigaprogvideo" "Making Video drivers"
+@next "plus4prog"
+@prev "amigaprog"
+
+        Compile  the  modules  without startup-code. GCC: -nostartup, SAS/C:
+NOSTARTUP. You have to open/close all libraries, if you need them, and maybe
+you  have  to  get the ExecBase from 4 (See: C2P_WANTSYSBASE). The following
+FUNCTION names may not be changed, and you must define all of them.
+
+---CUT HERE---
+#includes
+
+// The defines marked with exclamation point are mandatory
+
+#define C2P_VERSION     "1"                    // !
+#define C2P_REVISION    "0"                    // !
+#define C2P_AUTHOR      "author..."            //
+#define C2P_NAME        "drivername..."        // !
+// If you define the next one, the main program will not render the
+// actual emulation speed
+#define C2P_NOSPEED
+// You can select the desired buffering (single,double,triple): 
+// none/0       - You'll get NULLs as delta
+// 1,2,3        - You'll get the right delta buffers
+#define C2P_BUFFERING	3
+// If you are not using SAS/C, it is recommended to define the
+// date, in the Amiga standard form. dd.mm.yy
+#define C2P_DATE	25.2.99
+// If you define the next one, this will be the brief info, but in this
+// case you cannot localize it. (see: minfo())
+#define C2P_INFO	"long story..."
+// If you define this, you have SysBase at startup, without
+// this, you have to declare & get the SysBase
+#define C2P_WANTSYSBASE
+
+// If you want to localize your driver, use this:
+// (if you use it you will get SysBase, like at C2P_WANTSYSBASE!)
+//   void c2p_OpenCatalog(char **DefaultStrings);
+//      Open the catalogfile, called "cp4_" C2P_NAME ".catalog".
+//      The last item in DefaultStrings[] vector must be NULL.
+//   char *c2p_GetStr(long StringNum); (or the STR() macro)
+//      It gives the specified string, or if it isn't in catalog
+//      the DefaultStrings[StringNum], or if you gave illegal number,
+//      you will get the string "***NOMSG" and, if the intuition is
+//      opened, a requester too.
+//   void c2p_CloseCatalog(void);
+//      Close it after use! (Like tooth-paste)
+//   void c2p_strncpy(char *to,char *fr,int l);
+//      Stringcopy macro, like the strncpy().
+#define C2P_LOCALIZE
+
+// If your builtin language isn't english, give this:
+#define C2P_BUILTINLANGUAGE   "magyar"
+
+#include "c2p_module.c"
+
+//-------------------------------------------------------------------------
+char *SAVEDS minfo(void) {
+//-------------------------------------------------------------------------
+/*
+        If you did not define C2P_INFO, you have to use this function,
+        for return the info string. If you choose C2P_INFO, you cannot
+        use this.
+*/
+} // minfo()
+
+//-------------------------------------------------------------------------
+char *SAVEDS minit(ULONG scrmode, ULONG overscan, unsigned char *linedeltatab) {
+//-------------------------------------------------------------------------
+/*
+                Initializing
+
+        Called only once, after LoadSeg()
+
+        Input:
+                scrmode         ModeID, given by user
+                overscan        Overscan mode, given by user
+                linedeltatab    LineSkipBuffer
+                                283 bytes, one byte per line,
+                                If a byte is not zero, you do not have to draw
+                                to the screen memory. Usable only, if the
+                                buffering was defined correctly
+        Output:
+                NULL            OK
+                string          Error text, usable defines:
+                                C2P_NOMSG       No error message
+                                "custom"        Module specific error
+
+        You  have  to  open  a window, and a screen, if you need it. Put the
+address  of  the  Screen to vec.c2p_Scr. You have to build the palette here.
+The  vec.c2p_Palette  is a 384 bytes length vector. Format: RGB, each 8 bit.
+If  your  window  is  on  an  existing  PubScreen,  you  have to specify the
+PubScreen's  address.  Write your window's address to vec.c2p_Win. You don't
+need  to  specify  a  ScreenTitle.  You  can use Gadgets, Menus, etc on your
+window,  and you have to set the necessary IDCMPs. There're two exception to
+this  rule;  you  will not get any IDCMP_RAWKEY & IDCMP_VANILLAKEY messages,
+because  the  main  program  eats  them. About the messages, see the mdo() &
+mdofull()  functions.  The  Window  &  Screen  pointers are used by the main
+program to perform the following functions:
+
+            Open requesters on the screen, defined by window pointer, if
+             it's a PubScreen,
+            Get messages from the Window's UserPort,
+            Calls to ActivateWindow(), ModifyIDCMP(), SetWindowTitles() and
+             ScreenToFront()
+
+There   are   4  functions  to  handle  the  driver  specific  options.  The
+GetOptionXXX()  is  used to get an existing option, or create a new one. The
+two  versions are ...Int & ...Str for integers and strings. You must specify
+a  default  value, and if the required option is not found, this one will be
+returned.
+
+         int   GetOptionInt(char *name,int   defval);
+         char *GetOptionStr(char *name,char *defval);
+
+         void AddOptionInt(char *name,int   value);
+         void AddOptionStr(char *name,char *value);
+
+With  the  last  two, you can create new options, or modify an existing one.
+The option name is created by the C2P_NAME define, so if it is unique, there
+will not be any name collosions.
+
+*/
+} // minit()
+
+//-------------------------------------------------------------------------
+void SAVEDS mfree(void) {
+//-------------------------------------------------------------------------
+/*
+                Freeing resources
+
+        Immediately before UnloadSeg()-ing
+
+        You  have  to  free all your allocated resources. You have to verify
+all  resources for successful allocation, before freeing them, and first you
+have to call the mawake() function.
+
+*/
+} // mfree()
+
+//-------------------------------------------------------------------------
+int SAVEDS mdo(unsigned char *chunky,unsigned char *delta,int numscreen) {
+//-------------------------------------------------------------------------
+/*
+                Drawing
+
+        Called after every logical frame
+
+        Input:
+                chunky          The screen to draw to. 283x352 bytes of chunky
+                                data. Ignore the MSB. These are Plus4
+                                colors, $x0 are black.
+                delta           Screen array, like above, but, this is the
+                                current visible screen, if you gave the
+                                buffering number correctly.
+                numscreen       The ordinal number of the next screen,
+                                from 0 to the C2P_BUFFERING-1.
+                                ('3' ->  0 1 2 0 1...)
+
+        Deltaconversion.  The IDCMP messages are in the vec.c2p_MsgList Exec
+List, but it contains only the last frame's messages. If you don't handle an
+event  here,  you will not get it in the future. See this code fragment, for
+an example, for collecting all of the messages of the last logical frame:
+
+  struct IntuiMessage *imsg;
+  while(imsg=(struct IntuiMessage *)RemHead(&vec.c2p_MsgList)) {
+  	switch(imsg->Class) {...}
+  }
+
+In  the vec.c2p_Speed field, you find the actual percentage value, or -1, if
+the  user  does  not  want  a  speed  display. You have to return one of the
+following values:
+
+        RET_OK          - Normal
+        RET_PREFS       - Opens the Prefs window
+        RET_DEBUG       - Opens the Debug window
+        RET_RESET       - Normal reset
+        RET_HRESET      - Hard-Reset
+        RET_QUIT        - Quit
+        RET_NEWWIN      - When you have opened a new window, you must notify
+                          the main program about it
+        RET_ERROR       - Fatal error! At smaller errors, return RET_PREFS
+                          only
+
+*/
+} // mdo()
+
+//-------------------------------------------------------------------------
+int SAVEDS mdofull(unsigned char *chunky,int numscreen) {
+//-------------------------------------------------------------------------
+/*
+
+        The same like mdo(), but there is no delta buffer.
+
+*/
+} // mdofull()
+
+//-------------------------------------------------------------------------
+int SAVEDS mdont(void) {
+//-------------------------------------------------------------------------
+/*
+
+        This  one  is the UserBlank case routine. If the user pressed the F5
+key, (no gfx required) this will be the frame handler. The vec.c2p_Speed and
+the user input is still available.
+
+*/
+} // mdont()
+
+//-------------------------------------------------------------------------
+void SAVEDS msleep(void) {
+//-------------------------------------------------------------------------
+/*
+
+        Set busy pointer, no more input until a mawake() call.
+
+*/
+} // msleep()
+
+//-------------------------------------------------------------------------
+void SAVEDS mawake(void) {
+//-------------------------------------------------------------------------
+/*
+
+        Return to normal input handling.
+
+*/
+} // mawake()
+---CUT HERE---
+@endnode
+
+@node "plus4prog" "Plus4 programmers'"
+@next "assp4"
+@prev "amigaprogvideo"
+
+        Send  all  compatibility & other errors to gatig@dragon.klte.hu, any
+attached files with tar/gzip/uuencode please!
+        If  you  know  exactly how the up/down scrolling on the Plus4 works,
+please write me about it!
+
+@endnode
+
+@node "assp4" "AssP4"
+@next "stat"
+@prev "plus4prog"
+
+        There's  a primitive, but easy to use assembler in this package. The
+start  address  must  be at the very first line. With the -s option, you can
+see the symbol table after compilation.
+
+---CUT HERE---
+$start_addr
+
+* remark
+
+label	MNM	operand
+	MNM	operand		* remark
+---CUT HERE---
+
+
+For example:
+
+---CUT HERE---
+$7000
+
+* example program
+
+	xdf	start		* extern symbol
+
+	inl	test_it.asm	* include
+
+NEWVAL	equ	$12
+OLDVAL	equ	$00
+
+mac1	MAC
+	pha
+	lda	data
+	beq	.l1
+	dec	data
+.l1	pla
+	<<<
+
+start	lda	#<.routin
+	sta	.c1
+	lda	#>.routin
+	sta	.c2
+	mac1
+	dat	#$02		* crash
+
+.routin	inc	$ff19
+	lda	#NEWVAL
+	sta	data
+	rti
+
+.c1	dat	#$00
+.c2	dat	#$00
+
+runthis	nop
+	lda	#$00
+.c1	inx
+	bne	.c1
+	jmp	start
+
+data	dat	#0
+
+---CUT HERE---
+
+extra mnemonics:
+	BSS	#$num[,$xx]		* 'num' x #$00 bytes (fill with $xx)
+	DAT	#$num			* 'num' (one byte, or label <lab)
+	STR	string until '\n' in the source
+	INL	filename		* include filename
+	XDF	label			* global label
+	MAC				* macro start
+	<<<				* macro end
+	EQU	value			* constans declaration (to label)
+
+@endnode
+
+@node "stat" "Statistics"
+@next "scrshots"
+@prev "assp4"
+
+After about one hour playing:
+
+Executed system clock: 563639491
+Average instruction clock: 3.1%
+Emulated 11807 frame.
+
+OpCode Statistic
+00  BRK IMP    	       -	  -.-%
+01  ORA (ZP,X) 	       4	  0.0%
+02 !CRA NONE   	      14	  0.0%
+03 !SLO (ZP,X) 	       -	  -.-%
+04 !NO2 IMP    	       -	  -.-%
+05  ORA ZP     	  134852	  0.0%
+06  ASL ZP     	  320414	  0.1%
+07 !SLO ZP     	       -	  -.-%
+08  PHP IMP    	   91484	  0.0%
+09  ORA #BYTE  	  190297	  0.1%
+0A  ASL ACC    	  243003	  0.1%
+0B !ANC #BYTE  	       2	  0.0%
+0C !NO3 IMP    	       -	  -.-%
+0D  ORA ABS    	10567709	  5.9%
+0E  ASL ABS    	    9327	  0.0%
+0F !SLO ABS    	       -	  -.-%
+10  BPL REL    	 4799492	  2.7%
+11  ORA (ZP),Y 	    7658	  0.0%
+12 !CRA NONE   	       -	  -.-%
+13 !SLO (ZP),Y 	       -	  -.-%
+14 !NO2 IMP    	       -	  -.-%
+15  ORA ZP,X   	       -	  -.-%
+16  ASL ZP,X   	   26930	  0.0%
+17 !SLO ZP,X   	       -	  -.-%
+18  CLC IMP    	 1815699	  1.0%
+19  ORA ABS,Y  	   30573	  0.0%
+1A !NOP IMP    	    1441	  0.0%
+1B !SLO ABS,Y  	       2	  0.0%
+1C !NO3 IMP    	       -	  -.-%
+1D  ORA ABS,X  	  125654	  0.0%
+1E  ASL ABS,X  	       -	  -.-%
+1F !SLO ABS,X  	       4	  0.0%
+20  JSR ABS    	 3166083	  1.7%
+21  AND (ZP,X) 	   46452	  0.0%
+22 !CRA NONE   	       -	  -.-%
+23 !RLA (ZP,X) 	       -	  -.-%
+24  BIT ZP     	  210190	  0.1%
+25  AND ZP     	   77822	  0.0%
+26  ROL ZP     	 1510853	  0.8%
+27 !RLA ZP     	       -	  -.-%
+28  PLP IMP    	   91477	  0.0%
+29  AND #BYTE  	 1155196	  0.6%
+2A  ROL IMP    	  319278	  0.1%
+2B !ANC #BYTE  	       -	  -.-%
+2C  BIT ABS    	 4142441	  2.3%
+2D  AND ABS    	   28624	  0.0%
+2E  ROL ABS    	       -	  -.-%
+2F !RLA ABS    	       -	  -.-%
+30  BMI REL    	  353698	  0.1%
+31  AND (ZP),Y 	     529	  0.0%
+32 !CRA NONE   	       -	  -.-%
+33 !RLA (ZP),Y 	       -	  -.-%
+34 !NO2 IMP    	     256	  0.0%
+35  AND ZP,X   	    4270	  0.0%
+36  ROL ZP,X   	       -	  -.-%
+37 !RLA ZP,X   	       -	  -.-%
+38  SEC IMP    	  528955	  0.2%
+39  AND ABS,Y  	   49401	  0.0%
+3A !NOP IMP    	    1370	  0.0%
+3B !RLA ABS,Y  	       4	  0.0%
+3C !NO3 IMP    	     539	  0.0%
+3D  AND ABS,X  	   30471	  0.0%
+3E  ROL ABS,X  	       -	  -.-%
+3F !RLA ABS,X  	       1	  0.0%
+40  RTI IMP    	   50536	  0.0%
+41  EOR (ZP,X) 	       -	  -.-%
+42 !CRA NONE   	       -	  -.-%
+43 !SRE (ZP,X) 	       -	  -.-%
+44 !NO2 IMP    	       -	  -.-%
+45  EOR ZP     	   57904	  0.0%
+46  LSR ZP     	  435634	  0.2%
+47 !SRE ZP     	       -	  -.-%
+48  PHA IMP    	  659124	  0.3%
+49  EOR #BYTE  	  304855	  0.1%
+4A  LSR ACC    	  564320	  0.3%
+4B !ASR #BYTE  	       1	  0.0%
+4C  JMP ABS    	 2280458	  1.2%
+4D  EOR ABS    	   74555	  0.0%
+4E  LSR ABS    	   31947	  0.0%
+4F !SRE ABS    	       -	  -.-%
+50  BVC REL    	   40964	  0.0%
+51  EOR (ZP),Y 	   65590	  0.0%
+52 !CRA NONE   	       -	  -.-%
+53 !SRE (ZP),Y 	       -	  -.-%
+54 !NO2 IMP    	       -	  -.-%
+55  EOR ZP,X   	       -	  -.-%
+56  LSR ZP,X   	    4116	  0.0%
+57 !SRE ZP,X   	       -	  -.-%
+58  CLI IMP    	  851056	  0.4%
+59  EOR ABS,Y  	    3754	  0.0%
+5A !NOP IMP    	     314	  0.0%
+5B !SRE ABS,Y  	       1	  0.0%
+5C !NO3 IMP    	       -	  -.-%
+5D  EOR ABS,X  	    1232	  0.0%
+5E  LSR ABS,X  	       -	  -.-%
+5F !SRE ABS,X  	       -	  -.-%
+60  RTS IMP    	 3193368	  1.7%
+61  ADC (ZP,X) 	       -	  -.-%
+62 !CRA NONE   	       -	  -.-%
+63 !RRA (ZP,X) 	       -	  -.-%
+64 !NO2 IMP    	       -	  -.-%
+65  ADC ZP     	  666168	  0.3%
+66  ROR ZP     	 1572456	  0.8%
+67 !RRA ZP     	       -	  -.-%
+68  PLA ACC    	  606498	  0.3%
+69  ADC #BYTE  	  636418	  0.3%
+6A  ROR ACC    	  132615	  0.0%
+6B !ARR #BYTE  	       -	  -.-%
+6C  JMP (ABS)  	  276295	  0.1%
+6D  ADC ABS    	   16263	  0.0%
+6E  ROR ABS    	     721	  0.0%
+6F !RRA ABS    	       -	  -.-%
+70  BVS REL    	     545	  0.0%
+71  ADC (ZP),Y 	     402	  0.0%
+72 !CRA NONE   	       -	  -.-%
+73 !RRA (ZP),Y 	   30739	  0.0%
+74 !NO2 IMP    	       -	  -.-%
+75  ADC ZP,X   	     624	  0.0%
+76  ROR ZP,X   	  155857	  0.0%
+77 !RRA ZP,X   	       -	  -.-%
+78  SEI IMP    	  836152	  0.4%
+79  ADC ABS,Y  	  146565	  0.0%
+7A !NOP IMP    	     455	  0.0%
+7B !RRA ABS,Y  	       1	  0.0%
+7C !NO3 IMP    	       -	  -.-%
+7D  ADC ABS,X  	   24292	  0.0%
+7E  ROR ABS,X  	       -	  -.-%
+7F !RRA ABS,X  	       1	  0.0%
+80 !NO2 IMP    	       -	  -.-%
+81  STA (ZP,X) 	   30326	  0.0%
+82 !NO2 IMP    	     256	  0.0%
+83 !SAX (ZP,X) 	       -	  -.-%
+84  STY ZP     	  355558	  0.2%
+85  STA ZP     	 4052953	  2.2%
+86  STX ZP     	  371429	  0.2%
+87 !SAX ZP     	       -	  -.-%
+88  DEY IMP    	 6389537	  3.6%
+89 !NO2 IMP    	       -	  -.-%
+8A  TXA IMP    	  255994	  0.1%
+8B !ANE #BYTE  	       -	  -.-%
+8C  STY ABS    	  129842	  0.0%
+8D  STA ABS    	 3236411	  1.8%
+8E  STX ABS    	  108026	  0.0%
+8F !SAX ABS    	    1168	  0.0%
+90  BCC REL    	 1793770	  1.0%
+91  STA (ZP),Y 	 1938462	  1.0%
+92 !CRA NONE   	       -	  -.-%
+93 !SHA (ZP),Y 	       -	  -.-%
+94  STY ZP,X   	   85807	  0.0%
+95  STA ZP,X   	  119018	  0.0%
+96  STX ZP,Y   	       -	  -.-%
+97 !SAX ZP,Y   	       -	  -.-%
+98  TYA IMP    	  390917	  0.2%
+99  STA ABS,Y  	  452786	  0.2%
+9A  TXS IMP    	     111	  0.0%
+9B !SHS ABS,Y  	       -	  -.-%
+9C !SHY ABS,X  	       3	  0.0%
+9D  STA ABS,X  	 2970340	  1.6%
+9E !SHX ABS,Y  	       -	  -.-%
+9F !SHA ABS,Y  	       2	  0.0%
+A0  LDY #BYTE  	  902998	  0.5%
+A1  LDA (ZP,X) 	   34126	  0.0%
+A2  LDX #BYTE  	  618849	  0.3%
+A3 !LAX (ZP,X) 	       2	  0.0%
+A4  LDY ZP     	  552709	  0.3%
+A5  LDA ZP     	16706578	  9.4%
+A6  LDX ZP     	  493474	  0.2%
+A7 !LAX ZP     	       5	  0.0%
+A8  TAY IMP    	  454258	  0.2%
+A9  LDA #BYTE  	 1457983	  0.8%
+AA  TAX IMP    	  688374	  0.3%
+AB !LXA #BYTE  	       -	  -.-%
+AC  LDY ABS    	   92071	  0.0%
+AD  LDA ABS    	 1971582	  1.1%
+AE  LDX ABS    	  141312	  0.0%
+AF !LAX ABS    	      14	  0.0%
+B0  BCS REL    	 1709654	  0.9%
+B1  LDA (ZP),Y 	 2446580	  1.3%
+B2 !CRA NONE   	       -	  -.-%
+B3 !LAX (ZP),Y 	       -	  -.-%
+B4  LDY ZP,X   	   43230	  0.0%
+B5  LDA ZP,X   	  143223	  0.0%
+B6  LDX ZP,Y   	     431	  0.0%
+B7 !LAX ZP,Y   	       -	  -.-%
+B8  CLV IMP    	       -	  -.-%
+B9  LDA ABS,Y  	 2904444	  1.6%
+BA  TSX IMP    	   59935	  0.0%
+BB !LAS ABS,Y  	       -	  -.-%
+BC  LDY ABS,X  	  227864	  0.1%
+BD  LDA ABS,X  	 3097037	  1.7%
+BE  LDX ABS,Y  	    3775	  0.0%
+BF !LAX ABS,Y  	    3499	  0.0%
+C0  CPY #BYTE  	  406806	  0.2%
+C1  CMP (ZP,X) 	       -	  -.-%
+C2 !NO2 IMP    	     256	  0.0%
+C3 !DCP (ZP,X) 	       -	  -.-%
+C4  CPY ZP     	   79598	  0.0%
+C5  CMP ZP     	  758906	  0.4%
+C6  DEC ZP     	  518182	  0.2%
+C7 !DCP ZP     	       -	  -.-%
+C8  INY IMP    	 5887671	  3.3%
+C9  CMP #BYTE  	 2504495	  1.4%
+CA  DEX IMP    	 1464767	  0.8%
+CB !SBX #BYTE  	       -	  -.-%
+CC  CPY ABS    	  963239	  0.5%
+CD  CMP ABS    	  145494	  0.0%
+CE  DEC ABS    	  132223	  0.0%
+CF !DCP ABS    	    1290	  0.0%
+D0  BNE REL    	31338199	 17.6%
+D1  CMP (ZP),Y 	    8712	  0.0%
+D2 !CRA NONE   	       -	  -.-%
+D3 !DCP (ZP),Y 	       -	  -.-%
+D4 !NO2 IMP    	       -	  -.-%
+D5  CMP ZP,X   	     297	  0.0%
+D6  DEC ZP,X   	       -	  -.-%
+D7 !DCP ZP,X   	       -	  -.-%
+D8  CLD IMP    	    4422	  0.0%
+D9  CMP ABS,Y  	    4549	  0.0%
+DA !NOP IMP    	      91	  0.0%
+DB !DCP ABS,Y  	       -	  -.-%
+DC !NO3 IMP    	       1	  0.0%
+DD  CMP ABS,X  	  529450	  0.2%
+DE  DEC ABS,X  	   78931	  0.0%
+DF !DCP ABS,X  	    2817	  0.0%
+E0  CPX #BYTE  	 1262872	  0.7%
+E1  SBC (ZP,X) 	       -	  -.-%
+E2 !NO2 IMP    	       -	  -.-%
+E3 !ISB (ZP,X) 	       -	  -.-%
+E4  CPX ZP     	  296026	  0.1%
+E5  SBC ZP     	  878878	  0.4%
+E6  INC ZP     	 1195918	  0.6%
+E7 !ISB ZP     	     120	  0.0%
+E8  INX IMP    	12611549	  7.1%
+E9  SBC #BYTE  	  327405	  0.1%
+EA  NOP IMP    	  297775	  0.1%
+EB !SBC #BYTE  	       -	  -.-%
+EC  CPX ABS    	   52778	  0.0%
+ED  SBC ABS    	   49851	  0.0%
+EE  INC ABS    	   59313	  0.0%
+EF !ISB ABS    	      58	  0.0%
+F0  BEQ REL    	14289723	  8.0%
+F1  SBC (ZP),Y 	    8202	  0.0%
+F2 !CRA NONE   	       -	  -.-%
+F3 !ISB (ZP),Y 	       -	  -.-%
+F4 !NO2 IMP    	      64	  0.0%
+F5  SBC ZP,X   	    1298	  0.0%
+F6  INC ZP,X   	     679	  0.0%
+F7 !ISB ZP,X   	       -	  -.-%
+F8  SED IMP    	       -	  -.-%
+F9  SBC ABS,Y  	     756	  0.0%
+FA !NOP IMP    	      25	  0.0%
+FB !ISB ABS,Y  	     256	  0.0%
+FC !NO3 IMP    	     186	  0.0%
+FD  SBC ABS,X  	    6104	  0.0%
+FE  INC ABS,X  	   33788	  0.0%
+FF !ISB ABS,X  	      37	  0.0%
+Total:		177446045	100.0%
+
+Addressing Statistic
+#BYTE  	 9768177	  5.5%
+ABS    	27402800	 15.4%
+ZP     	31246627	 17.6%
+ACC    	 1546436	  0.8%
+IMP    	36947693	 20.8%
+(ZP,X) 	  110910	  0.0%
+(ZP),Y 	 4506874	  2.5%
+ZP,X   	  585349	  0.3%
+ABS,X  	 7128026	  4.0%
+ABS,Y  	 3600368	  2.0%
+REL    	54326045	 30.6%
+(ABS)  	  276295	  0.1%
+ZP,Y   	     431	  0.0%
+NONE   	      14	  0.0%
+Total:	177446045	100.0%
+
+Instruction Statistic
+ ADC   	 1490732	  0.8%
+ AND   	 1392765	  0.7%
+ ASL   	  599674	  0.3%
+ BCC   	 1793770	  1.0%
+ BCS   	 1709654	  0.9%
+ BEQ   	14289723	  8.0%
+ BIT   	 4352631	  2.4%
+ BMI   	  353698	  0.1%
+ BNE   	31338199	 17.6%
+ BPL   	 4799492	  2.7%
+ BRK   	       -	  -.-%
+ BVC   	   40964	  0.0%
+ BVS   	     545	  0.0%
+ CLC   	 1815699	  1.0%
+ CLD   	    4422	  0.0%
+ CLI   	  851056	  0.4%
+ CLV   	       -	  -.-%
+ CMP   	 3951903	  2.2%
+ CPX   	 1611676	  0.9%
+ CPY   	 1449643	  0.8%
+ DEC   	  729336	  0.4%
+ DEX   	 1464767	  0.8%
+ DEY   	 6389537	  3.6%
+ EOR   	  507890	  0.2%
+ INC   	 1289698	  0.7%
+ INX   	12611549	  7.1%
+ INY   	 5887671	  3.3%
+ JMP   	 2556753	  1.4%
+ JSR   	 3166083	  1.7%
+ LDA   	28761553	 16.2%
+ LDX   	 1257841	  0.7%
+ LDY   	 1818872	  1.0%
+ LSR   	 1036017	  0.5%
+ NOP   	  297775	  0.1%
+ ORA   	11056747	  6.2%
+ PHA   	  659124	  0.3%
+ PHP   	   91484	  0.0%
+ PLA   	  606498	  0.3%
+ PLP   	   91477	  0.0%
+ ROL   	 1830131	  1.0%
+ ROR   	 1861649	  1.0%
+ RTI   	   50536	  0.0%
+ RTS   	 3193368	  1.7%
+ SBC   	 1272494	  0.7%
+ SEC   	  528955	  0.2%
+ SED   	       -	  -.-%
+ SEI   	  836152	  0.4%
+ STA   	12800296	  7.2%
+ STX   	  479455	  0.2%
+ STY   	  571207	  0.3%
+ TAX   	  688374	  0.3%
+ TAY   	  454258	  0.2%
+ TSX   	   59935	  0.0%
+ TXA   	  255994	  0.1%
+ TXS   	     111	  0.0%
+ TYA   	  390917	  0.2%
+!CRA   	      14	  0.0%
+!NOP   	    3696	  0.0%
+!NO2   	     832	  0.0%
+!NO3   	     726	  0.0%
+!SLO   	       6	  0.0%
+!ANC   	       2	  0.0%
+!RLA   	       5	  0.0%
+!SRE   	       1	  0.0%
+!RRA   	   30741	  0.0%
+!ARR   	       -	  -.-%
+!SAX   	    1168	  0.0%
+!ANE   	       -	  -.-%
+!SHA   	       2	  0.0%
+!SHS   	       -	  -.-%
+!SHY   	       3	  0.0%
+!SHX   	       -	  -.-%
+!LAX   	    3520	  0.0%
+!LAS   	       -	  -.-%
+!DCP   	    4107	  0.0%
+!SBX   	       -	  -.-%
+!ISB   	     471	  0.0%
+!SBC   	       -	  -.-%
+!ASR   	       1	  0.0%
+!LXA   	       -	  -.-%
+Total:	177446045	100.0%
+
+TED access
+
+  NAME 		  READ 		 WRITE
+  ------------------------------------------
+  Cnt1LO       	:      9832 	       21
+  Cnt1HI       	:       120 	       21
+  Cnt2LO       	:       152 	       21
+  Cnt2HI       	:      5142 	       21
+  Cnt3LO       	:        19 	       21
+  Cnt3HI       	:        19 	       21
+  Gfx1         	:       960 	     7239
+  Gfx2         	:      2646 	    42421
+  KeyRd        	:    346906 	   338974
+  IRQFlag      	:    128484 	    51203
+  IRQEnable    	:     26073 	     5148
+  Raster       	:    362738 	    50392
+  CurPos1      	:        19 	      464
+  CurPos2      	:        19 	      464
+  Snd1Freq1    	:        19 	     5180
+  Snd2Freq1    	:     32823 	    24009
+  Snd2Freq2    	:       107 	     4425
+  SndCtrl      	:     14419 	    28743
+  Gfx3         	:      7395 	    11950
+  ChrGen       	:        26 	    98752
+  VideoMatrix  	:        22 	     4575
+  Color0       	:        23 	    10769
+  Color1       	:        63 	    12975
+  Color2       	:        63 	    12097
+  Color3       	:        20 	       21
+  Color4       	:    551511 	    68515
+  1stCharAddr1 	:        19 	        0
+  1stCharAddr1 	:        19 	        0
+  ActRas1      	:    114940 	      414
+  ActRas2      	:     80132 	     1035
+  HRas         	:    397552 	        0
+  Flash        	:     62513 	        0
+
+Memory fetch table
+
+0000 ##########
+0100 
+0200 ######
+0300 ############
+0400 
+0500 
+0600 
+0700 
+0800 
+0900 
+0A00 
+0B00 ####
+0C00 
+0D00 
+0E00 #########
+0F00 #########
+1000 ####################
+1100 #
+1200 #####
+1300 
+1400 ###
+1500 ####
+1600 #########
+1700 
+1800 
+1900 #
+1A00 ######
+1B00 
+1C00 
+1D00 
+1E00 
+1F00 #
+2000 
+2100 
+2200 #
+2300 ############
+2400 #####
+2500 
+2600 #
+2700 ##
+2800 ####
+2900 ##
+2A00 
+2B00 #####
+2C00 ##
+2D00 #
+2E00 ###################################
+2F00 ################
+3000 #####
+3100 #
+3200 #
+3300 
+3400 
+3500 
+3600 
+3700 
+3800 
+3900 
+3A00 
+3B00 
+3C00 
+3D00 
+3E00 
+3F00 
+4000 #
+4100 ##
+4200 
+4300 
+4400 
+4500 
+4600 
+4700 ###
+4800 #
+4900 
+4A00 
+4B00 
+4C00 
+4D00 
+4E00 
+4F00 
+5000 
+5100 
+5200 #
+5300 
+5400 
+5500 
+5600 
+5700 
+5800 
+5900 
+5A00 
+5B00 
+5C00 
+5D00 
+5E00 
+5F00 
+6000 ##
+6100 
+6200 
+6300 
+6400 
+6500 ###
+6600 
+6700 
+6800 
+6900 
+6A00 
+6B00 
+6C00 #######
+6D00 
+6E00 
+6F00 
+7000 
+7100 
+7200 
+7300 
+7400 
+7500 
+7600 
+7700 
+7800 
+7900 
+7A00 
+7B00 
+7C00 ##############
+7D00 
+7E00 
+7F00 
+8000 
+8100 
+8200 
+8300 
+8400 
+8500 
+8600 
+8700 
+8800 
+8900 #####
+8A00 
+8B00 #
+8C00 
+8D00 
+8E00 
+8F00 
+9000 #
+9100 
+9200 ###
+9300 
+9400 
+9500 
+9600 #
+9700 
+9800 
+9900 
+9A00 
+9B00 
+9C00 
+9D00 
+9E00 ##
+9F00 
+A000 #
+A100 #
+A200 
+A300 
+A400 
+A500 
+A600 #
+A700 
+A800 
+A900 
+AA00 
+AB00 
+AC00 
+AD00 
+AE00 
+AF00 
+B000 
+B100 
+B200 
+B300 
+B400 
+B500 
+B600 
+B700 
+B800 
+B900 
+BA00 
+BB00 
+BC00 
+BD00 
+BE00 
+BF00 
+C000 
+C100 
+C200 
+C300 
+C400 
+C500 
+C600 
+C700 
+C800 
+C900 
+CA00 
+CB00 
+CC00 
+CD00 ##
+CE00 #
+CF00 
+D000 
+D100 
+D200 
+D300 
+D400 
+D500 
+D600 
+D700 
+D800 #######################################################################
+D900 #
+DA00 ########
+DB00 #
+DC00 
+DD00 
+DE00 #
+DF00 
+E000 
+E100 
+E200 
+E300 
+E400 ###
+E500 ##
+E600 
+E700 
+E800 
+E900 
+EA00 #
+EB00 
+EC00 
+ED00 
+EE00 
+EF00 
+F000 
+F100 
+F200 
+F300 
+F400 
+F500 
+F600 #
+F700 
+F800 
+F900 
+FA00 #
+FB00 #
+FC00 
+FD00 
+FE00 
+FF00 
+
+@endnode
+
+@node "scrshots" "ScreenShots"
+@next "news"
+@prev "stat"
+
+  @{" Picture #1 " SYSTEM "SYS:Utilities/Multiview SCREEN cp4_screen1.png"}
+  @{" Picture #2 " SYSTEM "SYS:Utilities/Multiview SCREEN cp4_screen2.png"}
+
+@endnode
+
+@node "news" "New features"
+@next "news"
+@prev "scrshots"
+
+V0.79	ADD	Digi sound emulation
+
+V0.78	ADD	Noise support
+
+V0.77i	ADD	assp4: Local labels (.lab)
+	ADD	assp4: Define support (EQU value ; directive)
+	ADD	assp4: Include support (INL filename ; directive)
+	ADD	assp4: XDEF support (XDF label ; directive)
+	ADD	assp4: Macros (MAC / <<< ; directives)
+	ADD	assp4: Free-style input understand now
+
+V0.76i	FIX	Some problems
+
+V0.75	ADD	OS3.5 Icons added by Unreal
+	ADD	NoBorder drivers for AGA & GfxCards
+	FIX	Localized date on about window
+	ADD	Localized update-installer
+
+V0.74	ADD	Xpk efficiency selection
+	FIX	Faster file selection hooks
+	FIX	Xpk menu handling
+
+V0.73	ADD	External palette settings, some driver obsolete now
+	FIX	Amiga Raster now correct on debug window
+	ADD	New keyboard function <Quit>
+	FIX	card.c2p extended with direct Picasso96 support (not tested!)
+
+V0.72	FIX	WindowAmiga driver speedup (two times faster)
+	ADD	WindowCardDelta driver for video cards
+
+V0.71	ADD	New driver for slow machines (Interlace)
+	FIX	Minor bugfixes
+
+V0.70	ADD	New driver for video cards (CardDelta), maybe faster
+	FIX	Minor bugfixes
+
+V0.68	FIX	Snapshot error
+	FIX	Window drivers' size problems
+	ADD	Faster zero-page addressing
+
+V0.67	ADD	Snapshot save/load
+
+V0.66i	FIX	Rewrite some code for more readable
+
+V0.63	ADD	D64 support
+
+V0.60	FIX	More bugs
+	ADD	Localize MakeROM
+	FIX	Numeric pad handling
+
+V0.59	FIX	Localize errors
+	FIX	Internal KeyMap problem
+
+V0.58	FIX	Workaround "NSD compliant" gameport.device (thanx 4 Chris)
+	FIX	Command keys fully localized
+	ADD	OS96 package (+ MakeROM utility)
+
+V0.57	ADD	Localized
+	MOD	Module interface (compatible) for localize modules
+	FIX	Stack size control
+
+V0.55	FIX	Small bug in SetMap gui
+	ADD	Joystick emulation on the keyboard
+	FIX	Version string changed to standard
+
+V0.54	ADD	SID card emulation via external libraries
+	ADD	Keymap editor
+	FIX	Some minor problem
+
+V0.52	ADD	About menuitem
+	ADD	RealTime mode
+	FIX	Monitor window opened sometimes on the driver's screen
+
+V0.51	ADD	Yet more speed
+	ADD	IEC handling switchable (problems with some prgs)
+
+V0.49	ADD	New drawing routines, faster at most case
+
+V0.47	ADD	Frees Joystick when window inactive
+	ADD	New module function for UserBlank
+	FIX	Handles bad ModeID
+
+@endnode

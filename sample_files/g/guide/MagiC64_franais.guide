@@ -1,0 +1,1889 @@
+@database 07bfe810-0
+@master Systems:Commodore_64/MagiC64.guide
+@$VER: 1.7
+@author "Nick Sardelianos and Michael Kramer"
+@(c) "Michael Kramer and Nick Sardelianos"
+
+@node "Main" "Main"
+
+ MagiC64  Un émulateur Commodore 64
+ ==================================
+
+	Quoi de neuf dans cette version
+
+	 @{"Nouvelles caractéristiques" link "new" 0}
+
+        Introduction
+
+         @{"Qu'est-ce que MagiC64?" link "What" 0}
+         @{"Un émulateur C64 en 1995 ?" link "1995" 0}
+         @{"... Qu'est-ce qu'un C64 ?" link "C64" 0}
+         @{"Configuration minimale" link "Requirements" 0}
+
+         @{"Prise en main rapide" link "QuickStart" 0}
+
+        L'émulateur
+
+         @{"Copyright et Enregistrement" link "Copyright" 0}     @{"Sauver" link "Save" 0}
+         @{"Affichage" link "Graphics" 0}                       @{"CPU & ROM" link "CPU" 0}
+         @{"Vidéo" link "Video" 0}                           @{"Sprites" link "Sprites" 0}
+         @{"Son" link "Sound" 0}                             @{"Joysticks" link "Joysticks" 0}
+         @{"Clavier" link "Keyboard" 0}                         @{"Disquettes" link "Floppy" 0}
+         @{"Fichiers D64 (Disquette)" link "D64-Disks" 0}        @{"Fichiers T64 (Cassette)" link "T64-Tapes" 0}
+         @{"Fichiers P00" link "P00-Files" 0}                    @{"Lecteur (Statut du lecteur de disquettes)" link "DiskState" 0}
+	 @{"Fichiers C64" link "C64-Files" 0}
+         @{"Démarrer" link "Start" 0}                        @{"Quitter" link "Quit" 0}
+
+        Emulation du lecteur de disquettes
+
+         @{"Introduction" link "Introduction" 0}
+         @{"Fonctions gérées" link "Supported" 0}
+         @{"Fonctions non gérées" link "NonSupported" 0}
+
+	Outils
+
+	 @{"Moniteur" link "Monitor" 0}
+
+        Questions courantes (FAQ)
+
+	 @{"Comment transférer des logiciels du C64 vers l'Amiga ?" link "Transfer" 0}
+         @{"Comment accélérer l'émulateur ?" link "SpeedUp" 0}
+	 @{"Comment ralentir l'émulateur ?" link "SlowDown" 0}
+         @{"Quels programmes ne fonctionnent pas ?" link "NotWork" 0}
+	 @{"Comment changer de disquette ?" link "DiskChange" 0}
+         @{"L'émulateur ne répond plus ?" link "Feedback" 0}
+	 @{"A quoi correspondent ces avertissements ?" link "Warnings" 0}
+	 @{"Où trouver des logiciels C64" link "Software" 0}
+	 @{"Votre Amiga est rapide, mais MagiC64 est lent ?" link "Why" 0}
+
+
+        @{"Historique" link "History" 0}
+        @{"Ce qui reste à faire" link "ToDo" 0}
+
+
+        @{"Crédits" link "Greetings" 0}
+
+@endnode
+
+@node "New" "Nouvelles caractéristiques"
+
+	Nouvelles caractéristiques
+
+ Il est maintenant possible de controler MagiC64 v1.7 complétement au clavier.
+Pour plus de détail, se référer à la @{"Prise en main rapide" link "QuickStart" 0}.
+L'émulation elle-même a également étée améliorée, le rafraîchissement
+intelligent marche maintenant dans tous les cas, et la vitesse a encore été
+améliorée.
+ En plus de cela quelques petits bogues dans l'émulation vidéo ont encore été
+éliminés ; du coup les programmes dans lesquels seule une partie de l'écran
+défile marchent maintenant bien mieux.
+ Les effets des raccourcis-clavier sont maintenant affichés sous le forme d'un
+court message ephémère dans la ligne de statut (située dans la partie basse de
+l'écran).
+ De nouveaux raccourcis-clavier permettent de changer directement le nombre de
+cycles pour l'affichage des lignes, ce qui permet de supprimer un léger
+clignotement de l'affichage directement depuis le mode C64.
+ Un indicateur de vitesse (qui peut être désactivé) permet d'ajuster la
+vitesse de l'émulation.
+ La sauvegarde sur image disque D64 marche à nouveau.
+ Un bogue concernant la bibliothèque playsid.library a été retiré, ce bogue
+pouvait ammener MagiC64 à se planter dans certaines circonstances.
+ Des catalogues Français et Italiens ont étés ajoutés.
+
+ Pour plus d'information veuillez vous référer à l'@{"Historique" link "History" 0}
+
+@endnode
+
+@node "What" "Qu'est-ce que MagiC64 ?"
+
+        Qu'est-ce que MagiC64 ?
+
+
+ MagiC64 est un émulateur C64 pour Amiga, qui essaye de reproduire un vrai C64
+de la manière la plus exacte possible. L'émulateur a les caractéristiques
+suivantes :
+
+
+	- Emulation complète du processeur 6510 (y compris les opcodes illégaux)
+
+        - Emulation ligne à ligne du VIC
+        	- Tous les modes graphiques sont supportés
+        	- Scrollings Horizontal et vertical
+
+        - Emulation complète des Sprites
+        	- Collisions Sprite-Sprite
+        	- Collisions Sprite-Fond
+
+        - Emulation du son grâce à la bibliothèque "6581sid.library" ou
+          "playsid.library"
+
+	- Emulation des ROMs du C64 ; Vous pouvez aussi utiliser les ROMS
+	  originales
+
+        - Gestion du clavier et des joysticks
+
+        - Emulation du lecteur de disquettes 1541
+        	- Chargement et sauvegarde rapide pour tous les programmes
+        	- Quasiment toutes les commandes du 1541 sont gérées
+
+	- Gestion des formats de fichiers D64, T64, P00 et C64
+
+        - Conversion possible entre les formats de fichiers
+
+        - Fonctions graphiques optimisées pour l'affichage par plan de bits.
+          Sur les Amigas rapides, il est possible d'obtenir la même vitesse
+          qu'un vrai C64. Les cartes graphiques sont également gérées
+          (via CyberGfx).
+
+        - L'émulateur est programmé proprement, il tourne en multitâche
+          complet.
+
+@endnode
+
+@node "1995" "Un émulateur C64 en 1995 ?"
+
+        Un émulateur C64 en 1995 ?
+
+
+Cet émulateur a été écrit à un moment, où - à mon opinion - il n'existe pas
+d'émulateur C64 correct. Les modèles pour MagiC64 étaient au départ les
+émulateurs C64 pour PC, qui ont atteint une qualité impressionnante de nos
+jours. C'est pourquoi MagiC64 gère les formats PC les plus répandus, la
+plupart des programmes C64 disponibles actuellement étant dans un de ces
+formats. Un des autres objectifs pendant le développement de MagiC64 était
+d'obtenir une bonne vitesse d'émulation. C'est ainsi que MagiC64 possède
+des routines graphiques optimisée "bitplanes" très rapides. En effet, il
+n'y a pas de conversion chunky->planar, ce qui permet des performances
+graphiques bien meilleures. C'est une technique utile pour d'autres
+émulateurs 8 bits, ou même Macintosh.
+
+Maintenant les utilisateurs d'Amiga ont la possibilité d'accéder à (presque)
+tous les jeux et programmes du C64. Même si ces logiciels sont complètement
+dépassés au niveau des graphismes et du son, ils sont souvent très amusants
+et intéressants. Ils constituent ce qu'on peut appeler des "idées
+originales".
+
+Qui plus est, MagiC64 a des caractéristiques que seul un émulateur peut
+offrir : Chargement et sauvegarde rapides ainsi que la possibilité de
+suspendre et reprendre un programme à n'importe quel moment.
+
+
+@endnode
+
+@node "Requirements" "Configuration minimale"
+
+        Configuration minimale
+
+
+ Toute émulation C64, si elle est orienté-ligne, comme MagiC64, consomme
+beaucoup de temps CPU. MagiC64 requiert au moins un processeur 68020, mais
+un 68030 ou '40 est recommandé. Un A4000, A3000, ou tout Amiga équipé d'une
+carte processeur 68030 devrait garantir une utilisation confortable de
+l'émulateur avec un ratio d'image de 1/3. Un 68060 est nécessaire pour
+obtenir la pleine vitesse avec un ratio image de 1/1.
+
+ En plus de cela, les fonctions graphiques nécessitent beaucoup de mémoire
+pour les tables de recherche. Au total, MagiC64 a besoin d'un minimum de
+1,8 Mo de mémoire. Il est conseillé d'utiliser pour ce faire de la mémoire
+rapide (32 bits Fast RAM) afin de tirer le meilleur des performances.
+
+ Du côté logiciel, vous devez utiliser le Kickstart 2.04 ou antérieur. Les
+particularités du Kickstart 3.0 en ce qui concerne le double buffering sont
+utilisées si celui-ci est présent.
+
+En résumé :	- Processeur 68020 ou mieux
+		- 1,8 Mo de mémoire (si possible Fast RAM 32 bits)
+		- Kickstart 2.04 ou mieux
+
+NB: L'émulateur fonctionne parfaitement avec les Amigas sans chipset AGA.
+
+
+@endnode
+
+@node "QuickStart" "Prise en main rapide"
+
+        Prise en main rapide
+
+
+ MagiC64 peut être lancé à partir du CLI ou du Workbench. Dans la version non
+enregistrée, une fenêtre indiquant le copyright et les conditions d'enregistrement
+apparaîtra. Elle peut être simplement fermée en cliquant sur le bouton OK. Si le
+Kickstart 3.0 est présent, MagiC64 vous demandera la version de Setpatch de votre
+système afin de choisir sa gestion du double-buffering.
+Après cela vous devriez obtenir une fenêtre avec de nombreux boutons de sélection.
+
+ MagiC64 paut être contrôlé avec la souris ou le clavier. Lorsque vous utilisez le
+clavier, certaines touches ont la même signification dans les différentes fenêtres.
+Vous pouvez ainsi fermer les fenêtres avec la touche 'q', charger et lancer les
+programmes avec 'r' (comme 'Run') et encore utiliser la touche 'a' pour les
+opérations de sauvegarde. Les touches de flèches sont utilisables dans les requêtes
+de fichiers, avec 'Return' pour sélectionner un fichier. L'émulateur se souviendra
+des dernières positions des fenêtres et les sauvegardera. Vous pourrez ainsi vous
+faire votre propre GUI de MagiC64.
+
+ Vous pouvez accéder directement au mode C64 en cliquant sur le bouton "Démarrer",
+et revenir quand vous le souhaitez à la fenêtre de l'émulateur en utilisant la
+touche 'ESC'. Cette touche permet en fait de suspendre l'émulation.
+
+ Pour charger et lancer un programme, il faut avant tout choisir le format de
+fichier à utiliser dans la rubrique "Disquettes & Cassettes". Les fichiers D64
+représentent l'image d'une disquette de 1541, tandis que les fichiers T64 sont
+l'image d'une cassette. Vous avez également accès aux formats P00 et C64 qui
+représentent un seul programme C64.
+
+ Si vous choisissez @{"T64" link "T64-Tapes"}, @{"P00" link "P00-Files"} ou @{"C64" link "C64-Files"}, tous les fichiers du répertoire
+correspondant sont analysés, et les noms C64 des programmes sont affichés dans
+une fenêtre. Vous pouvez alors double-cliquer sur un des noms pour charger et
+lancer (l'émulateur passe automatiquement au mode C64) le programme voulu. Si la
+fenêtre des noms est vide, vous pouvez changer le répertoire de recherche en
+sélectionnant "Chemin T64", "Chemin P00" ou "Chemin C64".
+
+ Pour ce qui est des @{"fichiers D64" link "D64-Disks"}, vous devez en premier lieu cliquer sur le
+bouton "Charger D64". Sélectionnez un des fichiers D64. La liste des fichiers C64
+du disque sélectionné apparaît alors et il suffit, là encore, de double-cliquer
+sur le nom d'un des programmes pour le charger et le lancer.
+
+ Lors de l'émulation, vous pouvez ré-initialiser le C64 (Reset) en appuyant sur
+F9. Le C64 effectue alors une vérification de module, si bien que les programmes
+sous forme de module sont relancé. Si vous appuyez sur F10, un démarrage à froid
+(hard Reset) est réalisé, ce qui ramène toujours au message initial de l'émulation.
+
+ A tout moment lors de l'émulation (même après qu'un programme ait été chargé),
+vous pouvez changer le port joystick en cliquant sur "Joysticks" dans la rubrique
+"Emulation". Vous pouvez également changer le port des joystick en utilisant la
+touche '*' du pavé numérique. Si vous trouvez que l'émulation est trop lente, vous
+pouvez l'accélérer en rentrant une plus grande valeur pour "Afficher toutes les
+(n) images" dans la fenêtre "Vidéo" (réglage également accessible à partir des
+touches '+' et '-' du pavé numérique lors de l'émulation).
+Sur un A4000, vous devriez obtenir la pleine vitesse pour tous vos programmes avec
+une valeur de 3.
+
+ Le fait de changer cette valeur peut aussi permettre d'améliorer les choses quand
+le son du C64 semble bizarre. Vous pouvez sélectionner l'émulation qui vous
+convient le mieux dans la fenêtre 'Son'. Vous avez le choix entre les bibliothèques
+playsid.library et 6581sid.library. Ces deux bibliothèques ne sont pas inclues dans
+la distribution de MagiC64, pour plus d'information reportez vous à la rubrique @{"Son" link "Sound"}.
+
+ Une autre possibilité pour accélérer l'émulation est d'utiliser le Mode Rapide.
+Celui-ci est activé/désactivé à l'aide de la touche '.' du pavé numérique. Dans ce
+mode, l'écran n'est pas rafraîchis, ce qui peut être très utile quand un programme
+est décompressé par exemple.
+
+ Si le scrolling ne marche pas avec un programme, que les sprites clignotent ou
+que les lignes raster ne marchent pas comme il faut, essayez de modifier le
+nombre de cycles vidéo avec les touches 'Maj +/-', 'Alt +/-' ou 'Maj+Alt +/-' en
+mode C64. Cela devrais vous aider assez souvent, donc n'hésitez pas à essayer.
+
+ 'Enter' permet de suspendre l'émulation sans quitter le mode C64 (Intéressant
+pour les captures d'écran, ou juste pour faire 'pause').
+
+ Tous les effets des raccourcis-clavier sont affichés sous le forme d'un court
+message ephémère dans la ligne de statut.
+
+Les touches importantes sont donc :
+
+        - ESC		Suspend l'émulation et retourne à la fenêtre de l'émulateur
+        - F9		Reset avec vérification de module
+        - F10		Reset sans vérification de module
+        - *      	Change le port Joystick du C64
+        - /      	Son On/Off
+        - +/-    	Augmente/diminue le ratio image
+        - [/]    	Augmente/diminue la fréquence de l'autofire
+        - .      	Mode Rapide On/Off
+	- Maj +/-	Augmente/diminue le nombre de cycles
+	- Alt +/-	Augmente/diminue le cycle de départ
+	- Maj+Alt +/-	Augmente/diminue le nombre de cycles par 'Badlines'
+
+@endnode
+
+@node "Copyright" "Copyright et Enregistrement"
+
+        Copyright et Enregistrement
+
+
+Il y a deux versions de MagiC64 :
+
+- La version non-enregistrée, dans laquelle le temps d'utilisation en mode C64 est
+  limité à 10 minutes. Vous pouvez copier et distribuer cette version sans aucune
+  restriction. Si cette version est distribuée sur CD-Rom, l'auteur aimerais bien
+  qu'un exemplaire gratuit du CD lui soit envoyé.
+
+- La version enregistrée, sans limite de temps. Il est interdit de copier ou de
+  distribuer cette version. La clef (Keyfile) qui élimine la limite de temps
+  marche avec toutes les mises à jour.
+
+Adresse postale :
+
+        Michael Kramer
+        Im Hirschfeld 28
+        52222 Stolberg
+        Allemagne
+
+E-Mail:
+
+        michael_kramer@pop.ac-copy.com
+
+ Vous pouvez vous enregistrer à l'adresse ci-dessus ou par E-Mail. Le prix de
+l'enregistrement est de $20 US ou 30 DM, payables en liquide ou par Euro cheque.
+Si vous le souhaitez vous pouvez envoyer un montant équivalent dans votre monnaie
+nationale. Si vous vous enregistrez avant le 31/9/1996 vous pourrez payer $5 de
+moins : le prix de l'enregistrement dans ce cas est de $15.
+Si vous envoyez l'argent en liquide ou par Euro cheque, je vous enverrais le
+fichier clef (Keyfile) qui active toutes les options.
+
+Un enregistrement en ligne est aussi possible via :
+
+        http://www.ac-copy.com/~magic64
+
+
+Important:
+
+ Si vous envoyez un cheque, SEULs les Euro cheques sont acceptés ! Si vous le
+souhaitez, vous pouvez me contacter par e-mail pour plus d'information avant de
+vous enregistrer.
+
+
+ Pour ce qui est du son, vous aurez alors besoin de la bibliothèque
+6581sid.library OU playsid.library, qui ne font PAS partie de MagiC64. Vous
+pourrez trouver 6581sid.library dans une version démo de A64 (un autre émulateur
+C64 disponible sur Aminet). La bibliothèque playsid.library fait partie du
+logiciel Sidplay, disponible également sur Aminet.
+
+Veuillez respecter les copyrights de ces programmes.
+
+
+DEGAGEMENT DE LA RESPONSABILITE DE L'AUTEUR:
+
+MagiC64 devrais être un programme sans bogue(s). L'auteur ne peut être tenu pour
+responsable d'erreurs ou dommages quelconques lors de l'utilisation de MagiC64.
+
+@endnode
+
+@node "Save" "Sauver"
+
+        Sauver
+
+
+ Sauvegarde tous les réglages et chemins d'accès dans le fichier MagiC64.prefs.
+
+@endnode
+
+@node "Graphics" "Affichage"
+
+        Affichage
+
+
+- Afficher Vidéo
+
+ Si vous désactivez cette fonction, seule une fenêtre s'affichera lorsque vous
+démarrerez l'émulation. L'émulation tourne alors en tâche de fond (sans afficher
+les graphismes ou textes du C64). Utilisez cette fonction lorsque vous faites
+fonctionner des programmes qui n'ont peu ou pas de sortie visuelle. L'émulation
+est très rapide dans ce mode.
+
+- Synchroniser
+
+ Activer cette option permet de synchroniser les images non affichées avec l'
+affichage réel. Cela permet une restitution plus réaliste des sons et musiques.
+Vous devriez désactiver cette option sur un ordinateur assez lent (ex. un A1200
+de base). Cette option n'a pas d'effet si la valeur d' "afficher toutes les (n)
+images" dans les options de réglages "Vidéo" est 1, car toutes les images sont
+affichées dans ce cas. Vous devriez activer cette option si vous possédez un
+processeur très rapide (ex: un 68060), sinon MagiC64 tournera probablement
+beaucoup plus vite qu'un vrai C64.
+
+- Afficher la bordure
+
+ La bordure est afficher en mode C64. Certains jeux (Delta, Wizball...) nécessitent
+la bordure pour fonctionner correctement. Remarque : Les sprites de bordure
+latérale ne sont PAS gérés actuellement. Sans bordure l'émulation tourne
+approximativement 10% plus vite, vous pouvez donc enlever la bordure si vous le
+souhaitez.
+NB: Sur certain modes graphiques, l'écran complet ne peut être affiché. Il est
+    alors assez avisé de désactiver les bordures.
+
+- Limiter la vitesse
+
+ La vitesse de l'émulateur sera réduite à celle d'un véritable C64. Utile pour les
+Amigas très rapides.
+
+- Rafraîchissement +
+
+ C'est un mode de rafraîchissement intelligent : seules les portions d'écran ayant
+changé sont mises à jour. Cela permet d'améliorer la vitesse d'émulation jusqu'à
+50%. A cause du principe d'affichage du C64 qui utilise des codes de
+caractères au lieu de données graphiques brutes, des erreurs d'affichage peuvent se
+produire. Donc dans le doute, désactivez cette option. Lorsque de grandes parties
+d'écran sont mises à jour régulièrement (ex: scrolling vertical), le
+rafraîchissement intelligent n'a plus de sens et l'émulateur tournera plus vite si
+on désactive cette option.
+
+- Indicateur de vitesse
+
+ Lorsque vous utilisez l'indicateur de vitesse, la vitesse de l'émulation comparée
+à celle d'un vrai C64 est affichée dans le coin en bas à gauche. 100% veut dire
+que l'on a la même vitesse qu'un C64 original. Des valeurs plus grandes que 100%
+signifient que MagiC64 va plus vite qu'un vrai C64.
+
+- Ratio Image
+
+ Avec cette variable vous pouvez contrôler le taux d'images que l'émulation va
+réellement calculer et afficher. Plus sa valeur est grande, plus l'émulation est
+rapide, car moins de temps processeur est alors dévolu au graphisme.
+Avec des valeurs plus grandes que 1, il se peut que les collisions de sprites
+soient détectée plus tardivement. Cela n'est cependant pas trop gênant pour la
+plupart des programmes (mais certain réclament un ration de 1/1 pour fonctionner
+correctement). Le mieux est de mettre des valeurs entre 1 et 5.
+Augmentez également cette valeur si les effet sonores et/ou la musique sont trop
+lent (l'émulation ne peut alors pas fournir les données sonores à la bibliothèque
+assez rapidement). En mode C64 vous pouvez changer le ratio image avec les touches
++/- du pavé numérique.
+
+- Mode Ecran
+
+ En cliquant sur "Sélectionner ..." une requête système de mode écran apparaît,
+où vous pouvez sélectionner le mode écran pour l'affichage du C64. L'émulation
+tourne en 300x200, vous devriez donc utiliser un mode tel que PAL ou DBLPAL.
+D'autres modes comme EURO72 ont une plus grande stabilité, mais seule une partie
+de l'écran est alors utilisée.
+Vous devez avoir le Kickstart 2.1 pour changer le mode écran. Comme mode par
+défaut, vous avez PAL ou DBLPAL.
+
+- Type
+
+ Dans ce gadget cyclique, vous pouvez choisir entre "Amiga View", "Amiga-Screen"
+et "8 Bit RTG" (désolé, impossible de traduire ces chaînes ! =:) ). Comme le
+double buffering n'est géré correctement qu'à partir du Kickstart 3.0 par des
+fonctions spéciales du système d'exploitation, vous devriez utiliser "Amiga View"
+si vous possédez une version inférieure à la 3.0 (pour des performances optimum).
+Lorsque "Amiga View" est actif, vous ne pouvez pas utiliser Amiga M pour faire
+cycler les écrans, le multitâche de l'Amiga n'étant pas touché outre mesure (vos
+applications continuent de tourner en tâche de fond).
+"Amiga Screen" ne marche correctement QU'AVEC le Kickstart 3.0 SI vous avez
+installé SetPatch 40.14 ou mieux (Setpatch est en principe la première commande
+de votre startup-sequence). Si ce n'est pas le cas, MagiC64 se plantera lorsque
+vous utiliserez "Amiga Screen".
+
+ En résumé :
+
+	- Avec OS 2.04 ou 2.1 vous devriez toujours utiliser "Amiga View"
+	  pour des raisons de performances.
+
+	- Avec l'OS 3.0  vous devez installer SetPatch 40.14 ou mieux, sinon
+	  Amiga Screen" ne marchera pas. Si vous n'avez pas SetPatch 40.14
+	  ou antérieur, choisissez "Double-Buffering Kickstart 2" lors qu'on
+	  le demande lors du lancement ou utilisez "Amiga View" à la place.
+
+	- Avec l'OS 3.1 "Amiga Screen" marche correctement.
+
+ Vous pouvez déterminer la version de votre commande SetPatch en tapant
+Version C:SetPatch     dans le CLI (ou Shell).
+
+ Setpatch 40.16 est disponible sur Aminet (répertoire util/boot)
+
+ Dans certains mode (ex. DBLPAL), il peut arriver que l'affichage ne soit pas
+centré correctement ou que certaines portions ne soient pas affichées lors de l'
+utilisation de "Amiga View".
+Désolé, c'est un bogue du système, utilisez "Amiga Screen" dans ce cas.
+
+ A partir de MagiC64 v1.5, les cartes graphiques sont gérées avec le RTG 8 bits.
+Pour cela il vous faut Cybergfx (avec l'AGA vous pouvez utiliser le mode natif
+8 plans de bits, mais il est très lent). Comme MagiC64 travaille en interne avec
+des plans de bits, une conversion planar-chunky doit être faite, ce qui fait que
+les modes 8 bits sont toujours plus lent que les modes natifs Amiga.
+
+- Type de DB
+
+ Permet de sélectionner le mode de double-buffering qui sera utiliser en mode
+"Amiga Screen". Cela est possible à partir du Kickstart 3.0. Dans les versions
+précédentes de MagiC64 vous deviez choisir le type de DB au démarrage de MagiC64.
+Maintenant il est possible de changer le mode à n'importe quel moment. Pour plus
+d'information reportez vous à la rubrique "Type" (Ecran).
+
+- Accès direct
+
+ Vous pouvez accélérer notablement la vitesse de MagiC64 en mode 8 bits RTG si l'
+accès direct à la mémoire de la carte graphique est autorisé. Vous pouvez activer
+cette option ici.
+
+@endnode
+
+@node "CPU" "CPU & ROM"
+
+        CPU & ROM
+
+
+- Avertir sur Opcode illégal
+
+ Normalement lorsque l'émulation exécute un opcode illégal (ex. $02), l'exécution
+est suspendue, et un avertissement apparaît. Un vrai C64 serait dans ce cas
+bloqué, et ne pourrait repartir qu'avec un Reset. En conséquence la fenêtre d'
+avertissement vous permet d'effectuer un Reset ou de continuer l'émulation.
+L'utilisation de la touche F10 (Reset) est alors la seule action logique lors du
+retour au mode C64.
+
+- Avertir sur Opcode Break
+
+ L'opcode de break ($00 = BRK) n'est en principe utilisé que par des programmes
+très particuliers, et ne correspond à rien de logique dans la plupart des cas.
+Vous ne devriez enlever ces avertissement que lors de l'utilisation de programmes
+de "monitor" ou debuger en mode C64.
+Lorsque vous aurez cet avertissement avec des programmes normaux, c'est très
+probablement que le programme C64 est bogué.
+
+- Mode BCD Rapide
+
+Les commandes arithmétiques du 6510 peuvent être utilisées dans un mode décimal
+spécial (mode BCD-Binary Coded Decimal). Avec le mode BCD rapide seul de flag de
+retenu sera mis à jour correctement, les autres étant indéfinis. Si vous
+désactivez le mode BCD rapide, tous les flags seront mis à jour correctement.
+Cela ne fait certainement pas de différence pour tous les programmes courants.
+
+- Eluder test de la RAM
+  
+ Normalement la RAM du C64 est vérifiée lors du Reset. Ce test peut être sauté
+grâce à une modification spéciale de la ROM (patch), ce qui augmente notablement
+la vitesse du Reset.
+
+- ROM Emulation / Original ROM
+
+ Pour des raisons de copyright les ROMs originales du C64 ne sont pas fournies
+avec MagiC64. Elles sont remplacées par une émulation de la ROM. Cette émulation
+utilise des ROMs modifiées, et si vous les recopiez et les placez dans un vrai C64,
+celui-ci ne marchera pas.
+Si vous le souhaitez, vous pouvez aussi utiliser les ROMs originales. Elle doivent
+alors se trouver sous forme de fichier dans le répertoire ROMs, sous les noms
+BASIC.ROM, CHAR.ROM et KERNAL.ROM.
+
+@endnode
+
+@node "Video" "Vidéo"
+
+        Vidéo
+
+
+- Cycles par ligne de balayage
+
+ Cette variable pour l'émulation VIC détermine le nombre de cycle qu'une ligne de
+balayage consommera. Vous pouvez légèrement (!) changer cette valeur si les
+interruptions de balayage génèrent des papillotement à l'écran. Les valeurs
+recommandées pour cette variable vont de 60 à 66. En mode C64, vous pouvez
+modifier ces valeurs avec les touches 'Maj +/-'.
+
+- Cycles par 'Badline'
+
+ Vous pouvez ici régler le nombre de cycle consommé par une 'Badline'. Les
+'Badlines' sont des lignes de balayage lors desquelles le processeur (CPU) a moins
+de cycles disponibles, car ceux-ci sont réservés au VIC. Ne modifiez cette valeur
+que légèrement. Les valeurs recommandées vont de 20 à 24. En mode C64, vous pouvez
+modifier ces valeurs avec les touches 'Maj+Alt +/-'.
+
+- Cycle de départ
+
+ Détermine à quel cycle le VIC commence à aller chercher ses données. Pour le
+scrolling vertical il est important de savoir si le registre de scrolling est
+écrit avant ou après ce cycle. Ne modifiez cette valeur que lorsque le défilement
+vertical ne marche pas bien. Les valeurs acceptables pour cette variables vont de
+12 à 17. En mode C64, vous pouvez modifier ces valeurs avec les touches 'Alt +/-'.
+
+- PAL / NTSC 
+  
+ Change le nombre de ligne que l'émulation utilise. Certains jeux ne marchent que
+dans un des deux modes. Si vous sélectionnez le mode NTSC, l'émulation ira un peu
+plus vite car il y a alors moins de lignes d'affichage à calculer. D'un autre
+côté, le processeur du C64 a moins de cycles disponibles par image.
+
+@endnode
+
+@node "Sprites" "Sprites"
+
+        Sprites
+
+
+- Afficher les Sprites
+
+ Active l'affichage des sprites. Le fait de désactiver les sprites permet d'
+accélérer l'affichage général, mais est inapproprié pour la plupart des jeux.
+
+- Collisions Sprite-Sprite
+
+ Active la détection des collisions entre sprites. Si vous désactivez cette
+option, l'affichage sera un poil plus rapide. De nombreux jeux utilisent leurs
+propres routines de détection des collisions plutôt que la détection hardware
+(celle qui est émulée ici), il est peut donc être utile de désactiver cette
+option.
+
+- Collisions Sprite-Fond
+
+ Active la détection de collisions entre les sprites et le fond d'écran. Seuls
+quelques jeux utilisent cette détection hardware, vous pouvez donc désactiver cette
+option sans trop de risque. Dans ce cas les performances graphique sont quelque
+peu améliorées.
+
+ Les options ci-dessus agissent sur tous les sprites à la fois. Dans les réglages
+individuels vous pouvez faire de même mais en contrôlant chaque sprite
+individuellement. Vous pouvez ainsi créer des versions 'Trainer' de certains jeux
+en désactivant les collisions pour le sprite que contrôle le joueur. Cela ne
+marchera bien sûr que si le jeux en question utilise la détection de collisions
+hardware.
+
+@endnode
+
+@node "Sound" "Son"
+
+        Son
+
+
+ La bibliothèque 6581sid.library OU playsid.library est nécessaire. Ces
+bibliothèques ne font PAS partie de MagiC64. Une version de démonstration de A64,
+un autre émulateur C64 pour Amiga (devenu commercial depuis la version 3),
+contient la bibliothèque 6581sid.library. Pour ce qui est de playsid.library, vous
+pourrez la trouver dans le logiciel Sidplay.
+
+A64 et Sidplay sont tous deux disponibles sur AMINET.
+
+NB: playsid.library ne fonctionne pas sur les processeurs 68060 et également
+    avec le programme Executive, car ils utilisent tous les deux des ressources
+    communes (des timers). Certaines personnes ont affirmé qu'il existait des
+    versions de la bibliothèque playsid qui marcherait correctement avec un
+    68060. Il y a donc peut-être une version patchée de cette bibliothèque.
+    Si vous avez des informations à ce sujet, l'auteur est interessé...
+
+ Both libraries have some advantages: 6581sid.library is fast but output
+sometimes is a little bit poor. playsid.library produces nice sound
+quality but requires a lot more computing time.
+
+
+- Emulation
+
+ Choisissez votre bibliothèque sonore préférée. Si la bibliothèque est
+incorrectement installée (ou pas installée du tout), vous n'entendrez rien.
+Il est possible de changer de bibliothèque à la volée, mais parfois le son ne
+pourra être à nouveau disponible qu'après un Reset du C64 (F10).
+
+- Son <on>
+
+ Met en service ou coupe la musique et les effets sonore. Désactiver cette option
+peut être utile dans les jeux qui ont des musiques horribles...
+Vous pouvez activer/désactiver le son grâce à la touche '/' du pavé numérique en
+mode C64.
+
+- Canaux
+
+ Active chaque canal audio séparément.
+
+- Volume
+
+ Avec ce gadget vous pouvez régler le volume maximum pour les 3 canaux audio.
+
+@endnode
+
+@node "Joysticks" "Joysticks"
+
+        Joysticks
+
+
+- Réglages Joysticks
+
+ L'Amiga et le C64 utilisent tout deux des joysticks numériques. Comme l'Amiga
+utilise le port 0 pour la souris, vous pouvez rediriger les entrées du port 1 de
+l'Amiga vers les ports 0 et 1 du C64. Il est possible de rediriger un port Amiga
+vers deux ports C64 en même temps. Si vous utilisez cette option tous les jeux
+devraient marcher quelque soit le port qu'ils utilisent. Il peut cependant y avoir
+des effets de bords étranges si un jeu utilise en même temps le clavier et le port
+0 du C64, car le port 1 du C64 est relié au clavier.
+ Bien sûr, dans les jeux à 2 joueurs, il est possible d'utiliser le port 0 de l'
+Amiga, mais vous devrez alors enlever la souris (Vous le saviez déjà, non ? ;)
+Vous pouvez changer le port joystick C64 émulé en utilisant la touche '*' du pavé
+numérique en mode C64.
+
+ Si vous sélectionnez "Pas de Port C64" vous pouvez simuler le joystick via le
+pavé numérique de votre Amiga. Reportez vous à la figure ci-dessous pour les
+directions. Les touches 0 et 5 correspondent au bouton de feu.
+
+                                [   ]       *
+		Autofire :     Dim. Augm.   Change ports
+
+                		7   8   9
+
+		                  \ | /
+
+	                   	4 - 5 - 6
+
+                  		  / | \
+
+                 		1   2   3
+
+
+- Réglages Autofire
+
+ Vous pouvez régler la fréquence de l'Autofire pour les ports Amiga ici. Une
+fréquence de 0 correspond à aucun autofire pour le port, une fréquence de 1
+revient à appuyer constamment sur le bouton. Certains jeux ne peuvent être abusés
+ainsi et vous devrez dans ce cas choisir une fréquence de 2 ou plus. L'autofire
+est 'intelligent', lorsque vous appuyez sur le bouton feu pour la première fois,
+cela mettra l'autofire en service, si vous appuyez une seconde fois, il se
+désactivera. Vous pouvez donc relâcher le bouton de feu entretemps. Vous pouvez
+diminuer/augmenter la fréquence de l'autofire du port 1 de l'Amiga grâce aux
+touches '[' et ']' du pavé numérique.
+
+@endnode
+
+@node "Keyboard" "Clavier"
+
+        Clavier
+
+
+- Original / National
+
+ Quand l'émulateur est en mode Original, il essaye de copier le clavier physique
+d'un C64 de la manière la plus exacte possible. Dans ce mode le clavier est un
+QWERTY américain (les touches A, Z et M remplacent Q, W et ,/? ). Ce mode est
+utile pour les jeux qui sont conçus pour avoir des touches à certaines positions
+sur le clavier.
+ A contrario, en mode national, chaque touche est prise en compte selon le clavier
+sélectionné pour le Workbench (Setmap), la touche étant alors convertie dans le
+code touche correspondant pour le C64.
+
+Dans les deux modes, certaines touches ont des fonctions spéciales :
+
+- ESC
+ L'émulation est suspendue et retourne du mode C64 vers la fenêtre principale de
+l'émulateur. Vous pouvez alors changer certains réglages, puis appuyer sur le
+bouton "Démarrer" pour continuer le programme en mode C64 là où vous l'aviez
+laissé (pas de Reset).
+
+- F9
+ Reset de l'émulation C64. Une vérification de module pour les modules à $8000 est
+effectuée. S'il y a un module, celui-çi sera démarré, sinon le message normal du
+C64 apparaîtra à l'écran.
+
+- F10
+ Reset Hardware du C64. Il n'y a pas de vérification de module, et l'émulation
+retourne directement au message d'allumage.
+
+- Enter (Pavé numérique)
+ Suspend l'émulation sans quitter le mode C64. L'émulation reprend lorsque vous
+appuyez sur <Enter> une seconde fois. Cette touche est utile si vous désirez
+analyser calmement la situation lors d'un jeu (équivalent d'une touche Pause). Il
+est aussi possible de sauvegarder l'écran C64 avec un logiciel de capture d'écran.
+
+- Ctrl
+ Correspond à la touche RUN/STOP du C64.
+
+- Help
+ Correspond à la touche RESTORE du C64.
+
+- TAB
+ Correspond à la touche Ctrl du C64.
+
+- Del
+ Correspond à la touche CLR/HOME du C64.
+
+- Alt Gauche
+ Correspond à la touche Commodore du C64.
+
+- Alt Droit
+ Correspond à la touche @ du C64.
+
+- Amiga Droit
+ Correspond à la touche ´ du C64.
+
+- Amiga Gauche
+ Effectue une remise à zéro du clavier en mode national. Utilisez cette touche
+lorsque le clavier semble bloqué.
+
+- Touches Curseur
+ Correspondent aux fonctions équivalentes du C64.
+
+@endnode
+
+@node "Floppy" "Disquettes"
+
+        Disquettes
+
+
+ Dans cette rubrique sont regroupées toutes les options concernants le lecteur de
+disquette 1541. L'émulation du 1541 fonctionne à partir des fichiers D64. Vous
+pourrez trouver de plus amples informations sur ces fichiers dans la section
+correspondante.
+
+- Lecteur Actif
+
+ Vous pouvez ici activer ou désactiver l'émulation 1541. Cela correspond à
+débrancher le lecteur imaginaire ; ainsi si vous entrez par ex. LOAD"$",8 le C64
+vous répondra : "DEVICE NOT PRESENT". Désactiver le lecteur peut être intéressant
+dans les cas où des fichiers P00 ou T64 tentent de lire des données supplémentaires
+à partir du lecteur de disquette (ex: liste de highscore).
+
+- Indicateur d'accès disque
+
+ A chaque fois que le C64 accède au lecteur de disquette, vous verrez le mot
+'DISK' apparaître en rouge en bas à droite de l'écran. Vous pouvez supprimer cet
+indicateur ici dans le cas où ce qui se trouve à l'endroit où l'indicateur
+apparaît doit toujours rester visible. Pour des raisons techniques, l'indicateur
+n'apparaît pas en mode graphique 8 bits RTG.
+
+- Protection en écriture
+ 
+ Active/désactive la protection en écriture du disque. Si cette option est activée
+le fichier D64 en mémoire ne pourra pas être modifié par l'utilisateur. Cette
+option est idéale si vous voulez éviter que votre fichier soit altéré.
+
+- Avertissements : Commandes non gérées
+
+ Un véritable 1541 est (enfin ... était) un ordinateur indépendant comprenant son
+propre processeur, sa RAM et son système d'exploitation. Quoi qu'il en soit, l'
+émulation 1541 n'émule le lecteur qu'au niveau des commandes. Ainsi, certaines
+commandes comme M-E (Memory-Execute), qui exécutent leurs propres programmes dans
+la RAM du 1541 ne sont pas gérées. Malheureusement, à cause de cela, certains
+programmes qui utilisent des fastloader ou bien exécutent d'autres actions
+complexes (protection contre la copie) dans le lecteur ne fonctionneront pas. Si
+vous essayez d'exécuter de telles commandes, MagiC64 quitte le mode C64 et vous
+avertis de l'erreur. Avec cette option, vous pouvez désactiver ces messages d'
+avertissement.
+
+- Avertissements : Ecriture sur disques protégés
+
+ Un avertissement est donné lorsque vous tentez d'écrire sur un disque D64
+protégé en écriture. Vous pouvez éviter ces avertissements en désactivant cette
+option.
+
+@endnode
+
+@node "D64-Disks" "Fichiers D64 (Disquette)"
+
+        Fichiers D64 (Disquette)
+
+
+ Les fichiers D64 représentent une face d'une disquette 5"25 d'un lecteur 1541.
+Ce format a été introduit avec l'émulateur pour compatible PC : C64S. Avec le
+temps, il s'est imposé comme l'un des formats standard pour les émulateurs C64.
+Vous pouvez trouver presque tous les programmes C64 sous forme de fichiers D64.
+MagiC64 charge l'intégralité du fichier D64 en mémoire et effectue toute l'
+émulation en mémoire également. Si vous voulez rendre les changements sur la
+disquette permanents, il vous faut sauvegarder le fichier D64 explicitement.
+
+- Fenêtre de sélection
+
+ Ici vous pouvez voir le répertoire du fichier D64 actuellement en mémoire. La
+première ligne vous indique le nom du disque, suivis par son ID et sigle de
+formatage. Cliquer sur cette ligne n'a aucun effet. Les lignes suivantes
+représentent les différents fichiers du disque. Le nombre à gauche du nom de
+fichier vous donne la taille du fichier en nombre de blocs de 256 octets (comme
+dans un vrai C64). Sur le côté droit un trigramme vous donne le type de fichier.
+Si vous double-cliquez sur un des fichiers (ou appuyez sur la touche <Return> ou
+sur la touche 'r'), un Reset du C64 sera effectué puis l'émulateur passera en mode
+C64 pour charger et exécuter le programme sélectionné. La dernière ligne de la
+liste vous indique combien de blocs sont encore libre sur la disquette représentée
+par le fichier D64.
+
+- Charger
+
+ Charge un programme à partir d'un fichier D64 dans la mémoire du C64. Il n'y a
+PAS de Reset ni de retour automatique au mode C64. Le chargement est très rapide,
+et même des fichiers très grands (plus de 200 blocs) seront chargés en quelques
+secondes. Toutes les données sont chargées dans la mémoire du C64. La zone d'
+entrée/sortie (I/O) n'est pas touchée durant le chargement, et il est donc possible
+de charger des fichiers de plus de 202 blocs. Sur un vrai C64, il est impossible
+de faire cela sans fonctions de chargement spéciales.
+
+- Charger&Lancer
+
+ Effectue la même chose qu'un double-clic sur un nom de programme dans la fenêtre
+de sélection. Contrairement à la fonction "Charger", un Reset est effectué, et il
+y a un retour automatique au mode C64.
+
+- Charger D64
+
+ Ce bouton permet de sélectionner un fichier D64 dans un requester standard. Le
+répertoire du fichier D64 sélectionné apparaîtra alors dans la fenêtre de
+sélection. Cela correspond à insérer un disque dans le lecteur 1541. Vous pourrez
+donc utiliser cette option si un programme C64 vous demande de changer de
+disquette.
+
+- Sauver Disque
+
+ Le fichier D64 en mémoire est sauvegardé. Cliquez ici si vous souhaitez que les
+changements fait sur la disquette en mémoire soient permanents (L'émulation ne
+travaille qu'en mémoire vive).
+
+- Sauver
+
+ Un programme C64 est écrit sur le fichier D64 actuellement en mémoire. Le fichier
+n'est changé qu'en mémoire, aussi devrez vous utiliser "Sauver Disque" pour rendre
+ces changements permanents. La sauvegarde a les mêmes propriétés que le
+chargement : Rapidité hautement accrue et possibilité de sauver des programmes de
+plus de 202 blocs.
+
+- Formater
+
+ Formate un fichier D64 en mémoire. Après avoir cliqué sur ce bouton, vous devez
+donner un nom pour le disque ainsi que son ID. Ce ci est l'équivalent de la
+commande "NEW" du 1541. Si vous voulez créer un disque vide, chargez un fichier
+D64 quelconque (avec "Charger D64"), faites "Formater", puis sauvegarder le
+nouveau disque avec "Sauver Disque" sous un nom DIFFERENT.
+
+- Effacer
+
+ Après confirmation, le fichier sélectionné d'un disque D64 est effacé de la
+mémoire. C'est l'équivalent de la commande "SCRATCH" du 1541.
+
+- Renommer
+
+ Après confirmation, le fichier sélectionné d'un disque D64 est renommé en mémoire.
+C'est l'équivalent de la commande "RENAME" du 1541.
+
+- Initialiser
+
+ Après confirmation un fichier D64 est initialisé en mémoire. La BAM (Block
+Allocation Map) du disque est lue en mémoire de telle sorte qu'il est possible de
+distinguer des disques ayant même ID. C'est l'équivalent de la commande
+"INITIALIZE" du 1541.
+
+- Valider
+
+ Après confirmation un fichier D64 est validé en mémoire. Tous les fichiers encore
+ouverts sont fermés, et la BAM est mise à jour. C'est l'équivalent de la commande
+"VALIDATE" du 1541.
+
+@endnode
+
+@node "T64-Tapes" "Fichiers T64 (Cassette)"
+
+        Fichiers T64 (Cassette)
+
+
+ Le format T64 a également été introduit par C64S. Les fichiers T64 sont des
+images de cassettes C64. Il peut donc y avoir plusieurs fichiers C64 dans un
+fichier T64.
+
+- Fenêtre de sélection
+
+ La liste de TOUS les fichiers T64 est affichée ici. Double-cliquer sur un des
+nom permet de sélectionner le fichier T64 correspondant et de charger et lancer
+le programme de la cassette.
+
+- Charger
+
+ Charge le programme sélectionné d'un fichier T64 vers la mémoire du C64. Il n'y
+a ni Reset, ni retour au mode C64 automatique.
+
+- Charger&Lancer
+
+ Effectue la même chose qu'un double-clic sur un nom de programme dans la fenêtre
+de sélection. Contrairement à la fonction "Charger", un Reset est effectué, et il
+y a un retour automatique au mode C64.
+
+- Sauver
+
+ Après confirmation un programme provenant de la mémoire du C64 est sauvé dans un
+fichier T64. Le nom que vous donnez apparaîtra dans la fenêtre de sélection. Toute
+la zone définie en mémoire par les doublets $2B/$2C et $2D/$2E est sauvegardée.
+Il est possible de sauvegarder des programmes avec une adresse de fin plus grande
+que $CFFF. Le fichier T64 ainsi formé est nouveau, les fichiers existants étant
+éventuellement réécrits.
+
+- Chemin T64
+
+ Un requester standard apparaît où vous pouvez sélectionner le nouveau répertoire
+pour les fichiers T64. Lorsque vous cliquez sur "OK" tous les fichiers de ce
+répertoire sont analysés. Cela peut prendre un certain temps s'il y a de nombreux
+fichiers dans le répertoire. Le contenu des fichiers T64 apparaît ensuite dans la
+fenêtre de sélection.
+
+@endnode
+
+@node "P00-Files" "Fichiers P00"
+
+        Fichiers P00
+
+
+ Le format P00 a été introduit par l'émulateur PC64 (un émulateur C64 pour
+compatibles PC). Chaque fichier P00 représente un unique fichier C64.
+
+- Fenêtre de sélection
+
+ La liste de TOUS les fichiers P00 est affichée ici. Double-cliquer sur un des
+nom permet de sélectionner le fichier P00 correspondant, de charger le programme
+en mémoire et de le lancer.
+
+- Charger
+
+ Charge le programme sélectionné d'un fichier P00 vers la mémoire du C64. Il n'y
+a ni Reset, ni retour au mode C64 automatique.
+
+- Charger&Lancer
+
+ Effectue la même chose qu'un double-clic sur un nom de programme dans la fenêtre
+de sélection : Reset, passage au mode C64, chargement et lancement du programme.
+
+- Sauver
+
+ Après confirmation un programme provenant de la mémoire du C64 est sauvé dans un
+fichier P00. Le nom que vous donnez apparaîtra dans la fenêtre de sélection. Toute
+la zone définie en mémoire par les doublets $2B/$2C et $2D/$2E est sauvegardée.
+Il est possible de sauvegarder des programmes avec une adresse de fin plus grande
+que $CFFF. Le fichier P00 ainsi formé est nouveau, les fichiers existants étant
+éventuellement réécrits.
+
+- Chemin P00
+
+ Un requester standard apparaît où vous pouvez sélectionner le nouveau répertoire
+pour les fichiers P00. Lorsque vous cliquez sur "OK" tous les fichiers de ce
+répertoire sont analysés. Cela peut prendre un certain temps s'il y a de nombreux
+fichiers dans le répertoire. Le contenu des fichiers P00 apparaît ensuite dans la
+fenêtre de sélection.
+
+@endnode
+
+@node "C64-Files" "Fichiers C64"
+
+        Fichiers C64
+
+ Les fichiers C64 représentent des fichiers C64 dans leur format original. Les 2
+premiers octets contiennent l'adresse de départ et ils sont suivis des données du
+fichier.
+
+@endnode
+
+@node "DiskState" "Lecteur (Statut du lecteur de disquettes)"
+
+        Lecteur (Statut du lecteur de disquettes)
+
+
+ Le statut actuel de l'émulation 1541 est affiché. Le statut contient le numéro de
+la dernière erreur, le message d'erreur correspondant, la dernière piste lue et le
+dernier secteur.
+
+- Lire statut
+
+Lit le statut actuel, et revient au statut OK.
+
+@endnode
+
+@node "Start" "Démarrer"
+
+        Démarrer
+
+
+ Devinez ? L'émulation est démarrée ou reprise au point où elle était suspendue.
+
+@endnode
+
+@node "Quit" "Quitter"
+
+        Quitter
+
+
+ Ce bouton enclenche une fonction très complexe, mais je ne peux pas vous dire
+quoi car c'est un secret. Essayez de trouver par vous même.
+
+;-)
+
+@endnode
+
+@node "Introduction" "Introduction"
+
+        Introduction
+
+
+ Le lecteur de disquette 1541 est émulé au niveau fichiers/buffers. Le processeur
+6502 et son hardware spécial ne sont PAS émulés. Les fichiers à accès aléatoire
+(Random access files) sont gérés en lecture UNIQUEMENT (pas d'écriture).
+
+@endnode
+
+@node "Supported" "Fonctions gérées"
+
+        Fonctions gérées
+
+
+- LECTURE et SAUVEGARDE des fichiers. Les jokers * et ? sont utilisables.
+
+ Vous pouvez également écrire dans un fichier D64. La réécriture de fichiers dont
+le nom commence par '@' marche correctement dans tous les cas (contrairement à un
+vrai 1541). Les fichiers à accès aléatoire ne sont accessibles qu'en lecture.
+
+- Répertoires
+
+ Tous les types de fichiers, protégés (<) et non fermés (*) sont affichés. L'
+utilisation de jokers et la sélection par type de fichiers est possible quand on
+charge un répertoire.
+
+- Accès direct
+
+ Il est possible de réserver des buffers pour le lecteur avec #. Certaines
+commandes du lecteur de disquettes utilisent ces buffers.
+
+- Canal d'erreur
+
+ Toutes les erreurs et messages de statut sont supportés.
+
+- Commandes du lecteur de disquettes
+
+ Les commandes Scratch, Rename, Initialize, New et Validate sont gérées. La
+commande Copy ne peut rajouter des données à la suite d'un fichier existant
+(Append) : il est uniquement possible de dupliquer des fichiers. Block-Read,
+Block-Write, Block-Allocate et Block-Free sont gérés ainsi que leur commandes
+utilisateur correspondantes. Le pointeur du buffer peut être modifié avec la
+commande Buffer-Pointer. Les commandes de type Memory fonctionnent à l'intérieur
+de la zone du buffer. La commande P pour les fichiers à accès aléatoire est
+également supportée.
+
+@endnode
+
+@node "NonSupported" "Fonctions non gérées"
+
+        Fonctions non gérées
+
+
+ Toutes les commandes qui exécutent leur propre code à l'intérieur du 1541 ne
+marcherons pas : Block-Execute, Memory-Execute, les commandes utilisateur 3 à 8,
+ainsi que la commande &. En conséquence, les programmes qui utilisent leur propre
+Fast-Loader ou qui sont protégés ne fonctionnerons pas.
+ Il est impossible d'écrire des fichiers à accès aléatoire.
+
+@endnode
+
+
+@node "Monitor" "Moniteur"
+
+NDT: Etant dans l'impossibilité de traduire les chaînes du moniteur de MagiC64, je
+n'ai pas plus traduit sa documentation. De toute façon, si vous l'utilisez, c'est
+que vous causez mieux anglais que moi !
+
+	The monitor MagicMon
+
+	MagicMon is a very powerful 6510 monitor which offers extended
+	breakpoint possibilities and assembling with labels.
+
+	The monitor is activated by clicking the monitor button. After
+	this the monitor always will be activated when pressing ESC
+	in C64 mode or when a breakpoint is executed.
+
+	Using the 'x' command you can quit the monitor, the monitor
+	window will be closed and all breakpoints are cleared. If
+	you use the 'q' command instead the window will stay open,
+	the breakpoints are not deleted. The 'g' command will return
+	to C64 mode, the program will run as long as no breakpoint
+	is detected or ESC is pressed.
+
+	The online help of MagicMon is revealed if you use 'h'.
+	Additional information for commands is available with
+	h "command".
+
+	Most commands are self explainatory, so only MagicMon's
+	special possibilities are introduced in detail.
+
+	The assemble command 'a startadr' will output the starting
+	address staradr, you can now enter any 6510 command. All
+	command including illegal opcodes are supported. You
+	can quit assembly mode by pressing 'Return' without entering
+	any command or by entering 'f' followed by 'Return'. In the
+	later case the program will be listed again, all labels
+	are resolved. Labels in th form of Mxx preceed the commands
+	where xx is a hexadecimal number between 00 and 3F. Labels
+	can be used with branch commands or with any load/store
+	command. You could enter the following program starting
+	at address 4096 ($1000) with 'a 1000':
+
+		1000     ldx #00
+		1002 m02 lda m00,x
+		1005     beq m01
+		1007     jsr ffd2
+		100A     inx
+		100B     jmp m02
+		100E m01 rts
+		100F m00 .0d
+		1010 	"HELLO"
+		1015     .00
+
+	The program will output 'HELLO' to the screen if called
+	by entering SYS 4096 from C64 mode. Please note that you
+	can enter single bytes to the program with .xx, complete
+	strings are enclosed by ".
+
+	Breakpoints can be set with 'b breakpointadr', whenever
+	this address is reached, program execution is stopped
+	and MagicMon is called. In addition an address mask
+	can be specified with &. This mask will be ANDed with
+	the address and thus only address ranges can be defined.
+	It's also possible to define a breakpoint counter, in
+	this case the breakpoint will be activated when the
+	program has reached the breakpoint address counter
+	times. Last parameter could be a memory configuration
+	between 0 and 7. This number corresponds to the lower
+	three bits of CPU port 1. In this way you could define
+	breakpoints that become active when a programs run in
+	the ROM area.
+
+	A special feature of MagicMon are memory breakpoints,
+	that become active if a memory place or memory range
+	is accessed. You can divide these breakpoints in read
+	and write breakpoints, in addition you can specify a
+	value. When reading or writing this value the breakpoint
+	becomes active. Again it's possible to add a value mask
+	and thus to break on the setting or clearing of individual
+	bits in memory places. You will find examples in the online
+	help. If a breakpoint occurs the command responsible for
+	the break and the following command will be listed.
+
+	Breakpoints can be listed with 'bl', deleting them
+	requires the 'bk' command. When defining breakpoints
+	the emulation will run slower, that's especially
+	true for memory breakpoints.
+
+	You can single step programs with 't', 'ts' will
+	step through a complete subroutine. Because C64 mode
+	will be entered for a short time with every trace,
+	you can turn on the video display with 'v'.
+
+	Information about hardware is given with the info
+	commands ci,si,vi,mi and ii, which will print
+	detailed information about the current state CIA's, the
+	SID, the VIC, the current memory configuration and
+	interrupt vectors.
+
+	With 'f' and 'fa' there are two comfortable search
+	commands.
+
+	You can load and save C64 programs (lc,sc) and raw
+	data (l,s). It's possible to load from or to save
+	to D64 disks with the 'ld' and 'sd' commands.
+
+	You can access D64 blocks with the 'rb','sb' and 'wb'.
+
+	Redirect the output with the 'o' command, put byte
+	sequences to memory with the ':' command. List or
+	change register contents with the 'r' command.
+	With a preceded '.' you can run any Amiga DOS command
+	from within MagicMon. Disassemble programs with 'd',
+	memory dumps are possible with 'm'. You can set the
+	number of output lines for both commands with the
+	'ln' command. 
+
+@endnode
+
+@node "Transfer" "Comment transférer des logiciels du C64 vers l'Amiga ?"
+
+	Comment transférer des logiciels du C64 vers l'Amiga ?
+
+
+	Il n'est pas encore possible de connecter un véritable 1541 à l'
+	Amiga avec MagiC64. Cependant de nombreux programmes du domaine
+	public répondent à ce besoin. Voici une petite liste avec les
+	répertoires Aminet où vous pouvez trouver ces programmes :
+
+	- Easy1541 par Fabrizio Farenga
+
+	  Connectez un lecteur 1541 à votre Amiga via un cable spécial.
+	  Vous pouvez alors créer des images D64 de vos disquettes ou
+	  extraire simplement un seul fichier du disque. Un très bon
+	  programme, chaudement recommendé !
+
+	  /misc/emu/Easy1541.lha	  
+
+	- 1541 Disk Reader par Dan Babcock
+
+	  Permet de lire les disque originaux du C64 à l'aide d'un lecteur
+	  Amiga 5"25. Vous pouvez ainsi créer des fichiers D64, ou même
+	  récupérer des fichiers individuellement.
+
+	  /misc/emu/1541.lha
+
+
+	- Datasette 64 par Holger Schemel
+
+	  Convertis les fichiers turbo tape numérisés en un format compatible
+	  avec MagiC64.
+
+	  /misc/emu/d64.lha
+
+
+	- Frodo émulateur C64 par Christian Bauer
+
+	  Permet de connecter un véritable 1541 à l'Amiga grâce à un cablage
+	  et un logiciel de transfert spécial. Les schémas de connexion sont
+	  inclus dans le guide.
+
+	  /misc/emu/Frodo.lha
+
+
+	- Trans64 et StarCommander pour ordinateurs compatibles PC
+
+	  Ces deux programmes permettent eux aussi de connecter un véritable
+	  1541 à un PC via un cablage maison.
+
+	  Vous pouvez trouver ces programmes dans les archives relatives à
+	  l'émulation sur le site :
+
+		frodo.hiof.no
+
+@endnode
+
+
+
+@node "SpeedUp" "Comment accélérer l'émulateur ?"
+
+	Comment accélérer l'émulateur ?
+
+	Effectuez les actions suivantes dans la fenêtre de réglage de
+	l'affichage :
+
+	  - Augmentez le ratio Image
+
+	  - Désactivez l'option "Synchroniser"
+
+	  - Désactivez l'option "Afficher la bordure"
+
+	  - Désactivez l'option "Limiter la vitesse"
+
+	  - Activez l'option "Rafraîchissement +"
+
+	  - Utilisez un mode natif Amiga (ex: "PAL: Basse résolution")
+
+	  - Utilisez "Amiga Screen" au lieu de "8 Bit RTG"
+
+	  - Activez "Accès direct" si vous utilisez une carte graphique
+
+
+	Dans la fenêtre de réglage des Sprites :
+
+	  - Désactivez la détection des "Collisions Sprite-Sprite"
+
+	  - Désactivez la détection des "Collisions Sprite-Fond"
+
+
+	Dans la fenêtre de réglage du Son :
+
+	  - Choisissez "Aucune" Emulation (c.a.d. pas de son)
+
+
+ Notez bien : Il vous faut au moins un 68030 rapide (40 MHz) ou un 68040 pour
+              obtenir une vitesse correcte.
+
+@endnode
+
+@node "SlowDown" "Comment ralentir l'émulateur ?"
+
+	Comment ralentir l'émulateur ?
+
+
+	Dans la fenêtre de réglage de l'affichage :
+
+	  - Activez "Limiter la vitesse". Cela limitera la vitesse de l'émulation
+	    à celle d'un vrai C64. Cela ne vous intéressera que si vous avez un
+	    Amiga extrêmement rapide (68060...).
+
+@endnode
+
+@node "NotWork" "Quels programmes ne fonctionnent pas ?"
+
+        Quels programmes ne fonctionnent pas ?
+
+ Tous les programmes qui utilisent leur propre Fast-Loader ne fonctionnerons pas
+avec MagiC64. Les sprites en bordure latérale ne seront pas affichés, l'émulation
+du son a quelques problèmes avec les effets sonores complexes. Enfin, les effets
+graphiques en cours de ligne ne sont pas représentés correctement.
+
+@endnode
+
+@node "DiskChange" "Comment changer de disquette ?"
+
+	Comment changer de disquette ?
+
+
+	- Appuyez sur 'ESC' pour quitter le mode C64
+
+	- Aller à la fenêtre D64
+
+	- Choisissez 'Charger D64'
+
+	- Charger le fichier D64 contenant l'image de la nouvelle disquette
+
+	- Revenez à la fenêtre principale
+
+	- Retournez au mode C64 avec le bouton 'Démarrer'
+	
+@endnode
+
+@node "Feedback" "L'émulateur ne répond plus ?"
+
+        L'émulateur ne répond plus ?
+
+ Vous avez peut-être appuyé par erreur sur la touche ENTER (pavé numérique). Dans
+ce cas, ré-appuyez juste sur ENTER pour repartir. En mode national, le clavier
+peut parfois se bloquer. Dans ce cas vous n'avez qu'a appuyer sur la touche Amiga
+de gauche (ré-initialise le clavier du C64).
+ Certains jeux requièrent un joystick dans l'autre port. Dans ce cas, il vous
+suffit de changer le port joystick dans le menu Réglage Joystick, ou plus
+simplement en utilisant la touche '*' du pavé numérique.
+ Dans tous les cas (surtout si c'est un plantage normal de votre programme C64),
+il devrais vous être possible de quitter le mode C64 en utilisant la touche ESC.
+Si ça ne marche pas, hé bien il se peut que vous ayez trouvé un bogue dans
+l'émulateur ...
+
+@endnode
+
+@node "Warnings" "A quoi correspondent ces avertissements ?"
+
+	A quoi correspondent ces avertissements ?
+
+ Il arrive que l'émulateur quitte le mode C64 de lui même pour revenir à l'Amiga
+et afficher un message d'avertissement. Il y a trois types d'avertissements
+possibles :
+
+	1. Opcode illégal exécuté.
+	   Dans ce cas le programme C64 est certainement défectueux. Essayez le
+	   programme sur un autre émulateur (ou un vrai C64 !), et s'il marche
+	   correctement, veuillez s'il vous plaît contacter l'auteur car il s'agit
+	   alors d'un bogue dans l'émulation.
+
+	2. Opcode d'arrêt (Break) exécuté.
+	   Dans la plupart des cas, le programme que vous utilisez est défectueux.
+	   Cependant, certains programmes (comme par exemple les moniteurs)
+	   peuvent utiliser cette instruction à dessein. Dans ce cas désactivez
+	   simplement l'avertissement dans la fenêtre de réglage CPU & ROM.
+
+	3. Commandes du lecteur de disquette non gérées (B-E, M-E)
+	   Le C64 a tenté d'exécuté un programme dans le 1541. Cela n'est pas
+	   géré par l'émulateur, et donc le programme échouera. Essayez de
+	   récupérer une version sans Fast-Loader/déprotégée de votre programme.
+
+@endnode
+
+@node "Why" "Votre Amiga est rapide, mais MagiC64 est lent ?"
+
+	Votre Amiga est rapide, mais MagiC64 est lent ?
+
+
+ Lorsque l'on utilise une émulation orientée-ligne, comme MagiC64, une grande
+quantité de données doit être traitée. L'émulateur doit pouvoir traiter 1,5 Mo
+de données graphiques en une seconde.
+ L'utilisation du rafraîchissement intelligent aide un petit peu, mais requiert
+l'utilisation de structures de données complexes pour fonctionner correctement
+(On ne peut utiliser de MMU dans ce cas). Un co-processeur mathématique (FPU)
+ne sert ici à rien.
+ On ne peut pas comparer une émulation C64 en terme de vitesse avec, par exemple,
+une émulation Spectrum. Le hardware du C64 est bien plus compliqué, l'émulation
+des sprites demande beaucoup de temps processeur (Non, on ne peut pas simplement
+utiliser les sprites Amiga).
+La recompilation dynamique n'est pas appropriée ici, car :
+ 1) L'émulation vidéo requiert bien plus de temps que l'émulation du processeur.
+ 2) Cela signifie l'utilisation de code auto-modifiant alors que les processeurs
+    Motorola ont des problèmes pour gérer ce genre de code.
+ 3) Vous devez de toutes les façons toujours compter les cycles, ce qui signifie
+    qu'il y aura peu de différences avec du code interprété.
+
+ Et pourquoi A64 est-il si rapide ? Hé bien pourquoi A64 a-t-il tant de problèmes
+avec les effets raster complexes ? Dites vous simplement que vous aurez besoin d'
+un 68060 pour une pleine vitesse d'émulation avec un ration image de 1/1 si vous
+utilisez une émulation orientée ligne.
+
+ Veuillez remarquer que les émulateurs C64 pour PC demandent au moins un 486 à 66
+MHz pour une pleine vitesse, ce qui est équivalent à un 68040 à 40MHz. Vous ne
+verrez donc jamais une émulation à pleine vitesse sur votre Amiga avec processeur
+68020 à 14MHz. Si vous ne me croyez pas, écrivez une nouvelle émulation. Je serais
+heureux d'en voir une :-)
+
+@endnode
+
+@node "History" "Historique"
+
+        Historique
+
+
+* = Eradication de bogue        N = Nouvelle fonctionnalité
+
+
+1.0
+        - Première version Aminet.
+
+
+1.01
+ *  	- Mauvaise détection du 68020 rectifiée
+
+	- "Amiga View" est maintenant le mode par défaut
+
+     
+1.1	
+ *	- L'émulateur ne marchais pas avec l'OS 2.04 ou 2.1. Réparé.
+
+ *	- A cause d'un bogue dans l'OS 3.0, "Amiga Screen" ne marchait pas.
+ 	  Installez SetPatch 40.14 ou postérieur pour régler ceci. Si vous
+ 	  utilisez l'OS 3.0, un requester de sélection apparaîtra au démarrage.
+
+ *	- Lorsque l'on double-cliquait sur un programme pour le charger et le
+ 	  lancer, le Reset n'était pas fait systématiquement. Dans le pire des
+ 	  cas, l'écran du C64 restait ouvert lorsque l'émulateur quittait le mode
+ 	  C64. Cela ne devrais plus se produire à présent.
+
+ *	- En mode national le clavier était souvent bloqué. Réparé.
+
+ *	- Certaines couleur dans la palette étaient tout simplement mauvais.
+ 	  Fixé.
+ 	  
+ *	- Les commandes 6510 PHP et BRK ne marchaient pas correctement.
+	  DDR 0 n'était pas non plus utilisé. Les 3 bogues ont étés réparés.
+
+ * 	- Il est maintenant possible de créer des disque D64 vide en cliquant sur
+ 	  "Formater" lorsque aucun fichier D64 n'a été précédemment chargé.
+
+ N	- Vous pouvez maintenant synchroniser explicitement les écrans non
+ 	  affichés. Désactivez (défaut) cette option dans les réglages de l'
+ 	  affichage pour accélérer l'émulateur.
+
+ N	- De nombreuses personnes ont demandé un format C64 brut. Le voici.
+
+ N	- L'enregistrement se fait maintenant à l'aide de fichier clé (Keyfile).
+ 	  Le fichier clé est valide pour toutes les mises à jour.
+
+ N	- ftp.ac-copy.com est maintenant le site support officiel de MagiC64.
+	  Dans le répertoire /pub/amiga vous trouverez la dernière version de
+	  MagiC64 ainsi que le fichier c64progs.lha qui contient environ 100 jeux
+	  au format P00.
+
+
+1.2 (22.12.1995)
+ *	- Problème du Reset avec le double-clic enfin réglé.
+
+ *	- Emulation du VIC 6569
+ 
+		- MagiC64 produisait des défauts d'affichage quand le mode 38
+		  caractère était activé et que le registre de scrolling
+		  horizontal contenait une valeur non nulle. Ce bogue affectait
+		  de nombreux jeux, et plantait complètement l'émulateur dans le
+		  pire des cas. Réparé.
+
+		- Dans les jeux à scrolling vertical, le haut et le bas de l'aire
+		  de scrolling étaient souvent brouillés. C'est maintenant réparé
+		  dans la plupart des cas, mais parfois il est impossible d'éviter
+		  de léger bogues d'affichage.
+
+		- Meilleur minutage des Sprites. (International Karate)
+
+	- Emulation du processeur 6510
+
+		- Les trois bits de poids fort de 0 et 1 étaient toujours effacés.
+		  Corrigé. (Bruce Lee, Zorro)
+
+	- Emulation CIA 6526
+
+		- L'entrée clavier ´Renversée´ est maintenant possible.
+		  (Pitfall II, Johny Rebb II et beaucoup d'autres)
+
+		- Les IRQ et NMI n'étaient parfois pas prises en compte.
+		  (Ghosts and Goblins)
+
+		- Les Timers sont maintenant plus précis.
+
+	- Emulation du lecteur de disquettes 1541
+
+		- De nombreuses petites erreurs ont été réparées.
+
+ *	- Appuyer sur ESC lorsque l'émulateur était suspendu avec ENTER plantait
+ 	  MagiC64. Corrigé.
+
+ * 	- Les gadgets de liste n'étaient pas toujours mis à jour correctement.
+ 	  Réparé.
+
+ N	- Nouvelles fonctions dans l'émulation du 1541 :
+
+		- Lecture, écriture, et rajout (append) sur les fichiers SEQ.
+
+		- Chargement des programmes ISEPIC.
+
+		- L'utilisation de jokers pour la lecture du répertoire est
+		  maintenant possible.
+
+		- Vous pouvez maintenant spécifier des numéro de lecteur dans les
+		  noms de fichiers.
+
+ N	- Les positions des fenêtres de MagiC64 sont sauvegardées dans un fichier.
+
+ N	- Lorsque vous cliquez sur "Chemin P00" ou "Chemin T64", vous sélectionnez
+          un chemin et non un fichier. En conséquence, c'est un requester de
+          chemin qui apparaîtra désormais.
+
+ N	- Les fichiers T64 sans nom sont affichés au format : <nomdefichier.t64>
+	  dans la liste des programmes T64.
+
+ N	- Raccourcis clavier pour changer le ratio image (+/-) et le port joystick
+ 	  (*) en mode C64.
+
+ N	- Dans la version enregistrée vous êtes avertis lorsque vous changez de
+ 	  fichier D64 et que le fichier D64 précédent a été modifié (écrit). Votre
+ 	  sélection de double buffering au démarrage de MagiC64 est également
+ 	  sauvegardée.
+
+ N	- Quelques nouveaux catalogues, un guide en allemand et en suédois ont été
+ 	  ajoutés.
+
+
+1.21 (25.12.1995)
+ *	- Le bogue (Enforcer Hit) à l'appel de LayoutMenus a été éliminé.
+
+ N	- Icône MagicWB ajouté.
+
+
+1.3 (14.1.1996)
+ *	- Emulation VIC
+ 		- En mode PAL 313 lignes au lieu de 312 étaient calculées. Ce
+ 		  bogue affectait des jeux comme Nemesis et Rainbow Islands.
+
+		- En mode graphique multicolore, les collisions Sprites-Fond n'
+		  étaient pas toujours détectées. (Thrust)
+
+	- Emulation CIA
+
+		- Complètement réécrite. Plus courte et plus fiable.
+
+		- Le bit utilisé pour le mode couplé des minuteries était le
+		  mauvais. (Ballblazer)
+
+	- Emulation du processeur 6510
+
+		- PLP mettait toujours le flag B à 1. Réparé.
+
+		- En mode mémoire $01=01 La ROM était lue à la place de la RAM.
+		  (Park Patrol)
+
+	- Emulation du lecteur 1541
+
+		- Il n'était pas possible de lire les fichiers ou les répertoires
+		  de disques dont les deux premiers octets de la BAM ne pointaient
+		  PAS sur le premier bloc du répertoire. Corrigé.
+
+		- Le joker '*' n'était pas toujours correctement géré.
+		  (Bangkok Knights)
+
+ *	- Deux hits enforcer éliminés (accès en lecture à l'adresse 0). Ils n'
+ 	  apparaissaient qu'en de rares occasions.
+
+ N	- playsid.library est maintenant gérée.
+
+ N	- Un Autofire ´Intelligent´ est maintenant disponible.
+
+ N	- Indicateur d'accès disque.
+
+ N	- Nouveaux raccourcis clavier pour le son, l'autofire et le Mode Rapide.
+
+
+1.5 (3.7.1996)
+ * 	- Emulation du processeur 6510
+
+	  - Tous les flags sont maintenant mis correctement en mode BCD.
+
+	  - Tous les opcodes illégaux sont gérés.
+
+	  - Bogues avec certains opcodes illégaux éliminés. (On Court Tennis)
+
+ *	- Emulation VIC
+
+	  - Les interruption Sprite-Sprite et Sprite-Fond sont suspendues tant que
+	    les registres correspondants ne sont pas lu. (Potty Pigeon)
+
+ *	- Emulation du lecteur 1541
+
+	  - Les fichiers à accès aléatoire peuvent maintenant être lus. La
+	    commande P est également gérée. (Castle Wolfenstein)
+
+	  - La lecture de répertoires avec des jokers ET des numéros de lecteurs
+	    marche correctement maintenant. (Dr. Creep)
+
+	  - Avant qu'un fichier ne soit ouvert, le fichier précédent sur le même
+	    canal est fermé. (Creatures)
+
+ *	- Emulation SID
+
+	  - Le fait d'écrire dans le registre de contrôle du volume corrompait
+	    le contenu du registre de statut du 6510. Corrigé.
+
+ *	- L'écran est positionné correctement dans tous les modes lors de l'
+          utilisation de Amiga View.
+          
+ *	- MagiC64 devrais maintenant marcher en bonne entente avec le gestionnaire
+          de tâche "Executive".
+
+ *	- Clignotement vert lors de l'exécution de Jumpman éliminé.
+
+ N	- Moniteur MagicMon 6510.
+
+ N	- Mode de rafraîchissement intelligent.
+
+ N	- Limitation de la vitesse pour les Amigas très rapides.
+
+ N	- Gestion des cartes graphiques (CyberGfx).
+
+ N	- Emulation du joystick via le clavier (pavé numérique).
+ 
+ N 	- Toutes les options sont maintenant disponibles dans la version non
+          enregistrée. Il y a maintenant une limite de temps de 10 minutes en mode
+          C64 si vous n'êtes pas enregistré.
+
+
+1.7 (1.12.1996)
+
+ *	- Emulation du processeur 6510
+
+		- Les flags sont mis correctement en mode BCD pour SBC. (Joe Blade)
+
+		- Un opcode illegal corrigé. (Ms. Pacman)
+
+ *	- Emulation VIC
+
+		- Le rafraîchissement intelligent marche maintenant dans tous les
+                  modes et est plus rapide.
+
+		- Les bordures sont affichées plus vite.
+
+		- Les bordures sont plus hautes de 4 pixels en haut et en bas.
+
+		- L'écriture dans le registre de collision est ignorée.
+		  (Phantoms of the Asteroid)
+
+		- Lorsque l'affichage défile dans la direction X et que le bit
+		  38 caractères n'est pas mis, la couleur de fond est affichée.
+		  (Pesky Painter)
+
+		- Le 'Idle display' avec des modes illégaux affiche du noir et non
+		  plus la valeur $3FFF. (Paperboy, Druid)
+
+		- Les compteurs internes sont maintenant rafraîchit dans les modes
+		  illégaux. De nombreux programmes où seules des portions d'écran
+		  défillent devraient fontionner de manière plus fluide et sans
+		  problèmes d'affichage. (Druid, Rambo)
+
+ *	- Emulation CIA
+
+		- Les timers couplés comptaient deux fois plus vite qu'il ne
+		  fallait. Réglé. (Enduro Racer)
+
+		- Lors de l'utilisation des timers avec de tout petits intervales,
+		  l'intervale complet est utilisé. (Phantoms of Asteroid)
+
+ *	- Emulation du lecteur
+
+		- La sauvegarde vers les disques D64 ne marchait plus avec la
+		  version 1.5. C'est réparé. En plus il est maintenant possible de
+		  sauvegarder des fichiers plus grands que 160 blocs.
+
+		- L'indicateur d'accès disque marche maintenant dans tous les modes.
+
+ *	- L'émulateur pouvait se planter lors de l'utilisation simultanée de la
+	  bibliothèque playsid.library et d'Executive sous kickstart 3.0.
+
+ N	- L'émulateur est maintenant entièrement contrôlable avec le clavier.
+
+ N	- Repli vers un mode écran standard lorsque le mode écran du fichier de
+	  préférences n'est pas disponible.
+
+ N	- Utilisation d'un cache pour les sprites afin d'améliorer la vitesse.
+
+ N	- Indicateur de vitesse.
+
+ N	- L'effet des raccourcis-clavier est affiché dans une barre de statut.
+
+ N	- La sélection du double buffering sous Kickstart Kick 3.0 n'apparait plus
+	  qu'à la première exécution de MagiC64. Il en va de même pour l'
+	  avertissement lorsqu'aucune bibliothèque pour le son n'est disponible.
+
+ N	- Guide et catalogue français.
+
+ N	- Catalogue Italien.
+
+
+1.7 (8.12.1996)
+
+ *	- Emulator could crash in C64 mode without Smart Refresh
+	  when using hotkeys.
+
+ *	- The game Stratton is working again.
+
+ N	- Sprite handling changed. Playing games like Exploding
+	  Fist, International Karate or 1942 you won't notice
+	  any sprite flickering now. The only game slighty
+	  affected by this kind of handling is Delta.
+
+
+1.7 (11.12.1996)
+
+ N	- Directories with separating lines are looking better
+	  in the D64-Listview now.
+
+ N	- New guide entry with tips and tricks to some programs.
+
+@endnode
+
+@node "ToDo" "Ce qui reste à faire"
+
+        Ce qui reste à faire
+
+
+ - Corriger les bogues.
+
+ - Un "freezer" est prévu.
+
+ - La possibilité de brancher un vrai 1541.
+
+ - Emulation complète du 1541 pour les Amigas très rapides (68060).
+
+ - On verra. :-)
+
+@endnode
+
+@node "Greetings" "Crédits"
+
+        Crédits, remerciements et salutations
+
+
+Remerciements à :
+
+  Jochen Wiedmann pour Flexcat.
+  Helmut Neumann pour les Bêta-Tests.
+  Ma soeur Katja pour l'aide apportée dans la traduction des docs.
+   (même si NLS y a aussi touché un peu ;)
+  Mon frère Markus qui a toujours soutenu ce logiciel. :-)
+  NLS pour de nombreux indices et rapports de bogue.
+  Leon Woestenberg pour le catalogue Hollandais.
+  Christer Bjarnemo pour le catalogue et le guide Suédois.
+  Peter Sandén pour les icônes MagicWB.
+  Florent Brun pour le catalogue et le guide Français.
+  Alessandro Basso pour le catalogue Italien.
+
+
+Nick "NLS" Sardelianos s'occupe de la documentation AmigaGuide.
+
+@endnode
+
+@node "C64" "... Qu'est-ce qu'un C64 ?"
+
+        Qu'est-ce qu'un C64 ?
+
+
+ Cette page est encore en construction. En attendant laissez moi vous dire que le
+Commodore 64 est le meilleur ordinateur 8 bit ! :)
+
+@endnode
+
+@node "Software" "Où trouver des logiciels C64"
+
+
+ Faites une requête FTP à ftp.ac-copy.com. Dans le répertoire pub/amiga vous
+trouverez les fichiers c64progs1.lha et c64progs2.lha qui contiennent une centaine
+de jeux au format P00. Tous ces jeux ont été testé avec succès sur MagiC64 et
+devraient tourner sans aucun problème. Vous pouvez également essayer les sites
+ftp suivants :
+
+	arnold.hiof.no
+	128.195.201.233 (Childhoods End) répertoire CDRom
+	frodo.hiof.no
+
+ Vous pouvez également lire le newsgroup comp.emulations.cbm pour de plus amples
+informations sur les sources de programmes C64.
+
+ Cette page est encore en construction. Elle inclura bientôt d'autres adresses
+FTP et WWW.
+
+@endnode

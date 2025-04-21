@@ -1,0 +1,1717 @@
+@database Default
+@author "gega"
+@$VER: cp4.guide 0.79 (25.2.00)
+@(c) "1998-2000 Gáti Gergely, gega"
+
+@node "main" "cp4 guide"
+@next "features"
+@prev "main"
+
+@{b}C= Commodore C+4 Emulátor                                        by gega@{ub}
+
+@{" English " LINK cp4_EN.guide/main}
+
+@{" Jellemzõk             " LINK "features"}
+@{" Követelmények         " LINK "requirements"}
+@{" Installálás           " LINK "install"} 
+@{" Video driver-ek       " LINK "videodriver"} 
+@{" 1541                  " LINK "f1541"}
+@{" SID-kártya            " LINK "sidcard"}
+@{" Billentyûk            " LINK "bill"} 
+..@{" Billentyûzet mátrix " LINK "billmatrix"}
+@{" Prefs file            " LINK "prefsfile"} 
+@{" Parancssori Opciók    " LINK "opciok"} 
+@{" Prefs GUI             " LINK "prefsgui"} 
+..@{" SetMap GUI          " LINK "setmap"} 
+@{" Debug GUI             " LINK "debuggui"} 
+@{" Monitor GUI           " LINK "monitorgui"} 
+@{" Stack GUI             " LINK "stackgui"} 
+@{" Fordítóknak           " LINK "trans"}
+@{" Amiga Programozóknak  " LINK "amigaprog"} 
+..@{" Video driverek      " LINK "amigaprogvideo"}
+@{" Plus4 Programozóknak  " LINK "plus4prog"} 
+..@{" AssP4 help          " LINK "assp4"}
+..@{" Statisztikák        " LINK "stat"}
+@{" ScreenShots           " LINK "scrshots"}
+@{" Újdonságok            " LINK "news"}
+
+@{u}Készítette gega (Gáti Gergely)
+E-Mail:   gatig@dragon.klte.hu
+HomePage: www.klte.hu/~gatig/cp4.html
+@{uu}
+        Készült a gcc és a PhxAss segítségével, a GUI-t a GadToolsBox-al
+        terveztem. A SID library használatát a Frodo forrásából tanultam
+        meg. SID támogatás a 6581sid.library és a playsid.library segít-
+        ségével. 1541 meghajtó használat az Easy1541 csomagnak köszönhe-
+        tõen létezik. A lokalizálást az LFLocalize segítette.
+
+        A program freeware, de nem bánnék egy e-mailt, ha tetszett, vagy
+        ha javaslataid vannak...
+
+@{b}@{u}Köszönet@{uu}@{ub}
+        @{i}(ABC-rendben :-)@{ui}
+        @{b}Fehér Imrének@{ub}, a Plus4-es mérésekért, és a programozási tanácsokért
+        @{b}Ipacs Zsoltnak@{ub} aki hibakeresésben segédkezett sokat és a PCs verziót
+                készíti,
+        @{b}Kémeri Csabának /UnReal/@{ub} aki teszteléssel, hardwarerrel, ikon-
+                készítéssel és támogatásával segített,
+        @{b}Rajnai Álmosnak@{ub}, aki rábeszélt a feladatra,
+        @{b}Tábori Imre (Roe-Pipi)@{ub} tesztelés, support,
+        @{b}Zavacki Ferencnek@{ub}, aki rengeteget segített és az AGA-s c2p-t írta,
+        ...és mindenkinek, akit érdekel a Plus4-es!
+@endnode
+
+@node "features" "Features"
+@next "requirements"
+@prev "main"
+
+        - Gyors emuláció
+        - Közel teljes TED emuláció
+        - 1541 Drive támogatás iec.library-val
+        - SID kártya emuláció 6581sid.library-val vagy playsid.library-val
+        - Joystick támogatás vagy emuláció
+        - Átdefiniálható billentyûzetkiosztás
+        - Szabadon választható képernyûmód
+        - Sok külsõ megjelenítõ (ablakban, átméretezhetõen, ecs-hez, stb.)
+        - Valósidejû mód lassú gépeken (030/40+)
+        - Sebesség-kijelzõ
+        - Fontérzékeny Prefs ablak
+        - D64 támogatás (egyelõre csak a 174848 byte-os formátum)
+        - Letilthatatlan reset
+        - Beépített debugger és monitor
+        - Lokalizált, a locale.prefs módosítására futás közben is reagál
+        - Pillanatfelvétel készítése (Xpk támogatással)
+        - Nem dokumentált utasítások támogatása
+        - Külsõ paletta választás
+        - Ingyenes
+
+@endnode
+
+@node "requirements" "Követelmények"
+@next "install"
+@prev "features"
+
+    Min. 2M RAM    - csak a Mono, OCS és a WindowMono driver
+                     használható
+         3M RAM    - minden driver mûködik
+                     CHIP:  ~300Kb
+                     FAST: ~1600Kb
+    OCS,ECS        - Ekkor csak a WindowMono, WindowAmiga és az OCS
+                     driver használható
+    OS3.0          - Minimum
+    iec.library    - Nem feltétlenül szükséges, de ha van, használható egy
+                     1541-es drive csatlakoztatva.
+    6581sid.library- Az egyik kell, a SID-kártya emulációhoz.
+    playsid.library-
+    Processzor     - 020+
+    ROM images     - Eredeti C=+4 romok
+
+    Ne használja az fblittel, sokkal gyorsabb lesz nélküle!
+
+@endnode
+
+
+@node "install" "Installálás"
+@next "videodriver"
+@prev "requirements"
+
+        Semmi különös teendõ nincs az installálással, kivéve a @{" Prefs " link "prefsfile" 0} file
+elhelyezését.  Ha  a fõprogrammal azonos könyvtárban megfelelõ a .prefs file
+elhelyezése,  semmit  sem kell tenni, ha azonban az ENVARC: a megfelelõ hely
+számára,   akkor   létre   kell   hozni  egy  üres  .prefs  file-t  az  ENV:
+alkönyvtárban,  például az 'echo >ENV:cp4.prefs' dos paranccsal. A@{" romokat " link "opciok" 8}a
+fõprogrammal megegyezõ alkönyvtárba kell helyezni:
+
+        rom.basic                16K
+        rom.kernal               16K
+        rom.funclow              16K
+        rom.funchigh             16K
+
+nevekkel  ellátva. A mûködéshez mindenképpen kell a basic és a kernal, és ha
+csak ez a kettõ van jelen, akkor egy 64K-s C16-os emulációja történik. Végül
+a  megfelelõ  ikon  átnevezése  és  a  megfelelõ helyre másolása maradt csak
+hátra.
+
+        Ha nincs 1541-esed és egy kábeled, hogy letöltsd a romokat, használd
+a   MakeROM   utility-t,  ami  az  OS96  package  segítségével  elkészíti  a
+futtatáshoz szükséges rom file-okat.
+
+@endnode
+
+@node "videodriver" "Video Driverek"
+@next "f1541"
+@prev "install"
+
+        Az  elsõ  indítás után érdemes a video driver beállításával kezdeni.
+Az  alapértelmezett video driver a windowcard.c2p, ami a legtöbb Amigán gond
+nélkül  mûködik,  és  video kártya használata esetén az ajánlott megoldás is
+egyben,  miután  ez a driver a WritePixelArray8() függvényt használja, ami a
+graphics.library  alapértelmezett  chunky-to-planarja.  AGA gépeken nem ez a
+legjobb  választás,  ebben  az  esetben  Zavacki  Ferenc  driver-ét  érdemes
+használni,  ami  hozzávetõleg  tízszer  olyan  gyors  mint  a  card.c2p,  de
+kizárólag  AGA-n fut. A Mono driver csak szemléltetésképp került a csomagba,
+egy  egyszerû  példán  keresztül  bemutatja,  hogy  hogyan  készíthet  bárki
+egyszerûen@{" külsõ video driver-t " link "amigaprogvideo" 0}az emulátorhoz.
+
+Javasolt video-driver-ek 3M RAM felett:
+
+       @{u}@{b} Grafika                    -030                 040+         @{uu}@{ub}
+        VideoKártya                card, windowcard     +windowscale
+        AGA                        zavacki              +windowamiga
+        ECS,OCS                    OCS                  +windowamiga
+
+@endnode
+
+@node "f1541" "1541 Disk Drive"
+@next "sidcard"
+@prev "videodriver"
+
+        Használható egy   valódi   1541-es   meghajtó,  az  Easy1541  csomag
+segítségével.  A  csomagban  leírtaknak  megfelelõen  az Easy1541 kábel és a
+Frodo  kábel  egyaránt  mûködik.  A  software  letölthetõ az AmiNetrõl, ahol
+misc/emu/Easy1541.lha néven szerepel.
+
+@endnode
+
+@node "sidcard" "SID-kártya"
+@next "bill"
+@prev "f1541"
+
+        Az   elterjedt   6581sid.library  (A64  csomagban  található)  és  a
+playsid.library  (mellékelve)  segítségével  a  SID-kártya  is emulálható. A
+playsid.library-val   együtt   nem  használható  az  iec.library!  Ezért  az
+alapértelmezett a 6581sid.library.
+
+@endnode
+
+@node "bill" "Billentyûk"
+@next "billmatrix"
+@prev "sidcard"
+
+        Az  alapértelmezett  billentyûzet  a  C16  billentyûzeten alapul. Az
+elhelyezéskor  a  fizikai  megfeleltetés  került  elõtérbe,  nem  a tartalmi
+hasonlóság.
+
+        F5        Képrajzolás ki- és bekapcsolása
+                  Lassú gépen zenehallgatáskor segíthet
+        F6        Bináris file betöltése (LOAD"program",8,1)
+        F7        Joystickek cseréje (Lásd: @{" Swap Joy " link "prefsgui" 16}-Gadget/Menü)
+        F8        Reset
+        F9        Letilthatatlan reset
+        F10       Debug
+        HELP      Prefs
+@endnode
+
+@node "billmatrix" "Billentyûzetmátrix"
+@next "prefsfile"
+@prev "bill"
+Billentyûzet mátrix (német billentyûzettel)
+C+4:	@	F3	F2	F1	HELP	£	Ret	InstDel
+Amiga:	ü	f3	f2	f1	f4	RAmiga	Enter	Backspace
+C+4:	Shift	E	S	Z	4	A	W	3
+Amiga:	Shift	e	s	y	4	a	w	3
+C+4:	X	T	F	C	6	D	R	5
+Amiga:	x	t	f	c	6	d	r	5
+C+4:	V	U	H	B	8	G	Y	7
+Amiga:	v	u	h	b	8	g	z	7
+C+4:	N	O	K	M	0	J	I	9
+Amiga:	n	o	k	m	0	j	i	9
+C+4:	,	-	:	.	Up	L	P	Down
+Amiga:	,	\	ö	.	Up	l	p	Down
+C+4:	/	+	=	Esc	Right	;	*	Left
+Amiga:	-	'	RAlt	Esc	Right	ä	#	Left
+C+4:	Run/St	Q	C=	Space	2	CTRL	Clr/H	1
+Amiga:	Ctrl	q	LAlt	Space	2	Tab	Del	1
+@endnode
+
+@node "prefsfile" "Prefs file"
+@next "opciok"
+@prev "billmatrix"
+
+        A  beállítások programból állíthatóak be, menüpontokkal, gadgetekkel
+vagy  billentyûzetrõl,  de van néhány opció, ami egyelõre csak a .prefs file
+editálásával  módosítható,  ezeket  a  listában  '!' jelzi, vannak amelyeket
+programból szintén nem lehet állítani, de a parancssori opciókkal igen, ezek
+elõtt  '+'  áll.  Természetesen bármelyik opciót módosíthatjuk a .prefs file
+editálásával.  Ahol  számokat  kell  megadni,  ott az alapértelmezés a tizes
+számrendszer,  de  egy  kezdõ  '$'  vagy  '0x'  jellel  ez hexára módosul. A
+beállításokat  a  program  minden  hibamentes  kilépéskor  elmenti, tehát az
+ablakok helyzete és a legtöbb beállítás tárolódik.
+
+         TWOFRAME=NO                    Lásd: Prefs,@{" TwoFrame-" link "prefsgui" 13}Gadget/Menü
+         C2P=card.c2p                   Lásd: Prefs,@{" Chunky2Planar" link "prefsgui" 22}
+         SPEEDLIMIT=YES                 Lásd: Prefs, Limit-Gadget/Menü
+         JOY=NORMAL|SWAPPED             Lásd: Prefs, SwapJoy-Gadget/Menü
+         SOUND=YES                      Lásd: Prefs, Sound-Gadget/Menü
+         SID=NO                         Lásd: Prefs/SID-Menü
+        !SIDTYPE=6581SID                A SID library típusa, ha '6581SID',
+                                        akkor elõször a 6581sid.library-t
+                                        próbálja megnyitni, ha 'PLAYSID',
+                                        akkor a playsid.library-val kezdi
+         PERCENT=YES                    Lásd: Prefs/Display_Percent-Menü
+        !PERCENTCOLOR1=$31              A sebességjezõ számok színe
+        !PERCENTCOLOR0=$51              A számok külsõ keretének színe
+                                        Itt C+4 színeket lehet megadni,
+                                        0-tól egészen $7F-ig
+         OVERSCAN=-1                    Overscan sorszám
+         MODEID=-1                      ScreenmodeID nincs alapértelmezés,
+                                        az elsõ indításkor kötelezõ
+                                        választani egyet
+         P4PROGDIR=:                    Ahol a C+4 programokat keresni fogja
+                                        Ha a file-requesterben módosítjuk a
+                                        path-t, ez az opció automatikusan
+                                        módosul, tehát nincs külön beállítási
+                                        lehetõség
+        !INITMEM=0000FFFFFFFF0000       A memória kezdeti értéke,
+                                        tetszõlegesen hosszú minta
+         IEC=YES                        Rom patch az iec.library-hoz
+         REALTIME=YES                   Addig ugorja át a képkockákat amíg egy
+                                        valódi Plus4 sebességét el nem éri
+        +BASIC=rom.basic                Módosíthatóak a kért nevek
+        +KERNAL=rom.kernal
+        +FUNCTIONLOW=rom.funclow
+        +FUNCTIONHIGH=rom.funchigh
+        +CARTRIDGE1LOW=NO               A cartridge image file-ok nevei / NO
+        +CARTRIDGE1HIGH=NO
+        +CARTRIDGE2LOW=NO
+        +CARTRIDGE2HIGH=NO
+         MONWIN=NO                      Debug esetén nyíljon-e meg azonnal a
+                                        Monitor ablak (mindig megjegyzi,
+                                        hogy kilépéskor nyitva volt-e és
+                                        aszerint állítja ezt az opciót)
+         FOLLOW=NO                      Lásd: Monitor/Follow-Menü
+         WITHDATA=NO                    Lásd: Debug/???_With_Data-Menü
+         ILLOPCODES=NO                  Lásd: Debug/Illegal_OpCodes-Menü
+         MONLEFT=30                     Az ablakok pozíciója mindig az
+         MONTOP=11                      utoljára használt koordináta lesz
+         PRFLEFT=0
+         PRFTOP=11
+         DBGLEFT=0
+         DBGTOP=11
+         STKTOP=25
+         STKLEFT=80
+         KMAPTOP=0                      KeyMap Editor ablak helyzete
+         KMAPLEFT=0
+        !LISTINNERWIDTH=24              Amennyiben az OS3.0-tól eltérõ
+                                        ListView-scrollert használunk, ezt
+                                        az értéket be kell állítani:
+                                    A
+                       >-------------------------<
+                        ,---------------------+-+
+                        |                     | |
+                        |_____________________|X|
+                        |_____________________|X|
+                        |                     |X|
+                        |                     |X|
+                        |                     | |
+                        |                     | |
+                        |                     |_|
+                        |                     |^|
+                        |                     |v|
+                        `---------------------+-+
+                       >-<                   >---<
+                        B                      C
+         LISTINNERWIDTH = (A-(B+C))+2
+@endnode
+
+@node "opciok" "Opciók"
+@next "prefsgui"
+@prev "prefsfile"
+
+        Ezeket  valószínûleg  nem kell használni, de egyes esetekben még jól
+jöhetnek,  ezért maradtak a programban. Ha megadunk egy file-nevet, akkor az
+bekerül a Plus4-es memóriájába indításkor. További opciók:
+
+  -h  Opciók listája
+  -s  Hang tiltása
+  -t  Sebességlimitálás tiltása
+  -c  Chunky2Planar választás (filenév, pl.: '-c mono.c2p')
+  -v  ScreenModeID
+  -o  Overscan Mode (1-TEXT 2-STANDARD 3-MAX 4-VIDEO)
+  -f  Két képkockánkénti megjelenítés
+  -p  Sebességjelzés tiltása
+
+ROM-file opciók:        (Minden ROM kötelezõen 16K!)
+  -b  Basic             (vagy -0)
+  -k  Kernal            (vagy -1)
+  -2  Function-Low
+  -3  Function-High
+  -4  Cartridge1-Low
+  -5  Cartridge1-High
+  -6  Cartridge2-Low
+  -7  Cartridge2-High
+@endnode
+
+@node "prefsgui" "Prefs GUI"
+@next "setmap"
+@prev "opciok"
+
+        A preferences ablakot a HELP billentyûvel nyithatjuk meg.
+
+        @{b}@{u}Gadgetek@{uu}@{ub}
+        Drive:          8-11-es egységig használhatók meghajtók.
+                        A mellette lévõ gadgettel lehet beállítani, hogy
+                        a megadott meghajtón milyen emulációt szeretnénk.
+                        Választható valódi 1541-es kábellel, vagy D64
+                        emuláció. Egy hibának köszönhetõen D64 kezeléshez
+                        jelen kell lennie az iec.library-nak.
+        ?               Ezzel választható ki a .d64 file.
+        ScreenMode:     Képernyõmód kiválasztása
+                        Érdemes valami nagyobb overscan-t kiválasztani, hogy
+                        a keret is látszódjon.
+        Keymap:         Billentyûzet választás.
+        ChunkyToPlanar: Itt lehet kiválasztani a megfelelõ video drivert.
+                        A mellette lévõ területen információk jelennek meg
+                        az éppen kiválasztott driver-rõl és szerzõjérõl.
+        Save:           A beállított értékeket elmenti
+                        Ha az ENV:-rõl került betöltésre a .prefs, akkor
+                        elmenti azt az ENV:-re, és az ENVARC:-ra. Különben
+                        csak a PROGDIR:-re.
+        Use:            Ha az ENV:-en van a .prefs, akkor elmenti õket oda,
+                        különben csak a programban lesznek meg az értékek.
+        Cancel:         Az elvégzett változtatások nélkül visszalép az
+                        emulációba.
+        Quit:           Kilépés
+
+        @{b}@{u}Menük@{uu}@{ub}
+        Project/
+                Load_File       Betölt egy bináris file-t a memóriába (,8,1)
+                Save_Prog       A betöltött programot menti el (,8)
+                Reset           Mint a Debug/Reset-Menü
+                Back            Mint a Cancel
+                SetMap...       Billentyûzet beállítás
+                Make Snapshot	A gép belsõ állapotának mentése file-ba
+                Load Snapshot	Egy tárolt belsõ állapot visszatöltése
+                About           A címem, meg ilyesmi
+                Quit            Kilépés
+        Prefs/
+                Sound           Hang engedélyezése/tiltása
+                                A digitalizált hangok használata esetenként
+                                lelassíthatja az emulációt, ezért lehet értelme
+                                letiltani a hangokat.
+                Speed_Limit     Sebesség maximálása az eredeti C+4 sebességén
+                                Az emuláción nem lassít, tiltása akkor jöhet jól,
+                                ha egy számításigényes feladatot az eredetinél
+                                gyorsabban kell elvégezni.
+                TwoFrame        Kipipálásával minden második képkocka jelenik
+                                meg Egy 030/50-en ezzel az opcióval 90%-os
+                                teljesítmény is elérhetõ.
+                Swap_Joy        Az Amiga kettes portra kötött joystick C+4-beli
+                                értelmezése; kipipálva az egyes portra kerül.
+                                A billentyûzeten megvalósított joystick emuláció
+                                mindig a másik joysticket emulálja.
+                Display_Percent Sebességkijelzés tiltása/engedélyezése
+                IEC             iec.library használata
+                                A ROM patchelése néhány programnál
+                                hibához vezet, ekkor érdemes letiltani
+                RealTime        Használatakor addig ugorja át a képkockákat,
+                                amíg egy valódi Plus4-es sebességét el nem
+                                éri. Maximum 8-9 képkockát ugrik át.
+                SID             SID-kártya engedélyezése
+                                Ha van 6581sid.library, azt használja,
+                                ha nincs de van playsid.library, akkor
+                                az lép mûködésbe. A playsid.library-val
+                                együtt nem használható az iec.library!
+
+@endnode
+
+@node "setmap" "SetMap GUI"
+@next "debuggui"
+@prev "prefsgui"
+
+        A  Prefs ablakból nyitható a 'SetMap...' menüponttal. A négyzethálós
+GUI a  C+4-es @{" billentyûzetmátrixát " link "billmatrix"} reprezentálja. Az ablak titlebar-jában
+olvasható  a  szerkesztés alatt álló keymap neve. Egy billentyû leütésekor a
+státuszsorban olvasható, hogy mi van hozzárendelve.
+
+        @{b}@{u}Gadgetek@{uu}@{ub}
+                Open:           Másik keymap betöltése
+                New:            Keymap törlése (emulátor funkciókon kívül)
+                Save:           A módosított keymap kimentése (a használathoz
+                                mindenképpen kell)
+                Exit:           Vissza a Prefs ablakra
+                Functions:      Emulátor funkciók beállítása
+                                Itt a speciális funkciókhoz lehet
+                                billentyûket rendelni:
+                                  - Debug       » Debug ablak
+                                  - Percent     » Sebességkijelzés be/ki
+                                  - HardReset   » Letilthatatlan reset
+                                  - Load File   » File töltés
+                                  - Prefs       » Prefs ablak
+                                  - Reset       » Reset
+                                  - Limit       » Sebesség határ be/ki
+                                  - Swap Joy    » Joystick csere
+                                  - User Blank  » Képszerkesztés be/ki
+                                  - Joy Up      » Joystick fel
+                                  - Joy Down    » Joystick le
+                                  - Joy Left    » Joystick balra
+                                  - Joy Right   » Joystick jobbra
+                                  - Joy U-L     » Joystick fel-balra
+                                  - Joy U-R     » Joystick fel-jobbra
+                                  - Joy D-L     » Joystick le-balra
+                                  - Joy D-R     » Joystick le-jobbra
+                                  - Joy Fire    » Joystick tûzgomb
+                                  - Snapshot    » Pillanatfelvétel
+                                  - Restore     » Helyzet visszatöltése
+                Gombok:         Beállítható a Plus4-es billentyûhöz rendelt
+                                Amiga key. Az 'Add' gomb hozzáadja a
+                                listához az új billentyût, a 'Replace'
+                                lecseréli a listát az újra.
+
+@endnode
+
+@node "debuggui" "Debug GUI"
+@next "monitorgui"
+@prev "setmap"
+
+        A  Debug  ablak  az  F10  billentyû  hatására  jelenik meg a default
+PubScreen-en.
+
+        @{b}@{u}Gadgetek@{uu}@{ub}
+        DisAsm ListView   Itt látható az épp végrehajtás alatt lévõ
+                          utasítás, '>'-vel jelölve. Használata nem
+                          okozhat problémát.
+                          Használható billentyûk:
+                                   crsr:           mozgás
+                                   sh+crsr:        lapozás
+        PC                A program következõ utasításának címe
+        A,X,Y,SP          Accu, X, Y-reg, Stack Pointer
+        Flagek            7501-flagek
+        Run               A program tovább futtatása
+        Trace             Egy utasítás végrehajtása
+        Step              Egy utasítás, de a JSR-t egyszerre végrehajtja
+        BreakPoints       Breakpoint-ok engedélyezése
+        Clear             Az összes breakpoint törlése
+        Add               A kijelölt sor címe az aktuális breakpoint
+                          cím lesz
+
+        Ezek  alatt  az  aktuális  kijelzési mód neve található, az aktuális
+rasztersorban. Majd sorban tájékoztató információk:
+
+        Amiga_raster      Egyelõre nem mûködik
+        C+4_raster        Melyik raster-sorban jár a program
+        Raster_request    Hová kértek raster-megszakítást
+        Video_matrix      Video matrix helye
+        Gfx_base          A grafikus memória helye
+        Ras/C#1/C#2/C#3   A jelzettek közül melyik megszakítás
+                          engedélyezett (+)
+
+        @{b}@{u}Menük@{uu}@{ub}
+
+        A menü közös a Debug, @{" Monitor " link "monitorgui"} és a @{" Stack " link "stackgui"} ablakra.
+
+        Project/
+                Prefs           A Prefs ablak megnyitása
+                SaveMem         A memória kimentése az Amiga file-rendszerbe
+                Reset           Hard-reset
+                Back            Vissza az emulációba
+                Quit            Kilépés
+        Debug/
+                Trace           Lásd: Trace-Gadget
+                Step            Lásd: Step-Gadget
+                Run             Lásd: Run-Gadget
+                ???_With_Data   Az ismeretlen utasítások után feltünteti a
+                                byte értékét
+                BreakPoints     Lásd: BreakPoints-Gadget
+                Illegal_OpCodes Engedélyezi az illegális opcode-ok
+                                megjelenítését
+                Stack           Megnyitja a Stack ablakot
+        Monitor/
+                OpenWin         Megnyitja a Monitor ablakot
+                Follow          Használatakor, a végrehajtás alatti utasítás
+                                operandusára fog állni a monitor kurzora
+                Ascii           A monitor kijelzése ascii-kódokban történik
+                ScreenCode      Ugyanaz képernyõkódokban
+
+@endnode
+
+@node "monitorgui" "Monitor GUI"
+@next "stackgui"
+@prev "debuggui"
+
+        Ascii/ScrCode     Lásd: Monitor/Ascii|ScreenCode-Menü
+        String gadget     A keresendõ string/hexa szám írható ide
+                          Ha '$' jellel kezdõdik a string, hexa-ban
+                          keres, egyébként ascii-ban
+                          Pl.: '$08ff' - '08 FF'-et keres
+        Search            A kurzortól lefelé keres
+        ListView          Plus4 memóriája
+                          Használható billentyûk:
+                                   crsr:           mozgás
+                                   sh+crsr:        lapozás
+                                   számok+'a-f'    módosítás
+        @{b}@{u}Menük@{uu}@{ub}
+
+        A @{" menü " link "debuggui" 34} közös a @{" Debug " link "debuggui"} , Monitor és a @{" Stack " link "stackgui"} ablakra.
+
+@endnode
+
+@node "stackgui" "Stack GUI"
+@next "trans"
+@prev "monitorgui"
+
+        A  stack  backtrace  ablak  a  verem tartalmát mutatja visszafejtve,
+megállapítható  belõle, hogy honnan hívták meg azt a programrészt, ami éppen
+végrehajtás  alatt  áll.  Egy címre klikkelve a Debug ablak a kérdéses címre
+ugrik.
+
+        @{b}@{u}Menük@{uu}@{ub}
+
+        A @{" menü " link "debuggui" 34} közös a @{" Debug " link "debuggui"} , @{" Monitor " link "monitorgui"} és a Stack ablakra.
+
+@endnode
+
+@node "trans" "Fordítóknak"
+@next "amigaprog"
+@prev "stackgui"
+
+        A  fordításhoz  szükséges  a  CatComp  vagy  egy  azzal  egyenértékû
+program.  A  Localize  könyvtárban található két script, amelyek a fordítást
+hivatottak  egyszerûsíteni.  Az Util könyvtárban lévõ SetCT-t mindkét script
+használja.
+
+    MakeLanguage <nyelv>
+    ------------
+        Ez   a  script  elkészíti  a  Translations/<nyelv>  alkönyvtárat  és
+beállítja a szükséges paramétereket és a dátumokat.
+
+    MakeCatalog <nyelv>
+    -----------
+        A  fordítás  végeztével ennek segítségével készíthetjük el a catalog
+file-okat,  amik  a New_Catalog könyvtárba kerülnek, ahonnan át kell másolni
+õket a fõkönyvtárban lévõ Catalogs fiókba.
+
+@endnode
+
+@node "amigaprog" "Amiga programozóknak"
+@next "amigaprogvideo"
+@prev "trans"
+
+        A forrást kérésre elküldöm, a kéréseket a gatig@dragon.klte.hu címre
+küldjétek, mint a hibalistát is.
+@endnode
+
+@node "amigaprogvideo" "Video driverek készítése"
+@next "plus4prog"
+@prev "amigaprog"
+
+        A   video   driverek   LoadSeg()-gel   kerülnek   betöltésre,  de  a
+programozónak ezzel nem kell törõdnie, a mellékelt interface-t használva nem
+okoz  túl nagy gondot a driver elkészítése. A drivereket startup nélkül kell
+fordítani,  gcc  esetén  a  -nostartup,  Sas/C-nél  a  NOSTARTUP opciót kell
+megadni.  Ekkor persze majdnem mindenrõl magunknak kell gondoskodnunk (lásd:
+C2P_WANTSYSBASE).   A  következõ  példában  szereplõ  FÜGGVÉNYEKNEK  fix  az
+elnevezése, és kötelezõ megadni õket, akkor is ha nincsenek használatban.
+
+---CUT HERE---
+#include-ok
+
+// A felkiáltójellel jelzettek kötelezõen megadandók
+
+#define C2P_VERSION     "1"                   // ! Idézõjelbe kell tenni
+#define C2P_REVISION    "0"                   // !
+#define C2P_AUTHOR      "szerzõ..."           //
+#define C2P_NAME        "drivernév..."        // !
+
+// Ha megadjuk a következõ definíciót, a fõprogram nem renderel
+// százalékkijelzést, még, ha a felhasználó kérte is
+#define C2P_NOSPEED
+
+// Opcionálisan kérhetõ, hogy hányszoros bufferinget szeretnénk
+// használni. Ha nem adjuk meg, akkor nem használhatjuk a delta buffereket,
+// és abban a paraméterben mindig NULL-t kapunk. Nem kérhetõ tetszõleges
+// buffering-szám, csak 1, 2 vagy 3. 
+#define C2P_BUFFERING	3
+
+// Ha nem SAS/C-vel fordítunk javasolt megadni a következõ define-t is,
+// hogy a dátum a megfelelõ formában kerüljön be a verziósztringbe,
+// dd.mm.yy formában (nap.hó.év).
+#define C2P_DATE    25.2.99
+
+// Ha definiálja a következõt, ez lesz az ismertetõ, de ekkor nem
+// lokalizálhatja (lásd: minfo())
+#define C2P_INFO	"ismertetõ..."
+
+// Ha megadja, a töltés után rendelkezésre áll a SysBase,
+// ha nem, akkor errõl is a modulnak kell gondoskodnia
+#define C2P_WANTSYSBASE
+
+// Ha megadjuk, kapunk néhány függvényt a locale funkciók kezeléséhez, és
+// egyben a C2P_WANTSYSBASE is használatba kerül.
+//   void c2p_OpenCatalog(char **DefaultStrings);
+//      Megnyitja a catalog filet, melynek neve: "cp4_" C2P_NAME ".catalog"
+//      A DefaultStrings[] tömb utolsó bejegyzésének NULL-nak kell lennie.
+//   char *c2p_GetStr(long StringNum); (vagy az STR() makró)
+//      A megadott számú stringet adja, ha nincs akkor a
+//      DefaultStrings[]-bõl veszi. Ha érvénytelen számot adunk meg,
+//      akkor a "***NOMSG" stringet kapjuk, és ha meg van épp nyitva
+//      az intuition, egy requestert is.
+//   void c2p_CloseCatalog(void);
+//      Használat után lezárandó.
+//   void c2p_strncpy(char *to,char *fr,int l);
+//      Stringmásoló makró, épp mint az strncpy().
+#define C2P_LOCALIZE
+
+// Ha a beépített nyelvünk nem "english", adjuk meg ezt:
+#define C2P_BUILTINLANGUAGE   "magyar"
+
+#include "c2p_module.c"
+
+//-------------------------------------------------------------------------
+char *SAVEDS minfo(void) {
+//-------------------------------------------------------------------------
+/*
+        Ha nem definiálta a C2P_INFO-t, akkor ezt a függvényt kell meg-
+        adnia, ami visszaadja az ismertetõt. Ha a C2P_INFO-t választja,
+        ezt nem kell megadnia. Ennek a függvénynek a hívása elõtt semmi
+        inicializáló függvény nem hívódik meg!
+*/
+} // minfo()
+
+//-------------------------------------------------------------------------
+char *SAVEDS minit(ULONG scrmode, ULONG overscan, unsigned char *linedeltatab) {
+//-------------------------------------------------------------------------
+/*
+                Inicializálás
+
+        Egyszer hívódik meg, nemsokkal a modul betöltése után
+
+        Input:
+                scrmode         ModeID, amit a a felhasználó igényelt
+                overscan        Overscan mód, szintén a felhasználótól
+                linedeltatab    A belsõ deltázáshoz használatos táblázat,
+                                hossza 283 (SCRHEIGHT), és byte-okból áll
+                                ha egy sorra az értéke NEM 0, azt nem kell
+                                beírni a képernyõmemóriába, mert már ott
+                                található. Csak akkor használható, ha a
+                                bufferinget helyesen adtuk meg.
+        Output:
+                NULL            Ok
+                string          A hiba szövege. Használható define-ok:
+                                C2P_NOMSG       Nem kommentáljuk a hibát
+                                "custom"        Saját hibaüzenet
+        Teendõk:
+
+        Meg  kell nyitnunk a screen-t, a megadott paraméterekkel, ha szükség
+van  rá. Itt kell a paletta-beállítást is végezni. A vec.c2p_Palette egy 384
+elemû tömb, amely a felhasználó által kért palettát tartalmazza. A formátuma
+RGB mindegyik 8 bites. Egy ablakot is kell nyitni. Erre mindenképpen szükség
+van.  A  screen  címét  a  vec.c2p_Scr-be  kell helyezni, ha PublicScreen-en
+nyitunk ablakot, akkor a PublicScreen címét kell ide tenni. Az ablak címét a
+vec.c2p_Win-be kell tenni. Ha ezek bármelyike NULL, a program hibával kilép.
+ScreenTitle-t  nem  szükséges  megadni,  mert  a  program  úgyis beállítja a
+sajátját.  Az ablakunkon használhatunk gadgeteket, menüket, meg ilyesmit, az
+ehhez  szükséges  IDCMP-ket  természetesen  meg  kell adni. Két kivétel van,
+IDCMP_RAWKEY-t  ugyan beállíthatunk, de a message-eket a cp4 elkapja a modul
+elõl,  ha  IDCMP_VANILLAKEY-t  akarunk  megadni,  azt  törli  a fõprogram. A
+message-ek  érkezésével  kapcsolatban  a mdo() és az mdofull() függvényeknél
+teszek  említést.  A  fõprogram  az ablak pointerrel néhány mûveletet végez,
+ezek a következõk:
+
+            Requestert nyit a Window által megadott Screen-en, amennyiben az
+             PubScreen,
+            Eléri a Window UserPortját, az IDCMP-khez,
+            ActivateWindow(), ModifyIDCMP(), SetWindowTitles() hívásokat
+             alkalmaz,
+            A ScreenPointerrel pedig csak a ScreenToFront() függvényt
+             használja.
+
+Rendelkezésre  áll  még  négy  függvény,  amit  mindegyik  rutinból szabadon
+hívhatunk.  A  GetOptionXXX segítségével egy beállítást kérhetünk le a prefs
+file-ból.  Persze  csak  a  ránk  vonatkozókat.  Az XXX helyére Int vagy Str
+kerülhet  attól függõen, hogy stringet vagy egész számot szeretnénk-e kapni.
+A GetOptionXXX esetén lehetõség van egy alapérték megadására, ha nincs ilyen
+opció, ezt kapjuk vissza.
+
+         int   GetOptionInt(char *name,int   defval);
+         char *GetOptionStr(char *name,char *defval);
+
+         void AddOptionInt(char *name,int   value);
+         void AddOptionStr(char *name,char *value);
+
+Az utóbbi kettõvel beállíthatunk egy új opciót vagy módosíthatunk egy régit.
+Az   opciók   csak   számunkra  elérhetõek  és  másokét  sem  kérhetjük  le.
+Névütközésekkel  nem kell foglalkozni, ha a C2P_NAME-ben megadott driver-név
+egyedi.
+
+*/
+} // minit()
+
+//-------------------------------------------------------------------------
+void SAVEDS mfree(void) {
+//-------------------------------------------------------------------------
+/*
+                Felszabadítás
+
+        Közvetlenül az UnloadSeg() elõtt hívódik meg
+
+        Itt kell az összes lefoglalt erõforrást felszabadítani. Óvatosan kell
+eljárni,  mert  ha  az  minit()  hibával  tér  vissza, ez a függvény akkor is
+meghívásra  kerül,  tehát  minden  erõforrás  esetében ellenõrizni kell, hogy
+sikeresen le lett-e foglalva! Fontos feladat még, hogy figyelni kell rá, hogy
+mfree() hívás jelentkezhet az ablak 'sleep' állapotában is, ennek kezelésérõl
+gondoskodni kell.
+
+*/
+} // mfree()
+
+//-------------------------------------------------------------------------
+int SAVEDS mdo(unsigned char *chunky,unsigned char *delta,int numscreen) {
+//-------------------------------------------------------------------------
+/*
+                Kirajzolás
+
+        Minden logikai frame elkészítése után hívódik meg
+
+        Input:
+                chunky          A kirajzolandó screen. Hossza 283x352
+                                (SCRSIZE) és byte-okból áll. A legfelsõ
+                                bitet figyelmen kívül kell hagyni. Az
+                                értékek Plus4-es színeket jelölnek, tehát
+                                $x0 az fekete.
+                delta           Szintén egy a fentihez hasonló tömb, csak ez
+                                azt a tartalmat jelenti, amely megfelelõ
+                                esetben éppen a képernyõn található.
+                                Megfelelõ eset akkor áll fenn, ha a
+                                C2P_BUFFERING-ben kért bufferinget
+                                használjuk. Ha ezt nem definiáltuk, itt
+                                NULL-t kapunk.
+                numscreen       A megjelenítendõ képernyõ sorszáma. Értéke
+                                0-tól a kért buffering-ig változik.
+                                (pl.: '3' ->  0 1 2 0 1...)
+
+        Deltakonverziót  kértek a rutintól. A videosugárhoz való idõzítésrõl
+a   rutinnak  kell  gondoskodnia  (pl.:  ChangeScreenBuffer()).  Ha  tartjuk
+magunkat a numscreen által átadott képernyõsorszámokhoz, akkor használható a
+'delta'   tömb.  Az  intuitiontól  kért  message-eket  a  vec.c2p_MsgList-án
+keresztül  kapjuk meg, azokat, és csakis azokat amelyek az elõzõ frame ideje
+alatt  következtek  be.  Ha egy eseményt itt nem kezelünk, az menthetetlenül
+elvész.  Az  alábbi  programrészlettel  a  megfelelõ sorrendben megkapjuk az
+összes üzenetet, ami az elõzõ frame (logikai frame, a C= Plus/4 frame-je, ez
+lehet tíz perc is!) alatt összegyûlt:
+
+  struct IntuiMessage *imsg;
+  while(imsg=(struct IntuiMessage *)RemHead(&vec.c2p_MsgList)) {
+  	switch(imsg->Class) {...}
+  }
+
+A  vec.c2p_Speed  mezõben  megtaláljuk  az  aktuális framerate értéket, vagy
+-1-et,  ha  a  felhasználó  nem  kért  sebességkijelzést.  Ezt a C2P_NOSPEED
+opcióval  együtt felhasználhatjuk saját sebességjelzõ kirajzolására. A rutin
+visszatérési értékei a következõk lehetnek:
+        RET_OK          - Normál visszatérés.
+        RET_PREFS       - Erre az értékre, a rutinból kilépve megnyílik a
+                          Prefs ablak.
+        RET_DEBUG       - Debug ablak megnyitása.
+        RET_RESET       - Normál reset kérése.
+        RET_HRESET      - Hard-reset.
+        RET_QUIT        - Kilépés.
+        RET_NEWWIN      - A fõprogramnak jelzi, hogy új ablakot nyitott a
+                          Video-Driver.
+        RET_ERROR       - Fatális hiba esetén! Kisebb hibáknál jobb, ha csak
+                          egy Prefs-et kérünk.
+
+*/
+} // mdo()
+
+//-------------------------------------------------------------------------
+int SAVEDS mdofull(unsigned char *chunky,int numscreen) {
+//-------------------------------------------------------------------------
+/*
+
+        Ugyanaz   mint  a  'mdo()'  csak  itt  nincs  lehetõség  deltázni  a
+képernyõt.  Ez  akkor hívódik meg, ha túl sok minden módosult a képernyõn és
+ezért  nem  éri  meg  a  deltás módszert használni a fellépõ többletterhelés
+miatt.   Ami   a   message-ket   illeti,   természetesen   itt  is  ugyanúgy
+feldolgozhatjuk õket.
+
+*/
+} // mdofull()
+
+//-------------------------------------------------------------------------
+int SAVEDS mdont(void) {
+//-------------------------------------------------------------------------
+/*
+
+        Ebben  a  rutinban  semmit  nem kell rajzolni, ez akkor fut le, ha a
+felhasználó az F5 billentyûvel letiltotta a grafikát. A felhasználói inputot
+és a sebességet ugyanúgy használhatjuk, mint az elõzõekben.
+
+*/
+} // mdont()
+
+//-------------------------------------------------------------------------
+void SAVEDS msleep(void) {
+//-------------------------------------------------------------------------
+/*
+
+        Azt  várja  a  fõprogram  ettõl a rutintól, hogy a következõ mawake()
+hívásig ne fogadjon inputot, esetleg állítsa be a busy pointerét. Ha az ablak
+nincs  nyitva,  vagy már 'sleep'-ben van akkor a rutinnak azonnal vissza kell
+térnie.
+
+*/
+} // msleep()
+
+//-------------------------------------------------------------------------
+void SAVEDS mawake(void) {
+//-------------------------------------------------------------------------
+/*
+
+        Ismét  fel  kell készülni az inputok fogadására, de figyelni kell rá,
+hogy  ha  éppen  nincs  'sleep' állapotban a window, vagy nincs is nyitva, ne
+történjen semmi megbocsáthatatlan.
+
+*/
+} // mawake()
+---CUT HERE---
+@endnode
+
+@node "plus4prog" "Plus4 programozóknak"
+@next "assp4"
+@prev "amigaprogvideo"
+
+        A  hibák  leírását  is  a gatig@dragon.klte.hu címre küldjétek, és ha
+nélkülözhetetlen a Plus4-es file-t is tar/gzip/uuencode formában.
+        Ha  valaki  tudja,  hogy  pontosan  hogyan mûködik a felfelé scroll a
+plus4-en, ne habozzon elküldeni nekem a leírást, vagy kijavítani a forrást!
+@endnode
+
+@node "assp4" "AssP4"
+@next "stat"
+@prev "plus4prog"
+
+        Egy  egyszerû,  primitív  assemblert is mellékeltem. A start address
+csak az elsõ sorban lehet. A -s opció hatására kilistázza a szimbólumtáblát.
+
+---CUT HERE---
+$kezdõcím
+
+* megjegyzés
+
+cimke	MNM	operandus
+	MNM	operandus	* megjegyzés
+---CUT HERE---
+
+Például:
+---CUT HERE---
+$7000
+
+* példa-program
+
+	xdf	start		* globális symbol
+
+	inl	test_it.asm	* include
+
+NEWVAL	equ	$12
+OLDVAL	equ	$00
+
+mac1	MAC
+	pha
+	lda	data
+	beq	.l1
+	dec	data
+.l1	pla
+	<<<
+
+start	lda	#<.routin
+	sta	.c1
+	lda	#>.routin
+	sta	.c2
+	mac1
+	dat	#$02		* fagyás
+
+.routin	inc	$ff19
+	lda	#NEWVAL
+	sta	data
+	rti
+
+.c1	dat	#$00
+.c2	dat	#$00
+
+runthis	nop
+	lda	#$00
+.c1	inx
+	bne	.c1
+	jmp	start
+
+data	dat	#0
+
+---CUT HERE---
+
+Extra mnemonikok:
+	BSS	#$num[,$xx]		* 'num' x #$00 bytes (fill with $xx)
+	DAT	#$num			* 'num' (one byte, or label <lab)
+	STR	string until '\n' in the source
+	INL	filename		* include filename
+	XDF	label			* global label
+	MAC				* macro start
+	<<<				* macro end
+	EQU	value			* constans declaration (to label)
+
+@endnode
+
+@node "stat" "Statisztikák"
+@next "scrshots"
+@prev "assp4"
+
+Kb. egy óra játék után:
+
+Executed system clock: 563639491
+Average instruction clock: 3.1%
+Emulated 11807 frame.
+
+OpCode Statistic
+00  BRK IMP    	       -	  -.-%
+01  ORA (ZP,X) 	       4	  0.0%
+02 !CRA NONE   	      14	  0.0%
+03 !SLO (ZP,X) 	       -	  -.-%
+04 !NO2 IMP    	       -	  -.-%
+05  ORA ZP     	  134852	  0.0%
+06  ASL ZP     	  320414	  0.1%
+07 !SLO ZP     	       -	  -.-%
+08  PHP IMP    	   91484	  0.0%
+09  ORA #BYTE  	  190297	  0.1%
+0A  ASL ACC    	  243003	  0.1%
+0B !ANC #BYTE  	       2	  0.0%
+0C !NO3 IMP    	       -	  -.-%
+0D  ORA ABS    	10567709	  5.9%
+0E  ASL ABS    	    9327	  0.0%
+0F !SLO ABS    	       -	  -.-%
+10  BPL REL    	 4799492	  2.7%
+11  ORA (ZP),Y 	    7658	  0.0%
+12 !CRA NONE   	       -	  -.-%
+13 !SLO (ZP),Y 	       -	  -.-%
+14 !NO2 IMP    	       -	  -.-%
+15  ORA ZP,X   	       -	  -.-%
+16  ASL ZP,X   	   26930	  0.0%
+17 !SLO ZP,X   	       -	  -.-%
+18  CLC IMP    	 1815699	  1.0%
+19  ORA ABS,Y  	   30573	  0.0%
+1A !NOP IMP    	    1441	  0.0%
+1B !SLO ABS,Y  	       2	  0.0%
+1C !NO3 IMP    	       -	  -.-%
+1D  ORA ABS,X  	  125654	  0.0%
+1E  ASL ABS,X  	       -	  -.-%
+1F !SLO ABS,X  	       4	  0.0%
+20  JSR ABS    	 3166083	  1.7%
+21  AND (ZP,X) 	   46452	  0.0%
+22 !CRA NONE   	       -	  -.-%
+23 !RLA (ZP,X) 	       -	  -.-%
+24  BIT ZP     	  210190	  0.1%
+25  AND ZP     	   77822	  0.0%
+26  ROL ZP     	 1510853	  0.8%
+27 !RLA ZP     	       -	  -.-%
+28  PLP IMP    	   91477	  0.0%
+29  AND #BYTE  	 1155196	  0.6%
+2A  ROL IMP    	  319278	  0.1%
+2B !ANC #BYTE  	       -	  -.-%
+2C  BIT ABS    	 4142441	  2.3%
+2D  AND ABS    	   28624	  0.0%
+2E  ROL ABS    	       -	  -.-%
+2F !RLA ABS    	       -	  -.-%
+30  BMI REL    	  353698	  0.1%
+31  AND (ZP),Y 	     529	  0.0%
+32 !CRA NONE   	       -	  -.-%
+33 !RLA (ZP),Y 	       -	  -.-%
+34 !NO2 IMP    	     256	  0.0%
+35  AND ZP,X   	    4270	  0.0%
+36  ROL ZP,X   	       -	  -.-%
+37 !RLA ZP,X   	       -	  -.-%
+38  SEC IMP    	  528955	  0.2%
+39  AND ABS,Y  	   49401	  0.0%
+3A !NOP IMP    	    1370	  0.0%
+3B !RLA ABS,Y  	       4	  0.0%
+3C !NO3 IMP    	     539	  0.0%
+3D  AND ABS,X  	   30471	  0.0%
+3E  ROL ABS,X  	       -	  -.-%
+3F !RLA ABS,X  	       1	  0.0%
+40  RTI IMP    	   50536	  0.0%
+41  EOR (ZP,X) 	       -	  -.-%
+42 !CRA NONE   	       -	  -.-%
+43 !SRE (ZP,X) 	       -	  -.-%
+44 !NO2 IMP    	       -	  -.-%
+45  EOR ZP     	   57904	  0.0%
+46  LSR ZP     	  435634	  0.2%
+47 !SRE ZP     	       -	  -.-%
+48  PHA IMP    	  659124	  0.3%
+49  EOR #BYTE  	  304855	  0.1%
+4A  LSR ACC    	  564320	  0.3%
+4B !ASR #BYTE  	       1	  0.0%
+4C  JMP ABS    	 2280458	  1.2%
+4D  EOR ABS    	   74555	  0.0%
+4E  LSR ABS    	   31947	  0.0%
+4F !SRE ABS    	       -	  -.-%
+50  BVC REL    	   40964	  0.0%
+51  EOR (ZP),Y 	   65590	  0.0%
+52 !CRA NONE   	       -	  -.-%
+53 !SRE (ZP),Y 	       -	  -.-%
+54 !NO2 IMP    	       -	  -.-%
+55  EOR ZP,X   	       -	  -.-%
+56  LSR ZP,X   	    4116	  0.0%
+57 !SRE ZP,X   	       -	  -.-%
+58  CLI IMP    	  851056	  0.4%
+59  EOR ABS,Y  	    3754	  0.0%
+5A !NOP IMP    	     314	  0.0%
+5B !SRE ABS,Y  	       1	  0.0%
+5C !NO3 IMP    	       -	  -.-%
+5D  EOR ABS,X  	    1232	  0.0%
+5E  LSR ABS,X  	       -	  -.-%
+5F !SRE ABS,X  	       -	  -.-%
+60  RTS IMP    	 3193368	  1.7%
+61  ADC (ZP,X) 	       -	  -.-%
+62 !CRA NONE   	       -	  -.-%
+63 !RRA (ZP,X) 	       -	  -.-%
+64 !NO2 IMP    	       -	  -.-%
+65  ADC ZP     	  666168	  0.3%
+66  ROR ZP     	 1572456	  0.8%
+67 !RRA ZP     	       -	  -.-%
+68  PLA ACC    	  606498	  0.3%
+69  ADC #BYTE  	  636418	  0.3%
+6A  ROR ACC    	  132615	  0.0%
+6B !ARR #BYTE  	       -	  -.-%
+6C  JMP (ABS)  	  276295	  0.1%
+6D  ADC ABS    	   16263	  0.0%
+6E  ROR ABS    	     721	  0.0%
+6F !RRA ABS    	       -	  -.-%
+70  BVS REL    	     545	  0.0%
+71  ADC (ZP),Y 	     402	  0.0%
+72 !CRA NONE   	       -	  -.-%
+73 !RRA (ZP),Y 	   30739	  0.0%
+74 !NO2 IMP    	       -	  -.-%
+75  ADC ZP,X   	     624	  0.0%
+76  ROR ZP,X   	  155857	  0.0%
+77 !RRA ZP,X   	       -	  -.-%
+78  SEI IMP    	  836152	  0.4%
+79  ADC ABS,Y  	  146565	  0.0%
+7A !NOP IMP    	     455	  0.0%
+7B !RRA ABS,Y  	       1	  0.0%
+7C !NO3 IMP    	       -	  -.-%
+7D  ADC ABS,X  	   24292	  0.0%
+7E  ROR ABS,X  	       -	  -.-%
+7F !RRA ABS,X  	       1	  0.0%
+80 !NO2 IMP    	       -	  -.-%
+81  STA (ZP,X) 	   30326	  0.0%
+82 !NO2 IMP    	     256	  0.0%
+83 !SAX (ZP,X) 	       -	  -.-%
+84  STY ZP     	  355558	  0.2%
+85  STA ZP     	 4052953	  2.2%
+86  STX ZP     	  371429	  0.2%
+87 !SAX ZP     	       -	  -.-%
+88  DEY IMP    	 6389537	  3.6%
+89 !NO2 IMP    	       -	  -.-%
+8A  TXA IMP    	  255994	  0.1%
+8B !ANE #BYTE  	       -	  -.-%
+8C  STY ABS    	  129842	  0.0%
+8D  STA ABS    	 3236411	  1.8%
+8E  STX ABS    	  108026	  0.0%
+8F !SAX ABS    	    1168	  0.0%
+90  BCC REL    	 1793770	  1.0%
+91  STA (ZP),Y 	 1938462	  1.0%
+92 !CRA NONE   	       -	  -.-%
+93 !SHA (ZP),Y 	       -	  -.-%
+94  STY ZP,X   	   85807	  0.0%
+95  STA ZP,X   	  119018	  0.0%
+96  STX ZP,Y   	       -	  -.-%
+97 !SAX ZP,Y   	       -	  -.-%
+98  TYA IMP    	  390917	  0.2%
+99  STA ABS,Y  	  452786	  0.2%
+9A  TXS IMP    	     111	  0.0%
+9B !SHS ABS,Y  	       -	  -.-%
+9C !SHY ABS,X  	       3	  0.0%
+9D  STA ABS,X  	 2970340	  1.6%
+9E !SHX ABS,Y  	       -	  -.-%
+9F !SHA ABS,Y  	       2	  0.0%
+A0  LDY #BYTE  	  902998	  0.5%
+A1  LDA (ZP,X) 	   34126	  0.0%
+A2  LDX #BYTE  	  618849	  0.3%
+A3 !LAX (ZP,X) 	       2	  0.0%
+A4  LDY ZP     	  552709	  0.3%
+A5  LDA ZP     	16706578	  9.4%
+A6  LDX ZP     	  493474	  0.2%
+A7 !LAX ZP     	       5	  0.0%
+A8  TAY IMP    	  454258	  0.2%
+A9  LDA #BYTE  	 1457983	  0.8%
+AA  TAX IMP    	  688374	  0.3%
+AB !LXA #BYTE  	       -	  -.-%
+AC  LDY ABS    	   92071	  0.0%
+AD  LDA ABS    	 1971582	  1.1%
+AE  LDX ABS    	  141312	  0.0%
+AF !LAX ABS    	      14	  0.0%
+B0  BCS REL    	 1709654	  0.9%
+B1  LDA (ZP),Y 	 2446580	  1.3%
+B2 !CRA NONE   	       -	  -.-%
+B3 !LAX (ZP),Y 	       -	  -.-%
+B4  LDY ZP,X   	   43230	  0.0%
+B5  LDA ZP,X   	  143223	  0.0%
+B6  LDX ZP,Y   	     431	  0.0%
+B7 !LAX ZP,Y   	       -	  -.-%
+B8  CLV IMP    	       -	  -.-%
+B9  LDA ABS,Y  	 2904444	  1.6%
+BA  TSX IMP    	   59935	  0.0%
+BB !LAS ABS,Y  	       -	  -.-%
+BC  LDY ABS,X  	  227864	  0.1%
+BD  LDA ABS,X  	 3097037	  1.7%
+BE  LDX ABS,Y  	    3775	  0.0%
+BF !LAX ABS,Y  	    3499	  0.0%
+C0  CPY #BYTE  	  406806	  0.2%
+C1  CMP (ZP,X) 	       -	  -.-%
+C2 !NO2 IMP    	     256	  0.0%
+C3 !DCP (ZP,X) 	       -	  -.-%
+C4  CPY ZP     	   79598	  0.0%
+C5  CMP ZP     	  758906	  0.4%
+C6  DEC ZP     	  518182	  0.2%
+C7 !DCP ZP     	       -	  -.-%
+C8  INY IMP    	 5887671	  3.3%
+C9  CMP #BYTE  	 2504495	  1.4%
+CA  DEX IMP    	 1464767	  0.8%
+CB !SBX #BYTE  	       -	  -.-%
+CC  CPY ABS    	  963239	  0.5%
+CD  CMP ABS    	  145494	  0.0%
+CE  DEC ABS    	  132223	  0.0%
+CF !DCP ABS    	    1290	  0.0%
+D0  BNE REL    	31338199	 17.6%
+D1  CMP (ZP),Y 	    8712	  0.0%
+D2 !CRA NONE   	       -	  -.-%
+D3 !DCP (ZP),Y 	       -	  -.-%
+D4 !NO2 IMP    	       -	  -.-%
+D5  CMP ZP,X   	     297	  0.0%
+D6  DEC ZP,X   	       -	  -.-%
+D7 !DCP ZP,X   	       -	  -.-%
+D8  CLD IMP    	    4422	  0.0%
+D9  CMP ABS,Y  	    4549	  0.0%
+DA !NOP IMP    	      91	  0.0%
+DB !DCP ABS,Y  	       -	  -.-%
+DC !NO3 IMP    	       1	  0.0%
+DD  CMP ABS,X  	  529450	  0.2%
+DE  DEC ABS,X  	   78931	  0.0%
+DF !DCP ABS,X  	    2817	  0.0%
+E0  CPX #BYTE  	 1262872	  0.7%
+E1  SBC (ZP,X) 	       -	  -.-%
+E2 !NO2 IMP    	       -	  -.-%
+E3 !ISB (ZP,X) 	       -	  -.-%
+E4  CPX ZP     	  296026	  0.1%
+E5  SBC ZP     	  878878	  0.4%
+E6  INC ZP     	 1195918	  0.6%
+E7 !ISB ZP     	     120	  0.0%
+E8  INX IMP    	12611549	  7.1%
+E9  SBC #BYTE  	  327405	  0.1%
+EA  NOP IMP    	  297775	  0.1%
+EB !SBC #BYTE  	       -	  -.-%
+EC  CPX ABS    	   52778	  0.0%
+ED  SBC ABS    	   49851	  0.0%
+EE  INC ABS    	   59313	  0.0%
+EF !ISB ABS    	      58	  0.0%
+F0  BEQ REL    	14289723	  8.0%
+F1  SBC (ZP),Y 	    8202	  0.0%
+F2 !CRA NONE   	       -	  -.-%
+F3 !ISB (ZP),Y 	       -	  -.-%
+F4 !NO2 IMP    	      64	  0.0%
+F5  SBC ZP,X   	    1298	  0.0%
+F6  INC ZP,X   	     679	  0.0%
+F7 !ISB ZP,X   	       -	  -.-%
+F8  SED IMP    	       -	  -.-%
+F9  SBC ABS,Y  	     756	  0.0%
+FA !NOP IMP    	      25	  0.0%
+FB !ISB ABS,Y  	     256	  0.0%
+FC !NO3 IMP    	     186	  0.0%
+FD  SBC ABS,X  	    6104	  0.0%
+FE  INC ABS,X  	   33788	  0.0%
+FF !ISB ABS,X  	      37	  0.0%
+Total:		177446045	100.0%
+
+Addressing Statistic
+#BYTE  	 9768177	  5.5%
+ABS    	27402800	 15.4%
+ZP     	31246627	 17.6%
+ACC    	 1546436	  0.8%
+IMP    	36947693	 20.8%
+(ZP,X) 	  110910	  0.0%
+(ZP),Y 	 4506874	  2.5%
+ZP,X   	  585349	  0.3%
+ABS,X  	 7128026	  4.0%
+ABS,Y  	 3600368	  2.0%
+REL    	54326045	 30.6%
+(ABS)  	  276295	  0.1%
+ZP,Y   	     431	  0.0%
+NONE   	      14	  0.0%
+Total:	177446045	100.0%
+
+Instruction Statistic
+ ADC   	 1490732	  0.8%
+ AND   	 1392765	  0.7%
+ ASL   	  599674	  0.3%
+ BCC   	 1793770	  1.0%
+ BCS   	 1709654	  0.9%
+ BEQ   	14289723	  8.0%
+ BIT   	 4352631	  2.4%
+ BMI   	  353698	  0.1%
+ BNE   	31338199	 17.6%
+ BPL   	 4799492	  2.7%
+ BRK   	       -	  -.-%
+ BVC   	   40964	  0.0%
+ BVS   	     545	  0.0%
+ CLC   	 1815699	  1.0%
+ CLD   	    4422	  0.0%
+ CLI   	  851056	  0.4%
+ CLV   	       -	  -.-%
+ CMP   	 3951903	  2.2%
+ CPX   	 1611676	  0.9%
+ CPY   	 1449643	  0.8%
+ DEC   	  729336	  0.4%
+ DEX   	 1464767	  0.8%
+ DEY   	 6389537	  3.6%
+ EOR   	  507890	  0.2%
+ INC   	 1289698	  0.7%
+ INX   	12611549	  7.1%
+ INY   	 5887671	  3.3%
+ JMP   	 2556753	  1.4%
+ JSR   	 3166083	  1.7%
+ LDA   	28761553	 16.2%
+ LDX   	 1257841	  0.7%
+ LDY   	 1818872	  1.0%
+ LSR   	 1036017	  0.5%
+ NOP   	  297775	  0.1%
+ ORA   	11056747	  6.2%
+ PHA   	  659124	  0.3%
+ PHP   	   91484	  0.0%
+ PLA   	  606498	  0.3%
+ PLP   	   91477	  0.0%
+ ROL   	 1830131	  1.0%
+ ROR   	 1861649	  1.0%
+ RTI   	   50536	  0.0%
+ RTS   	 3193368	  1.7%
+ SBC   	 1272494	  0.7%
+ SEC   	  528955	  0.2%
+ SED   	       -	  -.-%
+ SEI   	  836152	  0.4%
+ STA   	12800296	  7.2%
+ STX   	  479455	  0.2%
+ STY   	  571207	  0.3%
+ TAX   	  688374	  0.3%
+ TAY   	  454258	  0.2%
+ TSX   	   59935	  0.0%
+ TXA   	  255994	  0.1%
+ TXS   	     111	  0.0%
+ TYA   	  390917	  0.2%
+!CRA   	      14	  0.0%
+!NOP   	    3696	  0.0%
+!NO2   	     832	  0.0%
+!NO3   	     726	  0.0%
+!SLO   	       6	  0.0%
+!ANC   	       2	  0.0%
+!RLA   	       5	  0.0%
+!SRE   	       1	  0.0%
+!RRA   	   30741	  0.0%
+!ARR   	       -	  -.-%
+!SAX   	    1168	  0.0%
+!ANE   	       -	  -.-%
+!SHA   	       2	  0.0%
+!SHS   	       -	  -.-%
+!SHY   	       3	  0.0%
+!SHX   	       -	  -.-%
+!LAX   	    3520	  0.0%
+!LAS   	       -	  -.-%
+!DCP   	    4107	  0.0%
+!SBX   	       -	  -.-%
+!ISB   	     471	  0.0%
+!SBC   	       -	  -.-%
+!ASR   	       1	  0.0%
+!LXA   	       -	  -.-%
+Total:	177446045	100.0%
+
+TED access
+
+  NAME 		  READ 		 WRITE
+  ------------------------------------------
+  Cnt1LO       	:      9832 	       21
+  Cnt1HI       	:       120 	       21
+  Cnt2LO       	:       152 	       21
+  Cnt2HI       	:      5142 	       21
+  Cnt3LO       	:        19 	       21
+  Cnt3HI       	:        19 	       21
+  Gfx1         	:       960 	     7239
+  Gfx2         	:      2646 	    42421
+  KeyRd        	:    346906 	   338974
+  IRQFlag      	:    128484 	    51203
+  IRQEnable    	:     26073 	     5148
+  Raster       	:    362738 	    50392
+  CurPos1      	:        19 	      464
+  CurPos2      	:        19 	      464
+  Snd1Freq1    	:        19 	     5180
+  Snd2Freq1    	:     32823 	    24009
+  Snd2Freq2    	:       107 	     4425
+  SndCtrl      	:     14419 	    28743
+  Gfx3         	:      7395 	    11950
+  ChrGen       	:        26 	    98752
+  VideoMatrix  	:        22 	     4575
+  Color0       	:        23 	    10769
+  Color1       	:        63 	    12975
+  Color2       	:        63 	    12097
+  Color3       	:        20 	       21
+  Color4       	:    551511 	    68515
+  1stCharAddr1 	:        19 	        0
+  1stCharAddr1 	:        19 	        0
+  ActRas1      	:    114940 	      414
+  ActRas2      	:     80132 	     1035
+  HRas         	:    397552 	        0
+  Flash        	:     62513 	        0
+
+Memory fetch table
+
+0000 ##########
+0100 
+0200 ######
+0300 ############
+0400 
+0500 
+0600 
+0700 
+0800 
+0900 
+0A00 
+0B00 ####
+0C00 
+0D00 
+0E00 #########
+0F00 #########
+1000 ####################
+1100 #
+1200 #####
+1300 
+1400 ###
+1500 ####
+1600 #########
+1700 
+1800 
+1900 #
+1A00 ######
+1B00 
+1C00 
+1D00 
+1E00 
+1F00 #
+2000 
+2100 
+2200 #
+2300 ############
+2400 #####
+2500 
+2600 #
+2700 ##
+2800 ####
+2900 ##
+2A00 
+2B00 #####
+2C00 ##
+2D00 #
+2E00 ###################################
+2F00 ################
+3000 #####
+3100 #
+3200 #
+3300 
+3400 
+3500 
+3600 
+3700 
+3800 
+3900 
+3A00 
+3B00 
+3C00 
+3D00 
+3E00 
+3F00 
+4000 #
+4100 ##
+4200 
+4300 
+4400 
+4500 
+4600 
+4700 ###
+4800 #
+4900 
+4A00 
+4B00 
+4C00 
+4D00 
+4E00 
+4F00 
+5000 
+5100 
+5200 #
+5300 
+5400 
+5500 
+5600 
+5700 
+5800 
+5900 
+5A00 
+5B00 
+5C00 
+5D00 
+5E00 
+5F00 
+6000 ##
+6100 
+6200 
+6300 
+6400 
+6500 ###
+6600 
+6700 
+6800 
+6900 
+6A00 
+6B00 
+6C00 #######
+6D00 
+6E00 
+6F00 
+7000 
+7100 
+7200 
+7300 
+7400 
+7500 
+7600 
+7700 
+7800 
+7900 
+7A00 
+7B00 
+7C00 ##############
+7D00 
+7E00 
+7F00 
+8000 
+8100 
+8200 
+8300 
+8400 
+8500 
+8600 
+8700 
+8800 
+8900 #####
+8A00 
+8B00 #
+8C00 
+8D00 
+8E00 
+8F00 
+9000 #
+9100 
+9200 ###
+9300 
+9400 
+9500 
+9600 #
+9700 
+9800 
+9900 
+9A00 
+9B00 
+9C00 
+9D00 
+9E00 ##
+9F00 
+A000 #
+A100 #
+A200 
+A300 
+A400 
+A500 
+A600 #
+A700 
+A800 
+A900 
+AA00 
+AB00 
+AC00 
+AD00 
+AE00 
+AF00 
+B000 
+B100 
+B200 
+B300 
+B400 
+B500 
+B600 
+B700 
+B800 
+B900 
+BA00 
+BB00 
+BC00 
+BD00 
+BE00 
+BF00 
+C000 
+C100 
+C200 
+C300 
+C400 
+C500 
+C600 
+C700 
+C800 
+C900 
+CA00 
+CB00 
+CC00 
+CD00 ##
+CE00 #
+CF00 
+D000 
+D100 
+D200 
+D300 
+D400 
+D500 
+D600 
+D700 
+D800 #######################################################################
+D900 #
+DA00 ########
+DB00 #
+DC00 
+DD00 
+DE00 #
+DF00 
+E000 
+E100 
+E200 
+E300 
+E400 ###
+E500 ##
+E600 
+E700 
+E800 
+E900 
+EA00 #
+EB00 
+EC00 
+ED00 
+EE00 
+EF00 
+F000 
+F100 
+F200 
+F300 
+F400 
+F500 
+F600 #
+F700 
+F800 
+F900 
+FA00 #
+FB00 #
+FC00 
+FD00 
+FE00 
+FF00 
+
+@endnode
+
+@node "scrshots" "ScreenShots"
+@next "news"
+@prev "stat"
+
+  @{" 1. kép " SYSTEM "SYS:Utilities/Multiview SCREEN cp4_screen1.png"}
+  @{" 2. kép " SYSTEM "SYS:Utilities/Multiview SCREEN cp4_screen2.png"}
+
+@endnode
+
+@node "news" "Újdonságok"
+@next "news"
+@prev "scrshots"
+
+V0.79	ADD	Digi hang támogatás (7. bit)
+
+V0.78	ADD	Zaj emuláció
+
+V0.77i	ADD	assp4: Lokális cimkék (.cimke)
+	ADD	assp4: Konstansok (EQU érték ; új direktíva)
+	ADD	assp4: Include (INL file-név ; új direktíva)
+	ADD	assp4: XDEF (XDF cimke ; új direktíva)
+	ADD	assp4: Makrók (MAC / <<< ; új direktívák)
+	ADD	assp4: Szabad stílusú input megértése
+
+V0.76i	FIX	Néhány probléma javítása
+
+V0.75	ADD	Új OS3.5 ikonok Unreal által
+	ADD	NoBorder megjelenítõk AGÁra és grafikus kártyákra
+	FIX	Helyi dátum a névjegyen
+	ADD	Lefordított update installer
+
+V0.74	ADD	Xpk hatásfok választás
+	FIX	Gyorsabb file-választás
+	FIX	Xpk menü kezelési hiba
+
+V0.73	ADD	Paletta állítási lehetõség, néhány megjelenítõ elavult
+	FIX	Az Amiga raszter végre a megfelelõ értéket mutatja
+	ADD	Új billentyûzet funkció, a <Kilépés>
+	FIX	A card.c2p kibõvítve közvetlen Picasso96 támogatással
+		(nincs tesztelve!)
+
+V0.72	FIX	WindowAmiga kétszeresére gyorsult
+	ADD	WindowCardDelta video-kártyákhoz
+
+V0.71	ADD	Új megjelenítõ lassú gépekre (Interlace)
+	FIX	Kisebb hibajavítások
+
+V0.70	ADD	Új megjelenítõ video-kártyákhoz (CardDelta), talán gyorsabb
+	FIX	Kisebb hibajavítások
+
+V0.68	FIX	Pillanatfelvétel hiba
+	FIX	Ablakos megjelenítõk méret problémája
+	ADD	Gyorsabb zero-page címzés
+
+V0.67	ADD	Pillanatfelvétel mentése és töltése
+
+V0.66i	FIX	Kicsit olvashatóbbá írtam át a kódot
+
+V0.63	ADD	D64 támogatás
+
+V0.60	FIX	Sok hiba
+	ADD	MakeROM lokalizálása
+	FIX	Numeric pad kezelés
+
+V0.59	FIX	Localizálási hibák
+	FIX	Hiba a belsõ billenytûzetnél
+
+V0.58	FIX	Javítgatás a gameport.device kezelésben (NSD) (kösz Chris)
+	FIX	Teljesen lokalizált billentyûk
+	ADD	OS96 csomag (és a MakeROM)
+
+V0.57	ADD	Lokalizált
+	MOD	Modul interface a lokalizált modulok számára
+	FIX	Verem méret ellenõrzés
+
+V0.55	FIX	A SetMap gui-ban kis hiba
+	ADD	Joystick emuláció a billenytyûzeten
+	FIX	A verzió-stringet szabványosra cseréltem
+
+V0.54	ADD	SID kártya emuláció külsõ library-kal
+	ADD	Billentyûzet szerkesztõ
+	FIX	Néhány kisebb hiba
+
+V0.52	ADD	About menü
+	ADD	Valósidejû üzemmód
+	FIX	A Monitor ablak néha a video driver képernyõjén nyílt
+
+V0.51	ADD	Még nagyobb sebesség
+	ADD	IEC kezelés kikapcsolható (néhány program fagy vele)
+
+V0.49	ADD	Új rajzoló rutinok, a legtöbb esetben gyorsabb
+
+V0.47	ADD	Felszabadítom a Joysticket, ha inaktívvá válik az ablak
+	ADD	Új modul funkció a UserBlank számára
+	FIX	Hibás ModeID-k kezelése
+
+@endnode

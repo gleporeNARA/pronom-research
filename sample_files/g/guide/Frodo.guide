@@ -1,0 +1,1244 @@
+@DATABASE "Frodo"
+@AUTHOR "Christian Bauer"
+@(C) "1994-1997 Christian Bauer"
+@$VER: Frodo.guide 2.4
+
+@NODE MAIN "Frodo Bedienungsanleitung"
+
+                                   @{b}Frodo@{ub}
+                                Version 2.4
+                              @{" Was ist neu? " LINK WhatsNew}
+
+                         Ein Commodore 64 Emulator
+                          für Amiga/DraCo Rechner
+
+                   © Copyright 1994-1997 Christian Bauer
+                           Freely distributable
+
+
+ @{" Überblick        " LINK Overview}  Wieso noch ein C64-Emulator?
+ @{" Installation     " LINK Installation}  Wie installiere ich Frodo?
+
+ @{" Starten/Beenden  " LINK StartQuit}  There and back again....
+ @{" Einstellungen    " LINK Settings}  Die leidige Konfiguration
+ @{" Tastaturbelegung " LINK Keyboard}  Wo ist an der Tastatur "oben"?
+ @{" Dateizugriff     " LINK Files}  Ein C64 mit Festplatte
+ @{" Drucker          " LINK Printer}  Benutzung von C64-Druckern
+ @{" SAM              " LINK SAM}  Der eingebaute Assembler/Monitor
+ @{" Kernal ROM       " LINK Kernal}  Erweiterungen des mitgelieferten Kernal ROM
+
+ @{" Die SID-Karte    " LINK SIDCard}  Für die, die den echten Sound haben wollen
+ @{" Das IEC-Kabel    " LINK IECCable}  Wie kommt die 1541 an den Amiga?
+
+ @{" Frodo SC         " LINK FrodoSC}  Die Einzelzyklus-Emulation
+
+ @{" Demoprogramme    " LINK DemoPrograms}  Die beiliegenden Beispielprogramme
+ @{" Technische Infos " LINK TechnicalInfo}  Was die Welt im Innersten zusammenhält
+ @{" Der Quelltext    " LINK TheSource}  Use the source, Luke.
+
+ @{" Rechtliches      " LINK LegalMush}  Copyright usw.
+ @{" Bugreports       " LINK BugReports}  Hoppla, da läuft was nicht!
+ @{" Danksagungen     " LINK Thanks}  Vielen Dank für die Blumen
+ @{" Der Autor        " LINK EmulationWizard}  Adresse des Programmierers
+ @{" History          " LINK History}  Entwicklungsgeschichte des Programms
+ @{" Die Zukunft      " LINK Future}  Pläne für die nächsten Versionen
+
+@ENDNODE
+
+
+@NODE WhatsNew "Was ist neu?"
+
+Die wichtigsten Änderungen zu Version 2.3:
+
+ · Unterstützung der Graffiti-Videokarte
+ · C64-ROMs mitgeliefert (mit @{"erweitertem" LINK Kernal} Kernal ROM)
+ · Zahlreiche Bugfixes
+
+Genaueres steht in der @{"Entwicklungsgeschichte" LINK History}.
+
+@ENDNODE
+
+
+@NODE Overview "Überblick"
+
+  @{i}"Ú-queta i yéni avánier alye,
+   ú-queta i cirya ná vanwa!"@{ui}
+
+@{b}Frodo@{ub} ist ein multitaskingfähiger Freeware-C64-Emulator für den Amiga/
+DraCo und der erste C64-Emulator der Welt, der kein "64" im Namen hat. :-)
+(Nein, er hat absolut nichts mit frodo.hiof.no zu tun, das ist purer Zufall.)
+
+Frodo wurde speziell dazu entwickelt, die Grafik von Spielen und Demos
+besser wiederzugeben als die existierenden Emulatoren für den Amiga. Daher
+hat Frodo relativ hohe Systemanforderungen: optimal sind ein 68040/68060
+und eine Zorro-III-Grafikkarte. Dafür zeigt er noch Rastertricks korrekt
+an, bei denen einem beim "A64" vor lauter Flimmern die Augen tränen.
+
+Benötigt wird ein Amiga mit mindestens OS2.1, einem 68020-Prozessor und 2MB
+Hauptspeicher oder ein DraCo. Frodo kann sowohl die eingebaute Amiga-Grafik
+verwenden, als auch jede beliebige Grafikkarte, deren Bildschirmmodi über
+den Standard-Bildschirmmodus-Requester auswählbar sind. Zusätzlich wird die
+"Graffiti"-Videokarte unterstützt.
+
+Die Benutzung einer Grafikkarte wird wärmstens empfohlen, da die Routinen
+des Emulators für einen Chunky-Grafikspeicher entwickelt wurden. Das
+Programm läuft zwar prinzipiell auf einem nackten A1200, aber die wahre
+Freude stellt sich damit nicht ein. Es gibt jedoch einen speziellen
+Monochrom-Modus, der zwar keine Farbe hat, aber dafür eine ganze Ecke
+schneller läuft als die volle Emulation. Auf einem 68060-50 mit CyberVision
+erreicht Frodo ca. 140-160% der Geschwindigkeit des Original-C64 im
+Standard-Textmodus wenn die Emulation auf maximale Präzision eingestellt
+ist.
+
+@ENDNODE
+
+
+@NODE Installation "Installation"
+
+Das Archiv enthält die folgenden Dateien:
+  README             - Kurzbeschreibung
+  Frodo              - Frodo-Hauptprogramm
+  Frodo SC           - Frodo-SC-Hauptprogramm
+  Frodo.guide        - Diese Anleitung
+  Frodo_E.guide      - Die englische Version der Anleitung
+  Frodo Prefs        - Datei mit den Einstellungen
+  FrodoSIDCard.lha   - Archiv mit Informationen zur @{"SID-Karte" LINK SIDCard}
+  Basic ROM          - C64-Basic-ROM
+  Kernal ROM         - C64-Kernal-ROM (@{"erweitert" LINK Kernal})
+  Char ROM           - C64-Character-ROM
+  #?.info            - Verschiedene Icons
+  Catalogs/#?        - Sprachdateien
+  64prgs/#?          - Einige Demoprogramme
+  src/#?             - Quelltext
+
+Zur Installation reicht es, das Archiv irgendwo auf die Festplatte zu
+entpacken. Die Dateien in "Catalogs" brauchen nicht nach LOCALE: kopiert
+zu werden, sie können da bleiben, wo sie sind.
+
+Zur Soundemulation benutzt Frodo die "6581sid.library" von A64 V3.0 oder
+die "playsid.library" von PlaySID V3.0, die nicht beiliegen, aber über
+das Aminet erhältlich sind.
+
+@ENDNODE
+
+
+@NODE StartQuit "Starten und Beenden"
+
+Nach einem Doppelklick auf das Icon erscheint zunächst das Fenster,
+in dem die @{"Einstellungen" LINK Settings} für den Emulator vorgenommen werden.
+
+Der eigentliche Emulator wird durch einen Klick auf "OK" gestartet.
+Dann sollte zunächst ein schwarzer Bildschirm und nach einem kurzen
+Moment die C64-Einschaltmeldung kommen.
+
+Die laufende Emulation kann über den Menüpunkt "Beenden" wieder beendet
+werden.
+
+@ENDNODE
+
+
+@NODE Settings "Einstellungen"
+
+Das Einstellungsfenster erscheint direkt nach dem Start von Frodo, oder
+wenn man bei laufender Emulation auf den Menüpunkt "Einstellungen..."
+wählt.
+
+Mit @{b}"Zyklen pro Zeile (CPU)"@{ub} und @{b}"Zyklen pro Bad Line (CPU)"@{ub} regelt man
+das Verhältnis von Grafikgeschwindigkeit zu Prozessorgeschwindigkeit.
+Je höher diese Werte, desto schneller die emulierte CPU, aber desto
+langsamer der Grafikaufbau. Zeigt ein Programm Grafikfehler oder
+flimmernde Zeilen, sollte man versuchen, beide Werte leicht abzuändern.
+Für "Bruce Lee" muß bei "Zyklen pro Zeile (CPU)" ein Wert von "62"
+eingetragen werden.
+
+Unter @{b}"Zyklen pro Zeile (CIA)"@{ub} regelt man die Geschwindigkeit der
+CIA-Timer. Wenn man hier einen höheren Wert eingibt, wird die Frequenz
+des Cursor-Blinkens und der Tastenwiederholung größer. Einige Programme
+laufen mit dem vorgegebenen Wert nicht korrekt (z.B. "Ballblazer", bei
+dem man hier "65" eintragen muß).
+
+Die Einstellungen für die drei "Zyklen", die dem original-PAL-C64 am
+nächsten kommen, sind (63,23,63).
+
+Mit @{b}"Jedes (n)te Bild"@{ub} kann man angeben, ob Frodo bei der Darstellung
+der C64-Grafik Bilder überspringen soll. Die normale Einstellung ist
+"1", d.h. jedes Bild (jeder simulierte Strahldurchlauf) wird neu
+berechnet. Ändert man die Einstellung z.B. auf "2", so wird nur noch
+jedes zweite Bild berechnet, was die Emulation natürlich erheblich
+beschleunigt, obwohl einige Rastereffekte damit ungenau dargestellt
+werden.
+
+@{b}"Joystick an Port 1/2"@{ub} bezieht sich auf die Amiga-Ports. Normalerweise
+wird man Port 1 ausgeschaltet lassen, wenn man dort die Maus
+angeschlossen hat. Mit @{b}"Joysticks vertauschen"@{ub} kann man die Zuordnung
+der Amiga-Ports zu den C64-Ports wechseln, ohne den Joystick umstecken zu
+müssen. Wenn z.B. ein C64-Spiel den Joystick an Port 1 erwartet, kann
+man ihn am Amiga-Port 2 eingesteckt lassen und braucht nur "Joysticks
+vertauschen" zu aktivieren. Auf dem DraCo stehen diese Funktionen nicht
+zur Verfügung, da er keine Joystick-Anschlüsse hat.
+
+Die Anordnung der Tasten Y und Z entspricht normalerweise dem deutschen
+System. Mit @{b}"Amerik. Tastatur"@{ub} kann man sie auf den amerikanischen
+Standard anpassen (Y und Z vertauschen).
+
+Mit dem Symbol @{b}"Sprite-Darstellung"@{ub} kann man die Darstellung der Sprites
+an- und ausschalten. Das Abschalten beschleunigt die Emulation etwas, wenn
+viele Sprites auf dem Bildschirm sind.
+
+Das Symbol @{b}"Sprite-Kollisionen"@{ub} bestimmt, ob Kollisionen zwischen Sprites
+untereinander und zwischen Sprites und Grafik erkannt werden sollen. Im
+Monochrom-Modus sind die Kollisionen immer ausgeschaltet. Mit
+abgeschalteten Kollisionen wird man in manchen Spielen unverwundbar
+(leider werden die Gegner dadurch meistens auch unverwundbar :-/.
+
+Mit der Einstellung @{b}"Schneller Reset"@{ub} gibt man an, ob der Speichertest
+beim C64-Reset übersprungen werden soll. Auf dem Amiga ist der
+Speichertest nicht notwendig und der Reset-Vorgang (F10) wird viel
+schneller, wenn man ihn abschaltet.
+
+In der linken unteren Bildschirmecke stellt Frodo immer dar, wieviel
+Prozent der Geschwindigkeit eines echten C64 die Emulation erreicht.
+Ist das Feld @{b}"Geschw.begrenzen"@{ub} aktiv, wird die Emulation abgebremst,
+wenn die Geschwindigkeit über 100% steigt. Wenn man den Wert "Jedes
+(n)te Bild" so einstellt, daß die Geschwindigkeit gerade über 100% ist
+und den Geschwindigkeitsbegrenzer einschaltet, läuft die Emulation mit
+original-C64-Geschwindigkeit, bei höchstmöglicher Präzision.
+
+Die Einstellung @{b}"Bildschirm-Typ"@{ub} bestimmt die Art, wie die Grafik
+angesteuert wird. "8 Bit RTG" ist die kompatibelste Einstellung, die für
+Grafikkarten benutzt werden muß und mit allen Karten funktionieren sollte.
+Besitzt man keine Grafikkarte, sollte man stattdessen die schnellere
+Einstellung "4 Bit c2p4" benutzen (diese funktioniert allerdings nicht
+mit Grafikkarten). Für die Graffiti-Videokarte ist die Einstellung
+"Graffiti" zu wählen (die Darstellung ist immer in PAL). Außerdem steht
+mit "1 Bit Amiga" noch ein besonders schneller Monochrom-Modus ohne
+Spritekollisionen zur Verfügung (nützlich z.B. für "Elite"), der allerdings
+ebenfalls nicht auf Grafikkarten funktioniert. Nach Auswahl des
+Bildschirmtyps kann man unter @{b}"Bildschirmmodus"@{ub} den zu
+verwendenden Bildschirmmodus auswählen. Diese Einstellungen lassen sich
+nur direkt nach dem Starten von Frodo ändern.
+
+Das Feld @{b}"Direkter Videozugriff erlaubt"@{ub} hat nur bei Verwendung der
+CyberGraphX-Software eine Funktion. Ist es abgehakt, schreibt Frodo ohne
+jede Kontrolle direkt in den Bildschirmspeicher der Grafikkarte, wenn
+die Karte dieses unterstützt. Dies beschleunigt die Geschwindigkeit des
+Emulators um ca. 20%, aber man sollte sicherstellen, daß außer Frodo kein
+weiteres Programm gleichzeitig die Grafikkarte benutzt.
+
+Mit "SID-Emulation" stellt man die zu verwendende Sound-Emulation ein.
+Bei "Keine" ist die Tonausgabe abgeschaltet, "SID-Karte" benutzt die
+@{"SID-Karte" LINK SIDCard}, "6581sid.library" die Library von A64 und "playsid.library"
+die von PlaySID. Für die letzten beiden Einstellungen müssen die
+entsprechenden Libraries in LIBS: vorhanden sein. Besitzt man keine
+SID-Karte, so liefert "playsid.library" die beste Tonqualität, aber mit
+höherem Aufwand an Rechenzeit als "6581sid.library".
+
+Unter @{b}"Laufwerk 8" bis "Laufwerk 11"@{ub} gibt man an wie die
+Diskettenlaufwerke 8, 9, 10 und 11 emuliert werden sollen (siehe dazu auch
+@{"hier" LINK Files}). Zur Auswahl stehen "Dir", "D64" und "IEC". Bei "Dir" wird das
+Laufwerk in einem Verzeichnis des Amiga-Dateisystems emuliert. Der Name und
+Pfad des Verzeichnisses muß im Textfeld daneben eingetragen werden (mit
+einem Klick auf das rechte Symbol kann man dies auch bequemer über ein
+Dateiauswahlfenster machen. Bei "D64" greift Frodo auf eine .d64 oder x64-
+Datei zu, die ein Image einer kompletten C64-Diskette enthält. Der Name
+der Datei kann entweder in das Textfeld eingegeben oder mit dem rechten
+Symbol ausgewählt werden. Ist "IEC" eingestellt, wird die entsprechende
+Gerätenummer über das @{"IEC-Kabel" LINK IECCable} als reales C64-Gerät angesteuert.
+Hat man z.B. eine echte 1541 mit Gerätenummer 8 angeschlossen, muß man
+Laufwerk 8 auf "IEC" stellen, damit die echte 1541 verwendet wird. Auf
+dem DraCo steht IEC nicht zur Verfügung.
+
+Ist das Feld @{b}"IEC für andere Geräte verwenden"@{ub} aktiv, spricht Frodo
+Geräte mit den Nummern 4-7 und 12-15 ebenfalls über das IEC-Kabel an.
+Hat man z.B. einen @{"C64-Drucker" LINK Printer} mit der Nummer 4 an den Amiga
+angeschlossen, sollte man dieses Feld anklicken, damit der Drucker
+benutzt werden kann. Ist das Symbol nicht aktiviert, geben alle
+Geräte außer 8-11 einen "Device not present error". Auf dem DraCo steht
+IEC nicht zur Verfügung.
+
+Mit @{b}"'/' -> '\\' in Dateinamen"@{ub} bestimmt man, ob das '/' in C64-
+Dateinamen durch ein '\\' ersetzt werden soll und umgekehrt. Das '/'-
+Zeichen wird auf dem Amiga benutzt, um Unterverzeichnisse anzusprechen,
+aber da der C64 keine Unterverzeichnisse hat, ist es ein gültiger Teil
+eines C64-Dateinamens. Das ist aber problematisch, wenn ein Programm
+eine Datei mit einem '/' im Namen erzeugen will, da das AmigaDOS den
+Teil davor als Verzeichnisname interpretieren und - da es kein solches
+Verzeichnis findet - einen Fehler zurückgeben und das Öffnen der Datei
+fehlschlagen würde. Jetzt braucht man nur dieses Symbol zu aktivieren
+und alle '/' werden transparent in '\\' konvertiert, also steht in
+Directories immer noch das '/'. Wenn man dieses Symbol ausschaltet,
+kann man natürlich das '/' benutzen, um vom C64 aus Dateien in Amiga-
+Unterverzeichnissen anzusprechen.
+
+Durch einen Klick auf @{b}"Sichern"@{ub} werden die Einstellungen auf Platte
+gespeichert und stehen danach auch beim nächsten Start des Emulators zur
+Verfügung. @{b}"OK"@{ub} startet den Emulator (bzw. kehrt dorthin zurück) und
+@{b}"Abbrechen"@{ub} verwirft die Einstellungen und beendet Frodo (bzw. kehrt
+ohne Änderung in den Emulator zurück).
+
+Mit den Menübefehlen @{b}"Öffnen..."@{ub} und @{b}"Sichern als..."@{ub} kann man die
+Einstellungen auch in beliebige Dateien sichern. Durch Doppelklick
+auf eine Einstellungsdatei wird Frodo mit den darin gespeicherten
+Einstellungen gestartet.
+
+@ENDNODE
+
+
+@NODE Keyboard "Tastaturbelegung"
+
+Die Anordnung der Tasten entspricht im Wesentlichen der des C64, die
+Anordnung von Y und Z läßt sich aber einstellen, um sie der deutschen
+Tastatur anzupassen.
+
+Die einzelnen Reihen der Tastatur sind wie folgt belegt (deutsche
+Tastatur):
+
+Option "Amerik. Tastatur" aus:
+
+<- 1 2 3 4 5 6 7 8 9 0 + - £     [ ] / *
+    Q W E R T Z U I O P @ *
+    A S D F G H J K L : ; =      <Joy>
+   ^ Y X C V B N M , . /
+
+Option "Amerik. Tastatur" an:
+
+<- 1 2 3 4 5 6 7 8 9 0 + - £     [ ] ^ =
+    Q W E R T Y U I O P @ *
+    A S D F G H J K L : ; =      <Joy>
+   ^ Z X C V B N M , . /
+
+Zusätzlich werden noch folgende Tasten verwendet:
+
+ Esc    - RUN/STOP
+ <-     - INS/DEL
+ Del    - CLR/HOME
+ Help   - Umschaltung von "Joysticks vertauschen"
+ Tab    - RUN/STOP-RESTORE
+ Return - RETURN
+ Enter  - RETURN
+ Amiga  - C=
+ Alt    - C=
+ F1-F8  - F1-F8
+ F9     - RESTORE
+ F10    - Löst einen Reset aus
+
+Die beliebte Tastenkombination RUN/STOP-RESTORE entspricht dann also der
+Tab-Taste oder ESC-F9 auf der Amiga-Tastatur. Allerdings muß man auf
+diesen Tasten nicht so rumprügeln wie auf der RESTORE-Taste beim C64. :-)
+
+Die Cursor-(Pfeil-)Tasten können wie beim Amiga verwendet werden,
+d.h. "Cursor hoch" entspricht der C64-Tastenkombination "Shift-
+Cursor-runter". Dasselbe gilt für die Funktionstasten F2, F4, F6 und F8.
+
+Die Zehnertastatur emuliert einen Joystick in Port 2 (mit "Joysticks
+vertauschen" einen in Port 1):
+
+   7    8    9
+        ^
+        |
+   4    5    6
+  <-- Feuer -->
+        |
+        v
+   1    2    3
+
+   0
+ Feuer
+
+Die Tasten '+' und '-' auf der numerischen Tastatur erhöhen bzw.
+erniedrigen die Einstellung "Jedes (n)te Bild" während die Emulation
+läuft.
+
+@ENDNODE
+
+
+@NODE Files "Dateizugriff"
+
+Frodo bietet drei Möglichkeiten, 1541-Laufwerke an den Geräteadressen
+8, 9, 10 und 11 zu simulieren:
+
+
+1. Amiga-Verzeichnis, Einstellung "Dir"
+
+Hierbei sind die C64-Programme und Dateien in einem Verzeichnis auf der
+Amiga-Festplatte abgelegt und können vom Emulator ganz normal mit LOAD und
+SAVE geladen und gespeichert werden. Die Pfade zu den Verzeichnissen der
+simulierten Laufwerke werden im Einstellungsfenster unter "Laufwerk 8" bis
+"Laufwerk 11" angegeben.
+
+Man kann auch von Frodo aus das Inhaltsverzeichnis mit LOAD"$",8 laden.
+Dabei werden alle Dateien, die als "ausführbar" markiert sind, als
+"PRG", alle restlichen Dateien als "SEQ" angezeigt. Der Dateityp "DIR"
+bezeichnet ein Amiga-Unterverzeichnis. Um hineinzugelangen muß man
+die Einstellungen aufrufen und den Pfad des Laufwerks entsprechend
+ändern, da das C64-Betriebssystem nichts von Unterverzeichnissen weiß.
+Es ist allerdings möglich, mit "/" in einem C64-Dateinamen Dateien
+aus Unterverzeichnissen anzusprechen (z.B. LOAD"GAMES/ELITE",8),
+solange nicht die '/'-Übersetzung in den Einstellungen angeschaltet
+ist.
+
+Beim Öffnen von Dateien werden die Dateitypen "PRG" und "SEQ" und die
+Zugriffsmodi "R", "W" und "A" unterstützt. Jokerzeichen (*,?) können
+ebenfalls verwendet werden, man muß aber beachten, daß es auf dem Amiga
+keine festgelegte Reihenfolge der Dateien in einem Verzeichnis gibt und
+das Ergebnis von LOAD"*",8 eher zufällig ist. Dateien werden immer
+überschrieben, auch wenn man sie nicht mit "@:" öffnet. Floppy- Befehle
+(außer "I" und "UJ"), relative Dateien und Direktzugriff sind nicht
+implementiert, man kann jedoch den Fehlerkanal auslesen.
+
+
+2. .d64/x64-Image-Datei, Einstellung "D64"
+
+Die meisten im Internet und auf CD-ROM verfügbaren C64-Programme,
+insbesondere Demos und Spiele, sind in Dateien mit der Endung ".d64"
+abgelegt. In einer solchen Datei sind alle 683 Blocks einer kompletten
+Seite einer 1541-Diskette gespeichert. Damit sind von der Emulation aus
+auch direkte Zugriffe auf einzelne Blocks einer Diskette möglich,
+allerdings unterstützt Frodo keine Schreibzugriffe.
+
+Neben .d64-Dateien kann Frodo auch Image-Dateien des Emulators "x64"
+verwenden, wobei automatisch erkannt wird, daß es sich um eine x64-Datei
+handelt.
+
+
+3. Anschluß einer echten 1541, Einstellung "IEC"
+
+Zum Anschluß von echten C64-Laufwerken benötigt man ein spezielles
+@{"Kabel" LINK IECCable}, mit dem die Geräte an den Amiga angeschlossen werden. Die
+Laufwerke können wie vom C64 aus verwendet werden. Fastloader
+funktionieren allerdings nicht. Auf dem DraCo steht IEC nicht zur
+Verfügung.
+
+@ENDNODE
+
+
+@NODE Printer "Drucker"
+
+Frodo kann zwar keine Amiga-Drucker verwenden, aber man kann mit dem
+@{"IEC-Kabel" LINK IECCable} einen C64-IEC-Drucker anschließen, der wie beim C64 üblich
+angesprochen wird. Dazu muß allerdings das Symbol "IEC für andere Geräte
+verwenden" im @{"Einstellungsfenster" LINK Settings} aktiviert sein.
+
+@ENDNODE
+
+
+@NODE SAM "SAM"
+
+Frodo besitzt einen eingebauten Maschinensprachemonitor, der jederzeit
+über den entsprechenden Menüpunkt aufgerufen werden kann: SAM (Simple
+Assembler and Monitor). Er erlaubt den vollen Zugriff auf den Speicher
+und die Hardware des emulierten C64.
+
+Die Bedienung erfolgt über eine befehlsorientierte Schnittstelle, alle
+Zahlenwerte sind hexadezimal. Mit dem Befehl "h" kann jederzeit eine
+Befehlsübersicht dargestellt werden. Der Befehl "x" beendet SAM und kehrt
+zu Frodo zurück.
+
+Alle Befehle, die auf den C64-Speicher zugreifen, benutzen die mit dem
+"k"-Befehl eingestellte Speicherkonfiguration. Beim Start von SAM wird die
+Konfiguration eingestellt, in der sich auch der Prozessor befindet.
+Zugriffe von SAM aus haben dieselbe Wirkung wie Zugriffe des emulierten
+Prozessors. Dies betrifft insb. die I/O-Register: Ein Speicherauszug von
+$dc00-$de00 löscht anstehende CIA-Interrupts, da von $dc0d und $dd0d
+gelesen wird. Mit den "v"-Befehlen kann man auf die I/O-Chips zugreifen,
+ohne den Zustand der Emulation zu verändern.
+
+Überall, wo SAM die Angabe einer Zahl erwartet (außer im Assembler),
+kann auch ein durch die vier Grundrechenarten und Klammern verknüpfter
+Ausdruck von Zahlen angegeben werden. Befehle, die eine längere Ausgabe
+erzeugen, können mit CTRL-C abgebrochen werden.
+
+Hier eine Beschreibung aller Befehle ('[]' kennzeichnet einen Parameter,
+den man weglassen kann, '{}' einen Parameter, den man beliebig wiederholen
+kann. Wird ein Parameter [start] weggelassen, so wird an der Adresse
+fortgefahren, an der letzte Befehl aufgehört hat):
+
+
+ a [start]           Assemblieren
+
+startet den Assembler ab Adresse "start". SAM gibt immer die Adresse vor,
+an die der nächste Befehl geschrieben wird. Die Syntax der Befehle
+entspricht bis auf eine Ausnahme dem Standard: Schiebe-/Rotationsbefehle
+mit der Adressierungsart "Akkumulator" müssen ohne Operand eingegeben
+werden, also z.B. "lsr" statt "lsr a". Durch Eingabe einer leeren Zeile
+wird der Assembler beendet und SAM kehrt in den Kommandomodus zurück.
+
+
+ b [start] [end]     Binarärauszug
+
+stellt den Speicher von "start" bis "end" byteweise binär dar. Damit kann
+man sich z.B. Zeichensätze ansehen.
+
+
+ c start end dest    Speicher vergleichen
+
+vergleicht den Speicher im Bereich von "start" bis einschließlich "end"
+mit dem ab "dest". Die Adressen aller unterschiedlichen Bytes und die
+Gesamtanzahl an Unterschieden (dezimal) werden ausgegeben.
+
+
+ d [start] [end]     Disassemblieren
+
+disassembliert den Speicher von "start" bis "end". Undokumentierte Opcodes
+werden mit einem Stern '*' gekennzeichnet.
+
+
+ e                   Interrupt-Vektoren zeigen
+
+zeigt die Interrupt-Vektoren des 6510 und (falls das Kernal-ROM
+eingeblendet ist) des Kernal an.
+
+
+ f start end byte    Speicher füllen
+
+füllt den Speicher im Bereich von "start" bis einschließlich "end" mit
+dem Wert "byte".
+
+
+ i [start] [end]     ASCII/PETSCII-Auszug
+
+zeigt den Speicher von "start" bis "end" als ASCII/PETSCII-Zeichen an.
+
+
+ k [config]          Speicherkonfiguration zeigen/setzen
+
+"k" ohne Parameter zeigt die für SAM eingestellte Speicherkonfiguration,
+"k" mit Parameter ändert sie. Beim Verlassen von SAM wird die über den
+Prozessorport angegebene Konfiguration wiederhergestellt. Die 8 möglichen
+Konfigurationen sind:
+
+  #  $a000-$bfff  $d000-$dfff  $e000-$ffff
+  ----------------------------------------
+  0      RAM          RAM          RAM
+  1      RAM       Char-ROM        RAM
+  2      RAM       Char-ROM    Kernal-ROM
+  3   Basic-ROM    Char-ROM    Kernal-ROM
+  4      RAM          RAM          RAM
+  5      RAM          I/O          RAM
+  6      RAM          I/O      Kernal-ROM
+  7   Basic-ROM       I/O      Kernal-ROM
+
+
+ l start "file"      Daten laden
+
+lädt den Inhalt der angegebenen Datei in den Speicher ab Adresse "start".
+Der Dateiname muß in Anführungszeichen stehen, auch wenn er keine
+Leerzeichen enthält. Dieser Befehl kann nicht zum Laden von C64-Programmen
+benutzt werden, denn er berücksichtigt die in den Programmen angegebene
+Ladeadresse nicht.
+
+
+ m [start] [end]     Speicherauszug
+
+zeigt den Speicher von "start" bis "end" hexadezimal und als ASCII-Zeichen
+an.
+
+
+ n [start] [end]     Bildschirmcode-Auszug
+
+zeigt den Speicher von "start" bis "end" als ASCII-Zeichen an, wobei jedes
+Byte als Bildschirmcode im Standard-Zeichensatz interpretiert wird.
+
+
+ o ["file"]          Ausgabe umleiten
+
+Wird als Parameter der Name einer Datei angegeben, werden alle folgenden
+Ausgaben in diese Datei umgelenkt. Der Dateiname muß in Anführungszeichen
+stehen, auch wenn er keine Leerzeichen enthält. Die Eingabe von "o" ohne
+Parameter schließt die Datei und leitet die Ausgabe wieder in das Fenster
+von SAM.
+
+
+ p [start] [end]     Sprite-Auszug
+
+zeigt den Speicher von "start" bis "end" mit drei Bytes pro Zeile binär
+an. Damit kann man sich Sprite-Daten ansehen.
+
+
+ r [reg value]       6510-Register zeigen/ändern
+
+"r" ohne Parameter zeigt alle 6510-Register und Flags und den Befehl am
+aktuellen Stand des Programmzählers an. "DR" und "PR" sind Datenrichtungs-
+register und Datenregister des Prozessorports. Um ein Register zu ändern,
+müssen der Registername ("reg") und der neue Wert ("value") als Parameter
+angegeben werden.
+
+
+ s start end "file"  Daten speichern
+
+schreibt den Speicher von "start" bis einschließlich "end" in die
+angegebene Datei. Der Dateiname muß in Anführungszeichen stehen, auch wenn
+er keine Leerzeichen enthält. Dieser Befehl kann nicht zum Speichern von
+C64-Programmen benutzt werden, denn er speichert keine Ladeadresse mit ab.
+
+
+ t start end dest    Speicher verschieben
+
+verschiebt den Speicher von "start" bis einschließlich "end" nach "dest".
+Quell- und Zielbereich können sich beliebig überlappen.
+
+
+ vc1                 Zustand von CIA 1 zeigen
+
+zeigt den Zustand von CIA 1 ($dc00) an.
+
+
+ vc2                 Zustand von CIA 2 zeigen
+
+zeigt den Zustand von CIA 2 ($dd00) an.
+
+
+ vs                  Zustand des SID zeigen
+
+zeigt den Zustand des SID an.
+
+
+ vv                  Zustand des VIC zeigen
+
+zeigt den Zustand des VIC an.
+
+
+ x                   Rückkehr zu Frodo
+
+beendet SAM und kehrt zu Frodo zurück.
+
+
+ : addr {byte}       Speicher verändern
+
+schreibt die durch Leerzeichen getrennten Werte "byte" ab Adresse "addr"
+in den Speicher.
+
+
+ ? expression        Ausdruck berechnen
+
+berechnet den Wert des übergebenen Ausdrucks und zeigt ihn dezimal und
+hexadezimal an.
+
+@ENDNODE
+
+
+@NODE Kernal "Erweiterungen des mitgelieferten Kernal ROM"
+
+Das mitgelieferte "Kernal ROM" hat im Vergleich zum original-C64-Kernal
+einige Verbesserungen/Veränderungen:
+
+ · RAM bei $fd30-$fd4f wird bei Reset nicht überschrieben
+ · Standard-Geräteadresse ist 8
+ · Standard-Sekundäradresse ist 1
+ · Beim Laden werden Start- und Endadresse ausgegeben
+ · C=-Taste hält Scrolling an
+ · Schnellerer Tastatur-Repeat
+ · Cassetten- und RS232-Routinen entfernt
+ · Tastaturbefehle:
+    F1       : <cls> LIST <cr>
+    F2       : SYS32768 <cr>
+    F3       : RUN<cr>
+    F4       : SYS4096*12
+    F5       : LOAD"
+    F6       : SAVE"
+    F7       : LOAD"$",8 <cr>
+    F8       : CLOSE7:OPEN7,8,15,"
+    SHIFT-Run: LOAD":*",8,1:RUN <cr>
+    CTRL-D   : Directory von Laufwerk 8 anzeigen
+    CTRL-K   : Fehlerkanal von Laufwerk 8 lesen
+    CTRL-L   : Basic-Programm aus RAM-Disk laden
+    CTRL-O   : UNNEW
+    CTRL-U   : Verändert die SAVE-Routine, so daß auch das RAM von
+               $a000-$bfff geSAVEt werden kann
+    CTRL-V   : Basic-Programm mit RAM-Disk austauschen
+    CTRL-W   : Basic-Programm in RAM-Disk schreiben
+    CTRL-X   : LIST-Befehl fortsetzen
+    CTRL-Z   : LIST-Befehl 50 Zeilen vorher fortsetzen
+    CTRL-F1  : Bildschirm mit Puffer 1 tauschen
+    CTRL-F3  : Bildschirm mit Puffer 2 tauschen
+    CTRL-F5  : Bildschirm mit Puffer 3 tauschen
+    CTRL-F7  : Bildschirm mit Puffer 4 tauschen
+    CBM-F1   : Bildschirm in Puffer 3 schreiben
+    CBM-F3   : Bildschirm in Puffer 4 schreiben
+    CBM-F5   : Bildschirm aus Puffer 3 laden
+    CBM-F7   : Bildschirm aus Puffer 4 laden
+ · Die Einschaltmeldung zeigt "BASIC X2"
+
+@ENDNODE
+
+
+@NODE SIDCard "Die SID-Karte"
+
+  @{i}"Fanuilos, le linnathon."@{ui}
+
+Frodo verfügt zwar über eine Soundemulation über die Amiga-Hardware
+(mit Hilfe der "6581sid.library"), aber für das wahre Sound-Erlebnis
+kann er auch einen echten C64-Soundchip (SID) auf einer Steckkarte im
+Amiga ansprechen. Diese Karte blendet den SID im Bereich ab $a00001
+in den Amiga-Adreßraum ein (ungerade Adressen).
+
+Der Schaltplan, ein DeliTracker-Player und zusätzliche Informationen
+finden sich im Archiv "FrodoSIDCard.lha".
+
+@ENDNODE
+
+
+@NODE IECCable "Das IEC-Kabel"
+
+  @{i}"This is Ohm of Borg.
+   Resistance is voltage divided by electric current."@{ui} :-)
+
+Die beste Möglichkeit, seine alte C64-Software auf den Amiga zu
+übertragen, ist der Anschluß eines echten C64-Laufwerks. Dazu ist ein
+spezielles Kabel mit einer kleinen Schaltung erforderlich, das
+zusammen mit der Software in Frodo den Amiga um den sog. "IEC"-Bus
+bereichert, der beim C64 zum Anschluß von Diskettenlaufwerken und
+Druckern benutzt wurde. Auf dem DraCo steht diese Möglichkeit nicht
+zur Verfügung.
+
+Wer für den A64 bereits so ein Kabel hat, kann dies direkt mit Frodo
+weiterverwenden. Das Kabel, daß im Amiga-Magazin 8/88 S.36 beschrieben
+wurde, kann nicht mit Frodo benutzt werden, da es invertierte
+Ausgangsleitungen hat.
+
+Der Bau eines IEC-Kabels ist recht einfach, es verbindet den parallelen
+Port des Amiga mit dem runden, sechspoligen Anschluß an den C64-Geräten:
+
+
+ Parallelport                        IEC-Anschluß
+    Amiga                               1541
+ DSUB, 25pol.                         DIN, 6pol.
+
+  Pin  Name                           Name  Pin
+   14  +5V ------------*--*--+
+                       |  |  |
+              7406    |¯||¯||¯|
+            (74LS05)  | || || | je 1k
+                      |_||_||_|
+              1|\\ 2    |  |  |
+    5  PB3 ----| O-----*--+--+------- ATN    3
+               |/         |  |
+                          |  |
+              3|\\ 4       |  |
+    6  PB4 ----| O--*-----*--+------- CLK    4
+               |/   |        |
+                    |        |
+              5|\\ 6 |        |
+    7  PB5 ----| O--+-*------*------- DATA   5
+               |/   | |
+                    | |
+    8  PB6 ---------+ |
+                      |
+    9  PB7 -----------+
+
+   25  GND -------------------------- GND    2
+
+Der 7406 (ein 74LS05 tuts auch) muß natürlich noch mit +5V und GND
+verbunden werden. Dem Fachmann wird auffallen, daß dies die selbe
+Schaltung ist, die sich auch im echten C64 befindet.
+
+[Wichtiger Hinweis: Wer vorhat, das Kabel nachzubauen und anzuschließen,
+sollte bedenken, daß er es auf eigene Gefahr macht. Ich werde keine
+Verantwortung übernehmen, wenn jemand damit seinen Computer in ein
+Tischfeuerwerk verwandelt.]
+
+@ENDNODE
+
+
+@NODE FrodoSC "Die Einzelzyklus-Emulation 'Frodo SC'"
+
+"Frodo SC" ist eine spezielle Version von Frodo, die nicht auf einer
+zeilenbasierten, sondern auf einer zyklusbasierten Emulation beruht.
+Das heißt, daß der Emulator in jedem emulierten ø2-Taktphase zwischen
+6510 und VIC umschaltet. Dadurch erreicht Frodo SC eine extreme
+Genauigkeit (nahezu alle $d011- und $d016-Effekte sind emulierbar),
+allerdings auf Kosten der Geschwindigkeit.
+
+Frodo SC unterscheidet sich von den Einstellungsmöglichkeiten bis auf
+wenige Punkte nicht von Frodo:
+
+ - Frodo SC benötigt einen 68060 und eine Grafikkarte, um einigermaßen
+   "schnell" zu laufen (maximal ist ca. 1/4 der Geschwindigkeit eines
+   echten C64 möglich)
+ - Der einzige unterstützte Bildschirmtyp is "8-Bit RTG"
+ - Die "Zyklen pro Zeile"-Einstellungen sind ohne Funktion, da das
+   Timing von Frodo SC fest vorgegeben ist
+
+Ansonsten wird Frodo SC genau wie Frodo bedient und verwendet auch die
+gleichen Einstellungen. Frodo SC hat nur wenige Inkompatibilitäten zum
+echten C64:
+
+ - Es gibt keine Speite-Kollisionserkennung und keine Prioritäten,
+   Sprites werden über den Rahmen gemalt
+ - Die undokumentierten Opcodes RRA und ISB haben keinen Dezimalmodus
+ - Einige Opcodes wie $8b/$ab erzeugen nicht die gleichen (teilweise
+   unvorhersagbaren) Resultate wie auf dem echten 6510
+ - BRK kann nicht von IRQ/NMI unterbrochen werden
+ - Die CIA-Timer stoppen zwei Zyklen zu früh
+ - Änderungen an Farbregistern werden 7 Pixel zu spät sichtbar
+ - Bei BA low und AEC high liest der VIC in D8-D11 immer $f
+ - Der Zugriff auf die Sprite-Daten beachtet BA nicht
+
+@ENDNODE
+
+
+@NODE DemoPrograms "Demoprogramme"
+
+Das Verzeichnis "64prgs" enthält einige kleine Beispielprogramme, die
+die Fähigkeiten von Frodo/Frodo SC zeigen. Bis auf "dadb" und "lrborder"
+müssen alle von Frodo mit LOAD"<name>",8,1 geladen und mit SYS49152
+gestartet werden. Dazu ist in den Einstellungen "Laufwerk 8" auf "Dir" zu
+stellen und '64prgs' einzutragen, damit Frodo die Programme auch findet.
+
+Die Programme stammen von Pasi Ojala, Marko Mäkelä und Andreas Boose. Wer
+Lust hat, kann sie ja mal mit anderen Emulatoren oder einem echten C64
+ausprobieren.
+
+Eine kurze Beschreibung der einzelnen Programme:
+  3fff     : Öffnet den oberen und unteren Rahmen und stellt dort
+             schwingende Buchstaben dar (man sollte die "Zyklen pro
+             Zeile (CPU)" auf 60 stellen)
+  colorbars: Flimmernde Farben
+  d011h3   : 8-Wege Softscrolling ohne daß ein einziges Byte im Speicher
+             bewegt wird (Cursortasten zum Links-Rechts-Scrollen, 't'
+             schaltet in den Textmodus, 'g' in den Bitmap-Modus), benötigt
+             Frodo SC
+  de00all  : Ein Programm, das im Adreßbereich $de00-$dfff abläuft
+             (Leertaste drücken), benötigt Frodo SC
+  dycp     : Scrolling mit variabler Y-Zeichenposition
+  fld      : Demonstriert den FLD-Effekt (Flexible Line Distance)
+  lrborder : Öffnet den linken/rechten Rahmen, benötigt Frodo SC
+  sprsync  : Stabile Rasterroutine durch Synchronisation mit einem Sprite,
+             benötigt Frodo SC
+  stretch  : Variabel expandierte Sprites, benötigt Frodo SC (obwohl
+             Frodo SC z.Z. keine Sprite-Darstellung hat, kann man sehen,
+             daß das Timing korrekt ist)
+  tech-tech: Horizontales Scrolling über große Distanzen, Steuerung
+             über Joystick an Port 2
+  text26   : Stellt (fast) 26 Textzeilen dar
+
+@ENDNODE
+
+
+@NODE TechnicalInfo "Technische Infos"
+
+  @{i}"Wissen?"@{ui} wiederholte Gandalf.
+  @{i}"Ich weiß vieles, was nur die Weisen wissen, Frodo."@{ui}
+
+Im Gegensatz zum A64, der sich eher an der Amiga-Hardware orientiert,
+versucht Frodo, C64-Hardwareeigenschaften genau nachzubilden. Nun ist
+die Hardware des C64 (insb. der Grafikchip "VIC") recht simpel entworfen,
+was dazu führt, daß eine Menge interner Abläufe nach außen dringen,
+woraus zahlreiche "undokumentierte Eigenschaften" resultieren, mit denen
+sich zum Teil Effekte realisieren lassen, von denen die Entwickler nie
+zu träumen wagten.
+
+Frodo benutzt eine zeilenweise Emulation, d.h. die Abläufe im VIC und im
+Prozessor (6510) werden jeweils für eine Rasterzeile des C64- Bildschirms
+emuliert. In der Praxis sieht das so aus, daß Frodo abwechselnd VIC und
+6510 jeweils ca. 63 simulierte Zyklen (entspricht einer Rasterzeile)
+laufen läßt. D.h. es wird erst 63 Zyklen lang der Prozessor emuliert, dann
+auf den VIC umgeschaltet, der eine Pixelzeile auf den Bildschirm malt,
+dann wieder 63 Zyklen Prozessor usw. Mit der Ausnahme des Monochrom-Modus
+wird die Grafik intern immer als Chunky-Darstellung berechnet. Der Amiga-
+Modus benutzt eine Chunky->Planar-Konvertierung, um die Chunky-Pixel auf
+dem Bildschirm darzustellen.
+
+Obwohl dies eine starke Vereinfachung der Abläufe im echten C64 darstellt,
+lassen sich damit zahlreiche grafische Effekte, die beim C64 möglich sind,
+bereits hervorragend emulieren, z.B. FLD, FLI, DYCP, Hyperscreen uvm.
+Aber die Methode hat einen großen Nachteil: Änderungen, die der Prozessor
+an den Registern des VIC vornimmt, werden erst in der nächsten Rasterzeile
+aktiv. So kann man z.B. beim Frodo die Rahmenfarbe nicht mitten in einer
+Zeile ändern, der Farbwechsel erfolgt erst zu Beginn der nächsten Zeile.
+Damit können aufwendige Effekte, bei denen es auf die genaue Position
+einer Registeränderung ankommt, nicht emuliert werden. So kann man z.B.
+bei Frodo den oberen und unteren Rahmen problemlos öffnen, den linken und
+rechten aber prinzipiell nicht (aus diesem Grund es auch in der Emulation
+nicht vorgesehen).
+
+Frodo SC geht noch einen Schritt weiter, indem er in jedem Zyklus zwischen
+VIC und 6510 umschaltet und die internen Abläufe exakt emuliert. Änderungen
+an VIC-Registern haben sofort in der nächsten Taktphase Wirkung und damit
+lassen sich auch Effekte emulieren, bei denen es auf die genaue Position
+einer Registeränderung innerhalb einer Rasterzeile ankommt, z.B. spezielle
+FLI-Routinen, das Öffnen des linken/rechten Rahmens, Linecrunch, DMA-Delay,
+mehrfach wiederholte Spritezeilen und der Ablauf von Programmen in offenen
+Adreßbereichen ($de00-$dfff) und im Farb-RAM. Auch die 6510-Emulation ist
+präziser und führt genau dieselben Speicherzugriffe wie der echte 6510 aus,
+auch die "unnötigen", die auf Design-Schwächen des 6510 beruhen und zum
+Funktionieren einzelner Opcodes überflüssig sind (so liest der 6510 z.B.
+bei einer Befehlsfolge wie INX:INX:INX:INX jeden Opcode doppelt).
+
+@ENDNODE
+
+
+@NODE TheSource "Der Quelltext"
+
+  @{i}"Bitte Quelldatei angeben.
+   FEHLER: Datei quillt nicht!"@{ui} :-)
+
+Wem die Nummern nichts sagen: Eine kleine Beschreibung der Funktionen
+der einzelnen Module:
+
+  1541fs.#?     - 1541-Emulation in Amiga-Verzeichnissen
+  1541d64.#?    - 1541-Emulation in .d64/x64-Dateien
+  6510#?        - Der Prozessor
+  6526#?        - Die CIAs (Ein-/Ausgabe, Tastatur, Timer)
+  6569#?        - Der VIC (Grafik)
+  6569mono.i    - Die Routinen für Monochrom-Grafik
+  6581.#?       - Der SID (Sound)
+  Boopsi.o      - Teil der GadToolsBox
+  c2p4.asm      - Chunky->Planar-Konvertierung
+  debug.#?      - Zum Debuggen
+  Display.#?    - Handhabung des Emulator-Bildschirms
+  ExpTable.bin  - Wird von 6569mono.i eingebunden
+  FrodoGUI.#?   - GadToolsBox-Oberfläche des Einstellungsfensters
+  Frodo_rev.#?  - Versionsinformationen
+  IEC.#?        - IEC-Bus-Routinen
+  LocStrings.#? - Für die Lokalisation, von CatComp erzeugt
+  Main.asm      - Das Hauptmodul
+  Makefile      - Das Makefile
+  Prefs.#?      - Handhabung des Einstellungsfensters
+  SAM.#?        - Der Monitor "SAM"
+
+Das Makefile wurde für PhxAss 4.x und die Freeware-Version von DICE V2.06
+geschrieben.
+
+@ENDNODE
+
+
+@NODE LegalMush "Rechtliches"
+
+Das Programm "Frodo", diese Anleitung und der Quelltext dürfen frei
+weitergegeben werden, solange sie unverändert bleiben (archivieren und
+packen ist erlaubt) und alle Dateien zusammen bleiben. Mit der
+Weitergabe von Frodo darf kein Gewinn erzielt werden, insbesondere darf
+der Verkaufspreis einer Diskette, die Frodo enthält, DM 8,- (bzw. den
+entsprechenden Betrag in anderen Währungen) nicht übersteigen. Frodo
+darf nach Belieben über Mailboxen und Netzwerke und als Teil von
+Shareware/Freeware-CDs verteilt werden.
+
+Wer das Programm benutzt, erklärt sich damit einverstanden, jegliches
+Risiko, das die Benutzung mit sich bringt, selbst zu tragen. Der Autor
+haftet in keinem Fall für Schäden, die direkt oder indirekt durch den
+Gebrauch oder Mißbrauch dieser Anleitung und/oder des Programms
+entstanden sind.
+
+Die Rechte am Quellcode verbleiben beim Autor. Er darf nicht - auch
+nicht auszugsweise - ohne schriftliche Genehmigung des Autors für
+kommerzielle Programme verwendet werden. Die Benutzung für nicht-
+kommerzielle Zwecke ist gestattet, solange meine Copyright-Notiz im
+Programm bleibt. Es ist nicht gestattet, den Quelltext dazu zu benutzen,
+eine veränderte Version von "Frodo" in Umlauf zu bringen.
+
+Die Oberfläche des Programms wurde mit GadToolsBox © Copyright
+1991-1993 Jaba Development erstellt.
+
+Teile des Programms sind © Copyright 1992-1993 Jaba Development.
+
+@ENDNODE
+
+
+@NODE BugReports "Bugreports"
+
+Wenn ihr einen Fehler oder eine Unzulänglichkeit in Frodo findet, oder
+eine Idee habt, wie man manches noch besser machen könnte, dann teilt
+mir das bitte mit, damit ich Frodo in Zukunft noch besser machen kann.
+Meine Adresse findet ihr @{"hier" LINK EmulationWizard}.
+
+Ich glaube nicht, daß sich die Geschwindigkeit unter Beibehaltung des
+Konzepts noch wesentlich erhöhen läßt, lasse mich aber gern eines
+besseren belehren.
+
+Außerdem suche ich noch Übersetzungen des Frodo.catalog in andere
+Sprachen. Eine elbische Version wäre besonders willkommen. :-)
+
+@ENDNODE
+
+
+@NODE Thanks "Danksagungen"
+
+  @{i}"Und Elbereth kam selbst herab:
+   Sie schuf dem Schiff den Silmaril
+   Zum Banner, ein lebend'ges Licht,
+   Ein heller Schein, der nie verblaßt."@{ui}
+
+Folgenden Personen möchte ich meinen besonderen Dank aussprechen, da
+sie einen nicht unwesentlichen Beitrag zur Entwicklung von Frodo
+geleistet haben:
+
+ · Frank Wille <frank@phoenix.owl.de>, dessen PhxAss zur Entwicklung von
+   Frodo benutzt wurde
+ · Matthew Dillon, dessen DICE zur Entwicklung von Frodo benutzt wurde
+ · Jaba Development, deren GadToolsBox die Oberfläche von Frodo
+   entwickelt hat
+ · Peter McGavin <peterm@maths.grace.cri.nz>, von dem die Chunky->Planar-
+   Konvertierung stammt
+ · Andreas Boose <boose@linux.rz.fh-hannover.de> und Marko Mäkelä
+   <marko.makela@hut.fi>, die mich mit wertvollen Informationen zum VIC
+   und zum C64 allgemein versorgt haben
+ · Markus Winklbauer <sysop@ng-box.wwbnet.de> für die Docs zur
+   Picasso-Karte
+ · Lord Prayer für die Docs zur Merlin-Karte
+ · Teemu Suikki <Teemu.Suikki@lut.fi> für die Idee mit dem Überspringen
+   von Bildern
+ · Den folgenden Leuten für die Catalog-Dateien:
+     Polnisch   : Pawel Soltysinski <polonus@felix.univ.szczecin.pl> und
+                  Pawel Hernik <spi-ph@srv1.tu.kielce.pl>
+     Italienisch: Giovanni Gentile <gentile@dsi.unimi.it>
+     Schwedisch : Marcus Comstedt <marcus@amicus.rydnet.lysator.liu.se>
+     Finnisch   : Jarkko Lindblad <lindblad@cc.helsinki.fi>
+                  Marko Mäkelä <marko.makela@hut.fi>
+     Dänisch    : Claus Østergaard <cos@dator.dk>
+     Norwegisch : Kjell Irgens <kjelli@stud.cd.uit.no>
+     Kroatisch  : Marko Sehtl <Marko.Sehtl@public.srce.hr>
+     Ungarisch  : László Török <phoenix@master.fok.hu>
+     Tschechisch: Lubos Nemec <nemec@amiga.cz>
+ · J.R.R.Tolkien für die Anregung zur Namensgebung des Emulators
+ · Allen, die mir Vorschläge und Anmerkungen geschickt haben
+
+@ENDNODE
+
+
+@NODE EmulationWizard "Der Autor"
+
+Meine Adresse lautet:
+
+  Christian Bauer
+  Max-Planck-Str.60
+  55124 Mainz
+  Deutschland
+
+EMail:
+  cbauer@iphcip1.physik.uni-mainz.de
+
+Für Fragen, Kritik, Anregungen und @{"Bugreports" LINK BugReports} bin ich jederzeit
+offen. EMail wird bevorzugt.
+
+Frodo ist @{b}kein@{ub} Shareware-Programm, aber über eine kleine
+Aufmerksamkeit freue ich mich natürlich. :-)
+
+@ENDNODE
+
+
+@NODE History "History"
+
+  @{i}"Jene Tage, das Dritte Zeitalter von Mittelerde,
+   sind nun lange vergangen, und die Gestalt der Länder
+   hat sich verändert."@{ui}
+
+Der Emulator war ursprünglich ein Abspielprogramm für C64-Musikstücke
+(daher auch die SID-Karte), bis ich den A64 V3.0 gesehen habe und davon
+so enttäuscht war, daß ich anfing, einen "richtigen" C64-Emulator zu
+schreiben (das war so um Weihnachten 1994).
+
+V0.4	05.Jan.1995
+  - Erste veröffentlichte Version
+
+V0.5	10.Jan.1995
+  - Wenn man Frodo auf einem 68000-Rechner gestartet hat, kam zwar
+    der entsprechende Requester, aber danach gab es einen Absturz.
+    Soviel zum Thema "ungetestete Fehlerabfragen". :-)
+  - Enforcer-Hits beim ersten Einstellen der Speicherkonfiguration
+    beseitigt
+  - Sprite-Zyklen werden richtig berechnet
+  - Schaltete man ein Sprite in der Mitte der Darstellung aus, wurde
+    es sofort abgeschaltet. Nun wird das Sprite korrekt zu Ende
+    gezeichnet.
+  - Grafik bei EGS/Picasso durch Zeilenpuffer erhöht (20% schneller),
+    andere kleine Optimierungen in der Grafik
+  - VIC-Interrupt-Flag wird bei jedem Schreibzugriff auf $d019
+    gelöscht (ein Hack für die RMW-Befehle, die zwei Schreibzugriffe
+    durchführen)
+  - Die CIA-Timer B können Unterläufe von Timer A zählen (für
+    Ballblazer :-)
+  - PLP und RTI löschen das Break-Flag
+  - Komplett neue 1541-Emulation, 4 Laufwerke
+  - Zyklenzähler der CPU wesentlich effizienter gestaltet (wieder
+    25% schneller)
+
+V1.0	25.Jan.1995
+  - PHP setzt das Break-Flag auf dem Stack
+  - HandleRESET setzte irrtümlich das I-Flag (trau keiner Dokumentation,
+    auch wenn sie vom Hersteller stammt...)
+  - Ein RESET setzt die VIC-Bank auf 0
+  - Alle illegalen Opcodes implementiert
+  - Neuer Algorithmus für den VC des VIC, der sich näher am echten VIC
+    orientiert
+  - Die VBlank-Routinen springen zu Periodic6569 zurück, denn sonst gibt
+    es eine nicht existierende (-1)te Zeile
+  - TOD-Clocks implementiert
+  - ECM+BMM, ECM+MCM und ECM+BMM+MCM stellen korrekt einen schwarzen
+    Bildschirm dar
+  - Zugriff auf SID-Karte ist abschaltbar
+  - Einige Fehler in der 1541-Emulation korrigiert
+  - Die Benutzung von IEC-Geräten über ein Adapterkabel ist möglich
+  - Die Auswahl der Verzeichnisse für die 1541-Emulationen kann über
+    einen Verzeichnis-Requester erfolgen
+  - Das Abschalten des Bildschirms mittels Bit 4 in $D011 funktioniert
+  - Einstellung für "Zeilenfrequenz" entfernt
+  - Interrupt-Handhabung komplett umgestellt
+  - Verschiedene interne Optimierungen
+  - Die CBM80-Kennung wird beim Reset nur noch überschrieben, wenn
+    sie vorhanden war
+  - Frodo läuft auch auf Nicht-AGA-Rechnern
+  - Sprite-Sprite-Kollisionen eingebaut
+  - Vertauschung von Y und Z ist einstellbar
+
+V1.1 war eine interne Testversion mit Bitplane-Grafik
+     (in V1.2 zunächst wieder entfernt)
+
+V1.2	09.Feb.1995
+  - Geschwindigkeit der Grafik ist im Durchschnitt höher, insb. in den
+    Multicolor- und Bitmap-Modi
+  - Neuer, sehr schneller Monochrom-Modus
+  - Sprite-Routinen sind effizienter. Sind alle Sprites ausgeschaltet,
+    wird keine Rechenzeit mehr vergeudet.
+  - Sound-Emulation über 6581sid.library, wenn die SID-Karte
+    abgeschaltet ist
+  - Minimale Auflösung ist 384×272
+  - Sprite-Kollisionen sind abschaltbar
+  - Die 1541-Emulation kommt mit sequentiellen Dateien und Zugriffsmodi
+    zurecht und ignoriert Laufwerksnummern und den '@'
+  - Frodo ist mehrsprachig durch die "locale.library"
+  - Es können Overscan-Auflösungen benutzt werden
+  - Die Auswahl von Modi wie "PAL:Lowres" ist unter OS2.x möglich
+  - Option zur Übersetzung von '/' in Dateinamen in '\\' und umgekehrt
+  - Die Joysticks werden nur noch in der VIC-VBlank-Routine abgefragt
+  - Die Amiga-Grafikroutinen benutzen Double Buffering
+  - Einstellung, um den Speichertest der Reset-Routine abzukürzen
+
+V1.3	22.Feb.1995
+  - Fehler in Close1541 korrigiert (Absturz beim Beenden)
+  - CyBERgraphics-Unterstützung
+  - Die 1541-Emulation beherrscht Jokerzeichen
+  - Option zum Überspringen von Bildern eingebaut
+
+V1.3a	04.Mär.1995
+  - Fehler beim Aufruf des Einstellungsfensters mit F9 bei der
+    Picasso korrigiert
+
+V1.4	05.Mai.1995
+  - Pause6510 und Resume6510 benutzen Signale
+  - Tastaturabfrage verbessert, die Option "Amerik. Tastatur" legt
+    "=" und "^" auf die numerische Tastatur
+  - Sprite-Routinen komplett neu geschrieben, Sprite-Grafik-Prioritäten
+    und -Kollisionen werden berücksichtigt
+  - Branches über $ffff/$0000 hinweg funktionieren
+  - Joystick-Emulation mit der Zehnertastatur
+  - Polnische und italienische Catalog-Dateien
+
+V1.4a	12.Mai.1995
+  - Fehler in der Joystickabfrage korrigiert
+  - Dänische, finnische und schwedische Catalog-Dateien
+
+V1.5	06.Jun.1995
+  - Unterstützung der Merlin-Grafikkarte
+  - Norwegische Catalog-Dateien
+
+V2.0	12.Dez.1995
+  - Komplett neues Grafikkonzept, alle Karten-spezifischen Routinen entfernt
+  - Präzisere Emulation des DEN-Bits in Register $d011
+  - Kleine Optimierungen an den VIC- und 6510-Routinen
+  - Beim Start wird das RAM (fast) wie auf dem echten C64 initialisiert
+  - 100% korrektes ADC/SBC im Dezimalmodus
+  - Bessere Emulation der Adressen 0 und 1
+  - Besseres NMI-Triggering
+  - Fehler bei CIA-Interrupts behoben
+  - Beim Drücken von F9 konnten anstehende Interrupts verloren gehen
+  - 1541-Open-Routine prüft auf Überlauf des Namenspuffers
+  - Das Schließen von 1541-Kanal 15 schließt alle offenen Dateien
+  - Unterstützung von .d64 und x64-Diskimages (nur Lesezugriffe)
+  - Vier Arten der SID-Emulation: Keine, die SID-Karte, 6581sid.library
+    und playsid.library
+  - Menüs für das Einstellungsfenster und das Emulatorfenster
+  - Lad- und speicherbare Einstellungen, die Einstellungsdateien sind
+    Frodo's "Projekte"
+  - Eingebauter Assembler/Monitor (SAM)
+  - Geschwindigkeitsanzeige und -begrenzer
+  - Schaltplan der SID-Karte korrigiert und einen DeliTracker-Player für
+    die Karte beigelegt
+  - Ungarische Catalog-Dateien
+
+V2.1	10.Feb.1996
+  - Das C64-Character-ROM ist nun im Archiv enthalten
+  - Schreibfehler im 1541 "Dir"-Modus behoben
+  - 1 Bit Amiga-Modus repariert
+  - SID-Typ-Gadget ist lokalisiert
+  - Reset6526 stoppt Timer B, wenn er Unterläufe von Timer A zählt
+  - Spritedarstellung ausschaltbar
+  - VIC-Interrupt-Handhabung korrigiert, Rasterinterrupts können durch
+    Schreibzugriff auf $d01a ausgelöst werden
+  - CIA-Interrupts können nicht durch Schreiben ins ICR gelöscht werden
+  - Bessere CIA 1 PRA/PRB-Emulation (Tastatur/Joysticks)
+  - Anzeige des CIA-Timer-Ausgabemodus in SAM korrigiert
+  - SAM kann von "Illegal Opcode"-Requestern aus aufgerufen werden
+  - 6510-Register können in SAM geändert werden
+  - Der Dateiname für den "o"-Befehl in SAM muß nun in Anführungszeichen
+    (") stehen
+  - Lade- und Speicherbefehle zu SAM hinzugefügt
+  - Frodo SC: SAM "vv"-Befehl funktioniert
+  - Frodo SC: 3-Zyklus-Verzögerung beim Starten von Timern eingebaut
+  - Frodo SC: LPY-Register gab falsche Werte zurück
+  - Frodo SC: Einfache Sprite-Darstellung implementiert (keine Kollisionen,
+    keine Prioritäten, Sprites werden über den Rahmen gemalt)
+  - Frodo SC: Darstellung der Hintergrundfarbe im linken/rechten
+    Rahmenbereich korrigiert
+
+V2.2	18.Apr.96
+  - OtherIEC-Gadget auf dem DraCo abgeschaltet
+  - Der Overscan-Typ kann wieder eingestellt werden
+  - D64-Routinen haben 1 Byte zu viel aus Dateien gelesen, was Probleme
+    mit einigen Entpackern machte
+  - $d41c gibt zufällige Werte zurück
+  - TOD-Clocks gehen nach 11:59:59.9 wieder auf Null
+  - SID-Register werden beim Wechsel des SID-Emulations-Typs neu geladen
+
+V2.3	13.Jun.96
+  - Anzeige des VIC-Darstellungsmodus in SAM korrigiert
+  - Emulation des SDR-Interrupts (CIA serieller Port)
+  - M-W-Befehl in D64-Routinen eingebaut
+  - Fehler in CIA-A PRA-Lesen korrigiert
+  - STA Abs,X/Y auf CIA-ICR löschen den Interrupt
+  - F9 wird nun zum Auslösen eines NMI benutzt
+  - Tastaturkürzel Amiga-P zum Öffnen des Einstellungsfensters
+  - '+'/'-' auf der numerischen Tastatur erhöhen/erniedrigen die "Jedes
+    (n)te Bild"-Einstellung
+  - Die Help-Taste schaltet die "Joysticks vertauschen"-Einstellung um
+  - Die Tab-Taste macht dasselbe wie Esc-F9
+
+V2.4	03.Jan.97
+  - Die C64 Basic- und Kernal-ROMs sind nun im Archiv enthalten
+  - FreeScreenBuffer() wurde auch unter OS 2.x aufgerufen
+  - Idle-State-Darstellung korrigiert
+  - Die letzte Zeile von Y-expandierten Sprites wurde nicht gezeichnet
+  - Raster-IRQs können durch Schreiben in $d011/$d012 ausgelöst werden
+  - Unterstützung der Graffiti-Videokarte
+  - Übersetzung der Zeichen 0xc1..0xda in conv_from_64() korrigiert
+  - 1541-Emulation ignoriert Laufwerksnummern beim Öffnen des Directorys
+    und erlaubt die Angabe von Wildcards zum selektiven Directory-Lesen
+  - Das Lesen aus einem write-only SID-Register gibt das zuletzt in den
+    SID geschriebene Byte zurück
+  - Im Schaltplan der SID-Karte waren D2 und D3 vertauscht
+  - ISB, RRA, SHX und SHY Befehle korrigiert
+  - Frodo SC: CIA-Timer stoppten nicht im one-shot-Modus
+  - Frodo SC: Timing der CIA-Timer korrigiert (starten/stoppen/laden)
+  - Frodo SC: Fehler in BackECM korrigiert
+  - Frodo SC: Mehr undokumentierte Opcodes implementiert
+  - Tschechische Catalog-Dateien
+
+@ENDNODE
+
+
+@NODE Future "Die Zukunft"
+
+  @{i}"Ai! Palan ú ná metta eldaloaron!"@{ui}
+
+An der Amiga-68K-Version (V2.x) von Frodo wird es vermutlich keine
+größeren Änderungen mehr geben. Frodo V3.x/V4.x wurde komplett in C++ neu
+geschrieben und auf BeOS, Unix/X11, MacOS und AmigaOS portiert. Frodo
+V3.x/V4.x besitzt zahlreiche Verbesserungen im Vergleich zu V2.x:
+
+ · Eine "echte" 1541-Emulation inkl. deren Prozessor, mit der ca. 90%
+   aller Fastloader laufen
+ · Eine eigene SID-Emulation mit Filtern
+ · Emulation einer REU (RAM Expansion Unit)
+ · Zugriff auf .t64/LYNX-Archive
+
+@ENDNODE

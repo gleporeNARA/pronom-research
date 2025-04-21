@@ -1,0 +1,2332 @@
+@database snma.hyper
+@node Main "Samu Nuojua's Macro Assembler, SNMA v1.90"
+
+	   ******************************************************
+	   *							*
+	   *		   S   N   M   A    V1.90		*
+	   *		   ~~~~~~~~~~~~~~~~~~~~~~		*
+	   ******************************************************
+
+		   SNMA is 680x0 conditional macro assembler.
+
+    1. @{" Introduction     " link intro}    Blablaablaa....
+
+    2. @{" Usage            " link HowTo}    How to use (start).
+
+    3. @{" Features         " link feature}    Expressions, directives...
+
+    4. @{" ARexx            " link arexx}    ARexx interface
+
+    5. @{" Author           " link Author}    Me.
+
+@endnode
+
+@node intro   "1. Introduction"
+
+
+	    Introduction to Samu Nuojua's Macro Assembler, SNMA
+
+    SNMA is 680x0/6888x macro assembler. SNMA requires OS 2.0+.
+    If you have used some other assembler, snma should not throw big
+    suprises to your face (I hope). (Look at @{" things to note " link note})
+
+    1.1 @{" Copyright and other boring stuff " link legal}
+
+    1.2 @{" What you need " link need}
+
+    1.3 @{" How to Install " link install}
+
+    1.4 @{" Good & Bad things " link GoodBad}
+
+    1.5 @{" History " link History}
+
+    1.6 @{" Bug reports " link bug_report}
+
+    1.7 @{" Misc.  " link nonsense}
+
+@endnode
+
+@node legal "1.1 Copyright ©"
+
+
+    SNMA stands for Samu Nuojua's Macro Assembler.
+
+    SNMA is © copyright 1993-1994 by Samu Nuojua.
+
+    All SNMA documents are © copyright 1993-1994 by Samu Nuojua.
+
+    SNMA is FREEWARE. I reserve all rights to SNMA. You can copy it as
+    long you don't ask payment (small fee is allowed to cover the expenses
+    of the possible disk/postage fee). Permission is granted to upload
+    SNMA to the bulletin boards and FTP sites. Also, you must provide all
+    the files supplied when you are copying SNMA to somewhere/somebody
+    (including all the documents).
+
+
+    DISCLAIMER:
+    ~~~~~~~~~~
+    SNMA software and documents are provided 'as is'. No guarantee of
+    any kind is given what SNMA does or that information in  files is
+    correct in any way. You are using this software at your own risk.
+    Author of SNMA is in NO WAY responsible for any losses or damage
+    caused by SNMA.
+
+@endnode
+
+@node need "1.2 What you need"
+
+    What you need to use SNMA to produce stand alone programs.
+
+	-   AmigaOS 2.04 or higher (V37)
+	-   Linker		   (to produce executables)
+	-   Text editor 	   (to write/edit programs)
+	-   The following libaries:
+					    V.		Where	 note
+					    ~~		~~~~~	 ~~~~
+		- dos.library		    37		in rom
+		- intuition.library	    36		in rom
+		- utility.library	    36		in rom
+		- icon.library		    any     *	in rom	 WB support
+		- mathieeedoubbas.library   any     *	libs:	 fp support
+		- mathieeedoubtrans.library any     *	libs:	 fp support
+		- rexxsyslib.library	    36	    *	libs:	 Arexx support
+
+	    Libraries marked with * are not neccessarily required. Math
+	    libraries are needed for the single and double floating point
+	    conversions. 6888x or 680x0 with FPU is needed for the extended
+	    floating point conversions. Rexxsyslib is needed for the Arexx
+	    support and icon.library for the WB support (if snma is started
+	    from the icon).
+
+
+     You need linker to produce executables. There are several choices,
+    snma should work with the ones which can deal with standard hunks.
+    I have used DLink (from the freely distributable DICE, not the
+    registered or commercial one, I don't know do they differ any way)
+    and that works just fine and is free.
+
+    Recommended:
+
+	-   Hard Disk
+	-   Manuals, manuals...
+	-   Debugger
+	-   Time (8')
+	-   Development tools (Includes and so on)
+
+    *********************************************************************
+    *  Remember, this isn't pascal, this is REAL programming.           *
+    *  - 68000 Assembly language, techniques for building programs	*
+    *********************************************************************
+
+    (Good book (a bit old, however) by D.Krantz and J.Stanley).
+
+@endnode
+
+@node install "1.3 Installing SNMA "
+
+
+    There are couple of files to be copied. Installer ? Well, as soon as
+    I have some time to spare.
+
+    SNMA	    main file, copy somewhere under the search path if
+		    using snma in shell mode. In arexx mode snma needs to
+		    be started only once so its not so neccasary to be
+		    under the search path. SNMA has now icon so it can be
+		    started directly from the WB.
+
+
+    SNMA.guide	    Documents in AmigaGuide format. Copy anywhere you like.
+
+    examples/	    Very simple example files.
+
+    arexx/	    Arexx macros. Copy to the rexx: directory the ones
+		    you are going to use.
+
+
+    See also examples/alias.txt file.
+
+
+    (User friendlies at the best 8'| )
+
+@endnode
+
+
+@node GoodBad "1.4 Good & Bad"
+
+    My personal view from this assembler.
+    Things are not in any particular order.
+
+    Good:
+
+	- It's free.
+	- Most	common @{" directives " link Direc} are supported.
+	- Macros are supported.
+	- All 680x0, 6888x, 68851 and 68030 PMMU instructions are supported
+	- Does normal optimizations, including forward branches.
+	- It's not terribly slow.
+	- It's coded with assembler. (See below, Bad things).
+	- Enforcer was in duty all the time I coded, checked, debugged...
+	- Supports all data types of 680x0 6888x family (I think).
+	  (FFP conversions not supported).
+	- @{" ARexx " link arexx} interface.
+	- Global symbol table
+
+    Bad:
+
+	- 68040/68060 instructions (those couple of) are not yet supported.
+	- All source files must fit to memory at the same time.
+	- Is coded with assembler. Messy code sometimes, my fault, my
+	  problem. (Moral: Assembly is two edged sword).
+	- Doesn't support any small data model.
+	- Some kind of beginners help would be good (sources...).
+	- Only outputted format is Amiga object code.
+	- No LINE DEBUG HUNK (or whatever it is)  nor any new hunks.
+	- This document is a translators nightmare!!!!
+	  From the one (TK) who tried to fix english...
+	  (Authors note: Oh, life is so hard. 8^)
+	- No GUI, but I'm not sure would it even be useful.
+
+@endnode
+
+@node History "1.5 History of SNMA"
+
+	Changes, fixes and additions I have made to SNMA
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    V1.90
+	o moveq didn't allow xref'd data.
+	o mc68xxx directives
+	o Command line additions ([-option])
+	o Object code naming now also checks ".s" and ".a" suffix.
+	o OBJ filename in template was ignored (oh my).
+	o tst with pc-relative was allowed on 68000 mode.
+	o ext_ref symbols with same name were written many times, causing
+	  larger object file size (not actual code size).
+	o xdef symbols were written to the all sections.
+	o divu.l wasn't allowed.
+	o Equates with relative components are handled better now.
+	o Minimal WorkBench support
+	o \*VALOF() + other macro 'insert functions'.
+	o abslong to pc-relative optimizing.
+	o DC generated too much data if the 2nd operand of the
+	  previous instruction was one which took some space.
+	o REPT/ENDR directives
+	o Global symbol table.
+	o In cases where reloc was needed didn't create it, when
+	  symbol referred to equate which type was relative.
+	o Equates with relative components are no longer written to
+	  the symbol list.
+	o CHDIR (AREXX) command called FreeVec with wrong argument,
+	  causing memory loss (no crash, at least in my system).
+
+    V1.70
+	o BTST/BCHG/BSET/BCLR  Dn,<ea> set always <ea> as d0. (uups)
+	o MOVEP didn't allow zero displacement.
+	o ENDC switched assembly on sometimes when it shouldn't.
+
+    V1.68
+	o Some minor bug fixes and changes (okay, I forgot them).
+
+    V1.65
+	o Address components which started with 'Z' or 'z' were
+	  parsed to the totally wrong thing. (Bad one).
+	o IFGT did unsigned test, instead of signed.
+	o Didn't notice all cases when macro was already defined.
+	o Include <devicename:filepath> didn't work.
+	o Expression handler didn't catch all undefined symbols.
+	o AREXX, SET command.
+	o 'TST An' in 020+ mode wasn't allowed.
+	o Destination address mode optimizing in move instruction
+	      generated spurious opcodes in some cases.
+	o Movem->move optimizing.
+
+    V1.60
+	o AREXX PORT finally added
+	o Several bugs fixed
+	o LONGBRA flag to the template
+	o ZAn no longer required if An omitted in addressing mode.
+
+	Probaply I don't remember all the changes and fixed bugs, but I
+	hope all the major ones are here.
+
+	First released version of SNMA is 1.39.
+
+@endnode
+@node bug_report "1.6 Bug reports"
+
+	Bug reports are WELCOME.
+
+	Please, state following facts:
+
+	1) Your system configuration (Model, CPU, MEM, OS, ...) and the
+	   version of SNMA.
+
+	2) What you did. Source code which caused bug. If I can't make the
+	   bug appear, it is awful task to find out what went wrong. If
+	   possible try to isolate the bug, only tiny piece of code is
+	   usually required to show it. Or if the bug is not directly
+	   related to the source code, describe it well enough (in any
+	   case).
+
+	If you find out something is implemented badly, something would
+	need a little polishing or something is missing, and things like that,
+	suggestions are welcome.
+
+	I'm also intrested does snma work in all (OS2.04+) Amiga models
+	with enough memory.
+
+	Where to report, see @{" author " link Author}.
+
+		   ----------------------------
+		   --* fixed bug better bug *--
+		   ----------------------------
+@endnode
+
+@node nonsense "1.7 Misc., general things"
+
+	Some words from the inner working of SNMA
+	~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+	SNMA is not traditional two pass assembler altough its operations
+	can be divided down to two stages. Source files are read and
+	parsed only once. SNMA creates its own internal structures in this
+	first pass. In the second pass, snma solves all undefined symbols,
+	optimizes code, recalculates the changed values (like pc-relative
+	stuff) and writes object code (and other requested files).
+
+	Listing file creation is sloooow. (I suspect the buffered IO, but
+	can't make sure because I don't have 3.1 where SetVBuf() actually does
+	something).
+
+
+	Memory usage of snma isn't the most economical, since all source
+	files must fit in the memory and the way I implemented all the
+	other stuff. Strip comments from the include files you use, because
+	that reduces memory usage.
+
+	As a memory usage example:
+
+	One source code module:     size 25625 bytes, 1061 lines
+					with includes 7423  lines
+
+	SNMA uses 99403 bytes to store source files, 225356 bytes to the
+	all other stuff, total 324759 bytes.
+
+	The way I have implemented macros costs memory because snma needs
+	the produced macro lines to be in the memory in second pass where
+	expressions with relative and undefined symbols are re-calculated
+	and possible errors told. (SNMA won't read the source twice).
+
+	I know, the actual snma file is quite large also. Well, can't help
+	a lot anymore, without complete re-desing and re-write which is not
+	in my top ten list of how to spend the next years of my life.
+	(Actually I have managed to drop the size little).
+
+	The development of SNMA
+	~~~~~~~~~~~~~~~~~~~~~~~
+
+	I started the development of snma somewhere on the first half of
+	year 1993. I have coded SNMA entirely with the assembler, most of it
+	with a68k and minor parts with snma itself. It works pretty stable
+	in my system (A2000, GVP A3001 28Mhz 68030/882, 4M fast 1Mchip,
+	OS2.04). I'm developing it in my free time and have spend long
+	nights staring at my old 1081 and wondering what the **** is wrong
+	with everything.
+
+
+	Thanks
+	~~~~~~
+	I really must thank all you who have made so much wonderful
+	'Freely Distributable' software to Amiga.
+
+	Special thanks to the following people for the software I mainly
+	use while developing SNMA.
+
+	- Charlie Gibbs,  A68k
+	- Matt Dillon, DME and DLink
+	- Aaron Digulla, XDME
+	- Steffan Becker, ToolManager
+	- Jorrit Tyberghein, PowerVisor.
+
+@endnode
+
+@node HowTo "2. How to use "
+
+    SNMA can be started from the Shell or from the WorkBench.
+
+    2.1 @{" Shell startup " link shell_startup}
+    2.2 @{" Workbench startup " link wbargs}
+    2.3 @{" Starting arexx host " link rexx_start}
+
+@endnode
+
+@node Shell_startup "2.1 Startup from shell"
+
+    SNMA can be started from the shell like 'traditional' assembler.
+    It parses it arguments using AmigaDOS 2.0 templates. Some of the options
+    can be specified also in the @{" 'old way' " link oldtemp}, i.e. with '-'.
+    These 'old way' arguments override the template arguments.
+
+
+    Command Line template:
+
+    SNMA
+	    SOURCEFILE/A O=OBJ/K O=OBJ/K I=INCLUDE/K H=HEADER/K E=EQUATE/K
+	    L=LISTING/K Q=QUICKOPT P=PCOPT A=ADDRESSOPT B=BASEFORCE S=SYMBOL
+	    L=LONGBRA AREXX/S PORTNAME/K QUIET/S PAGELEN/K/N
+
+    Where:
+
+    SOURCEFILE		is the name of the source file. It is a first
+			argument and must be there always.
+
+    OBJ 		defines the name of the object file.
+			alias: -o<name>
+
+    INCLUDE		defines list of directories where @{" INCLUDE " link dir_include } directive
+			searches include files
+			alias: -i<namelist>
+
+    HEADER		defines file to be included before any lines from
+			source file are assembled. Only one is allowed.
+			alias: -h[<name>]
+
+
+    EQUATE		defines equate file name to be created. Empty
+			string is allowed, SNMA produces name from the
+			source file name. Currently equate file is
+			generated at the end of assembly. Symbols are taken
+			from the hash table, so they are in mixed order.
+			You can use AmigaDOS SORT command if you like some
+			sort of order.
+			alias: -e[<name>]
+
+    LISTING		Listing file to be created. Minimal formatting can be
+			done by using PAGELEN option.
+			alias: -l[<name>]
+
+    QUICKOPT		Quick optimizing flag,	     default: on
+    PCOPT		pc-relative optimizing,      default: off
+    ADDRESSOPT		effective address optimizing default: on
+    BASEFORCE		Auto-force (Bd,An)->(disp16,An) default: on
+    SYMBOL		Write symbol data hunk	     default: off
+    LONGBRA		Long branches (wo/size field) default: off
+
+    AREXX		flag to start @{" AREXX " link arexx} command host SNMA.
+			Overrides others.
+
+    QUIET		Disables output
+
+    PAGELEN		Defines pagelen used in listing file. If null, snma
+			does not create pages (useful if you want to do
+			your own formatting).
+			Default: NULL.
+
+
+
+    See @{" Options " link dir_opt}.
+
+    SNMA does not check the stack anyway. I haven't had any problems with
+    stack size of 4000 bytes. You can overflow stack with very deep
+    expressions or very nested includes. One level on both cases takes
+    about 100 bytes, so very means here something like 40 levels. Actually
+    little less. If you worry about that, use bigger stack.
+
+    @{" Examples " link cliexample}
+
+@endnode
+
+@node oldtemp "2.1.1 template: old flags"
+
+    Many applications use the '-' as a option start character.
+    (like: a68k file.asm -l -iinclude:).
+
+    If you want just to flag that you want some file to be generated and
+    want snma to create the file name from the source name, you had to pass
+    empty string (like LISTING ""). I have to admit that this isn't very
+    elegant method and when trying to pass commands to arexx macros I had
+    several problems with the quotes. So, to allow easier use,	couple of
+    '-' flags are also allowed in commandline. In template they show
+    as OLDFLAGS/M template. In the template explanation they are referred
+    as 'alias:'.
+
+@endnode
+
+
+@node cliexample "2.1.2 Command Line Examples"
+
+
+prompt> SNMA	mycode.asm obj mycode.o include myinc:
+
+    Mycode.asm is a source file, mycode.o is a object file and include
+    files are searched from the current directory and then from myinc:
+    directory.
+
+
+prompt> SNMA mycode.asm  Q on A off B off S on	 I work:,work2:inc
+
+    mycode.asm is a source file. Flags are set on and off. Include files
+    are searched from the current directory, work: and work2:inc.
+
+
+prompt> SNMA mycode.asm EQUATE myequ
+
+    produces myequ.equ named equate file and mycode.o object code.
+
+prompt> SNMA mycode.asm E ""
+
+    produces  mycode.equ named equate file and mycode.o object code.
+
+prompt> SNMA arexx
+
+    Starts SNMA @{" Arexx " link arexx} command host.
+
+prompt> SNMA mycode.s -e -l -iinclude:
+
+    mycode.s is source code, -e and -l flags snma to produce equate and
+    listing file, and -iinclude: tells snma to search include files from
+    the include: directory.
+
+
+@endnode
+
+@node wbargs "2.2 Workbench support"
+
+    SNMA can be started from the Workbench, too. Its behaviour is
+    controlled with ToolTypes. SNMA can assemble file(s) or start Arexx
+    SNMA. You can disable ToolType removing it or setting it to parenthesis
+    "()".
+
+    Tooltypes:
+    ~~~~~~~~~
+
+    AREXX			flag to start snma in arexx mode.
+
+    PORTNAME=<name>		AREXX port name. If omitted, uses default
+				(SNMA) name.
+
+    WINDOW=<file>		Specify output file. If omitted, snma
+				will use its default output (CON:...). If
+				AREXX flag is set too, no default output is
+				created, if omitted.
+				See @{" Arexx/SET "link rx_set}.
+
+
+
+    The default tooltypes are so that AREXX snma will be started.
+    You can have many SNMAs running at the same time (altough it is not
+    very useful). If you click several times snma icon several SNMAs are
+    started, each with dirreferent portname. See @{" Arexx "link arexx}.
+
+    To stop SNMA you have to send QUIT command to it. Here's how you do it
+    from the shell:
+
+    ->rx "address SNMA QUIT"
+
+    where "SNMA" is the name of the arexx port.
+
+    How to stop from the WB ?  For example, use tool like ToolManager, and
+    create the "SNMA OFF" command which is just like the above shell
+    command.
+
+
+    If you want to assemble files playing with icons, I suggest you to use
+    for example ToolManager which makes your life a lot easier.
+
+    I added the WB support mainly because it may be helpful to start SNMA
+    in arexx mode from the icon.
+
+    If you start SNMA from the WB and pass it arguments (you have selected
+    other icons as well), SNMA will try to open WINDOW=<file>, if omitted
+    it will open its default output window. Then the passed file(s) is(are)
+    assembled just like in shell mode. SNMA won't check any of the
+    tooltypes of arguments and it does not check if there is already snma
+    arexx host where the assembly could be directed. (I strongly doubt
+    anyone will even use this method, but it was rather easy to implent so
+    there it is).
+
+@endnode
+
+@node rexx_start "2.3 Starting the arexx SNMA host"
+
+	SNMA can be started as arexx host and I suggest to use snma that
+	way.
+
+	Startup from:
+
+		    - Shell	use AREXX template
+
+		    - WB	use AREXX tooltype
+
+	See @{" Arexx " link arexx} section (4.).
+
+
+
+@endnode
+
+@node feature "3. Features of SNMA"
+
+
+    This section covers all the features of SNMA, relating to the actual
+    assembly process.
+
+
+	3.1 @{" Source code format " link source}
+
+	3.2 @{" Symbols            " link symbol}
+
+	3.3 @{" Expressions        " link express}
+
+	3.4 @{" Addressing modes   " link eas}
+
+	3.5 @{" Directives         " link Direc}
+
+	3.6 @{" Data types         " link dtypes}
+
+	3.7 @{" Things to note     " link note}
+
+	3.8 @{" Errors             " link error}
+
+
+@endnode
+
+
+@node source "3.1 Source code format"
+
+
+    The format of the source code is 'standard'.
+
+    One line can be 256 bytes long (after macro expansion, too).
+
+    One source code line may have following components:
+
+    <Label>   <opcode>	<operands>  <comment>
+
+
+    <Label>	Label must start from the first column.
+		It may end to the colon (':').
+
+		Legal label chars are 'A-Z', 'a-z', '0-9', '_', '.'
+		or codes 127-255 (chars like ‰ˆÂﬁ–).
+
+		First char must be: 'A-Z', 'a-z', codes 127-255, '_','.'
+		After that digits (0-9) are legal, too.
+
+		Local labels are supported. You have three alternatives
+		to define local label:
+
+		1)  add '.' in front of it. For example:  .local
+		2)  add '\' in front of it.  For example:  \local
+		3)  add '$' to the end of it. For example: local$
+
+		Local label can start also with a digit (actual label part).
+		(1$, .1,...)
+
+    <opcode>	Opcode field is separated from the label field at least one
+		space. Opcode can be:
+
+			1)  MC680x0 operation code (instruction).
+			2)  Assembler @{" directive " link Direc}
+			3)  Macro invocation
+
+    <operands>	Operand field is separated from the opcode field at least
+		one space. Operand field may contain 0 to 9 operands,
+		depending  from what is in the opcode field. Operands are
+		separated with comma (,).
+
+    <comment>	Anything after the operand field is ignored and treated as
+		comment. Those MC680x0 instructions which don't have
+		operands ignore anything after the opcode field. Anything
+		after the ";" character is treated as comment. If the
+		character in the first column is "*" entire line is
+		comment or if the opcode is * it is ignored.
+
+
+
+@endnode
+
+@node symbol "3.2 Symbols in SNMA"
+
+
+    Symbols in SNMA have different meaning, depending on where they are
+    used.
+
+
+       Absolute symbols
+       ~~~~~~~~~~~~~~~~
+
+    Absolute symbols are defined with the @{" EQU " link dir_equ} or @{" SET " link dir_set} directive. Symbols
+    may be local symbols same way as labels. See @{" label " link source} definition.
+    Absolute symbols refer to the numerical values.
+
+    @{" Example" link locsymb_example }
+
+    SNMA @{" pre-defines " link predefs} some symbols with SET directive.
+
+	Relative Symbols
+	~~~~~~~~~~~~~~~~
+
+    Relative symbols are labels, or equates which have relative symbols
+    in the expression which defines it. Only exception to this is expression
+    Relative-Relative which results absolute type. See @{" expressions " link express}
+    for the restrictions with the relative symbols.
+
+    "*" is special symbol and has the value of the program counter (PC).
+
+    For example:
+     data    ds.b    100	    ; define space 100 bytes
+     size    equ     *-data	    ; size gets value of 100 (abs type)
+
+
+
+	Register Equates
+	~~~~~~~~~~~~~~~~
+
+    Register equates are defined with @{" equr " link dir_equr} directive.
+    Register symbol refers to the register (Dn or An).
+
+
+	Register lists
+	~~~~~~~~~~~~~~
+
+    Register lists are only allowed in movem and fmovem instructions.
+    They are defined with @{" reg " link dir_reg} directive.
+    Register list refers to the list of registers.
+
+
+	Macro symbols
+	~~~~~~~~~~~~~
+
+    Macros are defined with @{" macro " link dir_macro} and @{" endm " link dir_endm} directives.
+    macro symbol refers to the defined macro.
+
+
+@endnode
+
+@node predefs "Pre-defined symbols"
+
+    SNMA pre-defines the following symbols with SET.
+
+    symbol name 	    value
+    ~~~~~~~~~~~ 	    ~~~~~
+	    SNMA	    0
+	    snma	    0
+	    NARG	    0		(actually number of args in macro call)
+	    M68000	    1
+	    M68010	    2
+	    M68020	    4
+	    M68030	    8
+	    M68040	    16
+	    M68881	    512
+	    M68882	    512
+	    M68851	    2048
+	    F040	    1024
+
+
+    These symbols are case-sensitive. 'SnMa' is not same as 'SNMA'.
+    M68xxx symbols are meant to be used with @{" cpu " link dir_cpu} directive.
+
+    See also @{" register names " link regnames}.
+
+@endnode
+@node regnames "Register names"
+
+    SNMA uses the following register names:
+
+    D0-D7  A0-A7 SP CCR SR SFC DFC CACR USP VBR CAAR MSP ISP FP0-FP7 FPCR
+    FPSR FPIAR TT0 TT1 TC DRP SRP CRP CAL VAL SCC AC MMUSR PSR PCSR
+    BAD0-BAD7 BAC0-BAC7
+
+    Registers from the CCR in above list are special registers. If
+    the name of special register is only component of address mode (like
+    'lea CAL,a0') snma thinks it to be special register. If the name
+    of special register is one of the components of address mode (like 'lea
+    (CAL,pc),a0') it is treated as a normal symbol. However, to avoid any
+    confusion, I strongly suggest you to use these names only when refering
+    to the special registers.
+
+
+@endnode
+
+@node express "3.3 Expressions in SNMA"
+
+
+    Expressions can be used almost anywhere where numerical
+    component(s) is(are) needed. Only exception is floating
+    point numbers which don't allow expressions. Expressions use
+    32 bit integer math.
+
+    Expressions may have: 1) symbols, 2) constants, 3) operators,
+			  4) parenthesis.
+
+    1) @{" Symbols " link symbol} must be absolute or relative ones.
+
+    2) Constants are numbers. They can be decimal, hexadecimal ($), or
+       in binary (%) form. Sorry, I'm too lazy to do octal conversion, but if
+       somebody really needs it, I may add it (never,ever used
+       it by myself).
+
+    3) operators
+
+	-		Unary minus
+	~		bitwise NOT (one's complement)
+	<< or < 	left shift
+	>> or > 	right shift
+	&		bitwise AND
+	! or |		bitwise OR
+	*		multiply
+	/		divide
+	+		add
+	-		subtract
+
+
+    4) Parenthesis are (). They can be nested.
+       For example: 3*((12-6)/(2+2))
+
+
+    Expressions are either absolute or relative, depending from the
+    types of the symbols and operators. Relative symbols are allowed
+    only to add and sub operands. When expression is evaluated, it is
+    divided to the sub-expressions down to stage <number operand number>,
+    where number can be symbol. This sub-expression gets its own sub-type.
+    Confusing ? See below.
+
+    For example: (Rel2-Rel1)/4 is legal expression, because
+		 the type of Rel2-Rel1 is absolute although they both
+		 are relative symbols. See the table below.
+
+
+    Following table tells types of expressions.
+    A = Absolute , R = Relative, - = not allowed
+
+    Operator		    operands
+    ~~~~~~~		    ~~~~~~~~
+			    A op A	A op R	  R op A    R op R
+    +			      A 	  R	    R	      -
+    -			      A 	  -	    R	      A
+    *, /, &, !, <<, >>	      A 	  -	    -	      -
+
+
+@endnode
+
+
+
+@node locsymb_example "Local symbol example"
+
+
+    Following example demonstrates local and global symbols.
+
+; start-----------------------------------------
+num	equ	123		; define global symbol
+start:
+.num	equ	10		; define local symbol
+	move.l	#.num,d0	; move 10 to d0
+	move.l	#num,d1 	; move 123 to d1
+new:
+.num	equ	23		; define local symbol
+	move.l	#.num,d0	; move 23 to d0
+	move.l	#num,d1 	; move 123 to d1
+	rts
+	end
+; end-----------------------------------------
+
+@endnode
+
+@node eas "3.4 Address modes"
+
+
+    SNMA supports all the addressing modes of the 680x0.
+
+    SNMA supports Motorola's new addressing mode format as well as
+    the old one. I don't have any of the Motorala's manuals, but I have
+    seen enough 'new format' sources. The actual change is more cosmetic, I
+    think. ( Aku(a0) is in new format (Aku,a0)).
+
+
+    Forcing the size
+    ~~~~~~~~~~~~~~~~
+    In some places, you can force value to be either word or long word.
+    This is generally used to force something to the  word size, but it
+    can be used to force something to the long size, too. Forcing is
+    implemented adding .w (for word) or .l (for long word) suffix to
+    the symbol. For example, 'move.l  (4.w),a0'.
+
+    Note1: Above addressing mode is optimized when using simple 'move.l
+	   (4),a0'. 'move.l (4.l),a0' would not allow optimizing because
+	   of the force suffix.
+
+    Note2: SNMA won't complain mode (4).w, but it ignores the  forcing
+	   suffix. Above mode is discouraged anyway if you take a look to
+	   the new addressing mode syntax of Motorola. At least in SNMA.
+
+
+    Base displacement modes (including Memory Indirect)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    You can force Base Displacement and  Outer Displacement to be a long
+    word or word with .l (long) or .w (word) suffix.
+
+    For example:    ([BD.w,A0,d1.w],OD.l)   where BD and OD are
+					   symbols.
+
+
+    SNMA will optimize addressing modes to the best possible. If certain
+    components are omitted change to the quicker mode can be made. When you
+    force some value with .l or .w, value must be within range and even if
+    actual value would be optimized it is not, because it is forced.
+
+    Example:
+
+	jsr	(BD.w,a6)
+    BD	equ	0
+
+    ; Although BD is null, generated addressing mode will be disp16(An)
+    ; because we forced BD to be word.
+
+	tst.l (BD,a0)
+    BD	equ   0
+
+    ; This will generate addressing mode (An)
+    ; end of example
+
+    Same thing applies to the Outer Displacement, except that addressing
+    mode is always Memory Indirect if there is OD.
+
+    Don't care, if above is confusing. You don't have to force usually
+    anything, SNMA optimizes best mode for you. If you want some value
+    to be exactly specified size (when importing value, for example)
+    forcing is handy feature.
+
+
+    No Address Register in addressing mode
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    When address register is not part of address generation you have two
+    ways to exclude it. First, just don't set it (like (d2.l) ). Then you
+    can always use Zero Suppressed address register using name ZAn (n does
+    not matter) instead of An. For example,
+
+    (10,d3.l)       =       (10,za0,d3.l)
+    (d1.l)          =       (za0,d1.l)
+    (10,a2.w)       =       (10,za0,a2.w)   index register is An
+
+
+    You may wonder what the <---> is this Zero suppress stuff. The book
+    I used as a reference manual mentioned it and I fool didn't realized it
+    until now (long time passed) that index register has suffix stuff which
+    says : HEY ! I'm the index register. Oh well...
+
+
+    Immediate values
+    ~~~~~~~~~~~~~~~~
+
+    SNMA checks immediate values so that they are in range, depending from
+    the size of the instruction. Immediate values can also be longer than
+    32 bits if instruction is some fpu/mmu instruction. FPU instructions
+    allow real mode definition of the number like -11.13232e-2.
+    FP values are not checked.
+
+    Optimizing Address modes
+    ~~~~~~~~~~~~~~~~~~~~~~~~
+    Address modes are optimized very well in SNMA. Forward optimizing is
+    also included. See @{" OPT " link dir_opt} directive. See above for
+    more information. I suggest that you keep addressing mode optimizing on,
+    ecspecially when the 68020+ mode is on, because the way SNMA works.
+    (You will get definetely the worst addressing mode if the symbols
+    are not defined when the line is assembled first time).
+
+@endnode
+
+@node Direc "3.5 Directives"
+
+    The following directives are supported:
+
+
+    @{" CNOP    " link dir_cnop   }     Conditional NOP
+    @{" CNUL    " link dir_cnul   }     Conditional NULL
+    @{" CPU     " link dir_cpu    }     Define CPU ID type
+    @{" DC      " link dir_dc     }     Define Constant
+    @{" DCB     " link dir_dcb    }     Define Constant Block
+    @{" DS      " link dir_ds     }     Define Space
+    @{" ELSEIF  " link dir_elseif }     Conditional assembly toggle
+    @{" END     " link dir_end    }     End of source file
+    @{" ENDC    " link dir_endc   }     End conditional assembly
+    @{" ENDIF   " link dir_endc   }     Alias for endc
+    @{" EDNM    " link dir_endm   }     End macro definition
+    @{" ENDR    " link dir_endr   }     End repeat block
+    @{" EQU     " link dir_equ    }     Define symbol value
+    @{" EQUR    " link dir_equr   }     Define register equate
+    @{" EVEN    " link dir_even   }     Ensure PC is even
+    @{" FAIL    " link dir_fail   }     User error
+    @{" IDNT    " link dir_idnt   }     Set program unit name
+    @{" IFC     " link dir_ifc    }     Assemble if strings equal
+    @{" IFcc    " link dir_ifcc   }     Assemble if condition true
+    @{" IFD     " link dir_ifd    }     Assemble if symbol defined
+    @{" IFNC    " link dir_ifnc   }     Assemble if strings not equal
+    @{" IFND    " link dir_ifnd   }     Assemble if symbol undefined
+    @{" INCBIN  " link dir_incbin }     Include Binary
+    @{" INCDIR  " link dir_incdir }     Include directory list
+    @{" INCLUDE " link dir_include}     Include source file
+    @{" LIST    " link dir_list   }     Turn on listing file generation
+    @{" MACRO   " link dir_macro  }     Start macro definition
+    @{" MC680x0 " link dir_mc68000}     CPU mode
+    @{" MEXIT   " link dir_mexit  }     Exit from macro
+    @{" NOLIST  " link dir_nolist }     Turn off listing file generation
+    @{" OPT     " link dir_opt    }     Define options
+    @{" REG     " link dir_reg    }     Define register list
+    @{" REPT    " link dir_rept   }     Start repeat block
+    @{" SECTION " link dir_section}     Start new section
+    @{" SET     " link dir_set    }     Define SET value
+    @{" XDEF    " link dir_xdef   }     Export symbol
+    @{" XREF    " link dir_xref   }     Import symbol
+
+@endnode
+
+
+
+@node	dir_cnop "CNOP directive "
+
+    Conditional NOP. This directive is used to align data arbitrarily.
+
+    CNOP    offset,alignment
+
+
+    Offset is value which is added to the alignment.
+    Alignment is alignment boundary value.
+
+    cnop 0,4	aligns pc to the long word boundary.
+
+
+    cnop 2,8	align pc to the 8 byte boundary plus two bytes.
+
+@endnode
+
+@node	dir_cnul "CNUL directive "
+
+    CNUL    offset,alignment
+
+    Conditional NULL. Same as @{" CNOP " link dir_cnop}, but instead of NOP directive, pads with
+    null word.
+
+
+@endnode
+
+@node	dir_cpu "CPU directive "
+
+    CPU     <expression>
+
+    Defines what kind of instructions are legal. This is also used to FPU
+    and MMU instructions.
+
+    Expression is simple numerical value which is set to the internal SNMA
+    variable (CPU command is only way to set it, it is not a symbol).
+    See @{" Pre-defined symbols " link predefs}.
+
+    M68000
+    M68010
+    M68020
+    M68040
+    M68851	MMU
+    M68881	FPU
+    M68882	FPU   same as M68881
+    F040	MC68040 floating point only
+    M030	68030 MMU
+
+
+    Examples:
+
+    CPU M68000			enables 68000 instructions
+    CPU M68000!M68010!M68020	enables instructions of those cpu's.
+
+    CPU M68020!M68030!M68881	enables FPU instruction also.
+
+
+    This directive can be used so that if code is wanted to be run in
+    M68000 machines you can check that there are no other instructions
+    than those which MC68000 recognizes. All combinations are possible.
+    CPU -1 enables all instructions to be assembled. SNMA performs  "CPU -1"
+    in the beginning of the assembly.
+
+    See also @{" MC680x0 " link dir_mc68000} directives.
+
+@endnode
+
+@node	dir_dc "DC directive "
+
+    Define Constant
+
+    DC.n    <expression> or <single value>
+
+    n is size of data.
+
+
+    See @{" Data types " link dtypes}.
+
+
+    dc.b    2+1 	reserves one byte and sets 3 to its value.
+    dc.l    12		reserves long word and sets 12 to its value
+    dc.s    $FEEBD00D	reserves long word and sets it to $FEEBD00D
+    dc.d    +12.9292e-2 reserves two long words and sets its value what
+			that number is in double format (binary).
+
+
+    Expressions are only valid to the integers. Expressions with the
+    floating point numbers are not allowed.
+
+    If n is not defined, default is word.
+
+@endnode
+
+@node	dir_dcb "DCB directive"
+
+    Define Constant Block
+
+    dcb.n   <abs expression>,<value>
+
+    Reserves space for given data type (n). All entries are set to single
+    value which is given as second argument. See @{" Data types " link dtypes}.
+
+@endnode
+
+@node	dir_ds "DS directive"
+
+    Define Space
+
+    DS.n    <abs expression>
+
+    Defines storage for given  data type (n).
+
+
+    ds.b    12		reserves space for 12 bytes
+    ds.l    3		reserves space for 3 longs (12 bytes)
+    ds.x    4*4 	reserves space for 16 extended type fp number.
+			(192 bytes)
+
+    <abs expression> must be evaluated and it cannot contain relative
+    symbols (or undefined by far).
+
+    All reserved space is set to null.
+    See @{" Data types " link dtypes}.
+
+
+@endnode
+
+@node	dir_elseif "ELSEIF directive "
+
+    ELSEIF toggles conditional assembly. If assembly was off, it
+    toggles it on and vice versa.
+
+    Warning! This one does NOT WORK as it should, when conditional assembly
+    nests.  (I should fix that...).
+
+@endnode
+
+
+
+@node	dir_end " End Directive"
+
+    End directive ends assembly. It is not required to be in the end of
+    source file. When source file ends it also ends assembly.
+    Anything after END directive is not assembled.
+
+@endnode
+
+@node	dir_endc " ENDC directive"
+
+    ENDC (alias ENDIF)
+
+    Toggles off conditional assembly if nest count match.
+@endnode
+
+@node	dir_endm "ENDM directive "
+
+	ENDM
+
+	Ends current macro definition.
+
+@endnode
+
+@node	dir_endr "ENDR directive "
+
+	ENDR
+
+	Ends current repeat block.
+	See @{" REPT " link dir_rept}.
+
+@endnode
+
+@node	dir_equ "EQU directive"
+
+    EQUate.
+
+    symbol EQU <expression>
+
+    Sets the value of the symbol to <expression>. Symbol and
+    <expression> are both required. = is equivalent to equ.
+
+    See @{" Expressions " link express}.
+
+    Floating point numbers are supported by specifying size field to
+    the EQU.
+
+    See @{" Data types " link dtypes}.
+
+    Only floating point data types are supported in equ if n suffix is
+    there. (You can't 'equ.b 5').
+
+    When symbol is used as part of fpu instruction simple type checking
+    is done, but only between floating point types.
+    The following code would cause ERROR:
+
+    NUM     equ.d   +11.234343
+	    fmove.s #NUM,fp0
+
+	To fix this, change NUM to single or fmove to double.
+
+    NUM     equ.d   +11.234343
+	    fmove.d #NUM,fp0		declared type same as used type !
+
+    The following code would not cause error, because fmove uses long type
+    which is not floating point type (okay, it would be good to check
+    anyway).
+
+     NUM    equ.d   12.23232
+	    fmove.l #NUM,fp0
+@endnode
+
+@node	dir_equr "EQUR directive "
+
+    EQUR means register equate.
+    It allows register to be addressed as symbols.
+    Register equates must de defined before used.
+
+
+    Example:
+
+    count   equr    d0
+	    move.l  #0,count	    ; means move.l #0,d0
+@endnode
+
+@node	dir_even " EVEN directive"
+
+    EVEN aligns PC to be divisible by two if it is not already. It does
+    same thing as cnop 0,2 See @{" CNOP." link dir_cnop}.
+
+@endnode
+
+@node	dir_fail "FAIL directive"
+
+     FAIL flags assembler to stop assembling. It is used to flag user
+     errors. It may be used if macro call won't get enough parameters,
+     for example.
+
+@endnode
+
+@node	dir_idnt "IDNT directive "
+
+	IDNT	<name>
+
+	Sets name of program unit to <name>.
+
+@endnode
+
+@node	dir_ifc " IFC directive"
+
+    IFC     'string1','string2'
+
+    If string1 = string2  DO assemble.
+
+    See also @{" IFNC " link dir_ifnc}.
+
+@endnode
+@node	dir_ifcc " IFcc directives"
+
+    IFcc  <expression>
+
+    IFcc is conditional assembly control directive.
+    cc is condition. Expression is tested against the value of zero.
+
+    directive			    means
+				    ~~~~~
+    IFEQ    <expression>	    EQual
+    IFNE    <expression>	    NEqual
+    IFGT    <expression>	    Greater Than
+    IFGE    <expression>	    Greater or Equal
+    IFLT    <expression>	    Lower Than
+    IFLE    <expression>	    Lower or Equal
+
+    If condition is true, assembling is continued. If condition is false
+    assembling is turned off. @{" ENDC " link dir_endc} directive ends
+    conditional assembling.
+
+@endnode
+
+@node	dir_ifd " IFD directive"
+
+    IFD <symbol>
+
+    Conditional assembly trigger.
+    IF symbol is defined,  do assemble, else don't.
+
+    See also  @{" IFND " link dir_ifnd}.
+
+@endnode
+
+@node	dir_ifnc " IFNC directive"
+
+    IFNC     'string1','string2'
+
+    If string1 <> string2 DO assemble.
+
+    See also @{" IFC " link dir_ifc}.
+@endnode
+
+@node	dir_ifnd " IFND directive "
+
+    IFND <symbol>
+
+    Conditional assembly trigger.
+    IF symbol is not defined,  do assemble, else don't.
+
+    See also @{" IFD " link dir_ifd}.
+
+@endnode
+
+@node	dir_incbin " INCBIN directive"
+
+    INCBIN  <file>
+
+    Incbin directive includes file to the code in its binary form. No
+    assembling is done to the file. If you have file named bin and it
+    contains following data in hex form (4 bytes long file):
+
+    0BAD BEEF
+
+    Now..
+
+	IncBin bin
+
+    would do same as
+
+	dc.l $0BADBEEF.
+
+
+     If the length of the file is not even, extra null byte is added to
+    the end of the data when it is set to the produced code. This makes
+    sure that the program counter stays aligned. This is just the same as
+    the Incbin without this feature (in SNMA this feature is always on):
+
+	incbin	<file>
+	even
+
+    Thus, above 'even' is done automatically (always) by 'incbin' and is
+    unnecessary in SNMA.
+
+@endnode
+
+@node	dir_incdir "INCDIR directive "
+
+    INCDIR  <mydir1>[,mydir2,mydir3...]
+
+    INCDIR directive adds directories to the directory list where
+    INCLUDE files are searched from.
+
+    INCBIN uses this list, too.
+
+@endnode
+
+@node	dir_include " INCLUDE directive "
+
+    INCLUDE <file>
+
+    Starts to assemble <file>. After it has been assembled, continues
+    assembling after INCLUDE directive.
+
+    Include files are searched first from the current directory, then
+    from directory list which can be defined in @{" command line " link HowTo 9}
+    or with @{" INCDIR " link dir_incdir} directive. If include file is
+    not found assembly is stopped right there (fatal error).
+
+    When snma is in arexx mode it can have global include tables. If <file> is
+    already in global table, it is skipped (not even loaded to the memory).
+    See @{" ADDGB " link rx_addgb}.
+
+@endnode
+
+@node	dir_list "LIST directive"
+
+	LIST	turns on listing file generation. You can disable portions
+		(like includes) of listing file to be generated with LIST and
+		@{" NOLIST " link dir_nolist} directives. These don't nest.
+
+@endnode
+
+@node	dir_macro "MACRO directive "
+
+    <Symbol> MACRO
+
+
+    Starts macro definition. Code inside macro definition is not assembled
+    yet. It is assembled when macro is called. NARG symbol is set to
+    number of arguments passed to macro, when macro is called.
+
+    Backslash ("\") has special meaning in macro definition. If character
+    after it is:
+
+    1)	1-9		insert argument number <number>
+    2)	0		insert size field of macro call
+    3)	@<label>	produces unique label (like local labels).
+    4)	*<function()>   executes special function
+
+
+
+;------------------------------------------------------
+    simple example:
+
+    Do	    macro
+	    move.\0 \1,\2
+	    endm
+
+	    Do.b    d0,d1	; produces move.b d0,d1
+;------------------------------------------------------
+
+
+    Special functions (4) insert result string to the macro. If there is
+    error actual function call is inserted. These 'functions' do not nest,
+    BUT you can define macro arguments in the argument of function (like
+    \*valof(\1)).
+
+
+    The parenthesis are required always because there must be some
+    way to tell when 'function' ends.
+
+    \*VALOF(expression)         inserts the numerical value of expression.
+				This expression is only solved during
+				pass1. If expression has relative
+				components, optimizing may change it but
+				the change is NOT reflected here. Also,
+				expression must be already defined.
+
+
+
+    \*DATE(format)              inserts the current date string of the system.
+				Format char	    format type
+				~~~~~~~~~~~	    ~~~~~~~~~~~
+				d		     DOS     (dd-mmm-yy)
+				i		     INT     (yy-mmm-dd)
+				u		     USA     (mm-dd-yy)
+				c		     CND     (dd-mm-yy)
+
+				DATE() uses dos/datestamp.
+
+    \*TIME()                    inserts current system time
+				TIME() uses dos/datestamp.
+
+    \*VAR(name)                 inserts local or global (ENV:) dos variable
+				using	dos/GetVar().
+
+    \*STRLEN(string)            insert lenght of string
+    \*UPPER(string)             converts string to uppercase
+    \*LOWER(string)             converts string to lowercase
+
+
+
+
+    DATE    macro
+	    dc.b    'Assembling Date: \*DATE(d)',0
+	    endm
+
+@endnode
+
+@node  dir_mc68000 "mc680x0 directives"
+
+	The following directives are shortcut to the cpu directive.
+
+	mc68000
+	mc68010
+	mc68020
+	mc68030
+	mc68040
+	mc68881
+	mc68882
+
+	They do same as @{" CPU " link dir_cpu} with single argument, which is one of the types
+	of cpu. MC68881 (mc68882) enables also 68020 (68030). Using CPU
+	directive, you can control arbitrarily the value of CPUID.
+
+	mc68040 is bit useless now because I still don't know the 68040
+	specific instructions (expect floating point).
+
+@endnode
+
+@node	dir_mexit "MEXIT directive "
+
+	MEXIT
+
+	Exit from macro definition.
+	When macro is called it may be useful to exit from macro expansion
+	before actual macro ends.
+
+	Used usually in conditional macros.
+
+
+@endnode
+
+@node dir_nolist "NOLIST directive"
+
+	NOLIST	directive turns off listing file generation.
+		See also @{" LIST " link dir_list} directive.
+@endnode
+
+@node	dir_opt " OPT directive"
+
+    OPT     flag[,flag,flag...]
+
+
+    where flags are:
+
+    Q	    Quick optimizing. Move->moveq, add->addq,sub->subq
+	    whenever possible. Also movem -> move if only one reg.
+	    Default: on
+
+    P	    Absolute long addressing -> program counter relative
+	    whenever possible.
+	    Default: off
+
+    A	    Effective address optimizing. 0(An)->(An), BD and OD
+	    optimizing if 0 or word. (BD,An)->dip16(An) if possible.
+	    Optimizes address modes as quick as they can be.
+	    Default: on
+
+    B	    Auto-force (BD,An) ->   disp16(An). This can be overridden
+	    disabling this flag or using .l suffix in the symbol.
+	    (BD.l,An) makes addressing mode always long, no matter of
+	    the B flag. This feature is there because routines of the
+	    run-time libraries can all be called by (disp16,An) mode.
+	    Often displacement is xref'd symbol which is solved during
+	    linking time. Because symbol is xref'd it must be treated
+	    like being 32 bit because in theory it can be so. All
+	    library calls however can use (disp16,An) mode. This method
+	    is provided so that you don't have to add .w extension to
+	    all calls. Default: on
+
+    S	    If flag is on, symbol hunks are written to the object file.
+	    This is handy when used with symbolic debuggers.
+	    Default: Off
+
+    L	    Long braches. If on Bcc instructions without size specifier
+	    are first treated long branches. If this flag is off they
+	    are converted to word braches (but they may change to the
+	    byte if possible).
+	    Default: Off
+
+    Example:
+
+    OPT S,P+,B-
+
+    Write symbol hunks, Optimize Absolute long -> pc-relative, Disable
+    Auto-forcing of (BD,An).
+
+@endnode
+
+@node	dir_reg "REG directive "
+
+
+    Symbol  REG <reg-list>
+
+    REG directive specifies register list used by movem instruction.
+    List may contain symbolic register name defined by equr.
+    Symbolic register lists must be defined before used.
+    Symbols defined by REG  can be used only with movem instruction.
+    <reg-list> may be omitted. If <reg-list> is empty, movem
+    instruction, which uses empty list, is not generated.
+
+
+    example:
+
+    list    reg     d0-d3/a0-a2/a5
+	    movem.l list,-(sp)          push registers to stack
+	    nop
+	    movem.l (sp)+,list          pop registers from stack
+
+
+@endnode
+
+@node	dir_rept "REPT directive "
+
+	REPT	<num>
+	Starts repeat block. <num> specifies how many times repeat block is
+	repeated.
+
+	Example
+
+	    rept    100 	    ; clear 400 bytes
+	    clr.l   (a0)+
+	    endr
+
+	See @{" ENDR " link dir_endr}.
+
+	Don't define things inside repeat block or use include or anything
+	like that.
+
+@endnode
+
+@node	dir_section " SECTION directive"
+
+    SECTION <name>[,<type>[,<mem type>]]
+
+    Start new section. Name of the section is set to <name>.
+    Type of the section is one of these:
+	CODE	CODE_C	CODE_F
+	DATA	DATA_C	DATA_F
+	BSS	BSS_C	BSS_F
+
+    _C extension specifies mem type (C=CHIP, F=FAST).
+
+    <mem type> specifies the type of the memory where hunk should be
+    loaded. It can be specified with <type> field by extension or with
+    separate third argument which is CHIP or FAST.
+
+
+@endnode
+
+@node	dir_set " SET directive"
+
+    <Symbol>	SET <number>
+
+    With SET you can define symbol whose value can be changed
+    arbitrarily later on. You can 'equ' set symbol but then it becomes
+    absolute symbol which cannot be changed anymore.
+
+
+@endnode
+
+@node	dir_xdef "XDEF directive "
+
+	XDEF	<symbol>[,<symbol>[,<symbol>...]]
+
+	Define external symbol. Defines symbol value to be visible to other
+	modules. (Export).
+
+@endnode
+
+@node	dir_xref "XREF directive "
+
+	XREF	<symbol>[,<symbol>[,<symbol>...]]
+
+	External reference to symbol. Defines label to be imported from
+	other modules.
+
+@endnode
+
+@node	dtypes "3.6 Data types"
+
+    Supported data types.
+
+    All data types are NOT supported by ALL instructions.
+
+    Directives which support:
+    DC.n
+    DCB.n
+    DS.n
+    EQU.n (all integers are 32 bit values and they are  defined without
+	   suffix).
+
+    n is one of these.				   size
+    ~~~~~~~~~~~~~~~~~				   ~~~~
+    b = byte					 ( 1 byte )
+    w = word					 ( 2 bytes)
+    l = long word				 ( 4 bytes)
+    s = single precision floating point number	 ( 4 bytes)
+    d = double precision floating point number	 ( 8 bytes)
+    x = extended precision floating point number (12 bytes)
+    p = packed floating point number		 (12 bytes)
+	Used K-factor is 17 with packed type.
+
+@endnode
+
+
+@node note  "3.7 Things to Note"
+
+    Things to note when using SNMA.
+
+    @{" 3.7.1 Instructions " link note_inst }
+
+    @{" 3.7.2 Expressions " link note_exp}
+
+    @{" 3.7.3 Include files " link note_include}
+
+    @{" 3.7.4 Directives " link note_dir}
+
+    @{" 3.7.5 Misc. " link note_misc}
+
+@endnode
+
+@node  note_inst "3.7.1 Notes about instructions"
+
+      @{" Bcc " link ins_bcc} (bsr, bra, beq,...) instructions
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    - If there is no size field (like bra  or bsr ) SNMA tries to optimize
+      branch to the shortest one. If the size field is given (like bsr.w)
+      SNMA belives that it is just what is wanted, and doesn't try to
+      optimize instruction.
+
+    If the size field is omitted:
+
+    - LONGRA flag tells to SNMA whether to use long or word size.
+      LONGBRA=on enables long braches in these cases and
+      LONGBRA=off disables longs, forcing SNMA to use word size branches.
+
+    - If the value is external reference, SNMA won't optimize it. Instead,
+      depending on LONGBRA flag (and CPU mode) it may be set to long
+      or word.
+
+    - Currently, if you Bcc to other module and SNMA ends up to long branch,
+      things go wrong. I have to dig out what's in in those new hunks my old
+      bantam book knows nothing at all. Until then, be warned...
+      (Change to jsr could be made but I'm searching more elegant method).
+      SNMA should really warn if this happens.
+
+
+@endnode
+
+@node	ins_bcc " Bcc instruction "
+
+    Bcc instruction. (Also bsr).
+
+    Sizes:  .s .b   (byte)
+	    .w	    (word)
+	    .l	    (long)
+@endnode
+
+@node note_exp	"3.7.2 Notes about the expressions"
+
+    The Check of the data sizes
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+    SNMA checks that specified data fits where it is set. For example if
+    you have instruction move.w  #100000,d0 SNMA tells you that value won't
+    fit to word. Positive number range is unsigned and negative signed.
+
+    Remember that when using NOT (~) operation all 32 bits are affected,
+    not only parts of it.
+
+    Range check can be annoying if you are using NOTs with bit masks and
+    other sizes than long word. (Hint: you can mask values with AND). The
+    check of the ranges of SNMA is revealed some bugs (value too big to
+    fit in byte) which were not noticed when using a68k, so I think it is
+    useful feature.
+
+@endnode
+
+@node  note_include "3.7.3 Notes about the include files"
+
+	SNMA assembles V37 includes just fine.
+
+	The V40 includes which I get from the NativeDeveloperKit3.1 have
+	very little problems with SNMA.
+
+	devices/conunit.i has some weird parenthesis '<' and '>' or at least
+	I think they are parenthesis. I don't know which assembler uses these
+	but I don't like them to be parenthesis. So fix them if you like to use
+	conunit.i with SNMA.
+
+	NOTE: I haven't tried all possible macros, so I don't claim all
+	macros will work as intended. If you have problems @{" report " link bug_report} is
+	welcome.
+
+	StripC tool which is in the NDK3.1 won't handle exec/macros.i, BTW.
+
+
+@endnode
+
+@node note_dir "3.7.4 Notes about the directives"
+
+    The OPT directive format is not neccesarily same in other assemblers.
+    CPU directive works little bit differently than the MACHINE directive
+    found in some assemblers. So, to avoid any confusion I implemented CPU
+    directive instead.
+
+
+@endnode
+
+@node note_misc "3.7.5 Misc. notes "
+
+    Alignement problems
+    ~~~~~~~~~~~~~~~~~~~
+    SNMA does not produce mis-aligned code. One thing to mention:
+
+    ;-----------
+    s dc.b 'arg'    line 1
+    sl = *-s	    line 2
+      dc.w  0	    line 3
+    ;-----------
+
+    Value of 'sl' will be 4 instead of intended 3. SNMA 'adjusts' dc.b in this
+    case with one null byte. To prevent this (so that 'sl' will get the
+    right value) , add EVEN or CNOP between line2 and line3. (It is good
+    practice to have EVEN or CNOP 0,4 after 'DC.B's anyway).
+
+@endnode
+
+
+@node error "3.8 Error messages of SNMA"
+
+    The error messages of SNMA are quite self-explaining. Error may be
+    "DEAD END" error which means that assembling cannot be continued.
+    Object file is NOT produced if there is even one error. If there
+    is old object file it is deleted so you don't link it by accident.
+    There are couple of warnings,too. Grammar of the error messages is
+    quite awful, by the way, but I hope you get an idea what caused error
+    (I hope you understand this guide, too).
+
+    First char of the possible cause of the error is underscored.
+    This might be sometimes in wrong spot, so don't wonder if you think
+    the error is somewhere else (it sure can be). I added this feature later
+    on and there are quite a lot of places I should adjust so that error column
+    would be in right spot always. When I found it is in wrong place I
+    usually (or sometimes) try to fix the problem, which is not quite big
+    one, however.
+
+    When error is in the macro you get two messages in SHELL interface.
+    First one tells where the error is in macro and 2nd one where the macro
+    call is which caused error. Error count is added by one, however,
+    because there is only one error, expect in @{" AREXX " link arexx} mode
+    where both are counted.
+
+    When the error is found in pass 2 (solving undefined symbols...) you
+    get only one error message when error is in macro, however. This thing
+    needs some work to do but you can see where the error is quite easily
+    even now (well, not always...8-( )
+
+    If you get an error which says its internal bug or something similar,
+    @{" bug report " link bug_report} is welcome.
+
+    You can control error message mechanism with @{" AREXX/SET " link rx_set} command.
+
+@endnode
+
+
+
+@node arexx "4. SNMA, ARexx "
+
+	ARexx interface is implemted as a command host.
+	PORTNAME keyword in template can be used to change the basename
+	of the Arexx port. Default basename is SNMA.
+
+	RexxMaster must be running when using snma in arexx mode.
+
+	SNMA itself cannot execute any Arexx macros, it is simple command host.
+
+
+	4.1 @{" General   " link rx_general}
+
+	4.2 @{" Commands  " link rx_cmd}
+
+	4.3 @{" Examples  " link  rx_example}
+
+
+	SNMA's ARexx port is the first one I wrote so it may need little
+	more polishing, but it works the way I want. Totally different
+	question is, is that way the right one...8^)
+
+
+@endnode
+
+@node rx_general "4.1 general arexx stuff"
+
+    GENERAL AREXX THINGS
+    ~~~~~~~~~~~~~~~~~~~~
+
+    I recommend to use snma as arexx host. Calling snma directly from the
+    text editor and using global symbol table make the development much
+    quicker. If you have problems in writing interface macros to the text
+    editor you use, you can always use the ShellAsm.rexx macro. The
+    interface is basicly same as in snma's shell mode. That way you can
+    still use global tables. Also, snma is in the memory all the time, no
+    load time here neither.
+
+    Its possible to display error messages as in shell mode when snma is in
+    arexx mode. SNMA writes the messages to the default output if you want
+    (you can always redirect the default output wherever you want, for
+    example to the con:). See @{" AREXX/SET " link rx_set} command.
+
+    There are lots of possibilities how to use snma, be creative !
+    (As usual).
+
+@endnode
+
+@node rx_cmd "4.2 ARexx commands of SNMA"
+
+	Many commands use RexxVariableInterface to pass information back.
+
+
+	4.2.1 @{" ASM     " link rx_asm}          Assemble file
+	4.2.2 @{" CHDIR   " link rx_chdir}          Change working directory
+	4.2.3 @{" FREE    " link rx_free}          Free resources of last assembly
+	4.2.4 @{" GETERR  " link rx_geterr}          Get the errors
+	4.2.5 @{" INFO    " link rx_info}          Get info about the last assembly
+	4.2.6 @{" QUIT    " link rx_quit}          Quit SNMA (ARexx)
+	4.2.7 @{" SET     " link rx_set}          SET attributes
+	4.2.8 @{" ADDGB   " link rx_addgb}          Add global include
+	4.2.9 @{" REMGB   " link rx_remgb}          Remove global include
+
+	If you are planning to call directly SNMA arexx port from another
+	progman (ie. not from Arexx macro) don't do it now. SNMA uses RVI
+	to pass information back, you won't get, it goes to the Arexx. I'm
+	planning to add code which detects this and passes information some
+	other way.
+
+@endnode
+
+@node rx_asm "4.2.1 SNMA,Arexx: ASM command"
+
+
+    Command:
+    ~~~~~~~	ASM SOURCEFILE/A,OBJ=O/K,INCLUDE=I/K,HEADER=H/K,LISTING=L/K,
+		    EQUATE=E/K
+
+    Template:
+     ~~~~~~~
+		All keywords are the same as in SNMA commandline. SNMA
+		Arexx commandline does not have PORTNAME, AREXX or @{" OPT " link dir_opt}
+		flags. You can set OPT flags with @{" SET " link rx_set} command.
+
+
+    Results:
+    ~~~~~~~
+		ASM command triggers SNMA to assemble SOURCEFILE.
+		To find out how assembly went, see/use @{" INFO " link rx_info} command.
+
+@endnode
+
+@node rx_chdir "4.2.2 SNMA, ARexx: CHDIR command"
+
+    Command:	CHDIR	DIRNAME/A
+    ~~~~~~~
+    Template:	DIRNAME is the name of the directory
+    ~~~~~~~~
+    Function:
+    ~~~~~~~~
+		Changes the working directory of SNMA. You can set the
+		working directory to the same directory where your source
+		file is with this command. If you have include files in the
+		same directory with the program source this is quite
+		helpful command. If DIRNAME does not exists or it is file,
+		SNMA prompts Requester to tell it.
+
+		Why this is CHDIR instead of CD ? To avoid any confusion
+		between this one and AmigaDOS CD.
+
+@endnode
+
+@node rx_free "4.2.3 SNMA, ARexx: FREE command"
+
+    Command:	FREE
+    ~~~~~~~
+    Template:	none
+    ~~~~~~~~
+    Function:
+    ~~~~~~~~
+		Frees all resources opened by ASM command. After you
+		execute this command you lose all the information about the
+		last assembly, including errors.
+
+		Resources here means memory. All file opening/closing is
+		internal in ASM command.
+
+@endnode
+
+@node rx_geterr "4.2.4 SNMA, ARexx: GETERR command"
+
+    Command:	GETERR	NUMBER/N REMOVE/S WARN/S STEM/K
+    ~~~~~~~
+    Template:
+    ~~~~~~~~
+	NUMBER	error/warning number. SNMA keeps track which error was
+		requested last. If the number is omitted next error is
+		returned. If GETERR tries to fetch error which does not
+		exists it returns special values, see below.
+
+
+	REMOVE	Toggle removes error from the list. Errors are numbered so
+		that the first one is always number one and if you remove
+		number one, the second one becomes number one and so on.
+
+	WARN	Toggle causes GETERR to return WARNINGS instead
+		of the ERRORS.
+
+	STEM	variable specifies variable base name.
+
+
+    Results:
+    ~~~~~~~
+	    <STEM>.LINENUM
+	    <STEM>.LINETXT
+	    <STEM>.FILENAME
+	    <STEM>.ERRTXT
+	    <STEM>.COLUMN
+
+	<STEM>.LINENUM
+		The line number of the error.  If this is NULL there is no
+		error you requested.
+
+	<STEM>.LINETXT
+		String which holds the source code line where error
+		is.
+
+	<STEM>.FILENAME
+		Name of the source code file.
+
+	<STEM>.ERRTXT
+		Error description text.
+
+	<STEM>.COLUMN
+		Column number where SNMA thinks the error is.
+		If your source code has TABS in it you may need to change
+		TAB value with @{" SET " link rx_set} command to get right
+		column. Default TAB is 8 (AmigaDOS uses).
+
+	<STEM>.ERRNUM
+		Which error this was. Handy if you want to know when using
+		GETERR to fetch next error. Number 1 is first.
+
+    Function:
+    ~~~~~~~~	GetErr is used to fetch errors SNMA found from source code.
+		Warning are fetched with GetErr, too.
+
+		Errors are stored in list. First error is first in the list,
+		2nd is 2nd and so on. Warnings are in the separate list.
+
+		Exactly how many errors is in the list can be found with
+		the @{" INFO "link rx_info} command from the <STEM>.ERRORS field. Warnings are
+		in <STEM>.WARNINGS field.
+		GETERR REMOVE changes  these values if you call INFO after
+		GETER REMOVE, but it does not change them when you call
+		GETERR.
+
+		If you call GETERR with illegal error number (error which
+		does not exists) you get the following results:
+
+		LINENUM=0
+		LINETEXT=' '
+		FILENAME=' '
+		ERRTXT='No more errors'
+		ERRIND=0
+
+		LINENUM=0 is not generated anywhere else because line
+		numbers star at one(1), so its safe to check in arexx macro
+		from this field if the error fetching succeed.
+
+		If you call GETERR to get next error and there is no next
+		error (all errors are handled) the situation is same as
+		above.
+
+@endnode
+@node rx_info "4.2.5 SNMA, ARexx: INFO command"
+
+
+    Command:	INFO  <STEM>
+    ~~~~~~~
+
+    Template:
+    ~~~~~~~~
+		<STEM> is the stem variable where values are put.
+
+    Results:
+    ~~~~~~~
+		<STEM>.STATUS	    ok, warn, error, fail
+		<STEM>.LINES	    How many lines we assembled
+		<STEM>.ERRORS	    number of errors
+		<STEM>.WARNINGS     number of warnings
+		<STEM>.CODE	    number of code sections
+		<STEM>.DATA		      data
+		<STEM>.BSS		      bss
+		<STEM>.CODESIZE     number of bytes in code sections
+		<STEM>.DATASIZE 		       data
+		<STEM>.BSSSIZE			       bss
+		<STEM>.FAILSTR	    possible failure string (if STATUS="FAIL")
+
+
+	.STATUS     is one of the following strings:
+
+		    OK	  = assembly went just fine / nothing assembled yet
+		    WARN  = last assembly resulted warn
+		    ERROR = last assembly resulted error
+		    FAIL  = last assembly resulted failure
+
+		    if .STATUS is "FAIL" .FAILSTR has the failure
+		    description.
+
+	.LINES	    tells how many lines SNMA assembled. (Include files
+		    are also counted for this).
+
+	.ERRORS     How many errors if any. Failures don't count here.
+
+	.WARNINGS   How many warnings if any.
+
+	.CODE	    Number of the CODE sections.
+
+	.DATA  and .BSS are equivalent with .CODE
+
+	.CODESIZE
+		    Number of the bytes section(s) take. This is the sum of
+		    all CODE sections.
+
+	.DATASIZE and .BSSSIZE are equivalent with .CODESIZE.
+
+	.FAILSTR    Possible failure description. See .STATUS.
+
+@endnode
+
+@node rx_quit "4.2.6 SNMA, Arexx: QUIT command"
+
+    Command:	    QUIT
+    ~~~~~~~
+    Template:	    none
+    ~~~~~~~~
+    Function:	    Quits SNMA
+    ~~~~~~~~
+
+@endnode
+
+
+@node rx_set "4.2.7 SNMA, Arexx: SET command"
+
+    Command:	SET Q=QUICKOPT/T P=PCOPT/T A=ADDRESSOPT/T
+    ~~~~~~~	    B=BASEFORCE/T S=SYMBOL/T L=LONGBRA/T
+		    TABS/K/N KS=KEEPSOURCE/T OF=OUTFILE/T RE=RXERR/T
+    Template:
+    ~~~~~~~~	QUICKOPT    Q flag  move-moveq and so on
+		PCOPT	    P flag  absolute long ->pc-relative
+		ADDRESS     A flag  address mode optimizing
+		BASEFORCE   B flag  ensure disp16(an) mode
+		SYMBOL	    S flag  write symbol hunk
+		LONGBRA     L flag  enable long branches (wo/ .l suffix)
+
+		TABS
+			    Number which specifies you current TAB setting.
+			    SNMA needs this for the GETERR.COLUMN field. If
+			    the value is NULL or negative SNMA simply
+			    ignores it.
+			    Default is 8.
+
+		KEEPSOURCE
+			    If off snma frees all source codes it allocated
+			    in last assembly and you cannot print the line
+			    where error is, but when working from the text
+			    editor that is not neccessary. When this flag
+			    is on snma frees the source code when next
+			    assembly is started (or with FREE command),
+			    keeping the source in memory between last
+			    assembly and next one.
+			    Default = ON.
+
+		OUTFILE
+			    Toggle to enable/disable normal snma output. If
+			    this is OFF snma won't write assembly messages
+			    to the  default output. When ON snma writes to
+			    the default output. Default = OFF.
+
+		RXERR
+			    Enable/disable rexx errors. Normally, in rexx
+			    mode this flag is kept on. If it is off snma
+			    will NOT create rexx error structures. INFO and
+			    GETERR commands think that there were no errors
+			    if this flag in off, even if there are errors.
+			    Default = ON.
+
+    Function:
+    ~~~~~~~~~
+		 To change default settings of SNMA. @{" OPT " link dir_opt} directive
+		 overrides those flags which can be set with OPT.
+
+		 SET arexx command has nothing to do with SET directive.
+
+@endnode
+
+@node rx_addgb "4.2.8 SNMA, Arexx: ADDGB  command"
+
+
+    Command:	ADDGB
+    ~~~~~~~	    SOURCEFILE/A,OBJ=O/K,INCLUDE=I/K,HEADER=H/K,LISTING=L/K,
+		    EQUATE=E/K
+
+    Template:
+    ~~~~~~~~	Template is same as in @{" ASM " link rx_asm} command.
+
+    Function:
+    ~~~~~~~~	To add symbols and macros to the global table. Single
+		ADDGB can add any number of include files to the global
+		table.
+
+		ADDGB works like @{" ASM " link rx_asm} with the following expections:
+
+		1) No code is generated
+		2) Second pass is not executed
+		3) Absolute symbols and macros are transfered to the global
+		   table at the end of assembly.
+		4) Include files are added to the internal include file list
+		   to prevent them to be included anymore.
+
+		Equates, sets, floating point equates and macros are transfered
+		to the global table.
+
+
+		Idea of global table is to lower include file loading and
+		processing time. You have to do this process only once,
+		after that SNMA will find the symbol (or macro) from the
+		global symbol table if it is there. If you try to
+		@{" INCLUDE " link dir_include} file which is ADDGB'd, the
+		include file is skipped. If you have includes in your
+		source, include files which are ADDGB'd are not processed.
+
+		SNMA locks the files you add to the global table. This
+		prevents you to modify (you can read it) these files, as the
+		change doesn't mirror to the global table anyway.
+		{" REMGB "link rx_remgb} command can be used to remove file from the global
+		table.
+
+		Important! The main sourcefile symbols and macros are NOT
+		transfered to the global table. File you handle with this
+		command usually contains INCLUDE directives which SNMA
+		process. This enables you to process your current
+		sourcefiles with ADDGB.
+
+		Errors are reported just like in ASM command.
+
+		If you have includes which produce code and you want that
+		code to be included DO NOT use ADDGB command to include
+		that file.
+
+		Global table can be used only in arexx mode.
+
+		So, what does all that mean in practice ?
+		There is little example in snma/examples. See it.
+
+@endnode
+
+@node rx_remgb "4.2.9 SNMA, Arexx: REMGB  command"
+
+    Command:	REMGB	FILENAME
+    ~~~~~~~
+
+    Template:
+    ~~~~~~~~	FILENAME	Name of include file you want to remove.
+				This removes only symbols added in main
+				include file.  If this include has included
+				other include files they will not be
+				removed.
+				If the FILENAME is omitted, global
+				table is cleared and symbols freed.
+
+    Function:
+    ~~~~~~~~	To remove symbols and macros one file (or all) has included
+		to the global tables. You can see what files are in global
+		tables with @{" SEEGB " link rx_seegb} command.
+
+		I have the following alias defined in shell-startup:
+
+		alias remgb "rx 'address SNMA remgb "[]"'
+
+		Then, just typing remgb <name> will remove the file from
+		the global table if present there.
+
+		Symbols which have been declared by using SET directive
+		belongs to the first file which defines them. When you
+		remove that file, the symbol is removed from the global
+		table, even if some other include file has changed (i.e.
+		declared by using SET) it.
+
+
+@endnode
+
+@node rx_seegb "4.2.10 SNMA, Arexx: SEEGB  command"
+
+    Command:	SEEGB	STEM
+
+    Template:
+    ~~~~~~~~	STEM	    stem variable name.
+			    STEM.COUNT will hold the number of filenames
+			    STEM.0     filename 0
+			    STEM.1     filename 1
+			    STEM.n     filename n
+
+
+    Function:
+    ~~~~~~~~	To get information what files are in the global symbol table.
+		If you don't specify STEM variable, this command is no-op.
+
+@endnode
+
+@node rx_example "4.3 ARexx examples"
+
+	The arexx directory of the snma package has several arexx macros
+	(programs). You can use them as they are and/or modify them anyway
+	you like.
+
+
+	ShellAsm.rexx	is simple macro to call from the shell and it does
+			basically the same as SNMA in shell mode. Looks little
+			better than the one in V1.70 release.
+
+	addgb.rexx	adds symbols to the global table. Basicly same as
+			ShellAsm.rexx.
+
+	seegb.rexx	displays what include files are in snma's global
+			symbol table.
+
+
+	Other macros are for the XDME text editor. Those who have some other
+	text editor (which supports ARexx) may found them helpful to write
+	their own interface macros.
+
+	asm.xdme	    assembles file
+	GetErr.xdme	    fetches error information
+	snmainfo.xdme	    displays information about last assembly
+
+	These macros will need little more work but they work now. GetErr
+	macro needs some work with 'user macro' errors, at least.
+
+	Feel free to modify these macros anyway you like or write
+	completely new ones. My taste is not neccessarily yours.
+
+	If you modify these files and distribute them, please change the
+	names, at least, and state what they are supposed to do clearly
+	enough.
+
+@endnode
+
+@node Author "5. Author "
+
+	Author lives in Helsinki, Finland.
+
+	He is currently intrested in do the people actually use snma at
+	all, i.e. is he developing mainly to himself or to the larger
+	audience. So, if you are using snma, by sending a mail or a
+	postcard you will motivate him to work even harder with snma. By
+	stating which Amiga model you use, the author knows that snma has
+	no problems (has it ? It shouldn't) with different Amiga models. By
+	stating where you get the snma package, you will give intresting
+	information, too. (Paranoid ? Who ? Me ? Why ? 8')
+
+	Send your comments, flames or whatever to
+
+	E-mail: snuojua@cc.helsinki.fi
+
+	or
+
+	smail:	Samu Nuojua
+		Harustie 8 B 15
+		00980 Helsinki
+		FINLAND
+
+
+
+    Well, although snma is freeware, donations are always welcome.
+    (Really ? 8')
+
+
+    Finally, thanks to Satu for the patience.
+
+@endnode

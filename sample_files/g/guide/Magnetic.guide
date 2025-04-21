@@ -1,0 +1,384 @@
+@database Magnetic.guide
+@author "David Kinder"
+@$VER: Magnetic.guide 2.3 (8.4.2008)
+@node main "Magnetic"
+
+	Magnetic Scrolls Interpreter v2.3
+	An interpreter for Magnetic Scrolls adventures.
+	Written by Niclas Karlsson
+
+	Amiga Release 7
+	Amiga front-end by David Kinder
+
+			@{" Introduction      " link intro}
+			@{" Supported Formats " link files}
+			@{" Starting Magnetic " link start}
+			@{" Using Magnetic    " link use}
+			@{" Graphics          " link graphics}
+			@{" Credits           " link credits}
+			@{" History           " link history}
+			@{" The IF Archive    " link archive}
+@endnode
+@node intro "Introduction"
+
+Magnetic is an interpreter for the games written between 1985 and 1990 by
+Magnetic Scrolls, a text adventure producer based in London, England.
+Although they only produced seven games they have acquired legendary status
+for text adventures of as good quality as Infocom accompanied by exceptional
+graphics.
+
+Magnetic is released under the terms of the GNU General Public License. See
+the file COPYING that is included with this program for details.
+@endnode
+@node files "Supported Formats"
+
+The Magnetic Scrolls games as originally distributed were in a somewhat
+complex data format, different for most platforms. The interpreter uses its
+own story file format, to be identified by the file name extension ".mag".
+You can download all story files from the Magnetic Scrolls Memorial site at
+
+    http://www.if-legends.org/
+
+Magnetic has been successfully tested with story files created from Amstrad
+CPC, Acorn Archimedes, Commodore 64, MS-DOS, Spectrum and Spectrum +3
+versions of the games. An alternative way to obtain the story files is to
+extract them from the original @{"Commodore 64" link ex64} and @{"MS-DOS" link exdos} game files.
+
+Currently the Amiga, Atari ST, Apple Macintosh and Sinclair QL releases of
+the games are not supported. This is because the games were originally
+written in native machine code for Motorola 68000 based systems (which all
+the above computers are). When porting to other systems Magnetic Scrolls
+implemented a limited subset of 68000 machine code as an emulator on the
+target system; it is this limited subset which the Magnetic interpreter
+implements.
+
+Magnetic Scrolls also released versions for at least the Apple II and Atari
+XL. Currently, we have not developed any tools to extract the data from
+such versions, nor have we located all the versions for these machines. If
+you have an emulator image or an original version for one of these
+machines, please contact the Magnetic development team. 
+@endnode
+@node ex64 "Extracting Commodore 64 Games"
+
+The Commodore 64 versions of the Magnetic Scrolls games can be extracted
+from C64 disk images (i.e. files representing the contents of the games
+released for the Commodore 64). These files are identified by having a
+file name ending with ".d64". Disk images for "The Pawn", "The Guild of
+Thieves", "Corruption", "Jinxter" and "Fish" can be found on the Internet
+on numerous C64 web sites. 
+
+To convert these files to the interpreter's own format, the Xtract64
+program must be used. Run the program without any arguments to read a help
+screen describing its syntax. You'll find that Xtract64 is easy to use;
+for example, for "The Pawn", the command line might be
+
+	Xtract64 pawn-1.d64 pawn-2.d64 pawn.mag
+@endnode
+@node exdos "Extracting MS-DOS Games"
+
+Story files can be created by extracting the data from both the original
+MS-DOS releases and the later "Magnetic Windows" releases of "Wonderland"
+and "The Magnetic Scrolls Collection, Volume 1". The latter of these
+comprised new versions of "The Guild of Thieves", "Corruption" and "Fish!".
+
+To convert these files to the interpreter's own format the XtractPC (for
+the original releases) or XtractMW (for the "Magnetic Windows" releases)
+programs, which are included with the interpreter, must be used. Run
+XtractPC or XtractMW without any arguments to read a help screen.
+
+The syntax for XtractPC is:
+
+    XtractPC game game.mag
+
+where "game" is the full path to the data files, minus any trailing numbers.
+For example, the data files for "The Pawn" are called "pawn1" to "pawn6". If
+these files are in a directory "Games/Magnetic/Pawn", the command line might
+be:
+
+    XtractPC Games/Magnetic/Pawn/pawn Pawn.mag
+
+The syntax for XtractMW is:
+
+    XtractMW game.rdf game.mag
+
+where "game.rdf" is the full path to the game's main rdf file ("all.rdf"
+for "Wonderland"; "corr.rdf", "fish.rdf" and "guild.rdf" for the games in
+"Collection Volume 1"). For example, for "Wonderland", the command line
+might be:
+
+    XtractMW Games/Magnetic/Wonder/all.rdf Wonder.mag
+@endnode
+@node gfxfiles "Graphics Files"
+
+The Magnetic Scrolls adventures were as well known for the quality of their
+graphics as of their text. The Magnetic interpreter supports graphics files
+(".gfx") which can be created from the Amiga releases. You'll probably want
+to download the graphics files from the Magnetic Scrolls Memorial site.
+
+The format of Magnetic's graphics files differs between the original and
+Magnetic Windows ("Wonderland" and "Collection Volume 1") releases,
+therefore a story file created from an original release cannot be used with
+a graphics file from a Magnetic Windows release, and vice versa.
+
+Included with the interpreter is GfxLink, a tool to build graphics files
+from the original Amiga releases of the Magnetic Scrolls games. To use
+GfxLink, supply as arguments the directory containing the Amiga files and
+the output graphics file name, e.g.
+
+    GfxLink Games/ThePawn Pawn.gfx
+
+The graphics files needed for "Wonderland" and the games in "Collection
+Volume 1" are somewhat different from those produced by GfxLink; instead
+GfxLink2 must be used. Firstly, you need an Amiga hard-drive installation
+of the game, and during installation must have selected the option to expand
+the compacted graphics files. If you choose this option, two extra files
+("user.rsc" and "user.rdf") are created by the installer. Then to use
+GfxLink2, supply as an argument the full path to the "user.rsc" file, e.g.
+
+    GfxLink2 Games/Wonder/user.rsc
+
+If GfxLink2 detects "Wonderland", the file "wonder.gfx" will be created; if
+"Collection Volume 1" is detected, the files "corrupt.gfx", "fish.gfx" and
+"guild.gfx" will be created.
+@endnode
+@node hintfiles "Hint Files"
+
+The Magnetic Windows releases of the Magnetic Scrolls adventures
+("Wonderland" and "Collection Volume 1") come with online hints, which can
+be accessed by entering "hint", "hints" or "help" at the input prompt. The
+Magnetic interpreter supports these hints by looking for a file with the
+same name as the story file, but with the extension ".hnt". The hint files
+can be obtained from Stefan Meier's Magnetic Scrolls Memorial site.
+@endnode
+@node start "Starting Magnetic"
+
+From the Shell, Magnetic can be started with the filename of any converted
+file, for example
+
+	Magnetic Pawn.mag
+
+Optionally the name of a graphics file can be given as a second argument,
+and a hint file as a third argument.
+
+If the graphics file is not specified on the command line, the interpreter
+will attempt to load a graphics file with the same name as the game file,
+but with ".gfx" as the file extension. As an example, the above command line
+would cause the interpreter to try to load "Pawn.gfx" as the graphics file.
+See @{"graphics" link graphics} for more information.
+
+Similarly, if the hint file is not specified, the interpreter will attempt
+to load a hint file with the same name, but with ".hnt" as the file
+extension. See @{"hint files" link hintfiles} for more information.
+
+If Magnetic is run from the Shell without arguments, a full description of
+all options is shown.
+
+If started without a filename, or if the Magnetic icon is double clicked
+from Workbench, a file requester will appear from which a game file can be
+selected.
+
+The following icon tooltypes are supported:
+
+    @{b}DIR@{ub}		If started from Workbench, the file requester which
+		initially appears will start in this directory. An
+		example of its use is
+
+			DIR=Work:Games/Magnetic
+
+The following tooltypes are also read if Magnetic is started from the Shell.
+In this case the interpreter will look for its icon in the same directory as
+the interpreter itself.
+
+    @{b}FONT@{ub}	This sets the font Magnetic uses for all text output.
+		The font may either be fixed-width or proportional.
+		As an example, the Times font with a height of 15
+		pixels would be selected by
+
+			FONT=times/15
+
+    @{b}DISPLAY@{ub}	This tooltype determines how the interpreter displays
+		the game. The available options are
+
+			DISPLAY=WINDOW
+			The interpreter uses a window on the default
+			public screen
+
+			DISPLAY=SCREEN
+			The interpreter uses a custom screen
+
+			DISPLAY=BLACK
+			The interpreter uses a custom screen with a white
+			on black colour scheme. This mode is the closest
+			to the original Magnetic Scrolls interpreters.
+
+    @{b}GRAPHICS@{ub}	This determines how the graphics, if they are present,
+		will be displayed. The available options are
+
+			GRAPHICS=COPPER
+		and	GRAPHICS=WINDOW
+
+		See @{"graphics" link graphics} for more information.
+
+    @{b}DOUBLEGFXWIDTH@{ub}
+		Causes the horizontal dimension of the graphics to be
+		doubled. See @{"graphics" link graphics} for more information.
+@endnode
+@node use "Using Magnetic"
+
+The text being input to the game can be edited using backspace, delete, and
+the left and right cursor keys. The shifted cursor keys move the cursor to
+the beginning and end of the current line, respectively. A history buffer
+stores the last twenty input lines; use cursor up and down to scroll through
+the history, and shift cursor up and down go to the top and bottom of the
+history, respectively.
+
+The interpreter supports several meta commands, which can be entered on the
+input line. These commands are handled by the interpreter rather than being
+passed to the game. They are:
+
+    @{b}#undo@{ub}	Takes back the previous move.
+
+    @{b}#logoff@{ub}	Stops the interpreter from writing to the script
+		or the transcription file.
+
+The following menu options are available:
+
+    @{b}Help@{ub}	Brings up this help file.
+
+    @{b}About@{ub}	Brings up a requester with information on the Magnetic
+		program.
+
+    @{b}Save Prefs@{ub}	Saves preferences. At the moment the preferences
+		consist of the position of the main window and the
+		position of the graphics window (if open). The
+		preferences are saved into the same directory as Magnetic
+		in the file "Magnetic.prefs". This file is read in on
+		startup.
+
+    @{b}Quit@{ub}	Immediately exits Magnetic. The current game will be lost.
+
+In addition, if the interpreter is set up so that both text and graphics are
+being displayed in Workbench windows, then pressing F1 and F2 brings the
+text or graphics window to the front, respectively.
+@endnode
+@node credits "Credits"
+
+    Niclas Karlsson <nkarlsso@abo.fi>
+    Development of the Magnetic interpreter.
+
+    David Kinder <d.kinder@btinternet.com>
+    Magnetic 2.x development, Windows, MS-DOS (32-bit) and Amiga ports.
+
+    Stefan Meier <stefan.meier@if-legends.org>
+    Magnetic 2.x development, JMagnetic Java port and the
+    Magnetic Scrolls Memorial web site.
+
+    Paul David Doherty <pdd@if-legends.org>
+    Magnetic 2.x development, story file extraction, help and testing.
+
+    Stefan Jokisch
+    MS-DOS (16-bit) port.
+
+    Torbjörn Andersson <d91tan@update.uu.se>
+    Unix/Gtk port.
+
+    Simon Baldwin <simonb@sco.com>
+    Glk port.
+
+    Rochus Boerner
+    Title screen pictures.
+
+    For comments and bug reports, our thanks go to Toine de Greef,
+    Jacob Gunness, Kai Hesse and Miron Schmidt.
+@endnode
+@node archive "The Interactive Fiction Archive"
+
+If you have access to the Internet and are interested in text adventures,
+then you can find all sorts of programs and information at The Interactive
+Fiction Archive, at the web site
+
+    http://www.ifarchive.org/
+
+The latest version of this program can always be found here.
+@endnode
+@node graphics "Graphics"
+
+The Magnetic Scrolls adventures were as well known for the quality of their
+graphics as of their text. The interpreter supports a single @{"graphics file" link gfxfiles}
+format, which is based on the graphics files released with the original
+Amiga version of the games.
+
+The graphics can be displayed in two possible ways, described below. Which
+of these is used is determined both by the interpreter's icon @{"tooltypes" link start}
+and the capabilities of the Amiga on which the interpreter is running. In
+either case, the graphics can be switched on or off by typing "graphics on"
+or "graphics off".
+
+Window Mode
+
+In this mode, a separate, resizable window is used to display the current
+picture. This works both when the interpreter is running in its own screen
+or on the Workbench screen. For this mode both Workbench 3.0 and an Amiga
+capable of more than 16 colours in the selected screen mode are required.
+In practice this means an AGA or graphics card equipped Amiga.
+
+Copper Mode
+
+This mode more closely resembles the original Magnetic Scrolls interpreters
+and only works on a custom screen. The current picture is displayed in the
+top section of the screen with the game text in the remaining space below.
+The Amiga's copper chip is used to switch colour palettes so that both the
+graphics and the text are displayed using the correct colour schemes, hence
+the name of this mode. This mode will work with any Amiga.
+
+The pictures are designed for a pixel aspect ratio of 1:1, i.e. for the
+pictures to appear correctly the display must use pixels that are as wide as
+they are tall. Several common Amiga screen modes (such as NTSC 640×200 and
+PAL 640×256) have pixels twice as tall as they are wide. To cope with this
+the interpreter can double the horizontal size of the graphics. If the
+pictures appear "squashed" on your display, this feature can be enabled with
+the DOUBLEGFXWIDTH @{"tooltype" link start}.
+@endnode
+@node history "History"
+
+Magnetic 2.3 Amiga Release 7
+
+  o Updated to Magnetic version 2.3.
+
+Magnetic 2.2 Amiga Release 6
+
+  o The transcript output now wraps lines at a maximum of 78 characters.
+
+  o The script input understands the #seed command.
+
+Magnetic 2.2 Amiga Release 5
+
+  o Updated to Magnetic version 2.2, including hint support.
+
+Magnetic 2.0 Amiga Release 4
+
+  o Updated to Magnetic version 2.0.
+
+Magnetic 1.0 Amiga Release 3
+
+  o Changed preferences code. The window positions can now be saved by
+    the "Save Preferences" menu item, and the SAVEWINDOW tool type has
+    been removed.
+
+  o Rebuilt Xtract64 from new source code to fix checksum bug.
+
+Magnetic 1.0 Amiga Release 2
+
+  o Added SAVEWINDOW icon tool type, which causes the window positions
+    and sizes to be saved.
+
+  o Added functions to bring the main and graphics windows to the front
+    to the keys F1 and F2.
+
+  o Fixed bugs in Xtract64 which caused it to lock up after completing
+    and to not remove the protection codes.
+
+Magnetic 1.0 Amiga Release 1
+
+  o First release.
+@endnode

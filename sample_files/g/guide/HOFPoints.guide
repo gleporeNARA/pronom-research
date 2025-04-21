@@ -1,0 +1,412 @@
+@database 00051650-4
+@master /NEW/hofpoints/HOFPoints.guide
+@$VER: 1.0
+@author "Michal Janak"
+@(c) "1995-1998"
+@remark Created with Heddley v1.1 (c) Edd Dumbill 1994
+
+@node "Main" "HOFPoints by Michal Janak"
+              @{fg shine}Wellcome to@{fg text}
+
+         @{b}HOFPoints@{ub}, Version 3.8
+     (C) 1995-1998 Bc.  Michal Janak
+           @{i}All Rights Reserved@{ui}
+
+
+
+           @{"    Important     " link "shareware" 0}   Shareware & registering
+           @{"   Introduction   " link "introduction" 0}   About this program and distribution
+           @{"    Disclaimer    " link "disclaimer" 0}   Important note
+           @{"   Requirements   " link "requirements" 0}   What you need
+           @{"  How it use it   " link "using" 0}   How use program
+           @{"     History      " link "history" 0}   Past and future
+           @{"    Greetings     " link "greetings" 0}   Thanks to some persons
+           @{"      author      " link "author" 0}   My address and something about me
+
+
+   (I must apologize to all for my not very good english)
+@endnode
+
+@node "shareware" "important"
+        @{b}HOFPOints@{ub} is @{fg shine}@{bg shadow}SHAREWARE@{fg text}@{bg back}.
+
+
+    In this version isn't program cripled (all functions are working). But
+there is requester with 10s delay on start and at the end of program.
+
+  If you are using this program frequently or you want version without
+waiting, please send shareware fee by snail mail to @{"author" link "author" 0}
+
+   UK pounds          2   (preffered)
+   DM                 5
+   CZK               90   
+
+(I think,that this isn't too much for my spent time in developing this program)
+
+  ( Or equivalent way is send me registered version of @{b}your@{ub} program
+    but after agreement with @{"me" link "author" 0} )
+
+   After you register I will send you last version and I will send to You
+automaticaly new versions in future.
+
+           !!! registered version  you can get only by E-mail !!!
+           !!! DO NOT copy registered version to other people !!!
+
+  You can freely distribute this
+program, but you can not change any part of this package and this
+package must contain this files:
+
+   HOFPoints               main executable
+   HOFPoints.info          info file for executable
+
+   HOFPoints.guide         amigaguide document
+   HOFPoints.guide.info    info file for this guide
+
+   HOFPoints.dat           datafile for HOFPoints
+                           (this file do not edit by hand (in word editors))
+
+
+   HOFPoints.pic           document picture
+
+   fonts draver containing  Ruby 15 & DBfont 8
+@endnode
+
+@node "introduction" "Introduction"
+@{b}HOFPoints @{ub}is a utility for competitors of the Amiga @{b}HOF
+(Hall of Fame)@{ub}, that calculates and displays points, which you reach.
+
+In first line is track info. There is track number, track
+name and length of track in metres. On the next line is best time done
+in the HOF (track record), your best time, your points and
+time difference between record and your time. In next line is number called
+"need points". I must explain this. When I want to be placed to 10th place
+(for example), you can see in the last HOF results that on 10th place has
+someone 224 points. then you need at least 224 points to be placed on 10th.
+   I spent much time on looking for best method for calculating need points
+for every track. But I found it and it works well. There is calculation:
+
+                                 /   Px                      \
+need points for track = points + |  ---- * (need points-SUM) |
+                                 \    S                      /
+
+        where   points.....your current track points
+                Px.........( 1 - (points/20) )
+                S..........Sum of P1 to P16
+
+  From these need points for tracks are calculated time which you need for 
+this number of points and time difference between needed time and your time.
+In the next row is points difference between needed points and your current
+number of points (your score) and the total number of points that you get in
+the HOF (but only if record stay unchanged). In last line are positions on
+tracks and position in HOF in all.
+    Your times and score can be printed on printer too.
+
+
+      This program is available from @{"me" link "author" 0}, newest version
+is available on my home page: 
+
+      @{fg shine}http://www.geocities.com/MotorCity/Garage/2064/@{fg text}
+
+or at @{b}Oliver Roberts@{ub} web pages:
+
+        @{fg shine}http://defstar.gre.ac.uk/~oliver/AmigaF1.html@{fg text}
+
+      (@{u}Amiga Formula One pages@{uu} is place where you can find many
+important informations an many useful programs)
+@endnode
+
+and from Aminet.
+
+@node "disclaimer" "Disclaimer"
+               DISCLAIMER
+               ----------
+
+   I AM NOT RESPONSIBLE FOR ANY DAMAGE OR LOSS OF
+DATA, WHETHER OR NOT CAUSED BY USING THIS PROGRAM.
+              USE THIS PROGRAM ON YOUR OWN RISK.
+@endnode
+
+@node "Requirements" "Requirements"
+
+
+    Any @{b}Amiga@{ub} (In this time tested only on My A1200 2MB Chip, 130MB HD and
+on A1200 +Blizzard IV +8MB FAST RAM
+    and  +Blizzard 1240 T/ERC +16MB FAST RAM)
+
+  Ruby 15 and DBFont 8 in
+FONTS:directory (included in package), file called hofpoints.dat in S:
+directory (or where you want if you use @{"TOOLTYPE" link "starting" 19} or @{"CLI argument" link "starting" 0} ).
+@endnode
+
+@node "starting" "Starting program"
+
+
+    This program can be started from WorkBench or from CLI
+
+     from CLI
+     --------
+
+ If you start this program without
+parameter (only <path>HOFPOINTS and RETURN), program will be loading
+datafile called hofpoints.dat from S:directory.
+
+  If you want use file with your own name or placed on another place
+  type:
+
+     <path>HOFPpints <path to datafile> <path to guidefile>
+
+ (for examle  dh1:simulators/F1GP/HOFPoints dh1:data/hofpoints.dat
+dh1:docs/hof2202.guide)
+
+You can use both parameters or one of them.
+
+     from WORKBENCH
+     --------------
+
+  Click on program icon.
+ there are two TOOLTYPE's (for this time, something will
+be added in near future) called
+
+   DATAFILE
+
+  (for examle DATAFILE=dh1:data/hofpoints.dat)
+
+  GUIDEFILE
+
+  (for examle GUIDEFILE=dh1:documents/hof2202.guide)
+
+
+  If you do not determine the guide file, the ASL requester will be opened
+@endnode
+
+@node "using" "Using"
+          Use of program
+          --------------
+
+       After start you can see the window ( @{"doc picture" link "hofpoints.pic/Main" 0} ).
+
+
+            There are some buttons
+
+  +-------------------------------------------------+
+  | Track info:  1 USA                   3668 m     |
+  |                                                 |
+  |  input:                      AMIGA @{fg shine}HOF@{fg text}          |
+  |-------------+------------+---------+------------|
+  | @{" Best time " link "tbest" 0}|@{" Your time " link "Ytime" 0}|  Points | Time diff. |
+  |   @{fg shine}1:13.663@{fg text}  | @{fg shine} 1:15.475@{fg text}  | @{fg shine} 10.40@{fg text}  |  @{fg shine}+ 1.812@{fg text}   |
+  |-------------+------------+---------+------------|
+  | @{"  Need Points " link "needp" 0} |  Need time       | Time diff. |
+  |      @{fg shine}224@{fg text}        |  @{fg shine}1:14.785@{fg text}        |  @{fg shine}+ 0.690@{fg text}   |
+  |                 |------------------|------------|
+  |   Points diff.  |                               |
+  |    @{fg shine}+ 83.08@{fg text}      |     SUM=@{bg shine} 140.92 @{bg back}Points        |
+  +-----------------+-------------------------------|
+  | Track pos @{fg shine}15@{fg text}     HOF pos @{fg shine}15@{fg text}    @{" positions " link "positions" 0}     |
+  +-------------------------------------------------|
+  |                                                 |
+  | @{fg shine}@{bg fill} Track  @{fg text}@{bg back} @{" 1" link "tracks" 0} @{" 2" link "tracks" 0} @{" 3" link "tracks" 0} @{" 4" link "tracks" 0} @{" 5" link "tracks" 0} @{" 6" link "tracks" 0} @{" 7" link "tracks" 0} @{"  8" link "tracks" 0}       | 
+  | @{fg shine}@{bg fill} select @{fg text}@{bg back} @{" 9" link "tracks" 0} @{"10" link "tracks" 0} @{"11" link "tracks" 0} @{"12" link "tracks" 0} @{"13" link "tracks" 0} @{"14" link "tracks" 0} @{"15" link "tracks" 0} @{" 16" link "tracks" 0}       | 
+  |                                                 |
+  | @{"   LOAD   " link "LOAD" 0} @{"   SAVE   " link "SAVE" 0} @{"  PRINT   " link "PRINT" 0} @{"   QUIT    " link "quit" 0}|
+  +-------------------------------------------------+
+@endnode
+
+@node "tbest" "Best time"
+   After pressing this button you will be asked for input
+new time in input gadget. In input gadget you write only
+seconds (instead 1:13.333 only 13.333)
+@endnode
+
+@node "Ytime" "Your time"
+   After pressing this button you will be asked for input
+new time in input gadget. (only seconds  instead 1:13.456  13.456) time
+must be between 0 and 59.999. If this time is better than @{"Best time" link "tbest" 0}, then
+the best time will be set to this value too.
+
+   If you have not done time for some tracks, please type time 59.998 in
+input window for this tracks.
+
+@endnode
+
+@node "needp" "Need time"
+     After pressing this button you will be asked for
+input of points you wat to have as score (posible value is between 0-minimum
+and 320 - maximum number of points thats you can get ( 16*20=320 )).
+     From this number are calculated times for each circuits.
+@endnode
+
+@node "positions" "Positions"
+   After this choice will be started reading of HOF.guide and from
+your time and points in HOF will be calculated positions on every track
+and position in HOF in all. The guide file must be original not altered
+file, that every player of HOF obtain by E-mail from Edo. Place of this file
+you can determine by TOOLTYPE or CLI argument. If is not this file
+determined by one of way, then will be opened ASL requester. In time of
+processing you can see in input window name of current processed circuit.
+
+   This function is called before every printing to printer automaticaly
+@endnode
+
+@node "tracks" "Track select"
+  this button is for selecting track, you want to see
+
+
+  1  USA                      9  Germany
+  2  Brazil                  10  Hungary
+  3  San Marino              11  Belgium
+  4  Monaco                  12  Italy
+  5  Canada                  13  Portugal
+  6  Mexico                  14  Spain
+  7  France                  15  Japan
+  8  Great Britain           16  Australia
+@endnode
+
+@node "LOAD" "LOAD"
+     By pressing this button will be reloaded
+datafile from disk. This datafile must be placed in S: directory. Only if
+you use @{"TOOLTYPE" link "starting" 19} in icon or @{"CLI argument" link "starting" 0}, you can place this file where you
+want.
+@endnode
+
+@node "SAVE" "SAVE"
+
+
+     After pressing this button will be renamed originaldatafile to
+
+  <name of file>.bak and than will be saved last
+data from program. This .bak file is for person who made some mistake and
+want return back their data or for case of crash machine in time of saving
+data. If you need data from .bak file, you must delete the datafile
+and then raname datafile.bak do datafile (hofpoints.dat.bak to
+hofpoints.dat)
+@endnode
+
+@node "PRINT" "PRINT"
+
+ After pressing this button and if you have printer conected and in ON state
+       then w ill be printed somethig as this:
+
+
+
+  HOFPoints output:   (Need points = 224)
+
+ Your current HOF position is  15
+
+ Nr.Track name Best time Your time Time dif. Points Need time Need dif. Pos
+  1 USA        1:13.663  1:14.859  + 1.196   13.61  1:14.785 + 0.074    15
+  2 BRAZIL     1:08.476  1:10.086  + 1.610   10.81  1:09.519 + 0.567    26
+                               .
+                               .
+                               .
+ 16 AUSTRALIA  1:06.998  1:08.940   + 1.942    8.73  1:08.018 + 0.921    20
+                                      /---------------------\
+                                      | SUM = 172.49 Points |
+                                      \---------------------/
+
+                                    HOFPoints 3.8 by Michal Janak
+@endnode
+
+@node "quit" "QUIT"
+
+
+    This button will quit this program.
+
+@{b}!!! Be sure, you saved changes before doing this operation !!!@{ub}
+@endnode
+
+@node "History" "History"
+   History:
+   --------
+   28-12-95  1.0  first version (in GFA-basic)
+                  without mouse control
+                  some bugs(font problem & problem with datafile)
+   12-01-96  1.5  removed bug with datafile and added mouse control
+   23-01-96  2.0  firt public version
+                  rewiten to BlitzBasic2
+   27-01-96  2.5  some graphics changes and added printings
+
+   ??-02-96       lost source code due Harddisk failure.
+   ??-02-96  2.6  not public released, rewriten from base
+                  some cosmetics changes
+   28-02-96  2.8  added printings of zeros in times(instead 1: 7.34
+                  1:07.340), points (13.60 instead 13.6) (thanks to Alan
+                  Strang for this idea)
+                  added printing of differention between your score
+                  and needed score.
+                  From this version program using one TOOLTYPE
+                  and one argument in cli.
+
+                  not public released
+
+   06-03-96   3.0 added calculation of your position on every
+                  track and in HOF (only for registered users).
+                  Some minor changes in code.
+
+   09-11-96   3.7 changed calculation of points, because there is new rule
+                  in HOF (107% rule)
+                  New method of calculating needtime(for need points).
+                  Before this change you coul get need time worse than
+                  your actual record.
+
+
+   10-04-98   3.8 Minor update. Only refflects changes of guidefile format
+                  which caused HoFPoints fail on obtaining track positions
+ 
+@endnode
+
+@node "greetings" "Greetings"
+   I thanks to following persons:
+
+      Edo Nijmeier      -   for constructive critics
+
+      Oliver Roberts    -   for placing my product on his web page
+      &  Alan Strang    -   for some hints (addition of printig zeros
+                            and positions in HOF feature)
+      
+
+@endnode
+
+@node "Author" "Author"
+   If you have any suggestions, bug reports, some hints or money for me,
+   let me know on my permanent home address:
+
+                     Michal Janak
+                     Vltavska 11
+                     Brno   625 00
+                     CZECH REPUBLIC
+
+      You can contact me via E-mail at this address:
+
+                @{fg shine}chemont@chemont.anet.cz@{fg text}
+
+    About me:
+
+       I was studying 4 years on Electrotechnical University in my city. I am
+living in Brno - Czech republic (small country in middle Europa). Most of my
+free time I am playing F1GP and other simulators. I am watching all Formula
+one races. My favourite driver was Damon Hill (and I am still hoping that
+He will get another podium finish)
+
+        Now I am working in factory as programmer.
+        
+       (I am too lazy for learning programming in assembler or C, this was my
+first program made for use by other people)
+
+  My other work:
+
+    STRIPHTML
+    =========
+               
+          Only CLI program which strips l html sequences from files. It
+is good for DirectoryOpus or other configurable file managers. (Program can
+handle multiple files)
+
+    SendResults.rexx v2.5
+    =====================
+
+ Arexx script for participants of Amiga F1GP Internet Championship which are
+sending results via YAM (freeware mail program).   
+
+@endnode
+

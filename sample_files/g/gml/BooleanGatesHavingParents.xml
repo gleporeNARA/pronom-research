@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<g:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:g="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <!-- 4 Quadrants in a Plane  -->
+
+  <g:RectangleGate g:id="FS-P">
+    <g:dimension g:parameter="FS" g:min="20"/>
+  </g:RectangleGate>
+
+  <g:BooleanGate g:id="FS-">
+    <g:not>
+      <g:gateReference g:ref="FS-P"/>
+    </g:not>
+  </g:BooleanGate>
+  
+  <g:RectangleGate g:id="SS-P_FS-P" g:parent_id="FS-P">
+    <g:dimension g:parameter="SS" g:min="10"/>
+  </g:RectangleGate>
+  
+  <g:RectangleGate g:id="SS-P_FS-" g:parent_id="FS-">
+    <g:dimension g:parameter="SS" g:min="10"/>
+  </g:RectangleGate>
+  
+  <g:BooleanGate g:id="SS-_FS-" g:parent_id="FS-">
+    <g:not>
+      <g:gateReference g:ref="SS-P_FS-"/>
+    </g:not>
+  </g:BooleanGate>
+  
+  <g:BooleanGate g:id="SS-_FS-P" g:parent_id="FS-P">
+    <g:not>
+      <g:gateReference g:ref="SS-P_FS-P"/>
+    </g:not>
+  </g:BooleanGate>
+
+</g:Gating-ML>

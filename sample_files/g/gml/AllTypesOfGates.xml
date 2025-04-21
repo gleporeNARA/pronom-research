@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gating:Gating-ML xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:gating="http://www.isac-net.org/std/Gating-ML/v1.3/"
+  xsi:schemaLocation="http://www.isac-net.org/std/Gating-ML/v1.3/ ../schema/Gating-ML.v1.3.xsd">
+
+  <gating:PolygonGate gating:id="Lymphocytes_on_CD45-PerCP_and_SSC-H">
+    <gating:dimension gating:parameter="CD45-PerCP"/>
+    <gating:dimension gating:parameter="SSC-H"/>
+    <gating:vertex>
+      <gating:coordinate gating:value="500"/>
+      <gating:coordinate gating:value="10"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="700"/>
+      <gating:coordinate gating:value="10"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="800"/>
+      <gating:coordinate gating:value="200"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="750"/>
+      <gating:coordinate gating:value="350"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="690"/>
+      <gating:coordinate gating:value="370"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="380"/>
+      <gating:coordinate gating:value="210"/>
+    </gating:vertex>
+    <gating:vertex>
+      <gating:coordinate gating:value="380"/>
+      <gating:coordinate gating:value="210"/>
+    </gating:vertex>
+  </gating:PolygonGate>
+
+  <gating:EllipsoidGate gating:id="R1" gating:parent_id="Lymphocytes_on_CD45-PerCP_and_SSC-H">
+    <gating:dimension gating:parameter="CD3-FITC"/>
+    <gating:dimension gating:parameter="CD4-PE"/>
+    <gating:focus>
+      <gating:coordinate gating:value="500"/>
+      <gating:coordinate gating:value="500"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="500"/>
+      <gating:coordinate gating:value="800"/>
+    </gating:focus>
+    <gating:distance>500</gating:distance>
+  </gating:EllipsoidGate>
+
+  <gating:EllipsoidGate gating:id="R2" gating:parent_id="Lymphocytes_on_CD45-PerCP_and_SSC-H">
+    <gating:dimension gating:parameter="CD3-FITC"/>
+    <gating:dimension gating:parameter="CD4-PE"/>
+    <gating:focus>
+      <gating:coordinate gating:value="500"/>
+      <gating:coordinate gating:value="100"/>
+    </gating:focus>
+    <gating:focus>
+      <gating:coordinate gating:value="488"/>
+      <gating:coordinate gating:value="300"/>
+    </gating:focus>
+    <gating:distance>385</gating:distance>
+  </gating:EllipsoidGate>
+
+  <gating:BooleanGate gating:id="notR1-union-R2">
+    <gating:or>
+      <gating:BooleanGate gating:id="tmpID545454">
+        <gating:not>
+          <gating:gateReference gating:ref="R1"/>
+        </gating:not>
+      </gating:BooleanGate>
+      <gating:gateReference gating:ref="R2"/>
+    </gating:or>
+  </gating:BooleanGate>
+
+  <gating:RectangleGate gating:id="Rect-1" gating:parent_id="Lymphocytes_on_CD45-PerCP_and_SSC-H">
+    <gating:dimension gating:parameter="FSC-H" gating:min="300" gating:max="800"/>
+  </gating:RectangleGate>
+
+  <gating:RectangleGate gating:id="R3" gating:parent_id="Rect-1">
+    <gating:dimension gating:parameter="CD3-FITC" gating:min="400" gating:max="652"/>
+    <gating:dimension gating:parameter="CD4-PE" gating:min="398" gating:max="712"/>
+  </gating:RectangleGate>
+
+  <gating:PolytopeGate gating:id="polytope-test-3d" gating:parent_id="ds-test">
+    <gating:dimension gating:parameter="CD3-FITC"/>
+    <gating:dimension gating:parameter="CD4-PE"/>
+    <gating:dimension gating:parameter="CD45-PerCP"/>
+    <gating:point>
+      <gating:coordinate gating:value="70"/>
+      <gating:coordinate gating:value="180"/>
+      <gating:coordinate gating:value="200"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="800"/>
+      <gating:coordinate gating:value="450"/>
+      <gating:coordinate gating:value="121"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="781"/>
+      <gating:coordinate gating:value="413"/>
+      <gating:coordinate gating:value="178"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="223"/>
+      <gating:coordinate gating:value="541"/>
+      <gating:coordinate gating:value="871"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="111"/>
+      <gating:coordinate gating:value="749"/>
+      <gating:coordinate gating:value="120"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="174"/>
+      <gating:coordinate gating:value="985"/>
+      <gating:coordinate gating:value="749"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="420"/>
+      <gating:coordinate gating:value="520"/>
+      <gating:coordinate gating:value="320"/>
+    </gating:point>
+    <gating:point>
+      <gating:coordinate gating:value="120"/>
+      <gating:coordinate gating:value="220"/>
+      <gating:coordinate gating:value="313"/>
+    </gating:point>
+  </gating:PolytopeGate>
+
+  <gating:DecisionTreeGate gating:id="ds-test"
+    gating:parent_id="Lymphocytes_on_CD45-PerCP_and_SSC-H">
+    <gating:rootNode gating:parameter="FSC-H" gating:threshold="50">
+      <gating:leafLT gating:inside="false"/>
+      <gating:nodeGTE gating:parameter="CD3-FITC" gating:threshold="800">
+        <gating:nodeLT gating:parameter="CD3-FITC" gating:threshold="200">
+          <gating:leafLT gating:inside="false"/>
+          <gating:leafGTE gating:inside="true"/>
+        </gating:nodeLT>
+        <gating:leafGTE gating:inside="false"/>
+      </gating:nodeGTE>
+    </gating:rootNode>
+  </gating:DecisionTreeGate>
+
+</gating:Gating-ML>

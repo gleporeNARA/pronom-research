@@ -1,0 +1,525 @@
+@database 00ca8dc0-0
+@master Amiconnect.guide
+@$VER: 3.0
+@author "Martin Carl Hunt"
+@(c) "MCHunt July 1995"
+
+@node "Main" "Amiconnect - Contents"
+@{b}@{fg shine}Amiconnect Version 3@{fg text}
+
+Copyright Martin Hunt 1985
+
+This program is shareware, please register@{ub}
+
+@{"Introduction" link "Introduction" 0} What is Amiconnect
+
+@{"Installation" alink "Installation" 0} How To Install
+
+@{"Main Menu" link "Main Menu" 0} The Main Menu
+
+@{"Command Line Parameters" link "CLP" 0} Starting From CLI
+
+@{"Other Programs" link "Progs" 0} Other AmiTCP related programs
+
+@{"Registration" link "Registration" 0} How To Register
+
+@{"Problems" link "Problems" 0} How to yell at me!
+
+@{"NEW FOR VERSION 3" link new 0} Improvements And New Features
+
+FAQ's, COMMON PROBLEMS AND IMPROVEMENTS WILL BE POSTED TO MY WWW PAGES
+
+http://www.webzone1.co.uk/www/plymouthweb/
+@endnode
+
+@node "Introduction" "Introduction"
+What is Amiconnect?
+
+After transfering from a service provider that provided a customised AmiTCP setup to
+my new supplier I found that setting up AmiTCP was actually quite a pain. I am quite a
+confident person when it comes to computers, so I thought that some sort of program
+was needed to make setting up easier.
+
+I had also had problems getting any sort of dialler working properly, and so decided
+to write a simple dialler program of my own, this I decided would be incorporated into
+my new configuration program. This new program must also be compatible with my Control
+Panel program, and in fact should complement it to allow even more accurate logging of
+calls.
+
+After several months of development AmiConnect was finished, but I had just found a
+new arexx library called Apig.library and had decided that I would use this library to
+make @{"Control Panel" link "Progs" 0} even better, as Rexxarplib.library and Apig.library weren't really
+compatible it meant completely rewriting AmiConnect. After all this AmiConnect now
+looks better and operates better, and in a more system friendly manner.
+
+AmiConnect is designed to replace startnet, any link script and also acts as a
+dialler. This version will now work with PPP, if you are using a dynamic
+node you must use PPP, dynamic slip connection are not supported and will
+not be supported in the future.
+
+This package and AmiTCP should be the only programs you need to connect to the net,
+send & receive mail and receive news. You will of course need a mail program and a
+newsreader, see @{"other programs" link "Progs" 0} for some recommendations.
+
+AmiConnect is not responsible for collecting and sending mail, so it will
+work with both POP3 and SMTP mail systems. If amitcp:bin/mailkick is present
+it will be started to facilitate sending of smtp mail, if it isn't available
+it won't/can't be started, you will have to manual start your mail grabbing
+program or pop3 client. If your provider can only handle POP3 mail, please
+make sure that amitcp:bin/mailkick doesn't exist by typing delete
+amitcp:bin/mailkick into a shell.
+
+This version of Amiconnect now has a more compact connection display, this
+is only a cosmetic improvement but does stop your desktop getting too
+cluttered.
+@endnode
+
+@node "Installation" "Installation"
+@{b}@{fg shine}Installation@{ub}@{fg text}
+
+Installation is via the standard Amiga installer program, the installer will ask you
+the following details
+
+@{b}Where Is AmiTCP Installed?@{ub}
+Choose the directory where you chose to install AmiTCP, if you have yet to install
+AmiTCP please abort the installation and install AmiTCP first.
+
+@{b}Where do you want Amiconnect to be installed?@{ub}
+Choose where you want the Amiconnect program and icon files to be stored, the
+recommended directory is amitcp:bin, but you may choose any directory you like, it is
+advisable that this directory is on a runnable path.
+
+@{b}Where do you want Amiconnects Doc File to be installed?@{ub}
+Select where you want to store this doc file, a doc file will also be installed to
+amitcp:docs as Amiconnect needs the file there for its help button to work.
+
+@{b}Copying News and Mail Stuff to AmiTCP:bin@{ub}
+This copies all the mail and news sending/reading programs to amitcp:bin, if you
+already have a working news/mail setup you may want to skip this part.
+
+@{b}Copying Mail Server to Amitcp:serv@{ub}
+This copies the incoming mail deamon in.smtpd to amitcp's server drawer, this file is
+essential if you want to receive mail. Your amitcp:db/inetd.conf file is also altered
+to use the mail server, if amitcp is currently running you will need to send a break_f
+to inetd or to reboot and restart amitcp before this server will become active.
+
+@{b}I now need to setup....@{ub}
+Amiconnect needs to know where your main system directories are, the default
+directories are made by the installer if not available.
+
+@{b}Where is your uunews: directory@{ub}
+Uunews is where all your news articles are unbatched to. I would advise that you
+either have a separate partition for news or invest in a new, more stable file system,
+as news puts a lot of wear on the hard drive and a crash during a news write operation
+may cause invalidation of your hard drive partition.
+
+@{b}Where is your uumail: directory@{ub}
+This is the directory where all your incoming mail is stored, if your mail address is
+Another@any.old.node your mail will be stored in a file called another.
+
+@{b}Where is you uulib: directory@{ub}
+This directory is where several import files are kept, such as
+
+Newsgroups        - The file with the names of all the newsgroups you want
+                    to subscribe to.
+
+Another.signature - Your signature, another being your user name
+Config            - Some old programs require a uulib:config file, an example
+                    file is given.
+
+Aliases           - A file with mail aliases in, this allows you to store peoples
+                    mail addresses and also allows you to redirect incoming mail.
+
+Seq               - A file containing a number used to generate message numbers for
+                    your outgoing mail.
+
+@{b}Where is your uuspool: directory@{ub}
+This is a directory where all your incoming mail and news is wrote to, it is also
+where all your outgoing mail is stored prior to being sent. This directory usually
+also contains some logfiles.
+
+@{b}Starting Amiconnect Configuration Program@{ub}
+Amiconnect is now started so that you can configure it, see @{"main menu" link "Main Menu" 0} for more
+details.
+@endnode
+
+@node "Main Menu" "Main Menu"
+@{b}@{fg shine}Main Menu@{ub}@{fg text}
+
+The menu that you get when you initially start Amiconnect, unless you use the command
+line options.
+
+                        @{b}@{bg shine}Amiconnect Configuration@{ub}@{bg back}
+
+               @{"User Details    " link "UserDetails" 0}             @{"Provider Details" link "ProviderDetails" 0}
+
+               @{"Modem Details   " link "ModemDetails" 0}             @{"Logon Details" link "LogonDetails" 0}
+
+                                 @{" HELP" link "HELP" 0}
+
+
+
+
+            @{"Start Amitcp " link "START " 0}  @{"Stop Amitcp " link "STOP" 0}        @{" Connect" link "UP" 0} @{"Disconnect" link "DOWN" 0}
+
+            @{"Load   " link "Load" 0}  @{"Save As  " link "SaveAs" 0}      @{"Use    " link "Use" 0}  @{"Save   " link "Save" 0}  @{"Cancel" link "Cancel" 0}
+@endnode
+
+@node "CLP" "Command Line Parameters"
+@{b}@{fg shine}Command Line Parameters@{ub}@{fg text}
+
+Amiconnect may be started from the command line and takes the following parameters.
+
+@{"LOAD" link "Load" 0}    - Allows you to load a config file, saved using save as option.
+
+NEWS    - Collects news when connect
+
+NONEWS  - Do not collect news when connected
+
+
+@{"CONFIG" link "Main Menu" 0}  - Displays Main Menu
+
+@{"START" link "START " 0}   - Starts AmiTCP
+
+@{"STOP" link "STOP" 0}    - Stops AmiTCP
+
+@{"UP" link "UP" 0}      - Attemps to connect you to the net
+
+@{"DOWN" link "DOWN" 0}    - Disconnects you from the net
+
+RETRY   - The number of times to retry the pops phonenumber
+@endnode
+
+@node "Progs" "Other Programs"
+
+@{b}Mail Programs@{ub}
+
+Admail An AmiTCP Mail Program
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/mail/admail.lha
+
+GDMail V1.2  A Gadtools Based Mail Program
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/mail/GDMail_1.2.lha
+
+Amiga Elm V4 A good complex mail reader
+ftp//src.doc.ic.ac.uk/pub/aminet/comm/mail/AmigaElm-v4.lha
+
+@{b}News Programs@{ub}
+
+Grn V2.1 Recommended GUI News Reader
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/news/GRn-2.1.lha
+
+Tin V1.2 News Reader
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/news/tin122.lha
+
+@{b}Other Programs@{ub}
+
+Archie132  Archie Client
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/tcp/archie132.lha
+
+GuiFTP     A graphical FTP client
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/tcp/Gui-FTP.lha
+
+Gopher     An Amiga Gopher Client
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/tcp/gopher.lha
+
+Grapevine  A very good graphical IRC client
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/tcp/grapevine-1_33.lha
+
+Artser     An improved serial.device
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/misc/ArtSer37_6.lha
+
+Pbill3.2   Phonebill prediction program, requires Amitcp software
+which generates logfile e.g. plink, Control Panel
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/misc/pbill32.lha
+
+@{b}Other Programs By Me@{ub}
+
+Control Panel 5   A Graphical Interface For AmiTCP, works with Amiconnect to
+                  generate accurate connection logs.
+                  Also includes Gui frontends for Telnet,Finger and ping and
+                  allows multiple users to use the same setup.
+                  Now supports public screens.
+
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/tcp/CP5.lha
+
+Arfir & Newsed 3  Arfir is a graphical front end for archie which allows you
+                  to easily search for files using archie and the download them.
+                  Newsed3 is a graphical editor for your uulib:newsgroup
+                  files, it has many features such as ability to selectively import
+                  groups from an active newsroup file, also allows unique signatures
+                  for newsgroups when used in conjunction with Grn.
+
+ftp://src.doc.ic.ac.uk/pub/aminet/comm/tcp/NewsedArfir.lha
+
+@endnode
+
+@node "Registration" "Registration"
+
+@{b}Registration@{ub}
+This package is shareware, this means that if you carry on using the
+program that you send me the suggested fee.
+The prices for registration is as follows
+
+                                    UK Pounds   US Dollars
+Amiconnect                            £10          $20
+
+
+Any other of my programs can then be ordered for 50% of their price
+e.g. CP5 and Amiconnect will cost £15 instead of £20.
+
+Payment must be in UK cheques/postal order, cash (notes only in strong
+envelope, not airmail envelopes), or International Money Order. Cash and UK
+Cheques are the preferred methods of payment.
+
+Your registered keyfile will be sent by uuencoded e-mail, you will also be
+entitled to 10k of free web space on my web site.
+
+You should send your registration fee and the following details
+
+Machine
+Memory
+HD
+Modem type
+AmiTCP Version
+WB Version
+E-Mail Address
+Whether you want Cp5 or Newsed/Arfir if you are ordering the £15/$30 package.
+
+To.
+
+Martin Hunt
+27 Furzehill Road
+Mutley
+Plymouth
+PL4 4JZ
+England
+
+If you need any help with any of my packages please e-mail me at
+mchunt@mail.zynet.co.uk and I will do my best to help, obviously
+registered users will get priority service but I will give help to
+those who have yet to register.
+
+@endnode
+
+@node "Problems" "Problems"
+Please contact me and I will help as quickly as I can;
+E-Mail: @{"mchunt@mail.zynet.co.uk" rx "amitcp:bin/emailmch"}
+
+Or check my homepages for any known bugs
+
+http://www.webzone1.oc.uk/www/plymouthweb/
+
+@endnode
+
+@node "Load" "LOAD"
+@{b}@{fg shine}Load@{ub}@{fg text}
+
+This button or parameter allows you to load a set of parameters which you have saved
+using the @{"save as" link "SaveAs" 0} facility, this is useful if you have more than one provider as you
+can have a separate config file for each provider.
+@endnode
+
+@node "START " "START AMITCP"
+@{b}@{fg shine}Start AmiTCP@{ub}@{fg text}
+
+This button or option starts AmiTCP using the information which you have entered into
+AmiConnect, it does not connect you to the net, to do that use the @{"connect" link "UP" 0} button or
+the @{"up" link "UP" 0} option.
+@endnode
+
+@node "STOP" "STOP AMITCP"
+@{b}@{fg shine}Stop Amitcp@{ub}@{fg text}
+
+This stops AmiTCP, maybe necessary if you are short on memory and using non AmiTCP
+applications.
+@endnode
+
+@node "UP" "Connecting To The Net"
+@{b}@{fg shine}Connect@{ub}@{fg text}
+
+This attempts to connect you to the net.
+
+A status display will appear, that will show all the message sent to and received from
+your modem and the computer you log on to. This display will also show you any error
+messages.
+
+If the phone number of the 1st pop is busy, Amiconnect will try the 2nd number, it
+will repeat this 2 times or as many times as specified by the retry parameter.
+
+Some settings are your modem will be altered temporariliy, but may be reset by
+switching your modem on or off.
+@endnode
+
+@node "DOWN" "Disconnecting From The Net"
+@{b}@{fg shine}Disconnect@{ub}@{fg text}
+
+Disconnects you from the net and takes your modem offline.
+@endnode
+
+@node "SaveAs" "Save As"
+
+@endnode
+
+@node "Save" "Save"
+@{b}@{fg shine}Save@{ub}@{fg text}
+
+Saves the current settings to envarc:
+@endnode
+
+@node "UserDetails" "User Details"
+@{b}@{fg shine}User Details@{ub}@{fg text}
+
+This is where you enter the details of the main user of your system.
+
+E-Mail Address - Enter your e-mail address here
+
+Real Name - Enter your realname
+
+Organization - Enter an organizat ion string
+
+Home Directory - Your home directory
+
+
+This information will be used to set various environment variables .
+@endnode
+
+@node "ModemDetails" "Modem Details"
+@{b}@{fg shine}Modem Details@{ub}@{fg text}
+
+Amiconnect needs to know quite a bit about your modem to work properly, most of the
+defaults should work fine, you may need to consult your modems handbooks for more
+information on the settings.
+
+
+Serial Device - What serial device your are using to connect to the net
+
+Device Number - The device number of the serial device
+
+Baud Rate - The DTE rate, this needs to be higher than your modems baud rate to ensure
+fastest transfer, 38400 or 57600 are probably the best values.
+
+Sana2/TCPIP Dev. - Are you using Cslip,slip or PPP.
+
+Init. Modem - Command used to initialis e modem
+
+Dial Command - Command used to dial your pop (may be ATDT or ATDP usually)
+
+DTR Overide On - The command used to turn the Data Terminal Ready overide on
+
+DTR Overide Off - The command to turn it off
+
+Modem Hang - Than command to tell the modem to hang up
+
+Command Mode - The string needed to tell the modem to enter command mode
+
+Set Data Rate - Command needed to fix the DTE rate at the current Baud Rate
+
+OK Message - How the modem responds if a command is successfu l
+@endnode
+
+@node "ProviderDetails" "Provider Details"
+@{b}@{fg shine}Provide Details@{ub}@{fg text}
+
+Information about your service provider, needed to dial out and connect.
+
+Your IP No. - Enter your internet protocol number, if you are using PPP with
+a dynamic node this number must be 0.0.0.0 
+
+Gateways IP No. - The internet protocol number of the machine you connect to.
+
+Mail Server - The address of the machine where you collect your mail (usually start
+off with post,gpo or something mail related followed by the domain name i.e.
+gpo.zynet.co.uk post.demon.co.uk)
+
+News Server - The address of the machine where you collect news (usually news followed
+by domain name, i.e.news.zynet.co.uk news.demon.co.uk)
+
+HTTP Proxy  - If your provider has a http proxy server, you may specify
+FTP Proxy   - the values here and WWW access will be speeded up.
+Gopher Proxy- The address is usually http://www.service.provider:portno/
+WAIS Proxy  - e.g. http://www.zynet.co.uk:8000/ http://www.demon.co.uk:8080/
+
+Pop1 Name - The name of the pop you want to connect to
+Pop1 Phone Numbeer - This pops phone number
+
+Pop2 Name - The pop to try if the 1st pop is busy, if your provider has only 1 pop
+enter the same as pop 1
+Pop2 Phone - The phone number for the 2nd pop
+@endnode
+
+@node "LogonDetails" "Logon Details"
+@{b}@{fg shine}Logon Details@{ub}@{fg text}
+
+Information about the logon sequence of your provider, your user name is taken from
+your e-mail address. It is usually best to only include the latter part of the
+prompts.
+
+Login Prompt: The prompt requesting you to enter your user name
+
+Response: What you enter in response to the login prompt, quite commonly
+your node name i.e. mchunt but maybe your user name.
+
+Protocol Prompt: The prompt requesting you to select what protocol you are using, if
+n/a leave blank.
+
+Password Prompt: The prompt asking you to enter your password
+
+Password: Your password, which you type in response to the above
+@endnode
+
+@node "HELP" "Help"
+@{b}@{fg shine}Help@{ub}@{fg text}
+
+Youre Reading It!
+@endnode
+
+@node "Use" "Use    "
+@{b}@{fg shine}Use@{ub}@{fg text}
+
+Save the current settings to Env:, will not be there when you reset.
+@endnode
+
+@node "Cancel" "Cancel"
+@{b}@{fg shine}Cancel@{ub}@{fg text}
+
+Cancels any changes made to the settings.
+@endnode
+
+@node "New" "New Features For Version 3"
+@{b}@{fg shine}New Features@{ub}@{fg text}
+
+Amiconnect 3 has a new connect interface which is more compact and in my
+opinion better looking. This interface will now abort at all stages (please
+email me if it doesn't), in version 2 the abort function would not work for
+some of the modem initialisation sequence.
+
+The main change however is the ability to use a custom login script, this is
+for people who's login procedure is vastly different to that which
+Amiconnect was initially written to deal with.
+
+To use this facility you will need to create a file called
+amitcp:db/aclogonscript, which should be in the following format
+
+received prompt1
+response to prompt1
+received prompt2
+response to prompt2
+.....
+received prompt#
+response to prompt#
+
+this file may be as long as you like but must have an even number of lines,
+i.e. every received prompt must have a corresponsing response. The standard
+login procedure would look like this
+
+ogin:
+nodename
+assword:
+yourpassword
+rotocol:
+slip
+
+There are no other new features, only a couple of small bugfixes and tweaks.
+
+@endnode
+

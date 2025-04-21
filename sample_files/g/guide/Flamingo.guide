@@ -1,0 +1,1038 @@
+@database Flamingo
+@author "Álmos Rajnai"
+@(c) "1998-2000 BiøHazard"
+
+@node "Main" "Flamingo Plus/4 emulator for the Amiga"
+
+                                  @{fg fill}Warning!@{fg text}
+       PowerPC version yet behaves unstable, use it with extreme care!
+
+
+                                  @{i}@{fg shine}Flamingo @{ui}@{fg text}
+                       @{fg fill}Plus/4 emulator for the Amiga@{fg text}
+                    by Álmos Rajnai (Rachy of BiøHazard)
+
+                           Version 1.51, 10.08.2000
+
+               @{"Intro        " link "Intro" 0       }   @{i}Whatta heck is this? @{ui}
+               @{"Requirements " link "Requirements" 0}   @{i}What do I really need? @{ui}
+               @{"Installation " link "Installation" 0}   @{i}This should be my biggest problem... @{ui}
+               @{"Usage        " link "Usage" 0       }   @{i}It works! @{ui}
+               @{"Distribution " link "Dist" 0        }   @{i}Should I register? @{ui}
+               @{"Author       " link "Author" 0      }   @{i}Who cares about this messy guy, eh? @{ui}
+               @{"Upcoming     " link "Upcoming" 0    }   @{i}Should I look that also? @{ui}
+               @{"Thanks to... " link "Thanx" 0       }   @{i}Who was his help? (Also guilty!) @{ui}
+               @{"Bugs         " link "Bugs" 0        }   @{i}"Raid! Fear of every bug!" @{ui}
+               @{"History      " link "History" 0     }   @{i}The Return Of The B.U.G. @{ui}
+               @{"To do        " link "Todo" 0        }   @{i}"Son, don't forget do the homework! @{ui}
+
+               @{"Plus/4 Facts " link "Facts" 0       }   @{i}Know your enemy! @{ui}
+
+                             @{i}©1998-2000 @{fg fill}BiøHazard  @{ui}@{fg text}
+
+@endnode
+
+@node "Intro" "How a story begun"
+
+ @{i}Those were the days... @{ui}
+
+ Can you remember? Or you used to have a Commodore 64? I used to have a
+Commodore Plus/4... Never heard of it? Well, yes: it was less popular, than
+his older brother, the C64.
+
+ You were one of the users/coders/graphicians/scene members...? I was. I was
+for a long time on Plus/4. This was my first computer.
+ I will never forget that day, when we met the first time. He was not a
+Commodore Plus/4 but some similar: a Commodore 16.
+
+ I just loved those small games, they used only 10 Kb of memory, so no space
+for huge animations, nice pictures were available, programmer should use all
+of his skills to optimize his code, use hardware tricks, and other "black
+magic".
+
+ @{i}Those were the days... @{ui}
+
+ But now, it is the past. Part of history, and always a sign to warn you:
+don't forget where you came from.
+
+ I, probably you too, enjoyed MUCH MORE that time.
+
+ @{i}Those were the days... @{ui}But it is the past already.
+
+ So, I was always looking for an emulator, a real Plus/4, C16, C116 emulator
+for the Amiga. The only one I found was A4, which was less than I could ever
+expect.
+ I waited, waited, nothing happened. Then a day I woke up, and started coding.
+And after a year of work, here it comes: a real emulator.
+
+ Where this name came from? Why Flamingo? A beauty bird, flies in the sky
+among clouds... Untouchable, unreachable, over all of us?
+ The story of this name: here, in Hungary was a -that time great- paper
+magazine, called @{b}Commodore Világ@{ub}. Once in this mag -in the reader's forum-
+started a huge dispute about C64 vs. Plus/4. (There was always a topic,
+nowadays called PC vs. Amiga, or Linux vs. Windows...)
+ Once, a C64 lover called the Plus/4 "skywalker flamingo". I just liked those
+words, always remind me that time.
+
+@endnode
+
+@node "Requirements" "Well, you will need at least an Alpha! I mean it... :)"
+
+ @{i}So, what do you really need? @{ui}
+
+ ø Kickstart 3.0
+
+ ø External libraries: asl.library, gadtools.library, iffparse.library (for
+ snapshot operations), 6581sid.library (for SID emulation),
+ cybergraphics.library V40 (for Cybergraphics video modes)
+
+ ø At least 68020 processor. (A 68030 or higher is strongly advisable.)
+
+ ø ECS, AGA or CyberGfx compatible card. (CGFX card is advisable with native
+   chunky mode, or a PowerPC coprocessor for chunky2planar.)
+
+ ø Some free memory. (About 1.5Mb, but it depends on video driver you use.
+   Fast Ram advisable too.)
+
+ ø PowerPC processor and PowerUp V4 for PowerPC version and PPC-based AGA
+   video driver
+
+@endnode
+
+@node "Installation" "Why this s**t does not want to work???"
+
+ At first you have to do to install is:
+
+    @{fg shine}copy all files and subdirs anywhere you want.@{fg text}
+
+ Then, it requires a @{b}rom image@{ub}, should be placed right in the same directory,
+and should be named "romimage".
+ This one can be found in several places, for example at @{b}Lando's
+ C16/Plus/4 Classix@{ub} (see below).
+ Don't forget: the whole ROM should be placed in one file! Often there are at
+least two files, called BASIC ROM and KERNAL ROM, rare there are more files
+for FUNCTION LOW and HIGH. All you need is BASIC ROM and KERNAL ROM.
+ Be careful: these files may start with loading addresses (eg. $00 $80), but
+it is not needed, you have to remove in some way. (Not too easy without any
+tool, you can find a tool for this purpose in A64 package.)
+
+ All the external video drivers should be placed in a "video" subdir same dir
+where Flamingo starts.
+
+ Some interesting Plus/4 sites:
+
+  Main Plus/4 program source
+   ftp://c64.rulez.org/pub/plus4
+
+  Lando's C16/Plus/4 Classix
+   http://plus4.emucamp.com/
+
+  Data about Plus/4 members, groups, programs
+   http://plus4.homepage.com/
+
+  Mike Dailly's Plus/4 homepage
+   http://www.scotch.demon.co.uk
+
+  The Commodore Plus/4 resource
+   http://www.plus4.org
+
+@endnode
+
+@node "Usage" "Easy-to-use is always suspicious!"
+
+                             Using the emulators
+
+ Both 68k and PPC versions are working the same. 
+
+ @{"Start from CLI, using parameters" link "CLI"}
+ @{"Start from icon, using GUI" link "Icon"}
+ @{"Special keys under emulation running" link "keys"}
+ @{"Patches in ROM (Loading, saving etc...)" link "patches"}
+
+@endnode
+
+@node "CLI" "My fingers are sticking to the keys. I ate jam."
+
+ To start from CLI just type @{i}Flamingo @{ui}in Flamingo's dir. You can add
+some parameter into the command line:
+@{b}
+ PROGRAM,VIDEODRIVER=XVD/K,STARTROM=SR/S,FRAMESKIP=SKIP/K/N,TASKPRI=PRI/K/N,
+ KEEPSYNC/S,NOSOUND/S,NOGUI/S
+@{ub}
+
+ @{b}PROGRAM@{ub} - it is obsolete already, Flamingo loads this program into the RAM.
+
+ @{b}VIDEODRIVER@{ub} - video driver can be replaced by this way to an other external
+video driver (should be located in video/ subdir).
+There are 7 drivers for now:
+  AGA-Delta 128 colour with delta buffer,
+  PPCAGA-Delta 256 colour PowerPC (WarpUp) based with delta,
+  ECS 8 colour,
+  MONO 2 colour,
+  CGX and CGX-Refresh 256 colour chunky driver for CyberGraphics
+    boards (thanks to PH03N1X),
+  Fake, which displays nothing. (This last one is only for test reasons.)
+ All sources of videodrivers are free, format documentation also provided in
+video subdir. See more at @{"here" link "GUIdriver"} in GUI documentation.
+
+ @{b}STARTROM@{ub} - if you used PROGRAM parameter, this switch cause starting ROM
+instead of loaded program.
+
+ @{b}FRAMESKIP@{ub} - the value of skipped (not drawn) frames can be set by this
+parameter. Default is zero. (Means: all frames to be drawn.) Frame counter
+displays different value in this case, displayed value means all emulated
+frames under a second, independently the number of displayed frames.
+
+ @{b}TASKPRI@{ub} - priority of the emulator. Default is -1.
+
+ @{b}KEEPSYNC@{ub} - if Flamingo runs too fast (for PPC version it is a must) this switch
+turns on synchronizing of frames to the real Amiga frames.
+If you left out this parameter from command line, that means there will be no
+synchronization at all, independently of default.cfg!
+
+ @{b}NOSOUND@{ub} - you can turn off the sound emulation of TED, if it drives you
+crazy. (Causes a small speed-up in some cases.)
+
+ @{b}NOGUI@{ub} - Opening of GUI can be supressed by this switch.
+
+ That was all. After default cofiguration have been loaded, parameters
+change configured values. (In case of modifying default configuration.)
+ Unfortunately for changing configuration, you have to start Flamingo with GUI.
+ (What a pain! :)
+
+@endnode
+
+@node "Icon" "I am a cat. I love mice."
+
+ If Flamingo started from Icon, or from CLI without NOGUI parameter, then
+its GUI appears, can be used for a few setup.
+ GUI should work with any default font, but if it cannot be fitted onto your
+screen, then it tries topaz 8.
+ Underlined characters are hotkeys. (Without any shifting key!)
+
+ Click to the buttons for more information!
+
+ +--------------------------------------------------------------+
+ | +-Video--------------------+ +-Program---------------------+ |
+ | |                          | |                             | |
+ | | Driver: @{"         " link "GUIdriver"}@{"Get" link "GUIdriver"}   | |     Task Priority: @{"   " link "GUItaskpri"}     | |
+ | |                          | |                             | |
+ | |  @{" Config " link "GUIxvdconfig"}    @{" Info " link "GUIinfo"}    | | CPU Speed: ###@{" " link "GUIcpuspeed"}###### 100% | |
+ | |                          | |                             | |
+ | |  Frame skip : @{"    " link "GUIframeskip"}      | |    Joy1:@{"   " link "GUIjoy"}   Joy2:@{"   " link "GUIjoy"}    | |
+ | |                          | |                             | |
+ | |  Keep synchron: @{"   " link "GUIsync"}     | |@{"Save snapshot" link "GUIsnap"} @{"Load Snapshot" link "GUIsnap"}| |
+ | |                          | |                             | |
+ | +--------------------------+ +-----------------------------+ |
+ | +-Sound--------------------+ +-Disk------------------------+ |
+ | |                          | |                             | |
+ | | @{" " link "GUIsound"} TED sound  Buffered @{" " link GUISound}| | #8 @{"Dir" link "GUIdird64"}@{"             " link "GUIdir"}@{"Get" link "GUIdir"}   | |
+ | | @{" " link "GUIsound"} SID card emulation    | |                             | |
+ | | @{" " link "GUIsound"} No sound              | |                             | |
+ | |                          | | #9 @{"Dir" link "GUIdird64"}@{"             " link "GUIdir"}@{"Get" link "GUIdir"}   | |
+ | |  SID base address $@{"    " link "GUIsidbase"} | |                             | |
+ | |                          | |                             | |
+ | +--------------------------+ +-----------------------------+ |
+ |                                                              |
+ | @{" Start " link "GUIstart"} @{" Load configuration " link "GUIconfig"} @{" Save configuration " link "GUIconfig"} @{" Quit " link "GUIquit"} |
+ |                                                              |
+ +--------------------------------------------------------------+
+
+
+@endnode
+
+@node "GUIdriver" "XVD driver string and Get"
+
+ Driver string for external video driver (XVD). You can simply type its name,
+or choose by requester clicking on Get gadget.
+ Video drivers should be located in video/ subdir.
+
+ Video drivers are simply chunky to planar converters for some special
+purposes. I like neither the system provided "c2p", writepixel8 function, nor
+some external, such as rtgmaster.library.
+ Anyway: it is up to you, you can do your own XVD, both sources and format
+documentation can be found in this package.
+
+There are 7 drivers for now:
+  AGA-Delta 128 colour with delta buffer
+    (by Álmos Rajnai, c2p by Ferenc Zavacki),
+  PPCAGA-Delta 256 colour PowerPC (WarpUp) based with delta
+    (by Álmos Rajnai, c2p by James McCoull & Peter McGavin)
+  ECS 8 colour, unfortunately no ECS-Delta, may be some time later
+    (by Álmos Rajnai, c2p by Ferenc Zavacki),
+  MONO 2 colour
+    (by Álmos Rajnai),
+  CGX and CGX-Refresh 256 colour chunky driver for CyberGraphics boards
+    (by László Török),
+  Fake, which displays nothing, only for test reasons
+    (by Álmos Rajnai).
+
+ PowerPC based AGA driver is working only with WarpUp (by Haage&Parter),
+gives almost the same speed as a graphcard with native chunky support.
+
+@endnode
+
+@node "GUIxvdconfig" "XVD configuration"
+
+ External video drivers can be configured. It calls video driver
+configuration routines.
+ Screenmode of AGA-Delta, PPCAGA-Delta, ECS, MONO and CGX drivers can be
+configured here, FAKE does not have anything to configure.
+
+@endnode
+
+@node "GUIinfo" "XVD information"
+
+ You can get some information about specified external video driver, it pops
+up an about box.
+
+@endnode
+
+@node "GUIframeskip" "Frame skip"
+
+ Skipping frames is common technology speeding up slow animation. It is
+almost the same, both rendering into the chunky buffer and chunky2planar
+conversion will be skipped on skipped frames. You can set up the number of
+skipped frames here.
+ Frame counter displays different value in this case, displayed value means
+all emulated frames per second, independently the number of displayed
+frames.
+ Can be set from 0 upto 99, but I see no reason more than 5 skipped frames.
+ I advice you to set at least 1 if you have a slower machine (eg. 68030-50Mhz
+or 68040-25Mhz), emulator runs much smoother then. PowerPC version does not
+require this feature at all.
+
+@endnode
+
+@node "GUIsync" "Keep synchron"
+
+ If Flamingo runs too fast (for example the PowerPC version) this switch
+turns on synchronizing of frames to the real Amiga frames. It is not working
+properly yet, it keeps the framerate from 47 FPS upto 52 FPS, but still
+nice enough.
+ This checkbox has no effect, when @{"Buffered TED sound" link "GUIsound"} is used.
+
+ Note: if you left out the equivalent parameter from command line (KEEPSYNC
+switch), that means there will be no synchronization when Flamingo started
+from cli, independently of default.cfg.
+
+@endnode
+
+@node "GUItaskpri" "Task priority"
+
+ You can specify the task priority by this number. From -9 upto 99, but -1 is
+perfect I think. Emulator never waits except @{"keep synchron" link "GUIsync"} enabled, and you
+have a really fast machine, or @{"frame skip" link "GUIframeskip"} set to a high value.
+
+@endnode
+
+@node "GUIcpuspeed" "CPU speed"
+
+ You can specify the relative speed of CPU emulation to its environment. That
+means CPU can get more time against video and sound. It is similar to frame
+skipping, but much more usable since all the other things (like interrupts,
+timers) are working the original speed, so you can play with high CPU-power
+required games much smoother than on the original Plus/4. (Playing Total
+Eclipse feels like Doom... :)
+ The original value is 100%. By increasing CPU speed you will notice an over
+all slowdown due to CPU emulation eats lot more then, and that is why I
+advice this function only for stronger computers. (You can make use of wasted
+waiting time between frames, when keep synchron active.)
+
+ On the other hand, decrease the CPU speed may even speeding up some
+programs, whose are using less CPU time, mostly spending time with waiting
+for some events, thus you can use it speeding up emulation on slower machines.
+
+ Be careful! It may confuse programs, which are highly depending on exact CPU
+speed, and become unstable, or unusable!
+
+@endnode
+
+@node "GUIjoy" "Joystick emulation"
+
+ Joystick emulation is possible from keyboard, by numeric keypad
+arrows and left Alt, or from port2 by a real joystick.
+ By this two cycle gadget you can select which port receive what kind of
+emulation. (Off - no emulation, Key - from keyboard, Joy - from joy port2.)
+
+@endnode
+
+@node "GUIsnap" "Loading, saving snapshot"
+
+ You can manage loading and saving snapshot of the state of the emulator.
+This means it will save all data into a file you specify, and you can load it
+back anytime, and continue using. It is very useful for games without saving
+possibility.
+
+ Flamingo uses a special new format for the snapshot, called CPS (Commodore
+Plus/4 Snapshot), it is an IFF formatted file.
+
+ @{fg shine}This fileformat is still internal, please do not spread it, I have to
+consult with some other emulator developer first!@{fg text}
+
+ Snapshot operations require iffparse.library.
+
+@endnode
+
+@node "GUIsound" "Sound emulation"
+
+ By this radio gadget you can set up the sound emulation. There are only 3
+possibility:
+
+  @{b}TED sound @{ub}is the original Plus/4 sound, using Paula as output device,
+    Using TED emulation there is a possibility of buffered sound output.
+    @{b}Buffered sound@{ub} is system friendly, should work on every sound output
+    device, which is using audio.device. All the mixing is done by Flamingo,
+    only one chanel allocated. This option requires a strong machine, or
+    sound will be "glitchy". If this option is on, turning off
+    @{"Keep synchron" link "GUIsync"} has no effect.
+  @{b}SID card @{ub}emulation is an extension emulation for the Plus/4 trough
+    the 6581sid.library, using Paula as output device, you have to set up base
+    address then by @{"SID base address" link "GUIsidbase"}.
+  @{b}No sound @{ub}is for turning off sound, if it drives you crazy. Audio channels
+    are free-ed then, so you can go for an MP3...
+
+@endnode
+
+@node "GUIsidbase" "SID base address"
+
+  SID chip emulation requires a base address. This address is a
+hexadecimal number from $0 upto $ffff. The original card uses $FE80 or $FD40,
+but Plus/4 programmers often use C64 music modules, such as Future Composer
+modules or similar. Usually they were too lazy relocate base address, so you
+can "revert" converting C64 tunes by a good base address setup. It is usually
+$D400, as in the original C64.
+ Give a try to this addresses too: $FF40, $FF50, $F400
+
+ And of course @{"SID card emulation" link "GUIsound"} should be used...
+
+@endnode
+
+@node "GUIdird64" "Directory-D64 file switch"
+
+ Unfortunately in this release there are no possibility switching between
+directory and D64 file based file emulation, so this gadget is disabled.
+
+@endnode
+
+@node "GUIdir" "Directory based file emulation"
+
+ @{"Patches" link "patches"} in ROM routines (especially disk routines)
+allow you the using of Amiga directories as Plus/4 floppy drives. Two device
+emulated this way (#8 and #9).
+ You can type the directory to be emulated as a drive, or click to the Get
+button for a requester.
+
+@endnode
+
+@node "GUIstart"
+
+ This button starts or continues the emulation.
+
+@endnode
+
+@node "GUIquit"
+
+ This button quits from the emulator.
+
+@endnode
+
+@node "GUIconfig"
+
+ By pressing this buttons a requester appears asking you to choose a
+configuration file.
+ Configuration can be saved anywhere under any name, and can be loaded back
+again of course.
+ Default configuration is always loaded from the file located in the program's
+directory and called "default.cfg". You can save your default configuration
+into this file.
+
+@endnode
+
+@node "keys" "- It says: 'Do Not Press The Red Button!' ...Ahem...- Click. "
+
+ There are a couple of hotkeys while the emulation is running, those are:
+
+ F6 - SID emulation on/off (sometimes it plays "garbage" from memory, that is
+      why this function included)
+ F7 - frame drawing on/off (speeding up emulation)
+ F9 - megareset (can not be disabled from Plus/4 programs)
+ F10 - normal reset (calls the reset handler)
+ HELP - back to GUI, or quit emulator, you can continue emulation pressing
+      "start" button in the GUI
+
+ Joy emulation from the numeric keypad:
+
+              7 8 9
+               \|/
+              4- -6   Fire: left Alt
+               /|\
+              1 2 3
+
+ A1200 has a bug on keyboard handling, use oblique keys instead of two keys
+at the same time. Left Alt works with any key together.
+
+ Asterisk (*) on the numeric keypad swaps the joysticks, so you don't have to
+go back to the setup window.
+
+ Run/stop is the Tab, Commodore key is the right Amiga.
+
+@endnode
+
+@node "patches" "- Does not want to work? Well, I have a new patch..."
+
+ There are high level patches on I/O routines for disk access. This means
+loading, saving, file opening, writing to, reading from a file, closing are
+working. Some lower level not emulated yet (such as listen, unlisten, talk,
+untalk functions), and no D64 support. Yet...
+
+ You can use both DLOAD and LOAD commands for loading files, DSAVE, SAVE for
+saving (all work from monitor functions also), and DIRECTORY for listing an
+emulated drive.
+
+ Eg. DLOAD"AUF W. MONTY.PRG" loads a file called "auf w. monty.prg" from
+device 8, DLOAD"AUF W. MONTY.PRG",U9 loads that file from device 9.
+
+ There are two special patches for opening a requester, if you don't like the
+typing, use * (asterisk) or empty name both loading and saving.
+
+ Eg. DLOAD"*" or LOAD"",8,1
+
+ You can use shift+Run/Stop (shift+TAB on the Amiga keyboard) for loading a
+program by requester and starting automatically by RUN command.
+ You can change subdirectory from the requester, Flamingo keeps tracking it,
+and appears even in the configuration (you can save it).
+
+ Be careful on loading files, there are no check for memory overflow. Of
+course normal Plus/4 files never exceed the memory, but others can!
+
+@endnode
+
+@node "Facts" "'-How did he look like? -I don't know... He wore a ski-mask.'"
+@{fg shine}
+@{i} "Well, it is small, yellow, and sour... But it is our own!"  @{ui}
+  Exctract from the movie "The Witness" by Péter Bacsó, a leader's opinion
+  about hungarian orange.
+
+                         @{fg fill}Commodore Plus/4 factsheet@{fg text}
+
+   Product type: Personal computer
+
+   Deput in: 1984
+
+   Serial: in same family as Commodore 16 and Commodore 116
+           (almost same hardware)
+
+@{fg shine}Hardware@{fg text}
+
+   Main processor: 7501 or 8501 (DIL-40) 
+                   clock freq: 1.773 Mhz or 886.7 Khz (chosen for actual bus
+                   mode)
+   Coprocessors:   7360 or 8360 (also called TED, DIL-48),
+                   6551 (also called ACIA, DIL-28)
+   Main memory:    64Kb, paged in two parts, 
+                   ~60Kb freely usable RAM
+                   (in Commodore 16 and 116 only 16Kb)
+                   ~32Kb ROM, contains built-in BASIC operating system
+                   ~32KB ROM, contains some applications
+                   (in Commodore 16 and 116 this ROM part is missing)
+
+   Ports:          Casette, Serial, RF out, Video out, Memory expansion, 
+                   User port, Joy#0 and Joy#1, Keyboard (internal)
+                   (in Commodore 16 and 116 User port is missing)
+
+   Periperials:    Any, which is working with normal Commodore IEC bus
+                   (VC-1541/1571/1581 Floppy Disk Drivers,
+                    MPS801/810 Matrix Printers and so on)
+
+                   A special Floppy Drive (VC-1551) were made especially for
+                   this family. (Uses Expansion port instead of IEC bus, much
+                   faster, but a dozen of "turbo loaders" are not working
+                   with this model.)
+
+                   Joysticks (similar to Commodore 64's, but the plug is
+                   different)
+
+                   Commodore Datasette Tape (similar to Commodore 64, but
+                   the plug is different)
+
+                   Display: any PAL or NTSC TV, or monitors with 15Khz
+                   line frequency and composite port
+
+   Video:          50Hz PAL or 60Hz NTSC screen, 15Khz line frequency,
+                   two resolutions: 160x200 and 320x200 pixels in
+                   121 color. (16 base color and 8 level for each, except
+                   black.)
+
+                   Character mode: 40x25 different position, 256 different
+                   character in 8x8 bitmap each, or 128 different character
+                   and inverse mode. A global background color and a different
+                   ink color for each character in high resolution, or 3 global
+                   base color and an ink color for each character in low
+                   resolution mode. (Ink color can be chosen from the first 8
+                   base color in this case.)
+
+                   Graphic mode: 320x200 pixel in two colors for each 8x8
+                   pixel group, or 160x200 pixel in 4 colors (2 for the whole
+                   screen and 2 for each 8x8 group).
+
+                   Hardware flashing and hardware cursor in normal 
+                   character mode.
+
+                   (Unfortunately no hardware sprites are available at all...)
+
+   Audio:          2 independent sound channels, square wave for the 1st and
+                   square wave or "white noise" for the 2nd channel.
+                   3 octaves, 8 level of volume, maskable flat-wave for
+                   digital sound. (And that's all...)
+
+@{fg shine}Software@{fg text}
+
+  Operating System: Commodore Basic V3.5
+                    (Very well designed, works perfect, but damn slow.)
+
+  Other built-in:   Some functional application is provided 
+                    (called Plus 4 Function), missing from Commodore 16/116.
+                    A simple word processor, and similar Office-like
+                    programs (not emulated in Flamingo, those softwares are
+                    useless, but contain some bugs, and those errors can
+                    cause lot of trouble).
+
+Upgrade possibilities:
+
+  ø 60 Kb memory expansion for 16/116 models
+
+  ø 256 Kb memory expansion hack for all models
+
+  ø SID card sound extension for all models (same port used as for memory
+    expansion at 16/116 models)
+
+  ø EPROM softwares for Plus/4 instead of Plus 4 built-in functions.
+
+@endnode
+
+@node "Author" "Err... What's up, Doc?"
+
+ Who did this boring/lame/shitty/great emulator?
+
+
+                      @{fg shine}Rajnai Álmos@{fg text} @{fg fill}(Rachy of BiøHazard)@{fg text}
+                  coder, tracer, sometimes even musician...
+
+          If you want to contact me, or send me gift, then write to
+
+                                 Snail mail:
+
+                              H-8360 Keszthely
+                              Bercsényi M.u. 46
+                                   Hungary
+
+                                 Or E-mail:
+
+                               @{fg shine}RACS@FS2.BDTF.HU@{fg text}
+
+                Please read docs carefully before asking me!
+
+ Or on the Plus/4 discussion list (of course...), find out more at:
+
+  HTTP://C64.RULEZ.ORG
+
+  And finally sometimes I am on the IRC channel @{fg shine}#amigahu@{fg text} on @{fg shine}IRCNET@{fg text}.
+
+ (Sorry for my terrible english. I will never learn it.)
+
+@endnode
+
+@node "Upcoming" "The future is Bright!"
+
+ What do I plan for the future?
+
+ @{fg shine}*@{fg text} Flamingo's updates are on the way of course.
+
+ @{fg shine}*@{fg text} Keep on editing my hungarian diskmag, called @{fg shine}F0NT!@{fg text}
+   I need help of course, if you are encouraged enough, try to
+   @{"contact me" link "Author" 0}. Internet is the preferred way...
+   You may find the issues on Aminet: 
+        docs/mags/F0NT01.lha
+        docs/mags/F0NT02.lha
+        .
+        .
+        .
+
+ @{fg shine}*@{fg text} I release a guide about PPC programming under WOS.
+
+ @{fg shine}*@{fg text} May be a better MPEG player.
+
+ @{fg shine}*@{fg text} I am planning a M68k emultor for the PowerPC, for simple
+ applications.
+
+ @{i}That's all, Folks! (For today...) @{ui}
+@endnode
+
+@node "Dist" "So you want to register... Don't you?"
+
+ This software is subject to the "Standard Amiga FD-Software Copyright Note".
+ It is GIFTWARE as defined in paragraph 4g.
+ If you like it and use it regularly please send any gift or a registered
+ copy of your software to {"me" link "Author" 0 }.
+ For more information please read "AFD-COPYRIGHT" (Version 1.4 or higher).
+
+                             Thanks in advance!
+
+ External video drivers are subject to the "Standard Amiga FD-Software 
+ Copyright Note".
+ Those are FREEWARE as defined in paragraph 4a.
+ Remember: you are allowed to use the sources any way you want, but don't
+ forget crediting the authors.
+ For more information please read "AFD-COPYRIGHT" (Version 1.4 or higher).
+
+@endnode
+
+@node "Thanx" "Thanks to..."
+
+  This program could not become to real without those men, and I would like
+to thank them:
+
+ @{fg shine}*@{fg text}@{i}Frank Wille @{ui}for creating and maintaining @{fg shine}PhxAss@{fg text} and @{fg shine}pasm@{fg text}.
+
+ @{fg shine}*@{fg text}@{i}Volker Barthelmann et al. @{ui}for @{fg shine}VBCC@{fg text} free C compiler.
+
+ @{fg shine}*@{fg text}@{i}Christian Bauer @{ui}for creating and maintaining @{fg shine}Frodo@{fg text}.
+  It gave me a few idea on optimising and on implement features.
+  Some parts at disk emulation are his works. (Taken from Frodo with his
+  permission.)
+
+ @{fg shine}*@{fg text}@{i}Török "Ph03n1x" László @{ui}author of great MooVId for CGFX video drivers and
+  beta testing. (That was a hard work, eh dude? ;)
+
+ @{fg shine}*@{fg text}@{i}James McCoull & Peter McGavin @{ui}for PowerPC-based chunky2planar routine.
+
+ @{fg shine}*@{fg text}@{i}Biczó "Crown" Tibor @{ui}for lotsa Plus/4-related helps.
+
+ @{fg shine}*@{fg text}@{i}Marko Mäkelä @{ui}and @{i}John West @{ui}for great documentations about the 65xx/85xx 
+  processors.
+
+ @{fg shine}*@{fg text}@{i}Mike Daily @{ui}author of Minus4 for his helps.
+
+ @{fg shine}*@{fg text}@{i}Tamás Baldauf @{ui}for the joystick, it was really a must for testing.
+
+ @{fg shine}*@{fg text}@{i}Stephen "Cobra" Fellner @{ui}for helps in timing code and for testing.
+
+ @{fg shine}*@{fg text}@{i}Kémeri "UnReal" Csaba @{ui}for beta testing, and for never forget
+  asking the question:
+  "When will you finish the next version?".
+
+ @{fg shine}*@{fg text}@{i}Lando @{ui}for beta testing, and new ideas.
+
+ @{fg shine}*@{fg text}@{i}Ferenc Zavacki @{ui}for lotsa helps in serveral topics.
+
+ @{fg shine}*@{fg text}@{i}Aminet staff @{ui}for the great Amiga related work. I probably lost my hope
+  without them.
+
+ @{fg shine}*@{fg text}@{i}Geo of BiøHazard @{ui}for all the helps and beers together.
+
+ @{fg shine}*@{fg text}@{i}Levente Hársfalvi @{ui}for all his helps.
+
+ @{fg shine}*@{fg text}@{i}Gáti "gega" Gergely @{ui}for sending me his code, which gave me some idea, when
+  I had no one.
+
+ @{fg shine}*@{fg text}@{i}Markovits "jam" Péter @{ui}for helps and @{i}lotsa @{ui}beers together...
+
+                           And @{i}you @{ui}for using it!
+
+ Finally greets to:
+
+  all other @{i}BiøHazard @{ui}members (especially @{i}Teo.p3 @{ui}and @{i}R.I.P. @{ui}),
+
+  @{i}asdf,@{ui}
+  @{i}BSZ/NST,@{ui}
+  @{i}CHIP,@{ui}
+  @{i}Darklon/Scoopex,@{ui}
+  @{i}Enc0re,@{ui}
+  @{i}ERN0,@{ui}
+  @{i}Emeric/SpaceHawks,@{ui}
+  @{i}Flex,@{ui}
+  @{i}Gato/Impulse,@{ui}
+  @{i}GreenGo,@{ui}
+  @{i}Imre Csaba,@{ui}
+  @{i}Jam,@{ui}
+  @{i}Jocó,@{ui}
+  @{i}Kovács Dezsõ,@{ui}
+  @{i}lORD/Absolute!^CJ^Impulse,@{ui}
+  @{i}Louise/AmigaONLY,@{ui}
+  @{i}Magic/AmigaONLY,@{ui}
+  @{i}Pethõ Szabolcs,@{ui}
+  @{i}Petike/AV,@{ui}
+  @{i}Ray/Therapy,@{ui}
+  @{i}QXYka,@{ui}
+  @{i}RatMan,@{ui}
+  @{i}Steve,@{ui}
+  @{i}Stinky/NST,@{ui}
+  @{i}Szabó András,@{ui}
+  @{i}Szaky,@{ui}
+  @{i}Valenta Ferenc,@{ui}
+  @{i}Watt.@{ui}
+
+@endnode
+
+@node "Bugs" "Beatlejuice! Beatlejuice! Beatlejuice!"
+
+ @{i}Known bugs and missing features:@{ui}
+
+  In the emulation some features are not emulated or working wrong, eg.
+hardware timers, FF0A-scroll tricks etc. I try to fix this in the future,
+post any suggestion to me!
+
+ Snapshot saving/loading not working in the PowerPC version yet.
+
+ Increased CPU speed messes up the hardware timers ($FF00-$FF05).
+
+ There is no double buffering in the XVDs, flickering could be annoying
+sometimes, mostly on CGX direct rendering. (In fact this method is much
+faster.)
+
+ Opened screen borders hardware tricks are not working always as it should.
+
+ SID emulation cannot emulate "gate" effects, because this trick requires
+register refresh between frames, and SID registers are refreshed only the
+end of each frame. (Eg. try the Last Ninja 2 songs.)
+
+ Buffered sound is not sounds as perfect as direct audio, because of the low
+mixing frequency (15600 Hz), probably I add a possibility of doubling this
+frequency for smoother sound.
+ Some digital sound is yet terrible. This came from hardware tricks used by
+coders for increasing quantity of digital volume levels. Unfortunately I
+don't know all the tricks, so I can not emulate this feature properly.
+ Sound have some latency, namely 1 second, because smaller buffers require
+separated audio task in the PPC version to avoid context switches. I will add
+this in next release.
+
+ Arithmetic overflow in ADC and SBC commands are not emulated succesfully in
+the PowerPC version. (Some programs work incorrectly, eg. Mercenary.)
+
+@endnode
+
+@node "Todo" "Let's check handkerchief!"
+
+ Well, there are a lot of things to improve (in order of importance):
+
+  ø Bugfix... :)
+  ø Real timer emulation (reqired for a few defenders and digital sound)
+  ø Usable external monitor/debugger functions
+  ø 256 Kb memory expansion emulation
+  ø Patched routines for D64 support
+  ø Real D64 support for faster machines (1541/1551 emulation)
+  ø Animation saver (AVI or IFF-ANIM5)
+
+@endnode
+
+@node "History" "Once Upon A Time..."
+
+History
+
+v1.51 Bugfix, 10.08.00
+
+* Fixed joystick support, requires lowlevel.library v40, but works better
+* (PPC) Fixed 38 row mode 
+* (PPC) Fixed serious error, which caused crash, when non-ppc based XVD ran
+  together with the PPC version
+
+* Added buffered sound. Lots of the digital sounds are much better now. (Eg.
+  Digital Ball sounds great!)
+
+v1.50 Bugfix and new features, 31.07.00
+
+* Added PowerPC version (3x-10x faster than 68k version)
+* Added new keystroke: numeric-* for joystick port swap under emulation
+  (thanks for the idea to Lando)
+
+* Fixed uncleared high word at indirect addressing, it might cause some
+  program run wrong (Leaper finally works! Yeah! I love it!)
+* Fixed a bug in the GUI: latest invoked function always reappeared on
+  non-hotkey keypresses
+* Fixed GUI: Flamingo can not be started without a valid XVD setup
+* Fixed GUI: XVD error message now really appears
+* Fixed hardware interrupt, break flag now cleared. This bug sometimes caused
+  infinite break loops (eg. in Turbo Assembler v6.0)
+* Fixed default program loading (after loading Flamingo filled memory with
+  patterns)
+* Fixed a serious mistake in max. FPS counting, it could cause crashes
+* Minor fixes and speedups (discovered under PPC conversion)
+* Fixed frame drawing on/off key (F7), now works independently the
+  frameskipping value
+* Fixed wrong error message on library open fail and I/O error
+* Fixed $FF1E timing, it behaves almost as most programs expect
+* Fixed raster interrupt, it came earlier than it should, now works right
+* Fixed character matrix switching, ailgned to new character-line beginning
+  (splitted graphical/text mode is working right, eg. BASIC graph mode 2)
+* Fixed screen draw on/off emulation, Manic Miner is working now
+  (thanks again to Lando for sending this game)
+* Fixed joy emulation, works better (emulation speed increased a bit again)
+* Fixed wrong FLD scrolling, horizontally scrolling games and magazines
+  are working right
+
+* Changed processor speed setup, now can be set upto 1000%
+* Changed FPS counter to 3 digits (guess why... ;)
+* Changed the PPCAGA-delta XVD from asynchrone to synchrone. (Unfortunately
+  this caused a bit performance decrease in the 68k version with this
+  driver.)
+* Changed slightly the XVD format, now supports PPC-based drivers without
+  context switches in FlamingoPPC
+
+* Due to lots of changes and improvements version number raised to 1.50
+
+v1.08 Internal beta
+
+v1.07 Bugfix and new features, 10.08.99
+
+* Fixed FF07 reset on return to the GUI, it caused wrong characher display
+  in some programs
+* Fixed late storing of chunky buffer from given back by XVDs, may cause
+  system crash in some very rare cases
+* Fixed timing system, now more precise, but not perfect yet (keep synchron
+  really keeps the synchron even on graphcard equipped machines)
+* Fixed messed FPS numbers on higher fps than 98
+* Fixed emulating of stack underflow, now works
+* Fixed timer hangup after stepping back to GUI
+* Fixed PHP command on wrong interrupt flag storing
+
+* Added CPU speed settings
+* Added handling of snapshot files, not fully tested yet
+* Added memory pattern filling on start: it is really weird, but a few
+  programs depend on this filling
+
+v1.06 Bugfix and new features, 12.07.99
+
+* Fixed PPCAGA-delta XVD, it allocated the screen wrong if the chip memory
+  was fragmented, caused often system crash
+* Fixed ECS driver, a bug in palette (no trailing zeroes), might cause system
+  crash in some rare cases
+* Fixed both CGX driver, modulo support added, now works on BVision too.
+  (Thanks goes again to pH03N1x!)
+
+* Added modulo for the chunky screen, required for native chunky screens
+* Added screenmode requester to every XVD (except Fake of course :)
+* Added real joystick support 
+
+* Removed AGA driver, it was totally pointless, AGA-Delta works very well
+
+v1.05 Bugfix and new features, 23.06.99, first public release
+
+* Fixed wrong calculation of clock cycles, improved speed a bit
+* Fixed kernal save routine patch
+* Fixed some wrong memory write on $FF40
+* Fixed wrong horizontal counter
+* Fixed keyboard reset
+* Fixed wrong reset after crash opcode
+* Fixed digital sound (it was a silly bug, but not there are more yet)
+* Fixed keyboard reset on file requesters
+* Fixed ROM/RAM marker bit in $FF13 TED register
+* Fixed wrong sound setup on CLI start
+* Fixed wrong indexing in LAX abs,Y ($BF) opcode
+* Fixed some bug in TED emulation
+* Fixed wrong raster line counting (caused wrong color, gfx mode switch in
+  some prgs, now works properly)
+* Fixed wrong timers (it is not perfect yet, but I don't have any idea)
+* Fixed wrong keep synchron function (there is yet more trouble: it
+  keeps synchron around 50 FPS instead of constant 50, but that should be not
+  a problem)
+* Fixed wrong character banking in turned off inverse modes
+
+* Added SID card support with 6581sid.library (awaited for a long time, it is
+  not perfect yet, but still nice enough)
+* Added low(er) level disk support for file system disk emulation
+  (Eg. Directory command works now)
+* Added Extended Color Mode (especially to the news and magazines)
+* Added PowerPC-based AGA external video driver
+
+* Optimalizations improved speed a lot
+
+* Some parts were rewritten in C for increasing flexibility (and size... ;)
+
+v1.04 Bugfix, 01.11.98
+
+* Fixed CyberGFX-Refresh XVD driver (thanx to Ph03n1x), now it works even on
+  UAE's Picasso driver (extreme case...)
+* Fixed ECS problems with levels of black color
+* Fixed wrong Single clock-Twiee clock switching
+* Fixed wrong task priority change
+* Fixed AGA, ECS and Mono external video driver at screen opening (thanks to
+  Ferenc Zavacki)
+* Fixed directory change on patched load and save requesters
+
+* Changed C= button from LAmiga to RAmiga
+* Changed the sizes in GUI, looks much better now (adviced by gega)
+
+* Optimalizations improved speed a bit again (concept changed from dynamic
+  compilation to interpretive, I was so sad, but dynamic mode not worked very
+  well)
+
+* Added delta buffer based AGA external video driver, which increment speed
+  much (thanks to Ferenc Zavacki again!)
+* Added chooseable joy emulation from keyboard
+
+v1.03a GUI Bugfix, 02.10.98
+
+* Fixed GUI, now working on all screens and with all fonts
+
+v1.03 Bugfix and optimalization, 26.09.98
+
+* Fixed BSS memory clearing
+* Fixed memory loss on exit
+* Fixed wrong vertical line size (really 311 lines for now)
+* Fixed(?) wrong interrupt request clearing
+* Fixed wrong status flags in decimal mode
+* Fixed wrong size of every decimal mode SBC
+* Fixed wrong addressing mode in write opcodes (now PRINT 1.1 is working
+  properly... :)
+* Fixed screen size to 311 lines
+* Fixed load patch on absolute load and an Enforcer hit (sometimes causes a
+  guru)
+
+* Optimized branching opcodes (improves speed a bit)
+* Optimized cache method (improves speed a bit again, and eats less memory)
+
+* Added version string :)
+* Added save patch
+
+v1.02 Bugfix and new features, 14.09.98
+
+* Fixed joystick handling, now works perfectly (thanks to Crown)
+* Fixed freq based sound again, now perfectly (hopefully)
+* Fixed FPS counter, now calculates exact FPS (even on NTSC)
+* Fixed vertical line high byte
+* Optimized border colour fill on turned off screen
+* Fixed wrong error message on fail audio open
+* Fixed memory read-write at $FF20-$FF3D
+* Fixed all external video driver at xvd_Done
+
+* Added NOSOUND option
+* Added file-requester on empty filename
+* Added digital sound emulation (buggy, and far slower than it should be)
+* Added GUI
+* Added NOGUI option
+* Added start from icon
+* Added multiple disk unit emulation
+* Added prefs saving/loading
+
+v1.01 Bugfix and new features, 31.08.98
+
+* Fixed wrong addressing mode cause lot of program crash (especially
+  Cruel-Crunch-ed programs)
+* Fixed wrong code flushing over $8000 (himem)
+* Fixed sound
+* Fixed bad vertical line interrupt (for Ph03n1x - now Icicle Works is
+  running right, he can play... ;)
+* Fixed vertical scroll
+* Fixed wrong multicolor draw
+
+* Added unsupported opcodes
+* Added ECS video driver (still buggy a bit)
+* Added chunky drivers for CGFX (thanks to Ph03n1x)
+* Added KEEPSYNC and TASKPRI options, plus priority change on start
+* Added cursor display
+
+v1.00 First beta, 17.08.98
+
+@endnode
+

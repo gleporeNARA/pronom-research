@@ -1,0 +1,308 @@
+@DATABASE OctaMEDPlayer Guide
+
+@NODE Main "OctaMEDPlayer Guide"
+
+            OctaMEDPlayer V6.0
+            ~~~~~~~~~~~~~~~~~~
+
+OctaMEDPlayer is a stand-alone, freely distributable player program for
+OctaMED songs. It can be used from both @{" Shell " LINK shell_usage} and @{" Workbench "
+LINK wb_usage}.
+
+            @{" Supported File Formats " LINK file_formats}
+            @{"  System Compatibility  " LINK sys_comp}
+            @{"      Shell Usage       " LINK shell_usage}
+            @{"    Workbench Usage     " LINK wb_usage}
+            @{"  OctaMEDPlayer Window  " LINK window}
+            @{"    ARexx Interface     " LINK arexx}
+            @{"    About Program...    " LINK about}
+            @{"        Changes         " LINK changes}
+
+Document last changed: 17.1.1996.
+@ENDNODE
+
+@NODE file_formats "OctaMEDPlayer File Formats"
+OctaMEDPlayer supports several MED/OctaMED file formats:
+
+* Old Sng+Samples format (MED V2.1 - OctaMED V2). OctaMEDPlayer is
+  probably the only external program capable of playing this format.
+
+* MED/OctaMED modules of type MMD0 (MED V2.1 - OctaMED V6), MMD1
+  (OctaMED V3 - V6) and MMD2 (OctaMED V5 - V6).
+
+OctaMEDPlayer is a MED/OctaMED-only player program. In particular,
+support of other music programs will NOT be added. There are more
+generic player programs for this purpose (e.g. MultiPlayer and
+PowerPlayer).
+
+OctaMEDPlayer supports normal four-channel songs, MIDI, and the split
+(5-8) channel modes, as well as multi-modules. These compression methods
+are supported:
+    * PowerPacker (requires powerpacker.library)
+    * SFCD/SFHD (requires lh.library)
+    * XPK (requires xpkmaster.library and the used compressor).
+
+There are some special @{" Notes for MED V2.1 / MED V3 Modules " LINK notes_21_3}.
+
+Note: I've seen "ripped" (Octa)MED modules around, which are severely
+malformed, due to ripper deficiency. (Octa)MED modules are not made to
+be ripped, so ripped modules are often likely to fail. In fact, you should
+never distribute ripped modules as such; at least load them into OctaMED
+and save them back to make sure that the file format is correct.
+@ENDNODE
+
+@NODE notes_21_3 "Notes for MED V2.1 / MED V3 Modules"
+MED V2.1 Modules
+~~~~~~~~~~~~~~~~
+There may be problems with the playing speed. If the playing speed isn't
+correct, load the module into a newer MED/OctaMED, change the TPL (Ticks Per
+Line) tempo to 6, and save it back.
+
+MED V3.00 Modules
+~~~~~~~~~~~~~~~~~
+There's an alignment bug in the module saving routine of MED V3.0. Some
+modules may crash when played (on 68000/68010-based Amigas). This problem
+can be fixed by loading the module into a newer MED/OctaMED and simply
+saving it back.
+@ENDNODE
+
+@NODE sys_comp "System Compatibility"
+OctaMEDPlayer is compatible with all versions of the operating system,
+even with the obsolete V1.3. Of course, OctaMEDPlayer is fully
+multitasking and OS-friendly.
+
+OctaMEDPlayer uses the system standard ASL file requester, it is
+available only under Workbench 2.0 and later.
+@ENDNODE
+
+@NODE hqmode "HQ (High Quality) Mode"
+The HQ Mode enhances the sound quality of 5-8 channel modes. It will,
+however, cause increased processor load. This mode is available in
+OctaMEDPlayer, as well as in OctaMED.
+
+Due to the high processor load, the HQ mode in 7/8 channel modes may
+not usable on slow (7.14 MHz/68000) Amigas.
+
+The HQ Mode gadget doesn't do anything when it's clicked. The change
+will take place next time Play or Cont is clicked. It's turned on by
+default, unless the NOHQ options is given.
+@ENDNODE
+
+@NODE shell_usage "Shell Usage"
+OctaMEDPlayer is started from Shell as follows:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    OctaMEDPlayer <song> <number> <options>
+
+    <song>      Optional, if not specified, @{" OctaMEDPlayer Window " LINK window}
+            appears and waits for your interaction. If <song>
+            is present, the song is loaded. If it loaded OK,
+            the playing will start. Ctrl-C quits.
+
+    <number>    If <song> is a multi-module, this number specifies
+            the song you want to play.
+
+    <options>   Additional command line options. Currently
+            supported are:
+
+        NOHQ    Deactivate the @{" HQ mode " LINK hqmode} (5-8 channel modes only).
+        WINDOW  Open the @{" OctaMEDPlayer Window " LINK window}.
+        MBEXIT  Stop playing when both mouse buttons pressed
+            (when started from Shell, also exits).
+        QUIET   Don't display any messages (in Shell mode only).
+        QUIT    Signals an already resident OctaMEDPlayer to quit.
+
+        Examples:
+        ~~~~~~~~~
+        octamedplayer multimod 2  ;plays the second song of 'multimod'
+
+    octamedplayer eightchsong  ;play 'eightchsong' (use HQ mode)
+
+    octamedplayer eightchsong window  ;as above, but open the window
+
+    octamedplayer nohq window ;open the window and deactivate the HQ mode
+
+    octamedplayer quit ;if there's OctaMEDPlayer already in memory,
+                       ;ask it to quit and exit as soon as it happens
+
+    octamedplayer song quit ;asks OctaMEDPlayer to quit (if one is
+                            ;currently in memory), then play 'song'
+
+@ENDNODE
+
+@NODE wb_usage "Workbench Usage"
+Workbench usage:
+~~~~~~~~~~~~~~~~
+        You can run OctaMEDPlayer by double-clicking its icon. To
+        automatically play a song when its icon is clicked, set the
+        icon default tool (the default setting is "OctaMEDPlayer").
+        You can click the song icon and then shift-double click the
+        OctaMEDPlayer icon to play that song. OctaMEDPlayer always
+        opens its @{" window " LINK window} when started from the WB.
+
+    You can also load modules by dragging their icons into
+    OctaMEDPlayer's window.
+@ENDNODE
+
+@NODE window "OctaMEDPlayer Window"
+The OctaMEDPlayer Window:
+~~~~~~~~~~~~~~~~~~~~~~~~~
+When you start OctaMEDPlayer from @{" WB " LINK wb_usage} or @{" Shell " LINK shell_usage} without
+arguments, the window appears. There are gadgets for controlling
+the playing:
+
+The string gadget   Holds the name of the current song. You can load a
+            new song by typing its path and filename into this
+            gadget, and pressing Enter.
+
+Play            Starts playing the song from the beginning. If
+            shift-clicked and there's a multi-module in memory,
+            all songs of the multi-module will be played.
+
+Cont            Plays the current song starting from the point
+            where you stopped it.
+
+Stop            Stops the playing.
+
+MIDI: Y/N       This gadget allows you to turn MIDI on/off. It has
+            no effect when in 5 - 8 channel mode!
+
+Load...         Allows you to load a song by using the ASL file-
+            requester. This feature requires OS Release 2 or
+            later.
+
+< >         With these gadgets you can select the song, if
+            there's a multi-module in memory.
+
+HQ          This switch toggles the @{" HQ mode " LINK hqmode}. Affects only 5-8
+            channel songs. It has no effect when clicked during
+            playing.
+
+There's some information about the playing position displayed:
+
+        Sg:01/01 Sc#:001/010 Sec:002/005
+        Seq:002/009 B:000/140 L:0012
+
+Sg: The number of the current song, and the total number of songs in
+    the current module.
+
+Sc#:    Current section list position. (MMD2 only)
+
+Sec:    Current playing sequence/section. (MMD2 only)
+
+Seq:    Current playing sequence position.
+
+B:  Current block.
+
+L:  Current line number.
+
+The window is an AppWindow, so you can drag icons into it.
+@ENDNODE
+
+@NODE arexx "OctaMEDPlayer ARexx Interface"
+ARexx interface
+~~~~~~~~~~~~~~~
+OctaMEDPlayer has a small ARexx interface, which is useful for multimedia
+use, for example. The port name is OCTAMEDPLAYER. The following commands
+are recognized (not case sensitive):
+
+PLAY        Plays the current module (equivalent to clicking the
+        "Play" button).
+
+PLAYALL     Plays all songs of the multi-module (= shift-click
+        Play button).
+
+CONT        Continue playing the current module.
+
+STOP        Stop playing.
+
+LOADMOD     Loads a module (e.g. loadmod 'module').
+
+SONGNUM     Sets the multi-module song number (e.g. songnum 2).
+
+GETSONGS    Returns the number of the songs in the current
+        module (1) or multi-module (> 1).
+
+WAITFOREND  Waits until the current song has reached its end (or
+        the user has manually stopped it) and stops playing.
+        An error is returned if nothing is being played.
+
+QUIT        Quits OctaMEDPlayer
+@ENDNODE
+
+@NODE about "About OctaMEDPlayer..."
+OctaMEDPlayer copyright ©1991-1996 Teijo Kinnunen. All Rights Reserved.
+This program is Freely Distributable. You are encouraged to distribute
+OctaMEDPlayer and this document file.
+
+OctaMEDPlayer supports all versions of OctaMED, copyright ©1991-1996
+Teijo Kinnunen & Ray Burt-Frost (RBF Software). OctaMED is available
+from several retailers around the world.
+Also, MED V2.10 and later PD versions are supported as well.
+
+A freely distributable demo version of OctaMED is also available.
+
+The author's address is:
+~~~~~~~~~~~~~~~~~~~~~~~~
+    Teijo Kinnunen
+    Oksantie 19
+    FIN-86300  OULAINEN
+    FINLAND
+    email: kinnunen@stekt.oulu.fi
+
+The program is available from:
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    RBF Software
+    169, Dale Valley Road,
+    Hollybrook,
+    Southampton.
+    SO16 6QX
+    England
+
+(enclose an SAE or IRC for Enquiries)
+
+    email: rbfsoft@cix.compulink.co.uk
+    email: ray@octamed.www.compulink.co.uk
+
+We are also available on the World Wide Web and a lot of
+up to the minute information is available there.....
+
+    http://www.compulink.co.uk/~octamed/
+
+Why not drop in????
+
+
+
+@ENDNODE
+
+@NODE changes "OctaMEDPlayer V6 History"
+
+    V6.0 (08.02.1995) (internal 6.1)
+    ~~~~~~~~~~~~~~~~~
+    Initial release for V6. (The same as V5.12, with player routines
+    upgraded.)
+
+    V6.01 (28.07.1995) (internal 6.2)
+    ~~~~~~~~~~~~~~~~~~
+    Added WAITFOREND ARexx command.
+
+    V6.02 (7.1.1995) (internal 6.3)
+    ~~~~~~~~~~~~~~~~
+    Fixed a bug affecting command 3 in blocks with multiple cmd pages.
+
+    V6.03 (8.1.1995) (internal 6.4)
+    ~~~~~~~~~~~~~~~~
+    OctaMEDPlayer is now an AppWindow.
+    Fixed a harmless Enforcer hit if trying to load garbage.
+    Fixed a cosmetic flaw (clicking Stop displayed "...- loading").
+
+    V6.04 (17.1.1995) (internal 6.5)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    A new QUIT command line function¹
+    Fixed finetunes in 8 channel mode²
+
+
+    ¹Thanks for the idea Richard
+    ²Thanks go to MUG member Rob Moseley for bringing
+     this to our attention, Many thanks Rob.    (Ray)
+
+@ENDNODE

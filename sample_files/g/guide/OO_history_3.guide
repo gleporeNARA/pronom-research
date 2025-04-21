@@ -1,0 +1,452 @@
+@database "OO_history.guide"
+@(C) 1993-1995 by Janne Siren, All Rights Reserved
+@author Janne Siren
+@remark gconv:40
+@node main "Offline Orbit Update History - Table of Contents"
+
+                        Offline Orbit Update History
+
+         Copyright © 1993-1995 by Janne Siren, All Rights Reserved
+ 
+                            @{b} Table of Contents @{ub}
+
+ @{"  0.70   " link OO-0.70} @{"  0.70a  " link OO-0.70a} @{"  0.70b  " link OO-0.70b} @{"  0.72   " link OO-0.72} @{"  0.73   " link OO-0.73} @{"  0.73a  " link OO-0.73a} @{"  0.73b  " link OO-0.73b}
+ @{"  0.73c  " link OO-0.73c} @{"  0.73d  " link OO-0.73d} @{"  0.74   " link OO-0.74} @{"  0.74a  " link OO-0.74a} @{"  0.75   " link OO-0.75} @{"  0.75a  " link OO-0.75a} @{"  0.76   " link OO-0.76}
+
+ @{" Additional Information " link HISTORY}
+@endnode
+@node OO-0.76 "Offline Orbit Update History - 0.76"
+@{i}RELEASE: 0.76 
+   DATE: August 1, 1995 @{ui}
+
+o Internet connections at krk.fi haven't been working for several weeks
+  now, so, for the moment, you should use jts@ntp.alli.fi to contact me.
+
+o Finnish documentation.
+
+o Fixed several minor flaws in the documentation.
+
+o Jari Karjalainen drew some nice icons for Offline Orbit. See the ReadMe
+  in Icons directory for more information.
+
+o Changing Iconification Method by mouse in General Preferences didn't
+  work. Fixed.
+
+o Pressing Alt and arrow up while reading a message caused an erroneus
+  reaction. Fixed.
+
+o When adding a new entry to BBS Preferences, the defaults are now copied
+  from Editor Preferences.
+
+o Support added for the Blue Wave message format.
+
+o Bundle Info now displays the bundle's file name in the window title.
+
+o Included History.lha which contains old history files.
+
+o When packing replies failed, Offline Orbit added extra brag lines to the
+  messages. Fixed.
+
+o New listview routines. Listview windows now adjust their sizes both
+  horizontally and vertically to fill the entire screen.
+
+o console.device replaced by internal routines. There isn't a significant
+  difference in speed, but this should finally fix the annoying bug that
+  occasionally crashed Offline Orbit after changing area or message.
+
+o New Files wasn't always enabled even if there was a list of new files
+  available. Fixed.
+
+o Fixed a bug in automatic pointer recognition.
+
+o If none of the replies are to be packed (ie. all have been set to be
+  killed), Offline Orbit won't bother you with a requester when closing the
+  bundle. Previously choosing Pack aborted the closing process.
+
+o Lots of optimizations.
+@endnode
+@node OO-0.75a "Offline Orbit Update History - 0.75a"
+@{i}RELEASE: 0.75a 
+   DATE: July 6, 1995 @{ui}
+
+o Empty User Name gadgets in BBS Preferences weren't ignored. Fixed.
+@endnode
+@node OO-0.75 "Offline Orbit Update History - 0.75"
+@{i}RELEASE: 0.75 
+   DATE: July 6, 1995 @{ui}
+
+o Happy birthday to Offline Orbit! On July 11th, exactly two years have
+  passed since the release of the first public version.
+
+o If changing directory before packing replies failed Offline Orbit still
+  tried to pack replies and afterwards deleted all files in the current
+  directory. Fixed.
+
+o Reorganized Messages Menu.
+
+o Skip Thread in Messages Menu.
+
+o Iconified Offline Orbit will now show the name of the currently open
+  message bundle in it's icon's title. This can be useful if you have a lot
+  of iconified Offline Orbits running simultaneously.
+
+o If Workbench isn't running Iconify will now replace the icon with a small
+  window instead of returning an error.
+
+o Iconification Method cycle gadget in General Preferences. There are now
+  three different styles for iconification. (A list of bundles to select
+  from in Workbench Tools menu sure looks pretty neat...)
+
+o If amigaguide.library is not available, pressing Help does nothing.
+
+o Known Bugs section (6.5) in OO.guide.
+
+o Resizeable Puzzle (4x4, 6x6 or 8x8).
+
+o Default Puzzle Size cycle gadget in General Preferences.
+
+o User List in Prefs menu.
+
+o Add to User List in Messages menu.
+
+o Search and New Files had the same keyboard shortcut. Fixed.
+
+o Warn If No BBS Preferences checkbox in General Preferences.
+
+o Cancel is now an option is all of the requesters that appear after
+  selecting Close or Quit.
+
+o User Name string gadget in BBS Preferences.
+
+o All sorts of optimizations.
+@endnode
+@node OO-0.74a "Offline Orbit Update History - 0.74a"
+@{i}RELEASE: 0.74a 
+   DATE: May 13, 1995 @{ui}
+
+o Previous Area in Messages menu didn't work. Fixed.
+
+o Area list wasn't properly updated after a search operation. Fixed.
+
+o Offline Orbit will no longer return an error if creating a directory,
+  that already exists, fails. Instead, Offline Orbit will now delete the
+  directory and it's contents and try again.
+
+o Search is now three times faster (actual results may vary).
+
+o Optimized string processing routines will speed up certain operations.
+
+o Running out of memory while loading a message no longer causes an endless
+  loop of alert messages.
+
+o If amigaguide.library is not available, pressing Help will now open the
+  About requester.
+
+o Pressing Shift and either one of the vertical arrow keys when reading a
+  message now moves immediately to the next page of the message. No more
+  slow line by line scrolling unless you press return or backspace.
+
+o QWK: "Produced by" string wasn't processed correctly. Fixed.
+
+o A linefeed should've been placed before the message when appending to a
+  text file, but wasn't. Fixed.
+@endnode
+@node OO-0.74 "Offline Orbit Update History - 0.74"
+@{i}RELEASE: 0.74 
+   DATE: April 15, 1995 @{ui}
+
+o A linefeed is placed before the message when appending to a text file.
+
+o Replies are no longer deleted after an unsuccesful packing.
+
+o New modifiers (%o and %r) for Quote Header.
+
+o Search and Repeat Search in Messages menu. The search function is still
+  very primitive, so suggestions are welcome.
+
+o If packing replies failed, all temporary files weren't deleted. Fixed.
+
+o SOUP: BBS name is still taken from the bundle's file name, but the
+  extension is now left out. Reply packets are also named differently.
+
+o SOUP: References are no longer loaded into memory when processing the
+  message bundle. This will speed up the processing a little and save you a
+  lot of memory.
+@endnode
+@node OO-0.73d "Offline Orbit Update History - 0.73d"
+@{i}RELEASE: 0.73d 
+   DATE: March 8, 1995 @{ui}
+
+o QWK: Offline Orbit occasionally created faulty header records in reply
+  packets. Fixed.
+
+o Unless Use Reply Prefix in General Preferences is checked, existing 'Re:'
+  prefixes are now automatically removed from the subjects of your replies.
+@endnode
+@node OO-0.73c "Offline Orbit Update History - 0.73c"
+@{i}RELEASE: 0.73c 
+   DATE: March 3, 1995 @{ui}
+
+o SOUP: Appending to reply packets didn't work properly. Fixed.
+
+o QWK: Fixed problems with 25 character header fields.
+
+o New modifier (%n) for Quote Header.
+@endnode
+@node OO-0.73b "Offline Orbit Update History - 0.73b"
+@{i}RELEASE: 0.73b 
+   DATE: February 10, 1995 @{ui}
+
+o Included an example configuration for beginners.
+
+o Moving from a string gadget to the next didn't work in General
+  Preferences. Fixed.
+@endnode
+@node OO-0.73a "Offline Orbit Update History - 0.73a"
+@{i}RELEASE: 0.73a 
+   DATE: February 8, 1995 @{ui}
+
+o The message scroller didn't work properly. The same bug also caused
+  occasional crashes. Fixed.
+@endnode
+@node OO-0.73 "Offline Orbit Update History - 0.73"
+@{i}RELEASE: 0.73 
+   DATE: February 7, 1995 @{ui}
+
+o Slightly altered configuration structure. You must re-enter your unpack
+  directory to Directory Preferences!
+
+o Puzzle in Project menu.
+
+o Stack gadget in Editor and Packer Preferences.
+
+o The extension of the currently used packer configuration is now
+  displayed in the screen title.
+
+o Aborting the area selector after moving the selector bar reseted the
+  current message pointer. Fixed.
+
+o Removed an enforcer hit.
+
+o The availability of the selected screen mode is now checked before trying
+  to open a screen.
+
+o The height of the message scroller gadget is now relative to the screen
+  resolution. If the scroller is too small or too big, please let me know.
+
+o The message's status is automatically set to private when writing a
+  message to a private-only area. You can still manually set the message's
+  status to public.
+@endnode
+@node OO-0.72 "Offline Orbit Update History - 0.72"
+@{i}RELEASE: 0.72 
+   DATE: January 21, 1995 @{ui}
+
+o There are several new configuration entries. Please read this text
+  carefully and check your preferences before using this version.
+
+o New version (2.2c/38.1266) of reqtools.library included.
+
+o The widths for the message header gadgets were calculated incorrectly
+  for a non-backdrop window. Fixed.
+
+o All of the temporary files weren't always deleted. Fixed.
+
+o Each Offline Orbit session now has it's own replies directory.
+
+o OMEN: The last area was displayed twice in the area list. Fixed.
+
+o The command string in Editor Preferences must now have a '%f' instead of
+  the reply text file name. The File and Quote gadgets have been removed.
+
+o Separate Quote File checkbox in Editor Preferences.
+
+o CTRL-Y (ASCII 25) is no longer stripped from messages. You can now use
+  C-Net's MCI codes in your replies.
+
+o Revised border pattern for windows.
+
+o QWK: Minor fixes in the reply packet format.
+
+o Some modifications for future localization.
+
+o The Quote Header gadget in General Preferences is now operational.
+
+o Save Message now allows you to select between a file and printer.
+
+o Reply length wasn't always calculated correctly. Fixed.
+
+o Faster file handling and message processing.
+
+o When quoting messages, the quoted text is now re-flowed.
+
+o Fixed some bugs in the word wrapping routine.
+
+o Amiga-Q is now the only keyboard equivalent for Quit.
+
+o Replies can now be removed by setting the Status gadget to Killed.
+
+o WWF: Personal.HDR files weren't properly ignored. Fixed.
+
+o Optimized reply packing routines.
+
+o Reply appending is now available for all supported formats.
+
+o Save Message now allows you to overwrite a file too.
+
+o Store Message Pointers checkbox in General Preferences.
+
+o Bigger, better and faster character set conversion.
+
+o QWK: Faster message processing.
+
+o QWK: BBBS bundles are now patched to work despite of the incorrect
+  position of the area numbers in their message header structures.
+
+o You can now read messages using a joystick.
+
+o Enable Joystick checkbox in General Preferences.
+
+o Unpack gadget in Directory Preferences. Old configuration files may cause
+  Offline Orbit to load some garbage in this gadget, so make sure you
+  replace the garbage with a valid directory name.
+@endnode
+@node OO-0.70b "Offline Orbit Update History - 0.70b"
+@{i}RELEASE: 0.70b 
+   DATE: September 3, 1994 @{ui}
+
+o Area name wasn't shown in the message list window in personal and replies
+  areas. This bug also caused a minor enforcer hit. Fixed.
+
+o Edit gadget was sometimes left enabled after packing replies. Fixed.
+
+o Save Message file requester now has a pattern matching gadget.
+
+o Open Bundle will no longer close the already open bundle (if any) until
+  you have selected another one. You can now return to the previously
+  opened bundle by cancelling the file requester.
+  
+o QWK: Names are now shown in mixed case.
+
+o All found enforcer hits removed.
+@endnode
+@node OO-0.70a "Offline Orbit Update History - 0.70a"
+@{i}RELEASE: 0.70a 
+   DATE: August 15, 1994 @{ui}
+
+o The title said: "This is a beta release for beta testers only. Do not
+  distribute." The text wasn't meant to be there, it was forgotten there!
+  Sorry for any confusion or inconvenience this may have caused you.
+
+o IBM and SF7 were misplaced in the Pack cycle gadgets in Editor and BBS
+  Preferences. Fixed.
+
+o BBS Preferences trashed memory. Fixed.
+
+o Offline Orbit didn't tolerate empty tag files. Fixed.
+
+o A debug delay was forgotten in the OMEN reply packing routine. Fixed.
+
+o Fixed some bugs in the documentation.
+
+o Flash Messages For You option didn't work properly. Fixed.
+
+o Random Tag gadget was enabled even if no tags were available. Fixed.
+
+o The default work directory is now 'T:' instead of 'RAM:'.
+@endnode
+@node OO-0.70 "Offline Orbit Update History - 0.70"
+@{i}RELEASE: 0.70 
+   DATE: August 13, 1994 @{ui}
+
+o Revised configuration structures and version identification methods. You
+  must delete all S:OO.#? files and reconfigure Offline Orbit.
+
+o The user interface of Offline Orbit is now completely font sensitive. You
+  can select your fonts from Screen Preferences. You can use both fixed
+  width and proportional fonts.
+
+o Better memory allocation and GUI routines are used to avoid excess stack
+  usage. 4096 bytes of stack is now more than enough for Offline Orbit.
+
+o The Offline Orbit executables are pure, ie. they can be made resident.
+
+o Support added for the SOUP (Simple Offline Usenet Packet) message format.
+  I would like to hear your comments and suggestions as Offline Orbit's
+  SOUP support is quite limited at the moment.
+
+o Save Message now checks if the file you select already exists.
+
+o QWK: Reply headers contained incorrect area number. Fixed.
+
+o Some font selectors were initialized incorrectly. Fixed.
+
+o An unsuccessful call to CreateContext() crashed the machine. Fixed.
+
+o Edit Message wasn't ghosted in normal message areas. Fixed.
+
+o Message Threading gadget in General Preferences.
+
+o A new tag file wasn't loaded if a BBS configuration was in use. Fixed.
+
+o An aborted area requester returned an incorrect area number. Fixed.
+
+o Fonts weren't opened when the window was on another screen. Fixed.
+
+o A failure to open fonts caused serious problems. Fixed.
+
+o QWK: Message length was sometimes incorrect. Fixed.
+
+o Blank Borders checkbox in Screen Preferences.
+
+o Memory for area names is now allocated according to their lengths.
+
+o Length limit for short tag lines decreased to avoid word wrapping.
+
+o New, improved icons that look better in 1:1 aspect screens.
+
+o Use Reply Prefix checkbox in General Preferences.
+
+o Long lines were some times wrapped incorrectly. Fixed.
+
+o QWK, WWF and SOUP bundles can now have any file name.
+
+o Match Pattern and Quote Header gadgets in General Preferences.
+
+o To avoid system crashes, the smallest accepted font height is now 5.
+
+o Edit Message is now a gadget on the control panel.
+
+o Slightly faster message processing for all formats.
+
+o WWF: Faster message processing.
+
+o KS3: Pooled memory allocation to avoid memory fragmentation.
+
+o Offline Orbit is now "optimized" using dccopt by Ville-Pertti Keinonen.
+
+o Your replies will no longer change the number of total messages.
+
+o Passing arguments to system requesters didn't work. Fixed.
+
+o WWF: The last area was displayed twice in the area list. Fixed.
+
+o Display RFC Headers checkbox in General Preferences.
+
+o More thorough character conversion.
+
+o Some menu items were disabled when they should have been enabled. Fixed.
+
+o All formats now show packer efficency after packing replies.
+
+o Offline Orbit didn't lock IntuitionBase before using it. Fixed.
+
+o Dozens of smaller fixes and code optimizations. The executable contains
+  new features and is still over fifteen (15) kilobytes smaller than
+  before.
+@endnode
+@node HISTORY "Offline Orbit Update History - Additional Information"
+This document describes the changes in Offline Orbit since version 0.70.
+History.lha contains older update histories. The first public version of
+Offline Orbit (0.02) was released on July 11, 1993.
+@endnode

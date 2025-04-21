@@ -1,0 +1,2369 @@
+@database userguide.guide
+
+@Master UserGuide.texinfo
+
+@Width 72
+
+
+This is the AmigaGuide® file userguide.guide, produced by Makeinfo-1.49 from 
+the input file UserGuide.texinfo.
+
+
+@Node Main "userguide.guide"
+@Next "Introduction"
+
+AmigaFax
+********
+
+A Facsimile Software Package for the Amiga Computer
+Copyright (C) 1994 by C-Born Software Systems
+
+
+ @{" Introduction        " Link "Introduction"}             
+ @{" Installation        " Link "Installation"}             
+ @{" Setting Up          " Link "Configuring the System"}                       
+ @{" Workbench           " Link "The Workbench Interface"}                        
+ @{" Shell               " Link "Operating from the Shell"}                         
+ @{" Other Files         " Link "Other Files"}            
+ @{" Other software      " Link "Integration with other software"}                                
+ @{" Registration        " Link "Registration and Maintenance"}                             
+ @{" FaxModem Specifics  " Link "FaxModem Specifics"}                   
+ @{" Index               " Link "Simple Index"} 
+
+
+@EndNode
+
+@Node "Introduction" "userguide.guide/Introduction"
+@Next "Installation"
+@Prev "Main"
+@Toc "Main"
+
+Introduction
+************
+
+This manual describes the AmigaFax software package for the Amiga
+family of computers. AmigaFax was originally written both to solve a
+personal need for shared facsimile and data on a single telephone line,
+and to become a commercial software product. When changing company
+circumstances dictated that bringing the product to commercial release
+level in a reasonable time frame would not be possible, it was decided
+to release the package in `Shareware' form, rather than deprive the
+Amiga community of the work that had already gone into it. While total
+returns from the registration fee charged have not even covered code
+maintenance and distribution costs, we still feel it has been a
+worthwhile project, especially due to the many contacts it has allowed
+us to form with the worldwide Amiga community.
+
+
+ @{" What is AmigaFax?   " Link "What is AmigaFax?"}                  
+ @{" Summary of Features " Link "Summary of Features"}                    
+ @{" System Requirements " Link "System Requirements"} 
+
+
+@EndNode
+
+@Node "What is AmigaFax?" "userguide.guide/What is AmigaFax?"
+@Next "Summary of Features"
+@Toc "Introduction"
+
+What is AmigaFax?
+=================
+
+AmigaFax is a software package that, in combination with a FaxModem,
+allows you to send and receive facsimile information from your Amiga
+computer.  Received faxes can be viewed, printed, forwarded to other
+fax machines, and saved as ILBM files which can then be accessed using
+many standard Amiga programs.  You can transmit text, ILBM graphics,
+and combinations of these as faxes. Using the AmigaFax command language
+you can add text from any Amiga font, along with logos and ILBM
+graphics, to create high quality multi-page fax documents.
+
+AmigaFax can be set up to automatically send documents to multiple
+recipients, to send faxes at or after set times, to answer incoming fax
+calls automatically, and even to forward received faxes (useful as a
+vacation mechanism).
+
+Faxes can be printed on plain paper, using your normal Amiga printer.
+
+AmigaFax is highly configurable, allowing you to set up a custom
+environment that best suits your hardware and way of working.
+
+
+@EndNode
+
+@Node "Summary of Features" "userguide.guide/Summary of Features"
+@Next "System Requirements"
+@Prev "What is AmigaFax?"
+@Toc "Introduction"
+
+Summary of Features
+===================
+
+   * *Automatic Reception*
+     AmigaFax may be configured to receive faxes in the background, or
+     to answer an already ringing line in Fax mode. Autoanswer may also
+     be integrated with a UUCP or BBS environment, where incoming calls
+     may be Fax or data, by using a specially modified version of the
+     getty program that recognises Fax calls.
+
+   * *Automatic Transmission*
+     Faxes may be queued for transmission after a particular time, to
+     take advantage of lower off-peak telecom rates, for example. You
+     may specify the number of times to try before giving up on
+     transmission, and the period at which retry attempts should be
+     made. All call progress is logged, and progress may be monitored
+     from the main program. Call logging displays when attempts were
+     made, the success or failure of the call, and the Called Number ID
+     of the remote Fax machine reached.
+
+   * *Multiple Recipients*
+     Fax numbers may be entered either directly, or using defineable
+     aliases. Therefore instead of sending to `99123456', you could
+     send it to `Fred'. In the same way, an alias can refer to a list
+     of other aliases, or numbers, so that one fax could be sent to
+     `Customers', representing a list of customers.
+
+   * *Flexible Fax Viewer*
+     The Fax viewer allows you to view a fax document at scales of from
+     1:1 to 1:8. A 1:3 scale igenerally gives a quite readable image
+     while still fitting the entire Fax width across a standard Amiga
+     screen. You can easily zoom in on areas of particular interest if
+     required. The viewer may be configured to take advantage of new
+     display modes (eg Productivity) and add-in high resolution display
+     cards (eg Retina).
+
+   * *Powerful Document Builder*
+     This allows you to mix any Amiga font or ILBM graphic on a page,
+     to include text, ILBM, Fax, or AmigaFax command files anywhere on
+     a page or in a document, perform alignment at character or pixel
+     level, justify text regardless of font size, automatically add
+     standard information such as address, signature, logo, and current
+     time/date. Text conversion includes selectable fonts size and
+     styles, including underline, bold and italic.
+
+   * *TeX to fax conversion*
+     The `dvifax' program (registered version only) allows TeX `dvi'
+     files to be converted directly to fax files.
+
+   * *Fax Printer-Driver*
+     The fax printer driver allows the output of wordprocessing, DTP,
+     painting and drawing programs to be converted directly to fax
+     files.
+
+   * *Highly User Configurable*
+     The configuration file allows you to set the system up to suit your
+     requirements. You can define your prefered editor for text and for
+     graphics, set a standard file to use as a template when creating
+     new Fax documents, customize your dial type (pulse/tone, special
+     prefix to get outside line, etc), set the Caller ID string to
+     identify yourself to remote Fax machines, define the modem type
+     you are using, and set many system default values.
+
+   * *Multiple Serial Port Support*
+     Using the A2232 multi-serial port card, AmigaFax can support
+     multiple FaxModems simultaneously, each modem being able to
+     transmit and receive facsimiles and data.
+
+   * *Uses Preferences Printer*
+     Because the Amiga Preferences printer is used to print out the
+     documents, you can tradeoff speed for resolution as you require.
+
+   * *Workbench or CLI interface*
+     AmigaFax can be run either from the workbench, or from a shell or
+     CLI interface. In either case, an easy to use graphical
+     presentation makes operation straightforward.
+
+
+@EndNode
+
+@Node "System Requirements" "userguide.guide/System Requirements"
+@Prev "Summary of Features"
+@Toc "Introduction"
+
+System Requirements
+===================
+
+AmigaFax requires AmigaDOS version 1.3 or greater. It operates with
+AmigaDOS 2.0, and will run on Amigas from the original A1000 through to
+the A3000. It is possible to run on an unexpanded A1000 with 512K RAM
+and 1 disk drive, but in this case memory and disk restraints will
+limit the number and size of faxes that may be generated or received.
+In general the more memory and disk available the better. For
+unattended Auto-receive operation a hard disk system is highly
+desirable.
+Certain features, such as font scaling, ASL file requester, and
+demand-loading of the printer symbiont rely on AmigaDOS 2.0 features,
+and will not operate under 1.3
+As of AmigaFax version 1.40, support for AmigaDOS 1.3 will not be
+guaranteed, however we will endeavour to maintain basic operation as
+long as possible, and will listen to any user feedback in this area.
+
+
+@EndNode
+
+@Node "Installation" "userguide.guide/Installation"
+@Next "Configuring the System"
+@Prev "Introduction"
+@Toc "Main"
+
+Installation
+************
+
+
+ @{" Installing the Software " Link "Installing the Software"}                        
+ @{" Basic Configuration     " Link "Basic Configuration"}                    
+ @{" Hardware                " Link "Hardware"}         
+ @{" ARP                     " Link "ARP"}    
+ @{" Extra FONTS             " Link "Extra FONTS"}            
+ @{" Printer Setup           " Link "Printer Setup"}              
+ @{" Configuring for Hardware and User Preferences " Link "Configuring for Hardware and User Preferences"} 
+
+*Warning:* Be sure to back up your original disks, and use working
+copies of the disks for normal operation.
+
+
+@EndNode
+
+@Node "Installing the Software" "userguide.guide/Installing the Software"
+@Next "Basic Configuration"
+@Toc "Installation"
+
+Installing the Software
+=======================
+
+Information on installing the AmigaFax software on your system is given
+in the  ReadMe  file on the distribution disk. Insert the distribution
+disk, and from the WorkBench double-click on the ReadMe icon for
+instructions.
+
+The installation script should automatically handle most installations.
+To use it, from the WorkBench double-click the Install_Now icon, or
+from a Shell window type  amigafax:install . The script will prompt you
+for information required to complete the installation.
+
+If you are updating to a later revision, the installation procedure
+will not overwrite your configuration or alias files, so you will not
+lose information. However in this case you may want to examine the
+files in the directories  `lib.user'  and  `s.user' on the distribution
+disk for examples of more recent configuration options.
+
+The AmigaFaX software requires certain logical assignments to be made.
+The installation procedure will create a file `afax:s/User-Startup'. 
+You must edit your `S:User-Startup' (2.0) or `S:Startup-Sequence' (1.3)
+ to include the contents of that file, which will be typically
+something like:
+
+     assign afax: Work:AmigaFax
+     mount null:
+     run >nil: <nil: l:fifo-handler
+     if exists afax:s/AFAX-Startup
+             execute afax:s/AFAX-Startup
+     endif
+
+If your `devs:MountList' doesn't contain an entry for the NULL: device,
+append the `MountList' file from the `devs' directory on the AmigaFax
+to it.
+
+
+@EndNode
+
+@Node "Basic Configuration" "userguide.guide/Basic Configuration"
+@Next "Hardware"
+@Prev "Installing the Software"
+@Toc "Installation"
+
+Basic Configuration
+===================
+
+There are many possible ways to operate the AmigaFax software. You may
+wish to operate it as the only software using your FaxModem, or have it
+share the modem with other software such as AmigaUUCP. The AmigaFax
+spooler may be started when you boot up your computer, or only when you
+want to send a fax. Fax Auto-Answer may be left on all the time,
+started only when you are expecting a fax, or not used at all.
+
+If you want the fax-spooler to start when you boot up your system, you
+must add the line
+
+     run >nil: <nil: AFAX:C/afaxspl
+
+to your startup sequence. This can be done in the `AFAX:s/AFaxAssign' 
+file, for example. Normally this would only be necessary if you send a
+lot of faxes with delayed spooling, and your computer may be rebooted
+often, as the spooler is automatically started when sending a fax.
+
+If you want auto-answer with Fax detection running constantly in
+background, you may either use the modified `Getty' command, or use
+`faa' directly, by adding the line
+
+     run >nil: <nil: faa
+
+somewhere in your startup sequence.
+
+Note that the modified `getty' will allow you to receive data and fax
+calls effectively, and is the recommended approach. However if you only
+wish to receive faxes, `faa' is effective and may be started by
+double-clicking on the *FaxAutoAnswer* icon.
+
+
+@EndNode
+
+@Node "Hardware" "userguide.guide/Hardware"
+@Next "ARP"
+@Prev "Basic Configuration"
+@Toc "Installation"
+
+Hardware
+========
+
+The cable between your Amiga and Modem MUST connect CTS,RTS,DTR, DCD,
+TXD, RXD and GND conductors. CTS and RTS are used for flow control
+handshaking. DTR is used to keep the modem on line - hangup occurs if
+it is dropped. DCD is used for carrier detection.
+
+     TXD   2  Transmit Data
+     RXD   3  Receive Data
+     RTS   4  Request to Send
+     CTS   5  Clear to Send
+     GND   7  Signal Ground
+     DCD   8  Data Carrier Detect
+     DTR  20  Data Terminal Ready
+
+
+@EndNode
+
+@Node "ARP" "userguide.guide/ARP"
+@Next "Extra FONTS"
+@Prev "Hardware"
+@Toc "Installation"
+
+ARP
+===
+
+If you have the ARP library installed (`Libs:arp.library') the system
+will make use of it for file requesters.
+
+Support for the ASL library under AmigaDOS2.0 has now been added to
+AmigaFax.  It is used in preference to ARP.
+
+
+@EndNode
+
+@Node "Extra FONTS" "userguide.guide/Extra FONTS"
+@Next "Printer Setup"
+@Prev "ARP"
+@Toc "Installation"
+
+Extra FONTS
+===========
+
+Some extra fonts have been included in the FaxFonts directory. You may
+let the installation script copy them into your `FONTS:' directory, or
+under AmigaDOS2.0 you may copy them into another directory, and modify
+your startup to extend the `FONT:' assign to that directory. The extra
+fonts are from the *Computer Modern* series, as used with TeX.
+These fonts will normally *not* be required under AmigaDOS2.0. You are
+much better off using the built-in font scaling where it is available.
+
+
+@EndNode
+
+@Node "Printer Setup" "userguide.guide/Printer Setup"
+@Next "Configuring for Hardware and User Preferences"
+@Prev "Extra FONTS"
+@Toc "Installation"
+
+Printer Setup
+=============
+
+AmigaFax currently uses the standard printer driver, as configured in
+`Preferences'.  Using a dot-matrix printer, Halftone Dithering, Integer
+Scaling, Black and White, Density 7 appears to work reasonably well.
+
+
+@EndNode
+
+@Node "Configuring for Hardware and User Preferences" "userguide.guide/Configuring for Hardware and User Preferences"
+@Prev "Printer Setup"
+@Toc "Installation"
+
+Configuring for Hardware and User Preferences
+=============================================
+
+You will need to modify the file  `FAXLIB:Config'  to suit your
+specific hardware and preferences. See @{"Configuring the System" Link "Configuring the System"}, for
+details on how to do this.
+
+
+@EndNode
+
+@Node "Configuring the System" "userguide.guide/Configuring the System"
+@Next "The Workbench Interface"
+@Prev "Installation"
+@Toc "Main"
+
+Configuring the System
+**********************
+
+
+ @{" General Configuration            " Link "General Configuration"}                      
+ @{" AmigaFax User Interface          " Link "AmigaFax User Interface"}                        
+ @{" Fax Page Layout Options          " Link "Fax Page Layout Options"}                        
+ @{" Fax Viewer Configuration         " Link "Fax Viewer Configuration"}                         
+ @{" Fax Printer Configuration        " Link "Fax Printer Configuration"}                          
+ @{" Fax Spooler Configuration        " Link "Fax Spooler Configuration"}                          
+ @{" Fax Receiver Configuration       " Link "Fax Receiver Configuration"}                           
+ @{" Fax Transmitter Configuration    " Link "Fax Transmitter Configuration"}                              
+ @{" PrintSymb Configuration          " Link "PrintSymb Configuration"}                        
+ @{" Modem Command and Status Strings " Link "Modem Command and Status Strings"}                                 
+ @{" Configuration Variable Index     " Link "Configuration Variable Index"} 
+
+The file `FAXLIB:Config'  is used to configure the basic operation of
+AmigaFax to suit your particular hardware and preferences. You must
+edit this file carefully, using a text editor. You should always keep a
+backup copy of this file. The configuration options are continually
+being added to as AmigaFax grows, so if you are upgrading you should
+look at the latest copy. This will *NOT* overwrite your existing
+configuration as part of the installation process.
+
+From version 1.30, AmigaFax configuration can be done using local or
+global environmental variables. This will override the values read in
+from the  `FAXLIB:Config'  file. For example typing from the CLI/Shell
+
+     SetEnv LocalID +61-52-786355
+
+will override the `LocalID' string with the new number. Parameters set
+by command-line switches will override bot environmantal and
+config-file values.
+
+
+@EndNode
+
+@Node "General Configuration" "userguide.guide/General Configuration"
+@Next "AmigaFax User Interface"
+@Toc "Configuring the System"
+
+General Configuration
+=====================
+
+   * *Debug*
+     Debug level, 0-9. Takes one numeric argument. Useful for
+     fault-finding, observing handshake between the Amiga and your
+     FaxModem.
+
+   * *LogFile*
+     Specifies the file for logging debug and error information. If not
+     given, information will not be logged.
+
+   * *LocalID*
+     The rest of the line is used as the local identifier string, which
+     is passed to the remote fax machine. This is usually your fax
+     number, and is limited to 20 characters. Some faxmodems (eg Supra)
+     require the ID string to be enclosed in double-quotes, others do
+     not allow this. *Important:* This seems to be the setting which
+     gives new users the most problems when trying to get AmigaFax
+     working. If you have difficulties please try setting your
+     `LocalID' both with and without the enclosing double-quotes.
+          LocalID "123-4567"
+          LocalID  123-4567
+
+   * *Device*
+     The device to use for connecting to the modem, usually
+     serial.device  (default). This should only be changed if using a
+     different serial device, as with a third-party serial hardware.
+
+   * *Unit*
+     Takes one numeric parameter as the unit number to use on the given
+     device. Default is 0. For example when using the first port on the
+     A2232 multi-serial, set this to 2.
+
+
+@EndNode
+
+@Node "AmigaFax User Interface" "userguide.guide/AmigaFax User Interface"
+@Next "Fax Page Layout Options"
+@Prev "General Configuration"
+@Toc "Configuring the System"
+
+AmigaFax User Interface
+=======================
+
+These items are used by the  `afax'  program.
+   * *Editor*
+     The name of the your prefered text editor, for example `TxEd, ced,
+     memacs, dme, mg', or `Ed' (default). I use `mg' (MicroGnuEmacs).
+
+   * *ILBMEditor*
+     The editor you prefer for editing IFF ILBM graphics, for example
+     `dpaint'.
+
+   * *Template*
+     The name of a file to use as a template for building fax
+     documents, If given, the editor will be given a copy of this file
+     to work on when you ask for a new fax file. This may include
+     references to your address, your signature, etc.
+
+
+@EndNode
+
+@Node "Fax Page Layout Options" "userguide.guide/Fax Page Layout Options"
+@Next "Fax Viewer Configuration"
+@Prev "AmigaFax User Interface"
+@Toc "Configuring the System"
+
+Fax Page Layout Options
+=======================
+
+These items are used by the  `mkafax'  program.
+   * *DefaultFont*
+     This is the default font, used for normal text unless otherwise
+     specified. It takes two parameters, the font name, and size. The
+     TeXfont  `cmtt10 41'  looks quite good for standard text, as does
+     the Amiga font `courier 32'.
+
+   * *HeaderFont*
+     This is the font used for page headers. My current setting is
+     `courier 16'.
+
+   * *PHeader*
+     If given, a header will be printed on each fax page, and the rest
+     of the line used as the main text, along with the date, local ID
+     string, and page number. If not given, no header will be printed.
+
+   * *LeftIndent*
+     The left indentation (border) to be used, in pixels. Many fax
+     machines will not print to the full fax width, and typically an
+     indentation of at least 50 pixels (approx 1/4 inch) on each size
+     is required to avoid losing characters.
+
+   * *RightIndent*
+     The right indentation (border) to be used, in pixels.
+
+   * *SyncEOL*
+     When set, `mkafax' will create faxes with EOL (End-Of-Line)
+     markers byte-aligned. While this should not be necessary, and
+     results in larger files, some fax modems to not correctly identify
+     EOL sequences which are not byte aligned, and this can cause
+     problems. ZyXEL modems with ROM versions before 6.00 had this
+     problem, and certain rare fax files could cause the modem to lock
+     up completely.
+
+
+@EndNode
+
+@Node "Fax Viewer Configuration" "userguide.guide/Fax Viewer Configuration"
+@Next "Fax Printer Configuration"
+@Prev "Fax Page Layout Options"
+@Toc "Configuring the System"
+
+Fax Viewer Configuration
+========================
+
+These items are used by the  `viewafax'  program.
+   * *ViewScale*
+     Takes one numeric argument, 1-8. This is the default scale used by
+     the fax viewer when it starts up. A value of three allows a
+     standard fax to fit across the screen. A scale of 1 shows maximum
+     detail.
+
+   * *CustomScreen*
+     Under AmigaDOS2.0 only, the value of this parameter is passed to
+     the OpenScreen() call in the ti_Data field of the SA_DisplayID tag
+     item. This allows users to define what type of screen the viewer
+     will appear on. The default values passed are PAL_MONITOR_ID and
+     HIRESLACE_KEY. Some possible values are:
+          DEFAULT_MONITOR_ID        0x00000000
+          NTSC_MONITOR_ID           0x00011000
+          PAL_MONITOR_ID            0x00021000
+          VGA_MONITOR_ID            0x00031000
+          
+            or'ed with
+          
+          LORES_KEY                 0x00000000
+          HIRES_KEY                 0x00008000
+          SUPER_KEY                 0x00008020
+          HAM_KEY                   0x00000800
+          LORESLACE_KEY             0x00000004
+          HIRESLACE_KEY             0x00008004
+          SUPERLACE_KEY             0x00008024
+          HAMLACE_KEY               0x00000804
+          LORESDPF_KEY              0x00000400
+          HIRESDPF_KEY              0x00008400
+          SUPERDPF_KEY              0x00008420
+          LORESLACEDPF_KEY          0x00000404
+          HIRESLACEDPF_KEY          0x00008404
+          SUPERLACEDPF_KEY          0x00008424
+          LORESDPF2_KEY             0x00000440
+          HIRESDPF2_KEY             0x00008440
+          SUPERDPF2_KEY             0x00008460
+          LORESLACEDPF2_KEY         0x00000444
+          HIRESLACEDPF2_KEY         0x00008444
+          SUPERLACEDPF2_KEY         0x00008464
+          EXTRAHALFBRITE_KEY        0x00000080
+          EXTRAHALFBRITELACE_KEY    0x00000084
+          VGAEXTRALORES_KEY         0x00031004
+          VGALORES_KEY              0x00039004
+          VGAPRODUCT_KEY            0x00039024
+          VGAHAM_KEY                0x00031804
+          VGAEXTRALORESLACE_KEY     0x00031005
+          VGALORESLACE_KEY          0x00039005
+          VGAPRODUCTLACE_KEY        0x00039025
+          VGAHAMLACE_KEY            0x00031805
+          VGAEXTRALORESDPF_KEY      0x00031404
+          VGALORESDPF_KEY           0x00039404
+          VGAPRODUCTDPF_KEY         0x00039424
+          VGAEXTRALORESLACEDPF_KEY  0x00031405
+          VGALORESLACEDPF_KEY       0x00039405
+          VGAPRODUCTLACEDPF_KEY     0x00039425
+          VGAEXTRALORESDPF2_KEY     0x00031444
+          VGALORESDPF2_KEY          0x00039444
+          VGAPRODUCTDPF2_KEY        0x00039464
+          VGAEXTRALORESLACEDPF2_KEY 0x00031445
+          VGALORESLACEDPF2_KEY      0x00039445
+          VGAPRODUCTLACEDPF2_KEY    0x00039465
+          VGAEXTRAHALFBRITE_KEY     0x00031084
+          VGAEXTRAHALFBRITELACE_KEY 0x00031085
+
+
+@EndNode
+
+@Node "Fax Printer Configuration" "userguide.guide/Fax Printer Configuration"
+@Next "Fax Spooler Configuration"
+@Prev "Fax Viewer Configuration"
+@Toc "Configuring the System"
+
+Fax Printer Configuration
+=========================
+
+These items are used by the `afaxprt' program.
+   * *MinLines*
+     `MinLines' is used to scale a fax page to fit on a printer page.
+     If the fax page is longer then the printer page by less than
+     MinLines, it will be scaled to fit. A value of around 500 works
+     for most faxes.
+
+`MinLines' had a different meaning in versions of AmigaFax prior to
+1.32, as follows:
+     Takes one numeric argument. This is the minimum number of lines
+     that must be on a fax page before we print it. The default value
+     is 0 (zero), meaning print all pages. This is for cut-sheet
+     feeders (Laser Printers), where the fax may be just a little
+     longer than one page. Use a value of around 100 here to stop
+     getting `blank pages' printed out.
+
+
+@EndNode
+
+@Node "Fax Spooler Configuration" "userguide.guide/Fax Spooler Configuration"
+@Next "Fax Receiver Configuration"
+@Prev "Fax Printer Configuration"
+@Toc "Configuring the System"
+
+Fax Spooler Configuration
+=========================
+
+These items are used by the `afaxspl'  program.
+   * *SpoolInterval*
+     This is the time interval, in minutes, at which the outbound fax
+     queue is scanned for untransmitted files.
+
+
+@EndNode
+
+@Node "Fax Receiver Configuration" "userguide.guide/Fax Receiver Configuration"
+@Next "Fax Transmitter Configuration"
+@Prev "Fax Spooler Configuration"
+@Toc "Configuring the System"
+
+Fax Receiver Configuration
+==========================
+
+These items are used by the  `faa'  program.
+   * *RSetup*
+     The receive setup string. This optional string is sent to the
+     modem. Unlike versions before 1.23, the string is *not* preceded
+     by AT . Instead, the line is sent as it appears. This allows
+     multiple commands to be sent when initializing the modem. This
+     allows you to add commands to set such things as speaker use and
+     volume.
+
+   * *RStatus*
+     Receive Status. If present, a status window will pop up when a fax
+     is being received, showing various details such as name, connect
+     speed, transmitter ID, amount of data received. It takes two
+     optional numeric parameters, which are used for the top and left
+     edge pixel positions to place the window.
+
+   * *DLEmode*
+     There are many incompatible modems and modem ROM revisions about.
+     This allows you to specify certain things about how your FaxModem
+     sends your data. It currently takes one numeric argument, (0, 1 or
+     3). 	
+          	
+
+        * 0  (default) treat DLE in received data as escape 		 
+          (Maestro 3.1, ZyXEL 3.99+) 	
+
+        * 1  Received DLE is g3 data  (ZyXEL Vn3.90, Supra?) 	
+
+        * 3  RAW input mode. Data is saved raw. For debug only. 	
+
+   * *RRate*
+     Sets the initial baud rate (`Receive Rate') for modem
+     communications. This defaults to 2400, for simple faxmodems that
+     normally communicate at 2400, but switch to 19200 for actual fax
+     data. More advanced modems, such as the ZyXEL, will communicate at
+     19200 baud or greater, at a locked DCE-DTE rate, as per the
+     FaxModem specification. I have this set to 19200, which is the
+     highest speed common to my FaxModem and the AS2232 multiport
+     serial card.
+
+     When receipt handshaking is via the `getty' program, `RRate' is
+     not used.
+
+
+@EndNode
+
+@Node "Fax Transmitter Configuration" "userguide.guide/Fax Transmitter Configuration"
+@Next "PrintSymb Configuration"
+@Prev "Fax Receiver Configuration"
+@Toc "Configuring the System"
+
+Fax Transmitter Configuration
+=============================
+
+These items are used by the `afaxsend'  program.
+
+   * *WSetup*
+     The transmit setup string. This optional string is sent to the
+     modem. As in the `RSetup' line, the line is sent to the modem as it
+     appears (since 1.23). This allows you to add commands to set such
+     things as speaker use and volume.
+
+   * *DialType*
+     Takes the parameters `Pulse' (default) or `Tone'.
+
+   * *DialPrefix*
+     Prefix to add before number when dialling. I use it to get an
+     outside line (dials 0 first), by setting it to `ATDP0,DT,' which
+     will pulse-dial 0, then tone-dial the rest of the number.
+
+   * *DoPadding*
+     This should not be necessary. However, some FaxModems to not
+     observe the minimum scan-time restrictions set by the standard.
+     When connecting to slower fax machines, this may result in missed
+     scan-lines. Note that if you set this parameter, it will usually
+     result in fax transmissions taking longer, as worst-case padding
+     must be added.
+
+   * *WStatus*
+     Write Status. If present, a status window will pop up when a fax is
+     being transmitted, showing various details such as name, connect
+     speed, receiver ID, percent of file sent. It takes two optional
+     numeric parameters, which are used for the top and left edge pixel
+     positions to place the window.
+
+   * *ScriptBeforeSending*
+     This may contain the name of a CLI command script to be executed
+     before a fax is sent. The script is executed synchronously before
+     the serial device is locked or opened.
+
+   * *ScriptAfterSending*
+     This may contain the name of a CLI command script to be executed
+     after a fax has been sent. The script is executed synchronously
+     just before `afaxsend' terminates.
+
+   * *XonXoff*
+     If set, causes `afaxsend' to use XON/XOFF handshaking with the
+     faxmodem while transmitting fax data. This is not normally
+     necessary, as the modems should implement CTS/RTS hardware
+     handshaking, but some modems, such as the NetComm M7F, have a
+     hardware bug that prevents the hardware handshake working.
+     Symptoms are buffer overrun, and loss of fax data.
+
+
+@EndNode
+
+@Node "PrintSymb Configuration" "userguide.guide/PrintSymb Configuration"
+@Next "Modem Command and Status Strings"
+@Prev "Fax Transmitter Configuration"
+@Toc "Configuring the System"
+
+PrintSymb Configuration
+=======================
+
+These items are used by the `PrintSymb' program.
+
+   * *FAXFILE*
+     This contains the name of the file to write fax-data from the
+     printer-driver to. If not defined, data will be written to the file
+     `FAXSPOOL:P_xxxx.AFX', where `xxxx' is used to create a new
+     sequential name, or if that cannot be done it will be written to
+     `Ram:fax.prt'.
+
+     When you do not with the fax file to be retained, you may direct
+     is to a temporary file, eg `SetEnv FAXFILE t:fx'. The variable
+     will be read in again every time file is created, so you may
+     change it dynamically.
+
+   * *ClipPage*
+     This is used to clip whitespace from the top and bottom of a page
+     sent to the fax printer driver. At present only bottom-clipping is
+     implemented, but for future compatability use the following values:
+          ClipPage 1	# Remove whitespace at bottom of page
+          ClipPage 2	# Remove whitespace at top of page
+          ClipPage 3	# Remove whitespace at top and bottom of page
+
+
+@EndNode
+
+@Node "Modem Command and Status Strings" "userguide.guide/Modem Command and Status Strings"
+@Next "Configuration Variable Index"
+@Prev "PrintSymb Configuration"
+@Toc "Configuring the System"
+
+Modem Command and Status Strings
+================================
+
+Certain  modem commands and status codes have now been made variable.
+The variables default to their own value, and may be set in the Config
+file, or as environment variables.
+
+     eg	setenv +FLID +FLI
+
+will result in the string `+FLI' rather than `+FLID' being used for
+setting the local ID code.
+
+Variables are:
+
+   * Status 	
+          	
+
+        * +FCON  	Fax connect established 	
+
+        * +FCSI 	Called station identifier follows 	
+
+        * +FTSI 	Transmitting station identifier follows 	
+
+        * +FDCS 	Current session parameters follow 	
+
+        * +FK 	
+
+        * +FPTS 	
+
+        * +FHNG 	Fax hangup (terminal) 	
+
+   * Command 	
+          	
+
+        * +FDT 	Fax Data Transmit (I am about to transmit) 	
+
+        * +FDR 	Fax Data Receive 	
+
+        * +FLID 	Local ID string follows 	
+
+   * Dual Use 	
+          	
+
+        * +FET 	Fax End of Transmission (Followed by status code) 	
+
+        * +FDIS 	Constrain session parameters 	
+
+
+@EndNode
+
+@Node "Configuration Variable Index" "userguide.guide/Configuration Variable Index"
+@Prev "Modem Command and Status Strings"
+@Toc "Configuring the System"
+
+Configuration Variables Index
+=============================
+
+
+ @{" Debug       " Link "General Configuration"}                      
+ @{" LogFile     " Link "General Configuration"}                      
+ @{" LocalID     " Link "General Configuration"}                      
+ @{" Device      " Link "General Configuration"}                      
+ @{" Unit        " Link "General Configuration"}                      
+
+ @{" Editor      " Link "AmigaFax User Interface"}                        
+ @{" ILBMEditor  " Link "AmigaFax User Interface"}                        
+ @{" Template    " Link "AmigaFax User Interface"}                        
+
+ @{" DefaultFont " Link "Fax Page Layout Options"}                        
+ @{" HeaderFont  " Link "Fax Page Layout Options"}                        
+ @{" PHeader     " Link "Fax Page Layout Options"}                        
+ @{" LeftIndent  " Link "Fax Page Layout Options"}                        
+ @{" RightIndent " Link "Fax Page Layout Options"}                        
+ @{" SyncEOL     " Link "Fax Page Layout Options"}                        
+
+ @{" ViewScale    " Link "Fax Viewer Configuration"}                         
+ @{" CustomScreen " Link "Fax Viewer Configuration"}                         
+
+ @{" MinLines    " Link "Fax Printer Configuration"}                          
+
+ @{" SpoolInterval " Link "Fax Spooler Configuration"}                          
+
+ @{" RSetup      " Link "Fax Receiver Configuration"}                           
+ @{" RStatus     " Link "Fax Receiver Configuration"}                           
+ @{" DLEmode     " Link "Fax Receiver Configuration"}                           
+ @{" RRate       " Link "Fax Receiver Configuration"}                           
+
+ @{" WSetup      " Link "Fax Transmitter Configuration"}                              
+ @{" DialType    " Link "Fax Transmitter Configuration"}                              
+ @{" DialPrefix  " Link "Fax Transmitter Configuration"}                              
+ @{" DoPadding   " Link "Fax Transmitter Configuration"}                              
+ @{" WStatus     " Link "Fax Transmitter Configuration"}                              
+ @{" ScriptBeforeSending " Link "Fax Transmitter Configuration"}                              
+ @{" ScriptAfterSending  " Link "Fax Transmitter Configuration"}                              
+ @{" XonXoff     " Link "Fax Transmitter Configuration"}                              
+
+ @{" FAXFILE     " Link "PrintSymb Configuration"}                        
+ @{" ClipPage    " Link "PrintSymb Configuration"}                        
+
+ @{" Modem Commands " Link "Modem Command and Status Strings"} 
+
+
+@EndNode
+
+@Node "The Workbench Interface" "userguide.guide/The Workbench Interface"
+@Next "Operating from the Shell"
+@Prev "Configuring the System"
+@Toc "Main"
+
+The Workbench Interface
+***********************
+
+
+ @{" AmigaFax      " Link "AmigaFax"}         
+ @{" FaxAutoAnswer " Link "FaxAutoAnswer"}              
+ @{" FaxSpool      " Link "FaxSpool"} 
+
+Once configured, AmigaFax may be operated either from a Shell or CLI
+(Command Line Interface), or from the Workbench. If you choose to
+operate from the Workbench, you will find three main icons, `AmigaFax',
+`FaxAutoAnswer' and `FaxSpool'.
+
+
+@EndNode
+
+@Node "AmigaFax" "userguide.guide/AmigaFax"
+@Next "FaxAutoAnswer"
+@Toc "The Workbench Interface"
+
+AmigaFax
+========
+
+When you double-click on the `AmigaFax' icon, the main AmigaFax control
+window will open. This allows you to edit, compile and view faxes,
+queue them for transmission, review previously queued transmissions,
+and so forth. There are currently six string gadgets, six pushbutton
+gadgets, and one toggle gadget on the control window.
+
+The gadget functions are:
+
+   * *FINE/STD*
+     This toggle gadget allows the user to toggle between `Fine' (200
+     DPI) and `Standard' (100 DPI) vertical resolution, when creating
+     AFax files.  Standard resolution takes half the space, and half the
+     time to transmit, of `Fine' mode, but `Fine' looks *much* nicer !!
+
+   * *To:*
+     This is the intended recipient of the Fax. It may be just a phone
+     number, or it may be an alias. When you enter a string and press
+     return, if the first character is a digit it will be treated as a
+     number, otherwise it will be checked for aliases. If no aliases are
+     found, the string is removed, otherwise the number of aliases
+     found is shown. See @{"Aliases" Link "Aliases"}, for more information on aliases.
+
+   * *From:*
+     This is picked up from the `LocalID' field in your Config file, if
+     present. You may override this value. It is a 20 character string
+     sent to the remote Fax to identify you as the sender, usually your
+     phone number for return faxes.
+
+   * *Source:*
+     This is the name of the fax source document, usually an AmigaFax
+     command (`.FCOM') file, although plain text or ILBM files may also
+     be used.  If you press return with an empty string, and ARP is
+     installed, a requester will prompt you for a filename.
+
+   * *AFAX:*
+     This is the name for the actual fax file. The system will usually
+     pick a name for you, but you may wish to override it.  Note that
+     the AFAX file name will be reserved, but not actually created,
+     until time to send the Fax. You may force creation with the "Make"
+     gadget if you wish to test that it is created correctly.  If a
+     document is to be faxed to multiple recipients, only one copy of
+     the AFAX file will be made. It is automatically deleted when all
+     recipients have been reached.
+
+   * *Tries:*
+     The maximum number of times to try to get a fax through to a
+     specific recipient if problems are encountered, such as remote
+     phone being engaged. Defaults to three.
+
+   * *Time:*
+     The Fax will not be sent until after this time. An empty field
+     means send at any time. Fill in as hh:mm, (24 hour format) then
+     press return. The system will interpret the time, and display the
+     result. Time can only be in the future, past time is rounded up by
+     a day.
+
+   * *New*
+     Create a new Fax document, and edit it using your configuration
+     editor.  The file pointed to by the configuration entry `Template'
+     will be used as a fax pro-forma.  The system will pick a default
+     document name for you, which you may keep or override.
+
+   * *Edit*
+     Edit a Fax document, using your configuration editor. Note that you
+     may set both a text and a graphic editor in your  `config' file.
+
+   * *Make*
+     The system will attempt to build an AFAX file from your source
+     document. This is not necessary when sending faxes, but does allow
+     you to check whether the document will appear as you wish.
+
+   * *Preview*
+     Invokes the AFAX viewer program, so you can preview the completed
+     document.
+
+   * *Send*
+     Your facsimile document will be queued for sending to the
+     appropriate recipients.  If the fax-spooler is not running, you
+     will be asked if you wish to start it.
+
+   * *QCheck*
+     This gadget will bring up the queue check window, to monitor the
+     progress of outgoing Faxes. From here it is possible to requeue
+     Faxes that have exceeded their error allowance, and to remove the
+     spool files for faxes that have been successfully sent, or that
+     are still queued for transmission.
+
+
+@EndNode
+
+@Node "FaxAutoAnswer" "userguide.guide/FaxAutoAnswer"
+@Next "FaxSpool"
+@Prev "AmigaFax"
+@Toc "The Workbench Interface"
+
+FaxAutoAnswer
+=============
+
+This icon will activate the background automatic-answer facility. If it
+is already operating, you will get the choice of removing the existing
+application (stopping it), or replacing it with the new version. You
+may wish to replace it if you have modified the configuration file
+settings.
+
+Note that you should only activate the auto-answer system in this
+fashion if you are  not  using the GETTY mode of operation, and only
+want to receive facimile transmissions, not data.
+
+
+@EndNode
+
+@Node "FaxSpool" "userguide.guide/FaxSpool"
+@Prev "FaxAutoAnswer"
+@Toc "The Workbench Interface"
+
+FaxSpool
+========
+
+This icon will activate the background fax-spooler program. If it is
+already operating, you will get the choice of removing the existing
+application (stopping it), or replacing it with the new version.  Note
+that in normal operation the main AmigaFax program will start the
+spooler for you when you queue a fax for transmission, or you will run
+it up automatically in your startup sequence.  You may wish to replace
+it if you have modified the configuration file settings.
+
+
+@EndNode
+
+@Node "Operating from the Shell" "userguide.guide/Operating from the Shell"
+@Next "Other Files"
+@Prev "The Workbench Interface"
+@Toc "Main"
+
+Operating from the Shell
+************************
+
+
+ @{" AFAX      " Link "AFAX"}     
+ @{" NEWFAX    " Link "NEWFAX"}       
+ @{" AFAXSPL   " Link "AFAXSPL"}        
+ @{" MKAFAX    " Link "MKAFAX"}       
+ @{" AFAXSEND  " Link "AFAXSEND"}         
+ @{" AFAXPRT   " Link "AFAXPRT"}        
+ @{" FAA       " Link "FAA"}    
+ @{" AFAXILBM  " Link "AFAXILBM"}         
+ @{" VIEWAFAX  " Link "VIEWAFAX"}         
+ @{" FXFX      " Link "FXFX"}     
+ @{" DVIFAX    " Link "DVIFAX"}       
+ @{" SHOWLIB   " Link "SHOWLIB"}        
+ @{" PRINTSYMB " Link "PRINTSYMB"}          
+ @{" FPRINT    " Link "FPRINT"}       
+ @{" AmigaFax Command File Format " Link "AmigaFax Command File Format"} 
+
+The main executable modules included in the release are:
+
+   * `afax'       Intuitionized interface for AFAX create/edit/send etc
+
+   * `newfax'
+     Notifies new fax received, allows print/view/delete, etc
+     [Intuitionized interface]
+
+   * `afaxspl'
+     Fax spooler daemon, many options/features
+
+   * `mkafax'
+     Convert documents to AmigaFax AFAX IFF file format
+
+   * `afaxprt'
+     Print and AmigaFax AFAX IFF file using preferences printer
+
+   * `afaxsend'
+     Send an AmigaFax AFAX IFF file to a remote Fax machine
+
+   * `faa'
+     Receive Fax documents in auto-answer mode
+
+   * `afaxilbm'
+     Convert pages from an AmigaFax AFAX IFF file to ILBM format
+
+   * `viewafax'
+     AmigaFax document viewer
+
+   * `fxfx'
+     Manipulates fax files
+
+   * `dvifax'
+     Converts TeX .dvi file to fax format (Registered version only)
+
+   * `showlib'
+     Display licence status
+
+   * `printsymb'
+     AmigaFax printer-driver print symbiont (assists afax.driver)
+
+   * `FPrint'
+     Redirect printer output to afax.driver
+
+
+@EndNode
+
+@Node "AFAX" "userguide.guide/AFAX"
+@Next "NEWFAX"
+@Toc "Operating from the Shell"
+
+AFAX
+====
+
+`AFAX:c/afax'
+`Afax' takes only one command line option at present:
+     afax [-f faxfile]
+If the `faxfile' option is given, `Afax' will come up with the given
+file name set as both its source and FAX file. This is used when `Afax'
+is started from the fax printer-driver. A common source and fax file is
+treated as a special case by the spooler, which will not delete the fax
+file when transmission is complete.
+
+This brings up a window which you can use to create new Fax documents,
+edit the documents, create the actual AFAX files, and send your faxes.
+It also allows you to monitor the status of faxes queued for
+transmission and maintain the queues, and to re-queue faxes that have
+exceeded teir allowed retry count.
+
+
+@EndNode
+
+@Node "NEWFAX" "userguide.guide/NEWFAX"
+@Next "AFAXSPL"
+@Prev "AFAX"
+@Toc "Operating from the Shell"
+
+NEWFAX
+======
+
+`AFAX:C/newfax faxname'
+This program is automatically invoked by faa when a fax is received. It
+puts up a window informing you of the Fax, with details about it (name,
+sender ID, number of pages), and allows you to view, print or delete
+the document.
+
+
+@EndNode
+
+@Node "AFAXSPL" "userguide.guide/AFAXSPL"
+@Next "MKAFAX"
+@Prev "NEWFAX"
+@Toc "Operating from the Shell"
+
+AFAXSPL
+=======
+
+     [run >nil: <nil:] afax:c/afaxspl  [-s] [-i n] [-d num]
+
+With the `-s' option, the spooler will run once only, checking for any
+faxes waiting to be spooled out. In this mode, it could be launched
+using cron/dcron/amicron at whatever times you wish to send faxes.
+
+Otherwise it will run in background and check for faxes to spool at
+intervals of every `n' minutes, where `n' is the interval in minutes
+from the configuration file default, optionally overridden by the `-i'
+command-line switch. You could do this perhaps every 1/2 hour, (n =
+30), or even at 1 minute intervals while testing.
+
+The spooler checks for files of the form `FAXSPOOL:*.SPL'. These are
+human-readable. As calls progress, results are added to the end of the
+file. If successfully sent, the file is renamed `FAXSPOOL:*.OK' . If
+unsuccessful for more than the specified number of tries, it is renamed
+`FAXSPOOL:*.ERR'.
+
+The queues are maintained from the `QCheck' module of the `afax'
+command. See @{"AFAX" Link "AFAX"}.
+
+`-d' is used to specify the debug level (0-9).
+
+
+@EndNode
+
+@Node "MKAFAX" "userguide.guide/MKAFAX"
+@Next "AFAXSEND"
+@Prev "AFAXSPL"
+@Toc "Operating from the Shell"
+
+MKAFAX
+======
+
+     mkafax [-s][-f][-dn][-Rresfile] <docfilename> <AFAX_filename>
+
+`mkafax' currently recognizes the IFF file types AFAX and ILBM, plain
+text files, and AFAX command text files, as input.
+
+A plain text file will be converted to an AFAX file using default
+settings.
+
+An IFF ILBM will be converted to a single-page FAX document. Only the
+first plane is converted, to convert multi-plane (eg DigiView Pics) use
+another tool, such as PfiltView (AmigaTeX).
+
+See @{"AmigaFax Command File Format" Link "AmigaFax Command File Format"}, for a full description of the
+command-file formatting instructions.
+
+The switches `-s' and `-f' are used to force `Standard' and `Fine'
+resolution repectively.
+
+`-d0' to `-d9' sets the debug level.
+
+The `-R' option specifies the name of the file to pass operational
+results in. This is meant for internal use only, and is not a feature
+guaranteed to be maintained. However some users have found it useful in
+their environment, if you need to know the file format please ask me
+for it.
+
+
+@EndNode
+
+@Node "AFAXSEND" "userguide.guide/AFAXSEND"
+@Next "AFAXPRT"
+@Prev "MKAFAX"
+@Toc "Operating from the Shell"
+
+AFAXSEND
+========
+
+     afaxsend [-options]  <dialstring | alias> <AFAX_filename>
+
+The present options are:
+     -t         Tone Dial (default is Pulse)
+     -P         DoPadding on  (Uppercase P)
+     -p         DoPadding off (Lowercase p)
+     -d n       Set debug level, 0-9
+     -D device  Use named device    (default serial.device)
+     -U unit    Use specified unit  (default 0)
+     -Rfile     Write result in file
+
+Command line options are normally not used, and settings are taken from
+environment values of `Faxlib:config'. If given, the command line
+switches take precedence.
+
+The `-R' option specifies the name of the file to pass operational
+results in. This is meant for internal use only, and is not a feature
+guaranteed to be maintained. However some users have found it useful in
+their environment, if you need to know the file format please ask me
+for it.
+
+`afaxsend' attempts to dial out, connect to the remote fax machine, and
+tranfer the specified document.
+
+`afaxsend Jeff MyFaxFile'
+
+If the first character of dialstring is not a digit, and not a name
+alias, the whole string will we be sent to the modem non-prefixed as a
+dial string. If an alias is used, it may be a group alias, resulting in
+the fax being sent to everyone in that group.
+
+
+@EndNode
+
+@Node "AFAXPRT" "userguide.guide/AFAXPRT"
+@Next "FAA"
+@Prev "AFAXSEND"
+@Toc "Operating from the Shell"
+
+AFAXPRT
+=======
+
+     afaxprt [-pnum] [-n] [-dn]<AFAX_filename>
+
+eg `afaxprt -p2 MyFaxFile'
+
+If the `-p' option is not used, all pages are printed.
+
+Using the `-n' option causes `afaxprt' not to send the data to the
+printer. Useful with the debug option `-d'.
+
+`afaxprt' sends the AmigaFax document to the preferences printer. It is
+a good idea to set your printer for high density.  Using a dot-matrix,
+Halftone Dithering, Integer Scaling, Black and White, Density 7 appears
+to work ok.
+
+
+@EndNode
+
+@Node "FAA" "userguide.guide/FAA"
+@Next "AFAXILBM"
+@Prev "AFAXPRT"
+@Toc "Operating from the Shell"
+
+FAA
+===
+
+`faa [BaseName]'
+
+Fax auto-answer. Sets up the FaxModem to auto-answer and recognise Fax
+or data tranmissions. Incoming Faxes will be saved in AFAX format. the
+default BaseName is `FAXREC:FAX', so that incoming faxes will be named
+     FAXREC:FAX0000
+     FAXREC:FAX0001
+     FAXREC:FAX0002
+
+etc.
+
+Note also that although `faa' recognises the difference between Fax and
+Data, it currently does nothing special with data. This may be
+integrated with the UUCP system in the future, along with *VoiceMail*
+capability.
+
+To terminate the `faa' program, send it a CTL_C break. If you ran it
+directly from your shell, just type control-C and wait. If you used
+`RUN' or `RUNBACK', send a break to its process number. (eg break 7 all)
+
+Command Line switches are:
+     -a	- Immediate Answer
+     -dn	- Set debug on, level n 	(default 1)
+     -D name	- Use name for the device 	(default serial.device)
+     -U num	- Use device unit num 		(default 0)
+     -G	- Run from a Getty
+     -z	- Diagnostic, do not detach, so debug messages can be read
+     -p	- Bump task priority by 1
+     -Q	- Qtest mode
+
+The Immediate Answer switch assumes phone is ringing, configures the
+modem & answers immediately. It probably makes sense to attach this to
+an alias if you use it this way. eg. `alias fa "faa -a"'
+
+The Getty option specifies that faa was run from a Getty. It will not
+modify the serial port parameters. It assumes that the Getty has
+answered the phone, detected a Fax call, and set up the line
+accordingly. Faa will connect, collect a Fax document, and return
+control to the Getty.
+
+If the `Qtest' option is specified, however, the baud rate will be set
+to `RRate' even if `Getty' mode is specified. This was added for
+compatability testing with `TrapDoor', a Getty-type front-end program.
+
+As `faa' will normally detach, and so debug diagnostics are not
+visible, the `-z' option was added to keep its STDIO attached to the
+launching console.
+
+
+@EndNode
+
+@Node "AFAXILBM" "userguide.guide/AFAXILBM"
+@Next "VIEWAFAX"
+@Prev "FAA"
+@Toc "Operating from the Shell"
+
+AFAXILBM
+========
+
+     afaxilbm [-pnum] <AFAX_filename> <ILBM_filename>
+     
+     eg
+     
+     afaxilbm -p2 RAM:AFAXR001 FX.ILBM
+
+This will extract the specified page from the AFAX file to the named
+ILBM file. It may then be viewed using standard ILBM viewing programs,
+such as LoadImage from Fish disks 281 and 355, of programs like
+DeluxePaint.
+
+If no page number is given, all pages will be extracted to separate
+files, and given names of the format base.1 base.2, etc
+
+The default ILBM file base name is afax_ilbm
+
+
+@EndNode
+
+@Node "VIEWAFAX" "userguide.guide/VIEWAFAX"
+@Next "FXFX"
+@Prev "AFAXILBM"
+@Toc "Operating from the Shell"
+
+VIEWAFAX
+========
+
+     viewafax [opts] <FaxFile>
+The fax viewer is normally started automatically by from the `NewFax'
+window. When invoked from the CLI, it takes the options:
+     -d debug_level
+     -p Page_Number
+     -s Scale
+
+The current version of the viewer keeps one entire fax page in memory.
+If the page will not fit in the requested scale, it tries to reduce the
+resolution until it finds one that will fit. Once a page is displayed,
+you can move about the page using the arrow keys. There is a scale
+gadget at the top left of the window, in the form of 1:n, where n is
+the current scale (say 3). You can click on the gadget, delete the
+current scale, and enter your own, in the range 1 to 8, where 1 is 1:1
+(full size), 2 is 1:2 (half size) etc. To the right of that gadget is
+another of the form Page: n where n is the current page displayed.
+Again you may enter the required page number in this gadget.
+
+To the top right of the window is a group of gadgets of the form
+`|<<-->>|'. These are actually four gadgets, which allow moving through
+the pages of the fax. From left to right they are First Page, Previous
+Page, Next Page, and Last Page.
+
+You may use the windows sizing gadget to resize the window. However
+with the current viewer, sizing the window larger than the fax page
+will result in the window shrinking to the page size at the next
+movement.
+
+Several keys are active in the viewer window.
+
+   * *Down Arrow* (Cursor Key or Numeric Pad) Move window down fax page.
+
+   * *Up Arrow* (Cursor Key or Numeric Pad) Move window up fax page.
+
+   * *Right Arrow* (Cursor Key or Numeric Pad) Move window right on fax
+     page.
+
+   * *Left Arrow* (Cursor Key or Numeric Pad) Move window left on fax
+     page.
+
+   * *Numeric pad keys 1,3,7,9* Diagonal window movement
+
+   * *i* Flip fax page vertically. Useful when faxes are sent
+     upside-down.
+
+   * *q* Quit from viewer
+
+   * *b* Move back on page in fax file
+
+   * *n* Move to next page in fax file
+
+   * *f* Move to first page in fax file
+
+   * *e* Move to end page in fax file
+
+   * *s* Make fax smaller - reduce scale one step
+
+   * *l* Make fax larger - increase scale one step
+
+
+@EndNode
+
+@Node "FXFX" "userguide.guide/FXFX"
+@Next "DVIFAX"
+@Prev "VIEWAFAX"
+@Toc "Operating from the Shell"
+
+FXFX
+====
+
+This utility allows you to split and merge AFAX format fax files. A
+typical use is where you have a complete fax document, perhaps
+generated by TeX->dvifax, or received as an AFAX fax-file and you want
+to sent it with an attached cover page, or you want to extract one or
+more pages from the document.
+
+     The command-line format is:
+     
+     fxfx [-f][-s] infile [-range] [infile[-range]] [...] outfile
+     
+     Some examples:
+     
+     fxfx file1 file2
+     
+      copies fax files file1 to file2
+     
+     fxfx file1 file2 file3 file4
+     
+      merges all pages from file1-3 to create file4
+     
+     fxfx file1 file2 -1,3,5-7,9- file3 -4 file4
+     
+      merges all pages from file1, pages 1,3,5-7 and 9 on from file2, and
+      page 4 from file3, to create file4
+     
+     
+     The range is currently sorted, so to reverse page order is currently
+     not simple, eg
+     
+     fxfx file1 -3 file1 -2 file1 -1 file2
+     
+      to create file2 from pages 1-3 of file1 in reverse order.
+
+The flags `-s' and `-f' are used to override the resolution flags when
+translating. This may be useful when a fax machine has sent you a fax
+with the incorrect resolution flags, as a fax machine in Brazil does to
+me. It sends in `Standard', but sets the `Fine' flag. I can correct
+this with
+
+`fxfx -s faxfile newfaxfile'
+
+
+@EndNode
+
+@Node "DVIFAX" "userguide.guide/DVIFAX"
+@Next "SHOWLIB"
+@Prev "FXFX"
+@Toc "Operating from the Shell"
+
+DVIFAX
+======
+
+This module works with the AmigaTeX package from Radical Eye Software,
+to enable you to convert a TeX  `.dvi'  file into an AmigaFax fax file.
+
+The command line syntax is
+     dvifax file.dvi -o file.afx
+
+You will be prompted for various size and scaling numbers. You are
+probably best to accept the default values (hit return) unless you have
+a very good idea what you are doing.
+
+The  Squeeze Fax  option will remove all white-space from the top and
+bottom of each page. This can result in significant savings in
+transmission time, and in fax paper at the other end.
+
+When creating faxes with `dvifax', you may want to add a cover page.
+This can be done easily with the  `fxfx'  utility.
+
+
+@EndNode
+
+@Node "SHOWLIB" "userguide.guide/SHOWLIB"
+@Next "PRINTSYMB"
+@Prev "DVIFAX"
+@Toc "Operating from the Shell"
+
+SHOWLIB
+=======
+
+This programs attempts to open the `afax.library' and display its
+contents. You can use this to confirm that a valid license library is
+available, check for user name, expiry date, etc. Output is of the form:
+
+     Current AmigaFax Library:
+     
+     Version = 1
+     Type    = 1
+     Serial  = 0
+     No Expiry
+     Level   = 10
+     User    = David Varley
+
+For registered users the fields `Serial' and `User' should display your
+registration serial number and your name. The `Version' field is an
+internal library revision, the `Type' field is reserved and may be
+later used to distinguish between reviewer, distributor, user, etc. The
+`Level' is presently unused, but could be used for a service level, and
+there may also be an licence expiry date shown. At present all
+registered user licences should show `No Expiry'.
+
+
+@EndNode
+
+@Node "PRINTSYMB" "userguide.guide/PRINTSYMB"
+@Next "FPRINT"
+@Prev "SHOWLIB"
+@Toc "Operating from the Shell"
+
+PRINTSYMB
+=========
+
+The `printsymb' module is used to translate data from the `afax.driver'
+printer driver into fax format, and save as a file. Under AmigaDOS2.0
+it will be run automatically by the driver, but under AmigaDOS1.3 it
+must be run up manually. It may be run in background, using a command
+such as `RunBack', from somewhere in your startup sequence.
+
+You can also run it manually from a CLI for diagnostic purposes. When
+run manually it takes the command line arguments
+     -h   Hang Around. Do not terminate when afax.driver is expunged
+     -r   Replace.     Replace a currently running printsymb
+     -q   Quit.        Kill any currently running printsymb and terminate
+
+If you run `printsymb' from a normal shell window, and print using the
+`afax.driver.debug' version of the driver, you will get lot of
+diagnostic information about how your application program is accessing
+the printer device. This can be useful for me in getting the driver to
+work with as many applications as possible.
+
+
+@EndNode
+
+@Node "FPRINT" "userguide.guide/FPRINT"
+@Next "AmigaFax Command File Format"
+@Prev "PRINTSYMB"
+@Toc "Operating from the Shell"
+
+FPRINT
+======
+
+`FPrint' is a small program that changes the in-memory system
+`Preferences' to use the `afax.driver', puts up a requester informing
+you that print has been redirected, and waits for you to signal it to
+cease redirection. This can be useful for quickly redirecting output to
+a fax without changing your main preferences settings, especially if
+you tie `FPrint' to a `HotKey' using a program such as `FKeys'.
+
+`FPrint' may not always work as expected, however, as some applications
+will adjust the printer from saved settings. For these you will have to
+use the normal `Printer' command to set your default printer to
+`afax.driver'.
+
+
+@EndNode
+
+@Node "AmigaFax Command File Format" "userguide.guide/AmigaFax Command File Format"
+@Prev "FPRINT"
+@Toc "Operating from the Shell"
+
+AmigaFax Command File Format
+============================
+
+
+ @{" Fill Mode " Link "Fill Mode"} 
+ @{" Stackable fonts and Style support " Link "Stackable fonts and Style support"} 
+
+An AFAX command file uses lines starting with a dot (.) as special
+commands, similar to TROFF style text processors. The file MUST start
+with .FCOM on the first line.
+
+      .FCOM
+     	on the first line to be recognised as a command file.
+     	.FCOM may optionally be followed by a dialstring or target alias.
+     	(Currently unused, future compatability)
+     
+     Other commands currently supported are :
+     
+      .PG	Clear out the old page and start a new one
+      .LM n	Set the left margin to n characters, in the current font
+      .LI n	Set the left  indentation to n pixels (default 50)
+      .RI n	Set the right indentation to n pixels (default 50)
+      .LJ	Left-justify text and Graphics from now on
+      .RJ	Right Justify text and Graphics
+      .CT	Center Text and Graphics
+      .TS n	Set Tabs every n characters (default 8)
+      .PL n	Set page length to n (pixel) rows (default 2292 == A4)
+      .FILL	Turn on fill mode
+      .NOFILL Turn off fill mode
+     
+      .VERBATIM
+     	All text read in will be printed verbatim, until .ENDVERB
+     
+      .VERBINC filename
+     	Include a file in verbatim mode. Still requires a .ENDVERB
+     
+      .ENDVERB
+     	End verbatim mode
+     
+      .FONT name size [styles]
+     	Set the font as specified. Typical use might be
+     	.FONT topaz 11
+     	.FONT diamond 20
+     	.FONT cmr10 30
+     	and so on. See the .STYLE command for style options.
+     
+      .ENDF	pop the current font/style, and return to the previous one.
+     
+      .STYLE styles
+     	Set the style according to the style string,
+     		N - Normal
+     		B - Bold
+     		U - Underlined
+     		I - Italics
+     		E - Extended
+     	eg .STYLE BU	(set to bold, underlined)
+     
+      . 	(dot followed by white-space) Rest of line is a comment
+     
+      .INC file
+     	Include the named file. File may be text, ILBM, or another command
+     	file. Type is auto-recognised. If a full path is not given to the
+     	include file, the current directory will be searched, then the
+     	FAXLIB: directory. Thus addresses, signatures, etc may be kept
+     	in FAXLIB:
+     
+     	From version 1.34, you may also .INC an AFAX format file. At
+     	present only one page is included, by default the first page.
+     	Page number can be specified by an optional parameter, eg
+     	.INC FAXREC:Fax0001 2
+     	At present only 1 page from an AFAX file can be included for each .INC
+     	command, and no data after that page will appear on the page it is
+     	included on. Text/graphics can be included before the included fax
+     	page, so you could use this, for example, to automatically add some
+     	header text to a received fax before relaying it on.
+     	Note that at present, normal page-length checking is NOT done while
+     	processing the included fax page, so you may get a longer than
+     	expected page.
+     
+      .DATE	Insert a line with the current date and time, using current font
+     	and line settings.
+
+Any line not beginning with a . will be processed as normal text,
+according to the current settings.
+
+
+@EndNode
+
+@Node "Fill Mode" "userguide.guide/Fill Mode"
+@Next "Stackable fonts and Style support"
+@Toc "AmigaFax Command File Format"
+
+Fill Mode
+---------
+
+In this mode, lines will be filled from input to full width (inside LR
+indent) in the current font. Line filling terminates on a dot command,
+blank line, or end of page. Left Margin is disabled while filling.
+
+See the included  `test.com'  file for examples of useage.
+
+
+@EndNode
+
+@Node "Stackable fonts and Style support" "userguide.guide/Stackable fonts and Style support"
+@Prev "Fill Mode"
+@Toc "AmigaFax Command File Format"
+
+Stackable fonts and Style support
+---------------------------------
+
+Version 1.34 and later of `mkafax' support stackable fonts, and the use
+of styles, such as *Bold* , *Italic* and `Underline'.
+
+Useage of the command  `.FONT'  has been extended, and the commands 
+`.STYLE'  and  `.ENDF'  have been added.
+
+The font system has been modified so that fonts are now nestable. This
+means you can set a font/style, and then return to the original
+font/style, without needing to know what that was. This can be very
+useful for include files, which can return to the original font before
+they exit, for example.
+
+The  `.FONT'  command now takes an optional third parameter, which
+defines the requested style to use. This takes the form of a string,
+consisting of the letters  `N, B, U, I'  and  `E'  in any order, upper
+or lower case.
+
+     N - Normal
+     B - Bold
+     U - Underlined
+     I - Italics
+     E - Extended
+
+Note that the letters are parsed in order, and that  `N'  will clear the
+other flags and set the font back to normal. For example,
+
+     .FONT topaz 30 BU
+will set the font to topaz 30, Bold and Underlined.
+
+     .FONT CGTimes 50 I
+set CGTimes at 50-point, Italic.
+
+You can retain the existing font, but change its style, by using the
+new .STYLE command.
+
+     .STYLE U
+     
+     This is Underlined.
+     
+     .STYLE IU
+     
+     This is Underlined and Italic.
+
+All `.FONT' and `.STYLE' commands can now be nested. This means that
+the font/style you set will remain in effect until the new command
+`.ENDF' is encountered. After this the previous font/style set will be
+in force. The Default font, which can be set from your `FAXLIB:Config'
+file or by environmental variable, is always the underlying font. No
+matter how many `.ENDF' commands you enter, this will not be popped
+from the font stack.
+
+Note that if you have defined a `Header' font, this will be
+automatically pushed for headers, and popped afterwards.
+
+     Example .FCOM file:
+     
+     .FCOM
+     This is in default font
+     .FONT CGTimes 30 U
+     This is in Underlined 30 point CGTimes
+     .FONT topaz 20 B
+     This is in Bold 20 point topaz
+     .STYLE NIU
+     And this is Italic Underlined 20 point topaz
+     .ENDF
+     Bold 20 point topaz
+     .ENDF
+     Underlined 30 point CGTimes
+     .ENDF
+     Default font
+     .ENDF
+     Default font
+
+
+@EndNode
+
+@Node "Other Files" "userguide.guide/Other Files"
+@Next "Integration with other software"
+@Prev "Operating from the Shell"
+@Toc "Main"
+
+Other Files
+***********
+
+
+ @{" Aliases " Link "Aliases"}        
+ @{" FONTS   " Link "FONTS"} 
+
+
+@EndNode
+
+@Node "Aliases" "userguide.guide/Aliases"
+@Next "FONTS"
+@Toc "Other Files"
+
+FAXLIB:Aliases
+==============
+
+This file allows you to alias numbers to names, create fax mailing
+groups, etc. Aliases may be defined in terms of other aliases.
+
+For example we could have:
+
+     joe: 1234596
+     
+     fred: 9876123
+     
+     bill: 0981234
+     
+     andy: "0,123-4567,,,"
+     
+     customers: joe, fred, bill
+
+Lines beginning with # are treated as comments, a comma means the alias
+list continues.
+
+If you want to include spaces or commas in an alias (commas are a way
+of inserting delays into a dial-string), you should surround the
+aliased number with double quotes. Adding coma-delays at the end of a
+dial string can be useful when dialing numbers that take a long time to
+respond, avoiding possible timeouts.
+
+The alias system is modelled closely on the one used in Matt Dillon's
+UUCP package. See UUCP documentation for more details. Thanks, Matt.
+
+
+@EndNode
+
+@Node "FONTS" "userguide.guide/FONTS"
+@Prev "Aliases"
+@Toc "Other Files"
+
+FONTS
+=====
+
+AmigaFax can use all the standard Amiga fonts. Under AmigaDOS2.0 the
+ability to perform font-scaling means that you can generate quite
+impressive documents very easily.
+
+The AmigaFax distribution also includes a selection of larger sized
+fonts from the Computer Modern series, which again allows very high
+quality faxes to be produced. These were generated from standard TeX
+fonts using the TEXF program. Note that these fonts do not contain the
+umlaut characters commonly used in Europe.
+
+These include the fonts  cmr10, cmbx10, cmssbx10 and cmtt10  in sizes
+from 29 to 103.
+
+I would suggest that anyone using AmigaDOS 2.0 use the standard Amiga
+fonts. Even Topaz scaled to 30 point size or greater comes out quite
+effectively. Play around until you find a setup you like.
+
+
+@EndNode
+
+@Node "Integration with other software" "userguide.guide/Integration with other software"
+@Next "Registration and Maintenance"
+@Prev "Other Files"
+@Toc "Main"
+
+Integration with other software
+*******************************
+
+
+ @{" UUCP           " Link "UUCP"}     
+ @{" TeX            " Link "TeX"}    
+ @{" PostScript     " Link "PostScript"}           
+ @{" Printer Driver " Link "Printer Driver"}               
+ @{" BBS Systems    " Link "BBS Systems"} 
+
+
+@EndNode
+
+@Node "UUCP" "userguide.guide/UUCP"
+@Next "TeX"
+@Toc "Integration with other software"
+
+UUCP
+====
+
+AmigaFax was designed from the beginning to integrate with UUCP, in
+particular with Matt Dillon's AmigaUUCP1.15D. Using the modified Getty
+program provided, a Fax call will be recognised, and the Fax
+auto-answer program will be called to handle it. Normal logins and UUCP
+connections should function as usual.
+
+Other facilities, such as network fax-server capability, can be
+provided to enhance the basic AmigaFax system.
+
+
+@EndNode
+
+@Node "TeX" "userguide.guide/TeX"
+@Next "PostScript"
+@Prev "UUCP"
+@Toc "Integration with other software"
+
+TeX
+===
+
+We have written a  `dvifax'  program, which will take a standard TeX
+`.dvi'  file, and transform it to an AmigaFax file, with superb quality
+output. This is now provided with the distribution.
+Martin Steppler and Martin Horneffer have donated a set of `PasTeX'
+compatability programs, to enable AmigaFax to run with the `PasTeX'
+freely distributable TeX package. This package is included in the
+distribution. *We have not tested these programs here.*
+
+
+@EndNode
+
+@Node "PostScript" "userguide.guide/PostScript"
+@Next "Printer Driver"
+@Prev "TeX"
+@Toc "Integration with other software"
+
+PostScript
+==========
+
+PostScript support is not yet in place, but it is on the list. Priority
+given depends on demand.
+
+
+@EndNode
+
+@Node "Printer Driver" "userguide.guide/Printer Driver"
+@Next "BBS Systems"
+@Prev "PostScript"
+@Toc "Integration with other software"
+
+Printer Driver
+==============
+
+The AmigaFax printer driver `afax.driver' allows any program that sends
+its output via the standard Amiga printer-driver is able to create fax
+files. This includes many desktop publishing packages, word-processors,
+drawing and paint programs, etc.
+
+*Be aware:* that the present version  of the afax.driver, as released
+with AmigaFax version 1.40, only converts *print graphics dumps* to fax
+files. Normal text sent to the printer is ignored. This may change for
+future releases.
+
+
+@EndNode
+
+@Node "BBS Systems" "userguide.guide/BBS Systems"
+@Prev "Printer Driver"
+@Toc "Integration with other software"
+
+BBS Systems
+===========
+
+The FifoBBS BBS system for VLT is no longer distributed with AmigaFax. 
+There several BBS systems that should work well alongside AmigaFax, the
+one we are currently using at C-Born is *TransAmiga*. This is a freely
+distributable shareware package which also supports FidoNet. It is
+available from several sources, including Amiga ftp sites. See the file
+BBSREADME in the distribution disk BBS directory for more details.
+
+
+@EndNode
+
+@Node "Registration and Maintenance" "userguide.guide/Registration and Maintenance"
+@Next "FaxModem Specifics"
+@Prev "Integration with other software"
+@Toc "Main"
+
+Registration and Maintenance
+****************************
+
+
+ @{" Getting Updates " Link "Getting Updates"}                
+ @{" Registration    " Link "Registration"} 
+
+AmigaFax has always been distributed in two versions. The demonstration
+version was freely distributable, but had certain limitations, in
+particular the ability to transmit and receive only single-page faxes.
+The registered version was sent out directly to registered users, and
+was made available in restricted access areas of the BBS, UUFS
+fileserver and BMS. The majority of the package was the same for both
+versions.
+
+With the increasing ease of access to networked file storeage systems,
+such as AmiNet, the ability of users to collect the latest registered
+version of the software over a network would greatly ease the
+distribution bottleneck. Registered software could also be distributed
+by means such as the Fish CD-ROMs.
+
+In order to implement this, AmigaFax Version 1.40 and later incorporate
+a licence management facility, implemented as a loadable library,
+`afax.library'. This means that on registration only a small library
+file needs to be sent to a user with the AmigaFax package, and
+registered users can always load and use all the features of the latest
+distribution when it appears on the networks, BBS, CD-ROM, etc.
+
+The licence library has facilities for various levels of access, and
+for limited-time licences, so that users may try with all features
+enabled for a limited period. If the licence library is not found, the
+package will still operate fully in demonstration mode, which for many
+casual users will meet all their requirements.
+
+
+@EndNode
+
+@Node "Getting Updates" "userguide.guide/Getting Updates"
+@Next "Registration"
+@Toc "Registration and Maintenance"
+
+Getting Updates
+===============
+
+The latest version of AmigaFax is available from our BBS system, as
+well as via e-mail, using either the UUFS fileserver or Matt Dillon's
+BMS (Batch Mail System) for AmigaUUCP. We can also send it out on disk
+by mail if necessary. We plan to set up a direct Internet connection in
+the next few months (1st half 1994), and AmigaFax may be available for
+direct `ftp' access then. Address is not yet known.
+
+Our BBS system is *TransAmiga*, and it currently runs on the same line
+as our AmigaFax, `+61-52-786355'. This number is likely to change some
+time in 1994.
+
+     Our mailing address is:
+     
+     C-Born Software System
+     59 West Fyans St.
+     Geelong, 3220
+     Victoria, AUSTRALIA.
+     
+     Phone +61-52-290144
+     Fax   +61-52 290248
+
+Our e-mail addresses may also be subject to change during 1994, as we
+set up our Internet connection. At present, the BMS server site is
+
+`sol.ccs.deakin.edu.au!drum3'
+
+and the UUFS fileserver can be reached as
+     sol.ccs.deakin.edu.au!drum3!fs
+You can reach me by email as
+     sol.ccs.deakin.edu.au!drum3!dave
+
+You can request help on useage of the UUFS fileserver by sending it
+email containing the following body text:
+     REPLYTO <Your email address>
+     INFO
+     ?
+     HELP
+     ASCII
+     GET BMS:Pub/Files
+     QUIT
+
+The REPLYTO field is only necessary if your return address is not
+easily resolveable, for example if your mail is forwarded via a machine
+that mangles your path. `<Your email address>' is a working address
+from `drum3' to you, the `<>' are not included. `BMS:Pub/Files' lists
+all the accessible files. Generally requesting
+`BBS:File/AfaxDemo/AmigaFax.lha' should get you the latest version.
+
+
+@EndNode
+
+@Node "Registration" "userguide.guide/Registration"
+@Prev "Getting Updates"
+@Toc "Registration and Maintenance"
+
+Registration
+============
+
+The registration fee has been held at $A65, or $US50, for several years
+now. (The original offer was valid until 6 April 1992, but we never got
+around to changing it) We accept MasterCard, VISA and BankCard in
+Australian dollars. EuroCheques are not accepted (we've tried, the
+local banks won't accept them!).
+
+     Here is an example registration form:
+     
+          o /
+     ------X------cut here--------------------------------------------------
+     
+                        AMIGAFAX REGISTRATION
+     
+     To:
+         C-Born Software Systems
+         59 West Fyans St.
+         Geelong, 3220
+         Victoria, AUSTRALIA
+     
+     
+     Name:                               Phone:
+             _________________________            _________________________
+     
+     
+     Address:
+             _______________________________________
+     
+     
+             _______________________________________
+     
+     Country:                                Postal Code:
+             _________________________                     ________________
+     
+     
+     Email:
+             _________________________
+     
+     
+     Payment Method:
+     
+     
+      MasterCard  ( )     Visa  ( )     BankCard  ( )     Bank Cheque  ( )
+     
+     
+     Card No.                                         Exp:
+              _______________________________________       __________
+     
+     
+     CardHolder Name:                                 Amount:  $65.00 Australian
+                       ______________________________
+     
+     
+          o /
+     ------X------cut here---------------------------------------------------
+
+
+@EndNode
+
+@Node "FaxModem Specifics" "userguide.guide/FaxModem Specifics"
+@Next "Simple Index"
+@Prev "Registration and Maintenance"
+@Toc "Main"
+
+FaxModem Specifics
+******************
+
+
+ @{" ZyXEL U-1496   " Link "ZyXEL U-1496"}             
+ @{" Maestro 9600XR " Link "Maestro 9600XR"} 
+
+
+@EndNode
+
+@Node "ZyXEL U-1496" "userguide.guide/ZyXEL U-1496"
+@Next "Maestro 9600XR"
+@Toc "FaxModem Specifics"
+
+ZyXEL U-1496
+============
+
+The ZyXEL U-1496 provides data rates to v32bis and higher, with v42bis
+error correction and compression. It is capable of facsimile data rates
+greater than 9600bps, currently up to 14400bps. ZeroOne makes ROM
+upgrades available through their BBS, with frequent upgrades. They are
+very helpful and responsive to customer requests.
+
+The latest ROM version we have used is  V6.10 .
+
+With this ROM, it is possible to lock the DCE/DTE data rate for fax
+with the sequence `ATS38=8S18=n' , where  n  is the DTE speed as per
+the S20 register list, eg 2 for 38.4Kbps, 3 for 19.2Kbps.
+
+There is a Voice-mode ROM for the ZyXEL currently in Beta-test. When
+this is released, we will try to integrate it with AmigaFax. this will
+allow you to send and receive voice messages, as well as fax and data
+calls, all from your Amiga.
+
+A few more tips on configuration, with getty. In my standard startup
+line I have been setting the page-length to A4, as my printer is A4,
+which is the standard here. However, it appears that my fax (and most
+others) when appending their header/footer lines, force the page past
+A4. This has not been a problem in the past, but now the U1496 must be
+obeying the page-length setting, and forces out an extra very short
+page for each A4 page. This causes handshake problems, etc.
+
+So for now, the best solution seems to be setting up for unlimited
+page-length. The AmigaFax software has no problem with this, but your
+printer may, if single-sheet type.
+
+Another option allows fax data-rates greater than 9600. Not many fax
+machines support this yet, but we may as well use it, just in case.
+
+     The +FDCC options are as follows:
+     
+     +FDCC=1,5,0,2
+           ^ ^ ^ ^
+           | | | +- Page Length: 0=A4(297mm) 1=B4(364mm) 2=unlimited
+           | | +--- Page Width : 0=1728 Pixels in 215mm
+           | +----- Bit Rate   : 0=2400 1=4800 2=7200 3=9600 4=12000 5=14400
+           +--------Vert. Res. : 0=Normal(98 lpi) 1=Fine(196 lpi)
+
+Other options cover compression format, error correction mode, binary
+file transfer, and scan time. These are not yet supported, probably not
+until the standards are finalized.
+
+The line I use to start up `Getty' is:
+
+     RunBack Getty -Mh -B19200 -x8 -F6 AT&C1&D3+FDCC=1,5,0,2
+
+As I have the FaxModem running from a  AS2232  multiport serial card,
+with a maximum baud rate of 19200, I must limit the DCE/DTE rate to
+that.
+
+
+@EndNode
+
+@Node "Maestro 9600XR" "userguide.guide/Maestro 9600XR"
+@Prev "ZyXEL U-1496"
+@Toc "FaxModem Specifics"
+
+Maestro 9600XR
+==============
+
+This is a low-cost Australian made 2400bps data, 9600bps send/receive
+fax modem, based on the Exar chipset. It does not allow DCE/DTE rate
+locking, and as of the latest version ROMs we have, still has
+occasional problems in correctly synchronising to incoming fax data,
+resulting in `garbage data' faxes, and missing lines from the top of
+pages. These problems may have been fixed in later ROM versions, but we
+have not been notified of any upgrades. The modem software does not
+appear to observe specified line-scan delays, which may result in
+missing lines when transmitting to older/slower fax machines.
+
+A typical Getty startup-line for this modem is:
+     run >nil: <nil: Getty -Mh -B2400 -F AT&C1&D2+FDCC=1,3
+
+
+@EndNode
+
+@Node "Simple Index" "userguide.guide/Simple Index"
+@Prev "Main"
+@Toc "Main"
+
+
+ @{" AFAX " Link "AFAX"} 
+ @{" AFAXILBM " Link "AFAXILBM"} 
+ @{" AFAXPRT " Link "AFAXPRT"} 
+ @{" AFAXSEND " Link "AFAXSEND"} 
+ @{" AFAXSPL " Link "AFAXSPL"} 
+ @{" Aliases " Link "Aliases"} 
+ @{" AmigaFax " Link "AmigaFax"} 
+ @{" AmigaFax Command File Format " Link "AmigaFax Command File Format"} 
+ @{" AmigaFax User Interface " Link "AmigaFax User Interface"} 
+ @{" ARP " Link "ARP"} 
+ @{" Basic Configuration " Link "Basic Configuration"} 
+ @{" BBS Systems " Link "BBS Systems"} 
+ @{" Configuring for Hardware and User Preferences " Link "Configuring for Hardware and User Preferences"} 
+ @{" Configuring the System " Link "Configuring the System"} 
+ @{" DVIFAX " Link "DVIFAX"} 
+ @{" Extra FONTS " Link "Extra FONTS"} 
+ @{" FAA " Link "FAA"} 
+ @{" Fax Page Layout Options " Link "Fax Page Layout Options"} 
+ @{" Fax Printer Configuration " Link "Fax Printer Configuration"} 
+ @{" Fax Receiver Configuration " Link "Fax Receiver Configuration"} 
+ @{" Fax Spooler Configuration " Link "Fax Spooler Configuration"} 
+ @{" Fax Transmitter Configuration " Link "Fax Transmitter Configuration"} 
+ @{" Fax Viewer Configuration " Link "Fax Viewer Configuration"} 
+ @{" FaxAutoAnswer " Link "FaxAutoAnswer"} 
+ @{" FaxModem Specifics " Link "FaxModem Specifics"} 
+ @{" FaxSpool " Link "FaxSpool"} 
+ @{" Fill Mode " Link "Fill Mode"} 
+ @{" FONTS " Link "FONTS"} 
+ @{" FPRINT " Link "FPRINT"} 
+ @{" FXFX " Link "FXFX"} 
+ @{" General Configuration " Link "General Configuration"} 
+ @{" Getting Updates " Link "Getting Updates"} 
+ @{" Hardware " Link "Hardware"} 
+ @{" Installation " Link "Installation"} 
+ @{" Installing the Software " Link "Installing the Software"} 
+ @{" Integration with other software " Link "Integration with other software"} 
+ @{" Introduction " Link "Introduction"} 
+ @{" Maestro 9600XR " Link "Maestro 9600XR"} 
+ @{" MKAFAX " Link "MKAFAX"} 
+ @{" Modem Command and Status Strings " Link "Modem Command and Status Strings"} 
+ @{" NEWFAX " Link "NEWFAX"} 
+ @{" Operating from the Shell " Link "Operating from the Shell"} 
+ @{" Other Files " Link "Other Files"} 
+ @{" PostScript " Link "PostScript"} 
+ @{" Printer Driver " Link "Printer Driver"} 
+ @{" Printer Setup " Link "Printer Setup"} 
+ @{" PRINTSYMB " Link "PRINTSYMB"} 
+ @{" PrintSymb Configuration " Link "PrintSymb Configuration"} 
+ @{" Registration " Link "Registration"} 
+ @{" Registration and Maintenance " Link "Registration and Maintenance"} 
+ @{" SHOWLIB " Link "SHOWLIB"} 
+ @{" Stackable fonts and Style support " Link "Stackable fonts and Style support"} 
+ @{" Summary of Features " Link "Summary of Features"} 
+ @{" System Requirements " Link "System Requirements"} 
+ @{" TeX " Link "TeX"} 
+ @{" The Workbench Interface " Link "The Workbench Interface"} 
+ @{" UUCP " Link "UUCP"} 
+ @{" VIEWAFAX " Link "VIEWAFAX"} 
+ @{" What is AmigaFax? " Link "What is AmigaFax?"} 
+ @{" ZyXEL U-1496 " Link "ZyXEL U-1496"} 
+
+@EndNode
+
