@@ -1,0 +1,242 @@
+# JOE syntax highlight file for PHP
+# modified by Eric Lin
+
+# TODO:
+#  * octal escape sequences
+#  * heredoc support (as good as possible)
+#  * highlight function and class names?
+
+# Define no. sync lines
+# You can say:
+# -200     means 200 lines
+# -        means always start parsing from beginning of file when we lose sync
+#          if nothing is specified, the default is -50
+
+-
+
+# Define colors
+
+=Idle
+=HTML		bold black
+=Comment 	green
+=Constant 	cyan
+=Constant_sq 	blue
+=Escape 	bold cyan
+=Keyword 	magenta
+=Var  red
+=Methods  bold
+
+:reset HTML
+	*		reset
+	"<"		reset_lt
+
+:reset_lt HTML
+	*		reset
+	"?"		idle		recolor=-2
+	"%"		idle		recolor=-2
+
+:idle Idle
+	*		idle
+	"?"		idle_qmark
+	"%"		idle_hash
+	"#"		sh_comment	recolor=-1
+	"/"		slash
+	"0-9"		first_digit	recolor=-1
+	"'"		string_sq	recolor=-1
+	"\""		string_dq	recolor=-1
+	"a-zA-Z_"	ident		buffer
+	"$"   php_var recolor=-1
+	"-" maybe_method
+	"{}"  brace recolor=-1
+	
+:brace  Methods
+  * idle  noeat
+	
+:php_var Var
+  *   php_var
+  " ;[]=()" idle  recolor=-1
+  "-" maybe_method recolor=-1
+
+:var_indqstring Var
+  *     string_dq recolor=-1
+  "a-zA-Z_" var_indqstring
+  "\""  idle
+	"\\"		string_dq_esc	recolor=-1
+
+:var_insqstring Var
+  *     string_sq recolor=-1
+  "a-zA-Z_" var_insqstring
+  "'" idle
+	"\\"		string_sq_esc	recolor=-1
+
+:maybe_method Methods
+	*		idle  recolor=-1
+	"?"		idle_qmark 
+	"%"		idle_hash
+	"#"		sh_comment	recolor=-1
+	"/"		slash
+	"0-9"		first_digit	recolor=-1
+	"'"		string_sq	recolor=-1
+	"\""		string_dq	recolor=-1
+	"a-zA-Z_"	ident		buffer
+	"$"   php_var recolor=-1
+	"{}"  brace recolor=-1
+  ">" method  recolor=-2
+  
+:method Methods
+  *   idle  recolor=-1
+  "a-zA-Z_" method  recolor=-1
+
+:idle_qmark Idle
+	*		idle
+	">"		reset
+
+:idle_hash Idle
+	*		idle	noeat
+	">"		reset
+
+:sh_comment Comment
+	*		sh_comment
+	"\n"		idle
+
+:slash Idle
+	*		idle		noeat
+	"*"		comment		recolor=-2
+	"/"		line_comment	recolor=-2
+
+:comment Comment
+	*		comment
+	"*"		maybe_end_comment
+
+:maybe_end_comment Comment
+	*		comment
+	"/"		idle
+	"*"		maybe_end_comment
+
+:line_comment Comment
+	*		line_comment
+	"\n"		idle
+
+
+:string_sq Constant_sq
+	*		string_sq
+	"$"     var_insqstring recolor=-1
+	"\'"		idle
+	"\\"		string_sq_esc	recolor=-1
+
+:string_sq_esc Escape
+	*		string_sq
+	"\n"		string_sq	recolor=-2
+
+:string_dq Constant
+	*		string_dq
+	"$"     var_indqstring recolor=-1
+	"\""		idle
+	"\\"		string_dq_esc	recolor=-1
+
+:string_dq_esc Escape
+	*		string_dq
+	"\n"		string_dq	recolor=-2
+	
+:first_digit Constant
+	*		idle	noeat
+	"xX"		hex
+	"."		float
+	"0-9"		first_number
+
+:hex Constant
+	*		idle	noeat
+	"0-9A-Fa-f"	hex
+
+:first_number Constant
+	*		idle	noeat
+	"0-9"		first_number
+	"."		float
+
+:maybe_float Constant
+	*		idle	recolor=-2	noeat
+	"0-9"		float		recolor=-2
+
+:float Constant
+	*		idle	noeat
+	"eE"		epart
+	"0-9"		float
+
+:epart Constant
+	*		idle	noeat
+	"0-9+\-"	enum
+
+:enum Constant
+	*		idle	noeat
+	"0-9"		enum
+
+:ident Idle
+	*		idle		noeat strings
+	"addslashes" meth
+	"array"		meth
+	"array_keys"  meth
+	"count" meth
+	"date"  meth
+	"chr" meth
+	"empty"		meth
+	"end"	meth
+	"header" meth
+	"highlight_file"  meth
+	"htmlspecialchars"  meth
+	"isset"		meth
+	"shuffle"  meth
+	"strip_tags"  meth
+	"strlen"  meth
+	"strpos"  meth
+	"strrpos" meth
+	"substr"  meth
+	"trim"    meth
+	"and"		kw
+	"as"		kw
+	"break"		kw
+	"case"    kw
+	"class"		kw
+	"continue"	kw
+	"declare"	kw
+	"default"	kw
+	"die"		kw
+	"do"		kw
+	"echo"		kw
+	"else"		kw
+	"elseif"	kw
+	"eval"		kw
+	"exception"	kw
+	"exit"		kw
+	"extends"	kw
+	"for"		kw
+	"foreach"	kw
+	"function"	kw
+	"global"	kw
+	"if"		kw
+	"include"	kw
+	"include_once"	kw
+	"list"		kw
+	"new"		kw
+	"or"		kw
+	"print"		kw
+	"private" kw
+	"public"  kw
+	"require"	kw
+	"require_once"	kw
+	"return"	kw
+	"static"	kw
+	"switch"	kw
+	"unset"		kw
+	"while"		kw
+done
+	"a-zA-Z0-9_"	ident
+
+:kw Keyword
+	*	idle	noeat
+
+:meth Methods
+  * idle  noeat
+
+:var  Var
+  * mark  noeat
+  

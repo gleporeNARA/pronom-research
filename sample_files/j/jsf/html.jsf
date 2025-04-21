@@ -1,0 +1,187 @@
+# JOE syntax highlight file for HTML
+# This needs lots of work...
+
+
+# Define colors
+
+=Idle
+=Comment 	green
+=Constant 	cyan
+=Escape 	bold cyan
+=Keyword 	bold
+=Bad		bold red
+=Attr		magenta
+
+# Start of markup, plus crazy HTML comments...
+
+:idle Idle
+	*		idle
+	"&"		char		recolor=-1
+	"<"		start
+
+:char Escape
+	*		char
+	";"		idle
+
+:start Idle
+	*		mark		noeat
+	"!"		bang
+
+:bang Idle
+	*		mark		noeat
+	"-"		maybe_comment
+
+:maybe_comment Idle
+	*		mark		noeat
+	"-"		comment		recolor=-2
+
+:comment Comment
+	*		comment
+	"-"		maybe_end_comment
+
+:maybe_end_comment Comment
+	*		comment
+	"-"		end_comment
+
+:end_comment Bad
+	*		idle
+	"-"		maybe_another_comment
+	" \t\n"		end_comment
+	">"		idle		recolor= -1
+
+:maybe_another_comment Idle
+	*		end_comment
+	"-"		comment		recolor= -2
+
+
+# We're in a markup
+
+:mark Idle
+	*		mark
+	">"		idle
+	"a-zA-Z_"	ident		buffer
+	"0-9"		number		recolor= -1
+	"\""		astring		recolor= -1
+	"\'"		bstring		recolor= -1
+
+:number Constant
+	*		mark	noeat
+	"0-9"		number
+
+
+# Strings
+
+:astring Constant
+	*		astring
+	"\""		mark
+
+:bstring Constant
+	*		bstring
+	"'"		mark
+
+# Keywords
+
+:ident Idle
+	*		mark		noeat istrings
+	"html"		kw
+	"head"		kw
+	"base"		kw
+	"isindex"	kw
+	"link"		kw
+	"meta"		kw
+	"nextid"	kw
+	"script"	kw
+	"title"		kw
+	"body"		kw
+	"address"	kw
+	"blockquote"	kw
+	"form"		kw
+	"input"		kw
+	"select"	kw
+	"option"	kw
+	"textarea"	kw
+	"h1"		kw
+	"h2"		kw
+	"h3"		kw
+	"h4"		kw
+	"h5"		kw
+	"h6"		kw
+	"hr"		kw
+	"dl"		kw
+	"dt"		kw
+	"dd"		kw
+	"ol"		kw
+	"li"		kw
+	"ul"		kw
+	"dir"		kw
+	"menu"		kw
+	"pre"		kw
+	"table"		kw
+	"caption"	kw
+	"tr"		kw
+	"td"		kw
+	"th"		kw
+	"p"		kw
+	"applet"	kw
+	"param"		kw
+	"basefont"	kw
+	"center"	kw
+	"map"		kw
+	"area"		kw
+	"bgsound"	kw
+	"marquee"	kw
+	"frameset"	kw
+	"frame"		kw
+	"noframes"	kw
+	"b"		kw
+	"i"		kw
+	"tt"		kw
+	"big"		kw
+	"small"		kw
+	"sub"		kw
+	"sup"		kw
+	"u"		kw
+	"font"		kw
+	"blink"		kw
+	"nobr"		kw
+	"cite"		kw
+	"code"		kw
+	"em"		kw
+	"kbd"		kw
+	"samp"		kw
+	"strong"	kw
+	"var"		kw
+	"a"		kw
+	"br"		kw
+	"img"		kw
+	"wbr"		kw
+# attributes
+	"href"		attr
+	"target"	attr
+	"prompt"	attr
+	"methods"	attr
+	"name"		attr
+	"rel"		attr
+	"rev"		attr
+	"title"		attr
+	"urn"		attr
+	"http-equiv"	attr
+	"content"	attr
+	"n"		attr
+	"background"	attr
+	"bgcolor"	attr
+	"text"		attr
+	"link"		attr
+	"vlink"		attr
+	"bgproperties"	attr
+	"action"	attr
+	"enctype"	attr
+	"method"	attr
+done
+	"a-zA-Z0-9_"	ident
+
+:kw Keyword
+	*	mark	noeat
+
+:attr Attr
+	*	mark	noeat
