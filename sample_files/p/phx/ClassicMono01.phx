@@ -1,0 +1,177 @@
+phasex_patch {
+	info {
+		version			= dev-m1;
+	}
+	general {
+		bpm			= 41;
+		master_tune		= 64;
+		portamento		= 25;
+		keymode			= mono_smooth;
+		keyfollow_vol		= 64;
+		volume			= 104;
+		transpose		= 64;
+		input_boost		= 0;
+		input_follow		= off;
+		pan			= 65;
+		stereo_width		= 127;
+		amp_velocity		= 19;
+	}
+	filter {
+		cutoff			= 62;
+		resonance		= 90;
+		smoothing		= 109;
+		keyfollow		= off;
+		mode			= lp;
+		type			= 1;
+		gain			= 104;
+		env_amount		= 52;
+		env_sign		= positive;
+		attack			= 3;
+		decay			= 76;
+		sustain			= 45;
+		release			= 64;
+		lfo			= 3;
+		lfo_cutoff		= 50;
+		lfo_resonance		= 59;
+	}
+	delay {
+		mix			= 31;
+		feed			= 40;
+		crossover		= on;
+		time			= 11/64;
+		lfo			= 0;
+	}
+	chorus {
+		mix			= 74;
+		feed			= 53;
+		crossover		= off;
+		time			= 14;
+		depth			= 77;
+		phase_rate		= 1/1;
+		phase_balance		= 64;
+		lfo_wave		= sine;
+		lfo_rate		= 19/64;
+	}
+	envelope {
+		attack			= 3;
+		decay			= 57;
+		sustain			= 109;
+		release			= 12;
+	}
+	oscillator {
+		modulation		= mix;
+		polarity		= unipolar;
+		source			= midi_key;
+		wave			= saw;
+		init_phase		= 0;
+		rate			= 21/64;
+		transpose		= 64;
+		fine_tune		= 64;
+		pitchbend		= 76;
+		am_mod			= velocity;
+		am_mod_amount		= 7;
+		fm_mod			= off;
+		fm_mod_amount		= 64;
+		fm_mod_fine		= 64;
+		pm_mod			= osc-1;
+		pm_mod_amount		= 89;
+		wave_lfo		= 1;
+		wave_lfo_amount		= 122;
+	}
+	oscillator {
+		modulation		= am;
+		polarity		= bipolar;
+		source			= midi_key;
+		wave			= bl_square;
+		init_phase		= 0;
+		rate			= 1/1;
+		transpose		= 64;
+		fine_tune		= 55;
+		pitchbend		= 76;
+		am_mod			= velocity;
+		am_mod_amount		= 73;
+		fm_mod			= off;
+		fm_mod_amount		= 127;
+		fm_mod_fine		= 64;
+		pm_mod			= off;
+		pm_mod_amount		= 68;
+		wave_lfo		= 0;
+		wave_lfo_amount		= 53;
+	}
+	oscillator {
+		modulation		= off;
+		polarity		= unipolar;
+		source			= midi_key;
+		wave			= sine;
+		init_phase		= 0;
+		rate			= 1/2;
+		transpose		= 64;
+		fine_tune		= 64;
+		pitchbend		= 76;
+		am_mod			= off;
+		am_mod_amount		= 64;
+		fm_mod			= off;
+		fm_mod_amount		= 64;
+		fm_mod_fine		= 64;
+		pm_mod			= lfo-1;
+		pm_mod_amount		= 79;
+		wave_lfo		= 0;
+		wave_lfo_amount		= 64;
+	}
+	oscillator {
+		modulation		= off;
+		polarity		= unipolar;
+		source			= midi_key;
+		wave			= sine;
+		init_phase		= 0;
+		rate			= 1/2;
+		transpose		= 64;
+		fine_tune		= 64;
+		pitchbend		= 76;
+		am_mod			= off;
+		am_mod_amount		= 64;
+		fm_mod			= off;
+		fm_mod_amount		= 64;
+		fm_mod_fine		= 64;
+		pm_mod			= lfo-1;
+		pm_mod_amount		= 49;
+		wave_lfo		= 0;
+		wave_lfo_amount		= 64;
+	}
+	lfo {
+		source			= tempo;
+		polarity		= unipolar;
+		wave			= stair;
+		init_phase		= 62;
+		rate			= 47/64;
+		transpose		= 64;
+		pitchbend		= 64;
+	}
+	lfo {
+		source			= midi_key;
+		polarity		= bipolar;
+		wave			= sine;
+		init_phase		= 0;
+		rate			= 21/32;
+		transpose		= 64;
+		pitchbend		= 64;
+	}
+	lfo {
+		source			= keytrig;
+		polarity		= bipolar;
+		wave			= sine;
+		init_phase		= 0;
+		rate			= 45/64;
+		transpose		= 64;
+		pitchbend		= 64;
+	}
+	lfo {
+		source			= keytrig;
+		polarity		= bipolar;
+		wave			= sine;
+		init_phase		= 0;
+		rate			= 1/1;
+		transpose		= 64;
+		pitchbend		= 64;
+	}
+}

@@ -1,0 +1,51 @@
+;P3D 1.1
+;This model is a test of text font capability
+(load 'p3d.lsp)
+
+(setq font0sample (def-gob :attr (list (cons 'text-font "simplex_roman"))
+		    :children (list
+			       (text (make-point :x -0.35) x-vec y-vec 
+				     "Simplex"))))
+
+(setq font1sample (def-gob :attr (list (cons 'text-font "simplex_script"))
+		    :children (list
+			       (text (make-point :x -0.35 :y 0.2) 
+				     (make-vector :x 1.0 :y 1.0 :z 0.0)
+				     (make-vector :x -1.0 :y 1.0 :z 0.0)
+				     "Script"))))
+
+(setq font2sample (def-gob :attr (list (cons 'text-font "triplex_roman"))
+		    :children (list
+			       (text (make-point :x -0.35 :y -0.2) 
+				     (make-vector :x 1.0 :y 1.0 :z -1.0)
+				     (make-vector :x -1.0 :y 1.0 :z 0.0)
+				     "Triplex"))))
+
+(setq object 
+	(def-gob :attr (list (cons 'text-height 0.12 ))
+		:children (list 
+			font0sample
+			font1sample
+			font2sample
+			(polyline (make-vertex :x -0.9 :y 0.12)
+				  (make-vertex :x 0.9 :y 0.12))
+			(polyline (make-vertex :x -0.9 :y 0.0)
+				  (make-vertex :x 0.9 :y 0.0))
+			)))
+
+(setq lights
+	(def-gob
+		:children (list
+		(light (make-point :x 20.0 :y 0.0 :z 20.0)
+		      (make-color :r 0.8 :g 0.8 :b 0.8))
+		(ambient (make-color :r 0.4 :g 0.2 :b 0.2)) )))
+
+(setq this-camera (make-camera
+	:lookfrom (make-point :x 0.0 :y 0.0 :z 1.0)
+	:lookat origin
+	:fovea 90.0
+	:up y-vec
+	:hither -0.1
+	:yon -2.0 ))
+
+(snap object lights this-camera)

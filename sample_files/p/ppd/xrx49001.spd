@@ -1,0 +1,438 @@
+*PPD-Adobe: "4.2"
+*% XRX49001.spd: Simplified form of XRX49001.ppd
+*LanguageEncoding: ISOLatin1
+*PCFileName: "XRX49001.PPD"
+*Product: "(Xerox 4900 Color Laser Printer)"
+*PSVersion: "(2013.115) 100700"
+*ModelName: "Xerox 4900 PostScript v1.3"
+*ShortNickName: "Xerox 4900 PostScript"
+*NickName: "Xerox 4900 PostScript"
+*OpenGroup: InstallableOptions/Options Installed
+*OpenUI *Option1/Tray 2: Boolean
+*DefaultOption1: False
+*Option1 True/Installed: ""
+*Option1 False/Not Installed: ""
+*CloseUI: *Option1 
+*CloseGroup: InstallableOptions/Options Installed
+*UIConstraints: *Option1 False 		*InputSlot Tray2
+*UIConstraints: *Option1 False 		*TraySwitch True/Yes
+*UIConstraints: *Option1 False 		*SlipSheet EndofPage/Slip Sheet After Each Page
+*LanguageLevel: "2"
+*Protocols: BCP
+*FreeVM: "5481099"
+*ColorDevice: True
+*Password: "()"
+*ExitServer: "
+ count 0 eq
+ { false } { true exch startjob } ifelse
+ not {
+     (WARNING: Cannot modify initial VM.) =
+     (Missing or invalid password.) =
+     (Please contact the author of this software.) = flush quit
+     } if
+"
+*End
+*ScreenFreq: "72.0"
+*ScreenAngle: "45.0"
+*OpenUI *PageSize: PickOne
+*OrderDependency: 30 AnySetup *PageSize
+*DefaultPageSize: Letter
+*PageSize Letter: "
+    2 dict dup /PageSize [612 792] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize Legal: "
+    2 dict dup /PageSize [612 1008] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize A4: "
+    2 dict dup /PageSize [595 842] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize 8.5x13: "
+    2 dict dup /PageSize [612 936] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize 8x10: "
+    2 dict dup /PageSize [576 720] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize 8x13: "
+    2 dict dup /PageSize [576 936] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize Executive: "
+    2 dict dup /PageSize [522 756] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize SP.Folio: "
+    2 dict dup /PageSize [612 893] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize B5: "
+    2 dict dup /PageSize [516 729] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize Comm10: "
+    2 dict dup /PageSize [297 684] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize DL: "
+    2 dict dup /PageSize [312 624] put dup /ImagingBBox null put setpagedevice"
+*End
+*?PageSize: "
+ save
+   currentpagedevice /PageSize get aload pop
+   2 copy gt {exch} if
+   (Unknown)
+  11 dict
+   dup [612 792] (Letter) put
+   dup [612 1008] (Legal) put
+   dup [595 842] (A4) put
+   dup [612 936] (8.5x13) put
+   dup [576 720] (8x10) put
+   dup [576 936] (8x13) put
+   dup [522 756] (Executive) put
+   dup [612 893] (SP.Folio) put
+   dup [516 729] (B5) put
+   dup [297 684] (Comm10) put
+   dup [312 624] (DL) put
+ { exch aload pop 4 index sub abs 5 le exch
+   5 index sub abs 5 le and
+      {exch pop exit} {pop} ifelse
+   } bind forall
+   = flush pop pop
+restore
+"
+*End
+*CloseUI: *PageSize
+*OpenUI *PageRegion:  PickOne
+*OrderDependency: 40 AnySetup *PageRegion
+*DefaultPageRegion: Letter
+*PageRegion  Letter: "
+    2 dict dup /PageSize [612 792] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion Legal: "
+    2 dict dup /PageSize [612 1008] put dup /ImagingBBox null put
+setpagedevice"
+*End
+*PageRegion A4: "
+    2 dict dup /PageSize [595 842] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion 8.5x13: "
+    2 dict dup /PageSize [612 936] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion 8x10: "
+    2 dict dup /PageSize [576 720] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion 8x13: "
+    2 dict dup /PageSize [576 936] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion Executive: "
+    2 dict dup /PageSize [522 756] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion SP.Folio: "
+    2 dict dup /PageSize [612 893] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion B5: "
+    2 dict dup /PageSize [516 729] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion Comm10: "
+    2 dict dup /PageSize [297 684] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion DL: "
+    2 dict dup /PageSize [312 624] put dup /ImagingBBox null put setpagedevice"
+*End
+*CloseUI: *PageRegion
+*DefaultImageableArea: Letter
+*ImageableArea Letter:    "24 16 588 776"
+*ImageableArea Legal:     "24 16 588 992"
+*ImageableArea A4:        "24 16 571 826"
+*ImageableArea 8.5x13:    "24 16 588 920"
+*ImageableArea 8x10:      "24 16 552 704"
+*ImageableArea 8x13:      "24 16 552 920"
+*ImageableArea Executive: "24 16 498 740"
+*ImageableArea SP.Folio:  "24 16 588  877"
+*ImageableArea B5:        "24 16 492 713"
+*ImageableArea Comm10:    "24 16 273 668"
+*ImageableArea DL:        "24 16 288 608"
+*?ImageableArea: "
+ save
+   /cvp { (                ) cvs print ( ) print } bind def
+   /upperright {10000 mul floor 10000 div} bind def
+   /lowerleft {10000 mul ceiling 10000 div} bind def
+   newpath clippath pathbbox
+   4 -2 roll exch 2 {lowerleft cvp} repeat
+   exch 2 {upperright cvp} repeat flush
+ restore
+"
+*End
+*DefaultPaperDimension: Letter
+*PaperDimension Letter:    "612 792"
+*PaperDimension Legal:     "612 1008"
+*PaperDimension A4:        "595 842"
+*PaperDimension 8.5x13:    "612 936"
+*PaperDimension 8x10:      "576 720"
+*PaperDimension 8x13:      "576 936"
+*PaperDimension Executive: "522 756"
+*PaperDimension SP.Folio:  "612 893"
+*PaperDimension B5:        "516 729"
+*PaperDimension Comm10:    "297 684"
+*PaperDimension DL:        "312 624"
+*RequiresPageRegion All: False
+*OpenUI *InputSlot: PickOne
+*OrderDependency: 35 AnySetup *InputSlot
+*DefaultInputSlot: Tray1
+*InputSlot Tray1/Tray 1: "
+  currentpagedevice /InputAttributes get 0 get 
+  dup null eq 
+  { pop } 
+  { dup length 1 add dict copy 
+    dup /InputAttributes
+    1 dict dup /Priority [0] put
+    put setpagedevice
+  } ifelse"
+*End
+*InputSlot Tray2/Tray 2: "
+  currentpagedevice /InputAttributes get 1 get 
+  dup null eq 
+  { pop } 
+  { dup length 1 add dict copy 
+    dup /InputAttributes
+    1 dict dup /Priority [1] put
+    put setpagedevice
+  } ifelse"
+*End
+*?InputSlot: "
+save
+  2 dict
+  dup /0 (Tray1) put
+  dup /1 (Tray2) put
+  currentpagedevice /InputAttributes get
+  dup /Priority known
+  { /Priority get 0 get (      ) cvs cvn get }
+  {
+    dup length 1 eq
+    { {pop} forall (       ) cvs cvn get }
+    { pop pop (Unknown) } ifelse
+  } ifelse
+  = flush
+restore
+"
+*End
+*CloseUI: *InputSlot
+*OpenUI *XRXColorOptions/Color Mode: PickOne
+*OrderDependency: 20 AnySetup *XRXColorOptions
+*DefaultXRXColorOptions: Color
+*XRXColorOptions Pictorial: "
+
+	userdict begin
+		/xerox$calcolor$mode 2 def
+	end
+
+
+	/sg {dup dup setcolor} bind def
+	/sco {setcolor} bind def
+
+	/setrgbcolor { /Screen_RGB_D50_Color_Space setcolorspace setcolor } bind def
+	/setrgbcolor { /sco } bind def
+
+	/colspABC /Screen_RGB_D50_Color_Space /ColorSpace findresource def     
+	/colspRefresh {colspABC setcolorspace} bind def 
+"
+*End
+*XRXColorOptions Graphics: "
+	userdict begin
+		/xerox$graphics$mode 1 def
+		/xerox$calcolor$mode 1 def
+	end
+
+	/sg {dup dup setcolor} bind def
+	/sco {setcolor} bind def
+
+	/setrgbcolor { /Screen_RGB_D50_Color_Space setcolorspace setcolor } bind def    
+	/setrgbcolor { /sco } bind def
+
+	/colspABC /Screen_RGB_D50_Color_Space /ColorSpace findresource def       
+	/colspRefresh {colspABC setcolorspace} bind def 
+"
+*End
+*XRXColorOptions Color: "  
+	
+"
+*End
+*XRXColorOptions Grayscale: "
+	<</ProcessColorModel /DeviceGray >> setpagedevice
+"
+*End
+*XRXColorOptions Black&White/Black & White: "
+	<</ProcessColorModel /DeviceGray >> setpagedevice
+	/sco { pop pop pop 0 setgray } bind def         
+"
+*End
+*?XRXColorOptions: "
+  save
+    currentpagedevice /XRXColorOptions get
+    aload pop exch
+    (          ) cvs print
+    (x) print (          ) cvs print
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXColorOptions
+*OpenUI *Resolution: PickOne
+*OrderDependency: 20 AnySetup *Resolution
+*DefaultResolution: 300dpi/Printer Default
+*Resolution 300dpi: "
+% Needed to handle Windows anisotropic resolution problems
+"
+*End
+*?Resolution: "
+  save
+    currentpagedevice /HWResolution get                                                                          
+    aload pop exch
+    (          ) cvs print
+    (x) print (          ) cvs print (dpi)
+    = flush
+  restore
+"
+*End
+*CloseUI: *Resolution
+*OpenUI *XRXEnhancedResolution/Resolution: PickOne
+*OrderDependency: 20 AnySetup *XRXEnhancedResolution
+*DefaultXRXEnhancedResolution: Unknown
+*XRXEnhancedResolution Unknown/Printer Default: "
+	 
+"
+*End
+*XRXEnhancedResolution 1200x300dpi/1200 dpi: "
+  2 dict 
+    dup /HWResolution [1200 300] put            
+    dup /Policies
+      1 dict dup /HWResolution 1 put 
+  put setpagedevice  
+"
+*End
+*XRXEnhancedResolution 600x300dpi/600 dpi: "
+  2 dict 
+    dup /HWResolution [600 300] put           
+    dup /Policies
+      1 dict dup /HWResolution 1 put 
+  put setpagedevice
+"
+*End
+*XRXEnhancedResolution 300x300dpi/300 dpi: "
+  2 dict 
+    dup /HWResolution [300 300] put           
+    dup /Policies
+      1 dict dup /HWResolution 1 put 
+  put setpagedevice
+"
+*End
+*?XRXEnhancedResolution: "
+  save
+    currentpagedevice /HWResolution get                                                                          
+    aload pop exch
+    (          ) cvs print
+    (x) print (          ) cvs print (dpi)
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXEnhancedResolution
+*OpenUI *XRXAMediaType/Media Type:  PickOne
+*OrderDependency: 30 AnySetup *XRXAMediaType
+*DefaultXRXAMediaType: PlainPaper
+*XRXAMediaType PlainPaper/Plain Paper: "1 dict dup /MediaType (Plain Paper) put setpagedevice"
+*XRXAMediaType Transparency/Transparency: "1 dict dup /MediaType (Transparency) put setpagedevice"
+*XRXAMediaType LabelStock/Label Stock: "1 dict dup /MediaType (Label Stock) put setpagedevice"
+*?XRXAMediaType: "
+  save
+    currentpagedevice /MediaType
+     {get} stopped
+       {pop pop (PlainPaper)} {dup null eq {pop (PlainPaper)} if} ifelse
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXAMediaType
+*OpenUI *TraySwitch/Tray Switching:  Boolean
+*OrderDependency: 30 AnySetup *TraySwitch
+*DefaultTraySwitch: False
+*TraySwitch True/On: "1 dict dup /TraySwitch true put setpagedevice"
+*TraySwitch False/Off: "1 dict dup /TraySwitch false put setpagedevice"
+*?TraySwitch: "
+  save
+    currentpagedevice /TraySwitch
+     {get} stopped
+       {pop pop (Plain)} {dup null eq {pop (Plain)} if} ifelse
+    = flush
+  restore"
+*End
+*CloseUI: *TraySwitch
+*OpenUI *ManualFeed/Manual Feed:  Boolean
+*OrderDependency: 15 AnySetup *ManualFeed
+*DefaultManualFeed: False
+*ManualFeed True/On: "1 dict dup /ManualFeed true put setpagedevice
+	/EngExe /ProcSet findresource
+	begin
+		EngPreStart
+	end
+"
+*End
+*ManualFeed False/Off: "1 dict dup /ManualFeed false put setpagedevice
+	/EngExe /ProcSet findresource
+	begin
+		EngPreStart
+	end
+"
+*End
+*?ManualFeed: "
+  save
+    currentpagedevice /ManualFeed get
+    {(True)} {(False)} ifelse
+    = flush
+  restore"
+*End
+*CloseUI: *ManualFeed
+*OpenUI *SlipSheet/Slip Sheet:  PickOne
+*OrderDependency: 20 AnySetup *SlipSheet 
+*DefaultSlipSheet: None
+*SlipSheet None/No Slip Sheets: "1 dict dup /SlipSheet 0 put setpagedevice"
+*SlipSheet EndofPage/Slip Sheet After Each Page: "1 dict dup /SlipSheet 1 put setpagedevice"
+*?SlipSheet: "
+save
+  [(None)(EndofPage)]
+  currentpagedevice /SlipSheet get
+  {get} stopped {pop pop (Unknown)} if = flush
+restore
+"
+*End
+*CloseUI: *SlipSheet
+*DefaultFont: Courier
+*Font AvantGarde-Gothic-Book: Standard "(001.001)"
+*Font AvantGarde-Gothic-BookOblique: Standard "(001.002)"
+*Font AvantGarde-Gothic-Demi: Standard "(001.003)"
+*Font AvantGarde-Gothic-DemiOblique: Standard "(001.003)"
+*Font Bookman-Demi: Standard "(001.001)"
+*Font Bookman-DemiItalic: Standard "(001.001)"
+*Font Bookman-Light: Standard "(001.001)"
+*Font Bookman-LightItalic: Standard "(001.001)"
+*Font Courier: Standard "(002.002)"
+*Font Courier-Bold: Standard "(002.002)"
+*Font Courier-BoldOblique: Standard "(002.002)"
+*Font Courier-Oblique: Standard "(002.002)"
+*Font Helvetica: Standard "(001.006)"
+*Font Helvetica-Bold: Standard "(001.007)"
+*Font Helvetica-BoldOblique: Standard "(001.007)"
+*Font Helvetica-Narrow: Standard "(001.001)"
+*Font Helvetica-Narrow-Bold: Standard "(001.002)"
+*Font Helvetica-Narrow-BoldOblique: Standard "(001.002)"
+*Font Helvetica-Narrow-Oblique: Standard "(001.001)"
+*Font Helvetica-Oblique: Standard "(001.006)"
+*Font NewCenturySchlbk-Bold: Standard "(001.008)"
+*Font NewCenturySchlbk-BoldItalic: Standard "(001.006)"
+*Font NewCenturySchlbk-Italic: Standard "(001.005)"
+*Font NewCenturySchlbk-Roman: Standard "(001.006)"
+*Font Palatino-Bold: Standard "(001.005)"
+*Font Palatino-BoldItalic: Standard "(001.005)"
+*Font Palatino-Italic: Standard "(001.005)"
+*Font Palatino-Roman: Standard "(001.005)"
+*Font Symbol: Special "(001.003)"
+*Font Times-Bold: Standard "(001.007)"
+*Font Times-BoldItalic: Standard "(001.009)"
+*Font Times-Italic: Standard "(001.007)"
+*Font Times-Roman: Standard "(001.007)"
+*Font ZapfChancery-MediumItalic: Standard "(001.003)"
+*Font ZapfDingbats: Special "(001.002)"

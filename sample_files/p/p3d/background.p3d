@@ -1,0 +1,35 @@
+;P3D 2.1
+(load 'p3d.lsp)
+
+(setq sphere1 (sphere))
+
+(setq object 
+      (def-gob :attr (list (cons 'color blue)
+			   (cons 'text-height 0.15))
+	:children (list
+		   (text (make-point :x 0.0 :y 2.0 :z 0.0)
+			 x-vec y-vec "note the yellow background")
+		   (def-gob :transform (make-translate 4.0 4.0 0.0)
+		     :children (list sphere1))
+		   (def-gob :transform (make-translate 0.0 4.0 0.0)
+		     :children (list sphere1))
+		   (def-gob :transform (make-translate 4.0 0.0 0.0)
+		     :children (list sphere1))
+		   (def-gob :children (list sphere1)))))
+(setq lights
+	(def-gob
+		:children (list
+		(light (make-point :x 0.0 :y 20.0 :z 20.0)
+		      (make-color :r 0.8 :g 0.8 :b 0.8))
+		(ambient (make-color :r 0.2 :g 0.2 :b 0.2)) )))
+
+(setq this-camera (make-camera
+	:lookfrom (make-point :x 2.0 :y 2.0 :z 10.0)
+	:lookat (make-point :x 2.0 :y 2.0 :z 0.0)
+	:fovea 45.0
+	:up y-vec
+	:hither -3.0
+	:yon -20.0 
+	:background yellow))
+
+(snap object lights this-camera)

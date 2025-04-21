@@ -1,0 +1,35 @@
+;P3D 1.1
+; This model is a test of camera fovea.  The crossed lines should just
+; touch the edges of the image;  the box is 5% of the way in from the
+; line tips.
+(load 'p3d.lsp)
+
+(setq object 
+	(def-gob :attr (list (cons 'text-height 0.12 ))
+		:children (list 
+			   (polyline (make-vertex :x 0.95 :y 0.95)
+				     (make-vertex :x 0.95 :y -0.95)
+				     (make-vertex :x -0.95 :y -0.95)
+				     (make-vertex :x -0.95 :y 0.95)
+				     (make-vertex :x 0.95 :y 0.95))
+			   (polyline (make-vertex :y 1.0)
+				     (make-vertex :y -1.0))
+			   (polyline (make-vertex :x -1.0)
+				     (make-vertex :x 1.0)))))
+
+(setq lights
+	(def-gob
+		:children (list
+		(light (make-point :x 20.0 :y 0.0 :z 20.0)
+		      (make-color :r 0.8 :g 0.8 :b 0.8))
+		(ambient (make-color :r 0.4 :g 0.2 :b 0.2)) )))
+
+(setq this-camera (make-camera
+	:lookfrom (make-point :x 0.0 :y 0.0 :z 1.0)
+	:lookat origin
+	:fovea 90.0
+	:up y-vec
+	:hither -0.1
+	:yon -2.0 ))
+
+(snap object lights this-camera)

@@ -1,0 +1,129 @@
+;P3D 2.1
+(load 'p3d.lsp)
+
+(defun vtx (xval yval zval) (make-vertex :x xval :y yval :z zval))
+
+(setq mysphere (def-gob :attr (list (cons 'color white)) 
+	:children (list (sphere))))
+
+(setq mypline (polyline 
+	(vtx 0.0 0.0 0.0)
+	(vtx 2.0 0.0 0.0)
+	(vtx 0.0 0.0 0.0)
+	(vtx 0.0 3.0 0.0)
+	(vtx 0.0 0.0 0.0)
+	(vtx 0.0 0.0 4.0)))
+
+(setq label (text (make-point :x 0.0 :y 0.0 :z 2.0) x-vec z-vec "Z"))
+
+(setq object (def-gob :transform (make-scale 0.9 0.9 0.9)
+	       :children (list mysphere mypline label)))
+
+(setq light1 (light (make-point :z 0.0 :y 1.0 :x 0.0 )
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light2 (light (make-point :z 0.0 :y 0.92388 :x 0.38268)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light3 (light (make-point :z 0.0 :y 0.70711 :x 0.70711)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light4 (light (make-point :z 0.0 :y 0.38268 :x 0.92388)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light5 (light (make-point :z 0.0 :y 0.0 :x 1.0)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light6 (light (make-point :z 0.0 :y -0.38268 :x 0.92388)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light7 (light (make-point :z 0.0 :y -0.70711 :x 0.70711)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light8 (light (make-point :z 0.0 :y -0.92388 :x 0.38268)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light9 (light (make-point :z 0.0 :y -1.0 :x 0.0 )
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light10 (light (make-point :z 0.0 :y -0.92388 :x -0.38268)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light11 (light (make-point :z 0.0 :y -0.70711 :x -0.70711)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light12 (light (make-point :z 0.0 :y -0.38268 :x -0.92388)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light13 (light (make-point :z 0.0 :y 0.0 :x -1.0)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light14 (light (make-point :z 0.0 :y 0.38268 :x -0.92388)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light15 (light (make-point :z 0.0 :y 0.70711 :x -0.70711)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light16 (light (make-point :z 0.0 :y 0.92388 :x -0.38268)
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq light17 (light (make-point :z 0.0 :y 1.0 :x -0.0 )
+		      (make-color :r 0.7 :g 0.7 :b 0.7)))
+
+(setq this-camera (make-camera
+	:lookfrom (make-point :x 0.0 :y 0.0 :z 5.0)
+	:lookat origin
+	:fovea 45.0
+	:up y-vec
+	:hither -1.0
+	:yon -200.0 ))
+
+(snap object light1 this-camera)
+(snap object light2 this-camera)
+(snap object light3 this-camera)
+(snap object light4 this-camera)
+(snap object light5 this-camera)
+(snap object light6 this-camera)
+(snap object light7 this-camera)
+(snap object light8 this-camera)
+(snap object light9 this-camera)
+(snap object light10 this-camera)
+(snap object light11 this-camera)
+(snap object light12 this-camera)
+(snap object light13 this-camera)
+(snap object light14 this-camera)
+(snap object light15 this-camera)
+(snap object light16 this-camera)
+(snap object light17 this-camera)
+(snap object light2 this-camera)
+(snap object light3 this-camera)
+(snap object light4 this-camera)
+(snap object light5 this-camera)
+(snap object light6 this-camera)
+(snap object light7 this-camera)
+(snap object light8 this-camera)
+(snap object light9 this-camera)
+(snap object light10 this-camera)
+(snap object light11 this-camera)
+(snap object light12 this-camera)
+(snap object light13 this-camera)
+(snap object light14 this-camera)
+(snap object light15 this-camera)
+(snap object light16 this-camera)
+(snap object light17 this-camera)
+(snap object light2 this-camera)
+(snap object light3 this-camera)
+(snap object light4 this-camera)
+(snap object light5 this-camera)
+(snap object light6 this-camera)
+(snap object light7 this-camera)
+(snap object light8 this-camera)
+(snap object light9 this-camera)
+(snap object light10 this-camera)
+(snap object light11 this-camera)
+(snap object light12 this-camera)
+(snap object light13 this-camera)
+(snap object light14 this-camera)
+(snap object light15 this-camera)
+(snap object light16 this-camera)
+(snap object light17 this-camera)

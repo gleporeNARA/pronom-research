@@ -1,0 +1,48 @@
+;P3D 2.1
+(load 'p3d.lsp)
+
+(setq object (def-gob :children (list 
+	(def-gob :attr (list (cons 'material default-material))
+		:transform (make-translate 4.0 0.0 0.0)
+		:children (list (sphere)))
+	(def-gob :attr (list (cons 'material dull-material))
+		:transform (make-translate 2.0 0.0 0.0)
+		:children (list (sphere)))
+	(def-gob :attr (list (cons 'material shiny-material))
+		:transform (make-translate 0.0 0.0 0.0)
+		:children (list (sphere)))
+	(def-gob :attr (list (cons 'material metallic-material))
+		:transform (make-translate -2.0 0.0 0.0)
+		:children (list (sphere)))
+	(def-gob :attr (list (cons 'material matte-material))
+		:transform (make-translate -4.0 0.0 0.0)
+		:children (list (sphere))))))
+
+(setq model1 (def-gob :children (list
+	(def-gob :attr (list (cons 'color red))
+		:transform (make-translate 0.0 0.0 3.0)
+		:children (list object))
+	(def-gob :attr (list (cons 'color green))
+		:transform (make-translate 0.0 0.0 1.0)
+		:children (list object))
+	(def-gob :attr (list (cons 'color blue))
+		:transform (make-translate 0.0 0.0 -1.0)
+		:children (list object))
+	(def-gob :attr (list (cons 'color white))
+		:transform (make-translate 0.0 0.0 -3.0)
+		:children (list object)))))
+
+(setq light1 (def-gob :children (list 
+		(light (make-point :z 0.0 :y 1000000.0 :x 0.0 )
+		      (make-color :r 0.7 :g 0.7 :b 0.7))
+		(ambient (make-color :r 0.3 :g 0.3 :b 0.3)))))
+
+(setq this-camera (make-camera
+	:lookfrom (make-point :x 0.0 :y 13.0 :z 0.0)
+	:lookat origin
+	:fovea 45.0
+	:up z-vec
+	:hither -5.0
+	:yon -20.0 ))
+
+(snap model1 light1 this-camera)

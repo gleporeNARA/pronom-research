@@ -1,0 +1,3 @@
+PCBoard (PCB) was a bulletin board system (BBS) application first introduced for DOS in 1983 by Clark Development Company. Clark Development was founded by Fred Clark. PCBoard was one of the first commercial BBS packages for DOS systems, and was considered one of the "high end" packages during the rapid expansion of BBS systems in the early 1990s. Like many BBS companies, the rise of the Internet starting around 1994 led to serious downturns in fortunes, and Clark Development went bankrupt in 1997. Most PCB sales were of two-line licenses; additional line licenses (in ranges of 5, 10, 25, 50, 100, 250 and 1000) were also available.
+
+https://en.wikipedia.org/wiki/PCBoard

@@ -1,0 +1,39 @@
+;P3D 1.0
+(load 'p3d.lsp)
+
+(defun tet (xpt ypt zpt siz lvl)
+  (let ((hsz (/ siz 2)))
+    (if (eq lvl 5) 
+        ( list (triangle
+	           (make-vertex :x xpt :y ypt :z zpt)
+	           (make-vertex :x (+ xpt siz) :y ypt :z zpt)
+	           (make-vertex :x xpt :y (+ ypt siz) :z zpt)
+	           (make-vertex :x xpt :y ypt :z (+ zpt siz))
+	           (make-vertex :x xpt :y ypt :z zpt)
+	           (make-vertex :x (+ xpt siz) :y ypt :z zpt)))
+	( append
+	  (tet xpt ypt zpt hsz (+ lvl 1))
+	  (tet (+ xpt hsz) ypt zpt hsz (+ lvl 1))
+	  (tet xpt (+ ypt hsz) zpt hsz (+ lvl 1))
+	  (tet xpt ypt (+ zpt hsz) hsz (+ lvl 1))))))
+
+
+(setq object (def-gob :children (tet 0.0 0.0 0.0 1.0 1)))
+
+(setq lights
+	(def-gob
+		:children (list
+		(light (make-point :x 20.0 :y 2.0 :z 0.0)
+		      (make-color :r 0.7 :g 0.7 :b 0.7))
+		(ambient (make-color :r 0.4 :g 0.2 :b 0.2)) )))
+
+(setq this-camera (make-camera
+	:lookfrom (make-point :x 3.0 :y 0.0 :z 0.0)
+	:lookat origin
+	:fovea 45.0
+	:up y-vec
+	:hither -0.1
+	:yon -50.0 ))
+
+(snap object lights this-camera)
+

@@ -1,0 +1,936 @@
+*PPD-Adobe: "4.2"
+*% XRX49151.spd: Simplified form of XRX49151.ppd
+*LanguageEncoding: ISOLatin1
+*PCFileName: "XRX49151.PPD"
+*Product: "(XPrint Color Laser Printer)"
+*PSVersion: "(2015.105) 100100"
+*ModelName: "XPrint 4915 PostScript v1.5"
+*ShortNickName: "XPrint 4915 PostScript"
+*NickName: "XPrint 4915 PostScript"
+*OpenGroup: InstallableOptions/Options Installed
+*OpenUI *Option1/Tray 2: Boolean
+*DefaultOption1: False
+*Option1 True/Installed: ""
+*Option1 False/Not Installed: ""
+*CloseUI: *Option1 
+*OpenUI *Option2/Memory Configuration: PickOne
+*DefaultOption2: 16Meg
+*Option2 16Meg/16 MB Total RAM: ""
+*Option2 24Meg/24 MB Total RAM: ""
+*Option2 32Meg/32 MB Total RAM: ""  
+*Option2 40Meg/40 MB Total RAM: ""
+*Option2 48Meg/48 MB Total RAM: ""
+*CloseUI: *Option2
+*OpenUI *Option3/Hard Disk: Boolean
+*DefaultOption3: False
+*Option3 True/Installed: ""
+*Option3 False/Not Installed: ""
+*CloseUI: *Option3 
+*CloseGroup: InstallableOptions/Options Installed
+*UIConstraints: *Option1 False 		*InputSlot Tray2
+*UIConstraints: *Option1 False 		*XRXZTraySwitch True/Yes
+*UIConstraints: *Option1 False 		*XRXZSlipSheet EndofPage/Slip Sheet After Each Page
+*UIConstraints: *Option3 False 		*XRXZCollate True/Yes
+*UIConstraints: *PageSize Invoice 	*InputSlot Tray1 
+*UIConstraints: *PageSize Invoice 	*InputSlot Tray2 
+*UIConstraints: *InputSlot Tray1	*PageSize Invoice
+*UIConstraints: *InputSlot Tray2	*PageSize Invoice
+*UIConstraints: *XRXAMediaType  Transparency	*XRXAColorOptions PlainColor
+*UIConstraints: *XRXAColorOptions PlainColor	*XRXAMediaType  Transparency
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectColor VividColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectColor ScreenMatchColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectColor PerceptualColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectColor SaturatedColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectColor PrimaryColors
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectColor GrayScaleColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectColor BlackAndWhiteColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectHalftone XRXQuadDot
+*UIConstraints: *XRXAColorOptions PlainColor *XRXGraphicsObjectHalftone XRXScatteredDot
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectColor VividColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectColor ScreenMatchColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectColor PerceptualColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectColor SaturatedColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectColor PrimaryColors
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectColor GrayScaleColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectColor BlackAndWhiteColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectHalftone XRXQuadDot
+*UIConstraints: *XRXAColorOptions PlainColor *XRXBitmappedObjectHalftone XRXScatteredDot 
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectColor VividColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectColor ScreenMatchColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectColor PerceptualColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectColor SaturatedColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectColor PrimaryColors
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectColor GrayScaleColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectColor BlackAndWhiteColor
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectHalftone XRXQuadDot
+*UIConstraints: *XRXAColorOptions PlainColor *XRXTextObjectHalftone XRXScatteredDot 
+*LanguageLevel: "2" 
+*Protocols: BCP
+*FreeVM: "5481099"
+*ColorDevice: True
+*TTRasterizer: Type42
+*?TTRasterizer:"
+  save
+ 42/FontType resourcestatus
+ {pop pop (Type42)}{(No Type42)} ifelse
+ restore
+ "
+*End
+*Password: "()"
+*ExitServer: "
+ count 0 eq
+ { false } { true exch startjob } ifelse
+ not {
+     (WARNING: Cannot modify initial VM.) =
+     (Missing or invalid password.) =
+     (Please contact the author of this software.) = flush quit
+     } if
+"
+*End
+*ScreenFreq: "72.0"
+*ScreenAngle: "45.0"
+*OpenUI *PageSize: PickOne
+*OrderDependency: 30 AnySetup *PageSize
+*DefaultPageSize: Letter
+*PageSize Letter: "
+    2 dict dup /PageSize [612 792] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize Legal: "
+    2 dict dup /PageSize [612 1008] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize A4: "
+    2 dict dup /PageSize [595 842] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize 8.5x13: "
+    2 dict dup /PageSize [612 936] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize 8x10: "
+    2 dict dup /PageSize [576 720] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize 8x13: "
+    2 dict dup /PageSize [576 936] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize Executive: "
+    2 dict dup /PageSize [522 756] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize SP.Folio: "
+    2 dict dup /PageSize [612 893] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize Invoice: "
+    2 dict dup /PageSize [396 612] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize Comm10: "
+    2 dict dup /PageSize [297 684] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageSize DL: "
+    2 dict dup /PageSize [312 624] put dup /ImagingBBox null put setpagedevice"
+*End
+*?PageSize: "
+ save
+   currentpagedevice /PageSize get aload pop
+   2 copy gt {exch} if
+   (Unknown)
+  11 dict
+   dup [612 792] (Letter) put
+   dup [612 1008] (Legal) put
+   dup [595 842] (A4) put
+   dup [612 936] (8.5x13) put
+   dup [576 720] (8x10) put
+   dup [576 936] (8x13) put
+   dup [522 756] (Executive) put
+   dup [612 893] (SP.Folio) put 
+   dup [396 612] (Invoice) put   
+   dup [297 684] (Comm10) put
+   dup [312 624] (DL) put
+ { exch aload pop 4 index sub abs 5 le exch
+   5 index sub abs 5 le and
+      {exch pop exit} {pop} ifelse
+   } bind forall
+   = flush pop pop
+restore
+"
+*End
+*CloseUI: *PageSize
+*OpenUI *PageRegion:  PickOne
+*OrderDependency: 40 AnySetup *PageRegion
+*DefaultPageRegion: Letter
+*PageRegion  Letter: "
+    2 dict dup /PageSize [612 792] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion Legal: "
+    2 dict dup /PageSize [612 1008] put dup /ImagingBBox null put
+setpagedevice"
+*End
+*PageRegion A4: "
+    2 dict dup /PageSize [595 842] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion 8.5x13: "
+    2 dict dup /PageSize [612 936] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion 8x10: "
+    2 dict dup /PageSize [576 720] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion 8x13: "
+    2 dict dup /PageSize [576 936] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion Executive: "
+    2 dict dup /PageSize [522 756] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion SP.Folio: "
+    2 dict dup /PageSize [612 893] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion Invoice: "
+    2 dict dup /PageSize [396 612] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion Comm10: "
+    2 dict dup /PageSize [297 684] put dup /ImagingBBox null put setpagedevice"
+*End
+*PageRegion DL: "
+    2 dict dup /PageSize [312 624] put dup /ImagingBBox null put setpagedevice"
+*End
+*CloseUI: *PageRegion
+*DefaultImageableArea: Letter
+*ImageableArea Letter:    "14 14 598 778"
+*ImageableArea Legal:     "14 14 598 994"
+*ImageableArea A4:        "14 14 581 828"
+*ImageableArea 8.5x13:    "14 14 598 922"
+*ImageableArea 8x10:      "14 14 562 706"
+*ImageableArea 8x13:      "14 14 562 922"
+*ImageableArea Executive: "14 14 508 742"
+*ImageableArea SP.Folio:  "14 14 598 879" 
+*ImageableArea Invoice:   "14 14 382 598"
+*ImageableArea Comm10:    "14 14 283 670"
+*ImageableArea DL:        "14 14 298 610"
+*?ImageableArea: "
+ save
+   /cvp { (                ) cvs print ( ) print } bind def
+   /upperright {10000 mul floor 10000 div} bind def
+   /lowerleft {10000 mul ceiling 10000 div} bind def
+   newpath clippath pathbbox
+   4 -2 roll exch 2 {lowerleft cvp} repeat
+   exch 2 {upperright cvp} repeat flush
+ restore
+"
+*End
+*DefaultPaperDimension: Letter
+*PaperDimension Letter:    "612 792"
+*PaperDimension Legal:     "612 1008"
+*PaperDimension A4:        "595 842"
+*PaperDimension 8.5x13:    "612 936"
+*PaperDimension 8x10:      "576 720"
+*PaperDimension 8x13:      "576 936"
+*PaperDimension Executive: "522 756"
+*PaperDimension SP.Folio:  "612 893"  
+*PaperDimension Invoice:   "396 612"
+*PaperDimension Comm10:    "297 684"
+*PaperDimension DL:        "312 624"
+*RequiresPageRegion All: False
+*OpenUI *InputSlot: PickOne
+*OrderDependency: 20 AnySetup *InputSlot
+*DefaultInputSlot: Tray1
+*InputSlot Tray1/Tray 1: "
+  currentpagedevice /InputAttributes get 0 get 
+  dup null eq 
+  { pop } 
+  { dup length 1 add dict copy 
+    dup /InputAttributes
+    1 dict dup /Priority [0] put
+    put setpagedevice
+  } ifelse"
+*End
+*InputSlot Tray2/Tray 2: "
+  currentpagedevice /InputAttributes get 1 get 
+  dup null eq 
+  { pop } 
+  { dup length 1 add dict copy 
+    dup /InputAttributes
+    1 dict dup /Priority [1] put
+    put setpagedevice
+  } ifelse"
+*End
+*?InputSlot: "
+save
+  2 dict
+  dup /0 (Tray1) put
+  dup /1 (Tray2) put
+  currentpagedevice /InputAttributes get
+  dup /Priority known
+  { /Priority get 0 get (      ) cvs cvn get }
+  {
+    dup length 1 eq
+    { {pop} forall (       ) cvs cvn get }
+    { pop pop (Unknown) } ifelse
+  } ifelse
+  = flush
+restore
+"
+*End
+*CloseUI: *InputSlot
+*DefaultResolution: 600dpi
+*OpenUI *XRX1EnhancedResolution/Resolution: PickOne
+*OrderDependency: 100 AnySetup *XRX1EnhancedResolution
+*DefaultXRX1EnhancedResolution: Unknown
+*XRX1EnhancedResolution Unknown/Printer Default: "
+	 
+"
+*End
+*XRX1EnhancedResolution 1200x300dpi/1200 dpi: "
+  2 dict 
+    dup /HWResolution [1200 300] put           
+    dup /Policies
+      1 dict dup /HWResolution 1 put 
+  put setpagedevice
+"
+*End
+*XRX1EnhancedResolution 600x300dpi/600 dpi: "
+  2 dict 
+    dup /HWResolution [600 300] put           
+    dup /Policies
+      1 dict dup /HWResolution 1 put 
+  put setpagedevice
+"
+*End
+*?XRX1EnhancedResolution: "
+  save
+    currentpagedevice /HWResolution get                                                                          
+    aload pop exch
+    (          ) cvs print
+    (x) print (          ) cvs print (dpi)
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRX1EnhancedResolution
+*OpenUI *XRXAColorOptions/Color Mode: PickOne 
+*OrderDependency: 99 AnySetup *XRXAColorOptions
+*DefaultXRXAColorOptions: OneButtonColor
+*XRXAColorOptions OneButtonColor/Intelligent Color: "  
+%/sg {dup dup setrgbcolor} def
+/sco {3 copy 3 copy sub abs 5 1 roll sub abs 3 1 roll sub abs add  add 0.0117 le {pop pop setgray} {X_GraphicRGBCSD setcolorspace setcolor} ifelse}bind def 
+
+userdict begin
+		/xerox$color$mode 1 def
+end
+
+<</ProcessColorModel /DeviceCMYK >> setpagedevice 
+userdict /X_ALLSetup true put
+<< >> setpagedevice
+userdict /X_GraphicObjectState undef
+userdict /X_TextObjectState undef
+userdict /X_BitmapObjectState undef
+userdict begin
+ /X_GraphicObjectState
+{  X_CurrentObjectHalftoneMode X_GraphicObjectHalftoneMode ne
+   X_CurrentObjectColorMode X_GraphicObjectColorMode ne or
+      X_CurrentObjectType /X_Text eq 
+      X_TextObjectHalftoneMode /X_ScatterDot ne and X_ParMode not and or
+   {X_GraphicState1} if
+  userdict  /X_CurrentObjectHalftoneMode X_GraphicObjectHalftoneMode put
+  userdict  /X_CurrentObjectColorMode X_GraphicObjectColorMode put
+  userdict  /X_CurrentObjectType /X_Graphic put
+} bind def
+/X_TextObjectState
+{  X_TextObjectHalftoneMode /X_ScatterDot ne X_ParMode not and 
+   X_CurrentObjectHalftoneMode X_TextObjectHalftoneMode ne or
+   X_CurrentObjectColorMode X_TextObjectColorMode ne or
+   {X_TextState1} if
+   userdict /X_CurrentObjectHalftoneMode X_TextObjectHalftoneMode put
+   userdict /X_CurrentObjectColorMode X_TextObjectColorMode put
+   userdict /X_CurrentObjectType /X_Text put
+} bind def
+/X_BitmapObjectState
+{  X_CurrentObjectHalftoneMode X_BitmapObjectHalftoneMode ne
+   X_CurrentObjectColorMode X_BitmapObjectColorMode ne or
+      X_CurrentObjectType /X_Text eq 
+      X_TextObjectHalftoneMode /X_ScatterDot ne and  X_ParMode not and  or
+   {X_BitmapState1} if
+   userdict /X_CurrentObjectHalftoneMode X_BitmapObjectHalftoneMode put
+   userdict /X_CurrentObjectColorMode X_BitmapObjectColorMode put
+   userdict /X_CurrentObjectType /X_Bitmap put
+} bind def
+end
+
+% patch to overload colorimage (PS I) operator
+% fixes Pagemaker dark image problems
+
+userdict /colorimage undef
+
+userdict /colorimage
+{ 
+
+/XComps exch def
+/Xmulti exch def
+
+Xmulti false eq
+   {
+   /Xproc exch def
+   /Xmatrix exch def
+   /Xbpc exch def
+   /Xheight exch def
+   /Xwidth exch def   
+   XComps 3 eq {
+   [/CIEBasedABC 
+   <<
+   /DecodeLMN [{1.65 exp } {1.65 exp  } {1.65 exp  }]
+   /MatrixLMN [0.4926 0.2827 0.0323 0.3409 0.6607 0.1088 0.1307 0.0566 0.6838]
+   /WhitePoint [0.9642 1 0.8249]
+   >>] setcolorspace
+   /XDecode [0 1 0 1 0 1] def
+   }
+   {XComps 4 eq 
+   {/DeviceCMYK setcolorspace /XDecode [0 1 0 1 0 1 0 1] def}
+   {/DeviceGray setcolorspace /XDecode [0 1] def} ifelse
+   } ifelse
+   <<
+   /ImageType 1
+   /Width Xwidth
+   /Height Xheight
+   /BitsPerComponent Xbpc
+   /Decode XDecode
+   /ImageMatrix Xmatrix
+   /DataSource /Xproc load 
+   >>
+   image
+   }
+   {
+   Xmulti XComps systemdict /colorimage get exec
+   } ifelse
+   
+} bind put
+
+% modify state machine to implement new version of cmyk ac limit
+% only works for graphic objects when current space in cmyk and
+% auto area coverage is on.
+ /X_GraphicObjectState
+{  
+currentcolorspace 0 get /DeviceCMYK eq
+X_AutoAreaCoverage and
+   {
+   currentcolor 3{dup 5 -1 roll add 1 exch sub dup 0 lt{pop 0}if exch}
+   repeat pop setrgbcolor
+   } if
+X_CurrentObjectHalftoneMode X_GraphicObjectHalftoneMode ne
+   X_CurrentObjectColorMode X_GraphicObjectColorMode ne or
+      X_CurrentObjectType /X_Text eq 
+      X_TextObjectHalftoneMode /X_ScatterDot ne and  X_ParMode not and  or
+   {X_GraphicState1} if
+  userdict  /X_CurrentObjectHalftoneMode X_GraphicObjectHalftoneMode put
+  userdict  /X_CurrentObjectColorMode X_GraphicObjectColorMode put
+  userdict  /X_CurrentObjectType /X_Graphic put
+} bind def
+"
+*End
+*XRXAColorOptions OneButtonBlack&White/Black & White: "
+
+userdict begin
+		/xerox$color$mode 2 def
+end
+
+	<</ProcessColorModel /DeviceGray >> setpagedevice
+	
+	userdict /X_ALLSetup true put
+	<< >> setpagedevice
+userdict /X_GraphicObjectState undef
+userdict /X_TextObjectState undef
+userdict /X_BitmapObjectState undef
+userdict begin
+ /X_GraphicObjectState
+{  X_CurrentObjectHalftoneMode X_GraphicObjectHalftoneMode ne
+   X_CurrentObjectColorMode X_GraphicObjectColorMode ne or
+      X_CurrentObjectType /X_Text eq 
+      X_TextObjectHalftoneMode /X_ScatterDot ne and X_ParMode not and or
+   {X_GraphicState1} if
+  userdict  /X_CurrentObjectHalftoneMode X_GraphicObjectHalftoneMode put
+  userdict  /X_CurrentObjectColorMode X_GraphicObjectColorMode put
+  userdict  /X_CurrentObjectType /X_Graphic put
+} bind def
+/X_TextObjectState
+{  X_TextObjectHalftoneMode /X_ScatterDot ne X_ParMode not and 
+   X_CurrentObjectHalftoneMode X_TextObjectHalftoneMode ne or
+   X_CurrentObjectColorMode X_TextObjectColorMode ne or
+   {X_TextState1} if
+   userdict /X_CurrentObjectHalftoneMode X_TextObjectHalftoneMode put
+   userdict /X_CurrentObjectColorMode X_TextObjectColorMode put
+   userdict /X_CurrentObjectType /X_Text put
+} bind def
+/X_BitmapObjectState
+{  X_CurrentObjectHalftoneMode X_BitmapObjectHalftoneMode ne
+   X_CurrentObjectColorMode X_BitmapObjectColorMode ne or
+      X_CurrentObjectType /X_Text eq 
+      X_TextObjectHalftoneMode /X_ScatterDot ne and  X_ParMode not and  or
+   {X_BitmapState1} if
+   userdict /X_CurrentObjectHalftoneMode X_BitmapObjectHalftoneMode put
+   userdict /X_CurrentObjectColorMode X_BitmapObjectColorMode put
+   userdict /X_CurrentObjectType /X_Bitmap put
+} bind def
+end
+"
+*End
+*XRXAColorOptions PlainColor/Color: "
+
+userdict begin
+		/xerox$color$mode 3 def
+end
+<</ProcessColorModel /DeviceCMYK >> setpagedevice	
+% patch to overload colorimage (PS I) operator
+% fixes Pagemaker dark image problems
+
+userdict /colorimage undef
+
+userdict /colorimage
+{ 
+
+/XComps exch def
+/Xmulti exch def
+
+Xmulti false eq
+   {
+   /Xproc exch def
+   /Xmatrix exch def
+   /Xbpc exch def
+   /Xheight exch def
+   /Xwidth exch def   
+   XComps 3 eq {
+   [/CIEBasedABC 
+   <<
+   /DecodeLMN [{1.65 exp } {1.65 exp  } {1.65 exp  }]
+   /MatrixLMN [0.4926 0.2827 0.0323 0.3409 0.6607 0.1088 0.1307 0.0566 0.6838]
+   /WhitePoint [0.9642 1 0.8249]
+   >>] setcolorspace
+   /XDecode [0 1 0 1 0 1] def
+   }
+   {XComps 4 eq 
+   {/DeviceCMYK setcolorspace /XDecode [0 1 0 1 0 1 0 1] def}
+   {/DeviceGray setcolorspace /XDecode [0 1] def} ifelse
+   } ifelse
+   <<
+   /ImageType 1
+   /Width Xwidth
+   /Height Xheight
+   /BitsPerComponent Xbpc
+   /Decode XDecode
+   /ImageMatrix Xmatrix
+   /DataSource /Xproc load 
+   >>
+   image
+   }
+   {
+   Xmulti XComps systemdict /colorimage get exec
+   } ifelse
+   
+} bind put		
+"
+*End
+*?XRXAColorOptions: "  
+"
+*End
+*CloseUI: *XRXAColorOptions
+*OpenUI *XRXAMediaType/Media Type:  PickOne
+*OrderDependency: 97 AnySetup *XRXAMediaType
+*DefaultXRXAMediaType: PlainPaper
+*XRXAMediaType PlainPaper/Plain Paper: "1 dict dup /MediaType (Plain Paper) put setpagedevice"
+*XRXAMediaType Transparency/Transparency: "1 dict dup /MediaType (Transparency) put setpagedevice"
+*XRXAMediaType LabelStock/Label Stock: "1 dict dup /MediaType (Label Stock) put setpagedevice"
+*?XRXAMediaType: "
+  save
+    currentpagedevice /MediaType
+     {get} stopped
+       {pop pop (PlainPaper)} {dup null eq {pop (PlainPaper)} if} ifelse
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXAMediaType
+*OpenUI *XRXZCollate/Collation Enabled: PickOne	
+*OrderDependency: 80 AnySetup *XRXZCollate
+*DefaultXRXZCollate: False
+*XRXZCollate True/Yes: "1 dict dup /Collate true put setpagedevice"
+*XRXZCollate False/No: "1 dict dup /Collate false put setpagedevice"
+*?XRXZCollate: "
+  save
+    currentpagedevice /Collate get
+    {(True)} {(False)} ifelse
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXZCollate
+*OpenUI *XRXGraphicsObjectColor/Graphics Color: PickOne	
+*OrderDependency: 20 AnySetup *XRXGraphicsObjectColor
+*DefaultXRXGraphicsObjectColor: VividColor
+*XRXGraphicsObjectColor VividColor/Vivid Colors: "
+userdict begin	
+	/xerox$graphics$color 1 def						
+	/X_GraphicObjectColorMode		/X_VividColor def
+end
+"
+*End
+*XRXGraphicsObjectColor ScreenMatchColor/Monitor Colors: "
+userdict begin	
+	/xerox$graphics$color 2 def						
+	/X_GraphicObjectColorMode		/X_ScreenMatchColor def
+end
+"
+*End
+*XRXGraphicsObjectColor PerceptualColor/Photo Mode: "	
+userdict begin	
+	/xerox$graphics$color 3 def						
+	/X_GraphicObjectColorMode		/X_PerceptualColor def
+end
+"
+*End
+*XRXGraphicsObjectColor SaturatedColor/Process Blue: "
+userdict begin		
+	/xerox$graphics$color 4 def					
+	/X_GraphicObjectColorMode		/X_SaturatedColor def
+end
+"
+*End  
+*XRXGraphicsObjectColor PrimaryColors/8 Primary Colors: "
+userdict begin		
+	/xerox$graphics$color 5 def					
+	/X_GraphicObjectColorMode		/X_PrimaryColor def
+end	
+"
+*End
+*XRXGraphicsObjectColor GrayScaleColor/Grayscale: "
+userdict begin		
+	/xerox$graphics$color 6 def					
+	/X_GraphicObjectColorMode		/X_GrayScaleColor def
+end	
+"
+*End
+*XRXGraphicsObjectColor BlackAndWhiteColor/Black and White: "
+userdict begin		
+	/xerox$graphics$color 7 def					
+	/X_GraphicObjectColorMode		/X_BlackAndWhiteColor def
+end
+"
+*End
+*?XRXGraphicsObjectColor: "
+  save
+    userdict /X_GraphicObjectColorMode get
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXGraphicsObjectColor
+*OpenUI *XRXGraphicsObjectHalftone/Graphics Halftone: PickOne	
+*OrderDependency: 20 AnySetup *XRXGraphicsObjectHalftone
+*DefaultXRXGraphicsObjectHalftone: XRXScatteredDot
+*XRXGraphicsObjectHalftone XRXQuadDot/Quad Dot : "						
+userdict begin		
+	/xerox$graphic$halftone 1 def				
+	/X_GraphicObjectHalftoneMode 		/X_QuadDot def
+end
+"
+*End
+*XRXGraphicsObjectHalftone XRXScatteredDot/Smooth Screen: "
+userdict begin		
+	/xerox$graphic$halftone 2 def					
+	/X_GraphicObjectHalftoneMode 		/X_ScatterDot def
+end
+"
+*End
+*?XRXGraphicsObjectHalftone: "
+  save
+    userdict /X_GraphicObjectHalftoneMode get
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXGraphicsObjectHalftone
+*OpenUI *XRXBitmappedObjectColor/Bitmapped Color: PickOne	
+*OrderDependency: 20 AnySetup *XRXBitmappedObjectColor
+*DefaultXRXBitmappedObjectColor: PerceptualColor  
+*XRXBitmappedObjectColor VividColor/Vivid Colors: "						
+userdict begin		
+	/xerox$bitmap$color 1 def					
+	/X_BitmapObjectColorMode		/X_VividColor def
+end
+"
+*End
+*XRXBitmappedObjectColor ScreenMatchColor/Monitor Colors: "
+userdict begin		
+	/xerox$bitmap$color 2 def					
+	/X_BitmapObjectColorMode		/X_ScreenMatchColor def
+end
+"
+*End
+*XRXBitmappedObjectColor PerceptualColor/Photo Mode: "						
+userdict begin		
+	/xerox$bitmap$color 3 def					
+	/X_BitmapObjectColorMode		/X_PerceptualColor def
+end
+"
+*End 
+*XRXBitmappedObjectColor SaturatedColor/Process Blue: "						
+userdict begin		
+	/xerox$bitmap$color 4 def					
+	/X_BitmapObjectColorMode		/X_SaturatedColor def
+end
+"
+*End
+*XRXBitmappedObjectColor PrimaryColors/8 Primary Colors: "
+userdict begin		
+	/xerox$bitmap$color 5 def					
+	/X_BitmapObjectColorMode		/X_PrimaryColor def
+end
+"
+*End
+*XRXBitmappedObjectColor GrayScaleColor/Grayscale: "
+userdict begin		
+	/xerox$bitmap$color 6 def					
+	/X_BitmapObjectColorMode		/X_GrayScaleColor def
+end
+"
+*End
+*XRXBitmappedObjectColor BlackAndWhiteColor/Black and White: "
+userdict begin		
+	/xerox$bitmap$color 7 def					
+	/X_BitmapObjectColorMode		/X_BlackAndWhiteColor def
+end
+"
+*End
+*?XRXBitmappedObjectColor: "
+  save
+    userdict /X_BitmapObjectColorMode get
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXBitmappedObjectColor
+*OpenUI *XRXBitmappedObjectHalftone/Bitmapped Halftone: PickOne	
+*OrderDependency: 20 AnySetup *XRXBitmappedObjectHalftone
+*DefaultXRXBitmappedObjectHalftone: XRXQuadDot
+*XRXBitmappedObjectHalftone XRXQuadDot/Quad Dot : "						
+userdict begin		
+	/xerox$bitmap$halftone 1 def					
+	/X_BitmapObjectHalftoneMode 		/X_QuadDot def
+end
+"
+*End
+*XRXBitmappedObjectHalftone XRXScatteredDot/Smooth Screen: "
+userdict begin		
+	/xerox$bitmap$halftone 2 def					
+	/X_BitmapObjectHalftoneMode 		/X_ScatterDot def	
+end
+"
+*End
+*?XRXBitmappedObjectHalftone: "
+  save
+    userdict /X_BitmapObjectHalftoneMode get
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXBitmappedObjectHalftone
+*OpenUI *XRXTextObjectColor/Text Color: PickOne	
+*OrderDependency: 20 AnySetup *XRXTextObjectColor
+*DefaultXRXTextObjectColor: VividColor  
+*XRXTextObjectColor VividColor/Vivid Colors: "						
+userdict begin	
+	/xerox$text$color 1 def						
+	/X_TextObjectColorMode			/X_VividColor def
+end
+"
+*End
+*XRXTextObjectColor ScreenMatchColor/Monitor Colors: "
+userdict begin		
+	/xerox$text$color 2 def						
+	/X_TextObjectColorMode			/X_ScreenMatchColor def
+end
+"
+*End
+*XRXTextObjectColor PerceptualColor/Photo Mode : "						
+userdict begin		
+	/xerox$text$color 3 def						
+	/X_TextObjectColorMode			/X_PerceptualColor def
+end
+"
+*End 
+*XRXTextObjectColor SaturatedColor/Process Blue: "
+userdict begin		
+	/xerox$text$color 4 def							
+	/X_TextObjectColorMode		/X_SaturatedColor def
+end
+"
+*End  
+*XRXTextObjectColor PrimaryColors/8 Primary Colors: "
+userdict begin		
+	/xerox$text$color 5 def						
+	/X_TextObjectColorMode			/X_PrimaryColor def
+end	
+"
+*End
+*XRXTextObjectColor GrayScaleColor/Grayscale: "
+userdict begin		
+	/xerox$text$color 6 def						
+	/X_TextObjectColorMode			/X_GrayScaleColor def
+end	
+"
+*End
+*XRXTextObjectColor BlackAndWhiteColor/Black and White: "
+userdict begin		
+	/xerox$text$color 7 def						
+	/X_TextObjectColorMode			/X_BlackAndWhiteColor def
+end
+"
+*End
+*?XRXTextObjectColor: "
+  save
+    userdict /X_TextObjectColorMode get
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXTextObjectColor
+*OpenUI *XRXTextObjectHalftone/Text Halftone: PickOne	
+*OrderDependency: 20 AnySetup *XRXTextObjectHalftone
+*DefaultXRXTextObjectHalftone: XRXScatteredDot
+*XRXTextObjectHalftone XRXQuadDot/Quad Dot : "						
+userdict begin		
+	/xerox$text$halftone 1 def						
+	/X_TextObjectHalftoneMode 		/X_QuadDot def
+end
+"
+*End
+*XRXTextObjectHalftone XRXScatteredDot/Smooth Screen: "
+userdict begin		
+	/xerox$text$halftone 2 def					
+	/X_TextObjectHalftoneMode 		/X_ScatterDot def
+end
+"
+*End
+*?XRXTextObjectHalftone: "
+  save
+    userdict /X_TextObjectHalftoneMode get
+    = flush
+  restore
+"
+*End
+*CloseUI: *XRXTextObjectHalftone
+*OpenUI *XRXXPrinterHalftone/Use Application Halftone: Boolean	
+*OrderDependency: 20 AnySetup *XRXXPrinterHalftone
+*DefaultXRXXPrinterHalftone: False
+*XRXXPrinterHalftone True/Yes: "
+"   
+*End
+*XRXXPrinterHalftone False/No: "
+/setcolorscreen { 12 { pop } repeat } def 
+/setscreen { 3 { pop } repeat } def
+/sethalftone { pop } def
+"
+*End
+*?XRXXPrinterHalftone: "
+  save
+    systemdict /setcolorscreen get = flush
+    systemdict /setscreen get = flush
+    systemdict /sethalftone get = flush
+  restore
+"
+*End
+*CloseUI: *XRXXPrinterHalftone
+*OpenUI *XRXXAutoAreaCoverage/Disable CMYK Coverage Limit: Boolean	
+*OrderDependency: 20 AnySetup *XRXXAutoAreaCoverage
+*DefaultXRXXAutoAreaCoverage: False
+*XRXXAutoAreaCoverage True/Yes: "
+/X_AutoAreaCoverage true def
+"
+*End
+*XRXXAutoAreaCoverage False/No: "
+/X_AutoAreaCoverage false def
+ "
+*End 
+*?XRXXAutoAreaCoverage: "
+"
+*End
+*CloseUI: *XRXXAutoAreaCoverage
+*OpenUI *XRXZTraySwitch/Tray Switching:  Boolean
+*OrderDependency: 81 AnySetup *XRXZTraySwitch
+*DefaultXRXZTraySwitch: False
+*XRXZTraySwitch True/On: "1 dict dup /TraySwitch true put setpagedevice"
+*XRXZTraySwitch False/Off: "1 dict dup /TraySwitch false put setpagedevice"
+*?XRXZTraySwitch: "
+  save
+    currentpagedevice /TraySwitch
+    {(True)} {(False)} ifelse
+	= flush
+  restore"
+*End
+*CloseUI: *XRXZTraySwitch
+*OpenUI *ManualFeed/Manual Feed:  Boolean
+*OrderDependency: 15 AnySetup *ManualFeed
+*DefaultManualFeed: False
+*ManualFeed True/On: "1 dict dup /ManualFeed true put setpagedevice	
+	/EngExe /ProcSet findresource
+	begin 
+		EngPreStart
+	end		
+" 
+*End
+*ManualFeed False/Off: "1 dict dup /ManualFeed false put setpagedevice		
+	/EngExe /ProcSet findresource
+	begin 
+		EngPreStart
+	end		 
+"
+*End
+*?ManualFeed: "
+  save
+    currentpagedevice /ManualFeed get
+    {(True)} {(False)} ifelse
+    = flush
+  restore"
+*End
+*CloseUI: *ManualFeed
+*OpenUI *XRXZSlipSheet/Slip Sheet:  PickOne
+*OrderDependency: 82 AnySetup *XRXZSlipSheet 
+*DefaultXRXZSlipSheet: None
+*XRXZSlipSheet None/No Slip Sheets: "1 dict dup /SlipSheet 0 put setpagedevice"
+*XRXZSlipSheet EndofPage/Slip Sheet After Each Page: "1 dict dup /SlipSheet 1 put setpagedevice"
+*?XRXZSlipSheet: "
+save
+  [(None)(EndofPage)]
+  currentpagedevice /SlipSheet get
+  {get} stopped {pop pop (Unknown)} if = flush
+restore
+"
+*End
+*CloseUI: *XRXZSlipSheet
+*DefaultFont: Courier
+*Font AvantGarde-Gothic-Book: Standard "(001.001)"
+*Font AvantGarde-Gothic-BookOblique: Standard "(001.002)"
+*Font AvantGarde-Gothic-Demi: Standard "(001.003)"
+*Font AvantGarde-Gothic-DemiOblique: Standard "(001.003)"
+*Font Bookman-Demi: Standard "(001.001)"
+*Font Bookman-DemiItalic: Standard "(001.001)"
+*Font Bookman-Light: Standard "(001.001)"
+*Font Bookman-LightItalic: Standard "(001.001)"
+*Font Courier: Standard "(002.002)"
+*Font Courier-Bold: Standard "(002.002)"
+*Font Courier-BoldOblique: Standard "(002.002)"
+*Font Courier-Oblique: Standard "(002.002)"
+*Font Helvetica: Standard "(001.006)"
+*Font Helvetica-Bold: Standard "(001.007)"
+*Font Helvetica-BoldOblique: Standard "(001.007)"
+*Font Helvetica-Narrow: Standard "(001.001)"
+*Font Helvetica-Narrow-Bold: Standard "(001.002)"
+*Font Helvetica-Narrow-BoldOblique: Standard "(001.002)"
+*Font Helvetica-Narrow-Oblique: Standard "(001.001)"
+*Font Helvetica-Oblique: Standard "(001.006)"
+*Font NewCenturySchlbk-Bold: Standard "(001.008)"
+*Font NewCenturySchlbk-BoldItalic: Standard "(001.006)"
+*Font NewCenturySchlbk-Italic: Standard "(001.005)"
+*Font NewCenturySchlbk-Roman: Standard "(001.006)"
+*Font Palatino-Bold: Standard "(001.005)"
+*Font Palatino-BoldItalic: Standard "(001.005)"
+*Font Palatino-Italic: Standard "(001.005)"
+*Font Palatino-Roman: Standard "(001.005)"
+*Font Symbol: Special "(001.003)"
+*Font Times-Bold: Standard "(001.007)"
+*Font Times-BoldItalic: Standard "(001.009)"
+*Font Times-Italic: Standard "(001.007)"
+*Font Times-Roman: Standard "(001.007)"
+*Font ZapfChancery-MediumItalic: Standard "(001.003)"
+*Font ZapfDingbats: Special "(001.002)"
