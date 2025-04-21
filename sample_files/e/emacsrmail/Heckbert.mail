@@ -1,0 +1,778 @@
+BABYL OPTIONS:
+Version: 5
+Labels:
+Note:   This is the header of an rmail file.
+Note:   If you are seeing it in rmail,
+Note:    it means the file has no messages in it.
+
+1,,
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Received: from HOSTESS.GRAPHICS.CS.CMU.EDU by cis.uab.edu (4.1/SMI-4.0)
+	id AA19027; Thu, 22 Oct 92 17:08:36 CDT
+Message-Id: <9210222208.AA19027@cis.uab.edu>
+Date: Thu, 22 Oct 92 18:09:25 EDT
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: sloan@cis.uab.edu
+Subject: convexp
+
+*** EOOH ***
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Date: Thu, 22 Oct 92 18:09:25 EDT
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: sloan@cis.uab.edu
+Subject: convexp
+
+/*
+ * convex.c: test convexity of polygon on stdin
+ *
+ * Paul Heckbert	22 Oct 1992
+ */
+
+#include <stdio.h>
+
+/* change the following two lines if your data types differ */
+#define Number int
+#define FORMAT "%d%d"
+
+#define ERROR() {fprintf(stderr, "input format error\n"); exit(1);}
+typedef enum {POS, NEG, ZERO} Sign;
+
+main()
+{
+    printf(convexp(stdin) ?
+	"CONVEX AND SIMPLE\n" : "NOT CONVEX OR NOT SIMPLE\n");
+}
+
+/*
+ * convexp: read polygon on stream fp, consisting of ascii (x,y) coords,
+ * returning 1 if polygon convex, and 0 if not (i.e. if concave or not simple).
+ *
+ * A 1-pass version of Peter Schorn's algorithm (comp.graphics, 15 Oct 92).
+ * Concise, but not super-optimized implementation.
+ */
+
+convexp(fp)
+FILE *fp;
+{
+    int nturn;
+    Sign anglesign, xprojsign;
+    Number ax, ay, bx, by, cx, cy, px, py, qx, qy, rx, ry;
+
+    if (fscanf(fp, FORMAT, &cx, &cy) != 2) ERROR();
+    if (fscanf(fp, FORMAT, &ax, &ay) != 2) ERROR();
+    px = ax-cx; py = ay-cy;
+    rx = px; ry = py;
+    anglesign = ZERO;	/* sign of angle at current vertex */
+    xprojsign = ZERO;	/* sign of x projection of current edge */
+    nturn = 0;		/* number of changes in sign of x projection */
+    signchange(&xprojsign, px);
+    while (fscanf(fp, FORMAT, &bx, &by) == 2) {
+	qx = bx-ax; qy = by-ay;
+	/*
+	 * invariants: if we call (bx,by)=vert[i], then (ax,ay)=vert[i-1],
+	 * (qx,qy)=vert[i]-vert[i-1], (px,py)=vert[i-1]-vert[i-2],
+	 * (cx,cy)=vert[0], (rx,ry)=vert[1]-vert[0]
+	 */
+	if (signchange(&anglesign, px*qy-py*qx)) return 0;
+	if (signchange(&xprojsign, qx) && ++nturn==3) return 0;
+	ax = bx; ay = by;
+	px = qx; py = qy;
+    }
+    qx = cx-ax; qy = cy-ay;
+    if (signchange(&anglesign, px*qy-py*qx)) return 0;
+    if (signchange(&xprojsign, qx) && ++nturn==3) return 0;
+    if (signchange(&anglesign, qx*ry-qy*rx)) return 0;
+    return 1;
+}
+
+/*
+ * signchange: test if val has a different sign than *sign, updating *sign.
+ * Signs of zero (val==0) are ignored.
+ */
+
+int signchange(sign, val)
+Sign *sign;
+Number val;
+{
+    switch (*sign) {
+	case POS: if (val<0) {*sign = NEG; return 1;} break;
+	case NEG: if (val>0) {*sign = POS; return 1;} break;
+	case ZERO:
+	    if (val>0) *sign = POS;
+	    else if (val<0) *sign = NEG;
+	    break;
+    }
+    return 0;
+}
+
+
+1,,
+Summary-line: 23-Oct  .Heckbert@HOSTESS.GRAPHIC  #convexity testing
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Received: from HOSTESS.GRAPHICS.CS.CMU.EDU by cis.uab.edu (4.1/SMI-4.0)
+	id AA04891; Fri, 23 Oct 92 16:31:38 CDT
+Message-Id: <9210232131.AA04891@cis.uab.edu>
+Date: Fri, 23 Oct 92 17:08:40 EDT
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU, erich@eye.com, fred@kpc.com,
+        gavin@krypton.asd.sgi.com, hollasch@kpc.com,
+        ledwards@leland.Stanford.EDU, schorn@inf.ethz.ch, sloan@cis.uab.edu,
+        tomw@megatek.com, torbenm@diku.dk, wb104@mbuf.bio.cam.ac.uk,
+        zhu@sgi.com
+Subject: convexity testing
+
+*** EOOH ***
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Date: Fri, 23 Oct 92 17:08:40 EDT
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU, erich@eye.com, fred@kpc.com,
+        gavin@krypton.asd.sgi.com, hollasch@kpc.com,
+        ledwards@leland.Stanford.EDU, schorn@inf.ethz.ch, sloan@cis.uab.edu,
+        tomw@megatek.com, torbenm@diku.dk, wb104@mbuf.bio.cam.ac.uk,
+        zhu@sgi.com
+Subject: convexity testing
+
+Since I joined this convexity testing project late, you folks may have
+already interchanged testing code that I don't know about, but here's the
+set of little programs and test files I've been using to test my
+programs with.
+
+Included in the following is:
+    Some programs that read and write ascii polygons on stdin and stdout:
+
+	permute - permutes vertices cyclically, putting the first vertex last
+	transpose - swaps x and y
+	dup N - duplicates vertex N
+
+    Some shell scripts:
+
+	check FILE - run a polygon file through a battery of tests,
+	    permuting, transposing, and duplicating here and there
+	
+	workout - runs "check" on *.po in current dir
+
+    To run this with your own convexity-testing program,
+	create an empty directory
+	copy your executable into the directory with the name "convex"
+	un-shar the following
+	make
+	workout
+	compare your results with the file "answers" which contains
+	    what I consider to be the correct results.
+	    There seems to be disagreement among us about degeneracies and
+	    retracing, however.
+
+Test on nasty3.po (my own) and retrace2.po (from Ken) in particular.
+
+If you guys have been sharing test polygons, please point me to them or
+mail them to me.
+
+-Paul
+
+Paul Heckbert						    ph@cs.cmu.edu
+Computer Science Dept., Carnegie Mellon University
+5000 Forbes Ave, Pittsburgh PA 15213-3891, USA
+
+-----
+# to unpack, cut here and run the following shell archive through sh
+# contents: Makefile workout check permute.c transpose.c dup.c count.c
+# answers bow.po col.po collin1.po collin2.po colre.po concave.po
+# diamond.po hollasch.po nasty.po nasty3.po retrace1.po retrace2.po
+# seg.po spike.po square.po zhu.po
+#
+echo extracting Makefile
+sed 's/^_//' <<'EOF9517' >Makefile
+_all: count dup permute transpose
+_	chmod 777 workout check
+_
+_convexp.shar: GHOST
+_	shar Makefile workout check permute.c transpose.c dup.c count.c answers *.po > convexp.shar
+_
+_GHOST:
+EOF9517
+echo extracting workout
+sed 's/^_//' <<'EOF9518' >workout
+_#!/bin/csh -f
+_foreach x (*.po)
+_    echo $x
+_    check $x
+_end
+EOF9518
+echo extracting check
+sed 's/^_//' <<'EOF9519' >check
+_#!/bin/csh -f
+_set n=`wc -l <$1`
+_echo $n sides
+_cp $1 temp
+_foreach x (`count 1 $n`)
+_    cat temp
+_    cat temp | convex $2
+_    cat temp | transpose | convex $2
+_    cat temp | dup 0 | convex $2
+_    cat temp | dup 1 | dup 0 | convex $2
+_    cat temp | dup 2 | dup 1 | dup 0 | convex $2
+_    cat temp | dup 3 | dup 2 | dup 1 | dup 0 | convex $2
+_    permute <temp >temp2
+_    mv temp2 temp
+_end
+_rm temp
+EOF9519
+echo extracting permute.c
+sed 's/^_//' <<'EOF9520' >permute.c
+_#include <stdio.h>
+_
+_#define ERROR() {fprintf(stderr, "input format error\n"); exit(1);}
+_
+_main()
+_{
+_    double ax, ay, x, y;
+_
+_    if (scanf("%F%F", &ax, &ay) != 2) ERROR();
+_    while (scanf("%F%F", &x, &y) == 2)
+_	printf("%g %g\n", x, y);
+_    printf("%g %g\n", ax, ay);
+_}
+EOF9520
+echo extracting transpose.c
+sed 's/^_//' <<'EOF9521' >transpose.c
+_#include <stdio.h>
+_
+_main()
+_{
+_    double x, y;
+_
+_    while (scanf("%F%F", &x, &y) == 2)
+_	printf("%g %g\n", y, x);
+_}
+EOF9521
+echo extracting dup.c
+sed 's/^_//' <<'EOF9522' >dup.c
+_#include <stdio.h>
+_
+_main(ac, av)
+_int ac;
+_char **av;
+_{
+_    int i, n;
+_    double x, y;
+_
+_    n = ac>1 ? atoi(av[1]) : 0;
+_    for (i=0; scanf("%F%F", &x, &y) == 2; i++) {
+_	printf("%g %g\n", x, y);
+_	if (i==n) printf("%g %g\n", x, y);
+_    }
+_}
+EOF9522
+echo extracting count.c
+sed 's/^_//' <<'EOF9523' >count.c
+_main(ac,av)
+_int ac;
+_char **av;
+_{
+_    int i1,i2,di,i;
+_
+_    i1 = atoi(av[1]);
+_    i2 = atoi(av[2]);
+_    di = ac>3 ? atoi(av[3]) : 1;
+_    if (di>0)
+_	for (i=i1; i<=i2; i+=di)
+_	    printf("%d\n",i);
+_    else
+_	for (i=i1; i>=i2; i+=di)
+_	    printf("%d\n",i);
+_}
+EOF9523
+echo extracting answers
+sed 's/^_//' <<'EOF9524' >answers
+_bow.po
+_NOT CONVEX OR NOT SIMPLE
+_col.po
+_CONVEX AND SIMPLE
+_collin1.po
+_CONVEX AND SIMPLE
+_collin2.po
+_CONVEX AND SIMPLE
+_colre.po
+_NOT CONVEX OR NOT SIMPLE
+_concave.po
+_NOT CONVEX OR NOT SIMPLE
+_diamond.po
+_CONVEX AND SIMPLE
+_hollasch.po
+_NOT CONVEX OR NOT SIMPLE
+_nasty.po
+_NOT CONVEX OR NOT SIMPLE
+_nasty3.po
+_NOT CONVEX OR NOT SIMPLE
+_retrace1.po
+_NOT CONVEX OR NOT SIMPLE
+_retrace2.po
+_NOT CONVEX OR NOT SIMPLE
+_seg.po
+_CONVEX AND SIMPLE
+_spike.po
+_NOT CONVEX OR NOT SIMPLE
+_square.po
+_CONVEX AND SIMPLE
+_zhu.po
+_NOT CONVEX OR NOT SIMPLE
+EOF9524
+echo extracting bow.po
+sed 's/^_//' <<'EOF9525' >bow.po
+_0 0
+_1 1
+_1 0
+_0 1
+EOF9525
+echo extracting col.po
+sed 's/^_//' <<'EOF9526' >col.po
+_0 0
+_1 1
+_2 2
+_3 3
+EOF9526
+echo extracting collin1.po
+sed 's/^_//' <<'EOF9527' >collin1.po
+_0 0
+_2 2
+_1 1
+EOF9527
+echo extracting collin2.po
+sed 's/^_//' <<'EOF9528' >collin2.po
+_2 0
+_3 0
+_4 0
+_2 2
+_0 0
+_1 0 
+EOF9528
+echo extracting colre.po
+sed 's/^_//' <<'EOF9529' >colre.po
+_0 0
+_2 2
+_1 1
+_3 3
+EOF9529
+echo extracting concave.po
+sed 's/^_//' <<'EOF9530' >concave.po
+_0 0
+_2 0
+_2 2
+_0 2
+_1 1
+EOF9530
+echo extracting diamond.po
+sed 's/^_//' <<'EOF9531' >diamond.po
+_1 0
+_0 1
+_-1 0
+_0 -1
+EOF9531
+echo extracting hollasch.po
+sed 's/^_//' <<'EOF9532' >hollasch.po
+_2 2
+_2 3
+_0 0
+_5 0
+_5 5
+_0 5
+EOF9532
+echo extracting nasty.po
+sed 's/^_//' <<'EOF9533' >nasty.po
+_1 1
+_0 3
+_0 0
+_3 0
+_1 1
+EOF9533
+echo extracting nasty3.po
+sed 's/^_//' <<'EOF9534' >nasty3.po
+_1 1
+_1 1
+_0 3
+_0 0
+_3 0
+_1 1
+EOF9534
+echo extracting retrace1.po
+sed 's/^_//' <<'EOF9535' >retrace1.po
+_0 0
+_1 0
+_1 1
+_0 1
+_0 0
+_1 0
+_1 1
+_0 1
+EOF9535
+echo extracting retrace2.po
+sed 's/^_//' <<'EOF9536' >retrace2.po
+_0 0
+_2 0
+_1 0
+_3 0
+_0 1
+EOF9536
+echo extracting seg.po
+sed 's/^_//' <<'EOF9537' >seg.po
+_0 0
+_1 1
+EOF9537
+echo extracting spike.po
+sed 's/^_//' <<'EOF9538' >spike.po
+_0 0
+_1 0
+_0 1
+_0 -1
+EOF9538
+echo extracting square.po
+sed 's/^_//' <<'EOF9539' >square.po
+_0 0
+_1 0
+_1 1
+_0 1
+EOF9539
+echo extracting zhu.po
+sed 's/^_//' <<'EOF9540' >zhu.po
+_ 0  0
+_-1  4
+_-2 -3
+_ 2  1
+_-4  1
+_ 2 -3
+_ 1  2
+_-4 -2
+EOF9540
+exit
+
+
+1,,
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Received: from HOSTESS.GRAPHICS.CS.CMU.EDU by cis.uab.edu (4.1/SMI-4.0)
+	id AA19218; Mon, 26 Oct 92 12:21:20 CST
+Message-Id: <9210261821.AA19218@cis.uab.edu>
+Date: Mon, 26 Oct 92 13:07:03 EST
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: sloan@cis.uab.edu
+Subject: 2nd version
+Cc: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+
+*** EOOH ***
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Date: Mon, 26 Oct 92 13:07:03 EST
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: sloan@cis.uab.edu
+Subject: 2nd version
+Cc: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+
+Here's another copy of Friday's version.
+
+Somehow I reversed the sense of questions 1-3.
+Judging by your mail of Sunday afternoon, I think you and I agree
+on what's convex and simple.  This is what I meant to say on Friday:
+
+    0) are degenerate polygons CONVEX AND SIMPLE? yes
+    1) are polygons which contain non-extremal vertices CONVEX AND
+       SIMPLE?  absolutely yes
+    2) are polygons which retrace themselves CONVEX AND SIMPLE? absolutely no
+    3) How about local retracings? no
+    4) are polygons with repeated (consecutive duplicate) vertices
+       CONVEX and SIMPLE? yes.
+
+---
+
+/*
+ * convex.c: test convexity of polygon on stdin
+ *
+ * Paul Heckbert	23 Oct 1992
+ */
+
+#include <stdio.h>
+
+/* change the following two lines if your data types differ */
+#define Number double
+#define FORMAT "%F%F"
+
+typedef enum {POS, NEG, ZERO} Sign;
+
+main()
+{
+    printf(convexp(stdin) ?
+	"CONVEX AND SIMPLE\n" : "NOT CONVEX OR NOT SIMPLE\n");
+}
+
+/*
+ * convexp: read polygon on stream fp, consisting of ascii (x,y) coords,
+ * returning 1 if polygon convex, and 0 if not (i.e. if concave or not simple).
+ *
+ * A variation on Peter Schorn's algorithm (comp.graphics, 15 Oct 92).
+ * Concise, but not super-optimized implementation.
+ */
+
+convexp(fp)
+FILE *fp;
+{
+    int nxturn, nyturn;
+    Sign anglesign, xprojsign, yprojsign;
+    Number ax, ay, bx, by, cx, cy, px, py, qx, qy, rx, ry;
+
+    if (fscanf(fp, FORMAT, &cx, &cy) != 2) return 1;
+    do {
+	if (fscanf(fp, FORMAT, &ax, &ay) != 2) return 1;
+	px = ax-cx; py = ay-cy;
+    } while (px==0 && py==0);
+    rx = px; ry = py;
+    anglesign = ZERO;	/* sign of angle at current vertex */
+    xprojsign = ZERO;	/* sign of x projection of current edge */
+    yprojsign = ZERO;	/* sign of y projection of current edge */
+    nxturn = 0;		/* number of changes in sign of x projection */
+    nyturn = 0;		/* number of changes in sign of y projection */
+    signchange(&xprojsign, px);
+    signchange(&yprojsign, py);
+
+    while (fscanf(fp, FORMAT, &bx, &by) == 2) {
+	qx = bx-ax; qy = by-ay;
+	/*
+	 * invariants: if we call (bx,by)=vert[i], then (ax,ay)=vert[i-1],
+	 * (qx,qy)=vert[i]-vert[i-1], (px,py)=vert[i-1]-vert[i-2],
+	 * (cx,cy)=vert[0], (rx,ry)=vert[1]-vert[0]
+	 * where we've eliminated repeated vertices from input
+	 */
+	if (qx!=0 || qy!=0) {
+	    if (signchange(&anglesign, px*qy-py*qx)) return 0;
+	    if (signchange(&xprojsign, qx) && ++nxturn==3) return 0;
+	    if (signchange(&yprojsign, qy) && ++nyturn==3) return 0;
+	    ax = bx; ay = by;
+	    px = qx; py = qy;
+	}
+    }
+
+    qx = cx-ax; qy = cy-ay;
+    if (qx!=0 || qy!=0) {
+	if (signchange(&anglesign, px*qy-py*qx)) return 0;
+	if (signchange(&xprojsign, qx) && ++nxturn==3) return 0;
+	if (signchange(&yprojsign, qy) && ++nyturn==3) return 0;
+
+	if (signchange(&anglesign, qx*ry-qy*rx)) return 0;
+    }
+    else
+	if (signchange(&anglesign, px*ry-py*rx)) return 0;
+
+    return 1;
+}
+
+/*
+ * signchange: test if val has a different sign than *sign, updating *sign.
+ * Signs of zero (val==0) are ignored.
+ */
+
+int signchange(sign, val)
+Sign *sign;
+Number val;
+{
+    switch (*sign) {
+	case POS: if (val<0) {*sign = NEG; return 1;} break;
+	case NEG: if (val>0) {*sign = POS; return 1;} break;
+	case ZERO:
+	    if (val>0) *sign = POS;
+	    else if (val<0) *sign = NEG;
+	    break;
+    }
+    return 0;
+}
+
+
+1, answered,,
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Received: from HOSTESS.GRAPHICS.CS.CMU.EDU by cis.uab.edu (4.1/SMI-4.0)
+	id AA20259; Mon, 26 Oct 92 14:11:13 CST
+Message-Id: <9210262011.AA20259@cis.uab.edu>
+Date: Mon, 26 Oct 92 13:58:58 EST
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: sloan@cis.uab.edu
+Subject: test polygons
+Cc: ph@HOSTESS.GRAPHICS.CS.CMU.EDU
+
+*** EOOH ***
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Date: Mon, 26 Oct 92 13:58:58 EST
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: sloan@cis.uab.edu
+Subject: test polygons
+Cc: ph@HOSTESS.GRAPHICS.CS.CMU.EDU
+
+I just ran mine and yours on the test polygons you sent me, and a few
+test polygons of my own.
+
+polyN13 - YUCK!  Boy, is this one ever a nightmare!
+I'll have to think about how to cleanly handle this one!
+My code (Friday's version) gets the wrong answer on this one.
+
+Your program handles my file col.po correctly (0 0, 1 1, 2 2, 3 3)
+but when it's cycled two vertices	      (2 2, 3 3, 0 0, 1 1)
+it says NOT CONVEX...
+Your program is similarly inconsistent on colre.po .
+I discovered this by running my shell script "check col.po" .
+Your program doesn't handle nasty.po or nasty3.po correctly.
+
+Regarding the set of test files you sent me, I cleaned them up
+when I noticed that there were duplicates.
+Note that polyN15=polyY0 and polyN16=polyY2 !
+I ran the following to remove the redundancy:
+
+    rm polyNdart
+    rm polyNboucher2
+    rm polyNlinearLoop
+    rm polyNloop2
+    rm polyNmultiple
+    rm polyN15
+    rm polyN16
+    rm polyY1
+    rm polyY3
+    rm polyN0
+    rm polyN1
+    rm polyN2
+    rm polyN3
+    rm polyN4
+    rm polyN5
+    rm polyN6
+    rm polyN7
+    rm polyN8
+    rm polyN9
+    mv -i polyY0 polyY00
+    mv -i polyY2 polyY02
+
+
+1,,
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Received: from HOSTESS.GRAPHICS.CS.CMU.EDU by cis.uab.edu (4.1/SMI-4.0)
+	id AA00380; Tue, 27 Oct 92 17:38:16 CST
+Message-Id: <9210272338.AA00380@cis.uab.edu>
+Date: Tue, 27 Oct 92 18:36:37 EST
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: sloan@cis.uab.edu
+Subject: 3rd version
+Cc: ph@HOSTESS.GRAPHICS.CS.CMU.EDU
+
+*** EOOH ***
+Return-Path: <Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU@cis.uab.edu>
+Date: Tue, 27 Oct 92 18:36:37 EST
+From: Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU
+To: sloan@cis.uab.edu
+Subject: 3rd version
+Cc: ph@HOSTESS.GRAPHICS.CS.CMU.EDU
+
+This does polyN13 and all of your other test polygons correctly,
+as far as I can tell.
+
+------
+/*
+ * convex.c: test convexity of polygon on stdin
+ *
+ * Paul Heckbert	27 Oct 1992
+ */
+
+#include <stdio.h>
+
+/* change the following two lines if your data types differ */
+#define Number double
+#define FORMAT "%F%F"
+
+typedef enum {POS, NEG, ZERO} Sign;
+
+main()
+{
+    printf(convexp(stdin) ?
+	"CONVEX AND SIMPLE\n" : "NOT CONVEX OR NOT SIMPLE\n");
+}
+
+/*
+ * convexp: read polygon on stream fp, consisting of ascii (x,y) coords,
+ * returning 1 if polygon convex and simple, 0 if not.
+ *
+ * A variation on Peter Schorn's algorithm (comp.graphics, 15 Oct 92).
+ * Concise, but not super-optimized implementation.
+ */
+
+convexp(fp)
+FILE *fp;
+{
+    int nturn;
+    Sign anglesign, projsign;
+    Number ax, ay, bx, by, cx, cy, px, py, qx, qy, rx, ry;
+
+    if (fscanf(fp, FORMAT, &cx, &cy) != 2) return 1;
+    do {
+	if (fscanf(fp, FORMAT, &ax, &ay) != 2) return 1;
+	px = ax-cx; py = ay-cy;
+    } while (px==0 && py==0);
+    rx = px; ry = py;
+    anglesign = ZERO;	/* sign of angle at current vertex */
+    projsign = ZERO;	/* sign of projection of current edge */
+    nturn = 0;		/* number of changes in sign of projection */
+    signchange2(&projsign, px, py);
+
+    while (fscanf(fp, FORMAT, &bx, &by) == 2) {
+	qx = bx-ax; qy = by-ay;
+	/*
+	 * invariants: if we call (bx,by)=vert[i], then (ax,ay)=vert[i-1],
+	 * (qx,qy)=vert[i]-vert[i-1], (px,py)=vert[i-1]-vert[i-2],
+	 * (cx,cy)=vert[0], (rx,ry)=vert[1]-vert[0]
+	 * where we've eliminated repeated vertices from input
+	 */
+	if (qx!=0 || qy!=0) {
+	    if (signchange(&anglesign, px*qy-py*qx)) return 0;
+	    if (signchange2(&projsign, qx, qy) && ++nturn==3) return 0;
+	    ax = bx; ay = by;
+	    px = qx; py = qy;
+	}
+    }
+
+    qx = cx-ax; qy = cy-ay;
+    if (qx!=0 || qy!=0) {
+	if (signchange(&anglesign, px*qy-py*qx)) return 0;
+	if (signchange2(&projsign, qx, qy) && ++nturn==3) return 0;
+
+	if (signchange(&anglesign, qx*ry-qy*rx)) return 0;
+    }
+    else
+	if (signchange(&anglesign, px*ry-py*rx)) return 0;
+
+    return 1;
+}
+
+/*
+ * signchange: test if val has a different sign than *sign, updating *sign.
+ * Signs of zero (val==0) are ignored.
+ */
+
+int signchange(sign, val)
+Sign *sign;
+Number val;
+{
+    switch (*sign) {
+	case POS: if (val<0) {*sign = NEG; return 1;} break;
+	case NEG: if (val>0) {*sign = POS; return 1;} break;
+	case ZERO:
+	    if (val>0) *sign = POS;
+	    else if (val<0) *sign = NEG;
+	    break;
+    }
+    return 0;
+}
+
+/*
+ * signchange2: test if the pair (a,b) has a lexicographically different sign
+ * than *sign, updating *sign.
+ * (a,b) is considered positive if a>0 || a==0 && b>0
+ * (a,b) is considered negative if a<0 || a==0 && b<0
+ */
+
+int signchange2(sign, a, b)
+Sign *sign;
+Number a, b;
+{
+    return a!=0 ? signchange(sign, a) : signchange(sign, b);
+}
+
+

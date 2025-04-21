@@ -1,0 +1,423 @@
+BABYL OPTIONS:
+Version: 5
+Labels:
+Note:   This is the header of an rmail file.
+Note:   If you are seeing it in rmail,
+Note:    it means the file has no messages in it.
+
+1,,
+Return-Path: <torbenm@thor.diku.dk@cis.uab.edu>
+Received: from odin.diku.dk by cis.uab.edu (4.1/SMI-4.0)
+	id AA22807; Fri, 23 Oct 92 04:49:15 CDT
+Received: from thor.diku.dk by odin.diku.dk with SMTP id AA10082
+  (5.65+/IDA-1.3.5 for sloan@cis.uab.edu); Fri, 23 Oct 92 10:50:24 +0100
+Received: by thor.diku.dk id AA19128
+  (5.65+/IDA-1.3.5 for sloan@cis.uab.edu); Fri, 23 Oct 92 10:50:23 +0100
+From: Torben AEgidius Mogensen <torbenm@diku.dk>
+Message-Id: <9210230950.AA19128@thor.diku.dk>
+Subject: Re: still not right
+To: sloan@cis.uab.edu
+Date: Fri, 23 Oct 92 10:50:22 MET
+X-Mailer: ELM [version 2.3 PL11]
+
+*** EOOH ***
+Return-Path: <torbenm@thor.diku.dk@cis.uab.edu>
+From: Torben AEgidius Mogensen <torbenm@diku.dk>
+Subject: Re: still not right
+To: sloan@cis.uab.edu
+Date: Fri, 23 Oct 92 10:50:22 MET
+X-Mailer: ELM [version 2.3 PL11]
+
+Ken,
+
+>I modified your code (as fixed by me - still possible that I screwed up)
+>and using the last version of 'sameside' in your second posting.
+>
+>Your program fails on the following input:
+>
+>0 0
+>1 0
+>0 1
+>0 -1
+
+I discovered a few more bugs after I sent the correction. I really
+should have tested the program on machine in addition to on paper
+before submitting it. The error was basically that I used i as the
+loop variable, but referred to n inside the loop.
+
+Anyway, my newest program works on both your examples. I include a
+corrected version below. I also changed the representation of polygons
+to be two arrays of coordinates rather than one array of points. to
+compare against Eric Haines program.
+
+	Torben
+
+P.S.
+I apologize for the inconvenience caused by too quickly submitting a
+faulty program.
+
+
+int sameside(x1,y1,x2,y2,lx1,ly1,lx2,ly2)
+int x1,y1,x2,y2,lx1,ly1,lx2,ly2;
+{
+  int dx,dy,t1,t2;
+
+  dx = lx2 - lx1;
+  dy = ly2 - ly1;
+  t1 = dx*(y1-ly1)-dy*(x1-lx1);
+  t2 = dx*(y2-ly1)-dy*(x2-lx1);
+  return(t1<0 && t2<0 || t1>0 && t2>0);
+}
+
+int is_polygon_convex(x, y, n)
+    int *x, *y;
+    int n;
+
+{
+  int i;
+  int c;
+
+  c = 1;
+  for (i=3; i<n && c; ++i)
+    c = c && !sameside(x[i],y[i],x[1],y[1],x[0],y[0],x[i-1],y[i-1])
+          && sameside(x[i],y[i],x[i-1],y[i-1],x[0],y[0],x[1],y[1])
+          && sameside(x[i],y[i],x[0],y[0],x[i-1],y[i-1],x[i-2],y[i-2]);
+  return(c);
+}
+
+
+1, answered,,
+Return-Path: <torbenm@tyr.diku.dk@cis.uab.edu>
+Received: from odin.diku.dk by cis.uab.edu (4.1/SMI-4.0)
+	id AA16899; Mon, 26 Oct 92 06:23:06 CST
+Received: from tyr.diku.dk by odin.diku.dk with SMTP id AA01635
+  (5.65+/IDA-1.3.5 for sloan@cis.uab.edu); Mon, 26 Oct 92 13:21:45 +0100
+Received: by tyr.diku.dk id AA18123
+  (5.65+/IDA-1.3.5 for zhu@sgi.com); Mon, 26 Oct 92 13:21:32 +0100
+From: Torben AEgidius Mogensen <torbenm@diku.dk>
+Message-Id: <9210261221.AA18123@tyr.diku.dk>
+Subject: Re: pre-release announcement and results
+To: sloan@cis.uab.edu
+Date: Mon, 26 Oct 92 13:21:32 MET
+Cc: wb104@mbuf.bio.cam.ac.uk, ledwards@leland.Stanford.EDU, fred@kpc.com,
+        Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU, hollasch@kpc.com,
+        gavin@krypton.asd.sgi.com, torbenm@diku.dk, schorn@inf.ethz.ch,
+        tomw@megatek.com, zhu@sgi.com
+X-Mailer: ELM [version 2.3 PL11]
+
+*** EOOH ***
+Return-Path: <torbenm@tyr.diku.dk@cis.uab.edu>
+From: Torben AEgidius Mogensen <torbenm@diku.dk>
+Subject: Re: pre-release announcement and results
+To: sloan@cis.uab.edu
+Date: Mon, 26 Oct 92 13:21:32 MET
+Cc: wb104@mbuf.bio.cam.ac.uk, ledwards@leland.Stanford.EDU, fred@kpc.com,
+        Paul.Heckbert@HOSTESS.GRAPHICS.CS.CMU.EDU, hollasch@kpc.com,
+        gavin@krypton.asd.sgi.com, torbenm@diku.dk, schorn@inf.ethz.ch,
+        tomw@megatek.com, zhu@sgi.com
+X-Mailer: ELM [version 2.3 PL11]
+
+Kenneth Sloan writes:
+
+>Q7) Is there a workable definition of this class of polygon, which does
+>not depend on so many special cases?
+>A7) YES - a version of the "strictly convex curve" test which I offerred
+>up a few days ago. Which is:
+>
+>"A strictly convex curve (SCC) is a curve which divides the plane into three
+>regions: IN, ON, and OUT, and has the property that every line in the
+>plane intersects the curve (the points in ON) either zero, one, or two
+>times.  Zero-intersection lines are uninteresting.  One-intersection
+>lines must not pass through any point in IN (these are tangent to the
+>curve). Two-intersection lines *do* pass through IN.
+
+This will not do. In the polygon
+
+[(0 0) (0 1) (1 0)]
+
+The line x=0 intersects the curve in an infinity of points.
+
+I think we should start by giving a short and simple definition of
+which polygon (if any) is specified by a list of vertices. Once we
+agree on that, we can start specifying what it means for such polygon
+to be convex.
+
+I prefer a definition of polygon like this:
+
+The list of n vertices [V_0,...,V_{n-1}] defines a set of n half-open
+line segments: [V_0V_1[, ..., [V_{n-2}V_{n-1}[, [V_{n-1}V_0[, called
+the edges.  The interior of the polygon is defined as the set of
+points S such that any halfline starting in a point s in S will
+intersect an odd number of edges. The polygon is the union of its
+interior and its edges.
+
+This definition disallows repeated neighbouring vertices and one-point
+polygons (as two identical points do not define a half-open line
+segment), but allows some extreme polygons like [(0 0) (1 1)], which
+have empty interiors.  It also allows retracings like [(0 0)(1 0)(1 2)
+(1 1)(1 3)] and [(0 0)(1 0)(1 1)(0 0)(1 0)(1 1)].
+
+We can modify the definition to say that the common points of any two
+vertices must be either a singleton set or the empty set. This
+disallows retracings (including [(0 0) (1 1)]) but allows edges to
+intersect (non-simple polygons).  Personally, I'm in favour of this
+restriction, but I could be persuaded to let it fall.
+
+The most natural way to define a convex polygon is to say that the set
+of points that the polygon defines is a convex set in the classical
+sense, that is: any two points in the set are connected by a line
+segment entirely in the set. If we use the unrestricted definition of
+a polygon, we must say that [(0 0)(2 2)(1 1)(3 3)] and [(0 0)(1 0)(1
+1)(0 0)(1 0)(1 1)] are both convex. In other words, we have these
+answers to Kenneths questions are:
+
+Q0: NO
+
+Q1: YES
+
+Q2: YES
+
+Q3: YES
+
+Q4: YES
+
+Q5: NO
+
+Q6: YES
+
+If we have the restriction we get different answers to these questions:
+
+Q1: NO
+
+Q2: NO
+
+Q3: NO
+
+Q4: NO
+
+In both cases we, of course, have
+
+Q7: YES
+
+>Two programs (Haines and Torben) fail on the "L" polygon (polyN12):
+>
+>0 0
+>1 0
+>0 1
+>0 -1
+>
+>This is clearly not convex.  I don't think this is controversial!
+
+Kenneth must not have my latest version. I just tried the example and
+it returned "not convex". My latest version (which allows colinear
+points, but assumes that the restriction mentioned above applies) is
+
+int sameside(x1,y1,x2,y2,lx1,ly1,lx2,ly2)
+int x1,y1,x2,y2,lx1,ly1,lx2,ly2;
+{
+  int dx,dy,t1,t2;
+
+  dx = lx2 - lx1;
+  dy = ly2 - ly1;
+  t1 = dx*(y1-ly1)-dy*(x1-lx1);
+  t2 = dx*(y2-ly1)-dy*(x2-lx1);
+  return(t1<=0 && t2<=0 || t1>=0 && t2>=0);
+}
+
+int is_polygon_convex(x, y, n)
+    int *x, *y;
+    int n;
+
+{
+  int i;
+  int c;
+
+  c = 1;
+  for (i=3; i<n && c; ++i)
+    c = c && !sameside(x[i],y[i],x[1],y[1],x[0],y[0],x[i-1],y[i-1])
+          && sameside(x[i],y[i],x[i-1],y[i-1],x[0],y[0],x[1],y[1])
+          && sameside(x[i],y[i],x[0],y[0],x[i-1],y[i-1],x[i-2],y[i-2]);
+  return(c);
+}
+
+It uses integer coordinates, but can easily be modified to use floats
+or whatever.
+
+	Torben Mogensen (torbenm@diku.dk)
+
+
+1, answered,,
+Return-Path: <torbenm@thor.diku.dk@cis.uab.edu>
+Received: from odin.diku.dk by cis.uab.edu (4.1/SMI-4.0)
+	id AA02516; Wed, 28 Oct 92 05:42:34 CST
+Received: from thor.diku.dk by odin.diku.dk with SMTP id AA02250
+  (5.65+/IDA-1.3.5 for sloan@cis.uab.edu); Wed, 28 Oct 92 12:43:53 +0100
+Received: by thor.diku.dk id AA15314
+  (5.65+/IDA-1.3.5 for sloan@cis.uab.edu); Wed, 28 Oct 92 12:43:51 +0100
+From: Torben AEgidius Mogensen <torbenm@diku.dk>
+Message-Id: <9210281143.AA15314@thor.diku.dk>
+Subject: Re: one more time...
+To: sloan@cis.uab.edu
+Date: Wed, 28 Oct 92 12:43:51 MET
+X-Mailer: ELM [version 2.3 PL11]
+
+*** EOOH ***
+Return-Path: <torbenm@thor.diku.dk@cis.uab.edu>
+From: Torben AEgidius Mogensen <torbenm@diku.dk>
+Subject: Re: one more time...
+To: sloan@cis.uab.edu
+Date: Wed, 28 Oct 92 12:43:51 MET
+X-Mailer: ELM [version 2.3 PL11]
+
+Ken,
+
+>   According to my definition from my last mail it is not even a polygon,
+>   as the two vertices (0 0) and (0 0) don't define a line.
+>
+>Alas, the concense (as measured here, by me) is that your definition
+>doesn't work.  Sorry.
+
+I gather that, and have modified my program accordingly.
+
+> >How about [(0 0) (2 0) (2 2) (1 1) (2 2) (0 2)]?  Is this a convex polygon?
+>
+>   If you use the unrestricted definition from my mail, it is. I'm sure
+>   that you will agree that the set of points it defines is a convex set.
+>
+>Nope - I don't agree.  Not until you tell me more about how a boundary
+>defines a set of points.
+
+I stated in my definition of polygon that a boundary defined a set of
+points in the following way: Each edge is a half-open line segment.
+The interior of the polygon is the set S of points s, such that any
+halfline from s intersects an odd number of edges. The set of points
+that the polygon defines is the interiour set combined with the points
+on the edges.
+
+Thus the polygon above defines the following set of points:
+
+{(x,y) | x>=0 and x<=2 and y>=0 and y<=2}
+
+which is a convex set.
+
+> Do edges *include* points on one side, or
+>*exclude* points on the other side?  Or do edges not matter?  What set
+>of points is "defined by": [(0 0)(1 0)(1 1)(0 1)(1 0)(1 1)]?  
+
+See above. The set defined by [(0 0)(1 0)(1 1)(0 1)(1 0)(1 1)] is the
+points contained in the edges plus the interior, which in this case is
+the interior of the two triangles [(0 1) (1 1) (0.5 0.5)] and  [(0 0)
+(0 1) (0.5 0.5)].
+
+>But suppose that I do agree? I (and others) reject the notion that this
+>question revolves exclusively about the set of interior points.  The
+>real question is: what does it mean to count the number of intersections
+>with the boundary?  I claim that there are lines passing through
+>[(0 0) (2 0) (2 2) (1 1) (2 2) (0 2)] which intersect the polygon
+>boundary 4 times.
+
+Certainly. But any HALFline from an interior point will intersect the
+boundary either 1 or 3 times. The one-intersection variant of my
+definition will reject this as not convex and simple. But (requiring
+a non-empty interior) it will also reject [(0 0) (1 1)]. While I agree
+that the polygon [(0 0) (1 1)] is convex (in the set-of-points sense)
+I'm not certain I would call it simple. After all, it intersects
+itself in an infinity of points. It does, however, fit your definition
+of being arbitrarily approximable by strictly convex curves.
+
+>   This new definition requires a small change in my program, 
+>
+>Hee-hee!
+>I look forward to it.
+
+I have modified my program to conform to your definition. If there
+still are test cases where my program disagrees with your definition,
+please tell me.
+
+>OOOOHHHH! Truly radical test case.  What's the concensus on:
+>
+>    []
+
+If it is a polygon at all, it is certainly convex. So is a single
+point. The way my program is written now, it accepts both these cases.
+
+	Torben
+
+P.S.
+
+Here is my modified algorithm. It is somewhat larger for two reasons:
+I had to make a variant of sameside called nsameside, as the test for
+whether the new point is not strictly inside the polygon is not the
+exact negation of not strictly outside. The modification is needed
+because vertices can be colinear. Also, nsameside contains an extra
+test to reject retracing in some special cases which are not otherwise
+caught. The other reason is that some extra machinery is needed to
+handle repeated vertices. Especially the case where the first and last
+vertex are identical required special attention. I have included the
+remark /* double */ where int has to be replaced by double if you have
+real coordinates.
+
+
+int sameside(x1,y1,x2,y2,lx1,ly1,lx2,ly2)
+int /* double */  x1,y1,x2,y2,lx1,ly1,lx2,ly2;
+{
+  int /* double */  dx,dy,t1,t2;
+
+  dx = lx2 - lx1;
+  dy = ly2 - ly1;
+  t1 = dx*(y1-ly1)-dy*(x1-lx1);
+  t2 = dx*(y2-ly1)-dy*(x2-lx1);
+  return(t1<=0 && t2<=0 || t1>=0 && t2>=0);
+}
+
+int nsameside(x1,y1,x2,y2,lx1,ly1,lx2,ly2)
+int /* double */  x1,y1,x2,y2,lx1,ly1,lx2,ly2;
+{
+  int /* double */  dx,dy,dx1,dy1,t1,t2;
+
+  dx = lx2 - lx1;
+  dy = ly2 - ly1;
+  dx1 = x1 - lx1;
+  dy1 = y1 - ly1;
+  t1 = dx*dy1-dy*dx1;
+  t2 = dx*(y2-ly1)-dy*(x2-lx1);
+  if (t2<0) return(t1>=0);
+  if (t2>0) return(t1<=0);
+  return(t1==0 &&
+	 (dx>=0 && dx1>=0 || dx<=0 && dx1<=0) &&
+	 (dy>=0 && dy1>=0 || dy<=0 && dy1<=0));
+}
+
+
+int is_polygon_convex(x, y, n)
+    int /* double */  *x, *y;
+    int n;
+
+{
+  int c;
+  int v1,vi,vi_1,vi_2;
+
+  for (v1=1; v1<n && x[v1]==x[0] && y[v1]==y[0]; ++v1);
+  vi_2 = v1;
+  for (vi_1=v1+1; vi_1<n && x[vi_1]==x[v1] && y[vi_1]==y[v1]; ++vi_1);
+  
+  c = 1;
+  for (vi=vi_1+1; vi<n-1 && c; ++vi)
+    if (x[vi]!=x[vi_1] || y[vi]!=y[vi_1]) {
+      c = nsameside(x[vi],y[vi],x[v1],y[v1],x[0],y[0],x[vi_1],y[vi_1])
+          && sameside(x[vi],y[vi],x[vi_1],y[vi_1],x[0],y[0],x[v1],y[v1])
+          && sameside(x[vi],y[vi],x[0],y[0],x[vi_1],y[vi_1],x[vi_2],y[vi_2]);
+      vi_2 = vi_1;
+      vi_1 = vi;
+    }
+  if (c && vi==n-1 &&
+      (x[vi]!=x[vi_1] || y[vi]!=y[vi_1]) &&
+      (x[vi]!=x[0] || y[vi]!=y[0]))
+    c = nsameside(x[vi],y[vi],x[v1],y[v1],x[0],y[0],x[vi_1],y[vi_1])
+        && sameside(x[vi],y[vi],x[vi_1],y[vi_1],x[0],y[0],x[v1],y[v1])
+        && sameside(x[vi],y[vi],x[0],y[0],x[vi_1],y[vi_1],x[vi_2],y[vi_2]);
+  return(c);
+}
+
+
+

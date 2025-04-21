@@ -1,0 +1,169 @@
+BABYL OPTIONS:
+Version: 5
+Labels:
+Note:   This is the header of an rmail file.
+Note:   If you are seeing it in rmail,
+Note:    it means the file has no messages in it.
+
+1, answered,,
+Return-Path: <schorn@inf.ethz.ch@cis.uab.edu>
+Received: from bernina.ethz.ch by cis.uab.edu (4.1/SMI-4.0)
+	id AA12177; Thu, 29 Oct 92 09:42:06 CST
+Received: from neptune by bernina.ethz.ch with SMTP inbound id <7057-0@bernina.ethz.ch>; Thu, 29 Oct 1992 16:43:23 +0100
+Received: from brain.inf.ethz.ch (brain-gw.inf.ethz.ch) by neptune id AA07372; Thu, 29 Oct 92 16:43:18 +0100
+Message-Id: <9210291543.AA00971@brain.inf.ethz.ch>
+Received: from [129.132.124.74] (sansan) by brain.inf.ethz.ch id AA00971; Thu, 29 Oct 92 16:43:10 +0100
+Date: Thu, 29 Oct 1992 16:45:55 +0100
+To: Kenneth Sloan <sloan@cis.uab.edu>
+From: schorn@inf.ethz.ch
+Subject: numerics and my entry
+
+*** EOOH ***
+Return-Path: <schorn@inf.ethz.ch@cis.uab.edu>
+Date: Thu, 29 Oct 1992 16:45:55 +0100
+To: Kenneth Sloan <sloan@cis.uab.edu>
+From: schorn@inf.ethz.ch
+Subject: numerics and my entry
+
+>   If the coordinates of the points get big enough (say 1E10 and probably much
+>   smaller) your epsilon-test will work as if you had used EPSILON=0 because
+>   the term 'CrossProduct' is unbounded. This means that you'll detect
+>   concavities where the points are in fact 'almost' collinear.
+>
+>That's precisely what I want to happen.  Just after sending off my reply
+>I thought of this:  as the polygons get bigger, I ought to get "better"
+>answers.  I *want* to reject polygons which are "just barely concave" -
+>but I'm afraid of also rejecting polygons which are in fact "just barely
+>convex".  Ideally, the value of EPSILON should be tied to the precision
+>of the machine - but that's too complex for this kind of demonstration
+>program.  
+
+What you will actually do is the following: If the coordinate values are
+small enough (as they are in the current test cases) your absolute EPSILON
+will work just fine. But if you have larger values of the coordinates your
+test will accept concavities as convex and vice versa due to rounding
+errors (it is not too hard to construct examples). On the other hand you
+are doing something even worse: assume you scale down your coordinates (1
+becomes 1E-15). Consider the polygon [(0 0) (2E-15 0) (2E-15 4E-15) (1E-15
+1E-15)]. Your program says 'CONVEX' although this polygon is clearly
+concave. Furthermore this polygon is clearly not degenerate and this is
+what you want to detect with an approximate equality test. These problems
+disappear if you change 'ClassifyAngle' from measuring area (area of the
+triangle defined by the three points) to measuring angle. This is most
+simply done by dividing 'ClassifyAngle' by the square of the longest side
+of the triangle. Now it makes sense to use an EPSILON and you are right in
+saying that this EPSILON should be tied to the precision of the machine.
+
+I have done some numerical analysis for a winding-number program which
+accepts floating point coordinates. I can send you a short paper on this
+subject if you are interested.
+
+
+The following is my entry for the IsConvex-test programming contest. It
+does not do anything fancy (e.g. testing for approximate concavities,
+counting the number of collinear or repeated points) but should work on all
+kinds of degenerate data. It has passed all tests so far and it is quite
+short since there is only one special case namely when the first and the
+last point coincide.
+
+Peter
+
+
+cut here ------------------------------------------------------------------
+/*
+ * Determines whether a polygon is convex in O(n) time and O(1) space.
+ * Points maybe repeated and collinear.
+ * Author: Peter Schorn, schorn@inf.ethz.ch
+ * 29-Oct-92
+ */
+
+#include <stdio.h>
+
+#define TRUE (-1)
+#define FALSE (0)
+
+typedef struct Point2d { double x, y; } Point2d;
+
+int WhichSide(p, q, r)
+Point2d p, q, r;
+{
+ double result;
+ result = (p.x - q.x) * (q.y - r.y) - (p.y - q.y) * (q.x - r.x);
+ if (result > 0) return 1;
+ if (result < 0) return -1;
+ return 0;
+}
+
+int Compare(p, q)
+Point2d p, q;
+{
+ if (p.x < q.x) return -1;
+ if (p.x > q.x) return 1;
+ if (p.y < q.y) return -1;
+ if (p.y > q.y) return 1;
+ return 0;
+}
+
+int GetPoint(f, p)
+ FILE *f;
+ Point2d *p;
+ {
+  return !feof(f) && (2 == fscanf(f, " %lf %lf", &(p->x), &(p->y)));
+ }
+
+int GetDifferentPoint(f, previous, next)
+ FILE *f;
+ Point2d previous, *next;
+ {
+  int eof;
+  while ((eof = GetPoint(f, next)) && (Compare(previous, *next) == 0));
+  return eof;
+ }
+
+#define CheckTriple \
+  if (((thisDir = Compare(second, third)) == -curDir) && \
+      (++dirChanges > 2)) return FALSE; \
+  curDir = thisDir; \
+  if (thisSign = WhichSide(third, second, first)) \
+  { \
+   if (angleSign == -thisSign) return FALSE; \
+   angleSign = thisSign; \
+  } \
+  first = second; \
+  second = third;
+
+int IsPolygonConvex(f)
+ FILE *f;
+ {
+  int curDir, thisDir, thisSign, angleSign = 0, dirChanges = 0;
+  Point2d first, second, third, saveFirst, saveSecond;
+
+  if (!GetPoint(f, &first) ||
+      !GetDifferentPoint(f, first, &second)) return TRUE;
+  saveFirst = first; saveSecond = second;
+  curDir = Compare(first, second);
+  while (GetDifferentPoint(f, second, &third))
+  {
+   CheckTriple;
+  }
+  if (Compare(second, saveFirst))
+   {
+    third = saveFirst;
+    CheckTriple;
+   }
+  third = saveSecond;
+  CheckTriple;
+  return TRUE;
+ }
+
+
+int main()
+{
+ if (IsPolygonConvex(stdin))
+  { fprintf(stdout,"CONVEX AND SIMPLE\n");        exit(0); }
+ else
+  { fprintf(stdout,"NOT CONVEX OR NOT SIMPLE\n"); exit(-1); }
+}
+
+
+

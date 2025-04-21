@@ -1,0 +1,6 @@
+ECAT7 data format
+The ECAT7 data format is native to several generations of PET scanners manufactured by Siemens/CTI Inc. It is a “traditional” binary format that uses struct-type data blocks for header information [1]. The header and image data are contained in one file, the header data is split into one “main” header of size 512 Bytes [2] located at the beginning of the file and a 512 Byte header prefixed to each image frame. In addition there is one “directory” block. “Multi-frame” ECAT7 files contain more than one image volume: all images usually have the same dimensions and belong to one study, activation studies are saved in multi-frame files, each image frame has an entry in the directory block. It should be noted that this file format is not particularly suited as a general-purpose file format for data post-processing: it uses a fixed-size header which, by definition, cannot be expanded for extended keywords or general post-processing information; different conventions exist for numbering of frames in different contexts; no information about coordinate systems is provided; space for free-text comments and patient data is very limited.
+
+http://www.nf.mpg.de/vinci3/doc/image-formats.html#:~:text=The%20ECAT7%20data%20format%20is,for%20header%20information%20%5B1%5D.
+
+https://nipy.org/nibabel/reference/nibabel.ecat.html

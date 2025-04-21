@@ -1,0 +1,1655 @@
+BABYL OPTIONS:
+Version: 5
+Labels:
+Note:   This is the header of an rmail file.
+Note:   If you are seeing it in rmail,
+Note:    it means the file has no messages in it.
+
+1,,
+Return-Path: <fred@kpc.com@cis.uab.edu>
+Received: from horn.kpc.com by cis.uab.edu (4.1/SMI-4.0)
+	id AA16012; Thu, 29 Oct 92 19:50:31 CST
+Received: by horn.kpc.com (5.65/fma-120691);
+	id AA22612; Thu, 29 Oct 92 17:48:01 -0800
+Received: from pine by kpc.com (5.65/SMI-4.1-kpc1020)
+	id AA05733; Thu, 29 Oct 92 17:46:58 -0800
+Received: from phoenix by mailbox.kpc.com (4.1/kpc-920618)
+	id AA06357; Thu, 29 Oct 92 17:47:43 PST
+Message-Id: <9210300148.AA01533@phoenix.kpc.com>
+To: sloan@cis.uab.edu, schorn@inf.ethz.ch, wb104@mbuf.bio.cam.ac.uk,
+        Paul.Heckbert@hostess.graphics.cs.cmu.edu, erich@eye.com,
+        gavin@krypton.asd.sgi.com, hollasch@kpc.com,
+        ledwards@leland.stanford.edu, tomw@megatek.com, torbenm@diku.dk,
+        zhu@sgi.com, kjw@phoenix.kpc.com
+Subject: my convexity checker and timing analyzer.
+Date: Thu, 29 Oct 92 17:48:05 -0800
+From: fred@kpc.com
+
+*** EOOH ***
+Return-Path: <fred@kpc.com@cis.uab.edu>
+To: sloan@cis.uab.edu, schorn@inf.ethz.ch, wb104@mbuf.bio.cam.ac.uk,
+        Paul.Heckbert@hostess.graphics.cs.cmu.edu, erich@eye.com,
+        gavin@krypton.asd.sgi.com, hollasch@kpc.com,
+        ledwards@leland.stanford.edu, tomw@megatek.com, torbenm@diku.dk,
+        zhu@sgi.com, kjw@phoenix.kpc.com
+Subject: my convexity checker and timing analyzer.
+Date: Thu, 29 Oct 92 17:48:05 -0800
+From: fred@kpc.com
+
+
+Hello,
+
+I've got my version of the convexity tester going along with timing analysis.
+
+I wrote my version to return:
+	0)	if the "polygon" is degenerate (one point, or the
+		polygon edges form only lines)
+
+	1)	polygon is convex. this means the points are such that
+		a simple triangle fan tessellator will work for display.
+
+	2)	polygon is non-convex. These polygons should be displayed
+		with an algorithm more sophisticated than triangle-fan.
+		This will include some polygons that *could* be tessellated
+		with the triangle fan approach, but they're "crazy" type
+		polygons, like:
+		0 0, 0 2, 0 1, 0 2, 1 1
+		0 0, 1 0, 1 1, 0 0, 1 0, 1 1
+
+My program accepts the input stream as all of your programs, however I wanted
+to run timing tests on the data, and for all the other algorithms. To do this
+I required a routine defined like this:
+
+	isConvexFred( nvert, pVert )
+	int       nvert;
+	float     pVert[][2];
+	{
+	}
+
+I converted Steve Hollasch's and Ken Sloan's algorithms to this style and
+got the performance numbers listed later. I think this is a reasonable
+interface because once you've determined if the polygon is convex or not
+then I'd want to display it, or process it, or something.  If we've thrown 
+all the vertices away because we've scanned bye them (pun intended) from the 
+input stream, then what?
+
+My code passes all tests from the archive I got from Ken about a week ago,
+and is faster in all but 2 cases, and most of the time it's much faster. 
+Ken, let me know if it breaks for any of your new test cases.
+
+If everyone could modify their code to accept the interface above, it's
+quite simple to add your module into the test suite.
+
+By the way, I don't always track the monotonicity of the Y coords, just 
+during special conditions.
+
+Also, I'd like to see the programs working with float instead of double.
+I don't see any reason why we should be running with "slow" doubles.
+
+regards,
+
+Fred
+
+------------------------------------------------------------------------------
+initial performance report:
+
+
+uSecs/Test  totalSec onPolygon  numTest nameTest
+---------- --------- --------- -------- --------
+testdir/polyN00
+********** test for 6 vertices
+        24   2.4e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      46.7  4.67e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      40.2  4.02e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN01
+********** test for 8 vertices
+      22.6  2.26e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      42.8  4.28e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      37.8  3.78e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN02
+********** test for 5 vertices
+      19.6  1.96e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      28.4  2.84e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      48.1  4.81e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN03
+********** test for 14 vertices
+      66.9  6.69e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      87.9  8.79e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+     166.3 0.0001663  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN04
+********** test for 14 vertices
+      16.3  1.63e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      19.8  1.98e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      27.4  2.74e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN05
+********** test for 5 vertices
+      19.7  1.97e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      28.6  2.86e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+        48   4.8e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN06
+********** test for 5 vertices
+      17.3  1.73e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      30.1  3.01e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      35.9  3.59e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN07
+********** test for 7 vertices
+        15   1.5e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+        20     2e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      27.9  2.79e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN08
+********** test for 7 vertices
+      22.6  2.26e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      37.6  3.76e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      32.6  3.26e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN09
+********** test for 5 vertices
+      17.3  1.73e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      20.1  2.01e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      32.9  3.29e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN10
+********** test for 8 vertices
+      28.5  2.85e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      55.5  5.55e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      74.9  7.49e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN11
+********** test for 6 vertices
+      21.2  2.12e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      21.6  2.16e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      32.9  3.29e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN12
+********** test for 4 vertices
+      24.6  2.46e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      30.6  3.06e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      38.7  3.87e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN13
+********** test for 6 vertices
+        14   1.4e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      14.2  1.42e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      32.6  3.26e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN14
+********** test for 11 vertices
+      18.3  1.83e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+        14   1.4e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      56.7  5.67e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN15
+********** test for 2 vertices
+       2.3   2.3e-06  aveOfAve   100000 isConvexFred      says Non-Convex
+       1.5   1.5e-06  aveOfAve   100000 isConvexSteve     says Non-Convex
+       7.9   7.9e-06  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN16
+********** test for 3 vertices
+      17.2  1.72e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+        19   1.9e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      21.3  2.13e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyN17
+********** test for 6 vertices
+???ROUTINE 'isConvexKRSloan' disagress with previous routine
+    onVert = 6, onPolygon = 0, prev stat = 0, cur stat = 1
+ 0)        0        0
+ 1)        1        1
+ 2)        0        0
+ 3)        0        0
+ 4)        0        0
+ 5)        0        0
+      22.6  2.26e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      12.5  1.25e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      62.8  6.28e-05  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+
+testdir/polyNfred
+********** test for 6 vertices
+        24   2.4e-05  aveOfAve   100000 isConvexFred      says Non-Convex
+      45.1  4.51e-05  aveOfAve   100000 isConvexSteve     says Non-Convex
+      97.4  9.74e-05  aveOfAve   100000 isConvexKRSloan   says Non-Convex
+Pass.
+
+testdir/polyY01
+********** test for 3 vertices
+      18.1  1.81e-05  aveOfAve   100000 isConvexFred      says Convex
+      30.9  3.09e-05  aveOfAve   100000 isConvexSteve     says Convex
+      20.7  2.07e-05  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+
+testdir/polyY03
+********** test for 4 vertices
+      23.1  2.31e-05  aveOfAve   100000 isConvexFred      says Convex
+      39.3  3.93e-05  aveOfAve   100000 isConvexSteve     says Convex
+      55.4  5.54e-05  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+
+testdir/polyY04
+********** test for 5 vertices
+      25.1  2.51e-05  aveOfAve   100000 isConvexFred      says Convex
+      40.3  4.03e-05  aveOfAve   100000 isConvexSteve     says Convex
+      66.6  6.66e-05  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+
+testdir/polyY05
+********** test for 5 vertices
+      27.2  2.72e-05  aveOfAve   100000 isConvexFred      says Convex
+      40.7  4.07e-05  aveOfAve   100000 isConvexSteve     says Convex
+      73.5  7.35e-05  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+
+testdir/polyY06
+********** test for 3 vertices
+      16.3  1.63e-05  aveOfAve   100000 isConvexFred      says Convex
+      30.9  3.09e-05  aveOfAve   100000 isConvexSteve     says Convex
+      20.8  2.08e-05  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+
+testdir/polyY07
+********** test for 4 vertices
+      21.9  2.19e-05  aveOfAve   100000 isConvexFred      says Convex
+      38.7  3.87e-05  aveOfAve   100000 isConvexSteve     says Convex
+        55   5.5e-05  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+
+testdir/polyYfred100
+********** test for 100 vertices
+     480.3 0.0004803  aveOfAve   100000 isConvexFred      says Convex
+     776.5 0.0007765  aveOfAve   100000 isConvexSteve     says Convex
+    2072.7 0.0020727  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+
+testdir/polyYfred40
+********** test for 40 vertices
+     198.2 0.0001982  aveOfAve   100000 isConvexFred      says Convex
+     314.6 0.0003146  aveOfAve   100000 isConvexSteve     says Convex
+       802  0.000802  aveOfAve   100000 isConvexKRSloan   says Convex
+Pass.
+=== All tests passed ===
+
+.................. the following is a shell archive of my programs.
+perf.c is the generic polygon generator/reader and is the wrapper for
+	doing performance analysis.
+tests.c	contains my "real" code and Steve's revised algorithm.
+Sloan.c contains a version of Ken's code.
+
+Ken, if you want to just run my code, find the following in perf.c
+#define PROG_OPTIONS( macName )                                         \
+        macName(isConvexFred,  NUM_TEST);                               \
+        macName(isConvexSteve, NUM_TEST);                               \
+        macName(isConvexKRSloan, NUM_TEST);                             \
+
+and change to
+
+#define PROG_OPTIONS( macName )                                         \
+        macName(isConvexFred,  NUM_TEST);                               \
+
+.............................................................................
+#!/bin/sh
+# to extract, remove the header and type "sh filename"
+if `test ! -s ./perf.c`
+then
+echo "writing ./perf.c"
+cat > ./perf.c << '\End\Of\Shar\'
+/* file: perfpoly2d - do performance timing on code processing 2d polygons */
+
+/* This program facilitates deciding which algorithm is fastest for a given
+ * processing task. A number of random polygons are generated, then each
+ * algorithm is called to process the set of polygons.
+ * To add a new test:
+ *	1) add the routine name to the 'PROG_OPTIONS' macro
+ *	2) put the routine in this file or another to be resolved at link time.
+ *	   Your routine should return the following values:
+ *		return 0 for degenerate polygons (lines and points)
+ *		return 1 for convex polygons
+ *		return 2 for non-convex non-degenerate polygons
+ *
+ * you can control the amount of output with the verbosity option, try:
+ * 	perf < file 0			;only summary output
+ *	perf < file 1			;more...
+ *	perf < file 9			;the most
+ *
+ * if the file contains 999 for the first X coord, then program options
+ * are read from the file and random polygons are generated. See code.
+ *
+ * specify the following in 'PROG_OPTIONS'
+ * 	<routine name>
+ *		this is the actual "C" routine name.
+ *	<number of times to test routine with a given polygon> 
+ *		this should be > 1 / (HZ * approx. single test time in seconds)
+ */
+#define	PROG_OPTIONS( macName )						\
+	macName(isConvexFred,  NUM_TEST);				\
+	macName(isConvexSteve, NUM_TEST);				\
+	macName(isConvexKRSloan, NUM_TEST);				\
+
+#define	DEBUG			1
+#define	MAX_TEST_ROUTINE	50	/* max routines that may be specified */
+#define	MAX_POLY_VERT		100	/* max vertices that may be generated */
+#define	MAX_TIME_VERT		10	/* max verts to keep in summary table */
+#define	NUM_TEST		100000
+#undef	NUM_TEST
+#define	NUM_TEST		100
+
+#include "stdio.h"
+#include <math.h>
+#include <sys/types.h>
+#include <sys/param.h>
+#include <sys/times.h>
+
+/*****************************************************************************/
+int	verbose    = 0;		/* verbosity for debugging */
+
+static	int	numPolygon = 10;/* num of diff polygons to try for each nvert */
+static	int	minVert	   = 3;	/* min number of polygon vertices to generate */
+static	int	maxVert	   = 10;/* max number of polygon vertices to generate */
+
+double	drand48();
+
+#define	X	0
+#define	Y	1
+
+#if     DEBUG
+#define GITrace(level, args)   if ( verbose >= level  ) { args };
+
+#else
+#define GITrace(level, args)
+#endif
+
+/*****************************************************************************/
+long
+convertStarStopToUSec( start, stop )
+long		       start, stop;
+/* make this a routine so you can test the timer function and make sure HZ
+ * is defined right on your machine. Use verbosity option 't' to test time.
+ */
+{
+    long uSec = 1000000.0 *(float)(stop - start) / (float)(HZ);
+    return( uSec );
+}
+
+/*****************************************************************************/
+testTimer()
+{
+    long        timestart, timestop;
+    struct  tms timebuf;
+    float       uSec;
+
+    printf("Start timer test...\n");
+    timestart = times( &timebuf );
+    while ( 1 ) {
+	timestop = times( &timebuf ); 
+	if ( convertStarStopToUSec(timestart, timestop) / 1000000.0 > 10.0) 
+	   break;
+    }
+    timestop = times( &timebuf );
+    uSec = convertStarStopToUSec( timestart, timestop );
+    printf("\7\7\7End test in %g uSec, %g seconds\n", uSec, uSec / 1000000.0 );
+}
+
+/*****************************************************************************/
+readPolygon(stream, nvert, pVert )
+FILE 	*stream;
+int	*nvert;		/* return number of vertices read here */
+float	pVert[][2];	/* return vertices here */
+/* This routine reads in a stream of 2D polygon coords from the input stream */
+{
+    int		status, go = 1;
+
+    if ( verbose >= 4 ) {
+	printf("Read polygon data:\n");
+    }
+    *nvert = 0;
+    while ( go ) {
+	status = fscanf(stream,"%g%g",&(pVert[*nvert][X]), &(pVert[*nvert][Y]));
+	switch ( status ) {
+	    case EOF :
+		go = 0;
+		break;
+	    case 2 : {
+		if ( verbose >= 4 ) {
+		    printf("%2d) %8g %8g\n", *nvert, 
+					pVert[*nvert][X], pVert[*nvert][Y]);
+		}
+		(*nvert)++;
+		break;
+	    }
+	    default : {
+    		fprintf( stderr, "\7\7\7???BAD POLYGON DATA\n");
+		usage();
+		break;
+	    }
+	}
+    }
+}
+
+/*****************************************************************************/
+printPoly( nvert, pVert )
+int        nvert;
+float      pVert[][2];
+{
+    int	ii;
+
+    for ( ii = 0;  ii < nvert;  ii++ ) {
+	printf("%2d) %8g %8g\n", ii, pVert[ii][X], pVert[ii][Y]);
+    }
+}
+
+/*****************************************************************************/
+static	char	*progName = 0;
+usage()
+{
+    fprintf(stderr, "Usage: %s [arg1 [arg2]]\n", progName );
+    fprintf(stderr, "arg1 is either: 0-9 to specify verbosity level\n");
+    fprintf(stderr, "                t   for timer test only\n");
+    fprintf(stderr, "arg2 is the number of times to call test routine\n");
+    fprintf(stderr, "     default value for arg2 is diff for each test\n");
+}
+
+/*****************************************************************************/
+int
+main(argc,argv)
+int argc;  char *argv[];
+{
+    int		doRandom = 0, ii, jj, onVert, onPolygon, onRoutine, onTest, 
+		timeIndex, status[MAX_TEST_ROUTINE], 
+		useTableNumTest = 1, fixedNumTest, useNumTest;
+    long	timestart, timestop;
+    struct  tms	timebuf;
+    float	uSec;
+    int		nvertex;	/* number of vertices in current polygon */
+    float	pgon[MAX_POLY_VERT][2];	/* current polygon */
+    float	uSecPerTest[MAX_TEST_ROUTINE][MAX_TIME_VERT];
+
+    progName = argv[0];
+    if ( argc > 1 ) {
+        verbose = argv[1][0] - '0';
+	if ( argv[1][0] == 't' ) { testTimer(); verbose = 0; exit(0); }
+	if ( verbose < 0  ||  verbose > 9 ) { usage(); exit(0); }
+    }
+    if ( argc > 2 ) {
+	useTableNumTest = 0;			/* ignore table value */
+	fixedNumTest = atoi( argv[2] );
+	if ( fixedNumTest <= 0 ) { usage(); exit(0); }
+    }
+    srand( 12345 );
+    for ( ii = 0;  ii < MAX_TEST_ROUTINE;  ii++ ) {
+	for ( jj = 0;  jj < MAX_TIME_VERT;  jj++ ) {
+	    uSecPerTest[ ii ][ jj ] = 0.0;
+	}
+    }
+
+    readPolygon( stdin, &nvertex, pgon );
+    if ( pgon[0][X] > 998.0 ) {
+	/* generate random data */
+	doRandom   = 1;
+				   	numPolygon   = pgon[0][Y];
+	minVert         = pgon[1][X]; 	maxVert      = pgon[1][Y];
+	useTableNumTest = pgon[2][X];	fixedNumTest = pgon[2][Y];
+	if ( minVert < 0 ) {
+	    minVert = 0;
+	}
+    } else {
+ 	/* use polygon data from file for test */
+	minVert    = maxVert = nvertex;
+	numPolygon = 1;
+    }
+
+    if ( verbose ) {
+        printf("Test %d polygons for each vertex count in the range [%d,%d]\n",
+		numPolygon, minVert, maxVert );
+    }
+
+    /***** loop for each vertex size *****/
+    for ( onVert = minVert;  onVert <= maxVert;  onVert++ ) {
+	printf("********** test for %d vertices\n", onVert );
+	if ( onVert >= MAX_TIME_VERT ) {
+	    timeIndex = MAX_TIME_VERT - 1;
+	} else {
+	    timeIndex = onVert;
+	}
+	
+	if ( verbose >= 3 ) {
+printf("uSecs/Test is the ave of the average time for a given polygon size\n");
+	    printf("uSecs/Test  totalSec onPolygon  numTest nameTest\n");
+	    printf("---------- --------- --------- -------- --------\n");
+	}
+
+	/***** test for each polygon of the current vertex size *****/
+	for ( onPolygon = 0; onPolygon < numPolygon; onPolygon++ ) {
+	    if ( verbose >= 2 ) printf("onPolygon %2d\n", onPolygon );
+
+	    if ( doRandom ) {
+		/* make an arbitrary polygon fitting 0-1 range in x and y */
+		for ( ii = 0; ii < onVert; ii++ ) {
+		    pgon[ii][X] = drand48();
+		    pgon[ii][Y] = drand48();
+		}
+	    }
+
+	    /* define macro to run through all tests. It's true that this
+	     * makes it hard to debug the code, but it's working now, 
+	     * the type of code here doesn't need much more than visual
+	     * inspection, and it makes it easier to add new tests.
+	     */
+#define	DO_TEST(rname, numtest)						\
+	    if ( useTableNumTest ) useNumTest = numtest;		\
+	    else useNumTest = fixedNumTest;				\
+	    timestart = times( &timebuf );				\
+	    for ( onTest = 0;  onTest < useNumTest;  onTest++ ) {	\
+		status[onRoutine] = rname( onVert, pgon );		\
+	    }								\
+	    timestop = times( &timebuf );				\
+	    uSec = convertStarStopToUSec(timestart, timestop);		\
+	    uSecPerTest[ onRoutine ][timeIndex] += uSec / useNumTest;	\
+	    if ( status[onRoutine] == -1 ) status[onRoutine] = 1;	\
+	    if ( status[onRoutine] != 1  ) status[onRoutine] = 0;	\
+	    if ( onRoutine  &&  status[onRoutine] != status[onRoutine-1] ) { \
+		printf(							\
+		"\7\7\7???ROUTINE 'rname' disagress with previous routine\n");\
+		printf(							\
+"    onVert = %d, onPolygon = %d, prev stat = %d, cur stat = %d\n",	\
+		   onVert,onPolygon, status[onRoutine-1], status[onRoutine] ); \
+		printPoly( onVert, pgon );				\
+	    }								\
+	    if ( verbose >= 3 ) {					\
+	        /* print results of this one test */			\
+	        printf("%10g %9g %9d %8d ", uSec/useNumTest,		\
+			uSec / 1000000.0, onPolygon, useNumTest, "rname" );\
+	    }								\
+	    if ( verbose >= 2 ) {					\
+	        printf( "%-17s says %s\n", "rname", status[onRoutine] == 1 ? \
+			"Convex" : "Non-Convex" );                      \
+	    }								\
+	    onRoutine++;						\
+
+	    onRoutine 	= 0;
+	    PROG_OPTIONS( DO_TEST );
+	}
+
+#define	PRINT_RESULTS(rname, numtest)					\
+	if ( useTableNumTest ) useNumTest = numtest;			\
+	else useNumTest = fixedNumTest;					\
+	printf("%10g %9g  aveOfAve %8d ", 				\
+		uSecPerTest[ onRoutine ][timeIndex] / (float)(numPolygon),\
+		uSecPerTest[ onRoutine ][timeIndex] / 1000000.0, useNumTest);\
+	printf( "%-17s says %s\n", "rname", status[onRoutine] == 1 ?	\
+			"Convex" : "Non-Convex" );  			\
+	onRoutine++;						 	\
+
+	onRoutine = 0;
+	PROG_OPTIONS( PRINT_RESULTS );
+    }
+
+    if ( verbose )
+        printf("\nSummary of test results ordered by number of vertices:\n");
+    for ( onVert = minVert;  onVert <= maxVert && verbose;  onVert++ ) {
+	printf("********** Summary for %d vertices\n", onVert );
+	if ( onVert >= MAX_TIME_VERT ) {
+	    timeIndex = MAX_TIME_VERT - 1;
+	} else {
+	    timeIndex = onVert;
+	}
+
+	onRoutine   = 0;
+	PROG_OPTIONS( PRINT_RESULTS );
+    }
+    if ( status[0] == 1 ) return(0);
+    else return(1);
+}
+\End\Of\Shar\
+else
+  echo "will not over write ./perf.c"
+fi
+if `test ! -s ./tests.c`
+then
+echo "writing ./tests.c"
+cat > ./tests.c << '\End\Of\Shar\'
+/* file: tests.c - all routines to test */
+
+#include "stdio.h"
+#include "math.h"
+
+#define X       0
+#define Y       1
+#define Z       2
+#define W       3
+
+/* return 'z' of left-hand or right-hand cross product */
+#define GIScalerCrossZ( v0, v1 ) ( (v0)[X] * (v1)[Y] - (v0)[Y] * (v1)[X] )
+
+/*****************************************************************************/
+/*****************************************************************************/
+/* Fred Fisher test */
+
+#define	DEBUG	1
+int	verbose;			/* for tracing level */
+
+#if	DEBUG
+#define GIAssure(cond)                                                  \
+        if (!(cond)) {                                                  \
+            printf( "\7\7\7??? 'cond' failed\n");                       \
+            printf( "GIAssure: Line %d, File %s\n\n", __LINE__, __FILE__); \
+        }
+
+#define	GITrace(level, args)	if ( verbose >= level ) { args };
+
+#else
+#define GIAssure(cond)
+#define	GITrace(level, args)
+#endif
+
+/*****************************************************************************/
+#define	DirLeft		0
+#define	DirRight	1
+
+isConvexFred( nvert, pVert )
+int	  nvert;
+float	  pVert[][2];
+/* determine if the polygon is:
+ *	return 0 if degenerate (all points co-linear or co-incident
+ *	return 1 if convex
+ *	return 2 if non-convex
+ */
+{
+    int		firsti1, i1, i2, dir, turn = 0;
+    float	vec1[3], vec2[3], *pcur, *pnext, *ptemp, ccw = 0.0, 
+		outside, 
+		/* following keep track if all edges are degenerate */
+		outsideCCW, totalOutsideCCW = 0.0;
+
+    if ( nvert < 3  ) return(0);
+
+    /***** find indices i1 and i2 to 3 non-coincident points */
+    i1 = 1;
+    pcur  = vec1;
+    pnext = vec2;
+    /* scan for first pair of non-coincident pts */
+    do {
+	/* this is faster than computing entire cross product and checking
+	 * for zero. we'll use 'pcur' later to complete cross product.
+	 */
+	pcur[X] = pVert[i1][X] - pVert[0][X];
+	pcur[Y] = pVert[i1][Y] - pVert[0][Y];
+	if ( pcur[X] != 0.0  ||  pcur[Y] != 0.0 ) {
+	    break;
+	}
+    } while ( ++i1 < nvert );
+    if ( i1 >= nvert ) return(0);	/* all coincident */
+    firsti1 = i1;			/* remember first non-coincident */
+
+    /***** find the next point that's not coincident with coord 'i1' */
+    i2 = i1;
+    while ( ++i2 < nvert ) {
+	pnext[X] = pVert[i2][X] - pVert[i1][X];
+	pnext[Y] = pVert[i2][Y] - pVert[i1][Y];
+	if ( pnext[X] == 0.0  &&  pnext[Y] == 0.0 )
+	    continue;
+	ccw = GIScalerCrossZ( pcur, pnext );
+	/* must get out, consider [0,0] [1,0] [0,0] [0,1] */
+	break;
+    }
+    if ( i2 >= nvert ) return(0);	/* all coincident */
+
+#define	CheckNextVertexForDirection(from, to)				\
+    if ( dir == DirLeft ) {						\
+	if ( pVert[from][X] < pVert[to][X] ) {				\
+	    turn++; 	dir = DirRight; 	/* changed direction */	\
+	}								\
+    } else {								\
+	if ( pVert[from][X] > pVert[to][X] ) {				\
+	    turn++; 	dir = DirLeft; 		/* changed direction */	\
+	} else {							\
+	    /* X is not changing, check last three Y's */               \
+	    if ( !( (pcur[X] > 0.0  &&  pVert[to][X] > pVert[from][X]) || \
+		    (pcur[X] < 0.0  &&  pVert[to][X] > pVert[from][X]) ) ) { \
+		turn++;                         /* only y turned */     \
+	    }								\
+	}								\
+    } 									\
+
+    /***** we now have 3 non-colinear points, find first direction */
+    if ( pVert[0][X] < pVert[i1][X] ) {
+	/* first vector heads to right */
+	dir = DirRight;
+	CheckNextVertexForDirection( i1, i2 );	/* needn't check turn yet */
+    } else {
+	if ( pVert[0][X] > pVert[i1][X] ) {
+  	    /* first vector heads to left */
+    	    dir = DirLeft;
+	    CheckNextVertexForDirection( i1, i2 );  /* needn't check turn yet */
+	} else {
+	    /* first vector is vertical, decide with second coord */
+	    GIAssure( pVert[0][X] - pVert[i2][X] );
+	    if ( pVert[0][X] < pVert[i2][X] ) {
+	        dir = DirRight;
+	    } else {
+	        dir = DirLeft;
+	    }
+	}
+    }
+
+    if ( ccw < 0 ) { outside = -1.0; 	totalOutsideCCW = -outside; }
+    else           { outside =  1.0;	totalOutsideCCW =  ccw; }
+
+    GITrace( 5,
+	printf(
+	    "First three indices [%d, %d, %d], dir,outside,ccw = %d, %g, %g\n",
+			0, i1, i2, dir, outside, ccw );
+    )
+    ptemp = pnext;
+	    pnext = pcur;
+		    pcur = ptemp;		/* swap vector ptrs */
+
+    /***** go around polygon checking turn every 3 non-coincident vertices */
+    for ( i1 = i2, ++i2;    i2 < nvert;    i2++ ) {
+	pnext[X] = pVert[i2][X] - pVert[i1][X];
+	pnext[Y] = pVert[i2][Y] - pVert[i1][Y];
+	if ( pnext[X] == 0.0  &&  pnext[Y] == 0.0 )
+	    continue;
+
+	/* we have another non-coincident point */
+	CheckNextVertexForDirection( i1, i2 );
+        if ( turn > 2 ) return(2);
+
+	ccw = GIScalerCrossZ( pcur, pnext );
+	GITrace( 5,
+	    printf(
+	    "on %2d,%2d dir,turn,ccw=[%d,%d,%g], pcur=[%g,%g] pnext=[%g,%g]\n",
+		 i1,i2,           dir, turn, ccw,
+		 pcur[X], pcur[Y], 	pnext[X], pnext[Y] );
+	)
+	if ( (outsideCCW = ccw * outside) < 0.0 )
+	    return(2);				/* found wrong turn */
+	totalOutsideCCW += outsideCCW;
+	i1 = i2;
+	ptemp = pnext;
+		pnext = pcur;
+			pcur = ptemp;		/* swap vector ptrs */
+    }
+
+    /***** now check final direction */
+    CheckNextVertexForDirection( nvert-1, 0 );
+    if ( turn > 2 ) return(2);
+
+    /***** and another cross product */
+    i2 = 0;
+    pnext[X] = pVert[i2][X] - pVert[i1][X];
+    pnext[Y] = pVert[i2][Y] - pVert[i1][Y];
+    ccw = GIScalerCrossZ( pcur, pnext );
+    GITrace( 5,
+	printf(
+	    "on %2d,%2d dir,turn,ccw=[%d,%d,%g], pcur=[%g,%g] pnext=[%g,%g]\n",
+		 i1,i2,           dir, turn, ccw,
+		 pcur[X], pcur[Y], 	pnext[X], pnext[Y] );
+    )
+    if ( (outsideCCW = ccw * outside) < 0.0 )
+	return(2);                          /* found wrong turn */
+    totalOutsideCCW += outsideCCW;
+    i1 = i2;
+    ptemp = pnext;
+	    pnext = pcur;
+		    pcur = ptemp;           /* swap vector ptrs */
+
+    /***** and one more cross product to first non-coincident */
+    i2 = firsti1;
+    pnext[X] = pVert[i2][X] - pVert[i1][X];
+    pnext[Y] = pVert[i2][Y] - pVert[i1][Y];
+    ccw = GIScalerCrossZ( pcur, pnext );
+    GITrace( 5,
+	printf(
+	    "on %2d,%2d dir,turn,ccw=[%d,%d,%g], pcur=[%g,%g] pnext=[%g,%g]\n",
+		 i1,i2,           dir, turn, ccw,
+		 pcur[X], pcur[Y], 	pnext[X], pnext[Y] );
+    )
+    if ( (outsideCCW = ccw * outside) < 0.0 )
+	return(2);                          /* found wrong turn */
+    totalOutsideCCW += outsideCCW;
+
+    if ( totalOutsideCCW == 0.0 ) return(0);
+    return(1);
+}
+
+/*****************************************************************************/
+/*****************************************************************************\
+/* Steve Hollasch test */
+
+#define EPSILON 1e-15
+
+#define V2op2(X,op,Y) \
+    do { X[0] op Y[0]; X[1] op Y[1]; } while (0)
+
+#define V2op3(X,assign,Y,op,Z) \
+    do { X[0] assign Y[0] op Z[0]; X[1] assign Y[1] op Z[1]; } while (0)
+
+/*****************************************************************************
+**  This routine reads in a stream of 2D polygon coordinates from the input
+**  stream and returns 1 if the resulting closed polygon is convex, otherwise
+**  it returns 0.  The parameter `stream' is a currently open input stream.
+*****************************************************************************/
+
+int 
+isConvexSteve(nvert, pVert )
+int       nvert;
+float     pVert[][2];
+{
+    auto int    looking = 2;		/* Loop Termination Status */
+    auto int    factor = 0;		/* Turn Direction Factor */
+    auto float  A[2], B[2], C[2];	/* Current Vertices */
+    auto float  oldA[2], oldB[2];	/* First Two Vertices */
+    auto int    xdir, ydir;		/* Current Coordinate Direction */
+    auto int    xturns=0, yturns=0;	/* Coordinate Direction Changes */
+    auto float  dot;			/* Dot Product of Edge Norm and Edge */
+    auto float  U[2], V[2];		/* Edge Vectors AB and BC */
+    auto int	onvert;
+
+    /* Read in the first two vertices. */
+
+    if ( nvert < 3 ) return(0);
+    onvert = 0;
+    V2op2( B, =, pVert[0] );
+
+    do {
+	V2op2( C, =, pVert[onvert] );
+	onvert++;
+    } while ((B[0] == C[0]) && (B[1] == C[1]));
+
+    V2op2 (oldA,=,B);		/* Save the first two vertices. */
+    V2op2 (oldB,=,C);
+
+    V2op3 (V,=,C,-,B);		/* Calculate the edge vector V0V1. */
+
+    /* Set the X & Y coordinate directions if possible. */
+
+    xdir = (B[0] < C[0]) ? 1 : (B[0] > C[0]) ? -1 : 0;
+    ydir = (B[1] < C[1]) ? 1 : (B[1] > C[1]) ? -1 : 0;
+
+    do	/* Shift the last two vertices and read in the next vertex. */
+    {
+	V2op2 (A,=,B);
+	V2op2 (B,=,C);
+
+	do
+	{   switch (looking)
+	    {   case 2:
+		    V2op2( C, =, pVert[onvert] );
+		    if ( onvert >= nvert ) {
+		        looking = 1;
+			V2op2 (C,=,oldA);
+		    }
+		    onvert++;
+		    break;
+
+		case 1:
+		    looking = 0;
+		    V2op2 (C,=,oldB);
+		    break;
+		
+		case 0:
+		    return 1;
+	    }
+	} while ((C[0] == B[0]) && (C[1] == B[1]));
+
+	V2op2 (U,=,V);
+	V2op3 (V,=,C,-,B);	/* Calculate the edge vector from B to C. */
+
+	/* Get the dot product of the normal to edge AB and the vector BC.
+	** Compare this result with the previous dot products.  As long as
+	** the sign is the same as the previous ones (or zero), then
+	** everything's cool, otherwise we found a dent in the polygon, so
+	** return 0.  */
+
+	dot = (U[0] * V[1]) - (U[1] * V[0]);
+	if (fabs(dot) < EPSILON)
+	    dot = 0.0;
+	else
+	{   if (!factor)
+		factor = (dot < 0.0) ? -1 : 1;
+	    else if ((factor < 0) ^ (dot < 0.0))
+		return 0;
+	}
+
+	/* Check the X coordinate delta.  For a simple polygon, this can
+	** change sign (direction) twice, but no more. */
+
+#       define CHECK_DIRECTION(P,Q,dir,turns) \
+	    do { \
+		if (P < Q) \
+		{   if (dir == -1) \
+		    {   ++turns; \
+			if (dot == 0.0) return 0; \
+		    } \
+		    dir =  1; \
+		} \
+		else if (P > Q) \
+		{   if (dir ==  1) \
+		    {   ++turns; \
+			if (dot == 0.0) return 0; \
+		    } \
+		    dir = -1; \
+		} \
+	    } while (0)
+
+	CHECK_DIRECTION (B[0],C[0], xdir, xturns);
+	if (xturns > 2) return 0;
+
+	CHECK_DIRECTION (B[1],C[1], ydir, yturns);
+	if (yturns > 2) return 0;
+
+    } while (looking);
+
+    return 1;	/* All tests passed; polygon is simple and convex. */
+}
+\End\Of\Shar\
+else
+  echo "will not over write ./tests.c"
+fi
+if `test ! -s ./Sloan.c`
+then
+echo "writing ./Sloan.c"
+cat > ./Sloan.c << '\End\Of\Shar\'
+/*
+ File: Sloan.c
+ Authors: K.R. Sloan
+ Last Modified: 25 October 1992
+ Purpose: decides if a set of points is convex, 
+          in O(n) time and O(1) space.
+ */
+#include <stdio.h>
+#include <math.h>
+
+static int	onvert;
+
+static int VERBOSE = 0;
+static char *RoutineName = "Sloan.c";
+static void usage()
+ {
+  fprintf(stderr,"Usage is\n\t%s [-h][-v]\n",
+               RoutineName);
+ }
+
+static void FatalError(s)
+ char *s;
+ {
+  fprintf(stderr,"%s: FatalError(%s)\n",RoutineName,s);
+  exit(-1);
+ }
+
+#define TRUE (-1)
+#define FALSE (0)
+#define EPSILON (0.0000000001)
+
+typedef struct Point { double x, y; } Point;
+static int NextPoint(nvert, pVert, P)
+int       nvert;
+float     pVert[][2];
+Point *P;
+ {
+  if ( onvert >= nvert ) return(-1);
+  P->x = pVert[onvert][0];
+  P->y = pVert[onvert][1];
+  onvert++;
+  if (VERBOSE) fprintf(stderr," %lf %lf\n",P->x,P->y);
+  return 0;
+ }
+
+/*
+  Classify the angle A,B,C into the following cases:
+
+    -1 - turns left
+     0 - straight (or close to it)
+    +1 - turns right
+ */
+
+static int ClassifyAngle (A, B, C)
+ Point A, B, C;
+  {
+   double CrossProduct;
+   CrossProduct = ((A.x-B.x)*(C.y-B.y)) - ((A.y-B.y)*(C.x-B.x));
+   if (CrossProduct < -EPSILON) return -1;
+   if (CrossProduct >  EPSILON) return  1;
+   return 0;
+  }
+
+/*
+  Determine if the vectors AB and BC point in roughly the same
+  direction.  Used below to catagorize situations where A,B,C are
+  colinear.
+ */
+static int Monotonic(A,B,C)
+ Point A,B,C;
+ {
+  double ABdx, ABdy, BCdx, BCdy;
+  double DotProduct;
+
+  ABdx = B.x - A.x; ABdy = B.y - A.y;
+  BCdx = C.x - B.x; BCdy = C.y - B.y;
+
+  DotProduct = (ABdx*BCdx) + (ABdy*BCdy);
+  return (-EPSILON <= DotProduct); /* zero, if you are brave */
+ }
+
+/*
+   FindTurn returns the sense of the next turn.
+
+   sense 0 means that the first turn is a 180deg about face.
+
+   n is 3 if a turn is found, 0,1,2 if we run out of points.
+
+   On entry: n is the number of points already in P
+ */
+static int FindTurn(nvert, pVert, P,n)
+int       nvert;
+float     pVert[][2];
+ Point P[];
+ int *n;
+ {
+  int i;
+  int sense;
+  
+  /* get three points until we have 3*/
+  for(i=*n;i<3;i++) 
+   if (0 != NextPoint( nvert, pVert, &P[i]))     { *n = i; return 0; } 
+  /*
+    if colinear and monotonic,
+    discard middle point and get another third point
+   */
+  for(;0 == (sense = ClassifyAngle(P[0],P[1],P[2]));)
+   {
+    if (!Monotonic(P[0],P[1],P[2])) { *n = 3; return 0; }
+    P[1] = P[2];
+    if (0 != NextPoint(nvert, pVert, &P[2]))    { *n = 2; return 0; }
+   }
+
+  /* we have three non-colinear points, and know which way they turn */
+  *n = 3; return sense;
+ } 
+
+int 
+isConvexKRSloan( nvert, pVert )
+int       nvert;
+float     pVert[][2];
+{
+  int i;
+  int first, more, lastleg; 
+  int sense1,sense,n;
+  Point V1[3], V[3];
+
+  onvert = n = 0; 
+  sense1 = FindTurn(nvert, pVert, V1,&n);
+  if (3 > n)
+   {
+    if (VERBOSE) fprintf(stderr,"This polygon is degenerate.\n");
+    return 0;  /* if you like degenerate polygons */
+   }
+
+  if (0 == sense1)
+   {
+    /*
+      This polygon is either not-convex, or it is a single line.
+
+      V1[0] is the initial point
+      V1[1] is the extreme point
+      V1[2] is on the same side of V1[1] as V1[0].  
+
+      We have either:
+
+                             0      2      1
+      or 
+                     2       0             1
+
+      or even more degeneracy ...
+
+      We can turn around (!Monotonic) either 0 or 1 more time.
+      If we turn around again, we can't pass V1[0].
+
+      Use FindTurn twice more, and check all of the cases
+     
+     */
+     
+    V[0] = V1[1]; V[1] = V1[2]; n = 2; /* prime FindTurn */
+    sense = FindTurn(nvert, pVert, V,&n);
+    if (3 > n)      return TRUE;  /* all is well - a line */
+    if (0 != sense) return FALSE; /* we left the line     */
+
+    V1[2] = V[1];   /* note the second turn */
+
+    /* if we turned before reaching V1[0] again, we lose */
+    if (!Monotonic(V1[1],V1[2],V1[0])) return FALSE;
+
+    /*
+      if we passed V1[0] and then turned, we need to search for
+      yet another turn (we lose).
+     */
+    V[0] = V[1]; V[1] = V[2]; n = 2;
+    sense = FindTurn(nvert, pVert, V,&n);
+    if (3 == n) return FALSE; /* we left the line */
+
+    /*
+       finally, make sure that the last point didn't pass
+       V1[0] (again!)
+     */ 
+    if (!Monotonic(V[2],V1[2],V1[0])) return FALSE;
+    
+    return TRUE;  /* weird, but true */
+                  /* if you don't like degenerate polygons,
+                      return FALSE  and throw away much of the above */
+   } 
+
+  /*
+      Normal case - we have an initial turn with angle a.  0 < a < pi. 
+   */
+
+  if (VERBOSE) 
+   for(i=0;i<3;i++) 
+    fprintf(stderr,"    V1[%d] = (%lf,%lf)\n",i,V1[i].x,V1[i].y);
+
+
+  for(i=0;i<3;i++) V[i] = V1[i];
+  more = TRUE; first = TRUE; lastleg = FALSE;
+  for(;more;)
+   {
+    /* find the next true turn */
+    V[0] = V[1]; V[1] = V[2]; n = 2;
+    sense = FindTurn(nvert, pVert, V,&n);    
+    if (3 > n)
+     {  /* no more points */
+      if (first) return TRUE;  /* a triangle */
+      V[2] = V1[0];            /* complete the polygon */
+      /*
+         if this final leg is straight, 
+         we need only check that we didn't pass the original point
+         and double back
+       */
+      sense = ClassifyAngle(V[0],V[1],V[2]);
+      if (0 == sense) 
+       {
+        if (Monotonic(V[0],V[1],V[2])) return TRUE; else return FALSE; 
+       }
+      more = FALSE;
+     }
+    first = FALSE; 
+
+    /*
+      if a previous leg pointed directly at the initial point,
+      and we have reached this point, then we have either
+      backtracked, or we have turned off that line.
+      In either case, we lose
+     */ 
+
+    if (lastleg) return FALSE; /* once on the last leg, we can't turn */
+
+    /*
+       So much for degeneracies, and end conditions
+       Now, check generic vertices
+     */
+
+    if (VERBOSE) 
+     for(i=0;i<3;i++) 
+      fprintf(stderr,"        V[%d] = (%lf,%lf)\n",i,V[i].x,V[i].y);
+
+    /* all turns must match the first turn */
+    if (sense1 == -sense) return FALSE;  /* wrong turn */
+    if (0 == sense)       return FALSE;  /* no backtracking */
+
+    /*
+       all triangles constructed from the first vertex
+       and two successive vertices must have areas with the
+       same sign.  
+
+     */
+    sense = ClassifyAngle(V1[0],V[1],V[2]);
+    if (sense1 == -sense) return FALSE; /* negative area triangle */  
+
+    /*
+       if the triangle has zero area, then this leg points directly
+       at the initial point.  For this polygon to be convex, 
+       all remaining points must lie between V[2] and V1[0] 
+       and approach V1[0] monotonically
+    
+       FindTurn will handle all of these cases.  If the polygon
+       is acceptable, then FindTurn (and the last point processing
+       above) will discover no future turns.  If a future turn
+       is discovered, the check above will note that turns are
+       no longer allowed.  So - simple note that we're on the
+       last leg, and see what happens...
+
+       Note: we depend here on the fact that FindTurn has
+             eliminated duplicate points.  All other causes
+             of zero area triangles (except the last leg line)
+             indicate a concavity, or non-simplicity
+     */
+     if (0 == sense) lastleg = TRUE; /* forbid further turns */
+
+    /*
+       all vertices must be on the same side of (or perhaps ON)
+       the initial edge.
+
+       This test ensures that the first vertex lies on the convex
+       hull.
+
+       Clearly, if the first vertex is NOT on the hull, then
+       the polygon is not convex.  It is less easy to show, but
+       nonetheless true, that if the first vertex IS on the hull
+       then the earlier tests prove that the triangle IS convex.
+
+       But, we don't need this test on the very last iteration, because
+       V1[0] == V[2].
+     */
+    if (more) 
+     {
+      sense = ClassifyAngle(V1[0],V1[1],V[2]);
+      if (sense1 == -sense) return FALSE;
+     }
+   } 
+ 
+  /* seeing no objection... */
+  return TRUE;
+ }
+\End\Of\Shar\
+else
+  echo "will not over write ./Sloan.c"
+fi
+echo "Finished archive 1 of 1"
+exit
+
+
+
+1, answered,,
+Return-Path: <fred@kpc.com@cis.uab.edu>
+Received: from horn.kpc.com by cis.uab.edu (4.1/SMI-4.0)
+	id AA03468; Fri, 30 Oct 92 17:01:09 CST
+Received: by horn.kpc.com (5.65/fma-120691);
+	id AA13639; Fri, 30 Oct 92 15:04:03 -0800
+Received: from pine by kpc.com (5.65/SMI-4.1-kpc1020)
+	id AA15853; Fri, 30 Oct 92 15:03:01 -0800
+Received: from phoenix by mailbox.kpc.com (4.1/kpc-920618)
+	id AA16801; Fri, 30 Oct 92 15:03:47 PST
+Message-Id: <9210302304.AA18542@phoenix.kpc.com>
+To: sloan@cis.uab.edu
+Subject: new program
+Date: Fri, 30 Oct 92 15:04:15 -0800
+From: fred@kpc.com
+
+*** EOOH ***
+Return-Path: <fred@kpc.com@cis.uab.edu>
+To: sloan@cis.uab.edu
+Subject: new program
+Date: Fri, 30 Oct 92 15:04:15 -0800
+From: fred@kpc.com
+
+Hello Ken,
+
+Here's my second version. Your program was quite good at ferreting out
+a subtle bug. 
+
+Is your new polygon test list available through ftp now?
+at willis.cis.uab.edu:pub/sloan/ccg.tar.Z ?
+
+thanks,
+
+Fred
+
+/* file: tests.c - all routines to test */
+
+#include "stdio.h"
+#include "math.h"
+
+#define X       0
+#define Y       1
+#define Z       2
+#define W       3
+
+/* return 'z' of left-hand or right-hand cross product */
+#define GIScalerCrossZ( v0, v1 ) ( (v0)[X] * (v1)[Y] - (v0)[Y] * (v1)[X] )
+
+/*****************************************************************************/
+/*****************************************************************************/
+/* Fred Fisher test */
+
+#define	DEBUG	0
+int	verbose;			/* for tracing level */
+
+#if	DEBUG
+#define GIAssure(cond)                                                  \
+        if (!(cond)) {                                                  \
+            printf( "\7\7\7??? 'cond' failed\n");                       \
+            printf( "GIAssure: Line %d, File %s\n\n", __LINE__, __FILE__); \
+        }
+
+#define	GITrace(level, args)	if ( verbose >= level ) { args };
+
+#else
+#define GIAssure(cond)
+#define	GITrace(level, args)
+#endif
+
+/*****************************************************************************/
+#define	DirUnknown	0
+#define	DirPlus		1
+#define	DirNeg		-1
+
+isConvexFred( nvert, pVert )
+int	  nvert;
+float	  pVert[][2];
+/* determine if the polygon is:
+ *	return 0 if degenerate (all points co-linear or co-incident)
+ *	return 1 if convex
+ *	return 2 if non-convex
+ */
+{
+    int		firsti1, i1, i2, 
+		xdir = DirUnknown, aturn = 0, knowOutside = 0;
+    float	vec1[3], vec2[3], *pcur, *pnext, *ptemp, ccw = 0.0, 
+		outside = 0.0;
+
+    if ( nvert < 3  ) return(0);
+
+    /***** find indices i1 and i2 to 3 non-coincident points */
+    i1 = 1;
+    pcur  = vec1;
+    pnext = vec2;
+    /* scan for first pair of non-coincident pts */
+    do {
+	/* this is faster than computing entire cross product and checking
+	 * for zero. we'll use 'pcur' later to complete cross product.
+	 */
+	pcur[X] = pVert[i1][X] - pVert[0][X];
+	pcur[Y] = pVert[i1][Y] - pVert[0][Y];
+	if ( pcur[X] != 0.0  ||  pcur[Y] != 0.0 ) {
+	    break;
+	}
+    } while ( ++i1 < nvert );
+    if ( i1 >= nvert ) return(0);	/* all coincident */
+    firsti1 = i1;			/* remember first non-coincident */
+
+    /***** find the next point that's not coincident with coord 'i1'
+     * at first I thought of looking for the next point which does not
+     * produce a zero cross product (because of repeated points or movement
+     * along the same edge. However, this didn't account for things like:
+     * 0 0, 1 0, 0 0, 0 1 where (0 1) would be the next point and give a
+     * non-zero cross product.
+     */
+    i2 = i1;
+    while ( ++i2 < nvert ) {
+	pnext[X] = pVert[i2][X] - pVert[i1][X];
+	pnext[Y] = pVert[i2][Y] - pVert[i1][Y];
+	if ( pnext[X] == 0.0  &&  pnext[Y] == 0.0 )
+	    continue;
+	ccw = GIScalerCrossZ( pcur, pnext );
+	/* must get out, consider [0,0] [1,0] [0,0] [0,1] */
+	break;
+    }
+    if ( i2 >= nvert ) return(0);	/* all coincident */
+
+    /* check for X coord direction change. sometimes check for Y changing */
+#define	CheckNextVertexForDirection(pcur, pnext)			\
+    if ( pnext[X] > 0.0 ) {						\
+	if ( xdir == DirNeg ) {						\
+	    aturn++;							\
+	}								\
+	xdir = DirPlus;							\
+    } else if ( pnext[X] < 0.0 ) {					\
+	if ( xdir == DirPlus ) {					\
+	    aturn++;							\
+	}								\
+	xdir = DirNeg;							\
+    } else {								\
+	/* X is not changing, check last three Y's */ 			\
+	if ( pcur[Y] * pnext[Y] < 0.0 ) {				\
+	    aturn++; /* only y turned, x direction the same */		\
+	}								\
+    }									\
+
+#define	DetermineConvexDirection( crossResult )				\
+    if ( crossResult < 0 ) {						\
+	knowOutside = 1; outside = -1.0;				\
+    } else {								\
+	if ( crossResult > 0 ) {					\
+	    knowOutside = 1; outside =  1.0; 				\
+        }								\
+    }									\
+
+#define	TraceResults							\
+    GITrace( 5,								\
+	printf(								\
+"on %2d,%2d xdir,aturn,know,ccw=[%d,%d,%d,%g], pcur=[%g,%g] pnext=[%g,%g]\n",\
+		i1,i2,  	xdir, aturn, knowOutside, ccw,	\
+		pcur[X], pcur[Y],      pnext[X], pnext[Y] );		\
+    )									\
+
+    /***** we now have 3 non-coincident points, find first direction */
+    if ( pcur[X] > 0.0 ) {
+	xdir = DirPlus;
+    } else {
+	if ( pcur[X] < 0.0 ) {
+	    xdir = DirNeg;
+	}
+    }
+    CheckNextVertexForDirection( pcur, pnext );
+    DetermineConvexDirection( ccw );
+
+    GITrace( 5,
+	printf(
+	    "First three indices [%d, %d, %d], know,outside,ccw = %d, %g, %g\n",
+			0, i1, i2, knowOutside, outside, ccw );
+    )
+    ptemp = pnext;
+	    pnext = pcur;
+		    pcur = ptemp;		/* swap vector ptrs */
+
+    /***** go around polygon checking turn every 3 non-coincident vertices */
+    for ( i1 = i2, ++i2;    i2 < nvert;    i2++ ) {
+	pnext[X] = pVert[i2][X] - pVert[i1][X];
+	pnext[Y] = pVert[i2][Y] - pVert[i1][Y];
+	if ( pnext[X] == 0.0  &&  pnext[Y] == 0.0 )
+	    continue;
+
+	/* we have another non-coincident point */
+	CheckNextVertexForDirection( pcur, pnext );
+        if ( aturn > 2 ) return(2);
+
+	ccw = GIScalerCrossZ( pcur, pnext );
+	if ( !knowOutside && ccw ) 
+	    DetermineConvexDirection( ccw );
+
+	TraceResults;
+	if ( ccw * outside < 0.0 )
+	    return(2);				/* found wrong turn */
+	i1 = i2;
+	ptemp = pnext;
+		pnext = pcur;
+			pcur = ptemp;		/* swap vector ptrs */
+    }
+
+    /***** and another cross product */
+    i2 = 0;
+    pnext[X] = pVert[i2][X] - pVert[i1][X];
+    pnext[Y] = pVert[i2][Y] - pVert[i1][Y];
+    CheckNextVertexForDirection( pcur, pnext );
+    if ( aturn > 2 ) return(2);
+    ccw = GIScalerCrossZ( pcur, pnext );
+    if ( !knowOutside && ccw ) 
+	DetermineConvexDirection( ccw );
+    TraceResults;
+    if ( ccw * outside < 0.0 )
+	return(2);                          /* found wrong turn */
+    i1 = i2;
+    ptemp = pnext;
+	    pnext = pcur;
+		    pcur = ptemp;           /* swap vector ptrs */
+
+    /***** and one more cross product to first non-coincident */
+    i2 = firsti1;
+    pnext[X] = pVert[i2][X] - pVert[i1][X];
+    pnext[Y] = pVert[i2][Y] - pVert[i1][Y];
+    ccw = GIScalerCrossZ( pcur, pnext );
+    if ( !knowOutside && ccw ) 
+	DetermineConvexDirection( ccw );
+    TraceResults;
+    if ( ccw * outside < 0.0 )
+	return(2);                          /* found wrong turn */
+
+    if ( !knowOutside ) return(0);
+    return(1);
+}
+
+/*****************************************************************************/
+/*****************************************************************************\
+/* Steve Hollasch test */
+
+#define EPSILON 1e-15
+
+#define V2op2(X,op,Y) \
+    do { X[0] op Y[0]; X[1] op Y[1]; } while (0)
+
+#define V2op3(X,assign,Y,op,Z) \
+    do { X[0] assign Y[0] op Z[0]; X[1] assign Y[1] op Z[1]; } while (0)
+
+/*****************************************************************************
+**  This routine reads in a stream of 2D polygon coordinates from the input
+**  stream and returns 1 if the resulting closed polygon is convex, otherwise
+**  it returns 0.  The parameter `stream' is a currently open input stream.
+*****************************************************************************/
+
+int 
+isConvexSteve(nvert, pVert )
+int       nvert;
+float     pVert[][2];
+{
+    auto int    looking = 2;		/* Loop Termination Status */
+    auto int    factor = 0;		/* Turn Direction Factor */
+    auto float  A[2], B[2], C[2];	/* Current Vertices */
+    auto float  oldA[2], oldB[2];	/* First Two Vertices */
+    auto int    xdir, ydir;		/* Current Coordinate Direction */
+    auto int    xturns=0, yturns=0;	/* Coordinate Direction Changes */
+    auto float  dot;			/* Dot Product of Edge Norm and Edge */
+    auto float  U[2], V[2];		/* Edge Vectors AB and BC */
+    auto int	onvert;
+
+    /* Read in the first two vertices. */
+
+    if ( nvert < 3 ) return(0);
+    onvert = 0;
+    V2op2( B, =, pVert[0] );
+
+    do {
+	V2op2( C, =, pVert[onvert] );
+	onvert++;
+    } while ((B[0] == C[0]) && (B[1] == C[1]));
+
+    V2op2 (oldA,=,B);		/* Save the first two vertices. */
+    V2op2 (oldB,=,C);
+
+    V2op3 (V,=,C,-,B);		/* Calculate the edge vector V0V1. */
+
+    /* Set the X & Y coordinate directions if possible. */
+
+    xdir = (B[0] < C[0]) ? 1 : (B[0] > C[0]) ? -1 : 0;
+    ydir = (B[1] < C[1]) ? 1 : (B[1] > C[1]) ? -1 : 0;
+
+    do	/* Shift the last two vertices and read in the next vertex. */
+    {
+	V2op2 (A,=,B);
+	V2op2 (B,=,C);
+
+	do
+	{   switch (looking)
+	    {   case 2:
+		    V2op2( C, =, pVert[onvert] );
+		    if ( onvert >= nvert ) {
+		        looking = 1;
+			V2op2 (C,=,oldA);
+		    }
+		    onvert++;
+		    break;
+
+		case 1:
+		    looking = 0;
+		    V2op2 (C,=,oldB);
+		    break;
+		
+		case 0:
+		    return 1;
+	    }
+	} while ((C[0] == B[0]) && (C[1] == B[1]));
+
+	V2op2 (U,=,V);
+	V2op3 (V,=,C,-,B);	/* Calculate the edge vector from B to C. */
+
+	/* Get the dot product of the normal to edge AB and the vector BC.
+	** Compare this result with the previous dot products.  As long as
+	** the sign is the same as the previous ones (or zero), then
+	** everything's cool, otherwise we found a dent in the polygon, so
+	** return 2.  */
+
+	dot = (U[0] * V[1]) - (U[1] * V[0]);
+	if (fabs(dot) < EPSILON)
+	    dot = 0.0;
+	else
+	{   if (!factor)
+		factor = (dot < 0.0) ? -1 : 1;
+	    else if ((factor < 0) ^ (dot < 0.0))
+		return 2;
+	}
+
+	/* Check the X coordinate delta.  For a simple polygon, this can
+	** change sign (direction) twice, but no more. */
+
+#       define CHECK_DIRECTION(P,Q,dir,turns) \
+	    do { \
+		if (P < Q) \
+		{   if (dir == -1) \
+		    {   ++turns; \
+			if (dot == 0.0) return 0; \
+		    } \
+		    dir =  1; \
+		} \
+		else if (P > Q) \
+		{   if (dir ==  1) \
+		    {   ++turns; \
+			if (dot == 0.0) return 0; \
+		    } \
+		    dir = -1; \
+		} \
+	    } while (0)
+
+	CHECK_DIRECTION (B[0],C[0], xdir, xturns);
+	if (xturns > 2) return 2;
+
+	CHECK_DIRECTION (B[1],C[1], ydir, yturns);
+	if (yturns > 2) return 2;
+
+    } while (looking);
+
+    return 1;	/* All tests passed; polygon is simple and convex. */
+}
+
+
