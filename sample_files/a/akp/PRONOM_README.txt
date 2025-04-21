@@ -1,0 +1,4 @@
+WHAT IS A .AKP FILE?
+The AKP file extension is a data format associated to Akai Sampler. AKP files and AKAI Sampler were developed by AKAI Professional. These files are program files used by Akai S5000 and S6000 samplers. They are basically in the standard RIFF file format. A RIFF file is made up of chunks: each one starting with a 4 byte ASCII header and a 4 byte (double word) number representing the length of the chunk. Only two types of chunk are allowed to have sub chunks, the 'RIFF' chunk (the whole file) and any 'LIST' chunks In an AKP file, the 'kgrp' chunk contains 9 sub chunks. Chunks are always written in the same order .The kgrp header is also slightly non-standard. Files in AKP format can be opened with Propellerhead ReCycle, Chicken Systems Translator, FMJ-Software Awave Studio, MAZ Sound Tools VSampler, and Freecycle in Mac Os, Microsoft Windows-based systems and Linux platforms.
+
+https://www.reviversoft.com/en/file-extensions/akp

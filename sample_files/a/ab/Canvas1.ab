@@ -1,0 +1,229 @@
+*BEGIN BUILDER VERSION=420/320 ENCODING=NONE
+@14
+#0
+"@(#)%frank 0
+-
+-
+-
+-
+-
+-
+-
+-
+@6
+"Application
+&2
+'RootObject
+'ApplicationClass
+-
+-
+@1
+@6
+"Dialog1
+&2
+'RootObject
+'DialogBoxClass
+-
+-
+@2
+@6
+"Canvas
+&2
+'RootObject
+'CanvasClass
+@29
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Canvas
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : CanvasClass
+"''
+"
+"@@@ OBJECTS
+"#include "elfpen_.am"
+"objvar pen
+"objvar start
+"
+"set initialize_event
+"	pen = this.child@("Pen")
+"endset
+"
+"set button_press_event(position)
+"	start = position
+"endset
+"
+"set motion_event(position)
+"	this.draw_line(position)
+"	start = position
+"endset
+"
+"set draw_line(pos)
+"	this.draw_line@(pen,start,pos)
+"endset
+"
+-
+@1
+@6
+"Pen
+&2
+'RootObject
+'PenClass
+@18
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Pen
+"'' Application    : Application
+"'' Parent         : Canvas
+"'' Inherits from  : PenClass
+"''
+"
+"@@@ OBJECTS
+"#include "elfpen_.am"
+"set initialize_event
+"	this.foreground_color_name@ = "Blue"
+"	/* set background color to White  */
+"	this.background_color_cmyk@(0,0,0,0)
+"	this.line_style@ = XVAL_LineOnOffDash
+"	this.dashes@ = 20
+"endset
+"
+"
+-
+-
+@1
+@2
+"COMMENTS$$
+@1
+-
+@9
+@2
+"THICKNESS$$
+@2
+#-2
+#-2
+@2
+"HORIZ_SCROLL$$
+#1
+@2
+"W_TITLE$$
+"Canvas
+@2
+"YPOS$$
+@2
+#3
+#3
+@2
+"XPOS$$
+@2
+#5
+#5
+@2
+"WIDTH$$
+@2
+#373
+#40
+@2
+"HEIGHT$$
+@2
+#152
+#40
+@2
+"FLAGS$$
+#8242
+@2
+"COMMENTS$$
+@1
+-
+@6
+"Dismiss
+&2
+'RootObject
+'ButtonClass
+@12
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Dismiss
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : ButtonClass
+"''
+"
+"@@@ OBJECTS
+"
+"set clicked_event
+"	this.application@.quit@
+"endset
+-
+-
+@8
+@2
+"TYPE$$
+#0
+@2
+"DFLT$$
+#0
+@2
+"W_TITLE$$
+"Dismiss
+@2
+"YPOS$$
+@2
+#191
+#75
+@2
+"XPOS$$
+@2
+#157
+#10
+@2
+"WIDTH$$
+@2
+#70
+#70
+@2
+"HEIGHT$$
+@2
+#22
+#22
+@2
+"FLAGS$$
+#8242
+@5
+@2
+"DBOX_TYPE$$
+#1
+@2
+"WIDTH$$
+#400
+@2
+"TITLE$$
+"Dialog1
+@2
+"HEIGHT$$
+#225
+@2
+"REVISION$$
+#1
+-
+-
+@14
+"CanvasFirst.ab
+"/user/frank/builder/CanvasFirst.ab
+"Applix Builder 4.2
+"Version 455 Mon Aug 21 03:07:06 1995
+"August 21, 1995 07:54 pm
+"frank
+"Applix Builder 4.2
+"Version 456 Tue Aug 22 03:06:20 1995
+"August 22, 1995 10:04 am
+"frank
+#1
+#1
+-
+@6
+#0
+#400
+#151
+#400
+#320
+-
+-
+*END BUILDER

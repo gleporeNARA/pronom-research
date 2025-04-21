@@ -1,0 +1,13 @@
+Applixware is a suite of proprietary modular applications for Linux edited by Vistasource, Inc.
+
+Applixware was originally created by Applix, Inc..
+
+A subset of Applixware modules for Linux was originally developed by Applix upon request from Red Hat, who sold the package for $500. This price was reduced to $200 in October 1996,[2][3] and, by 2000, during the dotcom bubble, the Applixware Words word processor was available for $50 in GTK toolkit versions (Applixware 5.0 and Anyware 2.2) while the full Applix Office suite was sold for US$99.[4] Anywhere Office was built as a Java application that could run on in any Java virtual machine.[5] These offers (and the GTK toolkit) were subsequently abandoned when the dotcom bubble burst, and priority was given back to versions aimed at Vistasource's core customers in financial, defense and government markets.
+
+While not the first graphical word processor for Linux (EZ Word, part of the Andrew User Interface System, has that honor), nor the first proprietary word processor for Linux (WordPerfect was first made available for Linux by Caldera in late 1995), Applixware Words was a good deal more user-friendly than EZ Word and a good deal more bug-free than early Linux releases of WordPerfect.[citation needed]
+
+In 1999, Sun Microsystems bought a competing product, StarOffice, and turned it into the open source OpenOffice.org software suite. That destroyed the market for the competing software, and Applixware sales declined.
+
+The Applixware Words module waned in popularity among Linux users when full-featured open-source word processors, such as OpenOffice.org and AbiWord, became available.[6] Although Applixware was less powerful than the newer office packages, its interface design was arguably superior. While OpenOffice.org tried to make the user experience to be similar to that of Microsoft Office, Applixware was different. Almost no user interface panel was implemented as a modal window. All control elements could be opened by the user and if a control panel was not applicable in the current context, it just made all its widgets inactive. Although a non-modal interface design significantly increases the complexity of the program, it also makes the GUI to feel more responsive to the user. In addition, Applixware's charting capabilities remarkably surpassed that of the Charts in OpenOffice.org 1.x and 2.x versions. Some graphics features were also much more advanced than what the Draw module in OpenOffice.org is capable of. Another feature of Applixware was its small resource requirements; it ran in a satisfactory manner even on low-end machines of the time.
+
+https://en.wikipedia.org/wiki/Applixware

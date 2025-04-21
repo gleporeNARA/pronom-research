@@ -1,0 +1,3738 @@
+*BEGIN BUILDER VERSION=430/320 ENCODING=NONE
+@14
+#0
+"@(#)%laurar 0
+-
+-
+-
+-
+-
+-
+-
+-
+@6
+"Application
+&2
+'RootObject
+'ApplicationClass
+-
+-
+@4
+@6
+"Dialog1
+&2
+'RootObject
+'DialogBoxClass
+@16
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Dialog1
+"'' Application    : Application
+"'' Parent         : Application
+"'' Inherits from  : DialogBoxClass
+"''
+"
+"@@@ OBJECTS
+"
+"sysvar dbox_window
+"
+"set initialize_event
+"
+"	dbox_window = CURRENT_WINDOW_NUM@()
+"
+"ENDSET
+-
+@45
+@6
+"DEM_BID
+&2
+'RootObject
+'LabelClass
+@52
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : DEM_BID
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"#include "spsheet_.am"
+"
+"
+"objvar object 
+"		app, dbox, sprsh, wpdoc, data,
+"		dem_hits, dem_ticks, success, chart
+"
+"set initialize_event
+"
+"	app = this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	dbox = app.child@("Dialog1")
+"	dem_hits = dbox.child@("DEM_HITS")
+"	dem_ticks = dbox.child@("DEMTicks")
+"	success = this.sibling@("DEM_SUCCESS")
+"	chart = this.sibling@("Chart")
+"
+"endset
+"
+"
+"var FORMAT ss_cell_ cellstr
+"
+"
+"set update_event
+"
+"	if not is_null@(this.data_source@)
+"		this.value@ = this.data_source_value@
+"
+"	sprsh.insert_rows@("a:9",1)
+"
+"	sprsh.put_cell@("A:A9", this.value@)
+"	dem_hits.value@ = sprsh.get_cell_value@(1,4,0)
+"	dem_ticks.value@ = sprsh.get_cell_value@(1,5,0)
+"
+"	success.value@ = sprsh.get_cell_value@(4,2,0)
+"
+"	sprsh.number_style@(7,0,"A:E2")
+"
+"	cellstr = sprsh.get_cell@(4,2,0)
+"	success.value@ = cellstr.display_str
+"
+"
+"endset
+"
+-
+-
+@10
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"RT_FIELD_NAME$$
+"BID
+@2
+"RT_RECORD_NAME$$
+"DEM_RECORD
+@2
+"RT_GATEWAY_OBJ_NAME$$
+"Data1
+@2
+"DATA_SOURCE_TYPE$$
+#3
+@2
+"YPOS$$
+@2
+#103
+#16
+@2
+"XPOS$$
+@2
+#99
+#124
+@2
+"W_TITLE$$
+.1.639500000
+@6
+"GBP_BID
+&2
+'RootObject
+'LabelClass
+@52
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : GBP_BID
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+"#include "spsheet_.am"
+"
+"objvar object 
+"		app, dbox, sprsh, wpdoc, data,
+"		gbp_hits, gbp_ticks, success
+"
+"
+"set initialize_event
+"
+"	app = this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	dbox = app.child@("Dialog1")
+"	gbp_hits = dbox.child@("GBP_HITS")
+"	gbp_ticks = dbox.child@("GBPTicks")
+"	success = this.sibling@("GBP_SUCCESS")
+"
+"endset
+"
+"
+"var FORMAT ss_cell_ cellstr
+"
+"
+"set update_event
+"
+"	if not is_null@(this.data_source@)
+"		this.value@ = this.data_source_value@
+"		
+"	sprsh.insert_rows@("B:9",1)
+"
+"	sprsh.put_cell@("B:a9", this.value@)
+"	gbp_hits.value@ = sprsh.get_cell_value@(1,4,1)
+"	gbp_ticks.value@ = sprsh.get_cell_value@(1,5,1)
+"
+"	success.value@ = sprsh.get_cell_value@(4,2,1)
+"
+"	sprsh.number_style@(7,0,"B:E2")
+"
+"	cellstr = sprsh.get_cell@(4,2,1)
+"	success.value@ = cellstr.display_str
+"
+"endset
+"
+-
+-
+@10
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"RT_FIELD_NAME$$
+"BID
+@2
+"RT_RECORD_NAME$$
+"GBP_RECORD
+@2
+"RT_GATEWAY_OBJ_NAME$$
+"Data1
+@2
+"DATA_SOURCE_TYPE$$
+#3
+@2
+"YPOS$$
+@2
+#145
+#16
+@2
+"XPOS$$
+@2
+#99
+#124
+@2
+"W_TITLE$$
+.1.491000000
+@6
+"ITL_BID
+&2
+'RootObject
+'LabelClass
+@51
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : ITL_BID
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"#include "spsheet_.am"
+"
+"objvar object 
+"		app, dbox, sprsh, wpdoc, data,
+"	itl_hits, itl_ticks, success
+"
+"set initialize_event
+"
+"	app = this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	dbox = app.child@("Dialog1")
+"	itl_hits = dbox.child@("ITL_HITS")
+"	itl_ticks = dbox.child@("ITLTicks")
+"	success = this.sibling@("ITL_SUCCESS")
+"
+"endset
+"
+"
+"var FORMAT ss_cell_ cellstr
+"
+"
+"set update_event
+"
+"	if not is_null@(this.data_source@)
+"		this.value@ = this.data_source_value@
+"		
+"	sprsh.insert_rows@("C:9",1)
+"
+"	sprsh.put_cell@("C:a9", this.value@)
+"	itl_hits.value@ = sprsh.get_cell_value@(1,4,2)
+"	itl_ticks.value@ = sprsh.get_cell_value@(1,5,2)
+"
+"	success.value@ = sprsh.get_cell_value@(4,2,2)
+"
+"	sprsh.number_style@(7,0,"C:E2")
+"
+"	cellstr = sprsh.get_cell@(4,2,2)
+"	success.value@ = cellstr.display_str
+"
+"
+"endset
+"
+-
+-
+@10
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"RT_FIELD_NAME$$
+"BID
+@2
+"RT_RECORD_NAME$$
+"ITL_RECORD
+@2
+"RT_GATEWAY_OBJ_NAME$$
+"Data1
+@2
+"DATA_SOURCE_TYPE$$
+#3
+@2
+"YPOS$$
+@2
+#182
+#16
+@2
+"XPOS$$
+@2
+#100
+#124
+@2
+"W_TITLE$$
+.1596.650000000
+@6
+"FRF_BID
+&2
+'RootObject
+'LabelClass
+@52
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : FRF_BID
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"#include "spsheet_.am"
+"
+"
+"objvar object 
+"		app, dbox, sprsh, wpdoc, data,
+"		frf_hits, frf_ticks, success
+"
+"set initialize_event
+"
+"	app = this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	dbox = app.child@("Dialog1")
+"	frf_hits = dbox.child@("FRF_HITS")
+"	frf_ticks = dbox.child@("FRFTicks")
+"	success = this.sibling@("FRF_SUCCESS")
+"
+"endset
+"
+"
+"var FORMAT ss_cell_ cellstr
+"
+"
+"set update_event
+"
+"	if not is_null@(this.data_source@)
+"		this.value@ = this.data_source_value@
+"		
+"	sprsh.insert_rows@("D:9",1)
+"
+"	sprsh.put_cell@("D:a9", this.value@)
+"	frf_hits.value@ = sprsh.get_cell_value@(1,4,3)
+"	frf_ticks.value@ = sprsh.get_cell_value@(1,5,3)
+"
+"	success.value@ = sprsh.get_cell_value@(4,2,3)
+"
+"	sprsh.number_style@(7,0,"D:E2")
+"
+"	cellstr = sprsh.get_cell@(4,2,3)
+"	success.value@ = cellstr.display_str
+"
+"
+"endset
+"
+-
+-
+@10
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"W_TITLE$$
+.5.793000000
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"RT_FIELD_NAME$$
+"BID
+@2
+"RT_RECORD_NAME$$
+"FRF_RECORD
+@2
+"RT_GATEWAY_OBJ_NAME$$
+"Data1
+@2
+"DATA_SOURCE_TYPE$$
+#3
+@2
+"YPOS$$
+@2
+#225
+#16
+@2
+"XPOS$$
+@2
+#101
+#124
+@6
+"DEM_LOW
+&2
+'RootObject
+'EntryFieldClass
+@28
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : DEM_LOW
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : EntryFieldClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 
+"		app, sprsh, dem_success
+"
+"
+"set initialize_event
+"
+"	app= this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	dem_success = this.sibling@("DEM_SUCCESS")
+"
+"	this.value@ = sprsh.get_cell_value@(1,2,0)
+"endset
+"
+"set changed_event
+"
+"	sprsh.put_cell@("A:B3",this.value@)
+"	dem_success.value@ = sprsh.get_cell_value@(4,2,0)
+"
+"endset
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"NO_TITLE$$
+#-1
+@2
+"LENGTH$$
+#20
+@2
+"WIDTH$$
+@2
+#10
+#10
+@2
+"YPOS$$
+@2
+#102
+#210
+@2
+"XPOS$$
+@2
+#174
+#10
+@2
+"W_TITLE$$
+"Range - Low
+@6
+"DEM_HIGH
+&2
+'RootObject
+'EntryFieldClass
+@31
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : DEM_HIGH
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : EntryFieldClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 
+"		app, sprsh, dem_success
+"
+"set initialize_event
+"
+"	app= this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	dem_success = this.sibling@("DEM_SUCCESS")
+"
+"
+"	this.value@ = sprsh.get_cell_value@(1,3,0)
+"
+"endset
+"
+"
+"
+"set changed_event
+"
+"	sprsh.put_cell@("A:B4",this.value@)
+"	dem_success.value@ = sprsh.get_cell_value@(4,2,0)
+"
+"endset
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"NO_TITLE$$
+#-1
+@2
+"LENGTH$$
+#20
+@2
+"WIDTH$$
+@2
+#10
+#10
+@2
+"YPOS$$
+@2
+#101
+#210
+@2
+"XPOS$$
+@2
+#270
+#10
+@2
+"W_TITLE$$
+"Range - High
+@6
+"GBP_LOW
+&2
+'RootObject
+'EntryFieldClass
+@31
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : GBP_LOW
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : EntryFieldClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 
+"		app, sprsh, success
+"
+"set initialize_event
+"
+"	app= this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	success = this.sibling@("GBP_SUCCESS")
+"
+"	this.value@ = sprsh.get_cell_value@(1,2,1)
+"
+"endset
+"
+"
+"set changed_event
+"
+"	sprsh.put_cell@("B:B3",this.value@)
+"	success.value@ = sprsh.get_cell_value@(4,2,1)
+"
+"endset
+"
+"
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"NO_TITLE$$
+#-1
+@2
+"LENGTH$$
+#20
+@2
+"WIDTH$$
+@2
+#10
+#10
+@2
+"YPOS$$
+@2
+#143
+#210
+@2
+"XPOS$$
+@2
+#174
+#10
+@2
+"W_TITLE$$
+"Range - Low
+@6
+"ITL_LOW
+&2
+'RootObject
+'EntryFieldClass
+@28
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : ITL_LOW
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : EntryFieldClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 
+"		app, sprsh, success
+"
+"set initialize_event
+"
+"	app= this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	success = this.sibling@("ITL_SUCCESS")
+"
+"	this.value@ = sprsh.get_cell_value@(1,2,2)
+"
+"endset
+"
+"set changed_event(value)
+"
+"	sprsh.put_cell@("C:B3",this.value@)
+"	success.value@ = sprsh.get_cell_value@(4,2,2)
+"
+"endset
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"NO_TITLE$$
+#-1
+@2
+"LENGTH$$
+#20
+@2
+"WIDTH$$
+@2
+#10
+#10
+@2
+"YPOS$$
+@2
+#181
+#210
+@2
+"XPOS$$
+@2
+#174
+#10
+@2
+"W_TITLE$$
+"Range - Low
+@6
+"FRF_LOW
+&2
+'RootObject
+'EntryFieldClass
+@29
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : FRF_LOW
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : EntryFieldClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 
+"		app, sprsh, success
+"
+"set initialize_event
+"
+"	app= this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	success = this.sibling@("FRF_SUCCESS")
+"
+"	this.value@ = sprsh.get_cell_value@(1,2,3)
+"
+"endset
+"
+"set changed_event
+"
+"	sprsh.put_cell@("D:B3",this.value@)
+"	success.value@ = sprsh.get_cell_value@(4,2,3)
+"
+"endset
+"
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"NO_TITLE$$
+#-1
+@2
+"LENGTH$$
+#20
+@2
+"WIDTH$$
+@2
+#10
+#10
+@2
+"YPOS$$
+@2
+#223
+#210
+@2
+"XPOS$$
+@2
+#173
+#10
+@2
+"W_TITLE$$
+"Range - Low
+@6
+"GBP_HIGH
+&2
+'RootObject
+'EntryFieldClass
+@29
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : GBP_HIGH
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : EntryFieldClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 
+"		app, sprsh, success
+"
+"set initialize_event
+"
+"	app= this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	success = this.sibling@("GBP_SUCCESS")
+"
+"	this.value@ = sprsh.get_cell_value@(1,3,1)
+"
+"endset
+"
+"set changed_event
+"
+"	sprsh.put_cell@("B:B4",this.value@)
+"	success.value@ = sprsh.get_cell_value@(4,2,1)
+"
+"endset
+"
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"NO_TITLE$$
+#-1
+@2
+"LENGTH$$
+#20
+@2
+"WIDTH$$
+@2
+#10
+#10
+@2
+"YPOS$$
+@2
+#144
+#210
+@2
+"XPOS$$
+@2
+#270
+#10
+@2
+"W_TITLE$$
+"Range - Low
+@6
+"ITL_HIGH
+&2
+'RootObject
+'EntryFieldClass
+@28
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : ITL_HIGH
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : EntryFieldClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 
+"		app, sprsh, success
+"
+"set initialize_event
+"
+"	app= this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	success = this.sibling@("ITL_SUCCESS")
+"
+"	this.value@ = sprsh.get_cell_value@(1,3,2)
+"
+"endset
+"
+"set changed_event(value)
+"
+"	sprsh.put_cell@("C:B4",this.value@)
+"	success.value@ = sprsh.get_cell_value@(4,2,2)
+"
+"endset
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"NO_TITLE$$
+#-1
+@2
+"LENGTH$$
+#20
+@2
+"WIDTH$$
+@2
+#10
+#10
+@2
+"YPOS$$
+@2
+#182
+#210
+@2
+"XPOS$$
+@2
+#270
+#10
+@2
+"W_TITLE$$
+"Range - Low
+@6
+"FRF_HIGH
+&2
+'RootObject
+'EntryFieldClass
+@30
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : FRF_HIGH
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : EntryFieldClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 
+"		app, sprsh, success
+"
+"set initialize_event
+"
+"	app= this.application@
+"	sprsh = app.child@("SPRSH_DOC")
+"	success = this.sibling@("FRF_SUCCESS")
+"
+"	this.value@ = sprsh.get_cell_value@(1,3,3)
+"
+"endset
+"
+"set changed_event
+"
+"	sprsh.put_cell@("D:B4",this.value@)
+"	success.value@ = sprsh.get_cell_value@(4,2,3)
+"
+"endset
+"
+"
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"NO_TITLE$$
+#-1
+@2
+"LENGTH$$
+#20
+@2
+"WIDTH$$
+@2
+#10
+#10
+@2
+"YPOS$$
+@2
+#223
+#210
+@2
+"XPOS$$
+@2
+#270
+#10
+@2
+"W_TITLE$$
+"Range - Low
+@6
+"HITS_LABEL
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : HITS_LABEL
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#70
+#16
+@2
+"XPOS$$
+@2
+#462
+#124
+@2
+"W_TITLE$$
+"HITS
+@6
+"DEM_HITS
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : DEM_HITS
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"FLAGS$$
+#8242
+@2
+"YPOS$$
+@2
+#101
+#16
+@2
+"XPOS$$
+@2
+#472
+#124
+@2
+"W_TITLE$$
+#0
+@6
+"GBP_HITS
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : GBP_HITS
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"FLAGS$$
+#8242
+@2
+"YPOS$$
+@2
+#145
+#16
+@2
+"XPOS$$
+@2
+#472
+#124
+@2
+"W_TITLE$$
+#0
+@6
+"ITL_HITS
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : ITL_HITS
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"FLAGS$$
+#8242
+@2
+"YPOS$$
+@2
+#185
+#16
+@2
+"XPOS$$
+@2
+#473
+#124
+@2
+"W_TITLE$$
+#0
+@6
+"FRF_HITS
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : FRF_HITS
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"FLAGS$$
+#8242
+@2
+"YPOS$$
+@2
+#224
+#16
+@2
+"XPOS$$
+@2
+#474
+#124
+@2
+"W_TITLE$$
+#4
+@6
+"DEM_LABEL
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : DEM_LABEL
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#103
+#16
+@2
+"XPOS$$
+@2
+#30
+#124
+@2
+"W_TITLE$$
+"DEM=
+@6
+"GBP_LABEL
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : GBP_LABEL
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#141
+#16
+@2
+"XPOS$$
+@2
+#30
+#124
+@2
+"W_TITLE$$
+"GBP=
+@6
+"ITL=_LABEL
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : ITL=_LABEL
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#181
+#16
+@2
+"XPOS$$
+@2
+#31
+#124
+@2
+"W_TITLE$$
+"ITL=
+@6
+"FRF_LABEL
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : FRF_LABEL
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#225
+#16
+@2
+"XPOS$$
+@2
+#30
+#124
+@2
+"W_TITLE$$
+"FRF=
+@6
+"BID_LABEL
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : BID_LABEL
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#69
+#16
+@2
+"XPOS$$
+@2
+#109
+#124
+@2
+"W_TITLE$$
+"BID
+@6
+"TickLabel
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : TickLabel
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#70
+#16
+@2
+"XPOS$$
+@2
+#392
+#124
+@2
+"W_TITLE$$
+"TICKS
+@6
+"DEMTicks
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : DEMTicks
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#102
+#16
+@2
+"XPOS$$
+@2
+#408
+#124
+@2
+"W_TITLE$$
+#15
+@2
+"FLAGS$$
+#8242
+@6
+"GBPTicks
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : GBPTicks
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#144
+#16
+@2
+"XPOS$$
+@2
+#408
+#124
+@2
+"W_TITLE$$
+#4
+@2
+"FLAGS$$
+#8242
+@6
+"ITLTicks
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : ITLTicks
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#185
+#16
+@2
+"XPOS$$
+@2
+#407
+#124
+@2
+"W_TITLE$$
+#4
+@2
+"FLAGS$$
+#8242
+@6
+"FRFTicks
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : FRFTicks
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#230
+#90
+#100
+"blueblue
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#224
+#16
+@2
+"XPOS$$
+@2
+#407
+#124
+@2
+"W_TITLE$$
+#4
+@2
+"FLAGS$$
+#8242
+@6
+"Panel.2
+&2
+'RootObject
+'PanelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Panel.2
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : PanelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@10
+@2
+"STYLE$$
+#1
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"DB_UID$$
+#4
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#240
+#90
+#51
+"
+@2
+"THICKNESS$$
+@2
+#2
+#0
+@2
+"HEIGHT$$
+@2
+#51
+#50
+@2
+"WIDTH$$
+@2
+#618
+#50
+@2
+"YPOS$$
+@2
+#7
+#7
+@2
+"XPOS$$
+@2
+#7
+#224
+@2
+"W_TITLE$$
+"Panel.2
+@6
+"Label
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Label
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@6
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#100
+"White
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#24
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#22
+#16
+@2
+"XPOS$$
+@2
+#24
+#124
+@2
+"W_TITLE$$
+"Real Time Ranges - Hit Rate Analysis
+@6
+"SUCCESS_LABEL
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : SUCCESS_LABEL
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELFONT$$
+@4
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#3
+#-1
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#70
+#16
+@2
+"XPOS$$
+@2
+#517
+#124
+@2
+"W_TITLE$$
+"SUCCESS
+@6
+"DEM_SUCCESS
+&2
+'RootObject
+'LabelClass
+@14
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : DEM_SUCCESS
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"set initialize_event
+"
+"	this.value@ = 0
+"
+"endset
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#10
+#90
+#100
+"
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#102
+#16
+@2
+"XPOS$$
+@2
+#537
+#124
+@2
+"W_TITLE$$
+"0%
+@2
+"FLAGS$$
+#8242
+@6
+"GBP_SUCCESS
+&2
+'RootObject
+'LabelClass
+@15
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : GBP_SUCCESS
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"set initialize_event
+"
+"	this.value@ = 0
+"
+"endset
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#10
+#90
+#100
+"
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#144
+#16
+@2
+"XPOS$$
+@2
+#537
+#124
+@2
+"W_TITLE$$
+"0%
+@2
+"FLAGS$$
+#8242
+@6
+"ITL_SUCCESS
+&2
+'RootObject
+'LabelClass
+@15
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : ITL_SUCCESS
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"set initialize_event
+"
+"	this.value@ = 0
+"
+"endset
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#10
+#90
+#100
+"
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#184
+#16
+@2
+"XPOS$$
+@2
+#537
+#124
+@2
+"W_TITLE$$
+"0%
+@2
+"FLAGS$$
+#8242
+@6
+"FRF_SUCCESS
+&2
+'RootObject
+'LabelClass
+@15
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : FRF_SUCCESS
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"set initialize_event
+"
+"	this.value@ = 0
+"
+"endset
+"
+-
+-
+@7
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#10
+#90
+#100
+"
+@2
+"LABELFONT$$
+@3
+@2
+#1
+"Helvetica
+@2
+#2
+#14
+@2
+#4
+#0
+@2
+"YPOS$$
+@2
+#227
+#16
+@2
+"XPOS$$
+@2
+#537
+#124
+@2
+"W_TITLE$$
+"100%
+@2
+"FLAGS$$
+#8242
+@6
+"Chart
+&2
+'RootObject
+'ChartClass
+@48
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Chart
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : ChartClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object
+"		doct,
+"		DEM_SUCCESS, GBP_SUCCESS, FRF_SUCCESS, ITL_SUCCESS
+"
+"
+"set initialize_event
+"
+"	doct = this.parent@.sibling@("wpdoc")
+"
+"	DEM_SUCCESS = this.sibling@("DEM_SUCCESS")	
+"	GBP_SUCCESS = this.sibling@("GBP_SUCCESS")	
+"	ITL_SUCCESS = this.sibling@("ITL_SUCCESS")	
+"	FRF_SUCCESS = this.sibling@("FRF_SUCCESS")	
+"
+"endset
+"
+"set double_click_event
+"
+"	var DEMvar, GBPvar, ITLvar, FRFvar
+"
+"	DEMvar = "DEM"
+"	doct.set_doc_var@(DEMvar,DEM_SUCCESS.value@)
+"	
+"	GBPvar = "GBP"
+"	doct.set_doc_var@(GBPvar,GBP_SUCCESS.value@)
+"	
+"	ITLvar = "ITL"
+"	doct.set_doc_var@(ITLvar,ITL_SUCCESS.value@)
+"	
+"	FRFvar = "FRF"
+"	doct.set_doc_var@(FRFvar,FRF_SUCCESS.value@)
+"
+"	this.copy_to_clipboard@
+"
+"	doct.goto_end@
+"	doct.paste@
+"
+"endset
+"
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"COMMENTS$$
+@1
+-
+@2
+"HORIZ_SCROLL$$
+#-1
+@2
+"THICKNESS$$
+@2
+#-2
+#-2
+@2
+"HEIGHT$$
+@2
+#297
+#40
+@2
+"WIDTH$$
+@2
+#444
+#40
+@2
+"YPOS$$
+@2
+#266
+#376
+@2
+"XPOS$$
+@2
+#17
+#68
+@2
+"W_TITLE$$
+"Chart
+@6
+"CreateChart
+&2
+'RootObject
+'ButtonClass
+@82
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : CreateChart
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : ButtonClass
+"''
+"
+"@@@ OBJECTS
+"
+"#include "ch_type_.am"
+"
+"objvar object
+"		dem, gbp,itl,frf, 
+"		dem_hits, dem_ticks,
+"		gbp_hits, gbp_ticks,
+"		itl_hits, itl_ticks,
+"		frf_hits, frf_ticks,
+"		chart
+"
+"sysvar dbox_window
+"
+"
+"set initialize_event
+"
+"	dem = this.sibling@("DEM_SUCCESS")
+"	dem_hits = this.sibling@("DEM_HITS")
+"	dem_ticks = this.sibling@("DEMTicks")
+"
+"	gbp = this.sibling@("GBP_SUCCESS")
+"	gbp_hits = this.sibling@("GBP_HITS")
+"	gbp_ticks = this.sibling@("GBPTicks")
+"
+"	itl = this.sibling@("ITL_SUCCESS")
+"	itl_hits = this.sibling@("ITL_HITS")
+"	itl_ticks = this.sibling@("ITLTicks")
+"
+"	frf = this.sibling@("FRF_SUCCESS")
+"	frf_hits = this.sibling@("FRF_HITS")
+"	frf_ticks = this.sibling@("FRFTicks")
+"
+"	chart = this.sibling@("Chart")
+"
+"endset
+"
+"
+"set clicked_event
+"
+"	var data, time, date, system_date
+"
+"	SELECT_WINDOW@(dbox_window)
+"
+"	if dem_hits.value@ <> 0
+"		data[0,0] =(dem_hits.value@ / dem_ticks.value@) * 100
+"	else  
+"		data[0,0] = 0
+"
+"	if gbp_hits.value@ <> 0
+"		data[1,0] = (gbp_hits.value@ / gbp_ticks.value@) * 100
+"	else	
+"		data[1,0] = 0
+"
+"	if itl_hits.value@ <> 0
+"		data[2,0] = (itl_hits.value@ / itl_ticks.value@) * 100
+"	else
+"		data[2,0] = 0
+"
+"	if frf_hits.value@ <> 0
+"		data[3,0] = (frf_hits.value@ / frf_ticks.value@) * 100
+"	else	
+"		data[3,0] = 0
+"
+"
+"	system_date = CURRENT_TIME@()
+"	date = DATE_FORMAT@(system_date,1)
+"	time = DATE_FORMAT@(system_date,600)
+"
+"	chart.create@(COLUMN, data, "Currency Success Rates", date++" - "++time,"" ,"","" ,FALSE)
+"
+"	chart.display_chart@
+"
+"endset
+"
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#240
+#90
+#51
+"
+@2
+"DB_UID$$
+#8
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#70
+"Gray
+@2
+"HEIGHT$$
+@2
+#40
+#22
+@2
+"WIDTH$$
+@2
+#101
+#70
+@2
+"YPOS$$
+@2
+#370
+#75
+@2
+"XPOS$$
+@2
+#501
+#10
+@2
+"W_TITLE$$
+"Create Chart
+@6
+"WPaste
+&2
+'RootObject
+'ButtonClass
+@98
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : WPaste
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : ButtonClass
+"''
+"
+"@@@ OBJECTS
+"
+"objvar object 	app, doct, chart, chart_button,
+"			DEM_SUCCESS, GBP_SUCCESS, ITL_SUCCESS, FRF_SUCCESS,
+"			DEM_LOW, GBP_LOW, ITL_LOW, FRF_LOW,
+"			DEM_HIGH, GBP_HIGH, ITL_HIGH, FRF_HIGH
+"
+"set initialize_event
+"
+"	app = this.application@
+"
+"	doct = app.child@("wpdoc")
+"	chart = this.sibling@("Chart")
+"	chart_button = this.sibling@("CreateChart")
+"
+"	DEM_SUCCESS = this.sibling@("DEM_SUCCESS")
+"	GBP_SUCCESS = this.sibling@("GBP_SUCCESS")
+"	ITL_SUCCESS = this.sibling@("ITL_SUCCESS")
+"	FRF_SUCCESS = this.sibling@("FRF_SUCCESS")
+"
+"	DEM_LOW = this.sibling@("DEM_LOW")
+"	GBP_LOW = this.sibling@("GBP_LOW")
+"	ITL_LOW = this.sibling@("ITL_LOW")
+"	FRF_LOW = this.sibling@("FRF_LOW")
+"
+"	DEM_HIGH = this.sibling@("DEM_HIGH")
+"	GBP_HIGH = this.sibling@("GBP_HIGH")
+"	ITL_HIGH = this.sibling@("ITL_HIGH")
+"	FRF_HIGH = this.sibling@("FRF_HIGH")
+"
+"endset
+"
+"
+"set clicked_event
+"
+"	var 	DEMvar, GBPvar, ITLvar, FRFvar,
+"		DEMlow, DEMhigh,
+"		GBPlow, GBPhigh,
+"		ITLlow, ITLhigh,
+"		FRFlow, FRFhigh,
+"		system_date, paste_date, paste_time
+"
+"
+"	DEMvar = "DEM"
+"	doct.set_doc_var@(DEMvar,DEM_SUCCESS.value@)
+"	DEMlow = "dem_low"
+"	doct.set_doc_var@(DEMlow,DEM_LOW.value@)
+"	DEMhigh = "dem_high"
+"	doct.set_doc_var@(DEMhigh,DEM_HIGH.value@)
+"	
+"	GBPvar = "GBP"
+"	doct.set_doc_var@(GBPvar,GBP_SUCCESS.value@)
+"	GBPlow = "gbp_low"
+"	doct.set_doc_var@(GBPlow,GBP_LOW.value@)
+"	GBPhigh = "gbp_high"
+"	doct.set_doc_var@(GBPhigh,GBP_HIGH.value@)
+"
+"	ITLlow = "itl_low"	
+"	doct.set_doc_var@(ITLlow,ITL_LOW.value@)
+"	ITLhigh = "itl_high"
+"	doct.set_doc_var@(ITLhigh,ITL_HIGH.value@)
+"	ITLvar = "ITL"
+"	doct.set_doc_var@(ITLvar,ITL_SUCCESS.value@)
+"	
+"	FRFvar = "FRF"
+"	doct.set_doc_var@(FRFvar,FRF_SUCCESS.value@)
+"	FRFlow = "frf_low"
+"	doct.set_doc_var@(FRFlow,FRF_LOW.value@)
+"	FRFhigh = "frf_high"
+"	doct.set_doc_var@(FRFhigh,FRF_HIGH.value@)
+"
+"	system_date = CURRENT_TIME@()
+"	paste_date = DATE_FORMAT@(system_date,1)
+"	paste_time = DATE_FORMAT@(system_date,600)
+"
+"	chart_button.clicked_event()
+"	chart.copy_to_clipboard@
+"
+"	doct.goto_end@
+"	doct.goto_prev_inset@
+"	doct.delete_to_end_of_line@
+"	
+"	doct.paste@
+"
+"	doct.save@
+"
+"endset
+"
+"
+"
+"
+-
+-
+@9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"LABELCOLOR$$
+@3
+#5
+@3
+#240
+#90
+#51
+"
+@2
+"DB_UID$$
+#7
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#70
+"Gray
+@2
+"HEIGHT$$
+@2
+#40
+#22
+@2
+"WIDTH$$
+@2
+#101
+#70
+@2
+"YPOS$$
+@2
+#439
+#75
+@2
+"XPOS$$
+@2
+#501
+#10
+@2
+"W_TITLE$$
+"Create Report
+@6
+"Panel.3
+&2
+'RootObject
+'PanelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Panel.3
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : PanelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@10
+@2
+"STYLE$$
+#1
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"DB_UID$$
+#5
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#70
+"Gray
+@2
+"THICKNESS$$
+@2
+#2
+#0
+@2
+"HEIGHT$$
+@2
+#345
+#50
+@2
+"WIDTH$$
+@2
+#620
+#50
+@2
+"YPOS$$
+@2
+#254
+#7
+@2
+"XPOS$$
+@2
+#7
+#224
+@2
+"W_TITLE$$
+"Panel.3
+@6
+"Panel.4
+&2
+'RootObject
+'PanelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Panel.4
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : PanelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@10
+@2
+"STYLE$$
+#1
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"DB_UID$$
+#6
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#240
+#90
+#51
+"
+@2
+"THICKNESS$$
+@2
+#2
+#0
+@2
+"HEIGHT$$
+@2
+#15
+#50
+@2
+"WIDTH$$
+@2
+#618
+#50
+@2
+"YPOS$$
+@2
+#600
+#7
+@2
+"XPOS$$
+@2
+#8
+#224
+@2
+"W_TITLE$$
+"Panel.4
+@6
+"Label.1
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Label.1
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@4
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"YPOS$$
+@2
+#68
+#16
+@2
+"XPOS$$
+@2
+#181
+#124
+@2
+"W_TITLE$$
+"Range - Low
+@6
+"Label
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Label
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@4
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"YPOS$$
+@2
+#67
+#16
+@2
+"XPOS$$
+@2
+#274
+#124
+@2
+"W_TITLE$$
+"Range - High
+@6
+"menu_bar@
+&2
+'RootObject
+'MenuBarClass
+@72
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : menu_bar@
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : MenuBarClass
+"''
+"
+"@@@ OBJECTS
+"
+"include "menubar_.am"
+"
+"objvar object sprsh
+"sysvar window_num_new
+"
+"get menu_state_event (method_name)
+"
+"	sprsh = this.application@.child@("SPRSH_DOC")
+"
+"	case of lowercase@(method_name)
+"	case "print_dlg"
+"		return(MENUSTAT#DIMMED)
+"	case "toggle_view_expressline"
+"		return(this.parent@.expressline_status@)
+"	case "toggle_enable_live_feed"
+"		if this.application@.rt_live_feed_is_enabled@
+"			return(MENUSTAT#TOGGLE_ON)
+"		else
+"			return(MENUSTAT#TOGGLE_OFF)
+"	case "view_spreadsheet_toggle"
+"		if window_num_new = ""
+"			return(MENUSTAT#TOGGLE_OFF)
+"		else
+"			return(MENUSTAT#TOGGLE_ON)
+"
+"
+"	endcase
+"endget
+"
+"set exit_dlg
+"	this.application@.quit@
+"endset
+"
+"set print_dlg
+"endset
+"
+"set view_spreadsheet_toggle
+"	sprsh.windowing()
+"endset
+"
+"set toggle_view_expressline
+"	this.parent@.toggle_view_expressline@
+"endset
+"
+"set toggle_enable_live_feed
+"	if this.application@.rt_live_feed_is_enabled@
+"		this.application@.rt_disable_live_feed@
+"	else
+"		this.application@.rt_enable_live_feed@
+"endset
+"
+"set stop_restart_gateway_dlg
+"	this.application@.rt_stop_restart_gateway_dlg@
+"endset
+"
+"set display_status_window_dlg
+"	this.application@.rt_display_status@
+"endset
+"
+"set help_about
+"endset
+"
+"
+-
+-
+@2
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"DATA_ARRAY$$
+@4
+@2
+"File
+@2
+@2
+"Print...
+"print_dlg
+@2
+"Exit
+"exit_dlg
+@2
+"View
+@2
+@2
+"View Spreadsheet
+"view_spreadsheet_toggle
+@2
+"View Expressline
+"toggle_view_expressline
+@2
+"Real Time
+@3
+@2
+"Enable Live Feed
+"toggle_enable_live_feed
+@2
+"Stop/Restart Gateway...
+"stop_restart_gateway_dlg
+@2
+"Display Status Window...
+"display_status_window_dlg
+@2
+"Help
+@1
+@2
+"About...
+"help_about
+@6
+"Panel.5
+&2
+'RootObject
+'PanelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Panel.5
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : PanelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@9
+@2
+"DB_UID$$
+#9
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"THICKNESS$$
+@2
+#2
+#0
+@2
+"HEIGHT$$
+@2
+#174
+#50
+@2
+"WIDTH$$
+@2
+#124
+#50
+@2
+"YPOS$$
+@2
+#341
+#7
+@2
+"XPOS$$
+@2
+#489
+#224
+@2
+"W_TITLE$$
+"Output options
+@2
+"STYLE$$
+#2
+@6
+"Panel
+&2
+'RootObject
+'PanelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Panel
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : PanelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@9
+@2
+"DB_UID$$
+#10
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"WIDGETCOLOR$$
+@3
+#5
+@3
+#0
+#0
+#70
+"Gray
+@2
+"THICKNESS$$
+@2
+#2
+#0
+@2
+"HEIGHT$$
+@2
+#28
+#50
+@2
+"WIDTH$$
+@2
+#619
+#50
+@2
+"YPOS$$
+@2
+#62
+#7
+@2
+"XPOS$$
+@2
+#7
+#224
+@2
+"W_TITLE$$
+"Panel
+@6
+"Label
+&2
+'RootObject
+'LabelClass
+@10
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : Label
+"'' Application    : Application
+"'' Parent         : Dialog1
+"'' Inherits from  : LabelClass
+"''
+"
+"@@@ OBJECTS
+"
+"
+-
+-
+@4
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"YPOS$$
+@2
+#68
+#16
+@2
+"XPOS$$
+@2
+#14
+#124
+@2
+"W_TITLE$$
+"CURRENCY
+@9
+@2
+"VAR_SIZE$$
+#0
+@2
+"MENU_BAR_OBJ_NAME$$
+"menu_bar@
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"EXPLODE_CHILDREN$$
+#-1
+@2
+"REVISION$$
+#1
+@2
+"HEIGHT$$
+#624
+@2
+"WIDTH$$
+#633
+@2
+"DBOX_TYPE$$
+#1
+@2
+"TITLE$$
+"Real Time Ranges - Hit Rate Analysis
+@6
+"SPRSH_DOC
+&2
+'RootObject
+'SpreadsheetsClass
+@47
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : SPRSH_DOC
+"'' Application    : Application
+"'' Parent         : Application
+"'' Inherits from  : SpreadsheetsClass
+"''
+"
+"@@@ OBJECTS
+"
+"include "menubar_.am"
+"
+"objvar object app, dbox, SprshRadio
+"sysvar window_num, window_num_new
+"
+"set initialize_event
+"
+"	app = this.application@
+"	dbox = app.child@("Dialog1")
+"
+"	this.is_windowless@(TRUE)
+"	this.load_file@(demos_dir@() ++ "/custom_apps/Hit_Rate.as")
+"
+"	window_num = CURRENT_WINDOW_NUM@()
+"	window_num_new = ""	
+"
+"endset
+"
+"set windowing
+"var windows, i
+"
+"	IF window_num_new = ""
+"	{	SELECT_WINDOW@(window_num)
+"		SS_ADD_WIN@()                  
+"		window_num_new = CURRENT_WINDOW_TITLE@()
+"	} ELSE {
+"		windows = LIST_OF_WINDOWS@()
+"		FOR i=0 TO ARRAY_SIZE@(windows)
+"		IF (windows[i,1] = window_num_new) {
+"			SELECT_WINDOW_BY_NAME@(window_num_new)
+"			SS_EXIT@()
+"		}
+"		NEXT i
+"		window_num_new = ""
+"	}
+"
+"
+"ENDSET
+-
+-
+@2
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"COMMENTS$$
+@1
+-
+@6
+"Data1
+&2
+'RootObject
+'RealtimeGatewayClass
+-
+-
+@4
+@6
+"DEM_RECORD
+&2
+'RootObject
+'RealtimeRecordClass
+-
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"FIELD_WIDGET_CONTROLS$$
+@3
+@3
+"Dialog1
+"RIC1_BID
+"BID
+@3
+"Dialog1
+"DEM_ASK
+"ASK
+@3
+"Dialog1
+"DEM_BID
+"BID
+@2
+"FIELD_LIST$$
+@2
+@4
+"BID
+"
+-
+"
+@4
+"ASK
+"
+-
+"
+@2
+"RECORD_ID$$
+"DEM=
+@2
+"SERVICE_NAME$$
+"IDN_SELECTFEED
+@6
+"GBP_RECORD
+&2
+'RootObject
+'RealtimeRecordClass
+-
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"FIELD_WIDGET_CONTROLS$$
+@3
+@3
+"Dialog1
+"RIC2_BID
+"BID
+@3
+"Dialog1
+"GBP_ASK
+"ASK
+@3
+"Dialog1
+"GBP_BID
+"BID
+@2
+"FIELD_LIST$$
+@2
+@4
+"BID
+"
+-
+"
+@4
+"ASK
+"
+-
+"
+@2
+"RECORD_ID$$
+"GBP=
+@2
+"SERVICE_NAME$$
+"IDN_SELECTFEED
+@6
+"ITL_RECORD
+&2
+'RootObject
+'RealtimeRecordClass
+-
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"FIELD_WIDGET_CONTROLS$$
+@3
+@3
+"Dialog1
+"RIC3_BID
+"BID
+@3
+"Dialog1
+"ITL_ASK
+"ASK
+@3
+"Dialog1
+"ITL_BID
+"BID
+@2
+"FIELD_LIST$$
+@2
+@4
+"BID
+"
+-
+"
+@4
+"ASK
+"
+-
+"
+@2
+"RECORD_ID$$
+"ITL=
+@2
+"SERVICE_NAME$$
+"IDN_SELECTFEED
+@6
+"FRF_RECORD
+&2
+'RootObject
+'RealtimeRecordClass
+-
+-
+-
+@5
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"FIELD_WIDGET_CONTROLS$$
+@3
+@3
+"Dialog1
+"RIC4_BID
+"BID
+@3
+"Dialog1
+"FRF_ASK
+"ASK
+@3
+"Dialog1
+"FRF_BID
+"BID
+@2
+"FIELD_LIST$$
+@2
+@4
+"BID
+"
+-
+"
+@4
+"ASK
+"
+-
+"
+@2
+"RECORD_ID$$
+"FRF=
+@2
+"SERVICE_NAME$$
+"IDN_SELECTFEED
+@3
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"EXPLODE_CHILDREN$$
+#0
+@2
+"GATEWAY$$
+"rtdemo
+@6
+"wpdoc
+&2
+'RootObject
+'WordsClass
+@16
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : wpdoc
+"'' Application    : Application
+"'' Parent         : Application
+"'' Inherits from  : WordsClass
+"''
+"
+"@@@ OBJECTS
+"
+"set initialize_event
+"
+"	this.is_windowless@(false)
+"	this.load_file@(demos_dir@() ++ "/custom_apps/Hits_Link.aw")
+"
+"
+"endset
+-
+-
+@2
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"COMMENTS$$
+@1
+-
+@2
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"EXPLODE_CHILDREN$$
+#-1
+-
+@14
+"Hits_Demo_Chart_43.ab
+"/home/ax4.3.685/axdata/eng/Demos/custom_apps/Hits_Demo_Chart_43.ab
+"Applix Builder 4.2
+"Version 552 Sun Nov 19 13:52:11 1995
+"January 19, 1996 09:40 am
+"laurar
+"Applix Builder 4.3
+"Version 685 Fri Aug 16 23:45:51 1996
+"September 5, 1996 01:46 pm
+"pcurtis
+#1
+#1
+-
+@6
+#0
+#430
+#213
+#430
+#320
+-
+-
+*END BUILDER
+m
+"laurar
+#1
+#1
+-
+@6
+#0
+#420
+#213
+#420
+#320
+-
+-
+*END BUILDER
+ct
+'WordsClass
+@16
+"''''''''''''''''''''''''''''''''''''''''''''''''''''''''''
+"'' Object         : wpdoc
+"'' Application    : Application
+"'' Parent         : Application
+"'' Inherits from  : WordsClass
+"''
+"
+"@@@ OBJECTS
+"
+"set initialize_event
+"
+"	this.is_windowless@(false)
+"	this.load_file@("Hits_Link.aw")
+"
+"
+"endset
+-
+-
+@2
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"COMMENTS$$
+@1
+-
+@2
+@2
+"STATIC_OBJVAR_VERSION$$
+#1
+@2
+"EXPLODE_CHILDREN$$
+#-1
+-
+@14
+"Hits_Demo_Chart_43.ab
+"/user/laurar/rt43/Hits_Demo_Chart_43.ab
+"Applix Builder 4.2
+"Version 552 Sun Nov 19 13:52:11 1995
+"January 19, 1996 09:40 am
+"laurar
+"Applix Builder 4.3
+"Version 673 Wed Jul 31 02:09:35 1996
+"August 15, 1996 12:53 pm
+"laurar
+#1
+#1
+-
+@6
+#0
+#420
+#213
+#420
+#320
+-
+-
+*END BUILDER
+b
+"Applix Builder 4.2
+"Version 552 Sun Nov 19 13:52:11 1995
+"January 19, 1996 09:40 am
+"laurar
+"Applix Builder 4.3
+"Version 673 Wed Jul 31 02:09:35 1996
+"August 15, 1996 12:50 pm
+"laurar
+#1
+#1
+-
+@6
+#0
+#420
+#213
+#420
+#320
+-
+-
+*END BUILDER
