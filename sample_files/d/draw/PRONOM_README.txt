@@ -1,0 +1,3 @@
+Acorn Draw (or RISC OS Draw) files are the native format for vector graphics on RISC OS systems. The built-in Draw application can be used to load, edit and save files in this format. Thanks to software support from Acorn in the form of a system module for rendering Draw files and various tools and libraries written by third parties, the format was widely used. Although Draw files are used in a variety of applications, they are often used in conjunction with desktop publishing (DTP) and word processing software, and libraries of clip art would typically include drawings in this format.
+
+http://fileformats.archiveteam.org/wiki/Acorn_Draw

@@ -1,0 +1,3 @@
+DST (Data Stitch Tajima) is a very commonly-used proprietary embroidery format originally from Tajima. The files contain only stitch commands for the embroidery machines. And a metadata information of label. It is not very nicely designed but because of its age (it came about from punchcard days) but the general ubiquity means it is as close to a standard as exists within embroidery. Some format changes are made such as to not affect the reading by embroidery machines and yet have the ability to be interpreted different on newer machines with newer functionality.
+
+https://edutechwiki.unige.ch/en/Embroidery_format_DST
