@@ -1,0 +1,3 @@
+Gprof is a profiling program which collects and arranges statistics on your programs.Basically, it looks into each of your functions and inserts code at the head and tail of each one to collect timing information (actually, I don't believe it checks each time the function is run, but rather collects statistically significant samples). Then, when you run your program normally (that means with any std and file i/o you would normally have), it creates "gmon.out"... raw data which the gprof program turns into profiling statistics (which tell you all sorts of neat stuff).
+
+https://users.cs.duke.edu/~ola/courses/programming/gprof.html
