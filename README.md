@@ -3,7 +3,7 @@
 
 This repository contains file format samples, and <a href="https://github.com/gleporeNARA/pronom-research/wiki">standard operating procedures</a> for the identification, examination, and documentation of new file format signatures for the UK National Archives PRONOM database.
 
-In addition the repo contains over 1,300 PRONOM signatures converted to the 'file' format which can be used with the standard Linux command 'file'. Each subdirectory in sample_files contains sample files (duh), the PRONOM signature, metadata about the format (specifications, explanation, etc.), and the PRONOM signature after being run through the PRONOM Signature Reconstructor, which translates the PRONOM XML file to a simplified expression of the signature.
+In addition the repo contains over 1,100 PRONOM signatures converted to the 'file' format which can be used with the standard Linux command 'file'. Each subdirectory in sample_files contains sample files (duh), the PRONOM signature, metadata about the format (specifications, explanation, etc.), and the PRONOM signature after being run through the PRONOM Signature Reconstructor, which translates the PRONOM XML file to a simplified expression of the signature.
 
 "PRONOM is an on-line information system about data file formats and their supporting software products. Originally developed to support the accession and long-term preservation of electronic records held by the National Archives, PRONOM is now being made available as a resource for anyone requiring access to this type of information."
 
