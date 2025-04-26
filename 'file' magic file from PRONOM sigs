@@ -156,7 +156,7 @@
 # Affymetrix Probe Set Information (psi)
 0	string	=#Probe\ S	Affymetrix Probe Set Information
 
-# AGP Format (.)
+# AGP Format (agp)
 0	search/1024	=##agp-ve	AGP Format
 
 # Akai Sampler Format (akp)
@@ -194,11 +194,11 @@
 0	string	ToolsLayout	Altium Designer Tools Layout File
 
 # Amber OFF Library File (off2)
-0	string	=!!index\ 	Amber OFF Library File
+0	string	=!!index\x20	Amber OFF Library File
 
 # Amiga HotHelp Documentation Format (hdr3)
-0	string	=$VER:\ Ho	Amiga HotHelp Documentation Format
-0	string	=$VER:\ Ho	Amiga HotHelp Documentation Format
+0	string	=$VER:\ HotHelpText	Amiga HotHelp Documentation Format
+0	string	=$VER:\ HotHelpHeader	Amiga HotHelp Documentation Format
 
 # Amiga Metafile Format (library)
 0	string	FORM
@@ -221,7 +221,7 @@
 0	string	=\0\0\0\0\x90\0\0\0	Anex86 PC98 Floppy Image
 
 # Ani ST Vector Graphic (aniST)
-0	string	=*script\ 	Ani ST Vector Graphic
+0	string	=*script\x20	Ani ST Vector Graphic
 
 # ANIM Animated Raster Graphic (anim)
 8	string	ANIMFORM	ANIM Animated Raster Graphic
@@ -315,8 +315,8 @@
 
 # Atari 8 Bit Cassette (cas)
 0	string	FUJI
->8	string	baud
->16	string	data	Atari 8 Bit Cassette
+>8	search/32	baud
+>>16	search/32	data	Atari 8 Bit Cassette
 
 # Atari 8 Bit Disk Image (atx)
 0	string	AT8X	Atari 8 bit Disk Image
@@ -373,7 +373,7 @@
 0	string	Autodesk\ External\ Message\ File	Autodesk External Message File
 
 # Autodesk Key Index File (kif)
-0	string	AKIF\x00\x01\x00\x14\x00 	Autodesk Key Index File
+0	string	AKIF\x00\x01\x00\x14\x00x20	Autodesk Key Index File
 
 # Autodesk Softimage 3D Model Data (hrc)
 0	string	HRCH:\ Softimage	Autodesk Softimage 3D Model Data
@@ -390,12 +390,6 @@
 
 # AVZ Antiviral Toolkit Data (avz)
 0	string	AVZ	AVZ Antiviral Toolkit Data
-
-# Axon Text Format (mat2)
-0	string	ATF	Axon Text Format
-
-# AXS module (mdl5)
-8	string	AXSFUSER	AXS module
 
 # AY Amadeus chiptune (amad)
 0	string	ZXAYAMAD	AY Amadeus chiptune
@@ -493,7 +487,7 @@
 >8	string	IFRSRIdx	BLORB Interactive Fiction File
 
 # Blue Moon Rendering Tools Shading Language File (slc)
-0	string	version\ BMRT\ 	Blue Moon Rendering Tools Shading
+0	string	version\ BMRT\x20	Blue Moon Rendering Tools Shading
 
 # Bob_s Adlib Music (bam3)
 0	string	CBMF	Bob_s Adlib Music
@@ -522,9 +516,6 @@
 0	string	PKG7	Borland Delphi Compiled Package
 0	string	PKG9	Borland Delphi Compiled Package
 0	string	PKX0	Borland Delphi Compiled Package
-
-# Borland Device BGI Device Driver (bgi)
-0	search/200	string	BGI\ Device\ Driver	Borland Device BGI Device Driver
 
 # Borland Locale Library (bll)
 0	string	LOCALE.BLL	Borland Locale Library
@@ -581,7 +572,7 @@
 0	string	C-Worthy\ (R)\ Help\ Librarian\ Data	C Worthy R Help Librarian Data
 
 # C64 Library Container (lbr)
-0	string	DWB\ 	C64 Library Container
+0	string	DWB\x20	C64 Library Container
 
 # C64 NBZ Disk image (nbz)
 1	string	MNIB-1541-RAW	C64 NBZ Disk image
@@ -639,7 +630,7 @@
 0	string	STDY	CFAST Disney Animation Studio Raster Graphic
 
 # Chain Format (pat2)
-0	string	chain\ 	Chain Format
+0	string	chain\x20	Chain Format
 
 # CharPad Graphics File (ctm)
 0	string	CTM\x05	CharPad Graphics File
@@ -659,7 +650,7 @@
 0	string	ACS$\x01\x00\x00\x00\x00\x00\x00	CHUMP File Format
 
 # CIRCAD Data File (fil)
-0	string	CIRCAD\ Version\ 	CIRCAD Data File
+0	string	CIRCAD\ Version\x20	CIRCAD Data File
 
 # CircuitMaker Schematic (ckt2)
 0	string	CircuitMaker\ Text\x0d\x0a	CircuitMaker Schematic
@@ -715,10 +706,6 @@
 
 # ColorViewSquash Graphics File (rgb)
 0	string	RGB1	ColorViewSquash Graphics File
-
-# Common Data Format (cdf)
-
-#0	search/200	Common\ Data\ Format	Common Data Format
 
 # Common Instrumentation Transfer and Interchange File (d1)
 0	string	CITIFILE	Common Instrumentation Transfer and Interchange File
@@ -790,7 +777,7 @@
 >8	string	shw4LIST2	Corel SHOW V4 Show File
 
 # Corel SHOW V5 File (shw5)
-0		string	 RIFF
+0	string	 RIFF
 >8	 string	 shw5LIST2	Corel SHOW V5 File
 
 # Corel SHOW V5 Player File (shr)
@@ -812,10 +799,6 @@
 # Corel Time Line Report (rpt)
 0	string	\x00\x10
 >3	string	\x00\x04\x00\x00\x00\x00\x04\x00\x00\x00\x00\x05\x00	Corel Time Line Report
-
-# Corel Time Line Report (rpt)
-#0	string	\x00\x10
-#>3	string	\x00\x04\x00\x00\x00\x00\x04\x00\x00\x00\x00\x05\x00	Corel Time Line Report
 
 # CorelCENTRAL Card File (ccf)
 0	string	CorelCENTRAL\ Card\ File	CorelCENTRAL Card File
@@ -854,7 +837,7 @@
 0	string	CTMF	Creative Music Format
 
 # Crossware Embedded Development Studio Build Script (xmk)
-0	string	=#\ Build\ 	Crossware Embedded Development Studio Build Script
+0	string	=#\ Build\x20	Crossware Embedded Development Studio Build Script
 
 # Crunch Mania Compressed File (crm2)
 0	string	CrM2	Crunch Mania Compressed File
@@ -864,7 +847,7 @@
 0	string	HNM6	CRYO HNM6 Video
 
 # Crystallographic Binary File (cbf)
-0	string	=###CBF:\ 	Crystallographic Binary File
+0	string	=###CBF:\x20	Crystallographic Binary File
 
 # Crystallographic Information File Version 2 (cif2)
 0	string	=#\\#CIF_2	Crystallographic Information File
@@ -895,7 +878,7 @@
 # Data Stitch Tajima Machine Embroidery Format (dst)
 0	string	LA:
 >20	string	ST:
->31	string	CO:	Data Stitch Tajima Machine Embroidery Format
+>>31	string	CO:	Data Stitch Tajima Machine Embroidery Format
 
 # David Hanney Chiptune (dh)
 0	string	DSNGSEQU	David Hanney Chiptune
@@ -1008,7 +991,7 @@
 0	string	BSHD	Divinity Game Engine Compiled Shad
 
 # Divinity Game Engine Text Shader File (shd)
-0	string	=[Vertex\ 	Divinity Game Engine Text Shader File
+0	string	=[Vertex\x20	Divinity Game Engine Text Shader File
 
 # Dna Sequence Chromatogram
 0	string	.scf	Dna Sequence Chromatogram
@@ -1144,7 +1127,7 @@
 0	string	=\x0d\x0aEps\ Fi	Ensoniq EPS File
 
 # Ensoniq PARIS FAP PAF Format (fap)
-0	string	fap\ 	Ensoniq PARIS FAP PAF Format
+0	string	fap\x20	Ensoniq PARIS FAP PAF Format
 0	string	\ paf	Ensoniq PARIS FAP PAF Format
 
 # ENVI Image File (xp3)
@@ -1197,18 +1180,11 @@
 0	string	FORM
 >30 string	XMIDFORM	Extended MIDI Audio File
 
-# Extended Nintendo Sound Format chiptune (nsfe)
-0	string	NSFE	Extended Nintendo Sound Format chiptune
-
 # F-PROT Virus Scanning Report (rpt4)
 0	string	Virus\ scanning\ report\ \ -\ \	F-PROT Virus Scanning Report
 
 # Falcon3 Replay Video (vcr)
 0	string	VCRh	Falcon3 Replay Video
-
-# Famicom Disk System Disk Image (fds)
-0	string	FDS
->17 string	=*NINTENDO-HVC* Famicom Disk System Disk Image
 
 # Family Origins Report v5.x (rpt5)
 0	string	FOWIN_REPORT\x0C4	Family Origins Report v5.x
@@ -1217,7 +1193,7 @@
 0	string	FamiTracker\ Module	FamiTracker Module
 
 # Fancy Font System Font File (fon)
-0	string	Translation\ by\ Pacific\ Software\ 	Fancy Font System Font File
+0	string	Translation\ by\ Pacific\ Software\x20	Fancy Font System Font File
 
 # Farallon Replica File (rpl2)
 0	string	Farallon\ Replica\ (TM)	Farallon Replica File
@@ -1249,7 +1225,7 @@
 0	string	1\ FSTSha	Flight Simulator Toolkit File
 
 # Flight Simulator Toolkit Terrain File (ftd)
-0	string	FST\ Terrain\ Data\ V01.\ 	Flight Simulator Toolkit Terrain File
+0	string	FST\ Terrain\ Data\ V01.\x20	Flight Simulator Toolkit Terrain File
 
 # FLIP Graphics Format (fbi)
 0	string	=\xf08	FLIP Graphics Format
@@ -1322,7 +1298,7 @@
 0	string	=\0\x0a\xcf\xe2	Funny Paint Graphic File
 
 # Funpaint 2 Bitmap
-0	string	\xf0?FUNPAINT\ (MT)\ 	Funpaint 2 Bitmap
+0	string	\xf0?FUNPAINT\ (MT)\x20	Funpaint 2 Bitmap
 
 # FuturePlayer module (emul)
 36	string	F.PLAYER	FuturePlayer module
@@ -1334,7 +1310,7 @@
 0	string	crypt4gh	GA4GH Encrypted File
 
 # Gambit Neutral File Format (neu)
-0	search/300	=**\ GAMBI	Gambit Neutral File Format
+0	search/300	=\x2a\x2a\x20GAMBIT	Gambit Neutral File Format
 
 # GameBoy Music Module (glue)
 0	string	=\0\0\x01\0\x11\0\x01\0	GameBoy Music Module
@@ -1354,14 +1330,14 @@
 # Gating ML XML File (gml)
 0	string	xmlns:gating	Gating ML XML File
 
-# Genbank Flat File Format 1.0
+# Genbank Flat File Format 1.0 (gb2)
 0	string	LOCUS\ \ \ \ \ \ \ 
 >10	search/150	DEFINITION
->15	search/150	ACCESSION
->100	search/150	ORGANISM	Genbank Flat File Format 1.0
+>>15	search/150	ACCESSION
+>>>100	search/150	ORGANISM	Genbank Flat File Format 1.0
 
 # General Data Format for Biomedical Signals (gdf)
-0	string	GDF\ 	General Data Format for Biomedical Signals
+0	string	GDF\x20	General Data Format for Biomedical Signals
 
 # Generic Feature Format (gff)
 0	string	=##gff-ve	Generic Feature Format
@@ -1486,12 +1462,12 @@
 0	string	FYEK	Grim Fandango Animation Key File
 
 # Grim Fandango Colormap Palette (cmp)
-0	string	CMP\ 	Grim Fandango Colormap Palette
+0	string	CMP\x20	Grim Fandango Colormap Palette
 
 # Grim Fandango IMC Music Format (imc)
 0	string	iMUS
 >8	string	MAP
->16	string	FRMT	Grim Fandango IMC Music Format
+>>16	string	FRMT	Grim Fandango IMC Music Format
 
 # Grim Fandango Texture File (mat2)
 0	string	MAT\ 2	Grim Fandango Texture File
@@ -1555,10 +1531,6 @@
 
 # HMMER Format (mat2)
 0	string	HMMER	HMMER Format
-
-# HP 48 49 Calculator (hp48)
-0	string	HPHP48	HP 48 49 Calculator
-0	string	HPHP49	HP 48 49 Calculator
 
 # HSI JPEG (pt)
 0	string	hsi\x0A	HSI JPEG
@@ -1871,15 +1843,15 @@
 # JMP Data File (guide)
 443	string	Release,\ JMP	JMP Data File
 
-# Joe_s Own Editor JOE Syntax Highlight File (jsf)
-2	string	JOE\ syntax\ highlight\ file	Joe_s Own Editor JOE Syntax Highlight File
+# Joe's Own Editor JOE Syntax Highlight File (jsf)
+2	string	JOE\ syntax\ highlight\ file	Joe's Own Editor JOE Syntax Highlight File
 
 # Joint Committee on Atomic and Molecular Physical Data Exchange Format (dx)
 #0	string/200	##JCAMP-DX=
 
 # JPS Stereoscopic Image (jps)
 6	string	JFIF
-#>0	string/600	_JPSJPS_	JPS Stereoscopic Image
+>0	search/600/b	_JPSJPS_	JPS Stereoscopic Image
 
 # JRNF Data Format (jrnf)
 0	string	jrnf	JRNF Data Format
@@ -1911,9 +1883,6 @@
 
 # Koala Microillustrator Graphic
 0	string	\xff\x80\xc9\xc7\x1a	Koala Microillustrator Graphic
-
-# Kodak Photo CD Overview Pack File (pcd2)
-0	string	PCD_OPA	Kodak Photo CD Overview Pack File
 
 # Kodak Precision Transform File (pt)
 0	string	futf\x00\x00\x000\x00\x00	Kodak Precision Transform File
@@ -1952,7 +1921,7 @@
 0	string	=#:lav	LAV Format
 
 # LBR Archive Data (rbo)
-0	string	=\0\ \ \ \ \ \ \ 	LBR Archive Data
+0	string	=\0\ \ \ \ \ \ \x20	LBR Archive Data
 
 # LDraw File Format (mpd)
 0	string	0\ FILE	LDraw File Format
@@ -2089,14 +2058,13 @@
 # MapInfo Map Data (map4)
 0	string	=\0\x0a\x0e\x15\x0e\x16\x1b\xa2	MapInfo Map Data
 
-# Maple Worksheet (mws)
-0	string	={VERSION\ 
->13	string	="IBM\ INTEL\ NT"\ "	Maple Worksheet
-
-# Maptech Bsb Documentation File
+# Maptech Bsb Documentation File (bsb)
 0	search/1800	CED/
-0	search/1800	NTM/
-0	search/1800	VER/	Maptech Bsb Documentation File
+>0	search/1800	NTM/
+>>0	search/1800	VER/	Maptech Bsb Documentation File
+0	search/1800/b	CED/
+>0	search/1800/b	NTM/
+>>0	search/1800/b	VER/	Maptech Bsb Documentation File
 
 # Mark Cooksey Module (mc)
 0	string	=\xd0@\xd0@N\xfb\0\x02	Mark Cooksey Module
@@ -2125,10 +2093,6 @@
 
 # Maxis Database Packed File (package)
 0	string	DBPF	Maxis Database Packed File
-
-# Maxis XA audio (xa)
-0	string	XAI\x00	Maxis XA audio
-0	string	XAJ\x00	Maxis XA audio
 
 # MaxonCAD Drawing (mcdraw)
 0	string	MXCDDRAW	MaxonCAD Drawing
@@ -2202,7 +2166,7 @@
 0	string	\x01\x01\xFF\xE0\xF5\x05Copyright(c)\ 1992-1994,\ Microsoft\ Corp	Microsoft Clipart Index
 
 # Microsoft Cue Card (enc)
-0	string	CCV1\ \ 	Microsoft Cue Card
+0	string	CCV1\ \x20	Microsoft Cue Card
 
 # Microsoft Custom Soundtrack Music File (sty2)
 0	string	RIFF
@@ -2234,7 +2198,7 @@
 >8	string	tzip	Microsoft Direct3D Object
 
 # Microsoft eMbedded Visual Tools Workspace File (vcw)
-0	string	Microsoft\ eMbedded\ Visual\ Tools 	Microsoft eMbedded Visual Tools Workspace File
+0	string	Microsoft\ eMbedded\ Visual\ Tools\ Workspace	Microsoft eMbedded Visual Tools Workspace File
 
 # Microsoft Excel Toolbar (xlb)
 0	string	\x09\x08\x10\x00\x00\x06\x00\x09
@@ -2333,16 +2297,13 @@
 # MK Jamz Ad Lib Module (mkj)
 0	string	MKJamz	MK Jamz Ad Lib Module
 
-# MO3 Module (emul)
-0	string	MO3	MO3 Module
-
 # Mobile Sound Builder Session Document (msb2)
 0	string	MSB_2.00	Mobile Sound Builder Session Document
 
 # Modified Maximum Method Digisonde Portable Sounder File (mmm2)
 0	string	\x09\x3C\x00
 >16	string	\x04\x02\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x01
->45 string	\x01\x04\x01\x0D\x07\x04\x03\x04\x00\x00	Modified Maximum Method Digisonde Portable Sounder File
+>>45 string	\x01\x04\x01\x0D\x07\x04\x03\x04\x00\x00	Modified Maximum Method Digisonde Portable Sounder File
 
 # Modo 3D Model (modfast)
 0	string	FORM
@@ -2359,10 +2320,6 @@
 
 # MS Visual C++ Precompiled Header (pch)
 0	string	VCPCH0	MS Visual C++ Precompiled Header
-
-# MSX Graph Saurus Compressed Image (comp)
-0	string	=\xfd\0\0
->64	string	=\xDC\xCC\xDD\xCC\xCB\x02\x99\xA8\x87\x02\x88\x67\x79\xBB\xAA\xAD\xDE\x00\xD2\xEE\xED\xDD\x0E\xEE\xDA\xA8\x03\x77\x76\x77\x88\x87\x04\x77\x76\x02	MSX Graph Saurus Compressed Image
 
 # MSX Software Team TSR (tsr)
 0	string	MST\ TSR	MSX Software Team TSR
@@ -2382,7 +2339,7 @@
 
 # MultiViewDemo File (fil)
 0	string	\x00\x06
->7	string	MVD1\ 	MultiViewDemo File
+>7	string	MVD1\x20	MultiViewDemo File
 
 # Mupen64 Movie Capture (m64)
 0	string	M64\x1A	Mupen64 Movie Capture
@@ -2399,10 +2356,10 @@
 # Myriad Harmony Melody Assistant Music File (myr)
 0	string	SOLF
 >7	string	S	
->9	string O	Myriad Harmony Melody Assistant Music File
+>>9	string O	Myriad Harmony Melody Assistant Music File
 
 # NADCON los las Grid Format (los)
-0	string	NADCON\ EXTRACTED\ REGION\ \ \ \ \ \ \ \ \ 	NADCON los las Grid Format
+0	string	NADCON\ EXTRACTED\ REGION\ \ \ \ \ \ \ \ \x20	NADCON los las Grid Format
 
 # NASA SPICE BC Format (bc)
 0	string	DAF/CK	NASA SPICE BC Format
@@ -2452,7 +2409,7 @@
 0	string	nff	Neutral ASCII File Format
 
 # NeXT TopDraw Image (topdraw)
-0	string	TopDraw\ 	NeXT TopDraw Image
+0	string	TopDraw\x20	NeXT TopDraw Image
 
 # Nexus File Format (mat2)
 0	string	=#NEXUS	Nexus File Format
@@ -2488,17 +2445,17 @@
 # Nokia Picture Message 1.0
 0	string	NPM	Nokia Picture Message 1.0
 
-# Nokia Startup Logo (opo)
+# Nokia Startup Logo (nsl)
 0	string	FORM
 >6	string	VERS
->11 string	*Nokia\ Startup\ Logo\ Editor\ File Nokia Startup Logo
+>>11 string	*Nokia\ Startup\ Logo\ Editor\ File Nokia Startup Logo
 
 # Nord Modular G2 Patch File (pch3)
 0	string	Version=Nord\ Modular\ G2\ File\ Format
 >44 string	Patch	Nord Modular G2 Patch File
 
 # Nord Modular G2 Performance File (prf2)
-0	stringVersion=Nord\ Modular\ G2\ File\ Format
+0	string	Version=Nord\ Modular\ G2\ File\ Format
 >44 string	Performance	Nord Modular G2 Performance File
 
 # Norton Change Directory Persistent Cache (ncd)
@@ -2517,7 +2474,7 @@
 # NovoTrade Packer Module (ntp)
 0	string	MODU
 >0	search/1024	BODY
->0	search/10000	SAMP	NovoTrade Packer Module
+>>0	search/10000	SAMP	NovoTrade Packer Module
 
 # NoX Map Format (fmt)
 0	string	1#_a\xf4\xe3\x1a\xa0	NoX Map Format
@@ -2544,9 +2501,9 @@
 # ObjectVision Datafile (ovd)
 0	string	=\x01\0\x04\0\0\0\x19\xa4	ObjectVision Datafile
 
-# Obo Flat File Format 1.0
+# Obo Flat File Format 1.0 (obo)
 0	string	format-version:
-0	search/2000	[Term]	Obo Flat File Format 1.0
+>0	search/2000	[Term]	Obo Flat File Format 1.0
 
 # OFF Geometry Definition (off)
 0	string	OFF\x0D	OFF Geometry Definition
@@ -2586,26 +2543,16 @@
 0	string	KPG\x01\x02\ \x01	OPTIKS PCR Font
 
 # Orcad Layout File
-0	string	\x01\x00,\x00OrCAD\ INC.,\ Layout\ Database\ 	Orcad Layout File
+0	string	\x01\x00,\x00OrCAD\ INC.,\ Layout\ Database\x20	Orcad Layout File
 
 # Orcad Project File
-0	string	(ExpressProject\ 	Orcad Project File
+0	string	(ExpressProject\x20	Orcad Project File
 
 # OrCAD SDT Schematic (sch)
 0	string	Schematic\ FILE\x0D\x0A\x1A\x00	OrCAD SDT Schematic
 
 # Organya 2 module (org)
 0	string	Org-02	Organya 2 module
-
-# Oric Tape Format (tap)
-0	string	=\x16\x16\x16$
->6	string	=\0	Oric Tape Format
-0	string	=\x16\x16\x16$
->6	string	=\x80	Oric Tape Format
-
-# OS 2 INF HLP (os2hlp)
-0	string	HSP\x01	OS 2 INF HLP
-0	string	HSP\x10	OS 2 INF HLP
 
 # OS 2 Installation Package Archive (pkg3)
 0	string	=\xa5\x96\xfe\xff	OS 2 Installation Package Archive
@@ -2693,30 +2640,6 @@
 # PCX Library (library)
 0	string	pcxLib	PCX Library
 
-# PEM Certificate (pod)
-0	string	=-----BEG	PEM Certificate
-
-# PEM Certificate Request (pem4)
-0	string	=-----BEG	PEM Certificate Request
-
-# PEM Certificate Revocation List (pem5)
-0	string	=-----BEG	PEM Certificate Revocation List
-
-# PEM DSA Parameters (pem8)
-0	string	=-----BEG	PEM DSA Parameters
-
-# PEM DSA Private Key (pem3)
-0	string	=-----BEG	PEM DSA Private Key
-
-# PEM PKCS#1 File (pem6)
-0	string	=-----BEG	PEM PKCS#1 File
-
-# PEM RSA Private Key (pem2)
-0	string	=-----BEG	PEM RSA Private Key
-
-# PEM SSL Session Parameters (pem9)
-0	string	=-----BEG	PEM SSL Session Parameters
-
 # Perfect Zx Tape Image 1.0
 0	string	PZXT	Perfect Zx Tape Image 1.0
 
@@ -2725,18 +2648,6 @@
 
 # PES Machine Embroidery Format (pes)
 0	string	=#PES	PES Machine Embroidery Format
-
-# PGP Private Key Block (pgp2)
-0	string	=-----BEG	PGP Private Key Block
-
-# PGP Public Key Block (pgp)
-0	string	=-----BEG	PGP Public Key Block
-
-# PGP Signature (py)
-0	string	=-----BEG	PGP Signature
-
-# PGP Signed Message (asc)
-0	string	=-----BEG	PGP Signed Message
 
 # PGX JPEG 2000 (pgx2)
 0	string	PG\ ML	PGX JPEG 2000
@@ -2804,8 +2715,8 @@
 0	string	\x01fcp	Portable Compiled Format Font
 
 # Portable Gaming Notation (pgn)
-#0	string	[Event\	
-#>0	search/1024	[Site	Portable Gaming Notation
+#0	string	[Event\	Portable Gaming Notation
+#>0	search/1024/b	=[Site	Portable Gaming Notation
 
 # Portfolio Graphics Compressed File
 0	string	PG\x01	Portfolio Graphics Compressed File
@@ -2893,9 +2804,6 @@
 # Psion Series 3 Word Document (wrd)
 0	string	PSIONWPDATAFILE	Psion Series 3 Word Document
 
-# Psion Series 5 Word File (s5w)
-0	string	7\0\0\x10m\0\0\x10	Psion Series 5 Word File
-
 # Psycle Module (modpro4)
 0	string	PSY2SONG	Psycle Module
 0	string	PSY3SONG	Psycle Module
@@ -2949,8 +2857,8 @@
 0	string	STEVE\x02H	Quattro Pro Sound
 
 # Quaver Score Replay File (quaver)
-0	string	=\x050.0.1\ 	Quaver Score Replay File
-0	string	=\x050.0.2\ 	Quaver Score Replay File
+0	string	=\x050.0.1\x20	Quaver Score Replay File
+0	string	=\x050.0.2\x20	Quaver Score Replay File
 
 # Quest Interactive Fiction File (cas2)
 0	string	QCGF002\x00\x08\x01\x0A	Quest Interactive Fiction File
@@ -2967,8 +2875,8 @@
 
 # Quicken Data QMD File (qmd)
 0	string	\xEB\x39\x01\x00
->6	string	\x08\x00\x00
->13 string	\x10\x01\x00\x00\x90\x00\x90\x01\x00\x01\x00\x13\x10\xFE\xFF\xFF\x1F\x00\x10\x20\x00\xC0\x1C\x00	Quicken Data QMD File
+>5	string	\x08\x00\x00
+>>13 string	\x10\x01\x00\x00\x90\x00\x90\x01\x00\x01\x00\x13\x10\xFE\xFF\xFF\x1F\x00\x10\x20\x00\xC0\x1C\x00	Quicken Data QMD File
 
 # Quicken Data QSD V3 File (qsd)
 0	string	QW\ Ver.\ 3.	Quicken Data QSD V3 File
@@ -2995,8 +2903,8 @@
 0	string	RSW\x00	Raster Matrix Format
 
 # RayDream Designer File (rd4)
-#0	string	3DC
-#>30	search/500	Ray\ Dream\ Designer	Ray Dream Designer File
+0	string	3DC
+>10	search/500	Ray\ Dream\ Designer	Ray Dream Designer File
 
 # RDOFF Object File Format (rdoff)
 0	string	RDOFF1	RDOFF Object File Format
@@ -3091,7 +2999,7 @@
 0	string	XYZ1	RPG Maker XYZ Raster Image
 
 # S PLUS Transport Files (sdd)
-0	string	=##\ Dump\ 	S PLUS Transport Files
+0	string	=##\ Dump\x20	S PLUS Transport Files
 
 # SANSPRO Graph (grd)
 0	string	=*SANSGRA	SANSPRO Graph
@@ -3102,8 +3010,8 @@
 # SBStudio module (pac)
 0	string	PACG	SBStudio module
 
-# SBTab Format (pl)
-0	search/200	=!!SBtab\ 	SBTab Format
+# SBTab Format (sbtab)
+0	search/200	=!!SBtab\x20	SBTab Format
 
 # Scheme Compressed Debug File (bci)
 0	string	Compressed-B1-	Scheme Compressed Debug File
@@ -3132,8 +3040,7 @@
 3371	string	C64/C128\ SELF\ EXTRACTING\ LHARCHIVE	Self Extracting Lha Lzh Compressed Files
 
 # Septentrio PolaRxS PRO GNSS Data File
-
-#0	search/1000	PolaRxS_PRO	Septentrio PolaRxS PRO GNSS Data File
+0	search/5000/b	PolaRxS_PRO	Septentrio PolaRxS PRO GNSS Data File
 
 # Serif DrawPlus Picture Drawing v2 (dpp)
 0	string	V{DrawPlus\ Picture\ V2	Serif DrawPlus Picture Drawing v2
@@ -3148,8 +3055,8 @@
 0	string	BINICON\x0A	SGI Binary Vector Graphic File
 
 # SGX Graphics File Format (sgx)
-0	string	SGX\ 	SGX Graphics File Format
-0	string	SVG\ 	SGX Graphics File Format
+0	string	SGX\x20	SGX Graphics File Format
+0	string	SVG\x20	SGX Graphics File Format
 
 # Shanda Bambook EBook File (snb)
 0	string	SNBP000B	Shanda Bambook EBook File
@@ -3229,7 +3136,7 @@
 0	string	ConisioObjectFile	SolidWorks Vault Settings File
 
 # Sonic Visualiser Layer File (svl)
-0	string	=<sv>\x0a\ 	Sonic Visualiser Layer File
+0	string	=<sv>\x0a\x20	Sonic Visualiser Layer File
 
 # Sonique Music Player Skin (sgf2)
 0	string	DAF\x00LIST	Sonique Music Player Skin
@@ -3272,9 +3179,6 @@
 # Spartados Compressed Disk Image (scp)
 0	string	SCP\x19E	Spartados Compressed Disk Image
 
-# Spectrum +3 Data (u2d)
-0	string	ZXAYEMUL	Spectrum 128 tune_AY ZXAYEMUL
-
 # Spectrum 512 Extended Image Format
 0	string	SPX	Spectrum 512 Extended Image Format
 
@@ -3314,7 +3218,7 @@
 # StarSeiege Tribes Game Archive (pvol)
 1	string	VOL
 >8	string	VBLK
->16 string	GFIL	StarSeiege Tribes Game Archive
+>>16 string	GFIL	StarSeiege Tribes Game Archive
 
 # StarSiege Mission File (mis3)
 0	string	SIMG	StarSiege Mission File
@@ -3464,18 +3368,13 @@
 0	string	TERRAGENSURFMAP2SRFL	TerraGen Surface File
 
 # Terragen Terrain (ter)
-0	string	TERRAGENTERRAIN\ 	Terragen Terrain
+0	string	TERRAGENTERRAIN\x20	Terragen Terrain
 
 # TerraGen World File (tgw)
 0	string	TERRAGENWORL	TerraGen World File
 
 # TeX Font Library (library)
 0	string	FLIB	TeX Font Library
-
-# TeX Virtual Font Data (vf)
-0	string	=\xf7\xca
->11	string	=\xf3\0
->9	string	=\0\x10	TeX Virtual Font Data
 
 # Text Adventure Development System Game (tads)
 0	string	TADS2\ bin	Text Adventure Development System
@@ -3493,7 +3392,7 @@
 0	string	TFMfmtV2	TFM Music Maker music V2
 
 # TFMX Module Sound Data (tfmx)
-0	string	TFMX-SONG\ 	TFMX Module Sound Data
+0	string	TFMX-SONG\x20	TFMX Module Sound Data
 
 # The 0ok Amazing Synth Tracker module (t0ast)
 0	string	T0AST	The 0ok Amazing Synth Tracker module
@@ -3503,9 +3402,6 @@
 >20 string	HEDR	The Elder Scrolls Plugin and Master File
 0	string	TES3
 >16 string	HEDR	The Elder Scrolls Plugin and Master File
-
-# The Holy Noise Module Sound File (thn)
-0	string	ARP.	The Holy Noise Module Sound File
 
 # The Imploder Compresssed Data (impbang)
 0	string	IMP!	The Imploder Compresssed Data
@@ -3639,7 +3535,7 @@
 # Unity Game Engine UnityFS Asset Bundle Manifest (manifest)
 0	string	ManifestFileVersion:
 >23	string	CRC:
->38	string	Hashes: Unity Game Engine UnityFS Asset Bundle Manifest
+>>38	search/100/b	Hashes: Unity Game Engine UnityFS Asset Bundle Manifest
 
 # Unity3D WebGL Decompression Fallback File (unity3d)
 0	string	UnityWeb	Unity3D WebGL Decompression Fallback File
@@ -3740,10 +3636,9 @@
 
 # Visual Basic Form 1.0
 0	string	VERSION\ 
-
-#>10	search/200	Begin	Visual Basic Form 1.0
-
-#>10	search/200	Object\ =	Visual Basic Form 1.0
+>10	search/200	Begin	Visual Basic Form 1.0
+0	string	VERSION\ 
+>10	search/200	Object\ =	Visual Basic Form 1.0
 
 # Visual Boy Advance Movie Capture (vbm2)
 0	string	VBM\x1A	Visual Boy Advance Movie Capture 1
@@ -3764,22 +3659,22 @@
 0	string	=<VTKFile	Visualization Toolkit Unstructured
 
 # VLF Receiver Software Toolkit VT Format (vt)
-0	string	=\xd3l\0\0\0\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\0\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\0\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\0\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\0\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\0\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\0\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\0\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\x06\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\x06\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\x06\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\x06\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\x06\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\x06\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\x06\0\0\0	VLF Receiver Software Toolkit VT Format
-0	string	=\xd3l\0\0\x06\0\0\0	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\0\0\0\0\0\b\0\0\x01	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\0\0\0\0\0\b\0\0\x02	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\0\0\0\0\0\b\0\0\x03	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\0\0\0\0\0\b\0\0\x06	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\0\0\0\0\0\x20\0\0\x01	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\0\0\0\0\0\x20\0\0\x02	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\0\0\0\0\0\x20\0\0\x03	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\0\0\0\0\0\x20\0\0\x06	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\x06\0\0\0\0\b\0\0\x01	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\x06\0\0\0\0\b\0\0\x02	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\x06\0\0\0\0\b\0\0\x03	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\x06\0\0\0\0\b\0\0\x06	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\x06\0\0\0\0\x20\0\0\x01	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\x06\0\0\0\0\x20\0\0\x02	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\x06\0\0\0\0\x20\0\0\x03	VLF Receiver Software Toolkit VT Format
+0	string	\xD3l\0\0\x06\0\0\0\0\x20\0\0\x06	VLF Receiver Software Toolkit VT Format
 
 # VMWare Virtual Machine Disk Descriptor File (vmdk2)
 0	string	=#\ Disk\ D	VMWare Virtual Machine Disk Descriptor File
@@ -3821,7 +3716,7 @@
 0	string	WATCOM\ binary\ patch\ file\ format	WATCOM Binary Patch File Format
 
 # WATCOM Linker (map5)
-0	string	WATCOM\ Linker\ Version\ 	WATCOM Linker
+0	string	WATCOM\ Linker\ Version\x20	WATCOM Linker
 
 # WATCOM Profiler Data File (smp3)
 0	string	WATCOM\ Profiler\ data\ file	WATCOM Profiler Data File
