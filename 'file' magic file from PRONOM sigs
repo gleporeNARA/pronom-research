@@ -33,10 +33,10 @@
 0	string	CHN2\ COS	3D Movie Maker
 
 # 3Delight Compiled Shader (sdl)
-0	string	=\x7f3dl	3Delight Compiled Shader
+0	string	=\x7f3dl\x0A\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23\x23	3Delight Compiled Shader
 
 # 3Dfx Interactive Texture Utility File (3df)
-0	string	3df\ v	3Dfx Interactive Texture Utility File
+0	string	3df\ v\x31	3Dfx Interactive Texture Utility File
 
 # A. M. Composer 1.2 (amc)
 0	string	AMC\ V1.2	A. M. Composer 1.2
@@ -69,8 +69,7 @@
 0	string	AM01	Ace Tracker Module
 
 # Acorn Draw Vector Image (draw)
-0	string	Draw
->12	string	Draw	Acorn Draw Vector Image
+0	string	Draw\xC9\x00\x00\x00\x00\x00\x00\x00Draw\x20\x20\x20\x20	Acorn Draw Vector Image
 
 # AdLib Visual Composer Instrument Bank (bnk)
 2	string	ADLIB-	AdLib Visual Composer Instrument Bank
@@ -87,7 +86,7 @@
 >132	string	name	Adobe Color Settings File
 
 # Adobe FrameMaker Dictionary File (dct2)
-0	string	=<MakerDi	Adobe FrameMaker Dictionary File
+0	string	=<MakerDictionary	Adobe FrameMaker Dictionary File
 
 # Adobe FrameMaker MIF ASCII File (mif)
 0	string	=<MIFFile	Adobe FrameMaker MIF ASCII File
@@ -154,7 +153,7 @@
 0	string	=\x89GRD\x0d\x0a\x1a\x0a	Affymetrix GRD Data File
 
 # Affymetrix Probe Set Information (psi)
-0	string	=#Probe\ S	Affymetrix Probe Set Information
+0	string	=#Probe\ Sets:	Affymetrix Probe Set Information
 
 # AGP Format (agp)
 0	search/1024	=##agp-ve	AGP Format
@@ -170,7 +169,7 @@
 0	string	CWPAL	Aldus PhotoStyler Palette File
 
 # Aldus Table Editor (tbl2)
-0	string	=\0\0\0\x01\0\x02\0\x01	Aldus Table Editor
+0	string	=\x00\x00\x00\x01\x00\x02\x00\x01\x4B\x02\x00\x02\x00\x00\x00\x0A\x00\x01\x00\x08	Aldus Table Editor
 
 # Alembic ABC 3d Model (abc)
 0	string	Ogawa\xff\0\x01	Alembic ABC 3d Model
@@ -218,7 +217,7 @@
 >23	string	Music\ &\ Player\ by:\ Anders\ 0land	Anders Oland Music File
 
 # Anex86 PC98 Floppy Image (fdi)
-0	string	=\0\0\0\0\x90\0\0\0	Anex86 PC98 Floppy Image
+0	string	=\x00\x00\x00\x00\x90\x00\x00\x00\x00\x10\x00\x00\x00\x40\x13\x00\x00\x04\x00\x00	Anex86 PC98 Floppy Image
 
 # Ani ST Vector Graphic (aniST)
 0	string	=*script\x20	Ani ST Vector Graphic
@@ -226,8 +225,8 @@
 # ANIM Animated Raster Graphic (anim)
 8	string	ANIMFORM	ANIM Animated Raster Graphic
 
-# Animatic Film Format
-48	string	'\x18(\x18	Animatic Film Format
+# Animatic Film Format (flm)
+48	string	\x27\x18\x28\x18\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00	Animatic Film Format
 
 # ANSI 378 Fingerprint File (fmrpiv)
 88	string	FMR\x00	ANSI 378 Fingerprint File
@@ -263,7 +262,7 @@
 14	string	=\x1aJar\x1b	ARJ Software JAR Archive Data
 
 # ARQ Crusher Compressed File (arq)
-0	string	\x67\x57\x04\x01	ARQ Crusher Compressed File
+0	string	gW\x04\x01	ARQ Crusher Compressed File
 
 # ArtMaster88 Graphics Image (img)
 0	string	SS_SIF	ArtMaster88 Graphics Image
@@ -280,11 +279,6 @@
 
 # Ascaron Image Format (aim)
 0	string	AIMRES2.0	Ascaron Image Format
-
-# ASCII cpio archive (cpio)
-0	string	070701	ASCII cpio archive
-0	string	070702	ASCII cpio archive
-0	string	070707	ASCII cpio archive
 
 # ASCII Patrol Recording File (rec)
 0	string	REC0\x00\x00\x00\x00
@@ -2014,7 +2008,7 @@
 0	string	=\xd2\x04\x94&	Lotus Translation Table
 
 # Lotus Word Pro SmartMaster File (mwp)
-0	string	WordPro\x00\x00\x00\x00\x00\x00\\	Lotus Word Pro SmartMaster File
+0	string	WordPro\x00\x00\x00\x00\x00\x00	Lotus Word Pro SmartMaster File
 
 # LucasArts BiNary Archive Format (lab)
 0	string	LABN	LucasArts BiNary Archive Format
@@ -2090,9 +2084,6 @@
 # MAUD IFF Audio Format (maud)
 0	string	FORM
 >8	string	MAUDMHDR	MAUD IFF Audio Format
-
-# Maxis Database Packed File (package)
-0	string	DBPF	Maxis Database Packed File
 
 # MaxonCAD Drawing (mcdraw)
 0	string	MXCDDRAW	MaxonCAD Drawing
@@ -2708,9 +2699,6 @@
 # PMView Filter (rc4)
 0	string	PMView\ Filter	PMView Filter
 
-# Point Cloud Data File (pcd)
-0	string	=#\ .PCD	Point Cloud Data File
-
 # Portable Compiled Format Font
 0	string	\x01fcp	Portable Compiled Format Font
 
@@ -3185,9 +3173,6 @@
 # Spectrum 512 Smooshed Image
 0	string	SP\x00\x00	Spectrum 512 Smooshed Image
 
-# Spline Font Database (sfd)
-0	string	SplineFontDB:	Spline Font Database
-
 # Spritepad Image Format
 0	string	SPD	Spritepad Image Format
 
@@ -3573,9 +3558,6 @@
 
 # Varicad File
 1	string	\x87\x01\x00	Varicad File
-
-# VCDIFF Binary Difference File (x3)
-0	string	=\xd6\xc3\xc4\0	VCDIFF Binary Difference File
 
 # Ventura Publisher 3-5 Captions File (cap)
 0	string	=@Z_CAPTI	Ventura Publisher 3-5 Captions File
