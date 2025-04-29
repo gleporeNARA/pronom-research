@@ -1,7 +1,0 @@
-What are ABF files?
-The field of cellular electrophysiology uses highly-sensitive voltage and current measurement devices to gain insights into the electrical properties of biological membranes. Voltage-clamp and current-clamp circuits are used to measure the flow of ions through ion channels embedded in small patches of cell membranes. This technique is called patch-clamp electrophysiology, and Axon Instruments (now a division of Molecular Devices) sells patch-clamp systems (including amplifiers, digitizers, and software) which are commonly used by electrophysiologists in scientific research environments. Electrophysiological data produced by theses systems is saved in Axon Binary Format (ABF) files. Their patch-clamp analysis software suite (pCLAMP) includes acquisition software (Clampex) and analysis software (ClampFit) which can read and write ABF files.
-
-ABF File Format
-Axon Binary Format (ABF) files are encoded in a proprietary format. In the late 90s and early 2000s the file structure of ABF files was documented in the Axon SDK, allowing third party software (such as Mini Analysis by Synaptosoft, Inc.) to easily read data from ABF files. In 2006 pCLAMP 10 was released, featuring a new file format (ABF2) which was intentionally undocumented. Programmers seeking to write software to analyze ABF files were told that they must exclusively interact with ABFs through a closed-source, 32-bit, Windows-only DLL (abffio.dll) provided with the Axon pCLAMP SDK.
-
-https://swharden.com/pyabf/abf2-file-format/
