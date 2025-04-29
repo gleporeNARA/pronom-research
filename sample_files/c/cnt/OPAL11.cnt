@@ -1,0 +1,566 @@
+:Base OPAL11.hlp>main
+:Title Paradox Help: ObjectPAL Reference
+:Index Paradox Internet Tools Help=pdxinet.hlp
+:Link pdxinet.hlp
+:Link pdox11en.hlp
+:Link PalTut11.hlp
+
+1 ObjectPAL Basics
+2 Introducing ObjectPAL
+3 Overview: How to use ObjectPAL Help=Overview How to use ObjectPAL Help>main
+3 Overview: What is ObjectPAL?=Overview What is ObjectPAL>main
+3 Overview: Before using ObjectPAL...=Overview Before using ObjectPAL>main
+3 Overview: Understanding ObjectPAL=Overview Understanding ObjectPAL>main
+3 Event-driven=Eventdriven>proc4
+3 Built-in behavior=Builtin behavior>proc4
+3 Modular=Modular>proc4
+3 Advantages of modular programming=Advantages of modular programming>proc4
+2 The Language of ObjectPAL
+3 Overview: The Language of ObjectPAL=Overview The Language of ObjectPAL>main
+3 Overview: Objects and methods=Overview Objects and methods>main
+3 Overview: ObjectPAL language categories=Overview ObjectPAL language categories>main
+3 Events=Events>proc4
+3 Design objects=Design objects>proc4
+3 Display managers=Display managers>proc4
+3 Data types=Data types>proc4
+3 Data model objects=Data model objects>proc4
+3 System data objects=System data objects>proc4
+3 Overview: Planning=Overview Planning>main
+3 Overview: Printing reports=Overview Printing reports>main
+2 ObjectPAL Language Structure
+3 Overview: ObjectPAL Language Structure=Overview ObjectPAL Language Structure>main
+3 Overview: Dot Notation=Overview Dot Notation>main
+3 Overview: Structure=Overview Structure>main
+3 Overview: Control Structures=Overview Control Structures>main
+3 Overview: List of data types=Overview List of data types>main
+3 Casting a Data type=Casting a Data type>proc4
+3 Overview: Expressions=Overview Expressions>main
+3 Overview: Naming rules=Overview Naming rules>main
+3 Overview: Rules for naming custom methods, procedures, variables, and arrays=Overview Rules for naming custom methods procedures variables and arrays>main
+3 Overview: Basic language elements=Overview Basic language elements>main
+3 Overview: About procedures=Overview About procedures>main
+3 Overview: RTL procedures=Overview RTL procedures>main
+3 Overview: Custom procedures=Overview Custom procedures>main
+3 Procedures declared in methods=Procedures declared in methods>proc4
+3 Procedures declared in an object's Proc window=Procedures declared in an objects Proc window>proc4
+3 Overview: About methods=Overview About methods>main
+3 Editing a method=Editing a method>proc4
+3 Overview: Introduction to built-in event methods=Overview Introduction to builtin event methods>main
+3 Overview: Methods in the run-time library=Overview Methods in the runtime library>main
+3 Overview: Custom methods=Overview Custom methods>main
+3 Creating a custom method=Creating a custom method>proc4
+3 Overview: Methods in other objects=Overview Methods in other objects>main
+3 Overview: Method language structure and syntax=Overview Method language structure and syntax>main
+3 Overview: Variables=Overview Variables>main
+3 Overview: Constants=Overview Constants>main
+2 Variables, constants, and containership
+3 Overview: Variables, constants, and containership=Overview Variables constants and containership>main
+3 Overview: Containership=Overview Containership>main
+3 Using a container to store shared code=Using a container to store shared code>proc4
+3 Containership and custom methods=Containership and custom methods>proc4
+3 Using subject with custom methods=Using subject with custom methods>proc4
+3 Containership and custom procedures=Containership and custom procedures>proc4
+3 Overview: Working with Variables=Overview Working with Variables>main
+3 Declaring variables=Declaring variables>proc4
+3 Overview: The scope of a variable=Overview The scope of a variable>main
+3 Declared within a method=Declared within a method>proc4
+3 Declared outside a method=Declared outside a method>proc4
+3 Declared in the Var window=Declared in the Var window>proc4
+3 Compile-time binding=Compiletime binding>proc4
+3 Lifetime of a variable=Lifetime of a variable>proc4
+3 User-defined data types=Userdefined data types>proc4
+3 Blank variables=Blank variables>proc4
+3 Overview: Defining constants=Overview Defining constants>main
+3 ObjectPAL constants=ObjectPAL constants>proc4
+3 Overview: Passing arguments=Overview Passing arguments>main
+2 Code placement
+3 Overview: Code placement=Overview Code placement>main
+3 Overview: Placement considerations=Overview Placement considerations>main
+3 Executing code=Executing code>proc4
+3 Using code=Using code>proc4
+3 Attaching code to built-in methods=Attaching code to builtin methods>proc4
+3 Using methods=Using methods>proc4
+3 Overview: Before Code placement=Overview Before Code placement>main
+3 Overview: Levels of code=Overview Levels of code>main
+3 Overview: Considerations for Code Placement=Overview Considerations for Code Placement>main
+3 Overview: Variables: global or local=Overview Variables global or local>main
+2 The Integrated Development Environment (IDE)
+3 Overview: The Integrated Development Environment (IDE)=Overview The Integrated Development Environment IDE>main
+3 Setting developer preferences=Setting developer preferences>proc4
+3 Overview: About the Editor=Overview About the Editor>main
+3 Overview: Working in the Editor=Overview Working in the Editor>main
+3 Starting the Editor=Starting the Editor>proc4
+3 Overview: Moving around the Editor with the keyboard=Overview Moving around the Editor with the keyboard>main
+3 Selecting text=Selecting text>proc4
+3 Searching for text=Searching for text>proc4
+3 Leaving the Editor=Leaving the Editor>proc4
+3 Overview: About the ObjectPAL Quick Lookup=Overview About the ObjectPAL Quick Lookup>main
+3 Using the ObjectPAL Quick Lookup=Using the ObjectPAL Quick Lookup>proc4
+3 Overview: About keywords=Overview About keywords>main
+3 Using keywords=Using keywords>proc4
+3 Overview: The Debugger=Overview The Debugger>main
+3 Overview: The Debugger environment=Overview The Debugger environment>main
+3 Setting debugger preferences=Setting debugger preferences>proc4
+3 Starting the Debugger=Starting the Debugger>proc4
+3 Executing code in the Debugger=Executing code in the Debugger>proc4
+3 Overview: Viewing variables=Overview Viewing variables>main
+3 Inspect=Inspect>proc4
+3 Watch=Watch>proc4
+3 Overview: The Breakpoints list=Overview The Breakpoints list>main
+3 Overview: The Call Stack window=Overview The Call Stack window>main
+3 Overview: Navigating in the Debugger=Overview Navigating in the Debugger>main
+3 Overview: The Tracer=Overview The Tracer>main
+3 Overview: ObjectPAL Tracer procedures=Overview ObjectPAL Tracer procedures>main
+3 Overview: Debugger shortcuts=Overview Debugger shortcuts>main
+3 Overview: The Object Explorer=Overview The Object Explorer>main
+3 Opening the Object Explorer=Opening the Object Explorer>proc4
+3 Pinning the Object Explorer to the desktop=Pinning the Object Explorer to the desktop>proc4
+3 Overview: About the object tree=Overview About the object tree>main
+3 Opening the object tree=Opening the object tree>proc4
+3 Viewing the document's structure=Viewing the documents structure>proc4
+3 Copying and moving objects from the object tree=Copying and moving objects from the object tree>proc4
+3 Deleting objects=Deleting objects>proc4
+3 Overview: About the tabbed pane=Overview About the tabbed pane>main
+3 Viewing the tabbed pane=Viewing the tabbed pane>proc4
+3 Overview: About the Appearance page=Overview About the Appearance page>main
+3 Overview: the Methods page=Overview the Methods page>main
+3 Overview: About the Events page=Overview About the Events page>main
+3 Overview: About the Properties page=Overview About the Properties page>main
+3 Overview: About methods and events for ActiveX controls=Overview About methods and events for ActiveX controls>main
+3 Creating a new method=Creating a new method>proc4
+3 Editing a method or event=Editing a method or event>proc4
+3 Deleting a method or event=Deleting a method or event>proc4
+3 Attaching methods to a form=Attaching methods to a form>proc4
+3 Changing appearance=Changing appearance>proc4
+3 Changing properties=Changing properties>proc4
+2 Configuration settings
+3 Overview: Configuration settings in the system registry=Overview Configuration settings in the system registry>main
+3 Overview: WIN.INI settings in the system registry=Overview WININI settings in the system registry>main
+3 Using .INI Files=Using INI Files>proc4
+3 Using command-line options=Using commandline options>proc4
+3 Overview: Adding custom menu items=Overview Adding custom menu items>main
+3 Overview: PDOXWORK.INI=Overview PDOXWORKINI>main
+3 Overview: PDOXWIN.INI and the system registry=Overview PDOXWININI and the system registry>main
+3 Overview: Command-line options=Overview Commandline options>main
+1 Actions, Events, and built-in event methods
+2 Understanding the Event Model
+3 Overview: Understanding the Event Model=Overview Understanding the Event Model>main
+3 Overview: Using the Event Model=Overview Using the Event Model>main
+3 Overview: Understanding Events=Overview Understanding Events>main
+3 Creating a Form=Creating a Form>proc4
+3 Attaching code=Attaching code>proc4
+3 How it works=How it works>proc4
+3 Overview: Categorizing Event Methods=Overview Categorizing Event Methods>main
+3 How Paradox handles events=How Paradox handles events>proc4
+3 How containership works=How containership works>proc4
+3 Overview: The event packet: eventInfo=Overview The event packet eventInfo>main
+3 Using eventInfo=Using eventInfo>proc4
+3 Overview: Using ObjectPAL to handle events=Overview Using ObjectPAL to handle events>main
+3 Using isPreFilter=Using isPreFilter>proc4
+3 Using getTarget=Using getTarget>proc4
+3 Deleting default code=Deleting default code>proc4
+3 Overview: Event: The base event type=Overview Event The base event type>main
+3 Using setErrorCode and errorCode=Using setErrorCode and errorCode>proc4
+3 Using getTarget and switch...endSwitch=Using getTarget and switchendSwitch>proc4
+3 Using reason=Using reason>proc4
+3 Using reason with MoveEvents=Using reason with MoveEvents>proc4
+3 Using reason with StatusEvents=Using reason with StatusEvents>proc4
+3 Using reason with ErrorEvents=Using reason with ErrorEvents>proc4
+3 Using reason with newValue=Using reason with newValue>proc4
+2 Actions and UIObjects
+3 Overview: Actions and UIObjects=Overview Actions and UIObjects>main
+3 Understanding actions=Understanding actions>proc4
+3 Action constants=Action constants>proc4
+3 Initiating actions=Initiating actions>proc4
+3 Built-in event method action=Builtin event method action>proc4
+
+1 Default behavior of event methods
+2 Overview: The default behavior of event methods=Overview The default behavior of event methods>main
+2 Overview: About built in event methods=Overview About builtin event methods>main
+2 Overview: Descriptions of the built-in event methods=Overview Descriptions of the built-in event methods>main
+2 Attaching code to built-in event methods=Attaching code to a built-in event method>proc4
+2 Editing a built-in event method=Editing a builtin event method>proc4
+2 Overview: The sequence of execution=Overview The sequence of execution>main
+2 Overview: Controlling the default behavior=Overview Controlling the default behavior>main
+2 Overview: Built-in object variables=Overview Built-in object variables>main
+1 Programming Tasks
+2 Overview: Programming Tasks=Overview Programming Tasks>main
+2 Handling Run-time errors
+3 Overview: Handling run-time errors=Overview Handling runtime errors>main
+3 Overview: Categories of errors=Overview Categories of errors>main
+3 Overview: Run-time error levels=Overview Runtime error levels>main
+3 Overview: The error stack=Overview The error stack>main
+3 Error stack information and format=Error stack information and format>proc4
+3 Error stack procedures=Error stack procedures>proc4
+3 Overview: Using the explicit try...onFail block=Overview Using the explicit tryonFail block>main
+3 retry keyword=retry keyword>proc4
+3 fail procedure=fail procedure>proc4
+3 Overview: Default system error handling=Overview Default system error handling>main
+3 The implicit try...onFail block=The implicit tryonFail block>proc4
+3 The built-in error event method=The builtin error event method>proc4
+3 Overview: Custom error handling=Overview Custom error handling>main
+3 Handling warning errors=Handling warning errors>proc4
+3 Handling critical errors=Handling critical errors>proc4
+3 Overview: Advanced error handling topics=Overview Advanced error handling topics>main
+3 Interactive errors=Interactive errors>proc4
+3 Warning errors and try...onFail=Warning errors and tryonFail>proc4
+3 Where should code be attached?=Where should code be attached>proc4
+1 Creating the User Interface
+2 Overview: Creating the User Interface=Overview Creating the User Interface>main
+2 Overview: Properties=Overview Properties>main
+2 Using properties=Using properties>proc4
+2 Data types of properties=Data types of properties>proc4
+2 Using self=Using self>proc4
+2 Using the Value property=Using the Value property>proc4
+2 Overview: Properties: Special cases=Overview Properties Special cases>main
+2 Using methods to set properties=Using methods to set properties>proc4
+2 Properties of button objects=Properties of button objects>proc4
+2 Properties of field objects=Properties of field objects>proc4
+2 Overview: Understanding Compound objects=Overview Understanding Compound objects>main
+2 Example 1: Object tree for a button and a labeled field=Example 1 Object tree for a button and a labeled field>proc4
+2 Example 2: Object tree for a table frame=Example 2 Object tree for a table frame>proc4
+2 Overview: Events and UIObjects=Overview Events and UIObjects>main
+2 Overview: Using the hotkeyTarget property=Overview Using the hotkeyTarget property>main
+2 Creating an object that includes a hotkey=Creating an object that includes a hotkey>proc4
+2 Creating a table frame that includes hotkeys=Creating a table frame that includes hotkeys>proc4
+2 Using the hotkeyTarget property with text objects=Using the hotkeyTarget property with text objects>proc4
+2 Overview: Shortcuts and special cases=Overview Shortcuts and special cases>main
+2 Copying objects=Copying objects>proc4
+2 Prototyping objects=Prototyping objects>proc4
+2 Creating UIObjects=Creating UIObjects>proc4
+2 UIObject code example=UIObject code example>proc4
+2 Working with Menus
+3 Overview: Working with menus=Overview Working with menus>main
+3 Overview: Assigning ID numbers to menu items=Overview Assigning ID numbers to menu items>main
+3 Assigning ID numbers=Assigning ID numbers>proc4
+3 Overview: Processing menu choices by ID number=Overview Processing menu choices by ID number>main
+3 Overview: Control Menu attributes=Overview Control Menu attributes>main
+3 Controlling menu item attributes=Controlling menu item attributes>proc4
+3 Using MenuInit to control menu choice attributes=Using MenuInit to control menu choice attributes>proc4
+3 Overview: Accessing a menu with accelerators=Overview Accessing a menu with accelerators>main
+3 Adding accelerators using ObjectPAL=Adding accelerators using ObjectPAL>proc4
+3 Overview: Responding to choices from Paradox built-in menus=Overview Responding to choices from Paradox builtin menus>main
+3 Overview: PopUpMenu: Lists on demand=Overview PopUpMenu Lists on demand>main
+3 Building a pop-up menu=Building a popup menu>proc4
+3 Using addArray=Using addArray>proc4
+3 Using addPopUp=Using addPopUp>proc4
+3 Keyboard access=Keyboard access>proc4
+3 Inspecting items in a pop-up menu=Inspecting items in a popup menu>proc4
+3 switchMenu: A shortcut=switchMenu A shortcut>proc4
+3 Overview: Working with built-in menus and the Toolbar=Overview Working with builtin menus and the Toolbar>main
+3 Customizing toolbars=Customizing toolbars>proc4
+3 Working with Control menus=Working with Control menus>proc4
+3 Example of menu-building technique=Example of menubuilding technique>proc4
+3 Working with toolbars=Working with toolbars>proc4
+3 Toolbar type methods=Toolbar type methods>proc4
+3 Using Toolbar methods on Paradox toolbars=Using Toolbar methods on Paradox toolbars>proc4
+3 Overview: MenuEvent type=Overview MenuEvent type>main
+2 Calculated Fields
+3 Overview: Calculated Fields=Overview Calculated Fields>main
+3 Overview: Calculated field examples=Overview Calculated field examples>main
+3 Using a literal value=Using a literal value>proc4
+3 Using a variable=Using a variable>proc4
+3 Using special functions in calculated fields=Using special functions in calculated fields>proc4
+3 Working outside the data model=Working outside the data model>proc4
+3 Calling a custom method attached to another object=Calling a custom method attached to another object>proc4
+3 Using the DataRecalc action=Using the DataRecalc action>proc4
+3 Using UIObject names or field names=Using UIObject names or field names>proc4
+3 Responding to a TCursor search=Responding to a TCursor search>proc4
+3 Using iif() in calculated fields=Using iif in calculated fields>proc4
+3 Concatenating alphanumeric strings=Concatenating alphanumeric strings>proc4
+3 Using dates in calculated fields=Using dates in calculated fields>proc4
+3 Creating a calculated field on the fly=Creating a calculated field on the fly>proc4
+3 Overview: Conditional logic and ObjectPAL methods=Overview Conditional logic and ObjectPAL methods>main
+3 Examples of Conditional logic=Examples of Conditional logic>proc4
+2 Manipulating the data model
+3 Overview: Manipulating the data model=Overview Manipulating the data model>main
+3 Overview: Directory paths and the data model=Overview Directory paths and the data model>main
+2 Performing table operations
+3 Overview: Performing table operations=Overview Performing table operations>main
+3 Performing table-level operations=Performing tablelevel operations>proc4
+3 Specifying table attributes=Specifying table attributes>proc4
+2 Using TCursors
+3 Overview: Using TCursors=Overview Using TCursors>main
+3 Overview: About TCursors and tables=Overview About TCursors and tables>main
+3 Opening the table directly=Opening the table directly>proc4
+3 Opening the table using attributes=Opening the table using attributes>proc4
+3 Associating a TCursor with a table view or a UIObject=Associating a TCursor with a table view or a UIObject>proc4
+3 Attaching to unlinked tables=Attaching to unlinked tables>proc4
+3 Attaching to linked tables=Attaching to linked tables>proc4
+3 Overview: Using TCursors and tables=Overview Using TCursors and tables>main
+3 Editing with TCursors=Editing with TCursors>proc4
+3 Specifying fields=Specifying fields>proc4
+3 Getting values from a table=Getting values from a table>proc4
+3 Changing values=Changing values>proc4
+3 Adding a record to a table=Adding a record to a table>proc4
+2 Working with Databases
+3 Overview: Working with Databases=Overview Working with Databases>main
+3 Using an alias=Using an alias>proc4
+3 Opening a database=Opening a database>proc4
+2 Displaying output
+3 Overview: Displaying output=Overview Displaying output>main
+3 Overview: Application: The Desktop window=Overview Application The Desktop window>main
+3 Overview: Form: A window to data=Overview Form A window to data>main
+3 Using the form as a design object=Using the form as a design object>proc4
+3 Using the form as a display manager=Using the form as a display manager>proc4
+3 Show and hide=Show and hide>proc4
+3 Closing a form=Closing a form>proc4
+3 Setting properties=Setting properties>proc4
+3 Controlling size=Controlling size>proc4
+3 Overview: TableView: Display rows and columns=Overview TableView Display rows and columns>main
+3 TableView type methods=TableView type methods>proc4
+3 Properties of Table windows=Properties of Table windows>proc4
+3 Table windows and TCursors=Table windows and TCursors>proc4
+3 Overview: Using format to control output=Overview Using format to control output>main
+3 Width=Width>proc4
+3 Alignment=Alignment>proc4
+3 Case=Case>proc4
+3 Edit=Edit>proc4
+3 Sign=Sign>proc4
+3 Date=Date>proc4
+3 Logical=Logical>proc4
+3 Overview: Raster operations=Overview Raster operations>main
+3 RasterOperation Properties=RasterOperation Properties>proc4
+3 Demonstration form=Demonstration form>proc4
+2 Working with Queries
+3 Overview: Working with Queries=Overview Working with Queries>main
+3 Overview: Using a query statement=Overview Using a query statement>main
+3 Query variables=Query variables>proc4
+3 Using aliases=Using aliases>proc4
+3 Example elements=Example elements>proc4
+3 Overview: Using a query file=Overview Using a query file>main
+3 Operators=Operators>proc4
+3 Query operator example=Query operator example>proc4
+3 Overview: Using a query string=Overview Using a query string>main
+3 Using aliases to specify a path for a table to query=Using aliases to specify a path for a table to query>proc4
+3 Overview: Building a query on the fly=Overview Building a query on the fly>main
+2 Managing Sessions
+3 Overview: Managing sessions=Overview Managing sessions>main
+3 Working with sessions=Working with sessions>proc4
+3 Using session settings=Using session settings>proc4
+2 The File System
+3 Overview: The file system=Overview The file system>main
+3 Overview: Working with a FileSystem variable=Overview Working with a FileSystem variable>main
+3 Listing file information to a table=Listing file information to a table>proc4
+3 Attaching fileBrowser to a pushButton=Attaching fileBrowser to a pushButton>proc4
+2 Data Transfer: Importing and exporting data
+3 Overview: Data Transfer: Importing and exporting data=Overview Data Transfer Importing and exporting data>main
+3 Overview: Importing data=Overview Importing data>main
+3 Appending to an existing table=Appending to an existing table>proc4
+3 Importing to a new table=Importing to a new table>proc4
+3 Overview: Exporting data=Overview Exporting data>main
+3 Using a DataTransfer variable and methods for better control=Using a DataTransfer variable and methods for better control>proc4
+3 Overview: Exploring other options=Overview Exploring other options>main
+2 TextStream: Working with text files
+3 Overview: TextStream: Working with text files=Overview TextStream Working with text files>main
+3 Overview: Working with a TextStream=Overview Working with a TextStream>main
+3 TextStreams and Strings=TextStreams and Strings>proc4
+2 Multi-form applications
+3 Overview: Multi-Form applications=Overview MultiForm applications>main
+3 Overview: Differences between forms and dialog boxes=Overview Differences between forms and dialog boxes>main
+3 Designing a dialog box=Designing a dialog box>proc4
+3 Setting properties with ObjectPAL=Setting properties with ObjectPAL>proc4
+3 Specifying position and size=Specifying position and size>proc4
+3 Overview: Handling multi-window interaction=Overview Handling multiwindow interaction>main
+3 Using wait, formReturn, and close=Using wait formReturn and close>proc4
+3 Overview: Using pre-built dialog boxes=Overview Using prebuilt dialog boxes>main
+3 Overview: Calling Paradox dialog boxes=Overview Calling Paradox dialog boxes>main
+3 Overview: Advanced topics=Overview Advanced topics>main
+3 MDI child windows=MDI child windows>proc4
+3 Standard menu=Standard menu>proc4
+3 Using openAsDialog=Using openAsDialog>proc4
+3 DesktopForm property=DesktopForm property>proc4
+2 OLE automation
+3 Overview: OLE automation=Overview OLE automation>main
+3 Overview: OLE type=Overview OLE type>main
+3 Overview: Automation servers and objects=Overview Automation servers and objects>main
+3 OLE automation servers and the registry=OLE automation servers and the registry>proc4
+3 Programming with OleAuto=Programming with OleAuto>proc4
+3 Open vs. Attach=Open vs Attach>proc4
+3 Overview: Accessing properties and calling methods=Overview Accessing properties and calling methods>main
+3 Overview: Collection objects=Overview Collection objects>main
+3 Using a collection object in Paradox=Using a collection object in Paradox>proc4
+3 Overview: Mapping of ObjectPAL types and OLE automation types=Overview Mapping of ObjectPAL types and OLE automation types>main
+3 Overview: OLE run-time library methods=Overview OLE runtime library methods>main
+3 Automation server type information=Automation server type information>proc4
+2 ActiveX controls
+3 Overview: ActiveX controls=Overview ActiveX controls>main
+3 Overview: OLE event model vs. Paradox event model=Overview OLE event model vs Paradox event model>main
+3 Overview: ActiveX controls vs. Paradox UIObjects=Overview ActiveX controls vs Paradox UIObjects>main
+3 Overview: Designing forms with ActiveX controls=Overview Designing forms with ActiveX controls>main
+3 Installing and registering the control=Installing and registering the control>proc4
+3 Adding and removing the control to the Paradox toolbars=Adding and removing the control to the Paradox toolbars>proc4
+3 Placing the control on the form=Placing the control on the form>proc4
+3 Programming ActiveX controls=Programming ActiveX controls>proc4
+3 Overview: Paradox VCR control=Overview Paradox VCR control>main
+3 Overview: Properties, methods, and events in an ActiveX control=Overview Properties methods and events in an ActiveX control>main
+3 Working with properties and method invocation=Working with properties and method invocation>proc4
+3 Working with event handlers=Working with event handlers>proc4
+3 Overview: ObjectPAL PMEs and ActiveX control PMEs=Overview ObjectPAL PMEs and ActiveX control PMEs>main
+3 Overview: Using ObjectPAL to create controls=Overview Using ObjectPAL to create controls>main
+3 Overview: Data binding=Overview Data binding>main
+3 Overview: Ambient properties=Overview Ambient properties>main
+3 Overview: Native Windows Controls=Overview Native Windows Controls>main
+3 Accessing NWCs=Accessing NWCs>proc4
+3 NWC's and the Value property=NWCs and the Value property>proc4
+3 Combobox=Combobox>proc4
+3 Listbox=Listbox>proc4
+3 Progressbar=Progressbar>proc4
+3 Spinbox=Spinbox>proc4
+3 TrackBar=TrackBar>proc4
+2 Linking with Dynamic Data Exchange (DDE)
+2 Overview: Linking with Dynamic Data Exchange (DDE)=Overview Linking with Dynamic Data Exchange DDE>main
+3 Overview: Opening a DDE conversation=Overview Opening a DDE conversation>main
+3 Overview: Conversing, DDE-style=Overview Conversing DDEstyle>main
+3 Getting data=Getting data>proc4
+3 Sending data=Sending data>proc4
+3 Sending commands=Sending commands>proc4
+3 Overview: Closing the DDE conversation=Overview Closing the DDE conversation>main
+3 Overview: Problems opening DDE links=Overview Problems opening DDE links>main
+2 Introduction to Libraries
+3 Overview: Introduction to libraries=Overview Introduction to libraries>main
+3 Overview: Controlling the scope of a library=Overview Controlling the scope of a library>main
+3 Declaring a Library variable=Declaring a Library variable>proc4
+3 Opening a library=Opening a library>proc4
+3 Overview: Using library variables as arguments=Overview Using library variables as arguments>main
+3 Overview: Creating libraries=Overview Creating libraries>main
+3 Adding code to a library=Adding code to a library>proc4
+3 Attaching code to built-in event methods (in libraries)=Attaching code to builtin event methods in libraries>proc4
+3 Adding custom methods=Adding custom methods>proc4
+3 Adding custom procedures=Adding custom procedures>proc4
+3 Declaring variables, constants, data types, and external routines=Declaring variables constants data types and external routines>proc4
+3 Calling library methods=Calling library methods>proc4
+3 Overview: Library methods=Overview Library methods>main
+3 Debugging called libraries=Debugging called libraries>proc4
+3 Editing a library=Editing a library>proc4
+3 Delivering a library=Delivering a library>proc4
+2 Working with scripts
+3 Overview: Working with scripts=Overview Working with scripts>main
+3 Creating a script=Creating a script>proc4
+3 Editing a script=Editing a script>proc4
+3 Running a script=Running a script>proc4
+2 Ensuring data security and integrity
+3 Overview: Ensuring data security and integrity=Overview Ensuring data security and integrity>main
+3 Overview: Controlling access with passwords=Overview Controlling access with passwords>main
+3 Protecting the table=Protecting the table>proc4
+3 Understanding sessions=Understanding sessions>proc4
+3 Overview: Managing locks=Overview Managing locks>main
+3 Working with automatic locks=Working with automatic locks>proc4
+3 Using explicit locks=Using explicit locks>proc4
+3 Types of table locks=Types of table locks>proc4
+3 Using lock and unlock=Using lock and unlock>proc4
+3 Scope of locks=Scope of locks>proc4
+3 Placing a full lock=Placing a full lock>proc4
+3 Placing read and write locks=Placing read and write locks>proc4
+3 Placing multiple locks on one table=Placing multiple locks on one table>proc4
+3 Avoiding deadlock=Avoiding deadlock>proc4
+3 Testing for a successful lock=Testing for a successful lock>proc4
+3 Locking records=Locking records>proc4
+3 Locking existing records=Locking existing records>proc4
+3 Entering and posting new records=Entering and posting new records>proc4
+2 Handling Multiuser issues
+3 Overview: Handling multiuser issues=Overview Handling multiuser issues>main
+3 Overview: Organizing multiuser network applications=Overview Organizing multiuser network applications>main
+3 Overview: Planning a multiuser application=Overview Planning a multiuser application>main
+3 Using private directories=Using private directories>proc4
+3 Using interprocess communication=Using interprocess communication>proc4
+3 Overview: Database programming aspects of multiuser applications=Overview Database programming aspects of multiuser applications>main
+3 Handling key conflicts=Handling key conflicts>proc4
+3 Flyaway and relative ordering issues=Flyaway and relative ordering issues>proc4
+3 Working with Flyaway=Working with Flyaway>proc4
+3 Flyaway can occur in scan loops=Flyaway can occur in scan loops>proc4
+3 Effect of postRecord on locks=Effect of postRecord on locks>proc4
+3 Table locks on the data model=Table locks on the data model>proc4
+3 Unlock, commit, and cancel=Unlock commit and cancel>proc4
+3 Building automatic retries with setRetryPeriod=Building automatic retries with setRetryPeriod>proc4
+3 SetExclusive and setReadOnly=SetExclusive and setReadOnly>proc4
+3 Automatic refresh=Automatic refresh>proc4
+3 Performance tips=Performance tips>proc4
+2 Packaging and delivering an application
+3 Overview: Packaging and delivering an application=Overview Packaging and delivering an application>main
+3 Collecting the application components=Collecting the application components>proc4
+3 Saving and delivering forms=Saving and delivering forms>proc4
+3 Adding a Help system=Adding a Help system>proc4
+3 Overview: Localizing for international users=Overview Localizing for international users>main
+3 Using international formats for numeric constants=Using international formats for numeric constants>proc4
+3 Localizing quoted strings=Localizing quoted strings>proc4
+3 Localizing forms=Localizing forms>proc4
+3 About character sets=About character sets>proc4
+3 OEM-ANSI conversion=OEMANSI conversion>proc4
+3 Overview: Documenting the application code=Overview Documenting the application code>main
+3 Interactive function=Interactive function>proc4
+2 Sending e-mail with ObjectPAL
+3 Overview: Sending e-mail with ObjectPAL=Overview Sending email with ObjectPAL>main
+3 Using mail with ObjectPAL=Using mail with ObjectPAL>proc4
+3 Composing a mail message with ObjectPAL=Composing a mail message with ObjectPAL>proc4
+1 ObjectPAL Reference
+2 Conventions
+3 Syntax notation=opal_syntax_notation
+3 Required elements=opal_syntax_required_elements
+3 Informational elements=opal_syntax_Informational_Elements
+3 ObjectPAL prototypes=opal_syntax_ObjectPAL_prototypes
+3 Alternate syntax=opal_syntax_alternate_syntax
+3 Using ObjectPAL in calculated fields=opal_syntax_calculated_fields
+3 Derived methods=opal_derived_methods
+2 Types and methods
+3 ObjectPAL methods=idh_pobj_alph
+3 ObjectPAL types=idh_grp_allTypes
+3 ObjectPAL built-in event methods=opal_bmeth_list
+2 Properties and constants
+3 Properties=opal_prop_propertiesandpropertyvalues
+3 UIObject properties=opal_uiobj_uiobjectproperties
+3 Chart object properties=opal_prop_propertiesuniquetographobjects
+3 Constants (by type)=opal_const_constypes
+2 Native Windows Controls
+3 Native Windows Controls=Overview Native Windows Controls
+4 Combobox=Combobox
+4 Listbox=Listbox
+4 Progressbar=Progressbar
+4 Spinbox=Spinbox
+4 Trackbar=Trackbar
+
+1 TWAIN ObjectPAL Class
+2 Overview: TWAIN ObjectPAL Class=Overview TWAIN ObjectPAL Class>main
+2 Overview: acquire method=Overview acquire method>main
+2 acquire example 1=acquire example 1>proc4
+2 acquire example 2=acquire example 2>proc4
+2 acquire example 3=acquire example 3>proc4
+2 Overview: close method=Overview close method>main
+2 close example=close example>proc4
+2 Overview: enumSourceNames method=Overview enumSourceNames method>main
+2 enumSourceNames example=enumSourceNames example>proc4
+2 Overview: getDefaultSource method=Overview getDefaultSource method>main
+2 getDefaultSource example=getDefaultSource example>proc4
+2 Overview: getSource method=Overview getSource method>main
+2 getSource example=getSource example>proc4
+2 Overview: getSourceCount method=Overview getSourceCount method>main
+2 getSourceCount example=getSourceCount example>proc4
+2 Overview: isAssigned method=Overview isAssigned method>main
+2 isAssigned example=isAssigned example>proc4
+2 Overview: open method=Overview open method>main
+2 open example=open example>proc4
+2 Overview: setSource method=Overview setSource method>main
+2 setSource example=setSource example>proc4
+2 Overview: showSelectSourceDlg method=Overview showSelectSourceDlg method>main
+2 showSelectSourceDlg example=showSelectSourceDlg example>proc4
+2 Overview: isTwainAvailable method=Overview isTwainAvailable method>main
+2 isTwainAvailable example=isTwainAvailable example>proc4
+
+1 Paradox string lists
+2 Overview: Paradox string lists=Overview Paradox string lists>main
+2 Overview: String list user interface=Overview String list user interface>main
+2 Overview: Using string lists=Overview Using string lists>main
+2 To create a string list file=To create a string list file>proc4
+2 To save a String list file=To save a String list file>proc4
+2 To attach a String list file to a form=To attach a String list file to a form>proc4
+2 To attach a String list file to a report=To attach a String list file to a report>proc4
+2 To attach a String list value to a text object=To attach a String list value to a text object>proc4
+
+
+:include pdxinet.cnt
+1 Glossary
+2 ObjectPAL glossary=idh_opalglos
+1 ObjectPAL Tutorial
+2 ObjectPAL Tutorial=!EF("PALTut11.hlp")
+1 Paradox online Help
+2 Paradox online Help=!EF("pdox11en.hlp")

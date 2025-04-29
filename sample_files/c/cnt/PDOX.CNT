@@ -1,0 +1,1439 @@
+:Base pdox.hlp>main
+:Index Application Framework Help=frame.hlp
+:Index Visual Query Builder Help=qbuilder.hlp
+1 Welcome to Corel Paradox 8
+2 Welcome to Corel Paradox 8=nwhatnew_Welcome_to_Corel_Paradox_8
+2 What's new in Corel Paradox 8=new1>whatsnew
+2 Corel Paradox license agreement=nwhatnew_license
+2 Corel Paradox copyright information=nwhatnew_copyright
+2 Year 2000 date information=nwhatnew_Year_2000_date_information
+1 Database essentials
+2 Introduction to database systems=bunder_introduction
+2 What is a relational database?=bunder_what_is_relational
+2 Understanding data normalization=bunder_Understanding_data_normalization
+2 Understanding referential integrity=bunder_Understanding_referential_integrity
+2 Understanding keys and indexes=bunder_about_keys_indexes
+2 Understanding validity checks=bunder_Understanding_validity_checks
+2 Understanding links=bunder_Understanding_links
+2 Corel Paradox sample directory=bbasics_paradox_sample_directory
+2 About ObjectPAL scripting language=bbasics_opal_scripting
+2 Understanding data models=fdatamod_about_data_models
+2 The MAST company: a case study
+3 About the MAST company example=bunder_about_mast
+3 Stage one: a single table=bunder_mast_single_table
+3 Stage two: the need for a key=bunder_mast_need_key
+3 Stage three: organizing smaller tables=bunder_mast_organizing_smaller_tables
+3 The Customer table=bunder_mast_customer_table
+3 The Orders table=bunder_mast_orders_table
+3 The Lineitem table=bunder_mast_lineitem_table
+3 The Stock table=bunder_mast_stock_table
+3 The Vendors table=bunder_mast_vendors_table
+3 The Contacts table=bunder_mast_contacts_table
+3 Stage four: creating multi-table documents=bunder_mast_multi_table
+3 Stage five: creating and saving queries=bunder_mast_queries
+3 Stage six: creating a report from a query=bunder_mast_report
+1 Corel Paradox basics
+2 Understanding Corel Paradox objects
+3 What is a Corel Paradox object?=bbasics_about_paradox_objects
+3 Tables=bbasics_tables
+3 Temporary tables=bbasics_temporary_tables
+3 Forms=bbasics_forms
+3 Reports=bbasics_reports
+3 Queries=bbasics_queries
+3 Scripts=bbasics_scripts
+3 Libraries=bbasics_libraries
+3 SQL Files=bbasics_sql_files
+3 File extensions for Corel Paradox objects=bbasics_file_extensions
+2 The Corel Paradox Desktop
+3 About the Corel Paradox Desktop=bbasics_about_desktop
+3 About Toolbars=bbasics_about_toolbars
+3 Moving, docking and displaying Toolbars=bbasics_to_move_toolbar>taskwin
+3 Setting Desktop and system preferences=bbasics_to_set_system_preferences
+3 Setting ObjectPAL preferences=bbasics_to_set_opal_preferences
+2 Organizing your database projects
+3 About the Project Viewer=bbasics_about_project_viewer
+3 Using the Project Viewer=bbasics_to_use_project_viewer>taskwin
+3 Setting Project Viewer preferences=bbasics_to_set_project_viewer_preferences>taskwin
+3 Displaying a menu for Project Viewer items=bbasics_to_display_project_viewer_menu>taskwin
+3 Changing your working directory from the Project Viewer=bbasics_to_change_working_directory_project_viewer>taskwin
+3 About adding and removing Project Viewer items=bbasics_adding_removing_project_viewer_items
+3 Adding references=bbasics_to_add_references>taskwin
+3 Removing references=bbasics_to_remove_references>taskwin
+2 Directories and aliases
+3 About directories and aliases=bbasics_about_directories_aliases
+3 Changing your working directory=bbasics_to_change_working_directory>taskwin
+3 Changing your working directory from the Project Viewer=bbasics_to_change_working_directory_project_viewer>taskwin
+3 Specifying a private directory=bbasics_to_specify_private>taskwin
+3 About aliases=bbasics_about_aliases
+3 Public and project aliases=bbasics_public_project_aliases
+3 Creating a new alias=bbasics_to_create_new_alias>taskwin
+3 Modifying an alias=bbasics_to_modify_alias>taskwin
+3 Removing an alias=bbasics_to_remove_alias>taskwin
+2 Printing
+3 Printing=bbasics_printing
+2 Exiting Corel Paradox
+3 Exiting Corel Paradox=bbasics_to_exit_paradox>taskwin
+1 Tables
+2 Creating and restructuring tables
+3 About creating tables=tcreate_about_create
+3 Guidelines for creating better tables=tcreate_guidelines_create
+3 Creating a Corel Paradox table=tcreate_to_create_table>taskwin
+3 Borrowing an existing table structure=tcreate_about_borrowing
+3 About restructuring tables=trestruc_about_restructuring
+3 Packing a table=trestruc_packing_table
+3 Creating and restructuring an SQL table =tsql_create
+3 Viewing table structure information=tgetinfo_about_table_structure
+3 Defining fields
+4 Rules for Corel Paradox field names=tcreate_paradox_field_name_rules
+4 Creating a field=tcreate_to_create_field>taskwin
+4 Adding, deleting, and renaming fields=trestruc_to_add_fields
+4 Corel Paradox field types and sizes=tcreate_paradox_field_types
+4 About changing field types=trestruc_about_changing_field_types
+4 Formatting the text in a formatted memo field=tcreate_Formatting_the_text_in_a_formatted_memo_field
+4 Changing field types=trestruc_to_change_field_types
+4 Corel Paradox field types and sizes
+5 Corel Paradox alpha fields=tcreate_paradox_alpha
+5 Corel Paradox number field=tcreate_paradox_number
+5 Corel Paradox money fields=tcreate_paradox_money
+5 Corel Paradox short fields=tcreate_paradox_short
+5 Corel Paradox long integer fields=tcreate_paradox_long
+5 Corel Paradox BCD fields=tcreate_paradox_bcd
+5 Corel Paradox date fields=tcreate_paradox_date
+5 Corel Paradox time fields=tcreate_paradox_time
+5 Corel Paradox timestamp fields=tcreate_paradox_timestamp
+5 Corel Paradox memo fields=tcreate_paradox_memo
+5 Corel Paradox formatted memo fields=tcreate_paradox_formatted_memo
+5 Corel Paradox graphic fields=tcreate_paradox_graphic
+5 Corel Paradox OLE fields=tcreate_paradox_ole
+5 Corel Paradox logical  fields=tcreate_paradox_logical
+5 Corel Paradox binary fields=tcreate_paradox_binary
+5 Corel Paradox bytes fields=tcreate_paradox_bytes
+5 Compatible Corel Paradox field types=trestruc_compatible_paradox_field_types
+4 dBASE field types and sizes
+5 Rules for dBASE field names=tcreate_dbase_field_name_rules
+5 Compatible dBASE field types=trestruc_compatible_dbase_field_types
+5 dBASE field types and sizes=tcreate_dbase_field_types
+5 dBASE character fields=tcreate_dbase_character
+5 dBASE float fields=tcreate_dbase_float
+5 dBASE number fields=tcreate_dbase_number
+5 dBASE date fields=tcreate_dbase_date
+5 dBASE logical fields=tcreate_dbase_logical
+5 dBASE memo fields=tcreate_dbase_memo
+5 dBASE OLE fields=tcreate_dbase_ole
+5 dBASE binary fields=tcreate_dbase_binary
+5 dBASE record lock fields=tcreate_dbase_record_lock
+3 Primary keys (indexes) and secondary indexes
+4 About keys and indexes in tables=tcreate_about_indexes
+4 About primary indexes (key fields)=tcreate_about_primary
+4 Keys=bunder_keys
+4 Rules for defining key fields=tcreate_rules_key
+4 Composite keys=bunder_composite_keys
+4 Creating or removing a key=tcreate_to_create_key>taskwin
+4 About secondary indexes=tcreate_about_secondary
+4 Secondary index options=tcreate_types_secondary
+4 Creating secondary indexes=tcreate_to_create_secondary>taskwin
+4 Modifying a secondary index=tcreate_to_modify_secondary>taskwin
+4 Deleting a secondary index=tcreate_to_delete_secondary>taskwin
+4 Indexes and dBASE tables
+5 About dBASE indexes=tcreate_about_dbase_indexes
+5 Maintained dBASE indexes=tcreate_maintained_dbase_indexes
+5 Creating a dBASE expression index=tcreate_creating_dbase_expression_index
+5 Creating a subset condition expression=tcreate_creating_subset_condition
+5 Creating an index on a dBASE table=tcreate_to_create_dbase_index>taskwin
+4 Indexes and SQL tables
+5 Creating indexes on SQL tables=tsql_createindex
+3 Validity checks
+4 About validity checks=tcreate_about_validity_checks
+4 Creating a required field validity check=tcreate_to_create_required_fields>taskwin
+4 Creating minimum and maximum value validity checks=tcreate_to_create_minimum_maximum>taskwin
+4 Creating a default value validity check=tcreate_to_create_default_values>taskwin
+4 About picture validity checks=tcreate_about_pictures
+4 Picture string characters=tcreate_picture_characters
+4 Examples of picture validity checks=tcreate_examples_pictures
+4 Creating a sample picture validity check=tcreate_to_use_standard_pictures>taskwin
+4 Creating a custom picture validity check=tcreate_to_use_custom_pictures>taskwin
+4 Displaying and removing validity checks=tcreate_to_display_remove_validity_checks
+3 Table lookups
+4 About table lookups=tcreate_about_lookups
+4 Rules for table lookups=tcreate_lookup_rules
+4 Creating table lookups=tcreate_to_create_lookups>taskwin
+3 Referential integrity
+4 About referential integrity=tcreate_about_referential_integrity
+4 Self-referential integrity=tcreate_self_referential_integrity
+4 About restructuring and referential integrity=trestruc_about_restructuring_referential_integrity
+4 Creating referential integrity=tcreate_to_create_referential_integrity>taskwin
+4 Modifying referential integrity=tcreate_to_change_referential_integrity>taskwin
+4 Deleting referential integrity=tcreate_to_delete_referential_integrity>taskwin
+4 Copying referential integrity=bbasics_copying_referential_integrity
+3 Password security
+4 About password security=tcreate_about_passwords
+4 Creating a master password=tcreate_to_create_master_password>taskwin
+4 Entering and releasing passwords=tcreate_using_passwords
+4 Changing a master password=tcreate_to_change_master_password>taskwin
+4 Deleting a master password=tcreate_to_delete_master_password>taskwin
+4 About auxiliary passwords=tcreate_about_auxiliary_passwords
+4 Creating an auxiliary password=tcreate_to_create_auxiliary_password>taskwin
+4 Modifying an auxiliary password=tcreate_to_change_auxiliary_password>taskwin
+4 Deleting an auxiliary password=tcreate_to_delete_auxiliary_password>taskwin
+3 Table language drivers
+4 About table language drivers=tcreate_about_table_languages
+4 Choosing a table language driver=tcreate_to_choose_table_language>taskwin
+4 Changing a table language=trestruc_to_change_table_languages
+2 Copying, renaming and deleting tables
+3 About copying tables=bbasics_about_copying
+3 Copying to a different table type=bbasics_copying_different_type
+3 Copying from Corel Paradox to dBASE tables=bbasics_copying_Paradox_to_dBASE
+3 Copying from dBASE to Corel Paradox tables=bbasics_copying_dBASE_to_Paradox
+3 Renaming tables=bbasics_rename_on_network
+3 Deleting tables=bbasics_about_deleting
+2 Viewing tables
+3 Opening a table=tview_opening_table
+3 Moving among table records=tview_table_navigation_buttons
+3 Using the horizontal scroll lock=tview_scroll_lock
+3 Using the keyboard to move among table records=tview_keyboard_actions
+3 Displaying memo and BLOB fields=ps_mod_MEMOTUPLE
+3 Magnifying the display of a graphic or OLE field=tlook_magnify_graphic_ole
+3 About quick objects=tview_about_quick_objects
+2 Changing the look of tables
+3 About table views=tlook_about_table_views
+3 About dragging with the mouse=tlook_dragging_mouse
+3 Moving, resizing, or rotating columns=tlook_move_resize_rotate>taskwin
+3 Rearranging fields=trestruc_rearranging_fields
+3 Resizing rows=tlook_resize_rows>taskwin
+3 Viewing and changing table properties=tlook_to_view_change_properties>taskwin
+3 Saving table properties=tlook_to_save_table_properties>taskwin
+3 Restoring table properties=tlook_to_restore_table_properties>taskwin
+3 Deleting table properties=tlook_to_delete_table_properties>taskwin
+3 Creating new default table properties=tlook_to_create_default_table_properties_new>taskwin
+3 Changing the default system font=tlook_changing_the_default_system_font
+3 Aligning heading text and data
+4 Changing the alignment of text and data=tlook_aligning_heading
+4 Aligning text in a formatted memo field=tlook_align_formatted_memo>taskwin
+3 Formatting text and changing background colors
+4 Changing background colors=tlook_about_colors
+4 Formatting text=tlook_about_fonts
+3 Setting grid and record marker properties
+4 About the grid and record marker=tlook_about_grid
+4 Changing the grid's background color=tlook_change_grid_background>taskwin
+4 Formatting table grid lines=tlook_change_grid_lines>taskwin
+4 Formatting the current record marker=tlook_current_record_marker>taskwin
+3 Changing the appearance of cells based on data values
+4 Changing the appearance of cells in a field based on data values=tlook_properties_based_data
+3 Data formats
+4 About data formats=tlook_about_data_formats
+4 Specifying the format for numeric data=tlook_specify_numeric_format>taskwin
+4 Predefined number and money formats=tlook_predefined_number
+4 Predefined date formats=tlook_predefined_date
+4 Predefined time formats=tlook_predefined_time
+4 Predefined timestamp formats=tlook_predefined_timestamp
+4 Predefined logical formats=tlook_predefined_logical
+4 Creating a custom data format=tlook_create_custom_data_format>taskwin
+4 Changing a custom data format=tlook_change_custom_data_format>taskwin
+4 Deleting a custom data format=tlook_delete_custom_data_format>taskwin
+2 Sorting a table
+3 About sorting tables=tsort_about_sorting_tables
+3 Sorting a table=tsort_sort_table>taskwin
+3 Sorting an Answer table=tsort_sort_answer_table>taskwin
+2 Filtering your view of table data
+3 About filters=tfilter_about_filters
+3 Filters and queries compared=tfilter_filters_vs_queries
+3 Operator precedence in filters=tfilter_operator_precedence
+3 Either/or conditions=tfilter_either_or_conditions
+3 Filtering a field=tfilter_filter_field>taskwin
+3 Filtering a table=tfilter_filter_table>taskwin
+3 Removing a filter=tfilter_remove_filter>taskwin
+3 Setting ranges on a composite index=tfilter_ranges_on_composite
+3 Viewing keyed Paradox tables in a different order=tfilter_keyed_paradox>taskwin
+3 Viewing indexed dBASE tables in a different order=tfilter_indexed_dbase>taskwin
+3 Viewing indexed SQL tables in a different order=tfilter_indexed_sql>taskwin
+3 Ranges or filters on a quick form=tfilter_ranges_quick_form
+2 Adding, moving, subtracting, and emptying table records
+3 About adding records=tutils_about_adding_records
+3 Adding records from another table=tutils_to_add_records_from_another_table
+3 Corel Paradox and dBASE field type compatibility=tutils_merge_paradox_dbase
+3 Moving dependent records=tutils_about_moving_records
+3 About subtracting records that exist in another table=tutils_about_subtracting_records
+3 Subtracting records that exist in another table=tutils_to_subtract_records>taskwin
+3 Emptying tables=tutils_about_emptying
+2 Locking tables
+3 About locking tables=tlock_about_locking_tables
+3 Displaying table locks=tlock_about_display
+3 Locking a table=tlock_to_lock_table>taskwin
+3 Data corruption and peer to peer networks=Tlock_peer_to_peer
+1 Entering and editing data
+2 Entering and editing data=denter_about_entering_editing
+2 Editing part of a field=dmodenav_about_field_view
+2 Editing commands=Denter_Editing_commands
+2 Entering and editing memo and formatted memo text=dspecial_about_editing_memos
+2 Shortcuts for faster data entry=dmodenav_data_entry_shortcuts
+2 Why can't I leave a field?=dmodenav_cant_leave_field
+2 About inserting, posting, and deleting records=dinsdel_about_inserting_deleting_records
+2 Inserting records=dinsdel_to_insert_records>taskwin
+2 Deleting records=dinsdel_to_delete_records>taskwin
+2 Formattting formatted memo data=dspecial_to_enter_formatted_memo_data
+2 Data corruption and peer to peer networks=Tlock_peer_to_peer
+2 Cutting, copying, and pasting data
+3 Cutting and copying data=dcutcopy_about_cut_copy_paste
+3 Pasting data=dcutcopy_to_paste
+3 Deleting data=dcutcopy_to_delete>taskwin
+3 Copying to a file=dcutcopy_about_copying_to_file
+3 Pasting from a file=dcutcopy_about_pasting_from_file
+2 Locating and replacing data
+3 About finding and replacing data=dfind_about_finding_replacing
+3 Finding and replacing text in memo fields and text objects=dfind_to_search_replace>taskwin
+3 Locating a record number. field, or field value=dfind_to_locate_record_number>taskwin
+3 Locating and replacing values in a field=dfind_to_locate_replace_field_values>taskwin
+3 List of wildcards you can use to locate values=dfind_extended_wildcards
+3 Sample search strings with wildcards=dfind_sample_search_wildcards
+2 Entering and editing graphic data and OLE objects
+3 Graphic data
+4 About entering graphic data=dspecial_about_entering_graphic_data
+4 Placing a graphic using Cut and Paste=dspecial_to_place_graphic_cut_paste>taskwin
+4 Placing a graphic using Paste From=dspecial_dspecial_to_place_graphic_paste_from>taskwin
+4 Viewing graphic data=dspecial_to_view_graphic>taskwin
+3 OLE objects
+4 About inserting and using OLE objects=dspecial_about_ole
+4 About updating linked OLE objects=eole_about_updating_linked_ole_objects
+4 About manipulating OLE objects=eole_about_manipulating_ole_objects
+4 Embedding a new OLE object=eole_to_embed_new_ole>taskwin
+4 Embedding a copy of a file as an OLE object=eole_to_embed_copy_as_ole>taskwin
+4 Embedding part of a file as an OLE object=eole_to_embed_part_as_ole>taskwin
+4 Inserting an OLE object linked to a file=eole_to_insert_ole_linked_to_file>taskwin
+4 Inserting an OLE object linked to part of a file=eole_to_insert_ole_linked_to_part>taskwin
+4 Manipulating the contents of an OLE field=eole_to_manipulate_contents_of_ole_field>taskwin
+4 Manipulating the contents of an OLE design object=eole_to_manipulate_contents_of_ole_design_object>taskwin
+2 Locking records
+3 Locking records=dadvance_about_locking_records>taskwin
+3 Unlocking a record=dadvance_to_unlock_record>taskwin
+3 Posting a record without unlocking it=dadvance_to_post_without_unlocking>taskwin
+2 Using table lookups
+3 About table lookups=tcreate_about_lookups
+3 Types of table lookups=dadvance_types_of_table_lookup
+3 Using a table lookup=dadvance_to_use_table_lookup>taskwin
+3 Examples of table lookups=dadvance_examples_of_table_lookup>codewin
+3 Example of using Just Current Field with Fill No Help=dadvance_using_just_current_field_with_private
+3 Example of using Just Current Field with Help And Fill=dadvance_using_just_current_field_with_help_fill
+3 Example of using All Corresponding Fields with Fill No Help=dadvance_using_all_corresponding_fields_fill_no_help
+3 Example of using All Corresponding Fields with Help And Fill=dadvance_using_all_corresponding_fields_help_fill
+1 Exchanging data
+2 About exchanging data=eabout_about_exchanging_data
+2 Sharing information between workstations=eabout_Sharing information between workstations
+2 Importing data
+3 About importing data=eimport_about_importing
+3 Importing spreadsheet data=eimport_importing_spreadsheet
+3 Importing delimited text=eimport_importing_delimited
+3 Importing fixed length text=eimport_importing_fixed_length
+3 Determining spreadsheet field types=eimport_spreadsheet_field_types
+3 Importing a table=eimport_to_import_data>taskwin
+2 Exporting data
+3 About exporting data=eexport_about_exporting
+3 Exporting to a spreadsheet=eexport_exporting_to_spreadsheet
+3 Exporting to delimited text=eexport_exporting_to_delimited
+3 Exporting to fixed length text=eexport_exporting_to_fixed
+3 Exporting to a table=eexport_to_export>taskwin
+2 Using Object Linking and Embedding (OLE)
+3 About OLE=eole_about_ole
+3 About embedded OLE objects=eole_about_embedded_objects
+3 About linked OLE objects=eole_about_linked_objects
+3 Embedding objects in OLE fields and design objects
+4 Embedding a new OLE object=eole_to_embed_new_ole>taskwin
+4 Embedding a copy of a file as an OLE object=eole_to_embed_copy_as_ole>taskwin
+4 Embedding part of a file as an OLE object=eole_to_embed_part_as_ole>taskwin
+3 Inserting linked OLE objects
+4 Inserting an OLE object linked to a file=eole_to_insert_ole_linked_to_file>taskwin
+4 Inserting an OLE object linked to part of a file=eole_to_insert_ole_linked_to_part>taskwin
+3 Updating linked OLE objects
+4 About updating linked OLE objects=eole_about_updating_linked_ole_objects
+4 Changing the way Paradox updates linked objects=eole_to_change_the_way_paradox_updates_linked_objects>taskwin
+4 Manually updating a linked object=eole_to_manually_update_linked_object>taskwin
+3 Manipulating objects in OLE fields and design objects
+4 About manipulating OLE objects=eole_about_manipulating_ole_objects
+4 About OLE 1.0 versus OLE 2.0=eole_about_ole_1_versus_2
+4 Manipulating the contents of an OLE field=eole_to_manipulate_contents_of_ole_field>taskwin
+4 Manipulating the contents of an OLE design object=eole_to_manipulate_contents_of_ole_design_object>taskwin
+3 Using Paradox as an OLE 2.0 server
+4 About using Paradox as an OLE 2.0 server=eole_about_using_paradox_as_ole
+4 Embedding a Paradox table using the Clipboard=eole_to_embed_paradox_table_using_clipboard>taskwin
+4 Embedding a Paradox table using Insert Object=eole_to_embed_paradox_table_using_insert_object>taskwin
+2 Using Dynamic Data Exchange (DDE)
+3 About DDE=eole_about_dde
+3 Using Paradox as a DDE server=eole_to_use_paradox_as_dde_server>taskwin
+3 Using Paradox as a DDE client (tables)=eole_to_use_paradox_as_dde_client_tables>taskwin
+3 Using Paradox as a DDE client (queries)=eole_to_use_paradox_as_dde_client_queries>taskwin
+3 Disconnecting a DDE link=eole_to_disconnect_dde_link>taskwin
+3 Example of Paradox as a DDE server=eole_example_paradox_as_dde_server>codewin
+3 Example of Paradox as a DDE client and server (queries)=eole_example_paradox_as_dde_client_server_queries>codewin
+2 Sending mail
+3 About sending mail=email_about_sending_mail
+1 Querying your database
+2 About queries=qabout_about
+2 Steps for creating queries=qabout_guidelines
+2 Creating a query from a table=qabout_create_from_table>taskwin
+2 Creating a query based on a data model=qabout_based_on_data_model>taskwin
+2 Creating a query based on another query=qabout_based_on_query>taskwin
+2 Example of creating a simple query=qabout_create_example>codewin
+2 Opening and running a query=qabout_open
+2 Using the Visual Query Builder to create SQL queries=Visual_Query_Builder_overview@Qbuilder.hlp
+2 Choosing the tables you want to query
+3 Adding tables to a query=qwindow_add_tables>taskwin
+3 Removing tables from a query=qwindow_remove_tables>taskwin
+3 Rotating columns in a query image=qwindow_rotate_columns>taskwin
+2 Joining tables in a multi-table query
+3 Querying more than one table=qbasic_multiple_about
+3 Using example elements to link tables=qbasic_multiple_example_elements
+3 Linking more than two tables=qbasic_multiple_more_than_two
+3 Using a multi-table design to link tables=qbasic_multiple_design
+3 Joining tables =qbasic_example_create_toolbar
+3 Example of a multi-table query=qbasic_multiple_example
+2 Selecting fields to display
+3 About selecting fields to display=qbasic_fields_about
+3 Working with query images=qwindow_image_working_with
+3 Query image check boxes=qwindow_checkboxes
+3 Query image fields=qwindow_fields
+3 Placing a check mark in a query image=qwindow_place_checkmark>taskwin
+3 Specifying field names in the Answer table=qbasic_fields_specify>taskwin
+2 Specifying query selection criteria
+3 Using selection conditions
+4 Defining selection conditions=qbasic_selection_about
+4 Query operators=qbasic_selection_operators
+4 Operator precedence in queries=qbasic_selection_operator_precedence
+4 Rules for entering numbers in queries=qbasic_selection_typing_numbers
+4 Using reserved words or symbols in selection conditions=qbasic_selection_reserved_words
+4 Specifying two selection conditions for a field=qbasic_selection_combine_two_conditions
+4 Arithmetic operators
+5 Using arithmetic operators=qbasic_selection_arithmetic
+5 Paradox field types allowing arithmetic operators=qbasic_selection_arithmetic_paradox
+5 dBASE field types allowing arithmetic operators=qbasic_selection_arithmetic_dbase
+4 Specifying matches in selection conditions
+5 Exact matches=qbasic_selection_exact
+5 Matching a range of values: comparison operators=qbasic_selection_range
+5 Inexact matches: the LIKE operator=qbasic_selection_like
+5 Non-matches: the NOT operator=qbasic_selection_not
+5 Blank values: the BLANK operator=qbasic_selection_blank
+5 Today's date: the TODAY operator=qbasic_selection_today
+5 Using wildcards to match a pattern=qbasic_selection_wildcards
+5 The .. wildcard operator=qbasic_selection_series
+5 The @ operator=qbasic_selection_pattern
+5 Using wildcards with numbers=qbasic_selection_wildcards_numbers
+5 Using wildcards with dates=qbasic_selection_wildcards_dates
+5 Example of using wildcards to match a pattern=qbasic_selection_wildcards_pattern>codewin
+4 Using AND and OR in selection conditions
+5 About AND conditions=qbasic_selection_and_about
+5 AND conditions in the same field=qbasic_selection_and_same_field
+5 AND conditions in different fields=qbasic_selection_and_different_field
+5 AND conditions with linked tables=qbasic_selection_and_linked_tables
+5 About OR conditions=qbasic_selection_or_about
+5 OR conditions in the same field=qbasic_selection_or_same_field
+5 OR conditions in different fields=qbasic_selection_or_different_field
+5 OR conditions with linked tables (multi-table queries)=qbasic_selection_or_linked_tables
+5 Combining AND and OR conditions=qbasic_selection_combine_and_or
+3 Using example elements
+4 About example elements=qbasic_example_about
+4 Creating example elements=qbasic_example_creating
+4 Using an example element in a selection condition=qbasic_example_selection
+4 Using an example element to represent a value=qbasic_example_represent_value
+4 Using an example element in a range=qbasic_example_range
+4 Using an example element in a date condition=qbasic_example_date
+4 Using LIKE or NOT with an example element=qbasic_example_like_not
+4 Creating an example element by typing=qbasic_example_create_typing>taskwin
+4 Placing example elements with the Toolbar=qbasic_example_create_toolbar>taskwin
+3 Performing calculations with queries
+4 Calculating values with queries: the CALC operator=qbasic_calc_about
+4 Using CALC with arithmetic operators=qbasic_calc_arithmetic
+4 Using CALC with alphanumeric values=qbasic_calc_alphanumeric
+4 Creating a new answer field with a constant value=qbasic_calc_new_answer
+4 Calculating with numeric values from different tables=qbasic_calc_different_tables
+4 Examples of calculating values with queries=qbasic_calc_example>codewin
+2 Viewing and using query results
+3 About query results=qresults_about
+3 The Answer table
+4 About the Answer table=qresults_answer_about
+4 Modifying and renaming the Answer table=qresults_answer_modify
+4 Specifying field names in the Answer table=qbasic_fields_specify>taskwin
+4 Renaming Answer table fields=qresults_answer_rename_fields>taskwin
+4 Sorting the Answer table=qresults_answer_sort>taskwin
+4 Sorting Answer table values in descending order=qresults_answer_sort_descending>taskwin
+3 Live query views
+4 About live query views=qresults_live_about
+4 Rules for live query views=qresults_live_rules
+4 Creating a live query view=qresults_live_create>taskwin
+4 Editing a live query view=qresults_live_edit>taskwin
+4 Saving a live query view=qresults_live_save>taskwin
+2 Setting query properties
+3 About query properties=qprop_about
+3 Handling table updates=qprop_table_updates
+3 Setting Answer table properties=qprop_answer
+3 Setting auxiliary table properties=qprop_auxiliary
+3 Setting remote query properties=qprop_set_remote
+3 Setting query sort properties=qprop_set_sort
+3 Setting query structure properties=qprop_set_structure
+3 Saving query settings=qprop_save>taskwin
+2 Advanced queries: groups, sets, and inclusive links
+3 About advanced queries=qadvance_about
+3 Querying groups of records
+4 About querying groups of records=qadvance_groups_about
+4 Using summary operators
+5 About summary operators=qadvance_group_summary_about
+5 Paradox field types allowing summary operators=qadvance_group_summary_paradox
+5 dBASE field types allowing summary operators=qadvance_group_summary_dbase
+5 Using summary operator modifiers=qadvance_group_summary_modifiers
+5 Selecting records based on group definitions=qadvance_group_summary_based_on_group
+5 Example of using COUNT: selecting records based on a group count=qadvance_group_summary_count>codewin
+5 Example of using SUM: selecting records based on a group sum=qadvance_group_summary_sum>codewin
+5 Example of using AVERAGE: selecting records based on a group average=qadvance_group_summary_average>codewin
+5 Example of using MAX and MIN: selecting records based on a group maximum or minimum=qadvance_group_summary_maxmin>codewin
+4 Calculations on groups
+5 About calculations on groups=qadvance_group_calc_about
+5 Example of a basic calculation on a group=qadvance_group_calc_example>codewin
+5 Example of grouping by more than one field=qadvance_group_calc_multiple_fields>codewin
+5 Example of performing a group calculation on the entire table=qadvance_group_calc_entire_table>codewin
+5 Example of displaying summary values without grouping by them=qadvance_group_calc_display_only>codewin
+5 Example of counting unique values=qadvance_group_calc_count_unique>codewin
+5 Example of counting all values=qadvance_group_calc_count_all>codewin
+4 Using the ONLY operator
+5 Example of using ONLY: selecting records containing only one value=qadvance_group_only>codewin
+3 Querying sets of records
+4 About querying sets of records (SET queries)=qadvance_set_about_sets
+4 Defining a set=qadvance_set_define
+4 Example of defining a set=qadvance_set_define_example>codewin
+4 Set comparisons
+5 Performing set comparisons=qadvance_set_comparison_perform
+5 Example of performing a set comparison=qadvance_set_comparison_example>codewin
+5 Example of the ONLY set comparison operator=qadvance_set_comparison_only>codewin
+5 Example of the NO set comparison operator=qadvance_set_comparison_no>codewin
+5 Example of the EVERY set comparison operator=qadvance_set_comparison_every>codewin
+5 Example of the EXACTLY set comparison operator=qadvance_set_comparison_exactly>codewin
+5 Example of a SET query involving more than one set=qadvance_set_comparison_multiple_sets>codewin
+4 Set summaries
+5 Example of summary operators in a SET query=qadvance_set_summary>codewin
+3 Querying with inclusive links
+4 About inclusive links (! operator)=qadvance_link_about
+4 Linking to all records in a table=qadvance_link_all_records
+4 Rules for linking tables=qadvance_link_rules
+4 Selection conditions with inclusive links=qadvance_link_selection
+4 Examples
+5 Example of linking to all records in a table=qadvance_link_all_records_example>codewin
+5 Example of using the Inclusion operator in a query that performs a calculation=qadvance_link_inclusion_example>codewin
+5 Example of retrieving records from one table that are not in another table=qadvance_link_retrieve_not_in_table_example>codewin
+5 Example of using both inclusive and exclusive links in a query=qadvance_link_inclusive_exclusive_example>codewin
+2 Inserting, deleting, and changing values with queries
+3 About queries that change data=qchange_about
+3 Operation order in a query involving multiple operations=qchange_operation_order
+3 Inserting records with queries
+4 About INSERT queries=qchange_insert_about
+4 INSERT query temporary tables=qchange_insert_temporary_tables
+4 Performing an INSERT query=qchange_insert_perform>taskwin
+4 Example of inserting a record with an INSERT query=qchange_insert_record_example>codewin
+4 Example of inserting new values with an INSERT query=qchange_insert_new_values_example>codewin
+3 Deleting records with queries
+4 About DELETE queries=qchange_delete_about
+4 DELETE query temporary tables=qchange_delete_temporary_tables
+4 Performing a DELETE query=qchange_delete_perform>taskwin
+4 Example of removing a record with a DELETE query=qchange_delete_record_example>codewin
+4 Example of undoing a DELETE query=qchange_delete_undo_example>codewin
+3 Changing values with queries
+4 About CHANGETO queries=qchange_changeto_about
+4 CHANGETO query temporary tables=qchange_changeto_temporary_tables
+4 Performing a CHANGETO query=qchange_changeto_perform>taskwin
+4 Undoing changes using the Changed table=qchange_changeto_undo>taskwin
+4 Performing a multi-table CHANGETO query=qchange_changeto_multi_perform>taskwin
+4 Example of changing data with a CHANGETO query=qchange_changeto_example>codewin
+4 Example of using CHANGETO with example elements=qchange_changeto_example_elements_example>codewin
+1 Forms and reports
+2 Creating forms and reports=fabout_about_forms_reports
+2 Step 1: Creating the design document=fabout_create_design_document>taskwin
+2 Step 2: Creating a data model=fabout_create_data_model>taskwin
+2 Step 3: Creating a layout=fabout_create_layout>taskwin
+2 Step 4: Placing design objects on the document=fabout_place_objects>taskwin
+2 Step 5: Saving the form or report=fabout_save_design>taskwin
+2 Creating a form or report using the experts=fabout_create_with_expert>taskwin
+2 Creating and using data models
+3 About data models=fdatamod_about_data_models
+3 Multi-table data models=fdatamod_multi_table_data_model
+3 Data Models for reports with groups=fdatamod_data_model_report_groups
+3 Linking tables in a data model
+4 About links and indexes=fdatamod_about_links_indexes
+4 Single-value relationships=fdatamod_single_value
+4 Multi-value relationships=fdatamod_multi_value
+4 Creating a link=fdatamod_create_link>taskwin
+4 Defining a link=fdatamod_define_link>taskwin
+4 Previewing links=fdatamod_preview_links>taskwin
+4 Removing links=fdatamod_remove_links>taskwin
+4 dBASE linking combinations=fdatamod_dbase_linking
+4 Limitations on reports containing dBASE tables=fdatamod_dbase_report_limitations
+3 Using table aliases
+4 About table aliases=fdatamod_about_table_aliases
+4 Creating a table alias=fdatamod_create_table_alias>taskwin
+4 Removing a table alias=fdatamod_remove_table_alias>taskwin
+3 Creating data models in conjunction with forms or reports
+3 Creating data models independently of forms or reports
+4 About the Data Model Designer=fdatamod_about_designer
+4 Opening the Data Model Designer=fdatamod_open_designer>taskwin
+4 Choosing a view
+5 Viewing the current data model=fdatamod_view_current_data_model>taskwin
+5 Viewing a reference data model=fdatamod_view_reference_data_model>taskwin
+5 Viewing two data models at one time=fdatamod_view_split>taskwin
+4 Creating and opening a data model
+5 Creating a data model in the Data Model Designer=fdatamod_create_data_model>taskwin
+5 Loading a data model=fdatamod_load_data_model>taskwin
+4 Modifying a data model
+5 Adding a table to a data model=fdatamod_add_table>taskwin
+5 Creating, breaking, or modifying links=fdatamod_modify_links_designer>taskwin
+5 Removing a table from the data model=fdatamod_remove_table>taskwin
+5 Copying items from the reference data model=fdatamod_copy_from_reference>taskwin
+5 Viewing table properties in the Data Model Designer=fdatamod_view_table_properties>taskwin
+4 Saving and printing a data model
+5 About saving a data model in the Data Model Designer=fdatamod_save_data_model_designer
+5 Applying changes to the data model for the active form or report=fdatamod_apply_changes>taskwin
+5 Saving changes to the reference data model=fdatamod_save_changes_reference_model>taskwin
+5 Giving a data model a new name=fdatamod_give_new_name>taskwin
+5 Cancelling changes to the data model for the active form or report=fdatamod_cancel_changes>taskwin
+5 Saving or restoring a default data model=fdatamod_default_data_model>taskwin
+5 Printing a data model=fdatamod_print_data_model>taskwin
+2 Laying out forms and reports
+3 About form and report layouts=flayout_about_layouts
+3 Specifying an initial layout
+4 Opening the Design Layout dialog box=flayout_open_design_layout_dialog>taskwin
+4 Returning to the Design Layout dialog box=flayout_return_to_design_layout_dialog>taskwin
+4 Choosing a layout style=flayout_choose_layout_style>taskwin
+4 Selecting fields to display=flayout_select_fields>taskwin
+4 Displaying fields in columns or rows=flayout_single_table_columns_rows>taskwin
+4 Hiding or showing field labels=flayout_hide_show_field_labels>taskwin
+4 Choosing a style sheet=flayout_choose_style_sheet>taskwin
+3 Multi-table layouts
+4 Displaying objects in columns or rows=flayout_multi_table_columns_rows>taskwin
+4 Showing detail tables=flayout_show_detail_tables>taskwin
+4 Placing master records before detail tables=flayout_master_before_detail>taskwin
+4 Displaying several master records at the same time=flayout_display_several_masters>taskwin
+4 Nesting detail records in a form=flayout_nest_detail_form>taskwin
+4 Nesting detail records in a report=flayout_nest_detail_report>taskwin
+2 Using the design window
+3 About the design window=fdeswin_about_design_window
+3 Opening a design document=fdeswin_open_design_document>taskwin
+3 Using design window toolbars
+4 About design window Toolbars=fdeswin_about_design_toolbars
+4 Changing a tool's properties=fdeswin_change_tool_properties>taskwin
+4 Copying page properties to the Toolbar=fdeswin_copy_page_properties_to_toolbar>taskwin
+3 Rulers
+4 Using the design window rulers=fdeswin_about_rulers
+4 About the expanded ruler=fdeswin_about_expanded_ruler
+4 Displaying the expanded ruler=fdeswin_display_expanded_ruler>taskwin
+4 Placing tabs=fdeswin_place_tabs>taskwin
+4 Moving or deleting tabs=fdeswin_move_delete_tabs>taskwin
+4 Adding indentations=fdeswin_add_indentations>taskwin
+4 Changing margins=fdeswin_change_margins>taskwin
+4 Changing text alignment=fdeswin_change_text_alignment>taskwin
+4 Changing vertical line spacing=fdeswin_change_vertical_line_spacing>taskwin
+3 Grid
+4 Using the grid=fdeswin_about_grid
+4 Displaying the grid=fdeswin_show_grid>taskwin
+4 Aligning design objects at the grid line (snap to grid)=fdeswin_snap_to_grid>taskwin
+3 Zooming
+4 Zooming forms and reports=fdeswin_zoom>taskwin
+3 Setting designer preferences
+4 About designer preferences=fdeswin_about_design_preferences
+4 Select From Inside=fdeswin_select_from_inside
+4 Frame Objects=fdeswin_frame_objects
+4 Flicker-Free Draw=fdeswin_flicker_free_draw
+4 Outlined Move/Resize=fdeswin_outlined_move_resize
+4 Setting designer preferences=fdeswin_set_design_preferences>taskwin
+3 Style sheets
+4 About style sheets=fdeswin_style_sheet_about
+4 Creating or saving a style sheet=fdeswin_create_style_sheet>taskwin
+4 Applying a style sheet=fdeswin_apply_style_sheet>taskwin
+4 Changing to a different style sheet=fdeswin_change_style_sheet>taskwin
+4 Specifying a default style sheet=fdeswin_default_style_sheet>taskwin
+4 Accessing a style sheet from any working directory=fdeswin_style_sheet_any_directory>taskwin
+3 Saving a design
+4 Saving a form or report design=fdeswin_save_design>taskwin
+3 Setting default design window preferences
+4 Setting form and report default preferences=fdeswin_set_desktop_properties>taskwin
+2 Design objects and their properties
+3 Boxes, ellipses, and lines
+4 About boxes, ellipses, and lines=fobjprop_drawing_objects_about
+4 Using boxes and ellipses to keep design objects together=fobjprop_drawing_objects_keep_together
+4 Box
+5 About boxes=fobjprop_box_about
+5 Placing a box on a form or report=fobjprop_box_place>taskwin
+5 Box properties
+6 General page=idh_prop_general_1
+6 Pattern page=idh_prop_pattern_1
+6 Frame page=idh_prop_frame_1
+6 Design page=idh_prop_design_1
+6 Run Time page (forms)=idh_prop_runtimef_2
+6 Run Time page (reports)=idh_prop_runtimer_1
+4 Ellipse
+5 About ellipses=fobjprop_ellipse_about
+5 Placing an ellipse on a form or report=fobjprop_ellipse_place>taskwin
+5 Ellipse properties
+6 General page=idh_prop_general_1
+6 Line style page=idh_prop_style_2
+6 Pattern page=idh_prop_pattern_1
+6 Design page=idh_prop_design_1
+6 Run Time page (forms)=idh_prop_runtimef_2
+6 Run Time page (reports)=idh_prop_runtimer_1
+4 Line
+5 About lines=fobjprop_line_about
+5 Controlling pushed objects with lines=fobjprop_line_pushed_objects
+5 Placing a line on a form or report=fobjprop_line_place>taskwin
+5 Creating a curved line=fobjprop_line_curved>taskwin
+5 Adding arrows to straight lines=fobjprop_line_arrows>taskwin
+5 Line properties
+6 General page=idh_prop_general_1
+6 Style page=idh_prop_style_1
+6 Design page=idh_prop_design_1
+6 Run Time page (forms)=idh_prop_runtimef_2
+6 Run Time page (reports)=idh_prop_runtimer_1
+3 Graphic
+4 About graphics=fobjprop_graphic_about
+4 About raster operations=fobjprop_graphic_about_raster_operations
+4 Placing a graphic on a form or report=fobjprop_graphic_place>taskwin
+4 Moving a graphic=fobjprop_graphic_move>taskwin
+4 Placing a graphic on a button=fobjprop_button_graphic>taskwin
+4 Copying a graphic to a file without using Export=fobjprop_graphic_copy_to_file>taskwin
+4 Changing the appearance of a graphic object
+5 Cropping a graphic=fobjprop_graphic_crop>taskwin
+5 Magnifying the display of a graphic or OLE field=tlook_magnify_graphic_ole>taskwin
+5 Resizing a graphic or OLE object on a report=fobjprop_graphic_OLE_resize_report>taskwin
+5 Example of creating a mask for a graphic=fobjprop_graphic_create_mask>codewin
+4 Scroll bars on graphic objects
+5 About scroll bars in forms=fobjects_about_scrollbars_forms
+5 About scroll bars in reports=fobjects_about_scrollbars_reports
+5 Placing a scroll bar=fobjects_place_scrollbar>taskwin
+5 Changing the width of a scroll bar=fobjects_scrollbar_width>taskwin
+4 Graphic properties
+5 General page=idh_prop_general_2
+5 Magnification page=idh_prop_magnify_1
+5 Raster Operation page=idh_prop_raster_1
+5 Frame page=idh_prop_frame_1
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_2
+5 Run Time page (reports)=idh_prop_runtimer_1
+3 Text
+4 About text=fobjprop_text_about
+4 Placing a text object on a form or report=fobjprop_text_place>taskwin
+4 Changing text in a text object=fobjprop_text_change>taskwin
+4 Inserting fields in text=fobjprop_text_insert_fields>taskwin
+4 Example of inserting fields in a text object=fobjprop_text_insert_fields_example>codewin
+4 Wrapping memo field text in a Form Window=dspecial_to_wrap_memo_in_form
+4 Changing the appearance of text
+5 Selecting text to change properties=fobjprop_text_select>taskwin
+5 Specifying a font and typestyle for text=fobjprop_text_font_typestyle>taskwin
+5 Aligning text=fobjprop_text_align>taskwin
+5 Specifying the line spacing for text=fobjprop_text_line_spacing>taskwin
+5 Using word wrap=fobjprop_text_word_wrap>taskwin
+5 Specifying how a text object grows=fobjprop_text_how_grows>taskwin
+4 Scroll bars on text objects
+5 About scroll bars in forms=fobjects_about_scrollbars_forms
+5 About scroll bars in reports=fobjects_about_scrollbars_reports
+5 Placing a scroll bar=fobjects_place_scrollbar>taskwin
+5 Changing the width of a scroll bar=fobjects_scrollbar_width>taskwin
+4 Text properties
+5 General page=idh_prop_general_5
+5 Pattern page=idh_prop_pattern_1
+5 Frame page=idh_prop_frame_1
+5 Font page=idh_prop_font_1
+5 Text page=idh_prop_text_1
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_2
+5 Run Time page (reports)=idh_prop_runtimer_2
+3 OLE
+4 About OLE=eole_about_ole
+4 About embedded OLE objects=eole_about_embedded_objects
+4 About linked OLE objects=eole_about_linked_objects
+4 Placing an OLE object on a form or report=eole_place_ole_object>taskwin
+4 Embedding objects in OLE fields and design objects
+5 Embedding a new OLE object=eole_to_embed_new_ole>taskwin
+5 Embedding a copy of a file as an OLE object=eole_to_embed_copy_as_ole>taskwin
+5 Embedding part of a file as an OLE object=eole_to_embed_part_as_ole>taskwin
+4 Inserting linked OLE objects
+5 Inserting an OLE object linked to a file=eole_to_insert_ole_linked_to_file>taskwin
+5 Inserting an OLE object linked to part of a file=eole_to_insert_ole_linked_to_part>taskwin
+4 Updating linked OLE objects
+5 About updating linked OLE objects=eole_about_updating_linked_ole_objects
+5 Changing the way Paradox updates linked objects=eole_to_change_the_way_paradox_updates_linked_objects>taskwin
+5 Manually updating a linked object=eole_to_manually_update_linked_object>taskwin
+4 Manipulating objects in OLE fields and design objects
+5 About manipulating OLE objects=eole_about_manipulating_ole_objects
+5 About OLE 1.0 versus OLE 2.0=eole_about_ole_1_versus_2
+5 Manipulating the contents of an OLE field=eole_to_manipulate_contents_of_ole_field>taskwin
+5 Manipulating the contents of an OLE design object=eole_to_manipulate_contents_of_ole_design_object>taskwin
+4 Using Paradox as an OLE 2.0 server
+5 About using Paradox as an OLE 2.0 server=eole_about_using_paradox_as_ole
+5 Embedding a Paradox table using the Clipboard=eole_to_embed_paradox_table_using_clipboard>taskwin
+5 Embedding a Paradox table using Insert Object=eole_to_embed_paradox_table_using_insert_object>taskwin
+4 Scroll bars on OLE objects
+5 About scroll bars in forms=fobjects_about_scrollbars_forms
+5 About scroll bars in reports=fobjects_about_scrollbars_reports
+5 Placing a scroll bar=fobjects_place_scrollbar>taskwin
+5 Changing the width of a scroll bar=fobjects_scrollbar_width>taskwin
+4 OLE properties
+5 General page=idh_prop_general_3
+5 Magnification page=idh_prop_magnify_1
+5 Frame page=idh_prop_frame_1
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_2
+5 Run Time page (reports)=idh_prop_runtimer_1
+3 OLE and native Windows controls
+4 About OLE and native Windows controls=fobjprop_ocx_about
+4 About OLE control event types=fobjprop_oxc_about_event_types
+4 About ambient properties=fobjprop_ocx_about_ambient
+4 Displaying the Object Toolbar=fobjprop_ocx_access_toolbar>taskwin
+4 Placing a control on a form=fobjprop_ocx_place>taskwin
+4 Registering an OLE control=fobjprop_ocx_register>taskwin
+4 Adding a control to the Toolbar=fobjprop_ocx_add_toolbar_control>taskwin
+4 Removing a control from the Toolbar=fobjprop_ocx_remove_toolbar_control>taskwin
+4 Adding a page to the Object Toolbar=fobjprop_ocx_add_toolbar_page>taskwin
+4 Editing events on an OLE control=fobjprop_ocx_associate_method>taskwin
+4 OCX properties
+5 General page=idh_prop_general_4
+5 Frame page=idh_prop_frame_1
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_2
+3 Button
+4 About buttons=fobjprop_button_about
+4 Placing a button on a form=fobjprop_button_place>taskwin
+4 Selecting a button type=fobjprop_button_type>taskwin
+4 Selecting a button style=fobjprop_button_style>taskwin
+4 Placing a label on a button=fobjprop_button_label>taskwin
+4 Placing a graphic on a button=fobjprop_button_graphic>taskwin
+4 Editing button events and methods=fobjprop_button_attach_method>taskwin
+4 Button properties
+5 General page=idh_prop_general_7
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_4
+3 Field
+4 About field objects=fobjprop_field_about
+4 Placing a field on a form or report=fobjprop_field_place>taskwin
+4 Specifying the functionality of a field object
+5 Labeled and Unlabeled field objects=fobjprop_field_labeled
+5 Drop-Down Edit field objects=fobjprop_field_dropdown
+5 List field objects=fobjprop_field_list
+5 Radio Button field objects=fobjprop_field_radio
+5 Check Box field objects=fobjprop_field_checkbox
+5 Specifying a field object's display type=fobjprop_field_specify_display_type>taskwin
+5 Changing the values for a drop-down edit, list, radio button, or check box field object=fobjprop_field_change_values>taskwin
+5 Changing a label without changing the field value=fobjprop_field_change_label>taskwin
+4 Special fields
+5 About special fields=fobjprop_field_about_special
+5 Placing a special field on a form or report=fobjprop_field_place_special>taskwin
+4 Formatting data
+5 About pictures=tcreate_about_pictures
+5 Aligning text=fobjprop_text_align>taskwin
+5 Specifying the line spacing for text=fobjprop_text_line_spacing>taskwin
+5 Using word wrap=fobjprop_text_word_wrap>taskwin
+5 Specifying the format for numeric data=tlook_specify_numeric_format>taskwin
+4 Scroll bars on field objects
+5 About scroll bars in forms=fobjects_about_scrollbars_forms
+5 About scroll bars in reports=fobjects_about_scrollbars_reports
+5 Placing a scroll bar=fobjects_place_scrollbar>taskwin
+5 Changing the width of a scroll bar=fobjects_scrollbar_width>taskwin
+4 Calculated fields
+5 About calculated fields=fobjprop_field_calc_about
+5 Referring to fields and field objects=fobjprop_field_calc_field_references
+5 Calculated fields and summary fields=fobjprop_field_calc_vs_summary
+5 What calculated fields can include=fobjprop_field_calc_include
+5 Creating calculated fields
+6 Creating a calculated field=fobjprop_field_calc_create>taskwin
+6 Using a field name in a calculation=fobjprop_field_calc_field_name>taskwin
+6 Calculating on a field that has a punctuated name=fobjprop_field_calc_field_name_punctuation>taskwin
+6 Referencing another calculated field on the same form or report=fobjprop_field_calc_reference_same>taskwin
+6 Updating calculated fields when opening a form or report with a different table=fobjprop_open_form_different_table>taskwin
+6 Aligning a calculated field with data in a column of a table frame in a report=fobjprop_field_calc_align>taskwin
+6 Examples
+7 Example of calculating with a summary operator=fobjprop_field_calc_summary_example>codewin
+7 Example of calculating with a field and a constant=fobjprop_field_calc_constant_example>codewin
+7 Example of calculating with an alpha string=fobjprop_field_calc_alpha_example>codewin
+7 Example of using conditional logic and ObjectPAL methods=fobjprop_field_calc_conditional>codewin
+5 Calculated fields and printing
+6 Controlling page numbering with a calculated field=fobjprop_field_calc_page_numbering>taskwin
+6 Using a calculated field to print only fields containing data=fobjprop_field_calc_print_data>taskwin
+6 Using a calculated field to capitalize fields when printing=fobjprop_field_calc_capitalize>taskwin
+6 Printing in the page footer only on the last page=fobjprop_field_calc_last_footer>taskwin
+6 Printing a calculation formula=fobjprop_field_calc_print_formula>taskwin
+5 Number methods in calculated fields
+6 About using number methods in calculated fields=fobjprop_field_calc_about_numeric_procedures
+6 Rounding a value to a specific number of decimal places=fobjprop_field_calc_round_decimal>taskwin
+6 Rounding a value to the nearest whole number=fobjprop_field_calc_round_whole>taskwin
+6 Formatting a decimal value as a whole number=fobjprop_field_calc_format_whole>taskwin
+6 Deriving a fractional part of a numeric value=fobjprop_field_calc_fractional>taskwin
+6 Finding the higher of two values=fobjprop_field_calc_higher_of_two>taskwin
+6 Ensuring numeric answers from calculations on numeric values=fobjprop_field_calc_ensure_integers>taskwin
+5 Date and time calculations
+6 Finding the difference, in days, between two dates=fobjprop_field_calc_subtract_dates>taskwin
+6 Finding the difference, in hours and minutes, between two times=fobjprop_field_calc_subtract_times>taskwin
+6 Calculating a date based on the current date=fobjprop_field_calc_current_date>taskwin
+4 Summary fields
+5 About summary fields=fobjprop_field_summaries_about
+5 About summary scope=fobjprop_field_summaries_scope
+5 About summary scope on single-table reports=fobjprop_field_summaries_scope_reports_single
+5 About summary scope on multi-table reports=fobjprop_field_summaries_scope_reports_multi
+5 Defining a summary=fobjprop_field_summaries_define>taskwin
+5 Returning a summary value relative to a particular page=fobjprop_field_summaries_return_page>taskwin
+5 Examples
+6 Example of creating an Avg summary on a single-table form=fobjprop_field_summaries_creating_avg_example>codewin
+6 Example of defining the summary scope of a multi-table form=fobjprop_field_summaries_multi_table_scope_example>codewin
+6 Example of creating a count summary in a report=fobjprop_field_summaries_count_example>codewin
+4 Memo fields
+5 Displaying complete contents of a memo field=fobjprop_field_complete_memo>taskwin
+4 Filtering a field
+5 About filters=tfilter_about_filters
+5 Filtering a field=tfilter_filter_field>taskwin
+5 Filtering a table=tfilter_filter_table>taskwin
+5 Removing a filter=tfilter_remove_filter>taskwin
+4 Printing options
+5 Deleting an empty field or record when printing a report=fobjprop_field_delete_empty>taskwin
+5 Setting printing preferences for group headers=frdesign_band_group_printing>taskwin
+5 Setting printing preferences for objects in group headers=frdesign_band_group_printing_objects>taskwin
+4 Protecting and hiding data in a field
+5 Making a field read only=fobjprop_field_read_only>taskwin
+5 Hiding a field's contents=fobjprop_field_hide_contents>taskwin
+4 Field properties
+5 General page=idh_prop_general_6
+5 Pattern page=idh_prop_pattern_1
+5 Frame page=idh_prop_frame_1
+5 Font page=idh_prop_font_1
+5 Text page=idh_prop_text_1
+5 Format page=idh_prop_format_1
+5 Picture page=idh_prop_picture_1
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_4
+5 Run Time page (reports)=idh_prop_runtimer_1
+3 Table/Table frame
+4 About table frames=fobjprop_table_about
+4 Placing a table frame on a form or report=fobjprop_table_place>taskwin
+4 Defining a table frame=fobjprop_table_define>taskwin
+4 Deleting an empty field or record when printing a report=fobjprop_field_delete_empty>taskwin
+4 Setting printing preferences for group headers=frdesign_band_group_printing>taskwin
+4 Setting printing preferences for objects in group headers=frdesign_band_group_printing_objects>taskwin
+4 Repeating a table header in a report=fobjprop_table_repeat_header>taskwin
+4 Showing all records and columns=fobjprop_table_show_all>taskwin
+4 Modifying a table frame
+5 About modifying table frames=fobjprop_table_modify_about
+5 Changing the appearance of items in a table frame=fobjprop_table_modify_appearance>taskwin
+5 Specifying grid style for a table frame=fobjprop_table_change_grid>taskwin
+5 Rearranging the parts of a table frame=fobjprop_table_modify_rearrange>taskwin
+5 Adding data and design objects to a table frame=fobjprop_table_modify_add_objects>taskwin
+5 Combining (stack) fields in a column=fobjprop_field_stack>taskwin
+5 Example of combining fields in a column of a table frame=fobjprop_field_stack_example>codewin
+5 Example of placing design objects in a table frame=fobjprop_table_place_objects>codewin
+4 Scroll bars on table frames
+5 About scroll bars in forms=fobjects_about_scrollbars_forms
+5 About scroll bars in reports=fobjects_about_scrollbars_reports
+5 Placing a scroll bar=fobjects_place_scrollbar>taskwin
+5 Changing the width of a scroll bar=fobjects_scrollbar_width>taskwin
+4 Table properties
+5 General page=idh_prop_general_8
+5 General page (multiple objects in a table)=idh_prop_general_17
+5 Pattern page=idh_prop_pattern_1
+5 Grid page=idh_prop_grid_2
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_2
+5 Run Time page (reports)=idh_prop_runtimer_3
+3 Multi-record object
+4 About multi-record objects=fobjprop_mro_about
+4 Placing a multi-record object on a form or report=fobjprop_mro_place>taskwin
+4 Defining a multi-record object=fobjprop_mro_define>taskwin
+4 Specifying the record layout of a multi-record object=fobjprop_mro_record_layout>taskwin
+4 Specifying the field layout of a multi-record object=fobjprop_mro_field_layout>taskwin
+4 Resizing records in a multi-record object
+5 Resizing records in a multi-record object=fobjprop_mro_resize_records>taskwin
+5 Expanding or contracting records in a multi-record object=fobjprop_mro_expand_records>taskwin
+5 Showing all records and columns=fobjprop_table_show_all>taskwin
+5 Example of expanding or contracting records in a multi-record object=fobjprop_mro_expand_records_example>codewin
+4 Scroll bars on multi-record objects
+5 About scroll bars in forms=fobjects_about_scrollbars_forms
+5 About scroll bars in reports=fobjects_about_scrollbars_reports
+5 Placing a scroll bar=fobjects_place_scrollbar>taskwin
+5 Changing the width of a scroll bar=fobjects_scrollbar_width>taskwin
+4 Printing options
+5 Deleting an empty field or record when printing a report=fobjprop_field_delete_empty>taskwin
+5 Setting printing preferences for group headers=frdesign_band_group_printing>taskwin
+5 Setting printing preferences for objects in group headers=frdesign_band_group_printing_objects>taskwin
+4 Multi-record object properties
+5 Multi-record object
+6 General page=idh_prop_general_2
+5 General page (multiple objects in an MRO)=idh_prop_general_17
+6 Record layout page (forms)=idh_prop_layout_1
+6 Record layout page (reports)=idh_prop_layout_2
+6 Pattern page=idh_prop_pattern_1
+6 Frame page=idh_prop_frame_1
+6 Design page=idh_prop_design_1
+6 Run Time page (forms)=idh_prop_runtimef_2
+6 Run Time (reports)=idh_prop_runtimer_3
+5 Record (in MRO)
+6 General page=idh_prop_general_1
+6 Pattern page=idh_prop_pattern_1
+6 Frame page=idh_prop_frame_1
+6 Design page=idh_prop_design_1
+6 Run Time page (forms)=idh_prop_runtimef_2
+6 Run Time page (reports)=idh_prop_runtimer_1
+3 Notebook
+4 About notebooks=fobjprop_notebook_about
+4 Placing a notebook on a form=fobjprop_notebook_place>taskwin
+4 Selecting a notebook or a notebook page=fobjprop_notebook_select>taskwin
+4 Placing an object on a notebook page=fobjprop_notebook_place_object>taskwin
+4 Navigating notebook pages=fobjprop_notebook_navigate>taskwin
+4 Example of a form that uses a notebook object=fobjprop_notebook_about_example>codewin
+4 Adding and removing notebook pages
+5 Adding a page to a notebook=fobjprop_notebook_add_pages>taskwin
+4 Rotating notebook pages=fobjprop_notebook_rotate_pages>taskwin
+5 Deleting a notebook page=fobjprop_notebook_delete_page>taskwin
+4 Changing the appearance of a notebook
+5 Moving or resizing a notebook=fobjprop_notebook_move>taskwin
+5 Changing the tab height on a notebook=fobjprop_notebook_tab_height>taskwin
+5 Placing a scroll bar on a notebook=fobjprop_notebook_scroll>taskwin
+5 Copying and pasting a notebook page=fobjprop_notebook_copy_page>taskwin
+4 Notebook properties
+5 Notebook
+6 General page=idh_prop_general_9
+6 Design page=idh_prop_design_1
+6 Run Time page=idh_prop_runtimef_2
+5 Notebook page
+6 General page=idh_prop_general_1
+6 Inactive Color page=idh_prop_inactive_1
+6 Design page=idh_prop_design_1
+6 Run Time page=idh_prop_runtimef_2
+3 Field Palette
+4 Using the Field Palette=fobjprop_Field_Palette
+3 Chart
+4 About charts=fchart_about
+4 Placing a chart on a form or report=fchart_place>taskwin
+4 Chart properties
+5 About chart properties=fchart_about_chart_properties
+5 About chart area properties=fchart_about_chart_area_properties
+5 Changing chart properties=fchart_properties>taskwin
+5 General page=idh_prop_general_1
+5 Frame page=idh_prop_frame_1
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_2
+5 Run Time page (reports)=idh_prop_runtimer_1
+3 Crosstab
+4 About crosstabs=fcrosstb_crosstab_about
+4 Placing a crosstab on a form or report=fcrosstb_place>taskwin
+4 Crosstab properties
+5 Changing crosstab properties=fcrosstb_properties>taskwin
+5 General page=idh_prop_general_2
+5 Grid page=idh_prop_grid_2
+5 Design page=idh_prop_design_1
+5 Run Time page (forms)=idh_prop_runtimef_2
+5 Run Time page (reports)=idh_prop_runtimer_1
+2 Using design objects in forms and reports
+3 About design objects=fobjects_about_design_objects
+3 Selecting design objects
+4 Selecting a design object=fobjects_select_object
+4 Making a design object selectable or unselectable=fobjects_make_selectable
+3 Placing, grouping, and stacking design objects
+4 Placing a design object on a form or report=fobjects_place_object
+4 Duplicating a design object=fobjects_duplicate_object
+4 Grouping design objects=fobjects_group_objects
+4 Stacking design objects=fobjects_stack_objects>taskwin
+3 Specifying how to view design objects
+4 Displaying frames for design objects=fobjects_display_object_frames>taskwin
+4 Displaying outlines for design objects while moving or resizing=fobjects_display_object_outlines>taskwin
+4 Displaying design object size and position on the status bar=fobjects_display_object_size_position>taskwin
+3 Moving and aligning design objects
+4 Moving design objects=fobjects_move_objects
+4 Aligning design objects=fobjects_align_objects>taskwin
+4 Aligning design objects at the grid line (snap to grid)=fdeswin_snap_to_grid>taskwin
+4 Adjusting the spacing of design objects=fobjects_adjust_spacing>taskwin
+4 Pinning design objects in place on a form or report=fobjects_pin_objects>taskwin
+3 Sizing design objects
+4 Changing the size and shape of a design object=fobjects_adjust_object_size>taskwin
+4 Adjusting the size and spacing of multiple design objects=fobjects_adjust_object_size_multiple>taskwin
+4 Magnifying the display of a graphic or OLE field=tlook_magnify_graphic_ole>taskwin
+4 Sizing a field object=fobjects_size_field_object>taskwin
+3 Containing design objects
+4 About contained design objects=fobjects_about_contained
+4 Creating a contained design object=fobjects_create_contained>taskwin
+4 Selecting a contained design object=fobjects_select_contained>taskwin
+4 Breaking a container relationship=fobjects_break_container>taskwin
+4 Deleting a contained design object=fobjects_delete_contained_object>taskwin
+4 Deleting a container but not its contained objects=fobjects_delete_container_only>taskwin
+3 Naming design objects
+4 Object Name property=ps_mod_name
+4 Changing the name of a design object=fobjects_change_object_name>taskwin
+3 Placing scroll bars on design objects
+4 About scroll bars in forms=fobjects_about_scrollbars_forms
+4 About scroll bars in reports=fobjects_about_scrollbars_reports
+4 Placing a scroll bar=fobjects_place_scrollbar>taskwin
+4 Changing the width of a scroll bar=fobjects_scrollbar_width>taskwin
+3 Changing design object properties
+4 Changing a tool's properties=fdeswin_change_tool_properties>taskwin
+4 Changing properties using the Object Explorer=fobjects_properties_object_tree>taskwin
+4 Changing penetrating properties=fobjects_change_penetrating_properties>taskwin
+4 Changing penetrating properties of all objects=fobjects_change_penetrating_properties_all>taskwin
+3 Attaching methods to design objects
+4 Adding a method to an object with the Object Explorer=fobjects_attach_method>taskwin
+2 Designing forms
+3 About designing forms=ffdesign_about
+3 Creating a form
+4 About creating forms and reports=fabout_about_forms_reports
+4 Creating a form using the experts=fabout_create_with_expert>taskwin
+4 Creating a blank form=ffdesign_blank>taskwin
+4 Creating a form using a data model=fabout_create_data_model>taskwin
+4 Modifying an existing form=ffdesign_modify_existing>taskwin
+4 Example of copying a form=bbasics_copying_example_form
+3 Page size and layout
+4 About page layout for forms=ffdesign_page_layout_form_about
+4 Changing the page layout for a form=ffdesign_page_layout_change>taskwin
+4 Specifying a default on-screen size=ffdesign_page_layout_default_screen_size>taskwin
+3 Multi-page forms
+4 About multi-page forms=ffdesign_multi_page_about
+4 Adding a form page=ffdesign_multi_page_add>taskwin
+4 Cutting, copying, or pasting a form page=ffdesign_multi_page_copy>taskwin
+4 Deleting a form page=ffdesign_multi_page_delete>taskwin
+4 Rotating form pages=ffdesign_multi_page_rotate>taskwin
+4 Tiling form pages=ffdesign_multi_page_tile>taskwin
+4 Moving among form pages=ffdesign_multi_page_navigate>taskwin
+3 Specifying the form window style
+4 About forms as windows=ffdesign_windows
+4 About forms as dialog boxes=ffdesign_dialog_boxes
+4 Specifying form window style=ffdesign_window_style>taskwin
+3 Tab order
+4 About tab order of design objects on a form=ffdesign_tab_about
+4 Changing the design window tab order=ffdesign_tab_design>taskwin
+4 Changing run-time tab order=ffdesign_tab_runtime>taskwin
+3 Viewing (running) a form
+4 Running a form=ffdesign_run>taskwin
+4 Viewing a form with a different table=ffdesign_view_different_table>taskwin
+3 Designing a form from a report
+4 About forms based on reports=ffdesign_from_report_about
+4 Designing a form from a report=ffdesign_from_report>taskwin
+3 Delivering a form
+4 About delivering forms=ffdesign_deliver_about
+4 Delivering a form=ffdesign_deliver>taskwin
+3 Printing a form
+4 Printing a form's design=ffdesign_print_design>taskwin
+4 Printing a form's records=ffdesign_print_records>taskwin
+3 Form and page properties
+4 Changing a form's properties=ffdesign_properties>taskwin
+4 Changing a form page's properties=ffdesign_properties_page>taskwin
+4 Form properties General page=idh_prop_general_13
+4 Form properties Pattern page=idh_prop_pattern_1
+4 Page properties General page=idh_prop_general_1
+4 Page properties Pattern page=idh_prop_pattern_1
+4 Page properties Design page=idh_prop_design_1
+4 Page properties Run Time page=idh_prop_runtimef_2
+2 Using forms
+3 About running forms=ffuse_about
+3 Running an existing form=ffuse_existing>taskwin
+3 Moving around a form
+4 Table and form navigation buttons=tview_table_navigation_buttons
+4 Moving among fields on a form=ffuse_navigate_fields>taskwin
+4 Moving among records on a form=ffuse_navigate_records>taskwin
+4 Moving among table objects in a multi-table form=ffuse_navigate_table_objects>taskwin
+4 Moving among form pages=ffdesign_multi_page_navigate>taskwin
+3 Locating records, fields, or values
+4 Locating a record number, field, or field value=dfind_to_locate_record_number>taskwin
+4 Locating and replace values in a field=dfind_to_locate_replace_field_values>taskwin
+3 Entering and editing data
+4 About entering and editing data=denter_about_entering_editing
+4 Editing part of a field=dmodenav_about_field_view
+4 About editing memos and formatted memos=dspecial_about_editing_memos
+4 Wrapping memo field text in a Form window=dspecial_to_wrap_memo_in_form>taskwin
+3 Filtering data
+4 About filters=tfilter_about_filters
+4 Ranges or filters on a quick form=tfilter_ranges_quick_form
+4 Filtering a field=tfilter_filter_field>taskwin
+3 Changing the appearance of the Form window
+4 Zooming forms=fdeswin_zoom>taskwin
+4 Preventing screen flashing=ffuse_flicker>taskwin
+4 Saving Form window settings=ffuse_save_settings>taskwin
+3 The source table
+4 Viewing a form's source table=ffuse_source_table>taskwin
+2 Designing reports and mailing labels
+3 About designing reports=ffdesign_about
+3 Creating a report
+4 About creating forms and reports=fabout_about_forms_reports
+4 Creating a report using the experts=fabout_create_with_expert>taskwin
+4 Creating a blank report=ffdesign_blank>taskwin
+4 Creating a report using a data model=fabout_create_data_model>taskwin
+4 Modifying an existing report=ffdesign_modify_existing>taskwin
+3 Page size and layout
+4 About page layout for reports=ffdesign_page_layout_form_about
+4 Changing the page layout for a report=ffdesign_page_layout_change>taskwin
+3 Bands
+4 About bands=frdesign_band_about
+4 Showing band labels=frdesign_band_show_labels>taskwin
+4 Selecting a band=frdesign_band_select>taskwin
+4 Resizing a band=frdesign_band_resize>taskwin
+4 Deleting a band=frdesign_band_delete>taskwin
+4 Report bands
+5 About report bands=frdesign_band_report_about
+5 Changing the header order=frdesign_band_report_order>taskwin
+4 Page bands
+5 About page bands=frdesign_band_page_about
+5 Suppressing the header or footer on the first page=frdesign_band_page_suppress_first>taskwin
+5 Printing in the page footer only on the last page=fobjprop_field_calc_last_footer>taskwin
+4 Record bands
+5 About record bands=frdesign_band_record_about
+5 Starting page numbers at one when a band is reached=frdesign_band_record_start_at_one>taskwin
+5 Sorting records in a record band=frdesign_band_record_sort>taskwin
+4 Group bands
+5 About group bands=frdesign_band_group_about
+5 Adding a group band=frdesign_band_group_add>taskwin
+5 Defining a group band=frdesign_band_group_define>taskwin
+5 Rearranging group bands=frdesign_band_group_rearrange>taskwin
+5 Grouping by a field value=frdesign_band_group_field>taskwin
+5 Grouping by a number of records=frdesign_band_group_number>taskwin
+5 Grouping by a range
+6 About grouping by a range=frdesign_band_group_range_about
+6 Grouping by a range=frdesign_band_group_range>taskwin
+6 Example of grouping by a range on a numeric field=frdesign_band_group_range_numeric>codewin
+6 Example of grouping by a range on an alpha field=frdesign_band_group_range_alpha>codewin
+5 Layout preferences
+6 Starting page numbers at one when a band is reached=frdesign_band_record_start_at_one>taskwin
+6 Setting printing preferences for group headers=frdesign_band_group_printing>taskwin
+6 Setting printing preferences for objects in group headers=frdesign_band_group_printing_objects>taskwin
+6 Specifying the sort order for a group=frdesign_band_group_sort>taskwin
+6 Suppressing  repeated group values=frdesign_band_group_repeats>taskwin
+3 Page breaks
+4 About the sidebar=frdesign_sidebar_about
+4 Inserting or remove a page break in a report=frdesign_page_insert>taskwin
+3 Expanded and pushed objects
+4 About expanding, contracting, pushing, and pulling of objects in reports=frdesign_expand_about
+4 Controlling pushed objects with lines=fobjprop_line_pushed_objects
+4 Preventing expanding and contracting when running a report=frdesign_expand_fit>taskwin
+4 Pinning design objects at run time=frdesign_expand_pin>taskwin
+4 Example of preventing pushing and pulling=frdesign_expand_pin_example>codewin
+4 Example of invisible lines aligning pushed objects=frdesign_expand_line_example>codewin
+4 Example of a horizontal line pushing objects down=frdesign_expand_horizontal_line_example>codewin
+4 Example of a box pushing or pulling contained objects=frdesign_expand_box_example>codewin
+4 Example of an expanded box and a fixed line pushing or pulling contained objects=frdesign_expand_box_and_line_example>codewin
+4 Example of a container keeping objects together=frdesign_expand_container_example>codewin
+3 Filtering data
+4 About filters=tfilter_about_filters
+4 Filtering a field=tfilter_filter_field>taskwin
+3 Mailing labels
+4 About multi-record objects=fobjprop_mro_about
+4 Creating a mailing label report using the experts=fabout_create_with_expert>taskwin
+4 Creating mailing labels using the Report Design window=frdesign_labels_create>taskwin
+3 Merging data into a form letter
+4 Merging data using the Merge Expert=frdesign_merge_expert>taskwin
+3 Designing a form from a report
+4 About reports based on forms=frdesign_from_form_about
+4 Designing a report from a form=frdesign_from_form>taskwin
+3 Delivering a report
+4 About delivering reports=ffdesign_deliver_about
+4 Delivering a report=ffdesign_deliver>taskwin
+3 Changing report and band properties
+4 Changing a report's properties=frdesign_properties>taskwin
+4 Report properties General page=idh_prop_general_14
+4 Report properties Pattern page=idh_prop_pattern_1
+4 Changing a band's properties=frdesign_properties_band>taskwin
+4 Report Band General page=idh_prop_general_11
+4 Report Band Run Time page=idh_prop_runtimer_1
+4 Page Band General page=idh_prop_general_11
+4 Record Band General page=idh_prop_general_11
+4 Record Band Run Time page=idh_prop_runtimer_1
+4 Group Band General page=idh_prop_general_12
+4 Group Band Run Time page=idh_prop_runtimer_1
+2 Printing and previewing reports
+3 Previewing a report=frprint_preview>taskwin
+3 Sizing the Report window to the fit the report's design=frprint_window_size>taskwin
+3 Displaying a custom menu when previewing a report=frprint_custom_menu>taskwin
+3 Printing a report=frprint_print>taskwin
+3 Printing a report's design=frprint_print_design>taskwin
+3 Printing a report when another user is changing the data=frprint_restart_options>taskwin
+3 About printing a report to a file=frprint_to_file_about
+3 Adding a printer for printing to a file=frprint_add_printer>taskwin
+3 Printing to a file=frprint_to_file>taskwin
+3 Writing a report to a text file=frwrite_to_text_file>taskwin
+3 About using a report with a different table=frprint_about_using_different_table
+3 Printing or viewing a report using a different table=frprint_different_table>taskwin
+1 Charts and crosstabs
+2 About charts and crosstabs=fcrosstb_about
+2 Queries behind charts and crosstabs=fcrosstb_queries_behind
+2 Charts
+3 About charts=fchart_about
+3 Chart data types=fchart_datatype
+3 Multi-table charts=fchart_multi_table
+3 Charts of detail tables=fchart_detail_tables
+3 Creating a chart
+4 Placing a chart on a form or report=fchart_place>taskwin
+3 Defining a chart
+4 About y-axis values=fchart_y_axis_about
+4 Defining a chart=fchart_define>taskwin
+4 Defining a series=fchart_series>taskwin
+4 Specifying an additional group field in a 2-D summary chart=fchart_additional_group>taskwin
+3 Modifying a chart
+4 Changing a chart's type=fchart_type>taskwin
+4 Changing a chart's data type=fchart_datatype_change>taskwin
+4 Changing a chart's x-axis=fchart_x_axis_change>taskwin
+4 Changing a chart's y-axis=fchart_y_axis_change>taskwin
+4 Changing a chart's z-axis=fchart_z_axis_change>taskwin
+4 Changing a chart's title=fchart_title>taskwin
+4 Changing a chart's background=fchart_background>taskwin
+4 Removing fields from a chart=fchart_remove_fields>taskwin
+4 Controlling the number of groups (series) a 2-D summary chart displays=fchart_number_of_groups>taskwin
+4 Changing the order of y-value fields on a chart=fchart_change_field_order>taskwin
+3 Changing the appearance of a chart
+4 Changing a chart's fonts=fchart_font_palette>taskwin
+4 Changing a chart's color and transparency=fchart_color_palette>taskwin
+4 Creating custom colors for a chart=fchart_custom_color>taskwin
+3 Chart properties
+4 About chart properties=fchart_about_chart_properties
+4 About chart area properties=fchart_about_chart_area_properties
+4 Changing chart properties=fchart_properties>taskwin
+4 Example of chart areas=fchart_about_chart_properties_example>codewin
+4 General page=idh_prop_general_1
+4 Frame page=idh_prop_frame_1
+4 Design page=idh_prop_design_1
+4 Run Time page (forms)=idh_prop_runtimef_2
+4 Run Time page (reports)=idh_prop_runtimer_1
+2 Crosstabs
+3 About crosstabs=fcrosstb_crosstab_about
+3 Types of crosstabs
+4 One-dimensional crosstabs=fcrosstb_1d
+4 Two-dimensional crosstabs=fcrosstb_2d
+4 Multi-table crosstabs=fcrosstb_multi_table
+4 Crosstabs of detail tables=fcrosstb_detail_tables
+3 Creating a crosstab
+4 Placing a crosstab on a form or report=fcrosstb_place>taskwin
+3 Defining a crosstab
+4 Defining a crosstab=fcrosstb_define>taskwin
+4 Defining the fields of a crosstab=fcrosstb_define_fields>taskwin
+4 Specifying column headings for a crosstab=fcrosstb_column_headings>taskwin
+4 Specifying row headings (categories) for a crosstab=fcrosstb_row_headings>taskwin
+4 Specifying summary fields for a crosstab=fcrosstb_summary_data>taskwin
+4 Specifying a summary operation for a crosstab=fcrosstb_summary_operation>taskwin
+3 Running a crosstab
+4 Running a crosstab=fcrosstb_run>taskwin
+3 Modifying a crosstab
+4 Changing the appearance of a crosstab=fcrosstb_appearance>taskwin
+4 Changing the size of a crosstab=fcrosstb_size>taskwin
+4 Rearranging category and summary fields on a crosstab=fcrosstb_rearrange>taskwin
+4 Removing a field from a crosstab=fcrosstb_remove_field>taskwin
+3 Saving a crosstab to a table
+4 Saving a crosstab to a table=fcrosstb_save_to_table>taskwin
+3 Crosstab properties
+4 Changing crosstab properties=fcrosstb_properties>taskwin
+4 General page=idh_prop_general_2
+4 Grid page=idh_prop_grid_2
+4 Design page=idh_prop_design_1
+4 Run Time page (forms)=idh_prop_runtimef_2
+4 Run Time page (reports)=idh_prop_runtimer_1
+1 SQL
+2 About SQL=sql_intr
+2 SQL terminology=tsql_term
+2 Visual Query Builder overview=Visual_Query_Builder_overview@Qbuilder.hlp
+2 Accessing SQL data
+3 Preparing to connect to an SQL database=tsql_prep
+3 Connecting to the SQL server=tsql_connect
+3 SQL-enabled Paradox
+4 Changes in the Desktop=SQL_changes
+4 Using Table windows=SQL_tables
+4 Using Form windows=SQL_forms
+4 Changes in QBE=SQL_QBE
+3 Querying SQL data
+4 About querying SQL data=tsql_querying_data
+4 Using QBE to Query SQL Data=SQL_queryQBE
+4 Using pass-through SQL=SQL_queryPASSTHRU
+2 Creating and restructuring SQL tables
+3 Creating an SQL table=tsql_create
+3 Creating indexes on SQL tables=tsql_createindex
+3 Restructuring an SQL table=tsql_restructure
+2 Using the SQL Editor
+3 About the SQL Editor=tsql_editor_about_editor
+3 Opening the SQL Editor=sql_editor_opening>taskwin
+3 Moving around the SQL Editor with the keyboard=tsql_editor_move_around_editor_keyboard>taskwin
+3 Selecting text in the SQL Editor=tsql_editor_select_text>taskwin
+3 Searching for text in the SQL Editor=tsql_editor_search_for_text>taskwin
+3 Running an SQL statement and exiting the SQL Editor=tsql_editor_leave_editor>taskwin
+2 Creating and using SQL statements
+3 About SQL statements=tsql_sql_statements_about
+3 Specifying an alias in the SQL Editor=sql_editor_specifyingalias>taskwin
+3 Entering an SQL statement=sql_editor_enteringsql>taskwin
+3 Running an SQL statement=sql_editor_runningsql>taskwin
+3 Saving an SQL statement=sql_editor_savingsql>taskwin
+3 Viewing the SQL translation of a QBE query=sql_editor_qbetrans>taskwin
+2 Using Local SQL
+3 About Local SQL=tsql_local_intro
+3 Naming conventions=tsql_namingconventions
+3 Data Manipulation Language (DML)
+4 About Data Manipulation Language (DML) statements=tsql_datamanipulation
+4 Live query views=tsql_updateablequeries
+4 Heterogeneous joins=tsql_heterogeneousjoins
+4 DML statements
+5 INSERT=tsql_insert
+5 UPDATE=tsql_update
+5 DELETE=tsql_delete
+5 SELECT=tsql_select
+5 SELECT clauses
+6 FROM clause=tsql_fromclause
+6 WHERE clause=tsql_whereclause
+6 ORDER BY clause=tsql_orderbyclause
+6 GROUP BY clause=tsql_groupbyclause
+6 HAVING clause=tsql_havingclause
+6 UNION clause=tsql_unionclause
+4 Functions and operators
+5 Aggregate functions=tsql_aggregatefunctions
+5 String functions=tsql_stringfunctions
+5 Date functions=tsql_datefunction
+5 Operators=tsql_operators
+4 DML examples
+5 DML examples=tsql_dmlexamples
+3 Data Definition Language (DDL)
+4 About Data Definition Language (DDL) statements=tsql_datadefinition
+4 DDL statements
+5 CREATE TABLE=tsql_createtable
+5 ALTER TABLE=tsql_altertable
+5 DROP TABLE=tsql_droptable
+5 CREATE INDEX=tsql_createindex
+5 DROP INDEX=tsql_dropindex
+5 CREATE VIEW=tsql_createview
+4 DDL examples
+5 DDL examples=tsql_ddlexamples
+1 Creating applications
+2 Creating applications using the Application Framework=frame_Application_Framework_Contents@frame.hlp
+1 General reference
+2 Glossary=glossary
+2 Keyboard shortcuts
+3 About keyboard commands=idh_keyb_intr
+3 General shortcuts
+4 Menu command keys=keyb_menu
+4 Application access keys=keyb_appl
+4 Control menu keys=keyb_cont
+4 Help system keys=keyb_help
+4 Dialog box keys=keyb_dial
+4 Keys in the Editor and Debugger windows=keyb_keyob
+3 Shortcuts in tables and forms
+4 Navigation and selection keys=keyb_padcombo
+4 Table operation shortcuts=keyb_tablop
+4 Form window shortcuts=keyb_desnop
+4 Edit mode keys=keyb_edit
+4 Memo View keys=keyb_memo
+3 Function key actions
+4 Function keys in tables=keyb_funckeytb
+4 Function keys when viewing data in Form windows=keyb_funckeyfmview
+4 Function keys in Form Design windows=keyb_funckeyfmdesign
+4 Function keys in queries=keyb_funckeyqu
+3 Special procedures
+4 Rotating columns in a table=keyb_rota
+4 Selecting multiple fields=keyb_multsel
+4 Super Tab operations=keyb_supertab
+2 Answers to common questions
+3 What comparison operators are allowed in expression indexes on dBASE tables?=banswers_compatibility_with_dbase
+3 What functions are allowed in expression indexes on dBASE tables?=banswers_compatibility_with_dbase_functions
+3 Creating a maintained index for a dBASE III Plus table=banswers_compatibility_with_dbase_indexes
+2 Using command-line options
+3 Command-line options=bconfig_commandline
+2 Paradox add-ins
+3 About Paradox add-ins=eaddins_about
+3 To register a Paradox add-in=eaddins_toRegister>taskwin
+3 To remove a registered Paradox add-in=eaddins_toUnRegister>taskwin
+2 International topics
+3 International issues=bconfig_international_issues
+3 Preparation and assumptions=bconfig_preparation_assumptions
+3 Sorting conventions=bconfig_sorting_conventions
+3 Character set issues=bconfig_character_set_issues
+3 Working with tables using different language drivers=bconfig_different_language_drivers
+3 Data formats=bconfig_data_formats
+3 Internal data conversion=bconfig_internal_data_conversion
+3 Preventing character conversion=bconfig_prevent_character_conversion>taskwin
+3 Changing the default language drivers=bconfig_to_change_default_language_driver>taskwin
+1 Corel Paradox HTML publishing and Internet tools
+2 Corel Paradox HTML publishing and Internet tools=!EF("pdxinet.hlp")
+1 ObjectPAL Reference
+2 ObjectPAL Reference=!EF("opal.hlp")

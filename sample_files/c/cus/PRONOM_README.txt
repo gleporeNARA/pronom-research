@@ -1,0 +1,9 @@
+Summary
+Name	AutoCAD Custom Dictionary
+Version	 
+Other names	 
+Identifiers	PUID:  x-fmt/38
+
+https://www.nationalarchives.gov.uk/PRONOM/Format/proFormatSearch.aspx?status=detailReport&id=69
+
+NOTE: ALL CUSTOM DICTIONARY FILES ARE PLAIN TEXT WITH A LIST OF WORDS, ONE PER LINE. NO WAY TO CREATE A SIGNATURE. HOWEVER, IT IS POSSIBLE TO CREATE A SIGNATURE THAT FITS THE DEFAULT CUSTOM DICTIONARY, SINCE THEY ALL START WITH THE SAME WORDS. YOUR CALL.
