@@ -38,6 +38,11 @@
 # 3Dfx Interactive Texture Utility File (3df)
 0	string	3df\ v\x31	3Dfx Interactive Texture Utility File
 
+# 3D Studio Max ASCII Export
+0	string	*3DSMAX_ASCIIEXPORT	3D Studio Max ASCII Export
+0	string	\xFE\xFF\x00\x2A\x00\x33\x00\x44\x00\x53\x00\x4D\x00\x41\x00\x58\x00\x5F\x00\x41\x00\x53\x00\x43\x00\x49\x00\x49\x00\x45\x00\x58\x00\x50\x00\x4F\x00\x52\x00\x54	3D Studio Max ASCII Export
+0	string	\xFF\xFE\x2A\x00\x33\x00\x44\x00\x53\x00\x4D\x00\x41\x00\x58\x00\x5F\x00\x41\x00\x53\x00\x43\x00\x49\x00\x49\x00\x45\x00\x58\x00\x50\x00\x4F\x00\x52\x00\x54	3D Studio Max ASCII Export
+
 # A. M. Composer 1.2 (amc)
 0	string	AMC\ V1.2	A. M. Composer 1.2
 
@@ -182,6 +187,10 @@
 
 # Allegro Packfile Uncompressed (dat2)
 0	string	slh.	Allegro Packfile Uncompressed
+
+# Alsa Modular Synth Patch
+0	string	Module
+>0	search/200	FSlider	Alsa Modular Synth Patch
 
 # Altium Designer Installation File (ins2)
 0	string	ClientInsFile	Altium Designer Installation File
@@ -351,11 +360,62 @@
 # Auto FX PhotoGraphic Edges Image (afx)
 0	string	=\x88@GY\x0c\x0b\x1b\x0b	Auto FX PhotoGraphic Edges Image
 
+# AutoCAD Batch Plot (bp)
+0	string	AutoCAD\ Extended\ Batch\ Plot\ List\ File	AutoCAD Batch Plot
+
+# AutoCAD Batch Plot, 2000-2005 (bp2)
+0	string	AutoCAD\ 2000\ Batch\ Plot\ List\ File	AutoCAD Batch Plot, 2000-2005
+
+# AutoCAD Block Attribute Template (blk)
+0	string	\x01\x00\x00\x00
+>5	string	\x00\xFF\xFF\x01\x00\x0E\x00CEattBlockInfo	AutoCAD Block Attribute Template
+0	string	\x00\x01\x00\x00\x00\xFF\xFF\xFF\xFF\x01\x00\x00\x00\x00\x00\x00\x00\x0C\x02\x00\x00\x00
+>22	string	\x3dAcDx	AutoCAD Block Attribute Template
+
+# AutoCAD dbConnect Query Set (dbq)
+0	string	\x0A\x00\x00\x00DBCNC\ R15|\x0D\x00\x00\x00QUERYSET\ R15|	AutoCAD dbConnect Query Set
+
+# AutoCAD dbConnect Template Set (dbt)
+0	string	\x0A\x00\x00\x00DBCNC\ R15|\x0C\x00\x00\x00TMPLSET\ R15|\x0B\x00\x00\x00LNTSET	AutoCAD dbConnect Template Set
+
+# AutoCAD Default Custom Dictionary (cus)
+0	string	ACAD\x0D\x0AACIS\x0D\x0AAutoCAD\x0D	AutoCAD Default Custom Dictionary
+
+# AutoCAD External Database Configuration File
+0	string	\xFF\xFE[\x00o\x00l\x00e\x00d\x00b\x00]\x00\x0D\x00\x0A\x00;\x00\ \x00E\x00v\x00e\x00r\x00y\x00t\x00h\x00i\x00	AutoCAD External Database Configuration File
+
 # AutoCAD Fast load AutoLISP (fas)
 0	string	=\x0d\x0a\ FAS4-	AutoCAD Fast load AutoLISP
 
+# AutoCAD Film Roll (flm3)
+0	string	AutoCAD/AutoShade\ Film\ roll\x0D\x0A	AutoCAD Film Roll
+
+# AutoCAD Landscape Library (lli)
+0	string	#\ AutoVision\ Landscape\ library	AutoCAD Landscape Library
+
+# AutoCAD Last Saved Layer State (LAS)
+0	string	\ \ 0\x0D\x0ALAYERSTATEDICTIONARY	AutoCAD Last Saved Layer State
+
+# AutoCAD Menu Resource File
+0	search/200/b	cAliasList
+>0	search/200/b	CAcPopMenu	AutoCAD Menu Resource File
+
+# AutoCAD Plot Configuration File, R13
+0	string	;Created\ by\ AutoCAD\x20
+>0	search/400	PEN_WIDTH
+>0	search/400	PLOT_FILE	AutoCAD Plot Configuration File, R13
+
+# AutoCAD Plot Configuration File, R14
+0	string	PC2Version1\x0D\x0A\x0D\x0A[PlotDriver]	AutoCAD Plot Configuration File, R14
+
 # AutoCAD PROTECTED LISP File (lsp)
 0	string	AutoCAD\ PROTECTED\ LISP\ file	AutoCAD PROTECTED LISP File
+
+# AutoCAD Xref Log
+0	string	\x0D\x0A\x0D\x0A\x0D\x0A==============================\x0D\x0A\x0D\x0A
+>0	search/400	Operation:\ Attach\ Xref	AutoCAD Xref Log
+0	string	\x0D\x0A\x0D\x0A\x0D\x0A==============================\x0D\x0A\x0D\x0A
+>0	search/400	Operation:\ Overlay\ Xref	AutoCAD Xref Log
 
 # Autodesk Design Drawing Web Format 2D file (w2d)
 0	string	=(W2D\ V06	Autodesk Design Drawing Web Format
@@ -368,6 +428,9 @@
 
 # Autodesk Softimage 3D Model Data (hrc)
 0	string	HRCH:\ Softimage	Autodesk Softimage 3D Model Data
+
+# AutoSketch Drawing
+0	string	\x0A\x00\x00\x00\x00\x0B\x03401\x01\x00\x00\x00\x38\x00\x00\x00	AutoSketch Drawing
 
 # AutoSketch Drawing Database (skd)
 0	string	AutoSketch\ drawing\ database	AutoSketch Drawing Database
@@ -478,8 +541,8 @@
 # Blue Moon Rendering Tools Shading Language File (slc)
 0	string	version\ BMRT\x20	Blue Moon Rendering Tools Shading
 
-# Bob_s Adlib Music (bam3)
-0	string	CBMF	Bob_s Adlib Music
+# Bob's Adlib Music (bam3)
+0	string	CBMF	Bob's Adlib Music
 
 # Boom Tracker v4.0 Module (cff2)
 0	string	=<CUD-FM-	Boom Tracker v4.0 Module
@@ -1239,8 +1302,50 @@
 # Fractal Image And Sequence Codec (fco)
 0	string	FIASCO	Fractal Image And Sequence Codec
 
+# Frameworks Database, V2 (fw2)
+0	string	\x03\x00
+>4	string	\x02\x00\xED\xFB\x00\x00\x00\x00
+>>13	string	\x00\x00\x00	Frameworks Database, V2
+
+# Frameworks Database, V3 (fw3)
+0	string	\x03\x00
+>5	string	\x00\xED\xFB\x00\x00\x00\x00
+>>13	string	\x00\x00\x00
+>>>23	string	\x00
+>>>>25	string	\x00
+>>>>>28	string	\x00\x00	Frameworks Database, V3
+
+# Frameworks Database, V4 (fw4)
+0	string	\x03\x00
+>4	string	\x01\x00\xED\xFB\x00\x00\x00\x00
+>>13	string	\x01\x00\x00
+>>>25	string	\x00
+>>>>28	string	\x00\x00	Frameworks Database, V4
+
+0	string	\x03\x00
+>4	string	\x01\x00\xED\xFB\x00\x00\x00\x00
+>>13	string	\x01\x00\x00
+>>>25	string	\x01
+>>>>28	string	\x00\x00	Frameworks Database, V4
+
+0	string	\x03\x00
+>4	string	\x03\x00\xED\xFB\x00\x00\x00\x00
+>>13	string	\x01\x00\x00
+>>>25	string	\x00
+>>>>28	string	\x00\x00	Frameworks Database, V4
+
+0	string	\x03\x00
+>4	string	\x03\x00\xED\xFB\x00\x00\x00\x00
+>>13	string	\x01\x00\x00
+>>>25	string	\x01
+>>>>28	string	\x00\x00	Frameworks Database, V4
+
 # Fred Gray Module (gray)
 36	string	FREDGRAY	Fred Gray Module
+
+# Freelance File
+0	string	\x00\x01@\x00DEBR@\x00\x04\x00\x01\x00\x00\x00\x08\x00	Freelance File
+0	string	\x00\x01@\x00DEBR@\x00\x04\x00\x01\x00\x00\x00[\x00	Freelance File
 
 # Freyja 3D Model (mat)
 0	string	=[Material]\x0AName	Freyja 3D Model
@@ -1516,6 +1621,12 @@
 # IBM DisplayWrite 3 File (dw3)
 0	string	=\x80\0\0\x09\ \0O{	IBM DisplayWrite 3 File
 
+# IBM DisplayWrite 5 File (dwdoc)
+0	string	\x80\x00\x00\x09\ \x00O{J]\x18\x00\x14`\x00\x00\x80\x00	IBM DisplayWrite 5 File
+
+# IBM DisplayWrite DCA Text File (dca)
+0	string	\x00\x05\xE1\x03\x00\x00\x20\xE2\x05\x00\x01\x51\x01\x00	IBM DisplayWrite DCA Text File
+
 # IBM KIPS Bitmap (kps)
 0	string	DFIMAG00	IBM KIPS Bitmap
 
@@ -1693,6 +1804,11 @@
 0	string	:userdoc
 >-12	string/100	:euserdoc	Information Presentation Facility File
 
+# Inset Systems Bitmap (pix3)
+0	string	\x03\x00	
+>3	string	\x00\x00\x00\ \x00T\x00\x00\x00\x01\x00@\x00t\x00\x00\x00\x02\x00\x08\x00\xB4\x00\x00\x00\x11\x00.\x00\xBC\x00\x00\x00\x00\x80	Inset Systems Bitmap
+>3	string	\x00\x00\x00\ \x00\x94\x01\x00\x00\x01\x00@\x00\xB4\x01\x00\x00\x02\x00\x08\x00\xF4\x01\x00\x00\x11\x00.\x00\xFC\x01\x00\x00\x00\x80	Inset Systems Bitmap
+
 # InShape IIM bitmap (iim)
 0	string	IS_IMAGE	InShape IIM bitmap
 
@@ -1710,6 +1826,19 @@
 
 # InstallShield Script for Windows Registry (rgs)
 0	string	HKCR	InstallShield Script for Windows Registry
+
+# IntelliDraw Vector Graphics (idw)
+0	string	\x06iFpSw\x02w\x05x\x00x\x00\x08\x00	
+>16	string	\x00\x00\x00@	IntelliDraw Vector Graphics
+
+0	string	\x06iFpSw\x02w\x05x\x00x\x00\x08\x00	
+>16	string	\x00\x00\x00\ 	IntelliDraw Vector Graphics
+
+0	string	\x06iFpSw\x02w\x05x\x00x\x00\x04\x00	
+>16	string	\x00\x00\x00@	IntelliDraw Vector Graphics
+
+0	string	\x06iFpSw\x02w\x05x\x00x\x00\x04\x00	
+>16	string	\x00\x00\x00\ 	IntelliDraw Vector Graphics
 
 # Intellifont Font (type)
 0	string	\x00\x44\x00\x01\x00\x00\x00\x1A	Intellifont Font
@@ -1923,6 +2052,12 @@
 # Lotus Freelance Portfolio (pfl)
 0	string	=\0\x01\x0e\0\x02\x02BA	Lotus Freelance Portfolio
 
+# Lotus Freelance Smartmaster Graphics (mas)
+0	string	\x00\x01@\x00DEBR@\x00\x04\x00\x01\x00\x00\x00\x08\x00\x04\x00
+>164	string	Bulleted\ List	Lotus Freelance Smartmaster Graphics
+0	string	\x00\x01@\x00DEBR@\x00\x04\x00\x01\x00\x00\x00\x08\x00\x03\x00
+>164	string	Bulleted\ List	Lotus Freelance Smartmaster Graphics
+
 # Lotus Impress Font (ifl)
 8	string	Impress\ Font
 >17	string	\x6F\x6E\x74	Lotus Impress Font
@@ -2075,6 +2210,10 @@
 # MGUI Font (mfn)
 0	string	MGUI\ FONT	MGUI Font
 
+# Micrografx Designer
+0	string	\x01\xFF\x02\x04\x03\x01	Micrografx Designer
+0	string	\x01\xFF\x02\x04\x03\x02	Micrografx Designer
+
 # Micrografx Icon (icn)
 0	string	ZZZZd
 >41 string	view	Micrografx Icon
@@ -2156,6 +2295,10 @@
 # Microsoft Multimedia Viewer Book (mvb)
 0	string	?_\x03\x00	Microsoft Multimedia Viewer Book
 
+# Microsoft Multiplan (mod2)
+0	string	\x09\x00\x04\x00@\x01\x10\x00B\x00\x02\x00\xB5\x01f\x00\x1B\x00\x00\x00	Microsoft Multiplan
+0	string	\x09\x00\x04\x00@\x01\x10\x00B\x00\x02\x00\x00\x00f\x00\x1B\x00\x00\x00	Microsoft Multiplan
+
 # Microsoft Office Answer Wizard Index (aw3)
 0	string	\x09\x01\x07\x00\x00\x00\x73\x07	Microsoft Office Answer Wizard Index
 0	string	\x1E\x01\x08\x00\x00\x00\x34\x0C	Microsoft Office Answer Wizard Index
@@ -2195,6 +2338,12 @@
 
 # Microsoft Word For Dos Style Sheet (sty3)
 0	string	1\xBE\x02\x00\x00\xAB\x00\x00\x00\x00\x00\x00\x00\x00	Microsoft Word For Dos Style Sheet
+
+# Microsoft Works Database for Windows 2.0 (wdb)
+0	string	\ T\x02\x00\x00\x00\x05T\x02\x00
+>11	string	G%T\x00\x00&T\x02\x00\x00\x00\x06\x00\x08\x00\x00\x00\x00\x00
+>>31	string	\x00
+>>>33	string	\x00\x02\x00\x01\x00\xFF\x03	Microsoft Works Database for Windows 2.0
 
 # MIDAS Bulk Data Frame Format (bdf)
 4	string	IMAGE
@@ -2445,6 +2594,9 @@
 0	string	format-version:
 >0	search/2000	[Term]	Obo Flat File Format 1.0
 
+# Obsidium Project File (opf)
+0	string	OPF2\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00\x00	Obsidium Project File
+
 # OFF Geometry Definition (off)
 0	string	OFF\x0D	OFF Geometry Definition
 0	string	OFF\x0A	OFF Geometry Definition
@@ -2494,6 +2646,10 @@
 # Organya 2 Module (org)
 0	string	Org-02	Organya 2 Module
 
+# Origin Project Format (opj2)
+0	string	CPYA\ 4.
+>10	string	\x20\x23\x0A	Origin Project Format
+
 # OS 2 Installation Package Archive (pkg3)
 0	string	=\xa5\x96\xfe\xff	OS 2 Installation Package Archive
 
@@ -2521,6 +2677,10 @@
 
 # Pack Ice Compressed Data (pi9)
 0	string	ICE!	Pack Ice Compressed Data
+
+# PageMaker TableEditor Graphics (tbl)
+0	string	\x00\x00\x00\x01\x00\x02\x00\x01K\x02\x00\x02\x00\x00\x00\x0A\x00\x01\x00\x08	PageMaker TableEditor Graphics
+0	string	\xEF\xEF\xEF\xEF\xCE\xCE\xCE\xCE\x06\x00\x0A\x00\x00\x00\x00\x00\x00\x00\x00\x00	PageMaker TableEditor Graphics
 
 # PageStream Document (pgs)
 0	string	=\x07#\x19\x92\0\x0d	PageStream Document
@@ -2798,6 +2958,10 @@
 # Quicken Data QDB File (qdb)
 1	string	=\x00\x00\x00V\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00A\x00\x00\x00	Quicken Data QDB File
 
+# Quicken Data QEL File (qel)
+1	string	\x00\x00\x00V\x00\x00\x00\x01\x00\x00\x00\x02\x00\x00\x00A\x00\x00\x00L\x00\x00\x00I
+>92	string	QEL	Quicken Data QEL File
+
 # Quicken Data QMD File (qmd)
 0	string	\xEB\x39\x01\x00
 >5	string	\x08\x00\x00
@@ -2814,6 +2978,10 @@
 
 # Quite OK Image Format (qoi)
 0	string	qoif	Quite OK Image Format
+
+# R Data Saved Work State
+0	string	RDX2\x0AX\x0A\x00\x00\x00\x02\x00\x03\x02\x05\x00\x02\x03\x00\x00	R Data Saved Work State
+0	string	RDX3\x0AX\x0A\x00\x00\x00\x03\x00\x03\x06\x00\x00\x03\x05\x00\x00	R Data Saved Work State
 
 # RAG D Image Format (rag)
 0	string	RAG-D!	RAG D Image Format
@@ -2935,6 +3103,11 @@
 # SBTab Format (sbtab)
 0	search/200	=!!SBtab\x20	SBTab Format
 
+# Schedule+ Contacts File
+65	string	ACC
+>84	string	\xDF\xFF\xFF\xFF
+>256	string	\xCA	Schedule+ Contacts File
+
 # Scheme Compressed Debug File (bci)
 0	string	Compressed-B1-	Scheme Compressed Debug File
 
@@ -2953,6 +3126,11 @@
 
 # Segmented Hypergraphics File (shg)
 0	string	lp\x01\x00\x08\x00\x00\x00\x06\x01	Segmented Hypergraphics File
+
+# SEG-Y Data Exchange Format
+0	string	\xC3\x40\xf1
+>80	string	\xc3
+>>160	string	\xc3	SEG-Y Data Exchange Format
 
 # Self Dissolving Compressed Archive (sda)
 0	string	\x01\x08\x0D\x08
@@ -3065,6 +3243,10 @@
 
 # Sonix sampled Sound Instrument (instr)
 0	string	SampledSound\x00\x00\x00\x00	Sonix sampled Sound Instrument
+
+# Sony DVF Format (dvf)
+0	string	MS_VOICE\x00\x00\x00P\x01\x00\x00\x00SONY\ CORPORATIONICX-133	Sony DVF Format
+0	string	MS_VOICE\x00\x00\x00P\x01\x02\x00\x00SONY\ CORPORATIONICX-133	Sony DVF Format
 
 # Sony OpenMG Audio File (aa3)
 0	string	ea3\x03
@@ -3256,6 +3438,10 @@
 
 # Tanner Binary Database (tdb2)
 0	string	TDB\ File:\ Generic	Tanner Binary Database
+
+# TAP Commodore 64 (tap)
+0	string	C16-TAPE-RAW	TAP Commodore 64
+0	string	C64-TAPE-RAW	TAP Commodore 64
 
 # Taquart Interlace Picture (tip)
 0	string	TIP\x01\x00\xA0	Taquart Interlace Picture
@@ -3668,6 +3854,9 @@
 
 # Wolfram Computable Document Format (cdf3)
 0	string	=(*\ Content-type:\ application/vnd.wolfram.cdf.text	Wolfram Computable Document Format
+
+# WordStar for Windows Document
+0	string	#\ VV\ #\ 5.00\x0D\x0A\xF1\x01H\x00\x0A\x00\x10	WordStar for Windows Document
 
 # WordStar Screen Font File (wsf)
 32	string	=\0\x01\0\x02-\0,\x01	WordStar Screen Font File
