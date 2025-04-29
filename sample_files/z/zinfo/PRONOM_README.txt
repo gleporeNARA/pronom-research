@@ -1,0 +1,4 @@
+ZoomBrowser Ex thumbnail cache (ZbThumbnail.info) is a file output by Canon's ZoomBrowser Ex image organizing application.
+Documentation on the file is lacking but its purpose seems to be to support the display of image thumbnails in the Zoombrowser Ex application. Images are indexed and a lower resolution version created, and stored in the file, to be rendered as a thumbnail in the Zoombrowser window. ZbThumbnail files are created for each folder that is indexed by the tool. The file is created as a Windows 'hidden' file and its existence would not be known by the majority of users with a default configuration in Microsoft Windows. The file might contain information not elsewhere present in the Windows system. For example, even in a folder with no images, its existence suggests that images were once present and viewed using Zoombrowser Ex.
+
+http://fileformats.archiveteam.org/wiki/ZoomBrowser_Ex_thumbnail_cache
