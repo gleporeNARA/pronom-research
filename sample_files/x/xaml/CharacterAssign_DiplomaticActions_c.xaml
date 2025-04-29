@@ -1,0 +1,87 @@
+﻿<ls:UIWidget xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ls="clr-namespace:ls"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+    		 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+			 mc:Ignorable="d"
+             d:DesignWidth="3840" d:DesignHeight="2160"
+             ls:UIWidget.UseCustomDC="true"
+             ls:UIWidget.ContextName="DiplomaticActionsContext">
+
+
+    <Grid>
+        <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/partyManagement_popin_fader.png" Stretch="Fill" Width="2564" Height="1830" Margin="0,90,0,0" VerticalAlignment="Top"/>
+        <Grid Width="1072" Height="1192">
+            <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_sort_Bg.png" Stretch="None"/>
+
+            <TextBlock Text="{Binding TargetPlayer.PlayerName}" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 130 0 0"
+                           Background="Transparent" Foreground="{DynamicResource LS_PrimaryColor}" FontSize="{DynamicResource TitleFontSize}"/>
+
+            <ls:LSListBox x:Name="ActionsList"
+                              ActionPrevEvent="UIUp" ActionNextEvent="UIDown" Focusable="False"
+                              HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 300 0 0"
+                              SelectedIndex="0">
+                <ls:LSListBox.Style>
+                    <Style TargetType="ls:LSListBox">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="BorderBrush" Value="Transparent"/>
+                    </Style>
+                </ls:LSListBox.Style>
+                <ls:LSListBox.ItemContainerStyle>
+                    <Style TargetType="ListBoxItem">
+                        <Setter Property="Background" Value="Transparent"/>
+                        <Setter Property="Foreground" Value="{DynamicResource LS_PrimaryColor}"/>
+                        <Setter Property="BorderThickness" Value="0"/>
+                        <Setter Property="Focusable" Value="True"/>
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="ListBoxItem">
+                                    <Grid Margin="0,5">
+                                        <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_frame_sort.png" Stretch="None"/>
+                                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                    </Grid>
+                                    <ControlTemplate.Triggers>
+                                        <Trigger Property="IsSelected" Value="True" >
+                                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_frame_sort_selected.png" TargetName="img"/>
+                                        </Trigger>
+                                        <Trigger Property="IsEnabled" Value="False" >
+                                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_frame_sort.png" TargetName="img"/>
+                                            <Setter Property="Foreground" Value="{StaticResource LS_PrimaryColorDisabled}"/>
+                                        </Trigger>
+                                    </ControlTemplate.Triggers>
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                        <Style.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Background" Value="Transparent"/>
+                            </Trigger>
+                        </Style.Triggers>
+                    </Style>
+                </ls:LSListBox.ItemContainerStyle>
+
+                <ls:LSListBoxItem Content="{Binding Source='UICharacterAssign_KickPlayer',Converter={StaticResource TranslatedStringConverter}}"
+                                      IsEnabled="{Binding IsHost}"/>
+                <ls:LSListBoxItem Content="{Binding Source='UICharacterAssign_MakeWar',Converter={StaticResource TranslatedStringConverter}}"/>
+                <ls:LSListBoxItem Content="{Binding Source='UICharacterAssign_Peace',Converter={StaticResource TranslatedStringConverter}}"/>
+
+            </ls:LSListBox>
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 50">
+                <ls:LSButton Style="{StaticResource ControllerButton}"
+                                 DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UIAccept'}" 
+                                 Content="{Binding Source='UICharacterAssign_Accept',Converter={StaticResource TranslatedStringConverter}}"
+                                 Command="{Binding DataContext.SelectAndClose.ActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                                 CommandParameter="{Binding ElementName=ActionsList, Path=SelectedIndex}"
+                                 SoundID="UI_Shared_Accept"/>
+                <ls:LSButton Style="{StaticResource ControllerButton}"
+                                 DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UICancel'}" 
+                                 Content="{Binding Source='UICharacterAssign_Cancel',Converter={StaticResource TranslatedStringConverter}}"
+                                 Command="{Binding DataContext.CustomEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                                 CommandParameter="CloseWidget"
+                                 SoundID="UI_Shared_Cancel"/>
+            </StackPanel>
+        </Grid>
+    </Grid>
+</ls:UIWidget>

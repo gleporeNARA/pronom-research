@@ -1,0 +1,386 @@
+<ls:UIWidget
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ls="clr-namespace:ls"
+             xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             mc:Ignorable="d"
+             Focusable="False"
+             d:DesignHeight="2160" d:DesignWidth="3840"
+             ls:UIWidget.ContextName="CharacterAssign">
+
+    <ls:UIWidget.Resources>
+
+        <!-- Stadia Button -->
+        <Style x:Key="StartStreamButton" TargetType="{x:Type ls:LSButton}" BasedOn="{StaticResource ControllerButton}">
+            <Setter Property="Content" Value="{Binding Source='UICharacterAssign_StartStream',Converter={StaticResource TranslatedStringConverter}}"/>
+            <Setter Property="Visibility" Value="Hidden"/>
+            <Setter Property="IsEnabled" Value="False"/>
+            <Setter Property="Command" Value="{Binding DataContext.StartStream, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+            <Setter Property="CommandParameter" Value="Stream Stream Stream"></Setter>
+            <Setter Property="SoundID" Value="UI_HUD_Stadia_StartStream"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding DataContext.Data.IsStreaming, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="True">
+                    <Setter Property="Content" Value="{Binding Source='UICharacterAssign_StopStream',Converter={StaticResource TranslatedStringConverter}, ConverterParameter='ToUpper'}"/>
+                    <Setter Property="Command" Value="{Binding DataContext.StopStream, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                    <Setter Property="CommandParameter" Value=""></Setter>
+                    <Setter Property="SoundID" Value="UI_HUD_Stadia_StopStream"/>
+                </DataTrigger>
+                <!-- Stream connect disabled in EA -->
+                <!--<DataTrigger Binding="{Binding DataContext.CommunityType, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="GGP">
+                    <Setter Property="Visibility" Value="Visible"/>
+                    <Setter Property="IsEnabled" Value="True"/>
+                </DataTrigger>-->
+            </Style.Triggers>
+        </Style>
+
+        <ControlTemplate x:Key="CharacterSlotIndex">
+            <TextBlock HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,35,0,0" FontSize="{DynamicResource SmallFontSize}" Foreground="{DynamicResource LS_PrimaryColor}">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Text" Value="{Binding SlotIndex, Converter={StaticResource DecimalToRomanConverter}, ConverterParameter=true}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding State}" Value="Closed">
+                                <Setter Property="Opacity" Value="{DynamicResource DisabledOpacity}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="CommunityIcon">
+            <Grid>
+                <Border x:Name="commIcon" Background="{Binding Player.CommunityIcon}" Height="150" Width="150"/>
+                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/frame_playerPortrait.png" Stretch="None" IsHitTestVisible="False"/>
+                <Grid.Style>
+                    <Style TargetType="Grid">
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding HasPlayer}" Value="False">
+                                <Setter Property="Visibility" Value="Collapsed" />
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Grid.Style>
+            </Grid>
+        </ControlTemplate>
+        
+        <ControlTemplate x:Key="CharacterPortraitTemplate">
+            <Grid DataContext="{Binding Character}">
+                <Canvas Background="{Binding Icon}" Width="104" Height="168"/>
+                <ProgressBar Template="{StaticResource DefaultProgressBar}" VerticalAlignment="Bottom" Margin="0,0,0,102" Orientation="Vertical" Width="104" Height="168" Value="{Binding Stats.Health.PercentValue, Mode=OneWay, Converter={StaticResource InvertPercConverter}}" Maximum="1" Minimum="0" Background="Transparent" Foreground="{StaticResource LS_PortraitHPColor}" BorderThickness="0" BorderBrush="Transparent"/>
+                <ProgressBar VerticalAlignment="Bottom" Margin="0,0,0,94" Width="100" Height="8" Value="{Binding Stats.Health.PercentValue, Mode=OneWay}" Maximum="1" Minimum="0" Background="{StaticResource LS_HealthBarBackgound}" Foreground="{StaticResource LS_HealthBarForegound}" BorderBrush="Transparent"/>
+                <Image Stretch="None">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/PlayerPortraits/portrait_frame_inactive_d.png"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=CharacterType}" Value="Avatar">
+                                    <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/PlayerPortraits/portrait_frame_active_d.png"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Grid>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="PlayerItemTemplate" TargetType="ListBoxItem">
+            <Grid Margin="0 0 272 0">
+                <Image x:Name="PlayerBg" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/frame_playerSlot_bg.png" Stretch="None"/>
+                <Image x:Name="PortraitBg" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/frame_playerPortrait_empty_d.png" Stretch="None"/>
+                <ContentControl Template="{DynamicResource CommunityIcon}" DataContext="{Binding}" Focusable="False"/>
+                <ContentControl Template="{DynamicResource CharacterSlotIndex}" DataContext="{Binding}" Focusable="False"/>
+            </Grid>
+            <ControlTemplate.Triggers>
+                <DataTrigger Binding="{Binding HasPlayer}" Value="True">
+                    <Setter Property="Visibility" TargetName="PortraitBg" Value="Hidden" />
+                </DataTrigger>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Source" TargetName="PlayerBg" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign_c/c_selector_playerSlot_bg.png"/>
+                </Trigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <ControlTemplate x:Key="CharacterItemTemplate" TargetType="ListBoxItem">
+            <Grid Margin="0 0 26 0">
+                <Image x:Name="CharacterBg" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/frame_characterSlot_bg.png" Stretch="None"/>
+
+                <Image x:Name="CharacterSlot" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/frame_characterSlot.png" Stretch="None"/>
+                <ContentControl Template="{StaticResource CharacterPortraitTemplate}" Focusable="False"
+                                Visibility="{Binding Character, Converter={StaticResource NullToHiddenConverter}}"/>
+
+                <Grid x:Name="IconUp" 
+                      VerticalAlignment="Top" Margin="0 25 0 0" 
+                      Visibility="{Binding Character, Converter={StaticResource NullToHiddenConverter}}" 
+                      Opacity="0.4">
+                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/small_blackBoxBtn_d.png" Stretch="None"/>
+                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/ico_dropUp_d.png" Stretch="None"/>
+                </Grid>
+
+                <Grid x:Name="IconDown" 
+                      VerticalAlignment="Bottom" Margin="0 0 0 25" 
+                      Visibility="{Binding Character, Converter={StaticResource NullToHiddenConverter}}" 
+                      Opacity="0.4">
+                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/small_blackBoxBtn_d.png" Stretch="None"/>
+                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/ico_dropDown_d.png" Stretch="None"/>
+                </Grid>
+
+            </Grid>
+            <ControlTemplate.Triggers>
+                <Trigger Property="IsFocused" Value="True">
+                    <Setter Property="Source" TargetName="CharacterBg" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign_c/c_selector_characterSlot_bg.png"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding ElementName=PlayerSlot, Path=DataContext.HasPlayer}" Value="False">
+                    <Setter Property="Source" TargetName="CharacterSlot" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign/frame_characterSlot_unavailable.png"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DataContext.Data.LobbyVisibility, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="Offline">
+                    <Setter Property="IsEnabled" TargetName="CharacterSlot" Value="False"/>
+                </DataTrigger>
+                <DataTrigger Binding="{Binding DataContext.IsHost, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="False">
+                    <Setter Property="IsEnabled" TargetName="CharacterSlot" Value="False"/>
+                </DataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding CanMoveUp}" Value="True"/>
+                        <Condition Binding="{Binding CanMoveCharacter}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Opacity" TargetName="IconUp" Value="1"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding CanMoveDown}" Value="True"/>
+                        <Condition Binding="{Binding CanMoveCharacter}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter Property="Opacity" TargetName="IconDown" Value="1"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+        <DataTemplate x:Key="PlayerSlotTemplate">
+            <ls:LSListBox x:Name="PlayerSlot"
+                          Focusable="False" NavigateFocus="True"
+                          HorizontalAlignment="Left" Margin="0 0 0 8"
+                          Background="Transparent" BorderBrush="Transparent"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ActionPrevEvent="UILeft" ActionNextEvent="UIRight">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Horizontal"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ls:LSListBoxItem Template="{StaticResource PlayerItemTemplate}" Tag="Player"/>
+                <ls:LSListBoxItem Template="{StaticResource CharacterItemTemplate}" DataContext="{Binding PlayerCharacterSlots[0]}" Tag="Character"/>
+                <ls:LSListBoxItem Template="{StaticResource CharacterItemTemplate}" DataContext="{Binding PlayerCharacterSlots[1]}" Tag="Character"/>
+                <ls:LSListBoxItem Template="{StaticResource CharacterItemTemplate}" DataContext="{Binding PlayerCharacterSlots[2]}" Tag="Character"/>
+                <ls:LSListBoxItem Template="{StaticResource CharacterItemTemplate}" DataContext="{Binding PlayerCharacterSlots[3]}" Tag="Character"/>
+
+            </ls:LSListBox>
+        </DataTemplate>
+
+        <ControlTemplate x:Key="ControllerButtons">
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="-2,0,0,56">
+
+                <!-- Accept -->
+                <ls:LSButton Style="{StaticResource ControllerButton}"
+                             DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UIAccept'}" 
+                             Content="{Binding Source='UICharacterAssign_Accept',Converter={StaticResource TranslatedStringConverter}}"
+                             Command="{Binding DataContext.AcceptCommand.ActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                             SoundID="UI_Shared_Accept"/>
+
+                <!-- Diplomatic actions -->
+                <ls:LSButton x:Name="DiplomaticActionBtn"
+                             IsEnabled="False" Visibility="Collapsed"
+                             Style="{StaticResource ControllerButton}"
+                             DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UICreate'}" 
+                             Content="{Binding Source='UICharacterAssign_DiplomaticActions',Converter={StaticResource TranslatedStringConverter}}"
+                             Command="{Binding DataContext.DiplomaticActionsOpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                             CommandParameter="{Binding LocalFocus.DataContext ,ElementName=PlayerSlots}"
+                             SoundID="UI_Shared_Accept"/>
+
+                <!-- Move up character -->
+                <ls:LSButton x:Name="MoveUpBtn"
+                             IsEnabled="False" Visibility="Collapsed"
+                             Style="{StaticResource ControllerButton}"
+                             DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='PrevObject'}" 
+                             Content="{Binding Source='UICharacterAssign_MoveUp',Converter={StaticResource TranslatedStringConverter}}"
+                             Command="{Binding DataContext.MoveCharacterUpCommand.ActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
+                             CommandParameter="{Binding LocalFocus.DataContext ,ElementName=PlayerSlots}"
+                             SoundID="UI_Shared_Accept"/>
+
+                <!-- Move down character -->
+                <ls:LSButton x:Name="MoveDownBtn"
+                             IsEnabled="False" Visibility="Collapsed"
+                             Style="{StaticResource ControllerButton}"
+                             DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='NextObject'}" 
+                             Content="{Binding Source='UICharacterAssign_MoveDown',Converter={StaticResource TranslatedStringConverter}}"
+                             Command="{Binding DataContext.MoveCharacterDownCommand.ActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
+                             CommandParameter="{Binding LocalFocus.DataContext, ElementName=PlayerSlots}"
+                             SoundID="UI_Shared_Accept"/>
+
+                <!-- Subscribe to Game Stream (Stadia only) or Invite (context will be updated according to what is selected) -->
+                <ls:LSButton x:Name="InvitePlayerBtn"
+                             Style="{StaticResource ControllerButton}"
+                             DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UIDelete'}" 
+                             Content="{Binding Source='UICharacterAssign_InviteBtn',Converter={StaticResource TranslatedStringConverter}}"
+                             Command="{Binding DataContext.InvitePlayer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
+                             IsEnabled="{Binding LocalFocus.DataContext.HasPlayer, ElementName=PlayerSlots, Converter={StaticResource InvertBoolConverter}}"
+                             Visibility="{Binding DataContext.IsHost, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}, Converter={StaticResource BoolToVisibleConverter}}"
+                             SoundID="UI_Shared_Accept"/>
+
+                <!-- Cancel -->
+                <ls:LSButton Style="{StaticResource ControllerButton}"
+                             DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UICancel'}" 
+                             Content="{Binding Source='UICharacterAssign_Cancel',Converter={StaticResource TranslatedStringConverter}}"
+                             Command="{Binding DataContext.CustomEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                             CommandParameter="CloseWidget"
+                             SoundID="UI_Shared_Cancel"/>
+                
+                <!-- Mute -->
+                <ls:LSButton x:Name="MutePlayerButton"
+                             Style="{StaticResource ControllerButton}"
+                             DataContext="{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UISort'}"
+                             Content="{Binding Source='UICharacterAssign_MuteBtn',Converter={StaticResource TranslatedStringConverter}, ConverterParameter='ToUpper'}"
+                             Command="{Binding DataContext.ToggleMuteCommand.ActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
+                             CommandParameter="{Binding LocalFocus.DataContext ,ElementName=PlayerSlots}"
+                             SoundID="UI_HUD_Shared_Mute"
+                             IsEnabled="{Binding Player.VoiceChatEnabled}"/>
+
+            </StackPanel>
+            <ControlTemplate.Triggers>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding LocalFocus.Tag, ElementName=PlayerSlots}" Value="Player"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.HasPlayer, ElementName=PlayerSlots}" Value="True"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.IsCurrentPlayer, ElementName=PlayerSlots}" Value="False"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="DiplomaticActionBtn" Property="IsEnabled" Value="True"/>
+                        <Setter TargetName="DiplomaticActionBtn" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding LocalFocus.DataContext.Character, ElementName=PlayerSlots, Converter={StaticResource NullToBoolFalseConverter}}" Value="True"/>
+                        <Condition Binding="{Binding LocalFocus.Tag, ElementName=PlayerSlots}" Value="Character"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.CanMoveDown, ElementName=PlayerSlots}" Value="True"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.CanMoveCharacter, ElementName=PlayerSlots}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="MoveDownBtn" Property="IsEnabled" Value="True"/>
+                        <Setter TargetName="MoveDownBtn" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding LocalFocus.DataContext.Character, ElementName=PlayerSlots, Converter={StaticResource NullToBoolFalseConverter}}" Value="True"/>
+                        <Condition Binding="{Binding LocalFocus.Tag, ElementName=PlayerSlots}" Value="Character"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.CanMoveUp, ElementName=PlayerSlots}" Value="True"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.CanMoveCharacter, ElementName=PlayerSlots}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="MoveUpBtn" Property="IsEnabled" Value="True"/>
+                        <Setter TargetName="MoveUpBtn" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+                
+                <!-- Player context triggers -->
+                <DataTrigger Binding="{Binding DataContext.Data.LobbyVisibility, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="Offline">
+                    <Setter TargetName="InvitePlayerBtn" Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+
+                <!-- Stream connect disabled in EA -->
+                <!--<MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding LocalFocus.Tag, ElementName=PlayerSlots}" Value="Player"/>
+                        <Condition Binding="{Binding DataContext.CommunityType, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="GGP"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.HasPlayer, ElementName=PlayerSlots}" Value="True"/>
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="InvitePlayerBtn" Property="Content" Value="{Binding Source='UICharacterAssign_SubscribeToGameStream',Converter={StaticResource TranslatedStringConverter}}"/>
+                        <Setter TargetName="InvitePlayerBtn" Property="Command" Value="{Binding DataContext.SubscribeToStream, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                        <Setter TargetName="InvitePlayerBtn" Property="CommandParameter" Value="{Binding LocalFocus.DataContext, ElementName=PlayerSlots}"/>
+                        <Setter TargetName="InvitePlayerBtn" Property="Visibility" Value="Visible"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>-->
+
+                <MultiDataTrigger>
+                    <MultiDataTrigger.Conditions>
+                        <Condition Binding="{Binding DataContext.CommunityType, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Value="GGP"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.HasPlayer, ElementName=PlayerSlots}" Value="True"/>
+                        <Condition Binding="{Binding LocalFocus.DataContext.IsCurrentPlayer, ElementName=PlayerSlots}" Value="False"/>
+                        <!-- TODO : Should add the condition here to check if this player enabled streaming-->
+                    </MultiDataTrigger.Conditions>
+                    <MultiDataTrigger.Setters>
+                        <Setter TargetName="InvitePlayerBtn" Property="IsEnabled" Value="True"/>
+                    </MultiDataTrigger.Setters>
+                </MultiDataTrigger>
+
+                <DataTrigger Binding="{Binding LocalFocus.DataContext.HasPlayer, ElementName=PlayerSlots}" Value="False" >
+                    <Setter TargetName="MutePlayerButton" Property="IsEnabled" Value="False"/>
+                </DataTrigger>
+
+                <DataTrigger Binding="{Binding LocalFocus.DataContext.HasPlayer, ElementName=PlayerSlots}" Value="True" >
+                    <Setter TargetName="MutePlayerButton" Property="IsEnabled" Value="{Binding LocalFocus.DataContext.Player.VoiceChatEnabled, ElementName=PlayerSlots}"/>
+                </DataTrigger>
+                
+            </ControlTemplate.Triggers>
+        </ControlTemplate>
+
+    </ls:UIWidget.Resources>
+
+    <Grid Background="Transparent">
+        <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,68,0,0" Width="2612">
+            <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterAssign_c/c_characterAssign_bg.png" Stretch="None"/>
+
+            <ls:LSButton VerticalAlignment="Top" HorizontalAlignment="Left" Margin="220,40,0,0"
+                         Style="{StaticResource StartStreamButton}" Arrangement="Right"
+                         DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='ConnectivityMenu'}"/>
+
+            <TextBlock Foreground="{StaticResource LS_PrimaryColor}" FontSize="{DynamicResource BigFontSize}"
+                       VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,72,0,0" 
+                       Text="{Binding Source='UICharacterAssign_Title',Converter={StaticResource TranslatedStringConverter}}"/>
+
+            <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Right" Margin="0,40,220,0">
+                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/ico_options_d.png" Stretch="None" Margin="0 0 10 0"/>
+                <ls:LSButton Style="{StaticResource ControllerButton}" 
+                             DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='ToggleInGameMenu'}" 
+                             Content="{Binding Source='UICharacterAssign_Settings',Converter={StaticResource TranslatedStringConverter}}"
+                             Command="{Binding DataContext.ConnectivityMenuOpenCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                             SoundID="UI_HUD_CharacterAssign_Settings"/>
+            </StackPanel>
+
+            <ls:LSListBox x:Name="PlayerSlots"
+                          HorizontalAlignment="Left" VerticalAlignment="Top" 
+                          Width="1600" Margin="220 202 0 0"
+                          ActionNextEvent="UIDown"
+                          ActionPrevEvent="UIUp"
+                          ItemsSource="{Binding PlayerSlots}" 
+                          ItemTemplate="{StaticResource PlayerSlotTemplate}"
+                          LocalFocusSelector="{Binding ElementName=Selector,Mode=OneWay}"
+                          Focusable="False">
+                <ListBox.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <StackPanel Orientation="Vertical"/>
+                    </ItemsPanelTemplate>
+                </ListBox.ItemsPanel>
+            </ls:LSListBox>
+
+            <ContentControl x:Name="Selector" IsHitTestVisible="False"
+                            VerticalAlignment="Top" HorizontalAlignment="Left"
+                            Margin="220,180,0,0" Visibility="Hidden"
+                            Template="{StaticResource SelectorTemplate}"/>
+
+            <ContentControl Template="{StaticResource ControllerButtons}"/>
+        </Grid>
+    </Grid>
+</ls:UIWidget>

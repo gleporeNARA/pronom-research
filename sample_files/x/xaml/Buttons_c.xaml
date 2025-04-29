@@ -1,0 +1,354 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:ls="clr-namespace:ls"
+					mc:Ignorable="d">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Library/Converters.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+    <!-- Generic Button -->
+    <ControlTemplate x:Key="ButtonTemplate" TargetType="ls:LSButton">
+        <Image x:Name="img" Source="{DynamicResource ButtonNormal}" Stretch="None"/>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonHighlight}" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="{DynamicResource ButtonPressed}" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="{DynamicResource ButtonDisabled}" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+    
+
+    <Style x:Key="ComboBoxToggleButton" TargetType="ToggleButton">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ToggleButton">
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="prevImg" HorizontalAlignment="Left" VerticalAlignment="Center" Stretch="None" Opacity="0.5" 
+                               Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/input_slider_arrowL_d.png"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Width="570" TextAlignment="Center"
+                                   Text="{Binding Path=Content, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ToggleButton}}}"  
+                                   Foreground="{DynamicResource LS_PrimaryColor}" FontSize="{DynamicResource LargeFontSize}"
+                                   IsHitTestVisible="False"/>
+                        <Image x:Name="nextImg" HorizontalAlignment="Right" VerticalAlignment="Center" Stretch="None" Opacity="0.5" 
+                               Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/input_slider_arrowR_d.png"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                            <Setter TargetName="prevImg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/input_slider_arrowL_h.png"/>
+                            <Setter TargetName="nextImg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/input_slider_arrowR_h.png"/>
+                            <Setter TargetName="prevImg" Property="Opacity" Value="1"/>
+                            <Setter TargetName="nextImg" Property="Opacity" Value="1"/>
+                        </DataTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="TickBox" TargetType="{x:Type ls:LSTickBox}">
+        <Setter Property="Width" Value="640"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="ls:LSTickBox">
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="prevImg" HorizontalAlignment="Left" VerticalAlignment="Center" Stretch="None" Opacity="0.5" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/input_slider_arrowL_d.png"/>
+                        <TextBlock x:Name="text" VerticalAlignment="Center" HorizontalAlignment="Center" Width="570" TextAlignment="Center"
+                                Text="{Binding Source='UIOptions_Off', Converter={StaticResource TranslatedStringConverter}}" 
+                                Foreground="{DynamicResource LS_PrimaryColor}" FontSize="{DynamicResource LargeFontSize}"
+                                IsHitTestVisible="False"/>
+                        <Image x:Name="nextImg" HorizontalAlignment="Right" VerticalAlignment="Center" Stretch="None" Opacity="0.5" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/input_slider_arrowR_d.png"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <DataTrigger Binding="{Binding RelativeSource={RelativeSource Mode=FindAncestor, AncestorType={x:Type ListBoxItem}}, Path=IsSelected}" Value="True">
+                            <Setter TargetName="prevImg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/input_slider_arrowL_h.png"/>
+                            <Setter TargetName="nextImg" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Options/input_slider_arrowR_h.png"/>
+                            <Setter TargetName="prevImg" Property="Opacity" Value="1"/>
+                            <Setter TargetName="nextImg" Property="Opacity" Value="1"/>
+                        </DataTrigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="text" Property="Text" Value="{Binding Source='UIOptions_On', Converter={StaticResource TranslatedStringConverter}}"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- Red Button -->
+    <ControlTemplate x:Key="RedButton" TargetType="Button">
+        <Grid Width="221" Height="37" ClipToBounds="True">
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_red_d.png" Stretch="None" />
+            <TextBlock x:Name="txt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Text="{Binding ActionName, Converter={StaticResource StringToUpperConverter}}" Background="Transparent" Foreground="{DynamicResource LS_PrimaryColor}" FontSize="16"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_red_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_red_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,3,0,0" TargetName="txt"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_red_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- Blue Button -->
+    <ControlTemplate x:Key="BlueButton" TargetType="Button">
+        <Grid Width="221" Height="37" ClipToBounds="True">
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_d.png" Stretch="None" />
+            <TextBlock x:Name="txt" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0,0,0,0" Text="{Binding ActionName, Converter={StaticResource StringToUpperConverter}}" Background="Transparent" Foreground="{DynamicResource LS_PrimaryColor}" FontSize="16"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,3,0,0" TargetName="txt"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <!-- Blue Button Text From Buttons Content -->
+    <ControlTemplate x:Key="BlueButtonTextContent" TargetType="Button">
+        <Grid>
+            <Image x:Name="img" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_d.png" Stretch="None" />
+            <TextBlock x:Name="txt" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{TemplateBinding Content}" Background="Transparent" Foreground="{DynamicResource LS_PrimaryColor}" FontSize="{DynamicResource MediumFontSize}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,8,0,0" TargetName="txt"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_blue_disabled.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>    
+    
+    <!-- Brown Button -->
+    <Style x:Key="BrownButtonStyle" TargetType="Button">
+        <Setter Property="Width" Value="200" />
+        <Setter Property="Height" Value="36" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Image x:Name="img" Source="../Assets/Buttons/Btn_brown_d.png" />
+                        <TextBlock x:Name="txt" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Content , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Background="Transparent" Foreground="{DynamicResource LS_PrimaryColor}" FontSize="{DynamicResource MediumFontSize}"/>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" Value="../Assets/Buttons/Btn_brown_h.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Source" Value="../Assets/Buttons/Btn_brown_p.png" TargetName="img"/>
+                            <Setter Property="Margin" Value="0,4,0,0" TargetName="txt"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Source" Value="../Assets/Buttons/Btn_brown_d.png" TargetName="img"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="BrownButtonTextContent"  TargetType="Button">
+        <Grid>
+            <Image x:Name="img" Source="../Assets/Buttons/Btn_brown_d.png" Stretch="None"/>
+            <TextBlock x:Name="txt" HorizontalAlignment="Center" VerticalAlignment="Center" Text="{Binding Path=Content , RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}}" Background="Transparent" Foreground="{DynamicResource LS_PrimaryColor}" FontSize="{DynamicResource MediumFontSize}"/>
+        </Grid>
+        <ControlTemplate.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Source" Value="../Assets/Buttons/Btn_brown_h.png" TargetName="img"/>
+            </Trigger>
+            <Trigger Property="IsPressed" Value="True">
+                <Setter Property="Source" Value="../Assets/Buttons/Btn_brown_p.png" TargetName="img"/>
+                <Setter Property="Margin" Value="0,8,0,0" TargetName="txt"/>
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Source" Value="../Assets/Buttons/Btn_brown_d.png" TargetName="img"/>
+            </Trigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <Style x:Key="ExtractButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <StackPanel Orientation="Horizontal">
+                        <Image x:Name="img" Source="../Assets/Shared/ico_extract_d.png" Stretch="None" Margin="0,2,2,0" VerticalAlignment="Top"/>
+                        <TextBlock x:Name="txt" Text="{Binding Source='UICharacterPanel_Extract',Converter={StaticResource TranslatedStringConverter}, ConverterParameter='ToUpper'}" FontSize="{DynamicResource SmallFontSize}" Foreground="{DynamicResource LS_PaperColorLight}" VerticalAlignment="Top"/>
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" Value="../Assets/Shared/ico_extract_h.png" TargetName="img"/>
+                            <Setter Property="Foreground" Value="{DynamicResource LS_PaperColor}" TargetName="txt"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- up button -->
+    <Style x:Key="UpButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Image x:Name="img" Margin="-1,-1,-1,-1" Source="../Assets/Buttons/hotbar_up_d.png" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/hotbar_up_h.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/hotbar_up_p.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/hotbar_up_disabled.png" TargetName="img"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!-- down button -->
+    <Style x:Key="DownButton" TargetType="Button">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Grid>
+                        <Image x:Name="img" Margin="-1,-1,-1,-1" Source="../Assets/Buttons/hotbar_down_d.png" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/hotbar_down_h.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/hotbar_down_p.png" TargetName="img"/>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/hotbar_down_disabled.png" TargetName="img"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--Inventory View Tabs BEGIN -->
+    <!--Icon for inventoryView tab-->
+    <Style x:Key="InvViewTabIcon"  TargetType="{x:Type Image}">
+        <Setter Property="ToolTip" Value="{Binding Name}" />
+        <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_special.png" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding EnumId}" Value="All">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_all.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Equipment">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_EQ.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="KeysAndBooks">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_lit.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Magical">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_magic.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Ingredients">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_mats.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Consumables">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_pots.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Wares">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_wares.png" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--Icon for selected inventoryView tab-->
+    <Style x:Key="SelectedInvViewTabIcon"  TargetType="{x:Type Image}">
+        <Setter Property="ToolTip" Value="{Binding Name}" />
+        <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_special_active.png" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding EnumId}" Value="All">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_all_active.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Equipment">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_EQ_active.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="KeysAndBooks">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_lit_active.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Magical">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_magic_active.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Ingredients">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_mats_active.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Consumables">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_pots_active.png" />
+            </DataTrigger>
+            <DataTrigger Binding="{Binding EnumId}" Value="Wares">
+                <Setter Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared_c/c_ico_tab_wares_active.png" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <!--style for inventoryView Tab-->
+    <DataTemplate x:Key="InvViewTabTemplate" DataType="{x:Type ListBoxItem}">
+        <Grid x:Name="tabBtn" Background="Transparent" Width="{DynamicResource FilterSlotSize}" Height="{DynamicResource FilterSlotSize}">
+            <Image Stretch="UniformToFill" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_inventoryFilter_inactive_h.png"/>
+            <Image Stretch="None" Style="{StaticResource InvViewTabIcon}"/>
+        </Grid>
+    </DataTemplate>
+
+    <!--style for selected inventoryView Tab-->
+    <DataTemplate x:Key="SelectedInvViewTabTemplate" DataType="{x:Type ListBoxItem}">
+        <Grid x:Name="tabBtn" Background="Transparent" Width="{DynamicResource FilterSlotSize}" Height="{DynamicResource FilterSlotSize}">
+            <Image Stretch="UniformToFill" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/Btn_inventoryFilter_active_h.png"/>
+            <Image Stretch="None" Style="{StaticResource SelectedInvViewTabIcon}"/>
+        </Grid>
+    </DataTemplate>
+
+    <!--style for inventoryView list-->
+    <Style x:Key="InventoryViewTabStyle" TargetType="{x:Type ListBoxItem}"  BasedOn="{StaticResource {x:Type ListBoxItem}}">
+        <Setter Property="ContentTemplate" Value="{StaticResource InvViewTabTemplate}"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Margin" Value="0 0 6 0"/>
+        <Style.Triggers>
+            <Trigger Property="IsSelected" Value="True">
+                <Setter Property="ContentTemplate" Value="{StaticResource SelectedInvViewTabTemplate}"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderThickness" Value="0"/>
+            </Trigger>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Transparent" />
+                <Setter Property="BorderThickness" Value="0"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--Inventory View Tabs END -->
+
+</ResourceDictionary>

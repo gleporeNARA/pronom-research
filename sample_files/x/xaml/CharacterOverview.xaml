@@ -1,0 +1,278 @@
+﻿<ls:UIWidget
+    x:Name="CharacterOverview"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:System="clr-namespace:System;assembly=mscorlib"
+    xmlns:ls="clr-namespace:ls"
+    xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    mc:Ignorable="d"
+    d:DesignHeight="3840" d:DesignWidth="2160"
+    ls:UIWidget.Focusable="False"
+    ls:UIWidget.SoundID="UI_HUD_CharacterOverview"
+    Visibility="Visible">
+
+    <ls:UIWidget.Resources>
+        <Style x:Key="SquareFrameStyle" TargetType="Grid">
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Margin" Value="0,100,0,0"/>
+        </Style>
+
+        <DataTemplate x:Key="CharacterEquipment">
+            <Grid VerticalAlignment="Top">
+                <ContentControl Content="{Binding}" Style="{StaticResource EquipmentTemplate}" VerticalAlignment="Top" Margin="0,35,0,0"/>
+                <ls:LSButton x:Name="ExtractBtn" Style="{StaticResource ExtractButton}" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="150,112,0,0" Command="{Binding DataContext.ExtractEquipmentCommand,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"  CommandParameter="{Binding}"/>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,10" Text="{Binding Source='UICharacterPanel_Equipment',Converter={StaticResource TranslatedStringConverter}, ConverterParameter='ToUpper'}" FontSize="{DynamicResource TinyFontSize}" Foreground="Black"/>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CharacterInventory">          
+            <Grid Style="{StaticResource SquareFrameStyle}">
+                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/overview_frame.png" Stretch="None"  VerticalAlignment="Top"/>
+
+                <Grid VerticalAlignment="Top" Margin="0,18,0,0">
+                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/inventory_tabs_board.png" Stretch="None"/>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,38,0,0">
+                        <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_inventory_d.png" Stretch="None"/>
+                        <TextBlock Text="{Binding Source='UICharacterPanel_Inventory', Converter={StaticResource TranslatedStringConverter}}" Foreground="{DynamicResource LS_PrimaryColor}" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Grid>
+
+                <ls:LSButton x:Name="ExtractBtn" Style="{StaticResource ExtractButton}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-26,0,0" Command="{Binding DataContext.ExtractInventoryCommand,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"  CommandParameter="{Binding CurrentPlayer.SelectedCharacter}"/>
+
+                <!-- Filter Buttons -->
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Top" Margin="-8,128,0,0" DataContext="{Binding Path=DataContext, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" Template="{StaticResource InventoryFilterButtons}" />
+
+
+                <Path x:Name="SBPFrameStroke" Style="{StaticResource StandardFrameGlow}"  VerticalAlignment="Top">
+                    <Path.Stroke>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                            <GradientStop Color="{StaticResource PanelGlowAnimColour}" Offset="{DynamicResource SBPGlowAnimVal1a}"/>
+                            <GradientStop Color="{StaticResource PanelGlowAnimColourC}" Offset="{DynamicResource SBPGlowAnimVal2a}"/>
+                            <GradientStop Color="{StaticResource PanelGlowAnimColour}" Offset="{DynamicResource SBPGlowAnimVal3a}"/>
+                        </LinearGradientBrush>
+                    </Path.Stroke>
+                </Path>
+
+                <ListBox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="80,216,0,0" MaxHeight="1414" Style="{StaticResource InventoryGrid}"  DataContext="{Binding CurrentPlayer.SelectedCharacterPartyInvView}" ItemsSource="{Binding InventoryViewSlots}">
+                    <ListBox.Resources>
+                        <Style TargetType="{x:Type ScrollViewer}">
+                            <Style.Resources>
+                                <Style x:Key="ScrollBarStyle" TargetType="ScrollBar" BasedOn="{StaticResource DecorativeBlueScrollBar}"/>
+                                <GridLength x:Key="Top">50</GridLength>
+                                <GridLength x:Key="Bottom">50</GridLength>
+                            </Style.Resources>
+                            <Setter Property="Template" Value="{StaticResource ScrollViewerTemplate}"/>
+                            <Setter Property="Padding" Value="20,0,0,0"/>
+                        </Style>
+                        <System:UInt32 x:Key="invRows">15</System:UInt32>
+                        <System:UInt32 x:Key="invCols">7</System:UInt32>
+                    </ListBox.Resources>
+                </ListBox>
+
+                <!-- Weight bar -->
+                <ContentControl x:Name="BottomProgressBar" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-54" Template="{StaticResource WeightBarTemplate}" DataContext="{Binding CurrentPlayer.SelectedCharacter}" />
+
+                <i:Interaction.Triggers>
+                    <ei:TimerTrigger EventName="Loaded" MillisecondsPerTick="1300" TotalTicks="1">
+                        <ei:ControlStoryboardAction Storyboard="{StaticResource SingleBasicPanelGlowAnim}"/>
+                    </ei:TimerTrigger>
+                </i:Interaction.Triggers>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CharacterSheet">
+            <Grid Style="{StaticResource SquareFrameStyle}">
+                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/overview_frame.png" Stretch="None"/>
+                <Grid VerticalAlignment="Top" Margin="0,18,0,0">
+                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/header.png" Stretch="None"/>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,38,0,0">
+                        <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
+                        <TextBlock Text="{Binding Source='UICharacterPanel_CharacterSheet', Converter={StaticResource TranslatedStringConverter}}" Foreground="{DynamicResource LS_PrimaryColor}" Margin="0,4,0,0"/>
+                    </StackPanel>
+                </Grid>
+                <ls:LSButton x:Name="ExtractBtn" Style="{StaticResource ExtractButton}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-26,0,0" Command="{Binding DataContext.ExtractCharacterSheetCommand,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"  CommandParameter="{Binding }"/>
+                <Path x:Name="SBPFrameStroke" Style="{StaticResource StandardFrameGlow}"  VerticalAlignment="Top">
+                    <Path.Stroke>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                            <GradientStop Color="{StaticResource PanelGlowAnimColour}" Offset="{DynamicResource SBPGlowAnimVal1a}"/>
+                            <GradientStop Color="{StaticResource PanelGlowAnimColourC}" Offset="{DynamicResource SBPGlowAnimVal2a}"/>
+                            <GradientStop Color="{StaticResource PanelGlowAnimColour}" Offset="{DynamicResource SBPGlowAnimVal3a}"/>
+                        </LinearGradientBrush>
+                    </Path.Stroke>
+                </Path>
+                <!-- Scrollview -->
+                <ContentControl HorizontalAlignment="Center" VerticalAlignment="Top" Margin="32,132,0,0" Template="{StaticResource CharacterDetailsTemplate}"/>
+
+                <!-- XP bar -->
+                <ContentControl x:Name="BottomProgressBar" VerticalAlignment="Bottom" HorizontalAlignment="Center" Template="{DynamicResource XPBarTemplate}" Margin="0,0,0,-54"/>
+                <i:Interaction.Triggers>
+                    <ei:TimerTrigger EventName="Loaded" MillisecondsPerTick="1600" TotalTicks="1">
+                        <ei:ControlStoryboardAction Storyboard="{StaticResource SingleBasicPanelGlowAnim}"/>
+                    </ei:TimerTrigger>
+                </i:Interaction.Triggers>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="CharacterSpell">
+
+            <Grid Style="{StaticResource SquareFrameStyle}">
+                <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/overview_frame.png" Stretch="None"/>
+
+                <Grid VerticalAlignment="Top" Margin="0,18,0,0">
+                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/header.png" Stretch="None"/>
+
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,38,0,0">
+                        <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_spells_d.png" Stretch="None"/>
+                        <TextBlock Text="{Binding Source='UICharacterPanel_SpellBook', Converter={StaticResource TranslatedStringConverter}}" VerticalAlignment="Top" HorizontalAlignment="Left" Foreground="{DynamicResource LS_PrimaryColor}"  Margin="0,4,0,0"/>
+                    </StackPanel>
+
+                </Grid>
+                <ls:LSButton x:Name="ExtractBtn" Style="{StaticResource ExtractButton}" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0,-28,0,0" Command="{Binding DataContext.ExtractSpellBookCommand,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"  CommandParameter="{Binding }"/>
+                <Path x:Name="SBPFrameStroke" Style="{StaticResource StandardFrameGlow}"  VerticalAlignment="Top">
+                    <Path.Stroke>
+                        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" >
+                            <GradientStop Color="{StaticResource PanelGlowAnimColour}" Offset="{DynamicResource SBPGlowAnimVal1a}"/>
+                            <GradientStop Color="{StaticResource PanelGlowAnimColourC}" Offset="{DynamicResource SBPGlowAnimVal2a}"/>
+                            <GradientStop Color="{StaticResource PanelGlowAnimColour}" Offset="{DynamicResource SBPGlowAnimVal3a}"/>
+                        </LinearGradientBrush>
+                    </Path.Stroke>
+                </Path>
+                <!-- Scrollview for Spell details -->
+                <ContentControl x:Name="SpellContent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,212,0,0" Height="1416" Width="920" Template="{StaticResource SpellContentTemplate}"/>
+
+                <!-- Spellslots bar -->
+                <ContentControl x:Name="BottomProgressBar" Template="{DynamicResource SpellSlotsBarTemplate}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-54">
+                    <ContentControl.Style>
+                        <Style TargetType="ContentControl">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding MaxPreparedSpells}" Value="0">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ContentControl.Style>
+                </ContentControl>
+                <i:Interaction.Triggers>
+                    <ei:TimerTrigger EventName="Loaded" MillisecondsPerTick="1900" TotalTicks="1">
+                        <ei:ControlStoryboardAction Storyboard="{StaticResource SingleBasicPanelGlowAnim}"/>
+                    </ei:TimerTrigger>
+                </i:Interaction.Triggers>
+            </Grid>
+            
+        </DataTemplate>
+
+    </ls:UIWidget.Resources>
+
+    <ContentControl Template="{StaticResource StandardFraming}" >
+
+        <Grid>
+            <Rectangle x:Name="bgFader" Fill="Black"  IsHitTestVisible="False"/>
+
+            <Control VerticalAlignment="Top" HorizontalAlignment="Center" Template="{DynamicResource PanelNavButtons}" Tag="Overview" Panel.ZIndex="1"/>
+
+            <Viewbox>
+                <Grid Margin="100,0,100,180">
+                    <Grid.Triggers>
+                        <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                            <BeginStoryboard>
+                                <Storyboard>
+                                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)">
+                                        <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                        <EasingDoubleKeyFrame KeyTime="0:0:0.40" Value="1">
+                                            <EasingDoubleKeyFrame.EasingFunction>
+                                                <CubicEase EasingMode="EaseInOut"/>
+                                            </EasingDoubleKeyFrame.EasingFunction>
+                                        </EasingDoubleKeyFrame>
+                                    </DoubleAnimationUsingKeyFrames>
+
+                                    <Storyboard  BeginTime="0:0:0.20">
+                                        <Storyboard.Children>
+                                            <Storyboard Children="{StaticResource FadeOutBlackElements}"  />
+                                        </Storyboard.Children>
+                                    </Storyboard>
+                                </Storyboard>
+
+                            </BeginStoryboard>
+                        </EventTrigger>
+                    </Grid.Triggers>
+                    <Grid.Resources>
+                        <System:Int16 x:Key="SmallPartySize">1</System:Int16>
+                    </Grid.Resources>
+
+
+                    <!-- The four character overview panels -->
+                    <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                        <StackPanel.Resources>
+                            <Style x:Key="CharFrame" TargetType="{x:Type FrameworkElement}">
+                                <Setter Property="RenderTransform">
+                                    <Setter.Value>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Setter.Value>
+                                </Setter>
+                                <Setter Property="Opacity" Value="0"></Setter>
+                            </Style>
+                        </StackPanel.Resources>
+                        <ContentPresenter x:Name="Slot1" Style="{StaticResource CharFrame}" ContentTemplate="{StaticResource CharacterEquipment}" Content="{Binding CurrentPlayer.SelectedCharacter}"/>
+                        <ContentPresenter x:Name="Slot2" Style="{StaticResource CharFrame}" ContentTemplate="{StaticResource CharacterInventory}" Content="{Binding .}"/>
+                        <ContentPresenter x:Name="Slot3" Style="{StaticResource CharFrame}" ContentTemplate="{StaticResource CharacterSheet}"     Content="{Binding CurrentPlayer.SelectedCharacter}"/>
+                        <ContentPresenter x:Name="Slot4" Style="{StaticResource CharFrame}" ContentTemplate="{StaticResource CharacterSpell}"     Content="{Binding CurrentPlayer.SelectedCharacter}"/>
+                        <StackPanel.Triggers>
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard Storyboard.TargetName="Slot1">
+                                            <Storyboard.Children>
+                                                <Storyboard Children="{StaticResource TCAnimInCharacterSlot}"  />
+                                            </Storyboard.Children>
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard Storyboard.TargetName="Slot2">
+                                            <Storyboard.Children>
+                                                <Storyboard BeginTime="0:0:0.1" Children="{StaticResource TCAnimInCharacterSlot}"  />
+                                            </Storyboard.Children>
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard Storyboard.TargetName="Slot3">
+                                            <Storyboard.Children>
+                                                <Storyboard BeginTime="0:0:0.2" Children="{StaticResource TCAnimInCharacterSlot}"  />
+                                            </Storyboard.Children>
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+
+                                <BeginStoryboard>
+                                    <BeginStoryboard.Storyboard>
+                                        <Storyboard Storyboard.TargetName="Slot4">
+                                            <Storyboard.Children>
+                                                <Storyboard BeginTime="0:0:0.3" Children="{StaticResource TCAnimInCharacterSlot}"  />
+                                            </Storyboard.Children>
+                                        </Storyboard>
+                                    </BeginStoryboard.Storyboard>
+                                </BeginStoryboard>
+
+                            </EventTrigger>
+                        </StackPanel.Triggers>
+                    </StackPanel>
+                </Grid>
+            </Viewbox>
+            <Rectangle x:Name="frFader" Fill="Black" IsHitTestVisible="False"/>
+        </Grid>
+    </ContentControl>
+
+</ls:UIWidget>

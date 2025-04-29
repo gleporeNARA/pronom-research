@@ -1,0 +1,39 @@
+﻿<ls:UIWidget x:Name="ConditionsPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:ls="clr-namespace:ls"
+             xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+             mc:Ignorable="d"
+             ls:UIWidget.Focusable="False"
+             VerticalAlignment="Top">
+    
+    <ls:UIWidget.Resources>
+        <ResourceDictionary Source="../Library/ConditionsPanelTemplates.xaml"/>
+    </ls:UIWidget.Resources>
+    
+    <Grid VerticalAlignment="Center" HorizontalAlignment="Center" DataContext="{Binding CurrentPlayer.UIData}">
+
+        <ContentControl DataContext="{Binding StatusConditionsData}" Template="{StaticResource ConditionsPanelTemplate}"/>
+
+        <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,28" Orientation="Horizontal">
+
+            <ls:LSButton VerticalAlignment="Center" Margin="4,0,4,0"
+                         DataContext = "{Binding InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UIScrollUp'}"
+                         Style="{StaticResource ControllerButton}"  
+                         Content="{Binding Source='UIBtnHint_Scroll',Converter={StaticResource TranslatedStringConverter}}"/>
+
+            <ls:LSButton VerticalAlignment="Center" Margin="4,0,4,0"
+                        DataContext = "{Binding InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UICancel'}"
+                        Style="{StaticResource ControllerButton}"  
+                        Content="{Binding Source='UIBtnHint_Close',Converter={StaticResource TranslatedStringConverter}}"
+                        Command="{Binding DataContext.ToggleConditionsPanelCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                        CommandParameter="{Binding}"/>
+
+        </StackPanel>
+    </Grid>
+    
+</ls:UIWidget>

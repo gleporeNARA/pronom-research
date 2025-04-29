@@ -1,0 +1,376 @@
+﻿<ls:UIWidget xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ls="clr-namespace:ls"
+             xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    		 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+			 mc:Ignorable="d"
+             d:DesignHeight="2160" d:DesignWidth="3840"
+             ls:UIWidget.Focusable="False"
+             ls:UIWidget.SoundID="UI_HUD_CharacterOverview">
+
+    <ls:UIWidget.Resources>
+
+        <Style x:Key="OverviewStyle" TargetType="{x:Type ListBoxItem}" BasedOn="{StaticResource {x:Type ListBoxItem}}">
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Margin" Value="0 0 12 0"/>
+            <Style.Triggers>
+                <Trigger Property="IsSelected" Value="True">
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="Background" Value="Transparent" />
+                </Trigger>
+                <Trigger Property="IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="Transparent" />
+                    <Setter Property="Background" Value="Transparent" />
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+
+        <Style x:Key="PanelTitleStyle" TargetType="TextBlock" BasedOn="{StaticResource {x:Type TextBlock}}">
+            <Setter Property="Foreground" Value="{DynamicResource LS_PrimaryColor}"/>
+            <Setter Property="FontSize" Value="{DynamicResource MediumFontSize}"/>
+            <Setter Property="VerticalAlignment" Value="Center"/>
+            <Setter Property="Margin" Value="10 10 0 0"/>
+        </Style>
+
+        <System:Int16 x:Key="IntCountOne">1</System:Int16>
+
+    </ls:UIWidget.Resources>
+
+    <ContentControl Template="{DynamicResource StandardFraming}">
+        <Grid>
+            <ContentControl Template="{DynamicResource TopBarContent}"/>
+
+            <!-- Party Portraits -->
+            <ContentControl Template="{StaticResource PartyPortraits}"  HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,32,0,0" Visibility="{Binding CurrentPlayer.AssignedCharacters.count, Converter={StaticResource CountToVisibleConverter}, ConverterParameter={StaticResource IntCountOne}}"/>
+
+            <Grid HorizontalAlignment="Center" VerticalAlignment="Top" Margin="30 203 0 0">
+                <ls:LSListBox x:Name="overview" SelectedIndex="0" AlternationCount="4"
+                              ActionNextEvent="UIRight" ActionPrevEvent="UILeft"
+                              VerticalAlignment="Top" HorizontalAlignment="Left"
+                              ItemContainerStyle="{StaticResource OverviewStyle}"
+                              LocalFocusSelector="{Binding ElementName=selector,Mode=OneWay}"
+                              ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled" 
+                              BorderBrush="Transparent" Background="Transparent" 
+                              IsHitTestVisible="False">
+                    <ls:LSListBox.Resources>
+                        <System:UInt32 x:Key="invRows">11</System:UInt32>
+                        <System:UInt32 x:Key="invCols">6</System:UInt32>
+                    </ls:LSListBox.Resources>
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="LocalFocusChanged">
+                            <i:InvokeCommandAction Command="{Binding DataContext.ShowTooltipOnUIElement, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding Path=LocalFocus, ElementName=overview}"/>
+                            <i:InvokeCommandAction Command="{Binding DataContext.ClearItemNewFlag, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding Path=LocalFocus.DataContext.Item, ElementName=overview}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                    <ls:LSListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal"/>
+                        </ItemsPanelTemplate>
+                    </ls:LSListBox.ItemsPanel>
+
+                    <ls:LSListBoxItem DataContext="{Binding CurrentPlayer.SelectedCharacter}" Margin="0 -140 0 0">
+                        <ls:LSListBoxItem.Template>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <StackPanel>
+                                    <StackPanel.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </StackPanel.RenderTransform>
+                                    
+                                    <ContentControl Content="{Binding}" ContentTemplate="{DynamicResource EquipmentTemplate_c}"/>
+
+                                    <ContentControl x:Name="BottomProgressBar" DataContext="{Binding OwnerGameObject}" Template="{DynamicResource WeightBarTemplate}"  VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0 0 0 170"/>
+
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Loaded">
+                                            <ei:ControlStoryboardAction Storyboard="{StaticResource AnimReset}"/>
+                                        </i:EventTrigger>
+                                        <ei:TimerTrigger EventName="Loaded" MillisecondsPerTick="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource MultiplierConverter}, ConverterParameter=100}" TotalTicks="1">
+                                            <ei:ControlStoryboardAction Storyboard="{StaticResource animSlotIn_c}"/>
+                                        </ei:TimerTrigger>
+                                    </i:Interaction.Triggers>
+                                </StackPanel>
+                            </ControlTemplate>
+                        </ls:LSListBoxItem.Template>
+                    </ls:LSListBoxItem>
+                    <ls:LSListBoxItem DataContext="{Binding CurrentPlayer.SelectedCharacterPartyInvView}">
+                        <ls:LSListBoxItem.Template>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Grid Width="{StaticResource CharacterPanelWidth}">
+                                    <Grid.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Grid.RenderTransform>
+
+                                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/overview_frame.png" Stretch="None" VerticalAlignment="Top"/>
+
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 80 0 0">
+                                        <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_inventory_d.png" Stretch="None"/>
+                                        <TextBlock Text="{Binding Source='UICharacterPanel_Inventory', Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource PanelTitleStyle}"/>
+                                    </StackPanel>
+
+                                    <ls:LSListBox HorizontalAlignment="Center" VerticalAlignment="Top" Margin="68,250,0,0" MaxHeight="1360" 
+                              Style="{StaticResource InventoryGrid}" ItemsSource="{Binding InventoryViewSlots}" 
+                              ActionNextEvent="UIRight" ActionPrevEvent="UILeft">
+                                        <ls:LSListBox.Resources>
+                                            <Style TargetType="{x:Type ScrollViewer}">
+                                                <Setter Property="Template">
+                                                    <Setter.Value>
+                                                        <ControlTemplate TargetType="ScrollViewer">
+                                                            <ControlTemplate.Resources>
+                                                                <Style x:Key="ScrollBarStyle" TargetType="ScrollBar" BasedOn="{StaticResource DecorativeBlueScrollBar}">
+                                                                    <Setter Property="Margin" Value="17,0,0,0"/>
+                                                                </Style>
+                                                                <GridLength x:Key="Top">10</GridLength>
+                                                                <GridLength x:Key="Bottom">10</GridLength>
+                                                            </ControlTemplate.Resources>
+                                                            <StackPanel Orientation="Horizontal">
+                                                                <ScrollContentPresenter Margin="{TemplateBinding Padding}">
+                                                                    <i:Interaction.Triggers>
+                                                                        <i:EventTrigger EventName="Loaded">
+                                                                            <ei:ControlStoryboardAction Storyboard="{StaticResource AnimReset}"/>
+                                                                        </i:EventTrigger>
+                                                                        <ei:TimerTrigger EventName="Loaded" MillisecondsPerTick="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}, AncestorLevel=1}, Converter={StaticResource MultiplierConverter}, ConverterParameter=100}" TotalTicks="1">
+                                                                            <ei:ControlStoryboardAction Storyboard="{StaticResource FadeContentIn}"/>
+                                                                        </ei:TimerTrigger>
+                                                                    </i:Interaction.Triggers>
+                                                                </ScrollContentPresenter>
+                                                                <Grid>
+                                                                    <Grid.RowDefinitions>
+                                                                        <RowDefinition Height="{DynamicResource Top}"/>
+                                                                        <RowDefinition Height="*"/>
+                                                                        <RowDefinition Height="{DynamicResource Bottom}"/>
+                                                                    </Grid.RowDefinitions>
+
+                                                                    <ScrollBar Grid.Row="1" Style="{DynamicResource ScrollBarStyle}" Value="{TemplateBinding VerticalOffset}" Maximum="{TemplateBinding ScrollableHeight}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"/>
+                                                                </Grid>
+                                                            </StackPanel>
+                                                        </ControlTemplate>
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Style>
+                                            <System:UInt32 x:Key="invRows">11</System:UInt32>
+                                            <System:UInt32 x:Key="invCols">6</System:UInt32>
+                                        </ls:LSListBox.Resources>
+
+                                    </ls:LSListBox>
+
+                                    <ContentControl x:Name="BottomProgressBar" DataContext="{Binding OwnerGameObject}" Template="{DynamicResource WeightBarTemplate}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,170"/>
+
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Loaded">
+                                            <ei:ControlStoryboardAction Storyboard="{StaticResource AnimReset}"/>
+                                        </i:EventTrigger>
+                                        <ei:TimerTrigger EventName="Loaded" MillisecondsPerTick="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource MultiplierConverter}, ConverterParameter=100}" TotalTicks="1">
+                                            <ei:ControlStoryboardAction Storyboard="{StaticResource animSlotIn_c}"/>
+                                        </ei:TimerTrigger>
+                                    </i:Interaction.Triggers>
+                                </Grid>
+                            </ControlTemplate>
+                        </ls:LSListBoxItem.Template>
+                    </ls:LSListBoxItem>
+                    <ls:LSListBoxItem DataContext="{Binding CurrentPlayer.SelectedCharacter}">
+                        <ls:LSListBoxItem.Template>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Grid Width="{StaticResource CharacterPanelWidth}">
+                                    <Grid.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Grid.RenderTransform>
+
+                                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/overview_frame.png" Stretch="None"  VerticalAlignment="Top"/>
+
+                                    <StackPanel Grid.Row="0" Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0 80 0 0">
+                                        <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_identity_d.png" Stretch="None"/>
+                                        <TextBlock Text="{Binding Source='UICharacterPanel_CharacterSheet',Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource PanelTitleStyle}"/>
+                                    </StackPanel>
+
+                                    <ContentControl Template="{StaticResource CharacterDetailsTemplate}" VerticalAlignment="Top"  Margin="0 230 0 0"/>
+
+                                    <ContentControl Template="{StaticResource XPBarTemplate}" x:Name="BottomProgressBar" VerticalAlignment="Bottom" Margin="0,0,0,170"/>
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Loaded">
+                                            <ei:ControlStoryboardAction Storyboard="{StaticResource AnimReset}"/>
+                                        </i:EventTrigger>
+                                        <ei:TimerTrigger EventName="Loaded" MillisecondsPerTick="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ListBoxItem}}, Converter={StaticResource MultiplierConverter}, ConverterParameter=100}" TotalTicks="1">
+                                            <ei:ControlStoryboardAction Storyboard="{StaticResource animSlotIn_c}"/>
+                                        </ei:TimerTrigger>
+                                    </i:Interaction.Triggers>
+                                </Grid>
+                            </ControlTemplate>
+                        </ls:LSListBoxItem.Template>
+                    </ls:LSListBoxItem>
+                    <ls:LSListBoxItem DataContext="{Binding CurrentPlayer.SelectedCharacter}">
+                        <ls:LSListBoxItem.Template>
+                            <ControlTemplate TargetType="{x:Type ListBoxItem}">
+                                <Grid x:Name="characterHolder">
+                                    <Grid.RenderTransform>
+                                        <TransformGroup>
+                                            <ScaleTransform/>
+                                            <SkewTransform/>
+                                            <RotateTransform/>
+                                            <TranslateTransform/>
+                                        </TransformGroup>
+                                    </Grid.RenderTransform>
+
+                                    <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterOverview/overview_frame.png" Stretch="None"  VerticalAlignment="Top"/>
+
+                                    <StackPanel Orientation="Horizontal" VerticalAlignment="Top" HorizontalAlignment="Center" Margin="0 80 0 0">
+                                        <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/BottomBar/ico_spells_d.png" Stretch="None"/>
+                                        <TextBlock Text="{Binding Source='UICharacterPanel_SpellBook', Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource PanelTitleStyle}"/>
+                                    </StackPanel>
+
+                                    <!-- Scrollview for Spell details -->
+                                    <ContentControl x:Name="SpellContent" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="0,212,0,0" Height="1416" Width="920" Template="{StaticResource SpellContentTemplate}"/>
+
+                                    <!-- Spellslots bar -->
+                                    <ContentControl x:Name="BottomProgressBar" Template="{DynamicResource SpellSlotsBarTemplate}" VerticalAlignment="Bottom" HorizontalAlignment="Center" Margin="0,0,0,-72">
+                                        <ContentControl.Style>
+                                            <Style TargetType="ContentControl" BasedOn="{StaticResource {x:Type ContentControl}}">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding MaxPreparedSpells}" Value="0">
+                                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </ContentControl.Style>
+                                    </ContentControl>
+
+                                    <i:Interaction.Triggers>
+                                        <i:EventTrigger EventName="Loaded">
+                                            <ei:ControlStoryboardAction Storyboard="{StaticResource AnimReset}"/>
+                                        </i:EventTrigger>
+                                        <ei:TimerTrigger EventName="Loaded" MillisecondsPerTick="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentControl}}, Converter={StaticResource MultiplierConverter}, ConverterParameter=100}" TotalTicks="1">
+                                            <ei:ControlStoryboardAction Storyboard="{StaticResource animSlotIn_c}"/>
+                                        </ei:TimerTrigger>
+                                    </i:Interaction.Triggers>
+
+                                </Grid>
+                            </ControlTemplate>
+                        </ls:LSListBoxItem.Template>
+                    </ls:LSListBoxItem>
+
+                </ls:LSListBox>
+
+                <DockPanel VerticalAlignment="Top" HorizontalAlignment="Left" x:Name="selector" IsHitTestVisible="False">
+                    <ContentControl IsHitTestVisible="False" VerticalAlignment="Center" HorizontalAlignment="Center" Template="{StaticResource SelectorTemplate}" Width="118" Height="118" Canvas.ZIndex="96"/>
+                    <DockPanel.Style>
+                        <Style TargetType="DockPanel">
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=overview}" Value="2">
+                                    <Setter Property="Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </DockPanel.Style>
+                </DockPanel>
+
+            </Grid>
+            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Horizontal" Margin="0 0 0 30">
+
+                <ls:LSButton x:Name="ActionBtn" DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UIAccept'}" 
+                             IsEnabled="{Binding ElementName=overview, Path=LocalFocus, Converter={StaticResource NullToBoolFalseConverter}}" SoundID="UI_Shared_Accept">
+                    <ls:LSButton.Style>
+                        <Style TargetType="ls:LSButton" BasedOn="{StaticResource ControllerButton}">
+                            <Setter Property="IsEnabled" Value="{Binding ElementName=overview, Path=LocalFocus, Converter={StaticResource NullToBoolFalseConverter}}"/>
+                            <Style.Triggers>
+                                <!-- Equipment -->
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=overview}" Value="0">
+                                    <Setter Property="Content" Value="{Binding Source='UIBtnHint_Equip',Converter={StaticResource TranslatedStringConverter}}"/>
+                                    <Setter Property="Command" Value="{Binding DataContext.ShowAvailableEquipmentCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                    <Setter Property="CommandParameter" Value="{Binding Path=LocalFocus.DataContext, ElementName=overview}"/>
+                                </DataTrigger>
+                                <MultiDataTrigger>
+                                    <MultiDataTrigger.Conditions>
+                                        <Condition Binding="{Binding SelectedIndex, ElementName=overview}" Value="0"/>
+                                        <Condition Binding="{Binding Path=LocalFocus.DataContext, ElementName=overview, Converter={StaticResource TypeConverter}}" Value="ls.InventoryViewSlot"/>
+                                    </MultiDataTrigger.Conditions>
+                                    <MultiDataTrigger.Setters>
+                                        <Setter Property="Command" Value="{Binding DataContext.EquipItemCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                        <Setter Property="Content" Value="{Binding Source='UIBtnHint_Equip',Converter={StaticResource TranslatedStringConverter}}"/>
+                                        <Setter Property="CommandParameter" Value="{Binding Path=LocalFocus.DataContext, ElementName=overview}"/>
+                                    </MultiDataTrigger.Setters>
+                                </MultiDataTrigger>
+                                <!-- Inventory -->
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=overview}" Value="1">
+                                    <Setter Property="Content" Value="{Binding Path=LocalFocus ,ElementName=overview ,Converter={StaticResource GetUseActionConverter}}"/>
+                                    <Setter Property="Command" Value="{Binding DataContext.UseGameObject, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                    <Setter Property="CommandParameter" Value="{Binding Path=LocalFocus.DataContext.Item ,ElementName=overview}"/>
+                                </DataTrigger>
+                                <!-- Character sheet -->
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=overview}" Value="2">
+                                    <Setter Property="Content" Value="{Binding Source='UIBtnHint_Expand',Converter={StaticResource TranslatedStringConverter}}"/>
+                                    <Setter Property="Command" Value="{Binding DataContext.ToggleButtonCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                    <Setter Property="CommandParameter" Value="{Binding Path=LocalFocus ,ElementName=overview}"/>
+                                </DataTrigger>
+                                <!-- Spell -->
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=overview}" Value="3">
+                                    <Setter Property="Content" Value="{Binding Source='UIBtnHint_Select',Converter={StaticResource TranslatedStringConverter}}"/>
+                                    <Setter Property="Command" Value="{Binding DataContext.ToggleCharacterAction, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                                    <Setter Property="CommandParameter" Value="{Binding Path=LocalFocus.DataContext ,ElementName=overview}"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ls:LSButton.Style>
+                </ls:LSButton>
+
+                <ls:LSButton DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='ContextMenu'}" Content="{Binding Source='UIBtnHint_Context',Converter={StaticResource TranslatedStringConverter}}" 
+                             Command="{Binding DataContext.ShowContextMenu, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding Path=LocalFocus, ElementName=overview}">
+                    <ls:LSButton.Style>
+                        <Style TargetType="ls:LSButton" BasedOn="{StaticResource ControllerButton}">
+                            <Setter Property="IsEnabled" Value="{Binding ElementName=overview, Path=LocalFocus, Converter={StaticResource NullToBoolFalseConverter}}"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding SelectedIndex, ElementName=overview, Converter={StaticResource GreaterThanConverter}, ConverterParameter=1}" Value="True">
+                                    <Setter Property="IsEnabled" Value="False"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </ls:LSButton.Style>
+                </ls:LSButton>
+
+                <ls:LSButton Style="{StaticResource ControllerButton}" 
+                             DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UIShowInfo'}"
+                             Content="{Binding Source='UIBtnHint_Details',Converter={StaticResource TranslatedStringConverter}}" 
+                             Command="{Binding DataContext.ToggleTooltipOnUIElement, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                             CommandParameter="{Binding Path=LocalFocus, ElementName=overview}"
+                             IsEnabled="{Binding ElementName=overview, Path=LocalFocus, Converter={StaticResource NullToBoolFalseConverter}}"/>
+
+                <ls:LSButton Style="{StaticResource ControllerButton}" 
+                             DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UICancel'}"
+                             Content="{Binding Source='UIBtnHint_Close',Converter={StaticResource TranslatedStringConverter}}" 
+                             Command="{Binding DataContext.CustomEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                             CommandParameter="CloseWidget"/>
+                
+                <ls:LSButton Style="{StaticResource ControllerButton}" EatInput="False"
+                             DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='PartyManagement'}"
+                             Content="{Binding Source='UIBtnHint_CharacterSelect',Converter={StaticResource TranslatedStringConverter}}" />
+                
+                <ls:LSButton Style="{StaticResource ControllerButton}" EatInput="False"
+                             DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='PanelSelect'}"
+                             Content="{Binding Source='UIBtnHint_MenuSelect',Converter={StaticResource TranslatedStringConverter}}"/>
+
+                <ls:LSButton Style="{StaticResource ControllerButton}" EatInput="False"
+                             DataContext = "{Binding CurrentPlayer.UIData.InputEvents, Converter={StaticResource FindInputEventConverter}, ConverterParameter='UILeft'}"
+                             Content="{Binding Source='UIBtnHint_MoveSelection',Converter={StaticResource TranslatedStringConverter}}"/>
+            </StackPanel>
+        </Grid>
+    </ContentControl>
+</ls:UIWidget>

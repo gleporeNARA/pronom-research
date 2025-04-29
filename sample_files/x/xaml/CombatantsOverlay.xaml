@@ -1,0 +1,369 @@
+<ls:UIWidget x:Name="CombatantsOverlay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:ls="clr-namespace:ls"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             Template="{StaticResource Hud.Root}"
+             mc:Ignorable="d"
+             ls:UIWidget.ContextName="Combatants" d:DataContext="{d:DesignInstance {x:Type ls:Combatants}, IsDesignTimeCreatable=True}"
+             d:DesignHeight="2160" d:DesignWidth="3840">
+    <ls:UIWidget.Resources>
+        <KeyTime x:Key="SelectedFadeTime">0:0:0.5</KeyTime>
+        <KeyTime x:Key="SelectedFade2Time">0:0:1.0</KeyTime>
+        <KeyTime x:Key="CharSlideInTime">0:0:0.8</KeyTime>
+        <KeyTime x:Key="scaleUpTime">0:0:0.2</KeyTime>
+        <KeyTime x:Key="scaleDownTime">0:0:0.1</KeyTime>
+        <Duration x:Key="ResizeBeginTime">0:0:1</Duration>
+    </ls:UIWidget.Resources>
+    <StackPanel VerticalAlignment="Top" HorizontalAlignment="Left" SnapsToDevicePixels="True" Orientation="Horizontal" Visibility="{Binding Combatants.Count, Converter={StaticResource CountToVisibleConverter}}" >
+        <StackPanel.Style>
+            <Style TargetType="StackPanel">
+                <Setter Property="Margin" Value="-6,86,0,0"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding Data.Players.Count}" Value="1">
+                        <Setter Property="Margin" Value="-6,-14,0,0"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </StackPanel.Style>
+        <i:Interaction.Behaviors>
+            <noesis:CollectionSortBehavior x:Name="SortBehavior" ItemsSource="{Binding Combatants}" Comparer="{Binding CombatantSorter}" />
+        </i:Interaction.Behaviors>
+
+        <Grid>
+            <ItemsControl x:Name="CombatantsList" ItemsSource="{Binding SortedItems, ElementName=SortBehavior}" AlternationCount="{Binding Combatants.Count}">
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <WrapPanel Margin="20,0,20,0" Width="860" />
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ItemsControl.ItemContainerStyle>
+                    <Style TargetType="ContentPresenter">
+                        <Setter Property="Margin" Value="-21, 0,-22,0"/>
+                        <Setter Property="Panel.ZIndex" Value="{Binding Path=(ItemsControl.AlternationIndex),RelativeSource={RelativeSource Mode=Self},Converter={StaticResource MultiplierConverter},ConverterParameter=-1}"/>
+                    </Style>
+                </ItemsControl.ItemContainerStyle>
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate  DataType="{x:Type ls:Combatant}" >
+                        <DataTemplate.Resources>
+                            <TimelineCollection x:Key="SelectedFade"  >
+                                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" RepeatBehavior="Forever">
+                                    <LinearDoubleKeyFrame  KeyTime="{StaticResource SelectedFadeTime}" Value="1" />
+                                    <LinearDoubleKeyFrame  KeyTime="{StaticResource SelectedFade2Time}" Value="0.0" />
+                                </DoubleAnimationUsingKeyFrames>
+                            </TimelineCollection>
+
+                            <Style x:Key="SelectedImageStyle" TargetType="Image">
+                                <Style.Triggers>
+                                    <Trigger Property="Visibility" Value="Visible">
+                                        <Trigger.EnterActions>
+                                            <BeginStoryboard x:Name="fadeSelected">
+                                                <Storyboard Children="{StaticResource SelectedFade}"  />
+                                            </BeginStoryboard>
+                                        </Trigger.EnterActions>
+                                        <Trigger.ExitActions>
+                                            <StopStoryboard BeginStoryboardName="fadeSelected"/>
+                                        </Trigger.ExitActions>
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </DataTemplate.Resources>
+                        <StackPanel x:Name="ElementContainer" >
+                            <StackPanel.Tag>
+                                <!--previous member is highlited in game-->
+                                <MultiBinding Converter="{StaticResource EqualConverter}">
+                                    <Binding RelativeSource="{RelativeSource AncestorType={x:Type ls:UIWidget}}" Path="DataContext.CurrentPlayer.CurrentTarget"/>
+                                    <Binding Path="PreviousTeamMember" />
+                                </MultiBinding>
+                            </StackPanel.Tag>
+                            <Grid x:Name="CharacterContainer" DataContext="{Binding CurrentCharacter}" Tag="Intro" Background="Transparent" VerticalAlignment="Center" RenderTransformOrigin="0.5,0.5" Opacity="0">
+                                <Grid.RenderTransform>
+                                    <TransformGroup>
+                                        <ScaleTransform ScaleX="0.8" ScaleY="0.8"/>
+                                        <SkewTransform/>
+                                        <RotateTransform/>
+                                        <TranslateTransform/>
+                                    </TransformGroup>
+                                </Grid.RenderTransform>
+
+
+                                <!--196x130 -->
+                                <Rectangle Fill="Black" Width="132" Height="200" Margin="0,24,0,0" VerticalAlignment="Top" />
+                                <Rectangle Fill="{Binding Icon}" Width="130" Height="196" Margin="0,22,0,0" VerticalAlignment="Top" />
+                                <ProgressBar Template="{DynamicResource DefaultProgressBar}" VerticalAlignment="Top" HorizontalAlignment="Left" Width="130" Height="196" Margin="18,26,0,0" Orientation="Vertical" Value="{Binding Stats.Health.PercentValue, Mode=OneWay, Converter={StaticResource InvertPercConverter}}" Maximum="1" Minimum="0" Background="Transparent" Foreground="{StaticResource LS_PortraitHPColor}" BorderThickness="0" BorderBrush="Transparent"/>
+
+                                <Image x:Name="frame" Visibility="Visible" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_neutral_d.png" Stretch="None" Margin="0,8,-10,18" VerticalAlignment="Top" />
+                                <Image x:Name="frame_h" Visibility="Hidden" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_neutral_h.png" Stretch="None" Margin="0,8,-10,18" VerticalAlignment="Top" />
+                                <ContentControl Template="{StaticResource StatusHolder}" MaxWidth="84" MaxHeight="102" VerticalAlignment="Top" HorizontalAlignment="Left" Margin="24,22,0,0"/>
+                                <Control Template="{StaticResource PortraitHealth}" HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="0,0,0,40"/>
+
+                                <!-- health -->
+                                <ls:LSProgressBar VerticalAlignment="Bottom" Margin="0,0,0,36" Width="130" Height="12" Value="{Binding Stats.Health.PercentValue, Mode=OneWay}" Foreground="{StaticResource LS_HealthBarForegound}" Maximum="1" Minimum="0" BorderBrush="Transparent" Background="Black" />
+
+                                <Image x:Name="Selected" Margin="0,8,-10,18" Visibility="Collapsed"  VerticalAlignment="Top" IsHitTestVisible="False" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_active.png" Stretch="None" Style="{StaticResource SelectedImageStyle}" >
+                                    <Image.Tag>
+                                        <!--current character is highlited in game-->
+                                        <MultiBinding Converter="{StaticResource EqualConverter}">
+                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type ls:UIWidget}}" Path="DataContext.CurrentPlayer.CurrentTarget"/>
+                                            <Binding Path="DataContext" ElementName="CharacterContainer" />
+                                        </MultiBinding>
+                                    </Image.Tag>
+                                </Image>
+                                <Grid x:Name="PartyJoin" Margin="-156,8,-10,18" Visibility="Collapsed"  VerticalAlignment="Top" IsHitTestVisible="False">
+                                    <Grid.Tag>
+                                        <!--current character is controlled by the current player-->
+                                        <MultiBinding Converter="{StaticResource EqualConverter}">
+                                            <Binding RelativeSource="{RelativeSource AncestorType={x:Type ls:UIWidget}}" Path="DataContext.CurrentPlayer.UserId"/>
+                                            <Binding Path="OwnerUserID"/>
+                                        </MultiBinding>
+                                    </Grid.Tag>
+                                    <Image x:Name="frameJoin" Visibility="Collapsed" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_join_d.png" Stretch="None"   />
+                                    <Image x:Name="frameJoinGlow" Opacity="0" Visibility="Collapsed" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_join_glow.png" Stretch="None" />
+                                    <Image x:Name="PrevSelected" Visibility="Collapsed" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_join_active_left.png" Stretch="None" HorizontalAlignment="Left" Margin="86,0,0,0"    Style="{StaticResource SelectedImageStyle}" />
+                                    <Image x:Name="CurrSelected" Visibility="Collapsed" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_join_active_right.png" Stretch="None" HorizontalAlignment="Right" Margin="0,0,86,0"    Style="{StaticResource SelectedImageStyle}" />
+                                </Grid>
+                                <i:Interaction.Triggers>
+                                    <i:EventTrigger EventName="MouseLeftButtonUp" >
+                                        <i:InvokeCommandAction Command="{Binding DataContext.SetCameraOnGameObject, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}"/>
+                                        <i:InvokeCommandAction IsEnabled="{Binding IsCurrentTurn}" Command="{Binding DataContext.SelectCharacter, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}"/>
+                                        <i:InvokeCommandAction Command="{Binding DataContext.PlaySoundEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="UI_HUD_SelectCharacter"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseEnter">
+                                        <i:InvokeCommandAction Command="{Binding DataContext.HighlightGameobject, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}"/>
+                                        <i:InvokeCommandAction Command="{Binding DataContext.ShowGameobjectInTarget, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}"/>
+                                        <i:InvokeCommandAction Command="{Binding DataContext.PlaySoundEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                                                               CommandParameter="UI_HUD_Shared_Over"/>
+                                    </i:EventTrigger>
+                                    <i:EventTrigger EventName="MouseLeave">
+                                        
+                                        <i:InvokeCommandAction Command="{Binding DataContext.ClearHighlightGameobject, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}"/>
+                                        <i:InvokeCommandAction Command="{Binding DataContext.HideGameobjectInTarget, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}"/>
+                                    </i:EventTrigger>
+                                </i:Interaction.Triggers>
+                            </Grid>
+                            <!--debug values
+                        <TextBlock Text="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Converter={StaticResource MultiplierConverter}, ConverterParameter=1}" />-->
+                            <!--
+                        <TextBlock Text="{Binding Order}" />
+                        <TextBlock Text="{Binding ElementName=CharacterContainer,Path=Tag,StringFormat='{}::{0}::'}" />
+                        <TextBlock Text="{Binding CurrentCharacter.CurrentCombatInitiative,StringFormat='{}::{0}::'}" />
+                        debugValues-->
+                            
+                            <i:Interaction.Triggers>
+                                <ei:TimerTrigger SourceObject="{Binding ElementName=CharacterContainer}" EventName="Loaded" MillisecondsPerTick="{Binding (ItemsControl.AlternationIndex), RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ContentPresenter}}, Converter={StaticResource MultiplierConverter}, ConverterParameter=200}" TotalTicks="1">
+                                    <ei:ChangePropertyAction TargetName="CharacterContainer" PropertyName="Tag" Value="StartIntro" />
+                                </ei:TimerTrigger>
+                            </i:Interaction.Triggers>
+                        </StackPanel>
+
+
+                        <DataTemplate.Triggers>
+                            <Trigger SourceName="CharacterContainer" Property="Tag" Value="StartIntro">
+                                <Trigger.EnterActions>
+                                    <BeginStoryboard>
+                                        <Storyboard Storyboard.TargetName="CharacterContainer" >
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" >
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="1">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" >
+                                                <EasingDoubleKeyFrame KeyTime="0" Value="100"/>
+                                                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="Tag" >
+                                                <DiscreteObjectKeyFrame KeyTime="0:0:0.8" Value="Active"/>
+                                            </ObjectAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </Trigger.EnterActions>
+                            </Trigger>
+
+                            <DataTrigger Binding="{Binding ElementName=Selected, Path=Tag}" Value="True">
+                                <Setter TargetName="frame_h" Property="Visibility" Value="Visible" />
+                                <Setter TargetName="frame" Property="Visibility" Value="Hidden" />
+                                <Setter TargetName="frameJoin" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_join_right_h.png" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding ElementName=Selected, Path=Tag}" Value="False">
+                                    <Setter TargetName="frame_h" Property="Visibility" Value="Hidden" />
+                                    <Setter TargetName="frame" Property="Visibility" Value="Visible" />
+                                    <Setter TargetName="frameJoin" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_join_d.png" />
+                            </DataTrigger>
+
+                            <DataTrigger Binding="{Binding CurrentCharacter.PlayerRelation}" Value="Enemy">
+                                <Setter TargetName="frame" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_hostile_d.png" />
+                                <Setter TargetName="frame_h" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_hostile_h.png" />
+                            </DataTrigger>
+
+
+                            <DataTrigger Binding="{Binding ElementName=ElementContainer, Path=Tag}" Value="True">
+                                <Setter TargetName="frameJoin" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_join_left_h.png" />
+                            </DataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding CurrentCharacter.PlayerRelation}" Value="Player"/>
+                                    <Condition Binding="{Binding ElementName=PartyJoin, Path=Tag}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter TargetName="frame" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_party_d.png" />
+                                    <Setter TargetName="frame_h" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_party_h.png" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding CurrentCharacter.PlayerRelation}" Value="Player"/>
+                                    <Condition Binding="{Binding ElementName=PartyJoin, Path=Tag}" Value="False"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter TargetName="frame" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_remote_d.png" />
+                                    <Setter TargetName="frame_h" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_remote_h.png" />
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <DataTrigger Binding="{Binding PreviousTeamMember, Converter={StaticResource NullToBoolTrueConverter}}" Value="False">
+                                <Setter TargetName="PartyJoin" Property="Visibility" Value="Visible" />
+                                <Setter Property="Panel.ZIndex" Value="100" />
+                            </DataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding CurrentCharacter.IsCurrentTurn}" Value="True"/>
+                                    <Condition Binding="{Binding CurrentCharacter.IsSelectedCharacter}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter TargetName="Selected" Property="Visibility" Value="Visible"/>
+                                    <Setter TargetName="CurrSelected" Property="Visibility" Value="Visible"/>
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding PreviousTeamMember.IsCurrentTurn}" Value="True"/>
+                                    <Condition Binding="{Binding PreviousTeamMember.IsSelectedCharacter}" Value="True"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.Setters>
+                                    <Setter TargetName="PrevSelected" Property="Visibility" Value="Visible"/>
+                                </MultiDataTrigger.Setters>
+                            </MultiDataTrigger>
+                            <DataTrigger Binding="{Binding CurrentCharacter.PlayerRelation}" Value="Ally">
+                                <Setter TargetName="frame" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_friendly_d.png" />
+                                <Setter TargetName="frame_h" Property="Source" Value="pack://application:,,,/GustavNoesisGUI;component/Assets/Combatants/frame_friendly_h.png" />
+                            </DataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding CurrentCharacter.IsCurrentTurn}" Value="True"/>
+                                    <Condition Binding="{Binding Path=Tag,ElementName=CharacterContainer}" Value="Active"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard  x:Name="CurrentTurnBS">
+                                        <Storyboard FillBehavior="HoldEnd" BeginTime="0:0:0.3">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="CharacterContainer">
+                                                <EasingDoubleKeyFrame KeyTime="{StaticResource scaleUpTime}" Value="1.0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="CharacterContainer">
+                                                <EasingDoubleKeyFrame KeyTime="{StaticResource scaleUpTime}" Value="1.0">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin">
+                                                <EasingThicknessKeyFrame KeyTime="{StaticResource scaleUpTime}" Value="-4,0,-10,0">
+                                                    <EasingThicknessKeyFrame.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </EasingThicknessKeyFrame.EasingFunction>
+                                                </EasingThicknessKeyFrame>
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                            </MultiDataTrigger>
+                            <MultiDataTrigger>
+                                <MultiDataTrigger.Conditions>
+                                    <Condition Binding="{Binding CurrentCharacter.IsCurrentTurn}" Value="False"/>
+                                    <Condition Binding="{Binding Path=Tag,ElementName=CharacterContainer}" Value="Active"/>
+                                </MultiDataTrigger.Conditions>
+                                <MultiDataTrigger.EnterActions>
+                                    <BeginStoryboard x:Name="ExitCurrentTurnBS">
+                                        <Storyboard FillBehavior="HoldEnd">
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleY)" Storyboard.TargetName="CharacterContainer">
+                                                <EasingDoubleKeyFrame KeyTime="{StaticResource scaleDownTime}" Value="0.8">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[0].(ScaleTransform.ScaleX)" Storyboard.TargetName="CharacterContainer">
+                                                <EasingDoubleKeyFrame KeyTime="{StaticResource scaleDownTime}" Value="0.8">
+                                                    <EasingDoubleKeyFrame.EasingFunction>
+                                                        <CubicEase EasingMode="EaseOut"/>
+                                                    </EasingDoubleKeyFrame.EasingFunction>
+                                                </EasingDoubleKeyFrame>
+                                            </DoubleAnimationUsingKeyFrames>
+
+                                            <ThicknessAnimationUsingKeyFrames Storyboard.TargetProperty="Margin" >
+                                                <SplineThicknessKeyFrame KeyTime="{StaticResource scaleDownTime}" Value="-21, 0,-22,0" />
+                                            </ThicknessAnimationUsingKeyFrames>
+                                        </Storyboard>
+                                    </BeginStoryboard>
+                                </MultiDataTrigger.EnterActions>
+                            </MultiDataTrigger>
+
+                            <EventTrigger RoutedEvent="FrameworkElement.Loaded">
+
+                                <BeginStoryboard x:Name="LoadedBS">
+
+                                    <Storyboard FillBehavior="HoldEnd">
+
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="frameJoinGlow" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:00" Value="{x:Static Visibility.Visible}"/>
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:02.0" Value="{x:Static Visibility.Collapsed}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                        <ObjectAnimationUsingKeyFrames BeginTime="00:00:00" Storyboard.TargetName="frameJoin" Storyboard.TargetProperty="(UIElement.Visibility)">
+                                            <DiscreteObjectKeyFrame KeyTime="00:00:01.9" Value="{x:Static Visibility.Visible}"/>
+                                        </ObjectAnimationUsingKeyFrames>
+
+                                        <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Opacity)" Storyboard.TargetName="frameJoinGlow" BeginTime="0:0:1.0">
+                                            <EasingDoubleKeyFrame KeyTime="0" Value="0"/>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:0.8" Value="1">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseOut"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                            <EasingDoubleKeyFrame KeyTime="0:0:1" Value="0">
+                                                <EasingDoubleKeyFrame.EasingFunction>
+                                                    <CubicEase EasingMode="EaseIn"/>
+                                                </EasingDoubleKeyFrame.EasingFunction>
+                                            </EasingDoubleKeyFrame>
+                                        </DoubleAnimationUsingKeyFrames>
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+
+                        </DataTemplate.Triggers>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl >
+        </Grid>
+
+    </StackPanel>
+</ls:UIWidget>

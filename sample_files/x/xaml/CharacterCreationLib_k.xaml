@@ -1,0 +1,338 @@
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+			        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+					xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:ls="clr-namespace:ls"
+                    xmlns:noesis="clr-namespace:NoesisGUIExtensions"
+					mc:Ignorable="d">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="../Library/CharacterCreationLib.xaml"/>
+    </ResourceDictionary.MergedDictionaries>
+
+
+    <ControlTemplate x:Key="CharacterRaceFeatures">
+        <StackPanel HorizontalAlignment="Center" Background="Transparent">
+
+            <Image HorizontalAlignment="Center" Source="pack://application:,,,/GustavNoesisGUI;component/Assets/Shared/divider.png" Stretch="None"/>
+            <TextBlock Text="{Binding Source='UI_CC_Race_Features', Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource PanelHeaderText}"/>
+
+            <!-- Race Ability Increases -->
+            <ItemsControl ItemsSource="{Binding RaceProgressionDetails.AbilityBonus}" HorizontalAlignment="Center" MinWidth="600">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock FontSize="{DynamicResource DefaultFontSize}" Foreground="{DynamicResource LS_PrimaryColor}" ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Left">
+                            <Run Text="{Binding Source='UICharacterPanel_Race', Converter={StaticResource TranslatedStringConverter}, StringFormat='{}{0}: '}" Foreground="{DynamicResource LS_ActivePanelFontColor}"/>
+                            <Run Text="{Binding DisplayName}"/>
+                            <Run Text="{Binding Value, StringFormat={}{0: +#; -#; +0}}"/>
+                        </TextBlock>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Race Ability Selectors -->
+            <Grid Visibility="{Binding RaceProgressionDetails.AbilitySelection.Count, Converter={StaticResource CountToVisibleConverter}}" HorizontalAlignment="Center" MinWidth="600">
+                <ContentControl Template="{StaticResource ValidationFailedHighlighter}" Tag="{Binding RaceAbilityInvalid}">
+                    <ContentControl Template="{StaticResource AbilitiesImprovementTemplate}" DataContext="{Binding RaceProgressionDetails}">
+                        <TextBlock Foreground="{DynamicResource LS_PrimaryColor}" VerticalAlignment="Center" Margin="52,4,0,0">
+                            <Run Text="{Binding Source='UICharacterPanel_Race', Converter={StaticResource TranslatedStringConverter}, StringFormat='{}{0}: '}" Foreground="{DynamicResource LS_ActivePanelFontColor}"/>
+                            <Run Text="{Binding Source='UITooltip_AbilityImprovements', Converter={StaticResource TranslatedStringConverter}}"/>
+                            <Run Text="{Binding SelectedAbilityCount, StringFormat=' ({0}'}"/><Run Text="{Binding MaxSelectedAbilityCount, StringFormat='/{0})'}"/>
+                        </TextBlock>
+                    </ContentControl>
+                </ContentControl>
+            </Grid>
+
+            <!-- Race Progressions -->
+            <ItemsControl ItemsSource="{Binding RaceProgressionDetails.Progressions}" HorizontalAlignment="Center" MinWidth="600">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Template="{DynamicResource ProgressionFeatures}">
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSubProgression}" Value="True">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Sub Race Progressions -->
+            <TextBlock Text="{Binding Source='UI_CC_Sub_Race_Features', Converter={StaticResource TranslatedStringConverter}}" Style="{StaticResource PanelHeaderText}" Visibility="{Binding HasSubRaceProgressions, Converter={StaticResource BoolToVisibleConverter}, ConverterParameter=False }" />
+            <ItemsControl ItemsSource="{Binding RaceProgressionDetails.Progressions}" HorizontalAlignment="Center" MinWidth="600">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Template="{DynamicResource ProgressionFeatures}">
+                            <ContentControl.Style>
+                                <Style TargetType="ContentControl">
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding IsSubProgression}" Value="False">
+                                            <Setter Property="Visibility" Value="Collapsed"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </ContentControl.Style>
+                        </ContentControl>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+        </StackPanel>
+    </ControlTemplate>
+
+    
+    <ControlTemplate x:Key="SpellBoxesTemplate" TargetType="ContentControl">
+        <StackPanel>
+
+            <!-- Cantrip/Spell Addition -->
+            <ItemsControl ItemsSource="{Binding SpellSelectors}" Visibility="{Binding SpellSelectors.Count, Converter={StaticResource CountToVisibleConverter}}" >
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <Grid DataContext="{Binding .}" Visibility="{Binding Count, Converter={StaticResource CountToVisibleConverter}}" Margin="0,0,0,80">
+
+                            <Control Template="{StaticResource SpellBox}"/>
+
+                            <ContentControl Template="{DynamicResource SpellSelectorAdditionsTemplate}" Margin="0,0,0,90">
+                                <ContentControl.Resources>
+                                    <ControlTemplate x:Key="Title">
+                                        <TextBlock Style="{StaticResource PanelHeaderText}">
+                                            <Run Text="{Binding Title}"/>
+                                            <Run Text="{Binding AddedCount, StringFormat=' ({0}'}"/>
+                                            <Run Text="{Binding Additions.Count, StringFormat='/{0})'}"/>
+                                        </TextBlock>
+                                    </ControlTemplate>
+                                </ContentControl.Resources>
+                            </ContentControl>
+
+                            <ls:LSButton VerticalAlignment="Bottom" Margin="0,0,0,-42" Template="{DynamicResource TextButtonTemplate}" Command="{Binding DataContext.OpenSpellSelector, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}" SoundID="UI_HUD_CC_Spells"
+                                     Content="{Binding Source='UI_CC_ManageSpells', Converter={StaticResource TranslatedStringConverter}}">
+                                <ls:LSButton.Resources>
+                                    <ImageSource x:Key="ButtonNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_d.png</ImageSource>
+                                    <ImageSource x:Key="ButtonHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_h.png</ImageSource>
+                                    <ImageSource x:Key="ButtonPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_p.png</ImageSource>
+                                    <ImageSource x:Key="ButtonDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_disabled.png</ImageSource>
+                                </ls:LSButton.Resources>
+                            </ls:LSButton>
+                        </Grid>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Spell Replacement -->
+            <Grid Visibility="{Binding InSpellReplacement, Converter={StaticResource NullToCollapsedConverter}}" Margin="0,0,0,80">
+                <Control Template="{StaticResource SpellBox}"/>
+                <ContentControl Template="{DynamicResource SpellsReplacedTemplate}" Margin="0,0,0,90">
+                    <ContentControl.Resources>
+                        <ControlTemplate x:Key="Title">
+                            <TextBlock Style="{StaticResource PanelHeaderText}">
+                                <Run Text="{Binding Source='UI_CC_Replacement', Converter={StaticResource TranslatedStringConverter}}"/>
+                            </TextBlock>
+                        </ControlTemplate>
+                    </ContentControl.Resources>
+                </ContentControl>
+                <ls:LSButton VerticalAlignment="Bottom" Margin="0,0,0,-42" Template="{DynamicResource TextButtonTemplate}" Command="{Binding DataContext.OpenSpellReplacer, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding ElementName=chosenSpellsSection, Path=DataContext}" SoundID="UI_HUD_CC_Spells"
+                                     Content="{Binding Source='UI_CC_ManageSpells', Converter={StaticResource TranslatedStringConverter}}">
+                    <ls:LSButton.Resources>
+                        <ImageSource x:Key="ButtonNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_d.png</ImageSource>
+                        <ImageSource x:Key="ButtonHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_h.png</ImageSource>
+                        <ImageSource x:Key="ButtonPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_p.png</ImageSource>
+                        <ImageSource x:Key="ButtonDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_disabled.png</ImageSource>
+                    </ls:LSButton.Resources>
+                </ls:LSButton>
+            </Grid>
+
+        </StackPanel>
+    </ControlTemplate>
+
+    
+    <ControlTemplate x:Key="SpellPreparationTemplate" TargetType="ContentControl">
+        <Grid x:Name="preparedSpells" Visibility="{Binding SpellPrepare.MustPrepareSpells, Converter={StaticResource BoolToVisibleConverter}}">
+
+            <Control Template="{StaticResource SpellBox}"/>
+
+            <StackPanel x:Name="chosenSpellsSection" HorizontalAlignment="Center" VerticalAlignment="Center">
+
+                <TextBlock Style="{StaticResource PanelHeaderText}">
+                    <Run Text="{Binding Source='UI_CC_Prepared_Spells', Converter={StaticResource TranslatedStringConverter}}"/>
+                    <Run Text="{Binding SpellPrepare.PreparedCount, StringFormat=' ({0}'}"/>
+                    <Run Text="{Binding SpellPrepare.Prepared.Count, StringFormat='/{0})'}"/>
+                </TextBlock>
+
+                <ContentControl Template="{StaticResource ValidationFailedHighlighter}" Tag="{Binding SpellPrepare.IsInvalid}">
+                    <Grid HorizontalAlignment="Center">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp" >
+                                <i:InvokeCommandAction Command="{Binding DataContext.OpenSpellPreparation, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding ElementName=chosenSpellsSection, Path=DataContext}"/>
+                                <i:InvokeCommandAction Command="{Binding DataContext.PlaySoundEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="UI_HUD_CC_Spells_Click"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                        <StackPanel>
+
+                            <ItemsControl ItemsSource="{Binding SpellPrepare.Prepared}" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,0,90">
+                                <ItemsControl.ItemsPanel>
+                                    <ItemsPanelTemplate>
+                                        <WrapPanel MaxWidth="700"/>
+                                    </ItemsPanelTemplate>
+                                </ItemsControl.ItemsPanel>
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Grid ToolTip="{StaticResource ManagedTooltip}" ToolTipService.Placement="Left" Margin="-10,0,-10,0">
+                                            <Rectangle Width="80" Height="80" Fill="{Binding Spell.Icon}"/>
+                                            <Image Source="pack://application:,,,/GustavNoesisGUI;component/Assets/CharacterCreation/spellslot.png" Stretch="None" Margin="10,10,0,0"/>
+                                            <i:Interaction.Triggers>
+                                                <i:EventTrigger EventName="MouseEnter">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.PlaySoundEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="UI_HUD_Shared_SpellSlot_Over"/>
+                                                </i:EventTrigger>
+                                                <i:EventTrigger EventName="MouseLeave">
+                                                    <i:InvokeCommandAction Command="{Binding DataContext.PlaySoundEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="UI_HUD_Shared_SpellSlot_Out"/>
+                                                </i:EventTrigger>
+                                            </i:Interaction.Triggers>
+                                        </Grid>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </StackPanel>
+                    </Grid>
+                </ContentControl>
+            </StackPanel>
+
+            <ls:LSButton ClipToBounds="False" VerticalAlignment="Bottom" Margin="0,0,0,-42" Template="{DynamicResource TextButtonTemplate}" Command="{Binding DataContext.OpenSpellPreparation, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" SoundID="UI_HUD_CC_Spells" Content="{Binding Source='UI_CC_ManageSpells', Converter={StaticResource TranslatedStringConverter}}">
+                <ls:LSButton.Resources>
+                    <ImageSource x:Key="ButtonNormal">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_d.png</ImageSource>
+                    <ImageSource x:Key="ButtonHighlight">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_h.png</ImageSource>
+                    <ImageSource x:Key="ButtonPressed">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_p.png</ImageSource>
+                    <ImageSource x:Key="ButtonDisabled">pack://application:,,,/GustavNoesisGUI;component/Assets/Buttons/smallBtn_disabled.png</ImageSource>
+                </ls:LSButton.Resources>
+            </ls:LSButton>
+            
+        </Grid>
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding SpellPrepare.Prepared.Count}" Value="0">
+                <Setter TargetName="preparedSpells" Property="Visibility" Value="Collapsed"/>
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    
+    <ControlTemplate x:Key="SelectSkills" TargetType="ContentControl">
+        <ItemsControl ItemsSource="{Binding .}">
+            <ItemsControl.ItemTemplate>
+                <DataTemplate>
+                    <ContentControl Template="{StaticResource SelectableEnhancement}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonUp">
+                                <i:InvokeCommandAction Command="{Binding DataContext.ToggleSkill,RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" CommandParameter="{Binding}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ContentControl>
+                </DataTemplate>
+            </ItemsControl.ItemTemplate>
+        </ItemsControl>
+    </ControlTemplate>
+
+
+    <ControlTemplate x:Key="FeatSummary">
+
+        <StackPanel>
+            <StackPanel x:Name="req" Visibility="Collapsed" Margin="0,0,0,20">
+                <TextBlock Text="{Binding Source='UI_CC_Feat_Requirements', Converter={StaticResource TranslatedStringConverter}}"/>
+                <ItemsControl ItemsSource="{Binding Requirements}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock x:Name="req" Text="{Binding Requirement}" TextWrapping="Wrap"/>
+                            <DataTemplate.Triggers>
+                                <DataTrigger Binding="{Binding IsMet}" Value="False">
+                                    <Setter TargetName="req" Property="Foreground" Value="{DynamicResource LS_NegativeColor}"/>
+                                </DataTrigger>
+                            </DataTemplate.Triggers>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <TextBlock Text="{Binding Description.Text}" TextWrapping="Wrap"/>
+        </StackPanel>
+
+        <ControlTemplate.Triggers>
+            <DataTrigger Binding="{Binding IsRequirementsMet}" Value="False">
+                <Setter TargetName="req" Property="Visibility" Value="Visible"/>
+            </DataTrigger>
+        </ControlTemplate.Triggers>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="FeatDetails">
+
+        <StackPanel>
+
+            <TextBlock Text="{Binding Description.Text}" TextWrapping="Wrap" Margin="0,0,0,20"/>
+
+            <!-- Feat Detail (Progressions) -->
+            <ItemsControl ItemsSource="{Binding FeatDetails.Progressions}" Visibility="{Binding FeatDetails.Progressions.Count, Converter={StaticResource CountToVisibleConverter}}" HorizontalAlignment="Center" Margin="0,0,0,20">
+                <ItemsControl.ItemTemplate>
+                    <DataTemplate>
+                        <ContentControl Template="{DynamicResource ProgressionFeatures}"/>
+                    </DataTemplate>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
+
+            <!-- Feat Ability Selector -->
+            <ContentControl Template="{DynamicResource AbilitiesImprovementTemplate}" DataContext="{Binding FeatDetails}"
+                            Visibility="{Binding AbilitySelection.Count, Converter={StaticResource CountToVisibleConverter}}">
+                <TextBlock Foreground="{DynamicResource LS_PrimaryColor}" HorizontalAlignment="Center">
+                                <Run Text="{Binding Source='UITooltip_AbilityImprovements', Converter={StaticResource TranslatedStringConverter}}"/>
+                                <Run Text="{Binding SelectedAbilityCount, StringFormat=' ({0}'}"/><Run Text="{Binding MaxSelectedAbilityCount, StringFormat='/{0})'}"/>
+                </TextBlock>
+            </ContentControl>
+
+            <!-- Feat Skills -->
+            <ContentControl Template="{DynamicResource SkillSelectionBox}" DataContext="{Binding FeatSkills}">
+                <ContentControl.Resources>
+                    <ControlTemplate x:Key="Title">
+                        <TextBlock x:Name="txt" Style="{DynamicResource SkillHeaderText}" Foreground="{DynamicResource LS_PrimaryColor}" HorizontalAlignment="Center">
+                                                <Run Text="{Binding Source='UI_CC_Select_Feat_Skills', Converter={StaticResource TranslatedStringConverter}}"/>
+                                                <Run Text="{Binding SelectedSkillCount, StringFormat=' ({0}'}"/>
+                                                <Run Text="{Binding MaxSelectedSkillCount, StringFormat='/{0})'}"/>
+                        </TextBlock>
+                        <ControlTemplate.Triggers>
+                            <DataTrigger Binding="{Binding IsComplete}" Value="False">
+                                <Setter TargetName="txt" Property="Foreground" Value="{DynamicResource LS_SecondaryColor}"/>
+                            </DataTrigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </ContentControl.Resources>
+            </ContentControl>
+
+            <!-- Feat Passives -->
+            <StackPanel Visibility="{Binding FeatPassives.Count, Converter={StaticResource CountToVisibleConverter}}">
+                <ItemsControl ItemsSource="{Binding FeatPassives}" >
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel HorizontalAlignment="Center" Background="Transparent">
+                                <StackPanel HorizontalAlignment="Center" Margin="0,20,0,0">
+                                    <TextBlock Style="{StaticResource PanelHeaderText}">
+                                        <Run Text="{Binding DisplayName}"/>
+                                        <Run Text="{Binding SelectedPassiveCount, StringFormat=' ({0}'}"/>
+                                        <Run Text="{Binding MaxSelectedPassiveCount, StringFormat='/{0})'}"/>
+                                    </TextBlock>
+                                    <ContentControl Template="{StaticResource SelectPassives}" DataContext="{Binding Passives}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+            </StackPanel>
+
+            <!-- Feat Spell Selectors -->
+            <ContentControl Template="{DynamicResource SpellBoxesTemplate}" DataContext="{Binding FeatDetails}"/>
+        </StackPanel>
+    </ControlTemplate>
+
+
+</ResourceDictionary>

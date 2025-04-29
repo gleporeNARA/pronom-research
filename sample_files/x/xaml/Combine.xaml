@@ -1,0 +1,215 @@
+<ls:UIWidget xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:ls="clr-namespace:ls"
+             xmlns:noesis="clr-namespace:NoesisGUIExtensions;assembly=Noesis.GUI.Extensions"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+             xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+             xmlns:System="clr-namespace:System;assembly=mscorlib"
+             xmlns:ed="http://schemas.microsoft.com/expression/2010/drawing"
+             mc:Ignorable="d"
+             d:DesignHeight="2160" d:DesignWidth="3840"
+             ls:UIWidget.UseCustomDC="True"
+             ls:UIWidget.ContextName="Combine">
+  
+    <ls:UIWidget.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="../Library/ContainersBackground.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+
+            <!--#region Default combine background data-->
+            <System:Double x:Key="COMBINE_Width">778</System:Double>
+            <System:Double x:Key="COMBINE_Height">820</System:Double>
+            <System:Double x:Key="COMBINE_BG_Width">856</System:Double>
+            <System:Double x:Key="COMBINE_BG_Height">912</System:Double>
+            <System:Double x:Key="COMBINE_BG_Left">-42</System:Double>
+            <System:Double x:Key="COMBINE_BG_Top">-52</System:Double>
+            <System:Double x:Key="COMBINE_Inv_Left">0</System:Double>
+            <System:Double x:Key="COMBINE_Inv_Top">0</System:Double>
+            <!--#endregion-->
+
+            <System:Double x:Key="CombineSlotSize">108</System:Double>
+            <SolidColorBrush x:Key="SlotBorderColor" Color="#1E1D1B"/>
+
+            <ControlTemplate x:Key="InsertItemSlot">
+                <Border BorderThickness="2" x:Name="borderSlot">
+                    <Border.Style>
+                        <Style TargetType="Border">
+                            <Setter Property="BorderBrush" Value="{StaticResource SlotBorderColor}"/>
+                            <Setter Property="Background" Value="Transparent"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type ls:UIWidget}, AncestorLevel=1}, Path=DataContext.ShowSlotError}" Value="True">
+                                    <Setter Property="BorderBrush" Value="Red"/>
+                                    <Setter Property="Background" Value="#7FFF0000"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Border.Style>
+                    
+                    <Grid Width="112" Height="112">
+                        <Image Source="../Assets/Combine/c_ico_plus.png" Width="{DynamicResource CombineSlotSize}" Height="{DynamicResource CombineSlotSize}" IsHitTestVisible="False" 
+                           Visibility="{Binding Icon, Converter={StaticResource BoolToHiddenConverter}}"/>
+                        <ls:LSEntityObject EntityRef="{Binding EntityHandle}" Context="Inventory" 
+                                       Width="{DynamicResource CombineSlotSize}" Height="{DynamicResource CombineSlotSize}" 
+                                       Background="{Binding Icon}"/>
+                    </Grid>
+                </Border>
+                <ControlTemplate.Triggers>
+                    <Trigger Property="IsMouseOver" Value="True">
+                        <Setter TargetName="borderSlot" Property="BorderBrush" Value="White"/>
+                    </Trigger>
+                </ControlTemplate.Triggers>
+            </ControlTemplate>
+            
+            <Style x:Key="InsertSlotTemplateStyle" TargetType="ContentControl">
+                <Setter Property="Template" Value="{StaticResource InsertItemSlot}"/>
+            </Style>
+
+            <ControlTemplate x:Key="InsertSlot">
+                <ContentControl>
+                    <i:Interaction.Behaviors>
+                        <ls:DragGenericBehavior StartDragCommand="{Binding DataContext.StartDragCommand.ActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                        <ls:DropOnGenericBehavior DropCommand="{Binding DataContext.DropSlotCommand.ActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                    </i:Interaction.Behaviors>
+
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="MouseEnter">
+                            <i:InvokeCommandAction 
+                                Command="{Binding DataContext.PlaySoundEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                                CommandParameter="UI_HUD_Combine_InsertSlot_Over"/>
+                        </i:EventTrigger>
+
+                        <i:EventTrigger EventName="MouseLeave">
+                            <i:InvokeCommandAction 
+                                Command="{Binding DataContext.PlaySoundEvent, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}" 
+                                CommandParameter="UI_HUD_Combine_InsertSlot_Out"/>
+                        </i:EventTrigger>
+
+                        <i:EventTrigger EventName="MouseLeftButtonUp">
+                            <i:InvokeCommandAction 
+                                Command="{Binding DataContext.OpenInventoryCommand.ActionCommand, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+
+
+                    <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Width="112" Height="112" Margin="5,8,0,0">
+                        <ContentControl HorizontalAlignment="Left" VerticalAlignment="Top" Style="{StaticResource InsertSlotTemplateStyle}"/>
+                    </Grid>
+                </ContentControl>
+            </ControlTemplate>
+
+            <Style x:Key="InsertSlotStyle" TargetType="ContentControl">
+                <Setter Property="Template" Value="{StaticResource InsertSlot}"/>
+                <Setter Property="Panel.ZIndex" Value="0"/>
+            </Style>
+
+            <DataTemplate x:Key="CombineSlots2">
+                <ContentControl Style="{StaticResource InsertSlotStyle}" DataContext="{Binding DataContext.IngredientSlot, RelativeSource={RelativeSource AncestorType={x:Type ls:UIWidget}}}"
+                                VerticalAlignment="Top" HorizontalAlignment="Left" Margin="377,47,0,0"/>
+            </DataTemplate>
+
+        </ResourceDictionary>
+    </ls:UIWidget.Resources>
+
+    <Grid x:Name="rootCanvas" HorizontalAlignment="Center" VerticalAlignment="Center">
+        <Grid.Style>
+            <Style TargetType="Grid">
+                <Setter Property="Width" Value="{StaticResource COMBINE_Width}"/>
+                <Setter Property="Height" Value="{StaticResource COMBINE_Height}"/>
+            </Style>
+        </Grid.Style>
+
+        <i:Interaction.Behaviors>
+            <ls:LSMouseDragElementBehavior HitArea="{Binding ElementName=DragHit,Mode=OneWay}"/>
+        </i:Interaction.Behaviors>
+
+        <Path x:Name="DragHit" HorizontalAlignment="Center" VerticalAlignment="Center" IsHitTestVisible="True" Fill="Transparent">
+            <Path.Style>
+                <Style TargetType="Path">
+                    <Setter Property="Data" Value="M 0,0 778,0 778,820 0,820 Z"/>
+                    <Setter Property="Width" Value="{StaticResource COMBINE_Width}"/>
+                    <Setter Property="Height" Value="{StaticResource COMBINE_Height}"/>
+                </Style>
+            </Path.Style>
+        </Path>
+
+        <Image x:Name="ContainerBG" IsHitTestVisible="False" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image.Style>
+                <Style TargetType="Image">
+                    <Setter Property="Source" Value="../Assets/Combine/combine_inventory_bg.png"/>
+                    <Setter Property="Width" Value="{StaticResource COMBINE_BG_Width}"/>
+                    <Setter Property="Height" Value="{StaticResource COMBINE_BG_Height}"/>
+                    <Setter Property="Canvas.Left" Value="{StaticResource COMBINE_BG_Left}"/>
+                    <Setter Property="Canvas.Top" Value="{StaticResource COMBINE_BG_Top}"/>
+                </Style>
+            </Image.Style>
+        </Image>
+
+        <Grid Name="InsertElement" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Image Source="../Assets/Combine/combine_x2.png" Width="564" Height="376" Margin="28,28,28,259" HorizontalAlignment="Center" VerticalAlignment="Top"/>
+
+            <!-- Item in which we want to insert elements, this element should have a fixed position and immutable-->
+            <ls:LSEntityObject VerticalAlignment="Top" Margin="128,57,0,0"  
+                               Width="{StaticResource CombineSlotSize}" Height="{StaticResource CombineSlotSize}" 
+                               EntityRef="{Binding BaseItem.EntityHandle}" Context="Combine"
+                               Background="{Binding BaseItem.Icon}" IsHitTestVisible="False" HorizontalAlignment="Left">
+                <ls:LSEntityObject.Style>
+                    <Style TargetType="ls:LSEntityObject">
+                        <Setter Property="Opacity" Value="1"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CombineDone}" Value="True">
+                                <Setter Property="Opacity" Value="0.5"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </ls:LSEntityObject.Style>
+            </ls:LSEntityObject>
+
+            <ContentControl Visibility="{Binding CombineDone, Converter={StaticResource BoolToHiddenConverter}}">
+                <ContentControl.Style>
+                    <Style TargetType="ContentControl">
+                        <Setter Property="ContentTemplate" Value="{StaticResource CombineSlots2}"/>
+                    </Style>
+                </ContentControl.Style>
+            </ContentControl>
+
+            <!-- Result combine -->
+            <ls:LSEntityObject HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="256,0,256,288"  
+                               Width="{StaticResource CombineSlotSize}" Height="{StaticResource CombineSlotSize}" 
+                               EntityRef="{Binding ResultItem.EntityHandle}" Context="Combine" 
+                               Background="{Binding ResultItem.Icon}"/>
+
+
+            <!-- Preview result -->
+            <Rectangle Fill="{Binding PreviewIcon}" Width="{StaticResource CombineSlotSize}" Height="{StaticResource CombineSlotSize}" 
+                       HorizontalAlignment="Center" VerticalAlignment="Bottom" Margin="256,0,256,288" IsHitTestVisible="False" 
+                       Visibility="{Binding ResultItem.Icon, Converter={StaticResource BoolToHiddenConverter}}"/>
+
+            <TextBlock VerticalAlignment="Bottom" HorizontalAlignment="Center"
+                     Width="600" Height="150" Margin="10,0,10,110" 
+                     TextAlignment="Center" FontSize="{StaticResource DefaultFontSize}"
+                     Text="{Binding ResultText}" TextWrapping="Wrap">
+                <TextBlock.Style>
+                    <Style TargetType="TextBlock">
+                        <Setter Property="Foreground" Value="{StaticResource LS_PrimaryColor}"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding CombineSuccessful}" Value="False">
+                                <Setter Property="Foreground" Value="{StaticResource LS_NotificationErrorColor}"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+
+            <StackPanel VerticalAlignment="Bottom" HorizontalAlignment="Center" Orientation="Vertical" Margin="60,0,60,-69">
+                <ls:LSButton Template="{DynamicResource BlueButtonTextContent}" Content="{Binding Source='UICombine_CombineButton', Converter={StaticResource TranslatedStringConverter}, ConverterParameter='ToUpper'}" 
+                             Command="{Binding CombineItemsCommand.ActionCommand}" BoundEvent="UICombine" SoundID="UI_HUD_Combine_Combine" Margin="0,0,0,-16" IsEnabled="{Binding CombineEnabled}"/>
+                <ls:LSButton Template="{DynamicResource BrownButtonTextContent}" Content="{Binding Source='UIButton_Close', Converter={StaticResource TranslatedStringConverter}, ConverterParameter='ToUpper'}" 
+                             Command="{Binding CloseWidgetCommand.ActionCommand}" BoundEvent="UICancel" SoundID="UI_Shared_Cancel"/>
+            </StackPanel>
+        </Grid>
+
+    </Grid>
+</ls:UIWidget>
