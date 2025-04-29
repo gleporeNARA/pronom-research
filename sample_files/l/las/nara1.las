@@ -1,0 +1,420 @@
+  0
+LAYERSTATEDICTIONARY
+  0
+LAYERSTATE
+  1
+nara1
+ 91
+2047
+301
+
+290
+0
+302
+0
+  8
+PHONES
+ 90
+8
+ 62
+4
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+CHAIRS
+ 90
+8
+ 62
+4
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+CPU
+ 90
+8
+ 62
+6
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+FURNITURE
+ 90
+8
+ 62
+3
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+EMPLOYEE
+ 90
+8
+ 62
+1
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+FILE_CABINETS
+ 90
+8
+ 62
+1
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+PRINTER_ISLAND
+ 90
+8
+ 62
+7
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+RMNUM
+ 90
+8
+ 62
+40
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+PANELS_201
+ 90
+8
+ 62
+6
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+IWALLE
+ 90
+8
+ 62
+3
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+IDOORE
+ 90
+8
+ 62
+2
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+A-DOOR-TRIM-3D
+ 90
+8
+ 62
+7
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-S-COLM
+ 90
+8
+ 62
+8
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-F-PLMB
+ 90
+8
+ 62
+2
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-B-FURR
+ 90
+8
+ 62
+6
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-C-HEAD
+ 90
+8
+ 62
+5
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-B-MULL
+ 90
+8
+ 62
+8
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-F-SILL
+ 90
+8
+ 62
+8
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-F-CASE
+ 90
+8
+ 62
+4
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-F-TERR
+ 90
+8
+ 62
+4
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-B-ELEV
+ 90
+8
+ 62
+8
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-F-STAIR
+ 90
+8
+ 62
+8
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-B-CORE
+ 90
+8
+ 62
+8
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-F-DOOR
+ 90
+8
+ 62
+3
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+GRIDLN
+ 90
+10
+ 62
+9
+370
+-3
+  6
+CENTER
+  2
+Normal
+440
+0
+  8
+GRID-08
+ 90
+10
+ 62
+2
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-B-GLAZ
+ 90
+8
+ 62
+8
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+E-B-SHEL
+ 90
+8
+ 62
+2
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
+  8
+0
+ 90
+8
+ 62
+7
+370
+-3
+  6
+CONTINUOUS
+  2
+Normal
+440
+0
