@@ -1,0 +1,138 @@
+Delta Music 2 final format
+--------------------------
+(C)1990 Bent Nielsen
+
+"Delta music:tunes/" stores songs
+"Delta music:final/" stores final modules
+
+Reverse engineering by lclevy@club-internet.fr
+Jan 2000.
+
+
+offset	type	len	comments
+-------------------------------------------------------------
+000	b		replay routine
+148	b		Bent Nielsen message
+1fc	b		replay
+3ac	l	4	tracl length
+3bc	b		replay
+
+878			voice 1 data
+8b4			voice 2
+904			voice 3
+954			voice 4
+
+9a4			voice 1
+9f4			voice 2
+a44			voice 3
+a94			voice 4
+
+ae4	w		period table
+
+b8c			song data
+
+bc6	b	4	".FNL"
+
+bca	b	?*16	arpeggiato table
+
+fca	l	4	track 1-4 length (in bytes)
+fda	b	?	tracks
+			0	b	block number
+			1	b	note transpose
+
+?	l	1	block part length
+?	b	?*64	block
+			0	b	1	note
+			1	b	1	instrument
+			2	b	1	effect number
+			3	b	1	effect data
+?	w	127	instruments offset table
+
+?	w	1	instruments info table length
+
+?	b	?*88	instruments info table
+
+			0	w	1	len
+			2	w	1	repeat
+			4	w	1	replen
+			6	b	15	volume
+			15	b	15	vibrator
+			24	w	1	bendrate ?
+			26	b	1	instrument mode : synth/sample
+			27	b	1	sample number
+			28	b	48	waveform table
+
+
+-----------------------------------
+
+?	b	128*256	synth waveform table	
+
+?	l	16	sample len
+
+?	l	8	sample offset
+
+?	b	?	first sample
+
+
+-----------------------------------
+
+a0	voice
+
+0	l	dff0a0,dff0b0,...
+4	w	dff096 mask
+5	b	channel mask (set with or.b)
+6	l	1st instr info
+a	l	track adr
+e	l	current block adr
+12	w	pos in track
+14	w	pos in block
+16	b	sample number
+17	b	waveform pos
+18	w	transposed period
+1a	w	period
+1c	b	note
+1d	b	channel vol
+1e	w	channel bendrate
+20	w	volume
+22	w	pos in volume table
+24	b	vol sustain
+25	b	portamento speed
+26	b	unused ?
+27	b	vib direction 0=+, -1=-
+28	w	final bendrate
+2a	b	vib len (counter to 0)
+2b	b	note transpose
+2c	l	current arp table
+30	w	pos in arp table
+32	b	replay mode : 0=music, 1=soundfx
+33	b	instrument type : <0=synth, >0=sample
+34	b	vibrator pos
+35	b	vib sustain
+36	w	track len
+38	w	?
+
+--------------------------------------
+
+a6	song
+
+0	w	dff096
+1	b
+2	l	instr table
+6	l	instr offset table
+a	l	track 1 adress
+e	l	track 2 adress
+12	l	track 3
+16	l	track 4
+1a	l	1st block adr
+1e	l	end of instr table
+22	l	sample adr offset
+26	l	sample adr table
+2a	l	random generated ? not used ?
+2e	b	song vol
+2f	b	replay speed
+30	b	speed counter
+31	b	play mode : 0=normal, 1=same track pos & same block pos
+32	w	track 1 len counter to 0
+34	w	track 2 len counter to 0
+36	w	track 3 len counter to 0
+38	w	track 4 len counter to 0

@@ -1,0 +1,106 @@
+delta music 1 final song structure
+----------------------------------
+by Laurent Clevy (lclevy@club-internet.fr)
+
+
+DeltaMusic is (C) Bent Nielsen / Barricade Software.
+
+
+
+offset	type	size	content
+----------------------------------------
+0	B	4	"ALL "
+4	L	4	4 tracks sizes
+20	L	1	blocks size
+24	L	20	soundinfos sizes
+104	B	2*??	tracks
+
+	0	B	2*??	track
+
+		0	B	block
+		1	B	note transpose
+
+	??	W	2	-1 (=end of track), repeat step/2
+
+??	B	16*4*??	blocks
+
+	1 block = 16 steps
+	1 step = 
+		0	B	1	sound
+		1	B	1	note
+		2	B       1       effect_number
+		3	B       1       effect_data
+
+??	B		sounds
+
+	0	B	32	sound header
+
+		0	B	1	attack_step
+		1	B	1	attack_delay
+		2	B	1	decay_step
+		3	B	1	decay_delay
+		4	B	1	sustain
+		6	B	1	release_step
+		7	B	1	release_delay
+		8	B	1	volume  
+		9	B	1	vibrator_wait
+		10	B	1	vibrator_step
+		11	B	1	vibrator_length
+		12	B	1	bendrate
+		13	B	1	portamento
+		14	B	1	sample
+		15	B	1	table_delay
+		16	B	8	arpeggio
+		24	W	1	sound_length
+		26	W	1	repeat
+		28	W	1	repeat_length
+		30	W	1	table  
+
+	32	B	??	sound data
+
+Example:
+--------
+
+0	"ALL "
+4	00000044 00000044 00000044 00000044
+20	00000340
+24	00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000 00000000
+	0000061a 0000031a 0000018e 0000008e 0000008e	
+
+104	01070105 01000102 01070105 01000102 01070105 01000102
+	01070105 01000102 01070105 01000102 0c000105 01000102
+	01070105 01000102 01070105 01000102 ffff0000
+
+172	02070205 02000202 03000400 00000500 00000800 09000000
+...
+0x178	00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000
+	00000000 00000000 00000000 00000000 00000000 00000000 00000000 00000000 
+0x1b8	130d0401 00000000 13190000 13190000 130d0000 00000000 13190000 13190000
+	130d0000 00000000 13190000 13190000 130d0000 00000000 13190000 13190000
+...
+0x04b8  40 00 40 00 00 00 00 00 40 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00
+0004d0	05fc 0000 0001 0000
+	efc782ad 53848182 8f95b0c3 dde7613b 5f637f5b 73786052
+...
+000ac0	03f202e8 fdebff01 f6f7eff7 04fcfcf1
+000ad0	f2f1
+0x0ad2	40 00 40 00 00 00 00 00 40 00 00 00 00 00 01 00 00 00 00 00 00 00 00 00
+	02fc 0000 0001
+	0000f6f2 0cf3d8f0 1b05fc11 fd3ad608 151005ee 2022f507 fbfefaeb fbebfbeb
+...
+001090:  00000000 0000       
+
+
+effects:
+-------
+$00 = normal play (no effect)
+$01 = play speed
+$02 = filter (power light)
+$03 = channel bendrate up
+$04 = channel bendrate down
+$05 = channel portamento (slide between notes)
+$06 = max. channel volume (cool for echos)
+$07 = max. song volume (cool for volume fading)
+$08 = channel arpeggio (for chords and fx)
