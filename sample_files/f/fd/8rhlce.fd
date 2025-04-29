@@ -1,0 +1,21 @@
+%Filename: 8rhlce.fd
+%Created by: tex Fam_14965
+%Created using fontinst v1.800
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rhlce.fd}
+   [1998/07/06 Fontinst v1.800 font definitions for 8r/hlce.]
+
+\@ifundefined{DeclareLucidaFontShape}{%
+\def\DeclareLucidaFontShape#1#2#3#4#5#6{%
+\DeclareFontShape{#1}{#2}{#3}{#4}{<->#5}{#6}}}{}
+\DeclareFontFamily{8r}{hlce}{}
+
+\DeclareLucidaFontShape{8r}{hlce}{m}{it}{
+hlcrie8r
+}{}
+
+\DeclareFontShape{8r}{hlce}{m}{sl}{<->ssub * hlce/m/it}{}
+
+\endinput

@@ -1,0 +1,21 @@
+%Filename: 8rhlcw.fd
+%Created by: tex Fam_14933
+%Created using fontinst v1.800
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rhlcw.fd}
+   [1998/07/06 Fontinst v1.800 font definitions for 8r/hlcw.]
+
+\@ifundefined{DeclareLucidaFontShape}{%
+\def\DeclareLucidaFontShape#1#2#3#4#5#6{%
+\DeclareFontShape{#1}{#2}{#3}{#4}{<->#5}{#6}}}{}
+\DeclareFontFamily{8r}{hlcw}{}
+
+\DeclareLucidaFontShape{8r}{hlcw}{m}{it}{
+hlcriw8r
+}{}
+
+\DeclareFontShape{8r}{hlcw}{m}{sl}{<->ssub * hlcw/m/it}{}
+
+\endinput

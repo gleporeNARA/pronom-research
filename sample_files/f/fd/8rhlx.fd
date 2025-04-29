@@ -1,0 +1,43 @@
+%Filename: 8rhlx.fd
+%Created by: tex Fam_14574
+%Created using fontinst v1.800
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rhlx.fd}
+   [1998/07/06 Fontinst v1.800 font definitions for 8r/hlx.]
+
+\@ifundefined{DeclareLucidaFontShape}{%
+\def\DeclareLucidaFontShape#1#2#3#4#5#6{%
+\DeclareFontShape{#1}{#2}{#3}{#4}{<->#5}{#6}}}{}
+\DeclareFontFamily{8r}{hlx}{}
+
+\DeclareLucidaFontShape{8r}{hlx}{m}{n}{
+hlxr8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlx}{m}{sl}{
+hlxro8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlx}{m}{it}{
+hlxri8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlx}{b}{n}{
+hlxb8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlx}{b}{sl}{
+hlxbo8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlx}{b}{it}{
+hlxbi8r
+}{}
+
+\DeclareFontShape{8r}{hlx}{bx}{n}{<->ssub * hlx/b/n}{}
+\DeclareFontShape{8r}{hlx}{bx}{sl}{<->ssub * hlx/b/sl}{}
+\DeclareFontShape{8r}{hlx}{bx}{it}{<->ssub * hlx/b/it}{}
+
+\endinput

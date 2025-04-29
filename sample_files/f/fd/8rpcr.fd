@@ -1,0 +1,34 @@
+%Filename: 8rpcr.fd
+%Created by: tex Fam_29717
+%Created using fontinst v1.800
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rpcr.fd}
+   [1998/07/06 Fontinst v1.800 font definitions for 8r/pcr.]
+
+\DeclareFontFamily{8r}{pcr}{}
+
+\DeclareFontShape{8r}{pcr}{m}{n}{
+   <-> pcrr8r
+}{}
+
+\DeclareFontShape{8r}{pcr}{m}{sl}{
+   <-> pcrro8r
+}{}
+
+\DeclareFontShape{8r}{pcr}{b}{n}{
+   <-> pcrb8r
+}{}
+
+\DeclareFontShape{8r}{pcr}{b}{sl}{
+   <-> pcrbo8r
+}{}
+
+\DeclareFontShape{8r}{pcr}{m}{it}{<->ssub * pcr/m/sl}{}
+\DeclareFontShape{8r}{pcr}{bx}{n}{<->ssub * pcr/b/n}{}
+\DeclareFontShape{8r}{pcr}{bx}{sl}{<->ssub * pcr/b/sl}{}
+\DeclareFontShape{8r}{pcr}{b}{it}{<->ssub * pcr/b/sl}{}
+\DeclareFontShape{8r}{pcr}{bx}{it}{<->ssub * pcr/b/it}{}
+
+\endinput

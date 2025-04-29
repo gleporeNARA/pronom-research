@@ -1,0 +1,55 @@
+%Filename: 8rhlst.fd
+%Created by: tex Fam_14298
+%Created using fontinst v1.800
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rhlst.fd}
+   [1998/07/06 Fontinst v1.800 font definitions for 8r/hlst.]
+
+\@ifundefined{DeclareLucidaFontShape}{%
+\def\DeclareLucidaFontShape#1#2#3#4#5#6{%
+\DeclareFontShape{#1}{#2}{#3}{#4}{<->#5}{#6}}}{}
+\DeclareFontFamily{8r}{hlst}{}
+
+\DeclareLucidaFontShape{8r}{hlst}{m}{n}{
+hlsrt8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlst}{m}{sl}{
+hlsrot8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlst}{mc}{n}{
+hlsrt8rn
+}{}
+
+\DeclareLucidaFontShape{8r}{hlst}{mc}{sl}{
+hlsrot8rn
+}{}
+
+\DeclareLucidaFontShape{8r}{hlst}{b}{n}{
+hlsbt8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlst}{b}{sl}{
+hlsbot8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlst}{bc}{n}{
+hlsbt8rn
+}{}
+
+\DeclareLucidaFontShape{8r}{hlst}{bc}{sl}{
+hlsbot8rn
+}{}
+
+\DeclareFontShape{8r}{hlst}{m}{it}{<->ssub * hlst/m/sl}{}
+\DeclareFontShape{8r}{hlst}{mc}{it}{<->ssub * hlst/mc/sl}{}
+\DeclareFontShape{8r}{hlst}{bx}{n}{<->ssub * hlst/b/n}{}
+\DeclareFontShape{8r}{hlst}{bx}{sl}{<->ssub * hlst/b/sl}{}
+\DeclareFontShape{8r}{hlst}{b}{it}{<->ssub * hlst/b/sl}{}
+\DeclareFontShape{8r}{hlst}{bx}{it}{<->ssub * hlst/b/it}{}
+\DeclareFontShape{8r}{hlst}{bc}{it}{<->ssub * hlst/bc/sl}{}
+
+\endinput

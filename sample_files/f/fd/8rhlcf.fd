@@ -1,0 +1,25 @@
+%Filename: 8rhlcf.fd
+%Created by: tex Fam_14760
+%Created using fontinst v1.800
+
+%THIS FILE SHOULD BE PUT IN A TEX INPUTS DIRECTORY
+
+\ProvidesFile{8rhlcf.fd}
+   [1998/07/06 Fontinst v1.800 font definitions for 8r/hlcf.]
+
+\@ifundefined{DeclareLucidaFontShape}{%
+\def\DeclareLucidaFontShape#1#2#3#4#5#6{%
+\DeclareFontShape{#1}{#2}{#3}{#4}{<->#5}{#6}}}{}
+\DeclareFontFamily{8r}{hlcf}{}
+
+\DeclareLucidaFontShape{8r}{hlcf}{m}{n}{
+hlcrf8r
+}{}
+
+\DeclareLucidaFontShape{8r}{hlcf}{m}{sl}{
+hlcrof8r
+}{}
+
+\DeclareFontShape{8r}{hlcf}{m}{it}{<->ssub * hlcf/m/sl}{}
+
+\endinput
