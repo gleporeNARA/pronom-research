@@ -1,3 +1,9 @@
+# 2bit Format (2bit)
+0	string	C'A\x1A\x0\x0\x0\x0
+>9	string	\x0\x0\x0\x0\x0\x0\x0\x04chr	2bit Format
+0	string	C'A\x1A\x0\x0\x0\x0
+>9	string	\x01\x0\x0\x0\x0\x0\x0\x04chr	2bit Format
+
 # 2SF Nintendo DS Sound Format rip Mini (mini2sf)
 0	string	PSF$	2SF Nintendo DS Sound Format rip Mini
 
@@ -160,6 +166,9 @@
 # Affymetrix Probe Set Information (psi)
 0	string	=#Probe\ Sets:	Affymetrix Probe Set Information
 
+# Affymetrix Text Probe Map (tpmap)
+0	string	#seq_group_name	Affymetrix Text Probe Map
+
 # AGP Format (agp)
 0	search/1024	=##agp-ve	AGP Format
 
@@ -258,6 +267,9 @@
 # Applixware Macro (am2)
 0	string	=*BEGIN\ MACROS\ VERSION	Applixware Macro
 
+# ARCHICAD Archive (pla)
+0	string	ROF\ FDB\ \x10\x00\x02\x00\x00\x00\x01\x01\x00\x00\x00\x00	ARCHICAD Archive
+
 # ArchiCAD Library Object (gsm)
 0	string	\x57\x57
 >40	string	MYSG	ArchiCAD Library Object
@@ -272,6 +284,10 @@
 
 # ARQ Crusher Compressed File (arq)
 0	string	gW\x04\x01	ARQ Crusher Compressed File
+
+# ArtCAM RLF File
+0	string	\x0d\x0a\x20\x20
+>0	search/100/b	RELIEF\ FILE	ArtCAM RLF File
 
 # ArtMaster88 Graphics Image (img)
 0	string	SS_SIF\ \ \ \ 0.0	ArtMaster88 Graphics Image
@@ -403,7 +419,7 @@
 # AutoCAD Plot Configuration File, R13 (pcp)
 0	string	;Created\ by\ AutoCAD\x20
 >0	search/400	PEN_WIDTH
->0	search/400	PLOT_FILE	AutoCAD Plot Configuration File, R13
+>>0	search/400	PLOT_FILE	AutoCAD Plot Configuration File, R13
 
 # AutoCAD Plot Configuration File, R14 (pc2)
 0	string	PC2Version1\x0D\x0A\x0D\x0A[PlotDriver]	AutoCAD Plot Configuration File, R14
@@ -441,6 +457,10 @@
 
 # AVF Multimedia Format (avf)
 0	string	AVF\ WayneSikes	AVF Multimedia Format
+
+#Avro Object Container File (avro)
+0	string	Obj
+>6	string	avro	Avro Object Container File
 
 # AVZ Antiviral Toolkit Data (avz)
 0	string	AVZ	AVZ Antiviral Toolkit Data
@@ -484,6 +504,9 @@
 # Bethesda Softworks Video (vid)
 0	string	VID\x00	Bethesda Softworks Video
 
+# BGI Device Driver
+0	search/200/b	BGI\ Device\ Driver	BGI Device Driver
+
 # Bidimensional Anisotropic Mesh Generator (bamg)
 0	string	MeshVersionFormatted	Bidimensional Anisotropic Mesh Generator
 
@@ -499,6 +522,9 @@
 
 # bigWig Track Format (bigwig)
 0	string	=&\xfc\x8f\x88\x04\0	bigWig Track Format
+
+# ARCHICAD Building Information Model (bimx)
+0	string	BIMx\x89PNG\x0D\x0A\x1A\x0A\x00\x00\x00\x0DIHDR	ARCHICAD Building Information Model
 
 # Binary ExtendScript Script (jsxbin)
 0	string	=@JSXBIN@	Binary ExtendScript Script
@@ -1139,6 +1165,9 @@
 0	string	MADk	Electronic Arts MAD Video
 0	string	MADe	Electronic Arts MAD Video
 
+# Electronic Arts Game Archive (big)
+0	string	BIGF	Electronic Arts Game Archive
+
 # Electronic Arts Sound hEADer (tgv)
 0	string	SEAD	Electronic Arts Sound hEADer
 
@@ -1261,7 +1290,7 @@
 # FLIP Graphics Format (fbi)
 0	string	=\xf08
 >8	string	\x7f
->10	string	\0\0\0	FLIP Graphics Format
+>>10	string	\0\0\0	FLIP Graphics Format
 
 # FMOD Sample Bank Format (fsb)
 0	string	FSB1	FMOD Sample Bank Format
@@ -1352,6 +1381,9 @@
 
 # FrontPage Server Extensions Configuration File (vti)
 0	string	vti_encoding:	FrontPage Server Extensions Configuration File
+
+# Frostbit CAS Data Source (cas4)
+0	string	\xFA\xCE\x0F\xF0	Frostbit CAS Data Source
 
 # Frostbite TOC File (toc)
 0	string	=\x00\xD1\xCE\x00\x00\x00\x00\x00xa	Frostbite TOC File
@@ -1444,6 +1476,9 @@
 # GIMP Parametric Brush Data (vbr)
 0	string	GIMP-VBR\x0A	GIMP Parametric Brush Data
 
+# GIMP Script-Fu Script
+0	search/2000	\x28\x64\x65\x66\x69\x6E\x65\x20\x28\x73\x63\x72\x69\x70\x74\x2D\x66\x75	GIMP Script-Fu Script
+
 # GIMP Tool Preset Data (gtp2)
 0	string	=#\ GIMP\ tool\ preset\ file\x0A\x0A	GIMP Tool Preset Data
 
@@ -1458,6 +1493,11 @@
 
 # GNAT ADA Library Information File (ali)
 0	string	V\ "GNAT\ Lib\ v3.	GNAT ADA Library Information File
+
+# GoatTracker Chiptune
+0	string	GTS!	GoatTracker Chiptune
+0	string	GTS2	GoatTracker Chiptune
+0	string	GTS5	GoatTracker Chiptune
 
 # Godot 4 Bit Graphics Bitmap (4bt)
 0	string	GOD0	Godot 4 Bit Graphics Bitmap
@@ -1570,7 +1610,7 @@
 0	string	=\x913HF	HAP Compressed File
 
 # Harvard Graphics Symbol File (syw)
-0	string	SMLC\x01\x00\x01\x00 Harvard Graphics Symbol File
+0	string	SMLC\x01\x00\x01\x00	Harvard Graphics Symbol File
 
 # Hasselblad 3F Raw (3fr)
 348	string	Hasselblad	Hasselblad 3F Raw
@@ -1580,6 +1620,12 @@
 
 # Hemera Photo Object Raster Image (hpi)
 0	string	=\x89HPI	Hemera Photo Object Raster Image
+
+# HI C File
+0	string	HIC\x00\x08\x00\x00\x00
+>12	string	\x00\x00\x00\x00hg19	HI C File
+0	string	HIC\x00\x08\x00\x00\x00
+>12	string	\x00\x00\x00\x00/dat	HI C File
 
 # Hively Tracker Song 1 Module Data (hvl)
 0	string	HVL\x00	Hively Tracker Song 1 Module Data
@@ -1961,6 +2007,9 @@
 # KDE Desktop Entry File (desktop)
 0	string	=[Desktop\ Entry]\x0AEncoding=	KDE Desktop Entry File
 
+# Khoros Visualization Image File (viff)
+0	search/10000/b	ThisIsAViff	Khoros Visualization Image File
+
 # KiriKiri Adventure Game System Package (xp3)
 0	string	XP3\x0D\x0A\ \x0A\x1A\x8Bg\x01\x17\x00\x00\x00\x00\x00\x00\x00\x01	KiriKiri Adventure Game System Package
 
@@ -2093,6 +2142,10 @@
 # Lotus Word Pro SmartMaster File (mwp)
 0	string	WordPro\x00\x00\x00\x00\x00\x00	Lotus Word Pro SmartMaster File
 
+# LP Format
+0	search/100	\ LP\ format
+>-50	search/50	End	LP Format
+
 # LucasArts BiNary Archive Format (lab)
 0	string	LABN	LucasArts BiNary Archive Format
 
@@ -2116,6 +2169,9 @@
 
 # Maestro Music File (maestro)
 0	string	Maestro\x0a	Maestro Music File
+
+# Multiple Alignment Format (maf)
+0	string	##maf\ version=	Multiple Alignment Format
 
 # Magnetic Pages (pp2)
 0	string	MPARTICLE	Magnetic Pages
@@ -2278,6 +2334,12 @@
 # Microsoft Excel Toolbar (xlb)
 0	string	\x09\x08\x10\x00\x00\x06\x00\x09
 >10	string	=\xcd\x07	Microsoft Excel Toolbar
+
+# Microsoft Extensible Application Markup Language
+0	search/600	xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"	Microsoft Extensible Application Markup Language
+
+# Microsoft FrontPage Theme Pack (elm)
+0	search/1024/b	\x3C\x3D\x3D\x4D\x53\x2D\x54\x68\x65\x6D\x65\x3D\x3D\x3E	Microsoft FrontPage Theme Pack
 
 # Microsoft Incremental Linker Data (ilk)
 0	string	Microsoft\ Linker\ Database	Microsoft Incremental Linker Data
@@ -3106,7 +3168,7 @@
 # Schedule+ Contacts File (scd)
 65	string	ACC
 >84	string	\xDF\xFF\xFF\xFF
->256	string	\xCA	Schedule+ Contacts File
+>>256	string	\xCA	Schedule+ Contacts File
 
 # Scheme Compressed Debug File (bci)
 0	string	Compressed-B1-	Scheme Compressed Debug File
@@ -3502,6 +3564,9 @@
 # The Imploder Compresssed Data (impbang)
 0	string	IMP!	The Imploder Compresssed Data
 
+# ThermoVision FFF Format (seq2)
+0	string	FFF\x00ResearchIR\x00\x00\x00\x00\x00\x00	Thermovision FFF Format
+
 # The Settlers II World Map (wld2)
 0	string	WORLD_V1.0	The Settlers II World Map
 
@@ -3769,6 +3834,20 @@
 
 # VMWare Virtual Machine Disk Descriptor File (vmdk2)
 0	string	=#\ Disk\ DescriptorFile\x0Aversion=	VMWare Virtual Machine Disk Descriptor File
+
+# VMWare Virtual Machine Disk Paging File
+0	search/1400	\xFF\x00\xF0\xC3\xE2\x00\xF0\x53\xFF\x00\xF0\x53\xFF\x00\xF0\x54\xFF\x00\xF0	VMWare Virtual Machine Disk Paging File
+
+# VMWare Virtual Disk Suspended State File
+0	string	\xd0\xbe
+>9	string	\x00\x00\x00Checkpoint\x00\x00\x00\x00\x00\x00\x00\x00	VMWare Virtual Disk Suspended State File
+>9	string	\x00\x00\x00Snapshot	VMWare Virtual Disk Suspended State File
+0	string	\xD1\xBA
+>9	string	\x00\x00\x00Checkpoint\x00\x00\x00\x00\x00\x00\x00\x00	VMWare Virtual Disk Suspended State File
+>9	string	\x00\x00\x00Snapshot	VMWare Virtual Disk Suspended State File
+0	string	\xD2\xBE
+>9	string	\x00\x00\x00Checkpoint\x00\x00\x00\x00\x00\x00\x00\x00	VMWare Virtual Disk Suspended State File
+>9	string	\x00\x00\x00Snapshot	VMWare Virtual Disk Suspended State File
 
 # Vocal Eyes Screenreader Set File (set2)
 0	string	26Vocal-	Vocal Eyes Screenreader Set File
