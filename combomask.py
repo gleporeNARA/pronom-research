@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 import os
 import sys
+import subprocess
 from collections import Counter
 from itertools import product
 from tabulate import tabulate
@@ -92,4 +93,6 @@ else:
                 out.append(f"{prefix}{cl[0]}\tstring\t{sig}")
             else:
                 out.append(f"{prefix}{cl[0]}\tstring\t{sig}\t{title}")
-    print("\n" + "\n".join(out))
+    entry_text = "\n".join(out)
+    print("\n" + entry_text)
+    subprocess.Popen(['xclip','-selection','clipboard'], stdin=subprocess.PIPE).communicate(entry_text.encode())
